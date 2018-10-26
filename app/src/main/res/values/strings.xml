@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Bramhaputra</string>
+
+    <string name="layout_landDetails_LandType_SpinnerPrompt">Choose</string>
+
+    <string-array name="layout_landDetails_LandType_SpinnerAarrays">
+        <item>Free Hold</item>
+        <item>Leased</item>
+        <item>Rented</item>
+    </string-array>
+
+    <string name="layout_landDetails_copyAgreementWithOwner_SpinnerPrompt">Choose</string>
+
+    <string-array name="layout_landDetails_copyAgreementWithOwner_SpinnerAarrays">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
 </resources>
