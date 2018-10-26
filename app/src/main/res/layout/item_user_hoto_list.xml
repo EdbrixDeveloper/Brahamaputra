@@ -12,13 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.3"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:divider="@color/half_black"
+        android:showDividers="end">
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_lock_power_off"
+            android:src="@drawable/ic_mail_outline_black_24dp"
             android:layout_gravity="center"/>
     </LinearLayout>
 
@@ -33,28 +35,42 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textStyle="bold"/>
+            android:text="Hoto 1"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Site ID : 3854"
+            android:layout_margin="@dimen/app_min_margin"/>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/itemUserHoto_button_openHoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Close"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:layout_toRightOf="@+id/itemUserHoto_button_openHoto"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>
