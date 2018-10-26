@@ -44,6 +44,13 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        mDashboardRelativeLayoutMyAsset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashboardActivity.this,Tower_Detail.class));
+            }
+        });
+
     }
 
     @Override

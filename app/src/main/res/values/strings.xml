@@ -1,3 +1,37 @@
 <resources>
-    <string name="app_name">Bramhaputra</string>
+    <string name="app_name">Brahamaputra</string>
+    <string name="textview_textStyle">bold</string>
+
+    <!--Tower Detail screen Array for spinners -->
+    <string-array name="spinner_towerDetail_tower">
+        <item>GBT</item>
+        <item>RTT</item>
+        <item>Mast</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_typeOfTower">
+        <item>Tubular</item>
+        <item>Angular</item>
+
+    </string-array>
+
+    <string-array name="spinner_towerDetail_signboard">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_dangerSignageboard">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_cautionSignageboard">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_warningSignageboard">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
 </resources>
