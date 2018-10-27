@@ -29,11 +29,11 @@
 
         <activity
             android:name=".Activities.UsersHotoListActivity"
-            android:label="Hoto List"
+            android:label="HOTO List"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.UserHotoTransactionActivity"
-            android:label="Hoto Transaction"
+            android:label="HOTO Transaction"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Tower_Detail"

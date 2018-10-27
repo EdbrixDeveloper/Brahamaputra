@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorWhite"
     android:layout_height="match_parent"
     tools:context=".Activities.Land_Details">
 
@@ -13,14 +14,14 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_margin="@dimen/app_min_margin"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_big_margin"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -28,7 +29,7 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Type of Land" />
 
 
@@ -37,7 +38,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_landDetails_LandType"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -47,7 +48,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -55,14 +58,15 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Area of Land" />
 
                 <EditText
                     android:id="@+id/landDetails_editText_areaOfLand"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
+                    android:textSize="16sp"
                     android:hint="Enter Area" />
 
             </LinearLayout>
@@ -70,7 +74,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -78,14 +84,15 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Rent/Lease(In Rs.)" />
 
                 <EditText
                     android:id="@+id/landDetails_editText_rentLeaseInNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
+                    android:textSize="16sp"
                     android:hint="Enter Rent/Lease"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
@@ -95,7 +102,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -103,14 +112,15 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="In Words Rs." />
 
                 <EditText
                     android:id="@+id/landDetails_editText_rentLeaseInWords"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
+                    android:textSize="16sp"
                     android:hint="Enter Rs. In Words"
                     android:textAlignment="viewStart" />
 
@@ -119,7 +129,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -127,14 +139,15 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Name of owner" />
 
                 <EditText
                     android:id="@+id/landDetails_editText_nameOfOwner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
+                    android:textSize="16sp"
                     android:hint="Enter Name of Owner "
                     android:textAlignment="viewStart" />
 
@@ -143,7 +156,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -151,14 +166,15 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Mobile no of owner" />
 
                 <EditText
                     android:id="@+id/landDetails_editText_mobileNoOfOwner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
+                    android:textSize="16sp"
                     android:hint="Enter Mobile No."
                     android:inputType="number|none"
                     android:textAlignment="viewStart" />
@@ -168,7 +184,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -176,14 +194,15 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Layout of Land" />
 
                 <EditText
                     android:id="@+id/landDetails_editText_layoutOfLand"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
+                    android:textSize="16sp"
                     android:hint="Enter Layout Of Land "
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
@@ -193,7 +212,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -201,7 +222,7 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Copy of agreement with owner" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -209,7 +230,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_landDetails_copyAgreementWithOwner"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -220,7 +241,9 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
@@ -229,7 +252,7 @@
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Validity of Land" />
 
                 <EditText
@@ -237,9 +260,10 @@
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:editable="false"
                     android:focusable="false"
+                    android:textSize="16sp"
                     android:hint="DD/MM/YYYY"
                     android:inputType="none"
                     android:textAlignment="viewStart" />
