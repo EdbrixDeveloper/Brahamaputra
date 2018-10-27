@@ -87,6 +87,8 @@
     </string-array>
 
 
+
+
     <string-array name="spinner_landDetails_LandType">
         <item>Free Hold</item>
         <item>Leased</item>
@@ -766,4 +768,367 @@
         <item>Not Working</item>
 
     </string-array>
+
+    <string-array name="spinner_airConditioners_noOfAirConditionersACprovided">
+        <item>Non AC</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="spinner_airConditioners_numberofACInWorkingCondition">
+        <item>Non AC</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="spinner_airConditioners_assetOwner">
+        <item>BSNL Supplied Asset</item>
+        <item>M and M Supplied Asset</item>
+        <item>M and M Supplied Revenue</item>
+    </string-array>
+
+    <string-array name="spinner_airConditioners_typeOfAcSpliWindow">
+        <item>Split AC</item>
+        <item>Window AC</item>
+        <item>Compound Unit</item>
+    </string-array>
+
+    <string-array name="spinner_airConditioners_amc">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="spinner_airConditioners_workingCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+
+    <string-array name="spinner_shelter_physicalConditionOfShelterPlatform">
+        <item>Good</item>
+        <item>Damaged</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_numberOfBtsInsideShelter">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_numberOfBtsOutsideShelter">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_shelterLock">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_outdoorShelterLock">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_igbStatus">
+        <item>Not available</item>
+        <item>Connected</item>
+        <item>Not Connected</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_egbStatus">
+        <item>Not available</item>
+        <item>Connected</item>
+        <item>Not Connected</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_noOfOdcAvailable">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="spinner_shelter_odcLock">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+
+    ////////////////////////
+
+    <string-array name="spinner_powerBackupsDg_noOfEngineAlternatorSetsprovided">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_numberOfWorkingDg">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_assetOwner">
+        <item>BSNL Supplied Asset</item>
+        <item>M and M Supplied Asset</item>
+        <item>M and M Supplied Revenue</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_manufacturerMakeModel">
+        <item>Ashok Layland</item>
+        <item>Caterpiller</item>
+        <item>Perkins</item>
+        <item>Volvo</item>
+        <item>Elgi</item>
+        <item>Honda</item>
+        <item>Perfect</item>
+        <item>Mitsubushi</item>
+        <item>Mahindra</item>
+        <item>Kirloskar</item>
+        <item>Eicher</item>
+        <item>Cummins</item>
+        <item>Escort</item>
+        <item>Lister Pitter</item>
+        <item>Greeves</item>
+        <item>Other Makes</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_capacityInKva">
+        <item>5KVA</item>
+        <item>10KVA</item>
+        <item>15KVA</item>
+        <item>20KVA</item>
+        <item>25KVA</item>
+        <item>30KVA</item>
+        <item>40KVA</item>
+        <item>50KVA</item>
+        <item>62KVA</item>
+        <item>Above 70KVA</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_autoManual">
+        <item>Auto</item>
+        <item>Manual</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_amc">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_dgWorkingType">
+        <item>Air Cooled</item>
+        <item>Water Cooled</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_dgMainAlternatorType">
+        <item>01 PH Capacitor</item>
+        <item>01 PH AVR</item>
+        <item>03 PH Capacitor</item>
+        <item>03 PH AVR</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_dgMainAlternatorMake">
+        <item>Cummins</item>
+        <item>Caterpiller</item>
+        <item>Trident</item>
+        <item>Kohler</item>
+        <item>Crompton</item>
+        <item>Leroy Somer</item>
+        <item>KEL</item>
+        <item>Kirloskar</item>
+        <item>Stamford</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_dgCanopyStatus">
+        <item>Open DG</item>
+        <item>Good</item>
+        <item>Partially Damaged</item>
+        <item>Fully Damaged</item>
+        <item>Corroded and Painting Required</item>
+        <item>Canopy Water Leak</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_dgStartingBatteryStatus">
+        <item>Working Good</item>
+        <item>Not Available</item>
+        <item>Not Working</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_chargingAlternator">
+        <item>Working Good</item>
+        <item>Not Available</item>
+        <item>Not Working</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_batteryCharger">
+        <item>Working Good</item>
+        <item>Not Available</item>
+        <item>Not Working</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_dgAvrWorkingStatus">
+        <item>Working Good</item>
+        <item>Not Available</item>
+        <item>Not Working</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_fuelTankPosition">
+        <item>Bottom of DG</item>
+        <item>In Canopy Side</item>
+        <item>Top of Canopy</item>
+        <item>Outside Canopy</item>
+    </string-array>
+    <string-array name="spinner_powerBackupsDg_workingCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+
+    /////////////////////////
+
+    <string-array name="spinner_powerPlantDetails_assetOwner">
+        <item>BSNL Supplied Asset</item>
+        <item>M and M Supplied Asset</item>
+        <item>M and M Supplied Revenue</item>
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_numberOfPowerPlant">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_manufacturerMakeModel">
+        <item>ACME</item>
+        <item>Arisys</item>
+        <item>Blue Star</item>
+        <item>Carrier</item>
+        <item>Daikin</item>
+        <item>Godreg</item>
+        <item>Haier</item>
+        <item>Hitachi</item>
+        <item>LG</item>
+        <item>Mitsubishi</item>
+        <item>OG</item>
+        <item>Panasonic</item>
+        <item>Samsung</item>
+        <item>Spacemaker</item>
+        <item>Tata Liberty</item>
+        <item>Toshiba</item>
+        <item>Uniflair</item>
+        <item>Videocon</item>
+        <item>Voltas</item>
+        <item>Whirlpool</item>
+        <item>Local</item>
+        <item>Amara Raja</item>
+        <item>C and D</item>
+        <item>Coslite</item>
+        <item>Delta</item>
+        <item>Enersis</item>
+        <item>Excide</item>
+        <item>Exicom</item>
+        <item>GFM</item>
+        <item>GNB</item>
+        <item>HBL</item>
+        <item>Huwavai</item>
+        <item>Leoch</item>
+        <item>Liberty</item>
+        <item>Mahindra</item>
+        <item>Microtex</item>
+        <item>Narada</item>
+        <item>NED</item>
+        <item>Saft</item>
+        <item>Star</item>
+        <item>Ashok Leyland</item>
+        <item>Caterpillar</item>
+        <item>Cummins</item>
+        <item>Eicher</item>
+        <item>Elgi</item>
+        <item>Escorts</item>
+        <item>Greeves</item>
+        <item>Honda</item>
+        <item>Jackson</item>
+        <item>Koel</item>
+        <item>Lister Pitter</item>
+        <item>M and M</item>
+        <item>Mistubishi</item>
+        <item>Perfect</item>
+        <item>Perkins</item>
+        <item>Powerica</item>
+        <item>Sonalika</item>
+        <item>Volvo</item>
+        <item>Cage</item>
+        <item>Civil Room</item>
+        <item>PUF Shelter</item>
+        <item>Alpha Numeric Input</item>
+        <item>Servo</item>
+        <item>U-Form</item>
+        <item>V-Form</item>
+        <item>Zavline</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_numberModuleSlots">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_powerPlantEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_typeOfPowerPlantCommercialSmps">
+        <item>Commercial</item>
+        <item>SMPs</item>
+    </string-array>
+    <string-array name="spinner_powerPlantDetails_numberOfModules">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_noOfFaultyModules">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_spdStatus">
+        <item>WORKING</item>
+        <item>Faulty</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_powerPlantDetails_workingCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+
 </resources>

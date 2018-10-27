@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Solar_Power_System">
+    tools:context=".Activities.Shelter">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -22,26 +22,28 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/app_min_padding"
                 android:weightSum="1">
+                <!---->
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_QRCodeScan"
+                    android:id="@+id/shelter_textView_physicalConditionOfShelterPlatform"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="QR Code Scan" />
+                    android:text="Physical Condition of Shelter and Platform" />
 
 
-                <ImageView
-                    android:id="@+id/solarPowerSystem_button_QRCodeScan"
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/shelter_spinner_physicalConditionOfShelterPlatform"
+                    style="@style/SpinnerTheme"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:clickable="true"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+                    android:entries="@array/spinner_shelter_physicalConditionOfShelterPlatform"
+                    android:textAlignment="viewStart"
 
-                <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
+                    app:hintText="Select" />
+
 
             </LinearLayout>
 
@@ -53,22 +55,136 @@
 
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_available"
+                    android:id="@+id/shelter_textView_numberOfBtsInsideShelter"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Available" />
+                    android:text="Number of BTS Inside Shelter" />
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_available"
+                    android:id="@+id/shelter_spinner_numberOfBtsInsideShelter"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_available"
+                    android:entries="@array/spinner_shelter_numberOfBtsInsideShelter"
                     android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/shelter_textView_numberOfBtsOutsideShelter"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Number of BTS Outside Shelter" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/shelter_Spinner_numberOfBtsOutsideShelter"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_shelter_numberOfBtsOutsideShelter"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/shelter_textView_shelterLock"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Shelter Lock" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/shelter_Spinner_shelterLock"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_shelter_shelterLock"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/shelter_textView_outdoorShelterLock"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Outdoor Shelter Lock" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/shelter_Spinner_outdoorShelterLock"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_shelter_outdoorShelterLock"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/shelter_textView_igbStatus"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="IGB Status" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/shelter_Spinner_igbStatus"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_shelter_igbStatus"
+                    android:textAlignment="viewStart"
+
                     app:hintText="Select" />
 
 
@@ -81,27 +197,27 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_assetOwner"
+                    android:id="@+id/shelter_textView_egbStatus"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Asset Owner" />
+                    android:text="EGB Status" />
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_assetOwner"
+                    android:id="@+id/shelter_Spinner_egbStatus"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_assetOwner"
+                    android:entries="@array/spinner_shelter_egbStatus"
                     android:textAlignment="viewStart"
+
                     app:hintText="Select" />
 
             </LinearLayout>
 
-
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,135 +225,59 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
+                    android:id="@+id/shelter_textView_noOfOdcAvailable"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Manufacturer / Make / Model" />
-
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_manufacturerMakeModel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Manufacturer"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_cellPanel"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Cell / Panel" />
+                    android:text="NO OF ODC Available" />
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_cellPanel"
+                    android:id="@+id/shelter_Spinner_noOfOdcAvailable"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_cellPanel"
+                    android:entries="@array/spinner_shelter_noOfOdcAvailable"
                     android:textAlignment="viewStart"
+
                     app:hintText="Select" />
 
             </LinearLayout>
 
-
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/app_min_padding"
                 android:weightSum="1">
 
+
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_capacityKW"
+                    android:id="@+id/shelter_textView_odcLock"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Capacity (KW)" />
-
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_capacityKW"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Capacity(KW)"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_amcYesNo"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="AMC (Yes / No)" />
+                    android:text="ODC Lock" />
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_amcYesNo"
+                    android:id="@+id/shelter_Spinner_odcLock"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_amc"
+                    android:entries="@array/spinner_shelter_odcLock"
                     android:textAlignment="viewStart"
+
                     app:hintText="Select" />
 
-            </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_validityOfAmc"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="If yes, Validity of the AMC" />
-
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_dateOfvalidityOfAmc"
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MM/YYYY"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
 
             </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>

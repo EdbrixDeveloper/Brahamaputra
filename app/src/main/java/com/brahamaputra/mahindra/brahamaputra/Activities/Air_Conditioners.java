@@ -31,25 +31,34 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Solar_Power_System extends AppCompatActivity {
+public class Air_Conditioners extends AppCompatActivity {
 
-    private TextView mSolarPowerSystemTextViewQRCodeScan;
-    private ImageView mSolarPowerSystemEditTextQRCodeScan;
-    private TextView mSolarPowerSystemTextViewAvailable;
-    private Spinner mSolarPowerSystemSpinnerAvailable;
-    private TextView mSolarPowerSystemTextViewAssetOwner;
-    private Spinner mSolarPowerSystemSpinnerAssetOwner;
-    private TextView mSolarPowerSystemTextViewManufacturerMakeModel;
-    private EditText mSolarPowerSystemEditTextManufacturerMakeModel;
-    private TextView mSolarPowerSystemTextViewCellPanel;
-    private Spinner mSolarPowerSystemSpinnerCellPanel;
-    private TextView mSolarPowerSystemTextViewCapacityKW;
-    private EditText mSolarPowerSystemEditTextCapacityKW;
-    private TextView mSolarPowerSystemTextViewAmcYesNo;
-    private Spinner mSolarPowerSystemSpinnerAmcYesNo;
-    private TextView mSolarPowerSystemTextViewValidityOfAmc;
-    private EditText mSolarPowerSystemEditTextDateOfvalidityOfAmc;
-
+    private TextView mAirConditionersTextViewNoOfAirConditionersACprovided;
+    private Spinner mAirConditionersSpinnerNoOfAirConditionersACprovided;
+    private TextView mAirConditionersTextViewNumberOfACInWorkingCondition;
+    private Spinner mAirConditionersSpinnerNumberOfACInWorkingCondition;
+    private TextView mAirConditionersTextViewQRCodeScan;
+    private ImageView mAirConditionersButtonQRCodeScan;
+    private TextView mAirConditionersTextViewAssetOwner;
+    private Spinner mAirConditionersSpinnerAssetOwner;
+    private TextView mAirConditionersTextViewTypeOfAcSpliWindow;
+    private Spinner mAirConditionersSpinnerTypeOfAcSpliWindow;
+    private TextView mAirConditionersTextViewManufacturerMakeModel;
+    private EditText mAirConditionersEditTextManufacturerMakeModel;
+    private TextView mAirConditionersTextViewAcSerialNumber;
+    private EditText mAirConditionersEditTextAcSerialNumber;
+    private TextView mAirConditionersTextViewCapacityTr;
+    private EditText mAirConditionersEditTextCapacityTr;
+    private TextView mAirConditionersTextViewDateOfInstallation;
+    private EditText mAirConditionersEditTextDateOfInstallation;
+    private TextView mAirConditionersTextViewAmcYesNo;
+    private Spinner mAirConditionersSpinnerAmcYesNo;
+    private TextView mAirConditionersTextViewAlidityOfAmc;
+    private EditText mAirConditionersEditTextDateOfvalidityOfAmc;
+    private TextView mAirConditionersTextViewWorkingCondition;
+    private Spinner mAirConditionersSpinnerWorkingCondition;
+    private TextView mAirConditionersTextViewNatureOfProblem;
+    private EditText mAirConditionersEditTextNatureOfProblem;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -57,13 +66,14 @@ public class Solar_Power_System extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
+    public String date_flag = "no";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_solar_power_system);
+        setContentView(R.layout.activity_air_conditioners);
 
-        this.setTitle("Solar Power System");
+        this.setTitle("Air Conditioners");
         assignViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -80,27 +90,27 @@ public class Solar_Power_System extends AppCompatActivity {
 
         };
 
-        mSolarPowerSystemEditTextQRCodeScan.setOnClickListener(new View.OnClickListener() {
+        mAirConditionersButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(Solar_Power_System.this,
+                if (ContextCompat.checkSelfPermission(Air_Conditioners.this,
                         Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
 
-                    if (getFromPref(Solar_Power_System.this, ALLOW_KEY)) {
+                    if (getFromPref(Air_Conditioners.this, ALLOW_KEY)) {
 
                         showSettingsAlert();
 
-                    } else if (ContextCompat.checkSelfPermission(Solar_Power_System.this,
+                    } else if (ContextCompat.checkSelfPermission(Air_Conditioners.this,
                             Manifest.permission.CAMERA)
                             != PackageManager.PERMISSION_GRANTED) {
                         // Should we show an explanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(Solar_Power_System.this,
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(Air_Conditioners.this,
                                 Manifest.permission.CAMERA)) {
                             showAlert();
                         } else {
                             // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(Solar_Power_System.this,
+                            ActivityCompat.requestPermissions(Air_Conditioners.this,
                                     new String[]{Manifest.permission.CAMERA},
                                     MY_PERMISSIONS_REQUEST_CAMERA);
                         }
@@ -113,43 +123,96 @@ public class Solar_Power_System extends AppCompatActivity {
         });
 
 
-        mSolarPowerSystemEditTextDateOfvalidityOfAmc.setOnClickListener(new View.OnClickListener() {
+        mAirConditionersEditTextDateOfInstallation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(Solar_Power_System.this, date, myCalendar
+                date_flag = "install";
+                new DatePickerDialog(Air_Conditioners.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+        mAirConditionersEditTextDateOfvalidityOfAmc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date_flag = "valid";
+                new DatePickerDialog(Air_Conditioners.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+
     }
 
 
     private void assignViews() {
-        mSolarPowerSystemTextViewQRCodeScan = (TextView) findViewById(R.id.solarPowerSystem_textView_QRCodeScan);
-        mSolarPowerSystemEditTextQRCodeScan = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScan);
-        mSolarPowerSystemTextViewAvailable = (TextView) findViewById(R.id.solarPowerSystem_textView_available);
-        mSolarPowerSystemSpinnerAvailable = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_available);
-        mSolarPowerSystemTextViewAssetOwner = (TextView) findViewById(R.id.solarPowerSystem_textView_assetOwner);
-        mSolarPowerSystemSpinnerAssetOwner = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_assetOwner);
-        mSolarPowerSystemTextViewManufacturerMakeModel = (TextView) findViewById(R.id.solarPowerSystem_textView_manufacturerMakeModel);
-        mSolarPowerSystemEditTextManufacturerMakeModel = (EditText) findViewById(R.id.solarPowerSystem_editText_manufacturerMakeModel);
-        mSolarPowerSystemTextViewCellPanel = (TextView) findViewById(R.id.solarPowerSystem_textView_cellPanel);
-        mSolarPowerSystemSpinnerCellPanel = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_cellPanel);
-        mSolarPowerSystemTextViewCapacityKW = (TextView) findViewById(R.id.solarPowerSystem_textView_capacityKW);
-        mSolarPowerSystemEditTextCapacityKW = (EditText) findViewById(R.id.solarPowerSystem_editText_capacityKW);
-        mSolarPowerSystemTextViewAmcYesNo = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo);
-        mSolarPowerSystemSpinnerAmcYesNo = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_amcYesNo);
-        mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
-        mSolarPowerSystemEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.solarPowerSystem_editText_dateOfvalidityOfAmc);
+        mAirConditionersTextViewNoOfAirConditionersACprovided = (TextView) findViewById(R.id.airConditioners_textView_noOfAirConditionersACprovided);
+        mAirConditionersSpinnerNoOfAirConditionersACprovided = (Spinner) findViewById(R.id.airConditioners_spinner_noOfAirConditionersACprovided);
+        mAirConditionersTextViewNumberOfACInWorkingCondition = (TextView) findViewById(R.id.airConditioners_textView_numberOfACInWorkingCondition);
+        mAirConditionersSpinnerNumberOfACInWorkingCondition = (Spinner) findViewById(R.id.airConditioners_spinner_numberOfACInWorkingCondition);
+        mAirConditionersTextViewQRCodeScan = (TextView) findViewById(R.id.airConditioners_textView_QRCodeScan);
+        mAirConditionersButtonQRCodeScan = (ImageView) findViewById(R.id.airConditioners_button_QRCodeScan);
+        mAirConditionersTextViewAssetOwner = (TextView) findViewById(R.id.airConditioners_textView_assetOwner);
+        mAirConditionersSpinnerAssetOwner = (Spinner) findViewById(R.id.airConditioners_Spinner_assetOwner);
+        mAirConditionersTextViewTypeOfAcSpliWindow = (TextView) findViewById(R.id.airConditioners_textView_typeOfAcSpliWindow);
+        mAirConditionersSpinnerTypeOfAcSpliWindow = (Spinner) findViewById(R.id.airConditioners_Spinner_typeOfAcSpliWindow);
+        mAirConditionersTextViewManufacturerMakeModel = (TextView) findViewById(R.id.airConditioners_textView_manufacturerMakeModel);
+        mAirConditionersEditTextManufacturerMakeModel = (EditText) findViewById(R.id.airConditioners_editText_manufacturerMakeModel);
+        mAirConditionersTextViewAcSerialNumber = (TextView) findViewById(R.id.airConditioners_textView_acSerialNumber);
+        mAirConditionersEditTextAcSerialNumber = (EditText) findViewById(R.id.airConditioners_editText_acSerialNumber);
+        mAirConditionersTextViewCapacityTr = (TextView) findViewById(R.id.airConditioners_textView_capacityTr);
+        mAirConditionersEditTextCapacityTr = (EditText) findViewById(R.id.airConditioners_editText_capacityTr);
+        mAirConditionersTextViewDateOfInstallation = (TextView) findViewById(R.id.airConditioners_textView_dateOfInstallation);
+        mAirConditionersEditTextDateOfInstallation = (EditText) findViewById(R.id.airConditioners_editText_dateOfInstallation);
+        mAirConditionersTextViewAmcYesNo = (TextView) findViewById(R.id.airConditioners_textView_amcYesNo);
+        mAirConditionersSpinnerAmcYesNo = (Spinner) findViewById(R.id.airConditioners_Spinner_amcYesNo);
+        mAirConditionersTextViewAlidityOfAmc = (TextView) findViewById(R.id.airConditioners_textView_alidityOfAmc);
+        mAirConditionersEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.airConditioners_editText_dateOfvalidityOfAmc);
+        mAirConditionersTextViewWorkingCondition = (TextView) findViewById(R.id.airConditioners_textView_workingCondition);
+        mAirConditionersSpinnerWorkingCondition = (Spinner) findViewById(R.id.airConditioners_Spinner_workingCondition);
+        mAirConditionersTextViewNatureOfProblem = (TextView) findViewById(R.id.airConditioners_textView_natureOfProblem);
+        mAirConditionersEditTextNatureOfProblem = (EditText) findViewById(R.id.airConditioners_editText_natureOfProblem);
     }
 
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        if (date_flag.equals("install")) {
+            mAirConditionersEditTextDateOfInstallation.setText(sdf.format(myCalendar.getTime()));
+        } else if (date_flag.equals("valid")) {
+            mAirConditionersEditTextDateOfvalidityOfAmc.setText(sdf.format(myCalendar.getTime()));
+        } else {
 
-        mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText(sdf.format(myCalendar.getTime()));
+        }
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.menuSubmit:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    //////////////////////
+    //Camera//
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -172,7 +235,7 @@ public class Solar_Power_System extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        startInstalledAppDetailsActivity(Solar_Power_System.this);
+                        startInstalledAppDetailsActivity(Air_Conditioners.this);
 
                     }
                 });
@@ -208,7 +271,7 @@ public class Solar_Power_System extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        ActivityCompat.requestPermissions(Solar_Power_System.this,
+                        ActivityCompat.requestPermissions(Air_Conditioners.this,
                                 new String[]{Manifest.permission.CAMERA},
                                 MY_PERMISSIONS_REQUEST_CAMERA);
 
@@ -242,7 +305,7 @@ public class Solar_Power_System extends AppCompatActivity {
                             // or open another dialog explaining
                             // again the permission and directing to
                             // the app setting
-                            saveToPreferences(Solar_Power_System.this, ALLOW_KEY, true);
+                            saveToPreferences(Air_Conditioners.this, ALLOW_KEY, true);
                         }
                     }
                 }
@@ -263,25 +326,8 @@ public class Solar_Power_System extends AppCompatActivity {
         prefsEditor.commit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.submit_icon_menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.menuSubmit:
-                finish();
-                return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
+
 
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Solar_Power_System">
+    tools:context=".Activities.Air_Conditioners">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -23,8 +23,65 @@
                 android:paddingTop="@dimen/app_min_padding"
                 android:weightSum="1">
 
+
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_QRCodeScan"
+                    android:id="@+id/airConditioners_textView_noOfAirConditionersACprovided"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="No.of Air Conditioners (AC) provided " />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_spinner_noOfAirConditionersACprovided"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Number of AC in Working Condition" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_spinner_numberOfACInWorkingCondition"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_big_margin"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_QRCodeScan"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -33,7 +90,7 @@
 
 
                 <ImageView
-                    android:id="@+id/solarPowerSystem_button_QRCodeScan"
+                    android:id="@+id/airConditioners_button_QRCodeScan"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="0.5"
@@ -51,37 +108,8 @@
                 android:paddingTop="@dimen/app_min_padding"
                 android:weightSum="1">
 
-
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_available"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Available" />
-
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_available"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_available"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_assetOwner"
+                    android:id="@+id/airConditioners_textView_assetOwner"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -90,17 +118,16 @@
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_assetOwner"
+                    android:id="@+id/airConditioners_Spinner_assetOwner"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_assetOwner"
+                    android:entries="@array/spinner_airConditioners_assetOwner"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
 
             </LinearLayout>
-
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -109,7 +136,34 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
+                    android:id="@+id/airConditioners_textView_typeOfAcSpliWindow"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Type of AC (Split/Window)" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_Spinner_typeOfAcSpliWindow"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_typeOfAcSpliWindow"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_manufacturerMakeModel"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -117,7 +171,7 @@
                     android:text="Manufacturer / Make / Model" />
 
                 <EditText
-                    android:id="@+id/solarPowerSystem_editText_manufacturerMakeModel"
+                    android:id="@+id/airConditioners_editText_manufacturerMakeModel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -133,26 +187,22 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_cellPanel"
+                    android:id="@+id/airConditioners_textView_acSerialNumber"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Cell / Panel" />
+                    android:text="AC Serial Number" />
 
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_cellPanel"
-                    style="@style/SpinnerTheme"
+                <EditText
+                    android:id="@+id/airConditioners_editText_acSerialNumber"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_cellPanel"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Enter Serial Number"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
-
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -161,19 +211,19 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_capacityKW"
+                    android:id="@+id/airConditioners_textView_capacityTr"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Capacity (KW)" />
+                    android:text="Capacity(TR)" />
 
                 <EditText
-                    android:id="@+id/solarPowerSystem_editText_capacityKW"
+                    android:id="@+id/airConditioners_editText_capacityTr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter Capacity(KW)"
+                    android:hint="Enter Capacity(TR)"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
@@ -185,8 +235,37 @@
                 android:paddingTop="@dimen/app_min_padding"
                 android:weightSum="1">
 
+
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_amcYesNo"
+                    android:id="@+id/airConditioners_textView_dateOfInstallation"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Date of Installation" />
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_dateOfInstallation"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_amcYesNo"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -195,14 +274,43 @@
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_amcYesNo"
+                    android:id="@+id/airConditioners_Spinner_amcYesNo"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_solarPowerSystem_amc"
+                    android:entries="@array/spinner_airConditioners_amc"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_alidityOfAmc"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="If yes, Validity of the AMC" />
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_dateOfvalidityOfAmc"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -215,24 +323,51 @@
 
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_validityOfAmc"
+                    android:id="@+id/airConditioners_textView_workingCondition"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="If yes, Validity of the AMC" />
+                    android:text="Working Condition" />
 
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_dateOfvalidityOfAmc"
-                    style="@android:style/Widget.Holo.Light.Spinner"
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_Spinner_workingCondition"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_workingCondition"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_natureOfProblem"
+                    style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MM/YYYY"
-                    android:inputType="none"
+                    android:text="Nature of Problem" />
+
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_natureOfProblem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Nature of Problem"
                     android:textAlignment="viewStart" />
+
 
             </LinearLayout>
 
