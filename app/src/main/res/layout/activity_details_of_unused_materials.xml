@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DetailsOfUnusedMaterials">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/app_normal_margin"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:layout_marginTop="@dimen/app_normal_margin"
+
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Number of Unused Asset in Site" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/detailsOfUnusedMaterials_spinner_NumberofUnusedAssetinSite"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_detailsOfUnusedMaterials_NumberofUnusedAssetinSite"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:layout_marginTop="@dimen/app_normal_margin"
+
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/detailsOfUnusedMaterials_textView_AssetMake"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Asset Make" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/detailsOfUnusedMaterials_spinner_AssetMake"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_detailsOfUnusedMaterials_AssetMake"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:layout_marginTop="@dimen/app_normal_margin"
+
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/detailsOfUnusedMaterials_textView_AssetStatus"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Asset Status" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/detailsOfUnusedMaterials_spinner_AssetStatus"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_detailsOfUnusedMaterials_AssetStatus"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

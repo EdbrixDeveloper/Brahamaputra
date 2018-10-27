@@ -3,6 +3,8 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -87,6 +89,13 @@ public class Tower_Detail extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.dropdown_details_menu, menu);
+        return true;
+    }
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -100,8 +109,13 @@ public class Tower_Detail extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            case R.id.menuDone:
+                finish();
+                return true;
+
+
+
         }
+        return super.onOptionsItemSelected(item);
     }
 }

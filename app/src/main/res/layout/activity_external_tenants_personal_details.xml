@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ExternalTenantsPersonaldetails">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/app_normal_margin"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:layout_marginTop="@dimen/app_normal_margin"
+
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_TotalNumberofTanents"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Total Number of Tanents" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/externalTenantsPersonaldetails_spinner_TotalNumberofTanents"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_externalTenantsPersonaldetails_TotalNumberofTanents"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:layout_marginTop="@dimen/app_normal_margin"
+
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheTenant"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Name of the Tenant" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/externalTenantsPersonaldetails_spinner_NameoftheTenant"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_externalTenantsPersonaldetails_NameoftheTenant"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:layout_marginTop="@dimen/app_normal_margin"
+
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_TypeofTenant"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Type of Tenant" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/externalTenantsPersonaldetails_spinner_TypeofTenant"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_externalTenantsPersonaldetails_TypeofTenant"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_PositionattheTower"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Position (in Mtrs) at the Tower"
+
+                    />
+
+                <EditText
+                    android:id="@+id/externalTenantsPersonaldetails_editText_PositionattheTower"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Back up duration "
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_DateofthestartofTenancy"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:singleLine="false"
+                    android:text="Date of the start of Tenancy" />
+
+                <EditText
+                    android:id="@+id/externalTenantsPersonaldetails_editText_DateofthestartofTenancy"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_DateofthestartofRadiation"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:singleLine="false"
+                    android:text="Date of the start of Radiation" />
+
+                <EditText
+                    android:id="@+id/externalTenantsPersonaldetails_editText_DateofthestartofRadiation"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheContactPerson"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:singleLine="false"
+                    android:text="Name of the Contact Person" />
+
+                <EditText
+                    android:id="@+id/externalTenantsPersonaldetails_editText_NameoftheContactPerson"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+
+                    android:hint="Enter Name of the Contact Person "
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_AddressoftheContactPerson"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:singleLine="false"
+                    android:text="Address of the Contact Person" />
+
+                <EditText
+                    android:id="@+id/externalTenantsPersonaldetails_editText_AddressoftheContactPerson"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Address of the Contact Person"
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonMobile"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:singleLine="false"
+                    android:text="Telephone No. of Contact Person – Mobile" />
+
+                <EditText
+                    android:id="@+id/externalTenantsPersonaldetails_editText_TelephoneNoofContactPersonMobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Telephone No. of Contact Person – Mobile "
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonLandline"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:singleLine="false"
+                    android:text="Telephone No. of Contact Person -Land line" />
+
+                <EditText
+                    android:id="@+id/externalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Telephone No. of Contact Person -Land line "
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
