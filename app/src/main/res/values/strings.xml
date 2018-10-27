@@ -87,8 +87,6 @@
     </string-array>
 
 
-
-
     <string-array name="spinner_landDetails_LandType">
         <item>Free Hold</item>
         <item>Leased</item>
@@ -243,4 +241,529 @@
         <item>No</item>
     </string-array>
 
+
+    <!--Battery Set	 screen Array for spinners -->
+    <string-array name="spinner_batterySet_NoofBatterySetProvided">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="spinner_batterySet_NumberofBatteryBankWorking">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="spinner_batterySet_AssetOwner">
+        <item>BSNL Supplied Asset</item>
+        <item>M and M Supplied Asset</item>
+
+    </string-array>
+
+    <string-array name="spinner_batterySet_ManufacturerMakeModel">
+
+    </string-array>
+
+    <string-array name="spinner_batterySet_CapacityinAH">
+        <item>100AH</item>
+        <item>200AH</item>
+        <item>250AH</item>
+        <item>300AH</item>
+        <item>350AH</item>
+        <item>400AH</item>
+        <item>450AH</item>
+        <item>500AH</item>
+    </string-array>
+
+    <string-array name="spinner_batterySet_TypeofBattery">
+        <item>VRLA</item>
+        <item>Li-Ion</item>
+        <item>Tubular</item>
+    </string-array>
+
+    <string-array name="spinner_batterySet_PositionofBatteryBank">
+        <item>Inside Indoor Shelter</item>
+        <item>Outside the Shelter</item>
+        <item>In Outdoor Cabinet</item>
+    </string-array>
+
+
+    <string-array name="spinner_batterySet_BatteryBankCableSizeinSQMM">
+        <item>16</item>
+        <item>25</item>
+        <item>35</item>
+        <item>50</item>
+        <item>70</item>
+    </string-array>
+
+
+    <string-array name="spinner_batterySet_BatteryBankEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+    <string-array name="spinner_batterySet_BACKUPCondition">
+        <item>Healthy</item>
+        <item>Poor</item>
+
+    </string-array>
+
+    <!--Media screen Array for spinners -->
+    <string-array name="spinner_media_Typeofmedia">
+        <item>OFC</item>
+        <item>ML</item>
+        <item>SAT</item>
+
+    </string-array>
+
+    <!--Media screen Array for spinners -->
+    <string-array name="spinner_externalTenantsPersonaldetails_TotalNumberofTanents">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="spinner_externalTenantsPersonaldetails_NameoftheTenant">
+        <item>Airtel</item>
+        <item>BSNL</item>
+        <item>Idea</item>
+        <item>RJIL</item>
+        <item>VIL</item>
+        <item>Vodafone</item>
+    </string-array>
+
+    <string-array name="spinner_externalTenantsPersonaldetails_TypeofTenant">
+        <item>Indoor</item>
+        <item>Outdoor</item>
+    </string-array>
+
+    <!--Active equipment Details [BSNL] for record purpose only Array for spinners -->
+    <string-array name="spinner_activeEquipmentDetails_TypeofBTS">
+        <item>2G</item>
+        <item>3G</item>
+        <item>CDMA</item>
+        <item>WiMax</item>
+        <item>2G and 3G</item>
+        <item>3G and CDMA</item>
+        <item>2G and CDMA</item>
+        <item>All</item>
+
+
+    </string-array>
+
+    <!--Power Management System activity  spinners Array -->
+    <string-array name="spinner_powerManagementSystem_AssetOwner">
+        <item>BSNL Supplied Asset</item>
+        <item>M and M Supplied Asset</item>
+        <item>M and M Supplied Revenue</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_PowerManagementSystemType">
+        <item>PIU/PMU</item>
+        <item>AMF Panel</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_PowerManagementSystemMake">
+        <item>DELTA</item>
+        <item>PACE</item>
+        <item>Intelux</item>
+        <item>ACME</item>
+        <item>SUN</item>
+        <item>UTOPIA</item>
+        <item>Mahindra</item>
+        <item>AMF Other Makes</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_PowerManagementSystemPosition">
+        <item>Indoor Type</item>
+        <item>Outdoor Type</item>
+        <item>Mounted with DG</item>
+        <item>Outdoor With Cabinet</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_PowerManagementSystemStaus">
+        <item>Auto Mode</item>
+        <item>Manuel Mode</item>
+        <item>Not Working since long</item>
+        <item>Man Operated</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_WorkingCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+
+    </string-array>
+
+    <!--Power Management System activity  spinners Array -->
+    <string-array name="spinner_powerManagementSystem_SiteBoundaryStatus">
+        <item>Compound Wall with Gate</item>
+        <item>Compound Wall without Gate</item>
+        <item>RTT/RTP</item>
+        <item>Fencing with Gate</item>
+        <item>Fencing without Gate</item>
+        <item>Open Site</item>
+        <item>Not Applicable</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_SiteHygieneVegitationStatus">
+        <item>Cleaning OK</item>
+        <item>Cleaning Required</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_GateLock">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Not Required</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_DGRoomLock">
+        <item>Available</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_FireExtuinguisher">
+        <item>Available</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_FireExtuinguisherType">
+        <item>ABC</item>
+        <item>CO2</item>
+        <item>DCP</item>
+        <item>NITROGEN</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_FireBucket">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_SecurityStatus24x7">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_NoofSecurityPerson">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_CaretakerStatusUpOnEmergency">
+        <item>Available</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_IsSecurityCaretakeristheOwnerofSite">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Relative</item>
+        <item>Not Applicable</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_CaretakerSecuritySalaryPaidBy">
+        <item>BSNL</item>
+        <item>External Agency</item>
+        <item>Along with Site Rent</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_CaretakerSecurityStayinginSite">
+        <item>Yes</item>
+        <item>No</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_NumberofEarthPit">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_LightningArresterStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+
+    <string-array name="spinner_powerManagementSystem_FencingCompoundWallCondition">
+        <item>OK</item>
+        <item>Fencing Damaged</item>
+        <item>Compound Wall Damaged</item>
+        <item>NA</item>
+
+
+    </string-array>
+    <string-array name="spinner_powerManagementSystem_NumberoffreeODPaltformAvailable">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_AlarmMultipluxerStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_DoorOpenSensor">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_FuelSensor">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_powerManagementSystem_FireSmokeSensor">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+
+    <!--ACDB_DCDB activity  spinners Array -->
+    <string-array name="spinner_acdb_dcdb_NumberofACDB">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+
+    </string-array>
+
+    <string-array name="spinner_acdb_dcdb_NumberofDCDB">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+
+    </string-array>
+
+    <string-array name="spinner_acdb_dcdb_FreeCoolingDeviseStausFCU">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Not Required</item>
+
+    </string-array>
+
+
+    <!--Details Of Unused Materials activity  spinners Array -->
+    <string-array name="spinner_detailsOfUnusedMaterials_NumberofUnusedAssetinSite">
+
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+
+    </string-array>
+
+    <string-array name="spinner_detailsOfUnusedMaterials_AssetMake">
+        <item>ACME</item>
+        <item>Arisys</item>
+        <item>Blue Star</item>
+        <item>Carrier</item>
+        <item>Daikin</item>
+        <item>Godreg</item>
+        <item>Haier</item>
+        <item>Hitachi</item>
+        <item>LG</item>
+        <item>Mitsubishi</item>
+        <item>OG</item>
+        <item>Panasonic</item>
+        <item>Samsung</item>
+        <item>Spacemaker</item>
+        <item>Tata Liberty</item>
+        <item>Toshiba</item>
+        <item>Uniflair</item>
+        <item>Videocon</item>
+        <item>Voltas</item>
+        <item>Whirlpool</item>
+        <item>Local</item>
+        <item>Amara Raja</item>
+        <item>C and D</item>
+        <item>Coslite</item>
+        <item>Delta</item>
+        <item>Enersis</item>
+        <item>Excide</item>
+        <item>Exicom</item>
+        <item>GFM</item>
+        <item>GNB</item>
+        <item>HBL</item>
+        <item>Huwavai</item>
+        <item>Leoch</item>
+        <item>Liberty</item>
+        <item>Mahindra</item>
+        <item>Microtex</item>
+        <item>Narada</item>
+        <item>NED</item>
+        <item>Panasonic</item>
+        <item>Saft</item>
+        <item>Star</item>
+        <item>Ashok Leyland</item>
+        <item>Caterpillar</item>
+        <item>Cummins</item>
+        <item>Eicher</item>
+        <item>Elgi</item>
+        <item>Escorts</item>
+        <item>Greeves</item>
+        <item>Honda</item>
+        <item>Jackson</item>
+        <item>Koel</item>
+        <item>Lister Pitter</item>
+        <item>M and M</item>
+        <item>Mistubishi</item>
+        <item>Perfect</item>
+        <item>Perkins</item>
+        <item>Powerica</item>
+        <item>Sonalika</item>
+        <item>Volvo</item>
+        <item>Ador Poweron</item>
+        <item>Amaraja</item>
+        <item>BFU</item>
+        <item>Delta</item>
+        <item>Eltek</item>
+        <item>Emerson</item>
+        <item>Exicom</item>
+        <item>HBL Sabnif</item>
+        <item>INMPS</item>
+        <item>Intex</item>
+        <item>ITI</item>
+        <item>Lineage</item>
+        <item>M and M</item>
+        <item>Pace</item>
+        <item>UTL</item>
+        <item>Valere</item>
+        <item>XL Telecom</item>
+        <item>Ador Poweron</item>
+        <item>Amaraja</item>
+        <item>BFU</item>
+        <item>Delta</item>
+        <item>Eltek</item>
+        <item>Emerson</item>
+        <item>Exicom</item>
+        <item>HBL Sabnif</item>
+        <item>INMPS</item>
+        <item>Intex</item>
+        <item>ITI</item>
+        <item>Lineage</item>
+        <item>M and M</item>
+        <item>Pace</item>
+        <item>UTL</item>
+        <item>Valere</item>
+        <item>XL Telecom</item>
+        <item>Cage</item>
+        <item>Civil Room</item>
+        <item>PUF Shelter</item>
+        <item>Alpha Numeric Input</item>
+        <item>ACME</item>
+        <item>Servo</item>
+        <item>U-Form</item>
+        <item>V-Form</item>
+        <item>Zavline</item>
+
+
+    </string-array>
+
+    <string-array name="spinner_detailsOfUnusedMaterials_AssetStatus">
+
+        <item>New Asset</item>
+        <item>Reusable</item>
+        <item>Non Reusable</item>
+        <item>Scrap Item</item>
+
+    </string-array>
+
+    <!--ServoStabilizer activity  spinners Array -->
+    <string-array name="spinner_ServoStabilizer_ServoStabilizerWorkingStatus">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Not Using</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_ServoStabilizer_MakeofServo">
+        <item>Aircorn</item>
+        <item>Auro Power</item>
+        <item>KB Power</item>
+        <item>Krycard</item>
+        <item>Pragathy</item>
+        <item>Sakthy</item>
+        <item>Servomax</item>
+        <item>Suvic</item>
+        <item>Pace</item>
+        <item>Others</item>
+
+    </string-array>
+
+    <string-array name="spinner_ServoStabilizer_RatingofServo">
+        <item>5KVA</item>
+        <item>10KVA</item>
+        <item>15KVA</item>
+        <item>20KVA</item>
+        <item>25KVA</item>
+        <item>30KVA</item>
+        <item>Others</item>
+
+    </string-array>
+
+    <string-array name="spinner_ServoStabilizer_WorkingCondition">
+
+        <item>Working</item>
+        <item>Not Working</item>
+
+    </string-array>
 </resources>

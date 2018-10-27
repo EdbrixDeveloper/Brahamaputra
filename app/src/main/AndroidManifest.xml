@@ -3,7 +3,7 @@
     package="com.brahamaputra.mahindra.brahamaputra">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -65,7 +65,57 @@
             android:label="Sections"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".Activities.Media"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".Activities.Battery_Set"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.ExternalTenantsPersonaldetails"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.Total_DC_Load_site"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+
+
+        <activity
+            android:name=".Activities.ActiveequipmentDetails"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PowerManagementSystem"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.GeneralAndSafetyMeasures"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.ACDB_DCDB"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.ServoStabilizer"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.DetailsOfUnusedMaterials"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
