@@ -1,4 +1,4 @@
-package com.brahamaputra.mahindra.brahamaputra;
+package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +10,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
+import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.Calendar;
 
-import ir.samanjafari.easycountdowntimer.CountDownInterface;
-import ir.samanjafari.easycountdowntimer.EasyCountDownTextview;
+//import ir.samanjafari.easycountdowntimer.CountDownInterface;
+//import ir.samanjafari.easycountdowntimer.EasyCountDownTextview;
 
 public class Electric_Connection extends AppCompatActivity {
 
@@ -73,7 +74,7 @@ public class Electric_Connection extends AppCompatActivity {
     private EditText mElectricConnectionEditTextScheduledPowerCutInHrs;
     private TextView mElectricConnectionTextViewEbBillDate;
     private EditText mElectricConnectionEditTextEbBillDate;
-    EasyCountDownTextview countDownTextview;
+   // EasyCountDownTextview countDownTextview;
 
     String selectedHour = "HH", selectedMinute = "MM";
 
@@ -108,7 +109,7 @@ public class Electric_Connection extends AppCompatActivity {
             }
         });
 
-        countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
+      /*  countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
         countDownTextview.setOnTick(new CountDownInterface() {
             @Override
             public void onTick(long time) {
@@ -120,7 +121,7 @@ public class Electric_Connection extends AppCompatActivity {
                 //Log.i("main activity", "onFinish");
                 //Toast.makeText(getApplicationContext(),"Finish",).show();
             }
-        });
+        });*/
 
 
 /* mElectricConnectionEditTextAverageEbAvailabilityPerDay.setOnClickListener(new OnClickListener() {
@@ -203,7 +204,7 @@ public class Electric_Connection extends AppCompatActivity {
         mElectricConnectionTextViewEbBillDate = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate);
         mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
 
-        EasyCountDownTextview countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
+       // EasyCountDownTextview countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
     }
 
 

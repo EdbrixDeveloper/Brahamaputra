@@ -1,4 +1,4 @@
-package com.brahamaputra.mahindra.brahamaputra;
+package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,12 +17,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

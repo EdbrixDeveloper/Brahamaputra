@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Electric_Connection">
+    tools:context=".Activities.Electric_Connection">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -643,7 +643,7 @@
                     android:layout_weight="0.5"
                     android:text="Average EB Availability Per Day" />
 
-                <ir.samanjafari.easycountdowntimer.EasyCountDownTextview
+               <!-- <ir.samanjafari.easycountdowntimer.EasyCountDownTextview
                     android:id="@+id/easyCountDownTextview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -655,7 +655,7 @@
                     app:showHours="false"
                     app:showOnlySecond="false"
                     app:textColor="#000"
-                    app:textSize="25sp" />
+                    app:textSize="25sp" />-->
 
                 <EditText
                     android:id="@+id/electricConnection_editText_averageEbAvailabilityPerDay"
@@ -664,7 +664,7 @@
                     android:layout_weight="0.5"
                     android:hint="HH:MM"
                     android:textAlignment="viewStart"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
             </LinearLayout>
 

@@ -9,6 +9,7 @@
 
 
     <ListView
+        android:id="@+id/hotoSections_listView_sections"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:entries="@array/listView_hotoSections_sections" />

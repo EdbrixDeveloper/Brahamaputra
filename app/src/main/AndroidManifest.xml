@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brahamaputra.mahindra.brahamaputra">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,20 +29,43 @@
 
         <activity
             android:name=".Activities.UsersHotoListActivity"
-            android:screenOrientation="portrait"
-            android:label="Hoto List"/>
+            android:label="Hoto List"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.UserHotoTransactionActivity"
-            android:screenOrientation="portrait"
-            android:label="Hoto Transaction"/>
+            android:label="Hoto Transaction"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Tower_Detail"
-            android:screenOrientation="portrait"
-            android:label="Tower Detail"/>
+            android:label="Tower Detail"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.HotoSectionsListActivity"
-            android:screenOrientation="portrait"
-            android:label="Sections"/>
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.Land_Details"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Earth_Resistance_Equipment"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Earth_Resistance_Tower"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Electric_Connection"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Solar_Power_System"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>
