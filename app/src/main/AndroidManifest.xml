@@ -3,7 +3,7 @@
     package="com.brahamaputra.mahindra.brahamaputra">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,17 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activities.DashboardActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
+
         <activity
             android:name=".Activities.UsersHotoListActivity"
-            android:label="Hoto List"
+            android:label="HOTO List"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.UserHotoTransactionActivity"
-            android:label="Hoto Transaction"
+            android:label="HOTO Transaction"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Tower_Detail"
@@ -41,6 +43,7 @@
             android:name=".Activities.HotoSectionsListActivity"
             android:label="Sections"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Activities.Land_Details"
             android:label="Sections"
@@ -61,21 +64,57 @@
             android:name=".Activities.Solar_Power_System"
             android:label="Sections"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".Activities.Air_Conditioners"
-            android:label="Sections"
+            android:name=".Activities.Media"
+            android:label="Battery Set"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".Activities.Shelter"
-            android:label="Sections"
+            android:name=".Activities.Battery_Set"
+            android:label="Battery Set"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".Activities.Power_Backups_DG"
-            android:label="Sections"
+            android:name=".Activities.ExternalTenantsPersonaldetails"
+            android:label="Battery Set"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".Activities.PowerPlantDetailsActivity"
-            android:label="Sections"
+            android:name=".Activities.Total_DC_Load_site"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+
+
+        <activity
+            android:name=".Activities.ActiveequipmentDetails"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PowerManagementSystem"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.GeneralAndSafetyMeasures"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.ACDB_DCDB"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.ServoStabilizer"
+            android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.DetailsOfUnusedMaterials"
+            android:label="Battery Set"
             android:screenOrientation="portrait" />
     </application>
 
