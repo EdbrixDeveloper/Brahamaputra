@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,7 +21,6 @@ public class HotoSectionsListActivity extends AppCompatActivity {
         hotoSections_listView_sections = (ListView)findViewById(R.id.hotoSections_listView_sections);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         hotoSections_listView_sections.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -43,6 +43,17 @@ public class HotoSectionsListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

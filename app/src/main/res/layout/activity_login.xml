@@ -65,7 +65,7 @@
                     android:layout_height="60dp"
                     android:ems="10"
                     android:hint="Password"
-                    android:inputType="textPersonName"
+                    android:inputType="textPassword"
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
                     android:layout_marginBottom="@dimen/app_big_margin"
@@ -73,7 +73,8 @@
                     android:textColorHint="@color/colorWhite"
                     android:drawablePadding="@dimen/app_normal_padding"
                     android:backgroundTint="@color/colorWhite"
-                    android:textColor="@color/colorWhite"/>
+                    android:textColor="@color/colorWhite" />
+
 
                 <Button
                     android:id="@+id/login_button_login"

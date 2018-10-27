@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,7 +22,6 @@ public class UsersHotoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users_hoto_list);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         userHotoList_listView_hotoList = (ListView) findViewById(R.id.userHotoList_listView_hotoList);
         mAdapter = new UserHotoListAdapter(UsersHotoListActivity.this);
@@ -41,6 +41,17 @@ public class UsersHotoListActivity extends AppCompatActivity {
                 startActivity(new Intent(UsersHotoListActivity.this,UserHotoTransactionActivity.class));
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

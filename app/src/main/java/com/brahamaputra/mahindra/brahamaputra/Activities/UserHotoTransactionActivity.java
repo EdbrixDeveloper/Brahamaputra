@@ -36,7 +36,6 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_hoto_transaction);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         assignViews();
         disableInput();
@@ -72,6 +71,17 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
         mUserHotoTransTextViewSourceOfPower = (TextView) findViewById(R.id.userHotoTrans_textView_sourceOfPower);
         mUserHotoTransSpinnerSourceOfPower = (Spinner) findViewById(R.id.userHotoTrans_spinner_sourceOfPower);
         mUserHotoTransButtonSubmitHotoTrans = (Button)findViewById(R.id.userHotoTrans_button_submitHotoTrans);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
