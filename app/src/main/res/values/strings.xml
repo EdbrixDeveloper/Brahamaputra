@@ -34,4 +34,40 @@
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
+
+    <string-array name="spinner_userHotoTrans_typeOfSites">
+        <item>Indoor</item>
+        <item>Outdoor</item>
+    </string-array>
+
+    <string-array name="spinner_userHotoTrans_sourceOfPower">
+        <item>Non EB</item>
+        <item>Non DG</item>
+        <item>Std Site(EB+DG)</item>
+    </string-array>
+
+    <string-array name="listView_hotoSections_sections">
+        <item>1. Land Details</item>
+        <item>2. Tower Details</item>
+        <item>3. Earth Resistance (Tower)</item>
+        <item>4. Earth Resistance (Equipment)</item>
+        <item>5. Electric Connection</item>
+        <item>6. Air Conditioners</item>
+        <item>7. Solar Power System</item>
+        <item>8. Power Plant Details</item>
+        <item>9. Power Backups (DG)</item>
+        <item>10. Shelter</item>
+        <item>11. Media</item>
+        <item>12. Battery Set</item>
+        <item>13. External Tenants Personal details</item>
+        <item>14. Total DC load (Kilo Watt)</item>
+        <item>15. Active equipment Details</item>
+        <item>16. POWER MANAGEMENT SYSTEM </item>
+        <item>17. GENERAL AND SAFETY MEASURES</item>
+        <item>18. ACDB/DCDB</item>
+        <item>19. SERVO STABILIZER</item>
+        <item>20. DETAILS OF UNUSED MATERIALS</item>
+
+    </string-array>
+
 </resources>

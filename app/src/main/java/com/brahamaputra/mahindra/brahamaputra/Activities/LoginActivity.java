@@ -1,12 +1,17 @@
-package com.brahamaputra.mahindra.brahamaputra;
+package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.brahamaputra.mahindra.brahamaputra.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,9 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginEditTextUsername = (EditText) findViewById(R.id.login_editText_username);
         mLoginEditTextPassword = (EditText) findViewById(R.id.login_editText_password);
         mLoginButtonLogin = (Button) findViewById(R.id.login_button_login);
-
     }
-
 
 
 }

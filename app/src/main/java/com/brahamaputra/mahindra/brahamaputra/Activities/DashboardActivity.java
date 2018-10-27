@@ -1,7 +1,6 @@
-package com.brahamaputra.mahindra.brahamaputra;
+package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.support.v7.widget.Toolbar;
+
+import com.brahamaputra.mahindra.brahamaputra.R;
 
 public class DashboardActivity extends AppCompatActivity {
 

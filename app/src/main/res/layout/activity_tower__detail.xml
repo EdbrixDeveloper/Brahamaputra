@@ -1,242 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tower_Detail">
+    tools:context=".Activities.Tower_Detail">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/app_normal_margin"
-        android:orientation="vertical">
-
+    <ScrollView android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:layout_marginTop="@dimen/app_normal_margin"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:orientation="vertical">
 
-            android:orientation="horizontal"
-            android:weightSum="1">
 
-            <TextView
-                android:id="@+id/towerDetail_textView_tower"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Tower" />
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:layout_marginTop="@dimen/app_normal_margin"
 
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/towerDetail_spinner_tower"
-                style="@style/SpinnerTheme"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="0.5"
-                android:entries="@array/spinner_towerDetail_tower"
-                android:textAlignment="viewStart"
-                app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                android:orientation="horizontal"
+                android:weightSum="1">
 
+                <TextView
+                    android:id="@+id/towerDetail_textView_tower"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Tower" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/towerDetail_spinner_tower"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_towerDetail_tower"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/towerDetail_textView_typeOfTower"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Type of tower" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/towerDetail_spinner_typeOfTower"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_towerDetail_typeOfTower"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/towerDetail_textView_HeightOfTower"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Height of the tower(In Mtr)"
+
+                    />
+
+                <EditText
+                    android:id="@+id/towerDetail_editText_heightOfTower"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Height "
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/towerDetail_textView_dateOfPaintingOfTheTower"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Date of painting of the Tower" />
+
+                <EditText
+                    android:id="@+id/towerDetail_editText_dateOfPaintingOfTheTower"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/towerDetail_textView_signboard"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Sign Board" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/towerDetail_spinner_signboard"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_towerDetail_signboard"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/towerDetail_textView_dangerSignageboard"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="DANGER Signage Board" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/towerDetail_spinner_dangerSignageboard"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_towerDetail_dangerSignageboard"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/towerDetail_textView_cautionSignageboard"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="CAUTION Signage Board" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/towerDetail_spinner_cautionSignageboard"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_towerDetail_cautionSignageboard"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/towerDetail_textView_warningSignageboard"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="WARNING Signage Board" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/towerDetail_spinner_warningSignageboard"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_towerDetail_warningSignageboard"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"
+
+                    />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/towerDetail_textView_typeOfTower"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Type of tower" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/towerDetail_spinner_typeOfTower"
-                style="@style/SpinnerTheme"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="0.5"
-                android:entries="@array/spinner_towerDetail_typeOfTower"
-                android:textAlignment="viewStart"
-                app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/towerDetail_textView_HeightOfTower"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Height of the tower(In Mtr)"
-
-                />
-
-            <EditText
-                android:id="@+id/towerDetail_editText_heightOfTower"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:hint="Enter Height "
-                android:inputType="numberDecimal"
-                android:textAlignment="viewStart" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/towerDetail_textView_dateOfPaintingOfTheTower"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:singleLine="false"
-                android:text="Date of painting of the Tower" />
-
-            <EditText
-                android:id="@+id/towerDetail_editText_dateOfPaintingOfTheTower"
-                style="@android:style/Widget.Holo.Light.Spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:editable="false"
-                android:focusable="false"
-                android:hint="DD/MM/YYYY"
-                android:inputType="none"
-                android:textAlignment="viewStart" />
+    </ScrollView>
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/towerDetail_textView_signboard"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Sign Board" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/towerDetail_spinner_signboard"
-                style="@style/SpinnerTheme"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="0.5"
-                android:entries="@array/spinner_towerDetail_signboard"
-                android:textAlignment="viewStart"
-                app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/towerDetail_textView_dangerSignageboard"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="DANGER Signage Board" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/towerDetail_spinner_dangerSignageboard"
-                style="@style/SpinnerTheme"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="0.5"
-                android:entries="@array/spinner_towerDetail_dangerSignageboard"
-                android:textAlignment="viewStart"
-                app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/towerDetail_textView_cautionSignageboard"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="CAUTION Signage Board" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/towerDetail_spinner_cautionSignageboard"
-                style="@style/SpinnerTheme"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="0.5"
-                android:entries="@array/spinner_towerDetail_cautionSignageboard"
-                android:textAlignment="viewStart"
-                app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_normal_margin"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/towerDetail_textView_warningSignageboard"
-                style="@style/TextViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="WARNING Signage Board" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/towerDetail_spinner_warningSignageboard"
-                style="@style/SpinnerTheme"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="0.5"
-                android:entries="@array/spinner_towerDetail_warningSignageboard"
-                android:textAlignment="viewStart"
-                app:hintText="Select"
-
-                />
-
-        </LinearLayout>
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

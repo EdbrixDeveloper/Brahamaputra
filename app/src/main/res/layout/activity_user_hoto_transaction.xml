@@ -4,6 +4,202 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserHotoTransactionActivity">
+    tools:context=".Activities.UserHotoTransactionActivity">
+
+    <ScrollView android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer name"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userHotoTrans_editText_customerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userHotoTrans_editText_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name of circle"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userHotoTrans_editText_nameOfCircle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name of SSA"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userHotoTrans_editText_nameOfssa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name of site"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userHotoTrans_editText_nameOfsite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Site ID"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userHotoTrans_editText_siteID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Site Address"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userHotoTrans_editText_siteAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="3"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPostalAddress"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="232dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/userHotoTrans_textView_typeOfTower"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Type of sites"
+                    android:layout_gravity="center"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/userHotoTrans_spinner_typeOfSites"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_userHotoTrans_typeOfSites"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_normal_margin"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/userHotoTrans_textView_sourceOfPower"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Source of Power"
+                    android:layout_gravity="center"/>
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/userHotoTrans_spinner_sourceOfPower"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_userHotoTrans_sourceOfPower"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/userHotoTrans_button_submitHotoTrans"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:text="Proceed"
+                android:background="@color/red"
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="false"
+                android:textSize="18dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
 
 </android.support.constraint.ConstraintLayout>

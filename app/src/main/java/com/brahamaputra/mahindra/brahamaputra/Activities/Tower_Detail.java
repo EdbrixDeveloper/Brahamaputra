@@ -1,4 +1,4 @@
-package com.brahamaputra.mahindra.brahamaputra;
+package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

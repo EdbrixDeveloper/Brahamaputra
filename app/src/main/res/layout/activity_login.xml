@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".Activities.LoginActivity"
     android:orientation="vertical"
     android:background="@drawable/loginbg">
 
@@ -47,7 +47,6 @@
                     android:id="@+id/login_editText_username"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:ems="10"
                     android:hint="Username"
                     android:inputType="textPersonName"
                     android:layout_marginLeft="@dimen/app_big_margin"
@@ -55,9 +54,10 @@
                     android:layout_marginBottom="@dimen/app_normal_margin"
                     android:drawableLeft="@drawable/username_icon"
                     android:textColorHint="@color/colorWhite"
-                    android:drawablePadding="@dimen/app_big_padding"
+                    android:drawablePadding="@dimen/app_normal_padding"
                     android:backgroundTint="@color/colorWhite"
-                    android:textColor="@color/colorWhite"/>
+                    android:textColor="@color/colorWhite"
+                    />
 
                 <EditText
                     android:id="@+id/login_editText_password"
@@ -71,7 +71,7 @@
                     android:layout_marginBottom="@dimen/app_big_margin"
                     android:drawableLeft="@drawable/password_icon"
                     android:textColorHint="@color/colorWhite"
-                    android:drawablePadding="@dimen/app_big_padding"
+                    android:drawablePadding="@dimen/app_normal_padding"
                     android:backgroundTint="@color/colorWhite"
                     android:textColor="@color/colorWhite"/>
 
