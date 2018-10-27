@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Electric_Connection">
+    tools:context=".Activities.Power_Backups_DG">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
             android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
+
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -24,22 +25,53 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_typeOfElectricConnection"
+                    android:id="@+id/powerBackupsDg_textView_noOfEngineAlternatorSetsprovided"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Type of Electric Connection" />
+                    android:text="No.of Engine Alternator Sets provided" />
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_typeOfElectricConnection"
+                    android:id="@+id/powerBackupsDg_spinner_noOfEngineAlternatorSetsprovided"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_typrOfElectricConnection"
+                    android:entries="@array/spinner_powerBackupsDg_noOfEngineAlternatorSetsprovided"
                     android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Number of Working DG" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_spinner_numberOfWorkingDg"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_numberOfWorkingDg"
+                    android:textAlignment="viewStart"
+
                     app:hintText="Select" />
 
             </LinearLayout>
@@ -51,22 +83,104 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_tariff"
+                    android:id="@+id/powerBackupsDg_textView_QRCodeScan"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Tariff" />
+                    android:text="QR Code Scan" />
+
+
+                <ImageView
+                    android:id="@+id/powerBackupsDg_button_QRCodeScan"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.5"
+                    android:clickable="true"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_assetOwner"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Asset Owner" />
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_tariff"
+                    android:id="@+id/powerBackupsDg_Spinner_assetOwner"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_tariff"
+                    android:entries="@array/spinner_powerBackupsDg_assetOwner"
                     android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/app_min_padding"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+                <!--style="@style/TextViewStyle"-->
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dividerDesign"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Specifications"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <!--android:layout_marginTop="100sp"-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="#a40404" />
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_manufacturerMakeModel"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Manufacturer/Make/Model" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_manufacturerMakeModel"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_manufacturerMakeModel"
+                    android:textAlignment="viewStart"
+
                     app:hintText="Select" />
 
             </LinearLayout>
@@ -78,96 +192,55 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_sanctionedLoadKVA"
+                    android:id="@+id/powerBackupsDg_textView_capacityInKva"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Sanctioned load (KVA)" />
+                    android:text="Capacity in KVA" />
 
-                <EditText
-                    android:id="@+id/electricConnection_editText_sanctionedLoadKVA"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Sanctioned load"
-                    android:inputType="numberDecimal" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_existingLoadAtSiteKVA"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Existing load at site (KVA)" />
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_existingLoadAtSiteKVA"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Existing load"
-                    android:inputType="numberDecimal" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_nameOfSupplyCompany"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Name of the supply company" />
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_nameOfSupplyCompany"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Name of supply"
-                    android:textAlignment="viewStart" />
-                <!--company-->
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_copyOfElectricBills"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Copy of the electric bills" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_copyOfElectricBills"
+                    android:id="@+id/powerBackupsDg_Spinner_capacityInKva"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_copyOfElectricBills"
+                    android:entries="@array/spinner_powerBackupsDg_capacityInKva"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_autoManual"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Auto/ Manual" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_autoManual"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_autoManual"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -177,49 +250,52 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_numberOfCompoundLights"
+                    android:id="@+id/powerBackupsDg_textView_dieselTankCapacity"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Number of Compound lights" />
+                    android:text="Diesel Tank capacity" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_numberOfCompoundLights"
+                    android:id="@+id/powerBackupsDg_editText_dieselTankCapacity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter Compound lights"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterReadingInKWh"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="EB Meter Reading(KWH)" />
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_ebMeterReadingInKWh"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter EB Meter"
+                    android:hint="Enter Diesel Tank"
                     android:inputType="numberDecimal|none"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dateOfInstallation"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Date of Installation" />
+
+                <EditText
+                    android:id="@+id/powerBackupsDg_editText_dateOfInstallation"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -228,23 +304,107 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebSupplier"
+                    android:id="@+id/powerBackupsDg_textView_averageDieselConsumption"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="EB Supplier" />
+                    android:text="Average Diesel Consumption per Hr." />
+
+                <EditText
+                    android:id="@+id/powerBackupsDg_editText_averageDieselConsumption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Average"
+                    android:inputType="numberDecimal|none"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_amc"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="AMC(Yes/No)" />
+
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebSupplier"
+                    android:id="@+id/powerBackupsDg_Spinner_amc"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_ebSupplier"
+                    android:entries="@array/spinner_powerBackupsDg_amc"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_validityOfAmc"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="If yes, Validity of the AMC" />
+
+                <EditText
+                    android:id="@+id/powerBackupsDg_editText_dateOfvalidityOfAmc"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgWorkingType"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="DG Working Type" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_dgWorkingType"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_dgWorkingType"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
             </LinearLayout>
 
 
@@ -255,19 +415,19 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebCostPerUnitForSharedConnection"
+                    android:id="@+id/powerBackupsDg_textView_dgHmrReading"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="EB Cost Per Unit for Shared Connection" />
+                    android:text="DG HMR Reading" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_ebCostPerUnitForSharedConnection"
+                    android:id="@+id/powerBackupsDg_editText_dgHmrReading"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter EB Cost"
+                    android:hint="Enter HMR Reading"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
@@ -280,72 +440,104 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebStatus"
+                    android:id="@+id/powerBackupsDg_textView_dgEngineSerialNumber"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="EB Status" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebStatus"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_ebStatus"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_transformerWorkingCondition"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Transformer Working Condition" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_transformerWorkingCondition"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_transformerWorkingCondition"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_transformerCapacityInKva"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Transformer Capacity in KVA" />
+                    android:text="DG Engine Serial Number" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_transformerCapacityInKva"
+                    android:id="@+id/powerBackupsDg_editText_dgEngineSerialNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter Transformer Capacity"
-                    android:inputType="numberDecimal|none"
+                    android:hint="Enter Serial Number"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorType"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="DG Main Alternator Type" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_dgMainAlternatorType"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_dgMainAlternatorType"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorMake"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="DG Main Alternator Make" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_spinner_dgMainAlternatorMake"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_dgMainAlternatorMake"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorSerialNumber"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="DG Main Alternator Serial Number" />
+
+                <EditText
+                    android:id="@+id/powerBackupsDg_editText_dgMainAlternatorSerialNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Alternator Serial"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -357,23 +549,25 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterBoxStatus"
+                    android:id="@+id/powerBackupsDg_textView_dgCanopyStatus"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="EB Meter Box Status" />
+                    android:text="DG Canopy Status" />
+
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebMeterBoxStatus"
+                    android:id="@+id/powerBackupsDg_Spinner_dgCanopyStatus"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_ebMeterBoxStatus"
+                    android:entries="@array/spinner_powerBackupsDg_dgCanopyStatus"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+
+                    app:hintText="Select" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -383,19 +577,106 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_sectionName"
+                    android:id="@+id/powerBackupsDg_textView_dgStartingBatteryStatus"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Section Name" />
+                    android:text="DG Starting Battery Status" />
 
-                <EditText
-                    android:id="@+id/electricConnection_editText_sectionName"
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_dgStartingBatteryStatus"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_dgStartingBatteryStatus"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_chargingAlternator"
+                    style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter Section Name"
+                    android:text="Charging Alternator" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_chargingAlternator"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_chargingAlternator"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_batteryCharger"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Battery Charger" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_batteryCharger"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_batteryCharger"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_presentDieselStock"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Present Diesel Stock" />
+
+                <EditText
+                    android:id="@+id/powerBackupsDg_editText_presentDieselStock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Diesel Stock"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -407,20 +688,20 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_sectionNumber"
+                    android:id="@+id/powerBackupsDg_textView_gcuRunHrs"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Section Number" />
+                    android:text="GCU Run Hrs" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_sectionNumber"
+                    android:id="@+id/powerBackupsDg_editText_gcuRunHrs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter Section Number"
-                    android:inputType="numberDecimal|none"
+                    android:hint="Enter GCU Run Hrs"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -432,19 +713,20 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_consumerNumber"
+                    android:id="@+id/powerBackupsDg_textView_gcuKwh"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Consumer Number" />
+                    android:text="GCU KWH" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_consumerNumber"
+                    android:id="@+id/powerBackupsDg_editText_gcuKwh"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter Consumer Number"
+                    android:hint="Enter GCU KWH"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -456,23 +738,25 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterWorkingStatus"
+                    android:id="@+id/powerBackupsDg_textView_dgAvrWorkingStatus"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="EB Meter Working Status" />
+                    android:text="DG AVR working Status" />
+
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebMeterWorkingStatus"
+                    android:id="@+id/powerBackupsDg_Spinner_dgAvrWorkingStatus"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_ebMeterWorkingStatus"
+                    android:entries="@array/spinner_powerBackupsDg_dgAvrWorkingStatus"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+
+                    app:hintText="Select" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -482,246 +766,82 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterSerialNumber"
+                    android:id="@+id/powerBackupsDg_textView_fuelTankPosition"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="EB Meter Serial Number" />
+                    android:text="Fuel Tank Position" />
 
-                <EditText
-                    android:id="@+id/electricConnection_editText_ebMeterSerialNumber"
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_fuelTankPosition"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_fuelTankPosition"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_workingCondition"
+                    style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:hint="Enter Meter Serial"
+                    android:text="Working Condition" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/powerBackupsDg_Spinner_workingCondition"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_powerBackupsDg_workingCondition"
+                    android:textAlignment="viewStart"
+
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_natureOfProblem"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Nature of Problem" />
+
+
+                <EditText
+                    android:id="@+id/powerBackupsDg_editText_natureOfProblem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Nature of Problem"
                     android:textAlignment="viewStart" />
 
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_typeOfPayment"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Type Of Payment" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_typeOfPayment"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_typeOfPayment"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_ebPaymentSchedule"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="EB Payment Schedule" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebPaymentSchedule"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_ebPaymentSchedule"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_safetyFuseUnit"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Safety Fuse Unit (SFU)" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_safetyFuseUnit"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_safetyFuseUnit"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_kitKatClayFuseStatus"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="KIT-KAT/Clay Fuse Status" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_kitKatClayFuseStatus"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_kitKatClayFuseStatus"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_ebNeutralEarthing"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="EB Neutral Earthing" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebNeutralEarthing"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_electricConnection_ebNeutralEarthing"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_averageEbAvailabilityPerDay"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Average EB Availability Per Day" />
-
-                <!-- <ir.samanjafari.easycountdowntimer.EasyCountDownTextview
-                     android:id="@+id/easyCountDownTextview"
-                     android:layout_width="0dp"
-                     android:layout_height="wrap_content"
-                     android:layout_centerInParent="true"
-                     app:hours="2"
-                     app:minute="2"
-                     app:second="15"
-                     app:setAnimation="true"
-                     app:showHours="false"
-                     app:showOnlySecond="false"
-                     app:textColor="#000"
-                     app:textSize="25sp" />-->
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_averageEbAvailabilityPerDay"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="HH:MM"
-                    android:inputType="none"
-                    android:textAlignment="viewStart"
-                    android:visibility="visible" />
 
             </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_scheduledPowerCutInHrs"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Scheduled Power Cut in Hrs" />
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_scheduledPowerCutInHrs"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="HH:MM"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_ebBillDate"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="EB Bill Date" />
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_ebBillDate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter EB Bill Date"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>

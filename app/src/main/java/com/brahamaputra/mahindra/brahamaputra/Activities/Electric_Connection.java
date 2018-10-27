@@ -4,6 +4,8 @@ import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -74,7 +76,7 @@ public class Electric_Connection extends AppCompatActivity {
     private EditText mElectricConnectionEditTextScheduledPowerCutInHrs;
     private TextView mElectricConnectionTextViewEbBillDate;
     private EditText mElectricConnectionEditTextEbBillDate;
-   // EasyCountDownTextview countDownTextview;
+    // EasyCountDownTextview countDownTextview;
 
     String selectedHour = "HH", selectedMinute = "MM";
 
@@ -87,7 +89,7 @@ public class Electric_Connection extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText("" + selectedHour + ":" + selectedMinute);
+        //mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText("" + selectedHour + ":" + selectedMinute);
 
         mElectricConnectionEditTextAverageEbAvailabilityPerDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,41 +111,27 @@ public class Electric_Connection extends AppCompatActivity {
             }
         });
 
-      /*  countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
-        countDownTextview.setOnTick(new CountDownInterface() {
+        mElectricConnectionEditTextScheduledPowerCutInHrs.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTick(long time) {
-                Log.i("main activty", "onTick");
-            }
+            public void onClick(View view) {
 
-            @Override
-            public void onFinish() {
-                //Log.i("main activity", "onFinish");
-                //Toast.makeText(getApplicationContext(),"Finish",).show();
-            }
-        });*/
-
-
-/* mElectricConnectionEditTextAverageEbAvailabilityPerDay.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(AddReminder.this, new TimePickerDialog.OnTimeSetListener() {
+                mTimePicker = new TimePickerDialog(Electric_Connection.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        eReminderTime.setText( selectedHour + ":" + selectedMinute);
+                        mElectricConnectionEditTextScheduledPowerCutInHrs.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
             }
-        });*/
+        });
+
+
 
     }
 
@@ -204,24 +192,29 @@ public class Electric_Connection extends AppCompatActivity {
         mElectricConnectionTextViewEbBillDate = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate);
         mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
 
-       // EasyCountDownTextview countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
+        // EasyCountDownTextview countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-            /*case android.R.id.home:
+            case R.id.menuSubmit:
                 finish();
-                return true;*/
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    /**/
 
 }

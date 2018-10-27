@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Land_Details">
+    tools:context=".Activities.Air_Conditioners">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -23,22 +23,107 @@
                 android:paddingTop="@dimen/app_min_padding"
                 android:weightSum="1">
 
+
                 <TextView
-                    android:id="@+id/landDetails_textView_typeOfLand"
+                    android:id="@+id/airConditioners_textView_noOfAirConditionersACprovided"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Type of Land" />
+                    android:text="No.of Air Conditioners (AC) provided " />
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/landDetails_Spinner_typeOfLand"
+                    android:id="@+id/airConditioners_spinner_noOfAirConditionersACprovided"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_landDetails_LandType"
+                    android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Number of AC in Working Condition" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_spinner_numberOfACInWorkingCondition"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_big_margin"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_QRCodeScan"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="QR Code Scan" />
+
+
+                <ImageView
+                    android:id="@+id/airConditioners_button_QRCodeScan"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.5"
+                    android:clickable="true"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_assetOwner"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Asset Owner" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_Spinner_assetOwner"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_assetOwner"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
 
@@ -51,169 +136,96 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/landDetails_textView_areaOfLand"
+                    android:id="@+id/airConditioners_textView_typeOfAcSpliWindow"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Area of Land" />
+                    android:text="Type of AC (Split/Window)" />
 
-                <EditText
-                    android:id="@+id/landDetails_editText_areaOfLand"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Area" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/landDetails_textView_rentLeaseInNumber"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Rent/Lease(In Rs.)" />
-
-                <EditText
-                    android:id="@+id/landDetails_editText_rentLeaseInNumber"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Rent/Lease"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/landDetails_textView_rentLeaseInWords"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="In Words Rs." />
-
-                <EditText
-                    android:id="@+id/landDetails_editText_rentLeaseInWords"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Rs. In Words"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/landDetails_textView_nameOfOwner"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Name of owner" />
-
-                <EditText
-                    android:id="@+id/landDetails_editText_nameOfOwner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Name of Owner "
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/landDetails_textView_mobileNoOfOwner"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Mobile no of owner" />
-
-                <EditText
-                    android:id="@+id/landDetails_editText_mobileNoOfOwner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Mobile No."
-                    android:inputType="number|none"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/landDetails_textView_layoutOfLand"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Layout of Land" />
-
-                <EditText
-                    android:id="@+id/landDetails_editText_layoutOfLand"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:hint="Enter Layout Of Land "
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/landDetails_textView_copyAgreementWithOwner"
-                    style="@style/TextViewStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Copy of agreement with owner" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/landDetails_Spinner_copyAgreementWithOwner"
+                    android:id="@+id/airConditioners_Spinner_typeOfAcSpliWindow"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_landDetails_copyAgreementWithOwner"
+                    android:entries="@array/spinner_airConditioners_typeOfAcSpliWindow"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_manufacturerMakeModel"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Manufacturer / Make / Model" />
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_manufacturerMakeModel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Manufacturer"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_acSerialNumber"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="AC Serial Number" />
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_acSerialNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Serial Number"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_capacityTr"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Capacity(TR)" />
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_capacityTr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Capacity(TR)"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -225,15 +237,71 @@
 
 
                 <TextView
-                    android:id="@+id/landDetails_textView_validityOfLand"
+                    android:id="@+id/airConditioners_textView_dateOfInstallation"
                     style="@style/TextViewStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Validity of Land" />
+                    android:text="Date of Installation" />
 
                 <EditText
-                    android:id="@+id/landDetails_editText_dateOfvalidityOfLand"
+                    android:id="@+id/airConditioners_editText_dateOfInstallation"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_amcYesNo"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="AMC (Yes / No)" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_Spinner_amcYesNo"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_amc"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_alidityOfAmc"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="If yes, Validity of the AMC" />
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_dateOfvalidityOfAmc"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -247,6 +315,64 @@
             </LinearLayout>
 
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_workingCondition"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Working Condition" />
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/airConditioners_Spinner_workingCondition"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.5"
+                    android:entries="@array/spinner_airConditioners_workingCondition"
+                    android:textAlignment="viewStart"
+                    app:hintText="Select" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_natureOfProblem"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Nature of Problem" />
+
+
+                <EditText
+                    android:id="@+id/airConditioners_editText_natureOfProblem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Enter Nature of Problem"
+                    android:textAlignment="viewStart" />
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

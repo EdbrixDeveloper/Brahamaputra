@@ -14,13 +14,13 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_margin="@dimen/app_min_margin"
+            android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_big_margin"
+                android:paddingTop="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -62,7 +62,7 @@
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_available"
+                    android:id="@+id/solarPowerSystem_Spinner_available"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -90,7 +90,7 @@
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_assetOwner"
+                    android:id="@+id/solarPowerSystem_Spinner_assetOwner"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -142,7 +142,7 @@
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_cellPanel"
+                    android:id="@+id/solarPowerSystem_Spinner_cellPanel"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -195,7 +195,7 @@
 
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_amcYesNo"
+                    android:id="@+id/solarPowerSystem_Spinner_amcYesNo"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"

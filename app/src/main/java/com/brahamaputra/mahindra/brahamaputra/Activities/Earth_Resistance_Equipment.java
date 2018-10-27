@@ -3,6 +3,8 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -77,14 +79,21 @@ public class Earth_Resistance_Equipment extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        return true;
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-            /*case android.R.id.home:
+            case R.id.menuSubmit:
                 finish();
-                return true;*/
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
