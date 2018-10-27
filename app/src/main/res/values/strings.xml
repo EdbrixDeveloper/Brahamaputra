@@ -15,4 +15,232 @@
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
+
+    <string name="textview_textStyle">bold</string>
+
+    <!--Tower Detail screen Array for spinners -->
+    <string-array name="spinner_towerDetail_tower">
+        <item>GBT</item>
+        <item>RTT</item>
+        <item>Mast</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_typeOfTower">
+        <item>Tubular</item>
+        <item>Angular</item>
+
+    </string-array>
+
+    <string-array name="spinner_towerDetail_signboard">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_dangerSignageboard">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_cautionSignageboard">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_towerDetail_warningSignageboard">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_userHotoTrans_typeOfSites">
+        <item>Indoor</item>
+        <item>Outdoor</item>
+    </string-array>
+
+    <string-array name="spinner_userHotoTrans_sourceOfPower">
+        <item>Non EB</item>
+        <item>Non DG</item>
+        <item>Std Site(EB+DG)</item>
+    </string-array>
+
+    <string-array name="listView_hotoSections_sections">
+        <item>1. Land Details</item>
+        <item>2. Tower Details</item>
+        <item>3. Earth Resistance (Tower)</item>
+        <item>4. Earth Resistance (Equipment)</item>
+        <item>5. Electric Connection</item>
+        <item>6. Air Conditioners</item>
+        <item>7. Solar Power System</item>
+        <item>8. Power Plant Details</item>
+        <item>9. Power Backups (DG)</item>
+        <item>10. Shelter</item>
+        <item>11. Media</item>
+        <item>12. Battery Set</item>
+        <item>13. External Tenants Personal details</item>
+        <item>14. Total DC load (Kilo Watt)</item>
+        <item>15. Active equipment Details</item>
+        <item>16. POWER MANAGEMENT SYSTEM </item>
+        <item>17. GENERAL AND SAFETY MEASURES</item>
+        <item>18. ACDB/DCDB</item>
+        <item>19. SERVO STABILIZER</item>
+        <item>20. DETAILS OF UNUSED MATERIALS</item>
+
+    </string-array>
+
+
+
+
+    <string-array name="spinner_landDetails_LandType">
+        <item>Free Hold</item>
+        <item>Leased</item>
+        <item>Rented</item>
+    </string-array>
+
+    <string-array name="spinner_landDetails_copyAgreementWithOwner">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_earthResistanceTower_typeOfEarth">
+        <item>Plate Earth</item>
+        <item>Ring Earth</item>
+        <item>Both</item>
+    </string-array>
+
+    <string-array name="spinner_earthResistanceEquipment_typeOfEarth">
+        <item>Plate Earth</item>
+        <item>Ring Earth</item>
+        <item>Both</item>
+    </string-array>
+
+
+    <string-array name="spinner_electricConnection_typrOfElectricConnection">
+        <item>3-Phase AC</item>
+        <item>1-Phase AC</item>
+        <item>Both</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_tariff">
+        <item>Domestic</item>
+        <item>Commercial</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_copyOfElectricBills">
+        <item>Collected</item>
+        <item>Not Collected</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_ebSupplier">
+        <item>Dedicated Connection</item>
+        <item>Shared Connection</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_ebStatus">
+        <item>Available</item>
+        <item>Disconnected</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_transformerWorkingCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_ebMeterBoxStatus">
+        <item>OK</item>
+        <item>Minor Damage</item>
+        <item>Fully Damage</item>
+        <item>Corroded and Painting Required</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_ebMeterWorkingStatus">
+        <item>Working</item>
+        <item>Faulty</item>
+        <item>Display Faulty</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_typeOfPayment">
+        <item>Pre Paid</item>
+        <item>Post Paid</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_ebPaymentSchedule">
+        <item>Monthly</item>
+        <item>Bimonthly</item>
+        <item>Quarterly</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_safetyFuseUnit">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Not Required</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_kitKatClayFuseStatus">
+        <item>Available</item>
+        <item>Fuse Damage</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_ebNeutralEarthing">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="spinner_electricConnection_ebBillDate">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
+
+    <string-array name="spinner_solarPowerSystem_available">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="spinner_solarPowerSystem_assetOwner">
+        <item>BSNL Supplied Asset</item>
+        <item>M and M Supplied Asset</item>
+    </string-array>
+
+    <string-array name="spinner_solarPowerSystem_cellPanel">
+        <item>Cell</item>
+        <item>Panel</item>
+    </string-array>
+
+    <string-array name="spinner_solarPowerSystem_amc">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
 </resources>

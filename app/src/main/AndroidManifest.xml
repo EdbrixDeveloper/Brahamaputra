@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -19,15 +19,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DashboardActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"/>
 
-        <activity android:name=".UsersHotoListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".UserHotoTransactionActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activities.DashboardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+
+        <activity
+            android:name=".Activities.UsersHotoListActivity"
+            android:screenOrientation="portrait"
+            android:label="Hoto List"/>
+        <activity
+            android:name=".Activities.UserHotoTransactionActivity"
+            android:screenOrientation="portrait"
+            android:label="Hoto Transaction"/>
+        <activity
+            android:name=".Activities.Tower_Detail"
+            android:screenOrientation="portrait"
+            android:label="Tower Detail"/>
+        <activity
+            android:name=".Activities.HotoSectionsListActivity"
+            android:screenOrientation="portrait"
+            android:label="Sections"/>
     </application>
 
 </manifest>
