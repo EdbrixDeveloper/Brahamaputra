@@ -7,10 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".Activities.UsersHotoListActivity">
 
-    <ListView
+    <ExpandableListView
         android:id="@+id/userHotoList_listView_hotoList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listheader="@layout/item_user_hoto_list_seprator"
         tools:listitem="@layout/item_user_hoto_list" />
 
 
