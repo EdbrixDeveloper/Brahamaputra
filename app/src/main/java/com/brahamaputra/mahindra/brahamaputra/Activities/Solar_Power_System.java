@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -141,6 +142,9 @@ public class Solar_Power_System extends AppCompatActivity {
         mSolarPowerSystemSpinnerAmcYesNo = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_amcYesNo);
         mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
         mSolarPowerSystemEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.solarPowerSystem_editText_dateOfvalidityOfAmc);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
     private void updateLabel() {
@@ -150,6 +154,32 @@ public class Solar_Power_System extends AppCompatActivity {
         mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText(sdf.format(myCalendar.getTime()));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+
+            case R.id.menuSubmit:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    //////////////////////
+    //Camera//
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -254,6 +284,7 @@ public class Solar_Power_System extends AppCompatActivity {
         }
     }
 
+
     public static void saveToPreferences(Context context, String key,
                                          Boolean allowed) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -261,27 +292,6 @@ public class Solar_Power_System extends AppCompatActivity {
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.submit_icon_menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.menuSubmit:
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
 }

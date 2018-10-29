@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -191,10 +192,12 @@ public class Electric_Connection extends AppCompatActivity {
         mElectricConnectionEditTextScheduledPowerCutInHrs = (EditText) findViewById(R.id.electricConnection_editText_scheduledPowerCutInHrs);
         mElectricConnectionTextViewEbBillDate = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate);
         mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
 
         // EasyCountDownTextview countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -202,12 +205,15 @@ public class Electric_Connection extends AppCompatActivity {
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
+
             case R.id.menuSubmit:
                 finish();
                 return true;
@@ -216,5 +222,7 @@ public class Electric_Connection extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    /**/
 
 }

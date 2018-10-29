@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -61,6 +62,9 @@ public class Land_Details extends AppCompatActivity {
         mLandDetailsSpinnerCopyAgreementWithOwner = (Spinner) findViewById(R.id.landDetails_Spinner_copyAgreementWithOwner);
         mLandDetailsTextViewValidityOfLand = (TextView) findViewById(R.id.landDetails_textView_validityOfLand);
         mLandDetailsEditTextDateOfvalidityOfLand = (EditText) findViewById(R.id.landDetails_editText_dateOfvalidityOfLand);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
 
@@ -111,12 +115,14 @@ public class Land_Details extends AppCompatActivity {
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
+
             case R.id.menuSubmit:
                 finish();
                 return true;

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -129,6 +130,9 @@ public class GeneralAndSafetyMeasures extends AppCompatActivity {
         mPowerManagementSystemSpinnerFuelSensor = (SearchableSpinner) findViewById(R.id.powerManagementSystem_spinner_FuelSensor);
         mPowerManagementSystemTextViewFireSmokeSensor = (TextView) findViewById(R.id.powerManagementSystem_textView_FireSmokeSensor);
         mPowerManagementSystemSpinnerFireSmokeSensor = (SearchableSpinner) findViewById(R.id.powerManagementSystem_spinner_FireSmokeSensor);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
     final Calendar myCalendar = Calendar.getInstance();

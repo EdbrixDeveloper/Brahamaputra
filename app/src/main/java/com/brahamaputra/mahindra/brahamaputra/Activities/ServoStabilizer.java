@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +41,9 @@ public class ServoStabilizer extends AppCompatActivity {
         mServoStabilizerSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.ServoStabilizer_spinner_WorkingCondition);
         mServoStabilizerTextViewNatureofProblem = (TextView) findViewById(R.id.ServoStabilizer_textView_NatureofProblem);
         mServoStabilizerEditTextNatureofProblem = (EditText) findViewById(R.id.ServoStabilizer_editText_NatureofProblem);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
 

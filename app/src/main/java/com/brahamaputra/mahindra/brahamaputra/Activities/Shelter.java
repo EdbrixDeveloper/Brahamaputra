@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -68,6 +69,9 @@ public class Shelter extends AppCompatActivity {
         mShelterSpinnerNoOfOdcAvailable = (Spinner) findViewById(R.id.shelter_Spinner_noOfOdcAvailable);
         mShelterTextViewOdcLock = (TextView) findViewById(R.id.shelter_textView_odcLock);
         mShelterSpinnerOdcLock = (Spinner) findViewById(R.id.shelter_Spinner_odcLock);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
 

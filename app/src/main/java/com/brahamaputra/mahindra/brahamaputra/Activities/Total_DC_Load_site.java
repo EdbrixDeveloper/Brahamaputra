@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,6 +28,9 @@ public class Total_DC_Load_site extends AppCompatActivity {
     private void assignViews() {
         mTotalDCLoadsiteTextViewTotalDcLoadOfSite = (TextView) findViewById(R.id.totalDCLoadsite_textView_totalDcLoadOfSite);
         mTotalDCLoadsiteEditTextTotalDcLoadOfSite = (EditText) findViewById(R.id.totalDCLoadsite_editText_totalDcLoadOfSite);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
 

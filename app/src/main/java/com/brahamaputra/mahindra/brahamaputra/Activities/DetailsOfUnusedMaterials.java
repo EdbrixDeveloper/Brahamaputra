@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -27,6 +28,9 @@ public class DetailsOfUnusedMaterials extends AppCompatActivity {
         mDetailsOfUnusedMaterialsSpinnerAssetMake = (SearchableSpinner) findViewById(R.id.detailsOfUnusedMaterials_spinner_AssetMake);
         mDetailsOfUnusedMaterialsTextViewAssetStatus = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_AssetStatus);
         mDetailsOfUnusedMaterialsSpinnerAssetStatus = (SearchableSpinner) findViewById(R.id.detailsOfUnusedMaterials_spinner_AssetStatus);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
     @Override

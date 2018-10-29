@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,6 +29,9 @@ public class Media extends AppCompatActivity {
     private void assignViews() {
         mMediaTextViewTypeofmedia = (TextView) findViewById(R.id.media_textView_Typeofmedia);
         mMediaSpinnerTypeofmedia = (SearchableSpinner) findViewById(R.id.media_spinner_Typeofmedia);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
 

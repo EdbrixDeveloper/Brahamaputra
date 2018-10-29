@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.support.v7.widget.Toolbar;
@@ -64,6 +65,19 @@ public class DashboardActivity extends AppCompatActivity {
         mDashboardRelativeLayoutMyEnergy = (RelativeLayout) findViewById(R.id.dashboard_relativeLayout_myEnergy);
         mDashboardRelativeLayoutMyPrevitive = (RelativeLayout) findViewById(R.id.dashboard_relativeLayout_myPrevitive);
         mDashboardRelativeLayoutMyIncident = (RelativeLayout) findViewById(R.id.dashboard_relativeLayout_myIncident);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.menuSubmit:
+                startActivity(new Intent(DashboardActivity.this,UserProfileActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

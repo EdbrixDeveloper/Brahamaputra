@@ -19,8 +19,8 @@ public class HotoSectionsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoto_sections_list);
 
-        hotoSections_listView_sections = (ListView) findViewById(R.id.hotoSections_listView_sections);
-
+        hotoSections_listView_sections = (ListView)findViewById(R.id.hotoSections_listView_sections);
+        this.setTitle("Readings");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         hotoSections_listView_sections.setOnItemClickListener(new AdapterView.OnItemClickListener() {

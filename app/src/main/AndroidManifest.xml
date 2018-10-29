@@ -6,9 +6,9 @@
     
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/applogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/applogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -21,12 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activities.DashboardActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
-
         <activity
             android:name=".Activities.UsersHotoListActivity"
             android:label="HOTO List"
@@ -41,29 +39,29 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.HotoSectionsListActivity"
-            android:label="Sections"
+            android:label="Readings"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.Land_Details"
-            android:label="Sections"
+            android:label="Land Detail"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Earth_Resistance_Equipment"
-            android:label="Sections"
+            android:label="Earth Resistance (Equipment)"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Earth_Resistance_Tower"
-            android:label="Sections"
+            android:label="Earth Resistance (Tower)"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Electric_Connection"
-            android:label="Sections"
+            android:label="Electric Connection"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Solar_Power_System"
-            android:label="Sections"
+            android:label="Solar Power System"
             android:screenOrientation="portrait" />
+        <activity android:name=".Activities.UserProfileActivity"></activity>
 
         <activity
             android:name=".Activities.Media"
@@ -84,8 +82,6 @@
             android:name=".Activities.Total_DC_Load_site"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
-
 
         <activity
             android:name=".Activities.ActiveequipmentDetails"
@@ -115,6 +111,26 @@
         <activity
             android:name=".Activities.DetailsOfUnusedMaterials"
             android:label="Battery Set"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.Air_Conditioners"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PowerPlantDetailsActivity"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.Power_Backups_DG"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.Shelter"
+            android:label="Sections"
             android:screenOrientation="portrait" />
     </application>
 

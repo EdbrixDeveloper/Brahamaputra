@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -69,6 +70,9 @@ public class Earth_Resistance_Equipment extends AppCompatActivity {
         mEarthResistanceEquipmentEditTextEarthResistance = (EditText) findViewById(R.id.earthResistanceEquipment_editText_earthResistance);
         mEarthResistanceEquipmentTextViewDateOfearthResistanceMeasured = (TextView) findViewById(R.id.earthResistanceEquipment_textView_dateOfearthResistanceMeasured);
         mEarthResistanceEquipmentEditTextDateOfearthResistanceMeasured = (EditText) findViewById(R.id.earthResistanceEquipment_editText_dateOfearthResistanceMeasured);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
     private void updateLabel() {
@@ -90,6 +94,7 @@ public class Earth_Resistance_Equipment extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
+
             case R.id.menuSubmit:
                 finish();
                 return true;
