@@ -55,6 +55,8 @@
                     android:drawableLeft="@drawable/username_icon"
                     android:textColorHint="@color/colorWhite"
                     android:drawablePadding="@dimen/app_normal_padding"
+                    android:imeOptions="actionNext"
+                    android:imeActionLabel="Password"
                     android:backgroundTint="@color/colorWhite"
                     android:textColor="@color/colorWhite"
                     />
@@ -69,6 +71,8 @@
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
                     android:layout_marginBottom="@dimen/app_big_margin"
+                    android:imeOptions="actionDone"
+                    android:imeActionLabel="Sign In"
                     android:drawableLeft="@drawable/password_icon"
                     android:textColorHint="@color/colorWhite"
                     android:drawablePadding="@dimen/app_normal_padding"
