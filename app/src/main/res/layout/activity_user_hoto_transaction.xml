@@ -144,7 +144,7 @@
 
                 <TextView
                     android:id="@+id/userHotoTrans_textView_typeOfTower"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -173,7 +173,7 @@
 
                 <TextView
                     android:id="@+id/userHotoTrans_textView_sourceOfPower"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"

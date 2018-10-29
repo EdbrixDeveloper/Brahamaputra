@@ -9,31 +9,27 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/app_normal_margin"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:layout_marginTop="@dimen/app_normal_margin"
-
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/acdb_dcdb_textView_NumberofACDB"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Number of ACDB" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -41,7 +37,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_acdb_dcdb_NumberofACDB"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -51,46 +47,43 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:layout_marginTop="@dimen/app_normal_margin"
-
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/acdb_dcdb_textView_ACDBRatingAMP"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="ACDB Rating ( AMP)" />
 
                 <EditText
                     android:id="@+id/acdb_dcdb_editText_ACDBRatingAMP"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter ACDB Rating ( AMP) "
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:layout_marginTop="@dimen/app_normal_margin"
-
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/acdb_dcdb_textView_NumberofDCDB"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Number of DCDB" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -98,7 +91,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_acdb_dcdb_NumberofDCDB"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -108,18 +101,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:layout_marginTop="@dimen/app_normal_margin"
-
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/acdb_dcdb_textView_FreeCoolingDeviseStausFCU"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Free Cooling Devise Staus (FCU)" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -127,7 +117,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_acdb_dcdb_FreeCoolingDeviseStausFCU"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>

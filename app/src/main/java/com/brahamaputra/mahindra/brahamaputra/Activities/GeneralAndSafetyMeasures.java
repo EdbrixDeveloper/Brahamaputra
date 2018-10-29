@@ -1,6 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -188,10 +189,10 @@ public class GeneralAndSafetyMeasures extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                finish();
+                startActivity(new Intent(this, ACDB_DCDB.class));
                 return true;
 
 

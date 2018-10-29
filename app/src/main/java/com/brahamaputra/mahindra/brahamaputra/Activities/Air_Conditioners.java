@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,15 +36,15 @@ import java.util.Locale;
 public class Air_Conditioners extends AppCompatActivity {
 
     private TextView mAirConditionersTextViewNoOfAirConditionersACprovided;
-    private Spinner mAirConditionersSpinnerNoOfAirConditionersACprovided;
+    private SearchableSpinner mAirConditionersSpinnerNoOfAirConditionersACprovided;
     private TextView mAirConditionersTextViewNumberOfACInWorkingCondition;
-    private Spinner mAirConditionersSpinnerNumberOfACInWorkingCondition;
+    private SearchableSpinner mAirConditionersSpinnerNumberOfACInWorkingCondition;
     private TextView mAirConditionersTextViewQRCodeScan;
     private ImageView mAirConditionersButtonQRCodeScan;
     private TextView mAirConditionersTextViewAssetOwner;
-    private Spinner mAirConditionersSpinnerAssetOwner;
+    private SearchableSpinner mAirConditionersSpinnerAssetOwner;
     private TextView mAirConditionersTextViewTypeOfAcSpliWindow;
-    private Spinner mAirConditionersSpinnerTypeOfAcSpliWindow;
+    private SearchableSpinner mAirConditionersSpinnerTypeOfAcSpliWindow;
     private TextView mAirConditionersTextViewManufacturerMakeModel;
     private EditText mAirConditionersEditTextManufacturerMakeModel;
     private TextView mAirConditionersTextViewAcSerialNumber;
@@ -53,11 +54,11 @@ public class Air_Conditioners extends AppCompatActivity {
     private TextView mAirConditionersTextViewDateOfInstallation;
     private EditText mAirConditionersEditTextDateOfInstallation;
     private TextView mAirConditionersTextViewAmcYesNo;
-    private Spinner mAirConditionersSpinnerAmcYesNo;
+    private SearchableSpinner mAirConditionersSpinnerAmcYesNo;
     private TextView mAirConditionersTextViewAlidityOfAmc;
     private EditText mAirConditionersEditTextDateOfvalidityOfAmc;
     private TextView mAirConditionersTextViewWorkingCondition;
-    private Spinner mAirConditionersSpinnerWorkingCondition;
+    private SearchableSpinner mAirConditionersSpinnerWorkingCondition;
     private TextView mAirConditionersTextViewNatureOfProblem;
     private EditText mAirConditionersEditTextNatureOfProblem;
 
@@ -150,15 +151,15 @@ public class Air_Conditioners extends AppCompatActivity {
 
     private void assignViews() {
         mAirConditionersTextViewNoOfAirConditionersACprovided = (TextView) findViewById(R.id.airConditioners_textView_noOfAirConditionersACprovided);
-        mAirConditionersSpinnerNoOfAirConditionersACprovided = (Spinner) findViewById(R.id.airConditioners_spinner_noOfAirConditionersACprovided);
+        mAirConditionersSpinnerNoOfAirConditionersACprovided = (SearchableSpinner) findViewById(R.id.airConditioners_spinner_noOfAirConditionersACprovided);
         mAirConditionersTextViewNumberOfACInWorkingCondition = (TextView) findViewById(R.id.airConditioners_textView_numberOfACInWorkingCondition);
-        mAirConditionersSpinnerNumberOfACInWorkingCondition = (Spinner) findViewById(R.id.airConditioners_spinner_numberOfACInWorkingCondition);
+        mAirConditionersSpinnerNumberOfACInWorkingCondition = (SearchableSpinner) findViewById(R.id.airConditioners_spinner_numberOfACInWorkingCondition);
         mAirConditionersTextViewQRCodeScan = (TextView) findViewById(R.id.airConditioners_textView_QRCodeScan);
         mAirConditionersButtonQRCodeScan = (ImageView) findViewById(R.id.airConditioners_button_QRCodeScan);
         mAirConditionersTextViewAssetOwner = (TextView) findViewById(R.id.airConditioners_textView_assetOwner);
-        mAirConditionersSpinnerAssetOwner = (Spinner) findViewById(R.id.airConditioners_Spinner_assetOwner);
+        mAirConditionersSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_assetOwner);
         mAirConditionersTextViewTypeOfAcSpliWindow = (TextView) findViewById(R.id.airConditioners_textView_typeOfAcSpliWindow);
-        mAirConditionersSpinnerTypeOfAcSpliWindow = (Spinner) findViewById(R.id.airConditioners_Spinner_typeOfAcSpliWindow);
+        mAirConditionersSpinnerTypeOfAcSpliWindow = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_typeOfAcSpliWindow);
         mAirConditionersTextViewManufacturerMakeModel = (TextView) findViewById(R.id.airConditioners_textView_manufacturerMakeModel);
         mAirConditionersEditTextManufacturerMakeModel = (EditText) findViewById(R.id.airConditioners_editText_manufacturerMakeModel);
         mAirConditionersTextViewAcSerialNumber = (TextView) findViewById(R.id.airConditioners_textView_acSerialNumber);
@@ -168,16 +169,24 @@ public class Air_Conditioners extends AppCompatActivity {
         mAirConditionersTextViewDateOfInstallation = (TextView) findViewById(R.id.airConditioners_textView_dateOfInstallation);
         mAirConditionersEditTextDateOfInstallation = (EditText) findViewById(R.id.airConditioners_editText_dateOfInstallation);
         mAirConditionersTextViewAmcYesNo = (TextView) findViewById(R.id.airConditioners_textView_amcYesNo);
-        mAirConditionersSpinnerAmcYesNo = (Spinner) findViewById(R.id.airConditioners_Spinner_amcYesNo);
+        mAirConditionersSpinnerAmcYesNo = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_amcYesNo);
         mAirConditionersTextViewAlidityOfAmc = (TextView) findViewById(R.id.airConditioners_textView_alidityOfAmc);
         mAirConditionersEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.airConditioners_editText_dateOfvalidityOfAmc);
         mAirConditionersTextViewWorkingCondition = (TextView) findViewById(R.id.airConditioners_textView_workingCondition);
-        mAirConditionersSpinnerWorkingCondition = (Spinner) findViewById(R.id.airConditioners_Spinner_workingCondition);
+        mAirConditionersSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_workingCondition);
         mAirConditionersTextViewNatureOfProblem = (TextView) findViewById(R.id.airConditioners_textView_natureOfProblem);
         mAirConditionersEditTextNatureOfProblem = (EditText) findViewById(R.id.airConditioners_editText_natureOfProblem);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mAirConditionersSpinnerNoOfAirConditionersACprovided.setTitle("No.of Air Conditioners (AC) provided");
+        mAirConditionersSpinnerNumberOfACInWorkingCondition.setTitle("Number of AC in Working Condition");
+        mAirConditionersSpinnerAssetOwner.setTitle("Asset Owner");
+        mAirConditionersSpinnerTypeOfAcSpliWindow.setTitle("Type of AC (Split/Window)");
+        mAirConditionersSpinnerAmcYesNo.setTitle("AMC (Yes / No)");
+        mAirConditionersSpinnerWorkingCondition.setTitle("Working Condition");
+
     }
 
     private void updateLabel() {
@@ -203,10 +212,10 @@ public class Air_Conditioners extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                finish();
+                startActivity(new Intent(this, Solar_Power_System.class));
                 return true;
 
             default:

@@ -1,6 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,10 +86,10 @@ public class Shelter extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                finish();
+                startActivity(new Intent(this, Media.class));
                 return true;
 
             default:

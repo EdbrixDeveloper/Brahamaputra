@@ -1,6 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -58,6 +59,10 @@ public class ACDB_DCDB extends AppCompatActivity {
         this.setTitle("ACDB/DCDB");
         assignViews();
 
+        mAcdbDcdbSpinnerFreeCoolingDeviseStausFCU.setTitle("Free Cooling Devise Staus");
+        mAcdbDcdbSpinnerNumberofACDB.setTitle("Number of ACDB");
+        mAcdbDcdbSpinnerNumberofDCDB.setTitle("Number of DCDB");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -79,10 +84,10 @@ public class ACDB_DCDB extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                finish();
+                startActivity(new Intent(this, ServoStabilizer.class));
                 return true;
 
 

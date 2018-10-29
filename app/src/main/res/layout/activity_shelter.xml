@@ -20,16 +20,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
                 <!---->
 
                 <TextView
                     android:id="@+id/shelter_textView_physicalConditionOfShelterPlatform"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.4"
                     android:text="Physical Condition of Shelter and Platform" />
 
 
@@ -38,7 +38,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_physicalConditionOfShelterPlatform"
                     android:textAlignment="viewStart"
 
@@ -50,16 +50,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/shelter_textView_numberOfBtsInsideShelter"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Number of BTS Inside Shelter" />
 
 
@@ -68,7 +68,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_numberOfBtsInsideShelter"
                     android:textAlignment="viewStart"
 
@@ -79,15 +79,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/shelter_textView_numberOfBtsOutsideShelter"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Number of BTS Outside Shelter" />
 
 
@@ -96,7 +96,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_numberOfBtsOutsideShelter"
                     android:textAlignment="viewStart"
 
@@ -107,15 +107,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/shelter_textView_shelterLock"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Shelter Lock" />
 
 
@@ -124,7 +124,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_shelterLock"
                     android:textAlignment="viewStart"
 
@@ -135,15 +135,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/shelter_textView_outdoorShelterLock"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Outdoor Shelter Lock" />
 
 
@@ -152,7 +152,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_outdoorShelterLock"
                     android:textAlignment="viewStart"
 
@@ -163,16 +163,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/shelter_textView_igbStatus"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="IGB Status" />
 
 
@@ -181,7 +181,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_igbStatus"
                     android:textAlignment="viewStart"
 
@@ -193,15 +193,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/shelter_textView_egbStatus"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="EGB Status" />
 
 
@@ -210,7 +210,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_egbStatus"
                     android:textAlignment="viewStart"
 
@@ -221,15 +221,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/shelter_textView_noOfOdcAvailable"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="NO OF ODC Available" />
 
 
@@ -238,7 +238,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_noOfOdcAvailable"
                     android:textAlignment="viewStart"
 
@@ -249,16 +249,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/shelter_textView_odcLock"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="ODC Lock" />
 
 
@@ -267,7 +267,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_shelter_odcLock"
                     android:textAlignment="viewStart"
 

@@ -9,41 +9,40 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/app_normal_margin"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:layout_marginTop="@dimen/app_normal_margin"
-
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/totalDCLoadsite_textView_totalDcLoadOfSite"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Total DC load of the site at the time of Handing over (Kilo Watt)" />
 
                 <EditText
                     android:id="@+id/totalDCLoadsite_editText_totalDcLoadOfSite"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Total DC load of the site at the time of Handing over (Kilo Watt "
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionDone"
+                    />
 
 
             </LinearLayout>

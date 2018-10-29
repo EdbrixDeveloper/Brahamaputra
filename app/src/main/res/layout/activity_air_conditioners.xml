@@ -20,16 +20,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/airConditioners_textView_noOfAirConditionersACprovided"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.4"
                     android:text="No.of Air Conditioners (AC) provided " />
 
 
@@ -38,7 +38,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -49,16 +49,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.4"
                     android:text="Number of AC in Working Condition" />
 
 
@@ -67,7 +67,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -77,15 +77,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_big_margin"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_QRCodeScan"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="QR Code Scan" />
 
 
@@ -93,7 +93,7 @@
                     android:id="@+id/airConditioners_button_QRCodeScan"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:clickable="true"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
@@ -105,15 +105,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_assetOwner"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Asset Owner" />
 
 
@@ -122,7 +122,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_airConditioners_assetOwner"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -132,15 +132,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_typeOfAcSpliWindow"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Type of AC (Split/Window)" />
 
 
@@ -149,7 +149,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_airConditioners_typeOfAcSpliWindow"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -159,89 +159,98 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_manufacturerMakeModel"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:text="Manufacturer / Make / Model" />
 
                 <EditText
                     android:id="@+id/airConditioners_editText_manufacturerMakeModel"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Manufacturer"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_acSerialNumber"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="AC Serial Number" />
 
                 <EditText
                     android:id="@+id/airConditioners_editText_acSerialNumber"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Serial Number"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_capacityTr"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Capacity(TR)" />
 
                 <EditText
                     android:id="@+id/airConditioners_editText_capacityTr"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Capacity(TR)"
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    />
 
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/airConditioners_textView_dateOfInstallation"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Date of Installation" />
 
                 <EditText
@@ -249,7 +258,7 @@
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:editable="false"
                     android:focusable="false"
                     android:hint="DD/MM/YYYY"
@@ -261,15 +270,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_amcYesNo"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="AMC (Yes / No)" />
 
 
@@ -278,7 +287,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_airConditioners_amc"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -288,16 +297,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/airConditioners_textView_alidityOfAmc"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:text="If yes, Validity of the AMC" />
 
                 <EditText
@@ -305,7 +314,7 @@
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:editable="false"
                     android:focusable="false"
                     android:hint="DD/MM/YYYY"
@@ -318,16 +327,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/airConditioners_textView_workingCondition"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Working Condition" />
 
 
@@ -336,7 +345,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_airConditioners_workingCondition"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -348,25 +357,28 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/airConditioners_textView_natureOfProblem"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Nature of Problem" />
 
 
                 <EditText
                     android:id="@+id/airConditioners_editText_natureOfProblem"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Nature of Problem"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+
+                    android:inputType="text"/>
 
 
             </LinearLayout>

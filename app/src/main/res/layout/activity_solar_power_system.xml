@@ -20,15 +20,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_QRCodeScan"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="QR Code Scan" />
 
 
@@ -36,7 +36,7 @@
                     android:id="@+id/solarPowerSystem_button_QRCodeScan"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:clickable="true"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
@@ -48,16 +48,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_available"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Available" />
 
 
@@ -66,7 +66,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_solarPowerSystem_available"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -77,15 +77,15 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_assetOwner"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Asset Owner" />
 
 
@@ -94,7 +94,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_solarPowerSystem_assetOwner"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -105,39 +105,42 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:text="Manufacturer / Make / Model" />
 
                 <EditText
                     android:id="@+id/solarPowerSystem_editText_manufacturerMakeModel"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Manufacturer"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"/>
 
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_cellPanel"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Cell / Panel" />
 
 
@@ -146,7 +149,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_solarPowerSystem_cellPanel"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -157,40 +160,43 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_capacityKW"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Capacity (KW)" />
 
                 <EditText
                     android:id="@+id/solarPowerSystem_editText_capacityKW"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Capacity(KW)"
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+
+                    />
 
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_amcYesNo"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="AMC (Yes / No)" />
 
 
@@ -199,7 +205,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_solarPowerSystem_amc"
                     android:textAlignment="viewStart"
                     app:hintText="Select" />
@@ -210,16 +216,16 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/app_min_padding"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_validityOfAmc"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:text="If yes, Validity of the AMC" />
 
                 <EditText
@@ -227,7 +233,7 @@
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:editable="false"
                     android:focusable="false"
                     android:hint="DD/MM/YYYY"

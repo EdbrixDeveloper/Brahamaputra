@@ -9,31 +9,27 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/app_normal_margin"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:layout_marginTop="@dimen/app_normal_margin"
-
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/activeEquipmentDetails_textView_TypeofBTS"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="Type of BTS" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -41,7 +37,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_activeEquipmentDetails_TypeofBTS"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -51,28 +47,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/activeEquipmentDetails_textView_Make"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Make" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_Make"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Make "
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    />
 
 
             </LinearLayout>
@@ -80,28 +77,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/activeEquipmentDetails_textView_DCLoadofBTSequipment"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="DC Load of BTS equipment" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_DCLoadofBTSequipment"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter DC Load of BTS equipment "
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    />
 
 
             </LinearLayout>
@@ -109,17 +107,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/activeEquipmentDetails_textView_YearofInstallationatsite"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Year of Installation at site" />
 
@@ -128,7 +124,7 @@
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:editable="false"
                     android:focusable="false"
                     android:hint="DD/MM/YYYY"
@@ -141,28 +137,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/activeEquipmentDetails_textView_PositionoftheantennaatTowerinMtrs"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Position of the antenna at Tower (in Mtrs)" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_PositionoftheantennaatTowerinMtrs"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Position of the antenna at Tower (in Mtrs)"
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionDone"
+                    />
 
 
             </LinearLayout>

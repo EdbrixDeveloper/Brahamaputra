@@ -1,13 +1,16 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import android.view.View;
 import android.widget.DatePicker;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +29,7 @@ import java.util.Locale;
 public class Land_Details extends AppCompatActivity {
 
     private TextView mLandDetailsTextViewTypeOfLand;
-    private Spinner mLandDetailsSpinnerTypeOfLand;
+    private SearchableSpinner mLandDetailsSpinnerTypeOfLand;
     private TextView mLandDetailsTextViewAreaOfLand;
     private EditText mLandDetailsEditTextAreaOfLand;
     private TextView mLandDetailsTextViewRentLeaseInNumber;
@@ -37,15 +41,15 @@ public class Land_Details extends AppCompatActivity {
     private TextView mLandDetailsTextViewMobileNoOfOwner;
     private EditText mLandDetailsEditTextMobileNoOfOwner;
     private TextView mLandDetailsTextViewLayoutOfLand;
-    private EditText mLandDetailsEditTextLayoutOfLand;
+    private ImageView mLandDetailsButtonLayoutOfLand;
     private TextView mLandDetailsTextViewCopyAgreementWithOwner;
-    private Spinner mLandDetailsSpinnerCopyAgreementWithOwner;
-    private TextView mLandDetailsTextViewValidityOfLand;
-    private EditText mLandDetailsEditTextDateOfvalidityOfLand;
+    private SearchableSpinner mLandDetailsSpinnerCopyAgreementWithOwner;
+    private TextView mLandDetailsTextViewValidityOfAgreement;
+    private EditText mLandDetailsEditTextDateOfvalidityOfAgreement;
 
     private void assignViews() {
         mLandDetailsTextViewTypeOfLand = (TextView) findViewById(R.id.landDetails_textView_typeOfLand);
-        mLandDetailsSpinnerTypeOfLand = (Spinner) findViewById(R.id.landDetails_Spinner_typeOfLand);
+        mLandDetailsSpinnerTypeOfLand = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_typeOfLand);
         mLandDetailsTextViewAreaOfLand = (TextView) findViewById(R.id.landDetails_textView_areaOfLand);
         mLandDetailsEditTextAreaOfLand = (EditText) findViewById(R.id.landDetails_editText_areaOfLand);
         mLandDetailsTextViewRentLeaseInNumber = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInNumber);
@@ -57,14 +61,18 @@ public class Land_Details extends AppCompatActivity {
         mLandDetailsTextViewMobileNoOfOwner = (TextView) findViewById(R.id.landDetails_textView_mobileNoOfOwner);
         mLandDetailsEditTextMobileNoOfOwner = (EditText) findViewById(R.id.landDetails_editText_mobileNoOfOwner);
         mLandDetailsTextViewLayoutOfLand = (TextView) findViewById(R.id.landDetails_textView_layoutOfLand);
-        mLandDetailsEditTextLayoutOfLand = (EditText) findViewById(R.id.landDetails_editText_layoutOfLand);
+        mLandDetailsButtonLayoutOfLand = (ImageView) findViewById(R.id.landDetails_button_layoutOfLand);
         mLandDetailsTextViewCopyAgreementWithOwner = (TextView) findViewById(R.id.landDetails_textView_copyAgreementWithOwner);
-        mLandDetailsSpinnerCopyAgreementWithOwner = (Spinner) findViewById(R.id.landDetails_Spinner_copyAgreementWithOwner);
-        mLandDetailsTextViewValidityOfLand = (TextView) findViewById(R.id.landDetails_textView_validityOfLand);
-        mLandDetailsEditTextDateOfvalidityOfLand = (EditText) findViewById(R.id.landDetails_editText_dateOfvalidityOfLand);
+        mLandDetailsSpinnerCopyAgreementWithOwner = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_copyAgreementWithOwner);
+        mLandDetailsTextViewValidityOfAgreement = (TextView) findViewById(R.id.landDetails_textView_validityOfAgreement);
+        mLandDetailsEditTextDateOfvalidityOfAgreement = (EditText) findViewById(R.id.landDetails_editText_dateOfvalidityOfAgreement);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mLandDetailsSpinnerTypeOfLand.setTitle("Type of Land");
+        mLandDetailsSpinnerCopyAgreementWithOwner.setTitle("Copy of the agreement with the landlord/owner");
+
     }
 
 
@@ -91,7 +99,7 @@ public class Land_Details extends AppCompatActivity {
 
         };
 
-        mLandDetailsEditTextDateOfvalidityOfLand.setOnClickListener(new View.OnClickListener() {
+        mLandDetailsEditTextDateOfvalidityOfAgreement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(Land_Details.this, date, myCalendar
@@ -100,13 +108,15 @@ public class Land_Details extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mLandDetailsEditTextDateOfvalidityOfLand.setText(sdf.format(myCalendar.getTime()));
+        mLandDetailsEditTextDateOfvalidityOfAgreement.setText(sdf.format(myCalendar.getTime()));
     }
 
     @Override
@@ -120,11 +130,11 @@ public class Land_Details extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
             case R.id.menuSubmit:
-                finish();
+                startActivity(new Intent(this, Tower_Detail.class));
                 return true;
 
             default:

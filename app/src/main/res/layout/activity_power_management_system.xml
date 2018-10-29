@@ -9,38 +9,34 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/app_normal_margin"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:layout_marginTop="@dimen/app_normal_margin"
-
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_QRCodeScan"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:text="QR Code Scan" />
 
                 <ImageView
                     android:id="@+id/powerManagementSystem_button_QRCodeScan"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:clickable="true"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
@@ -49,17 +45,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_AssetOwner"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Asset Owner" />
 
@@ -68,7 +62,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_powerManagementSystem_AssetOwner"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -79,17 +73,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Type" />
 
@@ -98,7 +90,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemType"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -109,17 +101,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Make" />
 
@@ -128,7 +118,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemMake"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -139,17 +129,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemPosition"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Position" />
 
@@ -158,7 +146,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemPosition"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -169,17 +157,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Staus" />
 
@@ -188,7 +174,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemStaus"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -198,28 +184,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemSerialNumber"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Serial Number" />
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_PowerManagementSystemSerialNumber"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Power Management System Serial Number "
                     android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    />
 
 
             </LinearLayout>
@@ -227,17 +214,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_WorkingCondition"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Working Condition" />
 
@@ -246,7 +231,7 @@
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:entries="@array/spinner_powerManagementSystem_WorkingCondition"
                     android:textAlignment="viewStart"
                     app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
@@ -257,28 +242,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_NatureofProblem"
-                    style="@style/TextViewStyle"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Nature of Problem" />
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_NatureofProblem"
+                    style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.6"
                     android:hint="Enter Nature of Problem "
                     android:inputType="textMultiLine"
-                    android:textAlignment="viewStart" />
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionDone"
+                    />
 
 
             </LinearLayout>

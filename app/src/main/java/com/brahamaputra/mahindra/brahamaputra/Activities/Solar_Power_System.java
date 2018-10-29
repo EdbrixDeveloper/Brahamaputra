@@ -165,11 +165,11 @@ public class Solar_Power_System extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
             case R.id.menuSubmit:
-                finish();
+                startActivity(new Intent(this, PowerPlantDetailsActivity.class));
                 return true;
 
             default:

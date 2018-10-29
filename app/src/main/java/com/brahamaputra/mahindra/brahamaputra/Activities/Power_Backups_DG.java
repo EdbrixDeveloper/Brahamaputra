@@ -381,10 +381,10 @@ public class Power_Backups_DG extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                finish();
+                startActivity(new Intent(this, Shelter.class));
                 return true;
 
             default:
