@@ -211,10 +211,10 @@ public class Air_Conditioners extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:finish();
+              //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuSubmit:
+            case R.id.menuSubmit:finish();
                 startActivity(new Intent(this, Solar_Power_System.class));
                 return true;
 

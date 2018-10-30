@@ -8,11 +8,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.brahamaputra.mahindra.brahamaputra.Adapters.HotoSectionListAdapter;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
+
+import java.util.ArrayList;
 
 public class HotoSectionsListActivity extends AppCompatActivity {
 
     public ListView hotoSections_listView_sections;
+    ArrayList<HotoSection> dataModels;
+    String[] values;
+    private static HotoSectionListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +30,26 @@ public class HotoSectionsListActivity extends AppCompatActivity {
         this.setTitle("Readings");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        values = getResources().getStringArray(R.array.listView_hotoSections_sections);
+        dataModels= new ArrayList<>();
+        for(int i=0;i<values.length;i++){
+            if(i/2 == 0){
+                dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
+            }else{
+                dataModels.add(new HotoSection(""+(i+1),""+values[i],false));
+            }
+            //dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
+
+        }
+
+        adapter= new HotoSectionListAdapter(dataModels,getApplicationContext());
+
+        hotoSections_listView_sections.setAdapter(adapter);
         hotoSections_listView_sections.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (position) {
                     case 0:
                         startActivity(new Intent(HotoSectionsListActivity.this, Land_Details.class));
                         break;
@@ -81,7 +104,6 @@ public class HotoSectionsListActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override

@@ -211,11 +211,11 @@ public class Electric_Connection extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:finish();
+                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
-            case R.id.menuSubmit:
+            case R.id.menuSubmit:finish();
                 startActivity(new Intent(this, Air_Conditioners.class));
                 return true;
 

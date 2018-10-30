@@ -1,6 +1,9 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -35,24 +38,9 @@ public class UsersHotoListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         userHotoList_listView_hotoList = (ExpandableListView) findViewById(R.id.userHotoList_listView_hotoList);
-      /*  mAdapter = new UserHotoListAdapter(UsersHotoListActivity.this);
-
-        for (int i = 1; i < 30; i++) {
-            mAdapter.addItem("TKT_"+i);
-            if (i % 4 == 0) {
-                mAdapter.addSectionHeaderItem("26/10/2018");
-            }
-        }
-        userHotoList_listView_hotoList.setAdapter(mAdapter);*/
 
         prepareListData();
 
-//        userHotoList_listView_hotoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                startActivity(new Intent(UsersHotoListActivity.this,UserHotoTransactionActivity.class));
-//            }
-//        });
 
         userHotoList_listView_hotoList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -64,15 +52,31 @@ public class UsersHotoListActivity extends AppCompatActivity {
         userHotoList_listView_hotoList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                startActivity(new Intent(UsersHotoListActivity.this,UserHotoTransactionActivity.class));
+                // notify user
+                AlertDialog.Builder dialog = new AlertDialog.Builder(UsersHotoListActivity.this);
+                dialog.setMessage("Open Ticket");
+                dialog.setPositiveButton("Do you want to open this ticket ?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        startActivity(new Intent(UsersHotoListActivity.this,UserHotoTransactionActivity.class));
+                    }
+                });
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+                dialog.show();
+
+
                 return false;
             }
         });
     }
 
-    /*
-     * Preparing the list data
-     */
+
     private void prepareListData() {
         hotoListHeaders = new ArrayList<>();
         hotoListTiketDataMap = new HashMap<Object, List<HotoListTiketData>>();
@@ -117,7 +121,6 @@ public class UsersHotoListActivity extends AppCompatActivity {
         for(int i=0; i<hotoListHeaders.size();i++){
             userHotoList_listView_hotoList.expandGroup(i);
         }
-
     }
 
     @Override

@@ -130,10 +130,11 @@ public class Land_Details extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(this, HotoSectionsListActivity.class));
+                finish();
                 return true;
 
             case R.id.menuSubmit:
+                this.finish();
                 startActivity(new Intent(this, Tower_Detail.class));
                 return true;
 

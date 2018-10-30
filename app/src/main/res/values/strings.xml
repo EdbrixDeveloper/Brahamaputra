@@ -63,30 +63,28 @@
     </string-array>
 
     <string-array name="listView_hotoSections_sections">
-        <item>1. Land Details</item>
-        <item>2. Tower Details</item>
-        <item>3. Earth Resistance (Tower)</item>
-        <item>4. Earth Resistance (Equipment)</item>
-        <item>5. Electric Connection</item>
-        <item>6. Air Conditioners</item>
-        <item>7. Solar Power System</item>
-        <item>8. Power Plant Details</item>
-        <item>9. Power Backups (DG)</item>
-        <item>10. Shelter</item>
-        <item>11. Media</item>
-        <item>12. Battery Set</item>
-        <item>13. External Tenants Personal details</item>
-        <item>14. Total DC load (Kilo Watt)</item>
-        <item>15. Active equipment Details</item>
-        <item>16. POWER MANAGEMENT SYSTEM </item>
-        <item>17. GENERAL AND SAFETY MEASURES</item>
-        <item>18. ACDB/DCDB</item>
-        <item>19. SERVO STABILIZER</item>
-        <item>20. DETAILS OF UNUSED MATERIALS</item>
+        <item>Land Details</item>
+        <item>Tower Details</item>
+        <item>Earth Resistance (Tower)</item>
+        <item>Earth Resistance (Equipment)</item>
+        <item>Electric Connection</item>
+        <item>Air Conditioners</item>
+        <item>Solar Power System</item>
+        <item>Power Plant Details</item>
+        <item>Power Backups (DG)</item>
+        <item>Shelter</item>
+        <item>Media</item>
+        <item>Battery Set</item>
+        <item>External Tenants Personal details</item>
+        <item>Total DC load (Kilo Watt)</item>
+        <item>Active Equipment Details</item>
+        <item>Power Management System </item>
+        <item>Genral and Safty Measures</item>
+        <item>ACDB/DCDB</item>
+        <item>Servo Stabilizer</item>
+        <item>Details Of Unused Materials</item>
 
     </string-array>
-
-
 
 
     <string-array name="spinner_landDetails_LandType">

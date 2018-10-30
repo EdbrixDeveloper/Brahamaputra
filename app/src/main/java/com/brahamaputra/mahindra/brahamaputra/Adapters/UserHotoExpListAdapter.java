@@ -62,8 +62,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .size();
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
     }
 
     @Override
@@ -91,11 +90,6 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.item_user_hoto_list_seprator, null);
             convertView.setClickable(false);
         }
-
-//        TextView lblListHeader = (TextView) convertView
-//                .findViewById(R.id.lblListHeader);
-//        lblListHeader.setTypeface(null, Typeface.BOLD);
-//        lblListHeader.setText(headerTitle);
         TextView textView_Date = (TextView) convertView.findViewById(R.id.textView_Date);
         TextView textView_Count = (TextView) convertView.findViewById(R.id.textView_Count);
 

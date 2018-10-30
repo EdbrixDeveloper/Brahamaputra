@@ -140,10 +140,10 @@ public class Battery_Set extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:finish();
+               // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:
+            case R.id.menuDone:finish();
                 startActivity(new Intent(this, ExternalTenantsPersonaldetails.class));
                 return true;
 

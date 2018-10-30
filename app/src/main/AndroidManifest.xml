@@ -2,8 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brahamaputra.mahindra.brahamaputra">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/applogo"
@@ -61,77 +69,64 @@
             android:name=".Activities.Solar_Power_System"
             android:label="Solar Power System"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.UserProfileActivity"></activity>
-
+        <activity android:name=".Activities.UserProfileActivity" />
         <activity
             android:name=".Activities.Media"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.Battery_Set"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.ExternalTenantsPersonaldetails"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.Total_DC_Load_site"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.ActiveequipmentDetails"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.PowerManagementSystem"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.GeneralAndSafetyMeasures"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.ACDB_DCDB"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.ServoStabilizer"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.DetailsOfUnusedMaterials"
             android:label="Battery Set"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.Air_Conditioners"
             android:label="Sections"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.PowerPlantDetailsActivity"
             android:label="Sections"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.Power_Backups_DG"
             android:label="Sections"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.Shelter"
             android:label="Sections"
             android:screenOrientation="portrait" />
+        <activity android:name=".Activities.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

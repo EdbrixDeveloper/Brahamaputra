@@ -140,26 +140,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_normal_margin"
                 android:orientation="horizontal"
-                android:weightSum="1">
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/app_normal_margin">
 
                 <TextView
                     android:id="@+id/userHotoTrans_textView_typeOfTower"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="1.3"
                     android:text="Type of sites"
                     android:layout_gravity="center"/>
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/userHotoTrans_spinner_typeOfSites"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:entries="@array/spinner_userHotoTrans_typeOfSites"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                <EditText
+                    android:id="@+id/userHotoTrans_editText_typeOfSite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="3"
+                    android:ems="10"
+                    android:hint=""
+                    android:inputType="textPostalAddress"
+                    android:layout_weight="0.7"
+                    />
             </LinearLayout>
 
             <LinearLayout

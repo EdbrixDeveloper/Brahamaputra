@@ -1,6 +1,8 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,7 +27,9 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
     private EditText mUserHotoTransEditTextSiteAddress;
     private EditText mUserHotoTransEditTextSiteID;
     private TextView mUserHotoTransTextViewTypeOfTower;
-    private Spinner mUserHotoTransSpinnerTypeOfSites;
+
+    private EditText mUserHotoTransEditTextTypeOfSites;
+
     private TextView mUserHotoTransTextViewSourceOfPower;
     private Spinner mUserHotoTransSpinnerSourceOfPower;
     private Button mUserHotoTransButtonSubmitHotoTrans;
@@ -39,6 +43,7 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
 
         assignViews();
         disableInput();
+        checkNetworkConnection();
 
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,13 +53,25 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
         });
     }
 
+    public void checkNetworkConnection(){
+        if(!isNetworkConnected()){
+            mUserHotoTransEditTextCustomerName.setHint("offline");
+            mUserHotoTransEditTextState.setHint("offline");
+            mUserHotoTransEditTextNameOfCircle.setHint("offline");
+            mUserHotoTransEditTextNameOfssa.setHint("offline");
+            mUserHotoTransEditTextNameOfsite.setHint("offline");
+            mUserHotoTransEditTextSiteID.setHint("offline");
+            mUserHotoTransEditTextTypeOfSites.setHint("offline");
+        }
+    }
+
     private void disableInput() {
         mUserHotoTransEditTextCustomerName.setKeyListener(null);
         mUserHotoTransEditTextState.setKeyListener(null);
         mUserHotoTransEditTextNameOfCircle.setKeyListener(null);
         mUserHotoTransEditTextNameOfssa.setKeyListener(null);
         mUserHotoTransEditTextNameOfsite.setKeyListener(null);
-        //mUserHotoTransEditTextSiteAddress.setKeyListener(null);
+        mUserHotoTransEditTextTypeOfSites.setKeyListener(null);
         mUserHotoTransEditTextSiteID.setKeyListener(null);
     }
 
@@ -67,7 +84,9 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
         mUserHotoTransEditTextSiteAddress = (EditText) findViewById(R.id.userHotoTrans_editText_siteAddress);
         mUserHotoTransEditTextSiteID = (EditText) findViewById(R.id.userHotoTrans_editText_siteID);
         mUserHotoTransTextViewTypeOfTower = (TextView) findViewById(R.id.userHotoTrans_textView_typeOfTower);
-        mUserHotoTransSpinnerTypeOfSites = (Spinner) findViewById(R.id.userHotoTrans_spinner_typeOfSites);
+
+        mUserHotoTransEditTextTypeOfSites = (EditText) findViewById(R.id.userHotoTrans_editText_typeOfSite);
+
         mUserHotoTransTextViewSourceOfPower = (TextView) findViewById(R.id.userHotoTrans_textView_sourceOfPower);
         mUserHotoTransSpinnerSourceOfPower = (Spinner) findViewById(R.id.userHotoTrans_spinner_sourceOfPower);
         mUserHotoTransButtonSubmitHotoTrans = (Button)findViewById(R.id.userHotoTrans_button_submitHotoTrans);
@@ -95,7 +114,9 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
         }
     }
 
-
-
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
 
 }
