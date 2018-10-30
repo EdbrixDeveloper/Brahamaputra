@@ -15,8 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 
-public class UserHotoTransactionActivity extends AppCompatActivity {
+public class UserHotoTransactionActivity extends BaseActivity {
 
 
     private EditText mUserHotoTransEditTextCustomerName;
@@ -41,6 +42,10 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("ticketID");
+        this.setTitle(id);
+
         assignViews();
         disableInput();
         checkNetworkConnection();
@@ -55,13 +60,13 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
 
     public void checkNetworkConnection(){
         if(!isNetworkConnected()){
-            mUserHotoTransEditTextCustomerName.setHint("offline");
-            mUserHotoTransEditTextState.setHint("offline");
-            mUserHotoTransEditTextNameOfCircle.setHint("offline");
-            mUserHotoTransEditTextNameOfssa.setHint("offline");
-            mUserHotoTransEditTextNameOfsite.setHint("offline");
-            mUserHotoTransEditTextSiteID.setHint("offline");
-            mUserHotoTransEditTextTypeOfSites.setHint("offline");
+            mUserHotoTransEditTextCustomerName.setHint("Offline");
+            mUserHotoTransEditTextState.setHint("Offline");
+            mUserHotoTransEditTextNameOfCircle.setHint("Offline");
+            mUserHotoTransEditTextNameOfssa.setHint("Offline");
+            mUserHotoTransEditTextNameOfsite.setHint("Offline");
+            mUserHotoTransEditTextSiteID.setHint("Offline");
+            mUserHotoTransEditTextTypeOfSites.setHint("Offline");
         }
     }
 
@@ -95,7 +100,7 @@ public class UserHotoTransactionActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        menuInflater.inflate(R.menu.userhoto_transaction_menu, menu);
         return true;
     }
 

@@ -17,13 +17,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends BaseActivity {
 
     private RelativeLayout mDashboardRelativeLayoutMyHoto;
     private RelativeLayout mDashboardRelativeLayoutMyAsset;
@@ -32,11 +35,13 @@ public class DashboardActivity extends AppCompatActivity {
     private RelativeLayout mDashboardRelativeLayoutMyPrevitive;
     private RelativeLayout mDashboardRelativeLayoutMyIncident;
     final public int CHECK_PERMISSIONS = 123;
+    private AlertDialogManager alertDialogManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        alertDialogManager = new AlertDialogManager(DashboardActivity.this);
         assignViews();
         setListner();
 
@@ -76,8 +81,6 @@ public class DashboardActivity extends AppCompatActivity {
         mDashboardRelativeLayoutMyEnergy = (RelativeLayout) findViewById(R.id.dashboard_relativeLayout_myEnergy);
         mDashboardRelativeLayoutMyPrevitive = (RelativeLayout) findViewById(R.id.dashboard_relativeLayout_myPrevitive);
         mDashboardRelativeLayoutMyIncident = (RelativeLayout) findViewById(R.id.dashboard_relativeLayout_myIncident);
-
-
     }
 
     @Override
@@ -105,7 +108,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         if(!gps_enabled && !network_enabled) {
             // notify user
-            AlertDialog.Builder dialog = new AlertDialog.Builder(DashboardActivity.this);
+            /*AlertDialog.Builder dialog = new AlertDialog.Builder(DashboardActivity.this);
             dialog.setMessage("Location Not Enabled");
             dialog.setPositiveButton("Open Location Settings", new DialogInterface.OnClickListener() {
                 @Override
@@ -123,7 +126,16 @@ public class DashboardActivity extends AppCompatActivity {
                     // TODO Auto-generated method stub
                 }
             });
-            dialog.show();
+            dialog.show();*/
+
+            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel",new AlertDialogManager.onSingleButtonClickListner() {
+                @Override
+                public void onPositiveClick() {
+                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    DashboardActivity.this.startActivity(myIntent);
+                }
+            }).show();
+
         }
         else{
             if(isNetworkConnected()){
@@ -131,7 +143,7 @@ public class DashboardActivity extends AppCompatActivity {
                 intent.putExtra("isNetworkConnected", isNetworkConnected());
                 startActivity(intent);
             }else{
-                AlertDialog.Builder dialog = new AlertDialog.Builder(DashboardActivity.this);
+               /* AlertDialog.Builder dialog = new AlertDialog.Builder(DashboardActivity.this);
                 dialog.setMessage("Device has no internet connection");
                 dialog.setPositiveButton("Application work in offline mode.", new DialogInterface.OnClickListener() {
                     @Override
@@ -149,7 +161,34 @@ public class DashboardActivity extends AppCompatActivity {
                         // TODO Auto-generated method stub
                     }
                 });
-                dialog.show();
+                dialog.show();*/
+
+                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+
+                        final EditText taskEditText = new EditText(DashboardActivity.this);
+                        AlertDialog dialog = new AlertDialog.Builder(DashboardActivity.this)
+                                .setTitle("Information")
+                                .setMessage("Enter ticket id")
+                                .setView(taskEditText)
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //TicketID = String.valueOf(taskEditText.getText());
+
+                                        Intent intent = new Intent(DashboardActivity.this, UserHotoTransactionActivity.class);
+                                        intent.putExtra("ticketID", String.valueOf(taskEditText.getText()));
+                                        startActivity(intent);
+                                    }
+                                })
+                                .setNegativeButton("cancel", null)
+                                .create();
+                        dialog.show();
+
+
+                    }
+                }).show();
             }
         }
     }

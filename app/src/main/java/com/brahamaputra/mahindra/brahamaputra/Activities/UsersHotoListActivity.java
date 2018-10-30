@@ -16,18 +16,21 @@ import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoListHeader;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoListTiketData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UsersHotoListActivity extends AppCompatActivity {
+public class UsersHotoListActivity extends BaseActivity {
 
     private UserHotoListAdapter mAdapter;
     private UserHotoExpListAdapter userHotoExpListAdapter;
     public ExpandableListView userHotoList_listView_hotoList;
     private List<HotoListHeader> hotoListHeaders;
     private HashMap<Object, List<HotoListTiketData>> hotoListTiketDataMap;
+    private AlertDialogManager alertDialogManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class UsersHotoListActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        alertDialogManager = new AlertDialogManager(UsersHotoListActivity.this);
 
         userHotoList_listView_hotoList = (ExpandableListView) findViewById(R.id.userHotoList_listView_hotoList);
 
@@ -51,9 +56,9 @@ public class UsersHotoListActivity extends AppCompatActivity {
         });
         userHotoList_listView_hotoList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
                 // notify user
-                AlertDialog.Builder dialog = new AlertDialog.Builder(UsersHotoListActivity.this);
+                /*AlertDialog.Builder dialog = new AlertDialog.Builder(UsersHotoListActivity.this);
                 dialog.setMessage("Open Ticket");
                 dialog.setPositiveButton("Do you want to open this ticket ?", new DialogInterface.OnClickListener() {
                     @Override
@@ -68,9 +73,17 @@ public class UsersHotoListActivity extends AppCompatActivity {
                         // TODO Auto-generated method stub
                     }
                 });
-                dialog.show();
+                dialog.show();*/
 
 
+                alertDialogManager.Dialog("Information", "Do you want to open this ticket?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
+                        intent.putExtra("ticketID", "TKT_"+childPosition);
+                        startActivity(intent);
+                    }
+                }).show();
                 return false;
             }
         });
