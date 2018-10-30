@@ -48,9 +48,10 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:padding="@dimen/app_min_padding"
-                android:weightSum="1"
-                android:orientation="horizontal">
+                android:weightSum="1">
+
 
                 <TextView
                     android:id="@+id/landDetails_textView_areaOfLand"
@@ -62,16 +63,16 @@
 
                 <EditText
                     android:id="@+id/landDetails_editText_areaOfLand"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Area of Land"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:textSize="16sp" />
-
             </LinearLayout>
+
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -89,7 +90,7 @@
 
                 <EditText
                     android:id="@+id/landDetails_editText_rentLeaseInNumber"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
@@ -117,15 +118,15 @@
 
                 <EditText
                     android:id="@+id/landDetails_editText_rentLeaseInWords"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Rs. In Words"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -145,15 +146,15 @@
 
                 <EditText
                     android:id="@+id/landDetails_editText_nameOfOwner"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Name of Owner "
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -173,15 +174,15 @@
 
                 <EditText
                     android:id="@+id/landDetails_editText_mobileNoOfOwner"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile No."
                     android:inputType="number|none"
+                    android:maxLength="10"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
-                    android:maxLength="10"
 
                     />
 
@@ -251,7 +252,7 @@
                     android:id="@+id/landDetails_textView_validityOfAgreement"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Validity of the agreement" />
 
@@ -265,11 +266,10 @@
                     android:editable="false"
                     android:focusable="false"
                     android:hint="DD/MM/YYYY"
+                    android:imeOptions="actionDone"
                     android:inputType="none"
                     android:textAlignment="viewStart"
-                    android:textSize="16sp"
-                    android:imeOptions="actionDone"
-                    />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

@@ -64,10 +64,15 @@ public class PowerManagementSystem extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mPowerManagementSystemSpinnerAssetOwner.setTitle("Asset Owner");
+        mPowerManagementSystemSpinnerPowerManagementSystemType.setTitle("Power Management System Type");
+        mPowerManagementSystemSpinnerPowerManagementSystemMake.setTitle("Power Management System Make");
+        mPowerManagementSystemSpinnerPowerManagementSystemPosition.setTitle("Power Management System Position");
+        mPowerManagementSystemSpinnerPowerManagementSystemStaus.setTitle("Power Management System Staus");
+        mPowerManagementSystemSpinnerWorkingCondition.setTitle("Working Condition");
+
     }
-
-
-
 
 
     @Override
@@ -80,7 +85,6 @@ public class PowerManagementSystem extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
     }
 
     @Override
@@ -91,14 +95,15 @@ public class PowerManagementSystem extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
-               // startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:
+                finish();
+                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:finish();
+            case R.id.menuDone:
+                finish();
                 startActivity(new Intent(this, GeneralAndSafetyMeasures.class));
                 return true;
 

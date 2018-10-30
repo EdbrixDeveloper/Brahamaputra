@@ -9,7 +9,8 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_marginBottom="@dimen/app_normal_margin">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -28,7 +29,7 @@
                     android:id="@+id/airConditioners_textView_noOfAirConditionersACprovided"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="No.of Air Conditioners (AC) provided " />
 
@@ -57,7 +58,7 @@
                     android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Number of AC in Working Condition" />
 
@@ -166,13 +167,13 @@
                     android:id="@+id/airConditioners_textView_manufacturerMakeModel"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Manufacturer / Make / Model" />
 
                 <EditText
                     android:id="@+id/airConditioners_editText_manufacturerMakeModel"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -199,7 +200,7 @@
 
                 <EditText
                     android:id="@+id/airConditioners_editText_acSerialNumber"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -226,7 +227,7 @@
 
                 <EditText
                     android:id="@+id/airConditioners_editText_capacityTr"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -305,7 +306,7 @@
                     android:id="@+id/airConditioners_textView_alidityOfAmc"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="If yes, Validity of the AMC" />
 
@@ -371,7 +372,7 @@
 
                 <EditText
                     android:id="@+id/airConditioners_editText_natureOfProblem"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

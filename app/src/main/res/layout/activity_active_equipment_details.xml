@@ -56,12 +56,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:singleLine="false"
                     android:text="Make" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_Make"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -84,14 +83,14 @@
                     android:id="@+id/activeEquipmentDetails_textView_DCLoadofBTSequipment"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="DC Load of BTS equipment" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_DCLoadofBTSequipment"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -114,7 +113,7 @@
                     android:id="@+id/activeEquipmentDetails_textView_YearofInstallationatsite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Year of Installation at site" />
@@ -144,14 +143,14 @@
                     android:id="@+id/activeEquipmentDetails_textView_PositionoftheantennaatTowerinMtrs"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Position of the antenna at Tower (in Mtrs)" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_PositionoftheantennaatTowerinMtrs"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

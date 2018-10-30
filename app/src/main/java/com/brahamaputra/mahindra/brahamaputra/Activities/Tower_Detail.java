@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -22,47 +24,55 @@ import java.util.Locale;
 
 public class Tower_Detail extends AppCompatActivity {
     private TextView mTowerDetailTextViewTower;
-    private Spinner mTowerDetailSpinnerTower;
+    private SearchableSpinner mTowerDetailSpinnerTower;
     private TextView mTowerDetailTextViewTypeOfTower;
-    private Spinner mTowerDetailSpinnerTypeOfTower;
+    private SearchableSpinner mTowerDetailSpinnerTypeOfTower;
     private TextView mTowerDetailTextViewHeightOfTower;
     private EditText mTowerDetailEditTextHeightOfTower;
     private TextView mTowerDetailTextViewDateOfPaintingOfTheTower;
     private EditText mTowerDetailEditTextDateOfPaintingOfTheTower;
     private TextView mTowerDetailTextViewSignboard;
-    private Spinner mTowerDetailSpinnerSignboard;
+    private SearchableSpinner mTowerDetailSpinnerSignboard;
     private TextView mTowerDetailTextViewDangerSignageboard;
-    private Spinner mTowerDetailSpinnerDangerSignageboard;
+    private SearchableSpinner mTowerDetailSpinnerDangerSignageboard;
     private TextView mTowerDetailTextViewCautionSignageboard;
-    private Spinner mTowerDetailSpinnerCautionSignageboard;
+    private SearchableSpinner mTowerDetailSpinnerCautionSignageboard;
     private TextView mTowerDetailTextViewWarningSignageboard;
-    private Spinner mTowerDetailSpinnerWarningSignageboard;
+    private SearchableSpinner mTowerDetailSpinnerWarningSignageboard;
 
     private void assignViews() {
         mTowerDetailTextViewTower = (TextView) findViewById(R.id.towerDetail_textView_tower);
-        mTowerDetailSpinnerTower = (Spinner) findViewById(R.id.towerDetail_spinner_tower);
+        mTowerDetailSpinnerTower = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_tower);
         mTowerDetailTextViewTypeOfTower = (TextView) findViewById(R.id.towerDetail_textView_typeOfTower);
-        mTowerDetailSpinnerTypeOfTower = (Spinner) findViewById(R.id.towerDetail_spinner_typeOfTower);
+        mTowerDetailSpinnerTypeOfTower = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_typeOfTower);
         mTowerDetailTextViewHeightOfTower = (TextView) findViewById(R.id.towerDetail_textView_HeightOfTower);
         mTowerDetailEditTextHeightOfTower = (EditText) findViewById(R.id.towerDetail_editText_heightOfTower);
         mTowerDetailTextViewDateOfPaintingOfTheTower = (TextView) findViewById(R.id.towerDetail_textView_dateOfPaintingOfTheTower);
         mTowerDetailEditTextDateOfPaintingOfTheTower = (EditText) findViewById(R.id.towerDetail_editText_dateOfPaintingOfTheTower);
         mTowerDetailTextViewSignboard = (TextView) findViewById(R.id.towerDetail_textView_signboard);
-        mTowerDetailSpinnerSignboard = (Spinner) findViewById(R.id.towerDetail_spinner_signboard);
+        mTowerDetailSpinnerSignboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_signboard);
         mTowerDetailTextViewDangerSignageboard = (TextView) findViewById(R.id.towerDetail_textView_dangerSignageboard);
-        mTowerDetailSpinnerDangerSignageboard = (Spinner) findViewById(R.id.towerDetail_spinner_dangerSignageboard);
+        mTowerDetailSpinnerDangerSignageboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_dangerSignageboard);
         mTowerDetailTextViewCautionSignageboard = (TextView) findViewById(R.id.towerDetail_textView_cautionSignageboard);
-        mTowerDetailSpinnerCautionSignageboard = (Spinner) findViewById(R.id.towerDetail_spinner_cautionSignageboard);
+        mTowerDetailSpinnerCautionSignageboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_cautionSignageboard);
         mTowerDetailTextViewWarningSignageboard = (TextView) findViewById(R.id.towerDetail_textView_warningSignageboard);
-        mTowerDetailSpinnerWarningSignageboard = (Spinner) findViewById(R.id.towerDetail_spinner_warningSignageboard);
+        mTowerDetailSpinnerWarningSignageboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_warningSignageboard);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mTowerDetailSpinnerTower.setTitle("Tower");
+        mTowerDetailSpinnerTypeOfTower.setTitle("Type of tower");
+        mTowerDetailSpinnerSignboard.setTitle("Sign Board");
+        mTowerDetailSpinnerDangerSignageboard.setTitle("DANGER Signage Board");
+        mTowerDetailSpinnerCautionSignageboard.setTitle("CAUTION Signage Board");
+        mTowerDetailSpinnerWarningSignageboard.setTitle("WARNING Signage Board");
+
     }
 
 
+    final Calendar myCalendar = Calendar.getInstance();
 
-    final Calendar  myCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,12 +98,13 @@ public class Tower_Detail extends AppCompatActivity {
         mTowerDetailEditTextDateOfPaintingOfTheTower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(Tower_Detail.this,date, myCalendar
+                new DatePickerDialog(Tower_Detail.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
     }
+
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -111,11 +122,13 @@ public class Tower_Detail extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
+            case android.R.id.home:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
-            case R.id.menuSubmit:finish();
+            case R.id.menuSubmit:
+                finish();
                 startActivity(new Intent(this, Earth_Resistance_Tower.class));
                 return true;
 

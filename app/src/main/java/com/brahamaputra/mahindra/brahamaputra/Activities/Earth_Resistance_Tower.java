@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,7 +24,7 @@ import java.util.Locale;
 public class Earth_Resistance_Tower extends AppCompatActivity {
 
     private TextView mEarthResistanceTowerTextViewTypeOfEarth;
-    private Spinner mEarthResistanceTowerSpinnerTypeOfEarth;
+    private SearchableSpinner mEarthResistanceTowerSpinnerTypeOfEarth;
     private TextView mEarthResistanceTowerTextViewEarthResistance;
     private EditText mEarthResistanceTowerEditTextEarthResistance;
     private TextView mEarthResistanceTowerTextViewDateOfearthResistanceMeasured;
@@ -65,7 +66,7 @@ public class Earth_Resistance_Tower extends AppCompatActivity {
 
     private void assignViews() {
         mEarthResistanceTowerTextViewTypeOfEarth = (TextView) findViewById(R.id.earthResistanceTower_textView_typeOfEarth);
-        mEarthResistanceTowerSpinnerTypeOfEarth = (Spinner) findViewById(R.id.earthResistanceTower_Spinner_typeOfEarth);
+        mEarthResistanceTowerSpinnerTypeOfEarth = (SearchableSpinner) findViewById(R.id.earthResistanceTower_Spinner_typeOfEarth);
         mEarthResistanceTowerTextViewEarthResistance = (TextView) findViewById(R.id.earthResistanceTower_textView_earthResistance);
         mEarthResistanceTowerEditTextEarthResistance = (EditText) findViewById(R.id.earthResistanceTower_editText_earthResistance);
         mEarthResistanceTowerTextViewDateOfearthResistanceMeasured = (TextView) findViewById(R.id.earthResistanceTower_textView_dateOfearthResistanceMeasured);
@@ -73,6 +74,7 @@ public class Earth_Resistance_Tower extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+        mEarthResistanceTowerSpinnerTypeOfEarth.setTitle("Type of Earth");
     }
 
     private void updateLabel() {

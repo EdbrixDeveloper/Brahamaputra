@@ -81,7 +81,7 @@
                     android:id="@+id/earthResistanceEquipment_textView_dateOfearthResistanceMeasured"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Earth Resistance Measured on" />
 

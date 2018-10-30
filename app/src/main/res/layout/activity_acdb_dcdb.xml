@@ -60,7 +60,7 @@
 
                 <EditText
                     android:id="@+id/acdb_dcdb_editText_ACDBRatingAMP"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -116,7 +116,7 @@
                     android:id="@+id/acdb_dcdb_spinner_FreeCoolingDeviseStausFCU"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:layout_weight="0.6"
                     android:entries="@array/spinner_acdb_dcdb_FreeCoolingDeviseStausFCU"
                     android:textAlignment="viewStart"

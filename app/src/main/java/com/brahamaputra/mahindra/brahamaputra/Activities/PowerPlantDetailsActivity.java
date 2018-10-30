@@ -25,7 +25,9 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -40,37 +42,37 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
     private TextView mPowerPlantDetailsTextViewQRCodeScan;
     private ImageView mPowerPlantDetailsButtonQRCodeScan;
     private TextView mPowerPlantDetailsTextViewAssetOwner;
-    private Spinner mPowerPlantDetailsSpinnerAssetOwner;
+    private SearchableSpinner mPowerPlantDetailsSpinnerAssetOwner;
     private TextView mPowerPlantDetailsTextViewNumberOfPowerPlant;
-    private Spinner mPowerPlantDetailsSpinnerNumberOfPowerPlant;
+    private SearchableSpinner mPowerPlantDetailsSpinnerNumberOfPowerPlant;
     private TextView mPowerPlantDetailsTextViewManufacturerMakeModel;
-    private Spinner mPowerPlantDetailsSpinnerManufacturerMakeModel;
+    private SearchableSpinner mPowerPlantDetailsSpinnerManufacturerMakeModel;
     private TextView mPowerPlantDetailsTextViewPowerPlantModel;
     private EditText mPowerPlantDetailsEditTextPowerPlantModel;
     private TextView mPowerPlantDetailsTextViewNumberModuleSlots;
-    private Spinner mPowerPlantDetailsSpinnerNumberModuleSlots;
+    private SearchableSpinner mPowerPlantDetailsSpinnerNumberModuleSlots;
     private TextView mPowerPlantDetailsTextViewPowerPlantEarthingStatus;
-    private Spinner mPowerPlantDetailsSpinnerPowerPlantEarthingStatus;
+    private SearchableSpinner mPowerPlantDetailsSpinnerPowerPlantEarthingStatus;
     private TextView mPowerPlantDetailsTextViewDcLoadInDisplayAmp;
     private EditText mPowerPlantDetailsEditTextDcLoadInDisplayAmp;
     private TextView mPowerPlantDetailsTextViewPowerPlantSerialNumber;
     private EditText mPowerPlantDetailsEditTextPowerPlantSerialNumber;
     private TextView mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmps;
-    private Spinner mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps;
+    private SearchableSpinner mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps;
     private TextView mPowerPlantDetailsTextViewCapacityInAmp;
     private EditText mPowerPlantDetailsEditTextCapacityInAmp;
     private TextView mPowerPlantDetailsTextViewNumberOfModules;
-    private Spinner mPowerPlantDetailsSpinnerAmc;
+    private SearchableSpinner powerPlantDetails_Spinner_numberOfModules;
     private TextView mPowerPlantDetailsTextViewNoOfFaultyModulese;
-    private Spinner mPowerPlantDetailsSpinnerNoOfFaultyModules;
+    private SearchableSpinner mPowerPlantDetailsSpinnerNoOfFaultyModules;
     private TextView mPowerPlantDetailsTextViewSmpsExpandableUpToKW;
     private EditText mPowerPlantDetailsEditTextSmpsExpandableUpToKW;
     private TextView mPowerPlantDetailsTextViewSmpsUltimateCapacity;
     private EditText mPowerPlantDetailsEditTextSmpsUltimateCapacity;
     private TextView mPowerPlantDetailsTextViewSpdStatus;
-    private Spinner mPowerPlantDetailsSpinnerSpdStatus;
+    private SearchableSpinner mPowerPlantDetailsSpinnerSpdStatus;
     private TextView mPowerPlantDetailsTextViewWorkingCondition;
-    private Spinner mPowerPlantDetailsSpinnerWorkingCondition;
+    private SearchableSpinner mPowerPlantDetailsSpinnerWorkingCondition;
     private TextView mPowerPlantDetailsTextViewNatureOfProblem;
     private EditText mPowerPlantDetailsEditTextNatureOfProblem;
 
@@ -79,7 +81,7 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
     public String date_flag = "no";
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +121,7 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
 
             }
         });
-        
+
     }
 
 
@@ -127,44 +129,54 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
         mPowerPlantDetailsTextViewQRCodeScan = (TextView) findViewById(R.id.powerPlantDetails_textView_QRCodeScan);
         mPowerPlantDetailsButtonQRCodeScan = (ImageView) findViewById(R.id.powerPlantDetails_button_QRCodeScan);
         mPowerPlantDetailsTextViewAssetOwner = (TextView) findViewById(R.id.powerPlantDetails_textView_assetOwner);
-        mPowerPlantDetailsSpinnerAssetOwner = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_assetOwner);
+        mPowerPlantDetailsSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_assetOwner);
         mPowerPlantDetailsTextViewNumberOfPowerPlant = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfPowerPlant);
-        mPowerPlantDetailsSpinnerNumberOfPowerPlant = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_numberOfPowerPlant);
+        mPowerPlantDetailsSpinnerNumberOfPowerPlant = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_numberOfPowerPlant);
         mPowerPlantDetailsTextViewManufacturerMakeModel = (TextView) findViewById(R.id.powerPlantDetails_textView_manufacturerMakeModel);
-        mPowerPlantDetailsSpinnerManufacturerMakeModel = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_manufacturerMakeModel);
+        mPowerPlantDetailsSpinnerManufacturerMakeModel = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_manufacturerMakeModel);
         mPowerPlantDetailsTextViewPowerPlantModel = (TextView) findViewById(R.id.powerPlantDetails_textView_powerPlantModel);
         mPowerPlantDetailsEditTextPowerPlantModel = (EditText) findViewById(R.id.powerPlantDetails_editText_powerPlantModel);
         mPowerPlantDetailsTextViewNumberModuleSlots = (TextView) findViewById(R.id.powerPlantDetails_textView_numberModuleSlots);
-        mPowerPlantDetailsSpinnerNumberModuleSlots = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_numberModuleSlots);
+        mPowerPlantDetailsSpinnerNumberModuleSlots = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_numberModuleSlots);
         mPowerPlantDetailsTextViewPowerPlantEarthingStatus = (TextView) findViewById(R.id.powerPlantDetails_textView_powerPlantEarthingStatus);
-        mPowerPlantDetailsSpinnerPowerPlantEarthingStatus = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_powerPlantEarthingStatus);
+        mPowerPlantDetailsSpinnerPowerPlantEarthingStatus = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_powerPlantEarthingStatus);
         mPowerPlantDetailsTextViewDcLoadInDisplayAmp = (TextView) findViewById(R.id.powerPlantDetails_textView_dcLoadInDisplayAmp);
         mPowerPlantDetailsEditTextDcLoadInDisplayAmp = (EditText) findViewById(R.id.powerPlantDetails_editText_dcLoadInDisplayAmp);
         mPowerPlantDetailsTextViewPowerPlantSerialNumber = (TextView) findViewById(R.id.powerPlantDetails_textView_powerPlantSerialNumber);
         mPowerPlantDetailsEditTextPowerPlantSerialNumber = (EditText) findViewById(R.id.powerPlantDetails_editText_powerPlantSerialNumber);
         mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmps = (TextView) findViewById(R.id.powerPlantDetails_textView_typeOfPowerPlantCommercialSmps);
-        mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_typeOfPowerPlantCommercialSmps);
+        mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_typeOfPowerPlantCommercialSmps);
         mPowerPlantDetailsTextViewCapacityInAmp = (TextView) findViewById(R.id.powerPlantDetails_textView_capacityInAmp);
         mPowerPlantDetailsEditTextCapacityInAmp = (EditText) findViewById(R.id.powerPlantDetails_editText_capacityInAmp);
         mPowerPlantDetailsTextViewNumberOfModules = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfModules);
-        mPowerPlantDetailsSpinnerAmc = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_amc);
+        powerPlantDetails_Spinner_numberOfModules = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_numberOfModules);
         mPowerPlantDetailsTextViewNoOfFaultyModulese = (TextView) findViewById(R.id.powerPlantDetails_textView_noOfFaultyModulese);
-        mPowerPlantDetailsSpinnerNoOfFaultyModules = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_noOfFaultyModules);
+        mPowerPlantDetailsSpinnerNoOfFaultyModules = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_noOfFaultyModules);
         mPowerPlantDetailsTextViewSmpsExpandableUpToKW = (TextView) findViewById(R.id.powerPlantDetails_textView_smpsExpandableUpToKW);
         mPowerPlantDetailsEditTextSmpsExpandableUpToKW = (EditText) findViewById(R.id.powerPlantDetails_editText_smpsExpandableUpToKW);
         mPowerPlantDetailsTextViewSmpsUltimateCapacity = (TextView) findViewById(R.id.powerPlantDetails_textView_smpsUltimateCapacity);
         mPowerPlantDetailsEditTextSmpsUltimateCapacity = (EditText) findViewById(R.id.powerPlantDetails_editText_smpsUltimateCapacity);
         mPowerPlantDetailsTextViewSpdStatus = (TextView) findViewById(R.id.powerPlantDetails_textView_spdStatus);
-        mPowerPlantDetailsSpinnerSpdStatus = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_spdStatus);
+        mPowerPlantDetailsSpinnerSpdStatus = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_spdStatus);
         mPowerPlantDetailsTextViewWorkingCondition = (TextView) findViewById(R.id.powerPlantDetails_textView_workingCondition);
-        mPowerPlantDetailsSpinnerWorkingCondition = (Spinner) findViewById(R.id.powerPlantDetails_Spinner_workingCondition);
+        mPowerPlantDetailsSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_workingCondition);
         mPowerPlantDetailsTextViewNatureOfProblem = (TextView) findViewById(R.id.powerPlantDetails_textView_natureOfProblem);
         mPowerPlantDetailsEditTextNatureOfProblem = (EditText) findViewById(R.id.powerPlantDetails_editText_natureOfProblem);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-    }
 
+        mPowerPlantDetailsSpinnerAssetOwner.setTitle("Asset Owner");
+        mPowerPlantDetailsSpinnerNumberOfPowerPlant.setTitle("Number of Power Plant");
+        mPowerPlantDetailsSpinnerManufacturerMakeModel.setTitle("Manufacturer/Make");
+        mPowerPlantDetailsSpinnerNumberModuleSlots.setTitle("Number Module Slots");
+        mPowerPlantDetailsSpinnerPowerPlantEarthingStatus.setTitle("Power Plant Earthing Status");
+        mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps.setTitle("Type of the Power Plant [Commercial/SMPs]");
+        powerPlantDetails_Spinner_numberOfModules.setTitle("Number of Modules");
+        mPowerPlantDetailsSpinnerNoOfFaultyModules.setTitle("No. of Faulty Modules");
+        mPowerPlantDetailsSpinnerSpdStatus.setTitle("SPD Status");
+        mPowerPlantDetailsSpinnerWorkingCondition.setTitle("Working Condition");
+    }
 
 
     public static Boolean getFromPref(Context context, String key) {
@@ -264,7 +276,6 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
                 }
             }
 
-            
 
         }
     }
@@ -284,13 +295,16 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
+            case android.R.id.home:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuSubmit:finish();
+            case R.id.menuSubmit:
+                finish();
                 startActivity(new Intent(this, Power_Backups_DG.class));
                 return true;
 

@@ -80,7 +80,7 @@
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Type" />
@@ -108,7 +108,7 @@
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Make" />
@@ -136,7 +136,7 @@
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemPosition"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Position" />
@@ -164,7 +164,7 @@
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Staus" />
@@ -191,14 +191,14 @@
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemSerialNumber"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Power Management System Serial Number" />
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_PowerManagementSystemSerialNumber"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -256,7 +256,7 @@
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_NatureofProblem"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

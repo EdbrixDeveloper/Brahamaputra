@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,7 +24,7 @@ import java.util.Locale;
 public class Earth_Resistance_Equipment extends AppCompatActivity {
 
     private TextView mEarthResistanceEquipmentTextViewTypeOfEarth;
-    private Spinner mEarthResistanceEquipmentSpinnerTypeOfEarth;
+    private SearchableSpinner mEarthResistanceEquipmentSpinnerTypeOfEarth;
     private TextView mEarthResistanceEquipmentTextViewEarthResistance;
     private EditText mEarthResistanceEquipmentEditTextEarthResistance;
     private TextView mEarthResistanceEquipmentTextViewDateOfearthResistanceMeasured;
@@ -66,7 +67,7 @@ public class Earth_Resistance_Equipment extends AppCompatActivity {
 
     private void assignViews() {
         mEarthResistanceEquipmentTextViewTypeOfEarth = (TextView) findViewById(R.id.earthResistanceEquipment_textView_typeOfEarth);
-        mEarthResistanceEquipmentSpinnerTypeOfEarth = (Spinner) findViewById(R.id.earthResistanceEquipment_Spinner_typeOfEarth);
+        mEarthResistanceEquipmentSpinnerTypeOfEarth = (SearchableSpinner) findViewById(R.id.earthResistanceEquipment_Spinner_typeOfEarth);
         mEarthResistanceEquipmentTextViewEarthResistance = (TextView) findViewById(R.id.earthResistanceEquipment_textView_earthResistance);
         mEarthResistanceEquipmentEditTextEarthResistance = (EditText) findViewById(R.id.earthResistanceEquipment_editText_earthResistance);
         mEarthResistanceEquipmentTextViewDateOfearthResistanceMeasured = (TextView) findViewById(R.id.earthResistanceEquipment_textView_dateOfearthResistanceMeasured);
@@ -74,6 +75,8 @@ public class Earth_Resistance_Equipment extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mEarthResistanceEquipmentSpinnerTypeOfEarth.setTitle("Type of Earth");
     }
 
     private void updateLabel() {

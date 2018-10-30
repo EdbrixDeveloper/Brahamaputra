@@ -45,6 +45,11 @@ public class ServoStabilizer extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mServoStabilizerSpinnerServoStabilizerWorkingStatus.setTitle("Servo Stabilizer Working Status");
+        mServoStabilizerSpinnerMakeofServo.setTitle("Make of Servo");
+        mServoStabilizerSpinnerRatingofServo.setTitle("Rating of Servo");
+        mServoStabilizerSpinnerWorkingCondition.setTitle("Working Condition");
     }
 
 
@@ -53,12 +58,9 @@ public class ServoStabilizer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servo_stabilizer);
         this.setTitle("SERVO STABILIZER");
-       // assignViews();
+        // assignViews();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
 
 
     }
@@ -71,14 +73,15 @@ public class ServoStabilizer extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
-               // startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:
+                finish();
+                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:finish();
+            case R.id.menuDone:
+                finish();
                 startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
                 return true;
 

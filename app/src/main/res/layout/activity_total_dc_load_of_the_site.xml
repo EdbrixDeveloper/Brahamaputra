@@ -28,13 +28,13 @@
                     android:id="@+id/totalDCLoadsite_textView_totalDcLoadOfSite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Total DC load of the site at the time of Handing over (Kilo Watt)" />
 
                 <EditText
                     android:id="@+id/totalDCLoadsite_editText_totalDcLoadOfSite"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

@@ -134,6 +134,29 @@ public class GeneralAndSafetyMeasures extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mPowerManagementSystemSpinnerAlarmMultipluxerStatus.setTitle("Alarm Multipluxer Status");
+        mPowerManagementSystemSpinnerCaretakerSecuritySalaryPaidBy.setTitle("Caretaker/Security Salary Paid By");
+        mPowerManagementSystemSpinnerCaretakerSecurityStayinginSite.setTitle("Caretaker/Security Staying in Site");
+        mPowerManagementSystemSpinnerCaretakerStatusUpOnEmergency.setTitle("Caretaker Status (Up-On Emergency");
+        mPowerManagementSystemSpinnerDGRoomLock.setTitle("DG Room Lock");
+        mPowerManagementSystemSpinnerDoorOpenSensor.setTitle("Door Open Sensor");
+        mPowerManagementSystemSpinnerFencingCompoundWallCondition.setTitle("Fencing/Compound Wall Condition");
+        mPowerManagementSystemSpinnerFireBucket.setTitle("Fire Bucket");
+        mPowerManagementSystemSpinnerFireExtuinguisher.setTitle("Fire Extuinguisher");
+        mPowerManagementSystemSpinnerFireExtuinguisherType.setTitle("Fire Extuinguisher Type");
+        mPowerManagementSystemSpinnerFireSmokeSensor.setTitle("Fire and Smoke Sensor");
+        mPowerManagementSystemSpinnerFuelSensor.setTitle("Fuel Sensor");
+        mPowerManagementSystemSpinnerGateLock.setTitle("Gate Lock");
+        mPowerManagementSystemSpinnerIsSecurityCaretakeristheOwnerofSitey.setTitle("Is Security/Caretaker is the Owner of Site");
+        mPowerManagementSystemSpinnerLightningArresterStatus.setTitle("Lightning Arrester Status");
+        mPowerManagementSystemSpinnerNoofSecurityPerson.setTitle("No of Security Person");
+        mPowerManagementSystemSpinnerNumberofEarthPit.setTitle("Number of Earth Pit");
+        mPowerManagementSystemSpinnerNumberoffreeODPaltformAvailable.setTitle("Number of free OD Paltform Available");
+        mPowerManagementSystemSpinnerSecurityStatus24x7.setTitle("Security Status (24x7)");
+        mPowerManagementSystemSpinnerSiteBoundaryStatus.setTitle("Site Boundary Status");
+        mPowerManagementSystemSpinnerSiteHygieneVegitationStatus.setTitle("Site Hygiene/Vegitation Status");
+
     }
 
     final Calendar myCalendar = Calendar.getInstance();

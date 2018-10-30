@@ -15,7 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
-            android:orientation="vertical">
+            android:paddingBottom="@dimen/app_normal_margin"
+            android:orientation="vertical"
+            >
 
 
             <LinearLayout
@@ -34,7 +36,7 @@
 
                 <EditText
                     android:id="@+id/generalAndSafetyMeasures_editText_PrevailingSLA"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -224,7 +226,7 @@
                     android:id="@+id/powerManagementSystem_textView_FireExtuinguisherExpiryDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Fire Extuinguisher Expiry Date" />
@@ -337,14 +339,14 @@
                     android:id="@+id/powerManagementSystem_textView_MobileNumberofSecurity"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Mobile Number of Security" />
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_MobileNumberofSecurity"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -367,7 +369,7 @@
                     android:id="@+id/powerManagementSystem_textView_CaretakerStatusUpOnEmergency"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Caretaker Status (Up-On Emergency)" />
@@ -394,14 +396,14 @@
                     android:id="@+id/powerManagementSystem_textView_MobileNumberofCaretaker"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Mobile Number of Caretaker" />
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_MobileNumberofCaretaker"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -424,7 +426,7 @@
                     android:id="@+id/powerManagementSystem_textView_IsSecurityCaretakeristheOwnerofSite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Is Security/Caretaker is the Owner of Site" />
@@ -452,14 +454,14 @@
                     android:id="@+id/powerManagementSystem_textView_SalaryofSecurityCaretaker"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Salary of Security/Caretaker" />
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_SalaryofSecurityCaretaker"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -482,7 +484,7 @@
                     android:id="@+id/powerManagementSystem_textView_CaretakerSecuritySalaryPaidBy"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Caretaker/Security Salary Paid By" />
@@ -510,7 +512,7 @@
                     android:id="@+id/powerManagementSystem_textView_CaretakerSecurityStayinginSite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Caretaker/Security Staying in Site" />
@@ -594,7 +596,7 @@
                     android:id="@+id/powerManagementSystem_textView_FencingCompoundWallCondition"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Fencing/Compound Wall Condition" />
@@ -622,7 +624,7 @@
                     android:id="@+id/powerManagementSystem_textView_NumberoffreeODPaltformAvailable"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Number of free OD Paltform Available" />

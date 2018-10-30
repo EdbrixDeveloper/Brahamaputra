@@ -55,7 +55,7 @@
                     android:id="@+id/ServoStabilizer_textView_ServoStabilizerWorkingStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Servo Stabilizer Working Status" />
 
@@ -166,7 +166,7 @@
 
                 <EditText
                     android:id="@+id/ServoStabilizer_editText_NatureofProblem"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

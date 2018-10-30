@@ -25,7 +25,9 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -38,20 +40,20 @@ import java.util.Locale;
 public class Power_Backups_DG extends AppCompatActivity {
 
     private TextView mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovided;
-    private Spinner mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided;
+    private SearchableSpinner mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided;
     private TextView mPowerBackupsDgTextViewNumberOfWorkingDg;
-    private Spinner mPowerBackupsDgSpinnerNumberOfWorkingDg;
+    private SearchableSpinner mPowerBackupsDgSpinnerNumberOfWorkingDg;
     private TextView mPowerBackupsDgTextViewQRCodeScan;
     private ImageView mPowerBackupsDgButtonQRCodeScan;
     private TextView mPowerBackupsDgTextViewAssetOwner;
-    private Spinner mPowerBackupsDgSpinnerAssetOwner;
+    private SearchableSpinner mPowerBackupsDgSpinnerAssetOwner;
     private TextView mPowerBackupsDgTextViewDividerDesign;
     private TextView mPowerBackupsDgTextViewManufacturerMakeModel;
-    private Spinner mPowerBackupsDgSpinnerManufacturerMakeModel;
+    private SearchableSpinner mPowerBackupsDgSpinnerManufacturerMakeModel;
     private TextView mPowerBackupsDgTextViewCapacityInKva;
-    private Spinner mPowerBackupsDgSpinnerCapacityInKva;
+    private SearchableSpinner mPowerBackupsDgSpinnerCapacityInKva;
     private TextView mPowerBackupsDgTextViewAutoManual;
-    private Spinner mPowerBackupsDgSpinnerAutoManual;
+    private SearchableSpinner mPowerBackupsDgSpinnerAutoManual;
     private TextView mPowerBackupsDgTextViewDieselTankCapacity;
     private EditText mPowerBackupsDgEditTextDieselTankCapacity;
     private TextView mPowerBackupsDgTextViewDateOfInstallation;
@@ -59,29 +61,29 @@ public class Power_Backups_DG extends AppCompatActivity {
     private TextView mPowerBackupsDgTextViewAverageDieselConsumption;
     private EditText mPowerBackupsDgEditTextAverageDieselConsumption;
     private TextView mPowerBackupsDgTextViewAmc;
-    private Spinner mPowerBackupsDgSpinnerAmc;
+    private SearchableSpinner mPowerBackupsDgSpinnerAmc;
     private TextView mPowerBackupsDgTextViewValidityOfAmc;
     private EditText mPowerBackupsDgEditTextDateOfvalidityOfAmc;
     private TextView mPowerBackupsDgTextViewDgWorkingType;
-    private Spinner mPowerBackupsDgSpinnerDgWorkingType;
+    private SearchableSpinner mPowerBackupsDgSpinnerDgWorkingType;
     private TextView mPowerBackupsDgTextViewDgHmrReading;
     private EditText mPowerBackupsDgEditTextDgHmrReading;
     private TextView mPowerBackupsDgTextViewDgEngineSerialNumber;
     private EditText mPowerBackupsDgEditTextDgEngineSerialNumber;
     private TextView mPowerBackupsDgTextViewDgMainAlternatorType;
-    private Spinner mPowerBackupsDgSpinnerDgMainAlternatorType;
+    private SearchableSpinner mPowerBackupsDgSpinnerDgMainAlternatorType;
     private TextView mPowerBackupsDgTextViewDgMainAlternatorMake;
-    private Spinner mPowerBackupsDgSpinnerDgMainAlternatorMake;
+    private SearchableSpinner mPowerBackupsDgSpinnerDgMainAlternatorMake;
     private TextView mPowerBackupsDgTextViewDgMainAlternatorSerialNumber;
     private EditText mPowerBackupsDgEditTextDgMainAlternatorSerialNumber;
     private TextView mPowerBackupsDgTextViewDgCanopyStatus;
-    private Spinner mPowerBackupsDgSpinnerDgCanopyStatus;
+    private SearchableSpinner mPowerBackupsDgSpinnerDgCanopyStatus;
     private TextView mPowerBackupsDgTextViewDgStartingBatteryStatus;
-    private Spinner mPowerBackupsDgSpinnerDgStartingBatteryStatus;
+    private SearchableSpinner mPowerBackupsDgSpinnerDgStartingBatteryStatus;
     private TextView mPowerBackupsDgTextViewChargingAlternator;
-    private Spinner mPowerBackupsDgSpinnerChargingAlternator;
+    private SearchableSpinner mPowerBackupsDgSpinnerChargingAlternator;
     private TextView mPowerBackupsDgTextViewBatteryCharger;
-    private Spinner mPowerBackupsDgSpinnerBatteryCharger;
+    private SearchableSpinner mPowerBackupsDgSpinnerBatteryCharger;
     private TextView mPowerBackupsDgTextViewPresentDieselStock;
     private EditText mPowerBackupsDgEditTextPresentDieselStock;
     private TextView mPowerBackupsDgTextViewGcuRunHrs;
@@ -89,11 +91,11 @@ public class Power_Backups_DG extends AppCompatActivity {
     private TextView mPowerBackupsDgTextViewGcuKwh;
     private EditText mPowerBackupsDgEditTextGcuKwh;
     private TextView mPowerBackupsDgTextViewDgAvrWorkingStatus;
-    private Spinner mPowerBackupsDgSpinnerDgAvrWorkingStatus;
+    private SearchableSpinner mPowerBackupsDgSpinnerDgAvrWorkingStatus;
     private TextView mPowerBackupsDgTextViewFuelTankPosition;
-    private Spinner mPowerBackupsDgSpinnerFuelTankPosition;
+    private SearchableSpinner mPowerBackupsDgSpinnerFuelTankPosition;
     private TextView mPowerBackupsDgTextViewWorkingCondition;
-    private Spinner mPowerBackupsDgSpinnerWorkingCondition;
+    private SearchableSpinner mPowerBackupsDgSpinnerWorkingCondition;
     private TextView mPowerBackupsDgTextViewNatureOfProblem;
     private EditText mPowerBackupsDgEditTextNatureOfProblem;
 
@@ -184,20 +186,20 @@ public class Power_Backups_DG extends AppCompatActivity {
 
     private void assignViews() {
         mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovided = (TextView) findViewById(R.id.powerBackupsDg_textView_noOfEngineAlternatorSetsprovided);
-        mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided = (Spinner) findViewById(R.id.powerBackupsDg_spinner_noOfEngineAlternatorSetsprovided);
+        mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided = (SearchableSpinner) findViewById(R.id.powerBackupsDg_spinner_noOfEngineAlternatorSetsprovided);
         mPowerBackupsDgTextViewNumberOfWorkingDg = (TextView) findViewById(R.id.powerBackupsDg_textView_numberOfWorkingDg);
-        mPowerBackupsDgSpinnerNumberOfWorkingDg = (Spinner) findViewById(R.id.powerBackupsDg_spinner_numberOfWorkingDg);
+        mPowerBackupsDgSpinnerNumberOfWorkingDg = (SearchableSpinner) findViewById(R.id.powerBackupsDg_spinner_numberOfWorkingDg);
         mPowerBackupsDgTextViewQRCodeScan = (TextView) findViewById(R.id.powerBackupsDg_textView_QRCodeScan);
         mPowerBackupsDgButtonQRCodeScan = (ImageView) findViewById(R.id.powerBackupsDg_button_QRCodeScan);
         mPowerBackupsDgTextViewAssetOwner = (TextView) findViewById(R.id.powerBackupsDg_textView_assetOwner);
-        mPowerBackupsDgSpinnerAssetOwner = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_assetOwner);
+        mPowerBackupsDgSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_assetOwner);
         mPowerBackupsDgTextViewDividerDesign = (TextView) findViewById(R.id.powerBackupsDg_textView_dividerDesign);
         mPowerBackupsDgTextViewManufacturerMakeModel = (TextView) findViewById(R.id.powerBackupsDg_textView_manufacturerMakeModel);
-        mPowerBackupsDgSpinnerManufacturerMakeModel = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_manufacturerMakeModel);
+        mPowerBackupsDgSpinnerManufacturerMakeModel = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_manufacturerMakeModel);
         mPowerBackupsDgTextViewCapacityInKva = (TextView) findViewById(R.id.powerBackupsDg_textView_capacityInKva);
-        mPowerBackupsDgSpinnerCapacityInKva = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_capacityInKva);
+        mPowerBackupsDgSpinnerCapacityInKva = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_capacityInKva);
         mPowerBackupsDgTextViewAutoManual = (TextView) findViewById(R.id.powerBackupsDg_textView_autoManual);
-        mPowerBackupsDgSpinnerAutoManual = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_autoManual);
+        mPowerBackupsDgSpinnerAutoManual = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_autoManual);
         mPowerBackupsDgTextViewDieselTankCapacity = (TextView) findViewById(R.id.powerBackupsDg_textView_dieselTankCapacity);
         mPowerBackupsDgEditTextDieselTankCapacity = (EditText) findViewById(R.id.powerBackupsDg_editText_dieselTankCapacity);
         mPowerBackupsDgTextViewDateOfInstallation = (TextView) findViewById(R.id.powerBackupsDg_textView_dateOfInstallation);
@@ -205,29 +207,29 @@ public class Power_Backups_DG extends AppCompatActivity {
         mPowerBackupsDgTextViewAverageDieselConsumption = (TextView) findViewById(R.id.powerBackupsDg_textView_averageDieselConsumption);
         mPowerBackupsDgEditTextAverageDieselConsumption = (EditText) findViewById(R.id.powerBackupsDg_editText_averageDieselConsumption);
         mPowerBackupsDgTextViewAmc = (TextView) findViewById(R.id.powerBackupsDg_textView_amc);
-        mPowerBackupsDgSpinnerAmc = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_amc);
+        mPowerBackupsDgSpinnerAmc = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_amc);
         mPowerBackupsDgTextViewValidityOfAmc = (TextView) findViewById(R.id.powerBackupsDg_textView_validityOfAmc);
         mPowerBackupsDgEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.powerBackupsDg_editText_dateOfvalidityOfAmc);
         mPowerBackupsDgTextViewDgWorkingType = (TextView) findViewById(R.id.powerBackupsDg_textView_dgWorkingType);
-        mPowerBackupsDgSpinnerDgWorkingType = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_dgWorkingType);
+        mPowerBackupsDgSpinnerDgWorkingType = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgWorkingType);
         mPowerBackupsDgTextViewDgHmrReading = (TextView) findViewById(R.id.powerBackupsDg_textView_dgHmrReading);
         mPowerBackupsDgEditTextDgHmrReading = (EditText) findViewById(R.id.powerBackupsDg_editText_dgHmrReading);
         mPowerBackupsDgTextViewDgEngineSerialNumber = (TextView) findViewById(R.id.powerBackupsDg_textView_dgEngineSerialNumber);
         mPowerBackupsDgEditTextDgEngineSerialNumber = (EditText) findViewById(R.id.powerBackupsDg_editText_dgEngineSerialNumber);
         mPowerBackupsDgTextViewDgMainAlternatorType = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorType);
-        mPowerBackupsDgSpinnerDgMainAlternatorType = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_dgMainAlternatorType);
+        mPowerBackupsDgSpinnerDgMainAlternatorType = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgMainAlternatorType);
         mPowerBackupsDgTextViewDgMainAlternatorMake = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorMake);
-        mPowerBackupsDgSpinnerDgMainAlternatorMake = (Spinner) findViewById(R.id.powerBackupsDg_spinner_dgMainAlternatorMake);
+        mPowerBackupsDgSpinnerDgMainAlternatorMake = (SearchableSpinner) findViewById(R.id.powerBackupsDg_spinner_dgMainAlternatorMake);
         mPowerBackupsDgTextViewDgMainAlternatorSerialNumber = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorSerialNumber);
         mPowerBackupsDgEditTextDgMainAlternatorSerialNumber = (EditText) findViewById(R.id.powerBackupsDg_editText_dgMainAlternatorSerialNumber);
         mPowerBackupsDgTextViewDgCanopyStatus = (TextView) findViewById(R.id.powerBackupsDg_textView_dgCanopyStatus);
-        mPowerBackupsDgSpinnerDgCanopyStatus = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_dgCanopyStatus);
+        mPowerBackupsDgSpinnerDgCanopyStatus = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgCanopyStatus);
         mPowerBackupsDgTextViewDgStartingBatteryStatus = (TextView) findViewById(R.id.powerBackupsDg_textView_dgStartingBatteryStatus);
-        mPowerBackupsDgSpinnerDgStartingBatteryStatus = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_dgStartingBatteryStatus);
+        mPowerBackupsDgSpinnerDgStartingBatteryStatus = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgStartingBatteryStatus);
         mPowerBackupsDgTextViewChargingAlternator = (TextView) findViewById(R.id.powerBackupsDg_textView_chargingAlternator);
-        mPowerBackupsDgSpinnerChargingAlternator = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_chargingAlternator);
+        mPowerBackupsDgSpinnerChargingAlternator = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_chargingAlternator);
         mPowerBackupsDgTextViewBatteryCharger = (TextView) findViewById(R.id.powerBackupsDg_textView_batteryCharger);
-        mPowerBackupsDgSpinnerBatteryCharger = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_batteryCharger);
+        mPowerBackupsDgSpinnerBatteryCharger = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_batteryCharger);
         mPowerBackupsDgTextViewPresentDieselStock = (TextView) findViewById(R.id.powerBackupsDg_textView_presentDieselStock);
         mPowerBackupsDgEditTextPresentDieselStock = (EditText) findViewById(R.id.powerBackupsDg_editText_presentDieselStock);
         mPowerBackupsDgTextViewGcuRunHrs = (TextView) findViewById(R.id.powerBackupsDg_textView_gcuRunHrs);
@@ -235,16 +237,35 @@ public class Power_Backups_DG extends AppCompatActivity {
         mPowerBackupsDgTextViewGcuKwh = (TextView) findViewById(R.id.powerBackupsDg_textView_gcuKwh);
         mPowerBackupsDgEditTextGcuKwh = (EditText) findViewById(R.id.powerBackupsDg_editText_gcuKwh);
         mPowerBackupsDgTextViewDgAvrWorkingStatus = (TextView) findViewById(R.id.powerBackupsDg_textView_dgAvrWorkingStatus);
-        mPowerBackupsDgSpinnerDgAvrWorkingStatus = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_dgAvrWorkingStatus);
+        mPowerBackupsDgSpinnerDgAvrWorkingStatus = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgAvrWorkingStatus);
         mPowerBackupsDgTextViewFuelTankPosition = (TextView) findViewById(R.id.powerBackupsDg_textView_fuelTankPosition);
-        mPowerBackupsDgSpinnerFuelTankPosition = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_fuelTankPosition);
+        mPowerBackupsDgSpinnerFuelTankPosition = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_fuelTankPosition);
         mPowerBackupsDgTextViewWorkingCondition = (TextView) findViewById(R.id.powerBackupsDg_textView_workingCondition);
-        mPowerBackupsDgSpinnerWorkingCondition = (Spinner) findViewById(R.id.powerBackupsDg_Spinner_workingCondition);
+        mPowerBackupsDgSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_workingCondition);
         mPowerBackupsDgTextViewNatureOfProblem = (TextView) findViewById(R.id.powerBackupsDg_textView_natureOfProblem);
         mPowerBackupsDgEditTextNatureOfProblem = (EditText) findViewById(R.id.powerBackupsDg_editText_natureOfProblem);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided.setTitle("No.of Engine Alternator Sets provided");
+        mPowerBackupsDgSpinnerNumberOfWorkingDg.setTitle("Number of Working DG");
+        mPowerBackupsDgSpinnerAssetOwner.setTitle("Asset Owner");
+        mPowerBackupsDgSpinnerManufacturerMakeModel.setTitle("Manufacturer/Make/Model");
+        mPowerBackupsDgSpinnerCapacityInKva.setTitle("Capacity in KVA");
+        mPowerBackupsDgSpinnerAutoManual.setTitle("Auto/ Manual");
+        mPowerBackupsDgSpinnerAmc.setTitle("AMC(Yes/No)");
+        mPowerBackupsDgSpinnerDgWorkingType.setTitle("DG Working Type");
+        mPowerBackupsDgSpinnerDgMainAlternatorType.setTitle("DG Main Alternator Type");
+        mPowerBackupsDgSpinnerDgMainAlternatorMake.setTitle("DG Main Alternator Make");
+        mPowerBackupsDgSpinnerDgCanopyStatus.setTitle("DG Canopy Status");
+        mPowerBackupsDgSpinnerDgStartingBatteryStatus.setTitle("DG Starting Battery Status");
+        mPowerBackupsDgSpinnerChargingAlternator.setTitle("Charging Alternator");
+        mPowerBackupsDgSpinnerBatteryCharger.setTitle("Battery Charger");
+        mPowerBackupsDgSpinnerDgAvrWorkingStatus.setTitle("DG AVR working Status");
+        mPowerBackupsDgSpinnerFuelTankPosition.setTitle("Fuel Tank Position");
+        mPowerBackupsDgSpinnerWorkingCondition.setTitle("Working Condition");
+
     }
 
     private void updateLabel() {
@@ -377,13 +398,16 @@ public class Power_Backups_DG extends AppCompatActivity {
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
+            case android.R.id.home:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuSubmit:finish();
+            case R.id.menuSubmit:
+                finish();
                 startActivity(new Intent(this, Shelter.class));
                 return true;
 

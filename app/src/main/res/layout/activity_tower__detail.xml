@@ -80,7 +80,7 @@
                     android:id="@+id/towerDetail_textView_HeightOfTower"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Height of the tower(In Mtr)"
 
@@ -88,7 +88,7 @@
 
                 <EditText
                     android:id="@+id/towerDetail_editText_heightOfTower"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -109,7 +109,7 @@
                     android:id="@+id/towerDetail_textView_dateOfPaintingOfTheTower"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
                     android:text="Date of painting of the Tower" />

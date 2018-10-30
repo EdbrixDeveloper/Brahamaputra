@@ -85,6 +85,18 @@ public class Battery_Set extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mBatterySetSpinnerNoofBatterySetProvided.setTitle("No of Battery Set Provided");
+        mBatterySetSpinnerNumberofBatteryBankWorking.setTitle("Number of Battery Bank Working");
+        mBatterySetSpinnerAssetOwner.setTitle("Asset Owner");
+        mBatterySetSpinnerManufacturerMakeModel.setTitle("Manufacturer / Make / Model");
+        mBatterySetSpinnerCapacityinAH.setTitle("Capacity in AH");
+        mBatterySetSpinnerTypeofBattery.setTitle("Type of Battery");
+        mBatterySetSpinnerPositionofBatteryBank.setTitle("Position of Battery Bank");
+        mBatterySetSpinnerBatteryBankCableSizeinSQMM.setTitle("Battery Bank Cable Size in SQMM");
+        mBatterySetSpinnerBatteryBankEarthingStatus.setTitle("Battery Bank Earthing Status");
+        mBatterySetSpinnerBACKUPCondition.setTitle("BACKUP Condition");
+
     }
 
 
@@ -140,10 +152,12 @@ public class Battery_Set extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
-               // startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:
+                finish();
+                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:finish();
+            case R.id.menuDone:
+                finish();
                 startActivity(new Intent(this, ExternalTenantsPersonaldetails.class));
                 return true;
 

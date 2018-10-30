@@ -9,8 +9,8 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_marginBottom="@dimen/app_normal_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                     android:layout_weight="1"
                     android:text="Specifications"
                     android:textColor="@color/colorBlack"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
@@ -264,7 +264,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -280,7 +280,7 @@
 
                 <EditText
                     android:id="@+id/batterySet_editText_Backupduration"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -410,7 +410,7 @@
 
                 <EditText
                     android:id="@+id/batterySet_editText_NatureofProblem"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

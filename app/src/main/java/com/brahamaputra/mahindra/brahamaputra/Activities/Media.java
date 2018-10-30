@@ -33,6 +33,8 @@ public class Media extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mMediaSpinnerTypeofmedia.setTitle("Type of media");
     }
 
 
@@ -45,7 +47,7 @@ public class Media extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media);
         this.setTitle("Media");
-       // assignViews();
+        assignViews();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

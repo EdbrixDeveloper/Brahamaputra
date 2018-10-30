@@ -112,13 +112,13 @@
                     android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Manufacturer / Make / Model" />
 
                 <EditText
                     android:id="@+id/solarPowerSystem_editText_manufacturerMakeModel"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -173,7 +173,7 @@
 
                 <EditText
                     android:id="@+id/solarPowerSystem_editText_capacityKW"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -224,7 +224,7 @@
                     android:id="@+id/solarPowerSystem_textView_validityOfAmc"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="If yes, Validity of the AMC" />
 

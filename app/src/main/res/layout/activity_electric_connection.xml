@@ -9,7 +9,8 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_marginBottom="@dimen/app_normal_margin">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -87,7 +88,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_sanctionedLoadKVA"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -107,13 +108,13 @@
                     android:id="@+id/electricConnection_textView_existingLoadAtSiteKVA"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Existing load at site (KVA)" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_existingLoadAtSiteKVA"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -133,13 +134,13 @@
                     android:id="@+id/electricConnection_textView_nameOfSupplyCompany"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Name of the supply company" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_nameOfSupplyCompany"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -186,13 +187,13 @@
                     android:id="@+id/electricConnection_textView_numberOfCompoundLights"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Number of Compound lights" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_numberOfCompoundLights"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -220,7 +221,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_ebMeterReadingInKWh"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -250,7 +251,7 @@
                     android:id="@+id/electricConnection_Spinner_ebSupplier"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:entries="@array/spinner_electricConnection_ebSupplier"
                     android:textAlignment="viewStart"
@@ -269,13 +270,13 @@
                     android:id="@+id/electricConnection_textView_ebCostPerUnitForSharedConnection"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="EB Cost Per Unit for Shared Connection" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_ebCostPerUnitForSharedConnection"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -354,7 +355,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_transformerCapacityInKva"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -407,7 +408,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_sectionName"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -434,7 +435,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_sectionNumber"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -461,7 +462,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_consumerNumber"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -514,7 +515,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_ebMeterSerialNumber"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -665,7 +666,7 @@
                     android:id="@+id/electricConnection_textView_averageEbAvailabilityPerDay"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Average EB Availability Per Day" />
 
@@ -685,7 +686,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_averageEbAvailabilityPerDay"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -710,13 +711,13 @@
                     android:id="@+id/electricConnection_textView_scheduledPowerCutInHrs"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Scheduled Power Cut in Hrs" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_scheduledPowerCutInHrs"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -746,7 +747,7 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_ebBillDate"
-                    style="@style/FontStyle"
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

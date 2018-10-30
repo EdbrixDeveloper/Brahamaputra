@@ -32,6 +32,9 @@ public class DetailsOfUnusedMaterials extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+        mDetailsOfUnusedMaterialsSpinnerNumberofUnusedAssetinSite.setTitle("Number of Unused Asset in Site");
+        mDetailsOfUnusedMaterialsSpinnerAssetMake.setTitle("Asset Make");
+        mDetailsOfUnusedMaterialsSpinnerAssetStatus.setTitle("Asset Status");
     }
 
     @Override
@@ -39,12 +42,9 @@ public class DetailsOfUnusedMaterials extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_of_unused_materials);
         this.setTitle("Details Of Unused Materials");
-       // assignViews();
+        // assignViews();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
 
 
     }
@@ -57,14 +57,15 @@ public class DetailsOfUnusedMaterials extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
-               // startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:
+                finish();
+                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:finish();
+            case R.id.menuDone:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 

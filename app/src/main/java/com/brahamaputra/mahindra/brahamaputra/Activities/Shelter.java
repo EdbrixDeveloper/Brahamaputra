@@ -11,7 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Spinner;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -23,23 +24,23 @@ public class Shelter extends AppCompatActivity {
 
 
     private TextView mShelterTextViewPhysicalConditionOfShelterPlatform;
-    private Spinner mShelterSpinnerPhysicalConditionOfShelterPlatform;
+    private SearchableSpinner mShelterSpinnerPhysicalConditionOfShelterPlatform;
     private TextView mShelterTextViewNumberOfBtsInsideShelter;
-    private Spinner mShelterSpinnerNumberOfBtsInsideShelter;
+    private SearchableSpinner mShelterSpinnerNumberOfBtsInsideShelter;
     private TextView mShelterTextViewNumberOfBtsOutsideShelter;
-    private Spinner mShelterSpinnerNumberOfBtsOutsideShelter;
+    private SearchableSpinner mShelterSpinnerNumberOfBtsOutsideShelter;
     private TextView mShelterTextViewShelterLock;
-    private Spinner mShelterSpinnerShelterLock;
+    private SearchableSpinner mShelterSpinnerShelterLock;
     private TextView mShelterTextViewOutdoorShelterLock;
-    private Spinner mShelterSpinnerOutdoorShelterLock;
+    private SearchableSpinner mShelterSpinnerOutdoorShelterLock;
     private TextView mShelterTextViewIgbStatus;
-    private Spinner mShelterSpinnerIgbStatus;
+    private SearchableSpinner mShelterSpinnerIgbStatus;
     private TextView mShelterTextViewEgbStatus;
-    private Spinner mShelterSpinnerEgbStatus;
+    private SearchableSpinner mShelterSpinnerEgbStatus;
     private TextView mShelterTextViewNoOfOdcAvailable;
-    private Spinner mShelterSpinnerNoOfOdcAvailable;
+    private SearchableSpinner mShelterSpinnerNoOfOdcAvailable;
     private TextView mShelterTextViewOdcLock;
-    private Spinner mShelterSpinnerOdcLock;
+    private SearchableSpinner mShelterSpinnerOdcLock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +54,36 @@ public class Shelter extends AppCompatActivity {
 
     private void assignViews() {
         mShelterTextViewPhysicalConditionOfShelterPlatform = (TextView) findViewById(R.id.shelter_textView_physicalConditionOfShelterPlatform);
-        mShelterSpinnerPhysicalConditionOfShelterPlatform = (Spinner) findViewById(R.id.shelter_spinner_physicalConditionOfShelterPlatform);
+        mShelterSpinnerPhysicalConditionOfShelterPlatform = (SearchableSpinner) findViewById(R.id.shelter_spinner_physicalConditionOfShelterPlatform);
         mShelterTextViewNumberOfBtsInsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsInsideShelter);
-        mShelterSpinnerNumberOfBtsInsideShelter = (Spinner) findViewById(R.id.shelter_spinner_numberOfBtsInsideShelter);
+        mShelterSpinnerNumberOfBtsInsideShelter = (SearchableSpinner) findViewById(R.id.shelter_spinner_numberOfBtsInsideShelter);
         mShelterTextViewNumberOfBtsOutsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsOutsideShelter);
-        mShelterSpinnerNumberOfBtsOutsideShelter = (Spinner) findViewById(R.id.shelter_Spinner_numberOfBtsOutsideShelter);
+        mShelterSpinnerNumberOfBtsOutsideShelter = (SearchableSpinner) findViewById(R.id.shelter_Spinner_numberOfBtsOutsideShelter);
         mShelterTextViewShelterLock = (TextView) findViewById(R.id.shelter_textView_shelterLock);
-        mShelterSpinnerShelterLock = (Spinner) findViewById(R.id.shelter_Spinner_shelterLock);
+        mShelterSpinnerShelterLock = (SearchableSpinner) findViewById(R.id.shelter_Spinner_shelterLock);
         mShelterTextViewOutdoorShelterLock = (TextView) findViewById(R.id.shelter_textView_outdoorShelterLock);
-        mShelterSpinnerOutdoorShelterLock = (Spinner) findViewById(R.id.shelter_Spinner_outdoorShelterLock);
+        mShelterSpinnerOutdoorShelterLock = (SearchableSpinner) findViewById(R.id.shelter_Spinner_outdoorShelterLock);
         mShelterTextViewIgbStatus = (TextView) findViewById(R.id.shelter_textView_igbStatus);
-        mShelterSpinnerIgbStatus = (Spinner) findViewById(R.id.shelter_Spinner_igbStatus);
+        mShelterSpinnerIgbStatus = (SearchableSpinner) findViewById(R.id.shelter_Spinner_igbStatus);
         mShelterTextViewEgbStatus = (TextView) findViewById(R.id.shelter_textView_egbStatus);
-        mShelterSpinnerEgbStatus = (Spinner) findViewById(R.id.shelter_Spinner_egbStatus);
+        mShelterSpinnerEgbStatus = (SearchableSpinner) findViewById(R.id.shelter_Spinner_egbStatus);
         mShelterTextViewNoOfOdcAvailable = (TextView) findViewById(R.id.shelter_textView_noOfOdcAvailable);
-        mShelterSpinnerNoOfOdcAvailable = (Spinner) findViewById(R.id.shelter_Spinner_noOfOdcAvailable);
+        mShelterSpinnerNoOfOdcAvailable = (SearchableSpinner) findViewById(R.id.shelter_Spinner_noOfOdcAvailable);
         mShelterTextViewOdcLock = (TextView) findViewById(R.id.shelter_textView_odcLock);
-        mShelterSpinnerOdcLock = (Spinner) findViewById(R.id.shelter_Spinner_odcLock);
+        mShelterSpinnerOdcLock = (SearchableSpinner) findViewById(R.id.shelter_Spinner_odcLock);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mShelterSpinnerPhysicalConditionOfShelterPlatform.setTitle("Physical Condition of Shelter and Platform");
+        mShelterSpinnerNumberOfBtsInsideShelter.setTitle("Number of BTS Inside Shelter");
+        mShelterSpinnerNumberOfBtsOutsideShelter.setTitle("Number of BTS Outside Shelter");
+        mShelterSpinnerShelterLock.setTitle("Shelter Lock");
+        mShelterSpinnerOutdoorShelterLock.setTitle("Outdoor Shelter Lock");
+        mShelterSpinnerIgbStatus.setTitle("IGB Status");
+        mShelterSpinnerEgbStatus.setTitle("EGB Status");
+        mShelterSpinnerNoOfOdcAvailable.setTitle("NO OF ODC Available");
+        mShelterSpinnerOdcLock.setTitle("ODC Lock");
     }
 
 
@@ -82,13 +93,16 @@ public class Shelter extends AppCompatActivity {
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
-               // startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:
+                finish();
+                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuSubmit:finish();
+            case R.id.menuSubmit:
+                finish();
                 startActivity(new Intent(this, Media.class));
                 return true;
 
@@ -97,3 +111,4 @@ public class Shelter extends AppCompatActivity {
         }
     }
 }
+

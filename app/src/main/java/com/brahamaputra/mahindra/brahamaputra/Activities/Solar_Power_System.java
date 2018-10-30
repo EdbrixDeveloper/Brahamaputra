@@ -23,7 +23,9 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -37,17 +39,17 @@ public class Solar_Power_System extends AppCompatActivity {
     private TextView mSolarPowerSystemTextViewQRCodeScan;
     private ImageView mSolarPowerSystemEditTextQRCodeScan;
     private TextView mSolarPowerSystemTextViewAvailable;
-    private Spinner mSolarPowerSystemSpinnerAvailable;
+    private SearchableSpinner mSolarPowerSystemSpinnerAvailable;
     private TextView mSolarPowerSystemTextViewAssetOwner;
-    private Spinner mSolarPowerSystemSpinnerAssetOwner;
+    private SearchableSpinner mSolarPowerSystemSpinnerAssetOwner;
     private TextView mSolarPowerSystemTextViewManufacturerMakeModel;
     private EditText mSolarPowerSystemEditTextManufacturerMakeModel;
     private TextView mSolarPowerSystemTextViewCellPanel;
-    private Spinner mSolarPowerSystemSpinnerCellPanel;
+    private SearchableSpinner mSolarPowerSystemSpinnerCellPanel;
     private TextView mSolarPowerSystemTextViewCapacityKW;
     private EditText mSolarPowerSystemEditTextCapacityKW;
     private TextView mSolarPowerSystemTextViewAmcYesNo;
-    private Spinner mSolarPowerSystemSpinnerAmcYesNo;
+    private SearchableSpinner mSolarPowerSystemSpinnerAmcYesNo;
     private TextView mSolarPowerSystemTextViewValidityOfAmc;
     private EditText mSolarPowerSystemEditTextDateOfvalidityOfAmc;
 
@@ -129,22 +131,27 @@ public class Solar_Power_System extends AppCompatActivity {
         mSolarPowerSystemTextViewQRCodeScan = (TextView) findViewById(R.id.solarPowerSystem_textView_QRCodeScan);
         mSolarPowerSystemEditTextQRCodeScan = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScan);
         mSolarPowerSystemTextViewAvailable = (TextView) findViewById(R.id.solarPowerSystem_textView_available);
-        mSolarPowerSystemSpinnerAvailable = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_available);
+        mSolarPowerSystemSpinnerAvailable = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_available);
         mSolarPowerSystemTextViewAssetOwner = (TextView) findViewById(R.id.solarPowerSystem_textView_assetOwner);
-        mSolarPowerSystemSpinnerAssetOwner = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_assetOwner);
+        mSolarPowerSystemSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_assetOwner);
         mSolarPowerSystemTextViewManufacturerMakeModel = (TextView) findViewById(R.id.solarPowerSystem_textView_manufacturerMakeModel);
         mSolarPowerSystemEditTextManufacturerMakeModel = (EditText) findViewById(R.id.solarPowerSystem_editText_manufacturerMakeModel);
         mSolarPowerSystemTextViewCellPanel = (TextView) findViewById(R.id.solarPowerSystem_textView_cellPanel);
-        mSolarPowerSystemSpinnerCellPanel = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_cellPanel);
+        mSolarPowerSystemSpinnerCellPanel = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_cellPanel);
         mSolarPowerSystemTextViewCapacityKW = (TextView) findViewById(R.id.solarPowerSystem_textView_capacityKW);
         mSolarPowerSystemEditTextCapacityKW = (EditText) findViewById(R.id.solarPowerSystem_editText_capacityKW);
         mSolarPowerSystemTextViewAmcYesNo = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo);
-        mSolarPowerSystemSpinnerAmcYesNo = (Spinner) findViewById(R.id.solarPowerSystem_Spinner_amcYesNo);
+        mSolarPowerSystemSpinnerAmcYesNo = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_amcYesNo);
         mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
         mSolarPowerSystemEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.solarPowerSystem_editText_dateOfvalidityOfAmc);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mSolarPowerSystemSpinnerAvailable.setTitle("Available");
+        mSolarPowerSystemSpinnerAssetOwner.setTitle("Asset Owner");
+        mSolarPowerSystemSpinnerCellPanel.setTitle("Cell / Panel");
+        mSolarPowerSystemSpinnerAmcYesNo.setTitle("AMC (Yes / No)");
     }
 
     private void updateLabel() {
@@ -164,11 +171,13 @@ public class Solar_Power_System extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
+            case android.R.id.home:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
-            case R.id.menuSubmit:finish();
+            case R.id.menuSubmit:
+                finish();
                 startActivity(new Intent(this, PowerPlantDetailsActivity.class));
                 return true;
 

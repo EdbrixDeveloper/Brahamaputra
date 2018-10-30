@@ -45,6 +45,10 @@ public class ACDB_DCDB extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+        mAcdbDcdbSpinnerFreeCoolingDeviseStausFCU.setTitle("Free Cooling Devise Staus");
+        mAcdbDcdbSpinnerNumberofACDB.setTitle("Number of ACDB");
+        mAcdbDcdbSpinnerNumberofDCDB.setTitle("Number of DCDB");
+
 
     }
 
@@ -59,9 +63,6 @@ public class ACDB_DCDB extends AppCompatActivity {
         this.setTitle("ACDB/DCDB");
         assignViews();
 
-        mAcdbDcdbSpinnerFreeCoolingDeviseStausFCU.setTitle("Free Cooling Devise Staus");
-        mAcdbDcdbSpinnerNumberofACDB.setTitle("Number of ACDB");
-        mAcdbDcdbSpinnerNumberofDCDB.setTitle("Number of DCDB");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -28,7 +28,7 @@
                     android:id="@+id/shelter_textView_physicalConditionOfShelterPlatform"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Physical Condition of Shelter and Platform" />
 

@@ -69,6 +69,11 @@ public class ExternalTenantsPersonaldetails extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        mExternalTenantsPersonaldetailsSpinnerTotalNumberofTanents.setTitle("Total Number of Tanents");
+        mExternalTenantsPersonaldetailsSpinnerNameoftheTenant.setTitle("Name of the Tenant");
+        mExternalTenantsPersonaldetailsSpinnerTypeofTenant.setTitle("Type of Tenant");
+
     }
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -155,10 +160,12 @@ public class ExternalTenantsPersonaldetails extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
+            case android.R.id.home:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:finish();
+            case R.id.menuDone:
+                finish();
                 startActivity(new Intent(this, Total_DC_Load_site.class));
                 return true;
 
