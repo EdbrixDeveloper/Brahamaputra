@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import android.widget.TextView;
@@ -20,7 +22,7 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.Calendar;
 
-public class Shelter extends AppCompatActivity {
+public class Shelter extends BaseActivity {
 
 
     private TextView mShelterTextViewPhysicalConditionOfShelterPlatform;

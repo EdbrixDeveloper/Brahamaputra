@@ -26,6 +26,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import android.widget.TextView;
@@ -37,7 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class PowerPlantDetailsActivity extends AppCompatActivity {
+public class PowerPlantDetailsActivity extends BaseActivity {
 
     private TextView mPowerPlantDetailsTextViewQRCodeScan;
     private ImageView mPowerPlantDetailsButtonQRCodeScan;
@@ -82,11 +84,14 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
     public static final String CAMERA_PREF = "camera_pref";
     public String date_flag = "no";
 
+    private AlertDialogManager alertDialogManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_plant_details);
         this.setTitle("Power Plant Details");
+        alertDialogManager = new AlertDialogManager(PowerPlantDetailsActivity.this);
         assignViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -186,25 +191,34 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
     }
 
     private void showSettingsAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("App needs to access the Camera.");
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        //finish();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "SETTINGS",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        startInstalledAppDetailsActivity(PowerPlantDetailsActivity.this);
 
-                    }
-                });
-        alertDialog.show();
+        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+
+                final EditText taskEditText = new EditText(PowerPlantDetailsActivity.this);
+                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PowerPlantDetailsActivity.this)
+                        .setTitle("Permission")
+                        .setMessage("Need Camera Access")
+                        .setView(taskEditText)
+                        .setPositiveButton("SETTINGS", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                startInstalledAppDetailsActivity(PowerPlantDetailsActivity.this);
+                            }
+                        })
+                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                dialog.show();
+            }
+        }).show();
+
     }
 
     public static void startInstalledAppDetailsActivity(final Activity context) {
@@ -222,27 +236,37 @@ public class PowerPlantDetailsActivity extends AppCompatActivity {
     }
 
     private void showAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("App needs to access the Camera.");
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ALLOW",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        ActivityCompat.requestPermissions(PowerPlantDetailsActivity.this,
-                                new String[]{Manifest.permission.CAMERA},
-                                MY_PERMISSIONS_REQUEST_CAMERA);
+        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
 
-                    }
-                });
-        alertDialog.show();
+                final EditText taskEditText = new EditText(PowerPlantDetailsActivity.this);
+                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PowerPlantDetailsActivity.this)
+                        .setTitle("Permission")
+                        .setMessage("Need Camera Access")
+                        .setView(taskEditText)
+                        .setPositiveButton("ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                ActivityCompat.requestPermissions(PowerPlantDetailsActivity.this,
+                                        new String[]{Manifest.permission.CAMERA},
+                                        MY_PERMISSIONS_REQUEST_CAMERA);
+                            }
+                        })
+                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        })
+                        .create();
+                dialog.show();
+            }
+        }).show();
+
+
     }
 
     private void openCamera() {

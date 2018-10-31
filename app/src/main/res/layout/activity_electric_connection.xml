@@ -251,7 +251,7 @@
                     android:id="@+id/electricConnection_Spinner_ebSupplier"
                     style="@style/SpinnerTheme"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:entries="@array/spinner_electricConnection_ebSupplier"
                     android:textAlignment="viewStart"

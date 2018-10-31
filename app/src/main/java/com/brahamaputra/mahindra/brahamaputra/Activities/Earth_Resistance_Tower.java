@@ -15,13 +15,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Earth_Resistance_Tower extends AppCompatActivity {
+public class Earth_Resistance_Tower extends BaseActivity {
 
     private TextView mEarthResistanceTowerTextViewTypeOfEarth;
     private SearchableSpinner mEarthResistanceTowerSpinnerTypeOfEarth;

@@ -11,7 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -23,7 +26,7 @@ import java.util.Calendar;
 //import ir.samanjafari.easycountdowntimer.CountDownInterface;
 //import ir.samanjafari.easycountdowntimer.EasyCountDownTextview;
 
-public class Electric_Connection extends AppCompatActivity {
+public class Electric_Connection extends BaseActivity {
 
     private TextView mElectricConnectionTextViewTypeOfElectricConnection;
     private SearchableSpinner mElectricConnectionSpinnerTypeOfElectricConnection;
@@ -108,7 +111,7 @@ public class Electric_Connection extends AppCompatActivity {
                         mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
+                mTimePicker.setTitle("Select Time For Average Eb Availability");
                 mTimePicker.show();
 
             }
@@ -128,7 +131,7 @@ public class Electric_Connection extends AppCompatActivity {
                         mElectricConnectionEditTextScheduledPowerCutInHrs.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
+                mTimePicker.setTitle("Select Time For Scheduled Power Cut");
                 mTimePicker.show();
 
             }

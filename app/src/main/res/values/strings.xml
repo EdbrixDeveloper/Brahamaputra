@@ -21,19 +21,19 @@
     <!--Tower Detail screen Array for spinners -->
     <string-array name="spinner_towerDetail_tower">
         <item>GBT</item>
-        <item>RTT</item>
         <item>Mast</item>
+        <item>RTT</item>
     </string-array>
 
     <string-array name="spinner_towerDetail_typeOfTower">
-        <item>Tubular</item>
         <item>Angular</item>
+        <item>Tubular</item>
 
     </string-array>
 
     <string-array name="spinner_towerDetail_signboard">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="spinner_towerDetail_dangerSignageboard">
@@ -57,8 +57,8 @@
     </string-array>
 
     <string-array name="spinner_userHotoTrans_sourceOfPower">
-        <item>Non EB</item>
         <item>Non DG</item>
+        <item>Non EB</item>
         <item>Std Site(EB+DG)</item>
     </string-array>
 
@@ -99,27 +99,27 @@
     </string-array>
 
     <string-array name="spinner_earthResistanceTower_typeOfEarth">
+        <item>Both</item>
         <item>Plate Earth</item>
         <item>Ring Earth</item>
-        <item>Both</item>
     </string-array>
 
     <string-array name="spinner_earthResistanceEquipment_typeOfEarth">
+        <item>Both</item>
         <item>Plate Earth</item>
         <item>Ring Earth</item>
-        <item>Both</item>
     </string-array>
 
 
     <string-array name="spinner_electricConnection_typrOfElectricConnection">
-        <item>3-Phase AC</item>
         <item>1-Phase AC</item>
+        <item>3-Phase AC</item>
         <item>Both</item>
     </string-array>
 
     <string-array name="spinner_electricConnection_tariff">
-        <item>Domestic</item>
         <item>Commercial</item>
+        <item>Domestic</item>
         <item>Mixed</item>
     </string-array>
 
@@ -130,8 +130,8 @@
 
     <string-array name="spinner_electricConnection_ebSupplier">
         <item>Dedicated Connection</item>
-        <item>Shared Connection</item>
         <item>Not Available</item>
+        <item>Shared Connection</item>
     </string-array>
 
     <string-array name="spinner_electricConnection_ebStatus">
@@ -140,32 +140,36 @@
     </string-array>
 
     <string-array name="spinner_electricConnection_transformerWorkingCondition">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="spinner_electricConnection_ebMeterBoxStatus">
-        <item>OK</item>
-        <item>Minor Damage</item>
-        <item>Fully Damage</item>
         <item>Corroded and Painting Required</item>
+        <item>Fully Damage</item>
+        <item>Minor Damage</item>
         <item>Not Available</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="spinner_electricConnection_ebMeterWorkingStatus">
-        <item>Working</item>
-        <item>Faulty</item>
         <item>Display Faulty</item>
+        <item>Faulty</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="spinner_electricConnection_typeOfPayment">
-        <item>Pre Paid</item>
         <item>Post Paid</item>
+        <item>Pre Paid</item>
+        <!--<item>DD</item>
+        <item>Cheque</item>
+        <item>Cash</item>
+        <item>NEFT</item>-->
     </string-array>
 
     <string-array name="spinner_electricConnection_ebPaymentSchedule">
-        <item>Monthly</item>
         <item>Bimonthly</item>
+        <item>Monthly</item>
         <item>Quarterly</item>
     </string-array>
 
@@ -222,8 +226,8 @@
 
 
     <string-array name="spinner_solarPowerSystem_available">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="spinner_solarPowerSystem_assetOwner">
@@ -237,8 +241,8 @@
     </string-array>
 
     <string-array name="spinner_solarPowerSystem_amc">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
 
@@ -283,15 +287,15 @@
     </string-array>
 
     <string-array name="spinner_batterySet_TypeofBattery">
-        <item>VRLA</item>
         <item>Li-Ion</item>
         <item>Tubular</item>
+        <item>VRLA</item>
     </string-array>
 
     <string-array name="spinner_batterySet_PositionofBatteryBank">
+        <item>In Outdoor Cabinet</item>
         <item>Inside Indoor Shelter</item>
         <item>Outside the Shelter</item>
-        <item>In Outdoor Cabinet</item>
     </string-array>
 
 
@@ -307,21 +311,18 @@
     <string-array name="spinner_batterySet_BatteryBankEarthingStatus">
         <item>Available</item>
         <item>Not Available</item>
-
     </string-array>
 
     <string-array name="spinner_batterySet_BACKUPCondition">
         <item>Healthy</item>
         <item>Poor</item>
-
     </string-array>
 
     <!--Media screen Array for spinners -->
     <string-array name="spinner_media_Typeofmedia">
-        <item>OFC</item>
         <item>ML</item>
+        <item>OFC</item>
         <item>SAT</item>
-
     </string-array>
 
     <!--Media screen Array for spinners -->
@@ -353,14 +354,12 @@
     <string-array name="spinner_activeEquipmentDetails_TypeofBTS">
         <item>2G</item>
         <item>3G</item>
+        <item>2G and 3G</item>
+        <item>2G and CDMA</item>
+        <item>3G and CDMA</item>
+        <item>All</item>
         <item>CDMA</item>
         <item>WiMax</item>
-        <item>2G and 3G</item>
-        <item>3G and CDMA</item>
-        <item>2G and CDMA</item>
-        <item>All</item>
-
-
     </string-array>
 
     <!--Power Management System activity  spinners Array -->
@@ -372,62 +371,55 @@
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_PowerManagementSystemType">
-        <item>PIU/PMU</item>
         <item>AMF Panel</item>
         <item>Not Available</item>
-
+        <item>PIU/PMU</item>
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_PowerManagementSystemMake">
-        <item>DELTA</item>
-        <item>PACE</item>
-        <item>Intelux</item>
         <item>ACME</item>
+        <item>AMF Other Makes</item>
+        <item>DELTA</item>
+        <item>Intelux</item>
+        <item>Mahindra</item>
+        <item>PACE</item>
         <item>SUN</item>
         <item>UTOPIA</item>
-        <item>Mahindra</item>
-        <item>AMF Other Makes</item>
-
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_PowerManagementSystemPosition">
         <item>Indoor Type</item>
-        <item>Outdoor Type</item>
         <item>Mounted with DG</item>
+        <item>Outdoor Type</item>
         <item>Outdoor With Cabinet</item>
-
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_PowerManagementSystemStaus">
         <item>Auto Mode</item>
+        <item>Man Operated</item>
         <item>Manuel Mode</item>
         <item>Not Working since long</item>
-        <item>Man Operated</item>
-
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_WorkingCondition">
-        <item>Working</item>
         <item>Not Working</item>
-
+        <item>Working</item>
     </string-array>
 
     <!--Power Management System activity  spinners Array -->
     <string-array name="spinner_powerManagementSystem_SiteBoundaryStatus">
         <item>Compound Wall with Gate</item>
         <item>Compound Wall without Gate</item>
-        <item>RTT/RTP</item>
         <item>Fencing with Gate</item>
         <item>Fencing without Gate</item>
-        <item>Open Site</item>
         <item>Not Applicable</item>
-
+        <item>Open Site</item>
+        <item>RTT/RTP</item>
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_SiteHygieneVegitationStatus">
         <item>Cleaning OK</item>
         <item>Cleaning Required</item>
-
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_GateLock">
@@ -481,24 +473,21 @@
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_IsSecurityCaretakeristheOwnerofSite">
-        <item>Yes</item>
         <item>No</item>
-        <item>Relative</item>
         <item>Not Applicable</item>
-
+        <item>Relative</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_CaretakerSecuritySalaryPaidBy">
+        <item>Along with Site Rent</item>
         <item>BSNL</item>
         <item>External Agency</item>
-        <item>Along with Site Rent</item>
-
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_CaretakerSecurityStayinginSite">
-        <item>Yes</item>
         <item>No</item>
-
+        <item>Yes</item>
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_NumberofEarthPit">
@@ -521,12 +510,10 @@
 
 
     <string-array name="spinner_powerManagementSystem_FencingCompoundWallCondition">
-        <item>OK</item>
-        <item>Fencing Damaged</item>
         <item>Compound Wall Damaged</item>
+        <item>Fencing Damaged</item>
         <item>NA</item>
-
-
+        <item>OK</item>
     </string-array>
     <string-array name="spinner_powerManagementSystem_NumberoffreeODPaltformAvailable">
         <item>0</item>
@@ -535,7 +522,6 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
-
     </string-array>
 
     <string-array name="spinner_powerManagementSystem_AlarmMultipluxerStatus">
@@ -613,126 +599,97 @@
 
     <string-array name="spinner_detailsOfUnusedMaterials_AssetMake">
         <item>ACME</item>
+        <item>Ador Poweron</item>
+        <item>Amaraja</item>
         <item>Arisys</item>
+        <item>Ashok Leyland</item>
+        <item>BFU</item>
         <item>Blue Star</item>
-        <item>Carrier</item>
-        <item>Daikin</item>
-        <item>Godreg</item>
-        <item>Haier</item>
-        <item>Hitachi</item>
-        <item>LG</item>
-        <item>Mitsubishi</item>
-        <item>OG</item>
-        <item>Panasonic</item>
-        <item>Samsung</item>
-        <item>Spacemaker</item>
-        <item>Tata Liberty</item>
-        <item>Toshiba</item>
-        <item>Uniflair</item>
-        <item>Videocon</item>
-        <item>Voltas</item>
-        <item>Whirlpool</item>
-        <item>Local</item>
-        <item>Amara Raja</item>
         <item>C and D</item>
+        <item>Cage</item>
+        <item>Carrier</item>
+        <item>Caterpillar</item>
+        <item>Civil Room</item>
         <item>Coslite</item>
+        <item>Cummins</item>
+        <item>Daikin</item>
         <item>Delta</item>
+        <item>Eicher</item>
+        <item>Elgi</item>
+        <item>Eltek</item>
+        <item>Emerson</item>
         <item>Enersis</item>
+        <item>Escorts</item>
         <item>Excide</item>
         <item>Exicom</item>
         <item>GFM</item>
         <item>GNB</item>
-        <item>HBL</item>
-        <item>Huwavai</item>
-        <item>Leoch</item>
-        <item>Liberty</item>
-        <item>Mahindra</item>
-        <item>Microtex</item>
-        <item>Narada</item>
-        <item>NED</item>
-        <item>Panasonic</item>
-        <item>Saft</item>
-        <item>Star</item>
-        <item>Ashok Leyland</item>
-        <item>Caterpillar</item>
-        <item>Cummins</item>
-        <item>Eicher</item>
-        <item>Elgi</item>
-        <item>Escorts</item>
+        <item>Godreg</item>
         <item>Greeves</item>
+        <item>Haier</item>
+        <item>HBL</item>
+        <item>HBL Sabnif</item>
+        <item>Hitachi</item>
         <item>Honda</item>
+        <item>Huwavai</item>
+        <item>INMPS</item>
+        <item>Intex</item>
+        <item>ITI</item>
         <item>Jackson</item>
         <item>Koel</item>
+        <item>Leoch</item>
+        <item>LG</item>
+        <item>Liberty</item>
+        <item>Lineage</item>
         <item>Lister Pitter</item>
+        <item>Local</item>
         <item>M and M</item>
+        <item>Mahindra</item>
+        <item>Microtex</item>
         <item>Mistubishi</item>
+        <item>Narada</item>
+        <item>NED</item>
+        <item>OG</item>
+        <item>Pace</item>
+        <item>Panasonic</item>
         <item>Perfect</item>
         <item>Perkins</item>
         <item>Powerica</item>
-        <item>Sonalika</item>
-        <item>Volvo</item>
-        <item>Ador Poweron</item>
-        <item>Amaraja</item>
-        <item>BFU</item>
-        <item>Delta</item>
-        <item>Eltek</item>
-        <item>Emerson</item>
-        <item>Exicom</item>
-        <item>HBL Sabnif</item>
-        <item>INMPS</item>
-        <item>Intex</item>
-        <item>ITI</item>
-        <item>Lineage</item>
-        <item>M and M</item>
-        <item>Pace</item>
-        <item>UTL</item>
-        <item>Valere</item>
-        <item>XL Telecom</item>
-        <item>Ador Poweron</item>
-        <item>Amaraja</item>
-        <item>BFU</item>
-        <item>Delta</item>
-        <item>Eltek</item>
-        <item>Emerson</item>
-        <item>Exicom</item>
-        <item>HBL Sabnif</item>
-        <item>INMPS</item>
-        <item>Intex</item>
-        <item>ITI</item>
-        <item>Lineage</item>
-        <item>M and M</item>
-        <item>Pace</item>
-        <item>UTL</item>
-        <item>Valere</item>
-        <item>XL Telecom</item>
-        <item>Cage</item>
-        <item>Civil Room</item>
         <item>PUF Shelter</item>
-        <item>Alpha Numeric Input</item>
-        <item>ACME</item>
+        <item>Saft</item>
+        <item>Samsung</item>
         <item>Servo</item>
+        <item>Sonalika</item>
+        <item>Spacemaker</item>
+        <item>Star</item>
+        <item>Tata Liberty</item>
+        <item>Toshiba</item>
         <item>U-Form</item>
+        <item>Uniflair</item>
+        <item>UTL</item>
+        <item>Valere</item>
         <item>V-Form</item>
+        <item>Videocon</item>
+        <item>Voltas</item>
+        <item>Volvo</item>
+        <item>Whirlpool</item>
+        <item>XL Telecom</item>
         <item>Zavline</item>
-
-
     </string-array>
 
     <string-array name="spinner_detailsOfUnusedMaterials_AssetStatus">
-
         <item>New Asset</item>
-        <item>Reusable</item>
         <item>Non Reusable</item>
+        <item>Reusable</item>
         <item>Scrap Item</item>
-
     </string-array>
 
     <!--ServoStabilizer activity  spinners Array -->
     <string-array name="spinner_ServoStabilizer_ServoStabilizerWorkingStatus">
-        <item>Working</item>
-        <item>Not Working</item>
-        <item>Not Using</item>
         <item>Not Available</item>
+        <item>Not Using</item>
+        <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="spinner_ServoStabilizer_MakeofServo">
@@ -740,13 +697,12 @@
         <item>Auro Power</item>
         <item>KB Power</item>
         <item>Krycard</item>
+        <item>Others</item>
+        <item>Pace</item>
         <item>Pragathy</item>
         <item>Sakthy</item>
         <item>Servomax</item>
         <item>Suvic</item>
-        <item>Pace</item>
-        <item>Others</item>
-
     </string-array>
 
     <string-array name="spinner_ServoStabilizer_RatingofServo">
@@ -761,10 +717,8 @@
     </string-array>
 
     <string-array name="spinner_ServoStabilizer_WorkingCondition">
-
-        <item>Working</item>
         <item>Not Working</item>
-
+        <item>Working</item>
     </string-array>
 
     <string-array name="spinner_airConditioners_noOfAirConditionersACprovided">
@@ -792,25 +746,25 @@
     </string-array>
 
     <string-array name="spinner_airConditioners_typeOfAcSpliWindow">
+        <item>Compound Unit</item>
         <item>Split AC</item>
         <item>Window AC</item>
-        <item>Compound Unit</item>
     </string-array>
 
     <string-array name="spinner_airConditioners_amc">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="spinner_airConditioners_workingCondition">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
 
     <string-array name="spinner_shelter_physicalConditionOfShelterPlatform">
-        <item>Good</item>
         <item>Damaged</item>
+        <item>Good</item>
     </string-array>
 
     <string-array name="spinner_shelter_numberOfBtsInsideShelter">
@@ -840,14 +794,14 @@
     </string-array>
 
     <string-array name="spinner_shelter_igbStatus">
-        <item>Not available</item>
         <item>Connected</item>
+        <item>Not available</item>
         <item>Not Connected</item>
     </string-array>
 
     <string-array name="spinner_shelter_egbStatus">
-        <item>Not available</item>
         <item>Connected</item>
+        <item>Not available</item>
         <item>Not Connected</item>
     </string-array>
 
@@ -890,20 +844,20 @@
     <string-array name="spinner_powerBackupsDg_manufacturerMakeModel">
         <item>Ashok Layland</item>
         <item>Caterpiller</item>
+        <item>Cummins</item>
+        <item>Eicher</item>
+        <item>Elgi</item>
+        <item>Escort</item>
+        <item>Greeves</item>
+        <item>Honda</item>
+        <item>Kirloskar</item>
+        <item>Lister Pitter</item>
+        <item>Mahindra</item>
+        <item>Mitsubushi</item>
+        <item>Other Makes</item>
+        <item>Perfect</item>
         <item>Perkins</item>
         <item>Volvo</item>
-        <item>Elgi</item>
-        <item>Honda</item>
-        <item>Perfect</item>
-        <item>Mitsubushi</item>
-        <item>Mahindra</item>
-        <item>Kirloskar</item>
-        <item>Eicher</item>
-        <item>Cummins</item>
-        <item>Escort</item>
-        <item>Lister Pitter</item>
-        <item>Greeves</item>
-        <item>Other Makes</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_capacityInKva">
         <item>5KVA</item>
@@ -922,67 +876,67 @@
         <item>Manual</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_amc">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_dgWorkingType">
         <item>Air Cooled</item>
         <item>Water Cooled</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_dgMainAlternatorType">
-        <item>01 PH Capacitor</item>
         <item>01 PH AVR</item>
-        <item>03 PH Capacitor</item>
+        <item>01 PH Capacitor</item>
         <item>03 PH AVR</item>
+        <item>03 PH Capacitor</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_dgMainAlternatorMake">
-        <item>Cummins</item>
         <item>Caterpiller</item>
-        <item>Trident</item>
-        <item>Kohler</item>
         <item>Crompton</item>
-        <item>Leroy Somer</item>
+        <item>Cummins</item>
         <item>KEL</item>
         <item>Kirloskar</item>
+        <item>Kohler</item>
+        <item>Leroy Somer</item>
         <item>Stamford</item>
+        <item>Trident</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_dgCanopyStatus">
-        <item>Open DG</item>
-        <item>Good</item>
-        <item>Partially Damaged</item>
-        <item>Fully Damaged</item>
-        <item>Corroded and Painting Required</item>
         <item>Canopy Water Leak</item>
+        <item>Corroded and Painting Required</item>
+        <item>Fully Damaged</item>
+        <item>Good</item>
+        <item>Open DG</item>
+        <item>Partially Damaged</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_dgStartingBatteryStatus">
-        <item>Working Good</item>
         <item>Not Available</item>
         <item>Not Working</item>
+        <item>Working Good</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_chargingAlternator">
-        <item>Working Good</item>
         <item>Not Available</item>
         <item>Not Working</item>
+        <item>Working Good</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_batteryCharger">
-        <item>Working Good</item>
         <item>Not Available</item>
         <item>Not Working</item>
+        <item>Working Good</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_dgAvrWorkingStatus">
-        <item>Working Good</item>
         <item>Not Available</item>
         <item>Not Working</item>
+        <item>Working Good</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_fuelTankPosition">
         <item>Bottom of DG</item>
         <item>In Canopy Side</item>
-        <item>Top of Canopy</item>
         <item>Outside Canopy</item>
+        <item>Top of Canopy</item>
     </string-array>
     <string-array name="spinner_powerBackupsDg_workingCondition">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
 
@@ -1005,72 +959,70 @@
 
     <string-array name="spinner_powerPlantDetails_manufacturerMakeModel">
         <item>ACME</item>
-        <item>Arisys</item>
-        <item>Blue Star</item>
-        <item>Carrier</item>
-        <item>Daikin</item>
-        <item>Godreg</item>
-        <item>Haier</item>
-        <item>Hitachi</item>
-        <item>LG</item>
-        <item>Mitsubishi</item>
-        <item>OG</item>
-        <item>Panasonic</item>
-        <item>Samsung</item>
-        <item>Spacemaker</item>
-        <item>Tata Liberty</item>
-        <item>Toshiba</item>
-        <item>Uniflair</item>
-        <item>Videocon</item>
-        <item>Voltas</item>
-        <item>Whirlpool</item>
-        <item>Local</item>
         <item>Amara Raja</item>
+        <item>Arisys</item>
+        <item>Ashok Leyland</item>
+        <item>Blue Star</item>
         <item>C and D</item>
+        <item>Cage</item>
+        <item>Carrier</item>
+        <item>Caterpillar</item>
+        <item>Civil Room</item>
         <item>Coslite</item>
+        <item>Cummins</item>
+        <item>Daikin</item>
         <item>Delta</item>
+        <item>Eicher</item>
+        <item>Elgi</item>
         <item>Enersis</item>
+        <item>Escorts</item>
         <item>Excide</item>
         <item>Exicom</item>
         <item>GFM</item>
         <item>GNB</item>
-        <item>HBL</item>
-        <item>Huwavai</item>
-        <item>Leoch</item>
-        <item>Liberty</item>
-        <item>Mahindra</item>
-        <item>Microtex</item>
-        <item>Narada</item>
-        <item>NED</item>
-        <item>Saft</item>
-        <item>Star</item>
-        <item>Ashok Leyland</item>
-        <item>Caterpillar</item>
-        <item>Cummins</item>
-        <item>Eicher</item>
-        <item>Elgi</item>
-        <item>Escorts</item>
+        <item>Godreg</item>
         <item>Greeves</item>
+        <item>Haier</item>
+        <item>HBL</item>
+        <item>Hitachi</item>
         <item>Honda</item>
+        <item>Huwavai</item>
         <item>Jackson</item>
         <item>Koel</item>
+        <item>Leoch</item>
+        <item>LG</item>
+        <item>Liberty</item>
         <item>Lister Pitter</item>
+        <item>Local</item>
         <item>M and M</item>
+        <item>Mahindra</item>
+        <item>Microtex</item>
         <item>Mistubishi</item>
+        <item>Mitsubishi</item>
+        <item>Narada</item>
+        <item>NED</item>
+        <item>OG</item>
+        <item>Panasonic</item>
         <item>Perfect</item>
         <item>Perkins</item>
         <item>Powerica</item>
-        <item>Sonalika</item>
-        <item>Volvo</item>
-        <item>Cage</item>
-        <item>Civil Room</item>
         <item>PUF Shelter</item>
-        <item>Alpha Numeric Input</item>
+        <item>Saft</item>
+        <item>Samsung</item>
         <item>Servo</item>
+        <item>Sonalika</item>
+        <item>Spacemaker</item>
+        <item>Star</item>
+        <item>Tata Liberty</item>
+        <item>Toshiba</item>
         <item>U-Form</item>
+        <item>Uniflair</item>
         <item>V-Form</item>
+        <item>Videocon</item>
+        <item>Voltas</item>
+        <item>Volvo</item>
+        <item>Whirlpool</item>
         <item>Zavline</item>
-
     </string-array>
 
     <string-array name="spinner_powerPlantDetails_numberModuleSlots">
@@ -1118,14 +1070,14 @@
     </string-array>
 
     <string-array name="spinner_powerPlantDetails_spdStatus">
-        <item>WORKING</item>
         <item>Faulty</item>
         <item>Not Available</item>
+        <item>WORKING</item>
     </string-array>
 
     <string-array name="spinner_powerPlantDetails_workingCondition">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
 

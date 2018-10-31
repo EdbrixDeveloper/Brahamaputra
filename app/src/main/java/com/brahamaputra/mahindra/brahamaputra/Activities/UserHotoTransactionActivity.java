@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 public class UserHotoTransactionActivity extends BaseActivity {
 
@@ -32,7 +33,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private EditText mUserHotoTransEditTextTypeOfSites;
 
     private TextView mUserHotoTransTextViewSourceOfPower;
-    private Spinner mUserHotoTransSpinnerSourceOfPower;
+    private SearchableSpinner mUserHotoTransSpinnerSourceOfPower;
     private Button mUserHotoTransButtonSubmitHotoTrans;
 
     @Override
@@ -53,13 +54,13 @@ public class UserHotoTransactionActivity extends BaseActivity {
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserHotoTransactionActivity.this,HotoSectionsListActivity.class));
+                startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
             }
         });
     }
 
-    public void checkNetworkConnection(){
-        if(!isNetworkConnected()){
+    public void checkNetworkConnection() {
+        if (!isNetworkConnected()) {
             mUserHotoTransEditTextCustomerName.setHint("Offline");
             mUserHotoTransEditTextState.setHint("Offline");
             mUserHotoTransEditTextNameOfCircle.setHint("Offline");
@@ -93,8 +94,10 @@ public class UserHotoTransactionActivity extends BaseActivity {
         mUserHotoTransEditTextTypeOfSites = (EditText) findViewById(R.id.userHotoTrans_editText_typeOfSite);
 
         mUserHotoTransTextViewSourceOfPower = (TextView) findViewById(R.id.userHotoTrans_textView_sourceOfPower);
-        mUserHotoTransSpinnerSourceOfPower = (Spinner) findViewById(R.id.userHotoTrans_spinner_sourceOfPower);
-        mUserHotoTransButtonSubmitHotoTrans = (Button)findViewById(R.id.userHotoTrans_button_submitHotoTrans);
+        mUserHotoTransSpinnerSourceOfPower = (SearchableSpinner) findViewById(R.id.userHotoTrans_spinner_sourceOfPower);
+        mUserHotoTransButtonSubmitHotoTrans = (Button) findViewById(R.id.userHotoTrans_button_submitHotoTrans);
+
+        mUserHotoTransSpinnerSourceOfPower.setTitle("Source of Power");
     }
 
     @Override
