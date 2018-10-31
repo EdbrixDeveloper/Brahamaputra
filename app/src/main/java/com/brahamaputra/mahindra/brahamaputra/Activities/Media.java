@@ -15,13 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Media extends AppCompatActivity {
+public class Media extends BaseActivity {
 
 
     private TextView mMediaTextViewTypeofmedia;

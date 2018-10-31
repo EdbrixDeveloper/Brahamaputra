@@ -15,13 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ActiveequipmentDetails extends AppCompatActivity {
+public class ActiveequipmentDetails extends BaseActivity {
 
     private TextView mActiveEquipmentDetailsTextViewTypeofBTS;
     private SearchableSpinner mActiveEquipmentDetailsSpinnerTypeofBTS;
@@ -33,6 +34,9 @@ public class ActiveequipmentDetails extends AppCompatActivity {
     private EditText mActiveEquipmentDetailsEditTextYearofInstallationatsite;
     private TextView mActiveEquipmentDetailsTextViewPositionoftheantennaatTowerinMtrs;
     private EditText mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs;
+    private SearchableSpinner mActiveEquipmentDetails_spinner_importance_of_Site;
+    private SearchableSpinner mActiveEquipmentDetails_spinner_numberOfDependantSites;
+
 
     private void assignViews() {
         mActiveEquipmentDetailsTextViewTypeofBTS = (TextView) findViewById(R.id.activeEquipmentDetails_textView_TypeofBTS);
@@ -45,11 +49,16 @@ public class ActiveequipmentDetails extends AppCompatActivity {
         mActiveEquipmentDetailsEditTextYearofInstallationatsite = (EditText) findViewById(R.id.activeEquipmentDetails_editText_YearofInstallationatsite);
         mActiveEquipmentDetailsTextViewPositionoftheantennaatTowerinMtrs = (TextView) findViewById(R.id.activeEquipmentDetails_textView_PositionoftheantennaatTowerinMtrs);
         mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs = (EditText) findViewById(R.id.activeEquipmentDetails_editText_PositionoftheantennaatTowerinMtrs);
+        mActiveEquipmentDetails_spinner_importance_of_Site = (SearchableSpinner) findViewById(R.id.activeEquipmentDetails_spinner_importance_of_Site);
+        mActiveEquipmentDetails_spinner_numberOfDependantSites = (SearchableSpinner) findViewById(R.id.activeEquipmentDetails_spinner_numberOfDependantSites);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
         mActiveEquipmentDetailsSpinnerTypeofBTS.setTitle("Type of BTS");
+        mActiveEquipmentDetails_spinner_importance_of_Site.setTitle("Importance of Site");
+        mActiveEquipmentDetails_spinner_numberOfDependantSites.setTitle("Number of Dependant Sites");
     }
 
 
@@ -78,7 +87,7 @@ public class ActiveequipmentDetails extends AppCompatActivity {
 
         };
 
-        mActiveEquipmentDetailsEditTextYearofInstallationatsite .setOnClickListener(new View.OnClickListener() {
+        mActiveEquipmentDetailsEditTextYearofInstallationatsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
@@ -105,10 +114,12 @@ public class ActiveequipmentDetails extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
+            case android.R.id.home:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:finish();
+            case R.id.menuDone:
+                finish();
                 startActivity(new Intent(this, PowerManagementSystem.class));
                 return true;
 

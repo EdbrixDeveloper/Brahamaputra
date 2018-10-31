@@ -362,6 +362,23 @@
         <item>WiMax</item>
     </string-array>
 
+    <string-array name="spinner_activeEquipmentDetails_importance_of_Site">
+        <item>Hub Site</item>
+        <item>Strategic Site</item>
+        <item>High Dependant</item>
+        <item>High Traffic Site</item>
+        <item>Normal Site</item>
+    </string-array>
+
+    <string-array name="spinner_activeEquipmentDetails_numberOfDependantSites">
+        <item>Single</item>
+        <item>Less than 10</item>
+        <item>Less than 50</item>
+        <item>Less than 100</item>
+        <item>Above 100</item>
+    </string-array>
+
+
     <!--Power Management System activity  spinners Array -->
     <string-array name="spinner_powerManagementSystem_AssetOwner">
         <item>BSNL Supplied Asset</item>

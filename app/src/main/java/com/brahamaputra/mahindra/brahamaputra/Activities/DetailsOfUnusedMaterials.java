@@ -10,9 +10,10 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
-public class DetailsOfUnusedMaterials extends AppCompatActivity {
+public class DetailsOfUnusedMaterials extends BaseActivity {
 
 
     private TextView mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite;
