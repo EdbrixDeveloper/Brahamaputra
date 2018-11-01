@@ -26,20 +26,25 @@ import android.Manifest;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ServoStabilizer extends BaseActivity {
+
 
     private TextView mBatterySetTextViewQRCodeScan;
     private ImageView mBatterySetButtonQRCodeScan;
     private TextView mServoStabilizerTextViewServoStabilizerWorkingStatus;
-    private SearchableSpinner mServoStabilizerSpinnerServoStabilizerWorkingStatus;
+    private TextView mServoStabilizerTextViewServoStabilizerWorkingStatusVal;
     private TextView mServoStabilizerTextViewMakeofServo;
-    private SearchableSpinner mServoStabilizerSpinnerMakeofServo;
+    private TextView mServoStabilizerTextViewMakeofServoVal;
     private TextView mServoStabilizerTextViewRatingofServo;
-    private SearchableSpinner mServoStabilizerSpinnerRatingofServo;
+    private TextView mServoStabilizerTextViewRatingofServoVal;
     private TextView mServoStabilizerTextViewWorkingCondition;
-    private SearchableSpinner mServoStabilizerSpinnerWorkingCondition;
+    private TextView mServoStabilizerTextViewWorkingConditionVal;
     private TextView mServoStabilizerTextViewNatureofProblem;
     private EditText mServoStabilizerEditTextNatureofProblem;
 
@@ -49,38 +54,123 @@ public class ServoStabilizer extends BaseActivity {
 
     private AlertDialogManager alertDialogManager;
 
+    String str_ServoStabilizerWorkingStatus;
+    String str_makeofServo;
+    String str_ratingofServo;
+    String str_workingCondition;
+
     private void assignViews() {
         mBatterySetTextViewQRCodeScan = (TextView) findViewById(R.id.batterySet_textView_QRCodeScan);
         mBatterySetButtonQRCodeScan = (ImageView) findViewById(R.id.batterySet_button_QRCodeScan);
         mServoStabilizerTextViewServoStabilizerWorkingStatus = (TextView) findViewById(R.id.ServoStabilizer_textView_ServoStabilizerWorkingStatus);
-        mServoStabilizerSpinnerServoStabilizerWorkingStatus = (SearchableSpinner) findViewById(R.id.ServoStabilizer_spinner_ServoStabilizerWorkingStatus);
+        mServoStabilizerTextViewServoStabilizerWorkingStatusVal = (TextView) findViewById(R.id.ServoStabilizer_textView_ServoStabilizerWorkingStatus_val);
         mServoStabilizerTextViewMakeofServo = (TextView) findViewById(R.id.ServoStabilizer_textView_MakeofServo);
-        mServoStabilizerSpinnerMakeofServo = (SearchableSpinner) findViewById(R.id.ServoStabilizer_spinner_MakeofServo);
+        mServoStabilizerTextViewMakeofServoVal = (TextView) findViewById(R.id.ServoStabilizer_textView_MakeofServo_val);
         mServoStabilizerTextViewRatingofServo = (TextView) findViewById(R.id.ServoStabilizer_textView_RatingofServo);
-        mServoStabilizerSpinnerRatingofServo = (SearchableSpinner) findViewById(R.id.ServoStabilizer_spinner_RatingofServo);
+        mServoStabilizerTextViewRatingofServoVal = (TextView) findViewById(R.id.ServoStabilizer_textView_RatingofServo_val);
         mServoStabilizerTextViewWorkingCondition = (TextView) findViewById(R.id.ServoStabilizer_textView_WorkingCondition);
-        mServoStabilizerSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.ServoStabilizer_spinner_WorkingCondition);
+        mServoStabilizerTextViewWorkingConditionVal = (TextView) findViewById(R.id.ServoStabilizer_textView_WorkingCondition_val);
         mServoStabilizerTextViewNatureofProblem = (TextView) findViewById(R.id.ServoStabilizer_textView_NatureofProblem);
         mServoStabilizerEditTextNatureofProblem = (EditText) findViewById(R.id.ServoStabilizer_editText_NatureofProblem);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        mServoStabilizerSpinnerServoStabilizerWorkingStatus.setTitle("Servo Stabilizer Working Status");
-        mServoStabilizerSpinnerMakeofServo.setTitle("Make of Servo");
-        mServoStabilizerSpinnerRatingofServo.setTitle("Rating of Servo");
-        mServoStabilizerSpinnerWorkingCondition.setTitle("Working Condition");
-
 
     }
 
+    private void initCombo() {
+
+
+        mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_ServoStabilizerWorkingStatus))),
+                        "Servo Stabilizer Working Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ServoStabilizerWorkingStatus = item.get(position);
+                        mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(str_ServoStabilizerWorkingStatus);
+                    }
+                });
+
+            }
+        });
+        mServoStabilizerTextViewMakeofServoVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_MakeofServo))),
+                        "Make of Servo",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_makeofServo = item.get(position);
+                        mServoStabilizerTextViewMakeofServoVal.setText(str_makeofServo);
+                    }
+                });
+
+            }
+        });
+        mServoStabilizerTextViewRatingofServoVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_RatingofServo))),
+                        "Rating of Servo",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ratingofServo = item.get(position);
+                        mServoStabilizerTextViewRatingofServoVal.setText(str_ratingofServo);
+                    }
+                });
+
+            }
+        });
+        mServoStabilizerTextViewWorkingConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_WorkingCondition))),
+                        "Working Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_workingCondition = item.get(position);
+                        mServoStabilizerTextViewWorkingConditionVal.setText(str_workingCondition);
+                    }
+                });
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servo_stabilizer);
         this.setTitle("SERVO STABILIZER");
-        // assignViews();
+        assignViews();
+        initCombo();
         alertDialogManager = new AlertDialogManager(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -31,15 +31,15 @@
                     android:layout_weight="0.4"
                     android:text="Number of Unused Asset in Site" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/detailsOfUnusedMaterials_spinner_NumberofUnusedAssetinSite"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_detailsOfUnusedMaterials_NumberofUnusedAssetinSite"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -57,15 +57,15 @@
                     android:layout_weight="0.4"
                     android:text="Asset Make" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/detailsOfUnusedMaterials_spinner_AssetMake"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/detailsOfUnusedMaterials_textView_AssetMake_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_detailsOfUnusedMaterials_AssetMake"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -83,15 +83,15 @@
                     android:layout_weight="0.4"
                     android:text="Asset Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/detailsOfUnusedMaterials_spinner_AssetStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/detailsOfUnusedMaterials_textView_AssetStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_detailsOfUnusedMaterials_AssetStatus"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 

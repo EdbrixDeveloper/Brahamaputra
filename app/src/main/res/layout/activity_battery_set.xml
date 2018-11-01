@@ -33,15 +33,14 @@
                     android:layout_weight="0.4"
                     android:text="No of Battery Set Provided" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_NoofBatterySetProvided"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_NoofBatterySetProvided_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_NoofBatterySetProvided"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -59,15 +58,15 @@
                     android:layout_weight="0.4"
                     android:text="Number of Battery Bank Working" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_NumberofBatteryBankWorking"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_NumberofBatteryBankWorking_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_NumberofBatteryBankWorking"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -106,7 +105,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/batterySet_textView_AssetOwner"
+                    android:id="@+id/batterySet_textView_assetOwner"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -114,15 +113,15 @@
                     android:singleLine="false"
                     android:text="Asset Owner" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_AssetOwner"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_assetOwner_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_AssetOwner"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                     android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -168,15 +167,15 @@
                     android:layout_weight="0.4"
                     android:text="Manufacturer / Make / Model" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_ManufacturerMakeModel"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_ManufacturerMakeModel_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_ManufacturerMakeModel"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -194,15 +193,15 @@
                     android:layout_weight="0.4"
                     android:text="Capacity in AH" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_CapacityinAH"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_CapacityinAH_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_CapacityinAH"
+                   
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -220,15 +219,15 @@
                     android:layout_weight="0.4"
                     android:text="Type of Battery" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_TypeofBattery"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_TypeofBattery_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_TypeofBattery"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -305,15 +304,15 @@
                     android:layout_weight="0.4"
                     android:text="Position of Battery Bank" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_PositionofBatteryBank"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_PositionofBatteryBank_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_PositionofBatteryBank"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
             <LinearLayout
@@ -330,15 +329,15 @@
                     android:layout_weight="0.4"
                     android:text="Battery Bank Cable Size in SQMM" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_BatteryBankCableSizeinSQMM"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_BatteryBankCableSizeinSQMM_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_BatteryBankCableSizeinSQMM"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -356,15 +355,15 @@
                     android:layout_weight="0.4"
                     android:text="Battery Bank Earthing Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_BatteryBankEarthingStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_BatteryBankEarthingStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_BatteryBankEarthingStatus"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
             <LinearLayout
@@ -381,15 +380,15 @@
                     android:layout_weight="0.4"
                     android:text="BACKUP Condition" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/batterySet_spinner_BACKUPCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/batterySet_textView_BACKUPCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_batterySet_BACKUPCondition"
+                    
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
             <LinearLayout

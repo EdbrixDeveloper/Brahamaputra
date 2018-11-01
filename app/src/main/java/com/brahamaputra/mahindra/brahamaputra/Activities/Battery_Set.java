@@ -25,45 +25,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import android.Manifest;
+
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Battery_Set extends BaseActivity {
-
-    private TextView mBatterySetTextViewNoofBatterySetProvided;
-    private SearchableSpinner mBatterySetSpinnerNoofBatterySetProvided;
-    private TextView mBatterySetTextViewNumberofBatteryBankWorking;
-    private SearchableSpinner mBatterySetSpinnerNumberofBatteryBankWorking;
-    private TextView mBatterySetTextViewQRCodeScan;
-    private ImageView mBatterySetButtonQRCodeScan;
-    private TextView mBatterySetTextViewAssetOwner;
-    private SearchableSpinner mBatterySetSpinnerAssetOwner;
-    private TextView mBatterySetTextViewManufacturerMakeModel;
-    private SearchableSpinner mBatterySetSpinnerManufacturerMakeModel;
-    private TextView mBatterySetTextViewCapacityinAH;
-    private SearchableSpinner mBatterySetSpinnerCapacityinAH;
-    private TextView mBatterySetTextViewTypeofBattery;
-    private SearchableSpinner mBatterySetSpinnerTypeofBattery;
-    private TextView mBatterySetTextViewDateofInstallation;
-    private EditText mBatterySetEditTextDateofInstallation;
-    private TextView mBatterySetTextViewBackupduration;
-    private EditText mBatterySetEditTextBackupduration;
-    private TextView mBatterySetTextViewPositionofBatteryBank;
-    private SearchableSpinner mBatterySetSpinnerPositionofBatteryBank;
-    private TextView mBatterySetTextViewBatteryBankCableSizeinSQMM;
-    private SearchableSpinner mBatterySetSpinnerBatteryBankCableSizeinSQMM;
-    private TextView mBatterySetTextViewBatteryBankEarthingStatus;
-    private SearchableSpinner mBatterySetSpinnerBatteryBankEarthingStatus;
-    private TextView mBatterySetTextViewBACKUPCondition;
-    private SearchableSpinner mBatterySetSpinnerBACKUPCondition;
-    private TextView mBatterySetTextViewNatureofProblem;
-    private EditText mBatterySetEditTextNatureofProblem;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
@@ -71,55 +46,299 @@ public class Battery_Set extends BaseActivity {
 
     private AlertDialogManager alertDialogManager;
 
+    final Calendar myCalendar = Calendar.getInstance();
+    String str_noofBatterySetProvided;
+    String str_numberofBatteryBankWorking;
+    String str_assetOwner;
+    String str_manufacturerMakeModel;
+    String str_capacityinAH;
+    String str_typeofBattery;
+    String str_positionofBatteryBank;
+    String str_batteryBankCableSizeinSQMM;
+    String str_batteryBankEarthingStatus;
+    String str_backupCondition;
+
+
+    private TextView mBatterySetTextViewNoofBatterySetProvided;
+    private TextView mBatterySetTextViewNoofBatterySetProvidedVal;
+    private TextView mBatterySetTextViewNumberofBatteryBankWorking;
+    private TextView mBatterySetTextViewNumberofBatteryBankWorkingVal;
+    private TextView mBatterySetTextViewQRCodeScan;
+    private ImageView mBatterySetButtonQRCodeScan;
+    private TextView mBatterySetTextViewAssetOwner;
+    private TextView mBatterySetTextViewAssetOwnerVal;
+    private TextView mPowerBackupsDgTextViewDividerDesign;
+    private TextView mBatterySetTextViewManufacturerMakeModel;
+    private TextView mBatterySetTextViewManufacturerMakeModelVal;
+    private TextView mBatterySetTextViewCapacityinAH;
+    private TextView mBatterySetTextViewCapacityinAHVal;
+    private TextView mBatterySetTextViewTypeofBattery;
+    private TextView mBatterySetTextViewTypeofBatteryVal;
+    private TextView mBatterySetTextViewDateofInstallation;
+    private EditText mBatterySetEditTextDateofInstallation;
+    private TextView mBatterySetTextViewBackupduration;
+    private EditText mBatterySetEditTextBackupduration;
+    private TextView mBatterySetTextViewPositionofBatteryBank;
+    private TextView mBatterySetTextViewPositionofBatteryBankVal;
+    private TextView mBatterySetTextViewBatteryBankCableSizeinSQMM;
+    private TextView mBatterySetTextViewBatteryBankCableSizeinSQMMVal;
+    private TextView mBatterySetTextViewBatteryBankEarthingStatus;
+    private TextView mBatterySetTextViewBatteryBankEarthingStatusVal;
+    private TextView mBatterySetTextViewBACKUPCondition;
+    private TextView mBatterySetTextViewBACKUPConditionVal;
+    private TextView mBatterySetTextViewNatureofProblem;
+    private EditText mBatterySetEditTextNatureofProblem;
+
     private void assignViews() {
         mBatterySetTextViewNoofBatterySetProvided = (TextView) findViewById(R.id.batterySet_textView_NoofBatterySetProvided);
-        mBatterySetSpinnerNoofBatterySetProvided = (SearchableSpinner) findViewById(R.id.batterySet_spinner_NoofBatterySetProvided);
+        mBatterySetTextViewNoofBatterySetProvidedVal = (TextView) findViewById(R.id.batterySet_textView_NoofBatterySetProvided_val);
         mBatterySetTextViewNumberofBatteryBankWorking = (TextView) findViewById(R.id.batterySet_textView_NumberofBatteryBankWorking);
-        mBatterySetSpinnerNumberofBatteryBankWorking = (SearchableSpinner) findViewById(R.id.batterySet_spinner_NumberofBatteryBankWorking);
+        mBatterySetTextViewNumberofBatteryBankWorkingVal = (TextView) findViewById(R.id.batterySet_textView_NumberofBatteryBankWorking_val);
         mBatterySetTextViewQRCodeScan = (TextView) findViewById(R.id.batterySet_textView_QRCodeScan);
         mBatterySetButtonQRCodeScan = (ImageView) findViewById(R.id.batterySet_button_QRCodeScan);
-        mBatterySetTextViewAssetOwner = (TextView) findViewById(R.id.batterySet_textView_AssetOwner);
-        mBatterySetSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.batterySet_spinner_AssetOwner);
+        mBatterySetTextViewAssetOwner = (TextView) findViewById(R.id.batterySet_textView_assetOwner);
+        mBatterySetTextViewAssetOwnerVal = (TextView) findViewById(R.id.batterySet_textView_assetOwner_val);
+        mPowerBackupsDgTextViewDividerDesign = (TextView) findViewById(R.id.powerBackupsDg_textView_dividerDesign);
         mBatterySetTextViewManufacturerMakeModel = (TextView) findViewById(R.id.batterySet_textView_ManufacturerMakeModel);
-        mBatterySetSpinnerManufacturerMakeModel = (SearchableSpinner) findViewById(R.id.batterySet_spinner_ManufacturerMakeModel);
+        mBatterySetTextViewManufacturerMakeModelVal = (TextView) findViewById(R.id.batterySet_textView_ManufacturerMakeModel_val);
         mBatterySetTextViewCapacityinAH = (TextView) findViewById(R.id.batterySet_textView_CapacityinAH);
-        mBatterySetSpinnerCapacityinAH = (SearchableSpinner) findViewById(R.id.batterySet_spinner_CapacityinAH);
+        mBatterySetTextViewCapacityinAHVal = (TextView) findViewById(R.id.batterySet_textView_CapacityinAH_val);
         mBatterySetTextViewTypeofBattery = (TextView) findViewById(R.id.batterySet_textView_TypeofBattery);
-        mBatterySetSpinnerTypeofBattery = (SearchableSpinner) findViewById(R.id.batterySet_spinner_TypeofBattery);
+        mBatterySetTextViewTypeofBatteryVal = (TextView) findViewById(R.id.batterySet_textView_TypeofBattery_val);
         mBatterySetTextViewDateofInstallation = (TextView) findViewById(R.id.batterySet_textView_DateofInstallation);
         mBatterySetEditTextDateofInstallation = (EditText) findViewById(R.id.batterySet_editText_DateofInstallation);
         mBatterySetTextViewBackupduration = (TextView) findViewById(R.id.batterySet_textView_Backupduration);
         mBatterySetEditTextBackupduration = (EditText) findViewById(R.id.batterySet_editText_Backupduration);
         mBatterySetTextViewPositionofBatteryBank = (TextView) findViewById(R.id.batterySet_textView_PositionofBatteryBank);
-        mBatterySetSpinnerPositionofBatteryBank = (SearchableSpinner) findViewById(R.id.batterySet_spinner_PositionofBatteryBank);
+        mBatterySetTextViewPositionofBatteryBankVal = (TextView) findViewById(R.id.batterySet_textView_PositionofBatteryBank_val);
         mBatterySetTextViewBatteryBankCableSizeinSQMM = (TextView) findViewById(R.id.batterySet_textView_BatteryBankCableSizeinSQMM);
-        mBatterySetSpinnerBatteryBankCableSizeinSQMM = (SearchableSpinner) findViewById(R.id.batterySet_spinner_BatteryBankCableSizeinSQMM);
+        mBatterySetTextViewBatteryBankCableSizeinSQMMVal = (TextView) findViewById(R.id.batterySet_textView_BatteryBankCableSizeinSQMM_val);
         mBatterySetTextViewBatteryBankEarthingStatus = (TextView) findViewById(R.id.batterySet_textView_BatteryBankEarthingStatus);
-        mBatterySetSpinnerBatteryBankEarthingStatus = (SearchableSpinner) findViewById(R.id.batterySet_spinner_BatteryBankEarthingStatus);
+        mBatterySetTextViewBatteryBankEarthingStatusVal = (TextView) findViewById(R.id.batterySet_textView_BatteryBankEarthingStatus_val);
         mBatterySetTextViewBACKUPCondition = (TextView) findViewById(R.id.batterySet_textView_BACKUPCondition);
-        mBatterySetSpinnerBACKUPCondition = (SearchableSpinner) findViewById(R.id.batterySet_spinner_BACKUPCondition);
+        mBatterySetTextViewBACKUPConditionVal = (TextView) findViewById(R.id.batterySet_textView_BACKUPCondition_val);
         mBatterySetTextViewNatureofProblem = (TextView) findViewById(R.id.batterySet_textView_NatureofProblem);
         mBatterySetEditTextNatureofProblem = (EditText) findViewById(R.id.batterySet_editText_NatureofProblem);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        mBatterySetSpinnerNoofBatterySetProvided.setTitle("No of Battery Set Provided");
-        mBatterySetSpinnerNumberofBatteryBankWorking.setTitle("Number of Battery Bank Working");
-        mBatterySetSpinnerAssetOwner.setTitle("Asset Owner");
-        mBatterySetSpinnerManufacturerMakeModel.setTitle("Manufacturer / Make / Model");
-        mBatterySetSpinnerCapacityinAH.setTitle("Capacity in AH");
-        mBatterySetSpinnerTypeofBattery.setTitle("Type of Battery");
-        mBatterySetSpinnerPositionofBatteryBank.setTitle("Position of Battery Bank");
-        mBatterySetSpinnerBatteryBankCableSizeinSQMM.setTitle("Battery Bank Cable Size in SQMM");
-        mBatterySetSpinnerBatteryBankEarthingStatus.setTitle("Battery Bank Earthing Status");
-        mBatterySetSpinnerBACKUPCondition.setTitle("BACKUP Condition");
+
+
 
     }
 
 
-    final Calendar myCalendar = Calendar.getInstance();
+    private void initCombo()
+    {
 
+        mBatterySetTextViewNoofBatterySetProvidedVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_NoofBatterySetProvided))),
+                        "No of Battery Set Provided",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberofBatteryBankWorking = item.get(position);
+                        mBatterySetTextViewNoofBatterySetProvidedVal.setText(str_numberofBatteryBankWorking);
+                    }
+                });
+            }
+        });
+        mBatterySetTextViewNumberofBatteryBankWorkingVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_NumberofBatteryBankWorking))),
+                        "Number of Battery Bank Working",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noofBatterySetProvided = item.get(position);
+                        mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(str_noofBatterySetProvided);
+                    }
+                });
+            }
+        });
+
+        mBatterySetTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_AssetOwner))),
+                        "Asset Owner",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_assetOwner = item.get(position);
+                        mBatterySetTextViewAssetOwnerVal.setText(str_assetOwner);
+                    }
+                });
+            }
+        });
+        mBatterySetTextViewManufacturerMakeModelVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_ManufacturerMakeModel))),
+                        "Manufacturer Make Model",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_manufacturerMakeModel = item.get(position);
+                        mBatterySetTextViewManufacturerMakeModelVal.setText(str_manufacturerMakeModel);
+                    }
+                });
+
+            }
+        });
+
+
+        mBatterySetTextViewCapacityinAHVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_CapacityinAH))),
+                        "Capacity in AH",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_capacityinAH = item.get(position);
+                        mBatterySetTextViewCapacityinAHVal.setText(str_capacityinAH);
+                    }
+                });
+
+            }
+        });
+
+        mBatterySetTextViewTypeofBatteryVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_TypeofBattery))),
+                        "Type of Battery",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeofBattery = item.get(position);
+                        mBatterySetTextViewTypeofBatteryVal.setText(str_typeofBattery);
+                    }
+                });
+
+            }
+        });
+
+        mBatterySetTextViewPositionofBatteryBankVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_PositionofBatteryBank))),
+                        "Position of Battery Bank",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_positionofBatteryBank = item.get(position);
+                        mBatterySetTextViewPositionofBatteryBankVal.setText(str_positionofBatteryBank);
+                    }
+                });
+
+            }
+        });
+
+        mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_BatteryBankCableSizeinSQMM))),
+                        "Battery Bank Cable Size in SQMM",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_batteryBankCableSizeinSQMM = item.get(position);
+                        mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText(str_batteryBankCableSizeinSQMM);
+                    }
+                });
+
+            }
+        });
+
+        mBatterySetTextViewBatteryBankEarthingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_BatteryBankEarthingStatus))),
+                        "Battery Bank Earthing Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_batteryBankEarthingStatus = item.get(position);
+                        mBatterySetTextViewBatteryBankEarthingStatusVal.setText(str_batteryBankEarthingStatus);
+                    }
+                });
+
+            }
+        });
+
+        mBatterySetTextViewBACKUPConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Battery_Set.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_batterySet_BACKUPCondition))),
+                        "Backup Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_backupCondition = item.get(position);
+                        mBatterySetTextViewBACKUPConditionVal.setText(str_backupCondition);
+                    }
+                });
+
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +346,7 @@ public class Battery_Set extends BaseActivity {
         this.setTitle("Battery Set");
         alertDialogManager = new AlertDialogManager(this);
         assignViews();
-
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

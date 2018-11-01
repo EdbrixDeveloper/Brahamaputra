@@ -220,7 +220,7 @@ public class Air_Conditioners extends BaseActivity {
               //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:finish();
-                startActivity(new Intent(this, Air_Conditioners.class));
+                startActivity(new Intent(this, PowerPlantDetailsActivity.class));
                 return true;
 
             default:

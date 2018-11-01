@@ -32,15 +32,15 @@
                     android:layout_weight="0.4"
                     android:text="Number of ACDB" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/acdb_dcdb_spinner_NumberofACDB"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/acdb_dcdb_textView_NumberofACDB_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_acdb_dcdb_NumberofACDB"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -86,15 +86,15 @@
                     android:layout_weight="0.4"
                     android:text="Number of DCDB" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/acdb_dcdb_spinner_NumberofDCDB"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/acdb_dcdb_textView_NumberofDCDB_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_acdb_dcdb_NumberofDCDB"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -112,15 +112,15 @@
                     android:layout_weight="0.4"
                     android:text="Free Cooling Devise Staus (FCU)" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/acdb_dcdb_spinner_FreeCoolingDeviseStausFCU"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/acdb_dcdb_textView_FreeCoolingDeviseStausFCU_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_acdb_dcdb_FreeCoolingDeviseStausFCU"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 

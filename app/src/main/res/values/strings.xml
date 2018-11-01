@@ -247,7 +247,7 @@
 
 
     <!--Battery Set	 screen Array for spinners -->
-    <string-array name="spinner_batterySet_NoofBatterySetProvided">
+    <string-array name="array_batterySet_NoofBatterySetProvided">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -256,7 +256,7 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="spinner_batterySet_NumberofBatteryBankWorking">
+    <string-array name="array_batterySet_NumberofBatteryBankWorking">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -265,17 +265,17 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="spinner_batterySet_AssetOwner">
+    <string-array name="array_batterySet_AssetOwner">
         <item>BSNL Supplied Asset</item>
         <item>M and M Supplied Asset</item>
 
     </string-array>
 
-    <string-array name="spinner_batterySet_ManufacturerMakeModel">
+    <string-array name="array_batterySet_ManufacturerMakeModel">
 
     </string-array>
 
-    <string-array name="spinner_batterySet_CapacityinAH">
+    <string-array name="array_batterySet_CapacityinAH">
         <item>100AH</item>
         <item>200AH</item>
         <item>250AH</item>
@@ -286,20 +286,20 @@
         <item>500AH</item>
     </string-array>
 
-    <string-array name="spinner_batterySet_TypeofBattery">
+    <string-array name="array_batterySet_TypeofBattery">
         <item>Li-Ion</item>
         <item>Tubular</item>
         <item>VRLA</item>
     </string-array>
 
-    <string-array name="spinner_batterySet_PositionofBatteryBank">
+    <string-array name="array_batterySet_PositionofBatteryBank">
         <item>In Outdoor Cabinet</item>
         <item>Inside Indoor Shelter</item>
         <item>Outside the Shelter</item>
     </string-array>
 
 
-    <string-array name="spinner_batterySet_BatteryBankCableSizeinSQMM">
+    <string-array name="array_batterySet_BatteryBankCableSizeinSQMM">
         <item>16</item>
         <item>25</item>
         <item>35</item>
@@ -308,25 +308,25 @@
     </string-array>
 
 
-    <string-array name="spinner_batterySet_BatteryBankEarthingStatus">
+    <string-array name="array_batterySet_BatteryBankEarthingStatus">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_batterySet_BACKUPCondition">
+    <string-array name="array_batterySet_BACKUPCondition">
         <item>Healthy</item>
         <item>Poor</item>
     </string-array>
 
     <!--Media screen Array for spinners -->
-    <string-array name="spinner_media_Typeofmedia">
+    <string-array name="array_media_Typeofmedia">
         <item>ML</item>
         <item>OFC</item>
         <item>SAT</item>
     </string-array>
 
     <!--Media screen Array for spinners -->
-    <string-array name="spinner_externalTenantsPersonaldetails_TotalNumberofTanents">
+    <string-array name="array_externalTenantsPersonaldetails_TotalNumberofTanents">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -336,7 +336,7 @@
         <item>6</item>
     </string-array>
 
-    <string-array name="spinner_externalTenantsPersonaldetails_NameoftheTenant">
+    <string-array name="array_externalTenantsPersonaldetails_NameoftheTenant">
         <item>Airtel</item>
         <item>BSNL</item>
         <item>Idea</item>
@@ -345,13 +345,13 @@
         <item>Vodafone</item>
     </string-array>
 
-    <string-array name="spinner_externalTenantsPersonaldetails_TypeofTenant">
+    <string-array name="array_externalTenantsPersonaldetails_TypeofTenant">
         <item>Indoor</item>
         <item>Outdoor</item>
     </string-array>
 
     <!--Active equipment Details [BSNL] for record purpose only Array for spinners -->
-    <string-array name="spinner_activeEquipmentDetails_TypeofBTS">
+    <string-array name="array_activeEquipmentDetails_TypeofBTS">
         <item>2G</item>
         <item>3G</item>
         <item>2G and 3G</item>
@@ -362,38 +362,39 @@
         <item>WiMax</item>
     </string-array>
 
-    <string-array name="spinner_activeEquipmentDetails_importance_of_Site">
-        <item>Hub Site</item>
-        <item>Strategic Site</item>
+    <string-array name="array_activeEquipmentDetails_importance_of_Site">
         <item>High Dependant</item>
         <item>High Traffic Site</item>
+        <item>Hub Site</item>
         <item>Normal Site</item>
+        <item>Strategic Site</item>
     </string-array>
 
-    <string-array name="spinner_activeEquipmentDetails_numberOfDependantSites">
+    <string-array name="array_activeEquipmentDetails_numberOfDependantSites">
+        <item>Above 100</item>
         <item>Single</item>
         <item>Less than 10</item>
         <item>Less than 50</item>
         <item>Less than 100</item>
-        <item>Above 100</item>
+
     </string-array>
 
 
     <!--Power Management System activity  spinners Array -->
-    <string-array name="spinner_powerManagementSystem_AssetOwner">
+    <string-array name="array_powerManagementSystem_AssetOwner">
         <item>BSNL Supplied Asset</item>
         <item>M and M Supplied Asset</item>
         <item>M and M Supplied Revenue</item>
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_PowerManagementSystemType">
+    <string-array name="array_powerManagementSystem_PowerManagementSystemType">
         <item>AMF Panel</item>
         <item>Not Available</item>
         <item>PIU/PMU</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_PowerManagementSystemMake">
+    <string-array name="array_powerManagementSystem_PowerManagementSystemMake">
         <item>ACME</item>
         <item>AMF Other Makes</item>
         <item>DELTA</item>
@@ -404,27 +405,33 @@
         <item>UTOPIA</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_PowerManagementSystemPosition">
+    <string-array name="array_powerManagementSystem_PowerManagementSystemPosition">
         <item>Indoor Type</item>
         <item>Mounted with DG</item>
         <item>Outdoor Type</item>
         <item>Outdoor With Cabinet</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_PowerManagementSystemStaus">
+    <string-array name="array_powerManagementSystem_PowerManagementSystemStaus">
         <item>Auto Mode</item>
         <item>Man Operated</item>
         <item>Manuel Mode</item>
         <item>Not Working since long</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_WorkingCondition">
+    <string-array name="array_powerManagementSystem_WorkingCondition">
         <item>Not Working</item>
         <item>Working</item>
     </string-array>
 
-    <!--Power Management System activity  spinners Array -->
-    <string-array name="spinner_powerManagementSystem_SiteBoundaryStatus">
+    <!--GeneralAndSafetyMeasure activity   Array -->
+
+
+    <!--GeneralAndSafetyMeasure activity   Array -->
+
+
+    <!--GeneralAndSafetyMeasure activity   Array -->
+    <string-array name="array_generalAndSafetyMeasure_SiteBoundaryStatus">
         <item>Compound Wall with Gate</item>
         <item>Compound Wall without Gate</item>
         <item>Fencing with Gate</item>
@@ -434,31 +441,31 @@
         <item>RTT/RTP</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_SiteHygieneVegitationStatus">
+    <string-array name="array_generalAndSafetyMeasure_SiteHygieneVegitationStatus">
         <item>Cleaning OK</item>
         <item>Cleaning Required</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_GateLock">
+    <string-array name="array_generalAndSafetyMeasure_GateLock">
         <item>Available</item>
         <item>Not Available</item>
         <item>Not Required</item>
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_DGRoomLock">
+    <string-array name="array_generalAndSafetyMeasure_DGRoomLock">
         <item>Available</item>
         <item>Not Available</item>
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_FireExtuinguisher">
+    <string-array name="array_generalAndSafetyMeasure_FireExtuinguisher">
         <item>Available</item>
         <item>Not Available</item>
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_FireExtuinguisherType">
+    <string-array name="array_generalAndSafetyMeasure_FireExtuinguisherType">
         <item>ABC</item>
         <item>CO2</item>
         <item>DCP</item>
@@ -466,48 +473,48 @@
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_FireBucket">
+    <string-array name="array_generalAndSafetyMeasure_FireBucket">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_SecurityStatus24x7">
+    <string-array name="array_generalAndSafetyMeasure_SecurityStatus24x7">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_NoofSecurityPerson">
+    <string-array name="array_generalAndSafetyMeasure_NoofSecurityPerson">
         <item>1</item>
         <item>2</item>
         <item>3</item>
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_CaretakerStatusUpOnEmergency">
+    <string-array name="array_generalAndSafetyMeasure_CaretakerStatusUpOnEmergency">
         <item>Available</item>
         <item>Not Available</item>
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_IsSecurityCaretakeristheOwnerofSite">
+    <string-array name="array_generalAndSafetyMeasure_IsSecurityCaretakeristheOwnerofSite">
         <item>No</item>
         <item>Not Applicable</item>
         <item>Relative</item>
         <item>Yes</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_CaretakerSecuritySalaryPaidBy">
+    <string-array name="array_generalAndSafetyMeasure_CaretakerSecuritySalaryPaidBy">
         <item>Along with Site Rent</item>
         <item>BSNL</item>
         <item>External Agency</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_CaretakerSecurityStayinginSite">
+    <string-array name="array_generalAndSafetyMeasure_CaretakerSecurityStayinginSite">
         <item>No</item>
         <item>Yes</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_NumberofEarthPit">
+    <string-array name="array_generalAndSafetyMeasure_NumberofEarthPit">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -519,20 +526,20 @@
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_LightningArresterStatus">
+    <string-array name="array_generalAndSafetyMeasure_LightningArresterStatus">
         <item>Available</item>
         <item>Not Available</item>
 
     </string-array>
 
 
-    <string-array name="spinner_powerManagementSystem_FencingCompoundWallCondition">
+    <string-array name="array_generalAndSafetyMeasure_FencingCompoundWallCondition">
         <item>Compound Wall Damaged</item>
         <item>Fencing Damaged</item>
         <item>NA</item>
         <item>OK</item>
     </string-array>
-    <string-array name="spinner_powerManagementSystem_NumberoffreeODPaltformAvailable">
+    <string-array name="array_generalAndSafetyMeasure_NumberoffreeODPaltformAvailable">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -541,40 +548,30 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_AlarmMultipluxerStatus">
+    <string-array name="array_generalAndSafetyMeasure_AlarmMultipluxerStatus">
         <item>Available</item>
         <item>Not Available</item>
 
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_DoorOpenSensor">
+    <string-array name="array_generalAndSafetyMeasure_DoorOpenSensor">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_FuelSensor">
+    <string-array name="array_generalAndSafetyMeasure_FuelSensor">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_powerManagementSystem_FireSmokeSensor">
+    <string-array name="array_generalAndSafetyMeasure_FireSmokeSensor">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
 
-    <!--ACDB_DCDB activity  spinners Array -->
-    <string-array name="spinner_acdb_dcdb_NumberofACDB">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-
-    </string-array>
-
-    <string-array name="spinner_acdb_dcdb_NumberofDCDB">
+    <!--ACDB_DCDB activity   Array -->
+    <string-array name="array_acdb_dcdb_NumberofACDB">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -584,7 +581,17 @@
 
     </string-array>
 
-    <string-array name="spinner_acdb_dcdb_FreeCoolingDeviseStausFCU">
+    <string-array name="array_acdb_dcdb_NumberofDCDB">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+
+    </string-array>
+
+    <string-array name="array_acdb_dcdb_FreeCoolingDeviseStausFCU">
         <item>Available</item>
         <item>Not Available</item>
         <item>Not Required</item>
@@ -592,8 +599,8 @@
     </string-array>
 
 
-    <!--Details Of Unused Materials activity  spinners Array -->
-    <string-array name="spinner_detailsOfUnusedMaterials_NumberofUnusedAssetinSite">
+    <!--Details Of Unused Materials activity  Array -->
+    <string-array name="array_detailsOfUnusedMaterials_NumberofUnusedAssetinSite">
 
         <item>0</item>
         <item>1</item>
@@ -614,7 +621,7 @@
 
     </string-array>
 
-    <string-array name="spinner_detailsOfUnusedMaterials_AssetMake">
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake">
         <item>ACME</item>
         <item>Ador Poweron</item>
         <item>Amaraja</item>
@@ -694,22 +701,22 @@
         <item>Zavline</item>
     </string-array>
 
-    <string-array name="spinner_detailsOfUnusedMaterials_AssetStatus">
+    <string-array name="array_detailsOfUnusedMaterials_AssetStatus">
         <item>New Asset</item>
         <item>Non Reusable</item>
         <item>Reusable</item>
         <item>Scrap Item</item>
     </string-array>
 
-    <!--ServoStabilizer activity  spinners Array -->
-    <string-array name="spinner_ServoStabilizer_ServoStabilizerWorkingStatus">
+    <!--ServoStabilizer activity   Array -->
+    <string-array name="array_ServoStabilizer_ServoStabilizerWorkingStatus">
         <item>Not Available</item>
         <item>Not Using</item>
         <item>Not Working</item>
         <item>Working</item>
     </string-array>
 
-    <string-array name="spinner_ServoStabilizer_MakeofServo">
+    <string-array name="array_ServoStabilizer_MakeofServo">
         <item>Aircorn</item>
         <item>Auro Power</item>
         <item>KB Power</item>
@@ -722,7 +729,7 @@
         <item>Suvic</item>
     </string-array>
 
-    <string-array name="spinner_ServoStabilizer_RatingofServo">
+    <string-array name="array_ServoStabilizer_RatingofServo">
         <item>5KVA</item>
         <item>10KVA</item>
         <item>15KVA</item>
@@ -733,7 +740,7 @@
 
     </string-array>
 
-    <string-array name="spinner_ServoStabilizer_WorkingCondition">
+    <string-array name="array_ServoStabilizer_WorkingCondition">
         <item>Not Working</item>
         <item>Working</item>
     </string-array>

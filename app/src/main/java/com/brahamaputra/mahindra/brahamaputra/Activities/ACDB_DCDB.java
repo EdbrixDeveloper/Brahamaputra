@@ -16,46 +16,111 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class ACDB_DCDB extends BaseActivity {
 
 
+    String str_NumberofACDB;
+    String str_NumberofDCDB;
+    String str_FreeCoolingDeviseStausFCU;
+
     private TextView mAcdbDcdbTextViewNumberofACDB;
-    private SearchableSpinner mAcdbDcdbSpinnerNumberofACDB;
+    private TextView mAcdbDcdbTextViewNumberofACDBVal;
     private TextView mAcdbDcdbTextViewACDBRatingAMP;
     private EditText mAcdbDcdbEditTextACDBRatingAMP;
     private TextView mAcdbDcdbTextViewNumberofDCDB;
-    private SearchableSpinner mAcdbDcdbSpinnerNumberofDCDB;
+    private TextView mAcdbDcdbTextViewNumberofDCDBVal;
     private TextView mAcdbDcdbTextViewFreeCoolingDeviseStausFCU;
-    private SearchableSpinner mAcdbDcdbSpinnerFreeCoolingDeviseStausFCU;
+    private TextView mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal;
 
     private void assignViews() {
         mAcdbDcdbTextViewNumberofACDB = (TextView) findViewById(R.id.acdb_dcdb_textView_NumberofACDB);
-        mAcdbDcdbSpinnerNumberofACDB = (SearchableSpinner) findViewById(R.id.acdb_dcdb_spinner_NumberofACDB);
+        mAcdbDcdbTextViewNumberofACDBVal = (TextView) findViewById(R.id.acdb_dcdb_textView_NumberofACDB_val);
         mAcdbDcdbTextViewACDBRatingAMP = (TextView) findViewById(R.id.acdb_dcdb_textView_ACDBRatingAMP);
         mAcdbDcdbEditTextACDBRatingAMP = (EditText) findViewById(R.id.acdb_dcdb_editText_ACDBRatingAMP);
         mAcdbDcdbTextViewNumberofDCDB = (TextView) findViewById(R.id.acdb_dcdb_textView_NumberofDCDB);
-        mAcdbDcdbSpinnerNumberofDCDB = (SearchableSpinner) findViewById(R.id.acdb_dcdb_spinner_NumberofDCDB);
+        mAcdbDcdbTextViewNumberofDCDBVal = (TextView) findViewById(R.id.acdb_dcdb_textView_NumberofDCDB_val);
         mAcdbDcdbTextViewFreeCoolingDeviseStausFCU = (TextView) findViewById(R.id.acdb_dcdb_textView_FreeCoolingDeviseStausFCU);
-        mAcdbDcdbSpinnerFreeCoolingDeviseStausFCU = (SearchableSpinner) findViewById(R.id.acdb_dcdb_spinner_FreeCoolingDeviseStausFCU);
+        mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal = (TextView) findViewById(R.id.acdb_dcdb_textView_FreeCoolingDeviseStausFCU_val);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-        mAcdbDcdbSpinnerFreeCoolingDeviseStausFCU.setTitle("Free Cooling Devise Staus");
-        mAcdbDcdbSpinnerNumberofACDB.setTitle("Number of ACDB");
-        mAcdbDcdbSpinnerNumberofDCDB.setTitle("Number of DCDB");
-
 
     }
 
+    private void initCombo()
+    {
+        mAcdbDcdbTextViewNumberofDCDBVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ACDB_DCDB.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_acdb_dcdb_NumberofDCDB))),
+                        "Number of DCDB",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
 
+                        str_NumberofDCDB = item.get(position);
+                        mAcdbDcdbTextViewNumberofDCDBVal.setText(str_NumberofDCDB);
+                    }
+                });
 
+            }
+        });
+        mAcdbDcdbTextViewNumberofACDBVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ACDB_DCDB.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_acdb_dcdb_NumberofACDB))),
+                        "Number of ACDB",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_NumberofACDB = item.get(position);
+                        mAcdbDcdbTextViewNumberofACDBVal.setText(str_NumberofACDB);
+                    }
+                });
+
+            }
+        });
+        mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ACDB_DCDB.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_acdb_dcdb_FreeCoolingDeviseStausFCU))),
+                        "Free Cooling Devise Staus FCU",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_FreeCoolingDeviseStausFCU = item.get(position);
+                        mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal.setText(str_FreeCoolingDeviseStausFCU);
+                    }
+                });
+
+            }
+        });
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +128,14 @@ public class ACDB_DCDB extends BaseActivity {
         setContentView(R.layout.activity_acdb_dcdb);
         this.setTitle("ACDB/DCDB");
         assignViews();
-
+        initCombo();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
-
-
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,14 +145,15 @@ public class ACDB_DCDB extends BaseActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
-              //  startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:
+                finish();
+                //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuDone:finish();
+            case R.id.menuDone:
+                finish();
                 startActivity(new Intent(this, ServoStabilizer.class));
                 return true;
 

@@ -57,15 +57,14 @@
                     android:singleLine="false"
                     android:text="Asset Owner" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_AssetOwner"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerManagementSystem_textView_AssetOwner_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_AssetOwner"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -85,15 +84,14 @@
                     android:singleLine="false"
                     android:text="Power Management System Type" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_PowerManagementSystemType"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemType"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -113,15 +111,14 @@
                     android:singleLine="false"
                     android:text="Power Management System Make" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_PowerManagementSystemMake"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemMake"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -141,15 +138,14 @@
                     android:singleLine="false"
                     android:text="Power Management System Position" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_PowerManagementSystemPosition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemPosition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemPosition"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -169,18 +165,18 @@
                     android:singleLine="false"
                     android:text="Power Management System Staus" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_PowerManagementSystemStaus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_PowerManagementSystemStaus"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -203,10 +199,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Power Management System Serial Number "
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -226,15 +221,14 @@
                     android:singleLine="false"
                     android:text="Working Condition" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_WorkingCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerManagementSystem_textView_WorkingCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_WorkingCondition"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -261,10 +255,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Nature of Problem "
-                    android:inputType="textMultiLine"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionDone"
-                    />
+                    android:inputType="textMultiLine"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>

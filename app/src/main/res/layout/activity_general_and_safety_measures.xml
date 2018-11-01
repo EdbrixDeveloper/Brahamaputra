@@ -55,7 +55,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_SiteBoundaryStatus"
+                    android:id="@+id/generalAndSafetyMeasure_textView_SiteBoundaryStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -63,15 +63,15 @@
                     android:singleLine="false"
                     android:text="Site Boundary Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_SiteBoundaryStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_SiteBoundaryStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_SiteBoundaryStatus"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -83,7 +83,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_SiteHygieneVegitationStatus"
+                    android:id="@+id/generalAndSafetyMeasure_textView_SiteHygieneVegitationStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -91,15 +91,15 @@
                     android:singleLine="false"
                     android:text="Site Hygiene/Vegitation Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_SiteHygieneVegitationStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_SiteHygieneVegitationStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_SiteHygieneVegitationStatus"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -111,7 +111,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_GateLock"
+                    android:id="@+id/generalAndSafetyMeasure_textView_GateLock"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -119,15 +119,15 @@
                     android:singleLine="false"
                     android:text="Gate Lock" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_GateLock"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_GateLock_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_GateLock"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -139,7 +139,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_DGRoomLock"
+                    android:id="@+id/generalAndSafetyMeasure_textView_DGRoomLock"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -147,15 +147,15 @@
                     android:singleLine="false"
                     android:text="DG Room Lock" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_DGRoomLock"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_DGRoomLock_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_DGRoomLock"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -167,7 +167,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_FireExtuinguisher"
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireExtuinguisher"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,15 +175,15 @@
                     android:singleLine="false"
                     android:text="Fire Extuinguisher" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_FireExtuinguisher"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireExtuinguisher_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_FireExtuinguisher"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -195,7 +195,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_FireExtuinguisherType"
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireExtuinguisherType"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -203,15 +203,15 @@
                     android:singleLine="false"
                     android:text="Fire Extuinguisher Type" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_FireExtuinguisherType"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireExtuinguisherType_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_FireExtuinguisherType"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -223,7 +223,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_FireExtuinguisherExpiryDate"
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireExtuinguisherExpiryDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -232,7 +232,7 @@
                     android:text="Fire Extuinguisher Expiry Date" />
 
                 <EditText
-                    android:id="@+id/powerManagementSystem_editText_FireExtuinguisherExpiryDate"
+                    android:id="@+id/generalAndSafetyMeasure_editText_FireExtuinguisherExpiryDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_FireBucket"
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireBucket"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -260,15 +260,15 @@
                     android:singleLine="false"
                     android:text="Fire Bucket" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_FireBucket"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireBucket_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_FireBucket"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -280,7 +280,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_SecurityStatus24x7"
+                    android:id="@+id/generalAndSafetyMeasure_textView_SecurityStatus24x7"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -288,15 +288,15 @@
                     android:singleLine="false"
                     android:text="Security Status (24x7)" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_SecurityStatus24x7"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_SecurityStatus24x7_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_SecurityStatus24x7"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -309,7 +309,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_NoofSecurityPerson"
+                    android:id="@+id/generalAndSafetyMeasure_textView_NoofSecurityPerson"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -317,15 +317,15 @@
                     android:singleLine="false"
                     android:text="No of Security Person" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_NoofSecurityPerson"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_NoofSecurityPerson_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_NoofSecurityPerson"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -336,7 +336,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_MobileNumberofSecurity"
+                    android:id="@+id/generalAndSafetyMeasure_textView_MobileNumberofSecurity"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -345,7 +345,7 @@
                     android:text="Mobile Number of Security" />
 
                 <EditText
-                    android:id="@+id/powerManagementSystem_editText_MobileNumberofSecurity"
+                    android:id="@+id/generalAndSafetyMeasure_editText_MobileNumberofSecurity"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -366,7 +366,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_CaretakerStatusUpOnEmergency"
+                    android:id="@+id/generalAndSafetyMeasure_textView_CaretakerStatusUpOnEmergency"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -374,15 +374,15 @@
                     android:singleLine="false"
                     android:text="Caretaker Status (Up-On Emergency)" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_CaretakerStatusUpOnEmergency"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_CaretakerStatusUpOnEmergency_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_CaretakerStatusUpOnEmergency"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -393,7 +393,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_MobileNumberofCaretaker"
+                    android:id="@+id/generalAndSafetyMeasure_textView_MobileNumberofCaretaker"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -402,7 +402,7 @@
                     android:text="Mobile Number of Caretaker" />
 
                 <EditText
-                    android:id="@+id/powerManagementSystem_editText_MobileNumberofCaretaker"
+                    android:id="@+id/generalAndSafetyMeasure_editText_MobileNumberofCaretaker"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -423,7 +423,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_IsSecurityCaretakeristheOwnerofSite"
+                    android:id="@+id/generalAndSafetyMeasure_textView_IsSecurityCaretakeristheOwnerofSite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -431,15 +431,15 @@
                     android:singleLine="false"
                     android:text="Is Security/Caretaker is the Owner of Site" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_IsSecurityCaretakeristheOwnerofSitey"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_IsSecurityCaretakeristheOwnerofSite_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_IsSecurityCaretakeristheOwnerofSite"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -451,7 +451,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_SalaryofSecurityCaretaker"
+                    android:id="@+id/generalAndSafetyMeasure_textView_SalaryofSecurityCaretaker"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -460,7 +460,7 @@
                     android:text="Salary of Security/Caretaker" />
 
                 <EditText
-                    android:id="@+id/powerManagementSystem_editText_SalaryofSecurityCaretaker"
+                    android:id="@+id/generalAndSafetyMeasure_editText_SalaryofSecurityCaretaker"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -481,7 +481,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_CaretakerSecuritySalaryPaidBy"
+                    android:id="@+id/generalAndSafetyMeasure_textView_CaretakerSecuritySalaryPaidBy"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -489,15 +489,15 @@
                     android:singleLine="false"
                     android:text="Caretaker/Security Salary Paid By" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_CaretakerSecuritySalaryPaidBy"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_CaretakerSecuritySalaryPaidBy_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_CaretakerSecuritySalaryPaidBy"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -509,7 +509,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_CaretakerSecurityStayinginSite"
+                    android:id="@+id/generalAndSafetyMeasure_textView_CaretakerSecurityStayinginSite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -517,15 +517,15 @@
                     android:singleLine="false"
                     android:text="Caretaker/Security Staying in Site" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_CaretakerSecurityStayinginSite"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_CaretakerSecurityStayinginSite_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_CaretakerSecurityStayinginSite"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -537,7 +537,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_NumberofEarthPit"
+                    android:id="@+id/generalAndSafetyMeasure_textView_NumberofEarthPit"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -545,15 +545,15 @@
                     android:singleLine="false"
                     android:text="Number of Earth Pit" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_NumberofEarthPit"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_NumberofEarthPit_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_NumberofEarthPit"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -565,7 +565,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_LightningArresterStatus"
+                    android:id="@+id/generalAndSafetyMeasure_textView_LightningArresterStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -573,15 +573,15 @@
                     android:singleLine="false"
                     android:text="Lightning Arrester Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_LightningArresterStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_LightningArresterStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_LightningArresterStatus"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -593,7 +593,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_FencingCompoundWallCondition"
+                    android:id="@+id/generalAndSafetyMeasure_textView_FencingCompoundWallCondition"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -601,15 +601,15 @@
                     android:singleLine="false"
                     android:text="Fencing/Compound Wall Condition" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_FencingCompoundWallCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_FencingCompoundWallCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_FencingCompoundWallCondition"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -621,7 +621,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_NumberoffreeODPaltformAvailable"
+                    android:id="@+id/generalAndSafetyMeasure_textView_NumberoffreeODPaltformAvailable"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -629,15 +629,15 @@
                     android:singleLine="false"
                     android:text="Number of free OD Paltform Available" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_NumberoffreeODPaltformAvailable"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_NumberoffreeODPaltformAvailable_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_NumberoffreeODPaltformAvailable"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -649,7 +649,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_AlarmMultipluxerStatus"
+                    android:id="@+id/generalAndSafetyMeasure_textView_AlarmMultipluxerStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -657,15 +657,15 @@
                     android:singleLine="false"
                     android:text="Alarm Multipluxer Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_AlarmMultipluxerStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_AlarmMultipluxerStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_AlarmMultipluxerStatus"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
 
             </LinearLayout>
@@ -677,7 +677,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_DoorOpenSensor"
+                    android:id="@+id/generalAndSafetyMeasure_textView_DoorOpenSensor"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -685,15 +685,15 @@
                     android:singleLine="false"
                     android:text="Door Open Sensor" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_DoorOpenSensor"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_DoorOpenSensor_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_DoorOpenSensor"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
               </LinearLayout>
 
@@ -704,7 +704,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_FuelSensor"
+                    android:id="@+id/generalAndSafetyMeasure_textView_FuelSensor"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -712,15 +712,15 @@
                     android:singleLine="false"
                     android:text="Fuel Sensor" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_FuelSensor"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_FuelSensor_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_FuelSensor"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -731,7 +731,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_FireSmokeSensor"
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireSmokeSensor"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -739,15 +739,15 @@
                     android:singleLine="false"
                     android:text="Fire and Smoke Sensor" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerManagementSystem_spinner_FireSmokeSensor"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_FireSmokeSensor_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerManagementSystem_FireSmokeSensor"
+
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
         </LinearLayout>

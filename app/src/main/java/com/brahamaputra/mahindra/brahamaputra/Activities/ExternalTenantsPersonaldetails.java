@@ -16,21 +16,32 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class ExternalTenantsPersonaldetails extends BaseActivity {
 
 
+
+    final Calendar myCalendar = Calendar.getInstance();
+
+
+    String str_totalNumberofTanents;
+    String str_nameoftheTenant;
+    String str_typeofTenant;
+
     private TextView mExternalTenantsPersonaldetailsTextViewTotalNumberofTanents;
-    private SearchableSpinner mExternalTenantsPersonaldetailsSpinnerTotalNumberofTanents;
+    private TextView mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal;
     private TextView mExternalTenantsPersonaldetailsTextViewNameoftheTenant;
-    private SearchableSpinner mExternalTenantsPersonaldetailsSpinnerNameoftheTenant;
+    private TextView mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal;
     private TextView mExternalTenantsPersonaldetailsTextViewTypeofTenant;
-    private SearchableSpinner mExternalTenantsPersonaldetailsSpinnerTypeofTenant;
+    private TextView mExternalTenantsPersonaldetailsTextViewTypeofTenantVal;
     private TextView mExternalTenantsPersonaldetailsTextViewPositionattheTower;
     private EditText mExternalTenantsPersonaldetailsEditTextPositionattheTower;
     private TextView mExternalTenantsPersonaldetailsTextViewDateofthestartofTenancy;
@@ -48,11 +59,11 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
 
     private void assignViews() {
         mExternalTenantsPersonaldetailsTextViewTotalNumberofTanents = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_TotalNumberofTanents);
-        mExternalTenantsPersonaldetailsSpinnerTotalNumberofTanents = (SearchableSpinner) findViewById(R.id.externalTenantsPersonaldetails_spinner_TotalNumberofTanents);
+        mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_TotalNumberofTanents_val);
         mExternalTenantsPersonaldetailsTextViewNameoftheTenant = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_NameoftheTenant);
-        mExternalTenantsPersonaldetailsSpinnerNameoftheTenant = (SearchableSpinner) findViewById(R.id.externalTenantsPersonaldetails_spinner_NameoftheTenant);
+        mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_NameoftheTenant_val);
         mExternalTenantsPersonaldetailsTextViewTypeofTenant = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_TypeofTenant);
-        mExternalTenantsPersonaldetailsSpinnerTypeofTenant = (SearchableSpinner) findViewById(R.id.externalTenantsPersonaldetails_spinner_TypeofTenant);
+        mExternalTenantsPersonaldetailsTextViewTypeofTenantVal = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_TypeofTenant_val);
         mExternalTenantsPersonaldetailsTextViewPositionattheTower = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_PositionattheTower);
         mExternalTenantsPersonaldetailsEditTextPositionattheTower = (EditText) findViewById(R.id.externalTenantsPersonaldetails_editText_PositionattheTower);
         mExternalTenantsPersonaldetailsTextViewDateofthestartofTenancy = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_DateofthestartofTenancy);
@@ -67,17 +78,78 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile = (EditText) findViewById(R.id.externalTenantsPersonaldetails_editText_TelephoneNoofContactPersonMobile);
         mExternalTenantsPersonaldetailsTextViewTelephoneNoofContactPersonLandline = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonLandline);
         mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline = (EditText) findViewById(R.id.externalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        mExternalTenantsPersonaldetailsSpinnerTotalNumberofTanents.setTitle("Total Number of Tanents");
-        mExternalTenantsPersonaldetailsSpinnerNameoftheTenant.setTitle("Name of the Tenant");
-        mExternalTenantsPersonaldetailsSpinnerTypeofTenant.setTitle("Type of Tenant");
+
 
     }
 
-    final Calendar myCalendar = Calendar.getInstance();
+    private void initCombo()
+    {
+        mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ExternalTenantsPersonaldetails.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_TotalNumberofTanents))),
+                        "Total Number of Tanents",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_totalNumberofTanents = item.get(position);
+                        mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setText(str_totalNumberofTanents);
+                    }
+                });
+
+            }
+        });
+        mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ExternalTenantsPersonaldetails.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_NameoftheTenant))),
+                        "Name of the Tenant",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_nameoftheTenant = item.get(position);
+                        mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setText(str_nameoftheTenant);
+                    }
+                });
+
+            }
+        });
+        mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ExternalTenantsPersonaldetails.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_TypeofTenant))),
+                        "Type of Tenant",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeofTenant = item.get(position);
+                        mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.setText(str_typeofTenant);
+                    }
+                });
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +157,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         setContentView(R.layout.activity_external_tenants_personal_details);
         this.setTitle("External Tenants Personal details");
         assignViews();
-
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

@@ -20,7 +20,8 @@
            android:layout_marginBottom="@dimen/app_normal_margin"
             android:textSize="18dp"
             android:textStyle="normal"
-           android:textAlignment="center"/>
+           android:textAlignment="center"
+           android:textColor="@color/colorBlack"/>
     </LinearLayout>
 
     <LinearLayout
@@ -38,7 +39,8 @@
             android:layout_marginTop="@dimen/app_normal_margin"
            android:layout_marginBottom="@dimen/app_normal_margin"
             android:textSize="18dp"
-           android:textStyle="bold"/>
+           android:textStyle="bold"
+           android:textColor="@color/colorBlack"/>
     </LinearLayout>
 
     <LinearLayout

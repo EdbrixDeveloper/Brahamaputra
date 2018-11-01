@@ -59,16 +59,15 @@
                     android:layout_weight="0.4"
                     android:text="Servo Stabilizer Working Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/ServoStabilizer_spinner_ServoStabilizerWorkingStatus"
-                    style="@style/SpinnerTheme"
+               <TextView
+                    android:id="@+id/ServoStabilizer_textView_ServoStabilizerWorkingStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_ServoStabilizer_ServoStabilizerWorkingStatus"
                     android:textAlignment="viewStart"
 
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -86,15 +85,14 @@
                     android:layout_weight="0.4"
                     android:text="Make of Servo" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/ServoStabilizer_spinner_MakeofServo"
-                    style="@style/SpinnerTheme"
+               <TextView
+                    android:id="@+id/ServoStabilizer_textView_MakeofServo_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_ServoStabilizer_MakeofServo"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -112,15 +110,14 @@
                     android:layout_weight="0.4"
                     android:text="Rating of Servo" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/ServoStabilizer_spinner_RatingofServo"
-                    style="@style/SpinnerTheme"
+               <TextView
+                    android:id="@+id/ServoStabilizer_textView_RatingofServo_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_ServoStabilizer_RatingofServo"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -138,15 +135,14 @@
                     android:layout_weight="0.4"
                     android:text="Working Condition" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/ServoStabilizer_spinner_WorkingCondition"
-                    style="@style/SpinnerTheme"
+               <TextView
+                    android:id="@+id/ServoStabilizer_textView_WorkingCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_ServoStabilizer_WorkingCondition"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"></TextView>
 
             </LinearLayout>
 
@@ -166,7 +162,6 @@
 
                 <EditText
                     android:id="@+id/ServoStabilizer_editText_NatureofProblem"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

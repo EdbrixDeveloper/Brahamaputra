@@ -32,16 +32,13 @@
                     android:layout_weight="0.4"
                     android:text="Type of media" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/media_spinner_Typeofmedia"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/media_textView_Typeofmedia_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_media_Typeofmedia"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select "
-                    ></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:text="Type of media" />
 
             </LinearLayout>
 

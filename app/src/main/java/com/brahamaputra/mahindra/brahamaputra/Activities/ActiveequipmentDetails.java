@@ -16,16 +16,30 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class ActiveequipmentDetails extends BaseActivity {
 
+
+    final Calendar myCalendar = Calendar.getInstance();
+
+    String str_typeofBTS;
+    String str_importanceOfSite;
+    String str_numberOfDependantSites;
+
     private TextView mActiveEquipmentDetailsTextViewTypeofBTS;
-    private SearchableSpinner mActiveEquipmentDetailsSpinnerTypeofBTS;
+    private TextView mActiveEquipmentDetailsTextViewTypeofBTSVal;
+    private TextView mActiveEquipmentDetailsTextViewImportanceOfSite;
+    private TextView mActiveEquipmentDetailsTextViewImportanceOfSiteVal;
+    private TextView mActiveEquipmentDetailsTextViewNumberOfDependantSites;
+    private TextView mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal;
     private TextView mActiveEquipmentDetailsTextViewMake;
     private EditText mActiveEquipmentDetailsEditTextMake;
     private TextView mActiveEquipmentDetailsTextViewDCLoadofBTSequipment;
@@ -34,13 +48,14 @@ public class ActiveequipmentDetails extends BaseActivity {
     private EditText mActiveEquipmentDetailsEditTextYearofInstallationatsite;
     private TextView mActiveEquipmentDetailsTextViewPositionoftheantennaatTowerinMtrs;
     private EditText mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs;
-    private SearchableSpinner mActiveEquipmentDetails_spinner_importance_of_Site;
-    private SearchableSpinner mActiveEquipmentDetails_spinner_numberOfDependantSites;
-
 
     private void assignViews() {
         mActiveEquipmentDetailsTextViewTypeofBTS = (TextView) findViewById(R.id.activeEquipmentDetails_textView_TypeofBTS);
-        mActiveEquipmentDetailsSpinnerTypeofBTS = (SearchableSpinner) findViewById(R.id.activeEquipmentDetails_spinner_TypeofBTS);
+        mActiveEquipmentDetailsTextViewTypeofBTSVal = (TextView) findViewById(R.id.activeEquipmentDetails_textView_TypeofBTS_val);
+        mActiveEquipmentDetailsTextViewImportanceOfSite = (TextView) findViewById(R.id.activeEquipmentDetails_textView_importance_of_Site);
+        mActiveEquipmentDetailsTextViewImportanceOfSiteVal = (TextView) findViewById(R.id.activeEquipmentDetails_textView_importance_of_Site_val);
+        mActiveEquipmentDetailsTextViewNumberOfDependantSites = (TextView) findViewById(R.id.activeEquipmentDetails_textView_numberOfDependantSites);
+        mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal = (TextView) findViewById(R.id.activeEquipmentDetails_textView_numberOfDependantSites_val);
         mActiveEquipmentDetailsTextViewMake = (TextView) findViewById(R.id.activeEquipmentDetails_textView_Make);
         mActiveEquipmentDetailsEditTextMake = (EditText) findViewById(R.id.activeEquipmentDetails_editText_Make);
         mActiveEquipmentDetailsTextViewDCLoadofBTSequipment = (TextView) findViewById(R.id.activeEquipmentDetails_textView_DCLoadofBTSequipment);
@@ -49,20 +64,80 @@ public class ActiveequipmentDetails extends BaseActivity {
         mActiveEquipmentDetailsEditTextYearofInstallationatsite = (EditText) findViewById(R.id.activeEquipmentDetails_editText_YearofInstallationatsite);
         mActiveEquipmentDetailsTextViewPositionoftheantennaatTowerinMtrs = (TextView) findViewById(R.id.activeEquipmentDetails_textView_PositionoftheantennaatTowerinMtrs);
         mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs = (EditText) findViewById(R.id.activeEquipmentDetails_editText_PositionoftheantennaatTowerinMtrs);
-        mActiveEquipmentDetails_spinner_importance_of_Site = (SearchableSpinner) findViewById(R.id.activeEquipmentDetails_spinner_importance_of_Site);
-        mActiveEquipmentDetails_spinner_numberOfDependantSites = (SearchableSpinner) findViewById(R.id.activeEquipmentDetails_spinner_numberOfDependantSites);
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        mActiveEquipmentDetailsSpinnerTypeofBTS.setTitle("Type of BTS");
-        mActiveEquipmentDetails_spinner_importance_of_Site.setTitle("Importance of Site");
-        mActiveEquipmentDetails_spinner_numberOfDependantSites.setTitle("Number of Dependant Sites");
     }
 
+    private void initCombo()
+    {
 
-    final Calendar myCalendar = Calendar.getInstance();
+        mActiveEquipmentDetailsTextViewTypeofBTSVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ActiveequipmentDetails.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_activeEquipmentDetails_TypeofBTS))),
+                        "Type of BTS",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeofBTS = item.get(position);
+                        mActiveEquipmentDetailsTextViewTypeofBTSVal.setText(str_typeofBTS);
+                    }
+                });
+
+            }
+        });
+
+        mActiveEquipmentDetailsTextViewImportanceOfSiteVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ActiveequipmentDetails.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_activeEquipmentDetails_importance_of_Site))),
+                        "Importance of Site",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_importanceOfSite = item.get(position);
+                        mActiveEquipmentDetailsTextViewImportanceOfSiteVal.setText(str_importanceOfSite);
+                    }
+                });
+
+            }
+        });
+
+        mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ActiveequipmentDetails.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_activeEquipmentDetails_numberOfDependantSites))),
+                        "Number of Dependant Sites",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfDependantSites = item.get(position);
+                        mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.setText(str_numberOfDependantSites);
+                    }
+                });
+
+            }
+        });
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +145,7 @@ public class ActiveequipmentDetails extends BaseActivity {
         setContentView(R.layout.activity_active_equipment_details);
         this.setTitle("Active equipment Details");
         assignViews();
+        initCombo();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
