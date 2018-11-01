@@ -18,7 +18,7 @@ public class SessionManager {
 
     private static final String LOGTAG = "SessionManager";
 
-    private static final String APP_SHARED_PREFS_NAME = "Edbrix";
+    private static final String APP_SHARED_PREFS_NAME = "Bramhaputra";
 
     private static final String PREFS_SESSION_USERNAME = "SessionUsername";
     private static final String PREFS_SESSION_PASSWORD = "SessionPassword";
@@ -27,10 +27,11 @@ public class SessionManager {
     private static final String PREFS_SESSION_DEVICE_TOKEN = "SessionDeviceToken";
     private static final String PREFS_SESSION_DEVICE_TYPE = "SessionDeviceType";
     private static final String PREFS_SESSION_ORG_ID = "SessionOrgId";
-    private static final String PREFS_SESSION_SUB_COURSE_DATA = "SessionSubjectCourseData";
-    private static final String PREFS_SESSION_LOGGED_USERDATA = "SessionLoggedUsersData";
-    private static final String PREFS_SESSION_LOGGEDUSERSLIST = "SessionLoggedUsersList";
-    private static final String PREFS_SESSION_LOGGEDUSERSCREDENTIALSLIST = "SessionLoggedUsersCredentialsList";
+    private static final String PREFS_SESSION_USER_ID = "SessionUserId";
+
+    private static final String PREFS_SESSION_USER_FIRST_NAME = "SessionUserFirstName";
+    private static final String PREFS_SESSION_USER_LAST_NAME = "SessionUserLastName";
+
     private static final String PREF_SESSION_WALKTHROUGH_SKIP_KEY = "wlkSkip";
     private static final String PREF_SESSION_APPUPDATE_SKIP_KEY = "AppUpdateSkip";
     private static final String PREFS_SESSION_PROFILE_IMAGE_BASE64 = "SessionProfileImageBase64";
@@ -100,6 +101,34 @@ public class SessionManager {
     }
 
     /**
+     * Gets the session's saved userID.
+     *
+     * @return
+     */
+    public String getSessionUserId() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_ID, "");
+    }
+
+    /**
+     * Gets the session's saved user First Name.
+     *
+     * @return
+     */
+    public String getSessionUserFirstName() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_FIRST_NAME, "");
+    }
+
+    /**
+     * Gets the session's saved user Last Name.
+     *
+     * @return
+     */
+    public String getSessionUserFirstLast() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_LAST_NAME, "");
+    }
+
+
+    /**
      * Gets the session's saved device orientation.
      *
      * @return
@@ -107,43 +136,7 @@ public class SessionManager {
     public String getSessionDeviceType() {
         return this.sharedPrefs.getString(PREFS_SESSION_DEVICE_TYPE, "mob");
     }
-    /**
-     * Gets the session's saved Course Id.
-     *
-     * @return
-     *//*
-    public SubjectData getSessionSubjectCourseData() {
-        try {
-            return (SubjectData) ObjectSerializer.deserialize(this.sharedPrefs.getString(PREFS_SESSION_SUB_COURSE_DATA, ObjectSerializer.serialize(new SubjectData())));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }*/
 
-    /**
-     * Gets the session's saved Organization Id.
-     *
-     * @return
-     */
-    public String getSessionOrgId() {
-        return this.sharedPrefs.getString(PREFS_SESSION_ORG_ID, "");
-    }
-
-   /* public UserData getLoggedUserData() {
-        try {
-            return (UserData) ObjectSerializer.deserialize(this.sharedPrefs.getString(PREFS_SESSION_LOGGED_USERDATA, ObjectSerializer.serialize(new UserData())));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }*/
 
     /**
      * Gets the session's user profile image base64.
@@ -290,21 +283,50 @@ public class SessionManager {
     /**
      * Updates the saved session credentials.
      *
-     * @param subjectData the Subject_Course Data to save.
+     * @param Id the user Id to save.
      */
-//    public void updateSessionSubjectCourseData(SubjectData subjectData) {
-//        Editor editor = this.sharedPrefs.edit();
-//        try {
-//            if ((subjectData != null)) {
-//                editor.putString(PREFS_SESSION_SUB_COURSE_DATA, ObjectSerializer.serialize(subjectData));
-//            } else {
-//                editor.remove(PREFS_SESSION_SUB_COURSE_DATA);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        editor.commit();
-//    }
+    public void updateSessionUserID(String Id) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((Id != null) && (Id.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_ID, Id);
+        } else {
+            editor.remove(PREFS_SESSION_USER_ID);
+        }
+        editor.commit();
+    }
+
+    /**
+     * Updates the saved session credentials.
+     *
+     * @param fname the user First name to save.
+     */
+    public void updateSessionUserFirstName(String fname) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((fname != null) && (fname.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_FIRST_NAME, fname);
+        } else {
+            editor.remove(PREFS_SESSION_USER_FIRST_NAME);
+        }
+        editor.commit();
+    }
+
+    /**
+     * Updates the saved session credentials.
+     *
+     * @param lname the user Last name to save.
+     */
+    public void updateSessionUserLastName(String lname) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((lname != null) && (lname.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_LAST_NAME, lname);
+        } else {
+            editor.remove(PREFS_SESSION_USER_LAST_NAME);
+        }
+        editor.commit();
+    }
 
     /**
      * Updates the saved session credentials.

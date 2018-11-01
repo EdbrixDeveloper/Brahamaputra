@@ -69,6 +69,7 @@ public class SettingsMy {
      * @param user active user or null for disable user.
      */
     public static void setActiveUser(User user) {
+
         if (user != null){}
            // Timber.d("%s - Set active user with name: %s", TAG, user.toString());
         else{}

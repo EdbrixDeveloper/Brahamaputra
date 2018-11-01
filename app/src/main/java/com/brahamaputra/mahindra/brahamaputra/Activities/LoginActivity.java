@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,9 +22,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 
-public class LoginActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class LoginActivity extends BaseActivity {
 
     private ImageView mImageView;
     private EditText mLoginEditTextUsername;
@@ -31,16 +45,24 @@ public class LoginActivity extends AppCompatActivity {
     private Button mLoginButtonLogin;
     private TextView loginTextViewForgotPassword;
     final public int CHECK_PERMISSIONS = 123;
+    private SessionManager sessionManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        assignViews();
+
+        if(validateUser()){
+            finish();
+            startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
+        }else {
+            setContentView(R.layout.activity_login);
+            assignViews();
+            setListener();
+            hideKeyboard();
+        }
         checkPermission();
-        setListener();
-        hideKeyboard();
+        sessionManager = new SessionManager(LoginActivity.this);
     }
 
     private void assignViews() {
@@ -54,8 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                     // hide virtual keyboard
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(mLoginEditTextPassword.getWindowToken(), 0);
+
                     //doLogin
-                    doLogin();
+                    String username = mLoginEditTextUsername.getText().toString();
+                    String password = mLoginEditTextPassword.getText().toString();
+                    doLogin(username,password);
                     return true;
                 }
                 return false;
@@ -73,7 +98,9 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doLogin();
+                String username = mLoginEditTextUsername.getText().toString();
+                String password = mLoginEditTextPassword.getText().toString();
+                doLogin(username,password);
             }
         });
 
@@ -90,8 +117,63 @@ public class LoginActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(mLoginEditTextUsername.getWindowToken(), 0);
     }
 
-    private void doLogin(){
-        startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
+    private boolean validateUser(){
+        sessionManager = new SessionManager(LoginActivity.this);
+        if(sessionManager.getSessionUsername().equals("") && sessionManager.getSessionUserId().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    private void doLogin(String email,String password) {
+        showBusyProgress();
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put("APIKEY", Constants.APP_KEY__);
+            jo.put("SECRETKEY", Constants.APP_SECRET__);
+            jo.put("Username", email);
+            jo.put("Password", password);
+            jo.put("DeviceToken", sessionManager.getSessionFCMToken());
+            jo.put("Type", "A");
+
+        } catch (JSONException e) {
+            Log.e(LoginActivity.class.getName(),e.getMessage().toString());
+            return;
+        }
+
+        GsonRequest<UserLoginResponseData> userLoginEmailRequest = new GsonRequest<>(Request.Method.POST, Constants.userLogin, jo.toString(), UserLoginResponseData.class,
+                new Response.Listener<UserLoginResponseData>() {
+                    @Override
+                    public void onResponse(@NonNull UserLoginResponseData response) {
+                        hideBusyProgress();
+                        if(response.getError()!= null){
+                            showToast(response.getError().getErrorMessage());
+                        }else {
+
+                            if(response.getSuccess() == 1){
+                                sessionManager.updateSessionUsername(response.getUser().getUsername());
+                                sessionManager.updateSessionUserID(response.getUser().getId());
+                                sessionManager.updateSessionUserFirstName(response.getUser().getFirstName());
+                                sessionManager.updateSessionUserLastName(response.getUser().getLastName());
+                                finish();
+
+                                startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
+
+                            }
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                hideBusyProgress();
+                showToast(SettingsMy.getErrorMessage(error));
+            }
+        });
+        userLoginEmailRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+        userLoginEmailRequest.setShouldCache(false);
+        Application.getInstance().addToRequestQueue(userLoginEmailRequest, "login_requests");
     }
 
     private void checkPermission() {

@@ -73,8 +73,10 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/app_big_margin">
+                    android:gravity="left"
+                    android:layout_marginTop="@dimen/app_big_margin"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:layout_marginRight="@dimen/app_normal_margin">
 
                     <ImageView
                         android:id="@+id/userProfile_imageView_email"

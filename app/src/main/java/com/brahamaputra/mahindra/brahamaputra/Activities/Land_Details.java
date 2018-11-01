@@ -100,7 +100,7 @@ public class Land_Details extends AppCompatActivity {
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
+        //setInputDetails();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -251,7 +251,7 @@ public class Land_Details extends AppCompatActivity {
                 return true;
 
             case R.id.menuSubmit:
-                submitDetails();
+              //  submitDetails();
                 startActivity(new Intent(this, Tower_Detail.class));
                 finish();
                 return true;
@@ -265,7 +265,7 @@ public class Land_Details extends AppCompatActivity {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
-                Toast.makeText(Land_Details.this, "JsonInString :" + jsonInString, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
 //                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
@@ -311,7 +311,7 @@ public class Land_Details extends AppCompatActivity {
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-            Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
             offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
         } catch (Exception e) {

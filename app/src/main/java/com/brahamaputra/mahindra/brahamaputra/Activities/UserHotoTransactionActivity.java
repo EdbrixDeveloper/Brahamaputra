@@ -21,6 +21,7 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 
 public class UserHotoTransactionActivity extends BaseActivity {
 
@@ -39,6 +40,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private TextView mUserHotoTransTextViewSourceOfPower;
     private TextView mUserHotoTransSpinnerSourceOfPowerVal;
     private Button mUserHotoTransButtonSubmitHotoTrans;
+
+    public GPSTracker gpsTracker;
 
     String str_sourceOfPower;
 
@@ -64,6 +67,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
             }
         });
+
+        gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
+        if(gpsTracker.canGetLocation()){
+            showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude());
+        }
     }
 
     private void initCombo() {

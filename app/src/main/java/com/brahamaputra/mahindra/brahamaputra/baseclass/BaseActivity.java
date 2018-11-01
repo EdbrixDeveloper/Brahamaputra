@@ -39,6 +39,8 @@ public class BaseActivity extends AppCompatActivity {
 
     public static String TicketID = "TKT_0";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

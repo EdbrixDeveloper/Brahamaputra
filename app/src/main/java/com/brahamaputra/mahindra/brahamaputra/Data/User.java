@@ -1,38 +1,64 @@
+
 package com.brahamaputra.mahindra.brahamaputra.Data;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    private String userName;
-    private String userEmail;
-    private String userMobile;
+    @SerializedName("Id")
+    @Expose
+    private String id;
+    @SerializedName("FirstName")
+    @Expose
+    private String firstName;
+    @SerializedName("LastName")
+    @Expose
+    private String lastName;
+    @SerializedName("Username")
+    @Expose
+    private String username;
 
-    public User(String userName, String userEmail, String userMobile) {
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userMobile = userMobile;
+
+    public String getId() {
+        return id;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getUserMobile() {
-        return userMobile;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setUserMobile(String userMobile) {
-        this.userMobile = userMobile;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                '}';
     }
 }
