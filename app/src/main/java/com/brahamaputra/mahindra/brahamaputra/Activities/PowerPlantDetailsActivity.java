@@ -28,7 +28,8 @@ import android.widget.ImageView;
 
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -36,6 +37,8 @@ import android.widget.TimePicker;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -44,41 +47,54 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private TextView mPowerPlantDetailsTextViewQRCodeScan;
     private ImageView mPowerPlantDetailsButtonQRCodeScan;
     private TextView mPowerPlantDetailsTextViewAssetOwner;
-    private SearchableSpinner mPowerPlantDetailsSpinnerAssetOwner;
+    private TextView mPowerPlantDetailsTextViewAssetOwnerVal;
     private TextView mPowerPlantDetailsTextViewNumberOfPowerPlant;
-    private SearchableSpinner mPowerPlantDetailsSpinnerNumberOfPowerPlant;
+    private TextView mPowerPlantDetailsTextViewNumberOfPowerPlantVal;
     private TextView mPowerPlantDetailsTextViewManufacturerMakeModel;
-    private SearchableSpinner mPowerPlantDetailsSpinnerManufacturerMakeModel;
+    private TextView mPowerPlantDetailsTextViewManufacturerMakeModelVal;
     private TextView mPowerPlantDetailsTextViewPowerPlantModel;
     private EditText mPowerPlantDetailsEditTextPowerPlantModel;
     private TextView mPowerPlantDetailsTextViewNumberModuleSlots;
-    private SearchableSpinner mPowerPlantDetailsSpinnerNumberModuleSlots;
+    private TextView mPowerPlantDetailsTextViewNumberModuleSlotsVal;
     private TextView mPowerPlantDetailsTextViewPowerPlantEarthingStatus;
-    private SearchableSpinner mPowerPlantDetailsSpinnerPowerPlantEarthingStatus;
+    private TextView mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal;
     private TextView mPowerPlantDetailsTextViewDcLoadInDisplayAmp;
     private EditText mPowerPlantDetailsEditTextDcLoadInDisplayAmp;
     private TextView mPowerPlantDetailsTextViewPowerPlantSerialNumber;
     private EditText mPowerPlantDetailsEditTextPowerPlantSerialNumber;
     private TextView mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmps;
-    private SearchableSpinner mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps;
+    private TextView mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal;
     private TextView mPowerPlantDetailsTextViewCapacityInAmp;
     private EditText mPowerPlantDetailsEditTextCapacityInAmp;
     private TextView mPowerPlantDetailsTextViewNumberOfModules;
-    private SearchableSpinner powerPlantDetails_Spinner_numberOfModules;
+    private TextView mPowerPlantDetailsTextViewNumberOfModulesVal;
     private TextView mPowerPlantDetailsTextViewNoOfFaultyModulese;
-    private SearchableSpinner mPowerPlantDetailsSpinnerNoOfFaultyModules;
+    private TextView mPowerPlantDetailsTextViewNoOfFaultyModuleseVal;
     private TextView mPowerPlantDetailsTextViewSmpsExpandableUpToKW;
     private EditText mPowerPlantDetailsEditTextSmpsExpandableUpToKW;
     private TextView mPowerPlantDetailsTextViewSmpsUltimateCapacity;
     private EditText mPowerPlantDetailsEditTextSmpsUltimateCapacity;
     private TextView mPowerPlantDetailsTextViewSpdStatus;
-    private SearchableSpinner mPowerPlantDetailsSpinnerSpdStatus;
+    private TextView mPowerPlantDetailsTextViewSpdStatusVal;
     private TextView mPowerPlantDetailsTextViewWorkingCondition;
-    private SearchableSpinner mPowerPlantDetailsSpinnerWorkingCondition;
+    private TextView mPowerPlantDetailsTextViewWorkingConditionVal;
     private TextView mPowerPlantDetailsTextViewNatureOfProblem;
     private EditText mPowerPlantDetailsEditTextNatureOfProblem;
 
+
+    String str_assetOwner;
+    String str_numberOfPowerPlant;
+    String str_manufacturerMakeModel;
+    String str_numberModuleSlots;
+    String str_powerPlantEarthingStatus;
+    String str_typeOfPowerPlantCommercialSmps;
+    String str_numberOfModules;
+    String str_noOfFaultyModulese;
+    String str_spdStatus;
+    String str_workingCondition;
+
     //
+
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -93,7 +109,9 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         this.setTitle("Power Plant Details");
         alertDialogManager = new AlertDialogManager(PowerPlantDetailsActivity.this);
         assignViews();
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         mPowerPlantDetailsButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,60 +147,268 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     }
 
-
     private void assignViews() {
         mPowerPlantDetailsTextViewQRCodeScan = (TextView) findViewById(R.id.powerPlantDetails_textView_QRCodeScan);
         mPowerPlantDetailsButtonQRCodeScan = (ImageView) findViewById(R.id.powerPlantDetails_button_QRCodeScan);
         mPowerPlantDetailsTextViewAssetOwner = (TextView) findViewById(R.id.powerPlantDetails_textView_assetOwner);
-        mPowerPlantDetailsSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_assetOwner);
+        mPowerPlantDetailsTextViewAssetOwnerVal = (TextView) findViewById(R.id.powerPlantDetails_textView_assetOwner_val);
         mPowerPlantDetailsTextViewNumberOfPowerPlant = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfPowerPlant);
-        mPowerPlantDetailsSpinnerNumberOfPowerPlant = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_numberOfPowerPlant);
+        mPowerPlantDetailsTextViewNumberOfPowerPlantVal = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfPowerPlant_val);
         mPowerPlantDetailsTextViewManufacturerMakeModel = (TextView) findViewById(R.id.powerPlantDetails_textView_manufacturerMakeModel);
-        mPowerPlantDetailsSpinnerManufacturerMakeModel = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_manufacturerMakeModel);
+        mPowerPlantDetailsTextViewManufacturerMakeModelVal = (TextView) findViewById(R.id.powerPlantDetails_textView_manufacturerMakeModel_val);
         mPowerPlantDetailsTextViewPowerPlantModel = (TextView) findViewById(R.id.powerPlantDetails_textView_powerPlantModel);
         mPowerPlantDetailsEditTextPowerPlantModel = (EditText) findViewById(R.id.powerPlantDetails_editText_powerPlantModel);
         mPowerPlantDetailsTextViewNumberModuleSlots = (TextView) findViewById(R.id.powerPlantDetails_textView_numberModuleSlots);
-        mPowerPlantDetailsSpinnerNumberModuleSlots = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_numberModuleSlots);
+        mPowerPlantDetailsTextViewNumberModuleSlotsVal = (TextView) findViewById(R.id.powerPlantDetails_textView_numberModuleSlots_val);
         mPowerPlantDetailsTextViewPowerPlantEarthingStatus = (TextView) findViewById(R.id.powerPlantDetails_textView_powerPlantEarthingStatus);
-        mPowerPlantDetailsSpinnerPowerPlantEarthingStatus = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_powerPlantEarthingStatus);
+        mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal = (TextView) findViewById(R.id.powerPlantDetails_textView_powerPlantEarthingStatus_val);
         mPowerPlantDetailsTextViewDcLoadInDisplayAmp = (TextView) findViewById(R.id.powerPlantDetails_textView_dcLoadInDisplayAmp);
         mPowerPlantDetailsEditTextDcLoadInDisplayAmp = (EditText) findViewById(R.id.powerPlantDetails_editText_dcLoadInDisplayAmp);
         mPowerPlantDetailsTextViewPowerPlantSerialNumber = (TextView) findViewById(R.id.powerPlantDetails_textView_powerPlantSerialNumber);
         mPowerPlantDetailsEditTextPowerPlantSerialNumber = (EditText) findViewById(R.id.powerPlantDetails_editText_powerPlantSerialNumber);
         mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmps = (TextView) findViewById(R.id.powerPlantDetails_textView_typeOfPowerPlantCommercialSmps);
-        mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_typeOfPowerPlantCommercialSmps);
+        mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal = (TextView) findViewById(R.id.powerPlantDetails_textView_typeOfPowerPlantCommercialSmps_val);
         mPowerPlantDetailsTextViewCapacityInAmp = (TextView) findViewById(R.id.powerPlantDetails_textView_capacityInAmp);
         mPowerPlantDetailsEditTextCapacityInAmp = (EditText) findViewById(R.id.powerPlantDetails_editText_capacityInAmp);
         mPowerPlantDetailsTextViewNumberOfModules = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfModules);
-        powerPlantDetails_Spinner_numberOfModules = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_numberOfModules);
+        mPowerPlantDetailsTextViewNumberOfModulesVal = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfModules_val);
         mPowerPlantDetailsTextViewNoOfFaultyModulese = (TextView) findViewById(R.id.powerPlantDetails_textView_noOfFaultyModulese);
-        mPowerPlantDetailsSpinnerNoOfFaultyModules = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_noOfFaultyModules);
+        mPowerPlantDetailsTextViewNoOfFaultyModuleseVal = (TextView) findViewById(R.id.powerPlantDetails_textView_noOfFaultyModulese_val);
         mPowerPlantDetailsTextViewSmpsExpandableUpToKW = (TextView) findViewById(R.id.powerPlantDetails_textView_smpsExpandableUpToKW);
         mPowerPlantDetailsEditTextSmpsExpandableUpToKW = (EditText) findViewById(R.id.powerPlantDetails_editText_smpsExpandableUpToKW);
         mPowerPlantDetailsTextViewSmpsUltimateCapacity = (TextView) findViewById(R.id.powerPlantDetails_textView_smpsUltimateCapacity);
         mPowerPlantDetailsEditTextSmpsUltimateCapacity = (EditText) findViewById(R.id.powerPlantDetails_editText_smpsUltimateCapacity);
         mPowerPlantDetailsTextViewSpdStatus = (TextView) findViewById(R.id.powerPlantDetails_textView_spdStatus);
-        mPowerPlantDetailsSpinnerSpdStatus = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_spdStatus);
+        mPowerPlantDetailsTextViewSpdStatusVal = (TextView) findViewById(R.id.powerPlantDetails_textView_spdStatus_val);
         mPowerPlantDetailsTextViewWorkingCondition = (TextView) findViewById(R.id.powerPlantDetails_textView_workingCondition);
-        mPowerPlantDetailsSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.powerPlantDetails_Spinner_workingCondition);
+        mPowerPlantDetailsTextViewWorkingConditionVal = (TextView) findViewById(R.id.powerPlantDetails_textView_workingCondition_val);
         mPowerPlantDetailsTextViewNatureOfProblem = (TextView) findViewById(R.id.powerPlantDetails_textView_natureOfProblem);
         mPowerPlantDetailsEditTextNatureOfProblem = (EditText) findViewById(R.id.powerPlantDetails_editText_natureOfProblem);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-
-        mPowerPlantDetailsSpinnerAssetOwner.setTitle("Asset Owner");
-        mPowerPlantDetailsSpinnerNumberOfPowerPlant.setTitle("Number of Power Plant");
-        mPowerPlantDetailsSpinnerManufacturerMakeModel.setTitle("Manufacturer/Make");
-        mPowerPlantDetailsSpinnerNumberModuleSlots.setTitle("Number Module Slots");
-        mPowerPlantDetailsSpinnerPowerPlantEarthingStatus.setTitle("Power Plant Earthing Status");
-        mPowerPlantDetailsSpinnerTypeOfPowerPlantCommercialSmps.setTitle("Type of the Power Plant [Commercial/SMPs]");
-        powerPlantDetails_Spinner_numberOfModules.setTitle("Number of Modules");
-        mPowerPlantDetailsSpinnerNoOfFaultyModules.setTitle("No. of Faulty Modules");
-        mPowerPlantDetailsSpinnerSpdStatus.setTitle("SPD Status");
-        mPowerPlantDetailsSpinnerWorkingCondition.setTitle("Working Condition");
     }
 
+    private void initCombo() {
+        mPowerPlantDetailsTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_assetOwner))),
+                        "Asset Owner",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_assetOwner = item.get(position);
+                        mPowerPlantDetailsTextViewAssetOwnerVal.setText(str_assetOwner);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_numberOfPowerPlant))),
+                        "Number of Power Plant",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfPowerPlant = item.get(position);
+                        mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(str_numberOfPowerPlant);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewManufacturerMakeModelVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_manufacturerMakeModel))),
+                        "Manufacturer/Make",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_manufacturerMakeModel = item.get(position);
+                        mPowerPlantDetailsTextViewManufacturerMakeModelVal.setText(str_manufacturerMakeModel);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewNumberModuleSlotsVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_numberModuleSlots))),
+                        "Number Module Slots",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberModuleSlots = item.get(position);
+                        mPowerPlantDetailsTextViewNumberModuleSlotsVal.setText(str_numberModuleSlots);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_powerPlantEarthingStatus))),
+                        "Power Plant Earthing Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_powerPlantEarthingStatus = item.get(position);
+                        mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal.setText(str_powerPlantEarthingStatus);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_typeOfPowerPlantCommercialSmps))),
+                        "Type of the Power Plant [Commercial/SMPs]",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeOfPowerPlantCommercialSmps = item.get(position);
+                        mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.setText(str_typeOfPowerPlantCommercialSmps);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewNumberOfModulesVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_numberOfModules))),
+                        "Number of Modules",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfModules = item.get(position);
+                        mPowerPlantDetailsTextViewNumberOfModulesVal.setText(str_numberOfModules);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_noOfFaultyModules))),
+                        "No. of Faulty Modules",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noOfFaultyModulese = item.get(position);
+                        mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setText(str_noOfFaultyModulese);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewSpdStatusVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_spdStatus))),
+                        "SPD Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_spdStatus = item.get(position);
+                        mPowerPlantDetailsTextViewSpdStatusVal.setText(str_spdStatus);
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewWorkingConditionVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_workingCondition))),
+                        "Working Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_workingCondition = item.get(position);
+                        mPowerPlantDetailsTextViewWorkingConditionVal.setText(str_workingCondition);
+                    }
+                });
+            }
+        });
+    }
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -336,5 +562,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }

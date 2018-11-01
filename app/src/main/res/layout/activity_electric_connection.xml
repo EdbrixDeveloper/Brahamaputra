@@ -9,8 +9,8 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_marginBottom="@dimen/app_normal_margin">
+        android:layout_marginBottom="@dimen/app_normal_margin"
+        android:fillViewport="true">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -33,15 +33,15 @@
                     android:text="Type of Electric Connection" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_typeOfElectricConnection"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_typeOfElectricConnection_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_typrOfElectricConnection"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
 
             </LinearLayout>
 
@@ -60,15 +60,14 @@
                     android:text="Tariff" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_tariff"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_tariff_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_tariff"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -165,16 +164,15 @@
                     android:layout_weight="0.4"
                     android:text="Copy of the electric bills" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_copyOfElectricBills"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_copyOfElectricBills_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_copyOfElectricBills"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -247,16 +245,15 @@
                     android:layout_weight="0.4"
                     android:text="EB Supplier" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebSupplier"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_ebSupplier_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_ebSupplier"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
             </LinearLayout>
 
 
@@ -301,16 +298,15 @@
                     android:layout_weight="0.4"
                     android:text="EB Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_ebStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_ebStatus"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -327,16 +323,14 @@
                     android:layout_weight="0.4"
                     android:text="Transformer Working Condition" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_transformerWorkingCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_transformerWorkingCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_transformerWorkingCondition"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -380,16 +374,14 @@
                     android:layout_weight="0.4"
                     android:text="EB Meter Box Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebMeterBoxStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_ebMeterBoxStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_ebMeterBoxStatus"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -487,16 +479,14 @@
                     android:layout_weight="0.4"
                     android:text="EB Meter Working Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebMeterWorkingStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_ebMeterWorkingStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_ebMeterWorkingStatus"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -520,9 +510,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Meter Serial"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -540,16 +530,14 @@
                     android:layout_weight="0.4"
                     android:text="Type Of Payment" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_typeOfPayment"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_typeOfPayment_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_typeOfPayment"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -566,16 +554,14 @@
                     android:layout_weight="0.4"
                     android:text="EB Payment Schedule" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebPaymentSchedule"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_ebPaymentSchedule_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_ebPaymentSchedule"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -592,16 +578,14 @@
                     android:layout_weight="0.4"
                     android:text="Safety Fuse Unit (SFU)" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_safetyFuseUnit"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_safetyFuseUnit_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_safetyFuseUnit"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -618,16 +602,14 @@
                     android:layout_weight="0.4"
                     android:text="KIT-KAT/Clay Fuse Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_kitKatClayFuseStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_kitKatClayFuseStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_kitKatClayFuseStatus"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -644,16 +626,14 @@
                     android:layout_weight="0.4"
                     android:text="EB Neutral Earthing" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/electricConnection_Spinner_ebNeutralEarthing"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/electricConnection_textView_ebNeutralEarthing_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_electricConnection_ebNeutralEarthing"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -693,11 +673,10 @@
                     android:editable="false"
                     android:focusable="false"
                     android:hint="HH:MM"
+                    android:imeOptions="actionNext"
                     android:inputType="none"
                     android:textAlignment="viewStart"
-                    android:visibility="visible"
-                    android:imeOptions="actionNext"
-                    />
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -724,10 +703,9 @@
                     android:editable="false"
                     android:focusable="false"
                     android:hint="HH:MM"
-                    android:inputType="none"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="none"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -752,9 +730,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter EB Bill Date"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 

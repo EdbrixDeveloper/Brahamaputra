@@ -33,16 +33,14 @@
                     android:text="Physical Condition of Shelter and Platform" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_spinner_physicalConditionOfShelterPlatform"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_physicalConditionOfShelterPlatform_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_physicalConditionOfShelterPlatform"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -63,16 +61,14 @@
                     android:text="Number of BTS Inside Shelter" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_spinner_numberOfBtsInsideShelter"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_numberOfBtsInsideShelter_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_numberOfBtsInsideShelter"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -91,16 +87,14 @@
                     android:text="Number of BTS Outside Shelter" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_Spinner_numberOfBtsOutsideShelter"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_numberOfBtsOutsideShelter_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_numberOfBtsOutsideShelter"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -119,16 +113,14 @@
                     android:text="Shelter Lock" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_Spinner_shelterLock"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_shelterLock_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_shelterLock"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -147,16 +139,14 @@
                     android:text="Outdoor Shelter Lock" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_Spinner_outdoorShelterLock"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_outdoorShelterLock_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_outdoorShelterLock"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -176,16 +166,14 @@
                     android:text="IGB Status" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_Spinner_igbStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_igbStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_igbStatus"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -205,16 +193,14 @@
                     android:text="EGB Status" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_Spinner_egbStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_egbStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_egbStatus"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -233,16 +219,14 @@
                     android:text="NO OF ODC Available" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_Spinner_noOfOdcAvailable"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_noOfOdcAvailable_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_noOfOdcAvailable"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -262,16 +246,14 @@
                     android:text="ODC Lock" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/shelter_Spinner_odcLock"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/shelter_textView_odcLock_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_shelter_odcLock"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>

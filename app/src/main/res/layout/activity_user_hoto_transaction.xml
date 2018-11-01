@@ -184,15 +184,16 @@
                     android:text="Source of Power"
                     android:layout_gravity="center"/>
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/userHotoTrans_spinner_sourceOfPower"
-                    style="@style/SpinnerTheme"
+
+                <TextView
+                    android:id="@+id/userHotoTrans_textView_sourceOfPower_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.5"
-                    android:entries="@array/spinner_userHotoTrans_sourceOfPower"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+                    android:hint="Select"/>
+
             </LinearLayout>
 
 

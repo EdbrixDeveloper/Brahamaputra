@@ -61,15 +61,14 @@
                     android:text="Available" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_available"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_available_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_solarPowerSystem_available"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -89,15 +88,14 @@
                     android:text="Asset Owner" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_assetOwner"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_assetOwner_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_solarPowerSystem_assetOwner"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -123,9 +121,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Manufacturer"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -144,15 +142,14 @@
                     android:text="Cell / Panel" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_cellPanel"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_cellPanel_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_solarPowerSystem_cellPanel"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -200,15 +197,14 @@
                     android:text="AMC (Yes / No)" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/solarPowerSystem_Spinner_amcYesNo"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_amcYesNo_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_solarPowerSystem_amc"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 

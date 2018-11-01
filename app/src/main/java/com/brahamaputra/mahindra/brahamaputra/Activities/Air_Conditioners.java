@@ -29,24 +29,27 @@ import android.widget.TextView;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Air_Conditioners extends BaseActivity {
 
     private TextView mAirConditionersTextViewNoOfAirConditionersACprovided;
-    private SearchableSpinner mAirConditionersSpinnerNoOfAirConditionersACprovided;
+    private TextView mAirConditionersTextViewNoOfAirConditionersACprovidedVal;
     private TextView mAirConditionersTextViewNumberOfACInWorkingCondition;
-    private SearchableSpinner mAirConditionersSpinnerNumberOfACInWorkingCondition;
+    private TextView mAirConditionersTextViewNumberOfACInWorkingConditionVal;
     private TextView mAirConditionersTextViewQRCodeScan;
     private ImageView mAirConditionersButtonQRCodeScan;
     private TextView mAirConditionersTextViewAssetOwner;
-    private SearchableSpinner mAirConditionersSpinnerAssetOwner;
+    private TextView mAirConditionersTextViewAssetOwnerVal;
     private TextView mAirConditionersTextViewTypeOfAcSpliWindow;
-    private SearchableSpinner mAirConditionersSpinnerTypeOfAcSpliWindow;
+    private TextView mAirConditionersTextViewTypeOfAcSpliWindowVal;
     private TextView mAirConditionersTextViewManufacturerMakeModel;
     private EditText mAirConditionersEditTextManufacturerMakeModel;
     private TextView mAirConditionersTextViewAcSerialNumber;
@@ -56,13 +59,21 @@ public class Air_Conditioners extends BaseActivity {
     private TextView mAirConditionersTextViewDateOfInstallation;
     private EditText mAirConditionersEditTextDateOfInstallation;
     private TextView mAirConditionersTextViewAmcYesNo;
-    private SearchableSpinner mAirConditionersSpinnerAmcYesNo;
+    private TextView mAirConditionersTextViewAmcYesNoVal;
     private TextView mAirConditionersTextViewAlidityOfAmc;
     private EditText mAirConditionersEditTextDateOfvalidityOfAmc;
     private TextView mAirConditionersTextViewWorkingCondition;
-    private SearchableSpinner mAirConditionersSpinnerWorkingCondition;
+    private TextView mAirConditionersTextViewWorkingConditionVal;
     private TextView mAirConditionersTextViewNatureOfProblem;
     private EditText mAirConditionersEditTextNatureOfProblem;
+
+
+    String str_noOfAirConditionersACprovided;
+    String str_numberOfACInWorkingCondition;
+    String str_sssetOwner;
+    String str_typeOfAcSpliWindow;
+    String str_amcYesNo;
+    String str_workingCondition;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -82,7 +93,9 @@ public class Air_Conditioners extends BaseActivity {
         this.setTitle("Air Conditioners");
         alertDialogManager = new AlertDialogManager(Air_Conditioners.this);
         assignViews();
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -156,15 +169,15 @@ public class Air_Conditioners extends BaseActivity {
 
     private void assignViews() {
         mAirConditionersTextViewNoOfAirConditionersACprovided = (TextView) findViewById(R.id.airConditioners_textView_noOfAirConditionersACprovided);
-        mAirConditionersSpinnerNoOfAirConditionersACprovided = (SearchableSpinner) findViewById(R.id.airConditioners_spinner_noOfAirConditionersACprovided);
+        mAirConditionersTextViewNoOfAirConditionersACprovidedVal = (TextView) findViewById(R.id.airConditioners_textView_noOfAirConditionersACprovided_val);
         mAirConditionersTextViewNumberOfACInWorkingCondition = (TextView) findViewById(R.id.airConditioners_textView_numberOfACInWorkingCondition);
-        mAirConditionersSpinnerNumberOfACInWorkingCondition = (SearchableSpinner) findViewById(R.id.airConditioners_spinner_numberOfACInWorkingCondition);
+        mAirConditionersTextViewNumberOfACInWorkingConditionVal = (TextView) findViewById(R.id.airConditioners_textView_numberOfACInWorkingCondition_val);
         mAirConditionersTextViewQRCodeScan = (TextView) findViewById(R.id.airConditioners_textView_QRCodeScan);
         mAirConditionersButtonQRCodeScan = (ImageView) findViewById(R.id.airConditioners_button_QRCodeScan);
         mAirConditionersTextViewAssetOwner = (TextView) findViewById(R.id.airConditioners_textView_assetOwner);
-        mAirConditionersSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_assetOwner);
+        mAirConditionersTextViewAssetOwnerVal = (TextView) findViewById(R.id.airConditioners_textView_assetOwner_val);
         mAirConditionersTextViewTypeOfAcSpliWindow = (TextView) findViewById(R.id.airConditioners_textView_typeOfAcSpliWindow);
-        mAirConditionersSpinnerTypeOfAcSpliWindow = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_typeOfAcSpliWindow);
+        mAirConditionersTextViewTypeOfAcSpliWindowVal = (TextView) findViewById(R.id.airConditioners_textView_typeOfAcSpliWindow_val);
         mAirConditionersTextViewManufacturerMakeModel = (TextView) findViewById(R.id.airConditioners_textView_manufacturerMakeModel);
         mAirConditionersEditTextManufacturerMakeModel = (EditText) findViewById(R.id.airConditioners_editText_manufacturerMakeModel);
         mAirConditionersTextViewAcSerialNumber = (TextView) findViewById(R.id.airConditioners_textView_acSerialNumber);
@@ -174,24 +187,147 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersTextViewDateOfInstallation = (TextView) findViewById(R.id.airConditioners_textView_dateOfInstallation);
         mAirConditionersEditTextDateOfInstallation = (EditText) findViewById(R.id.airConditioners_editText_dateOfInstallation);
         mAirConditionersTextViewAmcYesNo = (TextView) findViewById(R.id.airConditioners_textView_amcYesNo);
-        mAirConditionersSpinnerAmcYesNo = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_amcYesNo);
+        mAirConditionersTextViewAmcYesNoVal = (TextView) findViewById(R.id.airConditioners_textView_amcYesNo_val);
         mAirConditionersTextViewAlidityOfAmc = (TextView) findViewById(R.id.airConditioners_textView_alidityOfAmc);
         mAirConditionersEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.airConditioners_editText_dateOfvalidityOfAmc);
         mAirConditionersTextViewWorkingCondition = (TextView) findViewById(R.id.airConditioners_textView_workingCondition);
-        mAirConditionersSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.airConditioners_Spinner_workingCondition);
+        mAirConditionersTextViewWorkingConditionVal = (TextView) findViewById(R.id.airConditioners_textView_workingCondition_val);
         mAirConditionersTextViewNatureOfProblem = (TextView) findViewById(R.id.airConditioners_textView_natureOfProblem);
         mAirConditionersEditTextNatureOfProblem = (EditText) findViewById(R.id.airConditioners_editText_natureOfProblem);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+    }
 
-        mAirConditionersSpinnerNoOfAirConditionersACprovided.setTitle("No.of Air Conditioners (AC) provided");
-        mAirConditionersSpinnerNumberOfACInWorkingCondition.setTitle("Number of AC in Working Condition");
-        mAirConditionersSpinnerAssetOwner.setTitle("Asset Owner");
-        mAirConditionersSpinnerTypeOfAcSpliWindow.setTitle("Type of AC (Split/Window)");
-        mAirConditionersSpinnerAmcYesNo.setTitle("AMC (Yes / No)");
-        mAirConditionersSpinnerWorkingCondition.setTitle("Working Condition");
+    private void initCombo() {
+        mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_noOfAirConditionersACprovided))),
+                        "No.of Air Conditioners (AC) provided",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noOfAirConditionersACprovided = item.get(position);
+                        mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(str_noOfAirConditionersACprovided);
+                    }
+                });
+            }
+        });
+
+        mAirConditionersTextViewNumberOfACInWorkingConditionVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_numberofACInWorkingCondition))),
+                        "Number of AC in Working Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfACInWorkingCondition = item.get(position);
+                        mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(str_numberOfACInWorkingCondition);
+                    }
+                });
+            }
+        });
+
+        mAirConditionersTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_assetOwner))),
+                        "Asset Owner",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_sssetOwner = item.get(position);
+                        mAirConditionersTextViewAssetOwnerVal.setText(str_sssetOwner);
+                    }
+                });
+            }
+        });
+
+        mAirConditionersTextViewTypeOfAcSpliWindowVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_typeOfAcSpliWindow))),
+                        "Type of AC (Split/Window)",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeOfAcSpliWindow = item.get(position);
+                        mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(str_typeOfAcSpliWindow);
+                    }
+                });
+            }
+        });
+
+        mAirConditionersTextViewAmcYesNoVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_amc))),
+                        "AMC (Yes / No)",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_amcYesNo = item.get(position);
+                        mAirConditionersTextViewAmcYesNoVal.setText(str_amcYesNo);
+                    }
+                });
+            }
+        });
+
+
+        mAirConditionersTextViewWorkingConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_workingCondition))),
+                        "Working Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_workingCondition = item.get(position);
+                        mAirConditionersTextViewWorkingConditionVal.setText(str_workingCondition);
+                    }
+                });
+            }
+        });
     }
 
     private void updateLabel() {
@@ -213,14 +349,17 @@ public class Air_Conditioners extends BaseActivity {
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
-              //  startActivity(new Intent(this, HotoSectionsListActivity.class));
+            case android.R.id.home:
+                finish();
+                //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
-            case R.id.menuSubmit:finish();
-                startActivity(new Intent(this, PowerPlantDetailsActivity.class));
+            case R.id.menuSubmit:
+                finish();
+                startActivity(new Intent(this, Solar_Power_System.class));
                 return true;
 
             default:
@@ -362,9 +501,6 @@ public class Air_Conditioners extends BaseActivity {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
-
-
-
 
 
 }

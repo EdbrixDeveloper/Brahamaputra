@@ -33,18 +33,17 @@
                     android:text="Type of Land" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/landDetails_Spinner_typeOfLand"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/landDetails_textView_typeOfLand_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:textAlignment="viewStart"
-                    android:entries="@array/spinner_landDetails_LandType"
-                    app:hintText="Select" />
+                    android:hint="Select"/>
+
 
             </LinearLayout>
-
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -229,16 +228,14 @@
                     android:layout_weight="0.4"
                     android:text="Copy of agreement with owner" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/landDetails_Spinner_copyAgreementWithOwner"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/landDetails_textView_copyAgreementWithOwner_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_landDetails_copyAgreementWithOwner"
                     android:textAlignment="viewStart"
-                    app:hintText="Select"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-                />
+                    android:hint="Select"/>
 
             </LinearLayout>
 

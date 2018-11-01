@@ -26,34 +26,42 @@ import android.widget.ImageView;
 
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Solar_Power_System extends BaseActivity {
 
     private TextView mSolarPowerSystemTextViewQRCodeScan;
-    private ImageView mSolarPowerSystemEditTextQRCodeScan;
+    private ImageView mSolarPowerSystemButtonQRCodeScan;
     private TextView mSolarPowerSystemTextViewAvailable;
-    private SearchableSpinner mSolarPowerSystemSpinnerAvailable;
+    private TextView mSolarPowerSystemTextViewAvailableVal;
     private TextView mSolarPowerSystemTextViewAssetOwner;
-    private SearchableSpinner mSolarPowerSystemSpinnerAssetOwner;
+    private TextView mSolarPowerSystemTextViewAssetOwnerVal;
     private TextView mSolarPowerSystemTextViewManufacturerMakeModel;
     private EditText mSolarPowerSystemEditTextManufacturerMakeModel;
     private TextView mSolarPowerSystemTextViewCellPanel;
-    private SearchableSpinner mSolarPowerSystemSpinnerCellPanel;
+    private TextView mSolarPowerSystemTextViewCellPanelVal;
     private TextView mSolarPowerSystemTextViewCapacityKW;
     private EditText mSolarPowerSystemEditTextCapacityKW;
     private TextView mSolarPowerSystemTextViewAmcYesNo;
-    private SearchableSpinner mSolarPowerSystemSpinnerAmcYesNo;
+    private TextView mSolarPowerSystemTextViewAmcYesNoVal;
     private TextView mSolarPowerSystemTextViewValidityOfAmc;
     private EditText mSolarPowerSystemEditTextDateOfvalidityOfAmc;
+
+    String str_available;
+    String str_assetOwner;
+    String str_cellPanel;
+    String str_amcYesNoVal;
 
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -73,7 +81,9 @@ public class Solar_Power_System extends BaseActivity {
         this.setTitle("Solar Power System");
         alertDialogManager = new AlertDialogManager(Solar_Power_System.this);
         assignViews();
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -88,7 +98,7 @@ public class Solar_Power_System extends BaseActivity {
 
         };
 
-        mSolarPowerSystemEditTextQRCodeScan.setOnClickListener(new View.OnClickListener() {
+        mSolarPowerSystemButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(Solar_Power_System.this,
@@ -131,32 +141,110 @@ public class Solar_Power_System extends BaseActivity {
         });
     }
 
-
     private void assignViews() {
         mSolarPowerSystemTextViewQRCodeScan = (TextView) findViewById(R.id.solarPowerSystem_textView_QRCodeScan);
-        mSolarPowerSystemEditTextQRCodeScan = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScan);
+        mSolarPowerSystemButtonQRCodeScan = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScan);
         mSolarPowerSystemTextViewAvailable = (TextView) findViewById(R.id.solarPowerSystem_textView_available);
-        mSolarPowerSystemSpinnerAvailable = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_available);
+        mSolarPowerSystemTextViewAvailableVal = (TextView) findViewById(R.id.solarPowerSystem_textView_available_val);
         mSolarPowerSystemTextViewAssetOwner = (TextView) findViewById(R.id.solarPowerSystem_textView_assetOwner);
-        mSolarPowerSystemSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_assetOwner);
+        mSolarPowerSystemTextViewAssetOwnerVal = (TextView) findViewById(R.id.solarPowerSystem_textView_assetOwner_val);
         mSolarPowerSystemTextViewManufacturerMakeModel = (TextView) findViewById(R.id.solarPowerSystem_textView_manufacturerMakeModel);
         mSolarPowerSystemEditTextManufacturerMakeModel = (EditText) findViewById(R.id.solarPowerSystem_editText_manufacturerMakeModel);
         mSolarPowerSystemTextViewCellPanel = (TextView) findViewById(R.id.solarPowerSystem_textView_cellPanel);
-        mSolarPowerSystemSpinnerCellPanel = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_cellPanel);
+        mSolarPowerSystemTextViewCellPanelVal = (TextView) findViewById(R.id.solarPowerSystem_textView_cellPanel_val);
         mSolarPowerSystemTextViewCapacityKW = (TextView) findViewById(R.id.solarPowerSystem_textView_capacityKW);
         mSolarPowerSystemEditTextCapacityKW = (EditText) findViewById(R.id.solarPowerSystem_editText_capacityKW);
         mSolarPowerSystemTextViewAmcYesNo = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo);
-        mSolarPowerSystemSpinnerAmcYesNo = (SearchableSpinner) findViewById(R.id.solarPowerSystem_Spinner_amcYesNo);
+        mSolarPowerSystemTextViewAmcYesNoVal = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo_val);
         mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
         mSolarPowerSystemEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.solarPowerSystem_editText_dateOfvalidityOfAmc);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+    }
 
-        mSolarPowerSystemSpinnerAvailable.setTitle("Available");
-        mSolarPowerSystemSpinnerAssetOwner.setTitle("Asset Owner");
-        mSolarPowerSystemSpinnerCellPanel.setTitle("Cell / Panel");
-        mSolarPowerSystemSpinnerAmcYesNo.setTitle("AMC (Yes / No)");
+    private void initCombo() {
+        mSolarPowerSystemTextViewAvailableVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Solar_Power_System.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_solarPowerSystem_available))),
+                        "Available",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_available = item.get(position);
+                        mSolarPowerSystemTextViewAvailableVal.setText(str_available);
+                    }
+                });
+            }
+        });
+
+        mSolarPowerSystemTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Solar_Power_System.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_solarPowerSystem_assetOwner))),
+                        "Asset Owner",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_assetOwner = item.get(position);
+                        mSolarPowerSystemTextViewAssetOwnerVal.setText(str_assetOwner);
+                    }
+                });
+            }
+        });
+
+        mSolarPowerSystemTextViewCellPanelVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Solar_Power_System.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_solarPowerSystem_cellPanel))),
+                        "Cell / Panel",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_cellPanel = item.get(position);
+                        mSolarPowerSystemTextViewCellPanelVal.setText(str_cellPanel);
+                    }
+                });
+            }
+        });
+
+
+        mSolarPowerSystemTextViewAmcYesNoVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Solar_Power_System.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_solarPowerSystem_amc))),
+                        "AMC (Yes / No)",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_amcYesNoVal = item.get(position);
+                        mSolarPowerSystemTextViewAmcYesNoVal.setText(str_amcYesNoVal);
+                    }
+                });
+            }
+        });
     }
 
     private void updateLabel() {
@@ -326,5 +414,6 @@ public class Solar_Power_System extends BaseActivity {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
+
 
 }

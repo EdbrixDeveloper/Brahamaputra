@@ -13,14 +13,16 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 //import ir.samanjafari.easycountdowntimer.CountDownInterface;
@@ -28,10 +30,11 @@ import java.util.Calendar;
 
 public class Electric_Connection extends BaseActivity {
 
+
     private TextView mElectricConnectionTextViewTypeOfElectricConnection;
-    private SearchableSpinner mElectricConnectionSpinnerTypeOfElectricConnection;
+    private TextView mElectricConnectionTextViewTypeOfElectricConnectionVal;
     private TextView mElectricConnectionTextViewTariff;
-    private SearchableSpinner mElectricConnectionSpinnerTariff;
+    private TextView mElectricConnectionTextViewTariffVal;
     private TextView mElectricConnectionTextViewSanctionedLoadKVA;
     private EditText mElectricConnectionEditTextSanctionedLoadKVA;
     private TextView mElectricConnectionTextViewExistingLoadAtSiteKVA;
@@ -39,23 +42,23 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewNameOfSupplyCompany;
     private EditText mElectricConnectionEditTextNameOfSupplyCompany;
     private TextView mElectricConnectionTextViewCopyOfElectricBills;
-    private SearchableSpinner mElectricConnectionSpinnerCopyOfElectricBills;
+    private TextView mElectricConnectionTextViewCopyOfElectricBillsVal;
     private TextView mElectricConnectionTextViewNumberOfCompoundLights;
     private EditText mElectricConnectionEditTextNumberOfCompoundLights;
     private TextView mElectricConnectionTextViewEbMeterReadingInKWh;
     private EditText mElectricConnectionEditTextEbMeterReadingInKWh;
     private TextView mElectricConnectionTextViewEbSupplier;
-    private SearchableSpinner mElectricConnectionSpinnerEbSupplier;
+    private TextView mElectricConnectionTextViewEbSupplierVal;
     private TextView mElectricConnectionTextViewEbCostPerUnitForSharedConnection;
     private EditText mElectricConnectionEditTextEbCostPerUnitForSharedConnection;
     private TextView mElectricConnectionTextViewEbStatus;
-    private SearchableSpinner mElectricConnectionSpinnerEbStatus;
+    private TextView mElectricConnectionTextViewEbStatusVal;
     private TextView mElectricConnectionTextViewTransformerWorkingCondition;
-    private SearchableSpinner mElectricConnectionSpinnerTransformerWorkingCondition;
+    private TextView mElectricConnectionTextViewTransformerWorkingConditionVal;
     private TextView mElectricConnectionTextViewTransformerCapacityInKva;
     private EditText mElectricConnectionEditTextTransformerCapacityInKva;
     private TextView mElectricConnectionTextViewEbMeterBoxStatus;
-    private SearchableSpinner mElectricConnectionSpinnerEbMeterBoxStatus;
+    private TextView mElectricConnectionTextViewEbMeterBoxStatusVal;
     private TextView mElectricConnectionTextViewSectionName;
     private EditText mElectricConnectionEditTextSectionName;
     private TextView mElectricConnectionTextViewSectionNumber;
@@ -63,28 +66,42 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewConsumerNumber;
     private EditText mElectricConnectionEditTextConsumerNumber;
     private TextView mElectricConnectionTextViewEbMeterWorkingStatus;
-    private SearchableSpinner mElectricConnectionSpinnerEbMeterWorkingStatus;
+    private TextView mElectricConnectionTextViewEbMeterWorkingStatusVal;
     private TextView mElectricConnectionTextViewEbMeterSerialNumber;
     private EditText mElectricConnectionEditTextEbMeterSerialNumber;
     private TextView mElectricConnectionTextViewTypeOfPayment;
-    private SearchableSpinner mElectricConnectionSpinnerTypeOfPayment;
+    private TextView mElectricConnectionTextViewTypeOfPaymentVal;
     private TextView mElectricConnectionTextViewEbPaymentSchedule;
-    private SearchableSpinner mElectricConnectionSpinnerEbPaymentSchedule;
+    private TextView mElectricConnectionTextViewEbPaymentScheduleVal;
     private TextView mElectricConnectionTextViewSafetyFuseUnit;
-    private SearchableSpinner mElectricConnectionSpinnerSafetyFuseUnit;
+    private TextView mElectricConnectionTextViewSafetyFuseUnitVal;
     private TextView mElectricConnectionTextViewKitKatClayFuseStatus;
-    private SearchableSpinner mElectricConnectionSpinnerKitKatClayFuseStatus;
+    private TextView mElectricConnectionTextViewKitKatClayFuseStatusVal;
     private TextView mElectricConnectionTextViewEbNeutralEarthing;
-    private SearchableSpinner mElectricConnectionSpinnerEbNeutralEarthing;
+    private TextView mElectricConnectionTextViewEbNeutralEarthingVal;
     private TextView mElectricConnectionTextViewAverageEbAvailabilityPerDay;
     private EditText mElectricConnectionEditTextAverageEbAvailabilityPerDay;
     private TextView mElectricConnectionTextViewScheduledPowerCutInHrs;
     private EditText mElectricConnectionEditTextScheduledPowerCutInHrs;
     private TextView mElectricConnectionTextViewEbBillDate;
     private EditText mElectricConnectionEditTextEbBillDate;
-    // EasyCountDownTextview countDownTextview;
+
 
     String selectedHour = "HH", selectedMinute = "MM";
+
+    String str_typeOfElectricConnection;
+    String str_tariff;
+    String str_copyOfElectricBills;
+    String str_ebSupplier;
+    String str_ebStatus;
+    String str_transformerWorkingCondition;
+    String str_ebMeterBoxStatus;
+    String str_ebMeterWorkingStatus;
+    String str_typeOfPayment;
+    String str_ebPaymentSchedule;
+    String str_safetyFuseUnit;
+    String str_kitKatClayFuseStatus;
+    String str_ebNeutralEarthing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +109,9 @@ public class Electric_Connection extends BaseActivity {
         setContentView(R.layout.activity_electric_connection);
         this.setTitle("Electric Connection");
         assignViews();
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        //mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText("" + selectedHour + ":" + selectedMinute);
 
         mElectricConnectionEditTextAverageEbAvailabilityPerDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,12 +156,11 @@ public class Electric_Connection extends BaseActivity {
 
     }
 
-
     private void assignViews() {
         mElectricConnectionTextViewTypeOfElectricConnection = (TextView) findViewById(R.id.electricConnection_textView_typeOfElectricConnection);
-        mElectricConnectionSpinnerTypeOfElectricConnection = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_typeOfElectricConnection);
+        mElectricConnectionTextViewTypeOfElectricConnectionVal = (TextView) findViewById(R.id.electricConnection_textView_typeOfElectricConnection_val);
         mElectricConnectionTextViewTariff = (TextView) findViewById(R.id.electricConnection_textView_tariff);
-        mElectricConnectionSpinnerTariff = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_tariff);
+        mElectricConnectionTextViewTariffVal = (TextView) findViewById(R.id.electricConnection_textView_tariff_val);
         mElectricConnectionTextViewSanctionedLoadKVA = (TextView) findViewById(R.id.electricConnection_textView_sanctionedLoadKVA);
         mElectricConnectionEditTextSanctionedLoadKVA = (EditText) findViewById(R.id.electricConnection_editText_sanctionedLoadKVA);
         mElectricConnectionTextViewExistingLoadAtSiteKVA = (TextView) findViewById(R.id.electricConnection_textView_existingLoadAtSiteKVA);
@@ -153,23 +168,23 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionTextViewNameOfSupplyCompany = (TextView) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany);
         mElectricConnectionEditTextNameOfSupplyCompany = (EditText) findViewById(R.id.electricConnection_editText_nameOfSupplyCompany);
         mElectricConnectionTextViewCopyOfElectricBills = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills);
-        mElectricConnectionSpinnerCopyOfElectricBills = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_copyOfElectricBills);
+        mElectricConnectionTextViewCopyOfElectricBillsVal = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills_val);
         mElectricConnectionTextViewNumberOfCompoundLights = (TextView) findViewById(R.id.electricConnection_textView_numberOfCompoundLights);
         mElectricConnectionEditTextNumberOfCompoundLights = (EditText) findViewById(R.id.electricConnection_editText_numberOfCompoundLights);
         mElectricConnectionTextViewEbMeterReadingInKWh = (TextView) findViewById(R.id.electricConnection_textView_ebMeterReadingInKWh);
         mElectricConnectionEditTextEbMeterReadingInKWh = (EditText) findViewById(R.id.electricConnection_editText_ebMeterReadingInKWh);
         mElectricConnectionTextViewEbSupplier = (TextView) findViewById(R.id.electricConnection_textView_ebSupplier);
-        mElectricConnectionSpinnerEbSupplier = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_ebSupplier);
+        mElectricConnectionTextViewEbSupplierVal = (TextView) findViewById(R.id.electricConnection_textView_ebSupplier_val);
         mElectricConnectionTextViewEbCostPerUnitForSharedConnection = (TextView) findViewById(R.id.electricConnection_textView_ebCostPerUnitForSharedConnection);
         mElectricConnectionEditTextEbCostPerUnitForSharedConnection = (EditText) findViewById(R.id.electricConnection_editText_ebCostPerUnitForSharedConnection);
         mElectricConnectionTextViewEbStatus = (TextView) findViewById(R.id.electricConnection_textView_ebStatus);
-        mElectricConnectionSpinnerEbStatus = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_ebStatus);
+        mElectricConnectionTextViewEbStatusVal = (TextView) findViewById(R.id.electricConnection_textView_ebStatus_val);
         mElectricConnectionTextViewTransformerWorkingCondition = (TextView) findViewById(R.id.electricConnection_textView_transformerWorkingCondition);
-        mElectricConnectionSpinnerTransformerWorkingCondition = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_transformerWorkingCondition);
+        mElectricConnectionTextViewTransformerWorkingConditionVal = (TextView) findViewById(R.id.electricConnection_textView_transformerWorkingCondition_val);
         mElectricConnectionTextViewTransformerCapacityInKva = (TextView) findViewById(R.id.electricConnection_textView_transformerCapacityInKva);
         mElectricConnectionEditTextTransformerCapacityInKva = (EditText) findViewById(R.id.electricConnection_editText_transformerCapacityInKva);
         mElectricConnectionTextViewEbMeterBoxStatus = (TextView) findViewById(R.id.electricConnection_textView_ebMeterBoxStatus);
-        mElectricConnectionSpinnerEbMeterBoxStatus = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_ebMeterBoxStatus);
+        mElectricConnectionTextViewEbMeterBoxStatusVal = (TextView) findViewById(R.id.electricConnection_textView_ebMeterBoxStatus_val);
         mElectricConnectionTextViewSectionName = (TextView) findViewById(R.id.electricConnection_textView_sectionName);
         mElectricConnectionEditTextSectionName = (EditText) findViewById(R.id.electricConnection_editText_sectionName);
         mElectricConnectionTextViewSectionNumber = (TextView) findViewById(R.id.electricConnection_textView_sectionNumber);
@@ -177,19 +192,19 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionTextViewConsumerNumber = (TextView) findViewById(R.id.electricConnection_textView_consumerNumber);
         mElectricConnectionEditTextConsumerNumber = (EditText) findViewById(R.id.electricConnection_editText_consumerNumber);
         mElectricConnectionTextViewEbMeterWorkingStatus = (TextView) findViewById(R.id.electricConnection_textView_ebMeterWorkingStatus);
-        mElectricConnectionSpinnerEbMeterWorkingStatus = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_ebMeterWorkingStatus);
+        mElectricConnectionTextViewEbMeterWorkingStatusVal = (TextView) findViewById(R.id.electricConnection_textView_ebMeterWorkingStatus_val);
         mElectricConnectionTextViewEbMeterSerialNumber = (TextView) findViewById(R.id.electricConnection_textView_ebMeterSerialNumber);
         mElectricConnectionEditTextEbMeterSerialNumber = (EditText) findViewById(R.id.electricConnection_editText_ebMeterSerialNumber);
         mElectricConnectionTextViewTypeOfPayment = (TextView) findViewById(R.id.electricConnection_textView_typeOfPayment);
-        mElectricConnectionSpinnerTypeOfPayment = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_typeOfPayment);
+        mElectricConnectionTextViewTypeOfPaymentVal = (TextView) findViewById(R.id.electricConnection_textView_typeOfPayment_val);
         mElectricConnectionTextViewEbPaymentSchedule = (TextView) findViewById(R.id.electricConnection_textView_ebPaymentSchedule);
-        mElectricConnectionSpinnerEbPaymentSchedule = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_ebPaymentSchedule);
+        mElectricConnectionTextViewEbPaymentScheduleVal = (TextView) findViewById(R.id.electricConnection_textView_ebPaymentSchedule_val);
         mElectricConnectionTextViewSafetyFuseUnit = (TextView) findViewById(R.id.electricConnection_textView_safetyFuseUnit);
-        mElectricConnectionSpinnerSafetyFuseUnit = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_safetyFuseUnit);
+        mElectricConnectionTextViewSafetyFuseUnitVal = (TextView) findViewById(R.id.electricConnection_textView_safetyFuseUnit_val);
         mElectricConnectionTextViewKitKatClayFuseStatus = (TextView) findViewById(R.id.electricConnection_textView_kitKatClayFuseStatus);
-        mElectricConnectionSpinnerKitKatClayFuseStatus = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_kitKatClayFuseStatus);
+        mElectricConnectionTextViewKitKatClayFuseStatusVal = (TextView) findViewById(R.id.electricConnection_textView_kitKatClayFuseStatus_val);
         mElectricConnectionTextViewEbNeutralEarthing = (TextView) findViewById(R.id.electricConnection_textView_ebNeutralEarthing);
-        mElectricConnectionSpinnerEbNeutralEarthing = (SearchableSpinner) findViewById(R.id.electricConnection_Spinner_ebNeutralEarthing);
+        mElectricConnectionTextViewEbNeutralEarthingVal = (TextView) findViewById(R.id.electricConnection_textView_ebNeutralEarthing_val);
         mElectricConnectionTextViewAverageEbAvailabilityPerDay = (TextView) findViewById(R.id.electricConnection_textView_averageEbAvailabilityPerDay);
         mElectricConnectionEditTextAverageEbAvailabilityPerDay = (EditText) findViewById(R.id.electricConnection_editText_averageEbAvailabilityPerDay);
         mElectricConnectionTextViewScheduledPowerCutInHrs = (TextView) findViewById(R.id.electricConnection_textView_scheduledPowerCutInHrs);
@@ -200,21 +215,274 @@ public class Electric_Connection extends BaseActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        mElectricConnectionSpinnerTypeOfElectricConnection.setTitle("Type of Electric Connection");
-        mElectricConnectionSpinnerTariff.setTitle("Tariff");
-        mElectricConnectionSpinnerCopyOfElectricBills.setTitle("Copy of the electric bills");
-        mElectricConnectionSpinnerEbSupplier.setTitle("EB Supplier");
-        mElectricConnectionSpinnerEbStatus.setTitle("EB Status");
-        mElectricConnectionSpinnerTransformerWorkingCondition.setTitle("Transformer Working Condition");
-        mElectricConnectionSpinnerEbMeterBoxStatus.setTitle("EB Meter Box Status");
-        mElectricConnectionSpinnerEbMeterWorkingStatus.setTitle("EB Meter Working Status");
-        mElectricConnectionSpinnerTypeOfPayment.setTitle("Type Of Payment");
-        mElectricConnectionSpinnerEbPaymentSchedule.setTitle("EB Payment Schedule");
-        mElectricConnectionSpinnerSafetyFuseUnit.setTitle("Safety Fuse Unit (SFU)");
-        mElectricConnectionSpinnerKitKatClayFuseStatus.setTitle("KIT-KAT/Clay Fuse Status");
-        mElectricConnectionSpinnerEbNeutralEarthing.setTitle("EB Neutral Earthing");
 
-        // EasyCountDownTextview countDownTextview = (EasyCountDownTextview) findViewById(R.id.easyCountDownTextview);
+    }
+
+    private void initCombo() {
+        mElectricConnectionTextViewTypeOfElectricConnectionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_typrOfElectricConnection))),
+                        "Type of Electric Connection",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeOfElectricConnection = item.get(position);
+                        mElectricConnectionTextViewTypeOfElectricConnectionVal.setText(str_typeOfElectricConnection);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewTariffVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_tariff))),
+                        "Tariff",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_tariff = item.get(position);
+                        mElectricConnectionTextViewTariffVal.setText(str_tariff);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewCopyOfElectricBillsVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_copyOfElectricBills))),
+                        "Copy of the electric bills",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_copyOfElectricBills = item.get(position);
+                        mElectricConnectionTextViewCopyOfElectricBillsVal.setText(str_copyOfElectricBills);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewEbSupplierVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebSupplier))),
+                        "EB Supplier",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ebSupplier = item.get(position);
+                        mElectricConnectionTextViewEbSupplierVal.setText(str_ebSupplier);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewEbStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebStatus))),
+                        "EB Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ebStatus = item.get(position);
+                        mElectricConnectionTextViewEbStatusVal.setText(str_ebStatus);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewTransformerWorkingConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_transformerWorkingCondition))),
+                        "Transformer Working Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_transformerWorkingCondition = item.get(position);
+                        mElectricConnectionTextViewTransformerWorkingConditionVal.setText(str_transformerWorkingCondition);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewEbMeterBoxStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebMeterBoxStatus))),
+                        "EB Meter Box Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ebMeterBoxStatus = item.get(position);
+                        mElectricConnectionTextViewEbMeterBoxStatusVal.setText(str_ebMeterBoxStatus);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewEbMeterWorkingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebMeterWorkingStatus))),
+                        "EB Meter Working Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ebMeterWorkingStatus = item.get(position);
+                        mElectricConnectionTextViewEbMeterWorkingStatusVal.setText(str_ebMeterWorkingStatus);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewTypeOfPaymentVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_typeOfPayment))),
+                        "Type Of Payment",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeOfPayment = item.get(position);
+                        mElectricConnectionTextViewTypeOfPaymentVal.setText(str_typeOfPayment);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewEbPaymentScheduleVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebPaymentSchedule))),
+                        "EB Payment Schedule",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ebPaymentSchedule = item.get(position);
+                        mElectricConnectionTextViewEbPaymentScheduleVal.setText(str_ebPaymentSchedule);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewSafetyFuseUnitVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_safetyFuseUnit))),
+                        "Safety Fuse Unit (SFU)",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_safetyFuseUnit = item.get(position);
+                        mElectricConnectionTextViewSafetyFuseUnitVal.setText(str_safetyFuseUnit);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewKitKatClayFuseStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_kitKatClayFuseStatus))),
+                        "KIT-KAT/Clay Fuse Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_kitKatClayFuseStatus = item.get(position);
+                        mElectricConnectionTextViewKitKatClayFuseStatusVal.setText(str_kitKatClayFuseStatus);
+                    }
+                });
+            }
+        });
+
+
+        mElectricConnectionTextViewEbNeutralEarthingVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebNeutralEarthing))),
+                        "EB Neutral Earthing",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ebNeutralEarthing = item.get(position);
+                        mElectricConnectionTextViewEbNeutralEarthingVal.setText(str_ebNeutralEarthing);
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -244,5 +512,6 @@ public class Electric_Connection extends BaseActivity {
     }
 
     /**/
+
 
 }

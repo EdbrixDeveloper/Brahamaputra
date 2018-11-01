@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;

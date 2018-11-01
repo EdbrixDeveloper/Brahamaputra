@@ -9,8 +9,8 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_marginBottom="@dimen/app_normal_margin">
+        android:layout_marginBottom="@dimen/app_normal_margin"
+        android:fillViewport="true">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -34,15 +34,14 @@
                     android:text="No.of Air Conditioners (AC) provided " />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/airConditioners_spinner_noOfAirConditionersACprovided"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/airConditioners_textView_noOfAirConditionersACprovided_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -63,15 +62,14 @@
                     android:text="Number of AC in Working Condition" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/airConditioners_spinner_numberOfACInWorkingCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_airConditioners_noOfAirConditionersACprovided"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -118,15 +116,14 @@
                     android:text="Asset Owner" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/airConditioners_Spinner_assetOwner"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/airConditioners_textView_assetOwner_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_airConditioners_assetOwner"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -145,15 +142,14 @@
                     android:text="Type of AC (Split/Window)" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/airConditioners_Spinner_typeOfAcSpliWindow"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/airConditioners_textView_typeOfAcSpliWindow_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_airConditioners_typeOfAcSpliWindow"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -178,9 +174,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Manufacturer"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -205,9 +201,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Serial Number"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -232,10 +228,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Capacity(TR)"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -283,15 +278,14 @@
                     android:text="AMC (Yes / No)" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/airConditioners_Spinner_amcYesNo"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/airConditioners_textView_amcYesNo_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_airConditioners_amc"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -341,15 +335,14 @@
                     android:text="Working Condition" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/airConditioners_Spinner_workingCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/airConditioners_textView_workingCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_airConditioners_workingCondition"
-                    android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -377,9 +370,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Nature of Problem"
-                    android:textAlignment="viewStart"
+                    android:inputType="text"
 
-                    android:inputType="text"/>
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>

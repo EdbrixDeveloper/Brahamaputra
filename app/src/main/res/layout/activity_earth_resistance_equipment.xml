@@ -31,15 +31,15 @@
                     android:layout_weight="0.4"
                     android:text="Type of Earth" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/earthResistanceEquipment_Spinner_typeOfEarth"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/earthResistanceEquipment_textView_typeOfEarth_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_earthResistanceEquipment_typeOfEarth"
                     android:textAlignment="viewStart"
-                    app:hintText="Select" />
+                    android:hint="Select"/>
+
 
             </LinearLayout>
 

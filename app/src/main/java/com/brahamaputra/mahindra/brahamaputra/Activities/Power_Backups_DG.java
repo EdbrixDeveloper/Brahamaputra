@@ -28,7 +28,8 @@ import android.widget.ImageView;
 
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -36,26 +37,28 @@ import android.widget.TimePicker;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Power_Backups_DG extends BaseActivity {
 
     private TextView mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovided;
-    private SearchableSpinner mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided;
+    private TextView mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal;
     private TextView mPowerBackupsDgTextViewNumberOfWorkingDg;
-    private SearchableSpinner mPowerBackupsDgSpinnerNumberOfWorkingDg;
+    private TextView mPowerBackupsDgTextViewNumberOfWorkingDgVal;
     private TextView mPowerBackupsDgTextViewQRCodeScan;
     private ImageView mPowerBackupsDgButtonQRCodeScan;
     private TextView mPowerBackupsDgTextViewAssetOwner;
-    private SearchableSpinner mPowerBackupsDgSpinnerAssetOwner;
+    private TextView mPowerBackupsDgTextViewAssetOwnerVal;
     private TextView mPowerBackupsDgTextViewDividerDesign;
     private TextView mPowerBackupsDgTextViewManufacturerMakeModel;
-    private SearchableSpinner mPowerBackupsDgSpinnerManufacturerMakeModel;
+    private TextView mPowerBackupsDgTextViewManufacturerMakeModelVal;
     private TextView mPowerBackupsDgTextViewCapacityInKva;
-    private SearchableSpinner mPowerBackupsDgSpinnerCapacityInKva;
+    private TextView mPowerBackupsDgTextViewCapacityInKvaVal;
     private TextView mPowerBackupsDgTextViewAutoManual;
-    private SearchableSpinner mPowerBackupsDgSpinnerAutoManual;
+    private TextView mPowerBackupsDgTextViewAutoManualVal;
     private TextView mPowerBackupsDgTextViewDieselTankCapacity;
     private EditText mPowerBackupsDgEditTextDieselTankCapacity;
     private TextView mPowerBackupsDgTextViewDateOfInstallation;
@@ -63,29 +66,29 @@ public class Power_Backups_DG extends BaseActivity {
     private TextView mPowerBackupsDgTextViewAverageDieselConsumption;
     private EditText mPowerBackupsDgEditTextAverageDieselConsumption;
     private TextView mPowerBackupsDgTextViewAmc;
-    private SearchableSpinner mPowerBackupsDgSpinnerAmc;
+    private TextView mPowerBackupsDgTextViewAmcVal;
     private TextView mPowerBackupsDgTextViewValidityOfAmc;
     private EditText mPowerBackupsDgEditTextDateOfvalidityOfAmc;
     private TextView mPowerBackupsDgTextViewDgWorkingType;
-    private SearchableSpinner mPowerBackupsDgSpinnerDgWorkingType;
+    private TextView mPowerBackupsDgTextViewDgWorkingTypeVal;
     private TextView mPowerBackupsDgTextViewDgHmrReading;
     private EditText mPowerBackupsDgEditTextDgHmrReading;
     private TextView mPowerBackupsDgTextViewDgEngineSerialNumber;
     private EditText mPowerBackupsDgEditTextDgEngineSerialNumber;
     private TextView mPowerBackupsDgTextViewDgMainAlternatorType;
-    private SearchableSpinner mPowerBackupsDgSpinnerDgMainAlternatorType;
+    private TextView mPowerBackupsDgTextViewDgMainAlternatorTypeVal;
     private TextView mPowerBackupsDgTextViewDgMainAlternatorMake;
-    private SearchableSpinner mPowerBackupsDgSpinnerDgMainAlternatorMake;
+    private TextView mPowerBackupsDgTextViewDgMainAlternatorMakeVal;
     private TextView mPowerBackupsDgTextViewDgMainAlternatorSerialNumber;
     private EditText mPowerBackupsDgEditTextDgMainAlternatorSerialNumber;
     private TextView mPowerBackupsDgTextViewDgCanopyStatus;
-    private SearchableSpinner mPowerBackupsDgSpinnerDgCanopyStatus;
+    private TextView mPowerBackupsDgTextViewDgCanopyStatusVal;
     private TextView mPowerBackupsDgTextViewDgStartingBatteryStatus;
-    private SearchableSpinner mPowerBackupsDgSpinnerDgStartingBatteryStatus;
+    private TextView mPowerBackupsDgTextViewDgStartingBatteryStatusVal;
     private TextView mPowerBackupsDgTextViewChargingAlternator;
-    private SearchableSpinner mPowerBackupsDgSpinnerChargingAlternator;
+    private TextView mPowerBackupsDgTextViewChargingAlternatorVal;
     private TextView mPowerBackupsDgTextViewBatteryCharger;
-    private SearchableSpinner mPowerBackupsDgSpinnerBatteryCharger;
+    private TextView mPowerBackupsDgTextViewBatteryChargerVal;
     private TextView mPowerBackupsDgTextViewPresentDieselStock;
     private EditText mPowerBackupsDgEditTextPresentDieselStock;
     private TextView mPowerBackupsDgTextViewGcuRunHrs;
@@ -93,13 +96,32 @@ public class Power_Backups_DG extends BaseActivity {
     private TextView mPowerBackupsDgTextViewGcuKwh;
     private EditText mPowerBackupsDgEditTextGcuKwh;
     private TextView mPowerBackupsDgTextViewDgAvrWorkingStatus;
-    private SearchableSpinner mPowerBackupsDgSpinnerDgAvrWorkingStatus;
+    private TextView mPowerBackupsDgTextViewDgAvrWorkingStatusVal;
     private TextView mPowerBackupsDgTextViewFuelTankPosition;
-    private SearchableSpinner mPowerBackupsDgSpinnerFuelTankPosition;
+    private TextView mPowerBackupsDgTextViewFuelTankPositionVal;
     private TextView mPowerBackupsDgTextViewWorkingCondition;
-    private SearchableSpinner mPowerBackupsDgSpinnerWorkingCondition;
+    private TextView mPowerBackupsDgTextViewWorkingConditionVal;
     private TextView mPowerBackupsDgTextViewNatureOfProblem;
     private EditText mPowerBackupsDgEditTextNatureOfProblem;
+
+
+    String str_noOfEngineAlternatorSetsprovided;
+    String str_numberOfWorkingDg;
+    String str_assetOwner;
+    String str_manufacturerMakeModel;
+    String str_capacityInKva;
+    String str_autoManual;
+    String str_amc;
+    String str_dgWorkingType;
+    String str_dgMainAlternatorType;
+    String str_dgMainAlternatorMake;
+    String str_DgCanopyStatus;
+    String str_dgStartingBatteryStatus;
+    String str_chargingAlternator;
+    String str_batteryCharger;
+    String str_dgAvrWorkingStatus;
+    String str_fuelTankPosition;
+    String str_workingCondition;
 
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -119,7 +141,9 @@ public class Power_Backups_DG extends BaseActivity {
         this.setTitle("Power Backups (DG)");
         alertDialogManager = new AlertDialogManager(Power_Backups_DG.this);
         assignViews();
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -191,20 +215,20 @@ public class Power_Backups_DG extends BaseActivity {
 
     private void assignViews() {
         mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovided = (TextView) findViewById(R.id.powerBackupsDg_textView_noOfEngineAlternatorSetsprovided);
-        mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided = (SearchableSpinner) findViewById(R.id.powerBackupsDg_spinner_noOfEngineAlternatorSetsprovided);
+        mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal = (TextView) findViewById(R.id.powerBackupsDg_textView_noOfEngineAlternatorSetsprovided_val);
         mPowerBackupsDgTextViewNumberOfWorkingDg = (TextView) findViewById(R.id.powerBackupsDg_textView_numberOfWorkingDg);
-        mPowerBackupsDgSpinnerNumberOfWorkingDg = (SearchableSpinner) findViewById(R.id.powerBackupsDg_spinner_numberOfWorkingDg);
+        mPowerBackupsDgTextViewNumberOfWorkingDgVal = (TextView) findViewById(R.id.powerBackupsDg_textView_numberOfWorkingDg_val);
         mPowerBackupsDgTextViewQRCodeScan = (TextView) findViewById(R.id.powerBackupsDg_textView_QRCodeScan);
         mPowerBackupsDgButtonQRCodeScan = (ImageView) findViewById(R.id.powerBackupsDg_button_QRCodeScan);
         mPowerBackupsDgTextViewAssetOwner = (TextView) findViewById(R.id.powerBackupsDg_textView_assetOwner);
-        mPowerBackupsDgSpinnerAssetOwner = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_assetOwner);
+        mPowerBackupsDgTextViewAssetOwnerVal = (TextView) findViewById(R.id.powerBackupsDg_textView_assetOwner_val);
         mPowerBackupsDgTextViewDividerDesign = (TextView) findViewById(R.id.powerBackupsDg_textView_dividerDesign);
         mPowerBackupsDgTextViewManufacturerMakeModel = (TextView) findViewById(R.id.powerBackupsDg_textView_manufacturerMakeModel);
-        mPowerBackupsDgSpinnerManufacturerMakeModel = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_manufacturerMakeModel);
+        mPowerBackupsDgTextViewManufacturerMakeModelVal = (TextView) findViewById(R.id.powerBackupsDg_textView_manufacturerMakeModel_val);
         mPowerBackupsDgTextViewCapacityInKva = (TextView) findViewById(R.id.powerBackupsDg_textView_capacityInKva);
-        mPowerBackupsDgSpinnerCapacityInKva = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_capacityInKva);
+        mPowerBackupsDgTextViewCapacityInKvaVal = (TextView) findViewById(R.id.powerBackupsDg_textView_capacityInKva_val);
         mPowerBackupsDgTextViewAutoManual = (TextView) findViewById(R.id.powerBackupsDg_textView_autoManual);
-        mPowerBackupsDgSpinnerAutoManual = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_autoManual);
+        mPowerBackupsDgTextViewAutoManualVal = (TextView) findViewById(R.id.powerBackupsDg_textView_autoManual_val);
         mPowerBackupsDgTextViewDieselTankCapacity = (TextView) findViewById(R.id.powerBackupsDg_textView_dieselTankCapacity);
         mPowerBackupsDgEditTextDieselTankCapacity = (EditText) findViewById(R.id.powerBackupsDg_editText_dieselTankCapacity);
         mPowerBackupsDgTextViewDateOfInstallation = (TextView) findViewById(R.id.powerBackupsDg_textView_dateOfInstallation);
@@ -212,29 +236,29 @@ public class Power_Backups_DG extends BaseActivity {
         mPowerBackupsDgTextViewAverageDieselConsumption = (TextView) findViewById(R.id.powerBackupsDg_textView_averageDieselConsumption);
         mPowerBackupsDgEditTextAverageDieselConsumption = (EditText) findViewById(R.id.powerBackupsDg_editText_averageDieselConsumption);
         mPowerBackupsDgTextViewAmc = (TextView) findViewById(R.id.powerBackupsDg_textView_amc);
-        mPowerBackupsDgSpinnerAmc = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_amc);
+        mPowerBackupsDgTextViewAmcVal = (TextView) findViewById(R.id.powerBackupsDg_textView_amc_val);
         mPowerBackupsDgTextViewValidityOfAmc = (TextView) findViewById(R.id.powerBackupsDg_textView_validityOfAmc);
         mPowerBackupsDgEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.powerBackupsDg_editText_dateOfvalidityOfAmc);
         mPowerBackupsDgTextViewDgWorkingType = (TextView) findViewById(R.id.powerBackupsDg_textView_dgWorkingType);
-        mPowerBackupsDgSpinnerDgWorkingType = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgWorkingType);
+        mPowerBackupsDgTextViewDgWorkingTypeVal = (TextView) findViewById(R.id.powerBackupsDg_textView_dgWorkingType_val);
         mPowerBackupsDgTextViewDgHmrReading = (TextView) findViewById(R.id.powerBackupsDg_textView_dgHmrReading);
         mPowerBackupsDgEditTextDgHmrReading = (EditText) findViewById(R.id.powerBackupsDg_editText_dgHmrReading);
         mPowerBackupsDgTextViewDgEngineSerialNumber = (TextView) findViewById(R.id.powerBackupsDg_textView_dgEngineSerialNumber);
         mPowerBackupsDgEditTextDgEngineSerialNumber = (EditText) findViewById(R.id.powerBackupsDg_editText_dgEngineSerialNumber);
         mPowerBackupsDgTextViewDgMainAlternatorType = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorType);
-        mPowerBackupsDgSpinnerDgMainAlternatorType = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgMainAlternatorType);
+        mPowerBackupsDgTextViewDgMainAlternatorTypeVal = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorType_val);
         mPowerBackupsDgTextViewDgMainAlternatorMake = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorMake);
-        mPowerBackupsDgSpinnerDgMainAlternatorMake = (SearchableSpinner) findViewById(R.id.powerBackupsDg_spinner_dgMainAlternatorMake);
+        mPowerBackupsDgTextViewDgMainAlternatorMakeVal = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorMake_val);
         mPowerBackupsDgTextViewDgMainAlternatorSerialNumber = (TextView) findViewById(R.id.powerBackupsDg_textView_dgMainAlternatorSerialNumber);
         mPowerBackupsDgEditTextDgMainAlternatorSerialNumber = (EditText) findViewById(R.id.powerBackupsDg_editText_dgMainAlternatorSerialNumber);
         mPowerBackupsDgTextViewDgCanopyStatus = (TextView) findViewById(R.id.powerBackupsDg_textView_dgCanopyStatus);
-        mPowerBackupsDgSpinnerDgCanopyStatus = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgCanopyStatus);
+        mPowerBackupsDgTextViewDgCanopyStatusVal = (TextView) findViewById(R.id.powerBackupsDg_textView_dgCanopyStatus_val);
         mPowerBackupsDgTextViewDgStartingBatteryStatus = (TextView) findViewById(R.id.powerBackupsDg_textView_dgStartingBatteryStatus);
-        mPowerBackupsDgSpinnerDgStartingBatteryStatus = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgStartingBatteryStatus);
+        mPowerBackupsDgTextViewDgStartingBatteryStatusVal = (TextView) findViewById(R.id.powerBackupsDg_textView_dgStartingBatteryStatus_val);
         mPowerBackupsDgTextViewChargingAlternator = (TextView) findViewById(R.id.powerBackupsDg_textView_chargingAlternator);
-        mPowerBackupsDgSpinnerChargingAlternator = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_chargingAlternator);
+        mPowerBackupsDgTextViewChargingAlternatorVal = (TextView) findViewById(R.id.powerBackupsDg_textView_chargingAlternator_val);
         mPowerBackupsDgTextViewBatteryCharger = (TextView) findViewById(R.id.powerBackupsDg_textView_batteryCharger);
-        mPowerBackupsDgSpinnerBatteryCharger = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_batteryCharger);
+        mPowerBackupsDgTextViewBatteryChargerVal = (TextView) findViewById(R.id.powerBackupsDg_textView_batteryCharger_val);
         mPowerBackupsDgTextViewPresentDieselStock = (TextView) findViewById(R.id.powerBackupsDg_textView_presentDieselStock);
         mPowerBackupsDgEditTextPresentDieselStock = (EditText) findViewById(R.id.powerBackupsDg_editText_presentDieselStock);
         mPowerBackupsDgTextViewGcuRunHrs = (TextView) findViewById(R.id.powerBackupsDg_textView_gcuRunHrs);
@@ -242,35 +266,372 @@ public class Power_Backups_DG extends BaseActivity {
         mPowerBackupsDgTextViewGcuKwh = (TextView) findViewById(R.id.powerBackupsDg_textView_gcuKwh);
         mPowerBackupsDgEditTextGcuKwh = (EditText) findViewById(R.id.powerBackupsDg_editText_gcuKwh);
         mPowerBackupsDgTextViewDgAvrWorkingStatus = (TextView) findViewById(R.id.powerBackupsDg_textView_dgAvrWorkingStatus);
-        mPowerBackupsDgSpinnerDgAvrWorkingStatus = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_dgAvrWorkingStatus);
+        mPowerBackupsDgTextViewDgAvrWorkingStatusVal = (TextView) findViewById(R.id.powerBackupsDg_textView_dgAvrWorkingStatus_val);
         mPowerBackupsDgTextViewFuelTankPosition = (TextView) findViewById(R.id.powerBackupsDg_textView_fuelTankPosition);
-        mPowerBackupsDgSpinnerFuelTankPosition = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_fuelTankPosition);
+        mPowerBackupsDgTextViewFuelTankPositionVal = (TextView) findViewById(R.id.powerBackupsDg_textView_fuelTankPosition_val);
         mPowerBackupsDgTextViewWorkingCondition = (TextView) findViewById(R.id.powerBackupsDg_textView_workingCondition);
-        mPowerBackupsDgSpinnerWorkingCondition = (SearchableSpinner) findViewById(R.id.powerBackupsDg_Spinner_workingCondition);
+        mPowerBackupsDgTextViewWorkingConditionVal = (TextView) findViewById(R.id.powerBackupsDg_textView_workingCondition_val);
         mPowerBackupsDgTextViewNatureOfProblem = (TextView) findViewById(R.id.powerBackupsDg_textView_natureOfProblem);
         mPowerBackupsDgEditTextNatureOfProblem = (EditText) findViewById(R.id.powerBackupsDg_editText_natureOfProblem);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+    }
 
-        mPowerBackupsDgSpinnerNoOfEngineAlternatorSetsprovided.setTitle("No.of Engine Alternator Sets provided");
-        mPowerBackupsDgSpinnerNumberOfWorkingDg.setTitle("Number of Working DG");
-        mPowerBackupsDgSpinnerAssetOwner.setTitle("Asset Owner");
-        mPowerBackupsDgSpinnerManufacturerMakeModel.setTitle("Manufacturer/Make/Model");
-        mPowerBackupsDgSpinnerCapacityInKva.setTitle("Capacity in KVA");
-        mPowerBackupsDgSpinnerAutoManual.setTitle("Auto/ Manual");
-        mPowerBackupsDgSpinnerAmc.setTitle("AMC(Yes/No)");
-        mPowerBackupsDgSpinnerDgWorkingType.setTitle("DG Working Type");
-        mPowerBackupsDgSpinnerDgMainAlternatorType.setTitle("DG Main Alternator Type");
-        mPowerBackupsDgSpinnerDgMainAlternatorMake.setTitle("DG Main Alternator Make");
-        mPowerBackupsDgSpinnerDgCanopyStatus.setTitle("DG Canopy Status");
-        mPowerBackupsDgSpinnerDgStartingBatteryStatus.setTitle("DG Starting Battery Status");
-        mPowerBackupsDgSpinnerChargingAlternator.setTitle("Charging Alternator");
-        mPowerBackupsDgSpinnerBatteryCharger.setTitle("Battery Charger");
-        mPowerBackupsDgSpinnerDgAvrWorkingStatus.setTitle("DG AVR working Status");
-        mPowerBackupsDgSpinnerFuelTankPosition.setTitle("Fuel Tank Position");
-        mPowerBackupsDgSpinnerWorkingCondition.setTitle("Working Condition");
+    private void initCombo() {
+        mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_noOfEngineAlternatorSetsprovided))),
+                        "No.of Engine Alternator Sets provided",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noOfEngineAlternatorSetsprovided = item.get(position);
+                        mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(str_noOfEngineAlternatorSetsprovided);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewNumberOfWorkingDgVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_numberOfWorkingDg))),
+                        "Number of Working DG",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfWorkingDg = item.get(position);
+                        mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(str_numberOfWorkingDg);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_assetOwner))),
+                        "Asset Owner",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_assetOwner = item.get(position);
+                        mPowerBackupsDgTextViewAssetOwnerVal.setText(str_assetOwner);
+                    }
+                });
+            }
+        });
+
+
+        mPowerBackupsDgTextViewManufacturerMakeModelVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_manufacturerMakeModel))),
+                        "Manufacturer/Make/Model",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_manufacturerMakeModel = item.get(position);
+                        mPowerBackupsDgTextViewManufacturerMakeModelVal.setText(str_manufacturerMakeModel);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewCapacityInKvaVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_capacityInKva))),
+                        "Capacity in KVA",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_capacityInKva = item.get(position);
+                        mPowerBackupsDgTextViewCapacityInKvaVal.setText(str_capacityInKva);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewAutoManualVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_autoManual))),
+                        "Auto/Manual",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_autoManual = item.get(position);
+                        mPowerBackupsDgTextViewAutoManualVal.setText(str_autoManual);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewAmcVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_amc))),
+                        "AMC(Yes/No)",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_amc = item.get(position);
+                        mPowerBackupsDgTextViewAmcVal.setText(str_amc);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewDgWorkingTypeVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgWorkingType))),
+                        "DG Working Type",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dgWorkingType = item.get(position);
+                        mPowerBackupsDgTextViewDgWorkingTypeVal.setText(str_dgWorkingType);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewDgMainAlternatorTypeVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgMainAlternatorType))),
+                        "DG Main Alternator Type",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dgMainAlternatorType = item.get(position);
+                        mPowerBackupsDgTextViewDgMainAlternatorTypeVal.setText(str_dgMainAlternatorType);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewDgMainAlternatorMakeVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgMainAlternatorMake))),
+                        "DG Main Alternator Make",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dgMainAlternatorMake = item.get(position);
+                        mPowerBackupsDgTextViewDgMainAlternatorMakeVal.setText(str_dgMainAlternatorMake);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewDgCanopyStatusVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgCanopyStatus))),
+                        "DG Canopy Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_DgCanopyStatus = item.get(position);
+                        mPowerBackupsDgTextViewDgCanopyStatusVal.setText(str_DgCanopyStatus);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgStartingBatteryStatus))),
+                        "DG Starting Battery Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dgStartingBatteryStatus = item.get(position);
+                        mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setText(str_dgStartingBatteryStatus);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewChargingAlternatorVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_chargingAlternator))),
+                        "Charging Alternator",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_chargingAlternator = item.get(position);
+                        mPowerBackupsDgTextViewChargingAlternatorVal.setText(str_chargingAlternator);
+                    }
+                });
+            }
+        });
+
+
+        mPowerBackupsDgTextViewBatteryChargerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_batteryCharger))),
+                        "Battery Charger",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_batteryCharger = item.get(position);
+                        mPowerBackupsDgTextViewBatteryChargerVal.setText(str_batteryCharger);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewDgAvrWorkingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgAvrWorkingStatus))),
+                        "DG AVR working Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dgAvrWorkingStatus = item.get(position);
+                        mPowerBackupsDgTextViewDgAvrWorkingStatusVal.setText(str_dgAvrWorkingStatus);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewFuelTankPositionVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_fuelTankPosition))),
+                        "Fuel Tank Position",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_fuelTankPosition = item.get(position);
+                        mPowerBackupsDgTextViewFuelTankPositionVal.setText(str_fuelTankPosition);
+                    }
+                });
+            }
+        });
+
+        mPowerBackupsDgTextViewWorkingConditionVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_workingCondition))),
+                        "Working Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_workingCondition = item.get(position);
+                        mPowerBackupsDgTextViewWorkingConditionVal.setText(str_workingCondition);
+                    }
+                });
+            }
+        });
     }
 
     private void updateLabel() {
@@ -439,5 +800,6 @@ public class Power_Backups_DG extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }

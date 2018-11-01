@@ -16,20 +16,26 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Earth_Resistance_Tower extends BaseActivity {
 
+
     private TextView mEarthResistanceTowerTextViewTypeOfEarth;
-    private SearchableSpinner mEarthResistanceTowerSpinnerTypeOfEarth;
+    private TextView mEarthResistanceTowerTextViewTypeOfEarthVal;
     private TextView mEarthResistanceTowerTextViewEarthResistance;
     private EditText mEarthResistanceTowerEditTextEarthResistance;
     private TextView mEarthResistanceTowerTextViewDateOfearthResistanceMeasured;
     private EditText mEarthResistanceTowerEditTextDateOfearthResistanceMeasured;
+
+    String str_typeOfEarth;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -41,6 +47,8 @@ public class Earth_Resistance_Tower extends BaseActivity {
         this.setTitle("Earth Resistance (Tower)");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
+        initCombo();
+
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -67,7 +75,7 @@ public class Earth_Resistance_Tower extends BaseActivity {
 
     private void assignViews() {
         mEarthResistanceTowerTextViewTypeOfEarth = (TextView) findViewById(R.id.earthResistanceTower_textView_typeOfEarth);
-        mEarthResistanceTowerSpinnerTypeOfEarth = (SearchableSpinner) findViewById(R.id.earthResistanceTower_Spinner_typeOfEarth);
+        mEarthResistanceTowerTextViewTypeOfEarthVal = (TextView) findViewById(R.id.earthResistanceTower_textView_typeOfEarth_val);
         mEarthResistanceTowerTextViewEarthResistance = (TextView) findViewById(R.id.earthResistanceTower_textView_earthResistance);
         mEarthResistanceTowerEditTextEarthResistance = (EditText) findViewById(R.id.earthResistanceTower_editText_earthResistance);
         mEarthResistanceTowerTextViewDateOfearthResistanceMeasured = (TextView) findViewById(R.id.earthResistanceTower_textView_dateOfearthResistanceMeasured);
@@ -75,7 +83,28 @@ public class Earth_Resistance_Tower extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-        mEarthResistanceTowerSpinnerTypeOfEarth.setTitle("Type of Earth");
+    }
+
+    private void initCombo() {
+        mEarthResistanceTowerTextViewTypeOfEarthVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Earth_Resistance_Tower.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_earthResistanceTower_typeOfEarth))),
+                        "Type of Earth",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeOfEarth = item.get(position);
+                        mEarthResistanceTowerTextViewTypeOfEarthVal.setText(str_typeOfEarth);
+                    }
+                });
+            }
+        });
     }
 
     private void updateLabel() {
@@ -95,11 +124,13 @@ public class Earth_Resistance_Tower extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:finish();
+            case android.R.id.home:
+                finish();
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
-            case R.id.menuSubmit:finish();
+            case R.id.menuSubmit:
+                finish();
                 startActivity(new Intent(this, Earth_Resistance_Equipment.class));
                 return true;
 
@@ -107,4 +138,7 @@ public class Earth_Resistance_Tower extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+
 }

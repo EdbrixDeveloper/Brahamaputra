@@ -18,8 +18,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -33,11 +35,14 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -46,7 +51,7 @@ public class Land_Details extends AppCompatActivity {
     private static final String TAG = Land_Details.class.getSimpleName();
 
     private TextView mLandDetailsTextViewTypeOfLand;
-    private SearchableSpinner mLandDetailsSpinnerTypeOfLand;
+    private TextView mLandDetailsTextViewTypeOfLandVal;
     private TextView mLandDetailsTextViewAreaOfLand;
     private EditText mLandDetailsEditTextAreaOfLand;
     private TextView mLandDetailsTextViewRentLeaseInNumber;
@@ -60,46 +65,17 @@ public class Land_Details extends AppCompatActivity {
     private TextView mLandDetailsTextViewLayoutOfLand;
     private ImageView mLandDetailsButtonLayoutOfLand;
     private TextView mLandDetailsTextViewCopyAgreementWithOwner;
-    private SearchableSpinner mLandDetailsSpinnerCopyAgreementWithOwner;
+    private TextView mLandDetailsTextViewCopyAgreementWithOwnerVal;
     private TextView mLandDetailsTextViewValidityOfAgreement;
     private EditText mLandDetailsEditTextDateOfvalidityOfAgreement;
     private TextView mLandDetailsTextViewValidityOfLand;
     private EditText mLandDetailsEditTextDateOfvalidityOfLand;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
-    private String ticketId ="28131";
+    private String ticketId = "28131";
     private HotoTransactionData hotoTransactionData;
     private LandDetailsData landDetailsData;
-    private String base64StringLayoutOfLand ="eji39jjj";
-
-    private void assignViews() {
-        mLandDetailsTextViewTypeOfLand = (TextView) findViewById(R.id.landDetails_textView_typeOfLand);
-        mLandDetailsSpinnerTypeOfLand = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_typeOfLand);
-        mLandDetailsTextViewAreaOfLand = (TextView) findViewById(R.id.landDetails_textView_areaOfLand);
-        mLandDetailsEditTextAreaOfLand = (EditText) findViewById(R.id.landDetails_editText_areaOfLand);
-        mLandDetailsTextViewRentLeaseInNumber = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInNumber);
-        mLandDetailsEditTextRentLeaseInNumber = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInNumber);
-        mLandDetailsTextViewRentLeaseInWords = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords);
-        mLandDetailsEditTextRentLeaseInWords = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInWords);
-        mLandDetailsTextViewNameOfOwner = (TextView) findViewById(R.id.landDetails_textView_nameOfOwner);
-        mLandDetailsEditTextNameOfOwner = (EditText) findViewById(R.id.landDetails_editText_nameOfOwner);
-        mLandDetailsTextViewMobileNoOfOwner = (TextView) findViewById(R.id.landDetails_textView_mobileNoOfOwner);
-        mLandDetailsEditTextMobileNoOfOwner = (EditText) findViewById(R.id.landDetails_editText_mobileNoOfOwner);
-        mLandDetailsTextViewLayoutOfLand = (TextView) findViewById(R.id.landDetails_textView_layoutOfLand);
-        mLandDetailsButtonLayoutOfLand = (ImageView) findViewById(R.id.landDetails_button_layoutOfLand);
-        mLandDetailsTextViewCopyAgreementWithOwner = (TextView) findViewById(R.id.landDetails_textView_copyAgreementWithOwner);
-        mLandDetailsSpinnerCopyAgreementWithOwner = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_copyAgreementWithOwner);
-        mLandDetailsTextViewValidityOfAgreement = (TextView) findViewById(R.id.landDetails_textView_validityOfAgreement);
-        mLandDetailsEditTextDateOfvalidityOfAgreement = (EditText) findViewById(R.id.landDetails_editText_dateOfvalidityOfAgreement);
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-
-        mLandDetailsSpinnerTypeOfLand.setTitle("Type of Land");
-        mLandDetailsSpinnerCopyAgreementWithOwner.setTitle("Copy of the agreement with the landlord/owner");
-
-    }
-
+    private String base64StringLayoutOfLand = "eji39jjj";
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -111,6 +87,9 @@ public class Land_Details extends AppCompatActivity {
 
     private AlertDialogManager alertDialogManager;
 
+    String str_landDetailsTypeOfLandVal;
+    String str_copyAgreementWithOwnerVal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +97,7 @@ public class Land_Details extends AppCompatActivity {
         this.setTitle("Land Detail");
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketId);
         assignViews();
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
         setInputDetails();
@@ -134,6 +114,7 @@ public class Land_Details extends AppCompatActivity {
             }
 
         };
+
 
         mLandDetailsEditTextDateOfvalidityOfAgreement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +160,75 @@ public class Land_Details extends AppCompatActivity {
 
     }
 
+    private void assignViews() {
+        mLandDetailsTextViewTypeOfLand = (TextView) findViewById(R.id.landDetails_textView_typeOfLand);
+        //mLandDetailsSpinnerTypeOfLand = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_typeOfLand);
+        mLandDetailsTextViewTypeOfLandVal = (TextView) findViewById(R.id.landDetails_textView_typeOfLand_val);
+        mLandDetailsTextViewAreaOfLand = (TextView) findViewById(R.id.landDetails_textView_areaOfLand);
+        mLandDetailsEditTextAreaOfLand = (EditText) findViewById(R.id.landDetails_editText_areaOfLand);
+        mLandDetailsTextViewRentLeaseInNumber = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInNumber);
+        mLandDetailsEditTextRentLeaseInNumber = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInNumber);
+        mLandDetailsTextViewRentLeaseInWords = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords);
+        mLandDetailsEditTextRentLeaseInWords = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInWords);
+        mLandDetailsTextViewNameOfOwner = (TextView) findViewById(R.id.landDetails_textView_nameOfOwner);
+        mLandDetailsEditTextNameOfOwner = (EditText) findViewById(R.id.landDetails_editText_nameOfOwner);
+        mLandDetailsTextViewMobileNoOfOwner = (TextView) findViewById(R.id.landDetails_textView_mobileNoOfOwner);
+        mLandDetailsEditTextMobileNoOfOwner = (EditText) findViewById(R.id.landDetails_editText_mobileNoOfOwner);
+        mLandDetailsTextViewLayoutOfLand = (TextView) findViewById(R.id.landDetails_textView_layoutOfLand);
+        mLandDetailsButtonLayoutOfLand = (ImageView) findViewById(R.id.landDetails_button_layoutOfLand);
+        mLandDetailsTextViewCopyAgreementWithOwner = (TextView) findViewById(R.id.landDetails_textView_copyAgreementWithOwner);
+        //mLandDetailsSpinnerCopyAgreementWithOwner = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_copyAgreementWithOwner);
+        mLandDetailsTextViewCopyAgreementWithOwnerVal = (TextView) findViewById(R.id.landDetails_textView_copyAgreementWithOwner_val);
+        mLandDetailsTextViewValidityOfAgreement = (TextView) findViewById(R.id.landDetails_textView_validityOfAgreement);
+        mLandDetailsEditTextDateOfvalidityOfAgreement = (EditText) findViewById(R.id.landDetails_editText_dateOfvalidityOfAgreement);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
+    private void initCombo() {
+        mLandDetailsTextViewTypeOfLandVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Land_Details.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_landDetails_LandType))),
+                        "Type of Land",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_landDetailsTypeOfLandVal = item.get(position);
+                        mLandDetailsTextViewTypeOfLandVal.setText(str_landDetailsTypeOfLandVal);
+                    }
+                });
+            }
+        });
+
+
+        mLandDetailsTextViewCopyAgreementWithOwnerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Land_Details.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_landDetails_copyAgreementWithOwner))),
+                        "Copy of the agreement with the landlord/owner",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_copyAgreementWithOwnerVal = item.get(position);
+                        mLandDetailsTextViewCopyAgreementWithOwnerVal.setText(str_copyAgreementWithOwnerVal);
+                    }
+                });
+            }
+        });
+    }
+
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -211,11 +261,11 @@ public class Land_Details extends AppCompatActivity {
         }
     }
 
-    private void setInputDetails(){
+    private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
-                Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+                Toast.makeText(Land_Details.this, "JsonInString :" + jsonInString, Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
 //                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
@@ -230,19 +280,19 @@ public class Land_Details extends AppCompatActivity {
                 mLandDetailsEditTextRentLeaseInWords.setText(landDetailsData.getRentLeaseValueInWords());
                 mLandDetailsEditTextNameOfOwner.setText(landDetailsData.getLandOwnerName());
                 mLandDetailsEditTextMobileNoOfOwner.setText(landDetailsData.getLandOwnerMob());
-                base64StringLayoutOfLand =landDetailsData.getLandLayout();
+                base64StringLayoutOfLand = landDetailsData.getLandLayout();
 //                mLandDetailsSpinnerCopyAgreementWithOwner.setSelection(1);
                 mLandDetailsEditTextDateOfvalidityOfLand.setText(landDetailsData.getLandAgreementValidity());
-            }else{
-                Toast.makeText(Land_Details.this,"No previous saved data available",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(Land_Details.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    private void submitDetails(){
+    private void submitDetails() {
         try {
             hotoTransactionData.setTicketNo(ticketId);
             String landType = "0";
@@ -264,7 +314,7 @@ public class Land_Details extends AppCompatActivity {
             Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
             offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

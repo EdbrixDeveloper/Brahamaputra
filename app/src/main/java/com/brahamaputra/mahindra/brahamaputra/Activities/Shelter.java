@@ -13,36 +13,51 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Shelter extends BaseActivity {
 
 
     private TextView mShelterTextViewPhysicalConditionOfShelterPlatform;
-    private SearchableSpinner mShelterSpinnerPhysicalConditionOfShelterPlatform;
+    private TextView mShelterTextViewPhysicalConditionOfShelterPlatformVal;
     private TextView mShelterTextViewNumberOfBtsInsideShelter;
-    private SearchableSpinner mShelterSpinnerNumberOfBtsInsideShelter;
+    private TextView mShelterTextViewNumberOfBtsInsideShelterVal;
     private TextView mShelterTextViewNumberOfBtsOutsideShelter;
-    private SearchableSpinner mShelterSpinnerNumberOfBtsOutsideShelter;
+    private TextView mShelterTextViewNumberOfBtsOutsideShelterVal;
     private TextView mShelterTextViewShelterLock;
-    private SearchableSpinner mShelterSpinnerShelterLock;
+    private TextView mShelterTextViewShelterLockVal;
     private TextView mShelterTextViewOutdoorShelterLock;
-    private SearchableSpinner mShelterSpinnerOutdoorShelterLock;
+    private TextView mShelterTextViewOutdoorShelterLockVal;
     private TextView mShelterTextViewIgbStatus;
-    private SearchableSpinner mShelterSpinnerIgbStatus;
+    private TextView mShelterTextViewIgbStatusVal;
     private TextView mShelterTextViewEgbStatus;
-    private SearchableSpinner mShelterSpinnerEgbStatus;
+    private TextView mShelterTextViewEgbStatusVal;
     private TextView mShelterTextViewNoOfOdcAvailable;
-    private SearchableSpinner mShelterSpinnerNoOfOdcAvailable;
+    private TextView mShelterTextViewNoOfOdcAvailableVal;
     private TextView mShelterTextViewOdcLock;
-    private SearchableSpinner mShelterSpinnerOdcLock;
+    private TextView mShelterTextViewOdcLockVal;
+
+
+    String str_physicalConditionOfShelterPlatform;
+    String str_numberOfBtsInsideShelter;
+    String str_numberOfBtsOutsideShelter;
+    String str_shelterLock;
+    String str_outdoorShelterLock;
+    String str_igbStatus;
+    String str_egbStatus;
+    String str_noOfOdcAvailable;
+    String str_odcLock;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,44 +65,235 @@ public class Shelter extends BaseActivity {
         setContentView(R.layout.activity_shelter);
         this.setTitle("Shelter");
         assignViews();
+        initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
+    private void initCombo() {
+        mShelterTextViewPhysicalConditionOfShelterPlatformVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_physicalConditionOfShelterPlatform))),
+                        "Physical Condition of Shelter and Platform",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_physicalConditionOfShelterPlatform = item.get(position);
+                        mShelterTextViewPhysicalConditionOfShelterPlatformVal.setText(str_physicalConditionOfShelterPlatform);
+                    }
+                });
+            }
+        });
+
+        mShelterTextViewNumberOfBtsInsideShelterVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_numberOfBtsInsideShelter))),
+                        "Number of BTS Inside Shelter",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfBtsInsideShelter = item.get(position);
+                        mShelterTextViewNumberOfBtsInsideShelterVal.setText(str_numberOfBtsInsideShelter);
+                    }
+                });
+            }
+        });
+
+        mShelterTextViewNumberOfBtsOutsideShelterVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_numberOfBtsOutsideShelter))),
+                        "Number of BTS Outside Shelter",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfBtsOutsideShelter = item.get(position);
+                        mShelterTextViewNumberOfBtsOutsideShelterVal.setText(str_numberOfBtsOutsideShelter);
+                    }
+                });
+            }
+        });
+
+        mShelterTextViewShelterLockVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_shelterLock))),
+                        "Shelter Lock",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_shelterLock = item.get(position);
+                        mShelterTextViewShelterLockVal.setText(str_shelterLock);
+                    }
+                });
+            }
+        });
+
+
+        mShelterTextViewOutdoorShelterLockVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_outdoorShelterLock))),
+                        "Outdoor Shelter Lock",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_outdoorShelterLock = item.get(position);
+                        mShelterTextViewOutdoorShelterLockVal.setText(str_outdoorShelterLock);
+                    }
+                });
+            }
+        });
+
+        mShelterTextViewIgbStatusVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_igbStatus))),
+                        "IGB Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_igbStatus = item.get(position);
+                        mShelterTextViewIgbStatusVal.setText(str_igbStatus);
+                    }
+                });
+            }
+        });
+
+        mShelterTextViewEgbStatusVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_egbStatus))),
+                        "EGB Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_egbStatus = item.get(position);
+                        mShelterTextViewEgbStatusVal.setText(str_egbStatus);
+                    }
+                });
+            }
+        });
+
+        mShelterTextViewNoOfOdcAvailableVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_noOfOdcAvailable))),
+                        "NO OF ODC Available",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noOfOdcAvailable = item.get(position);
+                        mShelterTextViewNoOfOdcAvailableVal.setText(str_noOfOdcAvailable);
+                    }
+                });
+            }
+        });
+
+
+        mShelterTextViewOdcLockVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_odcLock))),
+                        "ODC Lock",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_odcLock = item.get(position);
+                        mShelterTextViewOdcLockVal.setText(str_odcLock);
+                    }
+                });
+            }
+        });
+    }
 
     private void assignViews() {
         mShelterTextViewPhysicalConditionOfShelterPlatform = (TextView) findViewById(R.id.shelter_textView_physicalConditionOfShelterPlatform);
-        mShelterSpinnerPhysicalConditionOfShelterPlatform = (SearchableSpinner) findViewById(R.id.shelter_spinner_physicalConditionOfShelterPlatform);
+        mShelterTextViewPhysicalConditionOfShelterPlatformVal = (TextView) findViewById(R.id.shelter_textView_physicalConditionOfShelterPlatform_val);
         mShelterTextViewNumberOfBtsInsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsInsideShelter);
-        mShelterSpinnerNumberOfBtsInsideShelter = (SearchableSpinner) findViewById(R.id.shelter_spinner_numberOfBtsInsideShelter);
+        mShelterTextViewNumberOfBtsInsideShelterVal = (TextView) findViewById(R.id.shelter_textView_numberOfBtsInsideShelter_val);
         mShelterTextViewNumberOfBtsOutsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsOutsideShelter);
-        mShelterSpinnerNumberOfBtsOutsideShelter = (SearchableSpinner) findViewById(R.id.shelter_Spinner_numberOfBtsOutsideShelter);
+        mShelterTextViewNumberOfBtsOutsideShelterVal = (TextView) findViewById(R.id.shelter_textView_numberOfBtsOutsideShelter_val);
         mShelterTextViewShelterLock = (TextView) findViewById(R.id.shelter_textView_shelterLock);
-        mShelterSpinnerShelterLock = (SearchableSpinner) findViewById(R.id.shelter_Spinner_shelterLock);
+        mShelterTextViewShelterLockVal = (TextView) findViewById(R.id.shelter_textView_shelterLock_val);
         mShelterTextViewOutdoorShelterLock = (TextView) findViewById(R.id.shelter_textView_outdoorShelterLock);
-        mShelterSpinnerOutdoorShelterLock = (SearchableSpinner) findViewById(R.id.shelter_Spinner_outdoorShelterLock);
+        mShelterTextViewOutdoorShelterLockVal = (TextView) findViewById(R.id.shelter_textView_outdoorShelterLock_val);
         mShelterTextViewIgbStatus = (TextView) findViewById(R.id.shelter_textView_igbStatus);
-        mShelterSpinnerIgbStatus = (SearchableSpinner) findViewById(R.id.shelter_Spinner_igbStatus);
+        mShelterTextViewIgbStatusVal = (TextView) findViewById(R.id.shelter_textView_igbStatus_val);
         mShelterTextViewEgbStatus = (TextView) findViewById(R.id.shelter_textView_egbStatus);
-        mShelterSpinnerEgbStatus = (SearchableSpinner) findViewById(R.id.shelter_Spinner_egbStatus);
+        mShelterTextViewEgbStatusVal = (TextView) findViewById(R.id.shelter_textView_egbStatus_val);
         mShelterTextViewNoOfOdcAvailable = (TextView) findViewById(R.id.shelter_textView_noOfOdcAvailable);
-        mShelterSpinnerNoOfOdcAvailable = (SearchableSpinner) findViewById(R.id.shelter_Spinner_noOfOdcAvailable);
+        mShelterTextViewNoOfOdcAvailableVal = (TextView) findViewById(R.id.shelter_textView_noOfOdcAvailable_val);
         mShelterTextViewOdcLock = (TextView) findViewById(R.id.shelter_textView_odcLock);
-        mShelterSpinnerOdcLock = (SearchableSpinner) findViewById(R.id.shelter_Spinner_odcLock);
+        mShelterTextViewOdcLockVal = (TextView) findViewById(R.id.shelter_textView_odcLock_val);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-
-        mShelterSpinnerPhysicalConditionOfShelterPlatform.setTitle("Physical Condition of Shelter and Platform");
-        mShelterSpinnerNumberOfBtsInsideShelter.setTitle("Number of BTS Inside Shelter");
-        mShelterSpinnerNumberOfBtsOutsideShelter.setTitle("Number of BTS Outside Shelter");
-        mShelterSpinnerShelterLock.setTitle("Shelter Lock");
-        mShelterSpinnerOutdoorShelterLock.setTitle("Outdoor Shelter Lock");
-        mShelterSpinnerIgbStatus.setTitle("IGB Status");
-        mShelterSpinnerEgbStatus.setTitle("EGB Status");
-        mShelterSpinnerNoOfOdcAvailable.setTitle("NO OF ODC Available");
-        mShelterSpinnerOdcLock.setTitle("ODC Lock");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,5 +318,7 @@ public class Shelter extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
 

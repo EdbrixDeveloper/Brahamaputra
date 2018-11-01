@@ -1,52 +1,37 @@
 <resources>
     <string name="app_name">Bramhaputra</string>
 
-    <string name="layout_landDetails_LandType_SpinnerPrompt">Choose</string>
-
-    <string-array name="layout_landDetails_LandType_SpinnerAarrays">
-        <item>Free Hold</item>
-        <item>Leased</item>
-        <item>Rented</item>
-    </string-array>
-
-    <string name="layout_landDetails_copyAgreementWithOwner_SpinnerPrompt">Choose</string>
-
-    <string-array name="layout_landDetails_copyAgreementWithOwner_SpinnerAarrays">
-        <item>Available</item>
-        <item>Not Available</item>
-    </string-array>
-
     <string name="textview_textStyle">bold</string>
 
     <!--Tower Detail screen Array for spinners -->
-    <string-array name="spinner_towerDetail_tower">
+    <string-array name="array_towerDetail_tower">
         <item>GBT</item>
         <item>Mast</item>
         <item>RTT</item>
     </string-array>
 
-    <string-array name="spinner_towerDetail_typeOfTower">
+    <string-array name="array_towerDetail_typeOfTower">
         <item>Angular</item>
         <item>Tubular</item>
 
     </string-array>
 
-    <string-array name="spinner_towerDetail_signboard">
+    <string-array name="array_towerDetail_signboard">
         <item>No</item>
         <item>Yes</item>
     </string-array>
 
-    <string-array name="spinner_towerDetail_dangerSignageboard">
+    <string-array name="array_towerDetail_dangerSignageboard">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_towerDetail_cautionSignageboard">
+    <string-array name="array_towerDetail_cautionSignageboard">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_towerDetail_warningSignageboard">
+    <string-array name="array_towerDetail_warningSignageboard">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
@@ -56,7 +41,7 @@
         <item>Outdoor</item>
     </string-array>
 
-    <string-array name="spinner_userHotoTrans_sourceOfPower">
+    <string-array name="array_userHotoTrans_sourceOfPower">
         <item>Non DG</item>
         <item>Non EB</item>
         <item>Std Site(EB+DG)</item>
@@ -87,64 +72,64 @@
     </string-array>
 
 
-    <string-array name="spinner_landDetails_LandType">
+    <string-array name="array_landDetails_LandType">
         <item>Free Hold</item>
         <item>Leased</item>
         <item>Rented</item>
     </string-array>
 
-    <string-array name="spinner_landDetails_copyAgreementWithOwner">
+    <string-array name="array_landDetails_copyAgreementWithOwner">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_earthResistanceTower_typeOfEarth">
+    <string-array name="array_earthResistanceTower_typeOfEarth">
         <item>Both</item>
         <item>Plate Earth</item>
         <item>Ring Earth</item>
     </string-array>
 
-    <string-array name="spinner_earthResistanceEquipment_typeOfEarth">
+    <string-array name="array_earthResistanceEquipment_typeOfEarth">
         <item>Both</item>
         <item>Plate Earth</item>
         <item>Ring Earth</item>
     </string-array>
 
 
-    <string-array name="spinner_electricConnection_typrOfElectricConnection">
+    <string-array name="array_electricConnection_typrOfElectricConnection">
         <item>1-Phase AC</item>
         <item>3-Phase AC</item>
         <item>Both</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_tariff">
+    <string-array name="array_electricConnection_tariff">
         <item>Commercial</item>
         <item>Domestic</item>
         <item>Mixed</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_copyOfElectricBills">
+    <string-array name="array_electricConnection_copyOfElectricBills">
         <item>Collected</item>
         <item>Not Collected</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_ebSupplier">
+    <string-array name="array_electricConnection_ebSupplier">
         <item>Dedicated Connection</item>
         <item>Not Available</item>
         <item>Shared Connection</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_ebStatus">
+    <string-array name="array_electricConnection_ebStatus">
         <item>Available</item>
         <item>Disconnected</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_transformerWorkingCondition">
+    <string-array name="array_electricConnection_transformerWorkingCondition">
         <item>Not Working</item>
         <item>Working</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_ebMeterBoxStatus">
+    <string-array name="array_electricConnection_ebMeterBoxStatus">
         <item>Corroded and Painting Required</item>
         <item>Fully Damage</item>
         <item>Minor Damage</item>
@@ -152,13 +137,13 @@
         <item>OK</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_ebMeterWorkingStatus">
+    <string-array name="array_electricConnection_ebMeterWorkingStatus">
         <item>Display Faulty</item>
         <item>Faulty</item>
         <item>Working</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_typeOfPayment">
+    <string-array name="array_electricConnection_typeOfPayment">
         <item>Post Paid</item>
         <item>Pre Paid</item>
         <!--<item>DD</item>
@@ -167,30 +152,30 @@
         <item>NEFT</item>-->
     </string-array>
 
-    <string-array name="spinner_electricConnection_ebPaymentSchedule">
+    <string-array name="array_electricConnection_ebPaymentSchedule">
         <item>Bimonthly</item>
         <item>Monthly</item>
         <item>Quarterly</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_safetyFuseUnit">
+    <string-array name="array_electricConnection_safetyFuseUnit">
         <item>Available</item>
         <item>Not Available</item>
         <item>Not Required</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_kitKatClayFuseStatus">
+    <string-array name="array_electricConnection_kitKatClayFuseStatus">
         <item>Available</item>
         <item>Fuse Damage</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_ebNeutralEarthing">
+    <string-array name="array_electricConnection_ebNeutralEarthing">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_electricConnection_ebBillDate">
+    <string-array name="array_electricConnection_ebBillDate">
         <item>01</item>
         <item>02</item>
         <item>03</item>
@@ -225,22 +210,22 @@
     </string-array>
 
 
-    <string-array name="spinner_solarPowerSystem_available">
+    <string-array name="array_solarPowerSystem_available">
         <item>No</item>
         <item>Yes</item>
     </string-array>
 
-    <string-array name="spinner_solarPowerSystem_assetOwner">
+    <string-array name="array_solarPowerSystem_assetOwner">
         <item>BSNL Supplied Asset</item>
         <item>M and M Supplied Asset</item>
     </string-array>
 
-    <string-array name="spinner_solarPowerSystem_cellPanel">
+    <string-array name="array_solarPowerSystem_cellPanel">
         <item>Cell</item>
         <item>Panel</item>
     </string-array>
 
-    <string-array name="spinner_solarPowerSystem_amc">
+    <string-array name="array_solarPowerSystem_amc">
         <item>No</item>
         <item>Yes</item>
     </string-array>
@@ -745,7 +730,7 @@
         <item>Working</item>
     </string-array>
 
-    <string-array name="spinner_airConditioners_noOfAirConditionersACprovided">
+    <string-array name="array_airConditioners_noOfAirConditionersACprovided">
         <item>Non AC</item>
         <item>0</item>
         <item>1</item>
@@ -754,7 +739,7 @@
         <item>4</item>
     </string-array>
 
-    <string-array name="spinner_airConditioners_numberofACInWorkingCondition">
+    <string-array name="array_airConditioners_numberofACInWorkingCondition">
         <item>Non AC</item>
         <item>0</item>
         <item>1</item>
@@ -763,35 +748,35 @@
         <item>4</item>
     </string-array>
 
-    <string-array name="spinner_airConditioners_assetOwner">
+    <string-array name="array_airConditioners_assetOwner">
         <item>BSNL Supplied Asset</item>
         <item>M and M Supplied Asset</item>
         <item>M and M Supplied Revenue</item>
     </string-array>
 
-    <string-array name="spinner_airConditioners_typeOfAcSpliWindow">
+    <string-array name="array_airConditioners_typeOfAcSpliWindow">
         <item>Compound Unit</item>
         <item>Split AC</item>
         <item>Window AC</item>
     </string-array>
 
-    <string-array name="spinner_airConditioners_amc">
+    <string-array name="array_airConditioners_amc">
         <item>No</item>
         <item>Yes</item>
     </string-array>
 
-    <string-array name="spinner_airConditioners_workingCondition">
+    <string-array name="array_airConditioners_workingCondition">
         <item>Not Working</item>
         <item>Working</item>
     </string-array>
 
 
-    <string-array name="spinner_shelter_physicalConditionOfShelterPlatform">
+    <string-array name="array_shelter_physicalConditionOfShelterPlatform">
         <item>Damaged</item>
         <item>Good</item>
     </string-array>
 
-    <string-array name="spinner_shelter_numberOfBtsInsideShelter">
+    <string-array name="array_shelter_numberOfBtsInsideShelter">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -799,7 +784,7 @@
         <item>4</item>
     </string-array>
 
-    <string-array name="spinner_shelter_numberOfBtsOutsideShelter">
+    <string-array name="array_shelter_numberOfBtsOutsideShelter">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -807,29 +792,29 @@
         <item>4</item>
     </string-array>
 
-    <string-array name="spinner_shelter_shelterLock">
+    <string-array name="array_shelter_shelterLock">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_shelter_outdoorShelterLock">
+    <string-array name="array_shelter_outdoorShelterLock">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_shelter_igbStatus">
+    <string-array name="array_shelter_igbStatus">
         <item>Connected</item>
         <item>Not available</item>
         <item>Not Connected</item>
     </string-array>
 
-    <string-array name="spinner_shelter_egbStatus">
+    <string-array name="array_shelter_egbStatus">
         <item>Connected</item>
         <item>Not available</item>
         <item>Not Connected</item>
     </string-array>
 
-    <string-array name="spinner_shelter_noOfOdcAvailable">
+    <string-array name="array_shelter_noOfOdcAvailable">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -838,7 +823,7 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="spinner_shelter_odcLock">
+    <string-array name="array_shelter_odcLock">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
@@ -846,26 +831,26 @@
 
     ////////////////////////
 
-    <string-array name="spinner_powerBackupsDg_noOfEngineAlternatorSetsprovided">
+    <string-array name="array_powerBackupsDg_noOfEngineAlternatorSetsprovided">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_numberOfWorkingDg">
+    <string-array name="array_powerBackupsDg_numberOfWorkingDg">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_assetOwner">
+    <string-array name="array_powerBackupsDg_assetOwner">
         <item>BSNL Supplied Asset</item>
         <item>M and M Supplied Asset</item>
         <item>M and M Supplied Revenue</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_manufacturerMakeModel">
+    <string-array name="array_powerBackupsDg_manufacturerMakeModel">
         <item>Ashok Layland</item>
         <item>Caterpiller</item>
         <item>Cummins</item>
@@ -883,7 +868,7 @@
         <item>Perkins</item>
         <item>Volvo</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_capacityInKva">
+    <string-array name="array_powerBackupsDg_capacityInKva">
         <item>5KVA</item>
         <item>10KVA</item>
         <item>15KVA</item>
@@ -895,25 +880,25 @@
         <item>62KVA</item>
         <item>Above 70KVA</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_autoManual">
+    <string-array name="array_powerBackupsDg_autoManual">
         <item>Auto</item>
         <item>Manual</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_amc">
+    <string-array name="array_powerBackupsDg_amc">
         <item>No</item>
         <item>Yes</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_dgWorkingType">
+    <string-array name="array_powerBackupsDg_dgWorkingType">
         <item>Air Cooled</item>
         <item>Water Cooled</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_dgMainAlternatorType">
+    <string-array name="array_powerBackupsDg_dgMainAlternatorType">
         <item>01 PH AVR</item>
         <item>01 PH Capacitor</item>
         <item>03 PH AVR</item>
         <item>03 PH Capacitor</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_dgMainAlternatorMake">
+    <string-array name="array_powerBackupsDg_dgMainAlternatorMake">
         <item>Caterpiller</item>
         <item>Crompton</item>
         <item>Cummins</item>
@@ -924,7 +909,7 @@
         <item>Stamford</item>
         <item>Trident</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_dgCanopyStatus">
+    <string-array name="array_powerBackupsDg_dgCanopyStatus">
         <item>Canopy Water Leak</item>
         <item>Corroded and Painting Required</item>
         <item>Fully Damaged</item>
@@ -932,33 +917,33 @@
         <item>Open DG</item>
         <item>Partially Damaged</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_dgStartingBatteryStatus">
+    <string-array name="array_powerBackupsDg_dgStartingBatteryStatus">
         <item>Not Available</item>
         <item>Not Working</item>
         <item>Working Good</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_chargingAlternator">
+    <string-array name="array_powerBackupsDg_chargingAlternator">
         <item>Not Available</item>
         <item>Not Working</item>
         <item>Working Good</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_batteryCharger">
+    <string-array name="array_powerBackupsDg_batteryCharger">
         <item>Not Available</item>
         <item>Not Working</item>
         <item>Working Good</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_dgAvrWorkingStatus">
+    <string-array name="array_powerBackupsDg_dgAvrWorkingStatus">
         <item>Not Available</item>
         <item>Not Working</item>
         <item>Working Good</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_fuelTankPosition">
+    <string-array name="array_powerBackupsDg_fuelTankPosition">
         <item>Bottom of DG</item>
         <item>In Canopy Side</item>
         <item>Outside Canopy</item>
         <item>Top of Canopy</item>
     </string-array>
-    <string-array name="spinner_powerBackupsDg_workingCondition">
+    <string-array name="array_powerBackupsDg_workingCondition">
         <item>Not Working</item>
         <item>Working</item>
     </string-array>
@@ -966,13 +951,13 @@
 
     /////////////////////////
 
-    <string-array name="spinner_powerPlantDetails_assetOwner">
+    <string-array name="array_powerPlantDetails_assetOwner">
         <item>BSNL Supplied Asset</item>
         <item>M and M Supplied Asset</item>
         <item>M and M Supplied Revenue</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_numberOfPowerPlant">
+    <string-array name="array_powerPlantDetails_numberOfPowerPlant">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -981,7 +966,7 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_manufacturerMakeModel">
+    <string-array name="array_powerPlantDetails_manufacturerMakeModel">
         <item>ACME</item>
         <item>Amara Raja</item>
         <item>Arisys</item>
@@ -1049,7 +1034,7 @@
         <item>Zavline</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_numberModuleSlots">
+    <string-array name="array_powerPlantDetails_numberModuleSlots">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -1060,16 +1045,16 @@
         <item>8</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_powerPlantEarthingStatus">
+    <string-array name="array_powerPlantDetails_powerPlantEarthingStatus">
         <item>Available</item>
         <item>Not Available</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_typeOfPowerPlantCommercialSmps">
+    <string-array name="array_powerPlantDetails_typeOfPowerPlantCommercialSmps">
         <item>Commercial</item>
         <item>SMPs</item>
     </string-array>
-    <string-array name="spinner_powerPlantDetails_numberOfModules">
+    <string-array name="array_powerPlantDetails_numberOfModules">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -1081,7 +1066,7 @@
         <item>8</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_noOfFaultyModules">
+    <string-array name="array_powerPlantDetails_noOfFaultyModules">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -1093,13 +1078,13 @@
         <item>8</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_spdStatus">
+    <string-array name="array_powerPlantDetails_spdStatus">
         <item>Faulty</item>
         <item>Not Available</item>
         <item>WORKING</item>
     </string-array>
 
-    <string-array name="spinner_powerPlantDetails_workingCondition">
+    <string-array name="array_powerPlantDetails_workingCondition">
         <item>Not Working</item>
         <item>Working</item>
     </string-array>

@@ -15,9 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
-            android:paddingBottom="@dimen/app_normal_margin"
             android:orientation="vertical"
-            >
+            android:paddingBottom="@dimen/app_normal_margin">
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,8 +31,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="QR Code Scan"
-                     />
+                    android:text="QR Code Scan" />
 
 
                 <ImageView
@@ -61,20 +59,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Asset Owner"
-                     />
+                    android:text="Asset Owner" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_assetOwner"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_assetOwner_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_assetOwner"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -90,20 +85,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of Power Plant"
-                     />
+                    android:text="Number of Power Plant" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_numberOfPowerPlant"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_numberOfPowerPlant_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_numberOfPowerPlant"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -119,20 +111,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Manufacturer/Make"
-                     />
+                    android:text="Manufacturer/Make" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_manufacturerMakeModel"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_manufacturerMakeModel_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_manufacturerMakeModel"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -148,8 +137,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Power Plant Model"
-                     />
+                    android:text="Power Plant Model" />
 
 
                 <EditText
@@ -159,9 +147,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Power Plant Model"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -177,20 +165,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number Module Slots"
-                     />
+                    android:text="Number Module Slots" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_numberModuleSlots"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_numberModuleSlots_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_numberModuleSlots"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -206,20 +191,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Power Plant Earthing Status"
-                     />
+                    android:text="Power Plant Earthing Status" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_powerPlantEarthingStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_powerPlantEarthingStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_powerPlantEarthingStatus"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -244,10 +226,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter DC Load"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -263,8 +244,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Power Plant Serial Number"
-                     />
+                    android:text="Power Plant Serial Number" />
 
 
                 <EditText
@@ -274,10 +254,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Serial Number"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                     />
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -293,19 +272,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type of the Power Plant [Commercial/SMPs]"
-                     />
+                    android:text="Type of the Power Plant [Commercial/SMPs]" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_typeOfPowerPlantCommercialSmps"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_typeOfPowerPlantCommercialSmps_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_typeOfPowerPlantCommercialSmps"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -330,10 +306,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Capacity"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -349,19 +324,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of Modules"
-                     />
+                    android:text="Number of Modules" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_numberOfModules"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_numberOfModules_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_numberOfModules"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -377,20 +349,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="No. of Faulty Modules"
-                     />
+                    android:text="No. of Faulty Modules" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_noOfFaultyModules"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_noOfFaultyModulese_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_noOfFaultyModules"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -416,10 +385,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter SMPS(KW)"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -444,10 +412,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter SMPS Capacity"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -463,19 +430,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="SPD Status"
-                     />
+                    android:text="SPD Status" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_spdStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_spdStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_spdStatus"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -491,19 +455,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Working Condition"
-                     />
+                    android:text="Working Condition" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerPlantDetails_Spinner_workingCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerPlantDetails_textView_workingCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerPlantDetails_workingCondition"
-                    android:textAlignment="viewStart"
-                    
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -520,8 +481,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Nature of Problem"
-                     />
+                    android:text="Nature of Problem" />
 
                 <EditText
                     android:id="@+id/powerPlantDetails_editText_natureOfProblem"
@@ -530,9 +490,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Nature of Problem"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionDone"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 

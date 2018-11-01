@@ -9,8 +9,8 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_marginBottom="@dimen/app_normal_margin">
+        android:layout_marginBottom="@dimen/app_normal_margin"
+        android:fillViewport="true">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -34,16 +34,14 @@
                     android:text="No.of Engine Alternator Sets provided" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_spinner_noOfEngineAlternatorSetsprovided"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_noOfEngineAlternatorSetsprovided_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_noOfEngineAlternatorSetsprovided"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -64,16 +62,14 @@
                     android:text="Number of Working DG" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_spinner_numberOfWorkingDg"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_numberOfWorkingDg"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -119,24 +115,22 @@
                     android:text="Asset Owner" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_assetOwner"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_assetOwner_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_assetOwner"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/app_min_padding"
                 android:padding="@dimen/app_min_padding"
+                android:paddingBottom="@dimen/app_min_padding"
                 android:weightSum="1">
                 <!--style="@style/FontStyle"-->
                 <TextView
@@ -173,16 +167,14 @@
                     android:text="Manufacturer/Make/Model" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_manufacturerMakeModel"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_manufacturerMakeModel_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_manufacturerMakeModel"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -201,16 +193,14 @@
                     android:text="Capacity in KVA" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_capacityInKva"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_capacityInKva_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_capacityInKva"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -230,16 +220,14 @@
                     android:text="Auto/ Manual" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_autoManual"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_autoManual_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_autoManual"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -265,10 +253,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Diesel Tank"
-                    android:inputType="numberDecimal|none"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal|none"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -322,10 +309,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Average"
-                    android:inputType="numberDecimal|none"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal|none"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -344,16 +330,14 @@
                     android:text="AMC(Yes/No)" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_amc"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_amc_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_amc"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -401,16 +385,14 @@
                     android:text="DG Working Type" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_dgWorkingType"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgWorkingType_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_dgWorkingType"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -436,10 +418,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter HMR Reading"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -464,9 +445,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Serial Number"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -487,16 +468,14 @@
                     android:text="DG Main Alternator Type" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_dgMainAlternatorType"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorType_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_dgMainAlternatorType"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -517,16 +496,14 @@
                     android:text="DG Main Alternator Make" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_spinner_dgMainAlternatorMake"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorMake_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_dgMainAlternatorMake"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -552,9 +529,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Alternator Serial"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -573,16 +550,14 @@
                     android:text="DG Canopy Status" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_dgCanopyStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgCanopyStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_dgCanopyStatus"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -601,16 +576,14 @@
                     android:text="DG Starting Battery Status" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_dgStartingBatteryStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgStartingBatteryStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_dgStartingBatteryStatus"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -629,16 +602,14 @@
                     android:text="Charging Alternator" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_chargingAlternator"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_chargingAlternator_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_chargingAlternator"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -658,16 +629,14 @@
                     android:text="Battery Charger" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_batteryCharger"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_batteryCharger_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_batteryCharger"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -693,10 +662,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Diesel Stock"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -721,10 +689,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter GCU Run Hrs"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -749,10 +716,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter GCU KWH"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -771,16 +737,14 @@
                     android:text="DG AVR working Status" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_dgAvrWorkingStatus"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_dgAvrWorkingStatus_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_dgAvrWorkingStatus"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -799,16 +763,14 @@
                     android:text="Fuel Tank Position" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_fuelTankPosition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_fuelTankPosition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_fuelTankPosition"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -828,16 +790,14 @@
                     android:text="Working Condition" />
 
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/powerBackupsDg_Spinner_workingCondition"
-                    style="@style/SpinnerTheme"
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_workingCondition_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:entries="@array/spinner_powerBackupsDg_workingCondition"
-                    android:textAlignment="viewStart"
-
-                    app:hintText="Select" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -864,9 +824,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Nature of Problem"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>

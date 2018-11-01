@@ -16,7 +16,11 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UserHotoTransactionActivity extends BaseActivity {
 
@@ -33,8 +37,10 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private EditText mUserHotoTransEditTextTypeOfSites;
 
     private TextView mUserHotoTransTextViewSourceOfPower;
-    private SearchableSpinner mUserHotoTransSpinnerSourceOfPower;
+    private TextView mUserHotoTransSpinnerSourceOfPowerVal;
     private Button mUserHotoTransButtonSubmitHotoTrans;
+
+    String str_sourceOfPower;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         this.setTitle(id);
 
         assignViews();
+        initCombo();
         disableInput();
         checkNetworkConnection();
 
@@ -55,6 +62,28 @@ public class UserHotoTransactionActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
+            }
+        });
+    }
+
+    private void initCombo() {
+        mUserHotoTransSpinnerSourceOfPowerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(UserHotoTransactionActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_userHotoTrans_sourceOfPower))),
+                        "Select",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_sourceOfPower = item.get(position);
+                        mUserHotoTransSpinnerSourceOfPowerVal.setText(str_sourceOfPower);
+                    }
+                });
             }
         });
     }
@@ -94,11 +123,12 @@ public class UserHotoTransactionActivity extends BaseActivity {
         mUserHotoTransEditTextTypeOfSites = (EditText) findViewById(R.id.userHotoTrans_editText_typeOfSite);
 
         mUserHotoTransTextViewSourceOfPower = (TextView) findViewById(R.id.userHotoTrans_textView_sourceOfPower);
-        mUserHotoTransSpinnerSourceOfPower = (SearchableSpinner) findViewById(R.id.userHotoTrans_spinner_sourceOfPower);
+        mUserHotoTransSpinnerSourceOfPowerVal = (TextView) findViewById(R.id.userHotoTrans_textView_sourceOfPower_val);
         mUserHotoTransButtonSubmitHotoTrans = (Button) findViewById(R.id.userHotoTrans_button_submitHotoTrans);
 
-        mUserHotoTransSpinnerSourceOfPower.setTitle("Source of Power");
+        //mUserHotoTransSpinnerSourceOfPower.setTitle("Source of Power");
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

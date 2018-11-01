@@ -12,66 +12,47 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class Tower_Detail extends AppCompatActivity {
+
     private TextView mTowerDetailTextViewTower;
-    private SearchableSpinner mTowerDetailSpinnerTower;
+    private TextView mTowerDetailTextViewTowerVal;
     private TextView mTowerDetailTextViewTypeOfTower;
-    private SearchableSpinner mTowerDetailSpinnerTypeOfTower;
+    private TextView mTowerDetailTextViewTypeOfTowerVal;
     private TextView mTowerDetailTextViewHeightOfTower;
     private EditText mTowerDetailEditTextHeightOfTower;
     private TextView mTowerDetailTextViewDateOfPaintingOfTheTower;
     private EditText mTowerDetailEditTextDateOfPaintingOfTheTower;
     private TextView mTowerDetailTextViewSignboard;
-    private SearchableSpinner mTowerDetailSpinnerSignboard;
+    private TextView mTowerDetailTextViewSignboardVal;
     private TextView mTowerDetailTextViewDangerSignageboard;
-    private SearchableSpinner mTowerDetailSpinnerDangerSignageboard;
+    private TextView mTowerDetailSpinnerDangerSignageboardVal;
     private TextView mTowerDetailTextViewCautionSignageboard;
-    private SearchableSpinner mTowerDetailSpinnerCautionSignageboard;
+    private TextView mTowerDetailTextViewCautionSignageboardVal;
     private TextView mTowerDetailTextViewWarningSignageboard;
-    private SearchableSpinner mTowerDetailSpinnerWarningSignageboard;
-
-    private void assignViews() {
-        mTowerDetailTextViewTower = (TextView) findViewById(R.id.towerDetail_textView_tower);
-        mTowerDetailSpinnerTower = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_tower);
-        mTowerDetailTextViewTypeOfTower = (TextView) findViewById(R.id.towerDetail_textView_typeOfTower);
-        mTowerDetailSpinnerTypeOfTower = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_typeOfTower);
-        mTowerDetailTextViewHeightOfTower = (TextView) findViewById(R.id.towerDetail_textView_HeightOfTower);
-        mTowerDetailEditTextHeightOfTower = (EditText) findViewById(R.id.towerDetail_editText_heightOfTower);
-        mTowerDetailTextViewDateOfPaintingOfTheTower = (TextView) findViewById(R.id.towerDetail_textView_dateOfPaintingOfTheTower);
-        mTowerDetailEditTextDateOfPaintingOfTheTower = (EditText) findViewById(R.id.towerDetail_editText_dateOfPaintingOfTheTower);
-        mTowerDetailTextViewSignboard = (TextView) findViewById(R.id.towerDetail_textView_signboard);
-        mTowerDetailSpinnerSignboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_signboard);
-        mTowerDetailTextViewDangerSignageboard = (TextView) findViewById(R.id.towerDetail_textView_dangerSignageboard);
-        mTowerDetailSpinnerDangerSignageboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_dangerSignageboard);
-        mTowerDetailTextViewCautionSignageboard = (TextView) findViewById(R.id.towerDetail_textView_cautionSignageboard);
-        mTowerDetailSpinnerCautionSignageboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_cautionSignageboard);
-        mTowerDetailTextViewWarningSignageboard = (TextView) findViewById(R.id.towerDetail_textView_warningSignageboard);
-        mTowerDetailSpinnerWarningSignageboard = (SearchableSpinner) findViewById(R.id.towerDetail_spinner_warningSignageboard);
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-
-        mTowerDetailSpinnerTower.setTitle("Tower");
-        mTowerDetailSpinnerTypeOfTower.setTitle("Type of tower");
-        mTowerDetailSpinnerSignboard.setTitle("Sign Board");
-        mTowerDetailSpinnerDangerSignageboard.setTitle("DANGER Signage Board");
-        mTowerDetailSpinnerCautionSignageboard.setTitle("CAUTION Signage Board");
-        mTowerDetailSpinnerWarningSignageboard.setTitle("WARNING Signage Board");
-
-    }
-
+    private TextView mTowerDetailTextViewWarningSignageboardVal;
 
     final Calendar myCalendar = Calendar.getInstance();
+
+    String str_tower;
+    String str_typeOfTower;
+    String str_signboard;
+    String str_dangerSignageboard;
+    String str_cautionSignageboard;
+    String str_warningSignageboardVal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +61,7 @@ public class Tower_Detail extends AppCompatActivity {
         this.setTitle("Tower Detail");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
-
+        initCombo();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -101,6 +82,151 @@ public class Tower_Detail extends AppCompatActivity {
                 new DatePickerDialog(Tower_Detail.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
+    private void assignViews() {
+        mTowerDetailTextViewTower = (TextView) findViewById(R.id.towerDetail_textView_tower);
+        mTowerDetailTextViewTowerVal = (TextView) findViewById(R.id.towerDetail_textView_tower_val);
+        mTowerDetailTextViewTypeOfTower = (TextView) findViewById(R.id.towerDetail_textView_typeOfTower);
+        mTowerDetailTextViewTypeOfTowerVal = (TextView) findViewById(R.id.towerDetail_textView_typeOfTower_val);
+        mTowerDetailTextViewHeightOfTower = (TextView) findViewById(R.id.towerDetail_textView_HeightOfTower);
+        mTowerDetailEditTextHeightOfTower = (EditText) findViewById(R.id.towerDetail_editText_heightOfTower);
+        mTowerDetailTextViewDateOfPaintingOfTheTower = (TextView) findViewById(R.id.towerDetail_textView_dateOfPaintingOfTheTower);
+        mTowerDetailEditTextDateOfPaintingOfTheTower = (EditText) findViewById(R.id.towerDetail_editText_dateOfPaintingOfTheTower);
+        mTowerDetailTextViewSignboard = (TextView) findViewById(R.id.towerDetail_textView_signboard);
+        mTowerDetailTextViewSignboardVal = (TextView) findViewById(R.id.towerDetail_textView_signboard_val);
+        mTowerDetailTextViewDangerSignageboard = (TextView) findViewById(R.id.towerDetail_textView_dangerSignageboard);
+        mTowerDetailSpinnerDangerSignageboardVal = (TextView) findViewById(R.id.towerDetail_spinner_dangerSignageboard_val);
+        mTowerDetailTextViewCautionSignageboard = (TextView) findViewById(R.id.towerDetail_textView_cautionSignageboard);
+        mTowerDetailTextViewCautionSignageboardVal = (TextView) findViewById(R.id.towerDetail_textView_cautionSignageboard_val);
+        mTowerDetailTextViewWarningSignageboard = (TextView) findViewById(R.id.towerDetail_textView_warningSignageboard);
+        mTowerDetailTextViewWarningSignageboardVal = (TextView) findViewById(R.id.towerDetail_textView_warningSignageboard_val);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
+    private void initCombo() {
+        mTowerDetailTextViewTowerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_tower))),
+                        "Tower",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_tower = item.get(position);
+                        mTowerDetailTextViewTowerVal.setText(str_tower);
+                    }
+                });
+            }
+        });
+
+
+        mTowerDetailTextViewTypeOfTowerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_typeOfTower))),
+                        "Type of tower",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeOfTower = item.get(position);
+                        mTowerDetailTextViewTypeOfTowerVal.setText(str_typeOfTower);
+                    }
+                });
+            }
+        });
+
+        mTowerDetailTextViewSignboardVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_signboard))),
+                        "Sign Board",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_signboard = item.get(position);
+                        mTowerDetailTextViewSignboardVal.setText(str_signboard);
+                    }
+                });
+            }
+        });
+
+        mTowerDetailSpinnerDangerSignageboardVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_dangerSignageboard))),
+                        "DANGER Signage Board",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dangerSignageboard = item.get(position);
+                        mTowerDetailSpinnerDangerSignageboardVal.setText(str_dangerSignageboard);
+                    }
+                });
+            }
+        });
+
+        mTowerDetailTextViewCautionSignageboardVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_cautionSignageboard))),
+                        "CAUTION Signage Board",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_cautionSignageboard = item.get(position);
+                        mTowerDetailTextViewCautionSignageboardVal.setText(str_cautionSignageboard);
+                    }
+                });
+            }
+        });
+
+        mTowerDetailTextViewWarningSignageboardVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_warningSignageboard))),
+                        "WARNING Signage Board",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_warningSignageboardVal = item.get(position);
+                        mTowerDetailTextViewWarningSignageboardVal.setText(str_warningSignageboardVal);
+                    }
+                });
             }
         });
     }
@@ -136,4 +262,6 @@ public class Tower_Detail extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
