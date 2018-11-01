@@ -76,7 +76,12 @@ public class UsersHotoListActivity extends BaseActivity {
                 dialog.show();*/
 
 
-                alertDialogManager.Dialog("Information", "Do you want to open this ticket?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Confirmation", "Continue to open this ticket?", "OK", "CANCEL", new AlertDialogManager.onTwoButtonClickListner() {
+                    @Override
+                    public void onNegativeClick() {
+
+                    }
+
                     @Override
                     public void onPositiveClick() {
                         Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
@@ -96,30 +101,30 @@ public class UsersHotoListActivity extends BaseActivity {
 
         // Adding child data
         List<HotoListTiketData> header1  = new ArrayList<HotoListTiketData>();
-        header1.add(new HotoListTiketData("TKT_26_121"));
-        header1.add(new HotoListTiketData("TKT_26_122"));
-        header1.add(new HotoListTiketData("TKT_26_123"));
+        header1.add(new HotoListTiketData("TKT_26_121","Open"));
+        header1.add(new HotoListTiketData("TKT_26_122","Closed"));
+        header1.add(new HotoListTiketData("TKT_26_123","Open"));
         hotoListHeaders.add(new HotoListHeader("26 Oct 2018", ""+header1.size()));
 
         List<HotoListTiketData> header2  = new ArrayList<HotoListTiketData>();
-        header2.add(new HotoListTiketData("TKT_27_131"));
-        header2.add(new HotoListTiketData("TKT_27_132"));
-        header2.add(new HotoListTiketData("TKT_27_133"));
-        header2.add(new HotoListTiketData("TKT_27_134"));
-        header2.add(new HotoListTiketData("TKT_27_135"));
+        header2.add(new HotoListTiketData("TKT_27_131","Open"));
+        header2.add(new HotoListTiketData("TKT_27_132","Closed"));
+        header2.add(new HotoListTiketData("TKT_27_133","Open"));
+        header2.add(new HotoListTiketData("TKT_27_134","Closed"));
+        header2.add(new HotoListTiketData("TKT_27_135","Open"));
         hotoListHeaders.add(new HotoListHeader("27 Oct 2018", ""+header2.size()));
 
         List<HotoListTiketData> header3  = new ArrayList<HotoListTiketData>();
-        header3.add(new HotoListTiketData("TKT_28_121"));
-        header3.add(new HotoListTiketData("TKT_28_122"));
-        header3.add(new HotoListTiketData("TKT_28_123"));
+        header3.add(new HotoListTiketData("TKT_28_121","Open"));
+        header3.add(new HotoListTiketData("TKT_28_122","Closed"));
+        header3.add(new HotoListTiketData("TKT_28_123","Open"));
         hotoListHeaders.add(new HotoListHeader("28 Oct 2018", ""+header3.size()));
 
         List<HotoListTiketData> header4  = new ArrayList<HotoListTiketData>();
-        header4.add(new HotoListTiketData("TKT_29_121"));
-        header4.add(new HotoListTiketData("TKT_29_122"));
-        header4.add(new HotoListTiketData("TKT_29_123"));
-        header4.add(new HotoListTiketData("TKT_29_124"));
+        header4.add(new HotoListTiketData("TKT_29_121","Closed"));
+        header4.add(new HotoListTiketData("TKT_29_122","Closed"));
+        header4.add(new HotoListTiketData("TKT_29_123","Closed"));
+        header4.add(new HotoListTiketData("TKT_29_124","Closed"));
         hotoListHeaders.add(new HotoListHeader("29 Oct 2018", ""+header4.size()));
 
         hotoListTiketDataMap.put(hotoListHeaders.get(0), header1); // Header, Child data

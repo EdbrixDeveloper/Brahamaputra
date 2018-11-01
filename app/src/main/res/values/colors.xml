@@ -34,6 +34,7 @@
     <color name="lightgrey">#D3D3D3</color>
     <color name="whitesmoke">#F5F5F5</color>
     <color name="red">#FF0000</color>
+    <color name="red_90">#ffcccc</color>
     <color name="orange">#ff6600</color>
 
 </resources>

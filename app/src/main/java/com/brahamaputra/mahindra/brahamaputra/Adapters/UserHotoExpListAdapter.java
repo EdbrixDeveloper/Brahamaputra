@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +55,19 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
 
         TextView textView_HotoName = (TextView) convertView.findViewById(R.id.textView_HotoName);
         TextView textView_SiteID = (TextView) convertView.findViewById(R.id.textView_SiteID);
+        TextView textView_SiteName = (TextView) convertView.findViewById(R.id.textView_SiteName);
         TextView textView_SiteAddress = (TextView) convertView.findViewById(R.id.textView_SiteAddress);
 
-        textView_HotoName.setText(hotoListTiketData.getTiketId());
+        textView_HotoName.setText(hotoListTiketData.getHotoTicketNo());
+//        textView_SiteID.setText(hotoListTiketData.getSiteId());
+//        textView_SiteName.setText(hotoListTiketData.getSiteName());
+//        textView_SiteAddress.setText(hotoListTiketData.getSiteAddress());
+
+        if(hotoListTiketData.getStatus().equalsIgnoreCase("Closed")){
+            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.red_90));
+        }else{
+            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.colorWhite));
+        }
         return convertView;
     }
 
@@ -93,11 +104,11 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         TextView textView_Date = (TextView) convertView.findViewById(R.id.textView_Date);
         TextView textView_Count = (TextView) convertView.findViewById(R.id.textView_Count);
 
-        textView_Date.setText(hotoListHeader.getHeaderName());
+        textView_Date.setText(hotoListHeader.getDate());
         textView_Date.setTypeface(null, Typeface.BOLD);
 
         textView_Count.setTypeface(null, Typeface.BOLD);
-        textView_Count.setText(hotoListHeader.getHeaderCount());
+        textView_Count.setText(hotoListHeader.getHotoTicketCount());
 
         return convertView;
     }

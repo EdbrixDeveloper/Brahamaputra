@@ -32,6 +32,13 @@
             android:layout_marginLeft="@dimen/app_normal_margin"/>
 
         <TextView
+            android:id="@+id/textView_SiteName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Site Name: ST_MH_01"
+            android:layout_marginLeft="@dimen/app_normal_margin"/>
+
+        <TextView
             android:id="@+id/textView_SiteAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

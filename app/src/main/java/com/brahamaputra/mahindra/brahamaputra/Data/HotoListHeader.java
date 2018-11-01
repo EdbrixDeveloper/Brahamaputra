@@ -1,29 +1,41 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import java.util.ArrayList;
+
 public class HotoListHeader {
 
-    private String headerName;
+    private String date;
 
-    private String headerCount;
+    private String hotoTicketCount;
 
-    public HotoListHeader(String headerName, String headerCount) {
-        this.headerName = headerName;
-        this.headerCount = headerCount;
+    private ArrayList<HotoListTiketData> hotoTickets;
+
+    public HotoListHeader(String date, String hotoTicketCount) {
+        this.date = date;
+        this.hotoTicketCount = hotoTicketCount;
     }
 
-    public String getHeaderName() {
-        return headerName;
+    public String getDate() {
+        return date;
     }
 
-    public void setHeaderName(String headerName) {
-        this.headerName = headerName;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getHeaderCount() {
-        return headerCount;
+    public String getHotoTicketCount() {
+        return hotoTicketCount;
     }
 
-    public void setHeaderCount(String headerCount) {
-        this.headerCount = headerCount;
+    public void setHotoTicketCount(String hotoTicketCount) {
+        this.hotoTicketCount = hotoTicketCount;
+    }
+
+    public ArrayList<HotoListTiketData> getHotoTickets() {
+        return hotoTickets;
+    }
+
+    public void setHotoTickets(ArrayList<HotoListTiketData> hotoTickets) {
+        this.hotoTickets = hotoTickets;
     }
 }

@@ -100,7 +100,7 @@ public class Land_Details extends AppCompatActivity {
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
-        //setInputDetails();
+//        setInputDetails();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -251,7 +251,7 @@ public class Land_Details extends AppCompatActivity {
                 return true;
 
             case R.id.menuSubmit:
-              //  submitDetails();
+//                submitDetails();
                 startActivity(new Intent(this, Tower_Detail.class));
                 finish();
                 return true;
