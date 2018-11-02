@@ -72,7 +72,8 @@ public class Land_Details extends AppCompatActivity {
     private EditText mLandDetailsEditTextDateOfvalidityOfLand;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
-    private String ticketId = "28131";
+    private String ticketId = "";
+    private String ticketName = "28131";
     private HotoTransactionData hotoTransactionData;
     private LandDetailsData landDetailsData;
     private String base64StringLayoutOfLand = "eji39jjj";
@@ -95,7 +96,7 @@ public class Land_Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land_details);
         this.setTitle("Land Detail");
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketName);
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -263,26 +264,32 @@ public class Land_Details extends AppCompatActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
 //                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-                landDetailsData = hotoTransactionData.getLandDetailsData();
 
+                if(hotoTransactionData!=null) {
+
+                    landDetailsData = hotoTransactionData.getLandDetailsData();
+
+                    if (landDetailsData != null) {
 
 //                mLandDetailsSpinnerTypeOfLand.setSelection(1);
-                mLandDetailsEditTextAreaOfLand.setText(landDetailsData.getLandArea());
-                mLandDetailsEditTextRentLeaseInNumber.setText(landDetailsData.getRentLeaseValue());
-                mLandDetailsEditTextRentLeaseInWords.setText(landDetailsData.getRentLeaseValueInWords());
-                mLandDetailsEditTextNameOfOwner.setText(landDetailsData.getLandOwnerName());
-                mLandDetailsEditTextMobileNoOfOwner.setText(landDetailsData.getLandOwnerMob());
-                base64StringLayoutOfLand = landDetailsData.getLandLayout();
+                        mLandDetailsEditTextAreaOfLand.setText(landDetailsData.getLandArea());
+                        mLandDetailsEditTextRentLeaseInNumber.setText(landDetailsData.getRentLeaseValue());
+                        mLandDetailsEditTextRentLeaseInWords.setText(landDetailsData.getRentLeaseValueInWords());
+                        mLandDetailsEditTextNameOfOwner.setText(landDetailsData.getLandOwnerName());
+                        mLandDetailsEditTextMobileNoOfOwner.setText(landDetailsData.getLandOwnerMob());
+                        base64StringLayoutOfLand = landDetailsData.getLandLayout();
 //                mLandDetailsSpinnerCopyAgreementWithOwner.setSelection(1);
-                mLandDetailsEditTextDateOfvalidityOfLand.setText(landDetailsData.getLandAgreementValidity());
+                        mLandDetailsEditTextDateOfvalidityOfLand.setText(landDetailsData.getLandAgreementValidity());
+                    }
+                }
             } else {
                 Toast.makeText(Land_Details.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
@@ -294,7 +301,7 @@ public class Land_Details extends AppCompatActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+            hotoTransactionData.setTicketNo(ticketName);
             String landType = "0";
             String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
             String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
@@ -313,7 +320,7 @@ public class Land_Details extends AppCompatActivity {
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

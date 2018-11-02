@@ -13,15 +13,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class UserHotoTransactionActivity extends BaseActivity {
 
@@ -45,11 +51,26 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     String str_sourceOfPower;
 
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private HotoTransactionData hotoTransactionData;
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+    private String checkInLat = "";
+    private String checkInLong = "";
+    private String checkInBatteryData = "";
+
+    private String checkOutLat = "";
+    private String checkOutLong = "";
+    private String checkOutBatteryData = "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_hoto_transaction);
-
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
+        hotoTransactionData = new HotoTransactionData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
@@ -60,10 +81,12 @@ public class UserHotoTransactionActivity extends BaseActivity {
         initCombo();
         disableInput();
         checkNetworkConnection();
+        getOfflineData();
 
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                submitDetails();
                 startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
             }
         });
@@ -163,6 +186,58 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    private void getOfflineData() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+
+                if(hotoTransactionData!=null){
+                    mUserHotoTransEditTextSiteAddress.setText(hotoTransactionData.getSiteAddress());
+                    mUserHotoTransSpinnerSourceOfPowerVal.setText(hotoTransactionData.getSourceOfTower());
+                }
+
+            } else {
+                Toast.makeText(UserHotoTransactionActivity.this, "No offline data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketId(ticketId);
+            hotoTransactionData.setTicketNo(ticketName);
+
+            hotoTransactionData.setCheckInLatitude(checkInLat);
+            hotoTransactionData.setCheckInLongitude(checkInLong);
+            hotoTransactionData.setCheckInBatteryData(checkInBatteryData);
+
+            hotoTransactionData.setCheckOutLatitude(checkOutLat);
+            hotoTransactionData.setCheckOutLongitude(checkOutLong);
+            hotoTransactionData.setCheckOutBatteryData(checkOutBatteryData);
+
+            hotoTransactionData.setSiteAddress(mUserHotoTransEditTextSiteAddress.getText().toString());
+
+            hotoTransactionData.setSourceOfTower(mUserHotoTransSpinnerSourceOfPowerVal.getText().toString());
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
