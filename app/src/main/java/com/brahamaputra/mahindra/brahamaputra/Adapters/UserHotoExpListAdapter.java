@@ -64,9 +64,9 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
 //        textView_SiteAddress.setText(hotoListTiketData.getSiteAddress());
 
         if(hotoListTiketData.getStatus().equalsIgnoreCase("Closed")){
-            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.red_90));
-        }else{
             convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.colorWhite));
+        }else{
+            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.limegreen));
         }
         return convertView;
     }

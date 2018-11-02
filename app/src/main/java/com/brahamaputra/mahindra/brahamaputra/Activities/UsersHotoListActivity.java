@@ -101,23 +101,23 @@ public class UsersHotoListActivity extends BaseActivity {
 
         // Adding child data
         List<HotoListTiketData> header1  = new ArrayList<HotoListTiketData>();
-        header1.add(new HotoListTiketData("TKT_26_121","Open"));
+        header1.add(new HotoListTiketData("TKT_26_121","Closed"));
         header1.add(new HotoListTiketData("TKT_26_122","Closed"));
         header1.add(new HotoListTiketData("TKT_26_123","Open"));
         hotoListHeaders.add(new HotoListHeader("26 Oct 2018", ""+header1.size()));
 
         List<HotoListTiketData> header2  = new ArrayList<HotoListTiketData>();
-        header2.add(new HotoListTiketData("TKT_27_131","Open"));
+        header2.add(new HotoListTiketData("TKT_27_131","Closed"));
         header2.add(new HotoListTiketData("TKT_27_132","Closed"));
-        header2.add(new HotoListTiketData("TKT_27_133","Open"));
+        header2.add(new HotoListTiketData("TKT_27_133","Closed"));
         header2.add(new HotoListTiketData("TKT_27_134","Closed"));
-        header2.add(new HotoListTiketData("TKT_27_135","Open"));
+        header2.add(new HotoListTiketData("TKT_27_135","Closed"));
         hotoListHeaders.add(new HotoListHeader("27 Oct 2018", ""+header2.size()));
 
         List<HotoListTiketData> header3  = new ArrayList<HotoListTiketData>();
-        header3.add(new HotoListTiketData("TKT_28_121","Open"));
+        header3.add(new HotoListTiketData("TKT_28_121","Closed"));
         header3.add(new HotoListTiketData("TKT_28_122","Closed"));
-        header3.add(new HotoListTiketData("TKT_28_123","Open"));
+        header3.add(new HotoListTiketData("TKT_28_123","Closed"));
         hotoListHeaders.add(new HotoListHeader("28 Oct 2018", ""+header3.size()));
 
         List<HotoListTiketData> header4  = new ArrayList<HotoListTiketData>();

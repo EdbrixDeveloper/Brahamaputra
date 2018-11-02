@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.Activities.ACDB_DCDB;
@@ -62,6 +64,7 @@ public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements
         TextView txtHotoNo;
         TextView txtHotoName;
         ImageView imageViewStatus;
+        LinearLayout linearLayout_container;
         public boolean readingStatus=false;
     }
 
@@ -82,6 +85,7 @@ public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements
             viewHolder.txtHotoNo = (TextView) convertView.findViewById(R.id.hotoSection_textView_no);
             viewHolder.txtHotoName = (TextView) convertView.findViewById(R.id.hotoSection_textView_name);
             viewHolder.imageViewStatus = (ImageView) convertView.findViewById(R.id.hotoSection_imageView_status);
+            viewHolder.linearLayout_container = (LinearLayout)convertView.findViewById(R.id.linearLayout_container);
 
             result=convertView;
 
@@ -98,9 +102,11 @@ public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements
         viewHolder.txtHotoNo.setText(dataModel.getSecNo());
         viewHolder.txtHotoName.setText(dataModel.getSecName());
         if(dataModel.getSecReadingStatus()){
-            viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
+            //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.limegreen));
         }else {
-            viewHolder.imageViewStatus.setImageResource(R.drawable.baseline_done_white_18dp);
+            //viewHolder.imageViewStatus.setImageResource(R.drawable.baseline_done_white_18dp);
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
         }
 
         return convertView;
