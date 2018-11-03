@@ -57,15 +57,15 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private String userId = "";
     private String ticketId = "";//TicketId
-
     private String ticketName = "";//TicketId
-    private String checkInLat = "";
-    private String checkInLong = "";
-    private String checkInBatteryData = "";
 
-    private String checkOutLat = "";
-    private String checkOutLong = "";
-    private String checkOutBatteryData = "";
+    private String checkInLat = "0.0";
+    private String checkInLong = "0.0";
+    private String checkInBatteryData = "70";
+
+    private String checkOutLat = "0.0";
+    private String checkOutLong = "0.0";
+    private String checkOutBatteryData = "30";
 
     private SessionManager sessionManager;
 
@@ -74,13 +74,13 @@ public class UserHotoTransactionActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_hoto_transaction);
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
+
         hotoTransactionData = new HotoTransactionData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("ticketID");
+        String id = intent.getStringExtra("ticketNO");
         this.setTitle(id);
 
         assignViews();
@@ -89,9 +89,20 @@ public class UserHotoTransactionActivity extends BaseActivity {
         checkNetworkConnection();
         getOfflineData();
 
+        sessionManager = new SessionManager(UserHotoTransactionActivity.this);
+        userId = sessionManager.getSessionUserId();
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
+
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                checkInLat = String.valueOf(gpsTracker.getLatitude());
+                checkInLong = String.valueOf(gpsTracker.getLongitude());
+
                 submitDetails();
                 startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
             }
@@ -100,6 +111,12 @@ public class UserHotoTransactionActivity extends BaseActivity {
         gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
         if(gpsTracker.canGetLocation()){
             showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude());
+        }else {
+            checkInLong = "0.0";
+            checkInLat = "0.0";
+
+            checkOutLat = "0.0";
+            checkOutLong = "0.0";
         }
     }
 
@@ -134,6 +151,16 @@ public class UserHotoTransactionActivity extends BaseActivity {
             mUserHotoTransEditTextNameOfsite.setHint("Offline");
             mUserHotoTransEditTextSiteID.setHint("Offline");
             mUserHotoTransEditTextTypeOfSites.setHint("Offline");
+        }else{
+            Intent intent = getIntent();
+
+            mUserHotoTransEditTextCustomerName.setText(intent.getStringExtra("customerName"));
+            mUserHotoTransEditTextState.setText(intent.getStringExtra("stateName"));
+            mUserHotoTransEditTextNameOfCircle.setText( intent.getStringExtra("circleName"));
+            mUserHotoTransEditTextNameOfssa.setText(intent.getStringExtra("ssaName"));
+            mUserHotoTransEditTextNameOfsite.setText(intent.getStringExtra("siteName"));
+            mUserHotoTransEditTextSiteID.setText(intent.getStringExtra("siteId"));
+            mUserHotoTransEditTextTypeOfSites.setText(intent.getStringExtra("siteType"));
         }
     }
 
@@ -228,6 +255,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             hotoTransactionData.setCheckInLatitude(checkInLat);
             hotoTransactionData.setCheckInLongitude(checkInLong);
             hotoTransactionData.setCheckInBatteryData(checkInBatteryData);
+
 
             hotoTransactionData.setCheckOutLatitude(checkOutLat);
             hotoTransactionData.setCheckOutLongitude(checkOutLong);

@@ -101,7 +101,7 @@ public class Land_Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land_details);
         this.setTitle("Land Detail");
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketName);
+
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,6 +110,8 @@ public class Land_Details extends AppCompatActivity {
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = sessionManager.getSessionUserTicketId();
         userId = sessionManager.getSessionUserId();
+
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketId);
 
         hotoTransactionData = new HotoTransactionData();
 //        setInputDetails();

@@ -1,6 +1,7 @@
 
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +28,21 @@ public class HotoTicket {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("siteType")
+    @Expose
+    private String siteType;
+    @SerializedName("stateName")
+    @Expose
+    private String stateName;
+    @SerializedName("customerName")
+    @Expose
+    private String customerName;
+    @SerializedName("circleName")
+    @Expose
+    private String circleName;
+    @SerializedName("ssaName")
+    @Expose
+    private String ssaName;
 
     public String getId() {
         return id;
@@ -84,7 +100,47 @@ public class HotoTicket {
         this.status = status;
     }
 
-    public HotoTicket(String id, String hotoTicketNo, String hotoTicketDate, String siteId, String siteName, String siteAddress, String status) {
+    public String getSiteType() {
+        return siteType;
+    }
+
+    public void setSiteType(String siteType) {
+        this.siteType = siteType;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCircleName() {
+        return circleName;
+    }
+
+    public void setCircleName(String circleName) {
+        this.circleName = circleName;
+    }
+
+    public String getSsaName() {
+        return ssaName;
+    }
+
+    public void setSsaName(String ssaName) {
+        this.ssaName = ssaName;
+    }
+
+    public HotoTicket(String id, String hotoTicketNo, String hotoTicketDate, String siteId, String siteName, String siteAddress, String status, String siteType, String stateName, String customerName, String circleName, String ssaName) {
         this.id = id;
         this.hotoTicketNo = hotoTicketNo;
         this.hotoTicketDate = hotoTicketDate;
@@ -92,5 +148,10 @@ public class HotoTicket {
         this.siteName = siteName;
         this.siteAddress = siteAddress;
         this.status = status;
+        this.siteType = siteType;
+        this.stateName = stateName;
+        this.customerName = customerName;
+        this.circleName = circleName;
+        this.ssaName = ssaName;
     }
 }

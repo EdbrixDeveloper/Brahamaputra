@@ -50,6 +50,7 @@ public class DashboardActivity extends BaseActivity {
         setListner();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        sessionManager = new SessionManager(DashboardActivity.this);
         //setting the title
         toolbar.setTitle(getResources().getString(R.string.app_name));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
@@ -142,7 +143,7 @@ public class DashboardActivity extends BaseActivity {
                                         //TicketID = String.valueOf(taskEditText.getText());
                                         Intent intent = new Intent(DashboardActivity.this, UserHotoTransactionActivity.class);
                                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
-                                        intent.putExtra("ticketID", String.valueOf(taskEditText.getText()));
+                                        intent.putExtra("ticketNO", String.valueOf(taskEditText.getText()));
                                         sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
                                         startActivity(intent);
                                     }

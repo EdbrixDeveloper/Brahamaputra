@@ -77,13 +77,25 @@ public class UsersHotoListActivity extends BaseActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
                 // notify user
-
-                String hotoTickitNo = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getHotoTicketNo().toString();
                 String hotoTicketId = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getId().toString();
+                String hotoTicketNo = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getHotoTicketNo().toString();
+
+                String hotoTicketDate = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getHotoTicketDate().toString();
+                String siteId = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getSiteId().toString();
+                String siteName = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getSiteName().toString();
+                String siteAddress = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getSiteAddress().toString();
+                String status = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getStatus().toString();
+                String siteType = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getSiteType().toString();
+                String stateName = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getStateName().toString();
+                String customerName = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getCustomerName().toString();
+                String circleName = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getCircleName().toString();
+                String ssaName = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getSsaName().toString();
+
 
                 String hotoTickStatus = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getStatus().toString();
                 if(hotoTickStatus.equals("Open")){
-                    checkSystemLocation(hotoTickitNo,hotoTicketId);
+                    checkSystemLocation(hotoTicketNo,hotoTicketId,hotoTicketDate,siteId,siteName,siteAddress,status,siteType,
+                            stateName,customerName,circleName,ssaName);
                 }
                 return false;
             }
@@ -122,7 +134,14 @@ public class UsersHotoListActivity extends BaseActivity {
                                                 response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getSiteId(),
                                                 response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getSiteName(),
                                                 response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getSiteAddress(),
-                                                response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getStatus()));
+                                                response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getStatus(),
+
+                                                response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getSiteType(),
+                                                response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getStateName(),
+                                                response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getCustomerName(),
+                                                response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getCircleName(),
+                                                response.getHotoTicketsDates().get(i).getHotoTickets().get(i).getSsaName()
+                                                ));
                                     }
                                     //HotoTicketsDates.add(new HotoTicketsDate("26 Oct 2018", ""+header.size()));
 
@@ -214,7 +233,8 @@ public class UsersHotoListActivity extends BaseActivity {
         }
     }
 
-    public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId){
+    public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId, String hotoTicketDate, String siteId, String siteName, String siteAddress,
+                                    String status, String siteType, String stateName, String customerName, String circleName, String ssaName){
         LocationManager lm = (LocationManager)UsersHotoListActivity.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;
@@ -237,9 +257,22 @@ public class UsersHotoListActivity extends BaseActivity {
         else{
             if(Conditions.isNetworkConnected(UsersHotoListActivity.this)){
                 Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
-                intent.putExtra("ticketID",hotoTickitNo);
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
-                intent.putExtra("ticketID",hotoTickitNo);
+                intent.putExtra("Id",hotoTicketId);
+
+                intent.putExtra("ticketNO",hotoTickitNo);
+
+                intent.putExtra("hotoTicketDate",hotoTicketDate);
+                intent.putExtra("siteId",siteId);
+                intent.putExtra("siteName",siteName);
+                intent.putExtra("siteAddress",siteAddress);
+                intent.putExtra("status",status);
+                intent.putExtra("siteType",siteType);
+                intent.putExtra("stateName",stateName);
+                intent.putExtra("customerName",customerName);
+                intent.putExtra("circleName",circleName);
+                intent.putExtra("ssaName",ssaName);
+
                 sessionManager.updateSessionUserTicketId(hotoTicketId);
                 startActivity(intent);
             }else{
@@ -248,7 +281,7 @@ public class UsersHotoListActivity extends BaseActivity {
                     public void onPositiveClick() {
                         Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
-                        intent.putExtra("ticketID",hotoTickitNo);
+                        intent.putExtra("ticketNO",hotoTickitNo);
                         sessionManager.updateSessionUserTicketId(hotoTicketId);
                         startActivity(intent);
                     }
