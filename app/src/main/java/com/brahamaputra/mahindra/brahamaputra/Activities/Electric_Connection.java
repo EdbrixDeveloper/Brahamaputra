@@ -12,24 +12,29 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ElectricConnectionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-//import ir.samanjafari.easycountdowntimer.CountDownInterface;
-//import ir.samanjafari.easycountdowntimer.EasyCountDownTextview;
 
 public class Electric_Connection extends BaseActivity {
-
 
     private TextView mElectricConnectionTextViewTypeOfElectricConnection;
     private TextView mElectricConnectionTextViewTypeOfElectricConnectionVal;
@@ -86,7 +91,7 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewEbBillDate;
     private EditText mElectricConnectionEditTextEbBillDate;
 
-
+    private static final String TAG = Electric_Connection.class.getSimpleName();
     String selectedHour = "HH", selectedMinute = "MM";
 
     String str_typeOfElectricConnection;
@@ -103,6 +108,13 @@ public class Electric_Connection extends BaseActivity {
     String str_kitKatClayFuseStatus;
     String str_ebNeutralEarthing;
 
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private ElectricConnectionData electricConnectionData;
+    private SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +123,15 @@ public class Electric_Connection extends BaseActivity {
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(Electric_Connection.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Electric_Connection.this, userId, ticketId);
+
+        setInputDetails();
 
 
         mElectricConnectionEditTextAverageEbAvailabilityPerDay.setOnClickListener(new View.OnClickListener() {
@@ -485,6 +506,101 @@ public class Electric_Connection extends BaseActivity {
         });
     }
 
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                electricConnectionData = hotoTransactionData.getElectricConnectionData();
+
+
+                mElectricConnectionTextViewTypeOfElectricConnectionVal.setText(electricConnectionData.getElectricConnectionType());
+                mElectricConnectionTextViewTariffVal.setText(electricConnectionData.getConnectionTariff());
+                mElectricConnectionEditTextSanctionedLoadKVA.setText(electricConnectionData.getSanctionLoad());
+                mElectricConnectionEditTextExistingLoadAtSiteKVA.setText(electricConnectionData.getExistingLoadAtSite());
+                mElectricConnectionEditTextNameOfSupplyCompany.setText(electricConnectionData.getNameSupplyCompany());
+                mElectricConnectionTextViewCopyOfElectricBillsVal.setText(electricConnectionData.getElectricBillCopyStatus());
+                mElectricConnectionEditTextNumberOfCompoundLights.setText(electricConnectionData.getNoOfCompoundLights());
+                mElectricConnectionEditTextEbMeterReadingInKWh.setText(electricConnectionData.getMeterReadingsEB());
+                mElectricConnectionTextViewEbSupplierVal.setText(electricConnectionData.getSupplierEB());
+                mElectricConnectionEditTextEbCostPerUnitForSharedConnection.setText(electricConnectionData.getCostPerUnitForSharedConnectionEB());
+                mElectricConnectionTextViewEbStatusVal.setText(electricConnectionData.getStatusEB());
+                mElectricConnectionTextViewTransformerWorkingConditionVal.setText(electricConnectionData.getTransformerWorkingCondition());
+                mElectricConnectionEditTextTransformerCapacityInKva.setText(electricConnectionData.getTransformerCapacity());
+                mElectricConnectionTextViewEbMeterBoxStatusVal.setText(electricConnectionData.getMeterBoxStatusEB());
+                mElectricConnectionEditTextSectionName.setText(electricConnectionData.getSectionName());
+                mElectricConnectionEditTextSectionNumber.setText(electricConnectionData.getSectionNo());
+                mElectricConnectionEditTextConsumerNumber.setText(electricConnectionData.getConsumerNo());
+                mElectricConnectionTextViewEbMeterWorkingStatusVal.setText(electricConnectionData.getMeterWorkingStatusEB());
+                mElectricConnectionEditTextEbMeterSerialNumber.setText(electricConnectionData.getMeterSerialNumberEB());
+                mElectricConnectionTextViewTypeOfPaymentVal.setText(electricConnectionData.getPaymentType());
+                mElectricConnectionTextViewEbPaymentScheduleVal.setText(electricConnectionData.getPaymentScheduleEB());
+                mElectricConnectionTextViewSafetyFuseUnitVal.setText(electricConnectionData.getSafetyFuseUnit());
+                mElectricConnectionTextViewKitKatClayFuseStatusVal.setText(electricConnectionData.getKitKatFuseStatus());
+                mElectricConnectionTextViewEbNeutralEarthingVal.setText(electricConnectionData.getEbNeutralEarthing());
+                mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(electricConnectionData.getAverageEbAvailability());
+                mElectricConnectionEditTextScheduledPowerCutInHrs.setText(electricConnectionData.getScheduledPowerCut());
+                mElectricConnectionEditTextEbBillDate.setText(electricConnectionData.getEbBillDate());
+
+            } else {
+                Toast.makeText(Electric_Connection.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String electricConnectionType = mElectricConnectionTextViewTypeOfElectricConnectionVal.getText().toString().trim();
+            String connectionTariff = mElectricConnectionTextViewTariffVal.getText().toString().trim();
+            String sanctionLoad = mElectricConnectionEditTextSanctionedLoadKVA.getText().toString().trim();
+            String existingLoadAtSite = mElectricConnectionEditTextExistingLoadAtSiteKVA.getText().toString().trim();
+            String nameSupplyCompany = mElectricConnectionEditTextNameOfSupplyCompany.getText().toString().trim();
+            String electricBillCopyStatus = mElectricConnectionTextViewCopyOfElectricBillsVal.getText().toString().trim();
+            String noOfCompoundLights = mElectricConnectionEditTextNumberOfCompoundLights.getText().toString().trim();
+            String meterReadingsEB = mElectricConnectionEditTextEbMeterReadingInKWh.getText().toString().trim();
+            String supplierEB = mElectricConnectionTextViewEbSupplierVal.getText().toString().trim();
+            String costPerUnitForSharedConnectionEB = mElectricConnectionEditTextEbCostPerUnitForSharedConnection.getText().toString().trim();
+            String statusEB = mElectricConnectionTextViewEbStatusVal.getText().toString().trim();
+            String transformerWorkingCondition = mElectricConnectionTextViewTransformerWorkingConditionVal.getText().toString().trim();
+            String transformerCapacity = mElectricConnectionEditTextTransformerCapacityInKva.getText().toString().trim();
+            String meterBoxStatusEB = mElectricConnectionTextViewEbMeterBoxStatusVal.getText().toString().trim();
+            String sectionName = mElectricConnectionEditTextSectionName.getText().toString().trim();
+            String sectionNo = mElectricConnectionEditTextSectionNumber.getText().toString().trim();
+            String consumerNo = mElectricConnectionEditTextConsumerNumber.getText().toString().trim();
+            String meterWorkingStatusEB = mElectricConnectionTextViewEbMeterWorkingStatusVal.getText().toString().trim();
+            String meterSerialNumberEB = mElectricConnectionEditTextEbMeterSerialNumber.getText().toString().trim();
+            String paymentType = mElectricConnectionTextViewTypeOfPaymentVal.getText().toString().trim();
+            String paymentScheduleEB = mElectricConnectionTextViewEbPaymentScheduleVal.getText().toString().trim();
+            String safetyFuseUnit = mElectricConnectionTextViewSafetyFuseUnitVal.getText().toString().trim();
+            String kitKatFuseStatus = mElectricConnectionTextViewKitKatClayFuseStatusVal.getText().toString().trim();
+            String ebNeutralEarthing = mElectricConnectionTextViewEbNeutralEarthingVal.getText().toString().trim();
+            String averageEbAvailability = mElectricConnectionEditTextAverageEbAvailabilityPerDay.getText().toString().trim();
+            String scheduledPowerCut = mElectricConnectionEditTextScheduledPowerCutInHrs.getText().toString().trim();
+            String ebBillDate = mElectricConnectionEditTextEbBillDate.getText().toString().trim();
+
+
+            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate);
+
+            hotoTransactionData.setElectricConnectionData(electricConnectionData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -502,8 +618,9 @@ public class Electric_Connection extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                finish();
+                submitDetails();
                 startActivity(new Intent(this, Air_Conditioners.class));
+                finish();
                 return true;
 
             default:

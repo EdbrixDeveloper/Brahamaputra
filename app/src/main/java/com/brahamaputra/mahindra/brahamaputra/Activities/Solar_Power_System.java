@@ -24,14 +24,23 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
+import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,6 +72,16 @@ public class Solar_Power_System extends BaseActivity {
     String str_cellPanel;
     String str_amcYesNoVal;
 
+    private static final String TAG = Solar_Power_System.class.getSimpleName();
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private SolarPowerSystemData solarPowerSystemData;
+    private String base64StringQRCodeScan = "eji39jjj";
+    private SessionManager sessionManager;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -83,6 +102,15 @@ public class Solar_Power_System extends BaseActivity {
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(Solar_Power_System.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Solar_Power_System.this, userId, ticketId);
+
+        setInputDetails();
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -270,12 +298,67 @@ public class Solar_Power_System extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
+                submitDetails();
                 finish();
                 startActivity(new Intent(this, PowerPlantDetailsActivity.class));
+                finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                solarPowerSystemData = hotoTransactionData.getSolarPowerSystemData();
+
+                //private ImageView mSolarPowerSystemButtonQRCodeScan.setText(landDetailsData.getQRCodeScan());
+                mSolarPowerSystemTextViewAvailableVal.setText(solarPowerSystemData.getAvailable());
+                mSolarPowerSystemTextViewAssetOwnerVal.setText(solarPowerSystemData.getAssetOwner());
+                mSolarPowerSystemEditTextManufacturerMakeModel.setText(solarPowerSystemData.getManufacturerMakeModel());
+                mSolarPowerSystemTextViewCellPanelVal.setText(solarPowerSystemData.getCellPanel());
+                mSolarPowerSystemEditTextCapacityKW.setText(solarPowerSystemData.getCapacityKW());
+                mSolarPowerSystemTextViewAmcYesNoVal.setText(solarPowerSystemData.getAmcYesNo());
+                mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText(solarPowerSystemData.getDateOfvalidityOfAmc());
+
+            } else {
+                Toast.makeText(Solar_Power_System.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+
+            String qRCodeScan = base64StringQRCodeScan;
+            String available = mSolarPowerSystemTextViewAvailableVal.getText().toString().trim();
+            String assetOwner = mSolarPowerSystemTextViewAssetOwnerVal.getText().toString().trim();
+            String manufacturerMakeModel = mSolarPowerSystemEditTextManufacturerMakeModel.getText().toString().trim();
+            String cellPanel = mSolarPowerSystemTextViewCellPanelVal.getText().toString().trim();
+            String capacityKW = mSolarPowerSystemEditTextCapacityKW.getText().toString().trim();
+            String amcYesNo = mSolarPowerSystemTextViewAmcYesNoVal.getText().toString().trim();
+            String dateOfvalidityOfAmc = mSolarPowerSystemEditTextDateOfvalidityOfAmc.getText().toString().trim();
+
+            solarPowerSystemData = new SolarPowerSystemData(qRCodeScan, available, assetOwner, manufacturerMakeModel, cellPanel, capacityKW, amcYesNo, dateOfvalidityOfAmc);
+            hotoTransactionData.setSolarPowerSystemData(solarPowerSystemData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -30,6 +30,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
@@ -47,7 +48,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Land_Details extends AppCompatActivity {
+public class Land_Details extends BaseActivity {
 
     private static final String TAG = Land_Details.class.getSimpleName();
 
@@ -69,8 +70,6 @@ public class Land_Details extends AppCompatActivity {
     private TextView mLandDetailsTextViewCopyAgreementWithOwnerVal;
     private TextView mLandDetailsTextViewValidityOfAgreement;
     private EditText mLandDetailsEditTextDateOfvalidityOfAgreement;
-    private TextView mLandDetailsTextViewValidityOfLand;
-    private EditText mLandDetailsEditTextDateOfvalidityOfLand;
     private OfflineStorageWrapper offlineStorageWrapper;
 
     private String userId = "101";
@@ -101,7 +100,6 @@ public class Land_Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land_details);
         this.setTitle("Land Detail");
-
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -114,7 +112,7 @@ public class Land_Details extends AppCompatActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketId);
 
         hotoTransactionData = new HotoTransactionData();
-//        setInputDetails();
+        setInputDetails();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -265,7 +263,7 @@ public class Land_Details extends AppCompatActivity {
                 return true;
 
             case R.id.menuSubmit:
-//                submitDetails();
+                submitDetails();
                 startActivity(new Intent(this, Tower_Detail.class));
                 finish();
                 return true;
@@ -286,13 +284,14 @@ public class Land_Details extends AppCompatActivity {
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
 
-                if(hotoTransactionData!=null) {
+                if (hotoTransactionData != null) {
 
                     landDetailsData = hotoTransactionData.getLandDetailsData();
 
                     if (landDetailsData != null) {
 
 //                mLandDetailsSpinnerTypeOfLand.setSelection(1);
+                        mLandDetailsTextViewCopyAgreementWithOwnerVal.setText(landDetailsData.getLandAgreementCopy());
                         mLandDetailsEditTextAreaOfLand.setText(landDetailsData.getLandArea());
                         mLandDetailsEditTextRentLeaseInNumber.setText(landDetailsData.getRentLeaseValue());
                         mLandDetailsEditTextRentLeaseInWords.setText(landDetailsData.getRentLeaseValueInWords());
@@ -300,7 +299,8 @@ public class Land_Details extends AppCompatActivity {
                         mLandDetailsEditTextMobileNoOfOwner.setText(landDetailsData.getLandOwnerMob());
                         base64StringLayoutOfLand = landDetailsData.getLandLayout();
 //                mLandDetailsSpinnerCopyAgreementWithOwner.setSelection(1);
-                        mLandDetailsEditTextDateOfvalidityOfLand.setText(landDetailsData.getLandAgreementValidity());
+                        mLandDetailsTextViewTypeOfLandVal.setText(landDetailsData.getLandType());
+                        mLandDetailsEditTextDateOfvalidityOfAgreement.setText(landDetailsData.getLandAgreementValidity());
                     }
                 }
             } else {
@@ -315,15 +315,17 @@ public class Land_Details extends AppCompatActivity {
     private void submitDetails() {
         try {
             hotoTransactionData.setTicketNo(ticketName);
-            String landType = "0";
+            //String landType = "0";
+            String landType = mLandDetailsTextViewCopyAgreementWithOwnerVal.getText().toString().trim();
             String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
             String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
             String rentLeaseValueInWords = mLandDetailsEditTextRentLeaseInWords.getText().toString().trim();
             String landOwnerName = mLandDetailsEditTextNameOfOwner.getText().toString().trim();
             String landOwnerMob = mLandDetailsEditTextMobileNoOfOwner.getText().toString().trim();
             String landLayout = base64StringLayoutOfLand;
-            String landAgreementCopy = "0";
-            String landAgreementValidity = mLandDetailsEditTextDateOfvalidityOfLand.getText().toString();
+            //String landAgreementCopy = "0";
+            String landAgreementCopy = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
+            String landAgreementValidity = mLandDetailsEditTextDateOfvalidityOfAgreement.getText().toString();
 
             landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity);
 

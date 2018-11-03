@@ -26,15 +26,23 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -105,6 +113,37 @@ public class Power_Backups_DG extends BaseActivity {
     private EditText mPowerBackupsDgEditTextNatureOfProblem;
 
 
+    /*mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal;
+    mPowerBackupsDgTextViewNumberOfWorkingDgVal;
+    //private ImageView mPowerBackupsDgButtonQRCodeScan;
+    mPowerBackupsDgTextViewAssetOwnerVal;
+    mPowerBackupsDgTextViewManufacturerMakeModelVal;
+    mPowerBackupsDgTextViewCapacityInKvaVal;
+    mPowerBackupsDgTextViewAutoManualVal;
+    mPowerBackupsDgEditTextDieselTankCapacity;
+    mPowerBackupsDgEditTextDateOfInstallation;
+    mPowerBackupsDgEditTextAverageDieselConsumption;
+    mPowerBackupsDgTextViewAmcVal;
+    mPowerBackupsDgEditTextDateOfvalidityOfAmc;
+    mPowerBackupsDgTextViewDgWorkingTypeVal;
+    mPowerBackupsDgEditTextDgHmrReading;
+    mPowerBackupsDgEditTextDgEngineSerialNumber;
+    mPowerBackupsDgTextViewDgMainAlternatorTypeVal;
+    mPowerBackupsDgTextViewDgMainAlternatorMakeVal;
+    mPowerBackupsDgEditTextDgMainAlternatorSerialNumber;
+    mPowerBackupsDgTextViewDgCanopyStatusVal;
+    mPowerBackupsDgTextViewDgStartingBatteryStatusVal;
+    mPowerBackupsDgTextViewChargingAlternatorVal;
+    mPowerBackupsDgTextViewBatteryChargerVal;
+    mPowerBackupsDgEditTextPresentDieselStock;
+    mPowerBackupsDgEditTextGcuRunHrs;
+    mPowerBackupsDgEditTextGcuKwh;
+    mPowerBackupsDgTextViewDgAvrWorkingStatusVal;
+    mPowerBackupsDgTextViewFuelTankPositionVal;
+    mPowerBackupsDgTextViewWorkingConditionVal;
+    mPowerBackupsDgEditTextNatureOfProblem;*/
+
+
     String str_noOfEngineAlternatorSetsprovided;
     String str_numberOfWorkingDg;
     String str_assetOwner;
@@ -123,6 +162,17 @@ public class Power_Backups_DG extends BaseActivity {
     String str_fuelTankPosition;
     String str_workingCondition;
 
+    private static final String TAG = Power_Backups_DG.class.getSimpleName();
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private PowerBackupsDGData powerBackupsDGData;
+    private String base64StringQRCodeScan = "eji39jjj";
+
+    private SessionManager sessionManager;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -143,6 +193,14 @@ public class Power_Backups_DG extends BaseActivity {
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(Power_Backups_DG.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Power_Backups_DG.this, userId, ticketId);
+        setInputDetails();
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -646,6 +704,104 @@ public class Power_Backups_DG extends BaseActivity {
         }
     }
 
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                powerBackupsDGData = hotoTransactionData.getPowerBackupsDGData();
+
+                mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(powerBackupsDGData.getNoOfEngineAlternator());
+                mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(powerBackupsDGData.getNumberOfWorkingDg());
+                //mPowerBackupsDgButtonQRCodeScan.setText(powerBackupsDGData.getAvailable());
+                mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.getAssetOwner());
+                mPowerBackupsDgTextViewManufacturerMakeModelVal.setText(powerBackupsDGData.getManufacturerMakeModel());
+                mPowerBackupsDgTextViewCapacityInKvaVal.setText(powerBackupsDGData.getCapacityInKva());
+                mPowerBackupsDgTextViewAutoManualVal.setText(powerBackupsDGData.getAutoManual());
+                mPowerBackupsDgEditTextDieselTankCapacity.setText(powerBackupsDGData.getDieselTankCapacity());
+                mPowerBackupsDgEditTextDateOfInstallation.setText(powerBackupsDGData.getDateOfInstallation());
+                mPowerBackupsDgEditTextAverageDieselConsumption.setText(powerBackupsDGData.getAverageDieselConsumption());
+                mPowerBackupsDgTextViewAmcVal.setText(powerBackupsDGData.getAmc());
+                mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText(powerBackupsDGData.getDateOfvalidityOfAmc());
+                mPowerBackupsDgTextViewDgWorkingTypeVal.setText(powerBackupsDGData.getDgWorkingType());
+                mPowerBackupsDgEditTextDgHmrReading.setText(powerBackupsDGData.getDgHmrReading());
+                mPowerBackupsDgEditTextDgEngineSerialNumber.setText(powerBackupsDGData.getDgEngineSerialNo());
+                mPowerBackupsDgTextViewDgMainAlternatorTypeVal.setText(powerBackupsDGData.getDgMainAltType());
+                mPowerBackupsDgTextViewDgMainAlternatorMakeVal.setText(powerBackupsDGData.getDgMainAltMake());
+                mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.setText(powerBackupsDGData.getDgMainAltSerialNo());
+                mPowerBackupsDgTextViewDgCanopyStatusVal.setText(powerBackupsDGData.getDgCanopyStatus());
+                mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setText(powerBackupsDGData.getDgStartingBatteryStatus());
+                mPowerBackupsDgTextViewChargingAlternatorVal.setText(powerBackupsDGData.getChargingAlternator());
+                mPowerBackupsDgTextViewBatteryChargerVal.setText(powerBackupsDGData.getBatteryCharger());
+                mPowerBackupsDgEditTextPresentDieselStock.setText(powerBackupsDGData.getPresentDieselStock());
+                mPowerBackupsDgEditTextGcuRunHrs.setText(powerBackupsDGData.getGcuRunHrs());
+                mPowerBackupsDgEditTextGcuKwh.setText(powerBackupsDGData.getGcuKwh());
+                mPowerBackupsDgTextViewDgAvrWorkingStatusVal.setText(powerBackupsDGData.getDgAvrWorkingStatus());
+                mPowerBackupsDgTextViewFuelTankPositionVal.setText(powerBackupsDGData.getFuelTankPosition());
+                mPowerBackupsDgTextViewWorkingConditionVal.setText(powerBackupsDGData.getWorkingCondition());
+                mPowerBackupsDgEditTextNatureOfProblem.setText(powerBackupsDGData.getNatureOfProblem());
+
+            } else {
+                Toast.makeText(Power_Backups_DG.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+
+            String noOfEngineAlternator = mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim();
+            String numberOfWorkingDg = mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim();
+            String qRCodeScan = base64StringQRCodeScan;
+            //private ImageView mPowerBackupsDgButtonQRCodeScan.getText().toString().trim();
+            String assetOwner = mPowerBackupsDgTextViewAssetOwnerVal.getText().toString().trim();
+            String manufacturerMakeModel = mPowerBackupsDgTextViewManufacturerMakeModelVal.getText().toString().trim();
+            String capacityInKva = mPowerBackupsDgTextViewCapacityInKvaVal.getText().toString().trim();
+            String autoManual = mPowerBackupsDgTextViewAutoManualVal.getText().toString().trim();
+            String dieselTankCapacity = mPowerBackupsDgEditTextDieselTankCapacity.getText().toString().trim();
+            String dateOfInstallation = mPowerBackupsDgEditTextDateOfInstallation.getText().toString().trim();
+            String averageDieselConsumption = mPowerBackupsDgEditTextAverageDieselConsumption.getText().toString().trim();
+            String amc = mPowerBackupsDgTextViewAmcVal.getText().toString().trim();
+            String dateOfvalidityOfAmc = mPowerBackupsDgEditTextDateOfvalidityOfAmc.getText().toString().trim();
+            String dgWorkingType = mPowerBackupsDgTextViewDgWorkingTypeVal.getText().toString().trim();
+            String dgHmrReading = mPowerBackupsDgEditTextDgHmrReading.getText().toString().trim();
+            String dgEngineSerialNo = mPowerBackupsDgEditTextDgEngineSerialNumber.getText().toString().trim();
+            String dgMainAltType = mPowerBackupsDgTextViewDgMainAlternatorTypeVal.getText().toString().trim();
+            String dgMainAltMake = mPowerBackupsDgTextViewDgMainAlternatorMakeVal.getText().toString().trim();
+            String dgMainAltSerialNo = mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.getText().toString().trim();
+            String dgCanopyStatus = mPowerBackupsDgTextViewDgCanopyStatusVal.getText().toString().trim();
+            String dgStartingBatteryStatus = mPowerBackupsDgTextViewDgStartingBatteryStatusVal.getText().toString().trim();
+            String chargingAlternator = mPowerBackupsDgTextViewChargingAlternatorVal.getText().toString().trim();
+            String batteryCharger = mPowerBackupsDgTextViewBatteryChargerVal.getText().toString().trim();
+            String presentDieselStock = mPowerBackupsDgEditTextPresentDieselStock.getText().toString().trim();
+            String gcuRunHrs = mPowerBackupsDgEditTextGcuRunHrs.getText().toString().trim();
+            String gcuKwh = mPowerBackupsDgEditTextGcuKwh.getText().toString().trim();
+            String dgAvrWorkingStatus = mPowerBackupsDgTextViewDgAvrWorkingStatusVal.getText().toString().trim();
+            String fuelTankPosition = mPowerBackupsDgTextViewFuelTankPositionVal.getText().toString().trim();
+            String workingCondition = mPowerBackupsDgTextViewWorkingConditionVal.getText().toString().trim();
+            String natureOfProblem = mPowerBackupsDgEditTextNatureOfProblem.getText().toString().trim();
+
+            powerBackupsDGData = new PowerBackupsDGData(noOfEngineAlternator, numberOfWorkingDg, qRCodeScan, assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem);
+            hotoTransactionData.setPowerBackupsDGData(powerBackupsDGData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);
@@ -792,8 +948,9 @@ public class Power_Backups_DG extends BaseActivity {
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                finish();
+                submitDetails();
                 startActivity(new Intent(this, Shelter.class));
+                finish();
                 return true;
 
             default:

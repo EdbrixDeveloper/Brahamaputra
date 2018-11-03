@@ -1,28 +1,50 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class HotoTransactionData {
 
+
+    @SerializedName("ticketId")
     private String ticketId;
 
+    @SerializedName("ticketNo")
     private String ticketNo;
 
+    @SerializedName("checkInLatitude")
     private String checkInLatitude;
 
+    @SerializedName("checkInLongitude")
     private String checkInLongitude;
 
+    @SerializedName("checkInBatteryData")
     private String checkInBatteryData;
 
+    @SerializedName("siteAddress")
     private String siteAddress;
 
+    @SerializedName("sourceOfTower")
     private String sourceOfTower;
 
+    @SerializedName("checkOutLatitude")
     private String checkOutLatitude;
 
+    @SerializedName("checkOutLongitude")
     private String checkOutLongitude;
 
+    @SerializedName("checkOutBatteryData")
     private String checkOutBatteryData;
 
     private LandDetailsData landDetailsData;
+    private TowerDetailsData towerDetailsData;
+    private EarthResistanceTowerData earthResistanceTowerData;
+    private EarthResistanceEquipmentData earthResistanceEquipmentData;
+    private ElectricConnectionData electricConnectionData;
+    private AirConditionersData airConditionersData;
+    private SolarPowerSystemData solarPowerSystemData;
+    private PowerPlantDetailsData powerPlantDetailsData;
+    private PowerBackupsDGData powerBackupsDGData;
+    private ShelterData shelterData;
 
     public String getTicketId() {
         return ticketId;
@@ -110,5 +132,77 @@ public class HotoTransactionData {
 
     public void setLandDetailsData(LandDetailsData landDetailsData) {
         this.landDetailsData = landDetailsData;
+    }
+
+    public TowerDetailsData getTowerDetailsData() {
+        return towerDetailsData;
+    }
+
+    public void setTowerDetailsData(TowerDetailsData towerDetailsData) {
+        this.towerDetailsData = towerDetailsData;
+    }
+
+    public EarthResistanceTowerData getEarthResistanceTowerData() {
+        return earthResistanceTowerData;
+    }
+
+    public void setEarthResistanceTowerData(EarthResistanceTowerData earthResistanceTowerData) {
+        this.earthResistanceTowerData = earthResistanceTowerData;
+    }
+
+    public EarthResistanceEquipmentData getEarthResistanceEquipmentData() {
+        return earthResistanceEquipmentData;
+    }
+
+    public void setEarthResistanceEquipmentData(EarthResistanceEquipmentData earthResistanceEquipmentData) {
+        this.earthResistanceEquipmentData = earthResistanceEquipmentData;
+    }
+
+    public ElectricConnectionData getElectricConnectionData() {
+        return electricConnectionData;
+    }
+
+    public void setElectricConnectionData(ElectricConnectionData electricConnectionData) {
+        this.electricConnectionData = electricConnectionData;
+    }
+
+    public AirConditionersData getAirConditionersData() {
+        return airConditionersData;
+    }
+
+    public void setAirConditionersData(AirConditionersData airConditionersData) {
+        this.airConditionersData = airConditionersData;
+    }
+
+    public SolarPowerSystemData getSolarPowerSystemData() {
+        return solarPowerSystemData;
+    }
+
+    public void setSolarPowerSystemData(SolarPowerSystemData solarPowerSystemData) {
+        this.solarPowerSystemData = solarPowerSystemData;
+    }
+
+    public PowerPlantDetailsData getPowerPlantDetailsData() {
+        return powerPlantDetailsData;
+    }
+
+    public void setPowerPlantDetailsData(PowerPlantDetailsData powerPlantDetailsData) {
+        this.powerPlantDetailsData = powerPlantDetailsData;
+    }
+
+    public PowerBackupsDGData getPowerBackupsDGData() {
+        return powerBackupsDGData;
+    }
+
+    public void setPowerBackupsDGData(PowerBackupsDGData powerBackupsDGData) {
+        this.powerBackupsDGData = powerBackupsDGData;
+    }
+
+    public ShelterData getShelterData() {
+        return shelterData;
+    }
+
+    public void setShelterData(ShelterData shelterData) {
+        this.shelterData = shelterData;
     }
 }

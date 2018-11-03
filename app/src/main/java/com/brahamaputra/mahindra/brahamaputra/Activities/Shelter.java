@@ -12,14 +12,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,15 +65,35 @@ public class Shelter extends BaseActivity {
     String str_noOfOdcAvailable;
     String str_odcLock;
 
+    private static final String TAG = Shelter.class.getSimpleName();
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private ShelterData shelterData;
+
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter);
         this.setTitle("Shelter");
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Shelter.this, userId, ticketId);
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(Shelter.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Shelter.this, userId, ticketId);
+
+        setInputDetails();
 
     }
 
@@ -295,6 +322,64 @@ public class Shelter extends BaseActivity {
         );
     }
 
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                shelterData = hotoTransactionData.getShelterData();
+
+                mShelterTextViewPhysicalConditionOfShelterPlatformVal.setText(shelterData.getPhysicalCondition());
+                mShelterTextViewNumberOfBtsInsideShelterVal.setText(shelterData.getNoOBtsInsideShelter());
+                mShelterTextViewNumberOfBtsOutsideShelterVal.setText(shelterData.getNoOfBtsOutsideShelter());
+                mShelterTextViewShelterLockVal.setText(shelterData.getShelterLock());
+                mShelterTextViewOutdoorShelterLockVal.setText(shelterData.getOutdoorShelterLock());
+                mShelterTextViewIgbStatusVal.setText(shelterData.getIgbStatus());
+                mShelterTextViewEgbStatusVal.setText(shelterData.getEgbStatus());
+                mShelterTextViewNoOfOdcAvailableVal.setText(shelterData.getNoOfOdcAvailable());
+                mShelterTextViewOdcLockVal.setText(shelterData.getOdcLock());
+
+            } else {
+                Toast.makeText(Shelter.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String physicalCondition = mShelterTextViewPhysicalConditionOfShelterPlatformVal.getText().toString().trim();
+            String noOBtsInsideShelter = mShelterTextViewNumberOfBtsInsideShelterVal.getText().toString().trim();
+            String noOfBtsOutsideShelter = mShelterTextViewNumberOfBtsOutsideShelterVal.getText().toString().trim();
+            String shelterLock = mShelterTextViewShelterLockVal.getText().toString().trim();
+            String outdoorShelterLock = mShelterTextViewOutdoorShelterLockVal.getText().toString().trim();
+            String igbStatus = mShelterTextViewIgbStatusVal.getText().toString().trim();
+            String egbStatus = mShelterTextViewEgbStatusVal.getText().toString().trim();
+            String noOfOdcAvailable = mShelterTextViewNoOfOdcAvailableVal.getText().toString().trim();
+            String odcLock = mShelterTextViewOdcLockVal.getText().toString().trim();
+
+
+            shelterData = new ShelterData(physicalCondition, noOBtsInsideShelter, noOfBtsOutsideShelter, shelterLock, outdoorShelterLock, igbStatus, egbStatus, noOfOdcAvailable, odcLock);
+
+            hotoTransactionData.setShelterData(shelterData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -310,8 +395,9 @@ public class Shelter extends BaseActivity {
                 // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                finish();
+                submitDetails();
                 startActivity(new Intent(this, Media.class));
+                finish();
                 return true;
 
             default:

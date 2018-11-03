@@ -1,10 +1,18 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class EarthResistanceEquipmentData {
 
+    @SerializedName("earthType")
     private String earthType;
+
+    @SerializedName("earthResistanceInOhms")
     private String earthResistanceInOhms;
+
+    @SerializedName("earthResistanceMeasuredDate")
     private String earthResistanceMeasuredDate;
+
 
     public EarthResistanceEquipmentData(String earthType, String earthResistanceInOhms, String earthResistanceMeasuredDate) {
         this.earthType = earthType;

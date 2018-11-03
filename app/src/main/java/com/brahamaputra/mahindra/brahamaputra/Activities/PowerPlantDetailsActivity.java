@@ -26,15 +26,23 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,6 +101,17 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     String str_spdStatus;
     String str_workingCondition;
 
+    private static final String TAG = PowerPlantDetailsActivity.class.getSimpleName();
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private PowerPlantDetailsData powerPlantDetailsData;
+    private String base64StringQRCodeScan = "eji39jjj";
+    private SessionManager sessionManager;
+
     //
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -108,9 +127,19 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_power_plant_details);
         this.setTitle("Power Plant Details");
         alertDialogManager = new AlertDialogManager(PowerPlantDetailsActivity.this);
+
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(PowerPlantDetailsActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerPlantDetailsActivity.this, userId, ticketId);
+
+        setInputDetails();
 
 
         mPowerPlantDetailsButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
@@ -410,6 +439,81 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         });
     }
 
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                powerPlantDetailsData = hotoTransactionData.getPowerPlantDetailsData();
+
+                //private ImageView mPowerPlantDetailsButtonQRCodeScan.setText(powerPlantDetailsData.getAvailable());
+                mPowerPlantDetailsTextViewAssetOwnerVal.setText(powerPlantDetailsData.getAssetOwner());
+                mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsData.getNumberOfPowerPlant());
+                mPowerPlantDetailsTextViewManufacturerMakeModelVal.setText(powerPlantDetailsData.getManufacturerMakeModel());
+                mPowerPlantDetailsEditTextPowerPlantModel.setText(powerPlantDetailsData.getPowerPlantModel());
+                mPowerPlantDetailsTextViewNumberModuleSlotsVal.setText(powerPlantDetailsData.getNumberOfModules());
+                mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal.setText(powerPlantDetailsData.getEarthingStatus());
+                mPowerPlantDetailsEditTextDcLoadInDisplayAmp.setText(powerPlantDetailsData.getDcLoadInDisplay());
+                mPowerPlantDetailsEditTextPowerPlantSerialNumber.setText(powerPlantDetailsData.getSerialNumber());
+                mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.setText(powerPlantDetailsData.getTypeOfPowerPlantCommercialSmps());
+                mPowerPlantDetailsEditTextCapacityInAmp.setText(powerPlantDetailsData.getCapacityInAmp());
+                mPowerPlantDetailsTextViewNumberOfModulesVal.setText(powerPlantDetailsData.getNumberOfModules());
+                mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setText(powerPlantDetailsData.getNoOfFaultyModulese());
+                mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setText(powerPlantDetailsData.getSmpsExpandable());
+                mPowerPlantDetailsEditTextSmpsUltimateCapacity.setText(powerPlantDetailsData.getSmpsUltimateCapacity());
+                mPowerPlantDetailsTextViewSpdStatusVal.setText(powerPlantDetailsData.getSpdStatus());
+                mPowerPlantDetailsTextViewWorkingConditionVal.setText(powerPlantDetailsData.getWorkingCondition());
+                mPowerPlantDetailsEditTextNatureOfProblem.setText(powerPlantDetailsData.getNatureOfProblem());
+
+                //private ImageView mSolarPowerSystemButtonQRCodeScan.setText(landDetailsData.getQRCodeScan());
+
+            } else {
+                Toast.makeText(PowerPlantDetailsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String qRCodeScan = base64StringQRCodeScan;
+            //private ImageView mPowerPlantDetailsButtonQRCodeScan;
+            String assetOwner = mPowerPlantDetailsTextViewAssetOwnerVal.getText().toString().trim();
+            String numberOfPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
+            String manufacturerMakeModel = mPowerPlantDetailsTextViewManufacturerMakeModelVal.getText().toString().trim();
+            String powerPlantModel = mPowerPlantDetailsEditTextPowerPlantModel.getText().toString().trim();
+            String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
+            String earthingStatus = mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal.getText().toString().trim();
+            String dcLoadInDisplay = mPowerPlantDetailsEditTextDcLoadInDisplayAmp.getText().toString().trim();
+            String serialNumber = mPowerPlantDetailsEditTextPowerPlantSerialNumber.getText().toString().trim();
+            String typeOfPowerPlantCommercialSmps = mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.getText().toString().trim();
+            String capacityInAmp = mPowerPlantDetailsEditTextCapacityInAmp.getText().toString().trim();
+            String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
+            String noOfFaultyModulese = mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.getText().toString().trim();
+            String smpsExpandable = mPowerPlantDetailsEditTextSmpsExpandableUpToKW.getText().toString().trim();
+            String SmpsUltimateCapacity = mPowerPlantDetailsEditTextSmpsUltimateCapacity.getText().toString().trim();
+            String spdStatus = mPowerPlantDetailsTextViewSpdStatusVal.getText().toString().trim();
+            String workingCondition = mPowerPlantDetailsTextViewWorkingConditionVal.getText().toString().trim();
+            String natureOfProblem = mPowerPlantDetailsEditTextNatureOfProblem.getText().toString().trim();
+
+            powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, assetOwner, numberOfPowerPlant, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem);
+            hotoTransactionData.setPowerPlantDetailsData(powerPlantDetailsData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);
@@ -554,8 +658,9 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                finish();
+                submitDetails();
                 startActivity(new Intent(this, Power_Backups_DG.class));
+                finish();
                 return true;
 
             default:

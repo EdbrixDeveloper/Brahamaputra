@@ -1,14 +1,31 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TowerDetailsData {
 
+    @SerializedName("towerName")
     private String towerName;
+
+    @SerializedName("towerType")
     private String towerType;
+
+    @SerializedName("towerHeight")
     private String towerHeight;
+
+    @SerializedName("dateOfTowerPainting")
     private String dateOfTowerPainting;
+
+    @SerializedName("boardSign")
     private String boardSign;
+
+    @SerializedName("dangerSignBoard")
     private String dangerSignBoard;
+
+    @SerializedName("cautionSignBoard")
     private String cautionSignBoard;
+
+    @SerializedName("warningSignBoard")
     private String warningSignBoard;
 
 

@@ -52,6 +52,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     String str_sourceOfPower;
 
+
     private OfflineStorageWrapper offlineStorageWrapper;
     private HotoTransactionData hotoTransactionData;
 
@@ -74,7 +75,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_hoto_transaction);
-
         hotoTransactionData = new HotoTransactionData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -255,7 +255,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
             hotoTransactionData.setCheckInLatitude(checkInLat);
             hotoTransactionData.setCheckInLongitude(checkInLong);
             hotoTransactionData.setCheckInBatteryData(checkInBatteryData);
-
 
             hotoTransactionData.setCheckOutLatitude(checkOutLat);
             hotoTransactionData.setCheckOutLongitude(checkOutLong);

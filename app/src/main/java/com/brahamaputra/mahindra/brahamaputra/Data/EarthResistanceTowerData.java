@@ -1,9 +1,16 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class EarthResistanceTowerData {
 
+    @SerializedName("earthType")
     private String earthType;
+
+    @SerializedName("earthResistanceInOhms")
     private String earthResistanceInOhms;
+
+    @SerializedName("earthResistanceMeasuredDate")
     private String earthResistanceMeasuredDate;
 
     public EarthResistanceTowerData(String earthType, String earthResistanceInOhms, String earthResistanceMeasuredDate) {

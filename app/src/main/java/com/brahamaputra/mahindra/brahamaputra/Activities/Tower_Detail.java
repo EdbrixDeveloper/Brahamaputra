@@ -12,12 +12,20 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,15 +61,33 @@ public class Tower_Detail extends AppCompatActivity {
     String str_cautionSignageboard;
     String str_warningSignageboardVal;
 
+    private static final String TAG = Tower_Detail.class.getSimpleName();
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private TowerDetailsData towerDetailsData;
+
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tower__detail);
         this.setTitle("Tower Detail");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(Tower_Detail.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Tower_Detail.this, userId, ticketId);
+        setInputDetails();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -238,6 +264,63 @@ public class Tower_Detail extends AppCompatActivity {
         mTowerDetailEditTextDateOfPaintingOfTheTower.setText(sdf.format(myCalendar.getTime()));
     }
 
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                towerDetailsData = hotoTransactionData.getTowerDetailsData();
+
+                mTowerDetailTextViewTowerVal.setText(towerDetailsData.getTowerName());
+                mTowerDetailTextViewTypeOfTowerVal.setText(towerDetailsData.getTowerType());
+                mTowerDetailEditTextHeightOfTower.setText(towerDetailsData.getTowerHeight());
+                mTowerDetailEditTextDateOfPaintingOfTheTower.setText(towerDetailsData.getDateOfTowerPainting());
+                mTowerDetailTextViewSignboardVal.setText(towerDetailsData.getBoardSign());
+                mTowerDetailSpinnerDangerSignageboardVal.setText(towerDetailsData.getDangerSignBoard());
+                mTowerDetailTextViewCautionSignageboardVal.setText(towerDetailsData.getCautionSignBoard());
+                mTowerDetailTextViewWarningSignageboardVal.setText(towerDetailsData.getWarningSignBoard());
+
+            } else {
+                Toast.makeText(Tower_Detail.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String towerName = mTowerDetailTextViewTowerVal.getText().toString().trim();
+            String towerType = mTowerDetailTextViewTypeOfTowerVal.getText().toString().trim();
+            String towerHeight = mTowerDetailEditTextHeightOfTower.getText().toString().trim();
+            String dateOfTowerPainting = mTowerDetailEditTextDateOfPaintingOfTheTower.getText().toString().trim();
+            String boardSign = mTowerDetailTextViewSignboardVal.getText().toString().trim();
+            String dangerSignBoard = mTowerDetailSpinnerDangerSignageboardVal.getText().toString().trim();
+            String cautionSignBoard = mTowerDetailTextViewCautionSignageboardVal.getText().toString().trim();
+            String warningSignBoard = mTowerDetailTextViewWarningSignageboardVal.getText().toString().trim();
+
+            towerDetailsData = new TowerDetailsData(towerName, towerType, towerHeight, dateOfTowerPainting, boardSign, dangerSignBoard, cautionSignBoard, warningSignBoard);
+
+            hotoTransactionData.setTowerDetailsData(towerDetailsData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -254,8 +337,9 @@ public class Tower_Detail extends AppCompatActivity {
                 return true;
 
             case R.id.menuSubmit:
-                finish();
+                submitDetails();
                 startActivity(new Intent(this, Earth_Resistance_Tower.class));
+                finish();
                 return true;
 
             default:

@@ -211,7 +211,6 @@
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
 
-
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

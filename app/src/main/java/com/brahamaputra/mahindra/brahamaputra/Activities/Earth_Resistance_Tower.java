@@ -13,11 +13,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +43,17 @@ public class Earth_Resistance_Tower extends BaseActivity {
     private TextView mEarthResistanceTowerTextViewDateOfearthResistanceMeasured;
     private EditText mEarthResistanceTowerEditTextDateOfearthResistanceMeasured;
 
+    private static final String TAG = Earth_Resistance_Tower.class.getSimpleName();
+
     String str_typeOfEarth;
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private EarthResistanceTowerData earthResistanceTowerData;
+    private SessionManager sessionManager;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -45,9 +63,18 @@ public class Earth_Resistance_Tower extends BaseActivity {
         setContentView(R.layout.activity_earth_resistance_tower);
 
         this.setTitle("Earth Resistance (Tower)");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(Earth_Resistance_Tower.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Earth_Resistance_Tower.this, userId, ticketId);
+
+        setInputDetails();
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -114,6 +141,53 @@ public class Earth_Resistance_Tower extends BaseActivity {
         mEarthResistanceTowerEditTextDateOfearthResistanceMeasured.setText(sdf.format(myCalendar.getTime()));
     }
 
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                earthResistanceTowerData = hotoTransactionData.getEarthResistanceTowerData();
+
+                mEarthResistanceTowerTextViewTypeOfEarthVal.setText(earthResistanceTowerData.getEarthType());
+                mEarthResistanceTowerEditTextEarthResistance.setText(earthResistanceTowerData.getEarthResistanceInOhms());
+                mEarthResistanceTowerEditTextDateOfearthResistanceMeasured.setText(earthResistanceTowerData.getEarthResistanceMeasuredDate());
+
+
+            } else {
+                Toast.makeText(Earth_Resistance_Tower.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String earthType = mEarthResistanceTowerTextViewTypeOfEarthVal.getText().toString().trim();
+            String earthResistanceInOhms = mEarthResistanceTowerEditTextEarthResistance.getText().toString().trim();
+            String earthResistanceMeasuredDate = mEarthResistanceTowerEditTextDateOfearthResistanceMeasured.getText().toString().trim();
+
+            earthResistanceTowerData = new EarthResistanceTowerData(earthType, earthResistanceInOhms, earthResistanceMeasuredDate);
+
+            hotoTransactionData.setEarthResistanceTowerData(earthResistanceTowerData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -130,15 +204,15 @@ public class Earth_Resistance_Tower extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                finish();
+                submitDetails();
                 startActivity(new Intent(this, Earth_Resistance_Equipment.class));
+                finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
 }

@@ -25,12 +25,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionersData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,6 +84,17 @@ public class Air_Conditioners extends BaseActivity {
     String str_amcYesNo;
     String str_workingCondition;
 
+    private static final String TAG = Shelter.class.getSimpleName();
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private AirConditionersData airConditionersData;
+    private String base64StringQRCodeScan = "eji39jjj";
+    private SessionManager sessionManager;
+
     final Calendar myCalendar = Calendar.getInstance();
 
     /////////////////////////
@@ -92,9 +112,19 @@ public class Air_Conditioners extends BaseActivity {
 
         this.setTitle("Air Conditioners");
         alertDialogManager = new AlertDialogManager(Air_Conditioners.this);
+
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+        sessionManager = new SessionManager(Air_Conditioners.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Air_Conditioners.this, userId, ticketId);
+
+        setInputDetails();
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -342,6 +372,73 @@ public class Air_Conditioners extends BaseActivity {
         }
     }
 
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                airConditionersData = hotoTransactionData.getAirConditionersData();
+
+
+                mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(airConditionersData.getNoOfACprovided());
+                mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(airConditionersData.getNumberOfACInWorkingCondition());
+                //mAirConditionersButtonQRCodeScan;
+                base64StringQRCodeScan = airConditionersData.getqRCodeScan();
+                mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.getAssetOwner());
+                mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.getTypeOfAcSpliWindow());
+                mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.getManufacturerMakeModel());
+                mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.getAcSerialNumber());
+                mAirConditionersEditTextCapacityTr.setText(airConditionersData.getCapacityTr());
+                mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.getDateOfInstallation());
+                mAirConditionersTextViewAmcYesNoVal.setText(airConditionersData.getAmcYesNo());
+                mAirConditionersEditTextDateOfvalidityOfAmc.setText(airConditionersData.getDateOfvalidityOfAmc());
+                mAirConditionersTextViewWorkingConditionVal.setText(airConditionersData.getWorkingCondition());
+                mAirConditionersEditTextNatureOfProblem.setText(airConditionersData.getNatureOfProblem());
+
+            } else {
+                Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String noOfACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim();
+            String numberOfACInWorkingCondition = mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim();
+            String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
+            String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
+            String typeOfAcSpliWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
+            String manufacturerMakeModel = mAirConditionersEditTextManufacturerMakeModel.getText().toString().trim();
+            String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
+            String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
+            String dateOfInstallation = mAirConditionersEditTextDateOfInstallation.getText().toString().trim();
+            String amcYesNo = mAirConditionersTextViewAmcYesNoVal.getText().toString().trim();
+            String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
+            String workingCondition = mAirConditionersTextViewWorkingConditionVal.getText().toString().trim();
+            String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();
+
+
+            airConditionersData = new AirConditionersData(noOfACprovided, numberOfACInWorkingCondition, qRCodeScan, assetOwner, typeOfAcSpliWindow, manufacturerMakeModel, acSerialNumber, capacityTr, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem);
+
+            hotoTransactionData.setAirConditionersData(airConditionersData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -358,8 +455,9 @@ public class Air_Conditioners extends BaseActivity {
                 //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                finish();
+                submitDetails();
                 startActivity(new Intent(this, Solar_Power_System.class));
+                finish();
                 return true;
 
             default:
