@@ -285,7 +285,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_noOfEngineAlternatorSetsprovided))),
                         "No.of Engine Alternator Sets provided",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -305,7 +305,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_numberOfWorkingDg))),
                         "Number of Working DG",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -325,7 +325,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_assetOwner))),
                         "Asset Owner",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -346,7 +346,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_manufacturerMakeModel))),
                         "Manufacturer/Make/Model",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -366,7 +366,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_capacityInKva))),
                         "Capacity in KVA",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -386,7 +386,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_autoManual))),
                         "Auto/Manual",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -406,7 +406,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_amc))),
                         "AMC(Yes/No)",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -426,7 +426,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgWorkingType))),
                         "DG Working Type",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -446,7 +446,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgMainAlternatorType))),
                         "DG Main Alternator Type",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -468,7 +468,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgMainAlternatorMake))),
                         "DG Main Alternator Make",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -490,7 +490,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgCanopyStatus))),
                         "DG Canopy Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -512,7 +512,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgStartingBatteryStatus))),
                         "DG Starting Battery Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -534,7 +534,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_chargingAlternator))),
                         "Charging Alternator",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -555,7 +555,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_batteryCharger))),
                         "Battery Charger",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -575,7 +575,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_dgAvrWorkingStatus))),
                         "DG AVR working Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -597,7 +597,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_fuelTankPosition))),
                         "Fuel Tank Position",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -619,7 +619,7 @@ public class Power_Backups_DG extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_workingCondition))),
                         "Working Condition",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

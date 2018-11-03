@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
@@ -76,11 +77,7 @@ public class LoginActivity extends BaseActivity {
                     // hide virtual keyboard
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(mLoginEditTextPassword.getWindowToken(), 0);
-
-                    //doLogin
-                    String username = mLoginEditTextUsername.getText().toString();
-                    String password = mLoginEditTextPassword.getText().toString();
-                    doLogin(username,password);
+                    checkValidations();
                     return true;
                 }
                 return false;
@@ -98,9 +95,8 @@ public class LoginActivity extends BaseActivity {
         mLoginButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = mLoginEditTextUsername.getText().toString();
-                String password = mLoginEditTextPassword.getText().toString();
-                doLogin(username,password);
+                checkValidations();
+
             }
         });
 
@@ -156,6 +152,7 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionUserID(response.getUser().getId());
                                 sessionManager.updateSessionUserFirstName(response.getUser().getFirstName());
                                 sessionManager.updateSessionUserLastName(response.getUser().getLastName());
+                                sessionManager.updateSessionDeviceToken(response.getAccessToken());
                                 finish();
 
                                 startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
@@ -228,5 +225,32 @@ public class LoginActivity extends BaseActivity {
                 return;*/
             }
         }
+    }
+
+    private void checkValidations() {
+        //doLogin
+        String username = mLoginEditTextUsername.getText().toString();
+        String password = mLoginEditTextPassword.getText().toString();
+
+        Conditions.hideKeyboard(LoginActivity.this);
+
+        if (username.isEmpty()) {
+            mLoginEditTextUsername.setError("Field can not be empty");
+        } else /*if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            _login_edit_text_email.setError(getString(R.string.error_email_not_valid));
+        } else */if (password.isEmpty()) {
+            mLoginEditTextUsername.setError(null);
+            mLoginEditTextPassword.setError("Field can not be empty");
+        } else {
+            mLoginEditTextPassword.setError(null);
+
+            if (Conditions.isNetworkConnected(LoginActivity.this)) {
+                doLogin(username,password);
+                // ((MainActivity) getActivity()).onMeetingListSelected();
+            } else {
+                Toast.makeText(LoginActivity.this, "Network Eror", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 }

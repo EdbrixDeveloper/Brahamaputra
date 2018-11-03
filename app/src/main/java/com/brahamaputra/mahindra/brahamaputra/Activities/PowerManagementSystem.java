@@ -107,7 +107,7 @@ public class PowerManagementSystem extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_AssetOwner))),
                         "Asset Owner",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -127,7 +127,7 @@ public class PowerManagementSystem extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemType))),
                         "Power Management System Type",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -147,7 +147,7 @@ public class PowerManagementSystem extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemMake))),
                         "Power Management System Make",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -168,7 +168,7 @@ public class PowerManagementSystem extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemPosition))),
                         "Power Management System Position",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -188,7 +188,7 @@ public class PowerManagementSystem extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemStaus))),
                         "Power Management System Staus",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -208,7 +208,7 @@ public class PowerManagementSystem extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_WorkingCondition))),
                         "Working Condition",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

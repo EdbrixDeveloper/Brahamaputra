@@ -206,7 +206,7 @@ public class Air_Conditioners extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_noOfAirConditionersACprovided))),
                         "No.of Air Conditioners (AC) provided",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -228,7 +228,7 @@ public class Air_Conditioners extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_numberofACInWorkingCondition))),
                         "Number of AC in Working Condition",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -250,7 +250,7 @@ public class Air_Conditioners extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_assetOwner))),
                         "Asset Owner",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -272,7 +272,7 @@ public class Air_Conditioners extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_typeOfAcSpliWindow))),
                         "Type of AC (Split/Window)",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -294,7 +294,7 @@ public class Air_Conditioners extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_amc))),
                         "AMC (Yes / No)",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -315,7 +315,7 @@ public class Air_Conditioners extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_workingCondition))),
                         "Working Condition",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

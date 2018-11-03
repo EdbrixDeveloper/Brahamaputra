@@ -225,7 +225,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_typrOfElectricConnection))),
                         "Type of Electric Connection",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -245,7 +245,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_tariff))),
                         "Tariff",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -265,7 +265,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_copyOfElectricBills))),
                         "Copy of the electric bills",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -285,7 +285,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebSupplier))),
                         "EB Supplier",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -305,7 +305,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebStatus))),
                         "EB Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -325,7 +325,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_transformerWorkingCondition))),
                         "Transformer Working Condition",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -345,7 +345,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebMeterBoxStatus))),
                         "EB Meter Box Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -365,7 +365,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebMeterWorkingStatus))),
                         "EB Meter Working Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -385,7 +385,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_typeOfPayment))),
                         "Type Of Payment",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -407,7 +407,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebPaymentSchedule))),
                         "EB Payment Schedule",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -427,7 +427,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_safetyFuseUnit))),
                         "Safety Fuse Unit (SFU)",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -447,7 +447,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_kitKatClayFuseStatus))),
                         "KIT-KAT/Clay Fuse Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -470,7 +470,7 @@ public class Electric_Connection extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebNeutralEarthing))),
                         "EB Neutral Earthing",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

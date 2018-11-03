@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoListHeader;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoListTiketData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketsDate;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.HashMap;
@@ -19,12 +19,12 @@ import java.util.List;
 public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<HotoListHeader> _listDataHeader; // header titles
+    private List<HotoTicketsDate> _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<Object, List<HotoListTiketData>> _listDataChild;
+    private HashMap<Object, List<HotoTicket>> _listDataChild;
 
-    public UserHotoExpListAdapter(Context context, List<HotoListHeader> listDataHeader,
-                                 HashMap<Object, List<HotoListTiketData>> listChildData) {
+    public UserHotoExpListAdapter(Context context, List<HotoTicketsDate> listDataHeader,
+                                 HashMap<Object, List<HotoTicket>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -45,7 +45,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final HotoListTiketData hotoListTiketData = (HotoListTiketData) getChild(groupPosition, childPosition);
+        final HotoTicket HotoTicket = (HotoTicket) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -58,12 +58,12 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         TextView textView_SiteName = (TextView) convertView.findViewById(R.id.textView_SiteName);
         TextView textView_SiteAddress = (TextView) convertView.findViewById(R.id.textView_SiteAddress);
 
-        textView_HotoName.setText(hotoListTiketData.getHotoTicketNo());
-//        textView_SiteID.setText(hotoListTiketData.getSiteId());
-//        textView_SiteName.setText(hotoListTiketData.getSiteName());
-//        textView_SiteAddress.setText(hotoListTiketData.getSiteAddress());
+        textView_HotoName.setText(HotoTicket.getHotoTicketNo());
+        textView_SiteID.setText("Site Id: "+HotoTicket.getSiteId());
+        textView_SiteName.setText("Site Name: "+HotoTicket.getSiteName());
+        textView_SiteAddress.setText("Site Address: "+HotoTicket.getSiteAddress());
 
-        if(hotoListTiketData.getStatus().equalsIgnoreCase("Closed")){
+        if(HotoTicket.getStatus().equalsIgnoreCase("Closed")){
             convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.colorWhite));
         }else{
             convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.limegreen));
@@ -94,7 +94,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        HotoListHeader hotoListHeader = (HotoListHeader) getGroup(groupPosition);
+        HotoTicketsDate HotoTicketsDate = (HotoTicketsDate) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -104,11 +104,11 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         TextView textView_Date = (TextView) convertView.findViewById(R.id.textView_Date);
         TextView textView_Count = (TextView) convertView.findViewById(R.id.textView_Count);
 
-        textView_Date.setText(hotoListHeader.getDate());
+        textView_Date.setText(HotoTicketsDate.getDate());
         textView_Date.setTypeface(null, Typeface.BOLD);
 
         textView_Count.setTypeface(null, Typeface.BOLD);
-        textView_Count.setText(hotoListHeader.getHotoTicketCount());
+        textView_Count.setText(""+HotoTicketsDate.getHotoTicketCount());
 
         return convertView;
     }

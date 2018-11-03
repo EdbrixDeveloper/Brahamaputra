@@ -39,7 +39,7 @@
                             android:src="@drawable/applogo" />
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/textView_userProfile_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Venkatesh Prabhu"
@@ -49,7 +49,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/textView_userProfile_userName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="venkatesh.prabhu@gmail.com"

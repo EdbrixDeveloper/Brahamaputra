@@ -77,7 +77,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_physicalConditionOfShelterPlatform))),
                         "Physical Condition of Shelter and Platform",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -99,7 +99,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_numberOfBtsInsideShelter))),
                         "Number of BTS Inside Shelter",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -121,7 +121,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_numberOfBtsOutsideShelter))),
                         "Number of BTS Outside Shelter",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -143,7 +143,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_shelterLock))),
                         "Shelter Lock",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -166,7 +166,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_outdoorShelterLock))),
                         "Outdoor Shelter Lock",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -188,7 +188,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_igbStatus))),
                         "IGB Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -210,7 +210,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_egbStatus))),
                         "EGB Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -232,7 +232,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_noOfOdcAvailable))),
                         "NO OF ODC Available",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -255,7 +255,7 @@ public class Shelter extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Shelter.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_shelter_odcLock))),
                         "ODC Lock",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

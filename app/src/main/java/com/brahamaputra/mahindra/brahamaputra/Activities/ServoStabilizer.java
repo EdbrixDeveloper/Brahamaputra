@@ -88,7 +88,7 @@ public class ServoStabilizer extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_ServoStabilizerWorkingStatus))),
                         "Servo Stabilizer Working Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -108,7 +108,7 @@ public class ServoStabilizer extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_MakeofServo))),
                         "Make of Servo",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -128,7 +128,7 @@ public class ServoStabilizer extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_RatingofServo))),
                         "Rating of Servo",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -148,7 +148,7 @@ public class ServoStabilizer extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ServoStabilizer.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_ServoStabilizer_WorkingCondition))),
                         "Working Condition",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

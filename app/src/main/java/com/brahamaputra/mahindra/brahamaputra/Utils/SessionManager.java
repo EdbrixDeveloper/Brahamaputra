@@ -447,6 +447,18 @@ public class SessionManager {
         this.updateSessionOrgID(null);
         this.updateSessionProfileToken(null);
         this.updateSessionDeviceToken(null);
+
+        this.updateSessionUsername(null);
+        this.updateSessionPassword(null);
+        this.updateSessionProfileToken(null);
+        this.updateSessionDeviceToken(null);
+        this.updateSessionDeviceType(null);
+        this.updateSessionOrgID(null);
+        this.updateSessionUserID(null);
+        this.updateSessionUserFirstName(null);
+        this.updateSessionUserLastName(null);
+        this.updateSessionProfileImageBase64(null);
+        this.updateSessionCredentials(null,null,null);
 //        this.updateLoggedUserList(null);
 //        this.updateLoggedUsersCredentials(null);
 //        this.updateLoggedUserData(null);

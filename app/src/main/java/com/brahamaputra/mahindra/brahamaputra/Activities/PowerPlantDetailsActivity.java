@@ -197,7 +197,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_assetOwner))),
                         "Asset Owner",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -219,7 +219,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_numberOfPowerPlant))),
                         "Number of Power Plant",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -241,7 +241,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_manufacturerMakeModel))),
                         "Manufacturer/Make",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -263,7 +263,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_numberModuleSlots))),
                         "Number Module Slots",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -285,7 +285,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_powerPlantEarthingStatus))),
                         "Power Plant Earthing Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -307,7 +307,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_typeOfPowerPlantCommercialSmps))),
                         "Type of the Power Plant [Commercial/SMPs]",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -329,7 +329,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_numberOfModules))),
                         "Number of Modules",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -351,7 +351,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_noOfFaultyModules))),
                         "No. of Faulty Modules",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -373,7 +373,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_spdStatus))),
                         "SPD Status",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -395,7 +395,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_workingCondition))),
                         "Working Condition",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

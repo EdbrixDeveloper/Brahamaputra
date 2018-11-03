@@ -65,7 +65,7 @@ public class ACDB_DCDB extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ACDB_DCDB.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_acdb_dcdb_NumberofDCDB))),
                         "Number of DCDB",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -85,7 +85,7 @@ public class ACDB_DCDB extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ACDB_DCDB.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_acdb_dcdb_NumberofACDB))),
                         "Number of ACDB",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
@@ -105,7 +105,7 @@ public class ACDB_DCDB extends BaseActivity {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ACDB_DCDB.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_acdb_dcdb_FreeCoolingDeviseStausFCU))),
                         "Free Cooling Devise Staus FCU",
-                        "close", "#000000");
+                        "Close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {

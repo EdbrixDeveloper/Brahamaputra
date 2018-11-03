@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 
@@ -88,6 +89,7 @@ public class DashboardActivity extends BaseActivity {
         switch (item.getItemId()) {
 
             case R.id.menuSubmit:
+                finish();
                 startActivity(new Intent(DashboardActivity.this,UserProfileActivity.class));
                 return true;
 
@@ -108,26 +110,6 @@ public class DashboardActivity extends BaseActivity {
 
         if(!gps_enabled && !network_enabled) {
             // notify user
-            /*AlertDialog.Builder dialog = new AlertDialog.Builder(DashboardActivity.this);
-            dialog.setMessage("Location Not Enabled");
-            dialog.setPositiveButton("Open Location Settings", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                    // TODO Auto-generated method stub
-                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    DashboardActivity.this.startActivity(myIntent);
-                    //get gps
-                }
-            });
-            dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                    // TODO Auto-generated method stub
-                }
-            });
-            dialog.show();*/
-
             alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel",new AlertDialogManager.onSingleButtonClickListner() {
                 @Override
                 public void onPositiveClick() {
@@ -135,34 +117,13 @@ public class DashboardActivity extends BaseActivity {
                     DashboardActivity.this.startActivity(myIntent);
                 }
             }).show();
-
         }
         else{
-            if(isNetworkConnected()){
+            if(Conditions.isNetworkConnected(DashboardActivity.this)){
                 Intent intent = new Intent(DashboardActivity.this, UsersHotoListActivity.class);
-                intent.putExtra("isNetworkConnected", isNetworkConnected());
+                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
                 startActivity(intent);
             }else{
-               /* AlertDialog.Builder dialog = new AlertDialog.Builder(DashboardActivity.this);
-                dialog.setMessage("Device has no internet connection");
-                dialog.setPositiveButton("Application work in offline mode.", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                        Intent intent = new Intent(DashboardActivity.this, UsersHotoListActivity.class);
-                        intent.putExtra("isNetworkConnected", isNetworkConnected());
-                        startActivity(intent);
-                        //startActivity(new Intent(DashboardActivity.this,UsersHotoListActivity.class));
-                    }
-                });
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                        // TODO Auto-generated method stub
-                    }
-                });
-                dialog.show();*/
-
                 alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
@@ -176,8 +137,8 @@ public class DashboardActivity extends BaseActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         //TicketID = String.valueOf(taskEditText.getText());
-
                                         Intent intent = new Intent(DashboardActivity.this, UserHotoTransactionActivity.class);
+                                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
                                         intent.putExtra("ticketID", String.valueOf(taskEditText.getText()));
                                         startActivity(intent);
                                     }
@@ -185,17 +146,10 @@ public class DashboardActivity extends BaseActivity {
                                 .setNegativeButton("cancel", null)
                                 .create();
                         dialog.show();
-
-
                     }
                 }).show();
             }
         }
-    }
-
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
     }
 
 }
