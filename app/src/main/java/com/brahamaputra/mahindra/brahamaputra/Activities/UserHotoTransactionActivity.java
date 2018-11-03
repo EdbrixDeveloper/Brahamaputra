@@ -95,7 +95,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = id;//sessionManager.getSessionUserTicketId();
 
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketName);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
 
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +210,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                Object req = offlineStorageWrapper.getFileObjectByName(ticketName + ".txt");//saveObjectToFile(ticketName + ".txt", jsonString);
+                Object req = offlineStorageWrapper.getFileObjectByName(ticketId + ".txt");//saveObjectToFile(ticketName + ".txt", jsonString);
                 Log.e(UserHotoTransactionActivity.class.getName(),"FinalJson :\n"+req);
                 sessionManager.updateSessionUserTicketId(null);
                 sessionManager.updateSessionUserTicketName(null);
@@ -228,8 +228,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private void getOfflineData() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
@@ -271,7 +271,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
-            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
