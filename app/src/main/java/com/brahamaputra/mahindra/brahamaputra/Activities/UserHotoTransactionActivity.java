@@ -92,7 +92,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         sessionManager = new SessionManager(UserHotoTransactionActivity.this);
         userId = sessionManager.getSessionUserId();
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = id;//sessionManager.getSessionUserTicketId();
 
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
 
