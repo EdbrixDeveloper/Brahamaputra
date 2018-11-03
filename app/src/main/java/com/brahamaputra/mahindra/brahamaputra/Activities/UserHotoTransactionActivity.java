@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -53,9 +54,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private HotoTransactionData hotoTransactionData;
+
     private String userId = "";
-    private String ticketId = "";
-    private String ticketName = "";
+    private String ticketId = "";//TicketId
+
+    private String ticketName = "";//TicketId
     private String checkInLat = "";
     private String checkInLong = "";
     private String checkInBatteryData = "";
@@ -63,6 +66,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private String checkOutLat = "";
     private String checkOutLong = "";
     private String checkOutBatteryData = "";
+
+    private SessionManager sessionManager;
 
 
     @Override
@@ -72,6 +77,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
         hotoTransactionData = new HotoTransactionData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("ticketID");
@@ -176,6 +182,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
+                sessionManager.updateSessionUserTicketId(null);
+                sessionManager.updateSessionUserTicketName(null);
                 finish();
                 return true;
             default:

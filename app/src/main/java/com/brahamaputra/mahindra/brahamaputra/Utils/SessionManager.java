@@ -31,10 +31,14 @@ public class SessionManager {
 
     private static final String PREFS_SESSION_USER_FIRST_NAME = "SessionUserFirstName";
     private static final String PREFS_SESSION_USER_LAST_NAME = "SessionUserLastName";
+    private static final String PREFS_SESSION_USER_TICKET_ID = "SessionUserTicketId";
+    private static final String PREFS_SESSION_USER_TICKET_NAME = "SessionUserTicketName";
 
     private static final String PREF_SESSION_WALKTHROUGH_SKIP_KEY = "wlkSkip";
     private static final String PREF_SESSION_APPUPDATE_SKIP_KEY = "AppUpdateSkip";
     private static final String PREFS_SESSION_PROFILE_IMAGE_BASE64 = "SessionProfileImageBase64";
+
+
 
     private SharedPreferences sharedPrefs;
 
@@ -125,6 +129,14 @@ public class SessionManager {
      */
     public String getSessionUserFirstLast() {
         return this.sharedPrefs.getString(PREFS_SESSION_USER_LAST_NAME, "");
+    }
+
+    public String getSessionUserTicketId() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_TICKET_ID, "");
+    }
+
+    public String getSessionUserTicketName() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_TICKET_NAME, "");
     }
 
 
@@ -344,6 +356,29 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void updateSessionUserTicketId(String id) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((id != null) && (id.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_TICKET_ID, id);
+        } else {
+            editor.remove(PREFS_SESSION_USER_TICKET_ID);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionUserTicketName(String name) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((name != null) && (name.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_TICKET_NAME, name);
+        } else {
+            editor.remove(PREFS_SESSION_USER_TICKET_NAME);
+        }
+        editor.commit();
+    }
+
+
 
     /**
      * Updates the saved session credentials.
@@ -459,6 +494,9 @@ public class SessionManager {
         this.updateSessionUserLastName(null);
         this.updateSessionProfileImageBase64(null);
         this.updateSessionCredentials(null,null,null);
+
+        this.updateSessionUserTicketId(null);
+        this.updateSessionUserTicketName(null);
 //        this.updateLoggedUserList(null);
 //        this.updateLoggedUsersCredentials(null);
 //        this.updateLoggedUserData(null);

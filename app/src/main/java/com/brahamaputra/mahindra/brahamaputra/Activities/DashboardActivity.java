@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 
@@ -37,6 +38,8 @@ public class DashboardActivity extends BaseActivity {
     private RelativeLayout mDashboardRelativeLayoutMyIncident;
     final public int CHECK_PERMISSIONS = 123;
     private AlertDialogManager alertDialogManager;
+
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +143,7 @@ public class DashboardActivity extends BaseActivity {
                                         Intent intent = new Intent(DashboardActivity.this, UserHotoTransactionActivity.class);
                                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
                                         intent.putExtra("ticketID", String.valueOf(taskEditText.getText()));
+                                        sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
                                         startActivity(intent);
                                     }
                                 })

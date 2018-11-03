@@ -79,9 +79,11 @@ public class UsersHotoListActivity extends BaseActivity {
                 // notify user
 
                 String hotoTickitNo = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getHotoTicketNo().toString();
+                String hotoTicketId = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getId().toString();
+
                 String hotoTickStatus = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getStatus().toString();
                 if(hotoTickStatus.equals("Open")){
-                    checkSystemLocation(hotoTickitNo);
+                    checkSystemLocation(hotoTickitNo,hotoTicketId);
                 }
                 return false;
             }
@@ -212,7 +214,7 @@ public class UsersHotoListActivity extends BaseActivity {
         }
     }
 
-    public void checkSystemLocation(final String hotoTickitNo){
+    public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId){
         LocationManager lm = (LocationManager)UsersHotoListActivity.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;
@@ -237,9 +239,8 @@ public class UsersHotoListActivity extends BaseActivity {
                 Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
                 intent.putExtra("ticketID",hotoTickitNo);
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
-
                 intent.putExtra("ticketID",hotoTickitNo);
-
+                sessionManager.updateSessionUserTicketId(hotoTicketId);
                 startActivity(intent);
             }else{
                 alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
@@ -248,6 +249,7 @@ public class UsersHotoListActivity extends BaseActivity {
                         Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
                         intent.putExtra("ticketID",hotoTickitNo);
+                        sessionManager.updateSessionUserTicketId(hotoTicketId);
                         startActivity(intent);
                     }
                 }).show();

@@ -30,6 +30,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
@@ -71,9 +72,11 @@ public class Land_Details extends AppCompatActivity {
     private TextView mLandDetailsTextViewValidityOfLand;
     private EditText mLandDetailsEditTextDateOfvalidityOfLand;
     private OfflineStorageWrapper offlineStorageWrapper;
+
     private String userId = "101";
     private String ticketId = "";
     private String ticketName = "28131";
+
     private HotoTransactionData hotoTransactionData;
     private LandDetailsData landDetailsData;
     private String base64StringLayoutOfLand = "eji39jjj";
@@ -91,6 +94,8 @@ public class Land_Details extends AppCompatActivity {
     String str_landDetailsTypeOfLandVal;
     String str_copyAgreementWithOwnerVal;
 
+    private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +105,12 @@ public class Land_Details extends AppCompatActivity {
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        sessionManager = new SessionManager(Land_Details.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+
         hotoTransactionData = new HotoTransactionData();
 //        setInputDetails();
 
