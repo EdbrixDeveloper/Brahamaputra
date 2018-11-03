@@ -13,11 +13,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,13 +36,21 @@ import java.util.Locale;
 public class ExternalTenantsPersonaldetails extends BaseActivity {
 
 
-
     final Calendar myCalendar = Calendar.getInstance();
 
 
     String str_totalNumberofTanents;
     String str_nameoftheTenant;
     String str_typeofTenant;
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData;
+    private String base64StringLayoutOfLand = "eji39jjj";
+    private SessionManager sessionManager;
 
     private TextView mExternalTenantsPersonaldetailsTextViewTotalNumberofTanents;
     private TextView mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal;
@@ -84,11 +100,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         );
 
 
-
     }
 
-    private void initCombo()
-    {
+    private void initCombo() {
         mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,9 +170,16 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_external_tenants_personal_details);
         this.setTitle("External Tenants Personal details");
+        sessionManager = new SessionManager(ExternalTenantsPersonaldetails.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ExternalTenantsPersonaldetails.this, userId, ticketId);
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
 
 
         final DatePickerDialog.OnDateSetListener date1 = new DatePickerDialog.OnDateSetListener() {
@@ -238,6 +259,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                submitDetails();
                 finish();
                 startActivity(new Intent(this, Total_DC_Load_site.class));
                 return true;
@@ -246,4 +268,65 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                externalTenantsPersonalDetailsData = hotoTransactionData.getExternalTenantsPersonalDetailsData();
+
+
+                mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setText(externalTenantsPersonalDetailsData.getTotalNumberofTanents());
+                mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setText(externalTenantsPersonalDetailsData.getNameofTenant());
+                mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.setText(externalTenantsPersonalDetailsData.getTypeofTenant());
+                mExternalTenantsPersonaldetailsEditTextPositionattheTower.setText(externalTenantsPersonalDetailsData.getPositionattheTower());
+                mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setText(externalTenantsPersonalDetailsData.getDateofstartofTenancy());
+                mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(externalTenantsPersonalDetailsData.getDateofstartofRadiation());
+                mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.setText(externalTenantsPersonalDetailsData.getNameofContactPerson());
+                mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.setText(externalTenantsPersonalDetailsData.getAddressofContactPerson());
+                mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.setText(externalTenantsPersonalDetailsData.getContactPersonMobile());
+                mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.setText(externalTenantsPersonalDetailsData.getContactPersonLandline());
+
+
+            } else {
+                Toast.makeText(ExternalTenantsPersonaldetails.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+            String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
+            String nameofTenant = mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.getText().toString().trim();
+            String typeofTenant = mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.getText().toString().trim();
+            String positionattheTower = mExternalTenantsPersonaldetailsEditTextPositionattheTower.getText().toString().trim();
+            String dateofstartofTenancy = mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.getText().toString().trim();
+            String dateofstartofRadiation = mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.getText().toString().trim();
+            String nameofContactPerson = mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.getText().toString().trim();
+            String addressofContactPerson = mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.getText().toString().trim();
+            String contactPersonMobile = mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.getText().toString().trim();
+            String contactPersonLandline = mExternalTenantsPersonaldetailsTextViewTelephoneNoofContactPersonLandline.getText().toString().trim();
+
+            externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData(totalNumberofTanents, nameofTenant, typeofTenant, positionattheTower, dateofstartofTenancy, dateofstartofRadiation, nameofContactPerson, addressofContactPerson, contactPersonMobile, contactPersonLandline);
+
+            hotoTransactionData.setExternalTenantsPersonalDetailsData(externalTenantsPersonalDetailsData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

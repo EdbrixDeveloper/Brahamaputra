@@ -9,17 +9,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DetailsOfUnusedMaterials extends BaseActivity {
 
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
+    private SessionManager sessionManager;
 
     private TextView mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite;
     private TextView mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal;
@@ -28,6 +44,10 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     private TextView mDetailsOfUnusedMaterialsTextViewAssetStatus;
     private TextView mDetailsOfUnusedMaterialsTextViewAssetStatusVal;
 
+  /*  mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal;
+    mDetailsOfUnusedMaterialsTextViewAssetMakeVal;
+    mDetailsOfUnusedMaterialsTextViewAssetStatusVal;
+*/
 
     String str_numberofUnusedAssetinSite;
     String str_assetMake;
@@ -47,8 +67,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
     }
 
-    private void initCombo()
-    {
+    private void initCombo() {
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,11 +135,18 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_of_unused_materials);
         this.setTitle("Details Of Unused Materials");
+
+        sessionManager = new SessionManager(DetailsOfUnusedMaterials.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(DetailsOfUnusedMaterials.this, userId, ticketId);
+
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
     }
 
     @Override
@@ -136,15 +162,56 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                submitDetails();
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                detailsOfUnusedMaterialsData = hotoTransactionData.getDetailsOfUnusedMaterialsData();
+
+                mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(detailsOfUnusedMaterialsData.getNumberofUnusedAssetinSite());
+                mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(detailsOfUnusedMaterialsData.getAssetMake());
+                mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(detailsOfUnusedMaterialsData.getAssetStatus());
+
+            } else {
+                Toast.makeText(DetailsOfUnusedMaterials.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String numberofUnusedAssetinSite = mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.getText().toString().trim();
+            String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
+            String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
+
+            detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(numberofUnusedAssetinSite, assetMake, assetStatus);
+            hotoTransactionData.setDetailsOfUnusedMaterialsData(detailsOfUnusedMaterialsData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

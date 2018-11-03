@@ -22,18 +22,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.Manifest;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ServoStabilizerData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ServoStabilizer extends BaseActivity {
 
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private ServoStabilizerData servoStabilizerData;
+    private String base64StringLayoutOfLand = "eji39jjj";
+    private SessionManager sessionManager;
 
     private TextView mBatterySetTextViewQRCodeScan;
     private ImageView mBatterySetButtonQRCodeScan;
@@ -47,6 +64,14 @@ public class ServoStabilizer extends BaseActivity {
     private TextView mServoStabilizerTextViewWorkingConditionVal;
     private TextView mServoStabilizerTextViewNatureofProblem;
     private EditText mServoStabilizerEditTextNatureofProblem;
+
+
+  /*  mBatterySetButtonQRCodeScan;
+    mServoStabilizerTextViewServoStabilizerWorkingStatusVal;
+    mServoStabilizerTextViewMakeofServoVal;
+    mServoStabilizerTextViewRatingofServoVal;
+    mServoStabilizerTextViewWorkingConditionVal;
+    mServoStabilizerEditTextNatureofProblem;*/
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
@@ -169,10 +194,18 @@ public class ServoStabilizer extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servo_stabilizer);
         this.setTitle("SERVO STABILIZER");
+        sessionManager = new SessionManager(ServoStabilizer.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ServoStabilizer.this, userId, ticketId);
         assignViews();
         initCombo();
         alertDialogManager = new AlertDialogManager(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
+
 
         mBatterySetButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,9 +255,9 @@ public class ServoStabilizer extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                submitDetails();
                 finish();
                 startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
                 return true;
@@ -232,6 +265,56 @@ public class ServoStabilizer extends BaseActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                servoStabilizerData = hotoTransactionData.getServoStabilizerData();
+
+                base64StringLayoutOfLand = servoStabilizerData.getServoStabilizer_Qr();
+                mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(servoStabilizerData.getServoStabilizerWorkingStatus());
+                mServoStabilizerTextViewMakeofServoVal.setText(servoStabilizerData.getMakeofServo());
+                mServoStabilizerTextViewRatingofServoVal.setText(servoStabilizerData.getRatingofServo());
+                mServoStabilizerTextViewWorkingConditionVal.setText(servoStabilizerData.getWorkingCondition());
+                mServoStabilizerEditTextNatureofProblem.setText(servoStabilizerData.getNatureofProblem());
+
+            } else {
+                Toast.makeText(ServoStabilizer.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String servoStabilizer_Qr = base64StringLayoutOfLand;
+            String servoStabilizerWorkingStatus = mServoStabilizerTextViewServoStabilizerWorkingStatusVal.getText().toString().trim();
+            String makeofServo = mServoStabilizerTextViewMakeofServoVal.getText().toString().trim();
+            String ratingofServo = mServoStabilizerTextViewRatingofServoVal.getText().toString().trim();
+            String workingCondition = mServoStabilizerTextViewWorkingConditionVal.getText().toString().trim();
+            String natureofProblem = mServoStabilizerEditTextNatureofProblem.getText().toString().trim();
+
+
+            servoStabilizerData = new ServoStabilizerData(servoStabilizer_Qr, servoStabilizerWorkingStatus, makeofServo, ratingofServo, workingCondition, natureofProblem);
+            hotoTransactionData.setServoStabilizerData(servoStabilizerData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Boolean getFromPref(Context context, String key) {

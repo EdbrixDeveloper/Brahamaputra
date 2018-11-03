@@ -13,11 +13,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 import java.text.SimpleDateFormat;
@@ -53,6 +61,14 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     String str_FuelSensor;
     String str_FireSmokeSensor;
 
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private GeneralSafetyMeasuresData generalSafetyMeasuresData;
+    private SessionManager sessionManager;
 
     private TextView mGeneralAndSafetyMeasuresTextViewPrevailingSLA;
     private EditText mGeneralAndSafetyMeasuresEditTextPrevailingSLA;
@@ -92,8 +108,8 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     private TextView mGeneralAndSafetyMeasureTextViewCaretakerSecurityStayinginSiteVal;
     private TextView mGeneralAndSafetyMeasureTextViewNumberofEarthPit;
     private TextView mGeneralAndSafetyMeasureTextViewNumberofEarthPitVal;
-    private TextView mGeneralAndSafetyMeasureTextViewLightningArresterStatus;
     private TextView mGeneralAndSafetyMeasureTextViewLightningArresterStatusVal;
+    private TextView mGeneralAndSafetyMeasureTextViewLightningArresterStatus;
     private TextView mGeneralAndSafetyMeasureTextViewFencingCompoundWallCondition;
     private TextView mGeneralAndSafetyMeasureTextViewFencingCompoundWallConditionVal;
     private TextView mGeneralAndSafetyMeasureTextViewNumberoffreeODPaltformAvailable;
@@ -169,8 +185,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     }
 
 
-    private void initCombo()
-    {
+    private void initCombo() {
 
 
         mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.setOnClickListener(new View.OnClickListener() {
@@ -246,7 +261,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_DGRoomLock= item.get(position);
+                        str_DGRoomLock = item.get(position);
                         mGeneralAndSafetyMeasureTextViewDGRoomLockVal.setText(str_DGRoomLock);
                     }
                 });
@@ -346,7 +361,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_NoofSecurityPerson= item.get(position);
+                        str_NoofSecurityPerson = item.get(position);
                         mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.setText(str_NoofSecurityPerson);
                     }
                 });
@@ -600,9 +615,16 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_and_safety_measures);
         this.setTitle("GENERAL & SAFETY MEASURES");
+        sessionManager = new SessionManager(GeneralAndSafetyMeasures.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(GeneralAndSafetyMeasures.this, userId, ticketId);
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -651,6 +673,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                 // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                submitDetails();
                 finish();
                 startActivity(new Intent(this, ACDB_DCDB.class));
                 return true;
@@ -658,5 +681,99 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                generalSafetyMeasuresData = hotoTransactionData.getGeneralSafetyMeasuresData();
+
+
+                mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setText(generalSafetyMeasuresData.getPrevailingSLA());
+                mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.setText(generalSafetyMeasuresData.getSiteBoundaryStatus());
+                mGeneralAndSafetyMeasureTextViewSiteHygieneVegitationStatusVal.setText(generalSafetyMeasuresData.getSiteHygieneVegitationStatus());
+                mGeneralAndSafetyMeasureTextViewGateLockVal.setText(generalSafetyMeasuresData.getGateLock());
+                mGeneralAndSafetyMeasureTextViewDGRoomLockVal.setText(generalSafetyMeasuresData.getDgRoomLock());
+                mGeneralAndSafetyMeasureTextViewFireExtuinguisherVal.setText(generalSafetyMeasuresData.getFireExtuinguisher());
+                mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.setText(generalSafetyMeasuresData.getFireExtuinguisherType());
+                mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setText(generalSafetyMeasuresData.getFireExtuinguisherExpiryDate());
+                mGeneralAndSafetyMeasureTextViewFireBucketVal.setText(generalSafetyMeasuresData.getFireBucket());
+                mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.setText(generalSafetyMeasuresData.getSecurityStatus());
+                mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.setText(generalSafetyMeasuresData.getNoofSecurityPerson());
+                mGeneralAndSafetyMeasureEditTextMobileNumberofSecurity.setText(generalSafetyMeasuresData.getMobileNumberofSecurity());
+                mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.setText(generalSafetyMeasuresData.getCaretakerStatusUpOnEmergency());
+                mGeneralAndSafetyMeasureEditTextMobileNumberofCaretaker.setText(generalSafetyMeasuresData.getMobileNumberofCaretaker());
+                mGeneralAndSafetyMeasureTextViewIsSecurityCaretakeristheOwnerofSiteVal.setText(generalSafetyMeasuresData.getIsSecurityCaretakeristheOwnerofSite());
+                mGeneralAndSafetyMeasureEditTextSalaryofSecurityCaretaker.setText(generalSafetyMeasuresData.getSalaryofSecurityCaretaker());
+                mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.setText(generalSafetyMeasuresData.getCaretakerSecuritySalaryPaidBy());
+                mGeneralAndSafetyMeasureTextViewCaretakerSecurityStayinginSiteVal.setText(generalSafetyMeasuresData.getCaretakerSecurityStayinginSite());
+                mGeneralAndSafetyMeasureTextViewNumberofEarthPitVal.setText(generalSafetyMeasuresData.getNumberofEarthPit());
+                mGeneralAndSafetyMeasureTextViewLightningArresterStatusVal.setText(generalSafetyMeasuresData.getLightningArresterStatus());
+                mGeneralAndSafetyMeasureTextViewFencingCompoundWallConditionVal.setText(generalSafetyMeasuresData.getFencingCompoundWallCondition());
+                mGeneralAndSafetyMeasureTextViewNumberoffreeODPaltformAvailableVal.setText(generalSafetyMeasuresData.getNumberoffreeODPaltformAvailable());
+                mGeneralAndSafetyMeasureTextViewAlarmMultipluxerStatusVal.setText(generalSafetyMeasuresData.getAlarmMultipluxerStatus());
+                mGeneralAndSafetyMeasureTextViewDoorOpenSensorVal.setText(generalSafetyMeasuresData.getDoorOpenSensor());
+                mGeneralAndSafetyMeasureTextViewFuelSensorVal.setText(generalSafetyMeasuresData.getFuelSensor());
+                mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText(generalSafetyMeasuresData.getFireSmokeSensor());
+
+
+            } else {
+                Toast.makeText(GeneralAndSafetyMeasures.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+
+            String prevailingSLA = mGeneralAndSafetyMeasuresEditTextPrevailingSLA.getText().toString().trim();
+            String siteBoundaryStatus = mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.getText().toString().trim();
+            String siteHygieneVegitationStatus = mGeneralAndSafetyMeasureTextViewSiteHygieneVegitationStatusVal.getText().toString().trim();
+            String gateLock = mGeneralAndSafetyMeasureTextViewGateLockVal.getText().toString().trim();
+            String dgRoomLock = mGeneralAndSafetyMeasureTextViewDGRoomLockVal.getText().toString().trim();
+            String fireExtuinguisher = mGeneralAndSafetyMeasureTextViewFireExtuinguisherVal.getText().toString().trim();
+            String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
+            String fireExtuinguisherExpiryDate = mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.getText().toString().trim();
+            String fireBucket = mGeneralAndSafetyMeasureTextViewFireBucketVal.getText().toString().trim();
+            String securityStatus = mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.getText().toString().trim();
+            String noofSecurityPerson = mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.getText().toString().trim();
+            String mobileNumberofSecurity = mGeneralAndSafetyMeasureEditTextMobileNumberofSecurity.getText().toString().trim();
+            String caretakerStatusUpOnEmergency = mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.getText().toString().trim();
+            String mobileNumberofCaretaker = mGeneralAndSafetyMeasureEditTextMobileNumberofCaretaker.getText().toString().trim();
+            String isSecurityCaretakeristheOwnerofSite = mGeneralAndSafetyMeasureTextViewIsSecurityCaretakeristheOwnerofSiteVal.getText().toString().trim();
+            String salaryofSecurityCaretaker = mGeneralAndSafetyMeasureEditTextSalaryofSecurityCaretaker.getText().toString().trim();
+            String caretakerSecuritySalaryPaidBy = mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.getText().toString().trim();
+            String caretakerSecurityStayinginSite = mGeneralAndSafetyMeasureTextViewCaretakerSecurityStayinginSiteVal.getText().toString().trim();
+            String numberofEarthPit = mGeneralAndSafetyMeasureTextViewNumberofEarthPitVal.getText().toString().trim();
+            String lightningArresterStatus = mGeneralAndSafetyMeasureTextViewLightningArresterStatusVal.getText().toString().trim();
+            String fencingCompoundWallCondition = mGeneralAndSafetyMeasureTextViewFencingCompoundWallConditionVal.getText().toString().trim();
+            String numberoffreeODPaltformAvailable = mGeneralAndSafetyMeasureTextViewNumberoffreeODPaltformAvailableVal.getText().toString().trim();
+            String alarmMultipluxerStatus = mGeneralAndSafetyMeasureTextViewAlarmMultipluxerStatusVal.getText().toString().trim();
+            String doorOpenSensor = mGeneralAndSafetyMeasureTextViewDoorOpenSensorVal.getText().toString().trim();
+            String fuelSensor = mGeneralAndSafetyMeasureTextViewFuelSensorVal.getText().toString().trim();
+            String fireSmokeSensor = mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.getText().toString().trim();
+
+            generalSafetyMeasuresData = new GeneralSafetyMeasuresData(prevailingSLA, siteBoundaryStatus, siteHygieneVegitationStatus, gateLock, dgRoomLock, fireExtuinguisher, fireExtuinguisherType, fireExtuinguisherExpiryDate, fireBucket, securityStatus, noofSecurityPerson, mobileNumberofSecurity, caretakerStatusUpOnEmergency, mobileNumberofCaretaker, isSecurityCaretakeristheOwnerofSite, salaryofSecurityCaretaker, caretakerSecuritySalaryPaidBy, caretakerSecurityStayinginSite, numberofEarthPit, lightningArresterStatus, fencingCompoundWallCondition, numberoffreeODPaltformAvailable, alarmMultipluxerStatus, doorOpenSensor, fuelSensor, fireSmokeSensor);
+
+            hotoTransactionData.setGeneralSafetyMeasuresData(generalSafetyMeasuresData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

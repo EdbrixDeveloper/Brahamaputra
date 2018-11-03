@@ -73,7 +73,7 @@ public class Land_Details extends BaseActivity {
     private OfflineStorageWrapper offlineStorageWrapper;
 
     private String userId = "101";
-    private String ticketId = "";
+    private String ticketId = "28131";
     private String ticketName = "28131";
 
     private HotoTransactionData hotoTransactionData;
@@ -108,7 +108,6 @@ public class Land_Details extends BaseActivity {
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = sessionManager.getSessionUserTicketId();
         userId = sessionManager.getSessionUserId();
-
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketId);
 
         hotoTransactionData = new HotoTransactionData();

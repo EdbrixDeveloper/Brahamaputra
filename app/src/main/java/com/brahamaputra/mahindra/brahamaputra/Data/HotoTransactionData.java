@@ -45,6 +45,16 @@ public class HotoTransactionData {
     private PowerPlantDetailsData powerPlantDetailsData;
     private PowerBackupsDGData powerBackupsDGData;
     private ShelterData shelterData;
+    private MediaData mediaData;
+    private BatterySetData batterySetData;
+    private ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData;
+    private TotalDCLoadofSiteData totalDCLoadofSiteData;
+    private ActiveequipmentDetailsData activeequipmentDetailsData;
+    private PowerManagementSystemData powerManagementSystemData;
+    private GeneralSafetyMeasuresData generalSafetyMeasuresData;
+    private ACDB_DCDB_Data acdb_dcdb_data;
+    private ServoStabilizerData servoStabilizerData;
+    private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
 
     public String getTicketId() {
         return ticketId;
@@ -204,5 +214,85 @@ public class HotoTransactionData {
 
     public void setShelterData(ShelterData shelterData) {
         this.shelterData = shelterData;
+    }
+
+    public MediaData getMediaData() {
+        return mediaData;
+    }
+
+    public void setMediaData(MediaData mediaData) {
+        this.mediaData = mediaData;
+    }
+
+    public BatterySetData getBatterySetData() {
+        return batterySetData;
+    }
+
+    public void setBatterySetData(BatterySetData batterySetData) {
+        this.batterySetData = batterySetData;
+    }
+
+    public ExternalTenantsPersonalDetailsData getExternalTenantsPersonalDetailsData() {
+        return externalTenantsPersonalDetailsData;
+    }
+
+    public void setExternalTenantsPersonalDetailsData(ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData) {
+        this.externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsData;
+    }
+
+    public TotalDCLoadofSiteData getTotalDCLoadofSiteData() {
+        return totalDCLoadofSiteData;
+    }
+
+    public void setTotalDCLoadofSiteData(TotalDCLoadofSiteData totalDCLoadofSiteData) {
+        this.totalDCLoadofSiteData = totalDCLoadofSiteData;
+    }
+
+    public ActiveequipmentDetailsData getActiveequipmentDetailsData() {
+        return activeequipmentDetailsData;
+    }
+
+    public void setActiveequipmentDetailsData(ActiveequipmentDetailsData activeequipmentDetailsData) {
+        this.activeequipmentDetailsData = activeequipmentDetailsData;
+    }
+
+    public PowerManagementSystemData getPowerManagementSystemData() {
+        return powerManagementSystemData;
+    }
+
+    public void setPowerManagementSystemData(PowerManagementSystemData powerManagementSystemData) {
+        this.powerManagementSystemData = powerManagementSystemData;
+    }
+
+    public GeneralSafetyMeasuresData getGeneralSafetyMeasuresData() {
+        return generalSafetyMeasuresData;
+    }
+
+    public void setGeneralSafetyMeasuresData(GeneralSafetyMeasuresData generalSafetyMeasuresData) {
+        this.generalSafetyMeasuresData = generalSafetyMeasuresData;
+    }
+
+    public ACDB_DCDB_Data getAcdb_dcdb_data() {
+        return acdb_dcdb_data;
+    }
+
+    public void setAcdb_dcdb_data(ACDB_DCDB_Data acdb_dcdb_data) {
+        this.acdb_dcdb_data = acdb_dcdb_data;
+    }
+
+    public ServoStabilizerData getServoStabilizerData() {
+        return servoStabilizerData;
+    }
+
+    public void setServoStabilizerData(ServoStabilizerData servoStabilizerData) {
+        this.servoStabilizerData = servoStabilizerData;
+    }
+
+    public DetailsOfUnusedMaterialsData getDetailsOfUnusedMaterialsData() {
+        return detailsOfUnusedMaterialsData;
+    }
+
+    public void setDetailsOfUnusedMaterialsData(DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData) {
+        this.detailsOfUnusedMaterialsData = detailsOfUnusedMaterialsData;
     }
 }

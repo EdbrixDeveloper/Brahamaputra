@@ -13,11 +13,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.ActiveequipmentDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +41,15 @@ public class ActiveequipmentDetails extends BaseActivity {
     String str_typeofBTS;
     String str_importanceOfSite;
     String str_numberOfDependantSites;
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private ActiveequipmentDetailsData activeequipmentDetailsData;
+    private SessionManager sessionManager;
+
 
     private TextView mActiveEquipmentDetailsTextViewTypeofBTS;
     private TextView mActiveEquipmentDetailsTextViewTypeofBTSVal;
@@ -71,8 +88,7 @@ public class ActiveequipmentDetails extends BaseActivity {
 
     }
 
-    private void initCombo()
-    {
+    private void initCombo() {
 
         mActiveEquipmentDetailsTextViewTypeofBTSVal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,11 +160,19 @@ public class ActiveequipmentDetails extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active_equipment_details);
         this.setTitle("Active equipment Details");
+
+        sessionManager = new SessionManager(ActiveequipmentDetails.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ActiveequipmentDetails.this, userId, ticketId);
+
         assignViews();
         initCombo();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -192,9 +216,9 @@ public class ActiveequipmentDetails extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                submitDetails();
                 finish();
                 startActivity(new Intent(this, PowerManagementSystem.class));
                 return true;
@@ -203,4 +227,62 @@ public class ActiveequipmentDetails extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-}
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                activeequipmentDetailsData = hotoTransactionData.getActiveequipmentDetailsData();
+
+
+
+                mActiveEquipmentDetailsTextViewTypeofBTSVal.setText(activeequipmentDetailsData.getTypeofBTS());
+                mActiveEquipmentDetailsTextViewImportanceOfSiteVal.setText(activeequipmentDetailsData.getImportanceOfSite());;
+                mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.setText(activeequipmentDetailsData.getNumberOfDependantSites());;
+                mActiveEquipmentDetailsEditTextMake.setText(activeequipmentDetailsData.getMake());;
+                mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.setText(activeequipmentDetailsData.getDCLoadofBTSequipment());;
+                mActiveEquipmentDetailsEditTextYearofInstallationatsite.setText(activeequipmentDetailsData.getYearofInstallationatsite());;
+                mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.setText(activeequipmentDetailsData.getPositionofAntennaTower());;
+
+
+            } else {
+                Toast.makeText(ActiveequipmentDetails.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+
+            String typeofBTS= mActiveEquipmentDetailsTextViewTypeofBTSVal.getText().toString().trim();
+            String importanceOfSite= mActiveEquipmentDetailsTextViewImportanceOfSiteVal.getText().toString().trim();
+            String numberOfDependantSites= mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.getText().toString().trim();
+            String make= mActiveEquipmentDetailsEditTextMake.getText().toString().trim();
+            String DCLoadofBTSequipment= mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString().trim();
+            String yearofInstallationatsite= mActiveEquipmentDetailsEditTextYearofInstallationatsite.getText().toString().trim();
+            String positionofAntennaTower= mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString().trim();
+
+            activeequipmentDetailsData = new ActiveequipmentDetailsData(typeofBTS, importanceOfSite, numberOfDependantSites, make, DCLoadofBTSequipment, yearofInstallationatsite, positionofAntennaTower);
+
+            hotoTransactionData.setActiveequipmentDetailsData(activeequipmentDetailsData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    }

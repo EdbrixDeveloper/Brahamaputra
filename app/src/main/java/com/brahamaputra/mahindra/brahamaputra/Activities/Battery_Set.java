@@ -25,12 +25,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import android.Manifest;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,6 +97,16 @@ public class Battery_Set extends BaseActivity {
     private TextView mBatterySetTextViewNatureofProblem;
     private EditText mBatterySetEditTextNatureofProblem;
 
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private BatterySetData batterySetData;
+    private String base64StringBatterySet = "eji39jjj";
+
+    private SessionManager sessionManager;
+
     private void assignViews() {
         mBatterySetTextViewNoofBatterySetProvided = (TextView) findViewById(R.id.batterySet_textView_NoofBatterySetProvided);
         mBatterySetTextViewNoofBatterySetProvidedVal = (TextView) findViewById(R.id.batterySet_textView_NoofBatterySetProvided_val);
@@ -124,14 +142,14 @@ public class Battery_Set extends BaseActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
 
 
     }
 
 
-    private void initCombo()
-    {
+    private void initCombo() {
 
         mBatterySetTextViewNoofBatterySetProvidedVal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,11 +357,18 @@ public class Battery_Set extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battery_set);
         this.setTitle("Battery Set");
+
+        sessionManager = new SessionManager(Battery_Set.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Battery_Set.this, userId, ticketId);
         alertDialogManager = new AlertDialogManager(this);
         assignViews();
         initCombo();
@@ -427,6 +452,7 @@ public class Battery_Set extends BaseActivity {
                 // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                submitDetails();
                 finish();
                 startActivity(new Intent(this, ExternalTenantsPersonaldetails.class));
                 return true;
@@ -434,6 +460,76 @@ public class Battery_Set extends BaseActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                batterySetData = hotoTransactionData.getBatterySetData();
+
+                mBatterySetTextViewNoofBatterySetProvidedVal.setText(batterySetData.getNoOfBatterySet());
+                mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(batterySetData.getNoOfBatteryBankWorking());
+                base64StringBatterySet = (batterySetData.getBatterySet_Qr());
+                mBatterySetTextViewAssetOwnerVal.setText(batterySetData.getAssetOwner());
+                mBatterySetTextViewManufacturerMakeModelVal.setText(batterySetData.getManufactureMakeModel());
+                mBatterySetTextViewCapacityinAHVal.setText(batterySetData.getCapacityInAH());
+                mBatterySetTextViewTypeofBatteryVal.setText(batterySetData.getTypeOfBattery());
+                mBatterySetEditTextDateofInstallation.setText(batterySetData.getDateOfInstallation());
+                mBatterySetEditTextBackupduration.setText(batterySetData.getBackupDuaration());
+                mBatterySetTextViewPositionofBatteryBankVal.setText(batterySetData.getPositionOfBatteryBank());
+                mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText(batterySetData.getBatteryBankCableSize());
+                mBatterySetTextViewBatteryBankEarthingStatusVal.setText(batterySetData.getBatteryBankEarthingStatus());
+                mBatterySetTextViewBACKUPConditionVal.setText(batterySetData.getBackupCondition());
+                mBatterySetEditTextNatureofProblem.setText(batterySetData.getNatureOfProblem());
+
+
+            } else {
+                Toast.makeText(Battery_Set.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String noOfBatterySet = mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim();
+            String noOfBatteryBankWorking = mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim();
+            String batterySet_Qr = base64StringBatterySet;
+            String assetOwner = mBatterySetTextViewAssetOwnerVal.getText().toString().trim();
+            String manufactureMakeModel = mBatterySetTextViewManufacturerMakeModelVal.getText().toString().trim();
+            String capacityInAH = mBatterySetTextViewCapacityinAHVal.getText().toString().trim();
+            String typeOfBattery = mBatterySetTextViewTypeofBatteryVal.getText().toString().trim();
+            String dateOfInstallation = mBatterySetEditTextDateofInstallation.getText().toString().trim();
+            String backupDuaration = mBatterySetEditTextBackupduration.getText().toString().trim();
+            String positionOfBatteryBank = mBatterySetTextViewPositionofBatteryBankVal.getText().toString().trim();
+            String batteryBankCableSize = mBatterySetTextViewBatteryBankCableSizeinSQMMVal.getText().toString().trim();
+            String batteryBankEarthingStatus = mBatterySetTextViewBatteryBankEarthingStatusVal.getText().toString().trim();
+            String backupCondition = mBatterySetTextViewBACKUPConditionVal.getText().toString().trim();
+            String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
+
+
+            batterySetData = new BatterySetData(noOfBatterySet, noOfBatteryBankWorking, batterySet_Qr, assetOwner, manufactureMakeModel,capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank,batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem);
+
+            hotoTransactionData.setBatterySetData(batterySetData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Boolean getFromPref(Context context, String key) {

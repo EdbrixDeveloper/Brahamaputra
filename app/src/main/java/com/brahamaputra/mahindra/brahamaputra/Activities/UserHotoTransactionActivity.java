@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -94,7 +95,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = id;//sessionManager.getSessionUserTicketId();
 
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketName);
 
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +210,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
+                Object req = offlineStorageWrapper.getFileObjectByName(ticketName + ".txt");//saveObjectToFile(ticketName + ".txt", jsonString);
+                Log.e(UserHotoTransactionActivity.class.getName(),"FinalJson :\n"+req);
                 sessionManager.updateSessionUserTicketId(null);
                 sessionManager.updateSessionUserTicketName(null);
                 finish();

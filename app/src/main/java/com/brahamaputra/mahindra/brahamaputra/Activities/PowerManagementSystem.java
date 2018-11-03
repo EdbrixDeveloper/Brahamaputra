@@ -23,13 +23,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerManagementSystemData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import android.Manifest;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +51,15 @@ public class PowerManagementSystem extends BaseActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "101";
+    private String ticketId = "28131";
+    private String ticketName = "28131";
+    private HotoTransactionData hotoTransactionData;
+    private PowerManagementSystemData powerManagementSystemData;
+    private String base64StringPowerManagementSystem = "eji39jjj";
+    private SessionManager sessionManager;
 
     String str_assetOwner;
     String str_powerManagementSystemType;
@@ -99,8 +116,7 @@ public class PowerManagementSystem extends BaseActivity {
 
     }
 
-    private void initCombo()
-    {
+    private void initCombo() {
         mPowerManagementSystemTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,15 +239,24 @@ public class PowerManagementSystem extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power_management_system);
         this.setTitle("Power Management System");
+        sessionManager = new SessionManager(PowerManagementSystem.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketId();
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerManagementSystem.this, userId, ticketId);
         assignViews();
         initCombo();
-                alertDialogManager = new AlertDialogManager(this);
+        alertDialogManager = new AlertDialogManager(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
 
         mPowerManagementSystemButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,6 +308,7 @@ public class PowerManagementSystem extends BaseActivity {
                 // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                submitDetails();
                 finish();
                 startActivity(new Intent(this, GeneralAndSafetyMeasures.class));
                 return true;
@@ -290,6 +316,63 @@ public class PowerManagementSystem extends BaseActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                powerManagementSystemData = hotoTransactionData.getPowerManagementSystemData();
+
+                base64StringPowerManagementSystem = powerManagementSystemData.getPowerManagementSystemQR();
+                mPowerManagementSystemTextViewAssetOwnerVal.setText(powerManagementSystemData.getAssetOwner());
+                mPowerManagementSystemTextViewPowerManagementSystemTypeVal.setText(powerManagementSystemData.getPowerManagementSystemType());
+                mPowerManagementSystemTextViewPowerManagementSystemMakeVal.setText(powerManagementSystemData.getPowerManagementSystemMake());
+                mPowerManagementSystemTextViewPowerManagementSystemPositionVal.setText(powerManagementSystemData.getPowerManagementSystemPosition());
+                mPowerManagementSystemTextViewPowerManagementSystemStausVal.setText(powerManagementSystemData.getPowerManagementSystemStaus());
+                mPowerManagementSystemEditTextPowerManagementSystemSerialNumber.setText(powerManagementSystemData.getSerialNumber());
+                mPowerManagementSystemTextViewWorkingConditionVal.setText(powerManagementSystemData.getWorkingCondition());
+                mPowerManagementSystemEditTextNatureofProblem.setText(powerManagementSystemData.getNatureofProblem());
+
+
+            } else {
+                Toast.makeText(PowerManagementSystem.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            hotoTransactionData.setTicketNo(ticketId);
+
+            String powerManagementSystemQR= base64StringPowerManagementSystem;
+            String assetOwner= mPowerManagementSystemTextViewAssetOwnerVal.getText().toString().trim();
+            String powerManagementSystemType= mPowerManagementSystemTextViewPowerManagementSystemTypeVal .getText().toString().trim();
+            String powerManagementSystemMake= mPowerManagementSystemTextViewPowerManagementSystemMakeVal.getText().toString().trim();
+            String powerManagementSystemPosition= mPowerManagementSystemTextViewPowerManagementSystemPositionVal.getText().toString().trim();
+            String powerManagementSystemStaus= mPowerManagementSystemTextViewPowerManagementSystemStausVal.getText().toString().trim();
+            String serialNumber= mPowerManagementSystemEditTextPowerManagementSystemSerialNumber.getText().toString().trim();
+            String workingCondition= mPowerManagementSystemTextViewWorkingConditionVal.getText().toString().trim();
+            String natureofProblem= mPowerManagementSystemEditTextNatureofProblem.getText().toString().trim();
+
+            powerManagementSystemData = new PowerManagementSystemData(powerManagementSystemQR,assetOwner, powerManagementSystemType, powerManagementSystemMake, powerManagementSystemPosition, powerManagementSystemStaus, serialNumber, workingCondition, natureofProblem);
+
+            hotoTransactionData.setPowerManagementSystemData(powerManagementSystemData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Boolean getFromPref(Context context, String key) {
