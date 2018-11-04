@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoListTiketData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketsDate;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
@@ -51,10 +52,13 @@ public class UsersHotoListActivity extends BaseActivity {
 
     private SessionManager sessionManager;
 
+    private HotoTicketList hotoTicketList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_hoto_list);
+        hotoTicketList = new HotoTicketList();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -77,7 +81,30 @@ public class UsersHotoListActivity extends BaseActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
                 // notify user
-                String hotoTicketId = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getId().toString();
+                if(hotoTicketList!=null){
+                    String hotoTicketId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getId().toString();
+                    String hotoTicketNo = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketNo().toString();
+
+                    String hotoTicketDate = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketDate().toString();
+                    String siteId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteId().toString();
+                    String siteName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteName().toString();
+                    String siteAddress = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteAddress().toString();
+                    String status = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
+                    String siteType = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteType().toString();
+                    String stateName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStateName().toString();
+                    String customerName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCustomerName().toString();
+                    String circleName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCircleName().toString();
+                    String ssaName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSsaName().toString();
+
+
+                    String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
+                    if(hotoTickStatus.equals("Open")){
+                        checkSystemLocation(hotoTicketNo,hotoTicketId,hotoTicketDate,siteId,siteName,siteAddress,status,siteType,
+                                stateName,customerName,circleName,ssaName);
+                    }
+                }
+
+               /* String hotoTicketId = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getId().toString();
                 String hotoTicketNo = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getHotoTicketNo().toString();
 
                 String hotoTicketDate = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getHotoTicketDate().toString();
@@ -96,7 +123,7 @@ public class UsersHotoListActivity extends BaseActivity {
                 if(hotoTickStatus.equals("Open")){
                     checkSystemLocation(hotoTicketNo,hotoTicketId,hotoTicketDate,siteId,siteName,siteAddress,status,siteType,
                             stateName,customerName,circleName,ssaName);
-                }
+                }*/
                 return false;
             }
         });
@@ -120,8 +147,12 @@ public class UsersHotoListActivity extends BaseActivity {
                             hideBusyProgress();
                             //showToast(""+response.getSuccess().toString());
                             if(response.getSuccess() == 1){
+                                hotoTicketList = response;
+                                userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this,hotoTicketList);
+                                userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
 
-                                HotoTicketsDates = new ArrayList<>();
+
+                                /*HotoTicketsDates = new ArrayList<>();
                                 HotoTicketMap = new HashMap<Object, List<HotoTicket>>();
                                 //showToast(""+response.getHotoTicketsDates().size());
                                 for(int i=0;i<response.getHotoTicketsDates().size();i++) {
@@ -152,9 +183,9 @@ public class UsersHotoListActivity extends BaseActivity {
                                     HotoTicketMap.put(HotoTicketsDates.get(i), header);
                                 }
                                 userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this,HotoTicketsDates,HotoTicketMap);
-                                userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
+                                userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);*/
 
-                                for(int i=0; i<HotoTicketsDates.size();i++){
+                                for(int i=0; i<response.getHotoTicketsDates().size();i++){
                                     userHotoList_listView_hotoList.expandGroup(i);
                                 }
                             }
@@ -274,6 +305,7 @@ public class UsersHotoListActivity extends BaseActivity {
                 intent.putExtra("ssaName",ssaName);
 
                 sessionManager.updateSessionUserTicketId(hotoTicketId);
+                sessionManager.updateSessionUserTicketName(hotoTickitNo);
                 startActivity(intent);
             }else{
                 alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {

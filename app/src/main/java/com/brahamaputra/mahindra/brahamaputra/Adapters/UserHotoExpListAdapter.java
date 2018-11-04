@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketsDate;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -22,6 +23,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
     private List<HotoTicketsDate> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<Object, List<HotoTicket>> _listDataChild;
+    private HotoTicketList hotoTicketList;
 
     public UserHotoExpListAdapter(Context context, List<HotoTicketsDate> listDataHeader,
                                  HashMap<Object, List<HotoTicket>> listChildData) {
@@ -30,15 +32,22 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         this._listDataChild = listChildData;
     }
 
+    public UserHotoExpListAdapter(Context _context, HotoTicketList hotoTicketList) {
+        this._context = _context;
+        this.hotoTicketList = hotoTicketList;
+    }
+
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .get(childPosititon);
+        return hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosititon);
+//        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+//                .get(childPosititon);
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        return Long.parseLong(hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getId());
+//        return childPosition;
     }
 
     @Override
@@ -73,17 +82,20 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
+        return hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().size();
+//        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+        return hotoTicketList.getHotoTicketsDates().get(groupPosition);
+//        return this._listDataHeader.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return hotoTicketList.getHotoTicketsDates().size();
+//        return this._listDataHeader.size();
     }
 
     @Override

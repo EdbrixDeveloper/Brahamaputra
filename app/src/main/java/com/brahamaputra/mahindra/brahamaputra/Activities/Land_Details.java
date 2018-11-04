@@ -8,12 +8,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,10 +45,13 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Land_Details extends BaseActivity {
@@ -72,9 +78,9 @@ public class Land_Details extends BaseActivity {
     private EditText mLandDetailsEditTextDateOfvalidityOfAgreement;
     private OfflineStorageWrapper offlineStorageWrapper;
 
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
 
     private HotoTransactionData hotoTransactionData;
     private LandDetailsData landDetailsData;
@@ -95,6 +101,9 @@ public class Land_Details extends BaseActivity {
 
     private SessionManager sessionManager;
 
+    private Uri imageFileUri;
+    private String imageFileName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,9 +115,9 @@ public class Land_Details extends BaseActivity {
 
         sessionManager = new SessionManager(Land_Details.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketName);
 
         hotoTransactionData = new HotoTransactionData();
         setInputDetails();
@@ -162,7 +171,7 @@ public class Land_Details extends BaseActivity {
                         }
                     }
                 } else {
-                    openCamera();
+                    openCameraIntent();
                 }
 
             }
@@ -368,6 +377,43 @@ public class Land_Details extends BaseActivity {
 
     }
 
+    public void openCameraIntent() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+            imageFileUri = Uri.fromFile(file);
+
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
+                resultCode == RESULT_OK) {
+            if (imageFileUri != null) {
+                try {
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+//                            (Bitmap) data.getExtras().get("data");
+//                mImageView.setImageBitmap(imageBitmap);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] bitmapDataArray = stream.toByteArray();
+                    base64StringLayoutOfLand = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     //Camera//
 

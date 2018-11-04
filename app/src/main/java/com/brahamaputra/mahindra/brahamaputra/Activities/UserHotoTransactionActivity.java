@@ -1,8 +1,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.BatteryManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -72,13 +75,21 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private SessionManager sessionManager;
 
 
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context ctxt, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            checkOutBatteryData =(String.valueOf(level) + "%");
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_hoto_transaction);
-        hotoTransactionData = new HotoTransactionData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("ticketNO");
@@ -88,14 +99,16 @@ public class UserHotoTransactionActivity extends BaseActivity {
         initCombo();
         disableInput();
         checkNetworkConnection();
-        getOfflineData();
+
 
         sessionManager = new SessionManager(UserHotoTransactionActivity.this);
         userId = sessionManager.getSessionUserId();
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = id;//sessionManager.getSessionUserTicketId();
 
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketName);
+
+        getOfflineData();
 
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +223,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                Object req = offlineStorageWrapper.getFileObjectByName(ticketId + ".txt");//saveObjectToFile(ticketName + ".txt", jsonString);
+                Object req = offlineStorageWrapper.getFileObjectByName(ticketName + ".txt");//saveObjectToFile(ticketName + ".txt", jsonString);
                 Log.e(UserHotoTransactionActivity.class.getName(),"FinalJson :\n"+req);
                 sessionManager.updateSessionUserTicketId(null);
                 sessionManager.updateSessionUserTicketName(null);
@@ -228,8 +241,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private void getOfflineData() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
@@ -243,7 +256,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 }
 
             } else {
-                Toast.makeText(UserHotoTransactionActivity.this, "No offline data available", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(UserHotoTransactionActivity.this, "No offline data available", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -271,7 +284,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

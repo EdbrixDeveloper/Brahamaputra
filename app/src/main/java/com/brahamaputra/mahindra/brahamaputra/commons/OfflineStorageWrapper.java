@@ -49,7 +49,7 @@ public class OfflineStorageWrapper {
             isDirCreated = folderDir.mkdirs();
         }
 
-        return isDirCreated ? folderDir.toString() : "";
+        return isDirCreated ? folderDir.toString() : folderDir.getPath();
     }
 
     /**
