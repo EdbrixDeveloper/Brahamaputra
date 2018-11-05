@@ -206,11 +206,22 @@
                     android:id="@+id/landDetails_button_layoutOfLand"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
+                    android:padding="2dp"
                     android:clickable="true"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
 
+                <ImageView
+                    android:id="@+id/landDetails_button_layoutOfLandView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone"
+                    android:src="@drawable/view_image" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
