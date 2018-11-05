@@ -81,7 +81,6 @@ public class Shelter extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter);
         this.setTitle("Shelter");
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Shelter.this, userId, ticketId);
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -89,9 +88,9 @@ public class Shelter extends BaseActivity {
 
         sessionManager = new SessionManager(Shelter.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Shelter.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Shelter.this, userId, ticketName);
 
         setInputDetails();
 
@@ -324,8 +323,8 @@ public class Shelter extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -333,7 +332,7 @@ public class Shelter extends BaseActivity {
                 shelterData = hotoTransactionData.getShelterData();
 
                 mShelterTextViewPhysicalConditionOfShelterPlatformVal.setText(shelterData.getPhysicalCondition());
-                mShelterTextViewNumberOfBtsInsideShelterVal.setText(shelterData.getNoOBtsInsideShelter());
+                mShelterTextViewNumberOfBtsInsideShelterVal.setText(shelterData.getNoOfBtsInsideShelter());
                 mShelterTextViewNumberOfBtsOutsideShelterVal.setText(shelterData.getNoOfBtsOutsideShelter());
                 mShelterTextViewShelterLockVal.setText(shelterData.getShelterLock());
                 mShelterTextViewOutdoorShelterLockVal.setText(shelterData.getOutdoorShelterLock());
@@ -353,10 +352,10 @@ public class Shelter extends BaseActivity {
     private void submitDetails() {
         try {
 
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketName);
 
             String physicalCondition = mShelterTextViewPhysicalConditionOfShelterPlatformVal.getText().toString().trim();
-            String noOBtsInsideShelter = mShelterTextViewNumberOfBtsInsideShelterVal.getText().toString().trim();
+            String noOfBtsInsideShelter = mShelterTextViewNumberOfBtsInsideShelterVal.getText().toString().trim();
             String noOfBtsOutsideShelter = mShelterTextViewNumberOfBtsOutsideShelterVal.getText().toString().trim();
             String shelterLock = mShelterTextViewShelterLockVal.getText().toString().trim();
             String outdoorShelterLock = mShelterTextViewOutdoorShelterLockVal.getText().toString().trim();
@@ -366,14 +365,14 @@ public class Shelter extends BaseActivity {
             String odcLock = mShelterTextViewOdcLockVal.getText().toString().trim();
 
 
-            shelterData = new ShelterData(physicalCondition, noOBtsInsideShelter, noOfBtsOutsideShelter, shelterLock, outdoorShelterLock, igbStatus, egbStatus, noOfOdcAvailable, odcLock);
+            shelterData = new ShelterData(physicalCondition, noOfBtsInsideShelter, noOfBtsOutsideShelter, shelterLock, outdoorShelterLock, igbStatus, egbStatus, noOfOdcAvailable, odcLock);
 
             hotoTransactionData.setShelterData(shelterData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -16,6 +16,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -33,7 +34,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Tower_Detail extends AppCompatActivity {
+public class Tower_Detail extends BaseActivity {
 
     private TextView mTowerDetailTextViewTower;
     private TextView mTowerDetailTextViewTowerVal;
@@ -84,9 +85,9 @@ public class Tower_Detail extends AppCompatActivity {
 
         sessionManager = new SessionManager(Tower_Detail.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Tower_Detail.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Tower_Detail.this, userId, ticketName);
         setInputDetails();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -267,8 +268,8 @@ public class Tower_Detail extends AppCompatActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -295,7 +296,7 @@ public class Tower_Detail extends AppCompatActivity {
     private void submitDetails() {
         try {
 
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketName);
 
             String towerName = mTowerDetailTextViewTowerVal.getText().toString().trim();
             String towerType = mTowerDetailTextViewTypeOfTowerVal.getText().toString().trim();
@@ -313,7 +314,7 @@ public class Tower_Detail extends AppCompatActivity {
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -660,7 +660,7 @@ public class Battery_Set extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringBatterySet = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    base64StringBatterySet ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

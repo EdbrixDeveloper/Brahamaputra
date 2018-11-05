@@ -91,6 +91,9 @@ public class PowerBackupsDGData {
     @SerializedName("natureOfProblem")
     String natureOfProblem;
 
+    @SerializedName("qrCodeImageFileName")
+    String qrCodeImageFileName;
+
     public PowerBackupsDGData() {
         this.noOfEngineAlternator = "";
         this.numberOfWorkingDg = "";
@@ -121,10 +124,10 @@ public class PowerBackupsDGData {
         this.fuelTankPosition = "";
         this.workingCondition = "";
         this.natureOfProblem = "";
-
+        this.qrCodeImageFileName = "";
     }
 
-    public PowerBackupsDGData(String noOfEngineAlternator, String numberOfWorkingDg, String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem) {
+    public PowerBackupsDGData(String noOfEngineAlternator, String numberOfWorkingDg, String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
         this.noOfEngineAlternator = noOfEngineAlternator;
         this.numberOfWorkingDg = numberOfWorkingDg;
         this.qRCodeScan = qRCodeScan;
@@ -154,6 +157,7 @@ public class PowerBackupsDGData {
         this.fuelTankPosition = fuelTankPosition;
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
     public String getNoOfEngineAlternator() {
@@ -386,5 +390,13 @@ public class PowerBackupsDGData {
 
     public void setNatureOfProblem(String natureOfProblem) {
         this.natureOfProblem = natureOfProblem;
+    }
+
+    public String getQrCodeImageFileName() {
+        return qrCodeImageFileName;
+    }
+
+    public void setQrCodeImageFileName(String qrCodeImageFileName) {
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 }

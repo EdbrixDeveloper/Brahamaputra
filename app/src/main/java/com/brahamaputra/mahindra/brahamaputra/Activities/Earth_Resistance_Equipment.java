@@ -70,9 +70,9 @@ public class Earth_Resistance_Equipment extends BaseActivity {
 
         sessionManager = new SessionManager(Earth_Resistance_Equipment.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Earth_Resistance_Equipment.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Earth_Resistance_Equipment.this, userId, ticketName);
 
         setInputDetails();
 
@@ -142,8 +142,8 @@ public class Earth_Resistance_Equipment extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -166,7 +166,7 @@ public class Earth_Resistance_Equipment extends BaseActivity {
     private void submitDetails() {
         try {
 
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketName);
 
             String earthType = mEarthResistanceEquipmentTextViewTypeOfEarthVal.getText().toString().trim();
             String earthResistanceInOhms = mEarthResistanceEquipmentEditTextEarthResistance.getText().toString().trim();
@@ -179,7 +179,7 @@ public class Earth_Resistance_Equipment extends BaseActivity {
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

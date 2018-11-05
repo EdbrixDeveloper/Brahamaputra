@@ -58,6 +58,8 @@ public class PowerPlantDetailsData {
     @SerializedName("natureOfProblem")
     String natureOfProblem;
 
+    @SerializedName("qrCodeImageFileName")
+    String qrCodeImageFileName;
     public PowerPlantDetailsData() {
         this.qRCodeScan = "";
         this.assetOwner = "";
@@ -77,9 +79,11 @@ public class PowerPlantDetailsData {
         this.spdStatus = "";
         this.workingCondition = "";
         this.natureOfProblem = "";
+        this.qrCodeImageFileName ="";
     }
 
-    public PowerPlantDetailsData(String qRCodeScan, String assetOwner, String numberOfPowerPlant, String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem) {
+
+    public PowerPlantDetailsData(String qRCodeScan, String assetOwner, String numberOfPowerPlant, String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
         this.numberOfPowerPlant = numberOfPowerPlant;
@@ -98,6 +102,7 @@ public class PowerPlantDetailsData {
         this.spdStatus = spdStatus;
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
     public String getqRCodeScan() {
@@ -242,6 +247,14 @@ public class PowerPlantDetailsData {
 
     public void setNatureOfProblem(String natureOfProblem) {
         this.natureOfProblem = natureOfProblem;
+    }
+
+    public String getQrCodeImageFileName() {
+        return qrCodeImageFileName;
+    }
+
+    public void setQrCodeImageFileName(String qrCodeImageFileName) {
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
 }

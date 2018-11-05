@@ -10,12 +10,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,12 +30,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -44,16 +50,22 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class PowerPlantDetailsActivity extends BaseActivity {
 
     private TextView mPowerPlantDetailsTextViewQRCodeScan;
     private ImageView mPowerPlantDetailsButtonQRCodeScan;
+
+    private ImageView mPowerPlantDetailsButtonQRCodeScanView;
+
     private TextView mPowerPlantDetailsTextViewAssetOwner;
     private TextView mPowerPlantDetailsTextViewAssetOwnerVal;
     private TextView mPowerPlantDetailsTextViewNumberOfPowerPlant;
@@ -111,6 +123,8 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private PowerPlantDetailsData powerPlantDetailsData;
     private String base64StringQRCodeScan = "eji39jjj";
     private SessionManager sessionManager;
+    private Uri imageFileUri;
+    private String imageFileName;
 
     //
 
@@ -135,9 +149,9 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
         sessionManager = new SessionManager(PowerPlantDetailsActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerPlantDetailsActivity.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerPlantDetailsActivity.this, userId, ticketName);
 
         setInputDetails();
 
@@ -168,9 +182,21 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                         }
                     }
                 } else {
-                    openCamera();
+                    //openCamera();
+                    openCameraIntent();
                 }
 
+            }
+        });
+
+        mPowerPlantDetailsButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUri != null) {
+                    GlobalMethods.showImageDialog(PowerPlantDetailsActivity.this, imageFileUri);
+                } else {
+                    Toast.makeText(PowerPlantDetailsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -179,6 +205,9 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private void assignViews() {
         mPowerPlantDetailsTextViewQRCodeScan = (TextView) findViewById(R.id.powerPlantDetails_textView_QRCodeScan);
         mPowerPlantDetailsButtonQRCodeScan = (ImageView) findViewById(R.id.powerPlantDetails_button_QRCodeScan);
+
+        mPowerPlantDetailsButtonQRCodeScanView = (ImageView) findViewById(R.id.powerPlantDetails_button_QRCodeScanView);
+
         mPowerPlantDetailsTextViewAssetOwner = (TextView) findViewById(R.id.powerPlantDetails_textView_assetOwner);
         mPowerPlantDetailsTextViewAssetOwnerVal = (TextView) findViewById(R.id.powerPlantDetails_textView_assetOwner_val);
         mPowerPlantDetailsTextViewNumberOfPowerPlant = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfPowerPlant);
@@ -441,19 +470,32 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 powerPlantDetailsData = hotoTransactionData.getPowerPlantDetailsData();
 
                 //private ImageView mPowerPlantDetailsButtonQRCodeScan.setText(powerPlantDetailsData.getAvailable());
+
+                base64StringQRCodeScan = powerPlantDetailsData.getqRCodeScan();
+                // New added for image #ImageSet
+                imageFileName = powerPlantDetailsData.getQrCodeImageFileName();
+                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+                imageFileUri = FileProvider.getUriForFile(PowerPlantDetailsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+                // New added for image #ImageSet
+                mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+                if (imageFileUri != null) {
+                    mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+
                 mPowerPlantDetailsTextViewAssetOwnerVal.setText(powerPlantDetailsData.getAssetOwner());
                 mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsData.getNumberOfPowerPlant());
                 mPowerPlantDetailsTextViewManufacturerMakeModelVal.setText(powerPlantDetailsData.getManufacturerMakeModel());
                 mPowerPlantDetailsEditTextPowerPlantModel.setText(powerPlantDetailsData.getPowerPlantModel());
-                mPowerPlantDetailsTextViewNumberModuleSlotsVal.setText(powerPlantDetailsData.getNumberOfModules());
+                mPowerPlantDetailsTextViewNumberModuleSlotsVal.setText(powerPlantDetailsData.getNumberModuleSlots());
                 mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal.setText(powerPlantDetailsData.getEarthingStatus());
                 mPowerPlantDetailsEditTextDcLoadInDisplayAmp.setText(powerPlantDetailsData.getDcLoadInDisplay());
                 mPowerPlantDetailsEditTextPowerPlantSerialNumber.setText(powerPlantDetailsData.getSerialNumber());
@@ -480,7 +522,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketName);
 
             String qRCodeScan = base64StringQRCodeScan;
             //private ImageView mPowerPlantDetailsButtonQRCodeScan;
@@ -502,17 +544,69 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             String workingCondition = mPowerPlantDetailsTextViewWorkingConditionVal.getText().toString().trim();
             String natureOfProblem = mPowerPlantDetailsEditTextNatureOfProblem.getText().toString().trim();
 
-            powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, assetOwner, numberOfPowerPlant, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem);
+            powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, assetOwner, numberOfPowerPlant, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem, imageFileName);
             hotoTransactionData.setPowerPlantDetailsData(powerPlantDetailsData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+//////////////////////
+    //Camera//
+
+    public void openCameraIntent() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+            //imageFileUri = Uri.fromFile(file);
+
+            imageFileUri = FileProvider.getUriForFile(PowerPlantDetailsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
+                resultCode == RESULT_OK) {
+            if (imageFileUri != null) {
+                try {
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+//                            (Bitmap) data.getExtras().get("data");
+//                mImageView.setImageBitmap(imageBitmap);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] bitmapDataArray = stream.toByteArray();
+                    base64StringQRCodeScan ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                imageFileName = "";
+                imageFileUri = null;
+                mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void openCamera() {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivity(intent);
+    }
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -597,11 +691,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         }).show();
 
 
-    }
-
-    private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
     }
 
     @Override

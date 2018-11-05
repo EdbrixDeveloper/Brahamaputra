@@ -91,6 +91,13 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewEbBillDate;
     private EditText mElectricConnectionEditTextEbBillDate;
 
+    private TextView mElectricConnectionTextViewTypeModeOfPayment;
+    private TextView mElectricConnectionTextViewTypeModeOfPayment_Val;
+    private TextView mElectricConnectionTextViewBankIfscCode;
+    private EditText mElectricConnectionEditTextBankIfscCode;
+    private TextView mElectricConnectionTextViewBankAccountNo;
+    private EditText mElectricConnectionEditTextBankAccountNo;
+
     private static final String TAG = Electric_Connection.class.getSimpleName();
     String selectedHour = "HH", selectedMinute = "MM";
 
@@ -107,6 +114,7 @@ public class Electric_Connection extends BaseActivity {
     String str_safetyFuseUnit;
     String str_kitKatClayFuseStatus;
     String str_ebNeutralEarthing;
+    String str_typeModeOfPayment;
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
@@ -115,6 +123,7 @@ public class Electric_Connection extends BaseActivity {
     private HotoTransactionData hotoTransactionData;
     private ElectricConnectionData electricConnectionData;
     private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,9 +136,9 @@ public class Electric_Connection extends BaseActivity {
 
         sessionManager = new SessionManager(Electric_Connection.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Electric_Connection.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Electric_Connection.this, userId, ticketName);
 
         setInputDetails();
 
@@ -232,6 +241,14 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionEditTextScheduledPowerCutInHrs = (EditText) findViewById(R.id.electricConnection_editText_scheduledPowerCutInHrs);
         mElectricConnectionTextViewEbBillDate = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate);
         mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
+
+        mElectricConnectionTextViewTypeModeOfPayment = (TextView) findViewById(R.id.electricConnection_textView_typeModeOfPayment);
+        mElectricConnectionTextViewTypeModeOfPayment_Val = (TextView) findViewById(R.id.electricConnection_textView_typeModeOfPayment_Val);
+        mElectricConnectionTextViewBankIfscCode = (TextView) findViewById(R.id.electricConnection_textView_bankIfscCode);
+        mElectricConnectionEditTextBankIfscCode = (EditText) findViewById(R.id.electricConnection_editText_bankIfscCode);
+        mElectricConnectionTextViewBankAccountNo = (TextView) findViewById(R.id.electricConnection_textView_bankAccountNo);
+        mElectricConnectionEditTextBankAccountNo = (EditText) findViewById(R.id.electricConnection_editText_bankAccountNo);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -504,12 +521,33 @@ public class Electric_Connection extends BaseActivity {
                 });
             }
         });
+
+        mElectricConnectionTextViewTypeModeOfPayment_Val.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_typeModeOfPayment))),
+                        "Type|Mode Of Payment",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_typeModeOfPayment = item.get(position);
+                        mElectricConnectionTextViewTypeModeOfPayment_Val.setText(str_typeModeOfPayment);
+                    }
+                });
+            }
+        });
+
     }
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -545,6 +583,10 @@ public class Electric_Connection extends BaseActivity {
                 mElectricConnectionEditTextScheduledPowerCutInHrs.setText(electricConnectionData.getScheduledPowerCut());
                 mElectricConnectionEditTextEbBillDate.setText(electricConnectionData.getEbBillDate());
 
+                mElectricConnectionTextViewTypeModeOfPayment_Val.setText(electricConnectionData.getTypeModeOfPayment_Val());
+                mElectricConnectionEditTextBankIfscCode.setText(electricConnectionData.getBankIfscCode());
+                mElectricConnectionEditTextBankAccountNo.setText(electricConnectionData.getBankAccountNo());
+
             } else {
                 Toast.makeText(Electric_Connection.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
@@ -556,7 +598,7 @@ public class Electric_Connection extends BaseActivity {
     private void submitDetails() {
         try {
 
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketName);
 
             String electricConnectionType = mElectricConnectionTextViewTypeOfElectricConnectionVal.getText().toString().trim();
             String connectionTariff = mElectricConnectionTextViewTariffVal.getText().toString().trim();
@@ -586,15 +628,19 @@ public class Electric_Connection extends BaseActivity {
             String scheduledPowerCut = mElectricConnectionEditTextScheduledPowerCutInHrs.getText().toString().trim();
             String ebBillDate = mElectricConnectionEditTextEbBillDate.getText().toString().trim();
 
+            String typeModeOfPayment_Val = mElectricConnectionTextViewTypeModeOfPayment_Val.getText().toString().trim();
+            String bankIfscCode = mElectricConnectionEditTextBankIfscCode.getText().toString().trim();
+            String bankAccountNo = mElectricConnectionEditTextBankAccountNo.getText().toString().trim();
 
-            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate);
+
+            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
 
             hotoTransactionData.setElectricConnectionData(electricConnectionData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -210,6 +210,13 @@
         <item>31</item>
     </string-array>
 
+    <string-array name="array_electricConnection_typeModeOfPayment">
+        <item>DD</item>
+        <item>Cheque</item>
+        <item>Cash</item>
+        <item>NEFT</item>
+    </string-array>
+
 
     <string-array name="array_solarPowerSystem_available">
         <item>No</item>

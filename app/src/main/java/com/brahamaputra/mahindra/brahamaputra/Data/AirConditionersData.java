@@ -17,7 +17,7 @@ public class AirConditionersData {
     String assetOwner;
 
     @SerializedName("typeOfAcSpliWindow")
-    String typeOfAcSpliWindow;
+    String typeOfAcSplitWindow;
 
     @SerializedName("manufacturerMakeModel")
     String manufacturerMakeModel;
@@ -48,7 +48,7 @@ public class AirConditionersData {
         this.numberOfACInWorkingCondition = "";
         this.qRCodeScan = "";
         this.assetOwner = "";
-        this.typeOfAcSpliWindow = "";
+        this.typeOfAcSplitWindow = "";
         this.manufacturerMakeModel = "";
         this.acSerialNumber = "";
         this.capacityTr = "";
@@ -57,14 +57,18 @@ public class AirConditionersData {
         this.dateOfvalidityOfAmc = "";
         this.workingCondition = "";
         this.natureOfProblem = "";
+        this.qrCodeImageFileName ="";
     }
+    @SerializedName("qrCodeImageFileName")
+    String qrCodeImageFileName;
 
-    public AirConditionersData(String noOfACprovided, String numberOfACInWorkingCondition, String qRCodeScan, String assetOwner, String typeOfAcSpliWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem) {
+
+    public AirConditionersData(String noOfACprovided, String numberOfACInWorkingCondition, String qRCodeScan, String assetOwner, String typeOfAcSplitWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
         this.noOfACprovided = noOfACprovided;
         this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
-        this.typeOfAcSpliWindow = typeOfAcSpliWindow;
+        this.typeOfAcSplitWindow = typeOfAcSplitWindow;
         this.manufacturerMakeModel = manufacturerMakeModel;
         this.acSerialNumber = acSerialNumber;
         this.capacityTr = capacityTr;
@@ -73,6 +77,7 @@ public class AirConditionersData {
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
     public String getNoOfACprovided() {
@@ -107,12 +112,12 @@ public class AirConditionersData {
         this.assetOwner = assetOwner;
     }
 
-    public String getTypeOfAcSpliWindow() {
-        return typeOfAcSpliWindow;
+    public String getTypeOfAcSplitWindow() {
+        return typeOfAcSplitWindow;
     }
 
-    public void setTypeOfAcSpliWindow(String typeOfAcSpliWindow) {
-        this.typeOfAcSpliWindow = typeOfAcSpliWindow;
+    public void setTypeOfAcSplitWindow(String typeOfAcSplitWindow) {
+        this.typeOfAcSplitWindow = typeOfAcSplitWindow;
     }
 
     public String getManufacturerMakeModel() {
@@ -179,5 +184,12 @@ public class AirConditionersData {
         this.natureOfProblem = natureOfProblem;
     }
 
+    public String getQrCodeImageFileName() {
+        return qrCodeImageFileName;
+    }
+
+    public void setQrCodeImageFileName(String qrCodeImageFileName) {
+        this.qrCodeImageFileName = qrCodeImageFileName;
+    }
 
 }

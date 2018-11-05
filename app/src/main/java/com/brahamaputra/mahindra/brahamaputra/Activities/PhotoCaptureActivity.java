@@ -279,7 +279,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringSite = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringSite = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -295,7 +295,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringShelter = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringShelter = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -311,7 +311,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringEbMeterBox = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringEbMeterBox ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -327,7 +327,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringSmps = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringSmps = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -343,7 +343,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringEbMeter = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringEbMeter = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -359,7 +359,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringDgHmr = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringDgHmr ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -375,7 +375,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringDgOverview = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringDgOverview = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         }catch (Exception e){
                             e.printStackTrace();
                         }

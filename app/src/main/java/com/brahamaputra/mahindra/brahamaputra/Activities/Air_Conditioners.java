@@ -9,12 +9,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionersData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
@@ -35,16 +40,20 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Air_Conditioners extends BaseActivity {
@@ -55,6 +64,9 @@ public class Air_Conditioners extends BaseActivity {
     private TextView mAirConditionersTextViewNumberOfACInWorkingConditionVal;
     private TextView mAirConditionersTextViewQRCodeScan;
     private ImageView mAirConditionersButtonQRCodeScan;
+
+    private ImageView mAirConditionersButtonQRCodeScanView;
+
     private TextView mAirConditionersTextViewAssetOwner;
     private TextView mAirConditionersTextViewAssetOwnerVal;
     private TextView mAirConditionersTextViewTypeOfAcSpliWindow;
@@ -84,7 +96,7 @@ public class Air_Conditioners extends BaseActivity {
     String str_amcYesNo;
     String str_workingCondition;
 
-    private static final String TAG = Shelter.class.getSimpleName();
+    private static final String TAG = Air_Conditioners.class.getSimpleName();
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
@@ -94,6 +106,8 @@ public class Air_Conditioners extends BaseActivity {
     private AirConditionersData airConditionersData;
     private String base64StringQRCodeScan = "eji39jjj";
     private SessionManager sessionManager;
+    private Uri imageFileUri;
+    private String imageFileName;
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -120,9 +134,9 @@ public class Air_Conditioners extends BaseActivity {
 
         sessionManager = new SessionManager(Air_Conditioners.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Air_Conditioners.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Air_Conditioners.this, userId, ticketName);
 
         setInputDetails();
 
@@ -166,7 +180,8 @@ public class Air_Conditioners extends BaseActivity {
                         }
                     }
                 } else {
-                    openCamera();
+                    //openCamera();
+                    openCameraIntent();
                 }
 
             }
@@ -194,6 +209,18 @@ public class Air_Conditioners extends BaseActivity {
         });
 
 
+        mAirConditionersButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUri != null) {
+                    GlobalMethods.showImageDialog(Air_Conditioners.this, imageFileUri);
+                } else {
+                    Toast.makeText(Air_Conditioners.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
     }
 
 
@@ -204,6 +231,9 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersTextViewNumberOfACInWorkingConditionVal = (TextView) findViewById(R.id.airConditioners_textView_numberOfACInWorkingCondition_val);
         mAirConditionersTextViewQRCodeScan = (TextView) findViewById(R.id.airConditioners_textView_QRCodeScan);
         mAirConditionersButtonQRCodeScan = (ImageView) findViewById(R.id.airConditioners_button_QRCodeScan);
+
+        mAirConditionersButtonQRCodeScanView = (ImageView) findViewById(R.id.airConditioners_button_QRCodeScanView);
+
         mAirConditionersTextViewAssetOwner = (TextView) findViewById(R.id.airConditioners_textView_assetOwner);
         mAirConditionersTextViewAssetOwnerVal = (TextView) findViewById(R.id.airConditioners_textView_assetOwner_val);
         mAirConditionersTextViewTypeOfAcSpliWindow = (TextView) findViewById(R.id.airConditioners_textView_typeOfAcSpliWindow);
@@ -374,8 +404,8 @@ public class Air_Conditioners extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -387,8 +417,21 @@ public class Air_Conditioners extends BaseActivity {
                 mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(airConditionersData.getNumberOfACInWorkingCondition());
                 //mAirConditionersButtonQRCodeScan;
                 base64StringQRCodeScan = airConditionersData.getqRCodeScan();
+
+                // New added for image #ImageSet
+                imageFileName = airConditionersData.getQrCodeImageFileName();
+                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+                imageFileUri = FileProvider.getUriForFile(Air_Conditioners.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+                // New added for image #ImageSet
+                mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+                if (imageFileUri != null) {
+                    mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+
+
                 mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.getAssetOwner());
-                mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.getTypeOfAcSpliWindow());
+                mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.getTypeOfAcSplitWindow());
                 mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.getManufacturerMakeModel());
                 mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.getAcSerialNumber());
                 mAirConditionersEditTextCapacityTr.setText(airConditionersData.getCapacityTr());
@@ -409,13 +452,13 @@ public class Air_Conditioners extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketName);
 
             String noOfACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim();
             String numberOfACInWorkingCondition = mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim();
             String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
             String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
-            String typeOfAcSpliWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
+            String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
             String manufacturerMakeModel = mAirConditionersEditTextManufacturerMakeModel.getText().toString().trim();
             String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
             String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
@@ -426,14 +469,14 @@ public class Air_Conditioners extends BaseActivity {
             String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();
 
 
-            airConditionersData = new AirConditionersData(noOfACprovided, numberOfACInWorkingCondition, qRCodeScan, assetOwner, typeOfAcSpliWindow, manufacturerMakeModel, acSerialNumber, capacityTr, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem);
+            airConditionersData = new AirConditionersData(noOfACprovided, numberOfACInWorkingCondition, qRCodeScan, assetOwner, typeOfAcSplitWindow, manufacturerMakeModel, acSerialNumber, capacityTr, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem, imageFileName);
 
             hotoTransactionData.setAirConditionersData(airConditionersData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -468,6 +511,56 @@ public class Air_Conditioners extends BaseActivity {
 
     //////////////////////
     //Camera//
+
+    public void openCameraIntent() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+            //imageFileUri = Uri.fromFile(file);
+
+            imageFileUri = FileProvider.getUriForFile(Air_Conditioners.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
+                resultCode == RESULT_OK) {
+            if (imageFileUri != null) {
+                try {
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+//                            (Bitmap) data.getExtras().get("data");
+//                mImageView.setImageBitmap(imageBitmap);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] bitmapDataArray = stream.toByteArray();
+                    base64StringQRCodeScan = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                imageFileName = "";
+                imageFileUri = null;
+                mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void openCamera() {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivity(intent);
+    }
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -554,10 +647,6 @@ public class Air_Conditioners extends BaseActivity {
 
     }
 
-    private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
-    }
 
     @Override
     public void onRequestPermissionsResult

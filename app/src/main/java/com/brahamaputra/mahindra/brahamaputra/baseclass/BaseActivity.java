@@ -50,6 +50,7 @@ public class BaseActivity extends AppCompatActivity {
         dialogManager = new DialogManager(this);
         globalMethods = new GlobalMethods();
         toastMessage = new ToastMessage(this);
+//        connectivityMonitor = new ConnectivityMonitor(this, erisConnectionListener);
         mContext = this;
 
         displayFirebaseRegId();

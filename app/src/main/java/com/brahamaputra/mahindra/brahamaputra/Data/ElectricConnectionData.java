@@ -85,6 +85,11 @@ public class ElectricConnectionData {
     @SerializedName("ebBillDate")
     private String ebBillDate;
 
+    @SerializedName("typeModeOfPayment_Val")
+    private String typeModeOfPayment_Val;
+
+    @SerializedName("bankIfscCode")
+    private String bankIfscCode;
     public ElectricConnectionData() {
         this.electricConnectionType = "";
         this.connectionTariff = "";
@@ -113,9 +118,16 @@ public class ElectricConnectionData {
         this.averageEbAvailability = "";
         this.scheduledPowerCut = "";
         this.ebBillDate = "";
+        this.typeModeOfPayment_Val="";
+        this.bankIfscCode="";
+        this.bankAccountNo="";
     }
 
-    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate) {
+    @SerializedName("bankAccountNo")
+    private String bankAccountNo;
+
+
+    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate,String typeModeOfPayment_Val,String bankIfscCode,String bankAccountNo) {
         this.electricConnectionType = electricConnectionType;
         this.connectionTariff = connectionTariff;
         this.sanctionLoad = sanctionLoad;
@@ -143,6 +155,9 @@ public class ElectricConnectionData {
         this.averageEbAvailability = averageEbAvailability;
         this.scheduledPowerCut = scheduledPowerCut;
         this.ebBillDate = ebBillDate;
+        this.typeModeOfPayment_Val=typeModeOfPayment_Val;
+        this.bankIfscCode=bankIfscCode;
+        this.bankAccountNo=bankAccountNo;
     }
 
     public String getElectricConnectionType() {
@@ -360,6 +375,30 @@ public class ElectricConnectionData {
 
     public void setEbBillDate(String ebBillDate) {
         this.ebBillDate = ebBillDate;
+    }
+
+    public String getTypeModeOfPayment_Val() {
+        return typeModeOfPayment_Val;
+    }
+
+    public void setTypeModeOfPayment_Val(String typeModeOfPayment_Val) {
+        this.typeModeOfPayment_Val = typeModeOfPayment_Val;
+    }
+
+    public String getBankIfscCode() {
+        return bankIfscCode;
+    }
+
+    public void setBankIfscCode(String bankIfscCode) {
+        this.bankIfscCode = bankIfscCode;
+    }
+
+    public String getBankAccountNo() {
+        return bankAccountNo;
+    }
+
+    public void setBankAccountNo(String bankAccountNo) {
+        this.bankAccountNo = bankAccountNo;
     }
 
 }

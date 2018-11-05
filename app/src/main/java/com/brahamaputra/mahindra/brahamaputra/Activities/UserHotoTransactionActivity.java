@@ -42,6 +42,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PowerManagementSystemData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ServoStabilizerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
+import com.brahamaputra.mahindra.brahamaputra.Data.SitePhotoCaptureData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
@@ -274,6 +275,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
+
                 Gson gson = new Gson();
 //                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
 
@@ -351,6 +353,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
             hotoTransactionData.setDetailsOfUnusedMaterialsData(new DetailsOfUnusedMaterialsData());
 
+            hotoTransactionData.setSitePhotoCaptureData(new SitePhotoCaptureData());
+
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
@@ -366,6 +370,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                Log.e("123",jsonInString);
 
                 GsonRequest<UserLoginResponseData> submitHotoTicketRequest = new GsonRequest<>(Request.Method.POST, Constants.submitHototTicket, jsonInString, UserLoginResponseData.class,
                         new Response.Listener<UserLoginResponseData>() {

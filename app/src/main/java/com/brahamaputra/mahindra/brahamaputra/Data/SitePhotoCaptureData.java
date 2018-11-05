@@ -33,6 +33,22 @@ public class SitePhotoCaptureData {
     @SerializedName("base64StringDgOverview")
     private String base64StringDgOverview;
 
+    public SitePhotoCaptureData(){
+        this.imageFileNameOfSite = "";
+        this.base64StringSite = "";
+        this.imageFileNameOfShelter = "";
+        this.base64StringShelter = "";
+        this.imageFileNameOfEbMeterBox = "";
+        this.base64StringEbMeterBox = "";
+        this.imageFileNameOfSmps = "";
+        this.base64StringSmps = "";
+        this.imageFileNameOfEbMeter = "";
+        this.base64StringEbMeter = "";
+        this.imageFileNameOfDgHmr = "";
+        this.base64StringDgHmr = "";
+        this.imageFileNameOfDgOverview = "";
+        this.base64StringDgOverview = "";
+    }
     public SitePhotoCaptureData(String imageFileNameOfSite, String base64StringSite, String imageFileNameOfShelter, String base64StringShelter, String imageFileNameOfEbMeterBox, String base64StringEbMeterBox, String imageFileNameOfSmps, String base64StringSmps, String imageFileNameOfEbMeter, String base64StringEbMeter, String imageFileNameOfDgHmr, String base64StringDgHmr, String imageFileNameOfDgOverview, String base64StringDgOverview) {
         this.imageFileNameOfSite = imageFileNameOfSite;
         this.base64StringSite = base64StringSite;

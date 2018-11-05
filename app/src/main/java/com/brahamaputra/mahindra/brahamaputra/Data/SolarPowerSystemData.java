@@ -28,6 +28,8 @@ public class SolarPowerSystemData {
     @SerializedName("dateOfvalidityOfAmc")
     String dateOfvalidityOfAmc;
 
+    @SerializedName("qrCodeImageFileName")
+    String qrCodeImageFileName;
     public SolarPowerSystemData() {
         this.qRCodeScan = "";
         this.available = "";
@@ -37,9 +39,10 @@ public class SolarPowerSystemData {
         this.capacityKW = "";
         this.amcYesNo = "";
         this.dateOfvalidityOfAmc = "";
+        this.qrCodeImageFileName = "";
     }
 
-    public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc) {
+    public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc,String qrCodeImageFileName) {
         this.qRCodeScan = qRCodeScan;
         this.available = available;
         this.assetOwner = assetOwner;
@@ -48,6 +51,7 @@ public class SolarPowerSystemData {
         this.capacityKW = capacityKW;
         this.amcYesNo = amcYesNo;
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
     public String getqRCodeScan() {
@@ -114,5 +118,12 @@ public class SolarPowerSystemData {
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
     }
 
+    public String getQrCodeImageFileName() {
+        return qrCodeImageFileName;
+    }
+
+    public void setQrCodeImageFileName(String qrCodeImageFileName) {
+        this.qrCodeImageFileName = qrCodeImageFileName;
+    }
 
 }

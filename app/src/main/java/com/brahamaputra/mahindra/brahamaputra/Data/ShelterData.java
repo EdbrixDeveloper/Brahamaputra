@@ -8,7 +8,7 @@ public class ShelterData {
     String physicalCondition;
 
     @SerializedName("noOBtsInsideShelter")
-    String noOBtsInsideShelter;
+    String noOfBtsInsideShelter;
 
     @SerializedName("noOfBtsOutsideShelter")
     String noOfBtsOutsideShelter;
@@ -33,7 +33,7 @@ public class ShelterData {
 
     public ShelterData() {
         this.physicalCondition = "";
-        this.noOBtsInsideShelter = "";
+        this.noOfBtsInsideShelter = "";
         this.noOfBtsOutsideShelter = "";
         this.shelterLock = "";
         this.outdoorShelterLock = "";
@@ -43,9 +43,9 @@ public class ShelterData {
         this.odcLock = "";
     }
 
-    public ShelterData(String physicalCondition, String noOBtsInsideShelter, String noOfBtsOutsideShelter, String shelterLock, String outdoorShelterLock, String igbStatus, String egbStatus, String noOfOdcAvailable, String odcLock) {
+    public ShelterData(String physicalCondition, String noOfBtsInsideShelter, String noOfBtsOutsideShelter, String shelterLock, String outdoorShelterLock, String igbStatus, String egbStatus, String noOfOdcAvailable, String odcLock) {
         this.physicalCondition = physicalCondition;
-        this.noOBtsInsideShelter = noOBtsInsideShelter;
+        this.noOfBtsInsideShelter = noOfBtsInsideShelter;
         this.noOfBtsOutsideShelter = noOfBtsOutsideShelter;
         this.shelterLock = shelterLock;
         this.outdoorShelterLock = outdoorShelterLock;
@@ -63,12 +63,12 @@ public class ShelterData {
         this.physicalCondition = physicalCondition;
     }
 
-    public String getNoOBtsInsideShelter() {
-        return noOBtsInsideShelter;
+    public String getNoOfBtsInsideShelter() {
+        return noOfBtsInsideShelter;
     }
 
-    public void setNoOBtsInsideShelter(String noOBtsInsideShelter) {
-        this.noOBtsInsideShelter = noOBtsInsideShelter;
+    public void setNoOfBtsInsideShelter(String noOfBtsInsideShelter) {
+        this.noOfBtsInsideShelter = noOfBtsInsideShelter;
     }
 
     public String getNoOfBtsOutsideShelter() {

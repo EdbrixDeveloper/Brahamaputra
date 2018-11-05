@@ -106,7 +106,7 @@ public class Land_Details extends BaseActivity {
     private SessionManager sessionManager;
 
     private Uri imageFileUri = null;
-    private String imageFileName ="";
+    private String imageFileName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,10 +185,10 @@ public class Land_Details extends BaseActivity {
         mLandDetailsButtonLayoutOfLandView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imageFileUri!=null) {
+                if (imageFileUri != null) {
                     GlobalMethods.showImageDialog(Land_Details.this, imageFileUri);
-                }else{
-                    Toast.makeText(Land_Details.this, "Image not available...!",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(Land_Details.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -302,7 +302,7 @@ public class Land_Details extends BaseActivity {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-               // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
 //                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
@@ -325,15 +325,14 @@ public class Land_Details extends BaseActivity {
                         base64StringLayoutOfLand = landDetailsData.getLandLayout();
 
                         // New added for image #ImageSet
-                             imageFileName = landDetailsData.getLandLayoutFileName();
-                             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+                        imageFileName = landDetailsData.getLandLayoutFileName();
+                        File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
 //                             imageFileUri = Uri.fromFile(file);
-                             imageFileUri = FileProvider.getUriForFile(Land_Details.this,BuildConfig.APPLICATION_ID + ".provider",file);
+                        imageFileUri = FileProvider.getUriForFile(Land_Details.this, BuildConfig.APPLICATION_ID + ".provider", file);
 
                         // New added for image #ImageSet
                         mLandDetailsButtonLayoutOfLandView.setVisibility(View.GONE);
-                        if(imageFileUri !=null)
-                        {
+                        if (imageFileUri != null) {
                             mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
                         }
 
@@ -355,7 +354,7 @@ public class Land_Details extends BaseActivity {
         try {
             //hotoTransactionData.setTicketNo(ticketName);
             //String landType = "0";
-            String landType = mLandDetailsTextViewCopyAgreementWithOwnerVal.getText().toString().trim();
+            String landType = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
             String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
             String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
             String rentLeaseValueInWords = mLandDetailsEditTextRentLeaseInWords.getText().toString().trim();
@@ -363,10 +362,10 @@ public class Land_Details extends BaseActivity {
             String landOwnerMob = mLandDetailsEditTextMobileNoOfOwner.getText().toString().trim();
             String landLayout = base64StringLayoutOfLand;
             //String landAgreementCopy = "0";
-            String landAgreementCopy = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
+            String landAgreementCopy = mLandDetailsTextViewCopyAgreementWithOwnerVal.getText().toString().trim();
             String landAgreementValidity = mLandDetailsEditTextDateOfvalidityOfAgreement.getText().toString();
 
-            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity,imageFileName);
+            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity, imageFileName);
 
             hotoTransactionData.setLandDetailsData(landDetailsData);
 
@@ -416,13 +415,13 @@ public class Land_Details extends BaseActivity {
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
 //            imageFileUri = Uri.fromFile(file);
 
-            imageFileUri = FileProvider.getUriForFile(Land_Details.this,BuildConfig.APPLICATION_ID + ".provider",file);
+            imageFileUri = FileProvider.getUriForFile(Land_Details.this, BuildConfig.APPLICATION_ID + ".provider", file);
 
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -439,13 +438,13 @@ public class Land_Details extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringLayoutOfLand = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    base64StringLayoutOfLand = "qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                     mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        }else{
+        } else {
             imageFileName = "";
             imageFileUri = null;
             mLandDetailsButtonLayoutOfLandView.setVisibility(View.GONE);
