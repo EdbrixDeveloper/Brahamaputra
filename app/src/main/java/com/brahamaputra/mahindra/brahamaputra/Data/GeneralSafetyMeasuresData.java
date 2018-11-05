@@ -292,7 +292,8 @@ public class GeneralSafetyMeasuresData {
     }
 
 
-
+    public GeneralSafetyMeasuresData() {
+    }
 
     public GeneralSafetyMeasuresData(String prevailingSLA, String siteBoundaryStatus, String siteHygieneVegitationStatus, String gateLock, String dgRoomLock, String fireExtuinguisher, String fireExtuinguisherType, String fireExtuinguisherExpiryDate, String fireBucket, String securityStatus, String noofSecurityPerson, String mobileNumberofSecurity, String caretakerStatusUpOnEmergency, String mobileNumberofCaretaker, String isSecurityCaretakeristheOwnerofSite, String salaryofSecurityCaretaker, String caretakerSecuritySalaryPaidBy, String caretakerSecurityStayinginSite, String numberofEarthPit, String lightningArresterStatus, String fencingCompoundWallCondition, String numberoffreeODPaltformAvailable, String alarmMultipluxerStatus, String doorOpenSensor, String fuelSensor, String fireSmokeSensor) {
         this.prevailingSLA = prevailingSLA;

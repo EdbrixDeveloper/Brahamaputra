@@ -8,6 +8,9 @@ public class TotalDCLoadofSiteData
     @SerializedName("totalDcLoadOfSite")
     private String totalDcLoadOfSite;
 
+    public TotalDCLoadofSiteData() {
+    }
+
     public TotalDCLoadofSiteData(String totalDcLoadOfSite) {
         this.totalDcLoadOfSite = totalDcLoadOfSite;
     }

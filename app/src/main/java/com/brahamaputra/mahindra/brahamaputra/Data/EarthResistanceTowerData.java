@@ -13,6 +13,9 @@ public class EarthResistanceTowerData {
     @SerializedName("earthResistanceMeasuredDate")
     private String earthResistanceMeasuredDate;
 
+    public EarthResistanceTowerData() {
+    }
+
     public EarthResistanceTowerData(String earthType, String earthResistanceInOhms, String earthResistanceMeasuredDate) {
         this.earthType = earthType;
         this.earthResistanceInOhms = earthResistanceInOhms;

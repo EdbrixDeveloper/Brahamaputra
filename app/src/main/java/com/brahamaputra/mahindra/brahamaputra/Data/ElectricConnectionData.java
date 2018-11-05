@@ -85,6 +85,8 @@ public class ElectricConnectionData {
     @SerializedName("ebBillDate")
     private String ebBillDate;
 
+    public ElectricConnectionData() {
+    }
 
     public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate) {
         this.electricConnectionType = electricConnectionType;

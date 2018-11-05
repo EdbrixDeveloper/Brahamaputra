@@ -43,7 +43,8 @@ public class AirConditionersData {
     @SerializedName("natureOfProblem")
     String natureOfProblem;
 
-
+    public AirConditionersData() {
+    }
 
     public AirConditionersData(String noOfACprovided, String numberOfACInWorkingCondition, String qRCodeScan, String assetOwner, String typeOfAcSpliWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem) {
         this.noOfACprovided = noOfACprovided;

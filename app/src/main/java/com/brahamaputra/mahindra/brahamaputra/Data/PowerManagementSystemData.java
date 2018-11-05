@@ -106,6 +106,9 @@ public class PowerManagementSystemData {
         this.natureofProblem = natureofProblem;
     }
 
+    public PowerManagementSystemData() {
+    }
+
     public String getQrCodeImageFileName() {
         return qrCodeImageFileName;
     }

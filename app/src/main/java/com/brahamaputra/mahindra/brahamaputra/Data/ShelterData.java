@@ -31,6 +31,8 @@ public class ShelterData {
     @SerializedName("odcLock")
     String odcLock;
 
+    public ShelterData() {
+    }
 
     public ShelterData(String physicalCondition, String noOBtsInsideShelter, String noOfBtsOutsideShelter, String shelterLock, String outdoorShelterLock, String igbStatus, String egbStatus, String noOfOdcAvailable, String odcLock) {
         this.physicalCondition = physicalCondition;

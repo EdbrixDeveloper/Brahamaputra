@@ -28,6 +28,16 @@ public class TowerDetailsData {
     @SerializedName("warningSignBoard")
     private String warningSignBoard;
 
+    public TowerDetailsData() {
+        this.towerName = "";
+        this.towerType = "";
+        this.towerHeight = "";
+        this.dateOfTowerPainting = "";
+        this.boardSign = "";
+        this.dangerSignBoard = "";
+        this.cautionSignBoard = "";
+        this.warningSignBoard = "";
+    }
 
     public TowerDetailsData(String towerName, String towerType, String towerHeight, String dateOfTowerPainting, String boardSign, String dangerSignBoard, String cautionSignBoard, String warningSignBoard) {
         this.towerName = towerName;

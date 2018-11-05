@@ -91,6 +91,8 @@ public class PowerBackupsDGData {
     @SerializedName("natureOfProblem")
     String natureOfProblem;
 
+    public PowerBackupsDGData() {
+    }
 
     public PowerBackupsDGData(String noOfEngineAlternator, String numberOfWorkingDg, String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem) {
         this.noOfEngineAlternator = noOfEngineAlternator;

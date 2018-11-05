@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.BatteryManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +20,37 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.ACDB_DCDB_Data;
+import com.brahamaputra.mahindra.brahamaputra.Data.ActiveequipmentDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionersData;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetData;
+import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceEquipmentData;
+import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ElectricConnectionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.MediaData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerManagementSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ServoStabilizerData;
+import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
+import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
+import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -105,6 +133,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
         userId = sessionManager.getSessionUserId();
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = id;//sessionManager.getSessionUserTicketId();
+
+        hotoTransactionData = new HotoTransactionData();
 
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, ticketName);
 
@@ -223,8 +253,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                Object req = offlineStorageWrapper.getFileObjectByName(ticketName + ".txt");//saveObjectToFile(ticketName + ".txt", jsonString);
-                Log.e(UserHotoTransactionActivity.class.getName(),"FinalJson :\n"+req);
+                submitHotoTicket();
                 sessionManager.updateSessionUserTicketId(null);
                 sessionManager.updateSessionUserTicketName(null);
                 finish();
@@ -252,7 +281,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
                 if(hotoTransactionData!=null){
                     mUserHotoTransEditTextSiteAddress.setText(hotoTransactionData.getSiteAddress());
-                    mUserHotoTransSpinnerSourceOfPowerVal.setText(hotoTransactionData.getSourceOfTower());
+                    mUserHotoTransSpinnerSourceOfPowerVal.setText(hotoTransactionData.getSourceOfPower());
                 }
 
             } else {
@@ -265,6 +294,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private void submitDetails() {
         try {
+            hotoTransactionData.setUserId(sessionManager.getSessionUserId());
+            hotoTransactionData.setAccessToken(sessionManager.getSessionDeviceToken());
             hotoTransactionData.setTicketId(ticketId);
             hotoTransactionData.setTicketNo(ticketName);
 
@@ -278,7 +309,49 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
             hotoTransactionData.setSiteAddress(mUserHotoTransEditTextSiteAddress.getText().toString());
 
-            hotoTransactionData.setSourceOfTower(mUserHotoTransSpinnerSourceOfPowerVal.getText().toString());
+            hotoTransactionData.setSourceOfPower(mUserHotoTransSpinnerSourceOfPowerVal.getText().toString());
+
+            hotoTransactionData.setLandDetailsData(new LandDetailsData());
+
+            hotoTransactionData.setTowerDetailsData(new TowerDetailsData());
+
+            hotoTransactionData.setEarthResistanceTowerData(new EarthResistanceTowerData());
+
+            hotoTransactionData.setEarthResistanceEquipmentData(new EarthResistanceEquipmentData());
+
+            hotoTransactionData.setElectricConnectionData(new ElectricConnectionData());
+
+            hotoTransactionData.setElectricConnectionData(new ElectricConnectionData());
+
+            hotoTransactionData.setAirConditionersData(new AirConditionersData());
+
+            hotoTransactionData.setSolarPowerSystemData(new SolarPowerSystemData());
+
+            hotoTransactionData.setPowerPlantDetailsData(new PowerPlantDetailsData());
+
+            hotoTransactionData.setPowerBackupsDGData(new PowerBackupsDGData());
+
+            hotoTransactionData.setPowerManagementSystemData(new PowerManagementSystemData());
+
+            hotoTransactionData.setShelterData(new ShelterData());
+
+            hotoTransactionData.setMediaData(new MediaData());
+
+            hotoTransactionData.setBatterySetData(new BatterySetData());
+
+            hotoTransactionData.setExternalTenantsPersonalDetailsData(new ExternalTenantsPersonalDetailsData());
+
+            hotoTransactionData.setTotalDCLoadofSiteData(new TotalDCLoadofSiteData());
+
+            hotoTransactionData.setActiveequipmentDetailsData(new ActiveequipmentDetailsData());
+
+            hotoTransactionData.setGeneralSafetyMeasuresData(new GeneralSafetyMeasuresData());
+
+            hotoTransactionData.setAcdb_dcdb_data(new ACDB_DCDB_Data());
+
+            hotoTransactionData.setServoStabilizerData(new ServoStabilizerData());
+
+            hotoTransactionData.setDetailsOfUnusedMaterialsData(new DetailsOfUnusedMaterialsData());
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
@@ -289,6 +362,43 @@ public class UserHotoTransactionActivity extends BaseActivity {
             e.printStackTrace();
         }
 
+    }
+
+    private void submitHotoTicket(){
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                GsonRequest<UserLoginResponseData> submitHotoTicketRequest = new GsonRequest<>(Request.Method.POST, Constants.submitHototTicket, jsonInString, UserLoginResponseData.class,
+                        new Response.Listener<UserLoginResponseData>() {
+                            @Override
+                            public void onResponse(@NonNull UserLoginResponseData response) {
+                                hideBusyProgress();
+                                if (response.getError() != null) {
+                                    showToast(response.getError().getErrorMessage());
+                                } else {
+
+                                    if (response.getSuccess() == 1) {
+
+
+                                    }
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        hideBusyProgress();
+                        showToast(SettingsMy.getErrorMessage(error));
+                    }
+                });
+                submitHotoTicketRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+                submitHotoTicketRequest.setShouldCache(false);
+                Application.getInstance().addToRequestQueue(submitHotoTicketRequest, "submitHotoTicketRequest");
+            }
+        }catch (Exception e){
+
+        }
     }
 
 }

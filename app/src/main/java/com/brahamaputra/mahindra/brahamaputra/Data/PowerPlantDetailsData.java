@@ -58,6 +58,8 @@ public class PowerPlantDetailsData {
     @SerializedName("natureOfProblem")
     String natureOfProblem;
 
+    public PowerPlantDetailsData() {
+    }
 
     public PowerPlantDetailsData(String qRCodeScan, String assetOwner, String numberOfPowerPlant, String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem) {
         this.qRCodeScan = qRCodeScan;

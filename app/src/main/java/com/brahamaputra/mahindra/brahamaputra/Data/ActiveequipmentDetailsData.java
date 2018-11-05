@@ -13,6 +13,9 @@ public class ActiveequipmentDetailsData {
     private String YearofInstallationatsite;
     private String PositionofAntennaTower;
 
+    public ActiveequipmentDetailsData() {
+    }
+
     public ActiveequipmentDetailsData(String typeofBTS, String importanceOfSite, String numberOfDependantSites, String make, String DCLoadofBTSequipment, String yearofInstallationatsite, String positionofAntennaTower) {
         this.typeofBTS = typeofBTS;
         this.importanceOfSite = importanceOfSite;

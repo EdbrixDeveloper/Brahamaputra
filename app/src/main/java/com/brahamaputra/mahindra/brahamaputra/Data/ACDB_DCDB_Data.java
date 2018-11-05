@@ -16,6 +16,9 @@ public class ACDB_DCDB_Data {
     @SerializedName("freeCoolingDeviseStausFCU")
     String freeCoolingDeviseStausFCU;
 
+    public ACDB_DCDB_Data() {
+    }
+
     public ACDB_DCDB_Data(String numberofACDB, String acdbRatingAMP, String numberofDCDB, String freeCoolingDeviseStausFCU) {
         this.numberofACDB = numberofACDB;
         this.acdbRatingAMP = acdbRatingAMP;

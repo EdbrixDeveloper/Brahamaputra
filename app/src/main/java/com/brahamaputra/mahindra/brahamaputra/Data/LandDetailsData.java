@@ -34,6 +34,19 @@ public class LandDetailsData  {
 
     private String landLayoutFileName;
 
+    public LandDetailsData() {
+        this.landType = "";
+        this.landArea = "";
+        this.rentLeaseValue = "";
+        this.rentLeaseValueInWords = "";
+        this.landOwnerName = "";
+        this.landOwnerMob = "";
+        this.landLayout = "";
+        this.landAgreementCopy = "";
+        this.landAgreementValidity = "";
+        this.landLayoutFileName = "";
+    }
+
     public LandDetailsData(String landType, String landArea, String rentLeaseValue, String rentLeaseValueInWords, String landOwnerName, String landOwnerMob, String landLayout, String landAgreementCopy, String landAgreementValidity, String landLayoutFileName) {
         this.landType = landType;
         this.landArea = landArea;

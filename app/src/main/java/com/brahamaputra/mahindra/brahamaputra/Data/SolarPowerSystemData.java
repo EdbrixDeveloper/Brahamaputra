@@ -28,6 +28,8 @@ public class SolarPowerSystemData {
     @SerializedName("dateOfvalidityOfAmc")
     String dateOfvalidityOfAmc;
 
+    public SolarPowerSystemData() {
+    }
 
     public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc) {
         this.qRCodeScan = qRCodeScan;

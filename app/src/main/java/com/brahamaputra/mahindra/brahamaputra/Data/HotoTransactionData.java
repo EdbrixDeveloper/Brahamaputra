@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 public class HotoTransactionData {
 
 
+    @SerializedName("UserId")
+    private String UserId;
+
+    @SerializedName("AccessToken")
+    private String AccessToken;
+
     @SerializedName("ticketId")
     private String ticketId;
 
@@ -23,8 +29,8 @@ public class HotoTransactionData {
     @SerializedName("siteAddress")
     private String siteAddress;
 
-    @SerializedName("sourceOfTower")
-    private String sourceOfTower;
+    @SerializedName("sourceOfPower")
+    private String sourceOfPower;
 
     @SerializedName("checkOutLatitude")
     private String checkOutLatitude;
@@ -55,6 +61,22 @@ public class HotoTransactionData {
     private ACDB_DCDB_Data acdb_dcdb_data;
     private ServoStabilizerData servoStabilizerData;
     private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
+    }
+
+    public String getAccessToken() {
+        return AccessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        AccessToken = accessToken;
+    }
 
     public String getTicketId() {
         return ticketId;
@@ -104,12 +126,12 @@ public class HotoTransactionData {
         this.siteAddress = siteAddress;
     }
 
-    public String getSourceOfTower() {
-        return sourceOfTower;
+    public String getSourceOfPower() {
+        return sourceOfPower;
     }
 
-    public void setSourceOfTower(String sourceOfTower) {
-        this.sourceOfTower = sourceOfTower;
+    public void setSourceOfPower(String sourceOfPower) {
+        this.sourceOfPower = sourceOfPower;
     }
 
     public String getCheckOutLatitude() {

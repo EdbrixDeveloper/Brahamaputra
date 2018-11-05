@@ -25,6 +25,10 @@ public class ServoStabilizerData {
     @SerializedName("qrCodeImageFileName")
     private String qrCodeImageFileName;
 
+    public ServoStabilizerData() {
+
+    }
+
     public ServoStabilizerData(String servoStabilizer_Qr, String servoStabilizerWorkingStatus, String makeofServo, String ratingofServo, String workingCondition, String natureofProblem,String qrCodeImageFileName) {
         this.servoStabilizer_Qr = servoStabilizer_Qr;
         this.servoStabilizerWorkingStatus = servoStabilizerWorkingStatus;

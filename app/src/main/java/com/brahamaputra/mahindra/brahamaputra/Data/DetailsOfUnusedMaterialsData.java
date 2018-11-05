@@ -13,6 +13,12 @@ public class DetailsOfUnusedMaterialsData {
     @SerializedName("assetStatus")
     String assetStatus;
 
+    public DetailsOfUnusedMaterialsData() {
+        this.numberofUnusedAssetinSite = "";
+        this.assetMake = "";
+        this.assetStatus = "";
+    }
+
     public DetailsOfUnusedMaterialsData(String numberofUnusedAssetinSite, String assetMake, String assetStatus) {
         this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
         this.assetMake = assetMake;

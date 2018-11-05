@@ -49,6 +49,9 @@ public class BatterySetData {
     @SerializedName("qrCodeImageFileName")
     private String qrCodeImageFileName;
 
+     public BatterySetData() {
+    }
+
     public BatterySetData(String noOfBatterySet, String noOfBatteryBankWorking, String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {
         this.noOfBatterySet = noOfBatterySet;
         this.noOfBatteryBankWorking = noOfBatteryBankWorking;

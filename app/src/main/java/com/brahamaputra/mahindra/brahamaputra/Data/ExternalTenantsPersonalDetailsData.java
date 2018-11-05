@@ -115,6 +115,9 @@ public class ExternalTenantsPersonalDetailsData {
         this.contactPersonLandline = contactPersonLandline;
     }
 
+    public ExternalTenantsPersonalDetailsData() {
+    }
+
     public ExternalTenantsPersonalDetailsData(String totalNumberofTanents, String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
         this.totalNumberofTanents = totalNumberofTanents;
         this.nameofTenant = nameofTenant;
