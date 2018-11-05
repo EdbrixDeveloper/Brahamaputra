@@ -254,6 +254,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
+
                     android:text="Telephone No. of Contact Person – Mobile" />
 
                 <EditText
@@ -264,6 +265,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Telephone No. of Contact Person – Mobile "
                     android:imeOptions="actionNext"
+                    android:maxLength="10"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
@@ -293,6 +295,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Telephone No. of Contact Person -Land line "
                     android:imeOptions="actionDone"
+                    android:maxLength="20"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 

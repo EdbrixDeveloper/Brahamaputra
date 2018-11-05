@@ -7,12 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,23 +42,29 @@ import com.google.gson.GsonBuilder;
 import android.Manifest;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class PowerManagementSystem extends BaseActivity {
 
-
+    private static final String TAG = PowerManagementSystem.class.getSimpleName();
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 
+    private Uri imageFileUri = null;
+    private String imageFileName ="";
+
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private PowerManagementSystemData powerManagementSystemData;
     private String base64StringPowerManagementSystem = "eji39jjj";
@@ -247,9 +256,9 @@ public class PowerManagementSystem extends BaseActivity {
         this.setTitle("Power Management System");
         sessionManager = new SessionManager(PowerManagementSystem.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerManagementSystem.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerManagementSystem.this, userId, ticketName);
         assignViews();
         initCombo();
         alertDialogManager = new AlertDialogManager(this);
@@ -284,7 +293,7 @@ public class PowerManagementSystem extends BaseActivity {
                         }
                     }
                 } else {
-                    openCamera();
+                    openCameraIntent();
                 }
 
             }
@@ -320,8 +329,8 @@ public class PowerManagementSystem extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -349,7 +358,7 @@ public class PowerManagementSystem extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketId);
 
             String powerManagementSystemQR= base64StringPowerManagementSystem;
             String assetOwner= mPowerManagementSystemTextViewAssetOwnerVal.getText().toString().trim();
@@ -361,7 +370,7 @@ public class PowerManagementSystem extends BaseActivity {
             String workingCondition= mPowerManagementSystemTextViewWorkingConditionVal.getText().toString().trim();
             String natureofProblem= mPowerManagementSystemEditTextNatureofProblem.getText().toString().trim();
 
-            powerManagementSystemData = new PowerManagementSystemData(powerManagementSystemQR,assetOwner, powerManagementSystemType, powerManagementSystemMake, powerManagementSystemPosition, powerManagementSystemStaus, serialNumber, workingCondition, natureofProblem);
+            powerManagementSystemData = new PowerManagementSystemData(powerManagementSystemQR,assetOwner, powerManagementSystemType, powerManagementSystemMake, powerManagementSystemPosition, powerManagementSystemStaus, serialNumber, workingCondition, natureofProblem,imageFileName);
 
             hotoTransactionData.setPowerManagementSystemData(powerManagementSystemData);
 
@@ -369,7 +378,7 @@ public class PowerManagementSystem extends BaseActivity {
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -458,6 +467,44 @@ public class PowerManagementSystem extends BaseActivity {
         }).show();
 
 
+    }
+
+    public void openCameraIntent() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+            imageFileUri = Uri.fromFile(file);
+
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
+                resultCode == RESULT_OK) {
+            if (imageFileUri != null) {
+                try {
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+//                            (Bitmap) data.getExtras().get("data");
+//                mImageView.setImageBitmap(imageBitmap);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] bitmapDataArray = stream.toByteArray();
+                    base64StringPowerManagementSystem = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private void openCamera() {

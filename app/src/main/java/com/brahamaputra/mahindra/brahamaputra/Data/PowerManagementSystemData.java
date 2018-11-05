@@ -31,6 +31,9 @@ public class PowerManagementSystemData {
     @SerializedName("natureofProblem")
     private String natureofProblem;
 
+    @SerializedName("qrCodeImageFileName")
+    private String qrCodeImageFileName;
+
     public String getPowerManagementSystemQR() {
         return powerManagementSystemQR;
     }
@@ -103,7 +106,15 @@ public class PowerManagementSystemData {
         this.natureofProblem = natureofProblem;
     }
 
-    public PowerManagementSystemData(String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem) {
+    public String getQrCodeImageFileName() {
+        return qrCodeImageFileName;
+    }
+
+    public void setQrCodeImageFileName(String qrCodeImageFileName) {
+        this.qrCodeImageFileName = qrCodeImageFileName;
+    }
+
+    public PowerManagementSystemData(String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem,String qrCodeImageFileName) {
         this.powerManagementSystemQR = powerManagementSystemQR;
         this.assetOwner = assetOwner;
         this.powerManagementSystemType = powerManagementSystemType;
@@ -113,5 +124,6 @@ public class PowerManagementSystemData {
         this.serialNumber = serialNumber;
         this.workingCondition = workingCondition;
         this.natureofProblem = natureofProblem;
+        this.qrCodeImageFileName=qrCodeImageFileName;
     }
 }

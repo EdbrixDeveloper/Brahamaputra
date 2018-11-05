@@ -7,12 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,19 +43,28 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Battery_Set extends BaseActivity {
 
+    private static final String TAG = Battery_Set.class.getSimpleName();
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 
+    private Uri imageFileUri = null;
+    private String imageFileName ="";
+
     private AlertDialogManager alertDialogManager;
+
+
 
     final Calendar myCalendar = Calendar.getInstance();
     String str_noofBatterySetProvided;
@@ -98,9 +110,9 @@ public class Battery_Set extends BaseActivity {
     private EditText mBatterySetEditTextNatureofProblem;
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private BatterySetData batterySetData;
     private String base64StringBatterySet = "eji39jjj";
@@ -366,9 +378,9 @@ public class Battery_Set extends BaseActivity {
 
         sessionManager = new SessionManager(Battery_Set.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Battery_Set.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Battery_Set.this, userId, ticketName);
         alertDialogManager = new AlertDialogManager(this);
         assignViews();
         initCombo();
@@ -423,7 +435,7 @@ public class Battery_Set extends BaseActivity {
                         }
                     }
                 } else {
-                    openCamera();
+                    openCameraIntent();
                 }
 
             }
@@ -464,8 +476,8 @@ public class Battery_Set extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
@@ -500,7 +512,7 @@ public class Battery_Set extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketId);
 
             String noOfBatterySet = mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim();
             String noOfBatteryBankWorking = mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim();
@@ -518,7 +530,7 @@ public class Battery_Set extends BaseActivity {
             String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
 
 
-            batterySetData = new BatterySetData(noOfBatterySet, noOfBatteryBankWorking, batterySet_Qr, assetOwner, manufactureMakeModel,capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank,batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem);
+            batterySetData = new BatterySetData(noOfBatterySet, noOfBatteryBankWorking, batterySet_Qr, assetOwner, manufactureMakeModel,capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank,batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem,imageFileName);
 
             hotoTransactionData.setBatterySetData(batterySetData);
 
@@ -526,7 +538,7 @@ public class Battery_Set extends BaseActivity {
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -617,6 +629,44 @@ public class Battery_Set extends BaseActivity {
 
     }
 
+
+    public void openCameraIntent() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+            imageFileUri = Uri.fromFile(file);
+
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
+                resultCode == RESULT_OK) {
+            if (imageFileUri != null) {
+                try {
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+//                            (Bitmap) data.getExtras().get("data");
+//                mImageView.setImageBitmap(imageBitmap);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] bitmapDataArray = stream.toByteArray();
+                    base64StringBatterySet = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     private void openCamera() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivity(intent);

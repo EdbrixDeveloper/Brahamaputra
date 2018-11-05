@@ -46,7 +46,10 @@ public class BatterySetData {
     @SerializedName("natureOfProblem")
     private String natureOfProblem;
 
-    public BatterySetData(String noOfBatterySet, String noOfBatteryBankWorking, String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem) {
+    @SerializedName("qrCodeImageFileName")
+    private String qrCodeImageFileName;
+
+    public BatterySetData(String noOfBatterySet, String noOfBatteryBankWorking, String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {
         this.noOfBatterySet = noOfBatterySet;
         this.noOfBatteryBankWorking = noOfBatteryBankWorking;
         this.batterySet_Qr = batterySet_Qr;
@@ -61,6 +64,7 @@ public class BatterySetData {
         this.batteryBankEarthingStatus = batteryBankEarthingStatus;
         this.backupCondition = backupCondition;
         this.natureOfProblem = natureOfProblem;
+        this.qrCodeImageFileName=qrCodeImageFileName;
     }
 
     public String getNoOfBatterySet() {
@@ -173,5 +177,13 @@ public class BatterySetData {
 
     public void setNatureOfProblem(String natureOfProblem) {
         this.natureOfProblem = natureOfProblem;
+    }
+
+    public String getQrCodeImageFileName() {
+        return qrCodeImageFileName;
+    }
+
+    public void setQrCodeImageFileName(String qrCodeImageFileName) {
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 }

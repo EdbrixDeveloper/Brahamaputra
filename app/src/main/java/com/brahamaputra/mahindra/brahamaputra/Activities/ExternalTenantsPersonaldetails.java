@@ -44,9 +44,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     String str_typeofTenant;
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData;
     private String base64StringLayoutOfLand = "eji39jjj";
@@ -172,9 +172,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         this.setTitle("External Tenants Personal details");
         sessionManager = new SessionManager(ExternalTenantsPersonaldetails.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ExternalTenantsPersonaldetails.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ExternalTenantsPersonaldetails.this, userId, ticketName);
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -271,8 +271,8 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -292,6 +292,8 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.setText(externalTenantsPersonalDetailsData.getContactPersonLandline());
 
 
+
+
             } else {
                 Toast.makeText(ExternalTenantsPersonaldetails.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
@@ -302,7 +304,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+           // hotoTransactionData.setTicketNo(ticketId);
             String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
             String nameofTenant = mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.getText().toString().trim();
             String typeofTenant = mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.getText().toString().trim();
@@ -312,7 +314,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             String nameofContactPerson = mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.getText().toString().trim();
             String addressofContactPerson = mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.getText().toString().trim();
             String contactPersonMobile = mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.getText().toString().trim();
-            String contactPersonLandline = mExternalTenantsPersonaldetailsTextViewTelephoneNoofContactPersonLandline.getText().toString().trim();
+            String contactPersonLandline = mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.getText().toString().trim();
 
             externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData(totalNumberofTanents, nameofTenant, typeofTenant, positionattheTower, dateofstartofTenancy, dateofstartofRadiation, nameofContactPerson, addressofContactPerson, contactPersonMobile, contactPersonLandline);
 
@@ -322,7 +324,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

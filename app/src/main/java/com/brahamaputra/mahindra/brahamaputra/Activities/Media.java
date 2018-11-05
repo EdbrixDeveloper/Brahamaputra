@@ -43,9 +43,9 @@ public class Media extends BaseActivity {
     private TextView mMediaTextViewTypeofmediaVal;
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private MediaData mediaData;
     private SessionManager sessionManager;
@@ -92,9 +92,9 @@ public class Media extends BaseActivity {
 
         sessionManager = new SessionManager(Media.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Media.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Media.this, userId, ticketName);
         hotoTransactionData = new HotoTransactionData();
 
         setInputDetails();
@@ -129,8 +129,8 @@ public class Media extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
@@ -151,7 +151,7 @@ public class Media extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+           // hotoTransactionData.setTicketNo(ticketId);
             String mediaType = mMediaTextViewTypeofmediaVal.getText().toString().trim();
 
             mediaData = new MediaData(mediaType);
@@ -161,7 +161,7 @@ public class Media extends BaseActivity {
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

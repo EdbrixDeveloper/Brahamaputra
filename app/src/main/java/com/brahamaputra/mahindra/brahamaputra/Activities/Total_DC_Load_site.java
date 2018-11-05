@@ -35,9 +35,9 @@ public class Total_DC_Load_site extends BaseActivity {
     private EditText mTotalDCLoadsiteEditTextTotalDcLoadOfSite;
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private TotalDCLoadofSiteData totalDCLoadofSiteData;
     private String base64StringLayoutOfLand = "eji39jjj";
@@ -61,9 +61,9 @@ public class Total_DC_Load_site extends BaseActivity {
         this.setTitle("Total DC load of the site");
         sessionManager = new SessionManager(Total_DC_Load_site.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Total_DC_Load_site.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Total_DC_Load_site.this, userId, ticketName);
         assignViews();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -102,8 +102,8 @@ public class Total_DC_Load_site extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
@@ -124,7 +124,7 @@ public class Total_DC_Load_site extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+            //hotoTransactionData.setTicketNo(ticketId);
 
             String totalDcLoadOfSite = mTotalDCLoadsiteEditTextTotalDcLoadOfSite.getText().toString().trim();
 
@@ -136,7 +136,7 @@ public class Total_DC_Load_site extends BaseActivity {
             String jsonString = gson2.toJson(hotoTransactionData);
 
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

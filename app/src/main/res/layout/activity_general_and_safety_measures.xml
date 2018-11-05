@@ -352,6 +352,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Security "
                     android:inputType="numberDecimal"
+                    android:maxLength="10"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
@@ -409,6 +410,8 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Caretaker "
                     android:inputType="numberDecimal"
+                    android:maxLength="10"
+
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
@@ -465,7 +468,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter Mobile Number of Caretaker "
+                    android:hint="Enter Salary of Security/Caretaker "
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"

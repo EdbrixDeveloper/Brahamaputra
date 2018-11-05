@@ -328,7 +328,13 @@ public class Land_Details extends BaseActivity {
                              File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
 //                             imageFileUri = Uri.fromFile(file);
                              imageFileUri = FileProvider.getUriForFile(Land_Details.this,BuildConfig.APPLICATION_ID + ".provider",file);
+
                         // New added for image #ImageSet
+                        mLandDetailsButtonLayoutOfLandView.setVisibility(View.GONE);
+                        if(imageFileUri !=null)
+                        {
+                            mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
+                        }
 
 //                mLandDetailsSpinnerCopyAgreementWithOwner.setSelection(1);
                         mLandDetailsTextViewTypeOfLandVal.setText(landDetailsData.getLandType());
@@ -346,7 +352,7 @@ public class Land_Details extends BaseActivity {
 
     private void submitDetails() {
         try {
-//            hotoTransactionData.setTicketNo(ticketName);
+            //hotoTransactionData.setTicketNo(ticketName);
             //String landType = "0";
             String landType = mLandDetailsTextViewCopyAgreementWithOwnerVal.getText().toString().trim();
             String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
@@ -395,6 +401,9 @@ public class Land_Details extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+
+
+//
 
     }
 

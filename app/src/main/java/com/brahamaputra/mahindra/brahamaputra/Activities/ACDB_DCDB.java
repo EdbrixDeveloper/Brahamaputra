@@ -42,9 +42,9 @@ public class ACDB_DCDB extends BaseActivity {
     String str_FreeCoolingDeviseStausFCU;
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketName = "28131";
-    private String ticketId = "28131";
+    private String userId = "";
+    private String ticketName = "";
+    private String ticketId = "";
     private HotoTransactionData hotoTransactionData;
     private ACDB_DCDB_Data acdb_dcdb_data;
     private SessionManager sessionManager;
@@ -152,9 +152,9 @@ public class ACDB_DCDB extends BaseActivity {
 
         sessionManager = new SessionManager(ACDB_DCDB.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ACDB_DCDB.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ACDB_DCDB.this, userId, ticketName);
 
         assignViews();
         initCombo();
@@ -196,8 +196,8 @@ public class ACDB_DCDB extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
@@ -222,7 +222,7 @@ public class ACDB_DCDB extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+           // hotoTransactionData.setTicketNo(ticketId);
 
 
             String numberofACDB = mAcdbDcdbTextViewNumberofACDBVal.getText().toString().trim();
@@ -236,7 +236,7 @@ public class ACDB_DCDB extends BaseActivity {
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
         } catch (Exception e) {
             e.printStackTrace();

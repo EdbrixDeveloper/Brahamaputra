@@ -22,13 +22,17 @@ public class ServoStabilizerData {
     @SerializedName("natureofProblem")
     String natureofProblem;
 
-    public ServoStabilizerData(String servoStabilizer_Qr, String servoStabilizerWorkingStatus, String makeofServo, String ratingofServo, String workingCondition, String natureofProblem) {
+    @SerializedName("qrCodeImageFileName")
+    private String qrCodeImageFileName;
+
+    public ServoStabilizerData(String servoStabilizer_Qr, String servoStabilizerWorkingStatus, String makeofServo, String ratingofServo, String workingCondition, String natureofProblem,String qrCodeImageFileName) {
         this.servoStabilizer_Qr = servoStabilizer_Qr;
         this.servoStabilizerWorkingStatus = servoStabilizerWorkingStatus;
         this.makeofServo = makeofServo;
         this.ratingofServo = ratingofServo;
         this.workingCondition = workingCondition;
         this.natureofProblem = natureofProblem;
+        this.qrCodeImageFileName=qrCodeImageFileName;
     }
 
     public String getServoStabilizer_Qr() {
@@ -77,5 +81,13 @@ public class ServoStabilizerData {
 
     public void setNatureofProblem(String natureofProblem) {
         this.natureofProblem = natureofProblem;
+    }
+
+    public String getQrCodeImageFileName() {
+        return qrCodeImageFileName;
+    }
+
+    public void setQrCodeImageFileName(String qrCodeImageFileName) {
+        this.qrCodeImageFileName = qrCodeImageFileName;
     }
 }

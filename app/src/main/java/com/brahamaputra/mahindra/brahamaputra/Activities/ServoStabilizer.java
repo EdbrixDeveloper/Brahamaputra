@@ -6,12 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,19 +40,23 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class ServoStabilizer extends BaseActivity {
 
-
+    private static final String TAG = ServoStabilizer.class.getSimpleName();
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ServoStabilizerData servoStabilizerData;
-    private String base64StringLayoutOfLand = "eji39jjj";
+    private String base64StringServoStablizer= "eji39jjj";
     private SessionManager sessionManager;
 
     private TextView mBatterySetTextViewQRCodeScan;
@@ -76,6 +83,9 @@ public class ServoStabilizer extends BaseActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
+
+    private Uri imageFileUri = null;
+    private String imageFileName ="";
 
     private AlertDialogManager alertDialogManager;
 
@@ -196,9 +206,9 @@ public class ServoStabilizer extends BaseActivity {
         this.setTitle("SERVO STABILIZER");
         sessionManager = new SessionManager(ServoStabilizer.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ServoStabilizer.this, userId, ticketId);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ServoStabilizer.this, userId, ticketName);
         assignViews();
         initCombo();
         alertDialogManager = new AlertDialogManager(this);
@@ -233,7 +243,7 @@ public class ServoStabilizer extends BaseActivity {
                         }
                     }
                 } else {
-                    openCamera();
+                    openCameraIntent();
                 }
 
             }
@@ -269,15 +279,15 @@ public class ServoStabilizer extends BaseActivity {
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketId + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketId + ".txt");
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 servoStabilizerData = hotoTransactionData.getServoStabilizerData();
 
-                base64StringLayoutOfLand = servoStabilizerData.getServoStabilizer_Qr();
+                base64StringServoStablizer = servoStabilizerData.getServoStabilizer_Qr();
                 mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(servoStabilizerData.getServoStabilizerWorkingStatus());
                 mServoStabilizerTextViewMakeofServoVal.setText(servoStabilizerData.getMakeofServo());
                 mServoStabilizerTextViewRatingofServoVal.setText(servoStabilizerData.getRatingofServo());
@@ -294,9 +304,9 @@ public class ServoStabilizer extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketId);
+           // hotoTransactionData.setTicketNo(ticketId);
 
-            String servoStabilizer_Qr = base64StringLayoutOfLand;
+            String servoStabilizer_Qr = base64StringServoStablizer;
             String servoStabilizerWorkingStatus = mServoStabilizerTextViewServoStabilizerWorkingStatusVal.getText().toString().trim();
             String makeofServo = mServoStabilizerTextViewMakeofServoVal.getText().toString().trim();
             String ratingofServo = mServoStabilizerTextViewRatingofServoVal.getText().toString().trim();
@@ -304,14 +314,14 @@ public class ServoStabilizer extends BaseActivity {
             String natureofProblem = mServoStabilizerEditTextNatureofProblem.getText().toString().trim();
 
 
-            servoStabilizerData = new ServoStabilizerData(servoStabilizer_Qr, servoStabilizerWorkingStatus, makeofServo, ratingofServo, workingCondition, natureofProblem);
+            servoStabilizerData = new ServoStabilizerData(servoStabilizer_Qr, servoStabilizerWorkingStatus, makeofServo, ratingofServo, workingCondition, natureofProblem,imageFileName);
             hotoTransactionData.setServoStabilizerData(servoStabilizerData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
             //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
-            offlineStorageWrapper.saveObjectToFile(ticketId + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -400,6 +410,44 @@ public class ServoStabilizer extends BaseActivity {
         }).show();
 
 
+    }
+
+    public void openCameraIntent() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+            imageFileUri = Uri.fromFile(file);
+
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
+                resultCode == RESULT_OK) {
+            if (imageFileUri != null) {
+                try {
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+//                            (Bitmap) data.getExtras().get("data");
+//                mImageView.setImageBitmap(imageBitmap);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] bitmapDataArray = stream.toByteArray();
+                    base64StringServoStablizer = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private void openCamera() {
