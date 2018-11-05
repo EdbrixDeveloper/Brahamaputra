@@ -116,6 +116,16 @@ public class ExternalTenantsPersonalDetailsData {
     }
 
     public ExternalTenantsPersonalDetailsData() {
+        this.totalNumberofTanents = "";
+        this.nameofTenant = "";
+        this.typeofTenant = "";
+        this.positionattheTower = "";
+        this.dateofstartofTenancy = "";
+        this.dateofstartofRadiation = "";
+        this.nameofContactPerson = "";
+        this.addressofContactPerson = "";
+        this.contactPersonMobile = "";
+        this.contactPersonLandline = "";
     }
 
     public ExternalTenantsPersonalDetailsData(String totalNumberofTanents, String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {

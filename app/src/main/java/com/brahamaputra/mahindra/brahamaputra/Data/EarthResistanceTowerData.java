@@ -14,6 +14,9 @@ public class EarthResistanceTowerData {
     private String earthResistanceMeasuredDate;
 
     public EarthResistanceTowerData() {
+        this.earthType = "";
+        this.earthResistanceInOhms = "";
+        this.earthResistanceMeasuredDate = "";
     }
 
     public EarthResistanceTowerData(String earthType, String earthResistanceInOhms, String earthResistanceMeasuredDate) {

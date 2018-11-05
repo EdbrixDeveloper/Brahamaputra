@@ -32,6 +32,15 @@ public class ShelterData {
     String odcLock;
 
     public ShelterData() {
+        this.physicalCondition = "";
+        this.noOBtsInsideShelter = "";
+        this.noOfBtsOutsideShelter = "";
+        this.shelterLock = "";
+        this.outdoorShelterLock = "";
+        this.igbStatus = "";
+        this.egbStatus = "";
+        this.noOfOdcAvailable = "";
+        this.odcLock = "";
     }
 
     public ShelterData(String physicalCondition, String noOBtsInsideShelter, String noOfBtsOutsideShelter, String shelterLock, String outdoorShelterLock, String igbStatus, String egbStatus, String noOfOdcAvailable, String odcLock) {

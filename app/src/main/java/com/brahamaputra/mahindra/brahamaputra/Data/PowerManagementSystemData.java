@@ -107,6 +107,16 @@ public class PowerManagementSystemData {
     }
 
     public PowerManagementSystemData() {
+        this.powerManagementSystemQR = "";
+        this.assetOwner = "";
+        this.powerManagementSystemType = "";
+        this.powerManagementSystemMake = "";
+        this.powerManagementSystemPosition = "";
+        this.powerManagementSystemStaus = "";
+        this.serialNumber = "";
+        this.workingCondition = "";
+        this.natureofProblem = "";
+        this.qrCodeImageFileName="";
     }
 
     public String getQrCodeImageFileName() {

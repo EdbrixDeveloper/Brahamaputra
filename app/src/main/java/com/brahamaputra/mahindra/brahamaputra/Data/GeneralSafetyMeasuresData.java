@@ -293,6 +293,32 @@ public class GeneralSafetyMeasuresData {
 
 
     public GeneralSafetyMeasuresData() {
+        this.prevailingSLA = "";
+        this.siteBoundaryStatus = "";
+        this.siteHygieneVegitationStatus = "";
+        this.gateLock = "";
+        this.dgRoomLock = "";
+        this.fireExtuinguisher = "";
+        this.fireExtuinguisherType = "";
+        this.fireExtuinguisherExpiryDate = "";
+        this.fireBucket = "";
+        this.securityStatus = "";
+        this.noofSecurityPerson = "";
+        this.mobileNumberofSecurity = "";
+        this.caretakerStatusUpOnEmergency = "";
+        this.mobileNumberofCaretaker = "";
+        this.isSecurityCaretakeristheOwnerofSite = "";
+        this.salaryofSecurityCaretaker = "";
+        this.caretakerSecuritySalaryPaidBy = "";
+        this.caretakerSecurityStayinginSite = "";
+        this.numberofEarthPit = "";
+        this.lightningArresterStatus = "";
+        this.fencingCompoundWallCondition = "";
+        this.numberoffreeODPaltformAvailable = "";
+        this.alarmMultipluxerStatus = "";
+        this.doorOpenSensor = "";
+        this.fuelSensor = "";
+        this.fireSmokeSensor = "";
     }
 
     public GeneralSafetyMeasuresData(String prevailingSLA, String siteBoundaryStatus, String siteHygieneVegitationStatus, String gateLock, String dgRoomLock, String fireExtuinguisher, String fireExtuinguisherType, String fireExtuinguisherExpiryDate, String fireBucket, String securityStatus, String noofSecurityPerson, String mobileNumberofSecurity, String caretakerStatusUpOnEmergency, String mobileNumberofCaretaker, String isSecurityCaretakeristheOwnerofSite, String salaryofSecurityCaretaker, String caretakerSecuritySalaryPaidBy, String caretakerSecurityStayinginSite, String numberofEarthPit, String lightningArresterStatus, String fencingCompoundWallCondition, String numberoffreeODPaltformAvailable, String alarmMultipluxerStatus, String doorOpenSensor, String fuelSensor, String fireSmokeSensor) {

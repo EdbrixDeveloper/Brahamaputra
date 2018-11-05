@@ -29,6 +29,14 @@ public class SolarPowerSystemData {
     String dateOfvalidityOfAmc;
 
     public SolarPowerSystemData() {
+        this.qRCodeScan = "";
+        this.available = "";
+        this.assetOwner = "";
+        this.manufacturerMakeModel = "";
+        this.cellPanel = "";
+        this.capacityKW = "";
+        this.amcYesNo = "";
+        this.dateOfvalidityOfAmc = "";
     }
 
     public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc) {

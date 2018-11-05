@@ -9,6 +9,7 @@ public class TotalDCLoadofSiteData
     private String totalDcLoadOfSite;
 
     public TotalDCLoadofSiteData() {
+        this.totalDcLoadOfSite = "";
     }
 
     public TotalDCLoadofSiteData(String totalDcLoadOfSite) {

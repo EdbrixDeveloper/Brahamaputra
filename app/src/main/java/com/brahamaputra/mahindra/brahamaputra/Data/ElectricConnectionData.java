@@ -86,6 +86,33 @@ public class ElectricConnectionData {
     private String ebBillDate;
 
     public ElectricConnectionData() {
+        this.electricConnectionType = "";
+        this.connectionTariff = "";
+        this.sanctionLoad = "";
+        this.existingLoadAtSite = "";
+        this.nameSupplyCompany = "";
+        this.electricBillCopyStatus = "";
+        this.noOfCompoundLights = "";
+        this.meterReadingsEB = "";
+        this.supplierEB = "";
+        this.costPerUnitForSharedConnectionEB = "";
+        this.statusEB = "";
+        this.transformerWorkingCondition = "";
+        this.transformerCapacity = "";
+        this.meterBoxStatusEB = "";
+        this.sectionName = "";
+        this.sectionNo = "";
+        this.consumerNo = "";
+        this.meterWorkingStatusEB = "";
+        this.meterSerialNumberEB = "";
+        this.paymentType = "";
+        this.paymentScheduleEB = "";
+        this.safetyFuseUnit = "";
+        this.kitKatFuseStatus = "";
+        this.ebNeutralEarthing = "";
+        this.averageEbAvailability = "";
+        this.scheduledPowerCut = "";
+        this.ebBillDate = "";
     }
 
     public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate) {

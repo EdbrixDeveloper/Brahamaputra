@@ -14,9 +14,11 @@ public class MediaData {
     }
 
     public MediaData() {
+        this.typeOfMedia = "";
     }
 
     public MediaData(String typeOfMedia) {
         this.typeOfMedia = typeOfMedia;
     }
+
 }

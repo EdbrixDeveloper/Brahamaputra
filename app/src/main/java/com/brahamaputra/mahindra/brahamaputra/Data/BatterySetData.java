@@ -50,6 +50,21 @@ public class BatterySetData {
     private String qrCodeImageFileName;
 
      public BatterySetData() {
+         this.noOfBatterySet = "";
+         this.noOfBatteryBankWorking = "";
+         this.batterySet_Qr = "";
+         this.assetOwner = "";
+         this.manufactureMakeModel = "";
+         this.capacityInAH = "";
+         this.typeOfBattery = "";
+         this.dateOfInstallation = "";
+         this.backupDuaration = "";
+         this.positionOfBatteryBank = "";
+         this.batteryBankCableSize = "";
+         this.batteryBankEarthingStatus = "";
+         this.backupCondition = "";
+         this.natureOfProblem = "";
+         this.qrCodeImageFileName = "";
     }
 
     public BatterySetData(String noOfBatterySet, String noOfBatteryBankWorking, String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {

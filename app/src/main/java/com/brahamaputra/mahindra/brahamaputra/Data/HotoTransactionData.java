@@ -78,6 +78,16 @@ public class HotoTransactionData {
         AccessToken = accessToken;
     }
 
+    public SitePhotoCaptureData getSitePhotoCaptureData() {
+        return sitePhotoCaptureData;
+    }
+
+    public void setSitePhotoCaptureData(SitePhotoCaptureData sitePhotoCaptureData) {
+        this.sitePhotoCaptureData = sitePhotoCaptureData;
+    }
+
+    private SitePhotoCaptureData sitePhotoCaptureData;
+
     public String getTicketId() {
         return ticketId;
     }

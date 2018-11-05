@@ -59,6 +59,24 @@ public class PowerPlantDetailsData {
     String natureOfProblem;
 
     public PowerPlantDetailsData() {
+        this.qRCodeScan = "";
+        this.assetOwner = "";
+        this.numberOfPowerPlant = "";
+        this.manufacturerMakeModel = "";
+        this.powerPlantModel = "";
+        this.numberModuleSlots = "";
+        this.earthingStatus = "";
+        this.dcLoadInDisplay = "";
+        this.serialNumber = "";
+        this.typeOfPowerPlantCommercialSmps = "";
+        this.capacityInAmp = "";
+        this.numberOfModules = "";
+        this.noOfFaultyModulese = "";
+        this.smpsExpandable = "";
+        this.SmpsUltimateCapacity = "";
+        this.spdStatus = "";
+        this.workingCondition = "";
+        this.natureOfProblem = "";
     }
 
     public PowerPlantDetailsData(String qRCodeScan, String assetOwner, String numberOfPowerPlant, String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem) {
@@ -76,7 +94,7 @@ public class PowerPlantDetailsData {
         this.numberOfModules = numberOfModules;
         this.noOfFaultyModulese = noOfFaultyModulese;
         this.smpsExpandable = smpsExpandable;
-        SmpsUltimateCapacity = smpsUltimateCapacity;
+        this.SmpsUltimateCapacity = smpsUltimateCapacity;
         this.spdStatus = spdStatus;
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;

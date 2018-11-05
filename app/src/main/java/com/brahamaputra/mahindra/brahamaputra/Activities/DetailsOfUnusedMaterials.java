@@ -2,7 +2,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.SitePhotoCaptureData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -165,6 +164,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                 return true;
             case R.id.menuDone:
                 submitDetails();
+                startActivity(new Intent(DetailsOfUnusedMaterials.this, SitePhotoCaptureData.class));
                 finish();
                 return true;
 

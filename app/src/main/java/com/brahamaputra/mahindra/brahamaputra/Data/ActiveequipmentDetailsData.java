@@ -14,6 +14,13 @@ public class ActiveequipmentDetailsData {
     private String PositionofAntennaTower;
 
     public ActiveequipmentDetailsData() {
+        this.typeofBTS = "";
+        this.importanceOfSite = "";
+        this.numberOfDependantSites = "";
+        this.make = "";
+        this.DCLoadofBTSequipment = "";
+        this.YearofInstallationatsite = "";
+        this.PositionofAntennaTower = "";
     }
 
     public ActiveequipmentDetailsData(String typeofBTS, String importanceOfSite, String numberOfDependantSites, String make, String DCLoadofBTSequipment, String yearofInstallationatsite, String positionofAntennaTower) {
@@ -22,10 +29,8 @@ public class ActiveequipmentDetailsData {
         this.numberOfDependantSites = numberOfDependantSites;
         this.make = make;
         this.DCLoadofBTSequipment = DCLoadofBTSequipment;
-        YearofInstallationatsite = yearofInstallationatsite;
-        PositionofAntennaTower = positionofAntennaTower;
-
-
+        this.YearofInstallationatsite = yearofInstallationatsite;
+        this.PositionofAntennaTower = positionofAntennaTower;
     }
 
     public String getTypeofBTS() {

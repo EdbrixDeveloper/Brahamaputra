@@ -45,19 +45,11 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sessionManager = new SessionManager(this);
-        if (!isTablet()) {
-            // stop screen rotation on phones
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            sessionManager.updateSessionDeviceType("mob");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            sessionManager.updateSessionDeviceType("tab");
-        }
         dialogManager = new DialogManager(this);
         globalMethods = new GlobalMethods();
         toastMessage = new ToastMessage(this);
-//        connectivityMonitor = new ConnectivityMonitor(this, erisConnectionListener);
         mContext = this;
 
         displayFirebaseRegId();

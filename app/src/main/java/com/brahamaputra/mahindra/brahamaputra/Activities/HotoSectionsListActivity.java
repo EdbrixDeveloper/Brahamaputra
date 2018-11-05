@@ -80,26 +80,38 @@ public class HotoSectionsListActivity extends AppCompatActivity {
                     case 9:
                         startActivity(new Intent(HotoSectionsListActivity.this, Shelter.class));
                         break;
-
-                    case 10: startActivity(new Intent(HotoSectionsListActivity.this,Media.class));
+                    case 10:
+                        startActivity(new Intent(HotoSectionsListActivity.this,Media.class));
                         break;
-                    case 11: startActivity(new Intent(HotoSectionsListActivity.this,Battery_Set.class));
+                    case 11:
+                        startActivity(new Intent(HotoSectionsListActivity.this,Battery_Set.class));
                         break;
-                    case 12: startActivity(new Intent(HotoSectionsListActivity.this,ExternalTenantsPersonaldetails.class));
+                    case 12:
+                        startActivity(new Intent(HotoSectionsListActivity.this,ExternalTenantsPersonaldetails.class));
                         break;
-                    case 13: startActivity(new Intent(HotoSectionsListActivity.this,Total_DC_Load_site.class));
+                    case 13:
+                        startActivity(new Intent(HotoSectionsListActivity.this,Total_DC_Load_site.class));
                         break;
-                    case 14: startActivity(new Intent(HotoSectionsListActivity.this,ActiveequipmentDetails.class));
+                    case 14:
+                        startActivity(new Intent(HotoSectionsListActivity.this,ActiveequipmentDetails.class));
                         break;
-                    case 15: startActivity(new Intent(HotoSectionsListActivity.this,PowerManagementSystem.class));
+                    case 15:
+                        startActivity(new Intent(HotoSectionsListActivity.this,PowerManagementSystem.class));
                         break;
-                    case 16: startActivity(new Intent(HotoSectionsListActivity.this,GeneralAndSafetyMeasures.class));
+                    case 16:
+                        startActivity(new Intent(HotoSectionsListActivity.this,GeneralAndSafetyMeasures.class));
                         break;
-                    case 17: startActivity(new Intent(HotoSectionsListActivity.this,ACDB_DCDB.class));
+                    case 17:
+                        startActivity(new Intent(HotoSectionsListActivity.this,ACDB_DCDB.class));
                         break;
-                    case 18: startActivity(new Intent(HotoSectionsListActivity.this,ServoStabilizer.class));
+                    case 18:
+                        startActivity(new Intent(HotoSectionsListActivity.this,ServoStabilizer.class));
                         break;
-                    case 19: startActivity(new Intent(HotoSectionsListActivity.this,DetailsOfUnusedMaterials.class));
+                    case 19:
+                        startActivity(new Intent(HotoSectionsListActivity.this,DetailsOfUnusedMaterials.class));
+                        break;
+                    case 20:
+                        startActivity(new Intent(HotoSectionsListActivity.this,PhotoCaptureActivity.class));
                         break;
                 }
             }

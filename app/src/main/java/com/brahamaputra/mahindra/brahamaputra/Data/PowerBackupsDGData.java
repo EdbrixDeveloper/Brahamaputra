@@ -92,6 +92,36 @@ public class PowerBackupsDGData {
     String natureOfProblem;
 
     public PowerBackupsDGData() {
+        this.noOfEngineAlternator = "";
+        this.numberOfWorkingDg = "";
+        this.qRCodeScan = "";
+        this.assetOwner = "";
+        this.manufacturerMakeModel = "";
+        this.capacityInKva = "";
+        this.autoManual = "";
+        this.dieselTankCapacity = "";
+        this.dateOfInstallation = "";
+        this.averageDieselConsumption = "";
+        this.amc = "";
+        this.dateOfvalidityOfAmc = "";
+        this.dgWorkingType = "";
+        this.dgHmrReading = "";
+        this.dgEngineSerialNo = "";
+        this.dgMainAltType = "";
+        this.dgMainAltMake = "";
+        this.dgMainAltSerialNo = "";
+        this.dgCanopyStatus = "";
+        this.dgStartingBatteryStatus = "";
+        this.chargingAlternator = "";
+        this.batteryCharger = "";
+        this.presentDieselStock = "";
+        this.gcuRunHrs = "";
+        this.gcuKwh = "";
+        this.dgAvrWorkingStatus = "";
+        this.fuelTankPosition = "";
+        this.workingCondition = "";
+        this.natureOfProblem = "";
+
     }
 
     public PowerBackupsDGData(String noOfEngineAlternator, String numberOfWorkingDg, String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem) {

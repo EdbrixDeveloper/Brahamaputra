@@ -26,7 +26,13 @@ public class ServoStabilizerData {
     private String qrCodeImageFileName;
 
     public ServoStabilizerData() {
-
+        this.servoStabilizer_Qr = "";
+        this.servoStabilizerWorkingStatus = "";
+        this.makeofServo = "";
+        this.ratingofServo = "";
+        this.workingCondition = "";
+        this.natureofProblem = "";
+        this.qrCodeImageFileName = "";
     }
 
     public ServoStabilizerData(String servoStabilizer_Qr, String servoStabilizerWorkingStatus, String makeofServo, String ratingofServo, String workingCondition, String natureofProblem,String qrCodeImageFileName) {

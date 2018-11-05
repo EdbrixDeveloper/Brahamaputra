@@ -321,8 +321,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
             hotoTransactionData.setElectricConnectionData(new ElectricConnectionData());
 
-            hotoTransactionData.setElectricConnectionData(new ElectricConnectionData());
-
             hotoTransactionData.setAirConditionersData(new AirConditionersData());
 
             hotoTransactionData.setSolarPowerSystemData(new SolarPowerSystemData());
@@ -377,9 +375,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                                 if (response.getError() != null) {
                                     showToast(response.getError().getErrorMessage());
                                 } else {
-
                                     if (response.getSuccess() == 1) {
-
 
                                     }
                                 }

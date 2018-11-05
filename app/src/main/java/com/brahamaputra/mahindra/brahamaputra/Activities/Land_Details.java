@@ -118,6 +118,7 @@ public class Land_Details extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sessionManager = new SessionManager(Land_Details.this);
+        alertDialogManager = new AlertDialogManager(Land_Details.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();

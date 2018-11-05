@@ -127,7 +127,6 @@
             android:name=".Activities.Shelter"
             android:label="Sections"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.ForgotPasswordActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -138,6 +137,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
+        <activity
+            android:name=".Activities.ForgotPasswordActivity"
+            android:label="Sections"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activities.PhotoCaptureActivity"
+            android:label="Sections"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

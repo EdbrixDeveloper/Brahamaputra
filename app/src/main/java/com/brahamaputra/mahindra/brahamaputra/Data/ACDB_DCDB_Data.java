@@ -17,6 +17,10 @@ public class ACDB_DCDB_Data {
     String freeCoolingDeviseStausFCU;
 
     public ACDB_DCDB_Data() {
+        this.numberofACDB = "";
+        this.acdbRatingAMP = "";
+        this.numberofDCDB = "";
+        this.freeCoolingDeviseStausFCU = "";
     }
 
     public ACDB_DCDB_Data(String numberofACDB, String acdbRatingAMP, String numberofDCDB, String freeCoolingDeviseStausFCU) {

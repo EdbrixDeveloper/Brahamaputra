@@ -44,6 +44,19 @@ public class AirConditionersData {
     String natureOfProblem;
 
     public AirConditionersData() {
+        this.noOfACprovided = "";
+        this.numberOfACInWorkingCondition = "";
+        this.qRCodeScan = "";
+        this.assetOwner = "";
+        this.typeOfAcSpliWindow = "";
+        this.manufacturerMakeModel = "";
+        this.acSerialNumber = "";
+        this.capacityTr = "";
+        this.dateOfInstallation = "";
+        this.amcYesNo = "";
+        this.dateOfvalidityOfAmc = "";
+        this.workingCondition = "";
+        this.natureOfProblem = "";
     }
 
     public AirConditionersData(String noOfACprovided, String numberOfACInWorkingCondition, String qRCodeScan, String assetOwner, String typeOfAcSpliWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem) {
