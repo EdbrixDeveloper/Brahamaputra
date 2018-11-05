@@ -101,8 +101,8 @@ public class Land_Details extends BaseActivity {
 
     private SessionManager sessionManager;
 
-    private Uri imageFileUri;
-    private String imageFileName;
+    private Uri imageFileUri = null;
+    private String imageFileName ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -335,7 +335,7 @@ public class Land_Details extends BaseActivity {
             String landAgreementCopy = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
             String landAgreementValidity = mLandDetailsEditTextDateOfvalidityOfAgreement.getText().toString();
 
-            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity);
+            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity,imageFileName);
 
             hotoTransactionData.setLandDetailsData(landDetailsData);
 

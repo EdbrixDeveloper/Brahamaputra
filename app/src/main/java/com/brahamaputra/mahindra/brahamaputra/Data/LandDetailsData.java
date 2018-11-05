@@ -32,7 +32,9 @@ public class LandDetailsData  {
     @SerializedName("landAgreementValidity")
     private String landAgreementValidity;
 
-    public LandDetailsData(String landType, String landArea, String rentLeaseValue, String rentLeaseValueInWords, String landOwnerName, String landOwnerMob, String landLayout, String landAgreementCopy, String landAgreementValidity) {
+    private String landLayoutFileName;
+
+    public LandDetailsData(String landType, String landArea, String rentLeaseValue, String rentLeaseValueInWords, String landOwnerName, String landOwnerMob, String landLayout, String landAgreementCopy, String landAgreementValidity, String landLayoutFileName) {
         this.landType = landType;
         this.landArea = landArea;
         this.rentLeaseValue = rentLeaseValue;
@@ -42,6 +44,7 @@ public class LandDetailsData  {
         this.landLayout = landLayout;
         this.landAgreementCopy = landAgreementCopy;
         this.landAgreementValidity = landAgreementValidity;
+        this.landLayoutFileName = landLayoutFileName;
     }
 
     public String getLandType() {
@@ -116,5 +119,13 @@ public class LandDetailsData  {
 
     public void setLandAgreementValidity(String landAgreementValidity) {
         this.landAgreementValidity = landAgreementValidity;
+    }
+
+    public String getLandLayoutFileName() {
+        return landLayoutFileName;
+    }
+
+    public void setLandLayoutFileName(String landLayoutFileName) {
+        this.landLayoutFileName = landLayoutFileName;
     }
 }
