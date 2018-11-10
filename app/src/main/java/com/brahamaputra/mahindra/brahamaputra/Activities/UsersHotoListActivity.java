@@ -355,6 +355,7 @@ public class UsersHotoListActivity extends BaseActivity {
                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
                         intent.putExtra("ticketNO", hotoTickitNo);
                         sessionManager.updateSessionUserTicketId(hotoTicketId);
+                        sessionManager.updateSessionUserTicketName(hotoTickitNo);
                         startActivityForResult(intent,RESULT_HOTO_SUBMIT);
                     }
                 }).show();

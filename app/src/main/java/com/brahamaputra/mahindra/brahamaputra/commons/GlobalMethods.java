@@ -1563,4 +1563,14 @@ fos.close();
     public static void dialContactPhone(Context context, final String phoneNumber) {
         context.startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
     }
+
+    /**
+     * Replace Special character in between string as underscore
+     * @param stringSpecialChar
+     * @return
+     */
+    public static String replaceAllSpecialCharAtUnderscore(String stringSpecialChar){
+        stringSpecialChar = stringSpecialChar.replaceAll("[^a-zA-Z0-9 -]", "_");
+        return stringSpecialChar;
+    }
 }

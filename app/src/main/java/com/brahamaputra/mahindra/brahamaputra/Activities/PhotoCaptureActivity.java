@@ -21,6 +21,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.SitePhotoCaptureData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -89,7 +90,7 @@ public class PhotoCaptureActivity extends BaseActivity {
 
         sessionManager = new SessionManager(PhotoCaptureActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PhotoCaptureActivity.this, userId, ticketName);
 
@@ -442,6 +443,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 return true;
             case R.id.menuDone:
                 submitDetails();
+                setResult(RESULT_OK);
                 finish();
                 return true;
         }

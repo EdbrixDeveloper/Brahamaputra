@@ -272,7 +272,7 @@ public class PowerManagementSystem extends BaseActivity {
         this.setTitle("Power Management System");
         sessionManager = new SessionManager(PowerManagementSystem.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerManagementSystem.this, userId, ticketName);
         assignViews();

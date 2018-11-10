@@ -20,6 +20,7 @@ public class HotoSectionsListActivity extends AppCompatActivity {
     ArrayList<HotoSection> dataModels;
     String[] values;
     private static HotoSectionListAdapter adapter;
+    public static final int RESULT_READING_COMPLETED = 650;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,11 +112,19 @@ public class HotoSectionsListActivity extends AppCompatActivity {
                         startActivity(new Intent(HotoSectionsListActivity.this,DetailsOfUnusedMaterials.class));
                         break;
                     case 20:
-                        startActivity(new Intent(HotoSectionsListActivity.this,PhotoCaptureActivity.class));
+                        startActivityForResult(new Intent(HotoSectionsListActivity.this,PhotoCaptureActivity.class),RESULT_READING_COMPLETED);
                         break;
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_READING_COMPLETED && resultCode == RESULT_OK){
+            finish();
+        }
     }
 
     @Override

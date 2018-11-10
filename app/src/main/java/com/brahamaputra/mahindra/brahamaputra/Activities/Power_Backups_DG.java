@@ -180,7 +180,7 @@ public class Power_Backups_DG extends BaseActivity {
 
         sessionManager = new SessionManager(Power_Backups_DG.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Power_Backups_DG.this, userId, ticketName);
         setInputDetails();

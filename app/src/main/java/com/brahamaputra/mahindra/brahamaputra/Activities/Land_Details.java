@@ -124,7 +124,7 @@ public class Land_Details extends BaseActivity {
         sessionManager = new SessionManager(Land_Details.this);
         alertDialogManager = new AlertDialogManager(Land_Details.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketName);
         englishNumberToWords = new EnglishNumberToWords();

@@ -120,7 +120,7 @@ public class Solar_Power_System extends BaseActivity {
 
         sessionManager = new SessionManager(Solar_Power_System.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Solar_Power_System.this, userId, ticketName);
 

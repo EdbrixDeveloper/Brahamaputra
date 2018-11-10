@@ -222,7 +222,7 @@ public class ServoStabilizer extends BaseActivity {
         this.setTitle("SERVO STABILIZER");
         sessionManager = new SessionManager(ServoStabilizer.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(ServoStabilizer.this, userId, ticketName);
         assignViews();

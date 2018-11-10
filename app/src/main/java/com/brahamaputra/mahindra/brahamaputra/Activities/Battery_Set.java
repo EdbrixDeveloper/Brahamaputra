@@ -394,7 +394,7 @@ public class Battery_Set extends BaseActivity {
 
         sessionManager = new SessionManager(Battery_Set.this);
         ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Battery_Set.this, userId, ticketName);
         alertDialogManager = new AlertDialogManager(this);
