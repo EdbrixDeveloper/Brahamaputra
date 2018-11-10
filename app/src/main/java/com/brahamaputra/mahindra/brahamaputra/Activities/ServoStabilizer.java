@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.Menu;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.Manifest;
 import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ServoStabilizerData;
@@ -34,6 +36,7 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -56,11 +59,12 @@ public class ServoStabilizer extends BaseActivity {
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ServoStabilizerData servoStabilizerData;
-    private String base64StringServoStablizer= "eji39jjj";
+    private String base64StringServoStablizer = "eji39jjj";
     private SessionManager sessionManager;
 
-    private TextView mBatterySetTextViewQRCodeScan;
-    private ImageView mBatterySetButtonQRCodeScan;
+    private TextView  mServoStabilizerTextViewQRCodeScan;
+    private ImageView mServoStabilizerbuttonQRCodeScan;
+    private ImageView mServoStabilizerbuttonQRCodeScanView;
     private TextView mServoStabilizerTextViewServoStabilizerWorkingStatus;
     private TextView mServoStabilizerTextViewServoStabilizerWorkingStatusVal;
     private TextView mServoStabilizerTextViewMakeofServo;
@@ -85,7 +89,7 @@ public class ServoStabilizer extends BaseActivity {
     public static final String CAMERA_PREF = "camera_pref";
 
     private Uri imageFileUri = null;
-    private String imageFileName ="";
+    private String imageFileName = "";
 
     private AlertDialogManager alertDialogManager;
 
@@ -95,18 +99,19 @@ public class ServoStabilizer extends BaseActivity {
     String str_workingCondition;
 
     private void assignViews() {
-        mBatterySetTextViewQRCodeScan = (TextView) findViewById(R.id.batterySet_textView_QRCodeScan);
-        mBatterySetButtonQRCodeScan = (ImageView) findViewById(R.id.batterySet_button_QRCodeScan);
-        mServoStabilizerTextViewServoStabilizerWorkingStatus = (TextView) findViewById(R.id.ServoStabilizer_textView_ServoStabilizerWorkingStatus);
-        mServoStabilizerTextViewServoStabilizerWorkingStatusVal = (TextView) findViewById(R.id.ServoStabilizer_textView_ServoStabilizerWorkingStatus_val);
-        mServoStabilizerTextViewMakeofServo = (TextView) findViewById(R.id.ServoStabilizer_textView_MakeofServo);
-        mServoStabilizerTextViewMakeofServoVal = (TextView) findViewById(R.id.ServoStabilizer_textView_MakeofServo_val);
-        mServoStabilizerTextViewRatingofServo = (TextView) findViewById(R.id.ServoStabilizer_textView_RatingofServo);
-        mServoStabilizerTextViewRatingofServoVal = (TextView) findViewById(R.id.ServoStabilizer_textView_RatingofServo_val);
-        mServoStabilizerTextViewWorkingCondition = (TextView) findViewById(R.id.ServoStabilizer_textView_WorkingCondition);
-        mServoStabilizerTextViewWorkingConditionVal = (TextView) findViewById(R.id.ServoStabilizer_textView_WorkingCondition_val);
-        mServoStabilizerTextViewNatureofProblem = (TextView) findViewById(R.id.ServoStabilizer_textView_NatureofProblem);
-        mServoStabilizerEditTextNatureofProblem = (EditText) findViewById(R.id.ServoStabilizer_editText_NatureofProblem);
+        mServoStabilizerTextViewQRCodeScan = (TextView) findViewById(R.id.servoStabilizer_textView_QRCodeScan);
+        mServoStabilizerbuttonQRCodeScan = (ImageView) findViewById(R.id.servoStabilizer_button_QRCodeScan);
+        mServoStabilizerbuttonQRCodeScanView = (ImageView) findViewById(R.id.servoStabilizer_button_QRCodeScanView);
+        mServoStabilizerTextViewServoStabilizerWorkingStatus = (TextView) findViewById(R.id.servoStabilizer_textView_ServoStabilizerWorkingStatus);
+        mServoStabilizerTextViewServoStabilizerWorkingStatusVal = (TextView) findViewById(R.id.servoStabilizer_textView_ServoStabilizerWorkingStatus_val);
+        mServoStabilizerTextViewMakeofServo = (TextView) findViewById(R.id.servoStabilizer_textView_MakeofServo);
+        mServoStabilizerTextViewMakeofServoVal = (TextView) findViewById(R.id.servoStabilizer_textView_MakeofServo_val);
+        mServoStabilizerTextViewRatingofServo = (TextView) findViewById(R.id.servoStabilizer_textView_RatingofServo);
+        mServoStabilizerTextViewRatingofServoVal = (TextView) findViewById(R.id.servoStabilizer_textView_RatingofServo_val);
+        mServoStabilizerTextViewWorkingCondition = (TextView) findViewById(R.id.servoStabilizer_textView_WorkingCondition);
+        mServoStabilizerTextViewWorkingConditionVal = (TextView) findViewById(R.id.servoStabilizer_textView_WorkingCondition_val);
+        mServoStabilizerTextViewNatureofProblem = (TextView) findViewById(R.id.servoStabilizer_textView_NatureofProblem);
+        mServoStabilizerEditTextNatureofProblem = (EditText) findViewById(R.id.servoStabilizer_editText_NatureofProblem);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -197,6 +202,17 @@ public class ServoStabilizer extends BaseActivity {
 
             }
         });
+
+        mServoStabilizerbuttonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUri != null) {
+                    GlobalMethods.showImageDialog(ServoStabilizer.this, imageFileUri);
+                } else {
+                    Toast.makeText(ServoStabilizer.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -217,7 +233,7 @@ public class ServoStabilizer extends BaseActivity {
         setInputDetails();
 
 
-        mBatterySetButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
+        mServoStabilizerbuttonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(ServoStabilizer.this,
@@ -294,6 +310,17 @@ public class ServoStabilizer extends BaseActivity {
                 mServoStabilizerTextViewWorkingConditionVal.setText(servoStabilizerData.getWorkingCondition());
                 mServoStabilizerEditTextNatureofProblem.setText(servoStabilizerData.getNatureofProblem());
 
+                // New added for image #ImageSet
+                imageFileName = servoStabilizerData.getQrCodeImageFileName();
+                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+                imageFileUri = FileProvider.getUriForFile(ServoStabilizer.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+                // New added for image #ImageSet
+                mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
+                if (imageFileUri != null) {
+                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+
             } else {
                 Toast.makeText(ServoStabilizer.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
@@ -304,7 +331,7 @@ public class ServoStabilizer extends BaseActivity {
 
     private void submitDetails() {
         try {
-           // hotoTransactionData.setTicketNo(ticketId);
+            // hotoTransactionData.setTicketNo(ticketId);
 
             String servoStabilizer_Qr = base64StringServoStablizer;
             String servoStabilizerWorkingStatus = mServoStabilizerTextViewServoStabilizerWorkingStatusVal.getText().toString().trim();
@@ -314,7 +341,7 @@ public class ServoStabilizer extends BaseActivity {
             String natureofProblem = mServoStabilizerEditTextNatureofProblem.getText().toString().trim();
 
 
-            servoStabilizerData = new ServoStabilizerData(servoStabilizer_Qr, servoStabilizerWorkingStatus, makeofServo, ratingofServo, workingCondition, natureofProblem,imageFileName);
+            servoStabilizerData = new ServoStabilizerData(servoStabilizer_Qr, servoStabilizerWorkingStatus, makeofServo, ratingofServo, workingCondition, natureofProblem, imageFileName);
             hotoTransactionData.setServoStabilizerData(servoStabilizerData);
 
             Gson gson2 = new GsonBuilder().create();
@@ -418,13 +445,13 @@ public class ServoStabilizer extends BaseActivity {
             imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-            imageFileUri = Uri.fromFile(file);
-
+            //imageFileUri = Uri.fromFile(file);
+            imageFileUri = FileProvider.getUriForFile(ServoStabilizer.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -443,7 +470,8 @@ public class ServoStabilizer extends BaseActivity {
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
                     base64StringServoStablizer = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                }catch (Exception e){
+                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

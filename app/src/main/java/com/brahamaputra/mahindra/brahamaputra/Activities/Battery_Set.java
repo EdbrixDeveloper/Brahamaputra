@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.Menu;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import android.Manifest;
 import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
@@ -37,6 +39,7 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -85,6 +88,7 @@ public class Battery_Set extends BaseActivity {
     private TextView mBatterySetTextViewNumberofBatteryBankWorkingVal;
     private TextView mBatterySetTextViewQRCodeScan;
     private ImageView mBatterySetButtonQRCodeScan;
+    private ImageView mBatterySetButtonQRCodeScanView;
     private TextView mBatterySetTextViewAssetOwner;
     private TextView mBatterySetTextViewAssetOwnerVal;
     private TextView mPowerBackupsDgTextViewDividerDesign;
@@ -126,6 +130,7 @@ public class Battery_Set extends BaseActivity {
         mBatterySetTextViewNumberofBatteryBankWorkingVal = (TextView) findViewById(R.id.batterySet_textView_NumberofBatteryBankWorking_val);
         mBatterySetTextViewQRCodeScan = (TextView) findViewById(R.id.batterySet_textView_QRCodeScan);
         mBatterySetButtonQRCodeScan = (ImageView) findViewById(R.id.batterySet_button_QRCodeScan);
+        mBatterySetButtonQRCodeScanView = (ImageView) findViewById(R.id.batterySet_button_QRCodeScanView);
         mBatterySetTextViewAssetOwner = (TextView) findViewById(R.id.batterySet_textView_assetOwner);
         mBatterySetTextViewAssetOwnerVal = (TextView) findViewById(R.id.batterySet_textView_assetOwner_val);
         mPowerBackupsDgTextViewDividerDesign = (TextView) findViewById(R.id.powerBackupsDg_textView_dividerDesign);
@@ -368,6 +373,17 @@ public class Battery_Set extends BaseActivity {
 
             }
         });
+        mBatterySetButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUri != null) {
+                    GlobalMethods.showImageDialog(Battery_Set.this, imageFileUri);
+                } else {
+                    Toast.makeText(Battery_Set.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -500,6 +516,17 @@ public class Battery_Set extends BaseActivity {
                 mBatterySetTextViewBatteryBankEarthingStatusVal.setText(batterySetData.getBatteryBankEarthingStatus());
                 mBatterySetTextViewBACKUPConditionVal.setText(batterySetData.getBackupCondition());
                 mBatterySetEditTextNatureofProblem.setText(batterySetData.getNatureOfProblem());
+
+                // New added for image #ImageSet
+                imageFileName = batterySetData.getQrCodeImageFileName();
+                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+                imageFileUri = FileProvider.getUriForFile(Battery_Set.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+                // New added for image #ImageSet
+                mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+                if (imageFileUri != null) {
+                    mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
 
 
             } else {
@@ -636,8 +663,8 @@ public class Battery_Set extends BaseActivity {
             imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-            imageFileUri = Uri.fromFile(file);
-
+          //  imageFileUri = Uri.fromFile(file);
+            imageFileUri = FileProvider.getUriForFile(Battery_Set.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
@@ -660,11 +687,16 @@ public class Battery_Set extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringBatterySet ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                }catch (Exception e){
+                    base64StringBatterySet = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+        } else {
+            imageFileName = "";
+            imageFileUri = null;
+            mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
         }
     }
     private void openCamera() {

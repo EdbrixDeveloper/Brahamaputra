@@ -32,7 +32,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Prevailing SLA" />
+                    android:text="Prevailing SLA(In % Wise)" />
 
                 <EditText
                     android:id="@+id/generalAndSafetyMeasures_editText_PrevailingSLA"
@@ -40,7 +40,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter Prevailing SLA "
+                    android:hint="Enter Prevailing SLA(In % Wise) "
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"

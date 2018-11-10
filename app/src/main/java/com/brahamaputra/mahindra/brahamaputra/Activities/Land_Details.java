@@ -17,6 +17,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +39,7 @@ import android.widget.Toast;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.EnglishNumberToWords;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
@@ -68,7 +71,7 @@ public class Land_Details extends BaseActivity {
     private TextView mLandDetailsTextViewRentLeaseInNumber;
     private EditText mLandDetailsEditTextRentLeaseInNumber;
     private TextView mLandDetailsTextViewRentLeaseInWords;
-    private EditText mLandDetailsEditTextRentLeaseInWords;
+    private TextView mLandDetailsTextViewRentLeaseInWords_val;
     private TextView mLandDetailsTextViewNameOfOwner;
     private EditText mLandDetailsEditTextNameOfOwner;
     private TextView mLandDetailsTextViewMobileNoOfOwner;
@@ -106,7 +109,8 @@ public class Land_Details extends BaseActivity {
     private SessionManager sessionManager;
 
     private Uri imageFileUri = null;
-    private String imageFileName = "";
+    private String imageFileName ="";
+    private EnglishNumberToWords englishNumberToWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +127,7 @@ public class Land_Details extends BaseActivity {
         ticketName = sessionManager.getSessionUserTicketName();
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Land_Details.this, userId, ticketName);
+        englishNumberToWords = new EnglishNumberToWords();
 
         hotoTransactionData = new HotoTransactionData();
         setInputDetails();
@@ -193,6 +198,28 @@ public class Land_Details extends BaseActivity {
             }
         });
 
+        mLandDetailsEditTextRentLeaseInNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mLandDetailsTextViewRentLeaseInWords_val.setText("");
+                String rentLease= mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
+                if(rentLease.toString().length()>0) {
+                    String str_rentLease = EnglishNumberToWords.convert(Long.valueOf(rentLease));
+                    mLandDetailsTextViewRentLeaseInWords_val.setText(str_rentLease);
+                }
+            }
+        });
+
 
     }
 
@@ -205,7 +232,7 @@ public class Land_Details extends BaseActivity {
         mLandDetailsTextViewRentLeaseInNumber = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInNumber);
         mLandDetailsEditTextRentLeaseInNumber = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInNumber);
         mLandDetailsTextViewRentLeaseInWords = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords);
-        mLandDetailsEditTextRentLeaseInWords = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInWords);
+        mLandDetailsTextViewRentLeaseInWords_val = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords_val);
         mLandDetailsTextViewNameOfOwner = (TextView) findViewById(R.id.landDetails_textView_nameOfOwner);
         mLandDetailsEditTextNameOfOwner = (EditText) findViewById(R.id.landDetails_editText_nameOfOwner);
         mLandDetailsTextViewMobileNoOfOwner = (TextView) findViewById(R.id.landDetails_textView_mobileNoOfOwner);
@@ -319,7 +346,7 @@ public class Land_Details extends BaseActivity {
                         mLandDetailsTextViewCopyAgreementWithOwnerVal.setText(landDetailsData.getLandAgreementCopy());
                         mLandDetailsEditTextAreaOfLand.setText(landDetailsData.getLandArea());
                         mLandDetailsEditTextRentLeaseInNumber.setText(landDetailsData.getRentLeaseValue());
-                        mLandDetailsEditTextRentLeaseInWords.setText(landDetailsData.getRentLeaseValueInWords());
+                        mLandDetailsTextViewRentLeaseInWords_val.setText(landDetailsData.getRentLeaseValueInWords());
                         mLandDetailsEditTextNameOfOwner.setText(landDetailsData.getLandOwnerName());
                         mLandDetailsEditTextMobileNoOfOwner.setText(landDetailsData.getLandOwnerMob());
                         base64StringLayoutOfLand = landDetailsData.getLandLayout();
@@ -357,7 +384,7 @@ public class Land_Details extends BaseActivity {
             String landType = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
             String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
             String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
-            String rentLeaseValueInWords = mLandDetailsEditTextRentLeaseInWords.getText().toString().trim();
+            String rentLeaseValueInWords = mLandDetailsTextViewRentLeaseInWords_val.getText().toString().trim();
             String landOwnerName = mLandDetailsEditTextNameOfOwner.getText().toString().trim();
             String landOwnerMob = mLandDetailsEditTextMobileNoOfOwner.getText().toString().trim();
             String landLayout = base64StringLayoutOfLand;

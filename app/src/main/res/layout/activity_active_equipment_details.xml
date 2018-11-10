@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Make "
-                    android:inputType="numberDecimal"
+                    android:inputType="text"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="DC Load of BTS equipment" />
+                    android:text="DC Load of BTS equipment(Amp)" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_DCLoadofBTSequipment"
@@ -143,7 +143,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter DC Load of BTS equipment "
+                    android:hint="DC Load of BTS equipment(Amp) "
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"

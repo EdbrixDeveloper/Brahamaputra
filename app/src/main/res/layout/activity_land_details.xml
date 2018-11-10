@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -40,8 +39,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"/>
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -97,7 +96,8 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Rent/Lease"
                     android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
+                    android:maxLength="8"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
 
@@ -117,16 +117,15 @@
                     android:layout_weight="0.4"
                     android:text="In Words Rs." />
 
-                <EditText
-                    android:id="@+id/landDetails_editText_rentLeaseInWords"
-
+                <TextView
+                    android:id="@+id/landDetails_textView_rentLeaseInWords_val"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter Rs. In Words"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
                     android:textAlignment="viewStart"
+
+                    android:textAllCaps="true"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -208,8 +207,8 @@
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="0.3"
-                    android:padding="2dp"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
 
@@ -217,12 +216,12 @@
                     android:id="@+id/landDetails_button_layoutOfLandView"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
                     android:layout_weight="0.3"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/view_image" />
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -245,8 +244,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"/>
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 

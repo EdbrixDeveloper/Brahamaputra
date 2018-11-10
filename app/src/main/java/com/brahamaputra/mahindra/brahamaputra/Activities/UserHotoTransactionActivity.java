@@ -391,6 +391,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e("123",e.getMessage().toString());
+
         }
 
     }

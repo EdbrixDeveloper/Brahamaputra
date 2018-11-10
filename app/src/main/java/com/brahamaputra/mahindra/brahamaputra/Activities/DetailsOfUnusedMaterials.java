@@ -164,7 +164,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                 return true;
             case R.id.menuDone:
                 submitDetails();
-                startActivity(new Intent(DetailsOfUnusedMaterials.this, SitePhotoCaptureData.class));
+                startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
                 finish();
                 return true;
 

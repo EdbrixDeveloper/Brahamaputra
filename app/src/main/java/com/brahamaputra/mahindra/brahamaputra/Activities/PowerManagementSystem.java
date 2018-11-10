@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.Menu;
@@ -26,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerManagementSystemData;
@@ -33,6 +35,7 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -81,6 +84,7 @@ public class PowerManagementSystem extends BaseActivity {
 
     private TextView mPowerManagementSystemTextViewQRCodeScan;
     private ImageView mPowerManagementSystemButtonQRCodeScan;
+    private ImageView mPowerManagementSystemButtonQRCodeScanView;
     private TextView mPowerManagementSystemTextViewAssetOwner;
     private TextView mPowerManagementSystemTextViewAssetOwnerVal;
     private TextView mPowerManagementSystemTextViewPowerManagementSystemType;
@@ -101,6 +105,7 @@ public class PowerManagementSystem extends BaseActivity {
     private void assignViews() {
         mPowerManagementSystemTextViewQRCodeScan = (TextView) findViewById(R.id.powerManagementSystem_textView_QRCodeScan);
         mPowerManagementSystemButtonQRCodeScan = (ImageView) findViewById(R.id.powerManagementSystem_button_QRCodeScan);
+        mPowerManagementSystemButtonQRCodeScanView = (ImageView) findViewById(R.id.powerManagementSystem_button_QRCodeScanView);
         mPowerManagementSystemTextViewAssetOwner = (TextView) findViewById(R.id.powerManagementSystem_textView_AssetOwner);
         mPowerManagementSystemTextViewAssetOwnerVal = (TextView) findViewById(R.id.powerManagementSystem_textView_AssetOwner_val);
         mPowerManagementSystemTextViewPowerManagementSystemType = (TextView) findViewById(R.id.powerManagementSystem_textView_PowerManagementSystemType);
@@ -247,6 +252,17 @@ public class PowerManagementSystem extends BaseActivity {
 
             }
         });
+
+        mPowerManagementSystemButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUri != null) {
+                    GlobalMethods.showImageDialog(PowerManagementSystem.this, imageFileUri);
+                } else {
+                    Toast.makeText(PowerManagementSystem.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -347,6 +363,16 @@ public class PowerManagementSystem extends BaseActivity {
                 mPowerManagementSystemTextViewWorkingConditionVal.setText(powerManagementSystemData.getWorkingCondition());
                 mPowerManagementSystemEditTextNatureofProblem.setText(powerManagementSystemData.getNatureofProblem());
 
+                // New added for image #ImageSet
+                imageFileName = powerManagementSystemData.getQrCodeImageFileName();
+                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+                imageFileUri = FileProvider.getUriForFile(PowerManagementSystem.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+                // New added for image #ImageSet
+                mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                if (imageFileUri != null) {
+                    mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
 
             } else {
                 Toast.makeText(PowerManagementSystem.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
@@ -475,13 +501,14 @@ public class PowerManagementSystem extends BaseActivity {
             imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-            imageFileUri = Uri.fromFile(file);
+            //imageFileUri = Uri.fromFile(file);
+            imageFileUri = FileProvider.getUriForFile(PowerManagementSystem.this, BuildConfig.APPLICATION_ID + ".provider", file);
 
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -500,11 +527,17 @@ public class PowerManagementSystem extends BaseActivity {
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
                     base64StringPowerManagementSystem = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
+        } else {
+            imageFileName = "";
+            imageFileUri = null;
+            mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
         }
+
     }
 
     private void openCamera() {
