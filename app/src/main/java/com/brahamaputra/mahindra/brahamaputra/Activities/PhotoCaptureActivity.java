@@ -697,7 +697,7 @@ public class PhotoCaptureActivity extends BaseActivity {
 
     private void submitDetails() {
         try {
-            hotoTransactionData.setTicketNo(ticketName);
+//            hotoTransactionData.setTicketNo(ticketName);
 
             sitePhotoCaptureData = new SitePhotoCaptureData(imageFileNameOfSite, base64StringSite,
                     imageFileNameOfShelter, base64StringShelter,

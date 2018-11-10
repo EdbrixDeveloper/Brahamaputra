@@ -282,9 +282,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             @Override
             public void onPositiveClick() {
                 submitHotoTicket();
-                sessionManager.updateSessionUserTicketId(null);
-                sessionManager.updateSessionUserTicketName(null);
-                finish();
+
             }
 
             @Override
@@ -420,9 +418,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
                                 } else {
                                     if (response.getSuccess() == 1) {
                                         showToast("Ticket submitted successfully.");
+                                        sessionManager.updateSessionUserTicketId(null);
+                                        sessionManager.updateSessionUserTicketName(null);
                                         removeOfflineCache();
                                         setResult(RESULT_OK);
-//                                        finish();
+                                        finish();
                                     }
                                 }
 
