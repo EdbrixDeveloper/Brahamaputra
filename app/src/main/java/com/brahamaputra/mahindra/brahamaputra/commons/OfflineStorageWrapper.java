@@ -38,6 +38,14 @@ public class OfflineStorageWrapper {
         return false;
     }
 
+    public boolean removedOffLineFile(String filename){
+        File fObj = new File(yourAppStorageDir.toString(), filename);
+        if (fObj.exists() && fObj.isFile()) {
+            return fObj.delete();
+        }
+        return false;
+    }
+
     public File getFileObjectByName(String filename) {
         return new File(yourAppStorageDir.toString(), filename);
     }

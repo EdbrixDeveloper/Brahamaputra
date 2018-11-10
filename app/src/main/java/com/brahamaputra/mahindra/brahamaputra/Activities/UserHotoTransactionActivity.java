@@ -266,6 +266,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 //sessionManager.updateSessionUserTicketId(null);
                 //sessionManager.updateSessionUserTicketName(null);
                 //finish();
+                submitDetails();
                 showSettingsAlert();
                 return true;
             default:
@@ -405,6 +406,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private void submitHotoTicket() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+                showBusyProgress();
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
                 Log.e("123", jsonInString);
 
@@ -418,8 +420,9 @@ public class UserHotoTransactionActivity extends BaseActivity {
                                 } else {
                                     if (response.getSuccess() == 1) {
                                         showToast("Ticket submitted successfully.");
+                                        removeOfflineCache();
                                         setResult(RESULT_OK);
-                                        finish();
+//                                        finish();
                                     }
                                 }
 
@@ -436,7 +439,14 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 Application.getInstance().addToRequestQueue(submitHotoTicketRequest, "submitHotoTicketRequest");
             }
         } catch (Exception e) {
+            hideBusyProgress();
             e.printStackTrace();
+        }
+    }
+
+    private void removeOfflineCache(){
+        if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+            offlineStorageWrapper.removedOffLineFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
         }
     }
 
