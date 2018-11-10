@@ -212,6 +212,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             mUserHotoTransEditTextNameOfssa.setText(intent.getStringExtra("ssaName"));
             mUserHotoTransEditTextNameOfsite.setText(intent.getStringExtra("siteName"));
             mUserHotoTransEditTextSiteID.setText(intent.getStringExtra("siteId"));
+            mUserHotoTransEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
             mUserHotoTransEditTextTypeOfSites.setText(intent.getStringExtra("siteType"));
         }
     }
@@ -312,6 +313,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
 
                 if (hotoTransactionData != null) {
+                    mUserHotoTransEditTextSiteID.setText(hotoTransactionData.getSiteId());
                     mUserHotoTransEditTextSiteAddress.setText(hotoTransactionData.getSiteAddress());
                     mUserHotoTransSpinnerSourceOfPowerVal.setText(hotoTransactionData.getSourceOfPower());
                 }
@@ -339,51 +341,53 @@ public class UserHotoTransactionActivity extends BaseActivity {
             hotoTransactionData.setCheckOutLongitude(checkOutLong);
             hotoTransactionData.setCheckOutBatteryData(checkOutBatteryData);
 
+            hotoTransactionData.setSiteId(mUserHotoTransEditTextSiteID.getText().toString());
+
             hotoTransactionData.setSiteAddress(mUserHotoTransEditTextSiteAddress.getText().toString());
 
             hotoTransactionData.setSourceOfPower(mUserHotoTransSpinnerSourceOfPowerVal.getText().toString());
 
-            hotoTransactionData.setLandDetailsData(new LandDetailsData());
-
-            hotoTransactionData.setTowerDetailsData(new TowerDetailsData());
-
-            hotoTransactionData.setEarthResistanceTowerData(new EarthResistanceTowerData());
-
-            hotoTransactionData.setEarthResistanceEquipmentData(new EarthResistanceEquipmentData());
-
-            hotoTransactionData.setElectricConnectionData(new ElectricConnectionData());
-
-            hotoTransactionData.setAirConditionersData(new AirConditionersData());
-
-            hotoTransactionData.setSolarPowerSystemData(new SolarPowerSystemData());
-
-            hotoTransactionData.setPowerPlantDetailsData(new PowerPlantDetailsData());
-
-            hotoTransactionData.setPowerBackupsDGData(new PowerBackupsDGData());
-
-            hotoTransactionData.setPowerManagementSystemData(new PowerManagementSystemData());
-
-            hotoTransactionData.setShelterData(new ShelterData());
-
-            hotoTransactionData.setMediaData(new MediaData());
-
-            hotoTransactionData.setBatterySetData(new BatterySetData());
-
-            hotoTransactionData.setExternalTenantsPersonalDetailsData(new ExternalTenantsPersonalDetailsData());
-
-            hotoTransactionData.setTotalDCLoadofSiteData(new TotalDCLoadofSiteData());
-
-            hotoTransactionData.setActiveequipmentDetailsData(new ActiveequipmentDetailsData());
-
-            hotoTransactionData.setGeneralSafetyMeasuresData(new GeneralSafetyMeasuresData());
-
-            hotoTransactionData.setAcdb_dcdb_data(new ACDB_DCDB_Data());
-
-            hotoTransactionData.setServoStabilizerData(new ServoStabilizerData());
-
-            hotoTransactionData.setDetailsOfUnusedMaterialsData(new DetailsOfUnusedMaterialsData());
-
-            hotoTransactionData.setSitePhotoCaptureData(new SitePhotoCaptureData());
+//            hotoTransactionData.setLandDetailsData(new LandDetailsData());
+//
+//            hotoTransactionData.setTowerDetailsData(new TowerDetailsData());
+//
+//            hotoTransactionData.setEarthResistanceTowerData(new EarthResistanceTowerData());
+//
+//            hotoTransactionData.setEarthResistanceEquipmentData(new EarthResistanceEquipmentData());
+//
+//            hotoTransactionData.setElectricConnectionData(new ElectricConnectionData());
+//
+//            hotoTransactionData.setAirConditionersData(new AirConditionersData());
+//
+//            hotoTransactionData.setSolarPowerSystemData(new SolarPowerSystemData());
+//
+//            hotoTransactionData.setPowerPlantDetailsData(new PowerPlantDetailsData());
+//
+//            hotoTransactionData.setPowerBackupsDGData(new PowerBackupsDGData());
+//
+//            hotoTransactionData.setPowerManagementSystemData(new PowerManagementSystemData());
+//
+//            hotoTransactionData.setShelterData(new ShelterData());
+//
+//            hotoTransactionData.setMediaData(new MediaData());
+//
+//            hotoTransactionData.setBatterySetData(new BatterySetData());
+//
+//            hotoTransactionData.setExternalTenantsPersonalDetailsData(new ExternalTenantsPersonalDetailsData());
+//
+//            hotoTransactionData.setTotalDCLoadofSiteData(new TotalDCLoadofSiteData());
+//
+//            hotoTransactionData.setActiveequipmentDetailsData(new ActiveequipmentDetailsData());
+//
+//            hotoTransactionData.setGeneralSafetyMeasuresData(new GeneralSafetyMeasuresData());
+//
+//            hotoTransactionData.setAcdb_dcdb_data(new ACDB_DCDB_Data());
+//
+//            hotoTransactionData.setServoStabilizerData(new ServoStabilizerData());
+//
+//            hotoTransactionData.setDetailsOfUnusedMaterialsData(new DetailsOfUnusedMaterialsData());
+//
+//            hotoTransactionData.setSitePhotoCaptureData(new SitePhotoCaptureData());
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);

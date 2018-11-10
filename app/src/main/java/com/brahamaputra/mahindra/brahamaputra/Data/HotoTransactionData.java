@@ -26,6 +26,9 @@ public class HotoTransactionData {
     @SerializedName("checkInBatteryData")
     private String checkInBatteryData;
 
+    @SerializedName("siteId")
+    private String siteId;
+
     @SerializedName("siteAddress")
     private String siteAddress;
 
@@ -61,6 +64,30 @@ public class HotoTransactionData {
     private ACDB_DCDB_Data acdb_dcdb_data;
     private ServoStabilizerData servoStabilizerData;
     private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
+
+    public HotoTransactionData() {
+        landDetailsData = new LandDetailsData();
+        towerDetailsData = new TowerDetailsData();
+        earthResistanceTowerData = new EarthResistanceTowerData();
+        earthResistanceEquipmentData = new EarthResistanceEquipmentData();
+        electricConnectionData = new ElectricConnectionData();
+        airConditionersData = new AirConditionersData();
+        solarPowerSystemData = new SolarPowerSystemData();
+        powerPlantDetailsData = new PowerPlantDetailsData();
+        powerBackupsDGData = new PowerBackupsDGData();
+        shelterData = new ShelterData();
+        mediaData = new MediaData();
+        batterySetData = new BatterySetData();
+        externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData();
+        totalDCLoadofSiteData = new TotalDCLoadofSiteData();
+        activeequipmentDetailsData = new ActiveequipmentDetailsData();
+        powerManagementSystemData = new PowerManagementSystemData();
+        generalSafetyMeasuresData = new GeneralSafetyMeasuresData();
+        acdb_dcdb_data = new ACDB_DCDB_Data();
+        servoStabilizerData = new ServoStabilizerData();
+        detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData();
+        sitePhotoCaptureData = new SitePhotoCaptureData();
+    }
 
     public String getUserId() {
         return UserId;
@@ -326,5 +353,13 @@ public class HotoTransactionData {
 
     public void setDetailsOfUnusedMaterialsData(DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData) {
         this.detailsOfUnusedMaterialsData = detailsOfUnusedMaterialsData;
+    }
+
+    public String getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(String siteId) {
+        this.siteId = siteId;
     }
 }
