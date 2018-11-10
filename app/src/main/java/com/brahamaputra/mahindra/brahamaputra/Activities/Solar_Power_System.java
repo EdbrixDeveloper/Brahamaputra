@@ -354,13 +354,14 @@ public class Solar_Power_System extends BaseActivity {
                 base64StringQRCodeScan = solarPowerSystemData.getqRCodeScan();
                 // New added for image #ImageSet
                 imageFileName = solarPowerSystemData.getQrCodeImageFileName();
-                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-                imageFileUri = FileProvider.getUriForFile(Solar_Power_System.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                // New added for image #ImageSet
                 mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileUri != null) {
-                    mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if (imageFileName != null && imageFileName.length() > 0) {
+                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                    imageFileUri = FileProvider.getUriForFile(Solar_Power_System.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    if (imageFileUri != null) {
+                        mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 mSolarPowerSystemTextViewAvailableVal.setText(solarPowerSystemData.getAvailable());

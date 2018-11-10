@@ -519,15 +519,15 @@ public class Battery_Set extends BaseActivity {
 
                 // New added for image #ImageSet
                 imageFileName = batterySetData.getQrCodeImageFileName();
-                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-                imageFileUri = FileProvider.getUriForFile(Battery_Set.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                // New added for image #ImageSet
                 mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileUri != null) {
-                    mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if (imageFileName != null && imageFileName.length() > 0) {
+                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                    imageFileUri = FileProvider.getUriForFile(Battery_Set.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    if (imageFileUri != null) {
+                        mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
                 }
-
 
             } else {
                 Toast.makeText(Battery_Set.this, "No previous saved data available", Toast.LENGTH_SHORT).show();

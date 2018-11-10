@@ -62,7 +62,7 @@ public class ServoStabilizer extends BaseActivity {
     private String base64StringServoStablizer = "eji39jjj";
     private SessionManager sessionManager;
 
-    private TextView  mServoStabilizerTextViewQRCodeScan;
+    private TextView mServoStabilizerTextViewQRCodeScan;
     private ImageView mServoStabilizerbuttonQRCodeScan;
     private ImageView mServoStabilizerbuttonQRCodeScanView;
     private TextView mServoStabilizerTextViewServoStabilizerWorkingStatus;
@@ -312,13 +312,14 @@ public class ServoStabilizer extends BaseActivity {
 
                 // New added for image #ImageSet
                 imageFileName = servoStabilizerData.getQrCodeImageFileName();
-                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-                imageFileUri = FileProvider.getUriForFile(ServoStabilizer.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                // New added for image #ImageSet
                 mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileUri != null) {
-                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                if (imageFileName != null && imageFileName.length() > 0) {
+                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                    imageFileUri = FileProvider.getUriForFile(ServoStabilizer.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    if (imageFileUri != null) {
+                        mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
                 }
 
             } else {

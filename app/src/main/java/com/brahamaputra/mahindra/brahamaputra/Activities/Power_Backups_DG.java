@@ -719,13 +719,14 @@ public class Power_Backups_DG extends BaseActivity {
                 base64StringQRCodeScan = powerBackupsDGData.getqRCodeScan();
                 // New added for image #ImageSet
                 imageFileName = powerBackupsDGData.getQrCodeImageFileName();
-                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-                imageFileUri = FileProvider.getUriForFile(Power_Backups_DG.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                // New added for image #ImageSet
                 mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileUri != null) {
-                    mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if (imageFileName != null && imageFileName.length() > 0) {
+                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                    imageFileUri = FileProvider.getUriForFile(Power_Backups_DG.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    if (imageFileUri != null) {
+                        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.getAssetOwner());

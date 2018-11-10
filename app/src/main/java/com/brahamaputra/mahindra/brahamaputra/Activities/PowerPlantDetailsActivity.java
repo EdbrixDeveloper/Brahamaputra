@@ -482,13 +482,14 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 base64StringQRCodeScan = powerPlantDetailsData.getqRCodeScan();
                 // New added for image #ImageSet
                 imageFileName = powerPlantDetailsData.getQrCodeImageFileName();
-                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-                imageFileUri = FileProvider.getUriForFile(PowerPlantDetailsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                // New added for image #ImageSet
                 mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileUri != null) {
-                    mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if (imageFileName != null && imageFileName.length() > 0) {
+                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                    imageFileUri = FileProvider.getUriForFile(PowerPlantDetailsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    if (imageFileUri != null) {
+                        mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 mPowerPlantDetailsTextViewAssetOwnerVal.setText(powerPlantDetailsData.getAssetOwner());

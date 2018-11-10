@@ -3,6 +3,8 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,23 +29,23 @@ public class HotoSectionsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoto_sections_list);
 
-        hotoSections_listView_sections = (ListView)findViewById(R.id.hotoSections_listView_sections);
+        hotoSections_listView_sections = (ListView) findViewById(R.id.hotoSections_listView_sections);
         this.setTitle("Readings");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         values = getResources().getStringArray(R.array.listView_hotoSections_sections);
-        dataModels= new ArrayList<>();
-        for(int i=0;i<values.length;i++){
-            if(i/2 == 0){
-                dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
-            }else{
-                dataModels.add(new HotoSection(""+(i+1),""+values[i],false));
+        dataModels = new ArrayList<>();
+        for (int i = 0; i < values.length; i++) {
+            if (i / 2 == 0) {
+                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], true));
+            } else {
+                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], false));
             }
             //dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
 
         }
 
-        adapter= new HotoSectionListAdapter(dataModels,getApplicationContext());
+        adapter = new HotoSectionListAdapter(dataModels, getApplicationContext());
 
         hotoSections_listView_sections.setAdapter(adapter);
         hotoSections_listView_sections.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,34 +84,34 @@ public class HotoSectionsListActivity extends AppCompatActivity {
                         startActivity(new Intent(HotoSectionsListActivity.this, Shelter.class));
                         break;
                     case 10:
-                        startActivity(new Intent(HotoSectionsListActivity.this,Media.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, Media.class));
                         break;
                     case 11:
-                        startActivity(new Intent(HotoSectionsListActivity.this,Battery_Set.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, Battery_Set.class));
                         break;
                     case 12:
-                        startActivity(new Intent(HotoSectionsListActivity.this,ExternalTenantsPersonaldetails.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, ExternalTenantsPersonaldetails.class));
                         break;
                     case 13:
-                        startActivity(new Intent(HotoSectionsListActivity.this,Total_DC_Load_site.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, Total_DC_Load_site.class));
                         break;
                     case 14:
-                        startActivity(new Intent(HotoSectionsListActivity.this,ActiveequipmentDetails.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, ActiveequipmentDetails.class));
                         break;
                     case 15:
-                        startActivity(new Intent(HotoSectionsListActivity.this,PowerManagementSystem.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, PowerManagementSystem.class));
                         break;
                     case 16:
-                        startActivity(new Intent(HotoSectionsListActivity.this,GeneralAndSafetyMeasures.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, GeneralAndSafetyMeasures.class));
                         break;
                     case 17:
-                        startActivity(new Intent(HotoSectionsListActivity.this,ACDB_DCDB.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, ACDB_DCDB.class));
                         break;
                     case 18:
-                        startActivity(new Intent(HotoSectionsListActivity.this,ServoStabilizer.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, ServoStabilizer.class));
                         break;
                     case 19:
-                        startActivity(new Intent(HotoSectionsListActivity.this,DetailsOfUnusedMaterials.class));
+                        startActivity(new Intent(HotoSectionsListActivity.this, DetailsOfUnusedMaterials.class));
                         break;
                     case 20:
                         startActivityForResult(new Intent(HotoSectionsListActivity.this,PhotoCaptureActivity.class),RESULT_READING_COMPLETED);

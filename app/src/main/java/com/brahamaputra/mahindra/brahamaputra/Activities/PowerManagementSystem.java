@@ -365,13 +365,14 @@ public class PowerManagementSystem extends BaseActivity {
 
                 // New added for image #ImageSet
                 imageFileName = powerManagementSystemData.getQrCodeImageFileName();
-                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-                imageFileUri = FileProvider.getUriForFile(PowerManagementSystem.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                // New added for image #ImageSet
                 mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileUri != null) {
-                    mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if (imageFileName != null && imageFileName.length() > 0) {
+                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                    imageFileUri = FileProvider.getUriForFile(PowerManagementSystem.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    if (imageFileUri != null) {
+                        mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
                 }
 
             } else {

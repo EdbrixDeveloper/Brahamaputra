@@ -420,15 +420,15 @@ public class Air_Conditioners extends BaseActivity {
 
                 // New added for image #ImageSet
                 imageFileName = airConditionersData.getQrCodeImageFileName();
-                File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-                imageFileUri = FileProvider.getUriForFile(Air_Conditioners.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                // New added for image #ImageSet
                 mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileUri != null) {
-                    mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if (imageFileName != null && imageFileName.length() > 0) {
+                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                    imageFileUri = FileProvider.getUriForFile(Air_Conditioners.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                    if (imageFileUri != null) {
+                        mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
                 }
-
 
                 mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.getAssetOwner());
                 mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.getTypeOfAcSplitWindow());
