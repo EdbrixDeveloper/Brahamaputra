@@ -10,6 +10,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -81,7 +83,7 @@ public class UsersHotoListActivity extends BaseActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
                 // notify user
-                if(hotoTicketList!=null){
+                if (hotoTicketList != null) {
                     String hotoTicketId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getId().toString();
                     String hotoTicketNo = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketNo().toString();
 
@@ -98,9 +100,9 @@ public class UsersHotoListActivity extends BaseActivity {
 
 
                     String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
-                    if(hotoTickStatus.equals("Open")){
-                        checkSystemLocation(hotoTicketNo,hotoTicketId,hotoTicketDate,siteId,siteName,siteAddress,status,siteType,
-                                stateName,customerName,circleName,ssaName);
+                    if (hotoTickStatus.equals("Open")) {
+                        checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                stateName, customerName, circleName, ssaName);
                     }
                 }
 
@@ -138,7 +140,7 @@ public class UsersHotoListActivity extends BaseActivity {
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
-            Log.i (UsersHotoListActivity.class.getName(),Constants.hototTicketList+"\n\n"+jo.toString());
+            Log.i(UsersHotoListActivity.class.getName(), Constants.hototTicketList + "\n\n" + jo.toString());
 
             GsonRequest<HotoTicketList> getAssignAvailabilityLearnersListRequest = new GsonRequest<>(Request.Method.POST, Constants.hototTicketList, jo.toString(), HotoTicketList.class,
                     new Response.Listener<HotoTicketList>() {
@@ -146,9 +148,9 @@ public class UsersHotoListActivity extends BaseActivity {
                         public void onResponse(@NonNull HotoTicketList response) {
                             hideBusyProgress();
                             //showToast(""+response.getSuccess().toString());
-                            if(response.getSuccess() == 1){
+                            if (response.getSuccess() == 1) {
                                 hotoTicketList = response;
-                                userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this,hotoTicketList);
+                                userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this, hotoTicketList);
                                 userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
 
 
@@ -185,7 +187,7 @@ public class UsersHotoListActivity extends BaseActivity {
                                 userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this,HotoTicketsDates,HotoTicketMap);
                                 userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);*/
 
-                                for(int i=0; i<response.getHotoTicketsDates().size();i++){
+                                for (int i = 0; i < response.getHotoTicketsDates().size(); i++) {
                                     userHotoList_listView_hotoList.expandGroup(i);
                                 }
                             }
@@ -254,10 +256,20 @@ public class UsersHotoListActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.refresh_icon_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.menuRefresh:
+                prepareListData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -265,55 +277,55 @@ public class UsersHotoListActivity extends BaseActivity {
     }
 
     public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId, String hotoTicketDate, String siteId, String siteName, String siteAddress,
-                                    String status, String siteType, String stateName, String customerName, String circleName, String ssaName){
-        LocationManager lm = (LocationManager)UsersHotoListActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                                    String status, String siteType, String stateName, String customerName, String circleName, String ssaName) {
+        LocationManager lm = (LocationManager) UsersHotoListActivity.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;
 
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
 
-        if(!gps_enabled && !network_enabled) {
+        if (!gps_enabled && !network_enabled) {
             // notify user
-            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel",new AlertDialogManager.onSingleButtonClickListner() {
+            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                 @Override
                 public void onPositiveClick() {
-                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     UsersHotoListActivity.this.startActivity(myIntent);
                 }
             }).show();
-        }
-        else{
-            if(Conditions.isNetworkConnected(UsersHotoListActivity.this)){
+        } else {
+            if (Conditions.isNetworkConnected(UsersHotoListActivity.this)) {
                 Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
-                intent.putExtra("Id",hotoTicketId);
+                intent.putExtra("Id", hotoTicketId);
 
-                intent.putExtra("ticketNO",hotoTickitNo);
+                intent.putExtra("ticketNO", hotoTickitNo);
 
-                intent.putExtra("hotoTicketDate",hotoTicketDate);
-                intent.putExtra("siteId",siteId);
-                intent.putExtra("siteName",siteName);
-                intent.putExtra("siteAddress",siteAddress);
-                intent.putExtra("status",status);
-                intent.putExtra("siteType",siteType);
-                intent.putExtra("stateName",stateName);
-                intent.putExtra("customerName",customerName);
-                intent.putExtra("circleName",circleName);
-                intent.putExtra("ssaName",ssaName);
+                intent.putExtra("hotoTicketDate", hotoTicketDate);
+                intent.putExtra("siteId", siteId);
+                intent.putExtra("siteName", siteName);
+                intent.putExtra("siteAddress", siteAddress);
+                intent.putExtra("status", status);
+                intent.putExtra("siteType", siteType);
+                intent.putExtra("stateName", stateName);
+                intent.putExtra("customerName", customerName);
+                intent.putExtra("circleName", circleName);
+                intent.putExtra("ssaName", ssaName);
 
                 sessionManager.updateSessionUserTicketId(hotoTicketId);
                 sessionManager.updateSessionUserTicketName(hotoTickitNo);
                 startActivity(intent);
-            }else{
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
+            } else {
+                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
-                        intent.putExtra("ticketNO",hotoTickitNo);
+                        intent.putExtra("ticketNO", hotoTickitNo);
                         sessionManager.updateSessionUserTicketId(hotoTicketId);
                         startActivity(intent);
                     }

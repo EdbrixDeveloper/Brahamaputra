@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -53,12 +54,14 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -103,12 +106,13 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private SessionManager sessionManager;
 
+    private AlertDialogManager alertDialogManager;
 
-    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            checkOutBatteryData =(String.valueOf(level) + "%");
+            checkOutBatteryData = (String.valueOf(level) + "%");
         }
     };
 
@@ -129,6 +133,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         disableInput();
         checkNetworkConnection();
 
+        alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
 
         sessionManager = new SessionManager(UserHotoTransactionActivity.this);
         userId = sessionManager.getSessionUserId();
@@ -154,9 +159,10 @@ public class UserHotoTransactionActivity extends BaseActivity {
         });
 
         gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
-        if(gpsTracker.canGetLocation()){
-            showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude());
-        }else {
+        if (gpsTracker.canGetLocation()) {
+            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+            Log.e("Current Location : ", "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+        } else {
             checkInLong = "0.0";
             checkInLat = "0.0";
 
@@ -196,12 +202,12 @@ public class UserHotoTransactionActivity extends BaseActivity {
             mUserHotoTransEditTextNameOfsite.setHint("Offline");
             mUserHotoTransEditTextSiteID.setHint("Offline");
             mUserHotoTransEditTextTypeOfSites.setHint("Offline");
-        }else{
+        } else {
             Intent intent = getIntent();
 
             mUserHotoTransEditTextCustomerName.setText(intent.getStringExtra("customerName"));
             mUserHotoTransEditTextState.setText(intent.getStringExtra("stateName"));
-            mUserHotoTransEditTextNameOfCircle.setText( intent.getStringExtra("circleName"));
+            mUserHotoTransEditTextNameOfCircle.setText(intent.getStringExtra("circleName"));
             mUserHotoTransEditTextNameOfssa.setText(intent.getStringExtra("ssaName"));
             mUserHotoTransEditTextNameOfsite.setText(intent.getStringExtra("siteName"));
             mUserHotoTransEditTextSiteID.setText(intent.getStringExtra("siteId"));
@@ -254,15 +260,38 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                submitHotoTicket();
-                sessionManager.updateSessionUserTicketId(null);
-                sessionManager.updateSessionUserTicketName(null);
-                finish();
+                //submitHotoTicket(); Comment by Arjun on 10-11-2018
+                //sessionManager.updateSessionUserTicketId(null);
+                //sessionManager.updateSessionUserTicketName(null);
+                //finish();
+                showSettingsAlert();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    ////added by arjun on 10-11-2018 Start
+
+    private void showSettingsAlert() {
+
+        alertDialogManager.Dialog("Confirmation", "Do You Want to Submit this Ticket", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+                submitHotoTicket();
+                sessionManager.updateSessionUserTicketId(null);
+                sessionManager.updateSessionUserTicketName(null);
+                finish();
+            }
+
+            @Override
+            public void onNegativeClick() {
+
+            }
+        }).show();
+
+    }
+////added by arjun on 10-11-2018 End
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -281,7 +310,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
 
-                if(hotoTransactionData!=null){
+                if (hotoTransactionData != null) {
                     mUserHotoTransEditTextSiteAddress.setText(hotoTransactionData.getSiteAddress());
                     mUserHotoTransSpinnerSourceOfPowerVal.setText(hotoTransactionData.getSourceOfPower());
                 }
@@ -366,11 +395,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     }
 
-    private void submitHotoTicket(){
+    private void submitHotoTicket() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-                Log.e("123",jsonInString);
+                Log.e("123", jsonInString);
 
                 GsonRequest<UserLoginResponseData> submitHotoTicketRequest = new GsonRequest<>(Request.Method.POST, Constants.submitHototTicket, jsonInString, UserLoginResponseData.class,
                         new Response.Listener<UserLoginResponseData>() {
@@ -381,7 +410,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                                     showToast(response.getError().getErrorMessage());
                                 } else {
                                     if (response.getSuccess() == 1) {
-
+                                        showToast("Your Ticket Data Submitted Successfully...");//added by arjun on 10-11-2018
                                     }
                                 }
 
@@ -397,7 +426,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 submitHotoTicketRequest.setShouldCache(false);
                 Application.getInstance().addToRequestQueue(submitHotoTicketRequest, "submitHotoTicketRequest");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
