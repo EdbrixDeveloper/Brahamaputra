@@ -412,7 +412,9 @@ public class UserHotoTransactionActivity extends BaseActivity {
                                     showToast(response.getError().getErrorMessage());
                                 } else {
                                     if (response.getSuccess() == 1) {
-                                        showToast("Your Ticket Data Submitted Successfully...");//added by arjun on 10-11-2018
+                                        showToast("Ticket submitted successfully.");
+                                        setResult(RESULT_OK);
+                                        finish();
                                     }
                                 }
 
@@ -429,7 +431,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 Application.getInstance().addToRequestQueue(submitHotoTicketRequest, "submitHotoTicketRequest");
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

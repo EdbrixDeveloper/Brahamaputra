@@ -353,14 +353,14 @@ public class Land_Details extends BaseActivity {
 
                         // New added for image #ImageSet
                         imageFileName = landDetailsData.getLandLayoutFileName();
-                        File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//                             imageFileUri = Uri.fromFile(file);
-                        imageFileUri = FileProvider.getUriForFile(Land_Details.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-                        // New added for image #ImageSet
                         mLandDetailsButtonLayoutOfLandView.setVisibility(View.GONE);
-                        if (imageFileUri != null) {
-                            mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
+                        if(imageFileName!=null && imageFileName.length()>0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                            imageFileUri = FileProvider.getUriForFile(Land_Details.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUri != null) {
+                                mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
+                            }
                         }
 
 //                mLandDetailsSpinnerCopyAgreementWithOwner.setSelection(1);

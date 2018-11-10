@@ -122,7 +122,9 @@
                     android:textAlignment="textEnd"
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
-                    android:layout_marginTop="@dimen/app_normal_margin"/>
+                    android:padding="@dimen/app_normal_padding"
+                    android:layout_marginBottom="@dimen/app_min_margin"
+                    android:layout_marginTop="@dimen/app_min_margin"/>
 
             </LinearLayout>
 

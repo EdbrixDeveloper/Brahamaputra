@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -56,6 +57,11 @@ public class UsersHotoListActivity extends BaseActivity {
 
     private HotoTicketList hotoTicketList;
 
+    private TextView txtNoTicketFound;
+
+    /////////////////////////
+    public static final int RESULT_HOTO_SUBMIT = 257;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,8 @@ public class UsersHotoListActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         userHotoList_listView_hotoList = (ExpandableListView) findViewById(R.id.userHotoList_listView_hotoList);
+        txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
+        txtNoTicketFound.setVisibility(View.GONE);
 
         alertDialogManager = new AlertDialogManager(UsersHotoListActivity.this);
         sessionManager = new SessionManager(UsersHotoListActivity.this);
@@ -131,7 +139,9 @@ public class UsersHotoListActivity extends BaseActivity {
         });
     }
 
-
+    /**
+     * Load ticket list. Can use for refresh list as same.
+     */
     private void prepareListData() {
         try {
             showBusyProgress();
@@ -150,8 +160,18 @@ public class UsersHotoListActivity extends BaseActivity {
                             //showToast(""+response.getSuccess().toString());
                             if (response.getSuccess() == 1) {
                                 hotoTicketList = response;
-                                userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this, hotoTicketList);
-                                userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
+                                if(hotoTicketList.getHotoTicketsDates()!=null && hotoTicketList.getHotoTicketsDates().size()>0) {
+                                    txtNoTicketFound.setVisibility(View.GONE);
+                                    userHotoList_listView_hotoList.setVisibility(View.VISIBLE);
+                                    userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this, hotoTicketList);
+                                    userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
+                                    for(int i=0; i<hotoTicketList.getHotoTicketsDates().size();i++){
+                                        userHotoList_listView_hotoList.expandGroup(i);
+                                    }
+                                }else{
+                                    userHotoList_listView_hotoList.setVisibility(View.GONE);
+                                    txtNoTicketFound.setVisibility(View.VISIBLE);
+                                }
 
 
                                 /*HotoTicketsDates = new ArrayList<>();
@@ -185,11 +205,11 @@ public class UsersHotoListActivity extends BaseActivity {
                                     HotoTicketMap.put(HotoTicketsDates.get(i), header);
                                 }
                                 userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this,HotoTicketsDates,HotoTicketMap);
-                                userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);*/
+                                userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
 
-                                for (int i = 0; i < response.getHotoTicketsDates().size(); i++) {
+                                for(int i=0; i<response.getHotoTicketsDates().size();i++){
                                     userHotoList_listView_hotoList.expandGroup(i);
-                                }
+                                }*/
                             }
 
                         }
@@ -276,6 +296,14 @@ public class UsersHotoListActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_HOTO_SUBMIT && resultCode == RESULT_OK){
+            prepareListData();
+        }
+    }
+
     public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId, String hotoTicketDate, String siteId, String siteName, String siteAddress,
                                     String status, String siteType, String stateName, String customerName, String circleName, String ssaName) {
         LocationManager lm = (LocationManager) UsersHotoListActivity.this.getSystemService(Context.LOCATION_SERVICE);
@@ -318,16 +346,16 @@ public class UsersHotoListActivity extends BaseActivity {
 
                 sessionManager.updateSessionUserTicketId(hotoTicketId);
                 sessionManager.updateSessionUserTicketName(hotoTickitNo);
-                startActivity(intent);
-            } else {
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                startActivityForResult(intent,RESULT_HOTO_SUBMIT);
+            }else{
+                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
                         intent.putExtra("ticketNO", hotoTickitNo);
                         sessionManager.updateSessionUserTicketId(hotoTicketId);
-                        startActivity(intent);
+                        startActivityForResult(intent,RESULT_HOTO_SUBMIT);
                     }
                 }).show();
             }
