@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
@@ -15,7 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePhotoCaptureData;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -42,6 +45,13 @@ public class PhotoCaptureActivity extends BaseActivity {
     private ImageView mPhotoCaptureButtonEbMeter;
     private ImageView mPhotoCaptureButtonDgHmr;
     private ImageView mPhotoCaptureButtonDgOverview;
+    private ImageView mPhotoCaptureButtonSiteView;
+    private ImageView mPhotoCaptureButtonShelterView;
+    private ImageView mPhotoCaptureButtonEbMeterBoxView;
+    private ImageView mPhotoCaptureButtonSmpsView;
+    private ImageView mPhotoCaptureButtonEbMeterView;
+    private ImageView mPhotoCaptureButtonDgHmrView;
+    private ImageView mPhotoCaptureButtonDgOverviewView;
     private OfflineStorageWrapper offlineStorageWrapper;
 
     private SessionManager sessionManager;
@@ -80,6 +90,14 @@ public class PhotoCaptureActivity extends BaseActivity {
     private String imageFileNameOfDgHmr;
     private String imageFileNameOfDgOverview;
 
+    private Uri imageFileNameOfSiteUri = null;
+    private Uri imageFileNameOfShelterUri = null;
+    private Uri imageFileNameOfEbMeterBoxUri = null;
+    private Uri imageFileNameOfSmpsUri = null;
+    private Uri imageFileNameOfEbMeterUri = null;
+    private Uri imageFileNameOfDgHmrUri = null;
+    private Uri imageFileNameOfDgOverviewUri = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,13 +116,15 @@ public class PhotoCaptureActivity extends BaseActivity {
         assignViews();
         checkCameraPermission();
         setListner();
+        setInputDetails();
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void setListner() {
         mPhotoCaptureButtonSite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkCameraPermission()){
+                if (checkCameraPermission()) {
                     takePhotoOfSite();
                 }
             }
@@ -113,7 +133,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonShelter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkCameraPermission()) {
+                if (checkCameraPermission()) {
                     takePhotoOfShelter();
                 }
             }
@@ -122,7 +142,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonEbMeterBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkCameraPermission()) {
+                if (checkCameraPermission()) {
                     takePhotoEbMeterBox();
                 }
             }
@@ -130,7 +150,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonSmps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkCameraPermission()) {
+                if (checkCameraPermission()) {
                     takePhotoSmps();
                 }
             }
@@ -138,7 +158,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonEbMeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkCameraPermission()){
+                if (checkCameraPermission()) {
                     takePhotoEbMeter();
                 }
             }
@@ -146,7 +166,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonDgHmr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkCameraPermission()){
+                if (checkCameraPermission()) {
                     takePhotoDgHmr();
                 }
             }
@@ -154,8 +174,82 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonDgOverview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkCameraPermission()){
+                if (checkCameraPermission()) {
                     takePhotoDgOverview();
+                }
+            }
+        });
+
+
+        //image preview code
+        mPhotoCaptureButtonSiteView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileNameOfSiteUri != null) {
+                    GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfSiteUri);
+                } else {
+                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        mPhotoCaptureButtonShelterView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileNameOfShelterUri != null) {
+                    GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfShelterUri);
+                } else {
+                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPhotoCaptureButtonEbMeterBoxView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileNameOfEbMeterBoxUri != null) {
+                    GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfEbMeterBoxUri);
+                } else {
+                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPhotoCaptureButtonSmpsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileNameOfSmpsUri != null) {
+                    GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfSmpsUri);
+                } else {
+                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPhotoCaptureButtonEbMeterView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileNameOfEbMeterUri != null) {
+                    GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfEbMeterUri);
+                } else {
+                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPhotoCaptureButtonDgHmrView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileNameOfDgHmrUri != null) {
+                    GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfDgHmrUri);
+                } else {
+                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPhotoCaptureButtonDgOverviewView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileNameOfDgOverviewUri != null) {
+                    GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfDgOverviewUri);
+                } else {
+                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -167,11 +261,11 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfDgOverview = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_dgOverview.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfDgOverview);
-            imageFileUri = Uri.fromFile(file);
+            imageFileNameOfDgOverviewUri = Uri.fromFile(file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfDgOverviewUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_DG_OVERVIEW);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -182,11 +276,11 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfDgHmr = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_dgHmr.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfDgHmr);
-            imageFileUri = Uri.fromFile(file);
+            imageFileNameOfDgHmrUri = Uri.fromFile(file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfDgHmrUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_DG_HMR);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -197,11 +291,11 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfEbMeter = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_ebMeter.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfEbMeter);
-            imageFileUri = Uri.fromFile(file);
+            imageFileNameOfEbMeterUri = Uri.fromFile(file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfEbMeterUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_EB_METER);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -212,11 +306,11 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfSmps = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_smps.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfSmps);
-            imageFileUri = Uri.fromFile(file);
+            imageFileNameOfSmpsUri = Uri.fromFile(file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfSmpsUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_SMPS);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -228,11 +322,11 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfEbMeterBox = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_ebMeterBox.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfEbMeterBox);
-            imageFileUri = Uri.fromFile(file);
+            imageFileNameOfEbMeterBoxUri = Uri.fromFile(file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfEbMeterBoxUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_EB_METER_BOX);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -243,11 +337,11 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfShelter = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_shelter.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfShelter);
-            imageFileUri = Uri.fromFile(file);
+            imageFileNameOfShelterUri = Uri.fromFile(file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfShelterUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_SHELTER);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -259,11 +353,11 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfSite = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_site.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfSite);
-            imageFileUri = Uri.fromFile(file);
+            imageFileNameOfSiteUri = Uri.fromFile(file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfSiteUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_SITE);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -271,123 +365,158 @@ public class PhotoCaptureActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        switch (requestCode){
+        switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CAMERA_SITE:
-                if(resultCode == RESULT_OK){
-                    if (imageFileUri != null) {
+                if (resultCode == RESULT_OK) {
+                    if (imageFileNameOfSiteUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringSite = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                        }catch (Exception e){
+                            mPhotoCaptureButtonSiteView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } else {
+                    imageFileNameOfSite = "";
+                    imageFileNameOfSiteUri = null;
+                    mPhotoCaptureButtonSiteView.setVisibility(View.GONE);
                 }
-            break;
+                break;
 
             case MY_PERMISSIONS_REQUEST_CAMERA_SHELTER:
-                if(resultCode == RESULT_OK){
-                    if (imageFileUri != null) {
+                if (resultCode == RESULT_OK) {
+                    if (imageFileNameOfShelterUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringShelter = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                        }catch (Exception e){
+                            mPhotoCaptureButtonShelterView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } else {
+                    imageFileNameOfShelter = "";
+                    imageFileNameOfShelterUri = null;
+                    mPhotoCaptureButtonShelterView.setVisibility(View.GONE);
                 }
-            break;
+                break;
 
             case MY_PERMISSIONS_REQUEST_CAMERA_EB_METER_BOX:
-                if(resultCode == RESULT_OK){
-                    if (imageFileUri != null) {
+                if (resultCode == RESULT_OK) {
+                    if (imageFileNameOfEbMeterBoxUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringEbMeterBox ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                        }catch (Exception e){
+                            base64StringEbMeterBox = "qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPhotoCaptureButtonEbMeterBoxView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } else {
+                    imageFileNameOfEbMeterBox = "";
+                    imageFileNameOfEbMeterBoxUri = null;
+                    mPhotoCaptureButtonEbMeterBoxView.setVisibility(View.GONE);
                 }
-            break;
+                break;
 
             case MY_PERMISSIONS_REQUEST_CAMERA_SMPS:
-                if(resultCode == RESULT_OK){
-                    if (imageFileUri != null) {
+                if (resultCode == RESULT_OK) {
+                    if (imageFileNameOfSmpsUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringSmps = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                        }catch (Exception e){
+                            mPhotoCaptureButtonSmpsView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } else {
+                    imageFileNameOfSmps = "";
+                    imageFileNameOfSmpsUri = null;
+                    mPhotoCaptureButtonSmpsView.setVisibility(View.GONE);
                 }
-            break;
+                break;
 
             case MY_PERMISSIONS_REQUEST_CAMERA_EB_METER:
-                if(resultCode == RESULT_OK){
-                    if (imageFileUri != null) {
+                if (resultCode == RESULT_OK) {
+                    if (imageFileNameOfEbMeterUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringEbMeter = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                        }catch (Exception e){
+                            mPhotoCaptureButtonEbMeterView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } else {
+                    imageFileNameOfEbMeter = "";
+                    imageFileNameOfEbMeterUri = null;
+                    mPhotoCaptureButtonEbMeterView.setVisibility(View.GONE);
                 }
-            break;
+                break;
 
             case MY_PERMISSIONS_REQUEST_CAMERA_DG_HMR:
-                if(resultCode == RESULT_OK){
-                    if (imageFileUri != null) {
+                if (resultCode == RESULT_OK) {
+                    if (imageFileNameOfDgHmrUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringDgHmr ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                        }catch (Exception e){
+                            base64StringDgHmr = "qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPhotoCaptureButtonDgHmrView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } else {
+                    imageFileNameOfDgHmr = "";
+                    imageFileNameOfDgHmrUri = null;
+                    mPhotoCaptureButtonDgHmrView.setVisibility(View.GONE);
                 }
-            break;
+                break;
 
             case MY_PERMISSIONS_REQUEST_CAMERA_DG_OVERVIEW:
-                if(resultCode == RESULT_OK){
-                    if (imageFileUri != null) {
+                if (resultCode == RESULT_OK) {
+                    if (imageFileNameOfDgOverviewUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringDgOverview = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                        }catch (Exception e){
+                            mPhotoCaptureButtonDgOverviewView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } else {
+                    imageFileNameOfDgOverview = "";
+                    imageFileNameOfDgOverviewUri = null;
+                    mPhotoCaptureButtonDgOverviewView.setVisibility(View.GONE);
                 }
-            break;
+                break;
         }
 
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean checkCameraPermission() {
 
         /*if (ContextCompat.checkSelfPermission(PhotoCaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
@@ -417,10 +546,9 @@ public class PhotoCaptureActivity extends BaseActivity {
             }
         }*/
 
-        if (ContextCompat.checkSelfPermission(PhotoCaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(PhotoCaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(PhotoCaptureActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
-        }else {
+        } else {
             return true;
         }
 
@@ -458,19 +586,126 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonEbMeter = (ImageView) findViewById(R.id.photoCapture_button_ebMeter);
         mPhotoCaptureButtonDgHmr = (ImageView) findViewById(R.id.photoCapture_button_dgHmr);
         mPhotoCaptureButtonDgOverview = (ImageView) findViewById(R.id.photoCapture_button_dgOerview);
+
+        mPhotoCaptureButtonSiteView = (ImageView) findViewById(R.id.photoCapture_button_siteView);
+        mPhotoCaptureButtonShelterView = (ImageView) findViewById(R.id.photoCapture_button_shelterView);
+        mPhotoCaptureButtonEbMeterBoxView = (ImageView) findViewById(R.id.photoCapture_button_ebMeterBoxView);
+        mPhotoCaptureButtonSmpsView = (ImageView) findViewById(R.id.photoCapture_button_smpsView);
+        mPhotoCaptureButtonEbMeterView = (ImageView) findViewById(R.id.photoCapture_button_ebMeterView);
+        mPhotoCaptureButtonDgHmrView = (ImageView) findViewById(R.id.photoCapture_button_dgHmrView);
+        mPhotoCaptureButtonDgOverviewView = (ImageView) findViewById(R.id.photoCapture_button_dgOerviewView);
+
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+
+                if (hotoTransactionData != null) {
+
+                    sitePhotoCaptureData = hotoTransactionData.getSitePhotoCaptureData();
+
+                    if (sitePhotoCaptureData != null) {
+
+                        // set image preview if exist
+                        imageFileNameOfSite = sitePhotoCaptureData.getImageFileNameOfSite();
+                        mPhotoCaptureButtonSiteView.setVisibility(View.GONE);
+                        if (imageFileNameOfSite != null && imageFileNameOfSite.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfSite);
+                            imageFileNameOfSiteUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileNameOfSiteUri != null) {
+                                mPhotoCaptureButtonSiteView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+
+                        imageFileNameOfShelter = sitePhotoCaptureData.getImageFileNameOfShelter();
+                        mPhotoCaptureButtonShelterView.setVisibility(View.GONE);
+                        if (imageFileNameOfShelter != null && imageFileNameOfShelter.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfShelter);
+                            imageFileNameOfShelterUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileNameOfShelterUri != null) {
+                                mPhotoCaptureButtonShelterView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+
+                        imageFileNameOfEbMeterBox = sitePhotoCaptureData.getImageFileNameOfEbMeterBox();
+                        mPhotoCaptureButtonEbMeterBoxView.setVisibility(View.GONE);
+                        if (imageFileNameOfEbMeterBox != null && imageFileNameOfEbMeterBox.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfEbMeterBox);
+                            imageFileNameOfEbMeterBoxUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileNameOfEbMeterBoxUri != null) {
+                                mPhotoCaptureButtonEbMeterBoxView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileNameOfSmps = sitePhotoCaptureData.getImageFileNameOfSmps();
+                        mPhotoCaptureButtonSmpsView.setVisibility(View.GONE);
+                        if (imageFileNameOfSmps != null && imageFileNameOfSmps.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfSmps);
+                            imageFileNameOfSmpsUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileNameOfSmpsUri != null) {
+                                mPhotoCaptureButtonSmpsView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileNameOfEbMeter = sitePhotoCaptureData.getImageFileNameOfEbMeter();
+                        mPhotoCaptureButtonEbMeterView.setVisibility(View.GONE);
+                        if (imageFileNameOfEbMeter != null && imageFileNameOfEbMeter.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfEbMeter);
+                            imageFileNameOfEbMeterUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileNameOfEbMeterUri != null) {
+                                mPhotoCaptureButtonEbMeterView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileNameOfDgHmr = sitePhotoCaptureData.getImageFileNameOfDgHmr();
+                        mPhotoCaptureButtonDgHmrView.setVisibility(View.GONE);
+                        if (imageFileNameOfDgHmr != null && imageFileNameOfDgHmr.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfDgHmr);
+                            imageFileNameOfDgHmrUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileNameOfDgHmrUri != null) {
+                                mPhotoCaptureButtonDgHmrView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileNameOfDgOverview = sitePhotoCaptureData.getImageFileNameOfDgOverview();
+                        mPhotoCaptureButtonDgOverviewView.setVisibility(View.GONE);
+                        if (imageFileNameOfDgOverview != null && imageFileNameOfDgOverview.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfDgOverview);
+                            imageFileNameOfDgOverviewUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileNameOfDgOverviewUri != null) {
+                                mPhotoCaptureButtonDgOverviewView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }
+                }
+            } else {
+                Toast.makeText(PhotoCaptureActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void submitDetails() {
         try {
             hotoTransactionData.setTicketNo(ticketName);
 
-            sitePhotoCaptureData = new SitePhotoCaptureData(imageFileNameOfSite , base64StringSite,
-                    imageFileNameOfShelter , base64StringShelter,
-                    imageFileNameOfEbMeterBox , base64StringEbMeterBox,
-                    imageFileNameOfSmps , base64StringSmps,
-                    imageFileNameOfEbMeter , base64StringEbMeter,
-                    imageFileNameOfDgHmr , base64StringDgHmr,
-                    imageFileNameOfDgOverview , base64StringDgOverview);
+            sitePhotoCaptureData = new SitePhotoCaptureData(imageFileNameOfSite, base64StringSite,
+                    imageFileNameOfShelter, base64StringShelter,
+                    imageFileNameOfEbMeterBox, base64StringEbMeterBox,
+                    imageFileNameOfSmps, base64StringSmps,
+                    imageFileNameOfEbMeter, base64StringEbMeter,
+                    imageFileNameOfDgHmr, base64StringDgHmr,
+                    imageFileNameOfDgOverview, base64StringDgOverview);
 
             hotoTransactionData.setSitePhotoCaptureData(sitePhotoCaptureData);
             Gson gson2 = new GsonBuilder().create();
