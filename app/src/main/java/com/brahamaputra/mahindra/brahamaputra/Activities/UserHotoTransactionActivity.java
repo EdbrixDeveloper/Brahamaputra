@@ -109,6 +109,9 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private AlertDialogManager alertDialogManager;
 
+    /////////////////////////
+    public static final int RESULT_HOTO_READING = 258;
+
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
@@ -155,7 +158,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 checkInLong = String.valueOf(gpsTracker.getLongitude());
 
                 submitDetails();
-                startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
+                startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class),RESULT_HOTO_READING);
             }
         });
 
@@ -447,6 +450,14 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private void removeOfflineCache(){
         if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
             offlineStorageWrapper.removedOffLineFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_HOTO_READING && resultCode == RESULT_OK){
+            getOfflineData();
         }
     }
 

@@ -311,7 +311,7 @@ public class Land_Details extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
 
             case R.id.menuSubmit:
@@ -323,6 +323,23 @@ public class Land_Details extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        alertDialogManager.Dialog("Save", "Continue with save readings..?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+                submitDetails();
+                finish();
+            }
+
+            @Override
+            public void onNegativeClick() {
+                finish();
+            }
+        }).show();
+
     }
 
     private void setInputDetails() {
