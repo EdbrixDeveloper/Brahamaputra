@@ -93,11 +93,12 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     String str_sourceOfPower;
 
+
     private OfflineStorageWrapper offlineStorageWrapper;
     private HotoTransactionData hotoTransactionData;
 
     private String userId = "";
-    private String ticketId = "0";//TicketId
+    private String ticketId = "";//TicketId
     private String ticketName = "";//TicketId
 
     private String checkInLat = "0.0";
@@ -111,6 +112,9 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private SessionManager sessionManager;
 
     private AlertDialogManager alertDialogManager;
+
+    /////////////////////////
+    public static final int RESULT_HOTO_READING = 258;
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -167,8 +171,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
                     checkInLat = String.valueOf(gpsTracker.getLatitude());
                     checkInLong = String.valueOf(gpsTracker.getLongitude());
 
-                    submitDetails();
-                    startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
+                submitDetails();
+                startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class),RESULT_HOTO_READING);
 
                 } else{
                     showToast("Sorry, could not detecting proper location.");
@@ -366,6 +370,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             @Override
             public void onPositiveClick() {
                 submitHotoTicket();
+
             }
 
             @Override
@@ -530,6 +535,14 @@ public class UserHotoTransactionActivity extends BaseActivity {
     private void removeOfflineCache(){
         if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
             offlineStorageWrapper.removedOffLineFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_HOTO_READING && resultCode == RESULT_OK){
+            getOfflineData();
         }
     }
 
