@@ -138,9 +138,9 @@ public class GPSTracker implements LocationListener {
         }
 
         // lat1 and lng1 are the values of a previously stored location
-        if (distance(longitude, latitude, lat2, lng2) < 0.1) { // if distance < 0.1 miles we take locations as equal
+        /*if (distance(longitude, latitude, lat2, lng2) < 0.1) { // if distance < 0.1 miles we take locations as equal
             Toast.makeText(mContext,"Could not on proper location",Toast.LENGTH_LONG).show();
-        }
+        }*/
 
     }
 

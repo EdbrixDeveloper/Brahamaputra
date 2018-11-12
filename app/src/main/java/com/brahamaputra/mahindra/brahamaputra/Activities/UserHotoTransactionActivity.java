@@ -52,6 +52,7 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.Volley.JsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -66,6 +67,9 @@ import java.util.Arrays;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UserHotoTransactionActivity extends BaseActivity {
 
@@ -89,12 +93,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     String str_sourceOfPower;
 
-
     private OfflineStorageWrapper offlineStorageWrapper;
     private HotoTransactionData hotoTransactionData;
 
     private String userId = "";
-    private String ticketId = "";//TicketId
+    private String ticketId = "0";//TicketId
     private String ticketName = "";//TicketId
 
     private String checkInLat = "0.0";
@@ -132,7 +135,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         assignViews();
         initCombo();
         disableInput();
-        checkNetworkConnection();
+
 
         alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
 
@@ -147,29 +150,33 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
         getOfflineData();
 
-        mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                checkInLat = String.valueOf(gpsTracker.getLatitude());
-                checkInLong = String.valueOf(gpsTracker.getLongitude());
-
-                submitDetails();
-                startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
-            }
-        });
-
         gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
         if (gpsTracker.canGetLocation()) {
             //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
             Log.e("Current Location : ", "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-        } else {
-            checkInLong = "0.0";
-            checkInLat = "0.0";
-
-            checkOutLat = "0.0";
-            checkOutLong = "0.0";
+        }else{
+            showToast("Sorry could not detect location");
+            finish();
         }
+
+        mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(gpsTracker.getLongitude()<0 && gpsTracker.getLongitude()<0){
+                    checkInLat = String.valueOf(gpsTracker.getLatitude());
+                    checkInLong = String.valueOf(gpsTracker.getLongitude());
+
+                    submitDetails();
+                    startActivity(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class));
+
+                } else{
+                    showToast("Sorry, could not detecting proper location.");
+                }
+
+            }
+        });
+        checkNetworkConnection();
     }
 
     private void initCombo() {
@@ -214,6 +221,73 @@ public class UserHotoTransactionActivity extends BaseActivity {
             mUserHotoTransEditTextSiteID.setText(intent.getStringExtra("siteId"));
             mUserHotoTransEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
             mUserHotoTransEditTextTypeOfSites.setText(intent.getStringExtra("siteType"));
+
+            if(gpsTracker.getLongitude()<0 && gpsTracker.getLongitude()<0){
+                checkInLat = String.valueOf(gpsTracker.getLatitude());
+                checkInLong = String.valueOf(gpsTracker.getLongitude());
+
+                submitCheckIn(checkInLong,checkInLat,checkOutBatteryData);
+            }else{
+                showToast("Sorry, could not detecting proper location.");
+            }
+
+        }
+    }
+
+    private void submitCheckIn(String longitude,String lattitude,String batteryLevel) {
+        showBusyProgress();
+
+        try {
+            JSONObject jo = new JSONObject();
+            try {
+                jo.put("UserId", sessionManager.getSessionUserId());
+                jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+                jo.put("HotoTicketId", ticketId);
+                jo.put("Longitude", longitude);
+                jo.put("Lattitude", lattitude);
+                jo.put("BatteryLevel", batteryLevel);
+
+            } catch (JSONException e) {
+                Log.e(LoginActivity.class.getName(),e.getMessage().toString());
+                return;
+            }
+
+            JsonRequest hototticketstatusclockin = new JsonRequest(Request.Method.POST, Constants.hototticketstatusclockin, jo,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(@NonNull JSONObject response) {
+                            hideBusyProgress();
+                            try
+                            {
+                                if (response != null) {
+                                    if(response.has("Success")){
+                                        int success = response.getInt("Success");
+                                        if(success==1){
+                                            showToast("Checked In");
+                                        }else {
+                                            showToast("Problem while check-in");
+                                        }
+                                    }
+                                }
+                            }catch (JSONException e){
+                                showToast("Exception :"+e.getMessage());
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    hideBusyProgress();
+                    showToast(SettingsMy.getErrorMessage(error));
+                }
+            });
+            hototticketstatusclockin.setRetryPolicy(Application.getDefaultRetryPolice());
+            hototticketstatusclockin.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(hototticketstatusclockin, "hototticketstatusclockin");
+
+        } catch (Exception e) {
+            hideBusyProgress();
+            e.printStackTrace();
         }
     }
 
@@ -266,8 +340,18 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 //sessionManager.updateSessionUserTicketId(null);
                 //sessionManager.updateSessionUserTicketName(null);
                 //finish();
-                submitDetails();
-                showSettingsAlert();
+
+                if(gpsTracker.getLongitude()<0 && gpsTracker.getLongitude()<0){
+                    checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                    checkOutLong = String.valueOf(gpsTracker.getLongitude());
+
+                    submitDetails();
+                    showSettingsAlert();
+                } else{
+                  showToast("Sorry, could not detecting proper location.");
+                }
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -282,7 +366,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
             @Override
             public void onPositiveClick() {
                 submitHotoTicket();
-
             }
 
             @Override

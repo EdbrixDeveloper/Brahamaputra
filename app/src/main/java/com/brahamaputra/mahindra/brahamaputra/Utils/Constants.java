@@ -54,5 +54,7 @@ public class Constants {
     public final static String userLogin = BASE_URL.concat("auth/login");  // authenticatestudent
     public final static String hototTicketList = BASE_URL.concat("hototickets/gethototticketlist");  // gethototticketlist
     public final static String submitHototTicket = BASE_URL.concat("hototickets/submithotottickettransactions");  // submitHototticket http://brahmaputra-dev-api.us-west-2.elasticbeanstalk.com/hototickets/submithotottickettransactions
+    public final static String hototticketstatusclockin = BASE_URL.concat("hototickets/hototticketstatusclockin");  // hototticketstatusclockin
+
 
 }
