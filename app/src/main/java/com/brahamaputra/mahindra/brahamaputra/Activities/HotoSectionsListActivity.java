@@ -37,7 +37,7 @@ public class HotoSectionsListActivity extends AppCompatActivity {
         dataModels = new ArrayList<>();
         for (int i = 0; i < values.length; i++) {
             if (i / 2 == 0) {
-                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], true));
+                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], false));
             } else {
                 dataModels.add(new HotoSection("" + (i + 1), "" + values[i], false));
             }
@@ -145,4 +145,6 @@ public class HotoSectionsListActivity extends AppCompatActivity {
         setResult(RESULT_OK);
         finish();
     }
+
+
 }

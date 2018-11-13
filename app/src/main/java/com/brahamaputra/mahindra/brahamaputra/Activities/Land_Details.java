@@ -109,7 +109,7 @@ public class Land_Details extends BaseActivity {
     private SessionManager sessionManager;
 
     private Uri imageFileUri = null;
-    private String imageFileName ="";
+    private String imageFileName = "";
     private EnglishNumberToWords englishNumberToWords;
 
     @Override
@@ -212,8 +212,8 @@ public class Land_Details extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 mLandDetailsTextViewRentLeaseInWords_val.setText("");
-                String rentLease= mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
-                if(rentLease.toString().length()>0) {
+                String rentLease = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
+                if (rentLease.toString().length() > 0) {
                     String str_rentLease = EnglishNumberToWords.convert(Long.valueOf(rentLease));
                     mLandDetailsTextViewRentLeaseInWords_val.setText(str_rentLease);
                 }
@@ -327,18 +327,9 @@ public class Land_Details extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        alertDialogManager.Dialog("Save", "Continue with save readings..?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-            @Override
-            public void onPositiveClick() {
-                submitDetails();
-                finish();
-            }
+        submitDetails();
+        finish();
 
-            @Override
-            public void onNegativeClick() {
-                finish();
-            }
-        }).show();
 
     }
 
@@ -363,7 +354,7 @@ public class Land_Details extends BaseActivity {
                         mLandDetailsTextViewCopyAgreementWithOwnerVal.setText(landDetailsData.getLandAgreementCopy());
                         mLandDetailsEditTextAreaOfLand.setText(landDetailsData.getLandArea());
                         mLandDetailsEditTextRentLeaseInNumber.setText(landDetailsData.getRentLeaseValue());
-                        mLandDetailsTextViewRentLeaseInWords_val.setText(landDetailsData.getRentLeaseValueInWords());
+                        mLandDetailsTextViewRentLeaseInWords_val.setText(landDetailsData.getRentLeaseValueInWords().toString().toUpperCase());
                         mLandDetailsEditTextNameOfOwner.setText(landDetailsData.getLandOwnerName());
                         mLandDetailsEditTextMobileNoOfOwner.setText(landDetailsData.getLandOwnerMob());
                         base64StringLayoutOfLand = landDetailsData.getLandLayout();
@@ -371,7 +362,7 @@ public class Land_Details extends BaseActivity {
                         // New added for image #ImageSet
                         imageFileName = landDetailsData.getLandLayoutFileName();
                         mLandDetailsButtonLayoutOfLandView.setVisibility(View.GONE);
-                        if(imageFileName!=null && imageFileName.length()>0) {
+                        if (imageFileName != null && imageFileName.length() > 0) {
                             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
 //                             imageFileUri = Uri.fromFile(file);
                             imageFileUri = FileProvider.getUriForFile(Land_Details.this, BuildConfig.APPLICATION_ID + ".provider", file);
@@ -482,7 +473,7 @@ public class Land_Details extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringLayoutOfLand = "qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    base64StringLayoutOfLand = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                     mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
                 } catch (Exception e) {
                     e.printStackTrace();

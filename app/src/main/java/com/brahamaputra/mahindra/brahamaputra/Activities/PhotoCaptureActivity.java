@@ -261,7 +261,7 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfDgOverview = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_dgOverview.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfDgOverview);
-            imageFileNameOfDgOverviewUri = Uri.fromFile(file);
+            imageFileNameOfDgOverviewUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfDgOverviewUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_DG_OVERVIEW);
@@ -276,7 +276,7 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfDgHmr = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_dgHmr.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfDgHmr);
-            imageFileNameOfDgHmrUri = Uri.fromFile(file);
+            imageFileNameOfDgHmrUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfDgHmrUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_DG_HMR);
@@ -291,7 +291,7 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfEbMeter = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_ebMeter.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfEbMeter);
-            imageFileNameOfEbMeterUri = Uri.fromFile(file);
+            imageFileNameOfEbMeterUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfEbMeterUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_EB_METER);
@@ -306,7 +306,7 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfSmps = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_smps.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfSmps);
-            imageFileNameOfSmpsUri = Uri.fromFile(file);
+            imageFileNameOfSmpsUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfSmpsUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_SMPS);
@@ -322,7 +322,7 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfEbMeterBox = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_ebMeterBox.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfEbMeterBox);
-            imageFileNameOfEbMeterBoxUri = Uri.fromFile(file);
+            imageFileNameOfEbMeterBoxUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfEbMeterBoxUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_EB_METER_BOX);
@@ -337,7 +337,7 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfShelter = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_shelter.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfShelter);
-            imageFileNameOfShelterUri = Uri.fromFile(file);
+            imageFileNameOfShelterUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfShelterUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_SHELTER);
@@ -353,7 +353,7 @@ public class PhotoCaptureActivity extends BaseActivity {
             imageFileNameOfSite = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_site.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileNameOfSite);
-            imageFileNameOfSiteUri = Uri.fromFile(file);
+            imageFileNameOfSiteUri = FileProvider.getUriForFile(PhotoCaptureActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameOfSiteUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_SITE);

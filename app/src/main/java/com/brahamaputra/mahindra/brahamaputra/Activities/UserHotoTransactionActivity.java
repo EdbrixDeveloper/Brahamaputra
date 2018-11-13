@@ -155,9 +155,10 @@ public class UserHotoTransactionActivity extends BaseActivity {
         getOfflineData();
 
         gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
+        Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         if (gpsTracker.canGetLocation()) {
             //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
-            Log.e("Current Location : ", "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+            Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         }else{
             showToast("Sorry could not detect location");
             finish();
@@ -167,7 +168,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if(gpsTracker.getLongitude()<0 && gpsTracker.getLongitude()<0){
+                if(gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
                     checkInLat = String.valueOf(gpsTracker.getLatitude());
                     checkInLong = String.valueOf(gpsTracker.getLongitude());
 
@@ -226,7 +227,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             mUserHotoTransEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
             mUserHotoTransEditTextTypeOfSites.setText(intent.getStringExtra("siteType"));
 
-            if(gpsTracker.getLongitude()<0 && gpsTracker.getLongitude()<0){
+            if(gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
                 checkInLat = String.valueOf(gpsTracker.getLatitude());
                 checkInLong = String.valueOf(gpsTracker.getLongitude());
 
@@ -345,7 +346,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 //sessionManager.updateSessionUserTicketName(null);
                 //finish();
 
-                if(gpsTracker.getLongitude()<0 && gpsTracker.getLongitude()<0){
+                if(gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
                     checkOutLat = String.valueOf(gpsTracker.getLatitude());
                     checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
@@ -366,7 +367,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private void showSettingsAlert() {
 
-        alertDialogManager.Dialog("Confirmation", "Do You Want to Submit this Ticket", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+        alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
                 submitHotoTicket();
@@ -434,7 +435,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
             hotoTransactionData.setSourceOfPower(mUserHotoTransSpinnerSourceOfPowerVal.getText().toString());
 
-//            hotoTransactionData.setLandDetailsData(new LandDetailsData());
+//           hotoTransactionData.setLandDetailsData(new LandDetailsData());
 //
 //            hotoTransactionData.setTowerDetailsData(new TowerDetailsData());
 //
@@ -508,8 +509,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
                                         showToast("Ticket submitted successfully.");
                                         sessionManager.updateSessionUserTicketId(null);
                                         sessionManager.updateSessionUserTicketName(null);
-                                        removeOfflineCache();
                                         setResult(RESULT_OK);
+                                        removeOfflineCache();
                                         finish();
                                     }
                                 }

@@ -86,7 +86,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private void showSettingsAlert() {
 
-        alertDialogManager.Dialog("Logout", "Are you sure you want to Logout ?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+        alertDialogManager.Dialog("Confirmation", "Are you sure you want to logout?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
                 sessionManager.clearSessionCredentials();
