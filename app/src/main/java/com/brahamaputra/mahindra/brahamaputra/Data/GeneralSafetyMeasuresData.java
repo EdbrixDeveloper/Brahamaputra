@@ -83,6 +83,9 @@ public class GeneralSafetyMeasuresData {
     @SerializedName("fireSmokeSensor")
     private String fireSmokeSensor;
 
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public String getSecurityStatus() {
         return securityStatus;
     }
@@ -291,6 +294,13 @@ public class GeneralSafetyMeasuresData {
         this.fireSmokeSensor = fireSmokeSensor;
     }
 
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
 
     public GeneralSafetyMeasuresData() {
         this.prevailingSLA = "";
@@ -319,6 +329,7 @@ public class GeneralSafetyMeasuresData {
         this.doorOpenSensor = "";
         this.fuelSensor = "";
         this.fireSmokeSensor = "";
+        this.isSubmited=false;
     }
 
     public GeneralSafetyMeasuresData(String prevailingSLA, String siteBoundaryStatus, String siteHygieneVegitationStatus, String gateLock, String dgRoomLock, String fireExtuinguisher, String fireExtuinguisherType, String fireExtuinguisherExpiryDate, String fireBucket, String securityStatus, String noofSecurityPerson, String mobileNumberofSecurity, String caretakerStatusUpOnEmergency, String mobileNumberofCaretaker, String isSecurityCaretakeristheOwnerofSite, String salaryofSecurityCaretaker, String caretakerSecuritySalaryPaidBy, String caretakerSecurityStayinginSite, String numberofEarthPit, String lightningArresterStatus, String fencingCompoundWallCondition, String numberoffreeODPaltformAvailable, String alarmMultipluxerStatus, String doorOpenSensor, String fuelSensor, String fireSmokeSensor) {
@@ -348,6 +359,7 @@ public class GeneralSafetyMeasuresData {
         this.doorOpenSensor = doorOpenSensor;
         this.fuelSensor = fuelSensor;
         this.fireSmokeSensor = fireSmokeSensor;
+        this.isSubmited=true;
     }
 
 

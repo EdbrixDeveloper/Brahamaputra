@@ -115,7 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter Back up duration "
+                    android:hint="Enter Position at the Tower"
                     android:imeOptions="actionNext"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />

@@ -90,6 +90,10 @@ public class ElectricConnectionData {
 
     @SerializedName("bankIfscCode")
     private String bankIfscCode;
+
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public ElectricConnectionData() {
         this.electricConnectionType = "";
         this.connectionTariff = "";
@@ -121,6 +125,7 @@ public class ElectricConnectionData {
         this.typeModeOfPayment_Val="";
         this.bankIfscCode="";
         this.bankAccountNo="";
+        this.isSubmited=false;
     }
 
     @SerializedName("bankAccountNo")
@@ -158,6 +163,7 @@ public class ElectricConnectionData {
         this.typeModeOfPayment_Val=typeModeOfPayment_Val;
         this.bankIfscCode=bankIfscCode;
         this.bankAccountNo=bankAccountNo;
+        this.isSubmited=true;
     }
 
     public String getElectricConnectionType() {
@@ -401,4 +407,11 @@ public class ElectricConnectionData {
         this.bankAccountNo = bankAccountNo;
     }
 
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
 }

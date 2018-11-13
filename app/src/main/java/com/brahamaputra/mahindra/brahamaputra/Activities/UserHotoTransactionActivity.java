@@ -120,7 +120,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            checkOutBatteryData = (String.valueOf(level) + "%");
+            checkOutBatteryData = (String.valueOf(level) + "");
+            checkInBatteryData = (String.valueOf(level) + "");
         }
     };
 
@@ -159,8 +160,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
         if (gpsTracker.canGetLocation()) {
             //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
             Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-        }else{
-            showToast("Sorry could not detect location");
+        } else {
+            showToast("Could not detect location");
             finish();
         }
 
@@ -168,15 +169,15 @@ public class UserHotoTransactionActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if(gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
+                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                     checkInLat = String.valueOf(gpsTracker.getLatitude());
                     checkInLong = String.valueOf(gpsTracker.getLongitude());
 
-                submitDetails();
-                startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class),RESULT_HOTO_READING);
+                    submitDetails();
+                    startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class), RESULT_HOTO_READING);
 
-                } else{
-                    showToast("Sorry, could not detecting proper location.");
+                } else {
+                    showToast("Could not detecting location.");
                 }
 
             }
@@ -227,19 +228,19 @@ public class UserHotoTransactionActivity extends BaseActivity {
             mUserHotoTransEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
             mUserHotoTransEditTextTypeOfSites.setText(intent.getStringExtra("siteType"));
 
-            if(gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
+            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 checkInLat = String.valueOf(gpsTracker.getLatitude());
                 checkInLong = String.valueOf(gpsTracker.getLongitude());
 
-                submitCheckIn(checkInLong,checkInLat,checkOutBatteryData);
-            }else{
-                showToast("Sorry, could not detecting proper location.");
+                submitCheckIn(checkInLong, checkInLat, checkOutBatteryData);
+            } else {
+                showToast("Could not detecting location.");
             }
 
         }
     }
 
-    private void submitCheckIn(String longitude,String lattitude,String batteryLevel) {
+    private void submitCheckIn(String longitude, String lattitude, String batteryLevel) {
         showBusyProgress();
 
         try {
@@ -253,7 +254,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 jo.put("BatteryLevel", batteryLevel);
 
             } catch (JSONException e) {
-                Log.e(LoginActivity.class.getName(),e.getMessage().toString());
+                Log.e(LoginActivity.class.getName(), e.getMessage().toString());
                 return;
             }
 
@@ -262,20 +263,19 @@ public class UserHotoTransactionActivity extends BaseActivity {
                         @Override
                         public void onResponse(@NonNull JSONObject response) {
                             hideBusyProgress();
-                            try
-                            {
+                            try {
                                 if (response != null) {
-                                    if(response.has("Success")){
+                                    if (response.has("Success")) {
                                         int success = response.getInt("Success");
-                                        if(success==1){
+                                        if (success == 1) {
                                             showToast("Checked In");
-                                        }else {
+                                        } else {
                                             showToast("Problem while check-in");
                                         }
                                     }
                                 }
-                            }catch (JSONException e){
-                                showToast("Exception :"+e.getMessage());
+                            } catch (JSONException e) {
+                                showToast("Exception :" + e.getMessage());
                                 e.printStackTrace();
                             }
                         }
@@ -346,14 +346,14 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 //sessionManager.updateSessionUserTicketName(null);
                 //finish();
 
-                if(gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
+                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                     checkOutLat = String.valueOf(gpsTracker.getLatitude());
                     checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
                     submitDetails();
                     showSettingsAlert();
-                } else{
-                  showToast("Sorry, could not detecting proper location.");
+                } else {
+                    showToast("Could not detecting location.");
                 }
 
 
@@ -484,7 +484,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("123",e.getMessage().toString());
+            Log.e("123", e.getMessage().toString());
 
         }
 
@@ -533,7 +533,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         }
     }
 
-    private void removeOfflineCache(){
+    private void removeOfflineCache() {
         if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
             offlineStorageWrapper.removedOffLineFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
         }
@@ -542,7 +542,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_HOTO_READING && resultCode == RESULT_OK){
+        if (requestCode == RESULT_HOTO_READING && resultCode == RESULT_OK) {
             getOfflineData();
         }
     }

@@ -30,6 +30,10 @@ public class SolarPowerSystemData {
 
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
+
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public SolarPowerSystemData() {
         this.qRCodeScan = "";
         this.available = "";
@@ -40,6 +44,7 @@ public class SolarPowerSystemData {
         this.amcYesNo = "";
         this.dateOfvalidityOfAmc = "";
         this.qrCodeImageFileName = "";
+        this.isSubmited=false;
     }
 
     public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc,String qrCodeImageFileName) {
@@ -52,6 +57,7 @@ public class SolarPowerSystemData {
         this.amcYesNo = amcYesNo;
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
         this.qrCodeImageFileName = qrCodeImageFileName;
+        this.isSubmited=true;
     }
 
     public String getqRCodeScan() {
@@ -126,4 +132,11 @@ public class SolarPowerSystemData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
 }

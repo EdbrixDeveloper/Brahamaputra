@@ -13,16 +13,21 @@ public class DetailsOfUnusedMaterialsData {
     @SerializedName("assetStatus")
     String assetStatus;
 
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public DetailsOfUnusedMaterialsData() {
         this.numberofUnusedAssetinSite = "";
         this.assetMake = "";
         this.assetStatus = "";
+        this.isSubmited = false;
     }
 
     public DetailsOfUnusedMaterialsData(String numberofUnusedAssetinSite, String assetMake, String assetStatus) {
         this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
         this.assetMake = assetMake;
         this.assetStatus = assetStatus;
+        this.isSubmited = true;
     }
 
     public String getNumberofUnusedAssetinSite() {
@@ -48,4 +53,14 @@ public class DetailsOfUnusedMaterialsData {
     public void setAssetStatus(String assetStatus) {
         this.assetStatus = assetStatus;
     }
+
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
+
+
 }

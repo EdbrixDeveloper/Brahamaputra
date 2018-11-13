@@ -60,6 +60,10 @@ public class PowerPlantDetailsData {
 
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
+
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public PowerPlantDetailsData() {
         this.qRCodeScan = "";
         this.assetOwner = "";
@@ -80,6 +84,7 @@ public class PowerPlantDetailsData {
         this.workingCondition = "";
         this.natureOfProblem = "";
         this.qrCodeImageFileName ="";
+        this.isSubmited=false;
     }
 
 
@@ -103,6 +108,7 @@ public class PowerPlantDetailsData {
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
+        this.isSubmited=true;
     }
 
     public String getqRCodeScan() {
@@ -257,4 +263,11 @@ public class PowerPlantDetailsData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
 }

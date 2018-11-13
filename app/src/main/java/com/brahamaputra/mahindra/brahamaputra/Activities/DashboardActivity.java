@@ -69,6 +69,14 @@ public class DashboardActivity extends BaseActivity {
 
             }
         });
+
+        mDashboardRelativeLayoutMyEnergy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              /*  Intent intent = new Intent(DashboardActivity.this, UsersHotoListActivity.class);
+                startActivity(intent);*/
+            }
+        });
     }
 
     @Override
@@ -94,7 +102,7 @@ public class DashboardActivity extends BaseActivity {
 
             case R.id.menuSubmit:
                 finish();
-                startActivity(new Intent(DashboardActivity.this,UserProfileActivity.class));
+                startActivity(new Intent(DashboardActivity.this, UserProfileActivity.class));
                 return true;
 
             default:
@@ -102,33 +110,33 @@ public class DashboardActivity extends BaseActivity {
         }
     }
 
-    public void checkSystemLocation(){
-        LocationManager lm = (LocationManager)DashboardActivity.this.getSystemService(Context.LOCATION_SERVICE);
+    public void checkSystemLocation() {
+        LocationManager lm = (LocationManager) DashboardActivity.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;
 
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
 
-        if(!gps_enabled && !network_enabled) {
+        if (!gps_enabled && !network_enabled) {
             // notify user
-            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel",new AlertDialogManager.onSingleButtonClickListner() {
+            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                 @Override
                 public void onPositiveClick() {
-                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     DashboardActivity.this.startActivity(myIntent);
                 }
             }).show();
-        }
-        else{
-            if(Conditions.isNetworkConnected(DashboardActivity.this)){
+        } else {
+            if (Conditions.isNetworkConnected(DashboardActivity.this)) {
                 Intent intent = new Intent(DashboardActivity.this, UsersHotoListActivity.class);
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
                 startActivity(intent);
-            }else{
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
+            } else {
+                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
 

@@ -49,6 +49,9 @@ public class BatterySetData {
     @SerializedName("qrCodeImageFileName")
     private String qrCodeImageFileName;
 
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
      public BatterySetData() {
          this.noOfBatterySet = "";
          this.noOfBatteryBankWorking = "";
@@ -65,6 +68,7 @@ public class BatterySetData {
          this.backupCondition = "";
          this.natureOfProblem = "";
          this.qrCodeImageFileName = "";
+         this.isSubmited=false;
     }
 
     public BatterySetData(String noOfBatterySet, String noOfBatteryBankWorking, String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {
@@ -83,6 +87,7 @@ public class BatterySetData {
         this.backupCondition = backupCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName=qrCodeImageFileName;
+        this.isSubmited=true;
     }
 
     public String getNoOfBatterySet() {
@@ -203,5 +208,13 @@ public class BatterySetData {
 
     public void setQrCodeImageFileName(String qrCodeImageFileName) {
         this.qrCodeImageFileName = qrCodeImageFileName;
+    }
+
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
     }
 }

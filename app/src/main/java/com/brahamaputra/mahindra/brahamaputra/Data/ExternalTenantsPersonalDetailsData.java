@@ -35,6 +35,9 @@ public class ExternalTenantsPersonalDetailsData {
     @SerializedName("contactPersonLandline")
     private String contactPersonLandline;
 
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public String getTotalNumberofTanents() {
         return totalNumberofTanents;
     }
@@ -115,6 +118,14 @@ public class ExternalTenantsPersonalDetailsData {
         this.contactPersonLandline = contactPersonLandline;
     }
 
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
+
     public ExternalTenantsPersonalDetailsData() {
         this.totalNumberofTanents = "";
         this.nameofTenant = "";
@@ -126,6 +137,7 @@ public class ExternalTenantsPersonalDetailsData {
         this.addressofContactPerson = "";
         this.contactPersonMobile = "";
         this.contactPersonLandline = "";
+        this.isSubmited=false;
     }
 
     public ExternalTenantsPersonalDetailsData(String totalNumberofTanents, String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
@@ -139,6 +151,7 @@ public class ExternalTenantsPersonalDetailsData {
         this.addressofContactPerson = addressofContactPerson;
         this.contactPersonMobile = contactPersonMobile;
         this.contactPersonLandline = contactPersonLandline;
+        this.isSubmited=true;
     }
 
 

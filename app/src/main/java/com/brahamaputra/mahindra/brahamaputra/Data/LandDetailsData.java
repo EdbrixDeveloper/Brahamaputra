@@ -149,11 +149,11 @@ public class LandDetailsData  {
         this.landLayoutFileName = landLayoutFileName;
     }
 
-    public Boolean getStatus() {
+    public Boolean getSubmited() {
         return isSubmited;
     }
 
-    public void setStatus(Boolean isSubmited) {
-        this.isSubmited = isSubmited;
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
     }
 }

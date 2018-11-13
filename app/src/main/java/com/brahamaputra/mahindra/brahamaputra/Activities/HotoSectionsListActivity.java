@@ -12,7 +12,12 @@ import android.widget.ListView;
 
 import com.brahamaputra.mahindra.brahamaputra.Adapters.HotoSectionListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -23,6 +28,16 @@ public class HotoSectionsListActivity extends AppCompatActivity {
     String[] values;
     private static HotoSectionListAdapter adapter;
     public static final int RESULT_READING_COMPLETED = 650;
+
+    //vinayak code start
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private SessionManager sessionManager;
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+
+    private HotoTransactionData hotoTransactionData;
+    //vinayak code end
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +129,7 @@ public class HotoSectionsListActivity extends AppCompatActivity {
                         startActivity(new Intent(HotoSectionsListActivity.this, DetailsOfUnusedMaterials.class));
                         break;
                     case 20:
-                        startActivityForResult(new Intent(HotoSectionsListActivity.this,PhotoCaptureActivity.class),RESULT_READING_COMPLETED);
+                        startActivityForResult(new Intent(HotoSectionsListActivity.this, PhotoCaptureActivity.class), RESULT_READING_COMPLETED);
                         break;
                 }
             }
@@ -124,15 +139,25 @@ public class HotoSectionsListActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_READING_COMPLETED && resultCode == RESULT_OK){
+        if (requestCode == RESULT_READING_COMPLETED && resultCode == RESULT_OK) {
             onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.menuSubmit:
                 onBackPressed();
                 return true;
             default:
@@ -144,6 +169,119 @@ public class HotoSectionsListActivity extends AppCompatActivity {
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        refreshList();
+        super.onResume();
+    }
+
+    public Boolean getHotoObj() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+
+                if (hotoTransactionData != null) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public Boolean checkIsSubmited(Integer SecNo) {
+        switch (SecNo) {
+            case 0:
+                return hotoTransactionData.getLandDetailsData().getSubmited();
+            case 1:
+                return hotoTransactionData.getTowerDetailsData().getSubmited();
+            case 2:
+                return hotoTransactionData.getEarthResistanceTowerData().getSubmited();
+            case 3:
+                return hotoTransactionData.getEarthResistanceEquipmentData().getSubmited();
+            case 4:
+                return hotoTransactionData.getElectricConnectionData().getSubmited();
+            case 5:
+                return hotoTransactionData.getAirConditionersData().getSubmited();
+            case 6:
+                return hotoTransactionData.getSolarPowerSystemData().getSubmited();
+            case 7:
+                return hotoTransactionData.getPowerPlantDetailsData().getSubmited();
+            case 8:
+                return hotoTransactionData.getPowerBackupsDGData().getSubmited();
+            case 9:
+                return hotoTransactionData.getShelterData().getSubmited();
+            case 10:
+                return hotoTransactionData.getMediaData().getSubmited();
+            case 11:
+                return hotoTransactionData.getBatterySetData().getSubmited();
+            case 12:
+                return hotoTransactionData.getExternalTenantsPersonalDetailsData().getSubmited();
+            case 13:
+                return hotoTransactionData.getTotalDCLoadofSiteData().getSubmited();
+            case 14:
+                return hotoTransactionData.getActiveequipmentDetailsData().getSubmited();
+            case 15:
+                return hotoTransactionData.getPowerManagementSystemData().getSubmited();
+            case 16:
+                return hotoTransactionData.getGeneralSafetyMeasuresData().getSubmited();
+            case 17:
+                return hotoTransactionData.getAcdb_dcdb_data().getSubmited();
+            case 18:
+                return hotoTransactionData.getServoStabilizerData().getSubmited();
+            case 19:
+                return hotoTransactionData.getDetailsOfUnusedMaterialsData().getSubmited();
+            case 20:
+                return hotoTransactionData.getSitePhotoCaptureData().getSubmited();
+
+        }
+        return false;
+    }
+
+    public void refreshList() {
+
+        sessionManager = new SessionManager(HotoSectionsListActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(HotoSectionsListActivity.this, userId, ticketName);
+
+        hotoTransactionData = new HotoTransactionData();
+        if (getHotoObj()) {
+
+
+            hotoSections_listView_sections = (ListView) findViewById(R.id.hotoSections_listView_sections);
+            this.setTitle("Readings");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            values = getResources().getStringArray(R.array.listView_hotoSections_sections);
+            dataModels = new ArrayList<>();
+            Boolean greenStatus = false;
+            for (int i = 0; i < values.length; i++) {
+                greenStatus = checkIsSubmited(i);
+                if (i / 2 == 0) {
+                    dataModels.add(new HotoSection("" + (i + 1), "" + values[i], greenStatus));
+                } else {
+                    dataModels.add(new HotoSection("" + (i + 1), "" + values[i], greenStatus));
+                }
+                //dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
+
+            }
+
+            adapter = new HotoSectionListAdapter(dataModels, getApplicationContext());
+
+            hotoSections_listView_sections.setAdapter(adapter);
+        }
+
     }
 
 

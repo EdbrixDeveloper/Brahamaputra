@@ -31,6 +31,9 @@ public class ShelterData {
     @SerializedName("odcLock")
     String odcLock;
 
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public ShelterData() {
         this.physicalCondition = "";
         this.noOfBtsInsideShelter = "";
@@ -41,6 +44,7 @@ public class ShelterData {
         this.egbStatus = "";
         this.noOfOdcAvailable = "";
         this.odcLock = "";
+        this.isSubmited=false;
     }
 
     public ShelterData(String physicalCondition, String noOfBtsInsideShelter, String noOfBtsOutsideShelter, String shelterLock, String outdoorShelterLock, String igbStatus, String egbStatus, String noOfOdcAvailable, String odcLock) {
@@ -53,6 +57,7 @@ public class ShelterData {
         this.egbStatus = egbStatus;
         this.noOfOdcAvailable = noOfOdcAvailable;
         this.odcLock = odcLock;
+        this.isSubmited=true;
     }
 
     public String getPhysicalCondition() {
@@ -127,4 +132,11 @@ public class ShelterData {
         this.odcLock = odcLock;
     }
 
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
 }

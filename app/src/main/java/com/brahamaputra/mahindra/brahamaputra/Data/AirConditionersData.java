@@ -43,6 +43,9 @@ public class AirConditionersData {
     @SerializedName("natureOfProblem")
     String natureOfProblem;
 
+    @SerializedName("isSubmited")
+    private Boolean isSubmited;
+
     public AirConditionersData() {
         this.noOfACprovided = "";
         this.numberOfACInWorkingCondition = "";
@@ -58,6 +61,7 @@ public class AirConditionersData {
         this.workingCondition = "";
         this.natureOfProblem = "";
         this.qrCodeImageFileName ="";
+        this.isSubmited=false;
     }
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
@@ -78,6 +82,7 @@ public class AirConditionersData {
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
+        this.isSubmited=true;
     }
 
     public String getNoOfACprovided() {
@@ -192,4 +197,12 @@ public class AirConditionersData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
+
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
 }
