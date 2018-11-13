@@ -527,7 +527,7 @@ public class PowerManagementSystem extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringPowerManagementSystem = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    base64StringPowerManagementSystem = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                     mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
                 }catch (Exception e){
                     e.printStackTrace();

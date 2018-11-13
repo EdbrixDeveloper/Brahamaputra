@@ -591,7 +591,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringQRCodeScan ="qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    base64StringQRCodeScan =Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                     mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
                 } catch (Exception e) {
                     e.printStackTrace();

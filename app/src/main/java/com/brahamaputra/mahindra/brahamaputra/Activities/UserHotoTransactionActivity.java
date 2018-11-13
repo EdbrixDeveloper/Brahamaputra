@@ -107,7 +107,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private String checkOutLat = "0.0";
     private String checkOutLong = "0.0";
-    private String checkOutBatteryData = "30";
+    private String checkOutBatteryData = "30%";
 
     private SessionManager sessionManager;
 
