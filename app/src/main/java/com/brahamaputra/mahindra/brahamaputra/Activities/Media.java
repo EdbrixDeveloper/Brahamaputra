@@ -99,8 +99,12 @@ public class Media extends BaseActivity {
         hotoTransactionData = new HotoTransactionData();
 
         setInputDetails();
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
     }
 
     @Override
@@ -140,7 +144,7 @@ public class Media extends BaseActivity {
                 mediaData = hotoTransactionData.getMediaData();
 
 
-              mMediaTextViewTypeofmediaVal.setText(mediaData.getTypeOfMedia());
+                mMediaTextViewTypeofmediaVal.setText(mediaData.getTypeOfMedia());
 
             } else {
                 Toast.makeText(Media.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
@@ -152,7 +156,7 @@ public class Media extends BaseActivity {
 
     private void submitDetails() {
         try {
-           // hotoTransactionData.setTicketNo(ticketId);
+            // hotoTransactionData.setTicketNo(ticketId);
             String mediaType = mMediaTextViewTypeofmediaVal.getText().toString().trim();
 
             mediaData = new MediaData(mediaType);
@@ -170,4 +174,4 @@ public class Media extends BaseActivity {
     }
 
 
-    }
+}

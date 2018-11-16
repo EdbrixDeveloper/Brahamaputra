@@ -557,6 +557,12 @@ public class PhotoCaptureActivity extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);

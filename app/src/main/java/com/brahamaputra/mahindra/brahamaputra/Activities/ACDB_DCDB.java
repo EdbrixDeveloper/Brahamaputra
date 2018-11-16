@@ -168,6 +168,11 @@ public class ACDB_DCDB extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -223,7 +228,7 @@ public class ACDB_DCDB extends BaseActivity {
 
     private void submitDetails() {
         try {
-           // hotoTransactionData.setTicketNo(ticketId);
+            // hotoTransactionData.setTicketNo(ticketId);
 
 
             String numberofACDB = mAcdbDcdbTextViewNumberofACDBVal.getText().toString().trim();

@@ -329,8 +329,6 @@ public class Land_Details extends BaseActivity {
     public void onBackPressed() {
         submitDetails();
         finish();
-
-
     }
 
     private void setInputDetails() {
@@ -392,7 +390,7 @@ public class Land_Details extends BaseActivity {
             String landType = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
             String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
             String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
-            String rentLeaseValueInWords = mLandDetailsTextViewRentLeaseInWords_val.getText().toString().trim();
+            String rentLeaseValueInWords = mLandDetailsTextViewRentLeaseInWords_val.getText().toString().trim().toUpperCase();
             String landOwnerName = mLandDetailsEditTextNameOfOwner.getText().toString().trim();
             String landOwnerMob = mLandDetailsEditTextMobileNoOfOwner.getText().toString().trim();
             String landLayout = base64StringLayoutOfLand;

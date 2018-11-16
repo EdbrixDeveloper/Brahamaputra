@@ -653,6 +653,12 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
@@ -733,7 +739,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
     private void submitDetails() {
         try {
-           // hotoTransactionData.setTicketNo(ticketId);
+            // hotoTransactionData.setTicketNo(ticketId);
 
 
             String prevailingSLA = mGeneralAndSafetyMeasuresEditTextPrevailingSLA.getText().toString().trim();

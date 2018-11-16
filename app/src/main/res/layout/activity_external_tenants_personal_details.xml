@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Total Number of Tanents" />
+                    android:text="Total Number of Tenants" />
 
                 <TextView
                     android:id="@+id/externalTenantsPersonaldetails_textView_TotalNumberofTanents_val"
@@ -88,8 +88,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -205,9 +205,8 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Name of the Contact Person "
                     android:imeOptions="actionNext"
-                    android:inputType="text"
                     android:textAlignment="viewStart" />
-
+                <!--android:inputType="text"-->
 
             </LinearLayout>
 
@@ -234,9 +233,8 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Address of the Contact Person"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
                     android:textAlignment="viewStart" />
-
+                <!--android:inputType="text"-->
 
             </LinearLayout>
 
@@ -254,7 +252,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-
                     android:text="Telephone No. of Contact Person – Mobile" />
 
                 <EditText
@@ -265,10 +262,9 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Telephone No. of Contact Person – Mobile "
                     android:imeOptions="actionNext"
-                    android:maxLength="10"
-                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
-
+                <!--android:inputType="numberDecimal"
+                android:maxLength="10"-->
             </LinearLayout>
 
             <LinearLayout
@@ -289,16 +285,14 @@
 
                 <EditText
                     android:id="@+id/externalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Telephone No. of Contact Person -Land line "
                     android:imeOptions="actionDone"
-                    android:maxLength="20"
-                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
-
+                <!--android:inputType="numberDecimal"
+                android:maxLength="20"-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

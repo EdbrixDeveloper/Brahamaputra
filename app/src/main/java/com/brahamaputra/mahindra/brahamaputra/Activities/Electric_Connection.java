@@ -91,6 +91,8 @@ public class Electric_Connection extends BaseActivity {
     private EditText mElectricConnectionEditTextScheduledPowerCutInHrs;
     private TextView mElectricConnectionTextViewEbBillDate;
     private EditText mElectricConnectionEditTextEbBillDate;
+    private TextView mElectricConnectionTextViewSapVendorCode;
+    private EditText mElectricConnectionEditTextSapVendorCode;
 
     private TextView mElectricConnectionTextViewTypeModeOfPayment;
     private TextView mElectricConnectionTextViewTypeModeOfPayment_Val;
@@ -187,6 +189,76 @@ public class Electric_Connection extends BaseActivity {
 
     }
 
+
+    /*14-11-2018*/
+    private String getSourceOfPower() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+
+                Gson gson = new Gson();
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+
+                if (hotoTransactionData != null) {
+                    return hotoTransactionData.getSourceOfPower();
+                } else {
+                    return "";
+                }
+
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+
+/*
+        mElectricConnectionTextViewEbMeterReadingInKWh.setVisibility(View.GONE);
+        mElectricConnectionEditTextEbMeterReadingInKWh.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbSupplier.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbSupplierVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbCostPerUnitForSharedConnection.setVisibility(View.GONE);
+        mElectricConnectionEditTextEbCostPerUnitForSharedConnection.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbStatus.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbStatusVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewTransformerWorkingCondition.setVisibility(View.GONE);
+        mElectricConnectionTextViewTransformerWorkingConditionVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewTransformerCapacityInKva.setVisibility(View.GONE);
+        mElectricConnectionEditTextTransformerCapacityInKva.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbMeterBoxStatus.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbMeterBoxStatusVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewSectionName.setVisibility(View.GONE);
+        mElectricConnectionEditTextSectionName.setVisibility(View.GONE);
+        mElectricConnectionTextViewSectionNumber.setVisibility(View.GONE);
+        mElectricConnectionEditTextSectionNumber.setVisibility(View.GONE);
+        mElectricConnectionTextViewConsumerNumber.setVisibility(View.GONE);
+        mElectricConnectionEditTextConsumerNumber.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbMeterWorkingStatus.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbMeterWorkingStatusVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbMeterSerialNumber.setVisibility(View.GONE);
+        mElectricConnectionEditTextEbMeterSerialNumber.setVisibility(View.GONE);
+        mElectricConnectionTextViewTypeOfPayment.setVisibility(View.GONE);
+        mElectricConnectionTextViewTypeOfPaymentVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbPaymentSchedule.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbPaymentScheduleVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewSafetyFuseUnit.setVisibility(View.GONE);
+        mElectricConnectionTextViewSafetyFuseUnitVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewKitKatClayFuseStatus.setVisibility(View.GONE);
+        mElectricConnectionTextViewKitKatClayFuseStatusVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbNeutralEarthing.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbNeutralEarthingVal.setVisibility(View.GONE);
+        mElectricConnectionTextViewAverageEbAvailabilityPerDay.setVisibility(View.GONE);
+        mElectricConnectionEditTextAverageEbAvailabilityPerDay.setVisibility(View.GONE);
+        mElectricConnectionTextViewScheduledPowerCutInHrs.setVisibility(View.GONE);
+        mElectricConnectionEditTextScheduledPowerCutInHrs.setVisibility(View.GONE);
+        mElectricConnectionTextViewEbBillDate.setVisibility(View.GONE);
+        mElectricConnectionEditTextEbBillDate.setVisibility(View.GONE);
+*/
+
+    }
+    /*14-11-2018*/
+
     private void assignViews() {
         mElectricConnectionTextViewTypeOfElectricConnection = (TextView) findViewById(R.id.electricConnection_textView_typeOfElectricConnection);
         mElectricConnectionTextViewTypeOfElectricConnectionVal = (TextView) findViewById(R.id.electricConnection_textView_typeOfElectricConnection_val);
@@ -242,6 +314,8 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionEditTextScheduledPowerCutInHrs = (EditText) findViewById(R.id.electricConnection_editText_scheduledPowerCutInHrs);
         mElectricConnectionTextViewEbBillDate = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate);
         mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
+        mElectricConnectionTextViewSapVendorCode = (TextView) findViewById(R.id.electricConnection_textView_sapVendorCode);
+        mElectricConnectionEditTextSapVendorCode = (EditText) findViewById(R.id.electricConnection_editText_sapVendorCode);
 
         mElectricConnectionTextViewTypeModeOfPayment = (TextView) findViewById(R.id.electricConnection_textView_typeModeOfPayment);
         mElectricConnectionTextViewTypeModeOfPayment_Val = (TextView) findViewById(R.id.electricConnection_textView_typeModeOfPayment_Val);
@@ -333,6 +407,7 @@ public class Electric_Connection extends BaseActivity {
 
                         str_ebSupplier = item.get(position);
                         mElectricConnectionTextViewEbSupplierVal.setText(str_ebSupplier);
+                        //visibilityOfEbCostPerUnitOnEbSupplierSelection(str_ebSupplier);
                     }
                 });
             }
@@ -433,6 +508,7 @@ public class Electric_Connection extends BaseActivity {
 
                         str_typeOfPayment = item.get(position);
                         mElectricConnectionTextViewTypeOfPaymentVal.setText(str_typeOfPayment);
+                        //visibilityOfPaymentScheduleOnTypeOfPaymentSelection(str_typeOfPayment);
                     }
                 });
             }
@@ -545,6 +621,26 @@ public class Electric_Connection extends BaseActivity {
 
     }
 
+    private void visibilityOfEbCostPerUnitOnEbSupplierSelection(String ebSupplier) {
+        if (ebSupplier.equals("Dedicated Connection")) {
+            mElectricConnectionTextViewEbCostPerUnitForSharedConnection.setVisibility(View.GONE);
+            mElectricConnectionEditTextEbCostPerUnitForSharedConnection.setVisibility(View.GONE);
+        } else {
+            mElectricConnectionTextViewEbCostPerUnitForSharedConnection.setVisibility(View.VISIBLE);
+            mElectricConnectionEditTextEbCostPerUnitForSharedConnection.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void visibilityOfPaymentScheduleOnTypeOfPaymentSelection(String typeOfPayment) {
+        if (typeOfPayment.equals("Pre Paid")) {
+            mElectricConnectionTextViewTypeOfPaymentVal.setVisibility(View.GONE);
+            mElectricConnectionTextViewEbPaymentScheduleVal.setVisibility(View.GONE);
+        } else {
+            mElectricConnectionTextViewTypeOfPaymentVal.setVisibility(View.GONE);
+            mElectricConnectionTextViewEbPaymentScheduleVal.setVisibility(View.GONE);
+        }
+    }
+
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -583,6 +679,7 @@ public class Electric_Connection extends BaseActivity {
                 mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(electricConnectionData.getAverageEbAvailability());
                 mElectricConnectionEditTextScheduledPowerCutInHrs.setText(electricConnectionData.getScheduledPowerCut());
                 mElectricConnectionEditTextEbBillDate.setText(electricConnectionData.getEbBillDate());
+                mElectricConnectionEditTextSapVendorCode.setText(electricConnectionData.getSapVendorCode());
 
                 mElectricConnectionTextViewTypeModeOfPayment_Val.setText(electricConnectionData.getTypeModeOfPayment_Val());
                 mElectricConnectionEditTextBankIfscCode.setText(electricConnectionData.getBankIfscCode());
@@ -628,13 +725,14 @@ public class Electric_Connection extends BaseActivity {
             String averageEbAvailability = mElectricConnectionEditTextAverageEbAvailabilityPerDay.getText().toString().trim();
             String scheduledPowerCut = mElectricConnectionEditTextScheduledPowerCutInHrs.getText().toString().trim();
             String ebBillDate = mElectricConnectionEditTextEbBillDate.getText().toString().trim();
+            String sapVendorCode = mElectricConnectionEditTextSapVendorCode.getText().toString().trim();
 
             String typeModeOfPayment_Val = mElectricConnectionTextViewTypeModeOfPayment_Val.getText().toString().trim();
             String bankIfscCode = mElectricConnectionEditTextBankIfscCode.getText().toString().trim();
             String bankAccountNo = mElectricConnectionEditTextBankAccountNo.getText().toString().trim();
 
 
-            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
+            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
 
             hotoTransactionData.setElectricConnectionData(electricConnectionData);
 
@@ -649,12 +747,17 @@ public class Electric_Connection extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

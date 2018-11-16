@@ -150,6 +150,12 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
@@ -168,8 +174,6 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                 startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
                 finish();
                 return true;
-
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -198,7 +202,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
     private void submitDetails() {
         try {
-           // hotoTransactionData.setTicketNo(ticketId);
+            // hotoTransactionData.setTicketNo(ticketId);
 
             String numberofUnusedAssetinSite = mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.getText().toString().trim();
             String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();

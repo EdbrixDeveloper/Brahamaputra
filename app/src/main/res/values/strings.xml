@@ -266,7 +266,7 @@
 
     <string-array name="array_batterySet_ManufacturerMakeModel">
         <item>Amara Raja</item>
-        <item>C and D</item>
+        <item>C&amp;D</item>
         <item>Coslite</item>
         <item>Delta</item>
         <item>Enersis</item>
@@ -285,7 +285,6 @@
         <item>Panasonic</item>
         <item>Saft</item>
         <item>Star</item>
-
     </string-array>
 
     <string-array name="array_batterySet_CapacityinAH">
@@ -642,7 +641,7 @@
         <item>Ashok Leyland</item>
         <item>BFU</item>
         <item>Blue Star</item>
-        <item>C and D</item>
+        <item>C&amp;D</item>
         <item>Cage</item>
         <item>Carrier</item>
         <item>Caterpillar</item>
@@ -721,6 +720,7 @@
         <item>Scrap Item</item>
     </string-array>
 
+
     <!--ServoStabilizer activity   Array -->
     <string-array name="array_ServoStabilizer_ServoStabilizerWorkingStatus">
         <item>Not Available</item>
@@ -786,6 +786,29 @@
         <item>Compound Unit</item>
         <item>Split AC</item>
         <item>Window AC</item>
+    </string-array>
+
+    <string-array name="array_airConditioners_manufacturerMakeModel">
+        <item>ACME</item>
+        <item>Arisys</item>
+        <item>Blue Star</item>
+        <item>Carrier</item>
+        <item>Daikin</item>
+        <item>Godreg</item>
+        <item>Haier</item>
+        <item>Hitachi</item>
+        <item>LG</item>
+        <item>Mitsubishi</item>
+        <item>OG</item>
+        <item>Panasonic</item>
+        <item>Samsung</item>
+        <item>Spacemaker</item>
+        <item>Tata Liberty</item>
+        <item>Toshiba</item>
+        <item>Uniflair</item>
+        <item>Videocon</item>
+        <item>Voltas</item>
+        <item>Whirlpool</item>
     </string-array>
 
     <string-array name="array_airConditioners_amc">
@@ -879,21 +902,23 @@
         <item>M and M Supplied Revenue</item>
     </string-array>
     <string-array name="array_powerBackupsDg_manufacturerMakeModel">
-        <item>Ashok Layland</item>
-        <item>Caterpiller</item>
+        <item>Ashok Leyland</item>
+        <item>Caterpillar</item>
         <item>Cummins</item>
         <item>Eicher</item>
         <item>Elgi</item>
-        <item>Escort</item>
+        <item>Escorts</item>
         <item>Greeves</item>
         <item>Honda</item>
-        <item>Kirloskar</item>
+        <item>Jackson</item>
+        <item>Koel</item>
         <item>Lister Pitter</item>
-        <item>Mahindra</item>
-        <item>Mitsubushi</item>
-        <item>Other Makes</item>
+        <item>M&amp;M</item>
+        <item>Mistubishi</item>
         <item>Perfect</item>
         <item>Perkins</item>
+        <item>Powerica</item>
+        <item>Sonalika</item>
         <item>Volvo</item>
     </string-array>
     <string-array name="array_powerBackupsDg_capacityInKva">
@@ -1000,7 +1025,7 @@
         <item>Arisys</item>
         <item>Ashok Leyland</item>
         <item>Blue Star</item>
-        <item>C and D</item>
+        <item>C&amp;D</item>
         <item>Cage</item>
         <item>Carrier</item>
         <item>Caterpillar</item>

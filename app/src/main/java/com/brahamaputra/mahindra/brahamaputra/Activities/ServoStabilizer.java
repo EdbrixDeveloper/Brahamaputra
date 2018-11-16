@@ -42,6 +42,8 @@ import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -203,6 +205,7 @@ public class ServoStabilizer extends BaseActivity {
             }
         });
 
+        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
         mServoStabilizerbuttonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,7 +215,7 @@ public class ServoStabilizer extends BaseActivity {
                     Toast.makeText(ServoStabilizer.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -259,7 +262,8 @@ public class ServoStabilizer extends BaseActivity {
                         }
                     }
                 } else {
-                    openCameraIntent();
+                    //openCameraIntent();This Commented By Arjun on 15-11-2018 For QR Code Purpose
+                    onClicked(v);
                 }
 
             }
@@ -268,13 +272,35 @@ public class ServoStabilizer extends BaseActivity {
 
     }
 
+    public void onClicked(View v) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setOrientationLocked(true);
+        integrator.initiateScan();
+
+//        Use this for more customization
+//        IntentIntegrator integrator = new IntentIntegrator(this);
+//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+//        integrator.setPrompt("Scan a barcode");
+//        integrator.setCameraId(0);  // Use a specific camera of the device
+//        integrator.setBeepEnabled(false);
+//        integrator.setBarcodeImageEnabled(true);
+//        integrator.initiateScan();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -310,7 +336,13 @@ public class ServoStabilizer extends BaseActivity {
                 mServoStabilizerTextViewWorkingConditionVal.setText(servoStabilizerData.getWorkingCondition());
                 mServoStabilizerEditTextNatureofProblem.setText(servoStabilizerData.getNatureofProblem());
 
+                mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
+                if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
+                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+
                 // New added for image #ImageSet
+                /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
                 imageFileName = servoStabilizerData.getQrCodeImageFileName();
                 mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
                 if (imageFileName != null && imageFileName.length() > 0) {
@@ -320,7 +352,7 @@ public class ServoStabilizer extends BaseActivity {
                     if (imageFileUri != null) {
                         mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }
+                }*/
 
             } else {
                 Toast.makeText(ServoStabilizer.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
@@ -460,6 +492,22 @@ public class ServoStabilizer extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
+            if (result.getContents() == null) {
+                base64StringServoStablizer = "";
+                showToast("Cancelled");
+            } else {
+                base64StringServoStablizer = result.getContents();
+                if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
+                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
+        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {
@@ -476,7 +524,7 @@ public class ServoStabilizer extends BaseActivity {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
 
     private void openCamera() {

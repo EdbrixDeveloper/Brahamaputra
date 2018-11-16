@@ -85,6 +85,9 @@ public class ElectricConnectionData {
     @SerializedName("ebBillDate")
     private String ebBillDate;
 
+    @SerializedName("sapVendorCode")
+    private String sapVendorCode;
+
     @SerializedName("typeModeOfPayment_Val")
     private String typeModeOfPayment_Val;
 
@@ -132,7 +135,7 @@ public class ElectricConnectionData {
     private String bankAccountNo;
 
 
-    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate,String typeModeOfPayment_Val,String bankIfscCode,String bankAccountNo) {
+    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate,String sapVendorCode,String typeModeOfPayment_Val,String bankIfscCode,String bankAccountNo) {
         this.electricConnectionType = electricConnectionType;
         this.connectionTariff = connectionTariff;
         this.sanctionLoad = sanctionLoad;
@@ -160,6 +163,7 @@ public class ElectricConnectionData {
         this.averageEbAvailability = averageEbAvailability;
         this.scheduledPowerCut = scheduledPowerCut;
         this.ebBillDate = ebBillDate;
+        this.sapVendorCode = sapVendorCode;
         this.typeModeOfPayment_Val=typeModeOfPayment_Val;
         this.bankIfscCode=bankIfscCode;
         this.bankAccountNo=bankAccountNo;
@@ -381,6 +385,14 @@ public class ElectricConnectionData {
 
     public void setEbBillDate(String ebBillDate) {
         this.ebBillDate = ebBillDate;
+    }
+
+    public String getSapVendorCode() {
+        return sapVendorCode;
+    }
+
+    public void setSapVendorCode(String sapVendorCode) {
+        this.sapVendorCode = sapVendorCode;
     }
 
     public String getTypeModeOfPayment_Val() {

@@ -47,6 +47,8 @@ import android.widget.Toast;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -92,10 +94,10 @@ public class Solar_Power_System extends BaseActivity {
     private String ticketName = "28131";
     private HotoTransactionData hotoTransactionData;
     private SolarPowerSystemData solarPowerSystemData;
-    private String base64StringQRCodeScan = "eji39jjj";
+    private String base64StringQRCodeScan = "";
     private SessionManager sessionManager;
     private Uri imageFileUri;
-    private String imageFileName;
+    private String imageFileName = "";
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -167,7 +169,8 @@ public class Solar_Power_System extends BaseActivity {
                     }
                 } else {
                     //openCamera();
-                    openCameraIntent();
+                    //openCameraIntent();This Commented By Arjun on 14-11-2018 For QR Code Purpose
+                    onClicked(v);
                 }
 
             }
@@ -184,6 +187,7 @@ public class Solar_Power_System extends BaseActivity {
         });
 
 
+        /*This Commented By Arjun on 14-11-2018 For QR Code Purpose
         mSolarPowerSystemButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,7 +197,24 @@ public class Solar_Power_System extends BaseActivity {
                     Toast.makeText(Solar_Power_System.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
+    }
+
+    public void onClicked(View v) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setOrientationLocked(true);
+        integrator.initiateScan();
+
+//        Use this for more customization
+//        IntentIntegrator integrator = new IntentIntegrator(this);
+//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+//        integrator.setPrompt("Scan a barcode");
+//        integrator.setCameraId(0);  // Use a specific camera of the device
+//        integrator.setBeepEnabled(false);
+//        integrator.setBarcodeImageEnabled(true);
+//        integrator.initiateScan();
+
     }
 
     private void assignViews() {
@@ -313,6 +334,12 @@ public class Solar_Power_System extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
@@ -352,8 +379,14 @@ public class Solar_Power_System extends BaseActivity {
                 //private ImageView mSolarPowerSystemButtonQRCodeScan.setText(landDetailsData.getQRCodeScan());
 
                 base64StringQRCodeScan = solarPowerSystemData.getqRCodeScan();
+
+                mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                    mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
                 // New added for image #ImageSet
-                imageFileName = solarPowerSystemData.getQrCodeImageFileName();
+               /* This Commented By Arjun on 14-11-2018 For QR Code Purpose
+               imageFileName = solarPowerSystemData.getQrCodeImageFileName();
                 mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
                 if (imageFileName != null && imageFileName.length() > 0) {
                     File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
@@ -362,7 +395,7 @@ public class Solar_Power_System extends BaseActivity {
                     if (imageFileUri != null) {
                         mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }
+                }*/
 
                 mSolarPowerSystemTextViewAvailableVal.setText(solarPowerSystemData.getAvailable());
                 mSolarPowerSystemTextViewAssetOwnerVal.setText(solarPowerSystemData.getAssetOwner());
@@ -432,6 +465,26 @@ public class Solar_Power_System extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
+            if (result.getContents() == null) {
+                base64StringQRCodeScan = "";
+                showToast("Cancelled");
+            } else {
+                base64StringQRCodeScan = result.getContents();
+                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                    mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+                //showToast(base64StringQRCodeScan);
+            }
+        } /*else {
+            //base64StringQRCodeScan ="";
+
+        }*/
+
+        /*This Commented By Arjun on 14-11-2018 For QR Code Purpose
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {
@@ -452,7 +505,7 @@ public class Solar_Power_System extends BaseActivity {
                 imageFileUri = null;
                 mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
             }
-        }
+        }*/
     }
 
     private void openCamera() {
