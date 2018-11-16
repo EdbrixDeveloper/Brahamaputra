@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Air_Conditioners">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/app_normal_margin"
         android:fillViewport="true">
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -45,22 +41,20 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/app_normal_margin"
                 android:orientation="vertical"
-                android:id="@+id/linearLayout_container"
                 android:visibility="gone">
 
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
@@ -88,14 +82,15 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/airConditioners_textView_AcNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/app_min_margin"
                     android:text="#1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
                     android:textAlignment="textStart"
-                    android:id="@+id/airConditioners_textView_AcNumber"
-                    android:layout_margin="@dimen/app_min_margin"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -121,9 +116,9 @@
                         android:id="@+id/airConditioners_button_QRCodeScan"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
-                        android:padding="2dp"
                         android:layout_weight="0.3"
                         android:clickable="true"
+                        android:padding="2dp"
                         android:scaleType="fitStart"
                         android:src="@drawable/baseline_photo_camera_black_18dp" />
 
@@ -131,12 +126,12 @@
                         android:id="@+id/airConditioners_button_QRCodeScanView"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
-                        android:padding="2dp"
                         android:layout_weight="0.3"
                         android:clickable="true"
+                        android:padding="2dp"
                         android:scaleType="fitCenter"
-                        android:visibility="gone"
-                        android:src="@drawable/baseline_done_black_18dp" />
+                        android:src="@drawable/baseline_done_black_18dp"
+                        android:visibility="gone" />
 
                     <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
 
@@ -210,14 +205,14 @@
 
                     <EditText
                         android:id="@+id/airConditioners_editText_manufacturerMakeModel"
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:hint="Enter Manufacturer"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -237,14 +232,14 @@
 
                     <EditText
                         android:id="@+id/airConditioners_editText_acSerialNumber"
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:hint="Enter Serial Number"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -271,7 +266,8 @@
                         android:hint="Enter Capacity(TR)"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -411,7 +407,8 @@
                         android:layout_weight="0.6"
                         android:hint="Enter Nature of Problem"
                         android:inputType="text"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
@@ -429,39 +426,40 @@
                     android:layout_weight="1"
                     android:layout_margin="@dimen/app_min_margin"/>-->
 
-                <LinearLayout android:layout_height="wrap_content"
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
                     <Button
                         android:id="@+id/airCondition_button_previousReading"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/app_normal_margin"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:text="Previous Ac Reading"
-                        android:background="@color/red"
-                        android:textColor="@color/whitesmoke"
-                        android:textAllCaps="false"
-                        android:textSize="18dp"
-                        android:layout_weight="1"
                         android:layout_margin="@dimen/app_min_margin"
-                        android:visibility="invisible"/>
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:text="Prev Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
 
                     <Button
                         android:id="@+id/airCondition_button_nextReading"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_min_margin"
                         android:layout_marginTop="@dimen/app_normal_margin"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:text="Next Ac Reading"
-                        android:background="@color/red"
-                        android:textColor="@color/whitesmoke"
-                        android:textAllCaps="false"
-                        android:textSize="18dp"
                         android:layout_weight="1"
-                        android:layout_margin="@dimen/app_min_margin"/>
+                        android:background="@color/red"
+                        android:text="Next Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
             </LinearLayout>

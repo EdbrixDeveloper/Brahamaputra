@@ -39,7 +39,7 @@ public class AirConditionParentData {
     public AirConditionParentData(){
         this.noOfACprovided = "";
         this.numberOfACInWorkingCondition = "";
-        this.airConditionersData = null;
+        this.airConditionersData = new ArrayList<>();
         this.isSubmited = false;
     }
 
