@@ -103,11 +103,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private String checkInLat = "0.0";
     private String checkInLong = "0.0";
-    private String checkInBatteryData = "70";
+    private String checkInBatteryData = "0";
 
     private String checkOutLat = "0.0";
     private String checkOutLong = "0.0";
-    private String checkOutBatteryData = "30%";
+    private String checkOutBatteryData = "0";
 
     private SessionManager sessionManager;
 
@@ -120,8 +120,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            checkOutBatteryData = (String.valueOf(level) + "");
-            checkInBatteryData = (String.valueOf(level) + "");
+            checkOutBatteryData = (String.valueOf(level) );
+            checkInBatteryData = (String.valueOf(level) );
         }
     };
 
@@ -236,7 +236,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
             } else {
                 showToast("Could not detecting location.");
             }
-
         }
     }
 

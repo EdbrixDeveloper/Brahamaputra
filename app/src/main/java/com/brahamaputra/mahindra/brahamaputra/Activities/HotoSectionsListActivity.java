@@ -211,7 +211,7 @@ public class HotoSectionsListActivity extends AppCompatActivity {
             case 4:
                 return hotoTransactionData.getElectricConnectionData().getSubmited();
             case 5:
-                return hotoTransactionData.getAirConditionersData().getSubmited();
+                 return hotoTransactionData.getAirConditionParentData().getSubmited();
             case 6:
                 return hotoTransactionData.getSolarPowerSystemData().getSubmited();
             case 7:

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="#1"
+        android:textStyle="bold"
+        android:textSize="@dimen/app_big_margin"
+        android:layout_marginLeft="@dimen/app_normal_margin"/>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_QRCodeScan"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="QR Code Scan" />
+
+
+        <ImageView
+            android:id="@+id/airConditioners_button_QRCodeScan"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:padding="2dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+        <ImageView
+            android:id="@+id/airConditioners_button_QRCodeScanView"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:padding="2dp"
+            android:layout_weight="0.3"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/view_image" />
+
+        <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_assetOwner"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Asset Owner" />
+
+
+        <TextView
+            android:id="@+id/airConditioners_textView_assetOwner_val"
+            style="@style/MyTheme"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.6"
+            android:hint="Select"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_typeOfAcSpliWindow"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Type of AC (Split/Window)" />
+
+
+        <TextView
+            android:id="@+id/airConditioners_textView_typeOfAcSpliWindow_val"
+            style="@style/MyTheme"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.6"
+            android:hint="Select"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_manufacturerMakeModel"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Manufacturer / Make / Model" />
+
+        <EditText
+            android:id="@+id/airConditioners_editText_manufacturerMakeModel"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:hint="Enter Manufacturer"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_acSerialNumber"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="AC Serial Number" />
+
+        <EditText
+            android:id="@+id/airConditioners_editText_acSerialNumber"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:hint="Enter Serial Number"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_capacityTr"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Capacity(TR)" />
+
+        <EditText
+            android:id="@+id/airConditioners_editText_capacityTr"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:hint="Enter Capacity(TR)"
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+
+        <TextView
+            android:id="@+id/airConditioners_textView_dateOfInstallation"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Date of Installation" />
+
+        <EditText
+            android:id="@+id/airConditioners_editText_dateOfInstallation"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="DD/MM/YYYY"
+            android:inputType="none"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_amcYesNo"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="AMC (Yes / No)" />
+
+
+        <TextView
+            android:id="@+id/airConditioners_textView_amcYesNo_val"
+            style="@style/MyTheme"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.6"
+            android:hint="Select"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+
+        <TextView
+            android:id="@+id/airConditioners_textView_alidityOfAmc"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="If yes, Validity of the AMC" />
+
+        <EditText
+            android:id="@+id/airConditioners_editText_dateOfvalidityOfAmc"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="DD/MM/YYYY"
+            android:inputType="none"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+
+        <TextView
+            android:id="@+id/airConditioners_textView_workingCondition"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Working Condition" />
+
+
+        <TextView
+            android:id="@+id/airConditioners_textView_workingCondition_val"
+            style="@style/MyTheme"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.6"
+            android:hint="Select"
+            android:textAlignment="viewStart" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/airConditioners_textView_natureOfProblem"
+            style="@style/FontStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="Nature of Problem" />
+
+
+        <EditText
+            android:id="@+id/airConditioners_editText_natureOfProblem"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:hint="Enter Nature of Problem"
+            android:inputType="text"
+            android:textAlignment="viewStart" />
+    </LinearLayout>
+</LinearLayout>

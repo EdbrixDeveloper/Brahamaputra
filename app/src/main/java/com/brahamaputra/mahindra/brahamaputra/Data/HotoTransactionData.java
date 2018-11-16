@@ -2,6 +2,8 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class HotoTransactionData {
 
 
@@ -49,7 +51,12 @@ public class HotoTransactionData {
     private EarthResistanceTowerData earthResistanceTowerData;
     private EarthResistanceEquipmentData earthResistanceEquipmentData;
     private ElectricConnectionData electricConnectionData;
-    private AirConditionersData airConditionersData;
+
+    private AirConditionParentData airConditionParentData;
+    //private AirConditionersDataList airConditionersDataList;
+
+
+
     private SolarPowerSystemData solarPowerSystemData;
     private PowerPlantDetailsData powerPlantDetailsData;
     private PowerBackupsDGData powerBackupsDGData;
@@ -71,7 +78,7 @@ public class HotoTransactionData {
         earthResistanceTowerData = new EarthResistanceTowerData();
         earthResistanceEquipmentData = new EarthResistanceEquipmentData();
         electricConnectionData = new ElectricConnectionData();
-        airConditionersData = new AirConditionersData();
+        airConditionParentData = new AirConditionParentData();
         solarPowerSystemData = new SolarPowerSystemData();
         powerPlantDetailsData = new PowerPlantDetailsData();
         powerBackupsDGData = new PowerBackupsDGData();
@@ -235,12 +242,20 @@ public class HotoTransactionData {
         this.electricConnectionData = electricConnectionData;
     }
 
-    public AirConditionersData getAirConditionersData() {
+   /* public AirConditionersData getAirConditionersData() {
         return airConditionersData;
     }
 
     public void setAirConditionersData(AirConditionersData airConditionersData) {
         this.airConditionersData = airConditionersData;
+    }*/
+
+    public AirConditionParentData getAirConditionParentData() {
+        return airConditionParentData;
+    }
+
+    public void setAirConditionParentData(AirConditionParentData airConditionParentData) {
+        this.airConditionParentData = airConditionParentData;
     }
 
     public SolarPowerSystemData getSolarPowerSystemData() {

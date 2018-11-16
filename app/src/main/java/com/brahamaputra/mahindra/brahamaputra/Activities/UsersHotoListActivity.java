@@ -36,6 +36,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,6 +63,8 @@ public class UsersHotoListActivity extends BaseActivity {
     /////////////////////////
     public static final int RESULT_HOTO_SUBMIT = 257;
 
+    public GPSTracker gpsTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,11 @@ public class UsersHotoListActivity extends BaseActivity {
 
         alertDialogManager = new AlertDialogManager(UsersHotoListActivity.this);
         sessionManager = new SessionManager(UsersHotoListActivity.this);
+        gpsTracker = new GPSTracker(UsersHotoListActivity.this);
+        if (gpsTracker.canGetLocation()) {
+            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+            Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+        }
 
         prepareListData();
 
@@ -326,27 +334,36 @@ public class UsersHotoListActivity extends BaseActivity {
                 }
             }).show();
         } else {
-            if (Conditions.isNetworkConnected(UsersHotoListActivity.this)) {
-                Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
-                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
-                intent.putExtra("Id", hotoTicketId);
+            if (Conditions.isNetworkConnected(UsersHotoListActivity.this))
+            {
+                //if (gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
 
-                intent.putExtra("ticketNO", hotoTickitNo);
+                    Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
+                    intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
+                    intent.putExtra("Id", hotoTicketId);
 
-                intent.putExtra("hotoTicketDate", hotoTicketDate);
-                intent.putExtra("siteId", siteId);
-                intent.putExtra("siteName", siteName);
-                intent.putExtra("siteAddress", siteAddress);
-                intent.putExtra("status", status);
-                intent.putExtra("siteType", siteType);
-                intent.putExtra("stateName", stateName);
-                intent.putExtra("customerName", customerName);
-                intent.putExtra("circleName", circleName);
-                intent.putExtra("ssaName", ssaName);
+                    intent.putExtra("ticketNO", hotoTickitNo);
 
-                sessionManager.updateSessionUserTicketId(hotoTicketId);
-                sessionManager.updateSessionUserTicketName(hotoTickitNo);
-                startActivityForResult(intent,RESULT_HOTO_SUBMIT);
+                    intent.putExtra("hotoTicketDate", hotoTicketDate);
+                    intent.putExtra("siteId", siteId);
+                    intent.putExtra("siteName", siteName);
+                    intent.putExtra("siteAddress", siteAddress);
+                    intent.putExtra("status", status);
+                    intent.putExtra("siteType", siteType);
+                    intent.putExtra("stateName", stateName);
+                    intent.putExtra("customerName", customerName);
+                    intent.putExtra("circleName", circleName);
+                    intent.putExtra("ssaName", ssaName);
+
+                    sessionManager.updateSessionUserTicketId(hotoTicketId);
+                    sessionManager.updateSessionUserTicketName(hotoTickitNo);
+                    startActivityForResult(intent,RESULT_HOTO_SUBMIT);
+
+                //}else{
+                //    showToast("Sorry could not detect location");
+                //    finish();
+                //}
+
             }else{
                 alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
