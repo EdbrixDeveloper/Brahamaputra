@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class PowerBackupsDGData {
 
-    @SerializedName("noOfEngineAlternator")
+    /*@SerializedName("noOfEngineAlternator")
     String noOfEngineAlternator;
 
     @SerializedName("numberOfWorkingDg")
-    String numberOfWorkingDg;
+    String numberOfWorkingDg;*/
 
     @SerializedName("qRCodeScan")
     String qRCodeScan;
@@ -94,12 +94,12 @@ public class PowerBackupsDGData {
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
 
-    @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //@SerializedName("isSubmited")
+    //private Boolean isSubmited;
 
     public PowerBackupsDGData() {
-        this.noOfEngineAlternator = "";
-        this.numberOfWorkingDg = "";
+       // this.noOfEngineAlternator = "";
+       // this.numberOfWorkingDg = "";
         this.qRCodeScan = "";
         this.assetOwner = "";
         this.manufacturerMakeModel = "";
@@ -128,12 +128,12 @@ public class PowerBackupsDGData {
         this.workingCondition = "";
         this.natureOfProblem = "";
         this.qrCodeImageFileName = "";
-        this.isSubmited=false;
+        //this.isSubmited=false;
     }
 
-    public PowerBackupsDGData(String noOfEngineAlternator, String numberOfWorkingDg, String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
-        this.noOfEngineAlternator = noOfEngineAlternator;
-        this.numberOfWorkingDg = numberOfWorkingDg;
+    public PowerBackupsDGData(String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
+       // this.noOfEngineAlternator = noOfEngineAlternator;
+       // this.numberOfWorkingDg = numberOfWorkingDg;
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
         this.manufacturerMakeModel = manufacturerMakeModel;
@@ -162,10 +162,10 @@ public class PowerBackupsDGData {
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
-        this.isSubmited=true;
+        //this.isSubmited=true;
     }
 
-    public String getNoOfEngineAlternator() {
+    /*public String getNoOfEngineAlternator() {
         return noOfEngineAlternator;
     }
 
@@ -179,7 +179,7 @@ public class PowerBackupsDGData {
 
     public void setNumberOfWorkingDg(String numberOfWorkingDg) {
         this.numberOfWorkingDg = numberOfWorkingDg;
-    }
+    }*/
 
     public String getqRCodeScan() {
         return qRCodeScan;
@@ -405,11 +405,11 @@ public class PowerBackupsDGData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
-    public Boolean getSubmited() {
+    /*public Boolean getSubmited() {
         return isSubmited;
     }
 
     public void setSubmited(Boolean submited) {
         isSubmited = submited;
-    }
+    }*/
 }

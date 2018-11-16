@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class BatterySetData {
 
-    @SerializedName("noOfBatterySet")
+  /*  @SerializedName("noOfBatterySet")
     private String noOfBatterySet;
 
     @SerializedName("noOfBatteryBankWorking")
-    private String noOfBatteryBankWorking;
+    private String noOfBatteryBankWorking;*/
 
     @SerializedName("batterySet_Qr")
     private String batterySet_Qr;
@@ -49,12 +49,12 @@ public class BatterySetData {
     @SerializedName("qrCodeImageFileName")
     private String qrCodeImageFileName;
 
-    @SerializedName("isSubmited")
-    private Boolean isSubmited;
+   /* @SerializedName("isSubmited")
+    private Boolean isSubmited;*/
 
      public BatterySetData() {
-         this.noOfBatterySet = "";
-         this.noOfBatteryBankWorking = "";
+         //this.noOfBatterySet = "";
+         //this.noOfBatteryBankWorking = "";
          this.batterySet_Qr = "";
          this.assetOwner = "";
          this.manufactureMakeModel = "";
@@ -68,12 +68,12 @@ public class BatterySetData {
          this.backupCondition = "";
          this.natureOfProblem = "";
          this.qrCodeImageFileName = "";
-         this.isSubmited=false;
+         //this.isSubmited=false;
     }
 
-    public BatterySetData(String noOfBatterySet, String noOfBatteryBankWorking, String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {
-        this.noOfBatterySet = noOfBatterySet;
-        this.noOfBatteryBankWorking = noOfBatteryBankWorking;
+    public BatterySetData(String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {
+        //this.noOfBatterySet = noOfBatterySet;
+        //this.noOfBatteryBankWorking = noOfBatteryBankWorking;
         this.batterySet_Qr = batterySet_Qr;
         this.assetOwner = assetOwner;
         this.manufactureMakeModel = manufactureMakeModel;
@@ -87,10 +87,10 @@ public class BatterySetData {
         this.backupCondition = backupCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName=qrCodeImageFileName;
-        this.isSubmited=true;
+        //this.isSubmited=true;
     }
 
-    public String getNoOfBatterySet() {
+  /*  public String getNoOfBatterySet() {
         return noOfBatterySet;
     }
 
@@ -104,7 +104,7 @@ public class BatterySetData {
 
     public void setNoOfBatteryBankWorking(String noOfBatteryBankWorking) {
         this.noOfBatteryBankWorking = noOfBatteryBankWorking;
-    }
+    }*/
 
     public String getBatterySet_Qr() {
         return batterySet_Qr;
@@ -210,11 +210,11 @@ public class BatterySetData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
-    public Boolean getSubmited() {
+   /* public Boolean getSubmited() {
         return isSubmited;
     }
 
     public void setSubmited(Boolean submited) {
         isSubmited = submited;
-    }
+    }*/
 }

@@ -3,10 +3,8 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 import com.google.gson.annotations.SerializedName;
 
 public class ExternalTenantsPersonalDetailsData {
-    @SerializedName("totalNumberofTanents")
-    private String totalNumberofTanents;
-
-
+   /* @SerializedName("totalNumberofTanents")
+    private String totalNumberofTanents;*/
 
     @SerializedName("nameofTenant")
     private String nameofTenant;
@@ -35,16 +33,16 @@ public class ExternalTenantsPersonalDetailsData {
     @SerializedName("contactPersonLandline")
     private String contactPersonLandline;
 
-    @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    /*@SerializedName("isSubmited")
+    private Boolean isSubmited;*/
 
-    public String getTotalNumberofTanents() {
+   /* public String getTotalNumberofTanents() {
         return totalNumberofTanents;
     }
 
     public void setTotalNumberofTanents(String totalNumberofTanents) {
         this.totalNumberofTanents = totalNumberofTanents;
-    }
+    }*/
 
     public String getNameofTenant() {
         return nameofTenant;
@@ -118,16 +116,16 @@ public class ExternalTenantsPersonalDetailsData {
         this.contactPersonLandline = contactPersonLandline;
     }
 
-    public Boolean getSubmited() {
+    /*public Boolean getSubmited() {
         return isSubmited;
     }
 
     public void setSubmited(Boolean submited) {
         isSubmited = submited;
     }
-
+*/
     public ExternalTenantsPersonalDetailsData() {
-        this.totalNumberofTanents = "";
+      //  this.totalNumberofTanents = "";
         this.nameofTenant = "";
         this.typeofTenant = "";
         this.positionattheTower = "";
@@ -137,11 +135,11 @@ public class ExternalTenantsPersonalDetailsData {
         this.addressofContactPerson = "";
         this.contactPersonMobile = "";
         this.contactPersonLandline = "";
-        this.isSubmited=false;
+       // this.isSubmited=false;
     }
 
-    public ExternalTenantsPersonalDetailsData(String totalNumberofTanents, String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
-        this.totalNumberofTanents = totalNumberofTanents;
+    public ExternalTenantsPersonalDetailsData(String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
+        //this.totalNumberofTanents = totalNumberofTanents;
         this.nameofTenant = nameofTenant;
         this.typeofTenant = typeofTenant;
         this.positionattheTower = positionattheTower;
@@ -151,9 +149,6 @@ public class ExternalTenantsPersonalDetailsData {
         this.addressofContactPerson = addressofContactPerson;
         this.contactPersonMobile = contactPersonMobile;
         this.contactPersonLandline = contactPersonLandline;
-        this.isSubmited=true;
+       // this.isSubmited=true;
     }
-
-
-
 }

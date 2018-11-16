@@ -6,14 +6,11 @@ import java.util.ArrayList;
 
 public class AirConditionParentData {
 
-
-
     @SerializedName("noOfACprovided")
     String noOfACprovided;
 
     @SerializedName("numberOfACInWorkingCondition")
     String numberOfACInWorkingCondition;
-
 
     @SerializedName("AirConditionData")
     ArrayList<AirConditionersData> airConditionersData;
@@ -66,5 +63,4 @@ public class AirConditionParentData {
     public void setAirConditionersData(ArrayList<AirConditionersData> airConditionersData) {
         this.airConditionersData = airConditionersData;
     }
-
 }

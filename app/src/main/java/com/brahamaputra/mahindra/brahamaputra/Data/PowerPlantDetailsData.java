@@ -10,8 +10,8 @@ public class PowerPlantDetailsData {
     @SerializedName("assetOwner")
     String assetOwner;
 
-    @SerializedName("numberOfPowerPlant")
-    String numberOfPowerPlant;
+   /* @SerializedName("numberOfPowerPlant")
+    String numberOfPowerPlant;*/
 
     @SerializedName("manufacturerMakeModel")
     String manufacturerMakeModel;
@@ -61,13 +61,13 @@ public class PowerPlantDetailsData {
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
 
-    @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    /*@SerializedName("isSubmited")
+    private Boolean isSubmited;*/
 
     public PowerPlantDetailsData() {
         this.qRCodeScan = "";
         this.assetOwner = "";
-        this.numberOfPowerPlant = "";
+        //this.numberOfPowerPlant = "";
         this.manufacturerMakeModel = "";
         this.powerPlantModel = "";
         this.numberModuleSlots = "";
@@ -84,14 +84,14 @@ public class PowerPlantDetailsData {
         this.workingCondition = "";
         this.natureOfProblem = "";
         this.qrCodeImageFileName ="";
-        this.isSubmited=false;
+        //this.isSubmited=false;
     }
 
 
-    public PowerPlantDetailsData(String qRCodeScan, String assetOwner, String numberOfPowerPlant, String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
+    public PowerPlantDetailsData(String qRCodeScan, String assetOwner,String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
-        this.numberOfPowerPlant = numberOfPowerPlant;
+        //this.numberOfPowerPlant = numberOfPowerPlant;
         this.manufacturerMakeModel = manufacturerMakeModel;
         this.powerPlantModel = powerPlantModel;
         this.numberModuleSlots = numberModuleSlots;
@@ -108,7 +108,7 @@ public class PowerPlantDetailsData {
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
-        this.isSubmited=true;
+        //this.isSubmited=true;
     }
 
     public String getqRCodeScan() {
@@ -127,13 +127,13 @@ public class PowerPlantDetailsData {
         this.assetOwner = assetOwner;
     }
 
-    public String getNumberOfPowerPlant() {
+  /*  public String getNumberOfPowerPlant() {
         return numberOfPowerPlant;
     }
 
     public void setNumberOfPowerPlant(String numberOfPowerPlant) {
         this.numberOfPowerPlant = numberOfPowerPlant;
-    }
+    }*/
 
     public String getManufacturerMakeModel() {
         return manufacturerMakeModel;
@@ -263,11 +263,11 @@ public class PowerPlantDetailsData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
-    public Boolean getSubmited() {
+   /* public Boolean getSubmited() {
         return isSubmited;
     }
 
     public void setSubmited(Boolean submited) {
         isSubmited = submited;
-    }
+    }*/
 }
