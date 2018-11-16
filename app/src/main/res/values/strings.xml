@@ -296,6 +296,12 @@
         <item>400AH</item>
         <item>450AH</item>
         <item>500AH</item>
+        <item>600AH</item>
+        <item>800AH</item>
+        <item>1000AH</item>
+        <item>1200AH</item>
+        <item>1500AH</item>
+        <item>2000AH</item>
     </string-array>
 
     <string-array name="array_batterySet_TypeofBattery">
