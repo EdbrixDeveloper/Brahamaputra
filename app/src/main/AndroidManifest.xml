@@ -145,6 +145,26 @@
             android:name=".Activities.PhotoCaptureActivity"
             android:label="Sections"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".Activities.DieselFilling"
+            android:label="Sections"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".Activities.DieselFillingList"
+            android:label="Sections"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activities.MyEnergyListActivity"
+            android:label="Sections"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".Activities.DashboardCircularActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+
     </application>
 
 </manifest>

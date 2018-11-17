@@ -46,7 +46,7 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewExistingLoadAtSiteKVA;
     private EditText mElectricConnectionEditTextExistingLoadAtSiteKVA;
     private TextView mElectricConnectionTextViewNameOfSupplyCompany;
-    private EditText mElectricConnectionEditTextNameOfSupplyCompany;
+    private TextView mElectricConnectionTextViewNameOfSupplyCompanyVal;
     private TextView mElectricConnectionTextViewCopyOfElectricBills;
     private TextView mElectricConnectionTextViewCopyOfElectricBillsVal;
     private TextView mElectricConnectionTextViewNumberOfCompoundLights;
@@ -104,6 +104,7 @@ public class Electric_Connection extends BaseActivity {
 
     String str_typeOfElectricConnection;
     String str_tariff;
+    String str_nameOfSupplyCompany;
     String str_copyOfElectricBills;
     String str_ebSupplier;
     String str_ebStatus;
@@ -116,6 +117,7 @@ public class Electric_Connection extends BaseActivity {
     String str_kitKatClayFuseStatus;
     String str_ebNeutralEarthing;
     String str_typeModeOfPayment;
+
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
@@ -197,7 +199,7 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionTextViewExistingLoadAtSiteKVA = (TextView) findViewById(R.id.electricConnection_textView_existingLoadAtSiteKVA);
         mElectricConnectionEditTextExistingLoadAtSiteKVA = (EditText) findViewById(R.id.electricConnection_editText_existingLoadAtSiteKVA);
         mElectricConnectionTextViewNameOfSupplyCompany = (TextView) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany);
-        mElectricConnectionEditTextNameOfSupplyCompany = (EditText) findViewById(R.id.electricConnection_editText_nameOfSupplyCompany);
+        mElectricConnectionTextViewNameOfSupplyCompanyVal = (TextView) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany_val);
         mElectricConnectionTextViewCopyOfElectricBills = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills);
         mElectricConnectionTextViewCopyOfElectricBillsVal = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills_val);
         mElectricConnectionTextViewNumberOfCompoundLights = (TextView) findViewById(R.id.electricConnection_textView_numberOfCompoundLights);
@@ -293,6 +295,26 @@ public class Electric_Connection extends BaseActivity {
 
                         str_tariff = item.get(position);
                         mElectricConnectionTextViewTariffVal.setText(str_tariff);
+                    }
+                });
+            }
+        });
+
+        mElectricConnectionTextViewNameOfSupplyCompanyVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_nameOfSupplyCompany))),
+                        "Name of the supply company",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_nameOfSupplyCompany= item.get(position);
+                        mElectricConnectionTextViewNameOfSupplyCompanyVal.setText(str_nameOfSupplyCompany);
                     }
                 });
             }
@@ -560,7 +582,7 @@ public class Electric_Connection extends BaseActivity {
                 mElectricConnectionTextViewTariffVal.setText(electricConnectionData.getConnectionTariff());
                 mElectricConnectionEditTextSanctionedLoadKVA.setText(electricConnectionData.getSanctionLoad());
                 mElectricConnectionEditTextExistingLoadAtSiteKVA.setText(electricConnectionData.getExistingLoadAtSite());
-                mElectricConnectionEditTextNameOfSupplyCompany.setText(electricConnectionData.getNameSupplyCompany());
+                mElectricConnectionTextViewNameOfSupplyCompanyVal.setText(electricConnectionData.getNameSupplyCompany());
                 mElectricConnectionTextViewCopyOfElectricBillsVal.setText(electricConnectionData.getElectricBillCopyStatus());
                 mElectricConnectionEditTextNumberOfCompoundLights.setText(electricConnectionData.getNoOfCompoundLights());
                 mElectricConnectionEditTextEbMeterReadingInKWh.setText(electricConnectionData.getMeterReadingsEB());
@@ -605,7 +627,7 @@ public class Electric_Connection extends BaseActivity {
             String connectionTariff = mElectricConnectionTextViewTariffVal.getText().toString().trim();
             String sanctionLoad = mElectricConnectionEditTextSanctionedLoadKVA.getText().toString().trim();
             String existingLoadAtSite = mElectricConnectionEditTextExistingLoadAtSiteKVA.getText().toString().trim();
-            String nameSupplyCompany = mElectricConnectionEditTextNameOfSupplyCompany.getText().toString().trim();
+            String nameSupplyCompany = mElectricConnectionTextViewNameOfSupplyCompanyVal.getText().toString().trim();
             String electricBillCopyStatus = mElectricConnectionTextViewCopyOfElectricBillsVal.getText().toString().trim();
             String noOfCompoundLights = mElectricConnectionEditTextNumberOfCompoundLights.getText().toString().trim();
             String meterReadingsEB = mElectricConnectionEditTextEbMeterReadingInKWh.getText().toString().trim();

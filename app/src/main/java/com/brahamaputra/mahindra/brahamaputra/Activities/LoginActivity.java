@@ -1,14 +1,12 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -55,7 +53,8 @@ public class LoginActivity extends BaseActivity {
 
         if(validateUser()){
             finish();
-            startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
+            //startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
+            startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
         }else {
             setContentView(R.layout.activity_login);
             assignViews();
@@ -155,8 +154,8 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionDeviceToken(response.getAccessToken());
                                 finish();
 
-                                startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
-
+                                //startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
+                                startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
                             }
                         }
 

@@ -137,16 +137,14 @@
                     android:layout_weight="0.4"
                     android:text="Name of the supply company" />
 
-                <EditText
-                    android:id="@+id/electricConnection_editText_nameOfSupplyCompany"
-
+                <TextView
+                    android:id="@+id/electricConnection_textView_nameOfSupplyCompany_val"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:hint="Enter Name of supply"
-                    android:imeOptions="actionNext"
+                    android:hint="Name of the supply company"
                     android:textAlignment="viewStart" />
-                <!--company-->
 
             </LinearLayout>
 

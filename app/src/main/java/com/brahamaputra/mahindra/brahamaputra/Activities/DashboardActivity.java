@@ -73,8 +73,8 @@ public class DashboardActivity extends BaseActivity {
         mDashboardRelativeLayoutMyEnergy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  Intent intent = new Intent(DashboardActivity.this, UsersHotoListActivity.class);
-                startActivity(intent);*/
+               Intent intent = new Intent(DashboardActivity.this, MyEnergyListActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -143,7 +143,7 @@ public class DashboardActivity extends BaseActivity {
                         final EditText taskEditText = new EditText(DashboardActivity.this);
                         AlertDialog dialog = new AlertDialog.Builder(DashboardActivity.this)
                                 .setTitle("Information")
-                                .setMessage("Enter ticket id")
+                                .setMessage("Enter Ticket ID")
                                 .setView(taskEditText)
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override

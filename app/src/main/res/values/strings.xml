@@ -109,6 +109,26 @@
         <item>Mixed</item>
     </string-array>
 
+    <string-array name="array_electricConnection_nameOfSupplyCompany">
+        <item>Assam Power Distribution Company Limited</item>
+        <item>EB Board Government of Arunachal Pradesh</item>
+        <item>EB board Government of Sikkim</item>
+        <item>Government of J and K Power Development</item>
+        <item>Himachal Pradesh State Electricity Board Ltd</item>
+        <item>Kerala State Electricity Board Ltd</item>
+        <item>Manipur State Power Distribution company Ltd</item>
+        <item>Meghalaya Energy Corporation Ltd</item>
+        <item>Mizoram Power Development Corporation Ltd</item>
+        <item>Nagaland Power Development Company Ltd</item>
+        <item>Punjab State Power corporation Ltd</item>
+        <item>Tamilnadu Generation and Distribution Corporation Ltd</item>
+        <item>The Calcutta Electric Supply Corporation</item>
+        <item>Tripura State Electricity state Corporation Ltd</item>
+        <item>West Bengal State Electricity Distribution Company Ltd</item>
+
+    </string-array>
+
+
     <string-array name="array_electricConnection_copyOfElectricBills">
         <item>Collected</item>
         <item>Not Collected</item>

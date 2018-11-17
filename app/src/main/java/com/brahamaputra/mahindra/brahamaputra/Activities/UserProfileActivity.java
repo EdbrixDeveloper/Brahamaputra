@@ -65,7 +65,7 @@ public class UserProfileActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                startActivity(new Intent(UserProfileActivity.this, DashboardActivity.class));
+                startActivity(new Intent(UserProfileActivity.this, DashboardCircularActivity.class));
                 return true;
 
             case R.id.menuLogout:
@@ -107,7 +107,7 @@ public class UserProfileActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        startActivity(new Intent(UserProfileActivity.this, DashboardActivity.class));
+        startActivity(new Intent(UserProfileActivity.this, DashboardCircularActivity.class));
     }
 
     private void assignViews() {
