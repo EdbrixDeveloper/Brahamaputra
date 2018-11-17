@@ -215,17 +215,17 @@ public class HotoSectionsListActivity extends AppCompatActivity {
             case 6:
                 return hotoTransactionData.getSolarPowerSystemData().getSubmited();
             case 7:
-                return hotoTransactionData.getPowerPlantDetailsData().getSubmited();
+                return hotoTransactionData.getPowerPlantDetailsParentData().getSubmited();
             case 8:
-                return hotoTransactionData.getPowerBackupsDGData().getSubmited();
+                return hotoTransactionData.getPowerBackupsDGParentData().getSubmited();
             case 9:
                 return hotoTransactionData.getShelterData().getSubmited();
             case 10:
                 return hotoTransactionData.getMediaData().getSubmited();
             case 11:
-                return hotoTransactionData.getBatterySetData().getSubmited();
+                return hotoTransactionData.getBatterySetParentData().getSubmited();
             case 12:
-                return hotoTransactionData.getExternalTenantsPersonalDetailsData().getSubmited();
+                return hotoTransactionData.getExternalTenantsPersonalDetailsParentData().getSubmited();
             case 13:
                 return hotoTransactionData.getTotalDCLoadofSiteData().getSubmited();
             case 14:
