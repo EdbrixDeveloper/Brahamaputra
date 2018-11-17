@@ -103,11 +103,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private String checkInLat = "0.0";
     private String checkInLong = "0.0";
-    private String checkInBatteryData = "70";
+    private String checkInBatteryData = "0";
 
     private String checkOutLat = "0.0";
     private String checkOutLong = "0.0";
-    private String checkOutBatteryData = "30";
+    private String checkOutBatteryData = "0";
 
     private SessionManager sessionManager;
 
@@ -116,22 +116,13 @@ public class UserHotoTransactionActivity extends BaseActivity {
     /////////////////////////
     public static final int RESULT_HOTO_READING = 258;
 
-    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context ctxt, Intent intent) {
-            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            checkOutBatteryData = (String.valueOf(level) + "");
-            checkInBatteryData = (String.valueOf(level) + "");
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_hoto_transaction);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        checkInBatteryData = "" + GlobalMethods.getBattery_percentage(UserHotoTransactionActivity.this);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("ticketNO");
@@ -232,11 +223,10 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 checkInLat = String.valueOf(gpsTracker.getLatitude());
                 checkInLong = String.valueOf(gpsTracker.getLongitude());
 
-                submitCheckIn(checkInLong, checkInLat, checkOutBatteryData);
+                submitCheckIn(checkInLong, checkInLat, checkInBatteryData);
             } else {
                 showToast("Could not detecting location.");
             }
-
         }
     }
 
@@ -416,6 +406,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private void submitDetails() {
         try {
+            checkOutBatteryData = "" + GlobalMethods.getBattery_percentage(UserHotoTransactionActivity.this);
+
             hotoTransactionData.setUserId(sessionManager.getSessionUserId());
             hotoTransactionData.setAccessToken(sessionManager.getSessionDeviceToken());
             hotoTransactionData.setTicketId(ticketId);

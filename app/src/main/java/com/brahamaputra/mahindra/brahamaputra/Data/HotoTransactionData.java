@@ -2,6 +2,8 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class HotoTransactionData {
 
 
@@ -49,14 +51,14 @@ public class HotoTransactionData {
     private EarthResistanceTowerData earthResistanceTowerData;
     private EarthResistanceEquipmentData earthResistanceEquipmentData;
     private ElectricConnectionData electricConnectionData;
-    private AirConditionersData airConditionersData;
+    private AirConditionParentData airConditionParentData;
     private SolarPowerSystemData solarPowerSystemData;
-    private PowerPlantDetailsData powerPlantDetailsData;
-    private PowerBackupsDGData powerBackupsDGData;
+    private PowerPlantDetailsParentData powerPlantDetailsParentData;
+    private PowerBackupsDGParentData powerBackupsDGParentData;
     private ShelterData shelterData;
     private MediaData mediaData;
-    private BatterySetData batterySetData;
-    private ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData;
+    private BatterySetParentData batterySetParentData;
+    private ExternalTenantsPersonalDetailsParentData externalTenantsPersonalDetailsParentData;
     private TotalDCLoadofSiteData totalDCLoadofSiteData;
     private ActiveequipmentDetailsData activeequipmentDetailsData;
     private PowerManagementSystemData powerManagementSystemData;
@@ -71,14 +73,14 @@ public class HotoTransactionData {
         earthResistanceTowerData = new EarthResistanceTowerData();
         earthResistanceEquipmentData = new EarthResistanceEquipmentData();
         electricConnectionData = new ElectricConnectionData();
-        airConditionersData = new AirConditionersData();
+        airConditionParentData = new AirConditionParentData();
         solarPowerSystemData = new SolarPowerSystemData();
-        powerPlantDetailsData = new PowerPlantDetailsData();
-        powerBackupsDGData = new PowerBackupsDGData();
+        powerPlantDetailsParentData = new PowerPlantDetailsParentData();
+        powerBackupsDGParentData = new PowerBackupsDGParentData();
         shelterData = new ShelterData();
         mediaData = new MediaData();
-        batterySetData = new BatterySetData();
-        externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData();
+        batterySetParentData = new BatterySetParentData();
+        externalTenantsPersonalDetailsParentData = new ExternalTenantsPersonalDetailsParentData();
         totalDCLoadofSiteData = new TotalDCLoadofSiteData();
         activeequipmentDetailsData = new ActiveequipmentDetailsData();
         powerManagementSystemData = new PowerManagementSystemData();
@@ -235,12 +237,12 @@ public class HotoTransactionData {
         this.electricConnectionData = electricConnectionData;
     }
 
-    public AirConditionersData getAirConditionersData() {
-        return airConditionersData;
+    public AirConditionParentData getAirConditionParentData() {
+        return airConditionParentData;
     }
 
-    public void setAirConditionersData(AirConditionersData airConditionersData) {
-        this.airConditionersData = airConditionersData;
+    public void setAirConditionParentData(AirConditionParentData airConditionParentData) {
+        this.airConditionParentData = airConditionParentData;
     }
 
     public SolarPowerSystemData getSolarPowerSystemData() {
@@ -251,20 +253,20 @@ public class HotoTransactionData {
         this.solarPowerSystemData = solarPowerSystemData;
     }
 
-    public PowerPlantDetailsData getPowerPlantDetailsData() {
-        return powerPlantDetailsData;
+    public PowerPlantDetailsParentData getPowerPlantDetailsParentData() {
+        return powerPlantDetailsParentData;
     }
 
-    public void setPowerPlantDetailsData(PowerPlantDetailsData powerPlantDetailsData) {
-        this.powerPlantDetailsData = powerPlantDetailsData;
+    public void setPowerPlantDetailsParentData(PowerPlantDetailsParentData powerPlantDetailsParentData) {
+        this.powerPlantDetailsParentData = powerPlantDetailsParentData;
     }
 
-    public PowerBackupsDGData getPowerBackupsDGData() {
-        return powerBackupsDGData;
+    public PowerBackupsDGParentData getPowerBackupsDGParentData() {
+        return powerBackupsDGParentData;
     }
 
-    public void setPowerBackupsDGData(PowerBackupsDGData powerBackupsDGData) {
-        this.powerBackupsDGData = powerBackupsDGData;
+    public void setPowerBackupsDGParentData(PowerBackupsDGParentData powerBackupsDGParentData) {
+        this.powerBackupsDGParentData = powerBackupsDGParentData;
     }
 
     public ShelterData getShelterData() {
@@ -283,20 +285,20 @@ public class HotoTransactionData {
         this.mediaData = mediaData;
     }
 
-    public BatterySetData getBatterySetData() {
-        return batterySetData;
+    public BatterySetParentData getBatterySetParentData() {
+        return batterySetParentData;
     }
 
-    public void setBatterySetData(BatterySetData batterySetData) {
-        this.batterySetData = batterySetData;
+    public void setBatterySetParentData(BatterySetParentData batterySetParentData) {
+        this.batterySetParentData = batterySetParentData;
     }
 
-    public ExternalTenantsPersonalDetailsData getExternalTenantsPersonalDetailsData() {
-        return externalTenantsPersonalDetailsData;
+    public ExternalTenantsPersonalDetailsParentData getExternalTenantsPersonalDetailsParentData() {
+        return externalTenantsPersonalDetailsParentData;
     }
 
-    public void setExternalTenantsPersonalDetailsData(ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData) {
-        this.externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsData;
+    public void setExternalTenantsPersonalDetailsParentData(ExternalTenantsPersonalDetailsParentData externalTenantsPersonalDetailsParentData) {
+        this.externalTenantsPersonalDetailsParentData = externalTenantsPersonalDetailsParentData;
     }
 
     public TotalDCLoadofSiteData getTotalDCLoadofSiteData() {

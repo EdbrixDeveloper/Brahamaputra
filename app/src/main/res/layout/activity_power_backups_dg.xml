@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -46,803 +47,863 @@
 
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/app_normal_margin"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                    android:id="@+id/powerBackupsDg_textView_Number"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Number of Working DG" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_QRCodeScan"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="QR Code Scan" />
-
-
-                <ImageView
-                    android:id="@+id/powerBackupsDg_button_QRCodeScan"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:padding="2dp"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp" />
-
-                <ImageView
-                    android:id="@+id/powerBackupsDg_button_QRCodeScanView"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:padding="2dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/view_image"
-                    android:visibility="gone" />
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_assetOwner"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Asset Owner" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_assetOwner_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:paddingBottom="@dimen/app_min_padding"
-                android:weightSum="1">
-                <!--style="@style/FontStyle"-->
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dividerDesign"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Specifications"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="20dp"
+                    android:layout_margin="@dimen/app_min_margin"
+                    android:text="#1"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#a40404" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Number of Working DG" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_QRCodeScan"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="QR Code Scan" />
+
+
+                    <ImageView
+                        android:id="@+id/powerBackupsDg_button_QRCodeScan"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/powerBackupsDg_button_QRCodeScanView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/baseline_done_black_18dp"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_assetOwner"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Asset Owner" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_assetOwner_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:paddingBottom="@dimen/app_min_padding"
+                    android:weightSum="1">
+                    <!--style="@style/FontStyle"-->
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dividerDesign"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Specifications"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <!--android:layout_marginTop="100sp"-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#a40404" />
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_manufacturerMakeModel"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Manufacturer/Make/Model" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_manufacturerMakeModel_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_capacityInKva"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Capacity in KVA" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_capacityInKva_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_autoManual"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Auto/ Manual" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_autoManual_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dieselTankCapacity"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Diesel Tank capacity" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_dieselTankCapacity"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Diesel Tank"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal|none"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dateOfInstallation"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Date of Installation" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_dateOfInstallation"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MM/YYYY"
+                        android:inputType="none"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_averageDieselConsumption"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Average Diesel Consumption per Hr." />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_averageDieselConsumption"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Average"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal|none"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_amc"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AMC(Yes/No)" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_amc_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_validityOfAmc"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="If yes, Validity of the AMC" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_dateOfvalidityOfAmc"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MM/YYYY"
+                        android:inputType="none"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgWorkingType"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG Working Type" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgWorkingType_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgHmrReading"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG HMR Reading" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_dgHmrReading"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter HMR Reading"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgEngineSerialNumber"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG Engine Serial Number" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_dgEngineSerialNumber"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Serial Number"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgMainAlternatorType"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG Main Alternator Type" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgMainAlternatorType_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgMainAlternatorMake"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG Main Alternator Make" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgMainAlternatorMake_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgMainAlternatorSerialNumber"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG Main Alternator Serial Number" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_dgMainAlternatorSerialNumber"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Alternator Serial"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgCanopyStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG Canopy Status" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgCanopyStatus_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgStartingBatteryStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG Starting Battery Status" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgStartingBatteryStatus_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_chargingAlternator"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Charging Alternator" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_chargingAlternator_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_batteryCharger"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Battery Charger" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_batteryCharger_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_presentDieselStock"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Present Diesel Stock" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_presentDieselStock"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Diesel Stock"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_gcuRunHrs"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="GCU Run Hrs" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_gcuRunHrs"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter GCU Run Hrs"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_gcuKwh"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="GCU KWH" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_gcuKwh"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter GCU KWH"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgAvrWorkingStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DG AVR working Status" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dgAvrWorkingStatus_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_fuelTankPosition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Fuel Tank Position" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_fuelTankPosition_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_workingCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Working Condition" />
+
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_workingCondition_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_natureOfProblem"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Nature of Problem" />
+
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_natureOfProblem"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Nature of Problem"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAlignment="viewStart" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/powerBackupsDg_button_previousReading"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_min_margin"
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:text="Prev Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
+
+                    <Button
+                        android:id="@+id/powerBackupsDg_button_nextReading"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_min_margin"
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:text="Next Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
             </LinearLayout>
-            <!--android:layout_marginTop="100sp"-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="#a40404" />
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_manufacturerMakeModel"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Manufacturer/Make/Model" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_manufacturerMakeModel_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_capacityInKva"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Capacity in KVA" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_capacityInKva_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_autoManual"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Auto/ Manual" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_autoManual_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dieselTankCapacity"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Diesel Tank capacity" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_dieselTankCapacity"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Diesel Tank"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal|none"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dateOfInstallation"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Date of Installation" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_dateOfInstallation"
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MM/YYYY"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_averageDieselConsumption"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Average Diesel Consumption per Hr." />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_averageDieselConsumption"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Average"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal|none"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_amc"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="AMC(Yes/No)" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_amc_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_validityOfAmc"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="If yes, Validity of the AMC" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_dateOfvalidityOfAmc"
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MM/YYYY"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgWorkingType"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG Working Type" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgWorkingType_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgHmrReading"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG HMR Reading" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_dgHmrReading"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter HMR Reading"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgEngineSerialNumber"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG Engine Serial Number" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_dgEngineSerialNumber"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Serial Number"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorType"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG Main Alternator Type" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorType_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorMake"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG Main Alternator Make" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorMake_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgMainAlternatorSerialNumber"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG Main Alternator Serial Number" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_dgMainAlternatorSerialNumber"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Alternator Serial"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgCanopyStatus"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG Canopy Status" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgCanopyStatus_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgStartingBatteryStatus"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG Starting Battery Status" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgStartingBatteryStatus_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_chargingAlternator"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Charging Alternator" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_chargingAlternator_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_batteryCharger"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Battery Charger" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_batteryCharger_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_presentDieselStock"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Present Diesel Stock" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_presentDieselStock"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Diesel Stock"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_gcuRunHrs"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="GCU Run Hrs" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_gcuRunHrs"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter GCU Run Hrs"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_gcuKwh"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="GCU KWH" />
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_gcuKwh"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter GCU KWH"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgAvrWorkingStatus"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="DG AVR working Status" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_dgAvrWorkingStatus_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_fuelTankPosition"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Fuel Tank Position" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_fuelTankPosition_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_workingCondition"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Working Condition" />
-
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_workingCondition_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerBackupsDg_textView_natureOfProblem"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Nature of Problem" />
-
-
-                <EditText
-                    android:id="@+id/powerBackupsDg_editText_natureOfProblem"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Nature of Problem"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textAlignment="viewStart" />
-
-
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

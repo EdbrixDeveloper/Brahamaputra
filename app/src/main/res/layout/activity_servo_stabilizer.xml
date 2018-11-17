@@ -41,24 +41,25 @@
                     android:clickable="true"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
+
                 <ImageView
                     android:id="@+id/servoStabilizer_button_QRCodeScanView"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
                     android:layout_weight="0.3"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/view_image" />
+                    android:src="@drawable/baseline_done_black_18dp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
                 android:orientation="horizontal"
+                android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
@@ -69,15 +70,15 @@
                     android:layout_weight="0.4"
                     android:text="Servo Stabilizer Working Status" />
 
-               <TextView
+                <TextView
                     android:id="@+id/servoStabilizer_textView_ServoStabilizerWorkingStatus_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
+                    android:hint="Select"
 
-                    android:hint="Select"></TextView>
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -95,14 +96,14 @@
                     android:layout_weight="0.4"
                     android:text="Make of Servo" />
 
-               <TextView
+                <TextView
                     android:id="@+id/servoStabilizer_textView_MakeofServo_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -120,14 +121,14 @@
                     android:layout_weight="0.4"
                     android:text="Rating of Servo" />
 
-               <TextView
+                <TextView
                     android:id="@+id/servoStabilizer_textView_RatingofServo_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -145,14 +146,14 @@
                     android:layout_weight="0.4"
                     android:text="Working Condition" />
 
-               <TextView
+                <TextView
                     android:id="@+id/servoStabilizer_textView_WorkingCondition_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -176,14 +177,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Nature of Problem "
-                    android:inputType="textMultiLine"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionDone"
-                    />
+                    android:inputType="textMultiLine"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

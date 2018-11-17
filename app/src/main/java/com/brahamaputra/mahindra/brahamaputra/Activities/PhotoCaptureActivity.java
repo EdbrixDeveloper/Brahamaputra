@@ -374,7 +374,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringSite = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringSite = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonSiteView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -395,7 +395,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringShelter = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringShelter = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonShelterView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -416,7 +416,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringEbMeterBox = "qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringEbMeterBox = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonEbMeterBoxView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -437,7 +437,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringSmps = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringSmps = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonSmpsView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -458,7 +458,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringEbMeter = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringEbMeter = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonEbMeterView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -479,7 +479,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringDgHmr = "qwer";// Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringDgHmr = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonDgHmrView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -500,7 +500,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringDgOverview = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringDgOverview = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonDgOverviewView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -554,6 +554,12 @@ public class PhotoCaptureActivity extends BaseActivity {
 
 
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
     }
 
     @Override

@@ -145,6 +145,10 @@
             android:name=".Activities.PhotoCaptureActivity"
             android:label="Sections"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
 
         <activity
             android:name=".Activities.DieselFilling"

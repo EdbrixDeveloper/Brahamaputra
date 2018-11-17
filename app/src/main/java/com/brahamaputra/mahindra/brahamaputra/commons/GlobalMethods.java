@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -23,6 +24,7 @@ import android.media.ThumbnailUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -1572,5 +1574,19 @@ fos.close();
     public static String replaceAllSpecialCharAtUnderscore(String stringSpecialChar){
         stringSpecialChar = stringSpecialChar.replaceAll("[^a-zA-Z0-9 -]", "_");
         return stringSpecialChar;
+    }
+
+    public static String getBattery_percentage(Context context)
+    {
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = context.registerReceiver(null, ifilter);
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float batteryPct = level / (float)scale;
+        float p = batteryPct * 100;
+
+        Log.d("Battery percentage",String.valueOf(Math.round(p)));
+
+        return String.valueOf(Math.round(p));
     }
 }

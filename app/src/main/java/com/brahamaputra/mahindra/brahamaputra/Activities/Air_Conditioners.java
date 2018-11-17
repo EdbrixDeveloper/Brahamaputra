@@ -24,14 +24,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionersData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
@@ -46,14 +49,18 @@ import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class Air_Conditioners extends BaseActivity {
@@ -88,6 +95,12 @@ public class Air_Conditioners extends BaseActivity {
     private TextView mAirConditionersTextViewNatureOfProblem;
     private EditText mAirConditionersEditTextNatureOfProblem;
 
+    private Button airCondition_button_previousReading;
+    private Button airCondition_button_nextReading;
+    //private Button airCondition_button_save;
+    private TextView airConditioners_textView_AcNumber;
+    private LinearLayout linearLayout_container;
+
 
     String str_noOfAirConditionersACprovided;
     String str_numberOfACInWorkingCondition;
@@ -103,8 +116,9 @@ public class Air_Conditioners extends BaseActivity {
     private String ticketId = "28131";
     private String ticketName = "28131";
     private HotoTransactionData hotoTransactionData;
-    private AirConditionersData airConditionersData;
-    private String base64StringQRCodeScan = "eji39jjj";
+    private ArrayList<AirConditionersData> airConditionersData;
+    private AirConditionersData airConditionersDataTemp;
+    private String base64StringQRCodeScan = "";
     private SessionManager sessionManager;
     private Uri imageFileUri;
     private String imageFileName;
@@ -118,6 +132,10 @@ public class Air_Conditioners extends BaseActivity {
     public String date_flag = "no";
 
     private AlertDialogManager alertDialogManager;
+    private AirConditionParentData dataList;
+
+    private int totalAcCount = 0;
+    private int currentPos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +156,10 @@ public class Air_Conditioners extends BaseActivity {
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Air_Conditioners.this, userId, ticketName);
 
-        setInputDetails();
+        //dataList = new ArrayList<>();
+        airConditionersData = new ArrayList<>();
+        currentPos = 0;
+        setInputDetails(currentPos);
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -162,7 +183,6 @@ public class Air_Conditioners extends BaseActivity {
                         != PackageManager.PERMISSION_GRANTED) {
 
                     if (getFromPref(Air_Conditioners.this, ALLOW_KEY)) {
-
                         showSettingsAlert();
 
                     } else if (ContextCompat.checkSelfPermission(Air_Conditioners.this,
@@ -181,7 +201,8 @@ public class Air_Conditioners extends BaseActivity {
                     }
                 } else {
                     //openCamera();
-                    openCameraIntent();
+                    //openCameraIntent();This Commented by Arjun On 15-12-2018 For QR Code Scan Purpose
+                    onClicked(v);
                 }
 
             }
@@ -209,6 +230,7 @@ public class Air_Conditioners extends BaseActivity {
         });
 
 
+        /*This Commented by Arjun On 15-12-2018 For QR Code Scan Purpose
         mAirConditionersButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,11 +240,26 @@ public class Air_Conditioners extends BaseActivity {
                     Toast.makeText(Air_Conditioners.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
-
-
+        });*/
     }
 
+    public void onClicked(View v) {
+
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
+
+//        Use this for more customization
+//        IntentIntegrator integrator = new IntentIntegrator(this);
+//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+//        integrator.setPrompt("Scan a barcode");
+//        integrator.setCameraId(0);  // Use a specific camera of the device
+//        integrator.setBeepEnabled(false);
+//        integrator.setBarcodeImageEnabled(true);
+//        integrator.initiateScan();
+
+    }
 
     private void assignViews() {
         mAirConditionersTextViewNoOfAirConditionersACprovided = (TextView) findViewById(R.id.airConditioners_textView_noOfAirConditionersACprovided);
@@ -254,6 +291,13 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersTextViewWorkingConditionVal = (TextView) findViewById(R.id.airConditioners_textView_workingCondition_val);
         mAirConditionersTextViewNatureOfProblem = (TextView) findViewById(R.id.airConditioners_textView_natureOfProblem);
         mAirConditionersEditTextNatureOfProblem = (EditText) findViewById(R.id.airConditioners_editText_natureOfProblem);
+
+        airCondition_button_nextReading = (Button) findViewById(R.id.airCondition_button_nextReading);
+        airCondition_button_previousReading = (Button) findViewById(R.id.airCondition_button_previousReading);
+        //airCondition_button_save = (Button) findViewById(R.id.airCondition_button_save);
+        airConditioners_textView_AcNumber = (TextView) findViewById(R.id.airConditioners_textView_AcNumber);
+        linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -275,6 +319,33 @@ public class Air_Conditioners extends BaseActivity {
 
                         str_noOfAirConditionersACprovided = item.get(position);
                         mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(str_noOfAirConditionersACprovided);
+
+                        //clear AC collection empty by select / changing value of No of Ac provided
+                        if (airConditionersData != null && airConditionersData.size() > 0) {
+                            airConditionersData.clear();
+                        }
+                        currentPos = 0;
+                        totalAcCount = 0;
+                        clearFields(currentPos);
+
+
+                        // Clear all field value and hide layout If Non AC or O //
+                        if (str_noOfAirConditionersACprovided.equals("Non AC") || str_noOfAirConditionersACprovided.equals("0")) {
+                            linearLayout_container.setVisibility(View.GONE);
+                        } else {
+                            totalAcCount = Integer.parseInt(str_noOfAirConditionersACprovided);
+                            airConditioners_textView_AcNumber.setText("Reading: #1");
+                            linearLayout_container.setVisibility(View.VISIBLE);
+                            airCondition_button_previousReading.setVisibility(View.GONE);
+                            airCondition_button_nextReading.setVisibility(View.VISIBLE);
+                            if (totalAcCount > 0 && totalAcCount == 1) {
+                                airCondition_button_nextReading.setText("Finish");
+                            } else {
+                                airCondition_button_nextReading.setText("Next Reading");
+                            }
+
+                        }
+
                     }
                 });
             }
@@ -388,6 +459,46 @@ public class Air_Conditioners extends BaseActivity {
                 });
             }
         });
+
+        airCondition_button_previousReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveACRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayACRecords(currentPos);
+                }
+            }
+        });
+        airCondition_button_nextReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos < (totalAcCount - 1)) {
+                    //Save current ac reading
+                    saveACRecords(currentPos);
+                    currentPos = currentPos + 1;
+                    //move to Next reading
+                    displayACRecords(currentPos);
+
+                } else if (currentPos == (totalAcCount - 1)) {
+                    //Save Final current reading and submit all AC data
+                    saveACRecords(currentPos);
+                    submitDetails();
+                    startActivity(new Intent(Air_Conditioners.this, Solar_Power_System.class));
+                    finish();
+                }
+            }
+        });
+       /* airCondition_button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });*/
     }
 
     private void updateLabel() {
@@ -402,7 +513,7 @@ public class Air_Conditioners extends BaseActivity {
         }
     }
 
-    private void setInputDetails() {
+    private void setInputDetails(int index) {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
@@ -410,68 +521,143 @@ public class Air_Conditioners extends BaseActivity {
                 Gson gson = new Gson();
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-                airConditionersData = hotoTransactionData.getAirConditionersData();
+                //airConditionersData = hotoTransactionData.getAirConditionersData();
+                dataList = hotoTransactionData.getAirConditionParentData();//setAirConditionersData(hotoTransactionData.getAirConditionParentData().getAirConditionersData());
+                airConditionersData.addAll(dataList.getAirConditionersData());
 
-
-                mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(airConditionersData.getNoOfACprovided());
-                mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(airConditionersData.getNumberOfACInWorkingCondition());
-                //mAirConditionersButtonQRCodeScan;
-                base64StringQRCodeScan = airConditionersData.getqRCodeScan();
-
-                // New added for image #ImageSet
-                imageFileName = airConditionersData.getQrCodeImageFileName();
-                mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileName != null && imageFileName.length() > 0) {
-                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//                             imageFileUri = Uri.fromFile(file);
-                    imageFileUri = FileProvider.getUriForFile(Air_Conditioners.this, BuildConfig.APPLICATION_ID + ".provider", file);
-                    if (imageFileUri != null) {
+                if (airConditionersData != null && airConditionersData.size() > 0) {
+                    linearLayout_container.setVisibility(View.VISIBLE);
+                    airConditioners_textView_AcNumber.setText("Reading: #1");
+                    totalAcCount = Integer.parseInt(dataList.getNoOfACprovided());
+                    mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(dataList.getNoOfACprovided());
+                    mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(dataList.getNumberOfACInWorkingCondition());
+                    //mAirConditionersButtonQRCodeScan;
+                    base64StringQRCodeScan = airConditionersData.get(index).getqRCodeScan();
+                    mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                         mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }
 
-                mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.getAssetOwner());
-                mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.getTypeOfAcSplitWindow());
-                mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.getManufacturerMakeModel());
-                mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.getAcSerialNumber());
-                mAirConditionersEditTextCapacityTr.setText(airConditionersData.getCapacityTr());
-                mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.getDateOfInstallation());
-                mAirConditionersTextViewAmcYesNoVal.setText(airConditionersData.getAmcYesNo());
-                mAirConditionersEditTextDateOfvalidityOfAmc.setText(airConditionersData.getDateOfvalidityOfAmc());
-                mAirConditionersTextViewWorkingConditionVal.setText(airConditionersData.getWorkingCondition());
-                mAirConditionersEditTextNatureOfProblem.setText(airConditionersData.getNatureOfProblem());
+                    mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.get(index).getAssetOwner());
+                    mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.get(index).getTypeOfAcSplitWindow());
+                    mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.get(index).getManufacturerMakeModel());
+                    mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.get(index).getAcSerialNumber());
+                    mAirConditionersEditTextCapacityTr.setText(airConditionersData.get(index).getCapacityTr());
+                    mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.get(index).getDateOfInstallation());
+                    mAirConditionersTextViewAmcYesNoVal.setText(airConditionersData.get(index).getAmcYesNo());
+                    mAirConditionersEditTextDateOfvalidityOfAmc.setText(airConditionersData.get(index).getDateOfvalidityOfAmc());
+                    mAirConditionersTextViewWorkingConditionVal.setText(airConditionersData.get(index).getWorkingCondition());
+                    mAirConditionersEditTextNatureOfProblem.setText(airConditionersData.get(index).getNatureOfProblem());
+
+                    airCondition_button_previousReading.setVisibility(View.GONE);
+                    airCondition_button_nextReading.setVisibility(View.VISIBLE);
+
+                    if (airConditionersData.size() > 1) {
+                        airCondition_button_nextReading.setText("Next Reading");
+                    } else {
+                        airCondition_button_nextReading.setText("Finish");
+                    }
+
+
+                }
 
             } else {
                 Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                linearLayout_container.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            //showToast(e.getMessage().toString());
         }
+    }
+
+
+    private void saveACRecords(int pos) {
+
+        String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
+        String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
+        String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
+        String manufacturerMakeModel = mAirConditionersEditTextManufacturerMakeModel.getText().toString().trim();
+        String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
+        String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
+        String dateOfInstallation = mAirConditionersEditTextDateOfInstallation.getText().toString().trim();
+        String amcYesNo = mAirConditionersTextViewAmcYesNoVal.getText().toString().trim();
+        String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
+        String workingCondition = mAirConditionersTextViewWorkingConditionVal.getText().toString().trim();
+        String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();
+
+
+        //airConditionersData = new ArrayList<>();
+        AirConditionersData air_conditioners = new AirConditionersData(qRCodeScan, assetOwner, typeOfAcSplitWindow, manufacturerMakeModel, acSerialNumber, capacityTr, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem, imageFileName);
+        //airConditionersData.add(air_conditioners);
+
+        if (airConditionersData.size() > 0) {
+            if (pos == airConditionersData.size()) {
+                airConditionersData.add(air_conditioners);
+            } else if (pos < airConditionersData.size()) {
+                airConditionersData.set(pos, air_conditioners);
+            }
+        } else {
+            airConditionersData.add(air_conditioners);
+        }
+    }
+
+    private void displayACRecords(int pos) {
+
+        if (airConditionersData.size() > 0 && pos < airConditionersData.size()) {
+
+            airConditioners_textView_AcNumber.setText("Reading: #" + (pos + 1));
+
+            base64StringQRCodeScan = airConditionersData.get(pos).getqRCodeScan();
+            mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+            if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+            }
+
+            mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.get(pos).getAssetOwner());
+            mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.get(pos).getTypeOfAcSplitWindow());
+            mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.get(pos).getManufacturerMakeModel());
+            mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.get(pos).getAcSerialNumber());
+            mAirConditionersEditTextCapacityTr.setText(airConditionersData.get(pos).getCapacityTr());
+            mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.get(pos).getDateOfInstallation());
+            mAirConditionersTextViewAmcYesNoVal.setText(airConditionersData.get(pos).getAmcYesNo());
+            mAirConditionersEditTextDateOfvalidityOfAmc.setText(airConditionersData.get(pos).getDateOfvalidityOfAmc());
+            mAirConditionersTextViewWorkingConditionVal.setText(airConditionersData.get(pos).getWorkingCondition());
+            mAirConditionersEditTextNatureOfProblem.setText(airConditionersData.get(pos).getNatureOfProblem());
+
+            airCondition_button_previousReading.setVisibility(View.VISIBLE);
+            airCondition_button_nextReading.setVisibility(View.VISIBLE);
+
+        } else {
+            clearFields(pos);
+        }
+
+        if (pos > 0 && pos < (totalAcCount - 1)) {
+            airCondition_button_previousReading.setVisibility(View.VISIBLE);
+            airCondition_button_nextReading.setText("Next Reading");
+        } else if (pos > 0 && pos == (totalAcCount - 1)) {
+            airCondition_button_previousReading.setVisibility(View.VISIBLE);
+            airCondition_button_nextReading.setText("Finish");
+        } else if (pos == 0) {
+            airCondition_button_previousReading.setVisibility(View.GONE);
+            if (pos == (totalAcCount - 1)) {
+                airCondition_button_nextReading.setText("Finish");
+            } else {
+                airCondition_button_nextReading.setText("Next Reading");
+            }
+        }
+
     }
 
 
     private void submitDetails() {
         try {
-            //hotoTransactionData.setTicketNo(ticketName);
-
             String noOfACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim();
             String numberOfACInWorkingCondition = mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim();
-            String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
-            String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
-            String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
-            String manufacturerMakeModel = mAirConditionersEditTextManufacturerMakeModel.getText().toString().trim();
-            String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
-            String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
-            String dateOfInstallation = mAirConditionersEditTextDateOfInstallation.getText().toString().trim();
-            String amcYesNo = mAirConditionersTextViewAmcYesNoVal.getText().toString().trim();
-            String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
-            String workingCondition = mAirConditionersTextViewWorkingConditionVal.getText().toString().trim();
-            String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();
+            dataList = new AirConditionParentData(noOfACprovided, numberOfACInWorkingCondition, airConditionersData);
+            //airConditionersDataList.setAirConditionersDataList(dataList);
 
-
-            airConditionersData = new AirConditionersData(noOfACprovided, numberOfACInWorkingCondition, qRCodeScan, assetOwner, typeOfAcSplitWindow, manufacturerMakeModel, acSerialNumber, capacityTr, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem, imageFileName);
-
-            hotoTransactionData.setAirConditionersData(airConditionersData);
+            hotoTransactionData.setAirConditionParentData(dataList);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
@@ -480,7 +666,34 @@ public class Air_Conditioners extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void clearFields(int indexPos) {
+
+        airConditioners_textView_AcNumber.setText("Reading: #" + (indexPos + 1));
+
+        mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+        mAirConditionersTextViewAssetOwnerVal.setText("");
+        mAirConditionersTextViewTypeOfAcSpliWindowVal.setText("");
+        mAirConditionersEditTextManufacturerMakeModel.setText("");
+        mAirConditionersEditTextAcSerialNumber.setText("");
+        mAirConditionersEditTextCapacityTr.setText("");
+        mAirConditionersEditTextDateOfInstallation.setText("");
+        mAirConditionersTextViewAmcYesNoVal.setText("");
+        mAirConditionersEditTextDateOfvalidityOfAmc.setText("");
+        mAirConditionersTextViewWorkingConditionVal.setText("");
+        mAirConditionersEditTextNatureOfProblem.setText("");
+
+        str_sssetOwner = "";
+        str_typeOfAcSpliWindow = "";
+        str_amcYesNo = "";
+        str_workingCondition = "";
+        base64StringQRCodeScan = "";
+        if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+            mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+        } else {
+            mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -498,16 +711,22 @@ public class Air_Conditioners extends BaseActivity {
                 //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, Solar_Power_System.class));
-                finish();
+
+                str_noOfAirConditionersACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString();
+
+                if (str_noOfAirConditionersACprovided == null || str_noOfAirConditionersACprovided.equals("")) {
+                    showToast("Please select no of ac");
+                } else {
+                    submitDetails();
+                    startActivity(new Intent(this, Solar_Power_System.class));
+                    finish();
+                }
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     //////////////////////
     //Camera//
@@ -534,6 +753,21 @@ public class Air_Conditioners extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+            if (result.getContents() == null) {
+                base64StringQRCodeScan = "";
+                showToast("Cancelled");
+            } else {
+                base64StringQRCodeScan = result.getContents();
+                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                    mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+        /*This Commented by Arjun On 15-12-2018 For QR Code Scan Purpose
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {
@@ -544,7 +778,7 @@ public class Air_Conditioners extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringQRCodeScan = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    base64StringQRCodeScan = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                     mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -554,7 +788,7 @@ public class Air_Conditioners extends BaseActivity {
                 imageFileUri = null;
                 mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
             }
-        }
+        }*/
     }
 
     private void openCamera() {
@@ -643,14 +877,10 @@ public class Air_Conditioners extends BaseActivity {
                 dialog.show();
             }
         }).show();
-
-
     }
 
-
     @Override
-    public void onRequestPermissionsResult
-            (int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CAMERA: {
                 for (int i = 0, len = permissions.length; i < len; i++) {
@@ -680,8 +910,7 @@ public class Air_Conditioners extends BaseActivity {
         }
     }
 
-    public static void saveToPreferences(Context context, String key,
-                                         Boolean allowed) {
+    public static void saveToPreferences(Context context, String key, Boolean allowed) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = myPrefs.edit();

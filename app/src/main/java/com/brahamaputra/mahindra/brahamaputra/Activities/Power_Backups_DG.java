@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ import android.widget.ImageView;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -42,6 +44,7 @@ import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -49,6 +52,8 @@ import android.widget.Toast;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -150,7 +155,7 @@ public class Power_Backups_DG extends BaseActivity {
     private String ticketId = "28131";
     private String ticketName = "28131";
     private HotoTransactionData hotoTransactionData;
-    private PowerBackupsDGData powerBackupsDGData;
+    private ArrayList<PowerBackupsDGData> powerBackupsDGData;
     private String base64StringQRCodeScan = "eji39jjj";
 
     private SessionManager sessionManager;
@@ -166,6 +171,14 @@ public class Power_Backups_DG extends BaseActivity {
     public String date_flag = "no";
 
     private AlertDialogManager alertDialogManager;
+
+    private PowerBackupsDGParentData powerBackupsDGParentData;
+    private int totalCount = 0;
+    private int currentPos = 0;
+    private Button powerBackupsDg_button_previousReading;
+    private Button powerBackupsDg_button_nextReading;
+    private TextView powerBackupsDg_textView_Number;
+    private LinearLayout linearLayout_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +196,11 @@ public class Power_Backups_DG extends BaseActivity {
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Power_Backups_DG.this, userId, ticketName);
-        setInputDetails();
+        //setInputDetails();
+
+        powerBackupsDGData = new ArrayList<>();
+        currentPos = 0;
+        setInputDetails(currentPos);
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -226,7 +243,8 @@ public class Power_Backups_DG extends BaseActivity {
                     }
                 } else {
                     //openCamera();
-                    openCameraIntent();
+                    //openCameraIntent();
+                    onClicked(v);
                 }
 
             }
@@ -329,6 +347,12 @@ public class Power_Backups_DG extends BaseActivity {
         mPowerBackupsDgTextViewWorkingConditionVal = (TextView) findViewById(R.id.powerBackupsDg_textView_workingCondition_val);
         mPowerBackupsDgTextViewNatureOfProblem = (TextView) findViewById(R.id.powerBackupsDg_textView_natureOfProblem);
         mPowerBackupsDgEditTextNatureOfProblem = (EditText) findViewById(R.id.powerBackupsDg_editText_natureOfProblem);
+
+        powerBackupsDg_button_nextReading = (Button) findViewById(R.id.powerBackupsDg_button_nextReading);
+        powerBackupsDg_button_previousReading = (Button) findViewById(R.id.powerBackupsDg_button_previousReading);
+        powerBackupsDg_textView_Number = (TextView) findViewById(R.id.powerBackupsDg_textView_Number);
+        linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -350,6 +374,31 @@ public class Power_Backups_DG extends BaseActivity {
 
                         str_noOfEngineAlternatorSetsprovided = item.get(position);
                         mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(str_noOfEngineAlternatorSetsprovided);
+
+                        //clear AC collection empty by select / changing value of No of Ac provided
+                        if (powerBackupsDGData != null && powerBackupsDGData.size() > 0) {
+                            powerBackupsDGData.clear();
+                        }
+                        currentPos = 0;
+                        totalCount = 0;
+                        clearFields(currentPos);
+                        totalCount = Integer.parseInt(str_noOfEngineAlternatorSetsprovided);
+
+                        // Clear all field value and hide layout If Non AC or O //
+                        if (totalCount > 0) {
+
+                            powerBackupsDg_textView_Number.setText("Reading: #1");
+                            linearLayout_container.setVisibility(View.VISIBLE);
+                            powerBackupsDg_button_previousReading.setVisibility(View.GONE);
+                            powerBackupsDg_button_nextReading.setVisibility(View.VISIBLE);
+                            if (totalCount > 0 && totalCount == 1) {
+                                powerBackupsDg_button_nextReading.setText("Finish");
+                            } else {
+                                powerBackupsDg_button_nextReading.setText("Next Reading");
+                            }
+                        } else {
+                            linearLayout_container.setVisibility(View.GONE);
+                        }
                     }
                 });
             }
@@ -688,6 +737,44 @@ public class Power_Backups_DG extends BaseActivity {
                 });
             }
         });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        powerBackupsDg_button_nextReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (currentPos < (totalCount - 1)) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos + 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+
+                } else if (currentPos == (totalCount - 1)) {
+                    //Save Final current reading and submit all AC data
+                    saveRecords(currentPos);
+                    submitDetails();
+                    startActivity(new Intent(Power_Backups_DG.this, Shelter.class));
+                    finish();
+                }
+
+            }
+        });
+
+        powerBackupsDg_button_previousReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+                }
+            }
+        });
+
     }
 
     private void updateLabel() {
@@ -699,117 +786,6 @@ public class Power_Backups_DG extends BaseActivity {
             mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText(sdf.format(myCalendar.getTime()));
         } else {
 
-        }
-    }
-
-
-    private void setInputDetails() {
-        try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-
-                Gson gson = new Gson();
-                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-                powerBackupsDGData = hotoTransactionData.getPowerBackupsDGData();
-
-                mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(powerBackupsDGData.getNoOfEngineAlternator());
-                mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(powerBackupsDGData.getNumberOfWorkingDg());
-                //mPowerBackupsDgButtonQRCodeScan.setText(powerBackupsDGData.getAvailable());
-
-                base64StringQRCodeScan = powerBackupsDGData.getqRCodeScan();
-                // New added for image #ImageSet
-                imageFileName = powerBackupsDGData.getQrCodeImageFileName();
-                mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileName != null && imageFileName.length() > 0) {
-                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//                             imageFileUri = Uri.fromFile(file);
-                    imageFileUri = FileProvider.getUriForFile(Power_Backups_DG.this, BuildConfig.APPLICATION_ID + ".provider", file);
-                    if (imageFileUri != null) {
-                        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                    }
-                }
-
-                mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.getAssetOwner());
-                mPowerBackupsDgTextViewManufacturerMakeModelVal.setText(powerBackupsDGData.getManufacturerMakeModel());
-                mPowerBackupsDgTextViewCapacityInKvaVal.setText(powerBackupsDGData.getCapacityInKva());
-                mPowerBackupsDgTextViewAutoManualVal.setText(powerBackupsDGData.getAutoManual());
-                mPowerBackupsDgEditTextDieselTankCapacity.setText(powerBackupsDGData.getDieselTankCapacity());
-                mPowerBackupsDgEditTextDateOfInstallation.setText(powerBackupsDGData.getDateOfInstallation());
-                mPowerBackupsDgEditTextAverageDieselConsumption.setText(powerBackupsDGData.getAverageDieselConsumption());
-                mPowerBackupsDgTextViewAmcVal.setText(powerBackupsDGData.getAmc());
-                mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText(powerBackupsDGData.getDateOfvalidityOfAmc());
-                mPowerBackupsDgTextViewDgWorkingTypeVal.setText(powerBackupsDGData.getDgWorkingType());
-                mPowerBackupsDgEditTextDgHmrReading.setText(powerBackupsDGData.getDgHmrReading());
-                mPowerBackupsDgEditTextDgEngineSerialNumber.setText(powerBackupsDGData.getDgEngineSerialNo());
-                mPowerBackupsDgTextViewDgMainAlternatorTypeVal.setText(powerBackupsDGData.getDgMainAltType());
-                mPowerBackupsDgTextViewDgMainAlternatorMakeVal.setText(powerBackupsDGData.getDgMainAltMake());
-                mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.setText(powerBackupsDGData.getDgMainAltSerialNo());
-                mPowerBackupsDgTextViewDgCanopyStatusVal.setText(powerBackupsDGData.getDgCanopyStatus());
-                mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setText(powerBackupsDGData.getDgStartingBatteryStatus());
-                mPowerBackupsDgTextViewChargingAlternatorVal.setText(powerBackupsDGData.getChargingAlternator());
-                mPowerBackupsDgTextViewBatteryChargerVal.setText(powerBackupsDGData.getBatteryCharger());
-                mPowerBackupsDgEditTextPresentDieselStock.setText(powerBackupsDGData.getPresentDieselStock());
-                mPowerBackupsDgEditTextGcuRunHrs.setText(powerBackupsDGData.getGcuRunHrs());
-                mPowerBackupsDgEditTextGcuKwh.setText(powerBackupsDGData.getGcuKwh());
-                mPowerBackupsDgTextViewDgAvrWorkingStatusVal.setText(powerBackupsDGData.getDgAvrWorkingStatus());
-                mPowerBackupsDgTextViewFuelTankPositionVal.setText(powerBackupsDGData.getFuelTankPosition());
-                mPowerBackupsDgTextViewWorkingConditionVal.setText(powerBackupsDGData.getWorkingCondition());
-                mPowerBackupsDgEditTextNatureOfProblem.setText(powerBackupsDGData.getNatureOfProblem());
-
-            } else {
-                Toast.makeText(Power_Backups_DG.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void submitDetails() {
-        try {
-            //hotoTransactionData.setTicketNo(ticketName);
-
-
-            String noOfEngineAlternator = mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim();
-            String numberOfWorkingDg = mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim();
-            String qRCodeScan = base64StringQRCodeScan;
-            //private ImageView mPowerBackupsDgButtonQRCodeScan.getText().toString().trim();
-            String assetOwner = mPowerBackupsDgTextViewAssetOwnerVal.getText().toString().trim();
-            String manufacturerMakeModel = mPowerBackupsDgTextViewManufacturerMakeModelVal.getText().toString().trim();
-            String capacityInKva = mPowerBackupsDgTextViewCapacityInKvaVal.getText().toString().trim();
-            String autoManual = mPowerBackupsDgTextViewAutoManualVal.getText().toString().trim();
-            String dieselTankCapacity = mPowerBackupsDgEditTextDieselTankCapacity.getText().toString().trim();
-            String dateOfInstallation = mPowerBackupsDgEditTextDateOfInstallation.getText().toString().trim();
-            String averageDieselConsumption = mPowerBackupsDgEditTextAverageDieselConsumption.getText().toString().trim();
-            String amc = mPowerBackupsDgTextViewAmcVal.getText().toString().trim();
-            String dateOfvalidityOfAmc = mPowerBackupsDgEditTextDateOfvalidityOfAmc.getText().toString().trim();
-            String dgWorkingType = mPowerBackupsDgTextViewDgWorkingTypeVal.getText().toString().trim();
-            String dgHmrReading = mPowerBackupsDgEditTextDgHmrReading.getText().toString().trim();
-            String dgEngineSerialNo = mPowerBackupsDgEditTextDgEngineSerialNumber.getText().toString().trim();
-            String dgMainAltType = mPowerBackupsDgTextViewDgMainAlternatorTypeVal.getText().toString().trim();
-            String dgMainAltMake = mPowerBackupsDgTextViewDgMainAlternatorMakeVal.getText().toString().trim();
-            String dgMainAltSerialNo = mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.getText().toString().trim();
-            String dgCanopyStatus = mPowerBackupsDgTextViewDgCanopyStatusVal.getText().toString().trim();
-            String dgStartingBatteryStatus = mPowerBackupsDgTextViewDgStartingBatteryStatusVal.getText().toString().trim();
-            String chargingAlternator = mPowerBackupsDgTextViewChargingAlternatorVal.getText().toString().trim();
-            String batteryCharger = mPowerBackupsDgTextViewBatteryChargerVal.getText().toString().trim();
-            String presentDieselStock = mPowerBackupsDgEditTextPresentDieselStock.getText().toString().trim();
-            String gcuRunHrs = mPowerBackupsDgEditTextGcuRunHrs.getText().toString().trim();
-            String gcuKwh = mPowerBackupsDgEditTextGcuKwh.getText().toString().trim();
-            String dgAvrWorkingStatus = mPowerBackupsDgTextViewDgAvrWorkingStatusVal.getText().toString().trim();
-            String fuelTankPosition = mPowerBackupsDgTextViewFuelTankPositionVal.getText().toString().trim();
-            String workingCondition = mPowerBackupsDgTextViewWorkingConditionVal.getText().toString().trim();
-            String natureOfProblem = mPowerBackupsDgEditTextNatureOfProblem.getText().toString().trim();
-
-            powerBackupsDGData = new PowerBackupsDGData(noOfEngineAlternator, numberOfWorkingDg, qRCodeScan, assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
-            hotoTransactionData.setPowerBackupsDGData(powerBackupsDGData);
-
-            Gson gson2 = new GsonBuilder().create();
-            String jsonString = gson2.toJson(hotoTransactionData);
-            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -924,7 +900,7 @@ public class Power_Backups_DG extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
+        /*if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {
                 try {
@@ -934,7 +910,7 @@ public class Power_Backups_DG extends BaseActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringQRCodeScan = "qwer";//Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    base64StringQRCodeScan = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                     mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -943,6 +919,21 @@ public class Power_Backups_DG extends BaseActivity {
                 imageFileName = "";
                 imageFileUri = null;
                 mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+            }
+        }*/
+
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+            if (result.getContents() == null) {
+                base64StringQRCodeScan = "";
+                showToast("Cancelled");
+            } else {
+                base64StringQRCodeScan = result.getContents();
+                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                    mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
@@ -1016,6 +1007,277 @@ public class Power_Backups_DG extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void setInputDetails(int index) {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                powerBackupsDGParentData = hotoTransactionData.getPowerBackupsDGParentData();
+                powerBackupsDGData.addAll(powerBackupsDGParentData.getPowerBackupsDGData());
+
+                if (powerBackupsDGData != null && powerBackupsDGData.size() > 0) {
+
+                    linearLayout_container.setVisibility(View.VISIBLE);
+                    powerBackupsDg_textView_Number.setText("Reading: #1");
+                    totalCount = Integer.parseInt(powerBackupsDGParentData.getNoOfEngineAlternator());
+
+                    mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(powerBackupsDGParentData.getNoOfEngineAlternator());
+                    mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(powerBackupsDGParentData.getNumberOfWorkingDg());
+
+                    base64StringQRCodeScan = powerBackupsDGData.get(index).getqRCodeScan();
+                    mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+
+                    // New added for image #ImageSet
+                    imageFileName = powerBackupsDGData.get(index).getQrCodeImageFileName();
+                    mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+                    if (imageFileName != null && imageFileName.length() > 0) {
+                        File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+//                             imageFileUri = Uri.fromFile(file);
+                        imageFileUri = FileProvider.getUriForFile(Power_Backups_DG.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                        if (imageFileUri != null) {
+                            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.get(index).getAssetOwner());
+                    mPowerBackupsDgTextViewManufacturerMakeModelVal.setText(powerBackupsDGData.get(index).getManufacturerMakeModel());
+                    mPowerBackupsDgTextViewCapacityInKvaVal.setText(powerBackupsDGData.get(index).getCapacityInKva());
+                    mPowerBackupsDgTextViewAutoManualVal.setText(powerBackupsDGData.get(index).getAutoManual());
+                    mPowerBackupsDgEditTextDieselTankCapacity.setText(powerBackupsDGData.get(index).getDieselTankCapacity());
+                    mPowerBackupsDgEditTextDateOfInstallation.setText(powerBackupsDGData.get(index).getDateOfInstallation());
+                    mPowerBackupsDgEditTextAverageDieselConsumption.setText(powerBackupsDGData.get(index).getAverageDieselConsumption());
+                    mPowerBackupsDgTextViewAmcVal.setText(powerBackupsDGData.get(index).getAmc());
+                    mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText(powerBackupsDGData.get(index).getDateOfvalidityOfAmc());
+                    mPowerBackupsDgTextViewDgWorkingTypeVal.setText(powerBackupsDGData.get(index).getDgWorkingType());
+                    mPowerBackupsDgEditTextDgHmrReading.setText(powerBackupsDGData.get(index).getDgHmrReading());
+                    mPowerBackupsDgEditTextDgEngineSerialNumber.setText(powerBackupsDGData.get(index).getDgEngineSerialNo());
+                    mPowerBackupsDgTextViewDgMainAlternatorTypeVal.setText(powerBackupsDGData.get(index).getDgMainAltType());
+                    mPowerBackupsDgTextViewDgMainAlternatorMakeVal.setText(powerBackupsDGData.get(index).getDgMainAltMake());
+                    mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.setText(powerBackupsDGData.get(index).getDgMainAltSerialNo());
+                    mPowerBackupsDgTextViewDgCanopyStatusVal.setText(powerBackupsDGData.get(index).getDgCanopyStatus());
+                    mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setText(powerBackupsDGData.get(index).getDgStartingBatteryStatus());
+                    mPowerBackupsDgTextViewChargingAlternatorVal.setText(powerBackupsDGData.get(index).getChargingAlternator());
+                    mPowerBackupsDgTextViewBatteryChargerVal.setText(powerBackupsDGData.get(index).getBatteryCharger());
+                    mPowerBackupsDgEditTextPresentDieselStock.setText(powerBackupsDGData.get(index).getPresentDieselStock());
+                    mPowerBackupsDgEditTextGcuRunHrs.setText(powerBackupsDGData.get(index).getGcuRunHrs());
+                    mPowerBackupsDgEditTextGcuKwh.setText(powerBackupsDGData.get(index).getGcuKwh());
+                    mPowerBackupsDgTextViewDgAvrWorkingStatusVal.setText(powerBackupsDGData.get(index).getDgAvrWorkingStatus());
+                    mPowerBackupsDgTextViewFuelTankPositionVal.setText(powerBackupsDGData.get(index).getFuelTankPosition());
+                    mPowerBackupsDgTextViewWorkingConditionVal.setText(powerBackupsDGData.get(index).getWorkingCondition());
+                    mPowerBackupsDgEditTextNatureOfProblem.setText(powerBackupsDGData.get(index).getNatureOfProblem());
+
+                    powerBackupsDg_button_previousReading.setVisibility(View.GONE);
+                    powerBackupsDg_button_nextReading.setVisibility(View.VISIBLE);
+
+                    if (powerBackupsDGData.size() > 1) {
+                        powerBackupsDg_button_nextReading.setText("Next Reading");
+                    } else {
+                        powerBackupsDg_button_nextReading.setText("Finish");
+                    }
+                }
+
+            } else {
+                Toast.makeText(Power_Backups_DG.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                linearLayout_container.setVisibility(View.GONE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            String noOfEngineAlternator = mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim();
+            String numberOfWorkingDg = mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim();
+
+            powerBackupsDGParentData = new PowerBackupsDGParentData(noOfEngineAlternator, numberOfWorkingDg, powerBackupsDGData);
+            hotoTransactionData.setPowerBackupsDGParentData(powerBackupsDGParentData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveRecords(int pos) {
+        String qRCodeScan = base64StringQRCodeScan;
+        //private ImageView mPowerBackupsDgButtonQRCodeScan.getText().toString().trim();
+        String assetOwner = mPowerBackupsDgTextViewAssetOwnerVal.getText().toString().trim();
+        String manufacturerMakeModel = mPowerBackupsDgTextViewManufacturerMakeModelVal.getText().toString().trim();
+        String capacityInKva = mPowerBackupsDgTextViewCapacityInKvaVal.getText().toString().trim();
+        String autoManual = mPowerBackupsDgTextViewAutoManualVal.getText().toString().trim();
+        String dieselTankCapacity = mPowerBackupsDgEditTextDieselTankCapacity.getText().toString().trim();
+        String dateOfInstallation = mPowerBackupsDgEditTextDateOfInstallation.getText().toString().trim();
+        String averageDieselConsumption = mPowerBackupsDgEditTextAverageDieselConsumption.getText().toString().trim();
+        String amc = mPowerBackupsDgTextViewAmcVal.getText().toString().trim();
+        String dateOfvalidityOfAmc = mPowerBackupsDgEditTextDateOfvalidityOfAmc.getText().toString().trim();
+        String dgWorkingType = mPowerBackupsDgTextViewDgWorkingTypeVal.getText().toString().trim();
+        String dgHmrReading = mPowerBackupsDgEditTextDgHmrReading.getText().toString().trim();
+        String dgEngineSerialNo = mPowerBackupsDgEditTextDgEngineSerialNumber.getText().toString().trim();
+        String dgMainAltType = mPowerBackupsDgTextViewDgMainAlternatorTypeVal.getText().toString().trim();
+        String dgMainAltMake = mPowerBackupsDgTextViewDgMainAlternatorMakeVal.getText().toString().trim();
+        String dgMainAltSerialNo = mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.getText().toString().trim();
+        String dgCanopyStatus = mPowerBackupsDgTextViewDgCanopyStatusVal.getText().toString().trim();
+        String dgStartingBatteryStatus = mPowerBackupsDgTextViewDgStartingBatteryStatusVal.getText().toString().trim();
+        String chargingAlternator = mPowerBackupsDgTextViewChargingAlternatorVal.getText().toString().trim();
+        String batteryCharger = mPowerBackupsDgTextViewBatteryChargerVal.getText().toString().trim();
+        String presentDieselStock = mPowerBackupsDgEditTextPresentDieselStock.getText().toString().trim();
+        String gcuRunHrs = mPowerBackupsDgEditTextGcuRunHrs.getText().toString().trim();
+        String gcuKwh = mPowerBackupsDgEditTextGcuKwh.getText().toString().trim();
+        String dgAvrWorkingStatus = mPowerBackupsDgTextViewDgAvrWorkingStatusVal.getText().toString().trim();
+        String fuelTankPosition = mPowerBackupsDgTextViewFuelTankPositionVal.getText().toString().trim();
+        String workingCondition = mPowerBackupsDgTextViewWorkingConditionVal.getText().toString().trim();
+        String natureOfProblem = mPowerBackupsDgEditTextNatureOfProblem.getText().toString().trim();
+
+        String imageFileName = "";
+
+
+        PowerBackupsDGData obj_powerBackupsDGData = new PowerBackupsDGData(qRCodeScan, assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
+        if (powerBackupsDGData.size() > 0) {
+            if (pos == powerBackupsDGData.size()) {
+                powerBackupsDGData.add(obj_powerBackupsDGData);
+            } else if (pos < powerBackupsDGData.size()) {
+                powerBackupsDGData.set(pos, obj_powerBackupsDGData);
+            }
+        } else {
+            powerBackupsDGData.add(obj_powerBackupsDGData);
+        }
+    }
+
+    private void displayRecords(int pos) {
+        if (powerBackupsDGData.size() > 0 && pos < powerBackupsDGData.size()) {
+
+            powerBackupsDg_textView_Number.setText("Reading: #" + (pos + 1));
+
+            base64StringQRCodeScan = powerBackupsDGData.get(pos).getqRCodeScan();
+            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+            if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+            }
+
+            mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.get(pos).getAssetOwner());
+            mPowerBackupsDgTextViewManufacturerMakeModelVal.setText(powerBackupsDGData.get(pos).getManufacturerMakeModel());
+            mPowerBackupsDgTextViewCapacityInKvaVal.setText(powerBackupsDGData.get(pos).getCapacityInKva());
+            mPowerBackupsDgTextViewAutoManualVal.setText(powerBackupsDGData.get(pos).getAutoManual());
+            mPowerBackupsDgEditTextDieselTankCapacity.setText(powerBackupsDGData.get(pos).getDieselTankCapacity());
+            mPowerBackupsDgEditTextDateOfInstallation.setText(powerBackupsDGData.get(pos).getDateOfInstallation());
+            mPowerBackupsDgEditTextAverageDieselConsumption.setText(powerBackupsDGData.get(pos).getAverageDieselConsumption());
+            mPowerBackupsDgTextViewAmcVal.setText(powerBackupsDGData.get(pos).getAmc());
+            mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText(powerBackupsDGData.get(pos).getDateOfvalidityOfAmc());
+            mPowerBackupsDgTextViewDgWorkingTypeVal.setText(powerBackupsDGData.get(pos).getDgWorkingType());
+            mPowerBackupsDgEditTextDgHmrReading.setText(powerBackupsDGData.get(pos).getDgHmrReading());
+            mPowerBackupsDgEditTextDgEngineSerialNumber.setText(powerBackupsDGData.get(pos).getDgEngineSerialNo());
+            mPowerBackupsDgTextViewDgMainAlternatorTypeVal.setText(powerBackupsDGData.get(pos).getDgMainAltType());
+            mPowerBackupsDgTextViewDgMainAlternatorMakeVal.setText(powerBackupsDGData.get(pos).getDgMainAltMake());
+            mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.setText(powerBackupsDGData.get(pos).getDgMainAltSerialNo());
+            mPowerBackupsDgTextViewDgCanopyStatusVal.setText(powerBackupsDGData.get(pos).getDgCanopyStatus());
+            mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setText(powerBackupsDGData.get(pos).getDgStartingBatteryStatus());
+            mPowerBackupsDgTextViewChargingAlternatorVal.setText(powerBackupsDGData.get(pos).getChargingAlternator());
+            mPowerBackupsDgTextViewBatteryChargerVal.setText(powerBackupsDGData.get(pos).getBatteryCharger());
+            mPowerBackupsDgEditTextPresentDieselStock.setText(powerBackupsDGData.get(pos).getPresentDieselStock());
+            mPowerBackupsDgEditTextGcuRunHrs.setText(powerBackupsDGData.get(pos).getGcuRunHrs());
+            mPowerBackupsDgEditTextGcuKwh.setText(powerBackupsDGData.get(pos).getGcuKwh());
+            mPowerBackupsDgTextViewDgAvrWorkingStatusVal.setText(powerBackupsDGData.get(pos).getDgAvrWorkingStatus());
+            mPowerBackupsDgTextViewFuelTankPositionVal.setText(powerBackupsDGData.get(pos).getFuelTankPosition());
+            mPowerBackupsDgTextViewWorkingConditionVal.setText(powerBackupsDGData.get(pos).getWorkingCondition());
+            mPowerBackupsDgEditTextNatureOfProblem.setText(powerBackupsDGData.get(pos).getNatureOfProblem());
+
+            powerBackupsDg_button_previousReading.setVisibility(View.VISIBLE);
+            powerBackupsDg_button_nextReading.setVisibility(View.VISIBLE);
+        } else {
+            clearFields(pos);
+        }
+
+        if (pos > 0 && pos < (totalCount - 1)) {
+            powerBackupsDg_button_previousReading.setVisibility(View.VISIBLE);
+            powerBackupsDg_button_nextReading.setText("Next Reading");
+        } else if (pos > 0 && pos == (totalCount - 1)) {
+            powerBackupsDg_button_previousReading.setVisibility(View.VISIBLE);
+            powerBackupsDg_button_nextReading.setText("Finish");
+        } else if (pos == 0) {
+            powerBackupsDg_button_previousReading.setVisibility(View.GONE);
+            if (pos == (totalCount - 1)) {
+                powerBackupsDg_button_nextReading.setText("Finish");
+            } else {
+                powerBackupsDg_button_nextReading.setText("Next Reading");
+            }
+        }
+
+    }
+
+    public void clearFields(int indexPos) {
+        powerBackupsDg_textView_Number.setText("Reading: #" + (indexPos + 1));
+        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+
+        mPowerBackupsDgTextViewAssetOwnerVal.setText("");
+        mPowerBackupsDgTextViewManufacturerMakeModelVal.setText("");
+        mPowerBackupsDgTextViewCapacityInKvaVal.setText("");
+        mPowerBackupsDgTextViewAutoManualVal.setText("");
+        mPowerBackupsDgEditTextDieselTankCapacity.setText("");
+        mPowerBackupsDgEditTextDateOfInstallation.setText("");
+        mPowerBackupsDgEditTextAverageDieselConsumption.setText("");
+        mPowerBackupsDgTextViewAmcVal.setText("");
+        mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText("");
+        mPowerBackupsDgTextViewDgWorkingTypeVal.setText("");
+        mPowerBackupsDgEditTextDgHmrReading.setText("");
+        mPowerBackupsDgEditTextDgEngineSerialNumber.setText("");
+        mPowerBackupsDgTextViewDgMainAlternatorTypeVal.setText("");
+        mPowerBackupsDgTextViewDgMainAlternatorMakeVal.setText("");
+        mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.setText("");
+        mPowerBackupsDgTextViewDgCanopyStatusVal.setText("");
+        mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setText("");
+        mPowerBackupsDgTextViewChargingAlternatorVal.setText("");
+        mPowerBackupsDgTextViewBatteryChargerVal.setText("");
+        mPowerBackupsDgEditTextPresentDieselStock.setText("");
+        mPowerBackupsDgEditTextGcuRunHrs.setText("");
+        mPowerBackupsDgEditTextGcuKwh.setText("");
+        mPowerBackupsDgTextViewDgAvrWorkingStatusVal.setText("");
+        mPowerBackupsDgTextViewFuelTankPositionVal.setText("");
+        mPowerBackupsDgTextViewWorkingConditionVal.setText("");
+        mPowerBackupsDgEditTextNatureOfProblem.setText("");
+
+
+        str_assetOwner = "";
+        str_manufacturerMakeModel = "";
+        str_capacityInKva = "";
+        str_autoManual = "";
+        str_amc = "";
+        str_dgWorkingType = "";
+        str_dgMainAlternatorType = "";
+        str_dgMainAlternatorMake = "";
+        str_DgCanopyStatus = "";
+        str_dgStartingBatteryStatus = "";
+        str_chargingAlternator = "";
+        str_batteryCharger = "";
+        str_dgAvrWorkingStatus = "";
+        str_fuelTankPosition = "";
+        str_workingCondition = "";
+
+        if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+        } else {
+            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+        }
+    }
+
+    public void onClicked(View v) {
+
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
     }
 
 

@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class AirConditionersData {
 
-    @SerializedName("noOfACprovided")
+   /* @SerializedName("noOfACprovided")
     String noOfACprovided;
 
     @SerializedName("numberOfACInWorkingCondition")
-    String numberOfACInWorkingCondition;
+    String numberOfACInWorkingCondition;*/
 
     @SerializedName("qRCodeScan")
     String qRCodeScan;
@@ -47,8 +47,8 @@ public class AirConditionersData {
     private Boolean isSubmited;
 
     public AirConditionersData() {
-        this.noOfACprovided = "";
-        this.numberOfACInWorkingCondition = "";
+        //this.noOfACprovided = "";
+       // this.numberOfACInWorkingCondition = "";
         this.qRCodeScan = "";
         this.assetOwner = "";
         this.typeOfAcSplitWindow = "";
@@ -67,9 +67,9 @@ public class AirConditionersData {
     String qrCodeImageFileName;
 
 
-    public AirConditionersData(String noOfACprovided, String numberOfACInWorkingCondition, String qRCodeScan, String assetOwner, String typeOfAcSplitWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
-        this.noOfACprovided = noOfACprovided;
-        this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
+    public AirConditionersData(String qRCodeScan, String assetOwner, String typeOfAcSplitWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
+       // this.noOfACprovided = noOfACprovided;
+       // this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
         this.typeOfAcSplitWindow = typeOfAcSplitWindow;
@@ -85,7 +85,7 @@ public class AirConditionersData {
         this.isSubmited=true;
     }
 
-    public String getNoOfACprovided() {
+   /* public String getNoOfACprovided() {
         return noOfACprovided;
     }
 
@@ -99,7 +99,7 @@ public class AirConditionersData {
 
     public void setNumberOfACInWorkingCondition(String numberOfACInWorkingCondition) {
         this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
-    }
+    }*/
 
     public String getqRCodeScan() {
         return qRCodeScan;

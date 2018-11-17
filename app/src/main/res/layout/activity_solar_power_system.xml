@@ -23,46 +23,6 @@
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_QRCodeScan"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="QR Code Scan" />
-
-
-                <ImageView
-                    android:id="@+id/solarPowerSystem_button_QRCodeScan"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:padding="2dp"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp" />
-
-                <ImageView
-                    android:id="@+id/solarPowerSystem_button_QRCodeScanView"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:padding="2dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/view_image"
-                    android:visibility="gone" />
-
-                <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_available"
@@ -82,6 +42,57 @@
                     android:hint="Select"
                     android:textAlignment="viewStart" />
 
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_QRCodeScan"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="QR Code Scan" />
+
+
+                <ImageView
+                    android:id="@+id/solarPowerSystem_button_QRCodeScan"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <!--<ImageView
+                    android:id="@+id/solarPowerSystem_button_QRCodeScanView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />-->
+
+                <ImageView
+                    android:id="@+id/solarPowerSystem_button_QRCodeScanView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/baseline_done_black_18dp"
+                    android:visibility="gone" />
+
+                <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
 
             </LinearLayout>
 

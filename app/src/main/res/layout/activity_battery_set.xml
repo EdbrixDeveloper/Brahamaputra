@@ -64,371 +64,440 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    
+
                     android:textAlignment="viewStart"
                     android:hint="Select"></TextView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/batterySet_textView_QRCodeScan"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="QR Code Scan"
-
-                    />
-
-                <ImageView
-                    android:id="@+id/batterySet_button_QRCodeScan"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp" />
-
-                <ImageView
-                    android:id="@+id/batterySet_button_QRCodeScanView"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:padding="2dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/view_image" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/batterySet_textView_assetOwner"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Asset Owner" />
-
-                <TextView
-                    android:id="@+id/batterySet_textView_assetOwner_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    
-                    android:textAlignment="viewStart"
-                     android:hint="Select"></TextView>
-
 
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/linearLayout_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-                <!--style="@style/FontStyle"-->
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/app_normal_margin"
+                android:orientation="vertical"
+                android:visibility="gone">
+
                 <TextView
-                    android:id="@+id/powerBackupsDg_textView_dividerDesign"
-                    android:layout_width="0dp"
+                    android:id="@+id/batterySet_textView_Number"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Specifications"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"/>
+                    android:layout_margin="@dimen/app_min_margin"
+                    android:text="#1"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            </LinearLayout>
-            <!--android:layout_marginTop="100sp"-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="#a40404"
-                android:layout_marginBottom="@dimen/app_normal_margin"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#a40404" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/batterySet_textView_ManufacturerMakeModel"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Manufacturer / Make / Model" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/batterySet_textView_ManufacturerMakeModel_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    <TextView
+                        android:id="@+id/batterySet_textView_QRCodeScan"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="QR Code Scan"
 
-            </LinearLayout>
+                        />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    <ImageView
+                        android:id="@+id/batterySet_button_QRCodeScan"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
 
-                <TextView
-                    android:id="@+id/batterySet_textView_CapacityinAH"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                    <ImageView
+                        android:id="@+id/batterySet_button_QRCodeScanView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:padding="2dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:scaleType="fitCenter"
+                        android:visibility="gone"
+                        android:src="@drawable/baseline_done_black_18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Capacity in AH" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/batterySet_textView_CapacityinAH_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                   
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    <TextView
+                        android:id="@+id/batterySet_textView_assetOwner"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Asset Owner" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/batterySet_textView_assetOwner_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
 
-                <TextView
-                    android:id="@+id/batterySet_textView_TypeofBattery"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Type of Battery" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+                    <!--style="@style/FontStyle"-->
+                    <TextView
+                        android:id="@+id/powerBackupsDg_textView_dividerDesign"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Specifications"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"/>
 
-                <TextView
-                    android:id="@+id/batterySet_textView_TypeofBattery_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                </LinearLayout>
+                <!--android:layout_marginTop="100sp"-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#a40404"
+                    android:layout_marginBottom="@dimen/app_normal_margin"/>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/batterySet_textView_DateofInstallation"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Date of Installation" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/batterySet_editText_DateofInstallation"
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/batterySet_textView_ManufacturerMakeModel"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Manufacturer / Make / Model" />
+
+                    <TextView
+                        android:id="@+id/batterySet_textView_ManufacturerMakeModel_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MM/YYYY"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
+                    <TextView
+                        android:id="@+id/batterySet_textView_CapacityinAH"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Capacity in AH" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/batterySet_textView_CapacityinAH_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
 
-                <TextView
-                    android:id="@+id/batterySet_textView_Backupduration"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Back up duration"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                    />
+                    <TextView
+                        android:id="@+id/batterySet_textView_TypeofBattery"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Type of Battery" />
 
-                <EditText
-                    android:id="@+id/batterySet_editText_Backupduration"
+                    <TextView
+                        android:id="@+id/batterySet_textView_TypeofBattery_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
 
-                    android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Back up duration "
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
-                    android:imeOptions="actionNext"
-                    />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    <TextView
+                        android:id="@+id/batterySet_textView_DateofInstallation"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Date of Installation" />
 
-                <TextView
-                    android:id="@+id/batterySet_textView_PositionofBatteryBank"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/batterySet_editText_DateofInstallation"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MM/YYYY"
+                        android:inputType="none"
+                        android:textAlignment="viewStart" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Position of Battery Bank" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/batterySet_textView_PositionofBatteryBank_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    <TextView
+                        android:id="@+id/batterySet_textView_Backupduration"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Back up duration"
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                        />
 
-                <TextView
-                    android:id="@+id/batterySet_textView_BatteryBankCableSizeinSQMM"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/batterySet_editText_Backupduration"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Back up duration "
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart"
+                        android:imeOptions="actionNext"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Battery Bank Cable Size in SQMM" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/batterySet_textView_BatteryBankCableSizeinSQMM_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    <TextView
+                        android:id="@+id/batterySet_textView_PositionofBatteryBank"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Position of Battery Bank" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/batterySet_textView_PositionofBatteryBank_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
 
-                <TextView
-                    android:id="@+id/batterySet_textView_BatteryBankEarthingStatus"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Battery Bank Earthing Status" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/batterySet_textView_BatteryBankEarthingStatus_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    <TextView
+                        android:id="@+id/batterySet_textView_BatteryBankCableSizeinSQMM"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Battery Bank Cable Size in SQMM" />
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    <TextView
+                        android:id="@+id/batterySet_textView_BatteryBankCableSizeinSQMM_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
 
-                <TextView
-                    android:id="@+id/batterySet_textView_BACKUPCondition"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="BACKUP Condition" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/batterySet_textView_BACKUPCondition_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    <TextView
+                        android:id="@+id/batterySet_textView_BatteryBankEarthingStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Battery Bank Earthing Status" />
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    <TextView
+                        android:id="@+id/batterySet_textView_BatteryBankEarthingStatus_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
 
-                <TextView
-                    android:id="@+id/batterySet_textView_NatureofProblem"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Nature of Problem"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                    />
+                    <TextView
+                        android:id="@+id/batterySet_textView_BACKUPCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Backup Condition" />
 
-                <EditText
-                    android:id="@+id/batterySet_editText_NatureofProblem"
+                    <TextView
+                        android:id="@+id/batterySet_textView_BACKUPCondition_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
 
-                    android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        android:hint="Select"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Nature of Problem "
-                    android:inputType="textMultiLine"
-                    android:textAlignment="viewStart"
-                    android:imeOptions="actionDone"
-                    />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/batterySet_textView_NatureofProblem"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Nature of Problem"
+
+                        />
+
+                    <EditText
+                        android:id="@+id/batterySet_editText_NatureofProblem"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Nature of Problem "
+                        android:inputType="textMultiLine"
+                        android:textAlignment="viewStart"
+                        android:imeOptions="actionDone"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/batterySet_button_previousReading"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_min_margin"
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:text="Prev Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
+
+                    <Button
+                        android:id="@+id/batterySet_button_nextReading"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_min_margin"
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:text="Next Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

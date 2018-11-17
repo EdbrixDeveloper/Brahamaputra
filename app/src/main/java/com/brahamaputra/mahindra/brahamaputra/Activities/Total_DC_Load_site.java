@@ -75,28 +75,28 @@ public class Total_DC_Load_site extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                finish();
                 return true;
             case R.id.menuDone:
-                finish();
                 submitDetails();
                 startActivity(new Intent(this, ActiveequipmentDetails.class));
                 finish();
                 return true;
-
-
         }
         return super.onOptionsItemSelected(item);
     }

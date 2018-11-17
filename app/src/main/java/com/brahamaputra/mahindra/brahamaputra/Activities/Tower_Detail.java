@@ -322,6 +322,11 @@ public class Tower_Detail extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        submitDetails();
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
