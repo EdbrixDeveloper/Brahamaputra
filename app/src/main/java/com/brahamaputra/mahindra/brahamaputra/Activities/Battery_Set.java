@@ -22,9 +22,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetData;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -45,6 +48,8 @@ import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -63,10 +68,9 @@ public class Battery_Set extends BaseActivity {
     public static final String CAMERA_PREF = "camera_pref";
 
     private Uri imageFileUri = null;
-    private String imageFileName ="";
+    private String imageFileName = "";
 
     private AlertDialogManager alertDialogManager;
-
 
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -118,10 +122,19 @@ public class Battery_Set extends BaseActivity {
     private String ticketId = "";
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
-    private BatterySetData batterySetData;
+    private ArrayList<BatterySetData> batterySetData;
     private String base64StringBatterySet = "eji39jjj";
 
+    private BatterySetParentData batterySetParentData;
+
     private SessionManager sessionManager;
+
+    private int totalCount = 0;
+    private int currentPos = 0;
+    private Button batterySet_button_previousReading;
+    private Button batterySet_button_nextReading;
+    private TextView batterySet_textView_Number;
+    private LinearLayout linearLayout_container;
 
     private void assignViews() {
         mBatterySetTextViewNoofBatterySetProvided = (TextView) findViewById(R.id.batterySet_textView_NoofBatterySetProvided);
@@ -155,14 +168,17 @@ public class Battery_Set extends BaseActivity {
         mBatterySetTextViewNatureofProblem = (TextView) findViewById(R.id.batterySet_textView_NatureofProblem);
         mBatterySetEditTextNatureofProblem = (EditText) findViewById(R.id.batterySet_editText_NatureofProblem);
 
+        batterySet_button_nextReading = (Button) findViewById(R.id.batterySet_button_nextReading);
+        batterySet_button_previousReading = (Button) findViewById(R.id.batterySet_button_previousReading);
+        batterySet_textView_Number = (TextView) findViewById(R.id.batterySet_textView_Number);
+        linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-        hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
-
-
+        //hotoTransactionData = new HotoTransactionData();
+        //setInputDetails();
     }
 
 
@@ -180,9 +196,34 @@ public class Battery_Set extends BaseActivity {
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
+                        str_noofBatterySetProvided = item.get(position);
+                        mBatterySetTextViewNoofBatterySetProvidedVal.setText(str_noofBatterySetProvided);
 
-                        str_numberofBatteryBankWorking = item.get(position);
-                        mBatterySetTextViewNoofBatterySetProvidedVal.setText(str_numberofBatteryBankWorking);
+                        //clear AC collection empty by select / changing value of No of Ac provided
+                        if (batterySetData != null && batterySetData.size() > 0) {
+                            batterySetData.clear();
+                        }
+                        currentPos = 0;
+                        totalCount = 0;
+                        clearFields(currentPos);
+                        totalCount = Integer.parseInt(str_noofBatterySetProvided);
+
+                        // Clear all field value and hide layout If Non AC or O //
+                        if (totalCount > 0) {
+
+                            batterySet_textView_Number.setText("Reading: #1");
+                            linearLayout_container.setVisibility(View.VISIBLE);
+                            batterySet_button_previousReading.setVisibility(View.GONE);
+                            batterySet_button_nextReading.setVisibility(View.VISIBLE);
+                            if (totalCount > 0 && totalCount == 1) {
+                                batterySet_button_nextReading.setText("Finish");
+                            } else {
+                                batterySet_button_nextReading.setText("Next Reading");
+                            }
+                        } else {
+                            linearLayout_container.setVisibility(View.GONE);
+                        }
+
                     }
                 });
             }
@@ -200,8 +241,8 @@ public class Battery_Set extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_noofBatterySetProvided = item.get(position);
-                        mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(str_noofBatterySetProvided);
+                        str_numberofBatteryBankWorking = item.get(position);
+                        mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(str_numberofBatteryBankWorking);
                     }
                 });
             }
@@ -383,6 +424,39 @@ public class Battery_Set extends BaseActivity {
                 }
             }
         });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        batterySet_button_nextReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos < (totalCount - 1)) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos + 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+
+                } else if (currentPos == (totalCount - 1)) {
+                    //Save Final current reading and submit all AC data
+                    saveRecords(currentPos);
+                    submitDetails();
+                    startActivity(new Intent(Battery_Set.this, ExternalTenantsPersonaldetails.class));
+                    finish();
+                }
+            }
+        });
+        batterySet_button_previousReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+                }
+            }
+        });
 
     }
 
@@ -402,6 +476,9 @@ public class Battery_Set extends BaseActivity {
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        batterySetData = new ArrayList<>();
+        currentPos = 0;
+        setInputDetails(currentPos);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -451,7 +528,8 @@ public class Battery_Set extends BaseActivity {
                         }
                     }
                 } else {
-                    openCameraIntent();
+                    //openCameraIntent();
+                    onClicked(v);
                 }
 
             }
@@ -490,86 +568,6 @@ public class Battery_Set extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setInputDetails() {
-        try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
-
-                Gson gson = new Gson();
-//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
-
-                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-                batterySetData = hotoTransactionData.getBatterySetData();
-
-                mBatterySetTextViewNoofBatterySetProvidedVal.setText(batterySetData.getNoOfBatterySet());
-                mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(batterySetData.getNoOfBatteryBankWorking());
-                base64StringBatterySet = (batterySetData.getBatterySet_Qr());
-                mBatterySetTextViewAssetOwnerVal.setText(batterySetData.getAssetOwner());
-                mBatterySetTextViewManufacturerMakeModelVal.setText(batterySetData.getManufactureMakeModel());
-                mBatterySetTextViewCapacityinAHVal.setText(batterySetData.getCapacityInAH());
-                mBatterySetTextViewTypeofBatteryVal.setText(batterySetData.getTypeOfBattery());
-                mBatterySetEditTextDateofInstallation.setText(batterySetData.getDateOfInstallation());
-                mBatterySetEditTextBackupduration.setText(batterySetData.getBackupDuaration());
-                mBatterySetTextViewPositionofBatteryBankVal.setText(batterySetData.getPositionOfBatteryBank());
-                mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText(batterySetData.getBatteryBankCableSize());
-                mBatterySetTextViewBatteryBankEarthingStatusVal.setText(batterySetData.getBatteryBankEarthingStatus());
-                mBatterySetTextViewBACKUPConditionVal.setText(batterySetData.getBackupCondition());
-                mBatterySetEditTextNatureofProblem.setText(batterySetData.getNatureOfProblem());
-
-                // New added for image #ImageSet
-                imageFileName = batterySetData.getQrCodeImageFileName();
-                mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileName != null && imageFileName.length() > 0) {
-                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//                             imageFileUri = Uri.fromFile(file);
-                    imageFileUri = FileProvider.getUriForFile(Battery_Set.this, BuildConfig.APPLICATION_ID + ".provider", file);
-                    if (imageFileUri != null) {
-                        mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                    }
-                }
-
-            } else {
-                Toast.makeText(Battery_Set.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void submitDetails() {
-        try {
-            //hotoTransactionData.setTicketNo(ticketId);
-
-            String noOfBatterySet = mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim();
-            String noOfBatteryBankWorking = mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim();
-            String batterySet_Qr = base64StringBatterySet;
-            String assetOwner = mBatterySetTextViewAssetOwnerVal.getText().toString().trim();
-            String manufactureMakeModel = mBatterySetTextViewManufacturerMakeModelVal.getText().toString().trim();
-            String capacityInAH = mBatterySetTextViewCapacityinAHVal.getText().toString().trim();
-            String typeOfBattery = mBatterySetTextViewTypeofBatteryVal.getText().toString().trim();
-            String dateOfInstallation = mBatterySetEditTextDateofInstallation.getText().toString().trim();
-            String backupDuaration = mBatterySetEditTextBackupduration.getText().toString().trim();
-            String positionOfBatteryBank = mBatterySetTextViewPositionofBatteryBankVal.getText().toString().trim();
-            String batteryBankCableSize = mBatterySetTextViewBatteryBankCableSizeinSQMMVal.getText().toString().trim();
-            String batteryBankEarthingStatus = mBatterySetTextViewBatteryBankEarthingStatusVal.getText().toString().trim();
-            String backupCondition = mBatterySetTextViewBACKUPConditionVal.getText().toString().trim();
-            String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
-
-
-            batterySetData = new BatterySetData(noOfBatterySet, noOfBatteryBankWorking, batterySet_Qr, assetOwner, manufactureMakeModel,capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank,batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem,imageFileName);
-
-            hotoTransactionData.setBatterySetData(batterySetData);
-
-            Gson gson2 = new GsonBuilder().create();
-            String jsonString = gson2.toJson(hotoTransactionData);
-            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
-
-            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -663,13 +661,13 @@ public class Battery_Set extends BaseActivity {
             imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-          //  imageFileUri = Uri.fromFile(file);
+            //  imageFileUri = Uri.fromFile(file);
             imageFileUri = FileProvider.getUriForFile(Battery_Set.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -677,8 +675,8 @@ public class Battery_Set extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
-                resultCode == RESULT_OK) {
+        /*if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA && resultCode == RESULT_OK)
+        {
             if (imageFileUri != null) {
                 try {
                     Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
@@ -697,8 +695,25 @@ public class Battery_Set extends BaseActivity {
             imageFileName = "";
             imageFileUri = null;
             mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+        }*/
+
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+            if (result.getContents() == null) {
+                base64StringBatterySet = "";
+                showToast("Cancelled");
+            } else {
+                base64StringBatterySet = result.getContents();
+                if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
+                    mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+            }
         }
+
     }
+
     private void openCamera() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivity(intent);
@@ -744,4 +759,208 @@ public class Battery_Set extends BaseActivity {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void setInputDetails(int index) {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                batterySetParentData = hotoTransactionData.getBatterySetParentData();
+                batterySetData.addAll(batterySetParentData.getBatterySetData());
+
+                if (batterySetData != null && batterySetData.size() > 0) {
+
+                    linearLayout_container.setVisibility(View.VISIBLE);
+                    batterySet_textView_Number.setText("Reading: #1");
+                    totalCount = Integer.parseInt(batterySetParentData.getNoOfBatterySet());
+
+                    mBatterySetTextViewNoofBatterySetProvidedVal.setText(batterySetParentData.getNoOfBatterySet());
+                    mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(batterySetParentData.getNoOfBatteryBankWorking());
+
+                    base64StringBatterySet = (batterySetData.get(index).getBatterySet_Qr());
+                    mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+                    if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
+                        mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+
+                    mBatterySetTextViewAssetOwnerVal.setText(batterySetData.get(index).getAssetOwner());
+                    mBatterySetTextViewManufacturerMakeModelVal.setText(batterySetData.get(index).getManufactureMakeModel());
+                    mBatterySetTextViewCapacityinAHVal.setText(batterySetData.get(index).getCapacityInAH());
+                    mBatterySetTextViewTypeofBatteryVal.setText(batterySetData.get(index).getTypeOfBattery());
+                    mBatterySetEditTextDateofInstallation.setText(batterySetData.get(index).getDateOfInstallation());
+                    mBatterySetEditTextBackupduration.setText(batterySetData.get(index).getBackupDuaration());
+                    mBatterySetTextViewPositionofBatteryBankVal.setText(batterySetData.get(index).getPositionOfBatteryBank());
+                    mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText(batterySetData.get(index).getBatteryBankCableSize());
+                    mBatterySetTextViewBatteryBankEarthingStatusVal.setText(batterySetData.get(index).getBatteryBankEarthingStatus());
+                    mBatterySetTextViewBACKUPConditionVal.setText(batterySetData.get(index).getBackupCondition());
+                    mBatterySetEditTextNatureofProblem.setText(batterySetData.get(index).getNatureOfProblem());
+
+                    // New added for image #ImageSet
+                    imageFileName = batterySetData.get(index).getQrCodeImageFileName();
+                    mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+                    if (imageFileName != null && imageFileName.length() > 0) {
+                        File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+                        imageFileUri = FileProvider.getUriForFile(Battery_Set.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                        if (imageFileUri != null) {
+                            mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    batterySet_button_previousReading.setVisibility(View.GONE);
+                    batterySet_button_nextReading.setVisibility(View.VISIBLE);
+
+                    if (batterySetData.size() > 1) {
+                        batterySet_button_nextReading.setText("Next Reading");
+                    } else {
+                        batterySet_button_nextReading.setText("Finish");
+                    }
+                }
+            } else {
+                Toast.makeText(Battery_Set.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                linearLayout_container.setVisibility(View.GONE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            String noOfBatterySet = mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim();
+            String noOfBatteryBankWorking = mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim();
+
+            batterySetParentData = new BatterySetParentData(noOfBatterySet, noOfBatteryBankWorking, batterySetData);
+            hotoTransactionData.setBatterySetParentData(batterySetParentData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveRecords(int pos) {
+        String batterySet_Qr = base64StringBatterySet;
+        String assetOwner = mBatterySetTextViewAssetOwnerVal.getText().toString().trim();
+        String manufactureMakeModel = mBatterySetTextViewManufacturerMakeModelVal.getText().toString().trim();
+        String capacityInAH = mBatterySetTextViewCapacityinAHVal.getText().toString().trim();
+        String typeOfBattery = mBatterySetTextViewTypeofBatteryVal.getText().toString().trim();
+        String dateOfInstallation = mBatterySetEditTextDateofInstallation.getText().toString().trim();
+        String backupDuaration = mBatterySetEditTextBackupduration.getText().toString().trim();
+        String positionOfBatteryBank = mBatterySetTextViewPositionofBatteryBankVal.getText().toString().trim();
+        String batteryBankCableSize = mBatterySetTextViewBatteryBankCableSizeinSQMMVal.getText().toString().trim();
+        String batteryBankEarthingStatus = mBatterySetTextViewBatteryBankEarthingStatusVal.getText().toString().trim();
+        String backupCondition = mBatterySetTextViewBACKUPConditionVal.getText().toString().trim();
+        String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
+
+
+        BatterySetData obj_batterySetData = new BatterySetData(batterySet_Qr, assetOwner, manufactureMakeModel, capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank, batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem, imageFileName);
+
+        if (batterySetData.size() > 0) {
+            if (pos == batterySetData.size()) {
+                batterySetData.add(obj_batterySetData);
+            } else if (pos < batterySetData.size()) {
+                batterySetData.set(pos, obj_batterySetData);
+            }
+        } else {
+            batterySetData.add(obj_batterySetData);
+        }
+
+    }
+
+    private void displayRecords(int pos) {
+        if (batterySetData.size() > 0 && pos < batterySetData.size()) {
+
+            batterySet_textView_Number.setText("Reading: #" + (pos + 1));
+
+            base64StringBatterySet = batterySetData.get(pos).getBatterySet_Qr();
+            mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+            if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
+                mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+            }
+
+            mBatterySetTextViewAssetOwnerVal.setText(batterySetData.get(pos).getAssetOwner());
+            mBatterySetTextViewManufacturerMakeModelVal.setText(batterySetData.get(pos).getManufactureMakeModel());
+            mBatterySetTextViewCapacityinAHVal.setText(batterySetData.get(pos).getCapacityInAH());
+            mBatterySetTextViewTypeofBatteryVal.setText(batterySetData.get(pos).getTypeOfBattery());
+            mBatterySetEditTextDateofInstallation.setText(batterySetData.get(pos).getDateOfInstallation());
+            mBatterySetEditTextBackupduration.setText(batterySetData.get(pos).getBackupDuaration());
+            mBatterySetTextViewPositionofBatteryBankVal.setText(batterySetData.get(pos).getPositionOfBatteryBank());
+            mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText(batterySetData.get(pos).getBatteryBankCableSize());
+            mBatterySetTextViewBatteryBankEarthingStatusVal.setText(batterySetData.get(pos).getBatteryBankEarthingStatus());
+            mBatterySetTextViewBACKUPConditionVal.setText(batterySetData.get(pos).getBackupCondition());
+            mBatterySetEditTextNatureofProblem.setText(batterySetData.get(pos).getNatureOfProblem());
+
+            batterySet_button_previousReading.setVisibility(View.VISIBLE);
+            batterySet_button_nextReading.setVisibility(View.VISIBLE);
+        } else {
+            clearFields(pos);
+        }
+
+        if (pos > 0 && pos < (totalCount - 1)) {
+            batterySet_button_previousReading.setVisibility(View.VISIBLE);
+            batterySet_button_nextReading.setText("Next Reading");
+        } else if (pos > 0 && pos == (totalCount - 1)) {
+            batterySet_button_previousReading.setVisibility(View.VISIBLE);
+            batterySet_button_nextReading.setText("Finish");
+        } else if (pos == 0) {
+            batterySet_button_previousReading.setVisibility(View.GONE);
+            if (pos == (totalCount - 1)) {
+                batterySet_button_nextReading.setText("Finish");
+            } else {
+                batterySet_button_nextReading.setText("Next Reading");
+            }
+        }
+    }
+
+    public void clearFields(int indexPos) {
+
+        batterySet_textView_Number.setText("Reading: #" + (indexPos + 1));
+
+        mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+
+        mBatterySetTextViewAssetOwnerVal.setText("");
+        mBatterySetTextViewManufacturerMakeModelVal.setText("");
+        mBatterySetTextViewCapacityinAHVal.setText("");
+        mBatterySetTextViewTypeofBatteryVal.setText("");
+        mBatterySetEditTextDateofInstallation.setText("");
+        mBatterySetEditTextBackupduration.setText("");
+        mBatterySetTextViewPositionofBatteryBankVal.setText("");
+        mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText("");
+        mBatterySetTextViewBatteryBankEarthingStatusVal.setText("");
+        mBatterySetTextViewBACKUPConditionVal.setText("");
+        mBatterySetEditTextNatureofProblem.setText("");
+
+        str_numberofBatteryBankWorking = "";
+        str_assetOwner = "";
+        str_manufacturerMakeModel = "";
+        str_capacityinAH = "";
+        str_typeofBattery = "";
+        str_positionofBatteryBank = "";
+        str_batteryBankCableSizeinSQMM = "";
+        str_batteryBankEarthingStatus = "";
+        str_backupCondition = "";
+        base64StringBatterySet = "";
+
+        if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
+            mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+        } else {
+            mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+        }
+    }
+
+    public void onClicked(View v) {
+
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
+    }
+
 }
