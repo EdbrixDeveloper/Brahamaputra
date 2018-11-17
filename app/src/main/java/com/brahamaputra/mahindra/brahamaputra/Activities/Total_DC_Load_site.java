@@ -76,7 +76,6 @@ public class Total_DC_Load_site extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        submitDetails();
         finish();
     }
 
@@ -92,16 +91,12 @@ public class Total_DC_Load_site extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                finish();
                 return true;
             case R.id.menuDone:
-                finish();
                 submitDetails();
                 startActivity(new Intent(this, ActiveequipmentDetails.class));
                 finish();
                 return true;
-
-
         }
         return super.onOptionsItemSelected(item);
     }

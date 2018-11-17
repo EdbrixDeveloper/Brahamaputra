@@ -99,27 +99,32 @@ public class UsersHotoListActivity extends BaseActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
                 // notify user
-                if (hotoTicketList != null) {
-                    String hotoTicketId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getId().toString();
-                    String hotoTicketNo = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketNo().toString();
+                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                    if (hotoTicketList != null) {
+                        String hotoTicketId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getId().toString();
+                        String hotoTicketNo = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketNo().toString();
 
-                    String hotoTicketDate = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketDate().toString();
-                    String siteId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteId().toString();
-                    String siteName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteName().toString();
-                    String siteAddress = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteAddress().toString();
-                    String status = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
-                    String siteType = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteType().toString();
-                    String stateName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStateName().toString();
-                    String customerName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCustomerName().toString();
-                    String circleName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCircleName().toString();
-                    String ssaName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSsaName().toString();
+                        String hotoTicketDate = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketDate().toString();
+                        String siteId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteId().toString();
+                        String siteName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteName().toString();
+                        String siteAddress = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteAddress().toString();
+                        String status = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
+                        String siteType = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteType().toString();
+                        String stateName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStateName().toString();
+                        String customerName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCustomerName().toString();
+                        String circleName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCircleName().toString();
+                        String ssaName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSsaName().toString();
 
 
-                    String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
-                    if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP") ) {
-                        checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                stateName, customerName, circleName, ssaName);
+                        String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
+                        if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP")) {
+                            checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                    stateName, customerName, circleName, ssaName);
+                        }
                     }
+
+                } else {
+                    showToast("Could not detecting location. Please try again later.");
                 }
 
                /* String hotoTicketId = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getId().toString();
@@ -168,15 +173,15 @@ public class UsersHotoListActivity extends BaseActivity {
                             //showToast(""+response.getSuccess().toString());
                             if (response.getSuccess() == 1) {
                                 hotoTicketList = response;
-                                if(hotoTicketList.getHotoTicketsDates()!=null && hotoTicketList.getHotoTicketsDates().size()>0) {
+                                if (hotoTicketList.getHotoTicketsDates() != null && hotoTicketList.getHotoTicketsDates().size() > 0) {
                                     txtNoTicketFound.setVisibility(View.GONE);
                                     userHotoList_listView_hotoList.setVisibility(View.VISIBLE);
                                     userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this, hotoTicketList);
                                     userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
-                                    for(int i=0; i<hotoTicketList.getHotoTicketsDates().size();i++){
+                                    for (int i = 0; i < hotoTicketList.getHotoTicketsDates().size(); i++) {
                                         userHotoList_listView_hotoList.expandGroup(i);
                                     }
-                                }else{
+                                } else {
                                     userHotoList_listView_hotoList.setVisibility(View.GONE);
                                     txtNoTicketFound.setVisibility(View.VISIBLE);
                                 }
@@ -307,7 +312,7 @@ public class UsersHotoListActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_HOTO_SUBMIT && resultCode == RESULT_OK){
+        if (requestCode == RESULT_HOTO_SUBMIT && resultCode == RESULT_OK) {
             prepareListData();
         }
     }
@@ -334,38 +339,37 @@ public class UsersHotoListActivity extends BaseActivity {
                 }
             }).show();
         } else {
-            if (Conditions.isNetworkConnected(UsersHotoListActivity.this))
-            {
+            if (Conditions.isNetworkConnected(UsersHotoListActivity.this)) {
                 //if (gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
 
-                    Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
-                    intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
-                    intent.putExtra("Id", hotoTicketId);
+                Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
+                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(UsersHotoListActivity.this));
+                intent.putExtra("Id", hotoTicketId);
 
-                    intent.putExtra("ticketNO", hotoTickitNo);
+                intent.putExtra("ticketNO", hotoTickitNo);
 
-                    intent.putExtra("hotoTicketDate", hotoTicketDate);
-                    intent.putExtra("siteId", siteId);
-                    intent.putExtra("siteName", siteName);
-                    intent.putExtra("siteAddress", siteAddress);
-                    intent.putExtra("status", status);
-                    intent.putExtra("siteType", siteType);
-                    intent.putExtra("stateName", stateName);
-                    intent.putExtra("customerName", customerName);
-                    intent.putExtra("circleName", circleName);
-                    intent.putExtra("ssaName", ssaName);
+                intent.putExtra("hotoTicketDate", hotoTicketDate);
+                intent.putExtra("siteId", siteId);
+                intent.putExtra("siteName", siteName);
+                intent.putExtra("siteAddress", siteAddress);
+                intent.putExtra("status", status);
+                intent.putExtra("siteType", siteType);
+                intent.putExtra("stateName", stateName);
+                intent.putExtra("customerName", customerName);
+                intent.putExtra("circleName", circleName);
+                intent.putExtra("ssaName", ssaName);
 
-                    sessionManager.updateSessionUserTicketId(hotoTicketId);
-                    sessionManager.updateSessionUserTicketName(hotoTickitNo);
-                    startActivityForResult(intent,RESULT_HOTO_SUBMIT);
+                sessionManager.updateSessionUserTicketId(hotoTicketId);
+                sessionManager.updateSessionUserTicketName(hotoTickitNo);
+                startActivityForResult(intent, RESULT_HOTO_SUBMIT);
 
                 //}else{
                 //    showToast("Sorry could not detect location");
                 //    finish();
                 //}
 
-            }else{
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel",  new AlertDialogManager.onSingleButtonClickListner() {
+            } else {
+                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         Intent intent = new Intent(UsersHotoListActivity.this, UserHotoTransactionActivity.class);
@@ -373,7 +377,7 @@ public class UsersHotoListActivity extends BaseActivity {
                         intent.putExtra("ticketNO", hotoTickitNo);
                         sessionManager.updateSessionUserTicketId(hotoTicketId);
                         sessionManager.updateSessionUserTicketName(hotoTickitNo);
-                        startActivityForResult(intent,RESULT_HOTO_SUBMIT);
+                        startActivityForResult(intent, RESULT_HOTO_SUBMIT);
                     }
                 }).show();
             }

@@ -43,256 +43,320 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheTenant"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Name of the Tenant" />
-
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheTenant_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
-
-            </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lnrTentantDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_TypeofTenant"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                    android:id="@+id/externalTenantsPersonaldetails_textView_TentantCount"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Type of Tenant" />
+                    android:layout_margin="@dimen/app_min_margin"
+                    android:text="Tentant #1"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_TypeofTenant_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#a40404" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_PositionattheTower"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Position (in Mtrs) at the Tower"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                    />
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheTenant"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Name of the Tenant" />
 
-                <EditText
-                    android:id="@+id/externalTenantsPersonaldetails_editText_PositionattheTower"
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheTenant_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
-                    android:layout_width="0dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Position at the Tower"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_TypeofTenant"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Type of Tenant" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_TypeofTenant_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_DateofthestartofTenancy"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Date of the start of Tenancy" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/externalTenantsPersonaldetails_editText_DateofthestartofTenancy"
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_PositionattheTower"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Position (in Mtrs) at the Tower"
+
+                        />
+
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetails_editText_PositionattheTower"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Position at the Tower"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MM/YYYY"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_DateofthestartofTenancy"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Date of the start of Tenancy" />
+
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetails_editText_DateofthestartofTenancy"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MM/YYYY"
+                        android:inputType="none"
+                        android:textAlignment="viewStart" />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_DateofthestartofRadiation"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Date of the start of Radiation" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/externalTenantsPersonaldetails_editText_DateofthestartofRadiation"
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_DateofthestartofRadiation"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Date of the start of Radiation" />
+
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetails_editText_DateofthestartofRadiation"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MM/YYYY"
+                        android:inputType="none"
+                        android:textAlignment="viewStart" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MM/YYYY"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheContactPerson"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Name of the Contact Person" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetails_editText_NameoftheContactPerson"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Name of the Contact Person "
+                        android:imeOptions="actionNext"
+                        android:textAlignment="viewStart" />
+                    <!--android:inputType="text"-->
 
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheContactPerson"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Name of the Contact Person" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/externalTenantsPersonaldetails_editText_NameoftheContactPerson"
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_AddressoftheContactPerson"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Address of the Contact Person" />
 
-                    android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetails_editText_AddressoftheContactPerson"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Address of the Contact Person"
+                        android:imeOptions="actionNext"
+                        android:textAlignment="viewStart" />
+                    <!--android:inputType="text"-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Name of the Contact Person "
-                    android:imeOptions="actionNext"
-                    android:textAlignment="viewStart" />
-                <!--android:inputType="text"-->
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonMobile"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Telephone No. of Contact Person – Mobile" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetails_editText_TelephoneNoofContactPersonMobile"
 
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_AddressoftheContactPerson"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Telephone No. of Contact Person – Mobile "
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:textAlignment="viewStart" />
+                    <!--android:inputType="numberDecimal"
+                    android:maxLength="10"-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Address of the Contact Person" />
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/externalTenantsPersonaldetails_editText_AddressoftheContactPerson"
+                    <TextView
+                        android:id="@+id/externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonLandline"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Telephone No. of Contact Person -Land line" />
 
-                    android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Telephone No. of Contact Person -Land line "
+                        android:imeOptions="actionDone"
+                        android:inputType="phone"
+                        android:textAlignment="viewStart" />
+                    <!--android:inputType="numberDecimal"
+                    android:maxLength="20"-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Address of the Contact Person"
-                    android:imeOptions="actionNext"
-                    android:textAlignment="viewStart" />
-                <!--android:inputType="text"-->
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/btnPrevReadingExtTenants"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_min_margin"
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:text="Prev Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    <Button
+                        android:id="@+id/btnNextReadingExtTenants"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_min_margin"
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:layout_weight="1"
+                        android:background="@color/red"
+                        android:text="Next Reading"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonMobile"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Telephone No. of Contact Person – Mobile" />
-
-                <EditText
-                    android:id="@+id/externalTenantsPersonaldetails_editText_TelephoneNoofContactPersonMobile"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Telephone No. of Contact Person – Mobile "
-                    android:imeOptions="actionNext"
-                    android:textAlignment="viewStart" />
-                <!--android:inputType="numberDecimal"
-                android:maxLength="10"-->
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonLandline"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Telephone No. of Contact Person -Land line" />
-
-                <EditText
-                    android:id="@+id/externalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Telephone No. of Contact Person -Land line "
-                    android:imeOptions="actionDone"
-                    android:textAlignment="viewStart" />
-                <!--android:inputType="numberDecimal"
-                android:maxLength="20"-->
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

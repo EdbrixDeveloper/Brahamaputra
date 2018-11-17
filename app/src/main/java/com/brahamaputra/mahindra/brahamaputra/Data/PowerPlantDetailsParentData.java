@@ -47,7 +47,7 @@ public class PowerPlantDetailsParentData {
     public PowerPlantDetailsParentData(){
         this.numberOfPowerPlant = "";
         this.powerPlantDetailsData = new ArrayList<>();
-        this.isSubmited = true;
+        this.isSubmited = false;
     }
 
 }
