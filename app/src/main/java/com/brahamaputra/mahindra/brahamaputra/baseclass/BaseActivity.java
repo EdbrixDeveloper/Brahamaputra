@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -39,7 +40,8 @@ public class BaseActivity extends AppCompatActivity {
 
     public static String TicketID = "TKT_0";
 
-
+    public static String checkOutBatteryData = "0";
+    public static String checkInBatteryData = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

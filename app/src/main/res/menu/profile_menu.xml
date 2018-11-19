@@ -3,10 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menuEditProf"
+        android:title="logout"
+        android:icon="@drawable/ic_edit_white_24dp"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menuChangePassword"
+        android:title="logout"
+        android:icon="@drawable/ic_lock_outline_white_24dp"
+        app:showAsAction="always" />
+    
+    <item
         android:id="@+id/menuLogout"
         android:title="logout"
         android:icon="@drawable/ic_logout_white_24dp"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 
 </menu>

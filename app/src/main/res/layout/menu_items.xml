@@ -10,7 +10,7 @@
         android:layout_height="85dp"
         android:background="@drawable/circle"
         android:elevation="2dp"
-        android:padding="15dp"
+        android:padding="18dp"
         android:src="@drawable/tickets_icon"
         android:tint="@color/colorWhite"
         circle:name="My HOTO" />
@@ -21,7 +21,7 @@
         android:layout_height="85dp"
         android:background="@drawable/circle"
         android:elevation="2dp"
-        android:padding="15dp"
+        android:padding="18dp"
         android:src="@drawable/assets_icon"
         android:tint="@color/colorWhite"
         circle:name="My Assets" />
@@ -43,7 +43,7 @@
         android:layout_height="85dp"
         android:background="@drawable/circle"
         android:elevation="2dp"
-        android:padding="15dp"
+        android:padding="18dp"
         android:src="@drawable/electricity_icon"
         android:tint="@color/colorWhite"
         circle:name="My Energy" />
@@ -54,7 +54,7 @@
         android:layout_height="85dp"
         android:background="@drawable/circle"
         android:elevation="2dp"
-        android:padding="15dp"
+        android:padding="18dp"
         android:src="@drawable/prevetive_icon"
         android:tint="@color/colorWhite"
         circle:name="My Prevetive" />
@@ -65,9 +65,10 @@
         android:layout_height="85dp"
         android:background="@drawable/circle"
         android:elevation="2dp"
-        android:padding="15dp"
+        android:padding="18dp"
         android:src="@drawable/incident_icon"
         android:tint="@color/colorWhite"
-        circle:name="My Incident" />
+        circle:name="My Incident"
+        />
 
 </merge>

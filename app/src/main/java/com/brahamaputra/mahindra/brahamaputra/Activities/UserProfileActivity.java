@@ -76,6 +76,14 @@ public class UserProfileActivity extends AppCompatActivity {
                 showSettingsAlert();
                 return true;
 
+            case R.id.menuEditProf:
+                startActivity(new Intent(UserProfileActivity.this,UserEditProfileActivity.class));
+                return true;
+
+            case R.id.menuChangePassword:
+                startActivity(new Intent(UserProfileActivity.this,UserChangePasswordActivity.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

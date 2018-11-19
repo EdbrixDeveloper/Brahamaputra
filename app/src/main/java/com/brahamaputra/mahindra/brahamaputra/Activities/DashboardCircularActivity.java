@@ -34,6 +34,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -64,6 +65,8 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
     String MenuSelected = "";
     View view_pass;
 
+    boolean doubleBackToExitPressedOnce = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +77,8 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         sessionManager = new SessionManager(DashboardCircularActivity.this);
         alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
         //setting the title
-        toolbar.setTitle(getResources().getString(R.string.app_name));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+        /*toolbar.setTitle(getResources().getString(R.string.app_name));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));*/
         //placing toolbar in place of actionbar
         setSupportActionBar(toolbar);
         // Set listeners
@@ -118,6 +121,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
 
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -309,5 +313,24 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 }).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        showToast("click BACK again to exit");
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }
