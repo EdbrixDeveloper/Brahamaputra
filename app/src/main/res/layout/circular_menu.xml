@@ -30,7 +30,7 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <com.szugyi.circlemenu.view.CircleLayout
+    <com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout
         android:id="@+id/circle_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,10 +40,10 @@
 
         android:paddingTop="50dp"
 
-        circle:isRotating="false">
+        circle:isRotating="true">
 
         <include layout="@layout/menu_items" />
-    </com.szugyi.circlemenu.view.CircleLayout>
+    </com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"

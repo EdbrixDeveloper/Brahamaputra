@@ -57,13 +57,12 @@ public class MyEnergyListActivity extends AppCompatActivity {
         mMyEnegyListRelativeLayoutEbProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              /*  startActivity(new Intent(MyEnergyListActivity.this, ElectricBillProcessList.class));*/
             }
         });
 
 
     }
-
 
 
     @Override

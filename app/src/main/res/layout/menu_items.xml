@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.szugyi.circlemenu.view.CircleImageView
+    <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
         android:id="@+id/dashboard_myHoto"
         android:layout_width="85dp"
         android:layout_height="85dp"
@@ -15,7 +15,7 @@
         android:tint="@color/colorWhite"
         circle:name="My HOTO" />
 
-    <com.szugyi.circlemenu.view.CircleImageView
+    <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
         android:id="@+id/dashboard_myAsset"
         android:layout_width="85dp"
         android:layout_height="85dp"
@@ -27,7 +27,7 @@
         circle:name="My Assets" />
 
 
-    <!-- <com.szugyi.circlemenu.view.CircleImageView
+    <!-- <CircleImageView
          android:id="@+id/main_mail_image"
          android:layout_width="85dp"
          android:layout_height="85dp"
@@ -37,7 +37,7 @@
          circle:name="My Masters"
          android:padding="15dp" />-->
 
-    <com.szugyi.circlemenu.view.CircleImageView
+    <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
         android:id="@+id/dashboard_myEnergy"
         android:layout_width="85dp"
         android:layout_height="85dp"
@@ -48,7 +48,7 @@
         android:tint="@color/colorWhite"
         circle:name="My Energy" />
 
-    <com.szugyi.circlemenu.view.CircleImageView
+    <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
         android:id="@+id/dashboard_myPrevitive"
         android:layout_width="85dp"
         android:layout_height="85dp"
@@ -59,7 +59,7 @@
         android:tint="@color/colorWhite"
         circle:name="My Prevetive" />
 
-    <com.szugyi.circlemenu.view.CircleImageView
+    <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
         android:id="@+id/dashboard_myIncident"
         android:layout_width="85dp"
         android:layout_height="85dp"

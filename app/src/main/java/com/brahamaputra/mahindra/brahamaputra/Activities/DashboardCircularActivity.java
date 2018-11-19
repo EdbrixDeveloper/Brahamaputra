@@ -21,6 +21,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -39,12 +40,13 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.szugyi.circlemenu.view.CircleImageView;
-import com.szugyi.circlemenu.view.CircleLayout;
-import com.szugyi.circlemenu.view.CircleLayout.OnCenterClickListener;
-import com.szugyi.circlemenu.view.CircleLayout.OnItemClickListener;
-import com.szugyi.circlemenu.view.CircleLayout.OnItemSelectedListener;
-import com.szugyi.circlemenu.view.CircleLayout.OnRotationFinishedListener;
+import com.brahamaputra.mahindra.brahamaputra.commons.ToastMessage;
+import com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView;
+import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout;
+import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnCenterClickListener;
+import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnItemClickListener;
+import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnItemSelectedListener;
+import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnRotationFinishedListener;
 
 public class DashboardCircularActivity extends BaseActivity implements OnItemSelectedListener,
         OnItemClickListener, OnRotationFinishedListener, OnCenterClickListener {
@@ -57,6 +59,10 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
     final public int CHECK_PERMISSIONS = 123;
     private AlertDialogManager alertDialogManager;
     private SessionManager sessionManager;
+    ToastMessage toastMessage;
+    boolean isItemClicked = false;
+    String MenuSelected = "";
+    View view_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +86,9 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         circleLayout.setOnCenterClickListener(this);
 
         selectedTextView = (TextView) findViewById(R.id.selected_textView);
-
+        toastMessage = new ToastMessage(DashboardCircularActivity.this);
         String name = null;
-        View view = circleLayout.getSelectedItem();
+        final View view = circleLayout.getSelectedItem();
         if (view instanceof CircleImageView) {
             name = ((CircleImageView) view).getName();
         }
@@ -96,8 +102,19 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
             @Override
             public void onClick(View v) {
 
+
             }
         });
+
+       /* CircleImageView circleImageView = (CircleImageView) circleLayout.findViewById(R.id.dashboard_myHoto);
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isItemClicked = true;
+                *//*toastMessage.showToast("my hoto");
+                Rotate(v);*//*
+            }
+        });*/
 
 
     }
@@ -193,19 +210,32 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         //Rotation_Animation(view);
     }
 
+
     @Override
     public void onRotationFinished(View view) {
-       /* Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
+        Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
         animation.setDuration(250);
         view.startAnimation(animation);
         String name = null;
-        if (view instanceof CircleImageView) {
-            name = ((CircleImageView) view).getName();
-        }
 
-       */
     }
 
+   /* public void Rotate(View view) {
+        Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
+        animation.setDuration(250);
+        view.startAnimation(animation);
+        view_pass = view;
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                menu_selected(view_pass);
+            }
+        }, 100);
+
+
+    }
+*/
 
     @Override
     public void onCenterClick() {
