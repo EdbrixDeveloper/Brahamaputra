@@ -53,8 +53,8 @@ public class LoginActivity extends BaseActivity {
 
         if(validateUser()){
             finish();
-            //startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
             startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
+            //startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
         }else {
             setContentView(R.layout.activity_login);
             assignViews();
@@ -154,8 +154,8 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionDeviceToken(response.getAccessToken());
                                 finish();
 
-                                //startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
                                 startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
+                                //startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
                             }
                         }
 

@@ -180,72 +180,8 @@ public class DieselFillingList extends BaseActivity {
         finish();
     }
 
-    public void checkNetworkAndLocation() {
-        LocationManager lm = (LocationManager) DieselFillingList.this.getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled = false;
-        boolean network_enabled = false;
-        boolean internet = false;
-
-        try {
-            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-            internet = Conditions.isNetworkConnected(DieselFillingList.this);
-
-            Log.e("ddd:", "" + gps_enabled + "," + network_enabled + "," + internet);
-        } catch (Exception ex) {
-
-        }
 
 
-      /*  if (!gps_enabled && !network_enabled) {
-            // notify user
-            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable ?", "ok", "cancel and continue", new AlertDialogManager.onTwoButtonClickListner() {
-                @Override
-                public void onPositiveClick() {
-                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    DieselFillingList.this.startActivity(myIntent);
-                }
-
-                @Override
-                public void onNegativeClick() {
-
-                }
-            }).show();
-        } else {
-            if (Conditions.isNetworkConnected(DieselFillingList.this)) {
-                Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
-                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DieselFillingList.this));
-                startActivity(intent);
-            } else {
-
-                alertDialogManager.Dialog("Information", "Internet not found,Please enable and try again", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-
-                    }
-                }).show();
-
-            }
-
-        }*/
-    }
-
-   /* public void check1() {
-        if (Conditions.isNetworkConnected(DieselFillingList.this)) {
-            Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
-            intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DieselFillingList.this));
-            startActivity(intent);
-        } else {
-
-            alertDialogManager.Dialog("Information", "Internet not found,Please enable and try again", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                @Override
-                public void onPositiveClick() {
-
-                }
-            }).show();
-
-        }
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

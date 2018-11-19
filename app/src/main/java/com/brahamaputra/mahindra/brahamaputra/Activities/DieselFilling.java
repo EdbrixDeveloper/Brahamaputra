@@ -44,6 +44,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
@@ -122,7 +123,7 @@ public class DieselFilling extends BaseActivity {
     public GPSTracker gpsTracker;
 
     private ToastMessage toastMessage;
-
+    private AlertDialogManager alertDialogManager;
 
     String str_siteName = "";
 
@@ -177,6 +178,7 @@ public class DieselFilling extends BaseActivity {
         this.setTitle("Diesel Filling");
 
         sessionManager = new SessionManager(DieselFilling.this);
+        alertDialogManager = new AlertDialogManager(DieselFilling.this);
         userSitesList = new UserSitesList();
         dgIdQrCodeList = new DgIdQrCodeList();
         toastMessage = new ToastMessage(DieselFilling.this);
@@ -344,12 +346,11 @@ public class DieselFilling extends BaseActivity {
                 //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                if(site_id>0) {
-                    submitDetails();
+                if (site_id > 0) {
+                    showSettingsAlert();
+                    //submitDetails();
                     return true;
-                }
-                else
-                {
+                } else {
                     showToast("No Site Selected");
                 }
 
@@ -388,10 +389,26 @@ public class DieselFilling extends BaseActivity {
         }
     }
 
+    private void showSettingsAlert() {
+
+        alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+                submitDetails();
+
+            }
+
+            @Override
+            public void onNegativeClick() {
+
+            }
+        }).show();
+
+    }
+
     private void submitDetails() {
         try {
-
-
+            showBusyProgress();
             String userId = sessionManager.getSessionUserId();
             String accessToken = sessionManager.getSessionDeviceToken();
           /*  String ticketId = "";
@@ -401,7 +418,7 @@ public class DieselFilling extends BaseActivity {
 
             /*String siteName = mDieselFillingTextViewSiteNameVal.getText().toString().trim();
             String siteDetails = mDieselFillingTextViewSiteDetailsVal.getText().toString().trim();*/
-            String siteID =String.valueOf(site_id);
+            String siteID = String.valueOf(site_id);
             String selectDgIdQrCode = mDieselFillingTextViewSelectDgIdQrCodeVal.getText().toString().trim();
             String presentDgHmr = mDieselFillingEditTextPresentDgHmr.getText().toString().trim();
             String hmrPhotoUpload = base64StringHmrPhoto;
@@ -425,11 +442,12 @@ public class DieselFilling extends BaseActivity {
                         public void onResponse(DieselSubmitResposeData response) {
                             hideBusyProgress();
                             if (response.getSuccess() == 1) {
+                                hideBusyProgress();
                                 setResult(RESULT_OK);
                                 showToast("Record submitted successfully.");
-
                                 finish();
                             } else {
+                                hideBusyProgress();
                                 showToast("Something went wrong");
                             }
                         }
@@ -437,7 +455,6 @@ public class DieselFilling extends BaseActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
                             hideBusyProgress();
                             Log.e("D100", error.toString());
                         }
@@ -447,8 +464,7 @@ public class DieselFilling extends BaseActivity {
             Application.getInstance().addToRequestQueue(dieselSubmitResposeData, "dieselSubmitResposeData");
 
 
-        } catch (
-                Exception e)
+        } catch (Exception e)
 
         {
             e.printStackTrace();
@@ -603,15 +619,6 @@ public class DieselFilling extends BaseActivity {
                                     }
 
 
-                                    // Log.e("D999", Sitelist.toArray().toString());
-
-
-
-                                    /*userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this, hotoTicketList);
-                                    userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
-                                    for(int i=0; i<hotoTicketList.getHotoTicketsDates().size();i++){
-                                        userHotoList_listView_hotoList.expandGroup(i);
-                                    }*/
                                 } else {
                                     mDieselFillingTextViewSiteNameVal.setText("No Site Found");
                                     //No sites found

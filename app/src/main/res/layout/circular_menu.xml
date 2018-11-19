@@ -40,7 +40,7 @@
 
         android:paddingTop="50dp"
 
-        circle:isRotating="true">
+        circle:isRotating="false">
 
         <include layout="@layout/menu_items" />
     </com.szugyi.circlemenu.view.CircleLayout>

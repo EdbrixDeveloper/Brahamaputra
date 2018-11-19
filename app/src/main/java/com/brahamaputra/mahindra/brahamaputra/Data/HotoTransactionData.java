@@ -364,4 +364,5 @@ public class HotoTransactionData {
     public void setSiteId(String siteId) {
         this.siteId = siteId;
     }
-}
+
+   }

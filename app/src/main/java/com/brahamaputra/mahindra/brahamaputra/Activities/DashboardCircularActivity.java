@@ -47,7 +47,7 @@ import com.szugyi.circlemenu.view.CircleLayout.OnItemSelectedListener;
 import com.szugyi.circlemenu.view.CircleLayout.OnRotationFinishedListener;
 
 public class DashboardCircularActivity extends BaseActivity implements OnItemSelectedListener,
-        OnItemClickListener, OnRotationFinishedListener, OnCenterClickListener{
+        OnItemClickListener, OnRotationFinishedListener, OnCenterClickListener {
     public static final String ARG_LAYOUT = "layout";
 
     protected CircleLayout circleLayout;
@@ -66,6 +66,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         setContentView(R.layout.circular_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         sessionManager = new SessionManager(DashboardCircularActivity.this);
+        alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
         //setting the title
         toolbar.setTitle(getResources().getString(R.string.app_name));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
@@ -87,10 +88,10 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         }
         //selectedTextView.setText(name);
 
-        selectedTextView.setText("Brahamputra");
+        selectedTextView.setText("Brahmputra");
 
 
-        mDashboard_myMaster=(ImageView)findViewById(R.id.dashboard_myMaster);
+        mDashboard_myMaster = (ImageView) findViewById(R.id.dashboard_myMaster);
         mDashboard_myMaster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +132,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
             name = null;
         }
 
-       // selectedTextView.setText(name);
+        // selectedTextView.setText(name);
 
         /*switch (view.getId()) {
             case R.id.main_calendar_image:
@@ -188,18 +189,27 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 // Handle tap click
                 break;
         }
+
+        //Rotation_Animation(view);
     }
 
     @Override
     public void onRotationFinished(View view) {
-        Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
+       /* Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
         animation.setDuration(250);
         view.startAnimation(animation);
+        String name = null;
+        if (view instanceof CircleImageView) {
+            name = ((CircleImageView) view).getName();
+        }
+
+       */
     }
+
 
     @Override
     public void onCenterClick() {
-       // Toast.makeText(getApplicationContext(), R.string.center_click, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getApplicationContext(), R.string.center_click, Toast.LENGTH_SHORT).show();
     }
 
     public void onAddClick(View view) {
