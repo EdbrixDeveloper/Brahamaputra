@@ -156,7 +156,7 @@ public class Power_Backups_DG extends BaseActivity {
     private String ticketName = "28131";
     private HotoTransactionData hotoTransactionData;
     private ArrayList<PowerBackupsDGData> powerBackupsDGData;
-    private String base64StringQRCodeScan = "eji39jjj";
+    private String base64StringQRCodeScan = "";
 
     private SessionManager sessionManager;
     private Uri imageFileUri;
@@ -271,7 +271,7 @@ public class Power_Backups_DG extends BaseActivity {
             }
         });
 
-        mPowerBackupsDgButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+        /*mPowerBackupsDgButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (imageFileUri != null) {
@@ -280,7 +280,24 @@ public class Power_Backups_DG extends BaseActivity {
                     Toast.makeText(Power_Backups_DG.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
+
+    }
+
+    public void onClicked(View v) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setOrientationLocked(true);
+        integrator.initiateScan();
+
+//        Use this for more customization
+//        IntentIntegrator integrator = new IntentIntegrator(this);
+//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+//        integrator.setPrompt("Scan a barcode");
+//        integrator.setCameraId(0);  // Use a specific camera of the device
+//        integrator.setBeepEnabled(false);
+//        integrator.setBarcodeImageEnabled(true);
+//        integrator.initiateScan();
 
     }
 
@@ -1037,7 +1054,7 @@ public class Power_Backups_DG extends BaseActivity {
                     }
 
                     // New added for image #ImageSet
-                    imageFileName = powerBackupsDGData.get(index).getQrCodeImageFileName();
+                    /*imageFileName = powerBackupsDGData.get(index).getQrCodeImageFileName();
                     mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
                     if (imageFileName != null && imageFileName.length() > 0) {
                         File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
@@ -1046,7 +1063,7 @@ public class Power_Backups_DG extends BaseActivity {
                         if (imageFileUri != null) {
                             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
                         }
-                    }
+                    }*/
 
                     mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.get(index).getAssetOwner());
                     mPowerBackupsDgTextViewManufacturerMakeModelVal.setText(powerBackupsDGData.get(index).getManufacturerMakeModel());
@@ -1271,14 +1288,5 @@ public class Power_Backups_DG extends BaseActivity {
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
         }
     }
-
-    public void onClicked(View v) {
-
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setPrompt("Scan a barcode or QRcode");
-        integrator.setOrientationLocked(false);
-        integrator.initiateScan();
-    }
-
 
 }

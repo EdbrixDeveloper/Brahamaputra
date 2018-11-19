@@ -202,6 +202,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             }
         });
 
+        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
         mPowerPlantDetailsButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,9 +212,10 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     Toast.makeText(PowerPlantDetailsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
 
     }
+
 
     private void assignViews() {
         mPowerPlantDetailsTextViewQRCodeScan = (TextView) findViewById(R.id.powerPlantDetails_textView_QRCodeScan);
@@ -560,7 +562,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     base64StringQRCodeScan = powerPlantDetailsData.getqRCodeScan();
                     mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
                     if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                        mPowerPlantDetailsButtonQRCodeScan.setVisibility(View.VISIBLE);
+                        mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
                     }
 
                     mPowerPlantDetailsTextViewAssetOwnerVal.setText(powerPlantDetailsData.getAssetOwner());
@@ -602,7 +604,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             base64StringQRCodeScan = powerPlantDetailsData.getqRCodeScan();
             mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
             if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                mPowerPlantDetailsButtonQRCodeScan.setVisibility(View.VISIBLE);
+                mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
             }
 
             mPowerPlantDetailsTextViewAssetOwnerVal.setText(powerPlantDetailsData.getAssetOwner());

@@ -325,12 +325,6 @@ public class Land_Details extends BaseActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        submitDetails();
-        finish();
-    }
-
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {

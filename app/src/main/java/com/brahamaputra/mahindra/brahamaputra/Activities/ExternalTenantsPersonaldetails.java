@@ -125,7 +125,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ExternalTenantsPersonaldetails.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_TotalNumberofTanents))),
-                        "Total Number of Tanents",
+                        "Total Number of Tenants",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 

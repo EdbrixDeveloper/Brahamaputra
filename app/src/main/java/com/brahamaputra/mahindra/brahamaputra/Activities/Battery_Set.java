@@ -68,9 +68,10 @@ public class Battery_Set extends BaseActivity {
     public static final String CAMERA_PREF = "camera_pref";
 
     private Uri imageFileUri = null;
-    private String imageFileName = "";
+    private String imageFileName ="";
 
     private AlertDialogManager alertDialogManager;
+
 
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -123,7 +124,7 @@ public class Battery_Set extends BaseActivity {
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ArrayList<BatterySetData> batterySetData;
-    private String base64StringBatterySet = "eji39jjj";
+    private String base64StringBatterySet = "";
 
     private BatterySetParentData batterySetParentData;
 
@@ -414,7 +415,7 @@ public class Battery_Set extends BaseActivity {
 
             }
         });
-        mBatterySetButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+        /*mBatterySetButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (imageFileUri != null) {
@@ -423,7 +424,7 @@ public class Battery_Set extends BaseActivity {
                     Toast.makeText(Battery_Set.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         batterySet_button_nextReading.setOnClickListener(new View.OnClickListener() {
@@ -800,7 +801,7 @@ public class Battery_Set extends BaseActivity {
                     mBatterySetEditTextNatureofProblem.setText(batterySetData.get(index).getNatureOfProblem());
 
                     // New added for image #ImageSet
-                    imageFileName = batterySetData.get(index).getQrCodeImageFileName();
+                    /*imageFileName = batterySetData.get(index).getQrCodeImageFileName();
                     mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
                     if (imageFileName != null && imageFileName.length() > 0) {
                         File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
@@ -808,7 +809,7 @@ public class Battery_Set extends BaseActivity {
                         if (imageFileUri != null) {
                             mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
                         }
-                    }
+                    }*/
 
                     batterySet_button_previousReading.setVisibility(View.GONE);
                     batterySet_button_nextReading.setVisibility(View.VISIBLE);

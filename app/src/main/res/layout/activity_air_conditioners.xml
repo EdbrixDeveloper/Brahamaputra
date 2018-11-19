@@ -203,7 +203,7 @@
                         android:layout_weight="0.4"
                         android:text="Manufacturer / Make / Model" />
 
-                    <EditText
+                    <!--<EditText
                         android:id="@+id/airConditioners_editText_manufacturerMakeModel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -212,7 +212,16 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:textAlignment="viewStart"
-                        android:textSize="16sp" />
+                        android:textSize="16sp" />-->
+
+                    <TextView
+                        android:id="@+id/airConditioners_textView_manufacturerMakeModel_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
 
                 </LinearLayout>
 

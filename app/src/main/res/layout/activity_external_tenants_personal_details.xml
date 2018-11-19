@@ -279,16 +279,15 @@
 
                     <EditText
                         android:id="@+id/externalTenantsPersonaldetails_editText_TelephoneNoofContactPersonMobile"
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:hint="Enter Telephone No. of Contact Person – Mobile "
                         android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="15"
                         android:textAlignment="viewStart" />
-                    <!--android:inputType="numberDecimal"
+                    <!--android:maxLength="15"
+                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:maxLength="10"-->
                 </LinearLayout>
 
@@ -315,9 +314,9 @@
                         android:layout_weight="0.6"
                         android:hint="Enter Telephone No. of Contact Person -Land line "
                         android:imeOptions="actionDone"
-                        android:inputType="phone"
                         android:textAlignment="viewStart" />
-                    <!--android:inputType="numberDecimal"
+                    <!--android:inputType="phone"
+                    android:inputType="numberDecimal"
                     android:maxLength="20"-->
                 </LinearLayout>
 

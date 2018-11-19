@@ -381,12 +381,6 @@ public class Shelter extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        submitDetails();
-        finish();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);

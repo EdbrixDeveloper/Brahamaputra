@@ -721,7 +721,7 @@
                     android:layout_weight="0.4"
                     android:text="EB Bill Date" />
 
-                <EditText
+                <!--<EditText
                     android:id="@+id/electricConnection_editText_ebBillDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -729,6 +729,15 @@
                     android:hint="Enter EB Bill Date"
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:textAlignment="viewStart" />-->
+
+                <TextView
+                    android:id="@+id/electricConnection_textView_ebBillDate_Val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -737,6 +746,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView

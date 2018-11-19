@@ -346,13 +346,12 @@
 
                 <EditText
                     android:id="@+id/generalAndSafetyMeasure_editText_MobileNumberofSecurity"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Security "
                     android:inputType="numberDecimal"
-                    android:maxLength="10"
+                    android:maxLength="15"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
@@ -381,7 +380,6 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-
                     android:textAlignment="viewStart"
                     android:hint="Select"></TextView>
 
@@ -410,8 +408,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Caretaker "
                     android:inputType="numberDecimal"
-                    android:maxLength="10"
-
+                    android:maxLength="15"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />

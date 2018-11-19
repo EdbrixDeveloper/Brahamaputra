@@ -133,7 +133,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="from the entrance of the shelter (Supress if outdoor site)" />
+                    android:text="from the entrance of the shelter" />
+                <!--(Supress if outdoor site)-->
 
             </LinearLayout>
 
@@ -381,7 +382,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="In front of DG HMR (Supress if Non-DG Site)" />
+                    android:text="In front of DG HMR" />
+                <!--(Supress if Non-DG Site)-->
 
             </LinearLayout>
 
@@ -443,7 +445,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="By Keeping the canopy door open (Supress if Non-DG Site)" />
+                    android:text="By Keeping the canopy door open" />
+                <!--(Supress if Non-DG Site)-->
 
             </LinearLayout>
 

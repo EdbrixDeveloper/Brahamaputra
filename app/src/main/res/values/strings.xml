@@ -245,7 +245,8 @@
 
     <string-array name="array_solarPowerSystem_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M and M Supplied Asset</item>
+        <item>M&amp;M Supplied Asset</item>
+        <item>M&amp;M Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_solarPowerSystem_cellPanel">
@@ -280,8 +281,8 @@
 
     <string-array name="array_batterySet_AssetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M and M Supplied Asset</item>
-
+        <item>M&amp;M Supplied Asset</item>
+        <item>M&amp;M Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_batterySet_ManufacturerMakeModel">
@@ -421,8 +422,8 @@
     <!--Power Management System activity  spinners Array -->
     <string-array name="array_powerManagementSystem_AssetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M and M Supplied Asset</item>
-        <item>M and M Supplied Revenue</item>
+        <item>M&amp;M Supplied Asset</item>
+        <item>M&amp;M Supplied Revenue</item>
 
     </string-array>
 
@@ -705,7 +706,7 @@
         <item>Lineage</item>
         <item>Lister Pitter</item>
         <item>Local</item>
-        <item>M and M</item>
+        <item>M&amp;M</item>
         <item>Mahindra</item>
         <item>Microtex</item>
         <item>Mistubishi</item>
@@ -804,8 +805,8 @@
 
     <string-array name="array_airConditioners_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M and M Supplied Asset</item>
-        <item>M and M Supplied Revenue</item>
+        <item>M&amp;M Supplied Asset</item>
+        <item>M&amp;M Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_airConditioners_typeOfAcSpliWindow">
@@ -924,8 +925,8 @@
     </string-array>
     <string-array name="array_powerBackupsDg_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M and M Supplied Asset</item>
-        <item>M and M Supplied Revenue</item>
+        <item>M&amp;M Supplied Asset</item>
+        <item>M&amp;M Supplied Revenue</item>
     </string-array>
     <string-array name="array_powerBackupsDg_manufacturerMakeModel">
         <item>Ashok Leyland</item>
@@ -1032,8 +1033,8 @@
 
     <string-array name="array_powerPlantDetails_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M and M Supplied Asset</item>
-        <item>M and M Supplied Revenue</item>
+        <item>M&amp;M Supplied Asset</item>
+        <item>M&amp;M Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_powerPlantDetails_numberOfPowerPlant">
@@ -1046,71 +1047,23 @@
     </string-array>
 
     <string-array name="array_powerPlantDetails_manufacturerMakeModel">
-        <item>ACME</item>
-        <item>Amara Raja</item>
-        <item>Arisys</item>
-        <item>Ashok Leyland</item>
-        <item>Blue Star</item>
-        <item>C&amp;D</item>
-        <item>Cage</item>
-        <item>Carrier</item>
-        <item>Caterpillar</item>
-        <item>Civil Room</item>
-        <item>Coslite</item>
-        <item>Cummins</item>
-        <item>Daikin</item>
+        <item>Ador Poweron</item>
+        <item>Amaraja</item>
+        <item>BFU</item>
         <item>Delta</item>
-        <item>Eicher</item>
-        <item>Elgi</item>
-        <item>Enersis</item>
-        <item>Escorts</item>
-        <item>Excide</item>
+        <item>Eltek</item>
+        <item>Emerson</item>
         <item>Exicom</item>
-        <item>GFM</item>
-        <item>GNB</item>
-        <item>Godreg</item>
-        <item>Greeves</item>
-        <item>Haier</item>
-        <item>HBL</item>
-        <item>Hitachi</item>
-        <item>Honda</item>
-        <item>Huwavai</item>
-        <item>Jackson</item>
-        <item>Koel</item>
-        <item>Leoch</item>
-        <item>LG</item>
-        <item>Liberty</item>
-        <item>Lister Pitter</item>
-        <item>Local</item>
-        <item>M and M</item>
-        <item>Mahindra</item>
-        <item>Microtex</item>
-        <item>Mistubishi</item>
-        <item>Mitsubishi</item>
-        <item>Narada</item>
-        <item>NED</item>
-        <item>OG</item>
-        <item>Panasonic</item>
-        <item>Perfect</item>
-        <item>Perkins</item>
-        <item>Powerica</item>
-        <item>PUF Shelter</item>
-        <item>Saft</item>
-        <item>Samsung</item>
-        <item>Servo</item>
-        <item>Sonalika</item>
-        <item>Spacemaker</item>
-        <item>Star</item>
-        <item>Tata Liberty</item>
-        <item>Toshiba</item>
-        <item>U-Form</item>
-        <item>Uniflair</item>
-        <item>V-Form</item>
-        <item>Videocon</item>
-        <item>Voltas</item>
-        <item>Volvo</item>
-        <item>Whirlpool</item>
-        <item>Zavline</item>
+        <item>HBL Sabnif</item>
+        <item>INMPS</item>
+        <item>Intex</item>
+        <item>ITI</item>
+        <item>Lineage</item>
+        <item>M&amp;M</item>
+        <item>Pace</item>
+        <item>UTL</item>
+        <item>Valere</item>
+        <item>XL Telecom</item>
     </string-array>
 
     <string-array name="array_powerPlantDetails_numberModuleSlots">
@@ -1160,7 +1113,7 @@
     <string-array name="array_powerPlantDetails_spdStatus">
         <item>Faulty</item>
         <item>Not Available</item>
-        <item>WORKING</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_powerPlantDetails_workingCondition">

@@ -90,7 +90,10 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewScheduledPowerCutInHrs;
     private EditText mElectricConnectionEditTextScheduledPowerCutInHrs;
     private TextView mElectricConnectionTextViewEbBillDate;
-    private EditText mElectricConnectionEditTextEbBillDate;
+    //private EditText mElectricConnectionEditTextEbBillDate;
+    private TextView mElectricConnectionTextViewEbBillDateVal;
+
+
     private TextView mElectricConnectionTextViewSapVendorCode;
     private EditText mElectricConnectionEditTextSapVendorCode;
 
@@ -119,6 +122,7 @@ public class Electric_Connection extends BaseActivity {
     String str_kitKatClayFuseStatus;
     String str_ebNeutralEarthing;
     String str_typeModeOfPayment;
+    String str_ebBillDate;
 
 
     private OfflineStorageWrapper offlineStorageWrapper;
@@ -315,7 +319,8 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionTextViewScheduledPowerCutInHrs = (TextView) findViewById(R.id.electricConnection_textView_scheduledPowerCutInHrs);
         mElectricConnectionEditTextScheduledPowerCutInHrs = (EditText) findViewById(R.id.electricConnection_editText_scheduledPowerCutInHrs);
         mElectricConnectionTextViewEbBillDate = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate);
-        mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
+        //mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
+        mElectricConnectionTextViewEbBillDateVal = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate_Val);
         mElectricConnectionTextViewSapVendorCode = (TextView) findViewById(R.id.electricConnection_textView_sapVendorCode);
         mElectricConnectionEditTextSapVendorCode = (EditText) findViewById(R.id.electricConnection_editText_sapVendorCode);
 
@@ -387,7 +392,7 @@ public class Electric_Connection extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_nameOfSupplyCompany= item.get(position);
+                        str_nameOfSupplyCompany = item.get(position);
                         mElectricConnectionTextViewNameOfSupplyCompanyVal.setText(str_nameOfSupplyCompany);
                     }
                 });
@@ -641,6 +646,26 @@ public class Electric_Connection extends BaseActivity {
             }
         });
 
+        mElectricConnectionTextViewEbBillDateVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_electricConnection_ebBillDate))),
+                        "EB Bill Date",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_ebBillDate = item.get(position);
+                        mElectricConnectionTextViewEbBillDateVal.setText(str_ebBillDate);
+                    }
+                });
+            }
+        });
+
     }
 
     private void visibilityOfEbCostPerUnitOnEbSupplierSelection(String ebSupplier) {
@@ -700,8 +725,9 @@ public class Electric_Connection extends BaseActivity {
                 mElectricConnectionTextViewEbNeutralEarthingVal.setText(electricConnectionData.getEbNeutralEarthing());
                 mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(electricConnectionData.getAverageEbAvailability());
                 mElectricConnectionEditTextScheduledPowerCutInHrs.setText(electricConnectionData.getScheduledPowerCut());
-                mElectricConnectionEditTextEbBillDate.setText(electricConnectionData.getEbBillDate());
-                mElectricConnectionEditTextSapVendorCode.setText(electricConnectionData.getSapVendorCode());
+                //mElectricConnectionEditTextEbBillDate.setText(electricConnectionData.getEbBillDate());
+                mElectricConnectionTextViewEbBillDateVal.setText(electricConnectionData.getEbBillDate());
+                //mElectricConnectionEditTextSapVendorCode.setText(electricConnectionData.getSapVendorCode());
 
                 mElectricConnectionTextViewTypeModeOfPayment_Val.setText(electricConnectionData.getTypeModeOfPayment_Val());
                 mElectricConnectionEditTextBankIfscCode.setText(electricConnectionData.getBankIfscCode());
@@ -746,8 +772,9 @@ public class Electric_Connection extends BaseActivity {
             String ebNeutralEarthing = mElectricConnectionTextViewEbNeutralEarthingVal.getText().toString().trim();
             String averageEbAvailability = mElectricConnectionEditTextAverageEbAvailabilityPerDay.getText().toString().trim();
             String scheduledPowerCut = mElectricConnectionEditTextScheduledPowerCutInHrs.getText().toString().trim();
-            String ebBillDate = mElectricConnectionEditTextEbBillDate.getText().toString().trim();
-            String sapVendorCode = mElectricConnectionEditTextSapVendorCode.getText().toString().trim();
+            //String ebBillDate = mElectricConnectionEditTextEbBillDate.getText().toString().trim();
+            String ebBillDate = mElectricConnectionTextViewEbBillDateVal.getText().toString().trim();
+            String sapVendorCode = "";//mElectricConnectionEditTextSapVendorCode.getText().toString().trim();
 
             String typeModeOfPayment_Val = mElectricConnectionTextViewTypeModeOfPayment_Val.getText().toString().trim();
             String bankIfscCode = mElectricConnectionEditTextBankIfscCode.getText().toString().trim();
@@ -766,12 +793,6 @@ public class Electric_Connection extends BaseActivity {
             e.printStackTrace();
         }
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        submitDetails();
-        finish();
     }
 
     @Override

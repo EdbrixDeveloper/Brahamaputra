@@ -79,7 +79,8 @@ public class Air_Conditioners extends BaseActivity {
     private TextView mAirConditionersTextViewTypeOfAcSpliWindow;
     private TextView mAirConditionersTextViewTypeOfAcSpliWindowVal;
     private TextView mAirConditionersTextViewManufacturerMakeModel;
-    private EditText mAirConditionersEditTextManufacturerMakeModel;
+    //private EditText mAirConditionersEditTextManufacturerMakeModel;
+    private TextView mAirConditionersTextViewManufacturerMakeModelVal;
     private TextView mAirConditionersTextViewAcSerialNumber;
     private EditText mAirConditionersEditTextAcSerialNumber;
     private TextView mAirConditionersTextViewCapacityTr;
@@ -106,6 +107,7 @@ public class Air_Conditioners extends BaseActivity {
     String str_numberOfACInWorkingCondition;
     String str_sssetOwner;
     String str_typeOfAcSpliWindow;
+    String str_manufacturerMakeModel;
     String str_amcYesNo;
     String str_workingCondition;
 
@@ -276,7 +278,8 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersTextViewTypeOfAcSpliWindow = (TextView) findViewById(R.id.airConditioners_textView_typeOfAcSpliWindow);
         mAirConditionersTextViewTypeOfAcSpliWindowVal = (TextView) findViewById(R.id.airConditioners_textView_typeOfAcSpliWindow_val);
         mAirConditionersTextViewManufacturerMakeModel = (TextView) findViewById(R.id.airConditioners_textView_manufacturerMakeModel);
-        mAirConditionersEditTextManufacturerMakeModel = (EditText) findViewById(R.id.airConditioners_editText_manufacturerMakeModel);
+        //mAirConditionersEditTextManufacturerMakeModel = (EditText) findViewById(R.id.airConditioners_editText_manufacturerMakeModel);
+        mAirConditionersTextViewManufacturerMakeModelVal = (TextView) findViewById(R.id.airConditioners_textView_manufacturerMakeModel_val);
         mAirConditionersTextViewAcSerialNumber = (TextView) findViewById(R.id.airConditioners_textView_acSerialNumber);
         mAirConditionersEditTextAcSerialNumber = (EditText) findViewById(R.id.airConditioners_editText_acSerialNumber);
         mAirConditionersTextViewCapacityTr = (TextView) findViewById(R.id.airConditioners_textView_capacityTr);
@@ -417,6 +420,28 @@ public class Air_Conditioners extends BaseActivity {
             }
         });
 
+        mAirConditionersTextViewManufacturerMakeModelVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Air_Conditioners.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_airConditioners_manufacturerMakeModel))),
+                        "Manufacturer/Make/Model",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_manufacturerMakeModel = item.get(position);
+                        mAirConditionersTextViewManufacturerMakeModelVal.setText(str_manufacturerMakeModel);
+                    }
+                });
+            }
+        });
+
         mAirConditionersTextViewAmcYesNoVal.setOnClickListener(new View.OnClickListener()
 
         {
@@ -540,7 +565,9 @@ public class Air_Conditioners extends BaseActivity {
 
                     mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.get(index).getAssetOwner());
                     mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.get(index).getTypeOfAcSplitWindow());
-                    mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.get(index).getManufacturerMakeModel());
+                    //mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.get(index).getManufacturerMakeModel());
+                    mAirConditionersTextViewManufacturerMakeModelVal.setText(airConditionersData.get(index).getManufacturerMakeModel());
+
                     mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.get(index).getAcSerialNumber());
                     mAirConditionersEditTextCapacityTr.setText(airConditionersData.get(index).getCapacityTr());
                     mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.get(index).getDateOfInstallation());
@@ -577,7 +604,8 @@ public class Air_Conditioners extends BaseActivity {
         String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
         String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
         String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
-        String manufacturerMakeModel = mAirConditionersEditTextManufacturerMakeModel.getText().toString().trim();
+        //String manufacturerMakeModel = mAirConditionersEditTextManufacturerMakeModel.getText().toString().trim();
+        String manufacturerMakeModel = mAirConditionersTextViewManufacturerMakeModelVal.getText().toString().trim();
         String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
         String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
         String dateOfInstallation = mAirConditionersEditTextDateOfInstallation.getText().toString().trim();
@@ -616,7 +644,8 @@ public class Air_Conditioners extends BaseActivity {
 
             mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.get(pos).getAssetOwner());
             mAirConditionersTextViewTypeOfAcSpliWindowVal.setText(airConditionersData.get(pos).getTypeOfAcSplitWindow());
-            mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.get(pos).getManufacturerMakeModel());
+            //mAirConditionersEditTextManufacturerMakeModel.setText(airConditionersData.get(pos).getManufacturerMakeModel());
+            mAirConditionersTextViewManufacturerMakeModelVal.setText(airConditionersData.get(pos).getManufacturerMakeModel());
             mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.get(pos).getAcSerialNumber());
             mAirConditionersEditTextCapacityTr.setText(airConditionersData.get(pos).getCapacityTr());
             mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.get(pos).getDateOfInstallation());
@@ -675,7 +704,8 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
         mAirConditionersTextViewAssetOwnerVal.setText("");
         mAirConditionersTextViewTypeOfAcSpliWindowVal.setText("");
-        mAirConditionersEditTextManufacturerMakeModel.setText("");
+        //mAirConditionersEditTextManufacturerMakeModel.setText("");
+        mAirConditionersTextViewManufacturerMakeModelVal.setText("");
         mAirConditionersEditTextAcSerialNumber.setText("");
         mAirConditionersEditTextCapacityTr.setText("");
         mAirConditionersEditTextDateOfInstallation.setText("");
