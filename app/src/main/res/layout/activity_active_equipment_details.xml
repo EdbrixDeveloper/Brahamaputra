@@ -38,8 +38,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -63,8 +63,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -88,8 +88,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -105,7 +105,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Make" />
+                    android:text="Manufacturer/ Make" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_Make"
@@ -113,11 +113,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter Make "
-                    android:inputType="text"
-                    android:textAlignment="viewStart"
+                    android:hint="Enter Manufacturer/ Make"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -144,10 +143,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="DC Load of BTS equipment(Amp) "
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -180,8 +178,8 @@
                     android:textAlignment="viewStart" />
 
 
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -204,10 +202,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Position of the antenna at Tower (in Mtrs)"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionDone"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>

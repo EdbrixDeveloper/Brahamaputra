@@ -395,8 +395,11 @@ public class UserHotoTransactionActivity extends BaseActivity {
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
-                submitHotoTicket();
-
+                if (mUserHotoTransSpinnerSourceOfPowerVal.getText().toString().trim().equals("Non EB")) {
+                    setElectricConnectionDataOnSourceOfPowerChangedValidation();
+                } else {
+                    submitHotoTicket();
+                }
             }
 
             @Override
@@ -571,6 +574,69 @@ public class UserHotoTransactionActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_HOTO_READING && resultCode == RESULT_OK) {
             getOfflineData();
+        }
+    }
+
+
+    //Arjun Added Code For Source Of Power Field Validation on 20112018 0654pm
+    private ElectricConnectionData electricConnectionData;
+
+    private void setElectricConnectionDataOnSourceOfPowerChangedValidation() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                electricConnectionData = hotoTransactionData.getElectricConnectionData();
+
+                String electricConnectionType = electricConnectionData.getElectricConnectionType();
+                String connectionTariff = electricConnectionData.getConnectionTariff();
+                String sanctionLoad = electricConnectionData.getSanctionLoad();
+                String existingLoadAtSite = electricConnectionData.getExistingLoadAtSite();
+                String nameSupplyCompany = electricConnectionData.getNameSupplyCompany();
+                String electricBillCopyStatus = electricConnectionData.getElectricBillCopyStatus();
+                String noOfCompoundLights = electricConnectionData.getNoOfCompoundLights();
+                String meterReadingsEB = "";
+                String supplierEB = "";
+                String costPerUnitForSharedConnectionEB = "";
+                String statusEB = "";
+                String transformerWorkingCondition = "";
+                String transformerCapacity = "";
+                String meterBoxStatusEB = "";
+                String sectionName = "";
+                String sectionNo = "";
+                String consumerNo = "";
+                String meterWorkingStatusEB = "";
+                String meterSerialNumberEB = "";
+                String paymentType = "";
+                String paymentScheduleEB = "";
+                String safetyFuseUnit = "";
+                String kitKatFuseStatus = "";
+                String ebNeutralEarthing = "";
+                String averageEbAvailability = "";
+                String scheduledPowerCut = "";
+                String ebBillDate = "";
+                String sapVendorCode = "";
+                String typeModeOfPayment_Val = electricConnectionData.getTypeModeOfPayment_Val();
+                String bankIfscCode = electricConnectionData.getBankIfscCode();
+                String bankAccountNo = electricConnectionData.getBankAccountNo();
+
+
+                electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
+                hotoTransactionData.setElectricConnectionData(electricConnectionData);
+
+                Gson gson2 = new GsonBuilder().create();
+                String jsonString = gson2.toJson(hotoTransactionData);
+                offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+                submitHotoTicket();
+            } else {
+                //Toast.makeText(UserHotoTransactionActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

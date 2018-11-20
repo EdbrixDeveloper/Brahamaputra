@@ -350,11 +350,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Security "
-                    android:inputType="numberDecimal"
                     android:maxLength="15"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
+                <!--android:inputType="numberDecimal"-->
 
 
             </LinearLayout>
