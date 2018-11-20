@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.BatteryManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -127,7 +129,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("ticketNO");
         this.setTitle(id);
-
+        checkInLat = intent.getStringExtra("latitude");
+        checkInLong = intent.getStringExtra("longitude");
         assignViews();
         initCombo();
         disableInput();
@@ -147,29 +150,29 @@ public class UserHotoTransactionActivity extends BaseActivity {
         getOfflineData();
 
         gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
-        Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+        /*Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         if (gpsTracker.canGetLocation()) {
             //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
             Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         } else {
             showToast("Could not detect location");
             finish();
-        }
+        }*/
 
         mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                     checkInLat = String.valueOf(gpsTracker.getLatitude());
-                    checkInLong = String.valueOf(gpsTracker.getLongitude());
+                    checkInLong = String.valueOf(gpsTracker.getLongitude());*/
 
-                    submitDetails();
-                    startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class), RESULT_HOTO_READING);
+                submitDetails();
+                startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class), RESULT_HOTO_READING);
 
-                } else {
+                /*} else {
                     showToast("Could not detecting location.");
-                }
+                }*/
 
             }
         });
@@ -219,14 +222,14 @@ public class UserHotoTransactionActivity extends BaseActivity {
             mUserHotoTransEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
             mUserHotoTransEditTextTypeOfSites.setText(intent.getStringExtra("siteType"));
 
-            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+            /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 checkInLat = String.valueOf(gpsTracker.getLatitude());
-                checkInLong = String.valueOf(gpsTracker.getLongitude());
+                checkInLong = String.valueOf(gpsTracker.getLongitude());*/
 
-                submitCheckIn(checkInLong, checkInLat, checkInBatteryData);
-            } else {
+            submitCheckIn(checkInLong, checkInLat, checkInBatteryData);
+            /*} else {
                 showToast("Could not detecting location.");
-            }
+            }*/
         }
     }
 
@@ -335,15 +338,46 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 //sessionManager.updateSessionUserTicketId(null);
                 //sessionManager.updateSessionUserTicketName(null);
                 //finish();
+                LocationManager lm = (LocationManager) UserHotoTransactionActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                boolean gps_enabled = false;
+                boolean network_enabled = false;
 
-                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                    checkOutLat = String.valueOf(gpsTracker.getLatitude());
-                    checkOutLong = String.valueOf(gpsTracker.getLongitude());
+                try {
+                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                } catch (Exception ex) {
+                }
 
-                    submitDetails();
-                    showSettingsAlert();
+                if (!gps_enabled && !network_enabled) {
+                    // notify user
+                    alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+                    alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                        @Override
+                        public void onPositiveClick() {
+                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            UserHotoTransactionActivity.this.startActivity(myIntent);
+                        }
+                    }).show();
                 } else {
-                    showToast("Could not detecting location.");
+                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                        checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                        checkOutLong = String.valueOf(gpsTracker.getLongitude());
+
+                        submitDetails();
+                        showSettingsAlert();
+                    } else {
+                        //showToast("Could not detecting location.");
+                        alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                            @Override
+                            public void onPositiveClick() {
+                                if (gpsTracker.canGetLocation()) {
+                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                                    Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                }
+                            }
+                        }).show();
+                    }
                 }
 
 
@@ -357,6 +391,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     private void showSettingsAlert() {
 
+        alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
