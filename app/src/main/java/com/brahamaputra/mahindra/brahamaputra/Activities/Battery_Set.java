@@ -851,14 +851,15 @@ public class Battery_Set extends BaseActivity {
                 batterySetParentData = hotoTransactionData.getBatterySetParentData();
                 batterySetData.addAll(batterySetParentData.getBatterySetData());
 
+                totalCount = Integer.parseInt(batterySetParentData.getNoOfBatterySet());
+                mBatterySetTextViewNoofBatterySetProvidedVal.setText(batterySetParentData.getNoOfBatterySet());
+                mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(batterySetParentData.getNoOfBatteryBankWorking());
+
                 if (batterySetData != null && batterySetData.size() > 0) {
 
                     linearLayout_container.setVisibility(View.VISIBLE);
                     batterySet_textView_Number.setText("Reading: #1");
-                    totalCount = Integer.parseInt(batterySetParentData.getNoOfBatterySet());
 
-                    mBatterySetTextViewNoofBatterySetProvidedVal.setText(batterySetParentData.getNoOfBatterySet());
-                    mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(batterySetParentData.getNoOfBatteryBankWorking());
 
                     base64StringBatterySet = (batterySetData.get(index).getBatterySet_Qr());
                     mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);

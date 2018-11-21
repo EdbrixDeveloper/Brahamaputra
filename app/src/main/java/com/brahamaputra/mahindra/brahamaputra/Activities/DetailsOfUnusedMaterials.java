@@ -189,22 +189,41 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         detailsOfUnusedMaterials_button_nextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPos < (totalCount - 1)) {
-                    //Save current ac reading
-                    saveRecords(currentPos);
-                    currentPos = currentPos + 1;
-                    //move to Next reading
-                    displayRecords(currentPos);
+                if (checkValidtionForArrayFields()) {
+                    if (currentPos < (totalCount - 1)) {
+                        //Save current ac reading
+                        saveRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
 
-                } else if (currentPos == (totalCount - 1)) {
-                    //Save Final current reading and submit all AC data
-                    saveRecords(currentPos);
-                    submitDetails();
-                    startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
-                    finish();
+                    } else if (currentPos == (totalCount - 1)) {
+                        //Save Final current reading and submit all AC data
+                        saveRecords(currentPos);
+                        submitDetails();
+                        startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
+                        finish();
+                    }
                 }
             }
         });
+    }
+
+    private boolean checkValidtionForArrayFields() {
+        String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
+        String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
+        String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
+
+        if (assetMake.isEmpty() || assetMake == null) {
+            showToast("Select Asset Make ");
+            return false;
+        } else if (assetStatus.isEmpty() || assetStatus == null) {
+            showToast("Select Asset Status");
+            return false;
+        } else if (assetDescription.isEmpty() || assetDescription == null) {
+            showToast("Select Asset Description ");
+            return false;
+        } else return true;
     }
 
     @Override
@@ -218,7 +237,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(DetailsOfUnusedMaterials.this, userId, ticketName);
-        
+
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -245,14 +264,26 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
-                finish();
+                if (checkValidationonSubmit()) {
+                    submitDetails();
+                    startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
+                    finish();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private boolean checkValidationonSubmit() {
+        String UnusedAssetNo = mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.getText().toString().trim();
+        if (!UnusedAssetNo.isEmpty() && UnusedAssetNo != null) {
+            return true;
+        } else {
+            showToast("Enter Number of Unused Asset in Site ");
+            return false;
+        }
+    }
 
     private void setInputDetails(int index) {
         try {
@@ -264,14 +295,15 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 detailsOfUnusedMaterialsParentData = hotoTransactionData.getDetailsOfUnusedMaterialsParentData();
                 detailsOfUnusedMaterialsData.addAll(detailsOfUnusedMaterialsParentData.getDetailsOfUnusedMaterialsData());
+
+                totalCount = Integer.parseInt(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
+                mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
+
                 if (detailsOfUnusedMaterialsData != null && detailsOfUnusedMaterialsData.size() > 0) {
 
                     linearLayout_container.setVisibility(View.VISIBLE);
                     detailsOfUnusedMaterials_textView_Number.setText("Reading: #1");
-                    totalCount = Integer.parseInt(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
 
-
-                    mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
                     mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetMake());
                     mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetStatus());
                     mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetDescription());
@@ -302,7 +334,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
             //detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(numberofUnusedAssetinSite, assetMake, assetStatus,assetDescription);
             //hotoTransactionData.setDetailsOfUnusedMaterialsData(detailsOfUnusedMaterialsData);
 
-            detailsOfUnusedMaterialsParentData = new DetailsOfUnusedMaterialsParentData(numberofUnusedAssetinSite,detailsOfUnusedMaterialsData);
+            detailsOfUnusedMaterialsParentData = new DetailsOfUnusedMaterialsParentData(numberofUnusedAssetinSite, detailsOfUnusedMaterialsData);
             hotoTransactionData.setDetailsOfUnusedMaterialsParentData(detailsOfUnusedMaterialsParentData);
 
             Gson gson2 = new GsonBuilder().create();
@@ -314,12 +346,12 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         }
     }
 
-    private void saveRecords(int pos){
+    private void saveRecords(int pos) {
         String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
         String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
         String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
 
-        DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(assetMake,assetStatus,assetDescription);
+        DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(assetMake, assetStatus, assetDescription);
         if (detailsOfUnusedMaterialsData.size() > 0) {
             if (pos == detailsOfUnusedMaterialsData.size()) {
                 detailsOfUnusedMaterialsData.add(obj_detailsOfUnusedMaterialsData);

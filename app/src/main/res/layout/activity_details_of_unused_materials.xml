@@ -138,7 +138,7 @@
                         android:layout_weight="0.6"
                         android:hint="Enter Description"
                         android:imeOptions="actionNext"
-                        android:inputType="numberDecimal"
+                        android:inputType="textMultiLine"
                         android:textAlignment="viewStart" />
 
                 </LinearLayout>

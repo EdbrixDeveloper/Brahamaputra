@@ -70,7 +70,7 @@ public class ElectricBillProcess extends BaseActivity {
     private String userId = "";
     private String ticketName = "";
     private String ticketId = "";
-       private SessionManager sessionManager;
+    private SessionManager sessionManager;
 
 
 
@@ -95,7 +95,6 @@ public class ElectricBillProcess extends BaseActivity {
         alertDialogManager = new AlertDialogManager(ElectricBillProcess.this);
         toastMessage = new ToastMessage(ElectricBillProcess.this);
         userId = sessionManager.getSessionUserId();
-
 
 
         initCombo();

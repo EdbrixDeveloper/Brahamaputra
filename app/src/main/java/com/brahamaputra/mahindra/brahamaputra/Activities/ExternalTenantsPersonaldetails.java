@@ -427,9 +427,11 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 externalTenantsPersonalDetailsParentData = hotoTransactionData.getExternalTenantsPersonalDetailsParentData();
                 externalTenantsPersonalDetailsDataList.addAll(externalTenantsPersonalDetailsParentData.getExternalTenantsPersonalDetailsData());
 
+                totalTenantCount = externalTenantsPersonalDetailsDataList.size();
+                mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setText(externalTenantsPersonalDetailsParentData.getTotalNumberofTanents());
+
                 if (externalTenantsPersonalDetailsDataList != null && externalTenantsPersonalDetailsDataList.size() > 0) {
-                    totalTenantCount = externalTenantsPersonalDetailsDataList.size();
-                    mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setText(externalTenantsPersonalDetailsParentData.getTotalNumberofTanents());
+
                     lnrTentantDetails.setVisibility(View.VISIBLE);
                     ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsDataList.get(index);
                     mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setText(externalTenantsPersonalDetailsData.getNameofTenant());
@@ -521,7 +523,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         if (!totalNumberofTanents.isEmpty() && totalNumberofTanents != null) {
             return true;
         } else {
-            showToast("Enter Number Of Tenant ");
+            showToast("Select Number Of Tenant ");
             return false;
         }
     }
