@@ -204,13 +204,12 @@
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_PowerManagementSystemSerialNumber"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Power Management System Serial Number "
                     android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
+                    android:inputType="text"
                     android:textAlignment="viewStart" />
 
 

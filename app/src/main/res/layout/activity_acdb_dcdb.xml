@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter ACDB Rating ( AMP) "
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
@@ -102,6 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/acdb_dcdb_linearLayout_FreeCoolingDeviseStausFCU"
                 android:weightSum="1">
 
                 <TextView

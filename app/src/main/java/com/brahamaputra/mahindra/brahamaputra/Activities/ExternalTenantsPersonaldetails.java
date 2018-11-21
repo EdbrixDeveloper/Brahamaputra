@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetail
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
@@ -112,6 +114,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         btnPrevReadingExtTenants = (Button) findViewById(R.id.btnPrevReadingExtTenants);
         btnNextReadingExtTenants = (Button) findViewById(R.id.btnNextReadingExtTenants);
 
+        mExternalTenantsPersonaldetailsEditTextPositionattheTower.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -143,7 +146,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                         if (externalTenantsPersonalDetailsDataList != null && externalTenantsPersonalDetailsDataList.size() > 0) {
                             externalTenantsPersonalDetailsDataList.clear();
                         }
-                        if(totalTenantCount>0){
+                        if (totalTenantCount > 0) {
                             mexternalTenantsPersonaldetails_textView_TentantCount.setText("Tenant: #1");
                             lnrTentantDetails.setVisibility(View.VISIBLE);
                             btnPrevReadingExtTenants.setVisibility(View.GONE);
@@ -153,7 +156,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                             } else {
                                 btnNextReadingExtTenants.setText("Next Reading");
                             }
-                        }else{
+                        } else {
                             lnrTentantDetails.setVisibility(View.GONE);
                         }
 
@@ -283,23 +286,91 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         btnNextReadingExtTenants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPos < (totalTenantCount - 1)) {
-                    //Save current  reading
-                    saveTenantRecords(currentPos);
-                    currentPos = currentPos + 1;
-                    //move to Next reading
-                    displayTenantRecords(currentPos);
+                if (checkValidtionForArrayFields()) {
+                    if (currentPos < (totalTenantCount - 1)) {
+                        //Save current  reading
+                        saveTenantRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayTenantRecords(currentPos);
 
-                } else if (currentPos == (totalTenantCount - 1)) {
-                    //Save Final current reading and submit all  data
-                    saveTenantRecords(currentPos);
-                    submitDetails();
-                    startActivity(new Intent(ExternalTenantsPersonaldetails.this, Total_DC_Load_site.class));
-                    finish();
+                    } else if (currentPos == (totalTenantCount - 1)) {
+                        //Save Final current reading and submit all  data
+                        saveTenantRecords(currentPos);
+                        submitDetails();
+                        startActivity(new Intent(ExternalTenantsPersonaldetails.this, Total_DC_Load_site.class));
+                        finish();
+                    }
                 }
             }
         });
     }
+
+    private boolean checkValidtionForArrayFields() {
+        String nameofTenant = mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.getText().toString().trim();
+        String typeofTenant = mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.getText().toString().trim();
+        String positionattheTower = mExternalTenantsPersonaldetailsEditTextPositionattheTower.getText().toString().trim();
+        String dateofstartofTenancy = mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.getText().toString().trim();
+        String dateofstartofRadiation = mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.getText().toString().trim();
+        String nameofContactPerson = mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.getText().toString().trim();
+        String addressofContactPerson = mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.getText().toString().trim();
+        String contactPersonMobile = mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.getText().toString().trim();
+        String contactPersonLandline = mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.getText().toString().trim();
+
+
+        if (!nameofTenant.isEmpty() && nameofTenant != null) {
+            if (!typeofTenant.isEmpty() && typeofTenant != null) {
+                if (!positionattheTower.isEmpty() && positionattheTower != null) {
+                    if (!dateofstartofTenancy.isEmpty() && dateofstartofTenancy != null) {
+                        if (!dateofstartofTenancy.isEmpty() && dateofstartofTenancy != null) {
+                            if (!dateofstartofRadiation.isEmpty() && dateofstartofRadiation != null) {
+                                if (!nameofContactPerson.isEmpty() && nameofContactPerson != null) {
+                                    if (!addressofContactPerson.isEmpty() && addressofContactPerson != null) {
+                                        if (!contactPersonMobile.isEmpty() && contactPersonMobile != null) {
+                                            if (!contactPersonLandline.isEmpty() && contactPersonLandline != null) {
+                                                return true;
+                                            } else {
+                                                showToast("Enter Landline Number of Contact Person ");
+                                                return false;
+                                            }
+                                        } else {
+                                            showToast("Enter Mobile Number of Contact Person ");
+                                            return false;
+                                        }
+                                    } else {
+                                        showToast("Enter Address of the ContactPerson");
+                                        return false;
+                                    }
+                                } else {
+                                    showToast("Enter Name of the Contact Person");
+                                    return false;
+                                }
+                            } else {
+                                showToast("Enter Date of Start of Radiation");
+                                return false;
+                            }
+                        } else {
+                            showToast("Enter Date of the start of Tenancy");
+                            return false;
+                        }
+                    } else {
+                        showToast("Enter Date of the start of Tenancy");
+                        return false;
+                    }
+                } else {
+                    showToast("Enter Position at the Tower");
+                    return false;
+                }
+            } else {
+                showToast("Select Type of Tenant");
+                return false;
+            }
+        } else {
+            showToast("Select Name of the Tenant");
+            return false;
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -333,9 +404,11 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                finish();
-                startActivity(new Intent(this, Total_DC_Load_site.class));
+                if (checkValidationonSubmit()) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, Total_DC_Load_site.class));
+                }
                 return true;
 
 
@@ -419,54 +492,64 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         }
     }
 
-        private void saveTenantRecords ( int pos){
-            String nameofTenant = mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.getText().toString().trim();
-            String typeofTenant = mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.getText().toString().trim();
-            String positionattheTower = mExternalTenantsPersonaldetailsEditTextPositionattheTower.getText().toString().trim();
-            String dateofstartofTenancy = mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.getText().toString().trim();
-            String dateofstartofRadiation = mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.getText().toString().trim();
-            String nameofContactPerson = mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.getText().toString().trim();
-            String addressofContactPerson = mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.getText().toString().trim();
-            String contactPersonMobile = mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.getText().toString().trim();
-            String contactPersonLandline = mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.getText().toString().trim();
-            ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData(nameofTenant, typeofTenant, positionattheTower, dateofstartofTenancy, dateofstartofRadiation, nameofContactPerson, addressofContactPerson, contactPersonMobile, contactPersonLandline);
+    private void saveTenantRecords(int pos) {
+        String nameofTenant = mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.getText().toString().trim();
+        String typeofTenant = mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.getText().toString().trim();
+        String positionattheTower = mExternalTenantsPersonaldetailsEditTextPositionattheTower.getText().toString().trim();
+        String dateofstartofTenancy = mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.getText().toString().trim();
+        String dateofstartofRadiation = mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.getText().toString().trim();
+        String nameofContactPerson = mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.getText().toString().trim();
+        String addressofContactPerson = mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.getText().toString().trim();
+        String contactPersonMobile = mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.getText().toString().trim();
+        String contactPersonLandline = mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.getText().toString().trim();
+        ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData(nameofTenant, typeofTenant, positionattheTower, dateofstartofTenancy, dateofstartofRadiation, nameofContactPerson, addressofContactPerson, contactPersonMobile, contactPersonLandline);
 
 
-            if (externalTenantsPersonalDetailsDataList.size() > 0) {
-                if (pos == externalTenantsPersonalDetailsDataList.size()) {
-                    externalTenantsPersonalDetailsDataList.add(externalTenantsPersonalDetailsData);
-                } else if (pos < externalTenantsPersonalDetailsDataList.size()) {
-                    externalTenantsPersonalDetailsDataList.set(pos, externalTenantsPersonalDetailsData);
-                }
-            } else {
+        if (externalTenantsPersonalDetailsDataList.size() > 0) {
+            if (pos == externalTenantsPersonalDetailsDataList.size()) {
                 externalTenantsPersonalDetailsDataList.add(externalTenantsPersonalDetailsData);
+            } else if (pos < externalTenantsPersonalDetailsDataList.size()) {
+                externalTenantsPersonalDetailsDataList.set(pos, externalTenantsPersonalDetailsData);
             }
+        } else {
+            externalTenantsPersonalDetailsDataList.add(externalTenantsPersonalDetailsData);
         }
+    }
 
-        private void submitDetails() {
-            try {
-                // hotoTransactionData.setTicketNo(ticketId);
-                String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
-
-                externalTenantsPersonalDetailsParentData.setSubmited(true);
-                externalTenantsPersonalDetailsParentData.setTotalNumberofTanents(totalNumberofTanents);
-                externalTenantsPersonalDetailsParentData.setExternalTenantsPersonalDetailsData(externalTenantsPersonalDetailsDataList);
-
-                hotoTransactionData.setExternalTenantsPersonalDetailsParentData(externalTenantsPersonalDetailsParentData);
-
-                Gson gson2 = new GsonBuilder().create();
-                String jsonString = gson2.toJson(hotoTransactionData);
-                //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
-
-                offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    private boolean checkValidationonSubmit() {
+        String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
+        if (!totalNumberofTanents.isEmpty() && totalNumberofTanents != null) {
+            return true;
+        } else {
+            showToast("Enter Number Of Tenant ");
+            return false;
         }
+    }
+
+    private void submitDetails() {
+        try {
+            // hotoTransactionData.setTicketNo(ticketId);
+            String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
+
+            externalTenantsPersonalDetailsParentData.setSubmited(true);
+            externalTenantsPersonalDetailsParentData.setTotalNumberofTanents(totalNumberofTanents);
+            externalTenantsPersonalDetailsParentData.setExternalTenantsPersonalDetailsData(externalTenantsPersonalDetailsDataList);
+
+            hotoTransactionData.setExternalTenantsPersonalDetailsParentData(externalTenantsPersonalDetailsParentData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
+
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void clearFields(int indexPos) {
 
-        mexternalTenantsPersonaldetails_textView_TentantCount.setText("Tentant: #"+ (indexPos + 1));
+        mexternalTenantsPersonaldetails_textView_TentantCount.setText("Tentant: #" + (indexPos + 1));
 
         mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setText("");
         mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.setText("");
@@ -480,4 +563,4 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     }
 
 
-    }
+}

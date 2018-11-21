@@ -117,13 +117,25 @@ public class Media extends BaseActivity {
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                finish();
-                startActivity(new Intent(this, Battery_Set.class));
+                if (checkValiadtion()) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, Battery_Set.class));
+                }
+
+
                 return true;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkValiadtion() {
+        String mediaType = mMediaTextViewTypeofmediaVal.getText().toString().trim();
+        if (mediaType.isEmpty() || mediaType == null) {
+            showToast("Select Media Type ");
+            return false;
+        } else return true;
     }
 
     private void setInputDetails() {

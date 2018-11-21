@@ -70,6 +70,7 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
 public class UserHotoTransactionActivity extends BaseActivity {
 
@@ -426,6 +427,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             hotoTransactionData.setSiteAddress(mUserHotoTransEditTextSiteAddress.getText().toString());
 
             hotoTransactionData.setSourceOfPower(mUserHotoTransSpinnerSourceOfPowerVal.getText().toString());
+            hototicket_Selected_SiteType = mUserHotoTransEditTextTypeOfSites.getText().toString();
 
 //           hotoTransactionData.setLandDetailsData(new LandDetailsData());
 //

@@ -32,7 +32,8 @@
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center|top"
-                android:src="@drawable/electricity_icon" />
+                android:src="@drawable/img_dieselfilling"
+                android:tint="@color/red"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -61,7 +62,8 @@
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center|top"
-                android:src="@drawable/electricity_icon" />
+                android:tint="@color/red"
+                android:src="@drawable/img_elctricitybilling" />
 
             <TextView
                 android:layout_width="match_parent"

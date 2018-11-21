@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
@@ -47,6 +49,8 @@ public class Total_DC_Load_site extends BaseActivity {
     private void assignViews() {
         mTotalDCLoadsiteTextViewTotalDcLoadOfSite = (TextView) findViewById(R.id.totalDCLoadsite_textView_totalDcLoadOfSite);
         mTotalDCLoadsiteEditTextTotalDcLoadOfSite = (EditText) findViewById(R.id.totalDCLoadsite_editText_totalDcLoadOfSite);
+
+        mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -88,13 +92,24 @@ public class Total_DC_Load_site extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                startActivity(new Intent(this, ActiveequipmentDetails.class));
-                finish();
+                if (checkValiadtion()) {
+                    submitDetails();
+                    startActivity(new Intent(this, ActiveequipmentDetails.class));
+                    finish();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private boolean checkValiadtion() {
+        String totalDcLoadOfSite = mTotalDCLoadsiteEditTextTotalDcLoadOfSite.getText().toString().trim();
+        if (totalDcLoadOfSite.isEmpty() || totalDcLoadOfSite == null) {
+            showToast("Enter Total DC Load of the Site ");
+            return false;
+        } else return true;
+    }
+
 
     private void setInputDetails() {
         try {

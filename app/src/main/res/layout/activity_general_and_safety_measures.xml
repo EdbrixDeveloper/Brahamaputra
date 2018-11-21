@@ -52,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                android:weightSum="1"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_SiteBoundaryStatus">
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_SiteBoundaryStatus"
@@ -136,6 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_DGRoomLock"
                 android:weightSum="1">
 
                 <TextView
@@ -192,6 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireExtuinguisherType"
                 android:weightSum="1">
 
                 <TextView
@@ -220,6 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireExtuinguisherExpiryDate"
                 android:weightSum="1">
 
                 <TextView
@@ -306,6 +310,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_NoofSecurityPerson"
                 android:weightSum="1">
 
                 <TextView
@@ -333,6 +338,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_MobileNumberofSecurity"
                 android:weightSum="1">
 
                 <TextView
@@ -351,7 +357,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Security "
                     android:inputType="numberDecimal"
-                    android:maxLength="15"
+                    android:maxLength="10"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
@@ -389,6 +395,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_MobileNumberofCaretaker"
                 android:weightSum="1">
 
                 <TextView
@@ -408,7 +415,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Caretaker "
                     android:inputType="numberDecimal"
-                    android:maxLength="15"
+                    android:maxLength="10"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />
@@ -420,6 +427,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_IsSecurityCaretakeristheOwnerofSite"
                 android:weightSum="1">
 
                 <TextView
@@ -448,6 +456,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_SalaryofSecurityCaretaker"
                 android:weightSum="1">
 
                 <TextView
@@ -478,6 +487,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_CaretakerSecuritySalaryPaidBy"
                 android:weightSum="1">
 
                 <TextView
@@ -506,6 +516,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_agencyNameSalaryPaid"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_agencyNameSalaryPaid"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:singleLine="false"
+                    android:text="Agency Name(Salary Paid By)" />
+
+                <EditText
+                    android:id="@+id/generalAndSafetyMeasure_editText_agencyNameSalaryPaid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Agency Name "
+                    android:inputType="text"
+                    android:textAlignment="viewStart"
+                    android:imeOptions="actionNext"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_CaretakerSecurityStayinginSite"
                 android:weightSum="1">
 
                 <TextView
@@ -590,6 +631,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FencingCompoundWallCondition"
                 android:weightSum="1">
 
                 <TextView
@@ -674,6 +716,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_DoorOpenSensor"
                 android:weightSum="1">
 
                 <TextView
@@ -701,6 +744,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FuelSensor"
                 android:weightSum="1">
 
                 <TextView
@@ -728,6 +772,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireSmokeSensor"
                 android:weightSum="1">
 
                 <TextView

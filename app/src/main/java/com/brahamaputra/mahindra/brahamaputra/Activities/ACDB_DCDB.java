@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
 public class ACDB_DCDB extends BaseActivity {
 
@@ -58,6 +61,7 @@ public class ACDB_DCDB extends BaseActivity {
     private TextView mAcdbDcdbTextViewNumberofDCDBVal;
     private TextView mAcdbDcdbTextViewFreeCoolingDeviseStausFCU;
     private TextView mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal;
+    private LinearLayout mAcdbDcdbLinearLayoutFreeCoolingDeviseStausFCU;
 
 
    /* mAcdbDcdbTextViewNumberofACDBVal;
@@ -75,6 +79,7 @@ public class ACDB_DCDB extends BaseActivity {
         mAcdbDcdbTextViewNumberofDCDBVal = (TextView) findViewById(R.id.acdb_dcdb_textView_NumberofDCDB_val);
         mAcdbDcdbTextViewFreeCoolingDeviseStausFCU = (TextView) findViewById(R.id.acdb_dcdb_textView_FreeCoolingDeviseStausFCU);
         mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal = (TextView) findViewById(R.id.acdb_dcdb_textView_FreeCoolingDeviseStausFCU_val);
+        mAcdbDcdbLinearLayoutFreeCoolingDeviseStausFCU=(LinearLayout) findViewById(R.id.acdb_dcdb_linearLayout_FreeCoolingDeviseStausFCU);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -164,9 +169,30 @@ public class ACDB_DCDB extends BaseActivity {
 
         hotoTransactionData = new HotoTransactionData();
         setInputDetails();
-
+        checkValidation();
 
     }
+
+    private void checkValidation() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+
+                if (hototicket_Selected_SiteType.equals("Outdoor")) {
+                    mAcdbDcdbLinearLayoutFreeCoolingDeviseStausFCU.setVisibility(View.GONE);
+                    mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal.setText("");
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

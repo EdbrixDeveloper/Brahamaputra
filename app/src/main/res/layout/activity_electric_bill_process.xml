@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
-            android:paddingBottom="@dimen/app_normal_margin"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/app_normal_margin">
 
 
             <LinearLayout
@@ -39,8 +39,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -64,8 +64,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -89,8 +89,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -114,8 +114,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -140,10 +140,11 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select "></TextView>
+                    android:hint="Select "
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,8 +164,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:paddingTop="5dp"
                     android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
                     android:textAlignment="viewStart"
                     android:textAllCaps="true"
                     android:textSize="16sp" />
@@ -192,12 +193,13 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:textAlignment="viewStart"
                     android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
                     android:textAllCaps="true"
                     android:textSize="16sp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -223,6 +225,7 @@
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -248,6 +251,7 @@
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -268,8 +272,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select "></TextView>
+                    android:hint="Select "
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -280,111 +284,101 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/ebProcess_textView_hmrPhotoUpload"
+                    android:id="@+id/ebProcess_textView_typeOfElectricConnection"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="HMR Photo Upload" />
-
-                <ImageView
-                    android:id="@+id/ebProcess_button_hmrPhotoUpload"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:padding="2dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp" />
-
-                <ImageView
-                    android:id="@+id/ebProcess_button_hmrPhotoUploadView"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:padding="2dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/view_image" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                    android:text="Type of electric connection" />
 
                 <TextView
-                    android:id="@+id/ebProcess_textView_tankBalanceBeforeFilling"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Tank Balance Before filling (in Lts)" />
-
-                <EditText
-                    android:id="@+id/ebProcess_editText_tankBalanceBeforeFilling"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Tank Balance Before filling (in Lts)"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/ebProcess_textView_fillingQty"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Filling Quantity (in Lts)" />
-
-                <EditText
-                    android:id="@+id/ebProcess_editText_fillingQty"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Filling Quantity (in Lts)"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/ebProcess_textView_finalDieselStock"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Final Diesel Stock (in Lts)" />
-
-                <TextView
-                    android:id="@+id/ebProcess_textView_finalDieselStockVal"
+                    android:id="@+id/ebProcess_textView_typeOfElectricConnectionVal"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:textAlignment="viewStart"
+                    android:hint="Select "
+                    android:textAlignment="viewStart"></TextView>
+            </LinearLayout>
 
-                    android:textAllCaps="true"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebProcess_textView_tariff"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Tariff" />
+
+                <EditText
+                    android:id="@+id/ebProcess_editText_tariff"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Tariff"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebProcess_textView_unitConsumed"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Units Consumed" />
+
+                <EditText
+                    android:id="@+id/ebProcess_editText_unitConsumed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Units Consumed"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebProcess_textView_billingFrom"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Billing Period From" />
+
+                <EditText
+                    android:id="@+id/ebProcess_editText_billingFrom"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:imeOptions="actionDone"
+                    android:inputType="none"
+                    android:textAlignment="viewStart"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -396,19 +390,49 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/ebProcess_textView_dieselPrice"
+                    android:id="@+id/ebProcess_textView_billingTo"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Diesel Price/Lts (in Rs)" />
+                    android:text="Billing Period To" />
 
                 <EditText
-                    android:id="@+id/ebProcess_editText_dieselPrice"
+                    android:id="@+id/ebProcess_editText_billingTo"
+                    style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter Diesel Price"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:imeOptions="actionDone"
+                    android:inputType="none"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebProcess_textView_billNo"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Bill/Invoice/Receipt Number" />
+
+                <EditText
+                    android:id="@+id/ebProcess_editText_billNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Bill No"
                     android:imeOptions="actionNext"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
@@ -422,20 +446,80 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/ebProcess_textView_presentEbReading"
+                    android:id="@+id/ebProcess_textView_billingIssueDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Present EB Reading" />
+                    android:text="Bill/Issue Date" />
 
                 <EditText
-                    android:id="@+id/ebProcess_editText_presentEbReading"
+                    android:id="@+id/ebProcess_editText_billingIssueDate"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:imeOptions="actionDone"
+                    android:inputType="none"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebProcess_textView_billiDueDate"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Bill Due Date" />
+
+                <EditText
+                    android:id="@+id/ebProcess_editText_billiDueDate"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:imeOptions="actionDone"
+                    android:inputType="none"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebProcess_textView_grossAmount"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Gross Amount" />
+
+                <EditText
+                    android:id="@+id/ebProcess_editText_grossAmount"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Enter Present EB Reading"
+                    android:hint="Enter Gross Amount"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:textAlignment="viewStart" />
@@ -449,62 +533,89 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/ebProcess_textView_presentEbReadingKwhPhoto"
+                    android:id="@+id/ebProcess_textView_netPaybleBeforeDueDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Present EB Meter Reading KWH Photo" />
+                    android:text="Net Payable on or before due Date" />
 
-                <ImageView
-                    android:id="@+id/ebProcess_button_presentEbReadingKwhPhoto"
+                <EditText
+                    android:id="@+id/ebProcess_editText_netPaybleBeforeDueDate"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:padding="2dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp" />
-
-                <ImageView
-                    android:id="@+id/ebProcess_button_presentEbReadingKwhPhotoView"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:padding="2dp"
-                    android:layout_weight="0.3"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/view_image" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Net Payable on or before due Date"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
-            <!--<LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/ebProcess_textView_presentFillingDate"
+                    android:id="@+id/ebProcess_textView_sapVendorCode"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Present/Filling Date" />
+                    android:text="SAP Vendor Code" />
 
-                <TextView
-                    android:id="@+id/ebProcess_textView_presentFillingDateVal"
+                <EditText
+                    android:id="@+id/ebProcess_editText_sapVendorCode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
+                    android:hint="Enter SAP Vendor Code"
                     android:imeOptions="actionNext"
-                    android:textAlignment="viewStart"
+                    android:inputType="number"
+                    android:textAlignment="viewStart" />
 
-                    android:textAllCaps="true"
-                    android:textSize="16sp" />
+            </LinearLayout>
 
-            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebProcess_textView_ebBillScanCopy"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="EB Bill Scan Copy" />
+
+                <ImageView
+                    android:id="@+id/ebProcess_button_ebBillScanCopy"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/ebProcess_button_ebBillScanCopyiew"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

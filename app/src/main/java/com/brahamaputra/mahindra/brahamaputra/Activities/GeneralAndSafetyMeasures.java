@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,13 +13,17 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
+import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
@@ -34,6 +39,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
 public class GeneralAndSafetyMeasures extends BaseActivity {
 
@@ -61,6 +68,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     String str_DoorOpenSensor;
     String str_FuelSensor;
     String str_FireSmokeSensor;
+    String str_AgencyName;
 
 
     private OfflineStorageWrapper offlineStorageWrapper;
@@ -69,6 +77,11 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private GeneralSafetyMeasuresData generalSafetyMeasuresData;
+
+    private TowerDetailsData towerDetailsData;
+    private PowerBackupsDGParentData powerBackupsDGParentData;
+
+
     private SessionManager sessionManager;
 
     private TextView mGeneralAndSafetyMeasuresTextViewPrevailingSLA;
@@ -124,6 +137,25 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     private TextView mGeneralAndSafetyMeasureTextViewFireSmokeSensor;
     private TextView mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal;
 
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutSiteBoundaryStatus;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutDGRoomLock;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherType;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherExpiryDate;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutNoofSecurityPerson;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutMobileNumberofSecurity;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutMobileNumberofCaretaker;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutIsSecurityCaretakeristheOwnerofSite;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutSalaryofSecurityCaretaker;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutCaretakerSecuritySalaryPaidBy;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutCaretakerSecurityStayinginSite;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutFencingCompoundWallCondition;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutDoorOpenSensor;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutFuelSensor;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutFireSmokeSensor;
+    private LinearLayout mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid;
+    private  EditText mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid;
+
+
     private void assignViews() {
         mGeneralAndSafetyMeasuresTextViewPrevailingSLA = (TextView) findViewById(R.id.generalAndSafetyMeasures_textView_PrevailingSLA);
         mGeneralAndSafetyMeasuresEditTextPrevailingSLA = (EditText) findViewById(R.id.generalAndSafetyMeasures_editText_PrevailingSLA);
@@ -178,6 +210,26 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         mGeneralAndSafetyMeasureTextViewFireSmokeSensor = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_FireSmokeSensor);
         mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_FireSmokeSensor_val);
 
+        mGeneralAndSafetyMeasureLinearLayoutSiteBoundaryStatus = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_SiteBoundaryStatus);
+        mGeneralAndSafetyMeasureLinearLayoutDGRoomLock = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_DGRoomLock);
+        mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherType = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_FireExtuinguisherType);
+        mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherExpiryDate = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_FireExtuinguisherExpiryDate);
+        mGeneralAndSafetyMeasureLinearLayoutNoofSecurityPerson = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_NoofSecurityPerson);
+        mGeneralAndSafetyMeasureLinearLayoutMobileNumberofSecurity = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_MobileNumberofSecurity);
+        mGeneralAndSafetyMeasureLinearLayoutMobileNumberofCaretaker = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_MobileNumberofCaretaker);
+        mGeneralAndSafetyMeasureLinearLayoutIsSecurityCaretakeristheOwnerofSite = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_IsSecurityCaretakeristheOwnerofSite);
+        mGeneralAndSafetyMeasureLinearLayoutSalaryofSecurityCaretaker = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_SalaryofSecurityCaretaker);
+        mGeneralAndSafetyMeasureLinearLayoutCaretakerSecuritySalaryPaidBy = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_CaretakerSecuritySalaryPaidBy);
+        mGeneralAndSafetyMeasureLinearLayoutCaretakerSecurityStayinginSite = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_CaretakerSecurityStayinginSite);
+        mGeneralAndSafetyMeasureLinearLayoutFencingCompoundWallCondition = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_FencingCompoundWallCondition);
+        mGeneralAndSafetyMeasureLinearLayoutDoorOpenSensor = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_DoorOpenSensor);
+        mGeneralAndSafetyMeasureLinearLayoutFuelSensor = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_FuelSensor);
+        mGeneralAndSafetyMeasureLinearLayoutFireSmokeSensor = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_FireSmokeSensor);
+        mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_agencyNameSalaryPaid);
+        mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid = (EditText) findViewById(R.id.generalAndSafetyMeasure_editText_agencyNameSalaryPaid);
+
+        mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid.setVisibility(View.GONE);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -284,6 +336,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                         str_FireExtuinguisher = item.get(position);
                         mGeneralAndSafetyMeasureTextViewFireExtuinguisherVal.setText(str_FireExtuinguisher);
+                        onValidateFireExtuinguisher(str_FireExtuinguisher);
                     }
                 });
 
@@ -344,6 +397,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                         str_SecurityStatus24x7 = item.get(position);
                         mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.setText(str_SecurityStatus24x7);
+                        onValidateSecurityStatus(str_SecurityStatus24x7);
                     }
                 });
 
@@ -384,6 +438,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                         str_CaretakerStatusUpOnEmergency = item.get(position);
                         mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.setText(str_CaretakerStatusUpOnEmergency);
+                        onValidateCaretakerStatus(str_CaretakerStatusUpOnEmergency);
                     }
                 });
 
@@ -424,8 +479,11 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                         str_CaretakerSecuritySalaryPaidBy = item.get(position);
                         mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.setText(str_CaretakerSecuritySalaryPaidBy);
+                        onValidateSalaryPaidBy(str_CaretakerSecuritySalaryPaidBy);
+
                     }
                 });
+
 
             }
         });
@@ -604,12 +662,94 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                         str_FireSmokeSensor = item.get(position);
                         mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText(str_FireSmokeSensor);
+
                     }
                 });
 
             }
         });
+
+
     }
+
+
+    private void onValidateFireExtuinguisher(String value) {
+
+        mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherType.setVisibility(View.VISIBLE);
+        mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherExpiryDate.setVisibility(View.VISIBLE);
+
+        if (value.equals("Not Available")) {
+            mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherType.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.setText("");
+
+            mGeneralAndSafetyMeasureLinearLayoutFireExtuinguisherExpiryDate.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setText("");
+        }
+
+    }
+
+    private void onValidateSecurityStatus(String value) {
+
+        mGeneralAndSafetyMeasureLinearLayoutNoofSecurityPerson.setVisibility(View.VISIBLE);
+        mGeneralAndSafetyMeasureLinearLayoutMobileNumberofSecurity.setVisibility(View.VISIBLE);
+
+        if (value.equals("Not Available")) {
+            mGeneralAndSafetyMeasureLinearLayoutNoofSecurityPerson.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.setText("");
+
+            mGeneralAndSafetyMeasureLinearLayoutMobileNumberofSecurity.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureEditTextMobileNumberofSecurity.setText("");
+        }
+        String securityStatus = mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.getText().toString();
+        String caretakerStatus = mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.getText().toString();
+        onValidateSecurityCaretakeStatus(securityStatus, caretakerStatus);
+    }
+
+    private void onValidateCaretakerStatus(String value) {
+
+        mGeneralAndSafetyMeasureLinearLayoutMobileNumberofCaretaker.setVisibility(View.VISIBLE);
+        mGeneralAndSafetyMeasureLinearLayoutIsSecurityCaretakeristheOwnerofSite.setVisibility(View.VISIBLE);
+
+        if (value.equals("Not Available")) {
+            mGeneralAndSafetyMeasureLinearLayoutMobileNumberofCaretaker.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureEditTextMobileNumberofCaretaker.setText("");
+
+            mGeneralAndSafetyMeasureLinearLayoutIsSecurityCaretakeristheOwnerofSite.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureTextViewIsSecurityCaretakeristheOwnerofSiteVal.setText("");
+        }
+        String securityStatus = mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.getText().toString();
+        String caretakerStatus = mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.getText().toString();
+        onValidateSecurityCaretakeStatus(securityStatus, caretakerStatus);
+    }
+
+    private void onValidateSecurityCaretakeStatus(String securityStatus, String caretakerStatus) {
+
+        mGeneralAndSafetyMeasureLinearLayoutSalaryofSecurityCaretaker.setVisibility(View.VISIBLE);
+        mGeneralAndSafetyMeasureLinearLayoutCaretakerSecuritySalaryPaidBy.setVisibility(View.VISIBLE);
+        mGeneralAndSafetyMeasureLinearLayoutCaretakerSecurityStayinginSite.setVisibility(View.VISIBLE);
+
+        if ((securityStatus.equals("Not Available")) & caretakerStatus.equals("Not Available")) {
+            mGeneralAndSafetyMeasureLinearLayoutSalaryofSecurityCaretaker.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureEditTextSalaryofSecurityCaretaker.setText("");
+
+            mGeneralAndSafetyMeasureLinearLayoutCaretakerSecuritySalaryPaidBy.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.setText("");
+
+            mGeneralAndSafetyMeasureLinearLayoutCaretakerSecurityStayinginSite.setVisibility(View.GONE);
+            mGeneralAndSafetyMeasureTextViewCaretakerSecurityStayinginSiteVal.setText("");
+        }
+    }
+
+    private void onValidateSalaryPaidBy(String value) {
+        mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid.setVisibility(View.GONE);
+        if (value.equals("External Agency")) {
+            mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid.setVisibility(View.VISIBLE);
+            mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.setText("");
+
+        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -626,6 +766,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
         setInputDetails();
+        checkValidation();
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -684,6 +825,46 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void checkValidation() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                towerDetailsData = hotoTransactionData.getTowerDetailsData();
+                if (towerDetailsData.getTowerName().equals("RTT") || towerDetailsData.getTowerName().equals("Mast")) {
+
+                    mGeneralAndSafetyMeasureLinearLayoutSiteBoundaryStatus.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.setText("");
+
+                    mGeneralAndSafetyMeasureLinearLayoutFencingCompoundWallCondition.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureTextViewFencingCompoundWallConditionVal.setText("");
+                }
+                powerBackupsDGParentData = hotoTransactionData.getPowerBackupsDGParentData();
+                if (powerBackupsDGParentData.getNoOfEngineAlternator().equals("0")) {
+                    mGeneralAndSafetyMeasureLinearLayoutDGRoomLock.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureTextViewDGRoomLockVal.setText("");
+
+                    mGeneralAndSafetyMeasureLinearLayoutFuelSensor.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureTextViewFuelSensorVal.setText("");
+                }
+
+                if (hototicket_Selected_SiteType.equals("Outdoor")) {
+                    mGeneralAndSafetyMeasureLinearLayoutDoorOpenSensor.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureTextViewDoorOpenSensorVal.setText("");
+
+                    mGeneralAndSafetyMeasureLinearLayoutFireSmokeSensor.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText("");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -721,6 +902,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                 mGeneralAndSafetyMeasureTextViewDoorOpenSensorVal.setText(generalSafetyMeasuresData.getDoorOpenSensor());
                 mGeneralAndSafetyMeasureTextViewFuelSensorVal.setText(generalSafetyMeasuresData.getFuelSensor());
                 mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText(generalSafetyMeasuresData.getFireSmokeSensor());
+                mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.setText(generalSafetyMeasuresData.getAgencyName());
 
 
             } else {
@@ -762,8 +944,9 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
             String doorOpenSensor = mGeneralAndSafetyMeasureTextViewDoorOpenSensorVal.getText().toString().trim();
             String fuelSensor = mGeneralAndSafetyMeasureTextViewFuelSensorVal.getText().toString().trim();
             String fireSmokeSensor = mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.getText().toString().trim();
+            String str_AgencyName=mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.getText().toString();
 
-            generalSafetyMeasuresData = new GeneralSafetyMeasuresData(prevailingSLA, siteBoundaryStatus, siteHygieneVegitationStatus, gateLock, dgRoomLock, fireExtuinguisher, fireExtuinguisherType, fireExtuinguisherExpiryDate, fireBucket, securityStatus, noofSecurityPerson, mobileNumberofSecurity, caretakerStatusUpOnEmergency, mobileNumberofCaretaker, isSecurityCaretakeristheOwnerofSite, salaryofSecurityCaretaker, caretakerSecuritySalaryPaidBy, caretakerSecurityStayinginSite, numberofEarthPit, lightningArresterStatus, fencingCompoundWallCondition, numberoffreeODPaltformAvailable, alarmMultipluxerStatus, doorOpenSensor, fuelSensor, fireSmokeSensor);
+            generalSafetyMeasuresData = new GeneralSafetyMeasuresData(prevailingSLA, siteBoundaryStatus, siteHygieneVegitationStatus, gateLock, dgRoomLock, fireExtuinguisher, fireExtuinguisherType, fireExtuinguisherExpiryDate, fireBucket, securityStatus, noofSecurityPerson, mobileNumberofSecurity, caretakerStatusUpOnEmergency, mobileNumberofCaretaker, isSecurityCaretakeristheOwnerofSite, salaryofSecurityCaretaker, caretakerSecuritySalaryPaidBy, caretakerSecurityStayinginSite, numberofEarthPit, lightningArresterStatus, fencingCompoundWallCondition, numberoffreeODPaltformAvailable, alarmMultipluxerStatus, doorOpenSensor, fuelSensor, fireSmokeSensor,str_AgencyName);
 
             hotoTransactionData.setGeneralSafetyMeasuresData(generalSafetyMeasuresData);
 

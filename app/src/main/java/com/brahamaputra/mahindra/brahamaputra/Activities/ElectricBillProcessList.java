@@ -54,7 +54,7 @@ public class ElectricBillProcessList extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diesel_filling_list);
+        setContentView(R.layout.activity_electric_bill_process_list);
         this.setTitle("Electric Bill Process Tickets");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(ElectricBillProcessList.this);

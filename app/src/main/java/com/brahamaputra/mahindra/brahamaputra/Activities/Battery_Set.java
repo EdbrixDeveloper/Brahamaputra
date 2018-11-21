@@ -16,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,6 +40,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -68,10 +70,9 @@ public class Battery_Set extends BaseActivity {
     public static final String CAMERA_PREF = "camera_pref";
 
     private Uri imageFileUri = null;
-    private String imageFileName ="";
+    private String imageFileName = "";
 
     private AlertDialogManager alertDialogManager;
-
 
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -174,6 +175,7 @@ public class Battery_Set extends BaseActivity {
         batterySet_textView_Number = (TextView) findViewById(R.id.batterySet_textView_Number);
         linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
 
+        mBatterySetEditTextBackupduration.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -430,19 +432,21 @@ public class Battery_Set extends BaseActivity {
         batterySet_button_nextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPos < (totalCount - 1)) {
-                    //Save current ac reading
-                    saveRecords(currentPos);
-                    currentPos = currentPos + 1;
-                    //move to Next reading
-                    displayRecords(currentPos);
+                if (checkValidtionForArrayFields()) {
+                    if (currentPos < (totalCount - 1)) {
+                        //Save current ac reading
+                        saveRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
 
-                } else if (currentPos == (totalCount - 1)) {
-                    //Save Final current reading and submit all AC data
-                    saveRecords(currentPos);
-                    submitDetails();
-                    startActivity(new Intent(Battery_Set.this, ExternalTenantsPersonaldetails.class));
-                    finish();
+                    } else if (currentPos == (totalCount - 1)) {
+                        //Save Final current reading and submit all AC data
+                        saveRecords(currentPos);
+                        submitDetails();
+                        startActivity(new Intent(Battery_Set.this, ExternalTenantsPersonaldetails.class));
+                        finish();
+                    }
                 }
             }
         });
@@ -458,6 +462,62 @@ public class Battery_Set extends BaseActivity {
                 }
             }
         });
+
+    }
+
+    private boolean checkValidtionForArrayFields() {
+
+        String batterySet_Qr = base64StringBatterySet;
+        String assetOwner = mBatterySetTextViewAssetOwnerVal.getText().toString().trim();
+        String manufactureMakeModel = mBatterySetTextViewManufacturerMakeModelVal.getText().toString().trim();
+        String capacityInAH = mBatterySetTextViewCapacityinAHVal.getText().toString().trim();
+        String typeOfBattery = mBatterySetTextViewTypeofBatteryVal.getText().toString().trim();
+        String dateOfInstallation = mBatterySetEditTextDateofInstallation.getText().toString().trim();
+        String backupDuaration = mBatterySetEditTextBackupduration.getText().toString().trim();
+        String positionOfBatteryBank = mBatterySetTextViewPositionofBatteryBankVal.getText().toString().trim();
+        String batteryBankCableSize = mBatterySetTextViewBatteryBankCableSizeinSQMMVal.getText().toString().trim();
+        String batteryBankEarthingStatus = mBatterySetTextViewBatteryBankEarthingStatusVal.getText().toString().trim();
+        String backupCondition = mBatterySetTextViewBACKUPConditionVal.getText().toString().trim();
+        String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
+
+        if (batterySet_Qr.isEmpty() || batterySet_Qr == null) {
+            showToast("Battery Set Qr Missing ");
+            return false;
+        } else if (assetOwner.isEmpty() || assetOwner == null) {
+            showToast("Select Asset Owner ");
+            return false;
+        } else if (manufactureMakeModel.isEmpty() || manufactureMakeModel == null) {
+            showToast("Select Manufacture Make Model");
+            return false;
+        } else if (capacityInAH.isEmpty() || capacityInAH == null) {
+            showToast("Select capacity InAH ");
+            return false;
+        } else if (typeOfBattery.isEmpty() || typeOfBattery == null) {
+            showToast("Select type of Battery ");
+            return false;
+        } else if (dateOfInstallation.isEmpty() || dateOfInstallation == null) {
+            showToast("Select Date of Installation ");
+            return false;
+        } else if (backupDuaration.isEmpty() || backupDuaration == null) {
+            showToast("Select Backup Duaration ");
+            return false;
+        } else if (positionOfBatteryBank.isEmpty() || positionOfBatteryBank == null) {
+            showToast("Select Position of Battery Bank ");
+            return false;
+        } else if (batteryBankCableSize.isEmpty() || batteryBankCableSize == null) {
+            showToast("Enter Battery Bank Cable Size");
+            return false;
+        } else if (batteryBankEarthingStatus.isEmpty() || batteryBankEarthingStatus == null) {
+            showToast("Select Battery Bank Earthing Status ");
+            return false;
+        } else if (backupCondition.isEmpty() || backupCondition == null) {
+            showToast("Select Backup Condition");
+            return false;
+        } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
+            showToast("Select Nature of Problem ");
+            return false;
+        } else return true;
+
 
     }
 
@@ -559,14 +619,32 @@ public class Battery_Set extends BaseActivity {
                 // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                finish();
-                startActivity(new Intent(this, ExternalTenantsPersonaldetails.class));
+                if (checkValidation()) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, ExternalTenantsPersonaldetails.class));
+                }
                 return true;
 
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkValidation() {
+        String noOfBatterySet = mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim();
+        String noOfBatteryBankWorking = mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim();
+
+        if (noOfBatterySet.isEmpty() || noOfBatterySet == null) {
+            showToast("Select No of Battery Set Provided ");
+            return false;
+        } else if (noOfBatteryBankWorking.isEmpty() || noOfBatteryBankWorking == null) {
+            showToast("Select No of Battery Bank Working ");
+            return false;
+        } else if (Integer.valueOf(noOfBatteryBankWorking) > Integer.valueOf(noOfBatterySet)) {
+            showToast("Number of battery bank working  is not more than number of battery set provided ");
+            return false;
+        } else return true;
     }
 
 

@@ -88,8 +88,8 @@ public class ElectricBillProcess extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diesel_filling);
-        this.setTitle("Diesel Filling");
+        setContentView(R.layout.activity_electric_bill_process);
+        this.setTitle("Electric Bill Process");
 
         sessionManager = new SessionManager(ElectricBillProcess.this);
         alertDialogManager = new AlertDialogManager(ElectricBillProcess.this);

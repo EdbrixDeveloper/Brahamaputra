@@ -228,6 +228,7 @@
                         android:layout_weight="0.6"
                         android:hint="Enter Name of the Contact Person "
                         android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:textAlignment="viewStart" />
                     <!--android:inputType="text"-->
 
@@ -256,6 +257,7 @@
                         android:layout_weight="0.6"
                         android:hint="Enter Address of the Contact Person"
                         android:imeOptions="actionNext"
+                        android:inputType="textMultiLine"
                         android:textAlignment="viewStart" />
                     <!--android:inputType="text"-->
 
@@ -284,6 +286,8 @@
                         android:layout_weight="0.6"
                         android:hint="Enter Telephone No. of Contact Person – Mobile "
                         android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="10"
                         android:textAlignment="viewStart" />
                     <!--android:maxLength="15"
                     android:inputType="number"
@@ -314,6 +318,8 @@
                         android:layout_weight="0.6"
                         android:hint="Enter Telephone No. of Contact Person -Land line "
                         android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="20"
                         android:textAlignment="viewStart" />
                     <!--android:inputType="phone"
                     android:inputType="numberDecimal"
