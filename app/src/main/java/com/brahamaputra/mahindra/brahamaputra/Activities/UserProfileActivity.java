@@ -33,6 +33,8 @@ public class UserProfileActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private AlertDialogManager alertDialogManager;
 
+    public static final int RESULT_UPDATE_PROFILE = 328;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +43,12 @@ public class UserProfileActivity extends AppCompatActivity {
         this.setTitle("Profile");
         assignViews();
         alertDialogManager = new AlertDialogManager(UserProfileActivity.this);
+        sessionManager = new SessionManager(UserProfileActivity.this);
         setValues();
     }
 
     private void setValues() {
-        sessionManager = new SessionManager(UserProfileActivity.this);
+
         if (!sessionManager.getSessionUsername().equals("") && !sessionManager.getSessionUserId().equals("")) {
             mUserProfileTextViewuserName.setText(sessionManager.getSessionUserFirstName().toString() + " " + sessionManager.getSessionUserFirstLast().toString());
             mUserProfileTextViewuserEmail.setText(sessionManager.getSessionUsername().toString());
@@ -77,7 +80,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menuEditProf:
-                startActivity(new Intent(UserProfileActivity.this,UserEditProfileActivity.class));
+                startActivityForResult(new Intent(UserProfileActivity.this,UserEditProfileActivity.class),RESULT_UPDATE_PROFILE);
                 return true;
 
             case R.id.menuChangePassword:
@@ -132,5 +135,11 @@ public class UserProfileActivity extends AppCompatActivity {
         mUserProfileTextViewuserEmail = (TextView) findViewById(R.id.textView_userProfile_userName);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_UPDATE_PROFILE && resultCode == RESULT_OK) {
+            setValues();
+        }
+    }
 }

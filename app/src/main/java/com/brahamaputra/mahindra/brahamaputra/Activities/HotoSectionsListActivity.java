@@ -239,7 +239,7 @@ public class HotoSectionsListActivity extends AppCompatActivity {
             case 18:
                 return hotoTransactionData.getServoStabilizerData().getSubmited();
             case 19:
-                return hotoTransactionData.getDetailsOfUnusedMaterialsData().getSubmited();
+                return hotoTransactionData.getDetailsOfUnusedMaterialsParentData().getSubmited();
             case 20:
                 return hotoTransactionData.getSitePhotoCaptureData().getSubmited();
 

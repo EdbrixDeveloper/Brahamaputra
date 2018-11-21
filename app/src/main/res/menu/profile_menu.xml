@@ -6,7 +6,8 @@
         android:id="@+id/menuEditProf"
         android:title="logout"
         android:icon="@drawable/ic_edit_white_24dp"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:visible="false"/>
     <item
         android:id="@+id/menuChangePassword"
         android:title="logout"

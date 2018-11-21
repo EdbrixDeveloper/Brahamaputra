@@ -55,6 +55,10 @@ public class Constants {
     public final static String hototTicketList = BASE_URL.concat("hototickets/gethototticketlist");  // gethototticketlist
     public final static String submitHototTicket = BASE_URL.concat("hototickets/submithotottickettransactions");  // submitHototticket http://brahmaputra-dev-api.us-west-2.elasticbeanstalk.com/hototickets/submithotottickettransactions
     public final static String hototticketstatusclockin = BASE_URL.concat("hototickets/hototticketstatusclockin");  // hototticketstatusclockin
+    public final static String changepassword = BASE_URL.concat("auth/changepassword");  // changepassword
+    public final static String editprofile = BASE_URL.concat("auth/editprofile");  // editprofile
+    public final static String forgotpassword = BASE_URL.concat("auth/forgotpassword");  // forgotpassword
+
 
     public final static String GetUserSites = BASE_URL.concat("common/getusersites");  // getusersites //used in diesel filling activity
     public final static String GetDgId_from_Sites = BASE_URL.concat("common/getdgmrqrcodesbysiteid");  // getdgmrqrcodesbysiteid //used in diesel filling activity

@@ -7,10 +7,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePhotoCaptureData;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -34,7 +38,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     private String ticketId = "";
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
-    private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
+    private ArrayList<DetailsOfUnusedMaterialsData> detailsOfUnusedMaterialsData;
     private SessionManager sessionManager;
 
     private TextView mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite;
@@ -43,6 +47,8 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     private TextView mDetailsOfUnusedMaterialsTextViewAssetMakeVal;
     private TextView mDetailsOfUnusedMaterialsTextViewAssetStatus;
     private TextView mDetailsOfUnusedMaterialsTextViewAssetStatusVal;
+
+    private EditText mDetailsOfUnusedMaterialsEditTextDescriptionVal;
 
   /*  mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal;
     mDetailsOfUnusedMaterialsTextViewAssetMakeVal;
@@ -53,6 +59,14 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     String str_assetMake;
     String str_assetStatus;
 
+    private DetailsOfUnusedMaterialsParentData detailsOfUnusedMaterialsParentData;
+    private int totalCount = 0;
+    private int currentPos = 0;
+    private Button detailsOfUnusedMaterials_button_previousReading;
+    private Button detailsOfUnusedMaterials_button_nextReading;
+    private TextView detailsOfUnusedMaterials_textView_Number;
+    private LinearLayout linearLayout_container;
+
     private void assignViews() {
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite);
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite_val);
@@ -60,11 +74,16 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         mDetailsOfUnusedMaterialsTextViewAssetMakeVal = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_AssetMake_val);
         mDetailsOfUnusedMaterialsTextViewAssetStatus = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_AssetStatus);
         mDetailsOfUnusedMaterialsTextViewAssetStatusVal = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_AssetStatus_val);
+        mDetailsOfUnusedMaterialsEditTextDescriptionVal = (EditText) findViewById(R.id.detailsOfUnusedMaterials_editText_description_val);
+
+        detailsOfUnusedMaterials_button_nextReading = (Button) findViewById(R.id.btnNextReading);
+        detailsOfUnusedMaterials_button_previousReading = (Button) findViewById(R.id.btnPrevReading);
+        detailsOfUnusedMaterials_textView_Number = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_Number);
+        linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-
-
     }
 
     private void initCombo() {
@@ -83,6 +102,31 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
                         str_numberofUnusedAssetinSite = item.get(position);
                         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(str_numberofUnusedAssetinSite);
+
+                        //clear AC collection empty by select / changing value of No of Ac provided
+                        if (detailsOfUnusedMaterialsData != null && detailsOfUnusedMaterialsData.size() > 0) {
+                            detailsOfUnusedMaterialsData.clear();
+                        }
+                        currentPos = 0;
+                        totalCount = 0;
+                        clearFields(currentPos);
+                        totalCount = Integer.parseInt(str_numberofUnusedAssetinSite);
+
+                        // Clear all field value and hide layout If Non AC or O //
+                        if (totalCount > 0) {
+
+                            detailsOfUnusedMaterials_textView_Number.setText("Reading: #1");
+                            linearLayout_container.setVisibility(View.VISIBLE);
+                            detailsOfUnusedMaterials_button_previousReading.setVisibility(View.GONE);
+                            detailsOfUnusedMaterials_button_nextReading.setVisibility(View.VISIBLE);
+                            if (totalCount > 0 && totalCount == 1) {
+                                detailsOfUnusedMaterials_button_nextReading.setText("Finish");
+                            } else {
+                                detailsOfUnusedMaterials_button_nextReading.setText("Next Reading");
+                            }
+                        } else {
+                            linearLayout_container.setVisibility(View.GONE);
+                        }
                     }
                 });
 
@@ -128,6 +172,39 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
             }
         });
+
+        detailsOfUnusedMaterials_button_previousReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+                }
+            }
+        });
+
+        detailsOfUnusedMaterials_button_nextReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos < (totalCount - 1)) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos + 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+
+                } else if (currentPos == (totalCount - 1)) {
+                    //Save Final current reading and submit all AC data
+                    saveRecords(currentPos);
+                    submitDetails();
+                    startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 
     @Override
@@ -141,12 +218,17 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(DetailsOfUnusedMaterials.this, userId, ticketName);
-
+        
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
+
+
+        detailsOfUnusedMaterialsData = new ArrayList<>();
+        currentPos = 0;
+        setInputDetails(currentPos);
+
     }
 
     @Override
@@ -155,7 +237,6 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -171,8 +252,9 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void setInputDetails() {
+    private void setInputDetails(int index) {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
@@ -180,11 +262,29 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                 Gson gson = new Gson();
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-                detailsOfUnusedMaterialsData = hotoTransactionData.getDetailsOfUnusedMaterialsData();
+                detailsOfUnusedMaterialsParentData = hotoTransactionData.getDetailsOfUnusedMaterialsParentData();
+                detailsOfUnusedMaterialsData.addAll(detailsOfUnusedMaterialsParentData.getDetailsOfUnusedMaterialsData());
+                if (detailsOfUnusedMaterialsData != null && detailsOfUnusedMaterialsData.size() > 0) {
 
-                mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(detailsOfUnusedMaterialsData.getNumberofUnusedAssetinSite());
-                mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(detailsOfUnusedMaterialsData.getAssetMake());
-                mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(detailsOfUnusedMaterialsData.getAssetStatus());
+                    linearLayout_container.setVisibility(View.VISIBLE);
+                    detailsOfUnusedMaterials_textView_Number.setText("Reading: #1");
+                    totalCount = Integer.parseInt(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
+
+
+                    mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetMake());
+                    mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetStatus());
+                    mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetDescription());
+
+                    detailsOfUnusedMaterials_button_previousReading.setVisibility(View.GONE);
+                    detailsOfUnusedMaterials_button_nextReading.setVisibility(View.VISIBLE);
+
+                    if (detailsOfUnusedMaterialsData.size() > 1) {
+                        detailsOfUnusedMaterials_button_nextReading.setText("Next Reading");
+                    } else {
+                        detailsOfUnusedMaterials_button_nextReading.setText("Finish");
+                    }
+                }
 
             } else {
                 Toast.makeText(DetailsOfUnusedMaterials.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
@@ -197,13 +297,13 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     private void submitDetails() {
         try {
             // hotoTransactionData.setTicketNo(ticketId);
-
             String numberofUnusedAssetinSite = mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.getText().toString().trim();
-            String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
-            String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
 
-            detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(numberofUnusedAssetinSite, assetMake, assetStatus);
-            hotoTransactionData.setDetailsOfUnusedMaterialsData(detailsOfUnusedMaterialsData);
+            //detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(numberofUnusedAssetinSite, assetMake, assetStatus,assetDescription);
+            //hotoTransactionData.setDetailsOfUnusedMaterialsData(detailsOfUnusedMaterialsData);
+
+            detailsOfUnusedMaterialsParentData = new DetailsOfUnusedMaterialsParentData(numberofUnusedAssetinSite,detailsOfUnusedMaterialsData);
+            hotoTransactionData.setDetailsOfUnusedMaterialsParentData(detailsOfUnusedMaterialsParentData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
@@ -212,5 +312,65 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void saveRecords(int pos){
+        String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
+        String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
+        String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
+
+        DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(assetMake,assetStatus,assetDescription);
+        if (detailsOfUnusedMaterialsData.size() > 0) {
+            if (pos == detailsOfUnusedMaterialsData.size()) {
+                detailsOfUnusedMaterialsData.add(obj_detailsOfUnusedMaterialsData);
+            } else if (pos < detailsOfUnusedMaterialsData.size()) {
+                detailsOfUnusedMaterialsData.set(pos, obj_detailsOfUnusedMaterialsData);
+            }
+        } else {
+            detailsOfUnusedMaterialsData.add(obj_detailsOfUnusedMaterialsData);
+        }
+    }
+
+    private void displayRecords(int pos) {
+        if (detailsOfUnusedMaterialsData.size() > 0 && pos < detailsOfUnusedMaterialsData.size()) {
+
+            detailsOfUnusedMaterials_textView_Number.setText("Reading: #" + (pos + 1));
+
+            mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(detailsOfUnusedMaterialsData.get(pos).getAssetMake());
+            mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(detailsOfUnusedMaterialsData.get(pos).getAssetStatus());
+            mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText(detailsOfUnusedMaterialsData.get(pos).getAssetDescription());
+
+            detailsOfUnusedMaterials_button_previousReading.setVisibility(View.VISIBLE);
+            detailsOfUnusedMaterials_button_nextReading.setVisibility(View.VISIBLE);
+
+        } else {
+            clearFields(pos);
+        }
+
+        if (pos > 0 && pos < (totalCount - 1)) {
+            detailsOfUnusedMaterials_button_previousReading.setVisibility(View.VISIBLE);
+            detailsOfUnusedMaterials_button_nextReading.setText("Next Reading");
+        } else if (pos > 0 && pos == (totalCount - 1)) {
+            detailsOfUnusedMaterials_button_previousReading.setVisibility(View.VISIBLE);
+            detailsOfUnusedMaterials_button_nextReading.setText("Finish");
+        } else if (pos == 0) {
+            detailsOfUnusedMaterials_button_previousReading.setVisibility(View.GONE);
+            if (pos == (totalCount - 1)) {
+                detailsOfUnusedMaterials_button_nextReading.setText("Finish");
+            } else {
+                detailsOfUnusedMaterials_button_nextReading.setText("Next Reading");
+            }
+        }
+    }
+
+    public void clearFields(int indexPos) {
+        detailsOfUnusedMaterials_textView_Number.setText("Reading: #" + (indexPos + 1));
+
+        mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText("");
+        mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText("");
+        mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText("");
+
+        str_assetMake = "";
+        str_assetStatus = "";
     }
 }

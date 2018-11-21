@@ -206,8 +206,7 @@ public class Power_Backups_DG extends BaseActivity {
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -795,7 +794,7 @@ public class Power_Backups_DG extends BaseActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         if (date_flag.equals("install")) {
             mPowerBackupsDgEditTextDateOfInstallation.setText(sdf.format(myCalendar.getTime()));

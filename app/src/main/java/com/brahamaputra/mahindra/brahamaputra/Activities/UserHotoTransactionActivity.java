@@ -136,7 +136,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
         initCombo();
         disableInput();
 
-
         alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
 
         sessionManager = new SessionManager(UserHotoTransactionActivity.this);

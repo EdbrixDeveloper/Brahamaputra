@@ -65,7 +65,8 @@ public class HotoTransactionData {
     private GeneralSafetyMeasuresData generalSafetyMeasuresData;
     private ACDB_DCDB_Data acdb_dcdb_data;
     private ServoStabilizerData servoStabilizerData;
-    private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
+    //private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
+    private DetailsOfUnusedMaterialsParentData detailsOfUnusedMaterialsParentData;
 
     public HotoTransactionData() {
         landDetailsData = new LandDetailsData();
@@ -87,7 +88,7 @@ public class HotoTransactionData {
         generalSafetyMeasuresData = new GeneralSafetyMeasuresData();
         acdb_dcdb_data = new ACDB_DCDB_Data();
         servoStabilizerData = new ServoStabilizerData();
-        detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData();
+        detailsOfUnusedMaterialsParentData = new DetailsOfUnusedMaterialsParentData();
         sitePhotoCaptureData = new SitePhotoCaptureData();
     }
 
@@ -349,12 +350,12 @@ public class HotoTransactionData {
         this.servoStabilizerData = servoStabilizerData;
     }
 
-    public DetailsOfUnusedMaterialsData getDetailsOfUnusedMaterialsData() {
-        return detailsOfUnusedMaterialsData;
+    public DetailsOfUnusedMaterialsParentData getDetailsOfUnusedMaterialsParentData() {
+        return detailsOfUnusedMaterialsParentData;
     }
 
-    public void setDetailsOfUnusedMaterialsData(DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData) {
-        this.detailsOfUnusedMaterialsData = detailsOfUnusedMaterialsData;
+    public void setDetailsOfUnusedMaterialsParentData(DetailsOfUnusedMaterialsParentData detailsOfUnusedMaterialsParentData) {
+        this.detailsOfUnusedMaterialsParentData = detailsOfUnusedMaterialsParentData;
     }
 
     public String getSiteId() {

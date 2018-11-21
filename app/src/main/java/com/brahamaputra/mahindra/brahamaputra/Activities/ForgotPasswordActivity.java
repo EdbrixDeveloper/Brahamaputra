@@ -1,7 +1,9 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,13 +13,24 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
+import com.brahamaputra.mahindra.brahamaputra.Volley.JsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    private EditText mForgotPasswordEditTextMobileNumber;
+public class ForgotPasswordActivity extends BaseActivity {
+
+    private EditText mForgotPasswordEditTextUserName;
     private Button mForgotPasswordButtonSubmit;
     private GlobalMethods globalMethods;
 
@@ -40,25 +53,72 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 checkValidations();
             }
         });
-
-
     }
 
     private void checkValidations() {
-
-        String mobile = mForgotPasswordEditTextMobileNumber.getText().toString();
+        String userName = mForgotPasswordEditTextUserName.getText().toString();
         Conditions.hideKeyboard(ForgotPasswordActivity.this);
-        if (mobile.isEmpty()) {
-            mForgotPasswordEditTextMobileNumber.setError("Field can not be empty");
-        } else if (globalMethods.validatePhoneNumber(mobile) == false) {
-            mForgotPasswordEditTextMobileNumber.setError("Please validate mobile number");
-        }else {
-            doForgot(mobile);
+        if (userName.isEmpty()) {
+            mForgotPasswordEditTextUserName.setError("Field can not be empty");
+        } else {
+            doForgot(userName);
         }
 
     }
 
-    private void doForgot(String mobile) {
+    private void doForgot(String userName) {
+
+        showBusyProgress();
+        try{
+            JSONObject jo = new JSONObject();
+            try {
+                jo.put("APIKEY", Constants.APP_KEY__);
+                jo.put("SECRETKEY", Constants.APP_SECRET__);
+                jo.put("Username", userName);
+
+            } catch (JSONException e) {
+                Log.e(ForgotPasswordActivity.class.getName(), e.getMessage().toString());
+                return;
+            }
+
+            JsonRequest forgotPasswordReq = new JsonRequest(Request.Method.POST, Constants.forgotpassword, jo,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(@NonNull JSONObject response) {
+                            hideBusyProgress();
+                            try {
+                                if (response != null) {
+                                    if (response.has("Success")) {
+                                        int success = response.getInt("Success");
+                                        if (success == 1) {
+                                            showToast("Password sent on your email.");
+                                            finish();
+                                        } else {
+                                            showToast("Problem while Password sending");
+                                            finish();
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                showToast("Exception :" + e.getMessage());
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    hideBusyProgress();
+                    showToast(SettingsMy.getErrorMessage(error));
+                }
+            });
+            forgotPasswordReq.setRetryPolicy(Application.getDefaultRetryPolice());
+            forgotPasswordReq.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(forgotPasswordReq, "forgotPasswordReq");
+
+        }catch(Exception e){
+            hideBusyProgress();
+            e.printStackTrace();
+        }
 
     }
 
@@ -74,10 +134,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void assignViews() {
-        mForgotPasswordEditTextMobileNumber = (EditText) findViewById(R.id.forgotPassword_editText_mobileNumber);
+        mForgotPasswordEditTextUserName = (EditText) findViewById(R.id.forgotPassword_editText_username);
         mForgotPasswordButtonSubmit = (Button) findViewById(R.id.forgotPassword_button_submit);
     }
-
-
-
 }

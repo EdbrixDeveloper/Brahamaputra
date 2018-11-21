@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class DetailsOfUnusedMaterialsData {
 
-    @SerializedName("numberofUnusedAssetinSite")
-    String numberofUnusedAssetinSite;
+    /*@SerializedName("numberofUnusedAssetinSite")
+    String numberofUnusedAssetinSite;*/
 
     @SerializedName("assetMake")
     String assetMake;
@@ -13,30 +13,37 @@ public class DetailsOfUnusedMaterialsData {
     @SerializedName("assetStatus")
     String assetStatus;
 
-    @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    @SerializedName("assetDescription")
+    String assetDescription;
+
+    /*@SerializedName("isSubmited")
+    private Boolean isSubmited;*/
+
+
 
     public DetailsOfUnusedMaterialsData() {
-        this.numberofUnusedAssetinSite = "";
+        //this.numberofUnusedAssetinSite = "";
         this.assetMake = "";
         this.assetStatus = "";
-        this.isSubmited = false;
+        this.assetDescription = "";
+        //this.isSubmited = false;
     }
 
-    public DetailsOfUnusedMaterialsData(String numberofUnusedAssetinSite, String assetMake, String assetStatus) {
-        this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
+    public DetailsOfUnusedMaterialsData(String assetMake, String assetStatus, String assetDescription) {
+       // this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
         this.assetMake = assetMake;
         this.assetStatus = assetStatus;
-        this.isSubmited = true;
+        this.assetDescription = assetDescription;
+        //this.isSubmited = true;
     }
 
-    public String getNumberofUnusedAssetinSite() {
+   /* public String getNumberofUnusedAssetinSite() {
         return numberofUnusedAssetinSite;
     }
 
     public void setNumberofUnusedAssetinSite(String numberofUnusedAssetinSite) {
         this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
-    }
+    }*/
 
     public String getAssetMake() {
         return assetMake;
@@ -54,13 +61,19 @@ public class DetailsOfUnusedMaterialsData {
         this.assetStatus = assetStatus;
     }
 
-    public Boolean getSubmited() {
+   /* public Boolean getSubmited() {
         return isSubmited;
     }
 
     public void setSubmited(Boolean submited) {
         isSubmited = submited;
+    }*/
+
+    public String getAssetDescription() {
+        return assetDescription;
     }
 
-
+    public void setAssetDescription(String assetDescription) {
+        this.assetDescription = assetDescription;
+    }
 }

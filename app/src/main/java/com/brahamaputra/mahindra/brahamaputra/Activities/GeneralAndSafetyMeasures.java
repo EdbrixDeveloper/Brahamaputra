@@ -801,7 +801,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setText(sdf.format(myCalendar.getTime()));

@@ -138,7 +138,7 @@ public class UsersHotoListActivity extends BaseActivity {
 
 
                             String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
-                            if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP")) {
+                            if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP") || hotoTickStatus.equals("Reassigned")) {
                                 checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
                                         stateName, customerName, circleName, ssaName);
                             }

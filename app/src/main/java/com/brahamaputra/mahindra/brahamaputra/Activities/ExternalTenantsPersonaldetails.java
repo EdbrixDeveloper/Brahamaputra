@@ -380,7 +380,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     }
 
     private void updateLabel_DateofthestartofTenancy() {
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setText(sdf.format(myCalendar.getTime()));
@@ -388,7 +388,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     }
 
     private void updateLabel_DateofthestartofRadiation() {
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
 

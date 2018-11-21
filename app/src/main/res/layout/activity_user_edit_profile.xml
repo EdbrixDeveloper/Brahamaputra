@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/app_normal_margin">
 
         <EditText
-            android:id="@+id/login_editText_firstName"
+            android:id="@+id/userEditProfile_editText_firstName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:hint="First Name"
@@ -34,7 +34,7 @@
             />
 
         <EditText
-            android:id="@+id/login_editText_lastName"
+            android:id="@+id/userEditProfile_editText_lastName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
@@ -51,7 +51,7 @@
             android:textColor="@color/colorWhite" />
 
         <EditText
-            android:id="@+id/login_editText_email"
+            android:id="@+id/userEditProfile_editText_email"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
