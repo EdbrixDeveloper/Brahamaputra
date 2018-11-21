@@ -46,6 +46,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_numberOfBtsInsideShelter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -73,6 +74,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_numberOfBtsOutsideShelter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -99,6 +101,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_shelterLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -125,6 +128,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_outdoorShelterLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -151,6 +155,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_igbStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -179,6 +184,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_egbStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -205,6 +211,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_noOfOdcAvailable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -231,6 +238,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/shelter_linearLayout_odcLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"

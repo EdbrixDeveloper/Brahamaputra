@@ -21,6 +21,7 @@ import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
 public class Shelter extends BaseActivity {
 
@@ -54,6 +57,15 @@ public class Shelter extends BaseActivity {
     private TextView mShelterTextViewNoOfOdcAvailableVal;
     private TextView mShelterTextViewOdcLock;
     private TextView mShelterTextViewOdcLockVal;
+
+    LinearLayout mshelterLinearLayoutNumberOfBtsInsideShelter;
+    LinearLayout mshelterLinearLayoutNumberOfBtsOutsideShelter;
+    LinearLayout mshelterLinearLayoutShelterLock;
+    LinearLayout mshelterLinearLayoutOutdoorShelterLock;
+    LinearLayout mshelterLinearLayoutIgbStatus;
+    LinearLayout mshelterLinearLayoutEgbStatus;
+    LinearLayout mshelterLinearLayoutNoOfOdcAvailable;
+    LinearLayout mshelterLinearLayoutOdcLock;
 
 
     String str_physicalConditionOfShelterPlatform;
@@ -94,6 +106,7 @@ public class Shelter extends BaseActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Shelter.this, userId, ticketName);
 
         setInputDetails();
+        checkValidation();
 
     }
 
@@ -317,6 +330,15 @@ public class Shelter extends BaseActivity {
         mShelterTextViewOdcLock = (TextView) findViewById(R.id.shelter_textView_odcLock);
         mShelterTextViewOdcLockVal = (TextView) findViewById(R.id.shelter_textView_odcLock_val);
 
+        mshelterLinearLayoutNumberOfBtsInsideShelter = (LinearLayout) findViewById(R.id.shelter_linearLayout_numberOfBtsInsideShelter);
+        mshelterLinearLayoutNumberOfBtsOutsideShelter = (LinearLayout) findViewById(R.id.shelter_linearLayout_numberOfBtsOutsideShelter);
+        mshelterLinearLayoutShelterLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_shelterLock);
+        mshelterLinearLayoutOutdoorShelterLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_outdoorShelterLock);
+        mshelterLinearLayoutIgbStatus = (LinearLayout) findViewById(R.id.shelter_linearLayout_igbStatus);
+        mshelterLinearLayoutEgbStatus = (LinearLayout) findViewById(R.id.shelter_linearLayout_egbStatus);
+        mshelterLinearLayoutNoOfOdcAvailable = (LinearLayout) findViewById(R.id.shelter_linearLayout_noOfOdcAvailable);
+        mshelterLinearLayoutOdcLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_odcLock);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -378,6 +400,34 @@ public class Shelter extends BaseActivity {
             e.printStackTrace();
         }
 
+    }
+
+    private void checkValidation() {
+        try {
+            if (hototicket_Selected_SiteType.equals("Outdoor")) {
+
+                mshelterLinearLayoutNumberOfBtsInsideShelter.setVisibility(View.GONE);
+                mshelterLinearLayoutNumberOfBtsOutsideShelter.setVisibility(View.GONE);
+                mshelterLinearLayoutShelterLock.setVisibility(View.GONE);
+                mshelterLinearLayoutOutdoorShelterLock.setVisibility(View.GONE);
+                mshelterLinearLayoutIgbStatus.setVisibility(View.GONE);
+                mshelterLinearLayoutEgbStatus.setVisibility(View.GONE);
+                mshelterLinearLayoutNoOfOdcAvailable.setVisibility(View.GONE);
+                mshelterLinearLayoutOdcLock.setVisibility(View.GONE);
+
+                mShelterTextViewNumberOfBtsInsideShelterVal.setText("");
+                mShelterTextViewNumberOfBtsOutsideShelterVal.setText("");
+                mShelterTextViewShelterLockVal.setText("");
+                mShelterTextViewOutdoorShelterLockVal.setText("");
+                mShelterTextViewIgbStatusVal.setText("");
+                mShelterTextViewEgbStatusVal.setText("");
+                mShelterTextViewNoOfOdcAvailableVal.setText("");
+                mShelterTextViewOdcLockVal.setText("");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

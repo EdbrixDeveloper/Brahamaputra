@@ -19,6 +19,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -37,6 +38,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -132,7 +134,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private HotoTransactionData hotoTransactionData;
     private PowerPlantDetailsParentData powerPlantDetailsParentData;
     private ArrayList<PowerPlantDetailsData> powerPlantDetailsDataList;
-    private String base64StringQRCodeScan = "eji39jjj";
+    private String base64StringQRCodeScan = "";
     private SessionManager sessionManager;
     private Uri imageFileUri;
     private String imageFileName = "";
@@ -263,6 +265,11 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         btnNextReadingPowerPlant = (Button) findViewById(R.id.btnNextReadingPowerPlant);
         lnrPlantDetails = (LinearLayout) findViewById(R.id.lnrPlantDetails);
         lnrPlantDetails.setVisibility(View.GONE);
+
+        mPowerPlantDetailsEditTextDcLoadInDisplayAmp.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mPowerPlantDetailsEditTextCapacityInAmp.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mPowerPlantDetailsEditTextSmpsUltimateCapacity.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -511,12 +518,14 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         btnPrevReadingPowerPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPos > 0) {
-                    //Save current reading
-                    savePlantRecords(currentPos);
-                    currentPos = currentPos - 1;
-                    //move to Next reading
-                    displayPlantRecords(currentPos);
+                if (checkValidationOfArrayFields() == true) {
+                    if (currentPos > 0) {
+                        //Save current reading
+                        savePlantRecords(currentPos);
+                        currentPos = currentPos - 1;
+                        //move to Next reading
+                        displayPlantRecords(currentPos);
+                    }
                 }
             }
         });
@@ -524,19 +533,23 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         btnNextReadingPowerPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPos < (totalPlantCount - 1)) {
-                    //Save current  reading
-                    savePlantRecords(currentPos);
-                    currentPos = currentPos + 1;
-                    //move to Next reading
-                    displayPlantRecords(currentPos);
+                if (checkValidationOfArrayFields() == true) {
+                    if (currentPos < (totalPlantCount - 1)) {
+                        //Save current  reading
+                        savePlantRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayPlantRecords(currentPos);
 
-                } else if (currentPos == (totalPlantCount - 1)) {
-                    //Save Final current reading and submit all  data
-                    savePlantRecords(currentPos);
-                    submitDetails();
-                    startActivity(new Intent(PowerPlantDetailsActivity.this, Power_Backups_DG.class));
-                    finish();
+                    } else if (currentPos == (totalPlantCount - 1)) {
+                        if (checkValidationOnNoOfPowerPlant() == true) {
+                            //Save Final current reading and submit all  data
+                            savePlantRecords(currentPos);
+                            submitDetails();
+                            startActivity(new Intent(PowerPlantDetailsActivity.this, Power_Backups_DG.class));
+                            finish();
+                        }
+                    }
                 }
             }
         });
@@ -552,10 +565,12 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 powerPlantDetailsParentData = hotoTransactionData.getPowerPlantDetailsParentData();
                 powerPlantDetailsDataList.addAll(powerPlantDetailsParentData.getPowerPlantDetailsData());
 
+                mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsParentData.getNumberOfPowerPlant());
+
                 if (powerPlantDetailsDataList != null && powerPlantDetailsDataList.size() > 0) {
 
                     totalPlantCount = powerPlantDetailsDataList.size();
-                    mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsParentData.getNumberOfPowerPlant());
+                    //mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsParentData.getNumberOfPowerPlant());
                     lnrPlantDetails.setVisibility(View.VISIBLE);
                     PowerPlantDetailsData powerPlantDetailsData = powerPlantDetailsDataList.get(index);
 
@@ -582,6 +597,14 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     mPowerPlantDetailsTextViewWorkingConditionVal.setText(powerPlantDetailsData.getWorkingCondition());
                     mPowerPlantDetailsEditTextNatureOfProblem.setText(powerPlantDetailsData.getNatureOfProblem());
 
+                    btnPrevReadingPowerPlant.setVisibility(View.GONE);
+                    btnNextReadingPowerPlant.setVisibility(View.VISIBLE);
+
+                    if (powerPlantDetailsDataList.size() > 1) {
+                        btnNextReadingPowerPlant.setText("Next Reading");
+                    } else {
+                        btnNextReadingPowerPlant.setText("Finish");
+                    }
                     //private ImageView mSolarPowerSystemButtonQRCodeScan.setText(landDetailsData.getQRCodeScan());
                 }
 
@@ -722,6 +745,132 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsEditTextNatureOfProblem.setText("");
     }
 
+
+    /*Arjun 21112018*/
+    public boolean checkValidationOfArrayFields() {
+        String numberOfPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
+        String qRCodeScan = base64StringQRCodeScan;
+        String assetOwner = mPowerPlantDetailsTextViewAssetOwnerVal.getText().toString().trim();
+        String manufacturerMakeModel = mPowerPlantDetailsTextViewManufacturerMakeModelVal.getText().toString().trim();
+        String powerPlantModel = mPowerPlantDetailsEditTextPowerPlantModel.getText().toString().trim();
+        String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
+        String earthingStatus = mPowerPlantDetailsTextViewPowerPlantEarthingStatusVal.getText().toString().trim();
+        String dcLoadInDisplay = mPowerPlantDetailsEditTextDcLoadInDisplayAmp.getText().toString().trim();
+        String serialNumber = mPowerPlantDetailsEditTextPowerPlantSerialNumber.getText().toString().trim();
+        String typeOfPowerPlantCommercialSmps = mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.getText().toString().trim();
+        String capacityInAmp = mPowerPlantDetailsEditTextCapacityInAmp.getText().toString().trim();
+        String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
+        String noOfFaultyModulese = mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.getText().toString().trim();
+        String smpsExpandable = mPowerPlantDetailsEditTextSmpsExpandableUpToKW.getText().toString().trim();
+        String SmpsUltimateCapacity = mPowerPlantDetailsEditTextSmpsUltimateCapacity.getText().toString().trim();
+        String spdStatus = mPowerPlantDetailsTextViewSpdStatusVal.getText().toString().trim();
+        String workingCondition = mPowerPlantDetailsTextViewWorkingConditionVal.getText().toString().trim();
+        String natureOfProblem = mPowerPlantDetailsEditTextNatureOfProblem.getText().toString().trim();
+
+
+        if (numberOfPowerPlant.isEmpty() || numberOfPowerPlant == null) {
+            showToast("Select Number Of Power Plant");
+            return false;
+        } else if (qRCodeScan.isEmpty() || qRCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        } else if (assetOwner.isEmpty() || assetOwner == null) {
+            showToast("Select Asset Owner");
+            return false;
+        } else if (manufacturerMakeModel.isEmpty() || manufacturerMakeModel == null) {
+            showToast("Select Manufacturer/Make/Model");
+            return false;
+        } else if (powerPlantModel.isEmpty() || powerPlantModel == null) {
+            showToast("Enter Power Plant Model");
+            return false;
+        } else if (numberModuleSlots.isEmpty() || numberModuleSlots == null) {
+            showToast("Select Number of Module Slots");
+            return false;
+        } else if (earthingStatus.isEmpty() || earthingStatus == null) {
+            showToast("Select Power Plant Earthing Status");
+            return false;
+        } else if (dcLoadInDisplay.isEmpty() || dcLoadInDisplay == null) {
+            showToast("Enter Dc Load in Display(Amp)");
+            return false;
+        } else if (serialNumber.isEmpty() || serialNumber == null) {
+            showToast("Enter Power Plant Serial Number");
+            return false;
+        } else if (typeOfPowerPlantCommercialSmps.isEmpty() || typeOfPowerPlantCommercialSmps == null) {
+            showToast("Select Type of Power Plant[Commercial/SMPs]");
+            return false;
+        } else if (capacityInAmp.isEmpty() || capacityInAmp == null) {
+            showToast("Enter Capacity in AMP");
+            return false;
+        } else if (numberOfModules.isEmpty() || numberOfModules == null) {
+            showToast("Select Number of Modules");
+            return false;
+        } else if (noOfFaultyModulese.isEmpty() || noOfFaultyModulese == null) {
+            showToast("Select No. of Faulty Modules");
+            return false;
+        } else if (smpsExpandable.isEmpty() || smpsExpandable == null) {
+            showToast("Enter SMPS Expandable up to(KW)");
+            return false;
+        } else if (SmpsUltimateCapacity.isEmpty() || SmpsUltimateCapacity == null) {
+            showToast("Enter SMPS Ultimate Capacity");
+            return false;
+        } else if (spdStatus.isEmpty() || spdStatus == null) {
+            showToast("Select SPD Status");
+            return false;
+        } else if (workingCondition.isEmpty() || workingCondition == null) {
+            showToast("Enter Working Condition");
+            return false;
+        } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
+            showToast("Enter Nature of Problem");
+            return false;
+        } else return checkValidationOnNoOfFaultyModulese();
+
+    }
+
+    /*Arjun 21112018*/
+    public boolean checkValidationOnNoOfFaultyModulese() {
+
+        String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
+        String noOfFaultyModulese = mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.getText().toString().trim();
+
+        if (!numberOfModules.isEmpty() && numberOfModules != null) {
+            if (numberOfModules.matches("\\d+(?:\\.\\d+)?")) {
+                if (Integer.valueOf(numberOfModules) > 0) {
+                    if (!noOfFaultyModulese.isEmpty() && noOfFaultyModulese != null) {
+                        if (Integer.valueOf(noOfFaultyModulese) <= Integer.valueOf(numberOfModules)) {
+                            return true;
+                        } else {
+                            showToast("Select No. of Faulty Modules is less than or equal to Number of Modules");
+                            return false;
+                        }
+                    } else {
+                        showToast("Select No. of Faulty Modules");
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            showToast("Select Number of Modules");
+            return false;
+        }
+
+    }
+
+
+    /*Arjun 21112018*/
+    public boolean checkValidationOnNoOfPowerPlant() {
+
+        String numberOfPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
+
+        if (numberOfPowerPlant.isEmpty() || numberOfPowerPlant == null) {
+            showToast("Select Number Of Power Plant");
+            return false;
+        } else return true;
+
+    }
 //////////////////////
     //Camera//
 
@@ -947,9 +1096,11 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, Power_Backups_DG.class));
-                finish();
+                if (checkValidationOnNoOfPowerPlant() == true) {
+                    submitDetails();
+                    startActivity(new Intent(this, Power_Backups_DG.class));
+                    finish();
+                }
                 return true;
 
             default:

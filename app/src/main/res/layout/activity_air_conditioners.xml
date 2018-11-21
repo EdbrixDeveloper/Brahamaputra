@@ -47,6 +47,34 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/airConditioners_linearLayout_numberOfACInWorkingCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Number of AC in Working Condition" />
+
+
+                <TextView
+                    android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/linearLayout_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -54,32 +82,7 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
 
-
-                    <TextView
-                        android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Number of AC in Working Condition" />
-
-
-                    <TextView
-                        android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition_val"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/airConditioners_textView_AcNumber"
@@ -336,6 +339,7 @@
                 </LinearLayout>
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/airConditioners_linearLayout_validityOfAmc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
@@ -343,7 +347,7 @@
 
 
                     <TextView
-                        android:id="@+id/airConditioners_textView_alidityOfAmc"
+                        android:id="@+id/airConditioners_textView_validityOfAmc"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

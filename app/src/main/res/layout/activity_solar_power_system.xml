@@ -46,6 +46,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_QRCodeScan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -97,6 +98,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_assetOwner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -124,6 +126,7 @@
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_manufacturerMakeModel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -151,6 +154,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_cellPanel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -178,6 +182,7 @@
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_capacityKW"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -206,6 +211,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_amcYesNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -233,6 +239,7 @@
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_validityOfAmc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"

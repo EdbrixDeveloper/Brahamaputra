@@ -18,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +34,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -41,6 +43,7 @@ import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +83,15 @@ public class Solar_Power_System extends BaseActivity {
     private TextView mSolarPowerSystemTextViewAmcYesNoVal;
     private TextView mSolarPowerSystemTextViewValidityOfAmc;
     private EditText mSolarPowerSystemEditTextDateOfvalidityOfAmc;
+
+    LinearLayout mSolarPowerSystemLinearLayoutQRCodeScan;
+    LinearLayout mSolarPowerSystemLinearLayoutAssetOwner;
+    LinearLayout mSolarPowerSystemLinearLayoutManufacturerMakeModel;
+    LinearLayout mSolarPowerSystemLinearLayoutCellPanel;
+    LinearLayout mSolarPowerSystemLinearLayoutCapacityKW;
+    LinearLayout mSolarPowerSystemLinearLayoutAmcYesNo;
+    LinearLayout mSolarPowerSystemLinearLayoutValidityOfAmc;
+
 
     String str_available;
     String str_assetOwner;
@@ -238,6 +250,16 @@ public class Solar_Power_System extends BaseActivity {
         mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
         mSolarPowerSystemEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.solarPowerSystem_editText_dateOfvalidityOfAmc);
 
+        mSolarPowerSystemLinearLayoutQRCodeScan = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_QRCodeScan);
+        mSolarPowerSystemLinearLayoutAssetOwner = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_assetOwner);
+        mSolarPowerSystemLinearLayoutManufacturerMakeModel = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_manufacturerMakeModel);
+        mSolarPowerSystemLinearLayoutCellPanel = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_cellPanel);
+        mSolarPowerSystemLinearLayoutCapacityKW = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_capacityKW);
+        mSolarPowerSystemLinearLayoutAmcYesNo = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_amcYesNo);
+        mSolarPowerSystemLinearLayoutValidityOfAmc = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_validityOfAmc);
+
+        mSolarPowerSystemEditTextCapacityKW.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -259,6 +281,7 @@ public class Solar_Power_System extends BaseActivity {
 
                         str_available = item.get(position);
                         mSolarPowerSystemTextViewAvailableVal.setText(str_available);
+                        checkValidation(str_available);
                     }
                 });
             }
@@ -320,6 +343,7 @@ public class Solar_Power_System extends BaseActivity {
 
                         str_amcYesNoVal = item.get(position);
                         mSolarPowerSystemTextViewAmcYesNoVal.setText(str_amcYesNoVal);
+                        visibilityOfValidityOfTheAMC(str_amcYesNoVal);
                     }
                 });
             }
@@ -399,6 +423,7 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemTextViewAmcYesNoVal.setText(solarPowerSystemData.getAmcYesNo());
                 mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText(solarPowerSystemData.getDateOfvalidityOfAmc());
 
+                checkValidation(solarPowerSystemData.getAvailable());
             } else {
                 Toast.makeText(Solar_Power_System.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
@@ -433,6 +458,66 @@ public class Solar_Power_System extends BaseActivity {
         }
     }
 
+    private void checkValidation(String str_available) {
+        try {
+            mSolarPowerSystemLinearLayoutQRCodeScan.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutAssetOwner.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutManufacturerMakeModel.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutCellPanel.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutCapacityKW.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutAmcYesNo.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
+            if (str_available.equals("No")) {
+                mSolarPowerSystemLinearLayoutQRCodeScan.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutAssetOwner.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutManufacturerMakeModel.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutCellPanel.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutCapacityKW.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutAmcYesNo.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.GONE);
+
+                base64StringQRCodeScan = "";
+                //mSolarPowerSystemTextViewAvailableVal.setText("");
+                mSolarPowerSystemTextViewAssetOwnerVal.setText("");
+                mSolarPowerSystemEditTextManufacturerMakeModel.setText("");
+                mSolarPowerSystemTextViewCellPanelVal.setText("");
+                mSolarPowerSystemEditTextCapacityKW.setText("");
+                mSolarPowerSystemTextViewAmcYesNoVal.setText("");
+                mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText("");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /*Arjun 21112018*/
+    private boolean validityOfValidityOfTheAMC(String amcYesNo) {
+        String dateOfvalidityOfAmc = mSolarPowerSystemEditTextDateOfvalidityOfAmc.getText().toString().trim();
+        if (amcYesNo.equals("Yes")) {
+            if (!dateOfvalidityOfAmc.isEmpty() && dateOfvalidityOfAmc != null) {
+                return true;
+            }
+            {
+                showToast("Select Validity of the AMC");
+                return false;
+            }
+        } else {
+            return true;
+
+        }
+    }
+
+    /*Arjun 21112018*/
+    private void visibilityOfValidityOfTheAMC(String amcYesNo) {
+        if (amcYesNo.equals("Yes")) {
+            mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
+        } else {
+            mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.GONE);
+            mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText("");
+
+        }
+    }
 
     //////////////////////
     //Camera//
