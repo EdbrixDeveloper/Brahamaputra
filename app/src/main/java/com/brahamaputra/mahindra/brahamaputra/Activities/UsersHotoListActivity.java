@@ -99,32 +99,63 @@ public class UsersHotoListActivity extends BaseActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
                 // notify user
-                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                    if (hotoTicketList != null) {
-                        String hotoTicketId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getId().toString();
-                        String hotoTicketNo = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketNo().toString();
 
-                        String hotoTicketDate = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketDate().toString();
-                        String siteId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteId().toString();
-                        String siteName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteName().toString();
-                        String siteAddress = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteAddress().toString();
-                        String status = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
-                        String siteType = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteType().toString();
-                        String stateName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStateName().toString();
-                        String customerName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCustomerName().toString();
-                        String circleName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCircleName().toString();
-                        String ssaName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSsaName().toString();
+                LocationManager lm = (LocationManager) UsersHotoListActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                boolean gps_enabled = false;
+                boolean network_enabled = false;
 
+                try {
+                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                } catch (Exception ex) {
+                }
 
-                        String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
-                        if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP")) {
-                            checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                    stateName, customerName, circleName, ssaName);
+                if (!gps_enabled && !network_enabled) {
+                    // notify user
+                    alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                        @Override
+                        public void onPositiveClick() {
+                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            UsersHotoListActivity.this.startActivity(myIntent);
                         }
-                    }
-
+                    }).show();
                 } else {
-                    showToast("Could not detecting location. Please try again later.");
+                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                        if (hotoTicketList != null) {
+                            String hotoTicketId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getId().toString();
+                            String hotoTicketNo = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketNo().toString();
+
+                            String hotoTicketDate = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getHotoTicketDate().toString();
+                            String siteId = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteId().toString();
+                            String siteName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteName().toString();
+                            String siteAddress = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteAddress().toString();
+                            String status = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
+                            String siteType = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSiteType().toString();
+                            String stateName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStateName().toString();
+                            String customerName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCustomerName().toString();
+                            String circleName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCircleName().toString();
+                            String ssaName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSsaName().toString();
+
+
+                            String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
+                            if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP")) {
+                                checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                        stateName, customerName, circleName, ssaName);
+                            }
+                        }
+
+                    } else {
+                        //showToast("Could not detecting location. Please try again later.");
+                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                            @Override
+                            public void onPositiveClick() {
+                                if (gpsTracker.canGetLocation()) {
+                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                                    Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                }
+                            }
+                        }).show();
+                    }
                 }
 
                /* String hotoTicketId = HotoTicketMap.get(HotoTicketsDates.get(groupPosition)).get(childPosition).getId().toString();
@@ -358,6 +389,8 @@ public class UsersHotoListActivity extends BaseActivity {
                 intent.putExtra("customerName", customerName);
                 intent.putExtra("circleName", circleName);
                 intent.putExtra("ssaName", ssaName);
+                intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
+                intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
 
                 sessionManager.updateSessionUserTicketId(hotoTicketId);
                 sessionManager.updateSessionUserTicketName(hotoTickitNo);
