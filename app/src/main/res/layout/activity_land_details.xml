@@ -250,6 +250,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/landDetails_linearLayout_validityOfAgreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -273,7 +274,7 @@
                     android:layout_weight="0.6"
                     android:editable="false"
                     android:focusable="false"
-                    android:hint="DD/MM/YYYY"
+                    android:hint="DD/MMM/YYYY"
                     android:imeOptions="actionDone"
                     android:inputType="none"
                     android:textAlignment="viewStart"

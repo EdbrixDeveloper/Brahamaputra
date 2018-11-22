@@ -547,13 +547,18 @@ public class Air_Conditioners extends BaseActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd/MMM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        if (date_flag.equals("install")) {
-            mAirConditionersEditTextDateOfInstallation.setText(sdf.format(myCalendar.getTime()));
-        } else if (date_flag.equals("valid")) {
-            mAirConditionersEditTextDateOfvalidityOfAmc.setText(sdf.format(myCalendar.getTime()));
-        } else {
+        try {
+            String myFormat = "dd/MMM/yyyy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            if (date_flag.equals("install")) {
+                mAirConditionersEditTextDateOfInstallation.setText(sdf.format(myCalendar.getTime()));
+            } else if (date_flag.equals("valid")) {
+                mAirConditionersEditTextDateOfvalidityOfAmc.setText(sdf.format(myCalendar.getTime()));
+            } else {
+
+            }
+        }catch(Exception ex)
+        {
 
         }
     }
@@ -1065,6 +1070,17 @@ public class Air_Conditioners extends BaseActivity {
     }
 
     /*Arjun 21112018*/
+    private void visibilityOfValidityOfTheAMC(String amcYesNo) {
+        if (amcYesNo.equals("Yes")) {
+            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
+        } else {
+            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.GONE);
+            mAirConditionersEditTextDateOfvalidityOfAmc.setText("");
+
+        }
+    }
+
+    /*Arjun 21112018*/
     private boolean validityOfValidityOfTheAMC(String amcYesNo) {
         String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
         if (amcYesNo.equals("Yes")) {
@@ -1077,17 +1093,6 @@ public class Air_Conditioners extends BaseActivity {
             }
         } else {
             return true;
-
-        }
-    }
-
-    /*Arjun 21112018*/
-    private void visibilityOfValidityOfTheAMC(String amcYesNo) {
-        if (amcYesNo.equals("Yes")) {
-            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
-        } else {
-            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.GONE);
-            mAirConditionersEditTextDateOfvalidityOfAmc.setText("");
 
         }
     }

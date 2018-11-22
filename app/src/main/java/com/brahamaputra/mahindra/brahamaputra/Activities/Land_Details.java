@@ -18,6 +18,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.Menu;
@@ -27,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,6 +39,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.EnglishNumberToWords;
@@ -84,6 +87,8 @@ public class Land_Details extends BaseActivity {
     private TextView mLandDetailsTextViewValidityOfAgreement;
     private EditText mLandDetailsEditTextDateOfvalidityOfAgreement;
     private OfflineStorageWrapper offlineStorageWrapper;
+
+    private LinearLayout mLandDetailsLinearLayoutValidityOfAgreement;
 
     private String userId = "";
     private String ticketId = "";
@@ -244,6 +249,10 @@ public class Land_Details extends BaseActivity {
         mLandDetailsTextViewCopyAgreementWithOwnerVal = (TextView) findViewById(R.id.landDetails_textView_copyAgreementWithOwner_val);
         mLandDetailsTextViewValidityOfAgreement = (TextView) findViewById(R.id.landDetails_textView_validityOfAgreement);
         mLandDetailsEditTextDateOfvalidityOfAgreement = (EditText) findViewById(R.id.landDetails_editText_dateOfvalidityOfAgreement);
+
+        mLandDetailsLinearLayoutValidityOfAgreement = (LinearLayout) findViewById(R.id.landDetails_linearLayout_validityOfAgreement);
+        //mLandDetailsEditTextAreaOfLand.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -286,6 +295,7 @@ public class Land_Details extends BaseActivity {
 
                         str_copyAgreementWithOwnerVal = item.get(position);
                         mLandDetailsTextViewCopyAgreementWithOwnerVal.setText(str_copyAgreementWithOwnerVal);
+                        //visibilityOfValidityOfAgreement(str_copyAgreementWithOwnerVal);
                     }
                 });
             }
@@ -372,6 +382,17 @@ public class Land_Details extends BaseActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /*Arjun 21112018*/
+    private void visibilityOfValidityOfAgreement(String ValidityOfAgreement) {
+        if (ValidityOfAgreement.equals("Available")) {
+            mLandDetailsLinearLayoutValidityOfAgreement.setVisibility(View.VISIBLE);
+        } else {
+            mLandDetailsLinearLayoutValidityOfAgreement.setVisibility(View.GONE);
+            mLandDetailsEditTextDateOfvalidityOfAgreement.setText("");
+
         }
     }
 

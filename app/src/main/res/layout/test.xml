@@ -12,7 +12,7 @@
         android:layout_weight="0.5"
         android:editable="false"
         android:focusable="false"
-        android:hint="DD/MM/YYYY"
+        android:hint="DD/MMM/YYYY"
         android:inputType="none"
         android:textAlignment="viewStart" />
 

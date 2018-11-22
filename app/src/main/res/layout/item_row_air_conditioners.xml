@@ -212,7 +212,7 @@
             android:layout_weight="0.6"
             android:editable="false"
             android:focusable="false"
-            android:hint="DD/MM/YYYY"
+            android:hint="DD/MMM/YYYY"
             android:inputType="none"
             android:textAlignment="viewStart" />
 
@@ -267,7 +267,7 @@
             android:layout_weight="0.6"
             android:editable="false"
             android:focusable="false"
-            android:hint="DD/MM/YYYY"
+            android:hint="DD/MMM/YYYY"
             android:inputType="none"
             android:textAlignment="viewStart" />
 

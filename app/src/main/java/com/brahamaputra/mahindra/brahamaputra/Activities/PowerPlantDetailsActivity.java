@@ -778,12 +778,12 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             showToast("Select Asset Owner");
             return false;
         } else if (manufacturerMakeModel.isEmpty() || manufacturerMakeModel == null) {
-            showToast("Select Manufacturer/Make/Model");
+            showToast("Select Manufacturer/Make");
             return false;
-        } else if (powerPlantModel.isEmpty() || powerPlantModel == null) {
+        }/* else if (powerPlantModel.isEmpty() || powerPlantModel == null) {
             showToast("Enter Power Plant Model");
             return false;
-        } else if (numberModuleSlots.isEmpty() || numberModuleSlots == null) {
+        }*/ else if (numberModuleSlots.isEmpty() || numberModuleSlots == null) {
             showToast("Select Number of Module Slots");
             return false;
         } else if (earthingStatus.isEmpty() || earthingStatus == null) {

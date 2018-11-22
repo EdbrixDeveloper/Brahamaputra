@@ -47,6 +47,34 @@
 
             </LinearLayout>
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/powerBackupsDg_linearLayout_numberOfWorkingDg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Number of Working DG" />
+
+
+                <TextView
+                    android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/linearLayout_container"
@@ -72,32 +100,7 @@
                     android:layout_gravity="center"
                     android:background="#a40404" />
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
 
-
-                    <TextView
-                        android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Number of Working DG" />
-
-
-                    <TextView
-                        android:id="@+id/powerBackupsDg_textView_numberOfWorkingDg_val"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
@@ -320,7 +323,7 @@
                         android:layout_weight="0.6"
                         android:editable="false"
                         android:focusable="false"
-                        android:hint="DD/MM/YYYY"
+                        android:hint="DD/MMM/YYYY"
                         android:inputType="none"
                         android:textAlignment="viewStart" />
 
@@ -380,6 +383,7 @@
                 </LinearLayout>
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/powerBackupsDg_linearLayout_validityOfAmc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
@@ -402,7 +406,7 @@
                         android:layout_weight="0.6"
                         android:editable="false"
                         android:focusable="false"
-                        android:hint="DD/MM/YYYY"
+                        android:hint="DD/MMM/YYYY"
                         android:inputType="none"
                         android:textAlignment="viewStart" />
 

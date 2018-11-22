@@ -308,6 +308,9 @@ public class Electric_Connection extends BaseActivity {
 
         mElectricConnectionEditTextSanctionedLoadKVA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
         mElectricConnectionEditTextExistingLoadAtSiteKVA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mElectricConnectionEditTextEbMeterReadingInKWh.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mElectricConnectionEditTextEbCostPerUnitForSharedConnection.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mElectricConnectionEditTextTransformerCapacityInKva.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
