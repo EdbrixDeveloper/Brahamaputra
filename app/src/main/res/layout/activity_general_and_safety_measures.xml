@@ -409,13 +409,11 @@
 
                 <EditText
                     android:id="@+id/generalAndSafetyMeasure_editText_MobileNumberofCaretaker"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Caretaker "
-                    android:inputType="numberDecimal"
-                    android:maxLength="10"
+                    android:inputType="phone"
                     android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
                     />

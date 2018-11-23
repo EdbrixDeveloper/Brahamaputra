@@ -165,19 +165,17 @@
             android:name=".Activities.DashboardCircularActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
-
         <activity
             android:name=".Activities.ElectricBillProcessList"
             android:label="Sections"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.ElectricBillProcess"
             android:label="Sections"
             android:screenOrientation="portrait" />
-
         <activity android:name=".Activities.UserEditProfileActivity" />
-        <activity android:name=".Activities.UserChangePasswordActivity"></activity>
+        <activity android:name=".Activities.UserChangePasswordActivity" />
+        <activity android:name=".Activities.UploadEBReceiptActivity"></activity>
     </application>
 
 </manifest>

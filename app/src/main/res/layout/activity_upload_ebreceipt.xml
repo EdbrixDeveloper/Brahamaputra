@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.UploadEBReceiptActivity">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Ticket Number" />
+
+                <EditText
+                    android:id="@+id/uploadEbReceipt_editText_ticketNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Ticket Number"
+                    android:imeOptions="actionDone"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site Id" />
+
+                <EditText
+                    android:id="@+id/uploadEbReceipt_editText_siteId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Site Id"
+                    android:imeOptions="actionDone"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site Name" />
+
+                <EditText
+                    android:id="@+id/uploadEbReceipt_editText_siteName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Site Name"
+                    android:imeOptions="actionDone"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Payment Method" />
+
+                <TextView
+                    android:id="@+id/uploadEbReceipt_textView_paymentType_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Upload"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/uploadEbReceipt_button_uploadPhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/uploadEbReceipt_button_uploadPhotoView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/baseline_done_black_18dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

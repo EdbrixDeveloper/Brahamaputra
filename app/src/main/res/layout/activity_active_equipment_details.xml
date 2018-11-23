@@ -50,56 +50,6 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/activeEquipmentDetails_textView_importance_of_Site"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Importance of Site" />
-
-                <TextView
-                    android:id="@+id/activeEquipmentDetails_textView_importance_of_Site_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/activeEquipmentDetails_textView_numberOfDependantSites"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Number of Dependant Sites" />
-
-                <TextView
-                    android:id="@+id/activeEquipmentDetails_textView_numberOfDependantSites_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
                     android:id="@+id/activeEquipmentDetails_textView_Make"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
@@ -206,6 +156,56 @@
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/activeEquipmentDetails_textView_importance_of_Site"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Importance of Site" />
+
+                <TextView
+                    android:id="@+id/activeEquipmentDetails_textView_importance_of_Site_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/activeEquipmentDetails_textView_numberOfDependantSites"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Number of Dependant Sites" />
+
+                <TextView
+                    android:id="@+id/activeEquipmentDetails_textView_numberOfDependantSites_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 

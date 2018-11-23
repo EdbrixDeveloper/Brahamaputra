@@ -72,10 +72,11 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         textView_SiteName.setText("Site Name: "+HotoTicket.getSiteName());
         textView_SiteAddress.setText("Site Address: "+HotoTicket.getSiteAddress());
 
-        if(HotoTicket.getStatus().equalsIgnoreCase("Closed")){
-            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.colorWhite));
-        }else{
+        if(HotoTicket.getStatus().equalsIgnoreCase("WIP")){
+
             convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.limegreen));
+        }else{
+            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.colorWhite));
         }
         return convertView;
     }
