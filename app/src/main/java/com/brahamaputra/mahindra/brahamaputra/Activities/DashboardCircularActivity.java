@@ -188,14 +188,14 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();*/
 
         switch (view.getId()) {
-            case R.id.dashboard_myHoto:
+            case R.id.dashboard_myHoto_layout:
                 // Handle calendar click
                 checkSystemLocation();
                 break;
-            case R.id.dashboard_myAsset:
+            case R.id.dashboard_myAsset_layout:
                 // Handle cloud click
                 break;
-            case R.id.dashboard_myEnergy:
+            case R.id.dashboard_myEnergy_layout:
                 // Handle key click
                 Intent intent = new Intent(DashboardCircularActivity.this, MyEnergyListActivity.class);
                 startActivity(intent);
@@ -203,10 +203,10 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
             /*case R.id.main_mail_image:
                 // Handle mail click
                 break;*/
-            case R.id.dashboard_myPrevitive:
+            case R.id.dashboard_myPrevitive_layout:
                 // Handle profile click
                 break;
-            case R.id.dashboard_myIncident:
+            case R.id.dashboard_myIncident_layout:
                 // Handle tap click
                 break;
         }

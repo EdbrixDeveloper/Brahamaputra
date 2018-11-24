@@ -214,15 +214,16 @@
                     android:layout_weight="0.4"
                     android:text="EB Service Provider" />
 
-                <EditText
-                    android:id="@+id/ebProcess_editText_ebServiceProvider"
+                <TextView
+                    android:id="@+id/ebProcess_textView_ebServiceProviderVal"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:hint="Enter EB Service Provider"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:textAlignment="viewStart" />
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -240,15 +241,14 @@
                     android:layout_weight="0.4"
                     android:text="EB Consumer Number/ID" />
 
-                <EditText
-                    android:id="@+id/ebProcess_editText_ebConsumerNumber"
+                <TextView
+                    android:id="@+id/ebProcess_textView_ebConsumerNumberVal"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:hint="Enter EB Consumer Number/ID"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:textAlignment="viewStart" />
+                    android:hint="Select "
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -315,15 +315,14 @@
                     android:layout_weight="0.4"
                     android:text="Tariff" />
 
-                <EditText
-                    android:id="@+id/ebProcess_editText_tariff"
+                <TextView
+                    android:id="@+id/ebProcess_textView_tariffVal"
+                    style="@style/MyTheme"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:hint="Enter Tariff"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:hint="Select "
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -552,31 +551,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/ebProcess_textView_sapVendorCode"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="SAP Vendor Code" />
-
-                <EditText
-                    android:id="@+id/ebProcess_editText_sapVendorCode"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter SAP Vendor Code"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

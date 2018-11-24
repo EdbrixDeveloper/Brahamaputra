@@ -31,13 +31,14 @@
                     android:layout_weight="0.4"
                     android:text="Ticket Number" />
 
-                <EditText
-                    android:id="@+id/uploadEbReceipt_editText_ticketNumber"
+                <TextView
+                    android:id="@+id/uploadEbReceipt_textView_ticketNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Ticket Number"
                     android:imeOptions="actionDone"
+
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -55,8 +56,8 @@
                     android:layout_weight="0.4"
                     android:text="Site Id" />
 
-                <EditText
-                    android:id="@+id/uploadEbReceipt_editText_siteId"
+                <TextView
+                    android:id="@+id/uploadEbReceipt_textView_siteId"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -79,8 +80,8 @@
                     android:layout_weight="0.4"
                     android:text="Site Name" />
 
-                <EditText
-                    android:id="@+id/uploadEbReceipt_editText_siteName"
+                <TextView
+                    android:id="@+id/uploadEbReceipt_textView_siteName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -146,7 +147,7 @@
                     android:clickable="true"
                     android:padding="2dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/baseline_done_black_18dp"
+                    android:src="@drawable/view_image"
                     android:visibility="gone" />
 
             </LinearLayout>

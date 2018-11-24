@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fafafa"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".Activities.DashboardCircularActivity">
 
@@ -28,6 +28,11 @@
 
     </android.support.v7.widget.Toolbar>
 
+   <!-- <View android:background="#ffffff"
+        android:layout_width = "match_parent"
+        android:layout_height="1dp"
+
+        android:layout_above="@+id/circle_layout"/>-->
 
     <com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout
         android:id="@+id/circle_layout"
@@ -36,9 +41,9 @@
         android:layout_above="@+id/selected_textView"
         android:layout_below="@id/toolbar"
         android:layout_gravity="top"
-        android:paddingTop="0dp"
-        circle:isRotating="true"
-        android:layout_marginTop="@dimen/app_normal_margin">
+        android:background="@color/colorPrimary"
+        android:paddingTop="5dp"
+        circle:isRotating="true">
 
         <include layout="@layout/menu_items" />
     </com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout>
@@ -51,18 +56,31 @@
         android:layout_alignLeft="@id/circle_layout"
         android:layout_alignRight="@id/circle_layout"
         android:layout_alignTop="@id/circle_layout"
-        android:layout_marginTop="@dimen/app_normal_margin">
+        android:layout_marginTop="@dimen/app_normal_margin"
+        >
 
         <ImageView
             android:id="@+id/dashboard_myMaster"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerInParent="true"
-            android:background="@drawable/circle"
+            android:background="@color/zxing_transparent"
             android:elevation="2dp"
-            android:padding="15dp"
+            android:padding="5dp"
             android:src="@drawable/master_icon"
-            android:tint="@color/colorWhite" />/>
+            android:tint="@color/colorWhite"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dashboard_myMaster"
+            android:layout_centerHorizontal="true"
+
+            android:text="My Masters"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="15dp" />
 
     </RelativeLayout>
 
@@ -83,13 +101,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/app_normal_margin">
+
+        android:background="#fafafa">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="220dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             android:src="@drawable/mahindra_rise_logo" />
 
     </FrameLayout>

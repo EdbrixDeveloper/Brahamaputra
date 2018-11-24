@@ -1121,5 +1121,11 @@
         <item>Working</item>
     </string-array>
 
+    <string-array name="array_payment_type">
+        <item>Cheque</item>
+        <item>DD</item>
+        <item>Receipt</item>
+    </string-array>
+
 
 </resources>

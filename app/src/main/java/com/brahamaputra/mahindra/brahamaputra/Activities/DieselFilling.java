@@ -391,6 +391,7 @@ public class DieselFilling extends BaseActivity {
 
     private void showSettingsAlert() {
 
+
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {

@@ -66,6 +66,7 @@ public class DieselFillingList extends BaseActivity {
     private AlertDialogManager alertDialogManager;
     private DieselTrasactionAdapter dieselTrasactionAdapter;
     public static final int RESULT_TRAN_SUBMIT = 259;
+
     private void assignViews() {
         mDieselFillingListListViewTickets = (ListView) findViewById(R.id.listViewDiesel);
         mTxtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
@@ -79,11 +80,9 @@ public class DieselFillingList extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(DieselFillingList.this);
         sessionManager = new SessionManager(DieselFillingList.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(DieselFillingList.this, userId, ticketName);
-        dieselFillingtransaction=new DieselFillingtransaction();
+        dieselFillingtransaction = new DieselFillingtransaction();
         assignViews();
         prepareListData();
 
@@ -110,15 +109,11 @@ public class DieselFillingList extends BaseActivity {
                                 if (dieselFillingtransaction.getDiselFillingTransactionList() != null && dieselFillingtransaction.getDiselFillingTransactionList().size() > 0) {
                                     mTxtNoTicketFound.setVisibility(View.GONE);
                                     mDieselFillingListListViewTickets.setVisibility(View.VISIBLE);
-                                    ArrayList<DiselFillingTransactionList> dd=new ArrayList<DiselFillingTransactionList>(dieselFillingtransaction.getDiselFillingTransactionList().size());
+                                    ArrayList<DiselFillingTransactionList> dd = new ArrayList<DiselFillingTransactionList>(dieselFillingtransaction.getDiselFillingTransactionList().size());
                                     dd.addAll(dieselFillingtransaction.getDiselFillingTransactionList());
-                                    dieselTrasactionAdapter = new DieselTrasactionAdapter( dd,DieselFillingList.this);
-
-
+                                    dieselTrasactionAdapter = new DieselTrasactionAdapter(dd, DieselFillingList.this);
                                     mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);
-                                   /* for (int i = 0; i < dieselFillingtransaction.getDiselFillingTransactionList().size(); i++) {
-                                        mDieselFillingListListViewTickets.expandGroup(i);
-                                    }*/
+
                                 } else {
                                     mDieselFillingListListViewTickets.setVisibility(View.GONE);
                                     mTxtNoTicketFound.setVisibility(View.VISIBLE);
@@ -166,7 +161,7 @@ public class DieselFillingList extends BaseActivity {
                 /*Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
                 startActivity(intent);*/
                 Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
-                startActivityForResult(intent,RESULT_TRAN_SUBMIT);
+                startActivityForResult(intent, RESULT_TRAN_SUBMIT);
                 return true;
 
 
@@ -181,12 +176,10 @@ public class DieselFillingList extends BaseActivity {
     }
 
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if( resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             prepareListData();
         }
     }

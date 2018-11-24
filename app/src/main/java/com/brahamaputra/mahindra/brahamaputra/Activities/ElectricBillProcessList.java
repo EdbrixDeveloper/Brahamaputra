@@ -3,10 +3,12 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,10 +16,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.DieselTrasactionAdapter;
+import com.brahamaputra.mahindra.brahamaputra.Adapters.EbProcessTrasactionAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingtransaction;
 import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
+import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentRequest;
+import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentRequestList;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
@@ -36,19 +42,38 @@ public class ElectricBillProcessList extends BaseActivity {
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
-    private String ticketName = "";
-    private String ticketId = "";
-
     private SessionManager sessionManager;
-
-
-    private TextView mTxtNoTicketFound;
     private AlertDialogManager alertDialogManager;
-
     public static final int RESULT_TRAN_SUBMIT = 259;
+    private EbPaymentRequest ebPaymentRequest;
+    private EbProcessTrasactionAdapter ebProcessTrasactionAdapter;
+
+    private ListView listViewElectricBill;
+    private TextView txtNoTicketFound;
+
+    public static final int RESULT_EB_REC_SUBMIT = 259;
 
     private void assignViews() {
+        listViewElectricBill = (ListView) findViewById(R.id.listViewElectricBill);
+        txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
+        listViewElectricBill.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //showToast(ebPaymentRequest.getEbPaymentRequestList().get(position).getRequestTicketeNo());
+               // Object itemObject = parent.getAdapter().getItem(position);
+                if(ebPaymentRequest.getEbPaymentRequestList().get(position).getStatusId().equals("1")) {
+                    Intent intent = new Intent(ElectricBillProcessList.this, UploadEBReceiptActivity.class);
+                    intent.putExtra("request_id", ebPaymentRequest.getEbPaymentRequestList().get(position).getId());
+                    intent.putExtra("ticket_no", ebPaymentRequest.getEbPaymentRequestList().get(position).getRequestTicketeNo());
+                    intent.putExtra("site_id", ebPaymentRequest.getEbPaymentRequestList().get(position).getSiteId());
+                    intent.putExtra("site_name", ebPaymentRequest.getEbPaymentRequestList().get(position).getSiteName());
 
+                    startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                }
+
+
+            }
+        });
     }
 
     @Override
@@ -59,19 +84,14 @@ public class ElectricBillProcessList extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(ElectricBillProcessList.this);
         sessionManager = new SessionManager(ElectricBillProcessList.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
-
-
         assignViews();
         prepareListData();
-
-
     }
 
+
     private void prepareListData() {
-       /* try {
+        try {
             showBusyProgress();
             JSONObject jo = new JSONObject();
 
@@ -79,29 +99,27 @@ public class ElectricBillProcessList extends BaseActivity {
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
 
-            GsonRequest<DieselFillingtransaction> dieselFillingtransactionRequest = new GsonRequest<>(Request.Method.POST, Constants.Getdieseltransactionticketlist, jo.toString(), DieselFillingtransaction.class,
-                    new Response.Listener<DieselFillingtransaction>() {
+            GsonRequest<EbPaymentRequest> ebPaymentRequestGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.GetElectriBillTransactionslist, jo.toString(), EbPaymentRequest.class,
+                    new Response.Listener<EbPaymentRequest>() {
                         @Override
-                        public void onResponse(@NonNull DieselFillingtransaction response) {
+                        public void onResponse(@NonNull EbPaymentRequest response) {
                             hideBusyProgress();
                             //showToast(""+response.getSuccess().toString());
                             if (response.getSuccess() == 1) {
-                                dieselFillingtransaction = response;
-                                if (dieselFillingtransaction.getDiselFillingTransactionList() != null && dieselFillingtransaction.getDiselFillingTransactionList().size() > 0) {
-                                    mTxtNoTicketFound.setVisibility(View.GONE);
-                                    mDieselFillingListListViewTickets.setVisibility(View.VISIBLE);
-                                    ArrayList<DiselFillingTransactionList> dd=new ArrayList<DiselFillingTransactionList>(dieselFillingtransaction.getDiselFillingTransactionList().size());
-                                    dd.addAll(dieselFillingtransaction.getDiselFillingTransactionList());
-                                    dieselTrasactionAdapter = new DieselTrasactionAdapter( dd,ElectricBillProcessList.this);
+                                ebPaymentRequest = response;
+                                if (ebPaymentRequest.getEbPaymentRequestList() != null && ebPaymentRequest.getEbPaymentRequestList().size() > 0) {
+                                    txtNoTicketFound.setVisibility(View.GONE);
+                                    listViewElectricBill.setVisibility(View.VISIBLE);
+                                    ArrayList<EbPaymentRequestList> dd = new ArrayList<EbPaymentRequestList>(ebPaymentRequest.getEbPaymentRequestList().size());
+                                    dd.addAll(ebPaymentRequest.getEbPaymentRequestList());
+                                    ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(dd, ElectricBillProcessList.this);
+
+                                    listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);
 
 
-                                    mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);
-                                   *//* for (int i = 0; i < dieselFillingtransaction.getDiselFillingTransactionList().size(); i++) {
-                                        mDieselFillingListListViewTickets.expandGroup(i);
-                                    }*//*
                                 } else {
-                                    mDieselFillingListListViewTickets.setVisibility(View.GONE);
-                                    mTxtNoTicketFound.setVisibility(View.VISIBLE);
+                                    listViewElectricBill.setVisibility(View.GONE);
+                                    txtNoTicketFound.setVisibility(View.VISIBLE);
                                 }
 
 
@@ -115,15 +133,14 @@ public class ElectricBillProcessList extends BaseActivity {
 
                 }
             });
-            dieselFillingtransactionRequest.setRetryPolicy(Application.getDefaultRetryPolice());
-            dieselFillingtransactionRequest.setShouldCache(false);
-            Application.getInstance().addToRequestQueue(dieselFillingtransactionRequest, "dieselFillingtransactionRequest");
+            ebPaymentRequestGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            ebPaymentRequestGsonRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(ebPaymentRequestGsonRequest, "ebPaymentRequestGsonRequest");
 
         } catch (JSONException e) {
             hideBusyProgress();
             showToast("Something went wrong. Please try again later.");
         }
-*/
 
     }
 
@@ -163,6 +180,9 @@ public class ElectricBillProcessList extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            prepareListData();
+        }
+        if (requestCode == RESULT_EB_REC_SUBMIT && resultCode == RESULT_OK) {
             prepareListData();
         }
     }
