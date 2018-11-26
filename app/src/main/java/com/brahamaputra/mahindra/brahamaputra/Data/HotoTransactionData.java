@@ -62,7 +62,8 @@ public class HotoTransactionData {
     private TotalDCLoadofSiteData totalDCLoadofSiteData;
     private ActiveequipmentDetailsData activeequipmentDetailsData;
     private PowerManagementSystemData powerManagementSystemData;
-    private GeneralSafetyMeasuresData generalSafetyMeasuresData;
+    //private GeneralSafetyMeasuresData generalSafetyMeasuresData;
+    private GeneralSafetyMeasuresParentData generalSafetyMeasuresParentData;
     private ACDB_DCDB_Data acdb_dcdb_data;
     private ServoStabilizerData servoStabilizerData;
     //private DetailsOfUnusedMaterialsData detailsOfUnusedMaterialsData;
@@ -85,7 +86,7 @@ public class HotoTransactionData {
         totalDCLoadofSiteData = new TotalDCLoadofSiteData();
         activeequipmentDetailsData = new ActiveequipmentDetailsData();
         powerManagementSystemData = new PowerManagementSystemData();
-        generalSafetyMeasuresData = new GeneralSafetyMeasuresData();
+        generalSafetyMeasuresParentData = new GeneralSafetyMeasuresParentData();
         acdb_dcdb_data = new ACDB_DCDB_Data();
         servoStabilizerData = new ServoStabilizerData();
         detailsOfUnusedMaterialsParentData = new DetailsOfUnusedMaterialsParentData();
@@ -326,12 +327,20 @@ public class HotoTransactionData {
         this.powerManagementSystemData = powerManagementSystemData;
     }
 
-    public GeneralSafetyMeasuresData getGeneralSafetyMeasuresData() {
+    /*public GeneralSafetyMeasuresData getGeneralSafetyMeasuresData() {
         return generalSafetyMeasuresData;
     }
 
     public void setGeneralSafetyMeasuresData(GeneralSafetyMeasuresData generalSafetyMeasuresData) {
         this.generalSafetyMeasuresData = generalSafetyMeasuresData;
+    }*/
+
+    public GeneralSafetyMeasuresParentData getGeneralSafetyMeasuresParentData() {
+        return generalSafetyMeasuresParentData;
+    }
+
+    public void setGeneralSafetyMeasuresParentData(GeneralSafetyMeasuresParentData generalSafetyMeasuresParentData) {
+        this.generalSafetyMeasuresParentData = generalSafetyMeasuresParentData;
     }
 
     public ACDB_DCDB_Data getAcdb_dcdb_data() {
@@ -399,7 +408,7 @@ public class HotoTransactionData {
             return false;
         } else if (!powerManagementSystemData.getSubmited()) {
             return false;
-        } else if (!generalSafetyMeasuresData.getSubmited()) {
+        } else if (!generalSafetyMeasuresParentData.getSubmited()) {
             return false;
         } else if (!acdb_dcdb_data.getSubmited()) {
             return false;

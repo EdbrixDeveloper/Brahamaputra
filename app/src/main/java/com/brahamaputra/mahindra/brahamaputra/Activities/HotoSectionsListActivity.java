@@ -240,7 +240,7 @@ public class HotoSectionsListActivity extends BaseActivity {
             case 15:
                 return hotoTransactionData.getPowerManagementSystemData().getSubmited();
             case 16:
-                return hotoTransactionData.getGeneralSafetyMeasuresData().getSubmited();
+                return hotoTransactionData.getGeneralSafetyMeasuresParentData().getSubmited();
             case 17:
                 return hotoTransactionData.getAcdb_dcdb_data().getSubmited();
             case 18:

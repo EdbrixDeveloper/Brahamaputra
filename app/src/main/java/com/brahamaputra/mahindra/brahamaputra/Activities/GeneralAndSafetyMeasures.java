@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,7 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresData;
+import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
@@ -40,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.ArrayList;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
@@ -77,7 +81,8 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     private String ticketId = "";
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
-    private GeneralSafetyMeasuresData generalSafetyMeasuresData;
+
+    private ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData;
 
     private TowerDetailsData towerDetailsData;
     private PowerBackupsDGParentData powerBackupsDGParentData;
@@ -157,6 +162,70 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     private EditText mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid;
 
 
+    TextView mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisher;
+    TextView mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal;
+
+
+    String str_NoOfFireExtuinguisher;
+
+    private GeneralSafetyMeasuresParentData generalSafetyMeasuresParentData;
+    private int totalCount = 0;
+    private int currentPos = 0;
+    Button mGeneralAndSafetyMeasureButtonPreviousReading;
+    Button mGeneralAndSafetyMeasureButtonNextReading;
+    TextView mGeneralAndSafetyMeasureTextViewNumber;
+    private LinearLayout linearLayout_container;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_general_and_safety_measures);
+        this.setTitle("GENERAL & SAFETY MEASURES");
+        sessionManager = new SessionManager(GeneralAndSafetyMeasures.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(GeneralAndSafetyMeasures.this, userId, ticketName);
+        assignViews();
+        initCombo();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+        //setInputDetails();
+        checkValidation();
+        //onValidateFireExtuinguisher();
+        onValidateSecurityStatus();
+        onValidateCaretakerStatus();
+        onValidateSecurityCaretakeStatus();
+        onValidateSalaryPaidBy();
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+
+        mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(GeneralAndSafetyMeasures.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        generalSafetyMeasuresData = new ArrayList<>();
+        currentPos = 0;
+        setInputDetails(currentPos);
+    }
+
     private void assignViews() {
         mGeneralAndSafetyMeasuresTextViewPrevailingSLA = (TextView) findViewById(R.id.generalAndSafetyMeasures_textView_PrevailingSLA);
         mGeneralAndSafetyMeasuresEditTextPrevailingSLA = (EditText) findViewById(R.id.generalAndSafetyMeasures_editText_PrevailingSLA);
@@ -228,6 +297,14 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         mGeneralAndSafetyMeasureLinearLayoutFireSmokeSensor = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_FireSmokeSensor);
         mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_agencyNameSalaryPaid);
         mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid = (EditText) findViewById(R.id.generalAndSafetyMeasure_editText_agencyNameSalaryPaid);
+
+        mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisher = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_noOfFireExtuinguisher);
+        mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_noOfFireExtuinguisher_val);
+
+        mGeneralAndSafetyMeasureTextViewNumber = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_Number);
+        mGeneralAndSafetyMeasureButtonPreviousReading = (Button) findViewById(R.id.generalAndSafetyMeasure_button_previousReading);
+        mGeneralAndSafetyMeasureButtonNextReading = (Button) findViewById(R.id.generalAndSafetyMeasure_button_nextReading);
+        linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
 
         //mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new InputFilterMinMax(0.00, 100.00, 6, 2)});
@@ -344,6 +421,55 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
             }
         });
+
+        mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(GeneralAndSafetyMeasures.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_generalAndSafetyMeasure_NoOfFireExtuinguisher))),
+                        "No of Fire Extuinguisher",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_NoOfFireExtuinguisher = item.get(position);
+                        mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal.setText(str_NoOfFireExtuinguisher);
+
+
+                        //clear NoOfFireExtuinguisher collection empty by select / changing value of No of NoOfFireExtuinguisher
+                        if (generalSafetyMeasuresData != null && generalSafetyMeasuresData.size() > 0) {
+                            generalSafetyMeasuresData.clear();
+                        }
+                        currentPos = 0;
+                        totalCount = 0;
+                        clearFields(currentPos);
+                        totalCount = Integer.parseInt(str_NoOfFireExtuinguisher);
+
+                        // Clear all field value and hide layout If O //
+                        if (totalCount > 0) {
+
+                            mGeneralAndSafetyMeasureTextViewNumber.setText("Reading: #1");
+                            linearLayout_container.setVisibility(View.VISIBLE);
+                            mGeneralAndSafetyMeasureButtonPreviousReading.setVisibility(View.GONE);
+                            mGeneralAndSafetyMeasureButtonNextReading.setVisibility(View.VISIBLE);
+                            if (totalCount > 0 && totalCount == 1) {
+                                mGeneralAndSafetyMeasureButtonNextReading.setText("Finish");
+                            } else {
+                                mGeneralAndSafetyMeasureButtonNextReading.setText("Next Reading");
+                            }
+                        } else {
+                            linearLayout_container.setVisibility(View.GONE);
+                        }
+
+                    }
+                });
+
+            }
+        });
+
         mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -671,6 +797,41 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
             }
         });
 
+        mGeneralAndSafetyMeasureButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+                }
+            }
+        });
+
+        mGeneralAndSafetyMeasureButtonNextReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidtionForArrayFields()) {
+                    if (currentPos < (totalCount - 1)) {
+                        //Save current ac reading
+                        saveRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
+
+                    } else if (currentPos == (totalCount - 1)) {
+                        //Save Final current reading and submit all AC data
+                        saveRecords(currentPos);
+                        submitDetails();
+                        startActivity(new Intent(GeneralAndSafetyMeasures.this, ACDB_DCDB.class));
+                        finish();
+                    }
+                }
+            }
+        });
+
 
     }
 
@@ -758,52 +919,6 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_and_safety_measures);
-        this.setTitle("GENERAL & SAFETY MEASURES");
-        sessionManager = new SessionManager(GeneralAndSafetyMeasures.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(GeneralAndSafetyMeasures.this, userId, ticketName);
-        assignViews();
-        initCombo();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
-        checkValidation();
-        onValidateFireExtuinguisher();
-        onValidateSecurityStatus();
-        onValidateCaretakerStatus();
-        onValidateSecurityCaretakeStatus();
-        onValidateSalaryPaidBy();
-
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
-        };
-
-
-        mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(GeneralAndSafetyMeasures.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
@@ -880,7 +995,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         }
     }
 
-    private void setInputDetails() {
+    private void setInputDetails(int index) {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
@@ -888,37 +1003,54 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                 Gson gson = new Gson();
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-                generalSafetyMeasuresData = hotoTransactionData.getGeneralSafetyMeasuresData();
+                generalSafetyMeasuresParentData = hotoTransactionData.getGeneralSafetyMeasuresParentData();
+                generalSafetyMeasuresData.addAll(generalSafetyMeasuresParentData.getGeneralSafetyMeasuresData());
 
+                totalCount = Integer.parseInt(generalSafetyMeasuresParentData.getNoOfFireExtuinguisher());
+                mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal.setText(generalSafetyMeasuresParentData.getNoOfFireExtuinguisher());
 
-                mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setText(generalSafetyMeasuresData.getPrevailingSLA());
-                mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.setText(generalSafetyMeasuresData.getSiteBoundaryStatus());
-                mGeneralAndSafetyMeasureTextViewSiteHygieneVegitationStatusVal.setText(generalSafetyMeasuresData.getSiteHygieneVegitationStatus());
-                mGeneralAndSafetyMeasureTextViewGateLockVal.setText(generalSafetyMeasuresData.getGateLock());
-                mGeneralAndSafetyMeasureTextViewDGRoomLockVal.setText(generalSafetyMeasuresData.getDgRoomLock());
-                mGeneralAndSafetyMeasureTextViewFireExtuinguisherVal.setText(generalSafetyMeasuresData.getFireExtuinguisher());
-                mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.setText(generalSafetyMeasuresData.getFireExtuinguisherType());
-                mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setText(generalSafetyMeasuresData.getFireExtuinguisherExpiryDate());
-                mGeneralAndSafetyMeasureTextViewFireBucketVal.setText(generalSafetyMeasuresData.getFireBucket());
-                mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.setText(generalSafetyMeasuresData.getSecurityStatus());
-                mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.setText(generalSafetyMeasuresData.getNoofSecurityPerson());
-                mGeneralAndSafetyMeasureEditTextMobileNumberofSecurity.setText(generalSafetyMeasuresData.getMobileNumberofSecurity());
-                mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.setText(generalSafetyMeasuresData.getCaretakerStatusUpOnEmergency());
-                mGeneralAndSafetyMeasureEditTextMobileNumberofCaretaker.setText(generalSafetyMeasuresData.getMobileNumberofCaretaker());
-                mGeneralAndSafetyMeasureTextViewIsSecurityCaretakeristheOwnerofSiteVal.setText(generalSafetyMeasuresData.getIsSecurityCaretakeristheOwnerofSite());
-                mGeneralAndSafetyMeasureEditTextSalaryofSecurityCaretaker.setText(generalSafetyMeasuresData.getSalaryofSecurityCaretaker());
-                mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.setText(generalSafetyMeasuresData.getCaretakerSecuritySalaryPaidBy());
-                mGeneralAndSafetyMeasureTextViewCaretakerSecurityStayinginSiteVal.setText(generalSafetyMeasuresData.getCaretakerSecurityStayinginSite());
-                mGeneralAndSafetyMeasureTextViewNumberofEarthPitVal.setText(generalSafetyMeasuresData.getNumberofEarthPit());
-                mGeneralAndSafetyMeasureTextViewLightningArresterStatusVal.setText(generalSafetyMeasuresData.getLightningArresterStatus());
-                mGeneralAndSafetyMeasureTextViewFencingCompoundWallConditionVal.setText(generalSafetyMeasuresData.getFencingCompoundWallCondition());
-                mGeneralAndSafetyMeasureTextViewNumberoffreeODPaltformAvailableVal.setText(generalSafetyMeasuresData.getNumberoffreeODPaltformAvailable());
-                mGeneralAndSafetyMeasureTextViewAlarmMultipluxerStatusVal.setText(generalSafetyMeasuresData.getAlarmMultipluxerStatus());
-                mGeneralAndSafetyMeasureTextViewDoorOpenSensorVal.setText(generalSafetyMeasuresData.getDoorOpenSensor());
-                mGeneralAndSafetyMeasureTextViewFuelSensorVal.setText(generalSafetyMeasuresData.getFuelSensor());
-                mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText(generalSafetyMeasuresData.getFireSmokeSensor());
-                mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.setText(generalSafetyMeasuresData.getAgencyName());
+                mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setText(generalSafetyMeasuresParentData.getPrevailingSLA());
+                mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.setText(generalSafetyMeasuresParentData.getSiteBoundaryStatus());
+                mGeneralAndSafetyMeasureTextViewSiteHygieneVegitationStatusVal.setText(generalSafetyMeasuresParentData.getSiteHygieneVegitationStatus());
+                mGeneralAndSafetyMeasureTextViewGateLockVal.setText(generalSafetyMeasuresParentData.getGateLock());
+                mGeneralAndSafetyMeasureTextViewDGRoomLockVal.setText(generalSafetyMeasuresParentData.getDgRoomLock());
+                mGeneralAndSafetyMeasureTextViewFireBucketVal.setText(generalSafetyMeasuresParentData.getFireBucket());
+                mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.setText(generalSafetyMeasuresParentData.getSecurityStatus());
+                mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.setText(generalSafetyMeasuresParentData.getNoofSecurityPerson());
+                mGeneralAndSafetyMeasureEditTextMobileNumberofSecurity.setText(generalSafetyMeasuresParentData.getMobileNumberofSecurity());
+                mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.setText(generalSafetyMeasuresParentData.getCaretakerStatusUpOnEmergency());
+                mGeneralAndSafetyMeasureEditTextMobileNumberofCaretaker.setText(generalSafetyMeasuresParentData.getMobileNumberofCaretaker());
+                mGeneralAndSafetyMeasureTextViewIsSecurityCaretakeristheOwnerofSiteVal.setText(generalSafetyMeasuresParentData.getIsSecurityCaretakeristheOwnerofSite());
+                mGeneralAndSafetyMeasureEditTextSalaryofSecurityCaretaker.setText(generalSafetyMeasuresParentData.getSalaryofSecurityCaretaker());
+                mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.setText(generalSafetyMeasuresParentData.getCaretakerSecuritySalaryPaidBy());
+                mGeneralAndSafetyMeasureTextViewCaretakerSecurityStayinginSiteVal.setText(generalSafetyMeasuresParentData.getCaretakerSecurityStayinginSite());
+                mGeneralAndSafetyMeasureTextViewNumberofEarthPitVal.setText(generalSafetyMeasuresParentData.getNumberofEarthPit());
+                mGeneralAndSafetyMeasureTextViewLightningArresterStatusVal.setText(generalSafetyMeasuresParentData.getLightningArresterStatus());
+                mGeneralAndSafetyMeasureTextViewFencingCompoundWallConditionVal.setText(generalSafetyMeasuresParentData.getFencingCompoundWallCondition());
+                mGeneralAndSafetyMeasureTextViewNumberoffreeODPaltformAvailableVal.setText(generalSafetyMeasuresParentData.getNumberoffreeODPaltformAvailable());
+                mGeneralAndSafetyMeasureTextViewAlarmMultipluxerStatusVal.setText(generalSafetyMeasuresParentData.getAlarmMultipluxerStatus());
+                mGeneralAndSafetyMeasureTextViewDoorOpenSensorVal.setText(generalSafetyMeasuresParentData.getDoorOpenSensor());
+                mGeneralAndSafetyMeasureTextViewFuelSensorVal.setText(generalSafetyMeasuresParentData.getFuelSensor());
+                mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText(generalSafetyMeasuresParentData.getFireSmokeSensor());
+                mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.setText(generalSafetyMeasuresParentData.getAgencyName());
 
+                if (generalSafetyMeasuresData != null && generalSafetyMeasuresData.size() > 0) {
+                    linearLayout_container.setVisibility(View.VISIBLE);
+                    mGeneralAndSafetyMeasureTextViewNumber.setText("Reading: #1");
+
+                    mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.setText(generalSafetyMeasuresData.get(index).getFireExtuinguisherType());
+                    mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setText(generalSafetyMeasuresData.get(index).getFireExtuinguisherExpiryDate());
+
+                    mGeneralAndSafetyMeasureButtonPreviousReading.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureButtonNextReading.setVisibility(View.VISIBLE);
+
+                    if (generalSafetyMeasuresData.size() > 1) {
+                        mGeneralAndSafetyMeasureButtonNextReading.setText("Next Reading");
+                    } else {
+                        mGeneralAndSafetyMeasureButtonNextReading.setText("Finish");
+                    }
+
+                }
 
             } else {
                 Toast.makeText(GeneralAndSafetyMeasures.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
@@ -932,15 +1064,15 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         try {
             // hotoTransactionData.setTicketNo(ticketId);
 
-
             String prevailingSLA = mGeneralAndSafetyMeasuresEditTextPrevailingSLA.getText().toString().trim();
             String siteBoundaryStatus = mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.getText().toString().trim();
             String siteHygieneVegitationStatus = mGeneralAndSafetyMeasureTextViewSiteHygieneVegitationStatusVal.getText().toString().trim();
             String gateLock = mGeneralAndSafetyMeasureTextViewGateLockVal.getText().toString().trim();
             String dgRoomLock = mGeneralAndSafetyMeasureTextViewDGRoomLockVal.getText().toString().trim();
-            String fireExtuinguisher = mGeneralAndSafetyMeasureTextViewFireExtuinguisherVal.getText().toString().trim();
-            String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
-            String fireExtuinguisherExpiryDate = mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.getText().toString().trim();
+            String fireExtuinguisher = "";//mGeneralAndSafetyMeasureTextViewFireExtuinguisherVal.getText().toString().trim();
+            String noOfFireExtuinguisher = mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal.getText().toString().trim();
+            /*String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
+            String fireExtuinguisherExpiryDate = mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.getText().toString().trim();*/
             String fireBucket = mGeneralAndSafetyMeasureTextViewFireBucketVal.getText().toString().trim();
             String securityStatus = mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.getText().toString().trim();
             String noofSecurityPerson = mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.getText().toString().trim();
@@ -961,9 +1093,8 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
             String fireSmokeSensor = mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.getText().toString().trim();
             String str_AgencyName = mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.getText().toString();
 
-            generalSafetyMeasuresData = new GeneralSafetyMeasuresData(prevailingSLA, siteBoundaryStatus, siteHygieneVegitationStatus, gateLock, dgRoomLock, fireExtuinguisher, fireExtuinguisherType, fireExtuinguisherExpiryDate, fireBucket, securityStatus, noofSecurityPerson, mobileNumberofSecurity, caretakerStatusUpOnEmergency, mobileNumberofCaretaker, isSecurityCaretakeristheOwnerofSite, salaryofSecurityCaretaker, caretakerSecuritySalaryPaidBy, caretakerSecurityStayinginSite, numberofEarthPit, lightningArresterStatus, fencingCompoundWallCondition, numberoffreeODPaltformAvailable, alarmMultipluxerStatus, doorOpenSensor, fuelSensor, fireSmokeSensor, str_AgencyName);
-
-            hotoTransactionData.setGeneralSafetyMeasuresData(generalSafetyMeasuresData);
+            generalSafetyMeasuresParentData = new GeneralSafetyMeasuresParentData(prevailingSLA, siteBoundaryStatus, siteHygieneVegitationStatus, gateLock, dgRoomLock, fireExtuinguisher, noOfFireExtuinguisher, fireBucket, securityStatus, noofSecurityPerson, mobileNumberofSecurity, caretakerStatusUpOnEmergency, mobileNumberofCaretaker, isSecurityCaretakeristheOwnerofSite, salaryofSecurityCaretaker, caretakerSecuritySalaryPaidBy, caretakerSecurityStayinginSite, numberofEarthPit, lightningArresterStatus, fencingCompoundWallCondition, numberoffreeODPaltformAvailable, alarmMultipluxerStatus, doorOpenSensor, fuelSensor, fireSmokeSensor, str_AgencyName, generalSafetyMeasuresData);
+            hotoTransactionData.setGeneralSafetyMeasuresParentData(generalSafetyMeasuresParentData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
@@ -974,5 +1105,74 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
             e.printStackTrace();
         }
 
+    }
+
+    private boolean checkValidtionForArrayFields() {
+        String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
+        String fireExtuinguisherExpiryDate = mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.getText().toString().trim();
+
+        if (fireExtuinguisherType.isEmpty() || fireExtuinguisherType == null) {
+            showToast("Select Fire Extuinguisher Type");
+            return false;
+        } else if (fireExtuinguisherExpiryDate.isEmpty() || fireExtuinguisherExpiryDate == null) {
+            showToast("Select Fire Extuinguisher Expiry Date");
+            return false;
+        } else return true;
+    }
+
+    private void saveRecords(int pos) {
+        String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
+        String fireExtuinguisherExpiryDate = mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.getText().toString().trim();
+
+        GeneralSafetyMeasuresData obj_generalSafetyMeasuresData = new GeneralSafetyMeasuresData(fireExtuinguisherType, fireExtuinguisherExpiryDate);
+        if (generalSafetyMeasuresData.size() > 0) {
+            if (pos == generalSafetyMeasuresData.size()) {
+                generalSafetyMeasuresData.add(obj_generalSafetyMeasuresData);
+            } else if (pos < generalSafetyMeasuresData.size()) {
+                generalSafetyMeasuresData.set(pos, obj_generalSafetyMeasuresData);
+            }
+        } else {
+            generalSafetyMeasuresData.add(obj_generalSafetyMeasuresData);
+        }
+    }
+
+    private void displayRecords(int pos) {
+        if (generalSafetyMeasuresData.size() > 0 && pos < generalSafetyMeasuresData.size()) {
+
+            mGeneralAndSafetyMeasureTextViewNumber.setText("Reading: #" + (pos + 1));
+
+            mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.setText(generalSafetyMeasuresData.get(pos).getFireExtuinguisherType());
+            mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setText(generalSafetyMeasuresData.get(pos).getFireExtuinguisherExpiryDate());
+
+            mGeneralAndSafetyMeasureButtonPreviousReading.setVisibility(View.VISIBLE);
+            mGeneralAndSafetyMeasureButtonNextReading.setVisibility(View.VISIBLE);
+
+        } else {
+            clearFields(pos);
+        }
+
+        if (pos > 0 && pos < (totalCount - 1)) {
+            mGeneralAndSafetyMeasureButtonPreviousReading.setVisibility(View.VISIBLE);
+            mGeneralAndSafetyMeasureButtonNextReading.setText("Next Reading");
+        } else if (pos > 0 && pos == (totalCount - 1)) {
+            mGeneralAndSafetyMeasureButtonPreviousReading.setVisibility(View.VISIBLE);
+            mGeneralAndSafetyMeasureButtonNextReading.setText("Finish");
+        } else if (pos == 0) {
+            mGeneralAndSafetyMeasureButtonPreviousReading.setVisibility(View.GONE);
+            if (pos == (totalCount - 1)) {
+                mGeneralAndSafetyMeasureButtonNextReading.setText("Finish");
+            } else {
+                mGeneralAndSafetyMeasureButtonNextReading.setText("Next Reading");
+            }
+        }
+    }
+
+    public void clearFields(int indexPos) {
+        mGeneralAndSafetyMeasureTextViewNumber.setText("Reading: #" + (indexPos + 1));
+
+        mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.setText("");
+        mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.setText("");
+
+        str_FireExtuinguisherType = "";
     }
 }
