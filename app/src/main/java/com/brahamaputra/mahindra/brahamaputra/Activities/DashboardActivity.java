@@ -154,7 +154,7 @@ public class DashboardActivity extends BaseActivity {
                                         //TicketID = String.valueOf(taskEditText.getText());
                                         Intent intent = new Intent(DashboardActivity.this, UserHotoTransactionActivity.class);
                                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
-                                        intent.putExtra("ticketNO", String.valueOf(taskEditText.getText()));
+                                        intent.putExtra("ticketNO", String.valueOf(taskEditText.getText().toString().toUpperCase()));
                                         sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
                                         startActivity(intent);
                                     }

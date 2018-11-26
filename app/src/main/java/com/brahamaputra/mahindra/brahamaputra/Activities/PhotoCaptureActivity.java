@@ -373,6 +373,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringSite = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonSiteView.setVisibility(View.VISIBLE);

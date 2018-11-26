@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Customer name"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorBlueLink"/>
 
             <EditText
                 android:id="@+id/userHotoTrans_editText_customerName"
@@ -42,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="State"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorBlueLink"/>
 
             <EditText
                 android:id="@+id/userHotoTrans_editText_state"
@@ -58,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name of circle"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorBlueLink"/>
 
             <EditText
                 android:id="@+id/userHotoTrans_editText_nameOfCircle"
@@ -68,13 +71,14 @@
                 android:hint=""
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="0dp" />
+                tools:layout_editor_absoluteY="0dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name of SSA"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorBlueLink"/>
 
             <EditText
                 android:id="@+id/userHotoTrans_editText_nameOfssa"
@@ -90,7 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name of site"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorBlueLink"/>
 
             <EditText
                 android:id="@+id/userHotoTrans_editText_nameOfsite"
@@ -106,7 +111,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Site ID"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorBlueLink"/>
 
             <EditText
                 android:id="@+id/userHotoTrans_editText_siteID"
@@ -133,7 +139,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.3"
                     android:text=" Type of sites"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorBlueLink"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:id="@+id/userHotoTrans_editText_typeOfSite"
@@ -151,7 +159,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Site Address"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorBlueLink"/>
 
             <EditText
                 android:id="@+id/userHotoTrans_editText_siteAddress"
@@ -182,7 +191,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="Source of Power"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorBlueLink"
+                    android:textStyle="bold"/>
 
 
                 <TextView

@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class Tower_Detail extends BaseActivity {
@@ -107,9 +108,12 @@ public class Tower_Detail extends BaseActivity {
         mTowerDetailEditTextDateOfPaintingOfTheTower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(Tower_Detail.this, date, myCalendar
+                DatePickerDialog dialog = new DatePickerDialog(Tower_Detail.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
             }
         });
     }

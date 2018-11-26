@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class ExternalTenantsPersonaldetails extends BaseActivity {
@@ -255,9 +256,12 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ExternalTenantsPersonaldetails.this, date1, myCalendar
+                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date1, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
             }
         });
 

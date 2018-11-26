@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -157,6 +158,7 @@ public class Land_Details extends BaseActivity {
                 new DatePickerDialog(Land_Details.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
             }
         });
 
@@ -622,16 +624,12 @@ public class Land_Details extends BaseActivity {
         }
     }
 
-    public static void saveToPreferences(Context context, String key,
-                                         Boolean allowed) {
-        SharedPreferences myPrefs = context.getSharedPreferences
-                (CAMERA_PREF, Context.MODE_PRIVATE);
+    public static void saveToPreferences(Context context, String key, Boolean allowed) {
+        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
-
-
 }
 
 
