@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import android.Manifest;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
@@ -598,6 +600,29 @@ public class Battery_Set extends BaseActivity {
 
             }
         });
+
+        mBatterySetEditTextBackupduration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(Battery_Set.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
+                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
+                        mBatterySetEditTextBackupduration.setText(selectedHour1 + ":" + selectedMinute1);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time For Scheduled Power Cut");
+                mTimePicker.show();
+
+            }
+        });
+
     }
 
     @Override
@@ -1013,7 +1038,7 @@ public class Battery_Set extends BaseActivity {
         mBatterySetTextViewCapacityinAHVal.setText("");
         mBatterySetTextViewTypeofBatteryVal.setText("");
         mBatterySetEditTextDateofInstallation.setText("");
-        mBatterySetEditTextBackupduration.setText("");
+        mBatterySetEditTextBackupduration.setText("00:00");
         mBatterySetTextViewPositionofBatteryBankVal.setText("");
         mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText("");
         mBatterySetTextViewBatteryBankEarthingStatusVal.setText("");

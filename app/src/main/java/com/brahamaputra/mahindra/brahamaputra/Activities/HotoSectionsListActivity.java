@@ -15,13 +15,14 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class HotoSectionsListActivity extends AppCompatActivity {
+public class HotoSectionsListActivity extends BaseActivity {
 
     public ListView hotoSections_listView_sections;
     ArrayList<HotoSection> dataModels;
@@ -45,8 +46,14 @@ public class HotoSectionsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hoto_sections_list);
 
         hotoSections_listView_sections = (ListView) findViewById(R.id.hotoSections_listView_sections);
-        this.setTitle("Readings");
+
+        //this.setTitle("Readings");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Intent intent = getIntent();
+        String tic_Name = intent.getStringExtra("ticketName");
+        this.setTitle(tic_Name);
 
         values = getResources().getStringArray(R.array.listView_hotoSections_sections);
         dataModels = new ArrayList<>();
@@ -211,7 +218,7 @@ public class HotoSectionsListActivity extends AppCompatActivity {
             case 4:
                 return hotoTransactionData.getElectricConnectionData().getSubmited();
             case 5:
-                 return hotoTransactionData.getAirConditionParentData().getSubmited();
+                return hotoTransactionData.getAirConditionParentData().getSubmited();
             case 6:
                 return hotoTransactionData.getSolarPowerSystemData().getSubmited();
             case 7:

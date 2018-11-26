@@ -39,6 +39,13 @@
             android:layout_marginLeft="@dimen/app_normal_margin"/>
 
         <TextView
+            android:id="@+id/textView_SiteSSA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Site SSA: Mahi_01_AA"
+            android:layout_marginLeft="@dimen/app_normal_margin"/>
+
+        <TextView
             android:id="@+id/textView_SiteAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

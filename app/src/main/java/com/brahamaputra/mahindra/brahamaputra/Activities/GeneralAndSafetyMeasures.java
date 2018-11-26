@@ -24,6 +24,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
+import com.brahamaputra.mahindra.brahamaputra.Utils.InputFilterMinMax;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
@@ -228,7 +229,8 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid = (LinearLayout) findViewById(R.id.generalAndSafetyMeasure_linearLayout_agencyNameSalaryPaid);
         mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid = (EditText) findViewById(R.id.generalAndSafetyMeasure_editText_agencyNameSalaryPaid);
 
-        mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        //mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new InputFilterMinMax(0.00, 100.00, 6, 2)});
         mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid.setVisibility(View.GONE);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -722,7 +724,8 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
     private void onValidateSecurityCaretakeStatus() {
         String securityStatus = mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.getText().toString();
-        String caretakerStatus = mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.getText().toString();;
+        String caretakerStatus = mGeneralAndSafetyMeasureTextViewCaretakerStatusUpOnEmergencyVal.getText().toString();
+        ;
         mGeneralAndSafetyMeasureLinearLayoutSalaryofSecurityCaretaker.setVisibility(View.VISIBLE);
         mGeneralAndSafetyMeasureLinearLayoutCaretakerSecuritySalaryPaidBy.setVisibility(View.VISIBLE);
         mGeneralAndSafetyMeasureLinearLayoutCaretakerSecurityStayinginSite.setVisibility(View.VISIBLE);
@@ -865,6 +868,11 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                     mGeneralAndSafetyMeasureLinearLayoutFireSmokeSensor.setVisibility(View.GONE);
                     mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText("");
+                }
+
+                if (hotoTransactionData.getSourceOfPower().toString().equals("Non DG")) {
+                    mGeneralAndSafetyMeasureLinearLayoutFuelSensor.setVisibility(View.GONE);
+                    mGeneralAndSafetyMeasureTextViewFuelSensorVal.setText("");
                 }
             }
         } catch (Exception e) {

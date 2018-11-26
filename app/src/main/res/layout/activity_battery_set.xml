@@ -9,8 +9,8 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_marginBottom="@dimen/app_normal_margin">
+        android:layout_marginBottom="@dimen/app_normal_margin"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,8 +39,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -65,8 +65,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -93,7 +93,6 @@
                     android:layout_height="1dp"
                     android:layout_gravity="center"
                     android:background="#a40404" />
-
 
 
                 <LinearLayout
@@ -126,12 +125,12 @@
                         android:id="@+id/batterySet_button_QRCodeScanView"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
-                        android:padding="2dp"
                         android:layout_weight="0.3"
                         android:clickable="true"
+                        android:padding="2dp"
                         android:scaleType="fitCenter"
-                        android:visibility="gone"
-                        android:src="@drawable/baseline_done_black_18dp" />
+                        android:src="@drawable/baseline_done_black_18dp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -157,8 +156,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
 
                 </LinearLayout>
@@ -175,10 +174,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Specifications"
+                        android:textAlignment="center"
                         android:textColor="@color/colorBlack"
                         android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:textAlignment="center"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
                 <!--android:layout_marginTop="100sp"-->
@@ -186,8 +185,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
-                    android:background="#a40404"
-                    android:layout_marginBottom="@dimen/app_normal_margin"/>
+                    android:layout_marginBottom="@dimen/app_normal_margin"
+                    android:background="#a40404" />
 
 
                 <LinearLayout
@@ -211,8 +210,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
                 </LinearLayout>
 
@@ -237,8 +236,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
                 </LinearLayout>
 
@@ -263,8 +262,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
                 </LinearLayout>
 
@@ -320,11 +319,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:hint="Enter Back up duration "
-                        android:inputType="numberDecimal"
-                        android:textAlignment="viewStart"
+                        android:focusable="false"
+                        android:hint="HH:MM"
                         android:imeOptions="actionNext"
-                        />
+                        android:inputType="none"
+                        android:text="00:00"
+                        android:textAlignment="viewStart"
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -349,8 +350,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
                 </LinearLayout>
 
@@ -375,8 +376,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
                 </LinearLayout>
 
@@ -401,8 +402,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
                 </LinearLayout>
 
@@ -427,8 +428,8 @@
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
 
-                        android:textAlignment="viewStart"
-                        android:hint="Select"></TextView>
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
                 </LinearLayout>
 
@@ -455,10 +456,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:hint="Enter Nature of Problem "
-                        android:inputType="textMultiLine"
-                        android:textAlignment="viewStart"
                         android:imeOptions="actionDone"
-                        />
+                        android:inputType="textMultiLine"
+                        android:textAlignment="viewStart" />
 
                 </LinearLayout>
 

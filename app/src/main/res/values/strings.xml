@@ -17,8 +17,10 @@
     </string-array>
 
     <string-array name="array_towerDetail_signboard">
-        <item>No</item>
-        <item>Yes</item>
+        <item>Available</item>
+        <item>Not Available</item>
+        <!--<item>No</item>
+        <item>Yes</item>-->
     </string-array>
 
     <string-array name="array_towerDetail_dangerSignageboard">
@@ -245,8 +247,8 @@
 
     <string-array name="array_solarPowerSystem_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M&amp;M Supplied Asset</item>
-        <item>M&amp;M Supplied Revenue</item>
+        <item>Mahindra Supplied Asset</item>
+        <item>Mahindra Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_solarPowerSystem_cellPanel">
@@ -281,8 +283,8 @@
 
     <string-array name="array_batterySet_AssetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M&amp;M Supplied Asset</item>
-        <item>M&amp;M Supplied Revenue</item>
+        <item>Mahindra Supplied Asset</item>
+        <item>Mahindra Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_batterySet_ManufacturerMakeModel">
@@ -329,6 +331,7 @@
         <item>Li-Ion</item>
         <item>Tubular</item>
         <item>VRLA</item>
+        <item>VRLA+</item>
     </string-array>
 
     <string-array name="array_batterySet_PositionofBatteryBank">
@@ -410,20 +413,19 @@
     </string-array>
 
     <string-array name="array_activeEquipmentDetails_numberOfDependantSites">
-        <item>Above 100</item>
         <item>Single</item>
         <item>Less than 10</item>
         <item>Less than 50</item>
         <item>Less than 100</item>
-
+        <item>Above 100</item>
     </string-array>
 
 
     <!--Power Management System activity  spinners Array -->
     <string-array name="array_powerManagementSystem_AssetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M&amp;M Supplied Asset</item>
-        <item>M&amp;M Supplied Revenue</item>
+        <item>Mahindra Supplied Asset</item>
+        <item>Mahindra Supplied Revenue</item>
 
     </string-array>
 
@@ -588,7 +590,8 @@
     </string-array>
 
     <string-array name="array_generalAndSafetyMeasure_AlarmMultipluxerStatus">
-        <item>Available</item>
+        <item>Available &amp; Working</item>
+        <item>Available &amp; Not Working</item>
         <item>Not Available</item>
 
     </string-array>
@@ -706,7 +709,7 @@
         <item>Lineage</item>
         <item>Lister Pitter</item>
         <item>Local</item>
-        <item>M&amp;M</item>
+        <item>Mahindra</item>
         <item>Mahindra</item>
         <item>Microtex</item>
         <item>Mistubishi</item>
@@ -786,7 +789,7 @@
     </string-array>
 
     <string-array name="array_airConditioners_noOfAirConditionersACprovided">
-        <item>Non AC</item>
+        <!--<item>Non AC</item>-->
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -795,7 +798,7 @@
     </string-array>
 
     <string-array name="array_airConditioners_numberofACInWorkingCondition">
-        <item>Non AC</item>
+        <!--<item>Non AC</item>-->
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -805,8 +808,8 @@
 
     <string-array name="array_airConditioners_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M&amp;M Supplied Asset</item>
-        <item>M&amp;M Supplied Revenue</item>
+        <item>Mahindra Supplied Asset</item>
+        <item>Mahindra Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_airConditioners_typeOfAcSpliWindow">
@@ -925,8 +928,8 @@
     </string-array>
     <string-array name="array_powerBackupsDg_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M&amp;M Supplied Asset</item>
-        <item>M&amp;M Supplied Revenue</item>
+        <item>Mahindra Supplied Asset</item>
+        <item>Mahindra Supplied Revenue</item>
     </string-array>
     <string-array name="array_powerBackupsDg_manufacturerMakeModel">
         <item>Ashok Leyland</item>
@@ -940,7 +943,7 @@
         <item>Jackson</item>
         <item>Koel</item>
         <item>Lister Pitter</item>
-        <item>M&amp;M</item>
+        <item>Mahindra</item>
         <item>Mistubishi</item>
         <item>Perfect</item>
         <item>Perkins</item>
@@ -998,9 +1001,11 @@
         <item>Partially Damaged</item>
     </string-array>
     <string-array name="array_powerBackupsDg_dgStartingBatteryStatus">
-        <item>Not Available</item>
+        <!--<item>Not Available</item>
         <item>Not Working</item>
-        <item>Working Good</item>
+        <item>Working Good</item>-->
+        <item>No</item>
+        <item>Yes</item>
     </string-array>
     <string-array name="array_powerBackupsDg_chargingAlternator">
         <item>Not Available</item>
@@ -1033,11 +1038,20 @@
 
     <string-array name="array_powerPlantDetails_assetOwner">
         <item>BSNL Supplied Asset</item>
-        <item>M&amp;M Supplied Asset</item>
-        <item>M&amp;M Supplied Revenue</item>
+        <item>Mahindra Supplied Asset</item>
+        <item>Mahindra Supplied Revenue</item>
     </string-array>
 
     <string-array name="array_powerPlantDetails_numberOfPowerPlant">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="array_powerPlantDetails_numberOfWorkingPowerPlant">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -1059,7 +1073,7 @@
         <item>Intex</item>
         <item>ITI</item>
         <item>Lineage</item>
-        <item>M&amp;M</item>
+        <item>Mahindra</item>
         <item>Pace</item>
         <item>UTL</item>
         <item>Valere</item>

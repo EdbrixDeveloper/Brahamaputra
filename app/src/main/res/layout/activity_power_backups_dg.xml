@@ -285,7 +285,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Diesel Tank capacity" />
+                        android:text="Diesel Tank capacity(in Ltrs)" />
 
                     <EditText
                         android:id="@+id/powerBackupsDg_editText_dieselTankCapacity"
@@ -692,7 +692,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Present Diesel Stock" />
+                        android:text="Present Diesel Stock(in Ltrs)" />
 
                     <EditText
                         android:id="@+id/powerBackupsDg_editText_presentDieselStock"

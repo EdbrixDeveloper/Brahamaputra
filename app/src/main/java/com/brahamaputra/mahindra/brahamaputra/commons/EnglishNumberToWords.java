@@ -3,23 +3,20 @@ package com.brahamaputra.mahindra.brahamaputra.commons;
 import java.text.DecimalFormat;
 
 public class EnglishNumberToWords {
-    private static final String[] tensNames = { "", " ten", " twenty", " thirty", " forty",
-            " fifty", " sixty", " seventy", " eighty", " ninety" };
+    private static final String[] tensNames = {"", " ten", " twenty", " thirty", " forty",
+            " fifty", " sixty", " seventy", " eighty", " ninety"};
 
-    private static final String[] numNames = { "", " one", " two", " three", " four", " five",
+    private static final String[] numNames = {"", " one", " two", " three", " four", " five",
             " six", " seven", " eight", " nine", " ten", " eleven", " twelve", " thirteen",
-            " fourteen", " fifteen", " sixteen", " seventeen", " eighteen", " nineteen" };
+            " fourteen", " fifteen", " sixteen", " seventeen", " eighteen", " nineteen"};
 
-    private static String convertLessThanOneThousand(int number)
-    {
+    private static String convertLessThanOneThousand(int number) {
         String soFar;
 
-        if (number % 100 < 20)
-        {
+        if (number % 100 < 20) {
             soFar = numNames[number % 100];
             number /= 100;
-        } else
-        {
+        } else {
             soFar = numNames[number % 10];
             number /= 10;
 
@@ -31,11 +28,9 @@ public class EnglishNumberToWords {
         return numNames[number] + " hundred" + soFar;
     }
 
-    public static String convert(long number)
-    {
+    public static String convert(long number) {
         // 0 to 999 999 999 999
-        if (number == 0)
-        {
+        if (number == 0) {
             return "zero";
         }
 
@@ -56,8 +51,7 @@ public class EnglishNumberToWords {
         int thousands = Integer.parseInt(snumber.substring(9, 12));
 
         String tradBillions;
-        switch (billions)
-        {
+        switch (billions) {
             case 0:
                 tradBillions = "";
                 break;
@@ -70,8 +64,7 @@ public class EnglishNumberToWords {
         String result = tradBillions;
 
         String tradMillions;
-        switch (millions)
-        {
+        switch (millions) {
             case 0:
                 tradMillions = "";
                 break;
@@ -84,8 +77,7 @@ public class EnglishNumberToWords {
         result = result + tradMillions;
 
         String tradHundredThousands;
-        switch (hundredThousands)
-        {
+        switch (hundredThousands) {
             case 0:
                 tradHundredThousands = "";
                 break;
@@ -102,7 +94,9 @@ public class EnglishNumberToWords {
         result = result + tradThousand;
 
         // remove extra spaces!
-        return result.replaceAll("^\\s+", "").replaceAll("\\b\\s{2,}\\b", " ");
+        //return result.replaceAll("^\\s+", "").replaceAll("\\b\\s{2,}\\b", " ");
+        String ret_inWords = result.replaceAll("^\\s+", "").replaceAll("\\b\\s{2,}\\b", " ");
+        return ret_inWords + " ONLY";
     }
 
 }

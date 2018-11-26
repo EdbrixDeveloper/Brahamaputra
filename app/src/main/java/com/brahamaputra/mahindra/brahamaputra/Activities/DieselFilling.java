@@ -162,6 +162,7 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingEditTextFillingQty.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         mDieselFillingEditTextDieselPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
 
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -346,13 +347,16 @@ public class DieselFilling extends BaseActivity {
                 //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                if (site_id > 0) {
+                /*if (site_id > 0) {*/
+                if (checkValidationOnSubmitDiselTicket() == true) {
+                   // Code For Next Validation by Arjun on 22112018
                     showSettingsAlert();
                     //submitDetails();
                     return true;
-                } else {
-                    showToast("No Site Selected");
                 }
+                /*} else {
+                    showToast("No Site Selected");
+                }*/
 
 
         }
@@ -733,5 +737,57 @@ public class DieselFilling extends BaseActivity {
         }
     }
 
+    /*Arjun 22112018*/
+    public boolean checkValidationOnSubmitDiselTicket() {
+        String userId = sessionManager.getSessionUserId();
+        String accessToken = sessionManager.getSessionDeviceToken();
+        String latitude = String.valueOf(gpsTracker.getLatitude());
+        String longitude = String.valueOf(gpsTracker.getLongitude());
+        String siteID = String.valueOf(site_id);
+        String selectDgIdQrCode = mDieselFillingTextViewSelectDgIdQrCodeVal.getText().toString().trim();
+
+        String presentDgHmr = mDieselFillingEditTextPresentDgHmr.getText().toString().trim();
+        String hmrPhotoUpload = base64StringHmrPhoto;
+        String tankBalanceBeforeFilling = mDieselFillingEditTextTankBalanceBeforeFilling.getText().toString().trim();
+        String fillingQty = mDieselFillingEditTextFillingQty.getText().toString().trim();
+        String finalDieselStock = mDieselFillingTextViewFinalDieselStockVal.getText().toString().trim();
+        String presentEbReading = mDieselFillingEditTextPresentEbReading.getText().toString().trim();
+        String ebReadingKwhPhoto = base64StringEbReadingKwh;
+        String dieselPrice = mDieselFillingEditTextDieselPrice.getText().toString().trim();
+
+
+        if (siteID.isEmpty() || siteID == null) {
+            showToast("Select Site Name");
+            return false;
+        } else if (selectDgIdQrCode.isEmpty() || selectDgIdQrCode == null) {
+            showToast("Select DG ID / QR Code");
+            return false;
+        } else if (presentDgHmr.isEmpty() || presentDgHmr == null) {
+            showToast("Enter Present DG HMR");
+            return false;
+        } else if (hmrPhotoUpload.isEmpty() || hmrPhotoUpload == null) {
+            showToast("Upload Photo of HMR");
+            return false;
+        } else if (tankBalanceBeforeFilling.isEmpty() || tankBalanceBeforeFilling == null) {
+            showToast("Enter Tank Balance Before Filling");
+            return false;
+        } else if (fillingQty.isEmpty() || fillingQty == null) {
+            showToast("Enter Filling Quantity");
+            return false;
+        } /*else if (finalDieselStock.isEmpty() || finalDieselStock == null) {
+            showToast("Wrong Final Diesel Stock");
+            return false;
+        }*/ else if (dieselPrice.isEmpty() || dieselPrice == null) {
+            showToast("Enter Diesel Price");
+            return false;
+        } else if (presentEbReading.isEmpty() || presentEbReading == null) {
+            showToast("Enter Present EB Reading");
+            return false;
+        } else if (ebReadingKwhPhoto.isEmpty() || ebReadingKwhPhoto == null) {
+            showToast("Upload Photo of EB Reading KWH");
+            return false;
+        } else return true;
+
+    }
 
 }

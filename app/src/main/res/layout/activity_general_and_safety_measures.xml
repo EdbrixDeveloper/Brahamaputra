@@ -15,9 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
-            android:paddingBottom="@dimen/app_normal_margin"
             android:orientation="vertical"
-            >
+            android:paddingBottom="@dimen/app_normal_margin">
 
 
             <LinearLayout
@@ -41,19 +40,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Prevailing SLA(In % Wise) "
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_SiteBoundaryStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:weightSum="1"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_SiteBoundaryStatus">
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_SiteBoundaryStatus"
@@ -71,8 +69,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -99,8 +97,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -127,17 +125,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_DGRoomLock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_DGRoomLock"
                 android:weightSum="1">
 
                 <TextView
@@ -156,8 +154,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -184,17 +182,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireExtuinguisherType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireExtuinguisherType"
                 android:weightSum="1">
 
                 <TextView
@@ -213,17 +211,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireExtuinguisherExpiryDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireExtuinguisherExpiryDate"
                 android:weightSum="1">
 
                 <TextView
@@ -249,6 +247,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -271,8 +270,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -299,18 +298,18 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_NoofSecurityPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_NoofSecurityPerson"
                 android:weightSum="1">
 
                 <TextView
@@ -329,16 +328,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_MobileNumberofSecurity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_MobileNumberofSecurity"
                 android:weightSum="1">
 
                 <TextView
@@ -356,11 +356,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Security "
-                    android:inputType="numberDecimal"
-                    android:maxLength="10"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
@@ -386,16 +384,17 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_MobileNumberofCaretaker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_MobileNumberofCaretaker"
                 android:weightSum="1">
 
                 <TextView
@@ -413,19 +412,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Caretaker "
-                    android:inputType="phone"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
-
-
+                    android:inputType="phone"
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_IsSecurityCaretakeristheOwnerofSite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_IsSecurityCaretakeristheOwnerofSite"
                 android:weightSum="1">
 
                 <TextView
@@ -444,17 +440,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_SalaryofSecurityCaretaker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_SalaryofSecurityCaretaker"
                 android:weightSum="1">
 
                 <TextView
@@ -473,19 +469,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Salary of Security/Caretaker "
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_CaretakerSecuritySalaryPaidBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_CaretakerSecuritySalaryPaidBy"
                 android:weightSum="1">
 
                 <TextView
@@ -504,17 +499,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_agencyNameSalaryPaid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_agencyNameSalaryPaid"
                 android:weightSum="1">
 
                 <TextView
@@ -532,19 +527,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Agency Name "
-                    android:inputType="text"
-                    android:textAlignment="viewStart"
                     android:imeOptions="actionNext"
-                    />
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_CaretakerSecurityStayinginSite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_CaretakerSecurityStayinginSite"
                 android:weightSum="1">
 
                 <TextView
@@ -563,8 +557,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -591,8 +585,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -619,17 +613,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FencingCompoundWallCondition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_FencingCompoundWallCondition"
                 android:weightSum="1">
 
                 <TextView
@@ -648,8 +642,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -676,8 +670,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
@@ -704,17 +698,17 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_DoorOpenSensor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_DoorOpenSensor"
                 android:weightSum="1">
 
                 <TextView
@@ -733,16 +727,16 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
-              </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FuelSensor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_FuelSensor"
                 android:weightSum="1">
 
                 <TextView
@@ -761,16 +755,16 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireSmokeSensor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/generalAndSafetyMeasure_linearLayout_FireSmokeSensor"
                 android:weightSum="1">
 
                 <TextView
@@ -789,8 +783,8 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
         </LinearLayout>

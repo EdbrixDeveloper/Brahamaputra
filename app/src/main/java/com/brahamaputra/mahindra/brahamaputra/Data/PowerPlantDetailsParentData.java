@@ -9,6 +9,9 @@ public class PowerPlantDetailsParentData {
     @SerializedName("numberOfPowerPlant")
     String numberOfPowerPlant;
 
+    @SerializedName("numberOfWorkingPowerPlant")
+    String numberOfWorkingPowerPlant;
+
     @SerializedName("powerPlantDetailsData")
     ArrayList<PowerPlantDetailsData> powerPlantDetailsData;
 
@@ -39,15 +42,25 @@ public class PowerPlantDetailsParentData {
         isSubmited = submited;
     }
 
-    public PowerPlantDetailsParentData(String numberOfPowerPlant, ArrayList<PowerPlantDetailsData> powerPlantDetailsData) {
+    public PowerPlantDetailsParentData(String numberOfPowerPlant, String numberOfWorkingPowerPlant, ArrayList<PowerPlantDetailsData> powerPlantDetailsData) {
         this.numberOfPowerPlant = numberOfPowerPlant;
+        this.numberOfWorkingPowerPlant = numberOfWorkingPowerPlant;
         this.powerPlantDetailsData = powerPlantDetailsData;
         this.isSubmited = true;
     }
-    public PowerPlantDetailsParentData(){
+
+    public PowerPlantDetailsParentData() {
         this.numberOfPowerPlant = "";
+        this.numberOfWorkingPowerPlant = "";
         this.powerPlantDetailsData = new ArrayList<>();
         this.isSubmited = false;
     }
 
+    public String getNumberOfWorkingPowerPlant() {
+        return numberOfWorkingPowerPlant;
+    }
+
+    public void setNumberOfWorkingPowerPlant(String numberOfWorkingPowerPlant) {
+        this.numberOfWorkingPowerPlant = numberOfWorkingPowerPlant;
+    }
 }

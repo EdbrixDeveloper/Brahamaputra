@@ -26,7 +26,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
     private HotoTicketList hotoTicketList;
 
     public UserHotoExpListAdapter(Context context, List<HotoTicketsDate> listDataHeader,
-                                 HashMap<Object, List<HotoTicket>> listChildData) {
+                                  HashMap<Object, List<HotoTicket>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -66,11 +66,13 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         TextView textView_SiteID = (TextView) convertView.findViewById(R.id.textView_SiteID);
         TextView textView_SiteName = (TextView) convertView.findViewById(R.id.textView_SiteName);
         TextView textView_SiteAddress = (TextView) convertView.findViewById(R.id.textView_SiteAddress);
+        TextView textView_SiteSSA = (TextView) convertView.findViewById(R.id.textView_SiteSSA);
 
         textView_HotoName.setText(HotoTicket.getHotoTicketNo());
-        textView_SiteID.setText("Site Id: "+HotoTicket.getSiteId());
-        textView_SiteName.setText("Site Name: "+HotoTicket.getSiteName());
-        textView_SiteAddress.setText("Site Address: "+HotoTicket.getSiteAddress());
+        textView_SiteID.setText("Site Id: " + HotoTicket.getSiteId());
+        textView_SiteName.setText("Site Name: " + HotoTicket.getSiteName());
+        textView_SiteAddress.setText("Site Address: " + HotoTicket.getSiteAddress());
+        textView_SiteSSA.setText("Site SSA: " + HotoTicket.getSsaName());
 
         if(HotoTicket.getStatus().equalsIgnoreCase("WIP")){
 

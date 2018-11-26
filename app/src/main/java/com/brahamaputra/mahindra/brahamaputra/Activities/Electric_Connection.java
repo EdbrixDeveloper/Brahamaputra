@@ -188,7 +188,9 @@ public class Electric_Connection extends BaseActivity {
                 mTimePicker = new TimePickerDialog(Electric_Connection.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(selectedHour + ":" + selectedMinute);
+                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
+                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
+                        mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(selectedHour1 + ":" + selectedMinute1);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time For Average Eb Availability");
@@ -208,7 +210,9 @@ public class Electric_Connection extends BaseActivity {
                 mTimePicker = new TimePickerDialog(Electric_Connection.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        mElectricConnectionEditTextScheduledPowerCutInHrs.setText(selectedHour + ":" + selectedMinute);
+                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
+                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
+                        mElectricConnectionEditTextScheduledPowerCutInHrs.setText(selectedHour1 + ":" + selectedMinute1);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time For Scheduled Power Cut");
@@ -807,7 +811,7 @@ public class Electric_Connection extends BaseActivity {
                         mElectricConnectionTextViewSafetyFuseUnitVal.setText("");
                         mElectricConnectionTextViewKitKatClayFuseStatusVal.setText("");
                         mElectricConnectionTextViewEbNeutralEarthingVal.setText("");
-                        mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText("");
+                        mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText("00:00");
                         mElectricConnectionEditTextScheduledPowerCutInHrs.setText("");
                         mElectricConnectionTextViewEbBillDateVal.setText("");
 

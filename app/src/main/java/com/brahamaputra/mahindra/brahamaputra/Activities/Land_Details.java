@@ -297,7 +297,7 @@ public class Land_Details extends BaseActivity {
 
                         str_copyAgreementWithOwnerVal = item.get(position);
                         mLandDetailsTextViewCopyAgreementWithOwnerVal.setText(str_copyAgreementWithOwnerVal);
-                        //visibilityOfValidityOfAgreement(str_copyAgreementWithOwnerVal);
+                        visibilityOfValidityOfAgreement(str_copyAgreementWithOwnerVal);
                     }
                 });
             }

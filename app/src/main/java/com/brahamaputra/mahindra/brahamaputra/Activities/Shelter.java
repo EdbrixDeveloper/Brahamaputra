@@ -424,6 +424,9 @@ public class Shelter extends BaseActivity {
                 mShelterTextViewNoOfOdcAvailableVal.setText("");
                 mShelterTextViewOdcLockVal.setText("");
 
+            } else if (hototicket_Selected_SiteType.equals("Indoor")) {
+                mshelterLinearLayoutOutdoorShelterLock.setVisibility(View.GONE);
+                mShelterTextViewOutdoorShelterLockVal.setText("");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -51,6 +51,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
@@ -72,6 +73,7 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
 public class UserHotoTransactionActivity extends BaseActivity {
@@ -167,12 +169,19 @@ public class UserHotoTransactionActivity extends BaseActivity {
                     checkInLat = String.valueOf(gpsTracker.getLatitude());
                     checkInLong = String.valueOf(gpsTracker.getLongitude());*/
 
+                /*Commented by arjun 24112018
                 submitDetails();
-                startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class), RESULT_HOTO_READING);
+                startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class), RESULT_HOTO_READING);*/
 
                 /*} else {
                     showToast("Could not detecting location.");
                 }*/
+
+
+                Intent intent = new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class);
+                intent.putExtra("ticketName", ticketName);
+
+                startActivityForResult(intent, RESULT_HOTO_READING);
 
             }
         });
@@ -364,7 +373,9 @@ public class UserHotoTransactionActivity extends BaseActivity {
                         checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
                         submitDetails();
-                        showSettingsAlert();
+                        CheckSubmitFlagOfAllHotoForms();//24112018 by arjun
+                        //showSettingsAlert();
+
                     } else {
                         //showToast("Could not detecting location.");
                         alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
@@ -388,6 +399,32 @@ public class UserHotoTransactionActivity extends BaseActivity {
     }
 
     ////added by arjun on 10-11-2018 Start
+    private void CheckSubmitFlagOfAllHotoForms() {
+        try {
+            if (!hotoTransactionData.isAllHotoFormsSubmit()) {
+                hideBusyProgress();
+                alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+                alertDialogManager.Dialog("Confirmation", "Some section incomplete.Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        showSettingsAlert();
+                    }
+
+                    @Override
+                    public void onNegativeClick() {
+
+                    }
+                }).show();
+
+
+            } else {
+                showSettingsAlert();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void showSettingsAlert() {
 

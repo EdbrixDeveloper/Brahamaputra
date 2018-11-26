@@ -366,4 +366,49 @@ public class HotoTransactionData {
         this.siteId = siteId;
     }
 
-   }
+    public boolean isAllHotoFormsSubmit() {
+        if (!landDetailsData.getSubmited()) {
+            return false;
+        } else if (!towerDetailsData.getSubmited()) {
+            return false;
+        } else if (!earthResistanceTowerData.getSubmited()) {
+            return false;
+        } else if (!earthResistanceEquipmentData.getSubmited()) {
+            return false;
+        } else if (!electricConnectionData.getSubmited()) {
+            return false;
+        } else if (!airConditionParentData.getSubmited()) {
+            return false;
+        } else if (!solarPowerSystemData.getSubmited()) {
+            return false;
+        } else if (!powerPlantDetailsParentData.getSubmited()) {
+            return false;
+        } else if (!powerBackupsDGParentData.getSubmited()) {
+            return false;
+        } else if (!shelterData.getSubmited()) {
+            return false;
+        } else if (!mediaData.getSubmited()) {
+            return false;
+        } else if (!batterySetParentData.getSubmited()) {
+            return false;
+        } else if (!externalTenantsPersonalDetailsParentData.getSubmited()) {
+            return false;
+        } else if (!totalDCLoadofSiteData.getSubmited()) {
+            return false;
+        } else if (!activeequipmentDetailsData.getSubmited()) {
+            return false;
+        } else if (!powerManagementSystemData.getSubmited()) {
+            return false;
+        } else if (!generalSafetyMeasuresData.getSubmited()) {
+            return false;
+        } else if (!acdb_dcdb_data.getSubmited()) {
+            return false;
+        } else if (!servoStabilizerData.getSubmited()) {
+            return false;
+        } else if (!detailsOfUnusedMaterialsParentData.getSubmited()) {
+            return false;
+        } else if (!sitePhotoCaptureData.getSubmited()) {
+            return false;
+        } else return true;
+    }
+}

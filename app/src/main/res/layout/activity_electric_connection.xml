@@ -93,8 +93,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Sanctioned load"
                     android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    />
+                    android:inputType="numberDecimal" />
 
             </LinearLayout>
 
@@ -190,13 +189,12 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_numberOfCompoundLights"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:hint="Enter Compound lights"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="number|none"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -692,6 +690,7 @@
                     android:hint="HH:MM"
                     android:imeOptions="actionNext"
                     android:inputType="none"
+                    android:text="00:00"
                     android:textAlignment="viewStart"
                     android:visibility="visible" />
 
@@ -723,6 +722,7 @@
                     android:hint="HH:MM"
                     android:imeOptions="actionNext"
                     android:inputType="none"
+                    android:text="00:00"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>

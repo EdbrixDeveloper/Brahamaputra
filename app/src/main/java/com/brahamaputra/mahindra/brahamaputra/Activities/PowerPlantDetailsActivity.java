@@ -113,6 +113,10 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private Button btnNextReadingPowerPlant;
     private LinearLayout lnrPlantDetails;
 
+    LinearLayout mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking;
+    TextView mPowerPlantDetailsTextViewNumberOfPowerPlantWorking;
+    TextView mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal;
+
 
     String str_assetOwner;
     String str_numberOfPowerPlant;
@@ -124,6 +128,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     String str_noOfFaultyModulese;
     String str_spdStatus;
     String str_workingCondition;
+    String str_numberOfPowerPlantWorking;
 
     private static final String TAG = PowerPlantDetailsActivity.class.getSimpleName();
 
@@ -266,6 +271,11 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         lnrPlantDetails = (LinearLayout) findViewById(R.id.lnrPlantDetails);
         lnrPlantDetails.setVisibility(View.GONE);
 
+        mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking = (LinearLayout) findViewById(R.id.powerPlantDetails_linearLayout_numberOfPowerPlantWorking);
+        mPowerPlantDetailsTextViewNumberOfPowerPlantWorking = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfPowerPlantWorking);
+        mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfPowerPlantWorking_val);
+        mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.GONE);
+
         mPowerPlantDetailsEditTextDcLoadInDisplayAmp.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
         mPowerPlantDetailsEditTextCapacityInAmp.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
         mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
@@ -324,6 +334,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                         if (totalPlantCount > 0) {
                             mpowerPlantDetails_textView_PlantNumber.setText("Plant: #1");
                             lnrPlantDetails.setVisibility(View.VISIBLE);
+                            mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.VISIBLE);
                             btnPrevReadingPowerPlant.setVisibility(View.GONE);
                             btnNextReadingPowerPlant.setVisibility(View.VISIBLE);
                             if (totalPlantCount > 0 && totalPlantCount == 1) {
@@ -333,7 +344,30 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                             }
                         } else {
                             lnrPlantDetails.setVisibility(View.GONE);
+                            mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.GONE);
                         }
+                    }
+                });
+            }
+        });
+
+        mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerPlantDetails_numberOfWorkingPowerPlant))),
+                        "Number Of Working Power Plant",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_numberOfPowerPlantWorking = item.get(position);
+                        mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText(str_numberOfPowerPlantWorking);
                     }
                 });
             }
@@ -553,6 +587,8 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 }
             }
         });
+
+
     }
 
     private void setInputDetails(int index) {
@@ -566,7 +602,8 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 powerPlantDetailsDataList.addAll(powerPlantDetailsParentData.getPowerPlantDetailsData());
 
                 mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsParentData.getNumberOfPowerPlant());
-
+                mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText(powerPlantDetailsParentData.getNumberOfWorkingPowerPlant());
+                mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.VISIBLE);
                 if (powerPlantDetailsDataList != null && powerPlantDetailsDataList.size() > 0) {
 
                     totalPlantCount = powerPlantDetailsDataList.size();
@@ -710,7 +747,8 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         try {
             //hotoTransactionData.setTicketNo(ticketName);
             String totalNumberofPlants = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
-            powerPlantDetailsParentData = new PowerPlantDetailsParentData(totalNumberofPlants, powerPlantDetailsDataList);
+            String numberOfWorkingPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim();
+            powerPlantDetailsParentData = new PowerPlantDetailsParentData(totalNumberofPlants, numberOfWorkingPowerPlant, powerPlantDetailsDataList);
             hotoTransactionData.setPowerPlantDetailsParentData(powerPlantDetailsParentData);
 
             Gson gson2 = new GsonBuilder().create();
@@ -745,6 +783,34 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsEditTextNatureOfProblem.setText("");
     }
 
+    /*Arjun 21112018*/
+    public boolean checkValidationOnNoOfPowerPlant() {
+
+        String numberOfPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
+        String numberOfWorkingPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim();
+
+        if (!numberOfPowerPlant.isEmpty() && numberOfPowerPlant != null) {
+            if (Integer.valueOf(numberOfPowerPlant) > 0) {
+                if (!numberOfWorkingPowerPlant.isEmpty() && numberOfWorkingPowerPlant != null) {
+                    if (Integer.valueOf(numberOfWorkingPowerPlant) <= Integer.valueOf(numberOfPowerPlant)) {
+                        return true;
+                    } else {
+                        showToast("Select number of working Power Plant is less than or equal to number Of Power Plant");
+                        return false;
+                    }
+                } else {
+                    showToast("Select number of working Power Plant");
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            showToast("Select number of Power Plant");
+            return false;
+        }
+
+    }
 
     /*Arjun 21112018*/
     public boolean checkValidationOfArrayFields() {
@@ -822,7 +888,43 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Enter Nature of Problem");
             return false;
+        } else if (checkValidationOnNoOfModuleSlots() == false) {
+            return false;
         } else return checkValidationOnNoOfFaultyModulese();
+
+    }
+
+    /*Arjun 21112018*/
+    public boolean checkValidationOnNoOfModuleSlots() {
+
+        String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
+        String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
+
+
+        if (!numberModuleSlots.isEmpty() && numberModuleSlots != null) {
+            if (numberModuleSlots.matches("\\d+(?:\\.\\d+)?")) {
+                if (Integer.valueOf(numberModuleSlots) > 0) {
+                    if (!numberOfModules.isEmpty() && numberOfModules != null) {
+                        if (Integer.valueOf(numberOfModules) <= Integer.valueOf(numberModuleSlots)) {
+                            return true;
+                        } else {
+                            showToast("Select Number of Modules is less than or equal to Module Slots");
+                            return false;
+                        }
+                    } else {
+                        showToast("Select Number of Modules");
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            showToast("Select Number of Module Slots");
+            return false;
+        }
 
     }
 
@@ -860,17 +962,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     }
 
 
-    /*Arjun 21112018*/
-    public boolean checkValidationOnNoOfPowerPlant() {
-
-        String numberOfPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
-
-        if (numberOfPowerPlant.isEmpty() || numberOfPowerPlant == null) {
-            showToast("Select Number Of Power Plant");
-            return false;
-        } else return true;
-
-    }
 //////////////////////
     //Camera//
 

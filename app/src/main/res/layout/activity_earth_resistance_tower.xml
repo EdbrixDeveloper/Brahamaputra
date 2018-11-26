@@ -65,7 +65,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Earth Resistance(Ohms)"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
