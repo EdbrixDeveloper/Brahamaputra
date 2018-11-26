@@ -59,6 +59,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -279,7 +281,7 @@ public class DieselFilling extends BaseActivity {
                 calculateDieselStock();
             }
         });
-        mDieselFillingEditTextFillingQty.addTextChangedListener(new TextWatcher() {
+                 mDieselFillingEditTextFillingQty.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -292,6 +294,12 @@ public class DieselFilling extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                /*if(mDieselFillingEditTextFillingQty.getText().toString().equals(".") && mDieselFillingEditTextFillingQty.getText().toString().equals("."))
+                {
+                    mDieselFillingEditTextFillingQty.setText("0.");
+                }
+                NumberFormat formatter = new DecimalFormat("#0.00");
+                showToast(formatter.format(Float.valueOf(mDieselFillingEditTextFillingQty.getText().toString()))) ;*/
                 calculateDieselStock();
             }
         });

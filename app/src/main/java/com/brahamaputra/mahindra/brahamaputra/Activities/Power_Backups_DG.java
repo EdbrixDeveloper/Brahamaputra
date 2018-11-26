@@ -1463,11 +1463,23 @@ public class Power_Backups_DG extends BaseActivity {
         } else if (workingCondition.isEmpty() || workingCondition == null) {
             showToast("Select Working Condition");
             return false;
-        } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
-            showToast("Enter Nature of Problem");
+        } else if (checkDuplicationQrCode(currentPos)) {
             return false;
         } else return true;
 
+    }
+
+    private boolean checkDuplicationQrCode(int curr_pos) {
+        for (int i = 0; i < powerBackupsDGData.size(); i++) {
+            if (i != curr_pos) {
+                if (base64StringQRCodeScan.equals(powerBackupsDGData.get(i).getqRCodeScan().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR COde Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /*Arjun 21112018*/

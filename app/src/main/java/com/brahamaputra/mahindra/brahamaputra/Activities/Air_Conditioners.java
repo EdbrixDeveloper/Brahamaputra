@@ -560,8 +560,7 @@ public class Air_Conditioners extends BaseActivity {
             } else {
 
             }
-        }catch(Exception ex)
-        {
+        } catch (Exception ex) {
 
         }
     }
@@ -1068,8 +1067,23 @@ public class Air_Conditioners extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Enter Nature of Problem");
             return false;
+        } else if (checkDuplicationQrCode(currentPos)) {
+            return false;
         } else return true;
 
+    }
+
+    private boolean checkDuplicationQrCode(int curr_pos) {
+        for (int i = 0; i < airConditionersData.size(); i++) {
+            if (i != curr_pos) {
+                if (base64StringQRCodeScan.equals(airConditionersData.get(i).getqRCodeScan().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR COde Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /*Arjun 21112018*/

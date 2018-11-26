@@ -518,11 +518,24 @@ public class Battery_Set extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Select Nature of Problem ");
             return false;
+        }  else if (checkDuplicationQrCode(currentPos)) {
+            return false;
         } else return true;
 
 
     }
-
+    private boolean checkDuplicationQrCode(int curr_pos) {
+        for (int i = 0; i < batterySetData.size(); i++) {
+            if (i != curr_pos) {
+                if (base64StringBatterySet.equals(batterySetData.get(i).getBatterySet_Qr().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR COde Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
