@@ -75,7 +75,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
-
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_CustomerName;
 public class UserHotoTransactionActivity extends BaseActivity {
 
 
@@ -176,7 +176,8 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 /*} else {
                     showToast("Could not detecting location.");
                 }*/
-
+                hototicket_Selected_SiteType = mUserHotoTransEditTextTypeOfSites.getText().toString();
+                hototicket_Selected_CustomerName = mUserHotoTransEditTextCustomerName.getText().toString();
 
                 Intent intent = new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class);
                 intent.putExtra("ticketName", ticketName);
@@ -501,7 +502,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             hotoTransactionData.setSiteAddress(mUserHotoTransEditTextSiteAddress.getText().toString());
 
             hotoTransactionData.setSourceOfPower(mUserHotoTransSpinnerSourceOfPowerVal.getText().toString());
-            hototicket_Selected_SiteType = mUserHotoTransEditTextTypeOfSites.getText().toString();
+
 
 //           hotoTransactionData.setLandDetailsData(new LandDetailsData());
 //

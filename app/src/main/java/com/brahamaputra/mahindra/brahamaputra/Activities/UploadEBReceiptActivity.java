@@ -80,7 +80,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_ebreceipt);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("Upload");
+        this.setTitle("Upload Receipt");
 
         Intent intent = getIntent();
         request_id = intent.getStringExtra("request_id");
@@ -174,6 +174,9 @@ public class UploadEBReceiptActivity extends BaseActivity {
             return false;
         } else if (payment_type.isEmpty() || payment_type == null) {
             showToast("Select Payment Type ");
+            return false;
+        } else if (base64String.isEmpty() || base64String == null) {
+            showToast("Upload Receipt ");
             return false;
         } else return true;
     }

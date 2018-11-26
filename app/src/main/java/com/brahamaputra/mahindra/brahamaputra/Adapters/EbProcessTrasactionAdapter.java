@@ -30,6 +30,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
     String ticket_no;
     String site_id;
     String site_name;
+    public static final int RESULT_EB_REC_SUBMIT = 259;
     // View lookup cache
     private static class ViewHolder {
 
@@ -114,36 +115,40 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
         viewHolder.textView_ModeOfPayment.setText("Mode Of Payment: " + dataModel.getModeOfPayment());
         viewHolder.textView_BillGrossAmt.setText("Gross Amt: " + dataModel.getGrossAmount());
 
-        if (dataModel.getStatusId().equals("1") ) {
+        if (dataModel.getStatusId().equals("1")) {
             viewHolder.textView_status.setText("Approved");
             viewHolder.textView_status.setTextColor(Color.parseColor("#4caf50"));
             viewHolder.imageView_status.setVisibility(View.VISIBLE);
-        } else if (dataModel.getStatusId().equals("0")){
-            viewHolder.textView_status.setText("Waiting for Approve" );
+        } else if (dataModel.getStatusId().equals("0")) {
+            viewHolder.textView_status.setText("Waiting for Approve");
             viewHolder.textView_status.setTextColor(Color.RED);
             viewHolder.imageView_status.setVisibility(View.GONE);
         }
-       /*  getStatus=dataModel.getStatusId();
-         request_id=dataModel.getId();
-         ticket_no=dataModel.getRequestTicketeNo();
-         site_id=dataModel.getSiteId();
-         site_name=dataModel.getSiteName();
+        getStatus = dataModel.getStatusId();
+        request_id = dataModel.getId();
+        ticket_no = dataModel.getRequestTicketeNo();
+        site_id = dataModel.getSiteId();
+        site_name = dataModel.getSiteName();
+        viewHolder.imageView_status.setTag(position);
+
+
         viewHolder.imageView_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getStatus.equals("1")) {
+                int position = (Integer) v.getTag();
+                EbPaymentRequestList lst = getItem(position);
+                Context c = getContext();
+                if (lst.getStatusId().equals("1")) {
                     Intent intent = new Intent(getContext(), UploadEBReceiptActivity.class);
-                    intent.putExtra("request_id", request_id);
-                    intent.putExtra("ticket_no", ticket_no);
-                    intent.putExtra("site_id", site_id);
-                    intent.putExtra("site_name", site_name);
-
-                    startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                    intent.putExtra("request_id", lst.getId());
+                    intent.putExtra("ticket_no", lst.getRequestTicketeNo());
+                    intent.putExtra("site_id", lst.getSiteId());
+                    intent.putExtra("site_name", lst.getSiteName());
+                    c.startActivity(intent);
+                    //startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                 }
-
             }
-        });*/
-
+        });
 
         // Return the completed view to render on screen
         return convertView;

@@ -616,11 +616,11 @@ public class ElectricBillProcess extends BaseActivity {
     }
 
     private boolean checkValiadtion() {
-        String CustomerId = String.valueOf(customerId);
-        String CircleId = String.valueOf(circleId);
-        String stateId = String.valueOf(StateId);
-        String SSAId = String.valueOf(ssaID);
-        String SiteId = String.valueOf(siteID);
+        String CustomerId = mEbProcessTextViewCustomerVal.getText().toString().trim();
+        String CircleId = mEbProcessTextViewCircleVal.getText().toString().trim();
+        String stateId = mEbProcessTextViewStateVal.getText().toString().trim();
+        String SSAId = mEbProcessTextViewSsaVal.getText().toString().trim();
+        String SiteId = mEbProcessTextViewSiteVal.getText().toString().trim();
         String EBServiceProvider = mEbProcessTextViewEbServiceProviderVal.getText().toString().trim();
         String EBConsumerNumber = mEbProcessTextViewEbConsumerNumberVal.getText().toString().trim();
         String ModeOfPayment = mEbProcessTextViewTypeModeOfPayementVal.getText().toString().trim();

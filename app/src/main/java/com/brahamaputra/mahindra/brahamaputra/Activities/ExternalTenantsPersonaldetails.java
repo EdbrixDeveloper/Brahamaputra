@@ -33,12 +33,16 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_CustomerName;
 
 public class ExternalTenantsPersonaldetails extends BaseActivity {
 
@@ -120,7 +124,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-
+        getNamesOfTenatsExludeSiteTenant();
     }
 
     private void initCombo() {
@@ -170,7 +174,8 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ExternalTenantsPersonaldetails.this,
+
+              /*  SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ExternalTenantsPersonaldetails.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_NameoftheTenant))),
                         "Name of the Tenant",
                         "close", "#000000");
@@ -183,7 +188,23 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                         str_nameoftheTenant = item.get(position);
                         mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setText(str_nameoftheTenant);
                     }
-                });
+                });*/
+                ArrayList<String> customeNames = getNamesOfTenatsExludeSiteTenant();
+                if (customeNames != null) {
+                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ExternalTenantsPersonaldetails.this, customeNames,
+                            "Name of the Tenant",
+                            "close", "#000000");
+                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                        @Override
+                        public void onClick(ArrayList<String> item, int position) {
+
+                            str_nameoftheTenant = item.get(position);
+                            mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.setText(str_nameoftheTenant);
+                        }
+                    });
+                }
 
             }
         });
@@ -566,6 +587,21 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.setText("");
         mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.setText("");
         mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.setText("");
+    }
+
+    public ArrayList<String> getNamesOfTenatsExludeSiteTenant() {
+        String CurrentCustomer = hototicket_Selected_CustomerName;
+        ArrayList<String> ss = null;
+        if (!CurrentCustomer.isEmpty() && CurrentCustomer != null) {
+            List<String> spinnerArray = new ArrayList<String>();
+            spinnerArray = (Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_NameoftheTenant)));
+            ss = new ArrayList<>(spinnerArray);
+            ss.remove(CurrentCustomer);
+
+        }
+        return ss;
+
+
     }
 
 

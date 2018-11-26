@@ -56,7 +56,7 @@ public class ElectricBillProcessList extends BaseActivity {
     private void assignViews() {
         listViewElectricBill = (ListView) findViewById(R.id.listViewElectricBill);
         txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
-        listViewElectricBill.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listViewElectricBill.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //showToast(ebPaymentRequest.getEbPaymentRequestList().get(position).getRequestTicketeNo());
@@ -73,7 +73,7 @@ public class ElectricBillProcessList extends BaseActivity {
 
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -187,4 +187,9 @@ public class ElectricBillProcessList extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        prepareListData();
+        super.onResume();
+    }
 }

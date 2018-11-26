@@ -37,7 +37,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.DieselSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserSitesList;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserSites;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.UserSitesList;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -349,7 +348,7 @@ public class DieselFilling extends BaseActivity {
             case R.id.menuDone:
                 /*if (site_id > 0) {*/
                 if (checkValidationOnSubmitDiselTicket() == true) {
-                   // Code For Next Validation by Arjun on 22112018
+                    // Code For Next Validation by Arjun on 22112018
                     showSettingsAlert();
                     //submitDetails();
                     return true;
