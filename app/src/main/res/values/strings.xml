@@ -506,6 +506,14 @@
 
     </string-array>
 
+    <string-array name="array_generalAndSafetyMeasure_NoOfFireExtuinguisher">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
     <string-array name="array_generalAndSafetyMeasure_FireExtuinguisherType">
         <item>ABC</item>
         <item>CO2</item>

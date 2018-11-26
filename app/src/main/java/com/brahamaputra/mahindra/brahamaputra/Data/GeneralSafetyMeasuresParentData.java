@@ -2,9 +2,11 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GeneralSafetyMeasuresData {
+import java.util.ArrayList;
 
-    /*@SerializedName("prevailingSLA")
+public class GeneralSafetyMeasuresParentData {
+
+    @SerializedName("prevailingSLA")
     private String prevailingSLA;
 
     @SerializedName("siteBoundaryStatus")
@@ -20,15 +22,12 @@ public class GeneralSafetyMeasuresData {
     private String dgRoomLock;
 
     @SerializedName("fireExtuinguisher")
-    private String fireExtuinguisher;*/
+    private String fireExtuinguisher;
 
-    @SerializedName("fireExtuinguisherType")
-    private String fireExtuinguisherType;
+    @SerializedName("noOfFireExtuinguisher")
+    private String noOfFireExtuinguisher;
 
-    @SerializedName("fireExtuinguisherExpiryDate")
-    private String fireExtuinguisherExpiryDate;
-
-    /*@SerializedName("fireBucket")
+    @SerializedName("fireBucket")
     private String fireBucket;
 
     @SerializedName("securityStatus")
@@ -83,22 +82,25 @@ public class GeneralSafetyMeasuresData {
     @SerializedName("fireSmokeSensor")
     private String fireSmokeSensor;
 
+    @SerializedName("agencyName")
+    private String agencyName;
+
+    @SerializedName("generalSafetyMeasuresData")
+    ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData;
+
     @SerializedName("isSubmited")
     private Boolean isSubmited;
 
-    @SerializedName("agencyName")
-    private String agencyName;*/
 
-    public GeneralSafetyMeasuresData() {
-        /*this.prevailingSLA = "";
+    public GeneralSafetyMeasuresParentData() {
+        this.prevailingSLA = "";
         this.siteBoundaryStatus = "";
         this.siteHygieneVegitationStatus = "";
         this.gateLock = "";
         this.dgRoomLock = "";
-        this.fireExtuinguisher = "";*/
-        this.fireExtuinguisherType = "";
-        this.fireExtuinguisherExpiryDate = "";
-        /*this.fireBucket = "";
+        this.fireExtuinguisher = "";
+        this.noOfFireExtuinguisher = "";
+        this.fireBucket = "";
         this.securityStatus = "";
         this.noofSecurityPerson = "";
         this.mobileNumberofSecurity = "";
@@ -116,20 +118,21 @@ public class GeneralSafetyMeasuresData {
         this.doorOpenSensor = "";
         this.fuelSensor = "";
         this.fireSmokeSensor = "";
-        this.isSubmited=false;
-        this.agencyName="";*/
+        this.isSubmited = false;
+        this.agencyName = "";
+        this.generalSafetyMeasuresData = new ArrayList<>();
     }
 
-    public GeneralSafetyMeasuresData(String fireExtuinguisherType, String fireExtuinguisherExpiryDate) {
-        /*this.prevailingSLA = prevailingSLA;
+
+    public GeneralSafetyMeasuresParentData(String prevailingSLA, String siteBoundaryStatus, String siteHygieneVegitationStatus, String gateLock, String dgRoomLock, String fireExtuinguisher, String noOfFireExtuinguisher, String fireBucket, String securityStatus, String noofSecurityPerson, String mobileNumberofSecurity, String caretakerStatusUpOnEmergency, String mobileNumberofCaretaker, String isSecurityCaretakeristheOwnerofSite, String salaryofSecurityCaretaker, String caretakerSecuritySalaryPaidBy, String caretakerSecurityStayinginSite, String numberofEarthPit, String lightningArresterStatus, String fencingCompoundWallCondition, String numberoffreeODPaltformAvailable, String alarmMultipluxerStatus, String doorOpenSensor, String fuelSensor, String fireSmokeSensor, String agencyName, ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData) {
+        this.prevailingSLA = prevailingSLA;
         this.siteBoundaryStatus = siteBoundaryStatus;
         this.siteHygieneVegitationStatus = siteHygieneVegitationStatus;
         this.gateLock = gateLock;
         this.dgRoomLock = dgRoomLock;
-        this.fireExtuinguisher = fireExtuinguisher;*/
-        this.fireExtuinguisherType = fireExtuinguisherType;
-        this.fireExtuinguisherExpiryDate = fireExtuinguisherExpiryDate;
-        /*this.fireBucket = fireBucket;
+        this.fireExtuinguisher = fireExtuinguisher;
+        this.noOfFireExtuinguisher = noOfFireExtuinguisher;
+        this.fireBucket = fireBucket;
         this.securityStatus = securityStatus;
         this.noofSecurityPerson = noofSecurityPerson;
         this.mobileNumberofSecurity = mobileNumberofSecurity;
@@ -147,12 +150,14 @@ public class GeneralSafetyMeasuresData {
         this.doorOpenSensor = doorOpenSensor;
         this.fuelSensor = fuelSensor;
         this.fireSmokeSensor = fireSmokeSensor;
-        this.isSubmited=true;
-        this.agencyName=agencyName;*/
+        this.agencyName = agencyName;
+        this.generalSafetyMeasuresData = generalSafetyMeasuresData;
+        this.isSubmited = true;
+
     }
 
 
-    /*public String getSecurityStatus() {
+    public String getSecurityStatus() {
         return securityStatus;
     }
 
@@ -306,25 +311,18 @@ public class GeneralSafetyMeasuresData {
 
     public void setFireExtuinguisher(String fireExtuinguisher) {
         this.fireExtuinguisher = fireExtuinguisher;
-    }*/
-
-    public String getFireExtuinguisherType() {
-        return fireExtuinguisherType;
     }
 
-    public void setFireExtuinguisherType(String fireExtuinguisherType) {
-        this.fireExtuinguisherType = fireExtuinguisherType;
+    public String getNoOfFireExtuinguisher() {
+        return noOfFireExtuinguisher;
     }
 
-    public String getFireExtuinguisherExpiryDate() {
-        return fireExtuinguisherExpiryDate;
+    public void setNoOfFireExtuinguisher(String noOfFireExtuinguisher) {
+        this.noOfFireExtuinguisher = noOfFireExtuinguisher;
     }
 
-    public void setFireExtuinguisherExpiryDate(String fireExtuinguisherExpiryDate) {
-        this.fireExtuinguisherExpiryDate = fireExtuinguisherExpiryDate;
-    }
 
-    /*public String getFireBucket() {
+    public String getFireBucket() {
         return fireBucket;
     }
 
@@ -360,13 +358,6 @@ public class GeneralSafetyMeasuresData {
         this.fireSmokeSensor = fireSmokeSensor;
     }
 
-    public Boolean getSubmited() {
-        return isSubmited;
-    }
-
-    public void setSubmited(Boolean submited) {
-        isSubmited = submited;
-    }
 
     public String getAgencyName() {
         return agencyName;
@@ -375,6 +366,23 @@ public class GeneralSafetyMeasuresData {
     public void setAgencyName(String agencyName) {
         this.agencyName = agencyName;
     }
-*/
+
+
+    public ArrayList<GeneralSafetyMeasuresData> getGeneralSafetyMeasuresData() {
+        return generalSafetyMeasuresData;
+    }
+
+    public void setGeneralSafetyMeasuresData(ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData) {
+        this.generalSafetyMeasuresData = generalSafetyMeasuresData;
+    }
+
+    public Boolean getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(Boolean submited) {
+        isSubmited = submited;
+    }
+
 
 }
