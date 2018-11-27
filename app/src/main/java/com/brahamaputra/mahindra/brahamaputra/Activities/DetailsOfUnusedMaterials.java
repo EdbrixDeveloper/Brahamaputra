@@ -22,6 +22,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
+import com.brahamaputra.mahindra.brahamaputra.commons.ToastMessage;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
@@ -43,6 +44,9 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
     private TextView mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite;
     private TextView mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal;
+
+    private TextView mDetailsOfUnusedMaterialsTextViewTypeOfAsset;
+    private TextView mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal;
     private TextView mDetailsOfUnusedMaterialsTextViewAssetMake;
     private TextView mDetailsOfUnusedMaterialsTextViewAssetMakeVal;
     private TextView mDetailsOfUnusedMaterialsTextViewAssetStatus;
@@ -56,6 +60,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 */
 
     String str_numberofUnusedAssetinSite;
+    String str_typeOfAsset;
     String str_assetMake;
     String str_assetStatus;
 
@@ -70,6 +75,10 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     private void assignViews() {
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite);
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite_val);
+
+        mDetailsOfUnusedMaterialsTextViewTypeOfAsset = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_TypeOfAsset);
+        mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_TypeOfAsset_val);
+
         mDetailsOfUnusedMaterialsTextViewAssetMake = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_AssetMake);
         mDetailsOfUnusedMaterialsTextViewAssetMakeVal = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_AssetMake_val);
         mDetailsOfUnusedMaterialsTextViewAssetStatus = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_AssetStatus);
@@ -132,12 +141,14 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
             }
         });
-        mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setOnClickListener(new View.OnClickListener() {
+
+
+        mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake))),
-                        "Asset Make",
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_TypeOfAsset))),
+                        "Type of Asset",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -145,11 +156,22 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_assetMake = item.get(position);
-                        mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                        str_typeOfAsset = item.get(position);
+                        mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setText(str_typeOfAsset);
                     }
                 });
 
+            }
+        });
+
+        mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim().isEmpty() && mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim() != null) {
+                    OnChangeTypeOfAssetsetArrayListAssetMake(mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString());
+                } else {
+                    showToast("Select Type of Asset");
+                }
             }
         });
         mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setOnClickListener(new View.OnClickListener() {
@@ -209,12 +231,260 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         });
     }
 
+    private void OnChangeTypeOfAssetsetArrayListAssetMake(String typeOfAsset) {
+        if (typeOfAsset.equals("AC")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_AC))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } else if (typeOfAsset.equals("AMF Panel")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_AmfPanel))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } else if (typeOfAsset.equals("Battery Bank")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_BatteryBank))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } /*else if (typeOfAsset.equals("Battery Rack")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_BatteryRack))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        }*/ else if (typeOfAsset.equals("DG")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_Dg))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } /*else if (typeOfAsset.equals("DG Battery")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_DgBattery))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        }else if (typeOfAsset.equals("FCU")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_Fcu))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } else if (typeOfAsset.equals("Fire Alarm Panel")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_FireAlarmPanel))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } else if (typeOfAsset.equals("Fire Extinngusher")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_FireExtinngusher))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        }else if (typeOfAsset.equals("Out Door Cabinet")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_OutDoorCabinet))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        }else if (typeOfAsset.equals("PIU")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_Piu))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } */ else if (typeOfAsset.equals("Power Plant")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_PowerPlant))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } else if (typeOfAsset.equals("Rectifier Module")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_RectifierModule))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } else if (typeOfAsset.equals("Shelter")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_Shelter))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        } /*else if (typeOfAsset.equals("Solar Panel")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_SolarPanel))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        }*/ else if (typeOfAsset.equals("Stabilizer")) {
+            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                    new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetMake_Stabilizer))),
+                    "Asset Make",
+                    "close", "#000000");
+            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                @Override
+                public void onClick(ArrayList<String> item, int position) {
+
+                    str_assetMake = item.get(position);
+                    mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(str_assetMake);
+                }
+            });
+        }
+    }
+
     private boolean checkValidtionForArrayFields() {
+        String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
         String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
         String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
         String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
 
-        if (assetMake.isEmpty() || assetMake == null) {
+        if (typeOfAsset.isEmpty() || typeOfAsset == null) {
+            showToast("Select Type of Asset ");
+            return false;
+        } else if (assetMake.isEmpty() || assetMake == null) {
             showToast("Select Asset Make ");
             return false;
         } else if (assetStatus.isEmpty() || assetStatus == null) {
@@ -304,6 +574,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                     linearLayout_container.setVisibility(View.VISIBLE);
                     detailsOfUnusedMaterials_textView_Number.setText("Reading: #1");
 
+                    mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setText(detailsOfUnusedMaterialsData.get(index).getTypeOfAsset());
                     mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetMake());
                     mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetStatus());
                     mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetDescription());
@@ -347,11 +618,13 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     }
 
     private void saveRecords(int pos) {
+
+        String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
         String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
         String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
         String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
 
-        DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(assetMake, assetStatus, assetDescription);
+        DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(typeOfAsset, assetMake, assetStatus, assetDescription);
         if (detailsOfUnusedMaterialsData.size() > 0) {
             if (pos == detailsOfUnusedMaterialsData.size()) {
                 detailsOfUnusedMaterialsData.add(obj_detailsOfUnusedMaterialsData);
@@ -368,6 +641,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
             detailsOfUnusedMaterials_textView_Number.setText("Reading: #" + (pos + 1));
 
+            mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setText(detailsOfUnusedMaterialsData.get(pos).getTypeOfAsset());
             mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText(detailsOfUnusedMaterialsData.get(pos).getAssetMake());
             mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(detailsOfUnusedMaterialsData.get(pos).getAssetStatus());
             mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText(detailsOfUnusedMaterialsData.get(pos).getAssetDescription());
@@ -398,10 +672,12 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     public void clearFields(int indexPos) {
         detailsOfUnusedMaterials_textView_Number.setText("Reading: #" + (indexPos + 1));
 
+        mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setText("");
         mDetailsOfUnusedMaterialsTextViewAssetMakeVal.setText("");
         mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText("");
         mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText("");
 
+        str_typeOfAsset = "";
         str_assetMake = "";
         str_assetStatus = "";
     }

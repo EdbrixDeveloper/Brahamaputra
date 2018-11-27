@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class ActiveequipmentDetails extends BaseActivity {
@@ -92,7 +93,6 @@ public class ActiveequipmentDetails extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-
 
     }
 
@@ -186,8 +186,6 @@ public class ActiveequipmentDetails extends BaseActivity {
 
             }
         });
-
-
     }
 
 
@@ -226,9 +224,16 @@ public class ActiveequipmentDetails extends BaseActivity {
         mActiveEquipmentDetailsEditTextYearofInstallationatsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
+                /*new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
+                DatePickerDialog dialog = new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
+
             }
         });
     }
@@ -294,19 +299,18 @@ public class ActiveequipmentDetails extends BaseActivity {
             e.printStackTrace();
         }
     }
-
     private void submitDetails() {
         try {
             //hotoTransactionData.setTicketNo(ticketId);
 
 
-            String typeofBTS = mActiveEquipmentDetailsTextViewTypeofBTSVal.getText().toString().trim();
-            String importanceOfSite = mActiveEquipmentDetailsTextViewImportanceOfSiteVal.getText().toString().trim();
-            String numberOfDependantSites = mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.getText().toString().trim();
-            String make = mActiveEquipmentDetailsEditTextMake.getText().toString().trim();
-            String DCLoadofBTSequipment = mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString().trim();
-            String yearofInstallationatsite = mActiveEquipmentDetailsEditTextYearofInstallationatsite.getText().toString().trim();
-            String positionofAntennaTower = mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString().trim();
+            String typeofBTS= mActiveEquipmentDetailsTextViewTypeofBTSVal.getText().toString().trim();
+            String importanceOfSite= mActiveEquipmentDetailsTextViewImportanceOfSiteVal.getText().toString().trim();
+            String numberOfDependantSites= mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.getText().toString().trim();
+            String make= mActiveEquipmentDetailsEditTextMake.getText().toString().trim();
+            String DCLoadofBTSequipment= mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString().trim();
+            String yearofInstallationatsite= mActiveEquipmentDetailsEditTextYearofInstallationatsite.getText().toString().trim();
+            String positionofAntennaTower= mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString().trim();
 
             activeequipmentDetailsData = new ActiveequipmentDetailsData(typeofBTS, importanceOfSite, numberOfDependantSites, make, DCLoadofBTSequipment, yearofInstallationatsite, positionofAntennaTower);
 

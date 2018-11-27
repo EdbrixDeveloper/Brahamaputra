@@ -7,6 +7,9 @@ public class DetailsOfUnusedMaterialsData {
     /*@SerializedName("numberofUnusedAssetinSite")
     String numberofUnusedAssetinSite;*/
 
+    @SerializedName("typeOfAsset")
+    String typeOfAsset;
+
     @SerializedName("assetMake")
     String assetMake;
 
@@ -20,17 +23,18 @@ public class DetailsOfUnusedMaterialsData {
     private Boolean isSubmited;*/
 
 
-
     public DetailsOfUnusedMaterialsData() {
         //this.numberofUnusedAssetinSite = "";
+        this.typeOfAsset = "";
         this.assetMake = "";
         this.assetStatus = "";
         this.assetDescription = "";
         //this.isSubmited = false;
     }
 
-    public DetailsOfUnusedMaterialsData(String assetMake, String assetStatus, String assetDescription) {
-       // this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
+    public DetailsOfUnusedMaterialsData(String typeOfAsset, String assetMake, String assetStatus, String assetDescription) {
+        // this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
+        this.typeOfAsset = typeOfAsset;
         this.assetMake = assetMake;
         this.assetStatus = assetStatus;
         this.assetDescription = assetDescription;
@@ -44,6 +48,14 @@ public class DetailsOfUnusedMaterialsData {
     public void setNumberofUnusedAssetinSite(String numberofUnusedAssetinSite) {
         this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
     }*/
+
+    public String getTypeOfAsset() {
+        return typeOfAsset;
+    }
+
+    public void setTypeOfAsset(String typeOfAsset) {
+        this.typeOfAsset = typeOfAsset;
+    }
 
     public String getAssetMake() {
         return assetMake;

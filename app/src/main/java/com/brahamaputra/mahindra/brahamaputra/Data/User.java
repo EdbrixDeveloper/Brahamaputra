@@ -19,6 +19,25 @@ public class User {
     @Expose
     private String username;
 
+    @SerializedName("Email")
+    @Expose
+    private String Email;
+
+    @SerializedName("MobileNo")
+    @Expose
+    private String MobileNo;
+
+    @SerializedName("ProfileImageUrl")
+    @Expose
+    private String ProfileImageUrl;
+
+    @SerializedName("Circle")
+    @Expose
+    private String Circle;
+
+    @SerializedName("Designation")
+    @Expose
+    private String Designation;
 
     public String getId() {
         return id;
@@ -52,6 +71,47 @@ public class User {
         this.username = username;
     }
 
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getMobileNo() {
+        return MobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        MobileNo = mobileNo;
+    }
+
+    public String getProfileImageUrl() {
+        return ProfileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        ProfileImageUrl = profileImageUrl;
+    }
+
+    public String getCircle() {
+        return Circle;
+    }
+
+    public void setCircle(String circle) {
+        Circle = circle;
+    }
+
+    public String getDesignation() {
+        return Designation;
+    }
+
+    public void setDesignation(String designation) {
+        Designation = designation;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -59,6 +119,12 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
+                ", MobileNo='" + MobileNo + '\'' +
+                ", ProfileImageUrl='" + ProfileImageUrl + '\'' +
+                ", Circle='" + Circle + '\'' +
+                ", Designation='" + Designation + '\'' +
                 '}';
     }
+
+
 }

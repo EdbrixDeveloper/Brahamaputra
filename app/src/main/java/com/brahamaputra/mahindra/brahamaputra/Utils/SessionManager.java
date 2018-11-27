@@ -31,6 +31,8 @@ public class SessionManager {
 
     private static final String PREFS_SESSION_USER_FIRST_NAME = "SessionUserFirstName";
     private static final String PREFS_SESSION_USER_LAST_NAME = "SessionUserLastName";
+    private static final String PREFS_SESSION_USER_EMAIL = "SessionUserEmail";
+    private static final String PREFS_SESSION_MobileNo = "MobileNo";
     private static final String PREFS_SESSION_USER_TICKET_ID = "SessionUserTicketId";
     private static final String PREFS_SESSION_USER_TICKET_NAME = "SessionUserTicketName";
 
@@ -38,6 +40,9 @@ public class SessionManager {
     private static final String PREF_SESSION_APPUPDATE_SKIP_KEY = "AppUpdateSkip";
     private static final String PREFS_SESSION_PROFILE_IMAGE_BASE64 = "SessionProfileImageBase64";
 
+    private static final String PREFS_SESSION_PROFILE_IMAGE_Url = "ProfileImageUrl";
+    private static final String PREFS_SESSION_User_Designation = "Designation";
+    private static final String PREFS_SESSION_User_Circle = "Circle";
 
 
     private SharedPreferences sharedPrefs;
@@ -131,6 +136,15 @@ public class SessionManager {
         return this.sharedPrefs.getString(PREFS_SESSION_USER_LAST_NAME, "");
     }
 
+    public String getSessionUserEmail() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_EMAIL, "");
+    }
+
+    public String getSessionMobileNo() {
+        return this.sharedPrefs.getString(PREFS_SESSION_MobileNo, "");
+    }
+
+
     public String getSessionUserTicketId() {
         return this.sharedPrefs.getString(PREFS_SESSION_USER_TICKET_ID, "");
     }
@@ -159,6 +173,18 @@ public class SessionManager {
         return this.sharedPrefs.getString(PREFS_SESSION_PROFILE_IMAGE_BASE64, "");
     }
 
+
+    public String getSessionProfileImageUrl() {
+        return this.sharedPrefs.getString(PREFS_SESSION_PROFILE_IMAGE_Url, "");
+    }
+
+    public String getSessionDesignation() {
+        return this.sharedPrefs.getString(PREFS_SESSION_User_Designation, "");
+    }
+
+    public String getSessionCircle() {
+        return this.sharedPrefs.getString(PREFS_SESSION_User_Circle, "");
+    }
 
   /*  public ArrayList<UserData> getLoggedUsersList() {
         try {
@@ -340,6 +366,29 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void updateSessionUserEmail(String Email) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((Email != null) && (Email.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_EMAIL, Email);
+        } else {
+            editor.remove(PREFS_SESSION_USER_EMAIL);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionMobileNo(String MobileNo) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((MobileNo != null) && (MobileNo.length() > 0)) {
+            editor.putString(PREFS_SESSION_MobileNo, MobileNo);
+        } else {
+            editor.remove(PREFS_SESSION_MobileNo);
+        }
+        editor.commit();
+    }
+
+
     /**
      * Updates the saved session credentials.
      *
@@ -352,6 +401,39 @@ public class SessionManager {
             editor.putString(PREFS_SESSION_PROFILE_IMAGE_BASE64, base64String);
         } else {
             editor.remove(PREFS_SESSION_PROFILE_IMAGE_BASE64);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionProfileImageUrl(String ProfileImageUrl) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((ProfileImageUrl != null) && (ProfileImageUrl.length() > 0)) {
+            editor.putString(PREFS_SESSION_PROFILE_IMAGE_Url, ProfileImageUrl);
+        } else {
+            editor.remove(PREFS_SESSION_PROFILE_IMAGE_Url);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionCircle(String Circle) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((Circle != null) && (Circle.length() > 0)) {
+            editor.putString(PREFS_SESSION_User_Circle, Circle);
+        } else {
+            editor.remove(PREFS_SESSION_User_Circle);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionDesignation(String Designation) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((Designation != null) && (Designation.length() > 0)) {
+            editor.putString(PREFS_SESSION_User_Designation, Designation);
+        } else {
+            editor.remove(PREFS_SESSION_User_Designation);
         }
         editor.commit();
     }
@@ -377,7 +459,6 @@ public class SessionManager {
         }
         editor.commit();
     }
-
 
 
     /**
@@ -493,7 +574,7 @@ public class SessionManager {
         this.updateSessionUserFirstName(null);
         this.updateSessionUserLastName(null);
         this.updateSessionProfileImageBase64(null);
-        this.updateSessionCredentials(null,null,null);
+        this.updateSessionCredentials(null, null, null);
 
         this.updateSessionUserTicketId(null);
         this.updateSessionUserTicketName(null);

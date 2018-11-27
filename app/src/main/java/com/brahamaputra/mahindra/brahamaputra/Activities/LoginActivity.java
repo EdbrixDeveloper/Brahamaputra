@@ -54,11 +54,11 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(validateUser()){
+        if (validateUser()) {
             finish();
-            startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
+            startActivity(new Intent(LoginActivity.this, DashboardCircularActivity.class));
             //startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
-        }else {
+        } else {
             setContentView(R.layout.activity_login);
             assignViews();
             setListener();
@@ -93,7 +93,7 @@ public class LoginActivity extends BaseActivity {
         );
     }
 
-    private void setListener(){
+    private void setListener() {
         mLoginButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +105,7 @@ public class LoginActivity extends BaseActivity {
         loginTextViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
     }
@@ -115,16 +115,16 @@ public class LoginActivity extends BaseActivity {
         imm.hideSoftInputFromWindow(mLoginEditTextUsername.getWindowToken(), 0);
     }
 
-    private boolean validateUser(){
+    private boolean validateUser() {
         sessionManager = new SessionManager(LoginActivity.this);
-        if(sessionManager.getSessionUsername().equals("") && sessionManager.getSessionUserId().equals("")){
+        if (sessionManager.getSessionUsername().equals("") && sessionManager.getSessionUserId().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
 
-    private void doLogin(String email,String password) {
+    private void doLogin(String email, String password) {
         showBusyProgress();
         JSONObject jo = new JSONObject();
         try {
@@ -136,7 +136,7 @@ public class LoginActivity extends BaseActivity {
             jo.put("Type", "A");
 
         } catch (JSONException e) {
-            Log.e(LoginActivity.class.getName(),e.getMessage().toString());
+            Log.e(LoginActivity.class.getName(), e.getMessage().toString());
             return;
         }
 
@@ -145,19 +145,24 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onResponse(@NonNull UserLoginResponseData response) {
                         hideBusyProgress();
-                        if(response.getError()!= null){
+                        if (response.getError() != null) {
                             showToast(response.getError().getErrorMessage());
-                        }else {
+                        } else {
 
-                            if(response.getSuccess() == 1){
+                            if (response.getSuccess() == 1) {
                                 sessionManager.updateSessionUsername(response.getUser().getUsername());
                                 sessionManager.updateSessionUserID(response.getUser().getId());
                                 sessionManager.updateSessionUserFirstName(response.getUser().getFirstName());
                                 sessionManager.updateSessionUserLastName(response.getUser().getLastName());
+                                sessionManager.updateSessionUserEmail(response.getUser().getEmail());
+                                sessionManager.updateSessionMobileNo(response.getUser().getMobileNo());
+                                sessionManager.updateSessionDesignation(response.getUser().getDesignation());
+                                sessionManager.updateSessionCircle(response.getUser().getCircle());
+                                sessionManager.updateSessionProfileImageUrl(response.getUser().getProfileImageUrl());
                                 sessionManager.updateSessionDeviceToken(response.getAccessToken());
                                 finish();
 
-                                startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
+                                startActivity(new Intent(LoginActivity.this, DashboardCircularActivity.class));
                                 //startActivity(new Intent(LoginActivity.this,DashboardCircularActivity.class));
                             }
                         }
@@ -176,15 +181,15 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(LoginActivity.this,Manifest.permission.CAMERA) +
-            ContextCompat.checkSelfPermission(LoginActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE) +
-            ContextCompat.checkSelfPermission(LoginActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE) +
-            ContextCompat.checkSelfPermission(LoginActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) +
-            ContextCompat.checkSelfPermission(LoginActivity.this,Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED ) {
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.CAMERA) +
+                ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) +
+                ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) +
+                ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) +
+                ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(LoginActivity.this,
-                    new String[]{Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,},
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,},
                     CHECK_PERMISSIONS);
         } else {
             //Toast.makeText(LoginActivity.this,"Already Granted",Toast.LENGTH_LONG).show();
@@ -192,22 +197,22 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case CHECK_PERMISSIONS: {
                 boolean isPerpermissionForAllGranted = false;
-                if (grantResults.length > 0){
+                if (grantResults.length > 0) {
                     boolean CAMERA = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean READ_EXTERNAL_STORAGE = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     boolean WRITE_EXTERNAL_STORAGE = grantResults[2] == PackageManager.PERMISSION_GRANTED;
                     boolean ACCESS_FINE_LOCATION = grantResults[3] == PackageManager.PERMISSION_GRANTED;
                     boolean ACCESS_COARSE_LOCATION = grantResults[4] == PackageManager.PERMISSION_GRANTED;
 
-                    if(CAMERA && READ_EXTERNAL_STORAGE && WRITE_EXTERNAL_STORAGE && ACCESS_FINE_LOCATION && ACCESS_COARSE_LOCATION){
+                    if (CAMERA && READ_EXTERNAL_STORAGE && WRITE_EXTERNAL_STORAGE && ACCESS_FINE_LOCATION && ACCESS_COARSE_LOCATION) {
                         //Toast.makeText(LoginActivity.this,"all permission granted",Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(LoginActivity.this,"some permission not granted",Toast.LENGTH_LONG).show();
-                        if(!ACCESS_COARSE_LOCATION || !ACCESS_COARSE_LOCATION){
+                    } else {
+                        Toast.makeText(LoginActivity.this, "some permission not granted", Toast.LENGTH_LONG).show();
+                        if (!ACCESS_COARSE_LOCATION || !ACCESS_COARSE_LOCATION) {
                             startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
                         }
                         return;
@@ -247,7 +252,7 @@ public class LoginActivity extends BaseActivity {
             mLoginEditTextPassword.setError(null);
 
             if (Conditions.isNetworkConnected(LoginActivity.this)) {
-                doLogin(username,password);
+                doLogin(username, password);
                 // ((MainActivity) getActivity()).onMeetingListSelected();
             } else {
                 Toast.makeText(LoginActivity.this, "Network Eror", Toast.LENGTH_SHORT).show();
@@ -271,7 +276,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

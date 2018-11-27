@@ -26,13 +26,31 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/app_normal_margin"
+            android:src="@drawable/ic_person_outline_white_24dp" />
+
+        <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/app_normal_margin"
+            android:src="@drawable/ic_person_outline_white_24dp"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="1dp" />-->
+
     </android.support.v7.widget.Toolbar>
 
-   <!-- <View android:background="#ffffff"
-        android:layout_width = "match_parent"
-        android:layout_height="1dp"
+    <!-- <View android:background="#ffffff"
+         android:layout_width = "match_parent"
+         android:layout_height="1dp"
 
-        android:layout_above="@+id/circle_layout"/>-->
+         android:layout_above="@+id/circle_layout"/>-->
 
     <com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout
         android:id="@+id/circle_layout"
@@ -56,8 +74,7 @@
         android:layout_alignLeft="@id/circle_layout"
         android:layout_alignRight="@id/circle_layout"
         android:layout_alignTop="@id/circle_layout"
-        android:layout_marginTop="@dimen/app_normal_margin"
-        >
+        android:layout_marginTop="@dimen/app_normal_margin">
 
         <ImageView
             android:id="@+id/dashboard_myMaster"
@@ -68,8 +85,7 @@
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/master_icon"
-            android:tint="@color/colorWhite"
-            />
+            android:tint="@color/colorWhite" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -48,6 +48,7 @@ import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnCenterClick
 import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnItemClickListener;
 import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnItemSelectedListener;
 import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnRotationFinishedListener;
+import com.bumptech.glide.Glide;
 
 public class DashboardCircularActivity extends BaseActivity implements OnItemSelectedListener,
         OnItemClickListener, OnRotationFinishedListener, OnCenterClickListener {
@@ -75,8 +76,10 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         setContentView(R.layout.circular_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         sessionManager = new SessionManager(DashboardCircularActivity.this);
+        ImageView imageViewProfilePhoto = (ImageView) findViewById(R.id.imageView2);
+        //CircleImageView imageViewProfilePhoto = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.imageView2);
         alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
-        //setting the title
+        //setting the title com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
         /*toolbar.setTitle(getResources().getString(R.string.app_name));
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));*/
         //placing toolbar in place of actionbar
@@ -109,6 +112,11 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
             }
         });
 
+        String imageUri = sessionManager.getSessionProfileImageUrl().toString();
+        Glide.with(getApplicationContext())
+                .load(imageUri)
+                .into(imageViewProfilePhoto);
+
        /* CircleImageView circleImageView = (CircleImageView) circleLayout.findViewById(R.id.dashboard_myHoto);
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,16 +127,23 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
             }
         });*/
 
+        imageViewProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(DashboardCircularActivity.this, UserProfileActivity.class));
+            }
+        });
 
     }
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dashboard_menu, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -327,7 +342,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

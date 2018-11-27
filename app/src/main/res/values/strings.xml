@@ -671,6 +671,176 @@
 
     </string-array>
 
+    <string-array name="array_detailsOfUnusedMaterials_TypeOfAsset">
+        <item>AC</item>
+        <item>AMF Panel</item>
+        <item>Battery Bank</item>
+        <!--<item>Battery Rack</item>-->
+        <item>DG</item>
+        <!--<item>DG Battery</item>-->
+        <!--<item>FCU</item>-->
+        <!--<item>Fire Alarm Panel</item>-->
+        <!--<item>Fire Extinngusher</item>-->
+        <!--<item>Out Door Cabinet</item>-->
+        <!--<item>PIU</item>-->
+        <item>Power Plant</item>
+        <item>Rectifier Module</item>
+        <item>Shelter</item>
+        <!--<item>Solar Panel</item>-->
+        <item>Stabilizer</item>
+
+    </string-array>
+
+    <!--End 16 Arrary List For Type Of Asset bind In Asset Make OnChange of type Of Asset List-->
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_AC">
+        <item>ACME</item>
+        <item>Arisys</item>
+        <item>Blue Star</item>
+        <item>Carrier</item>
+        <item>Daikin</item>
+        <item>Godreg</item>
+        <item>Haier</item>
+        <item>Hitachi</item>
+        <item>LG</item>
+        <item>Mitsubishi</item>
+        <item>OG</item>
+        <item>Panasonic</item>
+        <item>Samsung</item>
+        <item>Spacemaker</item>
+        <item>Tata Liberty</item>
+        <item>Toshiba</item>
+        <item>Uniflair</item>
+        <item>Videocon</item>
+        <item>Voltas</item>
+        <item>Whirlpool</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_AmfPanel">
+        <item>Local</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_BatteryBank">
+        <item>Amara Raja</item>
+        <item>C&amp;D</item>
+        <item>Coslite</item>
+        <item>Delta</item>
+        <item>Enersis</item>
+        <item>Excide</item>
+        <item>Exicom</item>
+        <item>GFM</item>
+        <item>GNB</item>
+        <item>HBL</item>
+        <item>Huwavai</item>
+        <item>Leoch</item>
+        <item>Liberty</item>
+        <item>Mahindra</item>
+        <item>Microtex</item>
+        <item>Narada</item>
+        <item>NED</item>
+        <item>Panasonic</item>
+        <item>Saft</item>
+        <item>Star</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_BatteryRack">
+
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Dg">
+        <item>Ashok Leyland</item>
+        <item>Caterpillar</item>
+        <item>Cummins</item>
+        <item>Eicher</item>
+        <item>Elgi</item>
+        <item>Escorts</item>
+        <item>Greeves</item>
+        <item>Honda</item>
+        <item>Jackson</item>
+        <item>Koel</item>
+        <item>Lister Pitter</item>
+        <item>Mahindra</item>
+        <item>Mistubishi</item>
+        <item>Perfect</item>
+        <item>Perkins</item>
+        <item>Powerica</item>
+        <item>Sonalika</item>
+        <item>Volvo</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_DgBattery">
+
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_PowerPlant">
+        <item>Ador Poweron</item>
+        <item>Amaraja</item>
+        <item>BFU</item>
+        <item>Delta</item>
+        <item>Eltek</item>
+        <item>Emerson</item>
+        <item>Exicom</item>
+        <item>HBL Sabnif</item>
+        <item>INMPS</item>
+        <item>Intex</item>
+        <item>ITI</item>
+        <item>Lineage</item>
+        <item>Mahindra</item>
+        <item>Pace</item>
+        <item>UTL</item>
+        <item>Valere</item>
+        <item>XL Telecom</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_RectifierModule">
+        <item>Ador Poweron</item>
+        <item>Amaraja</item>
+        <item>BFU</item>
+        <item>Delta</item>
+        <item>Eltek</item>
+        <item>Emerson</item>
+        <item>Exicom</item>
+        <item>HBL Sabnif</item>
+        <item>INMPS</item>
+        <item>Intex</item>
+        <item>ITI</item>
+        <item>Lineage</item>
+        <item>Mahindra</item>
+        <item>Pace</item>
+        <item>UTL</item>
+        <item>Valere</item>
+        <item>XL Telecom</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Shelter">
+        <item>Cage</item>
+        <item>Civil Room</item>
+        <item>PUF Shelter</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_SolarPanel"></string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Stabilizer">
+        <item>ACME</item>
+        <item>Servo</item>
+        <item>U-Form</item>
+        <item>V-Form</item>
+        <item>Zavline</item>
+    </string-array>
+
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_FireExtinngusher">
+    </string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_FireAlarmPanel">
+    </string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Piu">
+    </string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Fcu">
+    </string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_OutDoorCabinet">
+    </string-array>
+
+    <!--End 16 Arrary List For Type Of Asset bind In Asset Make OnChange of type Of Asset List-->
+
     <string-array name="array_detailsOfUnusedMaterials_AssetMake">
         <item>ACME</item>
         <item>Ador Poweron</item>

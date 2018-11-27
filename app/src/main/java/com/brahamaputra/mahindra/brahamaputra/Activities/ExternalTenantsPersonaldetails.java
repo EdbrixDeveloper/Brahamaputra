@@ -35,6 +35,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -296,9 +297,15 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar
+                /*new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
+                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
             }
         });
 
@@ -361,7 +368,42 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         String contactPersonLandline = mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.getText().toString().trim();
 
 
-        if (!nameofTenant.isEmpty() && nameofTenant != null) {
+        if (nameofTenant.isEmpty() && nameofTenant == null) {
+            showToast("Select Name of the Tenant");
+            return false;
+        } else if (typeofTenant.isEmpty() && typeofTenant == null) {
+            showToast("Select Type of Tenant");
+            return false;
+        } else if (positionattheTower.isEmpty() && positionattheTower == null) {
+            showToast("Enter Position at the Tower");
+            return false;
+        } else if (dateofstartofTenancy.isEmpty() && dateofstartofTenancy == null) {
+            showToast("Enter Date of the start of Tenancy");
+            return false;
+        } else if (dateofstartofTenancy.isEmpty() && dateofstartofTenancy == null) {
+            showToast("Enter Date of the start of Tenancy");
+            return false;
+        } else if (dateofstartofRadiation.isEmpty() && dateofstartofRadiation == null) {
+            showToast("Enter Date of Start of Radiation");
+            return false;
+        } else if (nameofContactPerson.isEmpty() && nameofContactPerson == null) {
+            showToast("Enter Name of the Contact Person");
+            return false;
+        } else if (addressofContactPerson.isEmpty() && addressofContactPerson == null) {
+            showToast("Enter Address of the ContactPerson");
+            return false;
+        } else if (contactPersonMobile.isEmpty() && contactPersonMobile == null) {
+            showToast("Enter Mobile Number of Contact Person ");
+            return false;
+        } else if (contactPersonLandline.isEmpty() && contactPersonLandline == null) {
+            showToast("Enter Landline Number of Contact Person ");
+            return false;
+        } else if (date_compare(dateofstartofTenancy, dateofstartofRadiation) == false) {
+            showToast("Select Date of Start of Radiation is less than or equal to Date of the start of Tenancy");
+            return false;
+        } else return true;
+
+        /*if (!nameofTenant.isEmpty() && nameofTenant != null) {
             if (!typeofTenant.isEmpty() && typeofTenant != null) {
                 if (!positionattheTower.isEmpty() && positionattheTower != null) {
                     if (!dateofstartofTenancy.isEmpty() && dateofstartofTenancy != null) {
@@ -411,9 +453,30 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         } else {
             showToast("Select Name of the Tenant");
             return false;
-        }
+        }*/
     }
 
+    public boolean date_compare(String dateStartTenancy, String dateStartRadiation) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
+
+            Date date1 = formatter.parse(dateStartTenancy);
+
+            Date date2 = formatter.parse(dateStartRadiation);
+            if (date1 != null && date2 != null) {
+                if (date1.compareTo(date2) < 0) {
+                    return false;
+                }
+            }
+            /*if (date1.compareTo(date2) < 0) {
+                System.out.println("date2 is Greater than my date1");
+            }*/
+            return true;
+        } catch (ParseException e1) {
+            e1.printStackTrace();
+            return true;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
