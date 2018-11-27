@@ -59,6 +59,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.UserSitesList;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
@@ -102,7 +103,7 @@ public class ElectricBillProcess extends BaseActivity {
     private SessionManager sessionManager;
     private ElectricBillProcessData electricBillProcessData;
     final Calendar myCalendar = Calendar.getInstance();
-
+    DecimalConversion decimalConversion;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -277,11 +278,20 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessButtonEbBillScanCopy = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopy);
         mEbProcessButtonEbBillScanCopyiew = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopyiew);
 
+        mEbProcessEditTextUnitConsumed.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mEbProcessEditTextGrossAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mEbProcessEditTextNetPaybleBeforeDueDate.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
     }
+    public void DecimalFormatConversion() {
+        mEbProcessEditTextUnitConsumed.setText(decimalConversion.convertDecimal(mEbProcessEditTextUnitConsumed.getText().toString()));
+        mEbProcessEditTextGrossAmount.setText(decimalConversion.convertDecimal(mEbProcessEditTextGrossAmount.getText().toString()));
+        mEbProcessEditTextNetPaybleBeforeDueDate.setText(decimalConversion.convertDecimal(mEbProcessEditTextNetPaybleBeforeDueDate.getText().toString()));
 
+    }
 
     private void initCombo() {
     }
@@ -291,7 +301,7 @@ public class ElectricBillProcess extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electric_bill_process);
         this.setTitle("Electric Bill Process");
-
+        decimalConversion = new DecimalConversion();
         sessionManager = new SessionManager(ElectricBillProcess.this);
         alertDialogManager = new AlertDialogManager(ElectricBillProcess.this);
         toastMessage = new ToastMessage(ElectricBillProcess.this);
@@ -305,7 +315,30 @@ public class ElectricBillProcess extends BaseActivity {
 
 
         // setInputDetails();
-
+        mEbProcessEditTextUnitConsumed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mEbProcessEditTextGrossAmount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mEbProcessEditTextNetPaybleBeforeDueDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
 
     }
 
@@ -605,6 +638,7 @@ public class ElectricBillProcess extends BaseActivity {
                 //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                DecimalFormatConversion();
                 if (checkValiadtion()) {
                     showSettingsAlert();
                 }
