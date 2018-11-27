@@ -286,6 +286,7 @@ public class ElectricBillProcess extends BaseActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
     }
+
     public void DecimalFormatConversion() {
         mEbProcessEditTextUnitConsumed.setText(decimalConversion.convertDecimal(mEbProcessEditTextUnitConsumed.getText().toString()));
         mEbProcessEditTextGrossAmount.setText(decimalConversion.convertDecimal(mEbProcessEditTextGrossAmount.getText().toString()));
@@ -346,6 +347,7 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessTextViewCustomerVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 prepareCustomer();
 
             }
@@ -353,7 +355,13 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessTextViewCircleVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prepareCircle();
+                if (!mEbProcessTextViewCustomerVal.getText().toString().trim().isEmpty()) {
+                    prepareCircle();
+                }
+                else
+                {
+                    showToast("Please Select Customer");
+                }
 
             }
         });
@@ -361,21 +369,41 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessTextViewStateVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prepareStates();
+               // prepareStates();
+                if (!mEbProcessTextViewCircleVal.getText().toString().trim().isEmpty()) {
+                    prepareStates();
+                }
+                else
+                {
+                    showToast("Please Select Circle");
+                }
 
             }
         });
         mEbProcessTextViewSsaVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prepareSSA();
-
+               // prepareSSA();
+                if (!mEbProcessTextViewStateVal.getText().toString().trim().isEmpty()) {
+                    prepareSSA();
+                }
+                else
+                {
+                    showToast("Please Select State");
+                }
             }
         });
         mEbProcessTextViewSiteVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                prepareSite();
+                //prepareSite();
+                if (!mEbProcessTextViewSsaVal.getText().toString().trim().isEmpty()) {
+                    prepareSite();
+                }
+                else
+                {
+                    showToast("Please Select SSA");
+                }
 
             }
         });

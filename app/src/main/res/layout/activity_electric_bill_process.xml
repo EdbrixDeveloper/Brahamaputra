@@ -520,7 +520,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Gross Amount"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -546,7 +546,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Net Payable on or before due Date"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
