@@ -270,7 +270,7 @@ public class LoginActivity extends BaseActivity {
 
         this.doubleBackToExitPressedOnce = true;
         //Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-        showToast("click BACK again to exit");
+        showToast("Click back again to exit.");
 
         new Handler().postDelayed(new Runnable() {
 

@@ -1,9 +1,14 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -11,11 +16,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
@@ -31,6 +39,8 @@ import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -52,6 +62,7 @@ public class PhotoCaptureActivity extends BaseActivity {
     private ImageView mPhotoCaptureButtonEbMeterView;
     private ImageView mPhotoCaptureButtonDgHmrView;
     private ImageView mPhotoCaptureButtonDgOverviewView;
+    private Switch mPhotoCaptureSwitchCaptureMode;
     private OfflineStorageWrapper offlineStorageWrapper;
 
     private SessionManager sessionManager;
@@ -97,6 +108,8 @@ public class PhotoCaptureActivity extends BaseActivity {
     private Uri imageFileNameOfEbMeterUri = null;
     private Uri imageFileNameOfDgHmrUri = null;
     private Uri imageFileNameOfDgOverviewUri = null;
+
+    private int ORIENTATION_ROTATE = 90;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,6 +198,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonSiteView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //009
                 if (imageFileNameOfSiteUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfSiteUri);
                 } else {
@@ -251,6 +265,20 @@ public class PhotoCaptureActivity extends BaseActivity {
                 } else {
                     Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+
+        mPhotoCaptureSwitchCaptureMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if(!isChecked){
+                   ORIENTATION_ROTATE = 90;///Portraite
+                   //showToast(""+ORIENTATION_ROTATE);
+               }else {
+                   ORIENTATION_ROTATE = 180;///Landscape
+                   //showToast(""+ORIENTATION_ROTATE);
+               }
             }
         });
     }
@@ -362,6 +390,41 @@ public class PhotoCaptureActivity extends BaseActivity {
         }
     }
 
+    public static Bitmap rotateImageIfRequired(Bitmap img, Context context, Uri selectedImage) throws IOException {
+
+        if (selectedImage.getScheme().equals("content")) {
+            String[] projection = { MediaStore.Images.ImageColumns.ORIENTATION };
+            Cursor c = context.getContentResolver().query(selectedImage, projection, null, null, null);
+            if (c.moveToFirst()) {
+                final int rotation = c.getInt(0);
+                c.close();
+                return rotateImage(img, rotation);
+            }
+            return img;
+        } else {
+            ExifInterface ei = new ExifInterface(selectedImage.getPath());
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            //Timber.d("orientation: %s", orientation);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    return rotateImage(img, 90);
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    return rotateImage(img, 90);
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    return rotateImage(img, 90);
+                default:
+                    return img;
+            }
+        }
+    }
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -370,13 +433,21 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (imageFileNameOfSiteUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri);
+                            //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri);
+                            Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri), ORIENTATION_ROTATE);
+
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+                            imageFileNameOfSiteUri = Uri.parse(path);
 
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringSite = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonSiteView.setVisibility(View.VISIBLE);
+
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -392,9 +463,16 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (imageFileNameOfShelterUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri);
+                            //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri);
+                            Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri), ORIENTATION_ROTATE);
+
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+                            imageFileNameOfShelterUri = Uri.parse(path);
+
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringShelter = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonShelterView.setVisibility(View.VISIBLE);
@@ -413,9 +491,16 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (imageFileNameOfEbMeterBoxUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri);
+                            //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri);
+                            Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri), ORIENTATION_ROTATE);
+
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+                            imageFileNameOfEbMeterBoxUri = Uri.parse(path);
+
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringEbMeterBox = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonEbMeterBoxView.setVisibility(View.VISIBLE);
@@ -434,9 +519,16 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (imageFileNameOfSmpsUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri);
+                            //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri);
+                            Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri), ORIENTATION_ROTATE);
+
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+                            imageFileNameOfSmpsUri = Uri.parse(path);
+
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringSmps = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonSmpsView.setVisibility(View.VISIBLE);
@@ -455,9 +547,16 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (imageFileNameOfEbMeterUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri);
+                            //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri);
+                            Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri), ORIENTATION_ROTATE);
+
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+                            imageFileNameOfEbMeterUri = Uri.parse(path);
+
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringEbMeter = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonEbMeterView.setVisibility(View.VISIBLE);
@@ -476,9 +575,16 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (imageFileNameOfDgHmrUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri);
+                            //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri);
+                            Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri), ORIENTATION_ROTATE);
+
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+                            imageFileNameOfDgHmrUri = Uri.parse(path);
+
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringDgHmr = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonDgHmrView.setVisibility(View.VISIBLE);
@@ -497,9 +603,16 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (imageFileNameOfDgOverviewUri != null) {
                         try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri);
+                            //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri);
+                            Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri), ORIENTATION_ROTATE);
+
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
+                            imageFileNameOfDgOverviewUri = Uri.parse(path);
+
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringDgOverview = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonDgOverviewView.setVisibility(View.VISIBLE);
@@ -595,6 +708,8 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonEbMeterView = (ImageView) findViewById(R.id.photoCapture_button_ebMeterView);
         mPhotoCaptureButtonDgHmrView = (ImageView) findViewById(R.id.photoCapture_button_dgHmrView);
         mPhotoCaptureButtonDgOverviewView = (ImageView) findViewById(R.id.photoCapture_button_dgOerviewView);
+
+        mPhotoCaptureSwitchCaptureMode = (Switch)findViewById(R.id.photoCapture_switch_captureMode);
 
     }
 

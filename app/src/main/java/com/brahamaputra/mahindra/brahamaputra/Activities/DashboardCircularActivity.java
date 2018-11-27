@@ -315,7 +315,9 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                                         Intent intent = new Intent(DashboardCircularActivity.this, UserHotoTransactionActivity.class);
                                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardCircularActivity.this));
                                         intent.putExtra("ticketNO", String.valueOf(taskEditText.getText()));
-                                        sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
+                                        //sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
+                                        sessionManager.updateSessionUserTicketName(String.valueOf(taskEditText.getText()));
+
                                         startActivity(intent);
                                     }
                                 })
@@ -336,7 +338,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         }
 
         this.doubleBackToExitPressedOnce = true;
-        showToast("click BACK again to exit");
+        showToast("Click back again to exit.");
 
         new Handler().postDelayed(new Runnable() {
 

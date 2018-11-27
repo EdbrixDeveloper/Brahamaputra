@@ -170,12 +170,13 @@ public class UserHotoTransactionActivity extends BaseActivity {
                     checkInLong = String.valueOf(gpsTracker.getLongitude());*/
 
                 /*Commented by arjun 24112018
-                submitDetails();
                 startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class), RESULT_HOTO_READING);*/
 
                 /*} else {
                     showToast("Could not detecting location.");
                 }*/
+
+                submitDetails();
                 hototicket_Selected_SiteType = mUserHotoTransEditTextTypeOfSites.getText().toString();
                 hototicket_Selected_CustomerName = mUserHotoTransEditTextCustomerName.getText().toString();
 
@@ -661,7 +662,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 String typeModeOfPayment_Val = electricConnectionData.getTypeModeOfPayment_Val();
                 String bankIfscCode = electricConnectionData.getBankIfscCode();
                 String bankAccountNo = electricConnectionData.getBankAccountNo();
-
 
                 electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
                 hotoTransactionData.setElectricConnectionData(electricConnectionData);

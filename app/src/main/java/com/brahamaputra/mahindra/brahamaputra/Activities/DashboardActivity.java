@@ -59,7 +59,6 @@ public class DashboardActivity extends BaseActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         //placing toolbar in place of actionbar
         setSupportActionBar(toolbar);
-
     }
 
     private void setListner() {
@@ -88,7 +87,6 @@ public class DashboardActivity extends BaseActivity {
         menuInflater.inflate(R.menu.dashboard_menu, menu);
         return true;
     }
-
 
     private void assignViews() {
         mDashboardRelativeLayoutMyHoto = (RelativeLayout) findViewById(R.id.dashboard_relativeLayout_myHoto);
@@ -155,7 +153,8 @@ public class DashboardActivity extends BaseActivity {
                                         Intent intent = new Intent(DashboardActivity.this, UserHotoTransactionActivity.class);
                                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
                                         intent.putExtra("ticketNO", String.valueOf(taskEditText.getText().toString().toUpperCase()));
-                                        sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
+                                        //sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
+                                        sessionManager.updateSessionUserTicketName(String.valueOf(taskEditText.getText()));
                                         startActivity(intent);
                                     }
                                 })
@@ -176,7 +175,7 @@ public class DashboardActivity extends BaseActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        showToast("click BACK again to exit");
+        showToast("Click back again to exit.");
 
         new Handler().postDelayed(new Runnable() {
 
