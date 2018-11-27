@@ -4,14 +4,15 @@
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:orientation="horizontal"
-    android:padding="@dimen/app_min_padding"
     android:weightSum="2">
 
     <LinearLayout
+        android:id="@+id/linearLayout_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/app_min_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,15 +121,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:gravity="right"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingRight="20dp">
 
                 <ImageView
                     android:id="@+id/imageView_status"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/app_normal_margin"
-                    android:src="@drawable/receipt"
+                    android:src="@drawable/ic_file_upload_black_24dp"
                     android:visibility="visible"></ImageView>
+
             </LinearLayout>
         </LinearLayout>
 

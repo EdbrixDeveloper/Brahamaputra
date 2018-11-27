@@ -3,11 +3,13 @@ package com.brahamaputra.mahindra.brahamaputra.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.Activities.ElectricBillProcessList;
@@ -43,6 +45,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
         TextView textView_BillGrossAmt;
         TextView textView_status;
         ImageView imageView_status;
+        LinearLayout linearLayout_item;
 
 
     }
@@ -95,6 +98,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
             viewHolder.textView_BillGrossAmt = (TextView) convertView.findViewById(R.id.textView_BillGrossAmt);
             viewHolder.textView_status = (TextView) convertView.findViewById(R.id.textView_status);
             viewHolder.imageView_status = (ImageView) convertView.findViewById(R.id.imageView_status);
+            viewHolder.linearLayout_item =(LinearLayout) convertView.findViewById(R.id.linearLayout_item);
 
 
             result = convertView;
@@ -117,12 +121,14 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
 
         if (dataModel.getStatusId().equals("1")) {
             viewHolder.textView_status.setText("Approved");
-            viewHolder.textView_status.setTextColor(Color.parseColor("#4caf50"));
+            viewHolder.textView_status.setTextColor(Color.BLACK);
             viewHolder.imageView_status.setVisibility(View.VISIBLE);
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext,R.color.limegreen));
         } else if (dataModel.getStatusId().equals("0")) {
             viewHolder.textView_status.setText("Waiting for Approve");
             viewHolder.textView_status.setTextColor(Color.RED);
             viewHolder.imageView_status.setVisibility(View.GONE);
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
         }
         getStatus = dataModel.getStatusId();
         request_id = dataModel.getId();
@@ -144,8 +150,9 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                     intent.putExtra("ticket_no", lst.getRequestTicketeNo());
                     intent.putExtra("site_id", lst.getSiteId());
                     intent.putExtra("site_name", lst.getSiteName());
-                    c.startActivity(intent);
-                    //startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                   // c.startActivity(intent);
+                    ((ElectricBillProcessList) mContext).startActivityForResult(intent,RESULT_EB_REC_SUBMIT);
+                    //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                 }
             }
         });

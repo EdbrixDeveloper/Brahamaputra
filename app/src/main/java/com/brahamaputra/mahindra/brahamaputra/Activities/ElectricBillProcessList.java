@@ -179,9 +179,9 @@ public class ElectricBillProcessList extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
+     /*   if (resultCode == RESULT_OK) {
             prepareListData();
-        }
+        }*/
         if (requestCode == RESULT_EB_REC_SUBMIT && resultCode == RESULT_OK) {
             prepareListData();
         }
@@ -189,7 +189,6 @@ public class ElectricBillProcessList extends BaseActivity {
 
     @Override
     protected void onResume() {
-        prepareListData();
         super.onResume();
     }
 }
