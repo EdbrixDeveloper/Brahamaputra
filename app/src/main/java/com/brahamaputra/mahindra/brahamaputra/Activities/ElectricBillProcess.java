@@ -278,9 +278,9 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessButtonEbBillScanCopy = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopy);
         mEbProcessButtonEbBillScanCopyiew = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopyiew);
 
-        mEbProcessEditTextUnitConsumed.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
-        mEbProcessEditTextGrossAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
-        mEbProcessEditTextNetPaybleBeforeDueDate.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mEbProcessEditTextUnitConsumed.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mEbProcessEditTextGrossAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mEbProcessEditTextNetPaybleBeforeDueDate.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
