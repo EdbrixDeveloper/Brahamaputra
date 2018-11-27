@@ -20,6 +20,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -48,7 +49,7 @@ public class Earth_Resistance_Tower extends BaseActivity {
     private EditText mEarthResistanceTowerEditTextDateOfearthResistanceMeasured;
 
     private static final String TAG = Earth_Resistance_Tower.class.getSimpleName();
-
+    DecimalConversion decimalConversion;
     String str_typeOfEarth;
 
     private OfflineStorageWrapper offlineStorageWrapper;
@@ -67,6 +68,7 @@ public class Earth_Resistance_Tower extends BaseActivity {
         setContentView(R.layout.activity_earth_resistance_tower);
 
         this.setTitle("Earth Resistance (Tower)");
+        decimalConversion = new DecimalConversion();
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -97,12 +99,21 @@ public class Earth_Resistance_Tower extends BaseActivity {
         mEarthResistanceTowerEditTextDateOfearthResistanceMeasured.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DecimalFormatConversion();
                 DatePickerDialog dialog = new DatePickerDialog(Earth_Resistance_Tower.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
 
                 dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.show();
+            }
+        });
+        mEarthResistanceTowerEditTextEarthResistance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
             }
         });
     }
@@ -121,10 +132,15 @@ public class Earth_Resistance_Tower extends BaseActivity {
         );
     }
 
+    public void DecimalFormatConversion() {
+        mEarthResistanceTowerEditTextEarthResistance.setText(decimalConversion.convertDecimal(mEarthResistanceTowerEditTextEarthResistance.getText().toString()));
+    }
+
     private void initCombo() {
         mEarthResistanceTowerTextViewTypeOfEarthVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DecimalFormatConversion();
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Earth_Resistance_Tower.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_earthResistanceTower_typeOfEarth))),
                         "Type of Earth",
@@ -213,6 +229,7 @@ public class Earth_Resistance_Tower extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
+                DecimalFormatConversion();
                 submitDetails();
                 startActivity(new Intent(this, Earth_Resistance_Equipment.class));
                 finish();

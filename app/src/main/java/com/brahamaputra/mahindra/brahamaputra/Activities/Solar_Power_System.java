@@ -34,6 +34,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -99,7 +100,7 @@ public class Solar_Power_System extends BaseActivity {
     String str_amcYesNoVal;
 
     private static final String TAG = Solar_Power_System.class.getSimpleName();
-
+    DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
     private String ticketId = "28131";
@@ -126,6 +127,7 @@ public class Solar_Power_System extends BaseActivity {
         setContentView(R.layout.activity_solar_power_system);
 
         this.setTitle("Solar Power System");
+        decimalConversion = new DecimalConversion();
         alertDialogManager = new AlertDialogManager(Solar_Power_System.this);
         assignViews();
         initCombo();
@@ -198,6 +200,15 @@ public class Solar_Power_System extends BaseActivity {
             }
         });
 
+        mSolarPowerSystemEditTextCapacityKW.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
 
         /*This Commented By Arjun on 14-11-2018 For QR Code Purpose
         mSolarPowerSystemButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
@@ -263,6 +274,11 @@ public class Solar_Power_System extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+    }
+
+    public void DecimalFormatConversion() {
+        mSolarPowerSystemEditTextCapacityKW.setText(decimalConversion.convertDecimal(mSolarPowerSystemEditTextCapacityKW.getText().toString()));
+
     }
 
     private void initCombo() {
@@ -373,6 +389,7 @@ public class Solar_Power_System extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
+                DecimalFormatConversion();
                 submitDetails();
                 finish();
                 startActivity(new Intent(this, PowerPlantDetailsActivity.class));

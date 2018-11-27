@@ -42,6 +42,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -75,7 +76,6 @@ public class Battery_Set extends BaseActivity {
     private String imageFileName = "";
 
     private AlertDialogManager alertDialogManager;
-
 
     final Calendar myCalendar = Calendar.getInstance();
     String str_noofBatterySetProvided;
@@ -185,6 +185,7 @@ public class Battery_Set extends BaseActivity {
         //hotoTransactionData = new HotoTransactionData();
         //setInputDetails();
     }
+
 
 
     private void initCombo() {
@@ -465,11 +466,12 @@ public class Battery_Set extends BaseActivity {
             }
         });
 
+
+
     }
 
     private boolean checkValidtionForArrayFields() {
-
-        String batterySet_Qr = base64StringBatterySet;
+             String batterySet_Qr = base64StringBatterySet;
         String assetOwner = mBatterySetTextViewAssetOwnerVal.getText().toString().trim();
         String manufactureMakeModel = mBatterySetTextViewManufacturerMakeModelVal.getText().toString().trim();
         String capacityInAH = mBatterySetTextViewCapacityinAHVal.getText().toString().trim();
@@ -518,12 +520,13 @@ public class Battery_Set extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Select Nature of Problem ");
             return false;
-        }  else if (checkDuplicationQrCode(currentPos)) {
+        } else if (checkDuplicationQrCode(currentPos)) {
             return false;
         } else return true;
 
 
     }
+
     private boolean checkDuplicationQrCode(int curr_pos) {
         for (int i = 0; i < batterySetData.size(); i++) {
             if (i != curr_pos) {
@@ -536,6 +539,7 @@ public class Battery_Set extends BaseActivity {
         }
         return false;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -548,6 +552,7 @@ public class Battery_Set extends BaseActivity {
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Battery_Set.this, userId, ticketName);
         alertDialogManager = new AlertDialogManager(this);
+
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -572,7 +577,7 @@ public class Battery_Set extends BaseActivity {
         mBatterySetEditTextDateofInstallation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dialog =  new DatePickerDialog(Battery_Set.this, date, myCalendar
+                DatePickerDialog dialog = new DatePickerDialog(Battery_Set.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
 

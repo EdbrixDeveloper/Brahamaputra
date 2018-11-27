@@ -20,6 +20,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -36,7 +37,7 @@ public class Total_DC_Load_site extends BaseActivity {
 
     private TextView mTotalDCLoadsiteTextViewTotalDcLoadOfSite;
     private EditText mTotalDCLoadsiteEditTextTotalDcLoadOfSite;
-
+    DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
     private String ticketId = "";
@@ -56,6 +57,10 @@ public class Total_DC_Load_site extends BaseActivity {
         );
     }
 
+    public void DecimalFormatConversion() {
+        mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setText(decimalConversion.convertDecimal(mTotalDCLoadsiteEditTextTotalDcLoadOfSite.getText().toString()));
+    }
+
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -64,6 +69,7 @@ public class Total_DC_Load_site extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_dc_load_of_the_site);
         this.setTitle("Total DC load of the site");
+        decimalConversion = new DecimalConversion();
         sessionManager = new SessionManager(Total_DC_Load_site.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -74,6 +80,14 @@ public class Total_DC_Load_site extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
         setInputDetails();
+        mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
 
 
     }
@@ -92,6 +106,7 @@ public class Total_DC_Load_site extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuDone:
+                DecimalFormatConversion();
                 if (checkValiadtion()) {
                     submitDetails();
                     startActivity(new Intent(this, ActiveequipmentDetails.class));

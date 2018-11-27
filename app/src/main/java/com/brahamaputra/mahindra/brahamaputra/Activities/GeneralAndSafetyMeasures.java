@@ -26,6 +26,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.InputFilterMinMax;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -175,12 +176,13 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     Button mGeneralAndSafetyMeasureButtonNextReading;
     TextView mGeneralAndSafetyMeasureTextViewNumber;
     private LinearLayout linearLayout_container;
-
+    DecimalConversion decimalConversion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_and_safety_measures);
         this.setTitle("GENERAL & SAFETY MEASURES");
+        decimalConversion = new DecimalConversion();
         sessionManager = new SessionManager(GeneralAndSafetyMeasures.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -224,6 +226,14 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         generalSafetyMeasuresData = new ArrayList<>();
         currentPos = 0;
         setInputDetails(currentPos);
+        mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
     }
 
     private void assignViews() {
@@ -312,7 +322,10 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+    }
 
+    public void DecimalFormatConversion() {
+        mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setText(decimalConversion.convertDecimal(mGeneralAndSafetyMeasuresEditTextPrevailingSLA.getText().toString()));
 
     }
 

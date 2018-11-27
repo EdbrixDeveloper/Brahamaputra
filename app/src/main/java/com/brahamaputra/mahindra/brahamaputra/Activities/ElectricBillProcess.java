@@ -585,7 +585,6 @@ public class ElectricBillProcess extends BaseActivity {
   /*  private String ddmmyyyy_ddmmmyyyy() {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
         mEbProcessEditTextBilliDueDate.setText(sdf.format(String value));
     }*/
 
@@ -711,10 +710,7 @@ public class ElectricBillProcess extends BaseActivity {
         try {
           /*  if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-
                 Gson gson = new Gson();
-
-
                 mDieselFillingTextViewSiteNameVal.setText(dieselFillingData.getSiteName());
                 mDieselFillingTextViewSiteDetailsVal.setText(dieselFillingData.getSiteDetails());
                 mDieselFillingTextViewSiteIDVal.setText(dieselFillingData.getSiteID());
@@ -726,9 +722,6 @@ public class ElectricBillProcess extends BaseActivity {
                 mDieselFillingTextViewFinalDieselStockVal.setText(dieselFillingData.getFinalDieselStock());
                 mDieselFillingEditTextPresentEbReading.setText(dieselFillingData.getPesentEbReading());
                 base64StringEbReadingKwh =dieselFillingData.getEbReadingKwhPhoto();
-
-
-
             } else {
                 Toast.makeText(DieselFilling.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }*/

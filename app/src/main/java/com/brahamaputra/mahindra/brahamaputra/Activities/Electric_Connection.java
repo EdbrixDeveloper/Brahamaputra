@@ -16,6 +16,7 @@ import android.widget.EditText;
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ElectricConnectionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -128,7 +129,7 @@ public class Electric_Connection extends BaseActivity {
     LinearLayout mElectricConnectionLinearLayoutScheduledPowerCutInHrs;
     LinearLayout mElectricConnectionLinearLayoutEbBillDate;
 
-
+    DecimalConversion decimalConversion;
     private static final String TAG = Electric_Connection.class.getSimpleName();
     String selectedHour = "HH", selectedMinute = "MM";
 
@@ -163,6 +164,7 @@ public class Electric_Connection extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electric_connection);
         this.setTitle("Electric Connection");
+        decimalConversion = new DecimalConversion();
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -218,6 +220,47 @@ public class Electric_Connection extends BaseActivity {
                 mTimePicker.setTitle("Select Time For Scheduled Power Cut");
                 mTimePicker.show();
 
+            }
+        });
+
+        mElectricConnectionEditTextSanctionedLoadKVA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mElectricConnectionEditTextExistingLoadAtSiteKVA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mElectricConnectionEditTextEbMeterReadingInKWh.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mElectricConnectionEditTextEbCostPerUnitForSharedConnection.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mElectricConnectionEditTextTransformerCapacityInKva.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
             }
         });
 
@@ -321,6 +364,14 @@ public class Electric_Connection extends BaseActivity {
         );
 
 
+    }
+
+    public void DecimalFormatConversion() {
+        mElectricConnectionEditTextSanctionedLoadKVA.setText(decimalConversion.convertDecimal(mElectricConnectionEditTextSanctionedLoadKVA.getText().toString()));
+        mElectricConnectionEditTextExistingLoadAtSiteKVA.setText(decimalConversion.convertDecimal(mElectricConnectionEditTextExistingLoadAtSiteKVA.getText().toString()));
+        mElectricConnectionEditTextEbMeterReadingInKWh.setText(decimalConversion.convertDecimal(mElectricConnectionEditTextEbMeterReadingInKWh.getText().toString()));
+        mElectricConnectionEditTextEbCostPerUnitForSharedConnection.setText(decimalConversion.convertDecimal(mElectricConnectionEditTextEbCostPerUnitForSharedConnection.getText().toString()));
+        mElectricConnectionEditTextTransformerCapacityInKva.setText(decimalConversion.convertDecimal(mElectricConnectionEditTextTransformerCapacityInKva.getText().toString()));
     }
 
     private void initCombo() {
@@ -868,6 +919,7 @@ public class Electric_Connection extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
+                DecimalFormatConversion();
                 submitDetails();
                 startActivity(new Intent(this, Air_Conditioners.class));
                 finish();

@@ -42,6 +42,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -129,7 +130,7 @@ public class Air_Conditioners extends BaseActivity {
     private SessionManager sessionManager;
     private Uri imageFileUri;
     private String imageFileName;
-
+    DecimalConversion decimalConversion;
     final Calendar myCalendar = Calendar.getInstance();
 
     /////////////////////////
@@ -156,7 +157,7 @@ public class Air_Conditioners extends BaseActivity {
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
-
+        decimalConversion = new DecimalConversion();
         sessionManager = new SessionManager(Air_Conditioners.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -251,6 +252,15 @@ public class Air_Conditioners extends BaseActivity {
                 }
             }
         });*/
+        mAirConditionersEditTextCapacityTr.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
     }
 
     public void onClicked(View v) {
@@ -316,6 +326,10 @@ public class Air_Conditioners extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+    }
+
+    public void DecimalFormatConversion() {
+        mAirConditionersEditTextCapacityTr.setText(decimalConversion.convertDecimal(mAirConditionersEditTextCapacityTr.getText().toString()));
     }
 
     private void initCombo() {
@@ -1021,6 +1035,7 @@ public class Air_Conditioners extends BaseActivity {
 
     /*Arjun 21112018*/
     public boolean checkValidationOfArrayFields() {
+        DecimalFormatConversion();
         String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
         String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
         String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();

@@ -20,6 +20,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceEquipmentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -47,7 +48,7 @@ public class Earth_Resistance_Equipment extends BaseActivity {
     private EditText mEarthResistanceEquipmentEditTextDateOfearthResistanceMeasured;
 
     private static final String TAG = Earth_Resistance_Equipment.class.getSimpleName();
-
+    DecimalConversion decimalConversion;
     String str_typeOfEarth;
 
     private OfflineStorageWrapper offlineStorageWrapper;
@@ -65,9 +66,9 @@ public class Earth_Resistance_Equipment extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_earth_resistance_equipment);
+        decimalConversion = new DecimalConversion();
         assignViews();
         this.setTitle("Earth Resistance (Equipment)");
-        assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
@@ -96,12 +97,22 @@ public class Earth_Resistance_Equipment extends BaseActivity {
         mEarthResistanceEquipmentEditTextDateOfearthResistanceMeasured.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DecimalFormatConversion();
                 DatePickerDialog dialog = new DatePickerDialog(Earth_Resistance_Equipment.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
 
                 dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.show();
+            }
+        });
+
+        mEarthResistanceEquipmentEditTextEarthResistance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
             }
         });
     }
@@ -120,11 +131,16 @@ public class Earth_Resistance_Equipment extends BaseActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
     }
+    public void DecimalFormatConversion() {
+        mEarthResistanceEquipmentEditTextEarthResistance.setText(decimalConversion.convertDecimal(mEarthResistanceEquipmentEditTextEarthResistance.getText().toString()));
+
+    }
 
     private void initCombo() {
         mEarthResistanceEquipmentTextViewTypeOfEarthVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DecimalFormatConversion();
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Earth_Resistance_Equipment.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_earthResistanceEquipment_typeOfEarth))),
                         "Type of Earth",
@@ -212,6 +228,7 @@ public class Earth_Resistance_Equipment extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
+                DecimalFormatConversion();
                 submitDetails();
                 startActivity(new Intent(this, Electric_Connection.class));
                 finish();

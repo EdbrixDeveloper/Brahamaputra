@@ -39,6 +39,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.UserSites;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
@@ -127,6 +128,7 @@ public class DieselFilling extends BaseActivity {
     private AlertDialogManager alertDialogManager;
 
     String str_siteName = "";
+    DecimalConversion decimalConversion;
 
     public int site_id = 0;
 
@@ -189,6 +191,7 @@ public class DieselFilling extends BaseActivity {
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(DieselFilling.this, userId, ticketName);
         gpsTracker = new GPSTracker(DieselFilling.this);
+        decimalConversion = new DecimalConversion();
         assignViews();
         initCombo();
         set_listener();
@@ -281,7 +284,7 @@ public class DieselFilling extends BaseActivity {
                 calculateDieselStock();
             }
         });
-                 mDieselFillingEditTextFillingQty.addTextChangedListener(new TextWatcher() {
+        mDieselFillingEditTextFillingQty.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -335,6 +338,38 @@ public class DieselFilling extends BaseActivity {
             }
         });
 
+        mDieselFillingEditTextFillingQty.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mDieselFillingEditTextDieselPrice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mDieselFillingEditTextTankBalanceBeforeFilling.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
+    }
+
+    public void DecimalFormatConversion() {
+        mDieselFillingEditTextFillingQty.setText(decimalConversion.convertDecimal(mDieselFillingEditTextFillingQty.getText().toString()));
+        mDieselFillingEditTextTankBalanceBeforeFilling.setText(decimalConversion.convertDecimal(mDieselFillingEditTextTankBalanceBeforeFilling.getText().toString()));
+        mDieselFillingTextViewFinalDieselStockVal.setText(decimalConversion.convertDecimal(mDieselFillingTextViewFinalDieselStockVal.getText().toString()));
+        mDieselFillingEditTextDieselPrice.setText(decimalConversion.convertDecimal(mDieselFillingEditTextDieselPrice.getText().toString()));
     }
 
 
@@ -355,6 +390,7 @@ public class DieselFilling extends BaseActivity {
                 return true;
             case R.id.menuDone:
                 /*if (site_id > 0) {*/
+                DecimalFormatConversion();
                 if (checkValidationOnSubmitDiselTicket() == true) {
                     // Code For Next Validation by Arjun on 22112018
                     showSettingsAlert();
@@ -750,7 +786,7 @@ public class DieselFilling extends BaseActivity {
         String accessToken = sessionManager.getSessionDeviceToken();
         String latitude = String.valueOf(gpsTracker.getLatitude());
         String longitude = String.valueOf(gpsTracker.getLongitude());
-        String siteID = String.valueOf(site_id);
+        String siteID = mDieselFillingTextViewSiteNameVal.getText().toString();
         String selectDgIdQrCode = mDieselFillingTextViewSelectDgIdQrCodeVal.getText().toString().trim();
 
         String presentDgHmr = mDieselFillingEditTextPresentDgHmr.getText().toString().trim();
@@ -796,5 +832,6 @@ public class DieselFilling extends BaseActivity {
         } else return true;
 
     }
+
 
 }

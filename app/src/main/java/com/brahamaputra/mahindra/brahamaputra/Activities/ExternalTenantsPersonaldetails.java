@@ -23,6 +23,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetail
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -53,7 +54,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     String str_totalNumberofTanents;
     String str_nameoftheTenant;
     String str_typeofTenant;
-
+    DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
     private String ticketId = "";
@@ -125,6 +126,11 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         );
 
         getNamesOfTenatsExludeSiteTenant();
+    }
+
+    public void DecimalFormatConversion() {
+        mExternalTenantsPersonaldetailsEditTextPositionattheTower.setText(decimalConversion.convertDecimal(mExternalTenantsPersonaldetailsEditTextPositionattheTower.getText().toString()));
+
     }
 
     private void initCombo() {
@@ -235,6 +241,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_external_tenants_personal_details);
         this.setTitle("External Tenants Personal details");
+        decimalConversion = new DecimalConversion();
         sessionManager = new SessionManager(ExternalTenantsPersonaldetails.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -329,9 +336,20 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 }
             }
         });
+
+        mExternalTenantsPersonaldetailsEditTextPositionattheTower.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
     }
 
     private boolean checkValidtionForArrayFields() {
+        DecimalFormatConversion();
         String nameofTenant = mExternalTenantsPersonaldetailsTextViewNameoftheTenantVal.getText().toString().trim();
         String typeofTenant = mExternalTenantsPersonaldetailsTextViewTypeofTenantVal.getText().toString().trim();
         String positionattheTower = mExternalTenantsPersonaldetailsEditTextPositionattheTower.getText().toString().trim();
@@ -429,6 +447,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
+                DecimalFormatConversion();
                 if (checkValidationonSubmit()) {
                     submitDetails();
                     finish();

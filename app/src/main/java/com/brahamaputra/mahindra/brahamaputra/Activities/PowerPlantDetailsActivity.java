@@ -38,6 +38,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -131,7 +132,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     String str_numberOfPowerPlantWorking;
 
     private static final String TAG = PowerPlantDetailsActivity.class.getSimpleName();
-
+    DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
     private String ticketId = "28131";
@@ -161,7 +162,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_power_plant_details);
         this.setTitle("Power Plant Details");
         alertDialogManager = new AlertDialogManager(PowerPlantDetailsActivity.this);
-
+        decimalConversion = new DecimalConversion();
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -208,6 +209,39 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
             }
         });
+        mPowerPlantDetailsEditTextDcLoadInDisplayAmp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerPlantDetailsEditTextCapacityInAmp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerPlantDetailsEditTextSmpsUltimateCapacity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
 
         /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
         mPowerPlantDetailsButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
@@ -284,6 +318,14 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
     }
+
+    public void DecimalFormatConversion() {
+        mPowerPlantDetailsEditTextDcLoadInDisplayAmp.setText(decimalConversion.convertDecimal(mPowerPlantDetailsEditTextDcLoadInDisplayAmp.getText().toString()));
+        mPowerPlantDetailsEditTextCapacityInAmp.setText(decimalConversion.convertDecimal(mPowerPlantDetailsEditTextCapacityInAmp.getText().toString()));
+        mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setText(decimalConversion.convertDecimal(mPowerPlantDetailsEditTextSmpsExpandableUpToKW.getText().toString()));
+        mPowerPlantDetailsEditTextSmpsUltimateCapacity.setText(decimalConversion.convertDecimal(mPowerPlantDetailsEditTextSmpsUltimateCapacity.getText().toString()));
+    }
+
 
     private void initCombo() {
         mPowerPlantDetailsTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
@@ -761,7 +803,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     public void clearFields(int indexPos) {
 
-        mpowerPlantDetails_textView_PlantNumber.setText("Tentant: #" + (indexPos + 1));
+        mpowerPlantDetails_textView_PlantNumber.setText("Tenant: #" + (indexPos + 1));
 
         mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
 
@@ -814,6 +856,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     /*Arjun 21112018*/
     public boolean checkValidationOfArrayFields() {
+        DecimalFormatConversion();
         String numberOfPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
         String qRCodeScan = base64StringQRCodeScan;
         String assetOwner = mPowerPlantDetailsTextViewAssetOwnerVal.getText().toString().trim();

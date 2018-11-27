@@ -37,6 +37,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -152,7 +153,7 @@ public class Power_Backups_DG extends BaseActivity {
     String str_workingCondition;
 
     private static final String TAG = Power_Backups_DG.class.getSimpleName();
-
+    DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "101";
     private String ticketId = "28131";
@@ -191,6 +192,7 @@ public class Power_Backups_DG extends BaseActivity {
         setContentView(R.layout.activity_power_backups_dg);
         this.setTitle("Power Backups (DG)");
         alertDialogManager = new AlertDialogManager(Power_Backups_DG.this);
+        decimalConversion = new DecimalConversion();
         assignViews();
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -275,6 +277,55 @@ public class Power_Backups_DG extends BaseActivity {
                 new DatePickerDialog(Power_Backups_DG.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        mPowerBackupsDgEditTextDieselTankCapacity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerBackupsDgEditTextAverageDieselConsumption.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerBackupsDgEditTextDgHmrReading.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerBackupsDgEditTextPresentDieselStock.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerBackupsDgEditTextGcuRunHrs.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPowerBackupsDgEditTextGcuKwh.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
             }
         });
 
@@ -390,6 +441,15 @@ public class Power_Backups_DG extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+    }
+
+    public void DecimalFormatConversion() {
+        mPowerBackupsDgEditTextDieselTankCapacity.setText(decimalConversion.convertDecimal(mPowerBackupsDgEditTextDieselTankCapacity.getText().toString()));
+        mPowerBackupsDgEditTextAverageDieselConsumption.setText(decimalConversion.convertDecimal(mPowerBackupsDgEditTextAverageDieselConsumption.getText().toString()));
+        mPowerBackupsDgEditTextDgHmrReading.setText(decimalConversion.convertDecimal(mPowerBackupsDgEditTextDgHmrReading.getText().toString()));
+        mPowerBackupsDgEditTextPresentDieselStock.setText(decimalConversion.convertDecimal(mPowerBackupsDgEditTextPresentDieselStock.getText().toString()));
+        mPowerBackupsDgEditTextGcuRunHrs.setText(decimalConversion.convertDecimal(mPowerBackupsDgEditTextGcuRunHrs.getText().toString()));
+        mPowerBackupsDgEditTextGcuKwh.setText(decimalConversion.convertDecimal(mPowerBackupsDgEditTextGcuKwh.getText().toString()));
     }
 
     private void initCombo() {
@@ -1355,7 +1415,7 @@ public class Power_Backups_DG extends BaseActivity {
 
     /*Arjun 21112018*/
     public boolean checkValidationOfArrayFields() {
-
+        DecimalFormatConversion();
         String qRCodeScan = base64StringQRCodeScan;
         String assetOwner = mPowerBackupsDgTextViewAssetOwnerVal.getText().toString().trim();//
         String manufacturerMakeModel = mPowerBackupsDgTextViewManufacturerMakeModelVal.getText().toString().trim();//

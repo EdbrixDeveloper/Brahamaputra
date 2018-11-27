@@ -20,6 +20,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.ActiveequipmentDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -44,7 +45,7 @@ public class ActiveequipmentDetails extends BaseActivity {
     String str_typeofBTS;
     String str_importanceOfSite;
     String str_numberOfDependantSites;
-
+    DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
     private String ticketId = "";
@@ -92,7 +93,34 @@ public class ActiveequipmentDetails extends BaseActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
+
     }
+
+    public void DecimalFormatConversion() {
+        mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.setText(decimalConversion.convertDecimal(mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString()));
+        mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.setText(decimalConversion.convertDecimal(mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString()));
+
+    }
+
+    public void set_listener() {
+        mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+    }
+
 
     private void initCombo() {
 
@@ -158,6 +186,8 @@ public class ActiveequipmentDetails extends BaseActivity {
 
             }
         });
+
+
     }
 
 
@@ -172,10 +202,10 @@ public class ActiveequipmentDetails extends BaseActivity {
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(ActiveequipmentDetails.this, userId, ticketName);
-
+        decimalConversion = new DecimalConversion();
         assignViews();
         initCombo();
-
+        set_listener();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
         setInputDetails();
@@ -224,6 +254,7 @@ public class ActiveequipmentDetails extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuDone:
+                DecimalFormatConversion();
                 submitDetails();
                 finish();
                 startActivity(new Intent(this, PowerManagementSystem.class));
@@ -247,14 +278,13 @@ public class ActiveequipmentDetails extends BaseActivity {
                 activeequipmentDetailsData = hotoTransactionData.getActiveequipmentDetailsData();
 
 
-
                 mActiveEquipmentDetailsTextViewTypeofBTSVal.setText(activeequipmentDetailsData.getTypeofBTS());
-                mActiveEquipmentDetailsTextViewImportanceOfSiteVal.setText(activeequipmentDetailsData.getImportanceOfSite());;
-                mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.setText(activeequipmentDetailsData.getNumberOfDependantSites());;
-                mActiveEquipmentDetailsEditTextMake.setText(activeequipmentDetailsData.getMake());;
-                mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.setText(activeequipmentDetailsData.getDCLoadofBTSequipment());;
-                mActiveEquipmentDetailsEditTextYearofInstallationatsite.setText(activeequipmentDetailsData.getYearofInstallationatsite());;
-                mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.setText(activeequipmentDetailsData.getPositionofAntennaTower());;
+                mActiveEquipmentDetailsTextViewImportanceOfSiteVal.setText(activeequipmentDetailsData.getImportanceOfSite());
+                mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.setText(activeequipmentDetailsData.getNumberOfDependantSites());
+                mActiveEquipmentDetailsEditTextMake.setText(activeequipmentDetailsData.getMake());
+                mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.setText(activeequipmentDetailsData.getDCLoadofBTSequipment());
+                mActiveEquipmentDetailsEditTextYearofInstallationatsite.setText(activeequipmentDetailsData.getYearofInstallationatsite());
+                mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.setText(activeequipmentDetailsData.getPositionofAntennaTower());
 
 
             } else {
@@ -264,18 +294,19 @@ public class ActiveequipmentDetails extends BaseActivity {
             e.printStackTrace();
         }
     }
+
     private void submitDetails() {
         try {
             //hotoTransactionData.setTicketNo(ticketId);
 
 
-            String typeofBTS= mActiveEquipmentDetailsTextViewTypeofBTSVal.getText().toString().trim();
-            String importanceOfSite= mActiveEquipmentDetailsTextViewImportanceOfSiteVal.getText().toString().trim();
-            String numberOfDependantSites= mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.getText().toString().trim();
-            String make= mActiveEquipmentDetailsEditTextMake.getText().toString().trim();
-            String DCLoadofBTSequipment= mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString().trim();
-            String yearofInstallationatsite= mActiveEquipmentDetailsEditTextYearofInstallationatsite.getText().toString().trim();
-            String positionofAntennaTower= mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString().trim();
+            String typeofBTS = mActiveEquipmentDetailsTextViewTypeofBTSVal.getText().toString().trim();
+            String importanceOfSite = mActiveEquipmentDetailsTextViewImportanceOfSiteVal.getText().toString().trim();
+            String numberOfDependantSites = mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.getText().toString().trim();
+            String make = mActiveEquipmentDetailsEditTextMake.getText().toString().trim();
+            String DCLoadofBTSequipment = mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString().trim();
+            String yearofInstallationatsite = mActiveEquipmentDetailsEditTextYearofInstallationatsite.getText().toString().trim();
+            String positionofAntennaTower = mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString().trim();
 
             activeequipmentDetailsData = new ActiveequipmentDetailsData(typeofBTS, importanceOfSite, numberOfDependantSites, make, DCLoadofBTSequipment, yearofInstallationatsite, positionofAntennaTower);
 

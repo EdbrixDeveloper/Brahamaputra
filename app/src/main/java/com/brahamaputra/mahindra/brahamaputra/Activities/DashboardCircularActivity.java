@@ -236,8 +236,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 menu_selected(view_pass);
             }
         }, 100);
-
-
     }
 */
 
