@@ -156,7 +156,7 @@ public class ElectricBillProcess extends BaseActivity {
     private TextView mEbProcessTextViewEbBillScanCopy;
     private ImageView mEbProcessButtonEbBillScanCopy;
     private ImageView mEbProcessButtonEbBillScanCopyiew;
-    private String base64StringBillUpload;
+    private String base64StringBillUpload="";
 
     String str_customerName = "";
     String str_circleName = "";
@@ -357,9 +357,7 @@ public class ElectricBillProcess extends BaseActivity {
             public void onClick(View v) {
                 if (!mEbProcessTextViewCustomerVal.getText().toString().trim().isEmpty()) {
                     prepareCircle();
-                }
-                else
-                {
+                } else {
                     showToast("Please Select Customer");
                 }
 
@@ -369,12 +367,10 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessTextViewStateVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // prepareStates();
+                // prepareStates();
                 if (!mEbProcessTextViewCircleVal.getText().toString().trim().isEmpty()) {
                     prepareStates();
-                }
-                else
-                {
+                } else {
                     showToast("Please Select Circle");
                 }
 
@@ -383,12 +379,10 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessTextViewSsaVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // prepareSSA();
+                // prepareSSA();
                 if (!mEbProcessTextViewStateVal.getText().toString().trim().isEmpty()) {
                     prepareSSA();
-                }
-                else
-                {
+                } else {
                     showToast("Please Select State");
                 }
             }
@@ -399,9 +393,7 @@ public class ElectricBillProcess extends BaseActivity {
                 //prepareSite();
                 if (!mEbProcessTextViewSsaVal.getText().toString().trim().isEmpty()) {
                     prepareSite();
-                }
-                else
-                {
+                } else {
                     showToast("Please Select SSA");
                 }
 
@@ -685,7 +677,7 @@ public class ElectricBillProcess extends BaseActivity {
         String EBServiceProvider = mEbProcessTextViewEbServiceProviderVal.getText().toString().trim();
         String EBConsumerNumber = mEbProcessTextViewEbConsumerNumberVal.getText().toString().trim();
         String ModeOfPayment = mEbProcessTextViewTypeModeOfPayementVal.getText().toString().trim();
-        String TypeofElectricConnection = mEbProcessTextViewTypeModeOfPayementVal.getText().toString().trim();
+        String TypeofElectricConnection = mEbProcessTextViewTypeOfElectricConnectionVal.getText().toString().trim();
         String Tariff = mEbProcessTextViewTariffVal.getText().toString().trim();
         String UnitsConsumed = mEbProcessEditTextUnitConsumed.getText().toString().trim();
         String BillingPeriodFrom = mEbProcessEditTextBillingFrom.getText().toString().trim();
@@ -758,7 +750,7 @@ public class ElectricBillProcess extends BaseActivity {
         } else if (CustomerId.isEmpty() || CustomerId == null) {
             showToast("Select Net Payable On Or Before Due Date ");
             return false;
-        } else if (EbBillScanCopyImageName.isEmpty() || EbBillScanCopyImageName == null) {
+        } else if (base64StringBillUpload.isEmpty() || base64StringBillUpload == null) {
             showToast("Upload Bill Image ");
             return false;
         } else
@@ -1276,7 +1268,10 @@ public class ElectricBillProcess extends BaseActivity {
                                             mEbProcessTextViewSiteVal.setText(str_siteName);
                                             siteID = Integer.valueOf(site.getSiteList().get(position).getId());
                                             mEbProcessTextViewSiteIDVal.setText(site.getSiteList().get(position).getSiteId());
-                                            mEbProcessTextViewSiteDetailsVal.setText(String.valueOf(site.getSiteList().get(position).getSiteAddress()));
+                                            String siteAddress = String.valueOf(site.getSiteList().get(position).getSiteAddress());
+                                            if (!siteAddress.isEmpty()) {
+                                                mEbProcessTextViewSiteDetailsVal.setText(String.valueOf(site.getSiteList().get(position).getSiteAddress()));
+                                            }
                                             mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(site.getSiteList().get(position).getEbOfficeName()));
                                             prepareEbSiteConnectedData();
                                         }
