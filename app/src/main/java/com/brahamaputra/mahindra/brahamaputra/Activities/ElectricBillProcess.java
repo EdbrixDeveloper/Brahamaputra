@@ -65,6 +65,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.EnglishNumberToWords;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
@@ -156,7 +157,9 @@ public class ElectricBillProcess extends BaseActivity {
     private TextView mEbProcessTextViewEbBillScanCopy;
     private ImageView mEbProcessButtonEbBillScanCopy;
     private ImageView mEbProcessButtonEbBillScanCopyiew;
-    private String base64StringBillUpload="";
+    private String base64StringBillUpload = "";
+    private TextView mEbProcessTextViewNetPayableWords;
+    private TextView mEbProcessTextViewNetPayableWordsVal;
 
     String str_customerName = "";
     String str_circleName = "";
@@ -277,6 +280,8 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessTextViewEbBillScanCopy = (TextView) findViewById(R.id.ebProcess_textView_ebBillScanCopy);
         mEbProcessButtonEbBillScanCopy = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopy);
         mEbProcessButtonEbBillScanCopyiew = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopyiew);
+        mEbProcessTextViewNetPayableWords = (TextView) findViewById(R.id.ebProcess_textView_netPayableWords);
+        mEbProcessTextViewNetPayableWordsVal = (TextView) findViewById(R.id.ebProcess_textView_netPayableWordsVal);
 
         mEbProcessEditTextUnitConsumed.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         mEbProcessEditTextGrossAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
@@ -337,6 +342,34 @@ public class ElectricBillProcess extends BaseActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     DecimalFormatConversion();
+                }
+            }
+        });
+        mEbProcessEditTextNetPaybleBeforeDueDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    mEbProcessTextViewNetPayableWordsVal.setText("");
+                    String netPayable = mEbProcessEditTextNetPaybleBeforeDueDate.getText().toString().trim();
+                    if (netPayable.toString().length() > 0 && !netPayable.equals(".")) {
+                        float number = Float.valueOf(netPayable);
+                        long aValue = (long) number;
+                        //String str_rentLease = EnglishNumberToWords.convert(Long.valueOf(netPayable));
+                        String str_rentLease = EnglishNumberToWords.convert(aValue);
+                        mEbProcessTextViewNetPayableWordsVal.setText(str_rentLease);
+                    }
+                } catch (Exception e) {
+                    Log.d(ElectricBillProcess.TAG,e.getMessage());
                 }
             }
         });

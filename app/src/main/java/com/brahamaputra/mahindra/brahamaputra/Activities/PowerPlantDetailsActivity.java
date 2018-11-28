@@ -931,11 +931,27 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Enter Nature of Problem");
             return false;
+        } else if (checkDuplicationQrCode(currentPos)) {
+            return false;
         } else if (checkValidationOnNoOfModuleSlots() == false) {
             return false;
         } else return checkValidationOnNoOfFaultyModulese();
 
     }
+
+    private boolean checkDuplicationQrCode(int curr_pos) {
+        for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
+            if (i != curr_pos) {
+                if (base64StringQRCodeScan.equals(powerPlantDetailsDataList.get(i).getqRCodeScan().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     /*Arjun 21112018*/
     public boolean checkValidationOnNoOfModuleSlots() {
