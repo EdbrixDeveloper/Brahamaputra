@@ -177,6 +177,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     TextView mGeneralAndSafetyMeasureTextViewNumber;
     private LinearLayout linearLayout_container;
     DecimalConversion decimalConversion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,7 +199,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         onValidateSecurityStatus();
         onValidateCaretakerStatus();
         onValidateSecurityCaretakeStatus();
-        //onValidateSalaryPaidBy(); //As per requirement TestResultV6.doc by arjun
+        onValidateSalaryPaidBy();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -620,7 +621,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                         str_CaretakerSecuritySalaryPaidBy = item.get(position);
                         mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.setText(str_CaretakerSecuritySalaryPaidBy);
-                        //onValidateSalaryPaidBy();//As per requirement Test Result V6.doc by arjun
+                        onValidateSalaryPaidBy();
 
                     }
                 });
