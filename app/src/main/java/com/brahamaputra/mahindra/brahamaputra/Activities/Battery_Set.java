@@ -532,7 +532,7 @@ public class Battery_Set extends BaseActivity {
             if (i != curr_pos) {
                 if (base64StringBatterySet.equals(batterySetData.get(i).getBatterySet_Qr().toString())) {
                     int dup_pos = i + 1;
-                    showToast("This QR COde Already scanned at Reading Number: " + dup_pos);
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
                     return true;
                 }
             }
