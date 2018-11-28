@@ -198,7 +198,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         onValidateSecurityStatus();
         onValidateCaretakerStatus();
         onValidateSecurityCaretakeStatus();
-
+        //onValidateSalaryPaidBy(); //As per requirement TestResultV6.doc by arjun
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -226,7 +226,6 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         generalSafetyMeasuresData = new ArrayList<>();
         currentPos = 0;
         setInputDetails(currentPos);
-        onValidateSalaryPaidBy();
         mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -621,7 +620,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
                         str_CaretakerSecuritySalaryPaidBy = item.get(position);
                         mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.setText(str_CaretakerSecuritySalaryPaidBy);
-                        onValidateSalaryPaidBy();
+                        //onValidateSalaryPaidBy();//As per requirement Test Result V6.doc by arjun
 
                     }
                 });
@@ -1122,7 +1121,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     }
 
     private boolean checkValidtionForArrayFields() {
-        String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
+       /* String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
         String fireExtuinguisherExpiryDate = mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.getText().toString().trim();
 
         if (fireExtuinguisherType.isEmpty() || fireExtuinguisherType == null) {
@@ -1131,7 +1130,8 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         } else if (fireExtuinguisherExpiryDate.isEmpty() || fireExtuinguisherExpiryDate == null) {
             showToast("Select Fire Extuinguisher Expiry Date");
             return false;
-        } else return true;
+        } else*/
+        return true;
     }
 
     private void saveRecords(int pos) {

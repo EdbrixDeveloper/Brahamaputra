@@ -156,6 +156,7 @@ public class Tower_Detail extends BaseActivity {
 
                         str_tower = item.get(position);
                         mTowerDetailTextViewTowerVal.setText(str_tower);
+
                     }
                 });
             }
@@ -182,46 +183,6 @@ public class Tower_Detail extends BaseActivity {
             }
         });
 
-        mTowerDetailTextViewSignboardVal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_signboard))),
-                        "Sign Board",
-                        "Close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_signboard = item.get(position);
-                        mTowerDetailTextViewSignboardVal.setText(str_signboard);
-                    }
-                });
-            }
-        });
-
-        mTowerDetailSpinnerDangerSignageboardVal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_dangerSignageboard))),
-                        "DANGER Signage Board",
-                        "close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_dangerSignageboard = item.get(position);
-                        mTowerDetailSpinnerDangerSignageboardVal.setText(str_dangerSignageboard);
-                    }
-                });
-            }
-        });
-
         mTowerDetailTextViewCautionSignageboardVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,6 +198,7 @@ public class Tower_Detail extends BaseActivity {
 
                         str_cautionSignageboard = item.get(position);
                         mTowerDetailTextViewCautionSignageboardVal.setText(str_cautionSignageboard);
+                        setSignboardVal();
                     }
                 });
             }
@@ -257,11 +219,64 @@ public class Tower_Detail extends BaseActivity {
 
                         str_warningSignageboardVal = item.get(position);
                         mTowerDetailTextViewWarningSignageboardVal.setText(str_warningSignageboardVal);
+                        setSignboardVal();
                     }
                 });
             }
         });
+
+        mTowerDetailSpinnerDangerSignageboardVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_dangerSignageboard))),
+                        "DANGER Signage Board",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dangerSignageboard = item.get(position);
+                        mTowerDetailSpinnerDangerSignageboardVal.setText(str_dangerSignageboard);
+                        setSignboardVal();
+                    }
+                });
+            }
+        });
+
+        /*mTowerDetailTextViewSignboardVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Tower_Detail.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_towerDetail_signboard))),
+                        "Sign Board",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_signboard = item.get(position);
+                        mTowerDetailTextViewSignboardVal.setText(str_signboard);
+                    }
+                });
+            }
+        });*/
+
     }
+
+    private void setSignboardVal() {
+        str_signboard = "Not Available";
+        if (mTowerDetailTextViewCautionSignageboardVal.getText().toString().trim().equals("Available") && mTowerDetailTextViewWarningSignageboardVal.getText().toString().trim().equals("Available") && mTowerDetailSpinnerDangerSignageboardVal.getText().toString().trim().equals("Available")) {
+            str_signboard = "Available";
+        }
+        mTowerDetailTextViewSignboardVal.setText(str_signboard);
+
+    }
+
 
     private void updateLabel() {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here

@@ -269,7 +269,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Mobile Number of Security "
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:textAlignment="viewStart" />
 
 

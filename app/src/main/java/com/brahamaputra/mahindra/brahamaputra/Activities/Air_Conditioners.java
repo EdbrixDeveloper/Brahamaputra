@@ -400,7 +400,10 @@ public class Air_Conditioners extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
 
                         str_numberOfACInWorkingCondition = item.get(position);
-                        mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(str_numberOfACInWorkingCondition);
+                        mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText("");
+                        if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), str_numberOfACInWorkingCondition) == true) {
+                            mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(str_numberOfACInWorkingCondition);
+                        }
                     }
                 });
             }
@@ -542,7 +545,8 @@ public class Air_Conditioners extends BaseActivity {
                         displayACRecords(currentPos);
 
                     } else if (currentPos == (totalAcCount - 1)) {
-                        if (checkValidationOnNoOfAcSelection() == true) {
+                        //if (checkValidationOnNoOfAcSelection() == true) {
+                        if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim()) == true) {
                             //Save Final current reading and submit all AC data
                             saveACRecords(currentPos);
                             submitDetails();
@@ -798,7 +802,8 @@ public class Air_Conditioners extends BaseActivity {
                 if (str_noOfAirConditionersACprovided == null || str_noOfAirConditionersACprovided.equals("")) {
                     showToast("Please select no of ac");
                 } else {
-                    if (checkValidationOnNoOfAcSelection() == true) {
+                    // if (checkValidationOnNoOfAcSelection() == true) {
+                    if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim()) == true) {
                         submitDetails();
                         startActivity(new Intent(this, Solar_Power_System.class));
                         finish();
@@ -1001,6 +1006,36 @@ public class Air_Conditioners extends BaseActivity {
         prefsEditor.commit();
     }
 
+    /*Arjun 28112018*/
+    public boolean checkValidationOnChangeNoOfAcSelection(String noOfACprovided, String numberOfACInWorkingCondition) {
+
+        if (!noOfACprovided.isEmpty() && noOfACprovided != null) {
+            if (noOfACprovided.matches("\\d+(?:\\.\\d+)?")) {
+                if (Integer.valueOf(noOfACprovided) > 0) {
+                    if (!numberOfACInWorkingCondition.isEmpty() && numberOfACInWorkingCondition != null) {
+                        if (Integer.valueOf(numberOfACInWorkingCondition) <= Integer.valueOf(noOfACprovided)) {
+                            return true;
+                        } else {
+                            showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
+                            return false;
+                        }
+                    } else {
+                        showToast("Select Number of AC in working condition");
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            showToast("Select No of Air Conditioners(AC) provided");
+            return false;
+        }
+
+    }
+
     /*Arjun 21112018*/
     public boolean checkValidationOnNoOfAcSelection() {
         String noOfACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim();
@@ -1037,7 +1072,7 @@ public class Air_Conditioners extends BaseActivity {
     public boolean checkValidationOfArrayFields() {
         DecimalFormatConversion();
         String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
-        String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
+        /*String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
         String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
         String manufacturerMakeModel = mAirConditionersTextViewManufacturerMakeModelVal.getText().toString().trim();
         String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
@@ -1046,13 +1081,13 @@ public class Air_Conditioners extends BaseActivity {
         String amcYesNo = mAirConditionersTextViewAmcYesNoVal.getText().toString().trim();
         String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
         String workingCondition = mAirConditionersTextViewWorkingConditionVal.getText().toString().trim();
-        String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();
+        String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();*/
 
 
         if (qRCodeScan.isEmpty() || qRCodeScan == null) {
             showToast("Please Scan QR Code");
             return false;
-        } else if (assetOwner.isEmpty() || assetOwner == null) {
+        }/* else if (assetOwner.isEmpty() || assetOwner == null) {
             showToast("Select Asset Owner");
             return false;
         } else if (typeOfAcSplitWindow.isEmpty() || typeOfAcSplitWindow == null) {
@@ -1082,7 +1117,7 @@ public class Air_Conditioners extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Enter Nature of Problem");
             return false;
-        } else if (checkDuplicationQrCode(currentPos)) {
+        }*/ else if (checkDuplicationQrCode(currentPos)) {
             return false;
         } else return true;
 

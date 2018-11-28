@@ -476,7 +476,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     }
 
     private boolean checkValidtionForArrayFields() {
-        String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
+        /*String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
         String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
         String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
         String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
@@ -493,7 +493,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         } else if (assetDescription.isEmpty() || assetDescription == null) {
             showToast("Select Asset Description ");
             return false;
-        } else return true;
+        } else*/ return true;
     }
 
     @Override

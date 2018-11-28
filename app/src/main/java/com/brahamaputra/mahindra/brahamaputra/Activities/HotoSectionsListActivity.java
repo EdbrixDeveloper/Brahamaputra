@@ -267,7 +267,6 @@ public class HotoSectionsListActivity extends BaseActivity {
 
 
             hotoSections_listView_sections = (ListView) findViewById(R.id.hotoSections_listView_sections);
-            this.setTitle("Readings");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             values = getResources().getStringArray(R.array.listView_hotoSections_sections);

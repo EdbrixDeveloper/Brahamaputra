@@ -399,7 +399,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             showToast("Enter Landline Number of Contact Person ");
             return false;
         } else if (date_compare(dateofstartofTenancy, dateofstartofRadiation) == false) {
-            showToast("Select Date of Start of Radiation is less than or equal to Date of the start of Tenancy");
+            showToast("Select Date of the start of Tenancy is less than or equal to Date of Start of Radiation");
             return false;
         } else return true;
 
@@ -464,7 +464,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
 
             Date date2 = formatter.parse(dateStartRadiation);
             if (date1 != null && date2 != null) {
-                if (date1.compareTo(date2) < 0) {
+                if (date2.compareTo(date1) < 0) {
                     return false;
                 }
             }
