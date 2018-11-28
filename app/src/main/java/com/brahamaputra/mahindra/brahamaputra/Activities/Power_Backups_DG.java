@@ -1330,6 +1330,7 @@ public class Power_Backups_DG extends BaseActivity {
     }
 
     public void clearFields(int indexPos) {
+
         powerBackupsDg_textView_Number.setText("Reading: #" + (indexPos + 1));
         mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
 
@@ -1376,6 +1377,7 @@ public class Power_Backups_DG extends BaseActivity {
         str_dgAvrWorkingStatus = "";
         str_fuelTankPosition = "";
         str_workingCondition = "";
+        base64StringQRCodeScan = "";
 
         if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
@@ -1534,7 +1536,7 @@ public class Power_Backups_DG extends BaseActivity {
             if (i != curr_pos) {
                 if (base64StringQRCodeScan.equals(powerBackupsDGData.get(i).getqRCodeScan().toString())) {
                     int dup_pos = i + 1;
-                    showToast("This QR COde Already scanned at Reading Number: " + dup_pos);
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
                     return true;
                 }
             }
