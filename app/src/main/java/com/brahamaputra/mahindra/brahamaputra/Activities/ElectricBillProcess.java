@@ -82,6 +82,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -369,7 +370,7 @@ public class ElectricBillProcess extends BaseActivity {
                         mEbProcessTextViewNetPayableWordsVal.setText(str_rentLease);
                     }
                 } catch (Exception e) {
-                    Log.d(ElectricBillProcess.TAG,e.getMessage());
+                    Log.d(ElectricBillProcess.TAG, e.getMessage());
                 }
             }
         });
@@ -625,7 +626,7 @@ public class ElectricBillProcess extends BaseActivity {
 
         mEbProcessEditTextBillingFrom.setText(sdf.format(myCalendar.getTime()));
 
-        String myFormat1 = "MM/dd/yyyy"; //In which you need put here
+        String myFormat1 = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_BillFrom = sdf1.format(myCalendar.getTime());
@@ -637,7 +638,7 @@ public class ElectricBillProcess extends BaseActivity {
 
         mEbProcessEditTextBillingTo.setText(sdf.format(myCalendar.getTime()));
 
-        String myFormat1 = "MM/dd/yyyy"; //In which you need put here
+        String myFormat1 = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_BillTo = sdf1.format(myCalendar.getTime());
@@ -649,7 +650,7 @@ public class ElectricBillProcess extends BaseActivity {
 
         mEbProcessEditTextBillingIssueDate.setText(sdf.format(myCalendar.getTime()));
 
-        String myFormat1 = "MM/dd/yyyy"; //In which you need put here
+        String myFormat1 = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_issue = sdf1.format(myCalendar.getTime());
@@ -661,7 +662,7 @@ public class ElectricBillProcess extends BaseActivity {
 
         mEbProcessEditTextBilliDueDate.setText(sdf.format(myCalendar.getTime()));
 
-        String myFormat1 = "MM/dd/yyyy"; //In which you need put here
+        String myFormat1 = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_due = sdf1.format(myCalendar.getTime());
@@ -702,6 +703,7 @@ public class ElectricBillProcess extends BaseActivity {
     }
 
     private boolean checkValiadtion() {
+
         String CustomerId = mEbProcessTextViewCustomerVal.getText().toString().trim();
         String CircleId = mEbProcessTextViewCircleVal.getText().toString().trim();
         String stateId = mEbProcessTextViewStateVal.getText().toString().trim();
@@ -786,10 +788,37 @@ public class ElectricBillProcess extends BaseActivity {
         } else if (base64StringBillUpload.isEmpty() || base64StringBillUpload == null) {
             showToast("Upload Bill Image ");
             return false;
+        } else if (!dateFromToValid(date_BillFrom, date_BillTo)) {
+            showToast("Bill To Date should  grater than Bill From Date ");
+            return false;
         } else
             return true;
 
 
+    }
+
+    private boolean dateFromToValid(String startdate, String enddate) {
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd/MM/yyyy");
+        Date date_1 = new Date();
+        Date date_2 = new Date();
+        try {
+            date_1 = dateFormat.parse(startdate);
+            date_2 = dateFormat.parse(enddate);
+            if (date_2.after(date_1)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+
+        }
+        return false;
     }
 
 

@@ -198,7 +198,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         onValidateSecurityStatus();
         onValidateCaretakerStatus();
         onValidateSecurityCaretakeStatus();
-        onValidateSalaryPaidBy();
+
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -226,6 +226,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         generalSafetyMeasuresData = new ArrayList<>();
         currentPos = 0;
         setInputDetails(currentPos);
+        onValidateSalaryPaidBy();
         mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -922,7 +923,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     private void onValidateSalaryPaidBy() {
         String value = mGeneralAndSafetyMeasureTextViewCaretakerSecuritySalaryPaidByVal.getText().toString();
         mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid.setVisibility(View.VISIBLE);
-        if (value.equals("External Agency")) {
+        if (!value.equals("External Agency")) {
             mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid.setVisibility(View.GONE);
             mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.setText("");
 
