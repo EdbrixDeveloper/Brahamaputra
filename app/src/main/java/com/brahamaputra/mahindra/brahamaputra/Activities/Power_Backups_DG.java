@@ -1536,7 +1536,7 @@ public class Power_Backups_DG extends BaseActivity {
             if (i != curr_pos) {
                 if (base64StringQRCodeScan.equals(powerBackupsDGData.get(i).getqRCodeScan().toString())) {
                     int dup_pos = i + 1;
-                    showToast("This QR COde Already scanned at Reading Number: " + dup_pos);
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
                     return true;
                 }
             }
