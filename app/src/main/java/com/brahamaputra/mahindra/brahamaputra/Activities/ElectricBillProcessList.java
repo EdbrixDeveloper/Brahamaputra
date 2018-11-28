@@ -129,6 +129,9 @@ public class ElectricBillProcessList extends BaseActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage().contains("java.net.UnknownHostException")){
+                        showToast("No Internet Connection.");
+                    }
                     hideBusyProgress();
 
                 }
