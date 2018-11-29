@@ -39,7 +39,6 @@ import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -446,7 +445,6 @@ public class PhotoCaptureActivity extends BaseActivity {
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringSite = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPhotoCaptureButtonSiteView.setVisibility(View.VISIBLE);
-
 
                         } catch (Exception e) {
                             e.printStackTrace();

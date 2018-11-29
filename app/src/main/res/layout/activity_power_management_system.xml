@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Power Management System Staus" />
+                    android:text="Power Management System Status" />
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus_val"

@@ -6,6 +6,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textSize">16sp</item>
+
+        <!--<item name="android:typeface">verdana</item>-->
+        <item name="android:fontFamily">verdana</item>
+        <item name="fontFamily">verdana</item>
+
     </style>
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
@@ -13,6 +18,10 @@
         <item name="android:textSize">16sp</item>
         <item name="android:paddingRight">@dimen/app_big_padding</item>
         <item name="android:paddingLeft">@dimen/app_min_padding</item>
+
+       <!-- <item name="android:typeface">verdana</item>-->
+        <item name="android:fontFamily">verdana</item>
+        <item name="fontFamily">verdana</item>
     </style>
 
     <style name="FontStyle" parent="android:Widget.TextView">
@@ -21,6 +30,9 @@
         <item name="android:layout_marginRight">@dimen/app_min_padding</item>
         <item name="android:layout_gravity">center_vertical</item>
 
+        <!--<item name="android:typeface">verdana</item>-->
+        <item name="android:fontFamily">verdana</item>
+        <item name="fontFamily">verdana</item>
         <!--<item name="android:textSize">20dp</item>-->
     </style>
     <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -28,6 +40,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!--<item name="android:typeface">verdana</item>-->
+        <item name="android:fontFamily">verdana</item>
+        <item name="fontFamily">verdana</item>
     </style>
 
     <style name="MyTheme" parent="android:Widget.Spinner">
@@ -35,6 +51,10 @@
         <item name="android:textSize">16sp</item>
         <item name="android:paddingRight">40dp</item>
         <item name="android:paddingLeft">10dp</item>
+
+       <!-- <item name="android:typeface">verdana</item>-->
+        <item name="android:fontFamily">verdana</item>
+        <item name="fontFamily">verdana</item>
     </style>
 
 </resources>

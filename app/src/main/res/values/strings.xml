@@ -456,7 +456,7 @@
     <string-array name="array_powerManagementSystem_PowerManagementSystemStaus">
         <item>Auto Mode</item>
         <item>Man Operated</item>
-        <item>Manuel Mode</item>
+        <item>Manual Mode</item>
         <item>Not Working since long</item>
     </string-array>
 

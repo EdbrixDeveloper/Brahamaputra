@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
     android:orientation="horizontal"
     android:padding="10dp"
     android:weightSum="3"
@@ -24,8 +23,7 @@
             android:text="100"
             android:textColor="@color/colorMainText"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="normal" />
+            style="@style/FontStyle"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,8 +41,7 @@
             android:layout_marginBottom="@dimen/app_normal_margin"
             android:text="TextView"
             android:textColor="@color/colorMainText"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            style="@style/FontStyle"/>
     </LinearLayout>
 
     <LinearLayout
@@ -61,7 +58,8 @@
             android:layout_margin="@dimen/app_min_margin"
             android:scaleType="centerInside"
             android:src="@drawable/baseline_done_black_18dp"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            style="@style/FontStyle"/>
 
     </LinearLayout>
 
