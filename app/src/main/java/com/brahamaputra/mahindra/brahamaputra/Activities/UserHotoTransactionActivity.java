@@ -406,7 +406,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             if (!hotoTransactionData.isAllHotoFormsSubmit()) {
                 hideBusyProgress();
                 alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
-                alertDialogManager.Dialog("Confirmation", "Some section incomplete.Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                alertDialogManager.Dialog("Confirmation", "Some section incomplete. Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         showSettingsAlert();

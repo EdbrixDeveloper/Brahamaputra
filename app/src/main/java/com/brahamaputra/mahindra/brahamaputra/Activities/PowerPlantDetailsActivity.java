@@ -687,7 +687,8 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     btnPrevReadingPowerPlant.setVisibility(View.GONE);
                     btnNextReadingPowerPlant.setVisibility(View.VISIBLE);
 
-                    if (powerPlantDetailsDataList.size() > 1) {
+                    //if (powerPlantDetailsDataList.size() > 1) {
+                    if (totalPlantCount > 1) {
                         btnNextReadingPowerPlant.setText("Next Reading");
                     } else {
                         btnNextReadingPowerPlant.setText("Finish");
@@ -831,6 +832,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsTextViewSpdStatusVal.setText("");
         mPowerPlantDetailsTextViewWorkingConditionVal.setText("");
         mPowerPlantDetailsEditTextNatureOfProblem.setText("");
+        base64StringQRCodeScan="";
     }
 
     /*Arjun 21112018*/

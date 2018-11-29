@@ -353,12 +353,12 @@ public class PowerManagementSystem extends BaseActivity {
                 // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                finish();
-                startActivity(new Intent(this, GeneralAndSafetyMeasures.class));
-                return true;
-
-
+                if (checkValidation() == true) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, GeneralAndSafetyMeasures.class));
+                    return true;
+                }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -435,6 +435,16 @@ public class PowerManagementSystem extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /*Arjun 29112018*/
+    public boolean checkValidation() {
+        String qRCodeScan = base64StringPowerManagementSystem;
+        if (qRCodeScan.isEmpty() || qRCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        } else return true;
+
     }
 
     public static Boolean getFromPref(Context context, String key) {

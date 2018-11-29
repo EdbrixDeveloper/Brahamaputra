@@ -634,7 +634,8 @@ public class Air_Conditioners extends BaseActivity {
                     airCondition_button_previousReading.setVisibility(View.GONE);
                     airCondition_button_nextReading.setVisibility(View.VISIBLE);
 
-                    if (airConditionersData.size() > 1) {
+                    //if (airConditionersData.size() > 1) {
+                    if (totalAcCount > 1) {
                         airCondition_button_nextReading.setText("Next Reading");
                     } else {
                         airCondition_button_nextReading.setText("Finish");
