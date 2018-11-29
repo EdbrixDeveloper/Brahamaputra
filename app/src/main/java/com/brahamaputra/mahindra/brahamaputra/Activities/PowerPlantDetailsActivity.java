@@ -831,6 +831,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsTextViewSpdStatusVal.setText("");
         mPowerPlantDetailsTextViewWorkingConditionVal.setText("");
         mPowerPlantDetailsEditTextNatureOfProblem.setText("");
+        base64StringQRCodeScan="";
     }
 
     /*Arjun 21112018*/
