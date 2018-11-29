@@ -36,9 +36,10 @@
                     android:id="@+id/media_textView_Typeofmedia_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:text="Type of media" />
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 

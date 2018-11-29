@@ -177,20 +177,12 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetStatus))),
-                        "Asset Status",
-                        "close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_assetStatus = item.get(position);
-                        mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(str_assetStatus);
-                    }
-                });
+                if (!mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim().isEmpty() && mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim() != null) {
+                    OnChangeAssetMakeArrayListAssetStatus();
+                } else {
+                    showToast("Select Asset Make");
+                }
 
             }
         });
@@ -227,6 +219,23 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                         finish();
                     }
                 }
+            }
+        });
+    }
+
+    private void OnChangeAssetMakeArrayListAssetStatus() {
+        SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DetailsOfUnusedMaterials.this,
+                new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_detailsOfUnusedMaterials_AssetStatus))),
+                "Asset Status",
+                "close", "#000000");
+        searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+        searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+            @Override
+            public void onClick(ArrayList<String> item, int position) {
+
+                str_assetStatus = item.get(position);
+                mDetailsOfUnusedMaterialsTextViewAssetStatusVal.setText(str_assetStatus);
             }
         });
     }
@@ -477,23 +486,25 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
     private boolean checkValidtionForArrayFields() {
         /*String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
-        String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();
+        String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();*/
         String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
         String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
 
-        if (typeOfAsset.isEmpty() || typeOfAsset == null) {
+        /*if (typeOfAsset.isEmpty() || typeOfAsset == null) {
             showToast("Select Type of Asset ");
             return false;
         } else if (assetMake.isEmpty() || assetMake == null) {
             showToast("Select Asset Make ");
             return false;
-        } else if (assetStatus.isEmpty() || assetStatus == null) {
+        } else*/
+        if ((assetStatus.isEmpty() || assetStatus == null) && (!assetDescription.isEmpty() && assetDescription != null)) {
             showToast("Select Asset Status");
             return false;
-        } else if (assetDescription.isEmpty() || assetDescription == null) {
+        } else/* if (assetDescription.isEmpty() || assetDescription == null) {
             showToast("Select Asset Description ");
             return false;
-        } else*/ return true;
+        } else*/
+            return true;
     }
 
     @Override
@@ -582,7 +593,8 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                     detailsOfUnusedMaterials_button_previousReading.setVisibility(View.GONE);
                     detailsOfUnusedMaterials_button_nextReading.setVisibility(View.VISIBLE);
 
-                    if (detailsOfUnusedMaterialsData.size() > 1) {
+                    //if (detailsOfUnusedMaterialsData.size() > 1) {
+                    if (totalCount > 1) {
                         detailsOfUnusedMaterials_button_nextReading.setText("Next Reading");
                     } else {
                         detailsOfUnusedMaterials_button_nextReading.setText("Finish");

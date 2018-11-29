@@ -960,7 +960,8 @@ public class Battery_Set extends BaseActivity {
                     batterySet_button_previousReading.setVisibility(View.GONE);
                     batterySet_button_nextReading.setVisibility(View.VISIBLE);
 
-                    if (batterySetData.size() > 1) {
+                    //if (batterySetData.size() > 1) {
+                    if (totalCount > 1) {
                         batterySet_button_nextReading.setText("Next Reading");
                     } else {
                         batterySet_button_nextReading.setText("Finish");

@@ -1194,7 +1194,8 @@ public class Power_Backups_DG extends BaseActivity {
                     powerBackupsDg_button_previousReading.setVisibility(View.GONE);
                     powerBackupsDg_button_nextReading.setVisibility(View.VISIBLE);
 
-                    if (powerBackupsDGData.size() > 1) {
+                    //if (powerBackupsDGData.size() > 1) {
+                    if (totalCount > 1) {
                         powerBackupsDg_button_nextReading.setText("Next Reading");
                     } else {
                         powerBackupsDg_button_nextReading.setText("Finish");

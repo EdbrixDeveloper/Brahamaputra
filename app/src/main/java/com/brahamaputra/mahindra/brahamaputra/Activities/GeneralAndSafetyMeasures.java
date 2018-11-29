@@ -1058,7 +1058,8 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                     mGeneralAndSafetyMeasureButtonPreviousReading.setVisibility(View.GONE);
                     mGeneralAndSafetyMeasureButtonNextReading.setVisibility(View.VISIBLE);
 
-                    if (generalSafetyMeasuresData.size() > 1) {
+                    //if (generalSafetyMeasuresData.size() > 1) {
+                    if (totalCount > 1) {
                         mGeneralAndSafetyMeasureButtonNextReading.setText("Next Reading");
                     } else {
                         mGeneralAndSafetyMeasureButtonNextReading.setText("Finish");
