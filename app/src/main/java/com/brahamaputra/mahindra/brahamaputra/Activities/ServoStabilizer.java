@@ -303,10 +303,12 @@ public class ServoStabilizer extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                finish();
-                startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
-                return true;
+                if (checkValidation() == true) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
+                    return true;
+                }
 
 
         }
@@ -380,6 +382,17 @@ public class ServoStabilizer extends BaseActivity {
             e.printStackTrace();
         }
     }
+
+
+    /*Arjun 29112018*/
+    public boolean checkValidation() {
+        String qRCodeScan = base64StringServoStablizer;
+        if (qRCodeScan.isEmpty() || qRCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        } else return true;
+    }
+
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences

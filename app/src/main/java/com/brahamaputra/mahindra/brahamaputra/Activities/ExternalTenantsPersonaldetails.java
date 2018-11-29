@@ -534,7 +534,8 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 externalTenantsPersonalDetailsParentData = hotoTransactionData.getExternalTenantsPersonalDetailsParentData();
                 externalTenantsPersonalDetailsDataList.addAll(externalTenantsPersonalDetailsParentData.getExternalTenantsPersonalDetailsData());
 
-                totalTenantCount = externalTenantsPersonalDetailsDataList.size();
+                //totalTenantCount = externalTenantsPersonalDetailsDataList.size();
+                totalTenantCount = Integer.parseInt(externalTenantsPersonalDetailsParentData.getTotalNumberofTanents());
                 mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setText(externalTenantsPersonalDetailsParentData.getTotalNumberofTanents());
 
                 if (externalTenantsPersonalDetailsDataList != null && externalTenantsPersonalDetailsDataList.size() > 0) {
@@ -550,6 +551,16 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                     mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.setText(externalTenantsPersonalDetailsData.getAddressofContactPerson());
                     mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.setText(externalTenantsPersonalDetailsData.getContactPersonMobile());
                     mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.setText(externalTenantsPersonalDetailsData.getContactPersonLandline());
+
+                    btnPrevReadingExtTenants.setVisibility(View.GONE);
+                    btnNextReadingExtTenants.setVisibility(View.VISIBLE);
+
+                    //if (batterySetData.size() > 1) {
+                    if (totalTenantCount > 1) {
+                        btnNextReadingExtTenants.setText("Next Reading");
+                    } else {
+                        btnNextReadingExtTenants.setText("Finish");
+                    }
                 }
 
 

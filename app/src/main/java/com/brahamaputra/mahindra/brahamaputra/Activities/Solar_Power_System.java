@@ -297,7 +297,7 @@ public class Solar_Power_System extends BaseActivity {
 
                         str_available = item.get(position);
                         mSolarPowerSystemTextViewAvailableVal.setText(str_available);
-                        checkValidation(str_available);
+                        changeVisibilityOfFields(str_available);
                     }
                 });
             }
@@ -390,11 +390,12 @@ public class Solar_Power_System extends BaseActivity {
 
             case R.id.menuSubmit:
                 DecimalFormatConversion();
-                submitDetails();
-                finish();
-                startActivity(new Intent(this, PowerPlantDetailsActivity.class));
-                finish();
-                return true;
+                if (checkValidation() == true) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, PowerPlantDetailsActivity.class));
+                    return true;
+                }
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -440,7 +441,7 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemTextViewAmcYesNoVal.setText(solarPowerSystemData.getAmcYesNo());
                 mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText(solarPowerSystemData.getDateOfvalidityOfAmc());
 
-                checkValidation(solarPowerSystemData.getAvailable());
+                changeVisibilityOfFields(solarPowerSystemData.getAvailable());
             } else {
                 Toast.makeText(Solar_Power_System.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
@@ -475,7 +476,7 @@ public class Solar_Power_System extends BaseActivity {
         }
     }
 
-    private void checkValidation(String str_available) {
+    private void changeVisibilityOfFields(String str_available) {
         try {
             mSolarPowerSystemLinearLayoutQRCodeScan.setVisibility(View.VISIBLE);
             mSolarPowerSystemLinearLayoutAssetOwner.setVisibility(View.VISIBLE);
@@ -507,6 +508,16 @@ public class Solar_Power_System extends BaseActivity {
         }
     }
 
+    /*Arjun 29112018*/
+    public boolean checkValidation() {
+        String qRCodeScan = base64StringQRCodeScan;
+        String available = mSolarPowerSystemTextViewAvailableVal.getText().toString().trim();
+        if (available.equals("Yes") && (qRCodeScan.isEmpty() || qRCodeScan == null)) {
+            showToast("Please Scan QR Code");
+            return false;
+        } else return true;
+
+    }
 
     /*Arjun 21112018*/
     private boolean validityOfValidityOfTheAMC(String amcYesNo) {
