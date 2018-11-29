@@ -747,7 +747,7 @@ public class ElectricBillProcess extends BaseActivity {
             showToast("Select EB Service Provider ");
             return false;
         } else if (EBConsumerNumber.isEmpty() || EBConsumerNumber == null) {
-            showToast("Select EB Consume rNumber ");
+            showToast("Select EB Consumer Number ");
             return false;
         } else if (ModeOfPayment.isEmpty() || ModeOfPayment == null) {
             showToast("Select Mode of Payment ");
@@ -789,7 +789,7 @@ public class ElectricBillProcess extends BaseActivity {
             showToast("Upload Bill Image ");
             return false;
         } else if (!dateFromToValid(date_BillFrom, date_BillTo)) {
-            showToast("Bill To Date should  grater than Bill From Date ");
+            showToast("Bill To Date should  greater than Bill From Date ");
             return false;
         } else
             return true;
