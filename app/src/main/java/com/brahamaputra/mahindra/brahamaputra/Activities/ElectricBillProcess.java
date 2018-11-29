@@ -377,6 +377,7 @@ public class ElectricBillProcess extends BaseActivity {
 
     }
 
+
     public void set_listener() {
         mEbProcessTextViewCustomerVal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -630,6 +631,7 @@ public class ElectricBillProcess extends BaseActivity {
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_BillFrom = sdf1.format(myCalendar.getTime());
+        BillFromToDateValidation();
     }
 
     private void updateLabelBillto() {
@@ -642,6 +644,7 @@ public class ElectricBillProcess extends BaseActivity {
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_BillTo = sdf1.format(myCalendar.getTime());
+        BillFromToDateValidation();
     }
 
     private void updateLabelIssueBill() {
@@ -668,7 +671,15 @@ public class ElectricBillProcess extends BaseActivity {
         date_due = sdf1.format(myCalendar.getTime());
     }
 
-
+    private void BillFromToDateValidation() {
+        if (date_BillFrom != null && date_BillTo!= null) {
+            if (!date_BillFrom.isEmpty() && !date_BillTo.isEmpty()) {
+                if (!dateFromToValid(date_BillFrom, date_BillTo)) {
+                    showToast("Bill To Date should  grater than Bill From Date ");
+                }
+            }
+        }
+    }
   /*  private String ddmmyyyy_ddmmmyyyy() {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
