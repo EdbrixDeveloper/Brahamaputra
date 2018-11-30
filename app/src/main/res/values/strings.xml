@@ -645,13 +645,11 @@
         <item>Available</item>
         <item>Not Available</item>
         <item>Not Required</item>
-
     </string-array>
 
 
     <!--Details Of Unused Materials activity  Array -->
     <string-array name="array_detailsOfUnusedMaterials_NumberofUnusedAssetinSite">
-
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -668,7 +666,6 @@
         <item>13</item>
         <item>14</item>
         <item>15</item>
-
     </string-array>
 
     <string-array name="array_detailsOfUnusedMaterials_TypeOfAsset">
@@ -688,7 +685,7 @@
         <item>Shelter</item>
         <!--<item>Solar Panel</item>-->
         <item>Stabilizer</item>
-
+        <item>General</item>
     </string-array>
 
     <!--End 16 Arrary List For Type Of Asset bind In Asset Make OnChange of type Of Asset List-->

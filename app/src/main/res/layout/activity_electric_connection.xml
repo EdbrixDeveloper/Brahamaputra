@@ -137,9 +137,8 @@
                     android:layout_weight="0.4"
                     android:text="Name of the supply company" />
 
-                <TextView
+                <EditText
                     android:id="@+id/electricConnection_textView_nameOfSupplyCompany_val"
-                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"

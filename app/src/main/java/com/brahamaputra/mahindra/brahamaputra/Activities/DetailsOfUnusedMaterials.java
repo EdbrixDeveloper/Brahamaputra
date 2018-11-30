@@ -33,7 +33,6 @@ import java.util.Arrays;
 
 public class DetailsOfUnusedMaterials extends BaseActivity {
 
-
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
     private String ticketId = "";
@@ -71,6 +70,8 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     private Button detailsOfUnusedMaterials_button_nextReading;
     private TextView detailsOfUnusedMaterials_textView_Number;
     private LinearLayout linearLayout_container;
+    private LinearLayout linearLayout_assetMake;
+    private LinearLayout linearLayout_assetStatus;
 
     private void assignViews() {
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite);
@@ -89,6 +90,8 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         detailsOfUnusedMaterials_button_previousReading = (Button) findViewById(R.id.btnPrevReading);
         detailsOfUnusedMaterials_textView_Number = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_Number);
         linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
+        linearLayout_assetMake = (LinearLayout) findViewById(R.id.linearLayout_assetMake);
+        linearLayout_assetStatus = (LinearLayout) findViewById(R.id.linearLayout_assetStatus);
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -158,6 +161,14 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
                         str_typeOfAsset = item.get(position);
                         mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setText(str_typeOfAsset);
+
+                        if(str_typeOfAsset.equals("General")){
+                            linearLayout_assetStatus.setVisibility(View.GONE);
+                            linearLayout_assetMake.setVisibility(View.GONE);
+                        }else{
+                            linearLayout_assetStatus.setVisibility(View.VISIBLE);
+                            linearLayout_assetMake.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 
@@ -485,8 +496,8 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     }
 
     private boolean checkValidtionForArrayFields() {
-        /*String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
-        String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();*/
+        String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
+        /* String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();*/
         String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
         String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
 
@@ -497,7 +508,9 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
             showToast("Select Asset Make ");
             return false;
         } else*/
-        if ((assetStatus.isEmpty() || assetStatus == null) && (!assetDescription.isEmpty() && assetDescription != null)) {
+        if (typeOfAsset.equals("General")){
+            return true;
+        }else if ((assetStatus.isEmpty() || assetStatus == null) && (!assetDescription.isEmpty() && assetDescription != null)) {
             showToast("Select Asset Status");
             return false;
         } else/* if (assetDescription.isEmpty() || assetDescription == null) {

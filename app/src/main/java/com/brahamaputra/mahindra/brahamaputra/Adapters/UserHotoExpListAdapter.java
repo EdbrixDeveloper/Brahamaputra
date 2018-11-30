@@ -75,8 +75,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         textView_SiteSSA.setText("Site SSA: " + HotoTicket.getSsaName());
 
         if(HotoTicket.getStatus().equalsIgnoreCase("WIP")){
-
-            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.limegreen));
+            convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.yellow));
         }else{
             convertView.setBackgroundColor(ContextCompat.getColor(_context,R.color.colorWhite));
         }
@@ -111,8 +110,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         HotoTicketsDate HotoTicketsDate = (HotoTicketsDate) getGroup(groupPosition);
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.item_user_hoto_list_seprator, null);
             convertView.setClickable(false);
         }
