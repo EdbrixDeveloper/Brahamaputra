@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ElectricConnectionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -38,6 +39,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
+
 
 public class Electric_Connection extends BaseActivity {
 
@@ -50,7 +53,7 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewExistingLoadAtSiteKVA;
     private EditText mElectricConnectionEditTextExistingLoadAtSiteKVA;
     private TextView mElectricConnectionTextViewNameOfSupplyCompany;
-    private TextView mElectricConnectionTextViewNameOfSupplyCompanyVal;
+    private EditText mElectricConnectionTextViewNameOfSupplyCompanyVal;
     private TextView mElectricConnectionTextViewCopyOfElectricBills;
     private TextView mElectricConnectionTextViewCopyOfElectricBillsVal;
     private TextView mElectricConnectionTextViewNumberOfCompoundLights;
@@ -264,6 +267,15 @@ public class Electric_Connection extends BaseActivity {
             }
         });
 
+        //showToast(hototicket_nameOfSupplyCompany);
+
+        if(hototicket_nameOfSupplyCompany.isEmpty() || hototicket_nameOfSupplyCompany.length() < 0){
+            //
+        }else{
+            mElectricConnectionTextViewNameOfSupplyCompanyVal.setText(hototicket_nameOfSupplyCompany);
+            mElectricConnectionTextViewNameOfSupplyCompanyVal.setKeyListener(null);
+        }
+
     }
 
     private void assignViews() {
@@ -276,7 +288,8 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionTextViewExistingLoadAtSiteKVA = (TextView) findViewById(R.id.electricConnection_textView_existingLoadAtSiteKVA);
         mElectricConnectionEditTextExistingLoadAtSiteKVA = (EditText) findViewById(R.id.electricConnection_editText_existingLoadAtSiteKVA);
         mElectricConnectionTextViewNameOfSupplyCompany = (TextView) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany);
-        mElectricConnectionTextViewNameOfSupplyCompanyVal = (TextView) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany_val);
+        //nameOfSupplyCompany
+        mElectricConnectionTextViewNameOfSupplyCompanyVal = (EditText) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany_val);
         mElectricConnectionTextViewCopyOfElectricBills = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills);
         mElectricConnectionTextViewCopyOfElectricBillsVal = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills_val);
         mElectricConnectionTextViewNumberOfCompoundLights = (TextView) findViewById(R.id.electricConnection_textView_numberOfCompoundLights);
@@ -415,7 +428,10 @@ public class Electric_Connection extends BaseActivity {
             }
         });
 
-        mElectricConnectionTextViewNameOfSupplyCompanyVal.setOnClickListener(new View.OnClickListener() {
+
+
+
+        /*mElectricConnectionTextViewNameOfSupplyCompanyVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Electric_Connection.this,
@@ -433,7 +449,8 @@ public class Electric_Connection extends BaseActivity {
                     }
                 });
             }
-        });
+        });*/
+
 
         mElectricConnectionTextViewCopyOfElectricBillsVal.setOnClickListener(new View.OnClickListener() {
             @Override

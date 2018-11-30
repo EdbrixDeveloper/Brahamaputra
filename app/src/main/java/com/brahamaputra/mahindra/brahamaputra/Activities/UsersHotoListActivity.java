@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 
 public class UsersHotoListActivity extends BaseActivity {
 
@@ -140,6 +141,9 @@ public class UsersHotoListActivity extends BaseActivity {
                             hototicket_Selected_SiteType =siteType;
 
                             String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
+                            hototicket_nameOfSupplyCompany = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getNameOfSupplyCompany().toString();
+                            showToast(hototicket_nameOfSupplyCompany);
+
                             if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP") || hotoTickStatus.equals("Reassigned")) {
                                 checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
                                         stateName, customerName, circleName, ssaName);

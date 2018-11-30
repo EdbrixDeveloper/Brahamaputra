@@ -64,7 +64,6 @@ public class HotoSectionsListActivity extends BaseActivity {
                 dataModels.add(new HotoSection("" + (i + 1), "" + values[i], false));
             }
             //dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
-
         }
 
         adapter = new HotoSectionListAdapter(dataModels, getApplicationContext());

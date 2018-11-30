@@ -43,6 +43,9 @@ public class HotoTicket {
     @SerializedName("ssaName")
     @Expose
     private String ssaName;
+    @SerializedName("nameOfSupplyCompany")
+    @Expose
+    private String nameOfSupplyCompany;
 
     public String getId() {
         return id;
@@ -140,7 +143,15 @@ public class HotoTicket {
         this.ssaName = ssaName;
     }
 
-    public HotoTicket(String id, String hotoTicketNo, String hotoTicketDate, String siteId, String siteName, String siteAddress, String status, String siteType, String stateName, String customerName, String circleName, String ssaName) {
+    public String getNameOfSupplyCompany() {
+        return nameOfSupplyCompany;
+    }
+
+    public void setNameOfSupplyCompany(String nameOfSupplyCompany) {
+        this.nameOfSupplyCompany = nameOfSupplyCompany;
+    }
+
+    public HotoTicket(String id, String hotoTicketNo, String hotoTicketDate, String siteId, String siteName, String siteAddress, String status, String siteType, String stateName, String customerName, String circleName, String ssaName,String nameOfSupplyCompany) {
         this.id = id;
         this.hotoTicketNo = hotoTicketNo;
         this.hotoTicketDate = hotoTicketDate;
@@ -153,5 +164,6 @@ public class HotoTicket {
         this.customerName = customerName;
         this.circleName = circleName;
         this.ssaName = ssaName;
+        this.nameOfSupplyCompany=nameOfSupplyCompany;
     }
 }

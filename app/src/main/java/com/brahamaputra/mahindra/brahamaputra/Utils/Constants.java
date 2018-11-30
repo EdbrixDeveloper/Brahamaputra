@@ -39,6 +39,7 @@ public class Constants {
     public static int meetingUserCount=0;
     public  static String hototicket_Selected_SiteType= "";
     public  static String hototicket_Selected_CustomerName = "";
+    public  static String hototicket_nameOfSupplyCompany = "";
 
     // TODO Change it to your web domain
     public final static String WEB_DOMAIN = "http://brahmaputra-dev-api.us-west-2.elasticbeanstalk.com";

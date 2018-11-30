@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/app_normal_margin"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/detailsOfUnusedMaterials_textView_Number"
@@ -94,6 +94,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/linearLayout_assetMake"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
@@ -119,6 +120,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearLayout_assetStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"

@@ -103,7 +103,7 @@ public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements
         viewHolder.txtHotoName.setText(dataModel.getSecName());
         if(dataModel.getSecReadingStatus()){
             //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
-            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.limegreen));
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.yellow));
         }else {
             //viewHolder.imageViewStatus.setImageResource(R.drawable.baseline_done_white_18dp);
             viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
