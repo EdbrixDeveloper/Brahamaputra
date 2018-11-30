@@ -104,7 +104,10 @@ public class ElectricBillProcess extends BaseActivity {
     private EbSiteConnectedData ebSiteConnectedData;
     private SessionManager sessionManager;
     private ElectricBillProcessData electricBillProcessData;
-    final Calendar myCalendar = Calendar.getInstance();
+     Calendar myCalendar1 = Calendar.getInstance();
+    Calendar myCalendar2 = Calendar.getInstance();
+    Calendar myCalendar3 = Calendar.getInstance();
+    Calendar myCalendar4 = Calendar.getInstance();
     DecimalConversion decimalConversion;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
@@ -190,9 +193,9 @@ public class ElectricBillProcess extends BaseActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            myCalendar1.set(Calendar.YEAR, year);
+            myCalendar1.set(Calendar.MONTH, monthOfYear);
+            myCalendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabelBillfrom();
         }
 
@@ -203,9 +206,9 @@ public class ElectricBillProcess extends BaseActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            myCalendar2.set(Calendar.YEAR, year);
+            myCalendar2.set(Calendar.MONTH, monthOfYear);
+            myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabelBillto();
         }
 
@@ -216,9 +219,9 @@ public class ElectricBillProcess extends BaseActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            myCalendar3.set(Calendar.YEAR, year);
+            myCalendar3.set(Calendar.MONTH, monthOfYear);
+            myCalendar3.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabelIssueBill();
         }
 
@@ -229,9 +232,9 @@ public class ElectricBillProcess extends BaseActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            myCalendar4.set(Calendar.YEAR, year);
+            myCalendar4.set(Calendar.MONTH, monthOfYear);
+            myCalendar4.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabelDueDate();
         }
 
@@ -542,34 +545,35 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessEditTextBillingFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ElectricBillProcess.this, dateBillfrom, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+                new DatePickerDialog(ElectricBillProcess.this, dateBillfrom, myCalendar1
+                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
+                        myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         mEbProcessEditTextBillingTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ElectricBillProcess.this, dateBillto, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(ElectricBillProcess.this, dateBillto, myCalendar2
+                        .get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH),
+                        myCalendar2.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
         mEbProcessEditTextBillingIssueDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ElectricBillProcess.this, dateIssueBill, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(ElectricBillProcess.this, dateIssueBill, myCalendar3
+                        .get(Calendar.YEAR), myCalendar3.get(Calendar.MONTH),
+                        myCalendar3.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         mEbProcessEditTextBilliDueDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ElectricBillProcess.this, dateDueDate, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(ElectricBillProcess.this, dateDueDate, myCalendar4
+                        .get(Calendar.YEAR), myCalendar4.get(Calendar.MONTH),
+                        myCalendar4.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -625,12 +629,12 @@ public class ElectricBillProcess extends BaseActivity {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mEbProcessEditTextBillingFrom.setText(sdf.format(myCalendar.getTime()));
+        mEbProcessEditTextBillingFrom.setText(sdf.format(myCalendar1.getTime()));
 
         String myFormat1 = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
-        date_BillFrom = sdf1.format(myCalendar.getTime());
+        date_BillFrom = sdf1.format(myCalendar1.getTime());
         BillFromToDateValidation();
     }
 
@@ -638,12 +642,12 @@ public class ElectricBillProcess extends BaseActivity {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mEbProcessEditTextBillingTo.setText(sdf.format(myCalendar.getTime()));
+        mEbProcessEditTextBillingTo.setText(sdf.format(myCalendar2.getTime()));
 
         String myFormat1 = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
-        date_BillTo = sdf1.format(myCalendar.getTime());
+        date_BillTo = sdf1.format(myCalendar2.getTime());
         BillFromToDateValidation();
     }
 
@@ -651,24 +655,25 @@ public class ElectricBillProcess extends BaseActivity {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mEbProcessEditTextBillingIssueDate.setText(sdf.format(myCalendar.getTime()));
+        mEbProcessEditTextBillingIssueDate.setText(sdf.format(myCalendar3.getTime()));
 
         String myFormat1 = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
-        date_issue = sdf1.format(myCalendar.getTime());
+        date_issue = sdf1.format(myCalendar3.getTime());
     }
 
     private void updateLabelDueDate() {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mEbProcessEditTextBilliDueDate.setText(sdf.format(myCalendar.getTime()));
+        mEbProcessEditTextBilliDueDate.setText(sdf.format(myCalendar4.getTime()));
 
-        String myFormat1 = "dd/MM/yyyy"; //In which you need put here
+        String myFormat1 = "dd/MM/yyyy"; //In
+        // which you need put here
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
-        date_due = sdf1.format(myCalendar.getTime());
+        date_due = sdf1.format(myCalendar4.getTime());
     }
 
     private void BillFromToDateValidation() {

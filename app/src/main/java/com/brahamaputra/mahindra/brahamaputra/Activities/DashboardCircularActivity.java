@@ -55,7 +55,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
     public static final String ARG_LAYOUT = "layout";
 
     protected CircleLayout circleLayout;
-    protected TextView selectedTextView;
+   // protected TextView selectedTextView;
     protected ImageView mDashboard_myMaster;
 
     final public int CHECK_PERMISSIONS = 123;
@@ -74,16 +74,20 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
 
 
         setContentView(R.layout.circular_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         sessionManager = new SessionManager(DashboardCircularActivity.this);
         ImageView imageViewProfilePhoto = (ImageView) findViewById(R.id.imageView2);
         //CircleImageView imageViewProfilePhoto = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.imageView2);
         alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
         //setting the title com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
-        /*toolbar.setTitle(getResources().getString(R.string.app_name));
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));*/
+
+
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         //placing toolbar in place of actionbar
-        setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setTitle(null);
+
         // Set listeners
         circleLayout = (CircleLayout) findViewById(R.id.circle_layout);
         circleLayout.setOnItemSelectedListener(this);
@@ -91,7 +95,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         circleLayout.setOnRotationFinishedListener(this);
         circleLayout.setOnCenterClickListener(this);
 
-        selectedTextView = (TextView) findViewById(R.id.selected_textView);
+        //selectedTextView = (TextView) findViewById(R.id.selected_textView);
         toastMessage = new ToastMessage(DashboardCircularActivity.this);
         String name = null;
         final View view = circleLayout.getSelectedItem();
@@ -100,7 +104,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         }
         //selectedTextView.setText(name);
 
-        selectedTextView.setText("Brahmputra");
+        //selectedTextView.setText("Brahmputra");
 
 
         mDashboard_myMaster = (ImageView) findViewById(R.id.dashboard_myMaster);

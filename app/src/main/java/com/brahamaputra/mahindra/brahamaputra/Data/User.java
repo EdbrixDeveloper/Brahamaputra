@@ -39,6 +39,14 @@ public class User {
     @Expose
     private String Designation;
 
+    @SerializedName("State")
+    @Expose
+    private String State;
+
+    @SerializedName("SSA")
+    @Expose
+    private String SSA;
+
     public String getId() {
         return id;
     }
@@ -111,6 +119,21 @@ public class User {
         Designation = designation;
     }
 
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    public String getSSA() {
+        return SSA;
+    }
+
+    public void setSSA(String SSA) {
+        this.SSA = SSA;
+    }
 
     @Override
     public String toString() {

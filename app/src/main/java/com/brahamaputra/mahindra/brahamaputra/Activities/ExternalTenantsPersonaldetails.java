@@ -49,7 +49,8 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 public class ExternalTenantsPersonaldetails extends BaseActivity {
 
 
-    final Calendar myCalendar = Calendar.getInstance();
+     Calendar myCalendar1 = Calendar.getInstance();
+    Calendar myCalendar2 = Calendar.getInstance();
 
 
     String str_totalNumberofTanents;
@@ -261,9 +262,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                myCalendar1.set(Calendar.YEAR, year);
+                myCalendar1.set(Calendar.MONTH, monthOfYear);
+                myCalendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel_DateofthestartofTenancy();
             }
 
@@ -274,9 +275,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                myCalendar2.set(Calendar.YEAR, year);
+                myCalendar2.set(Calendar.MONTH, monthOfYear);
+                myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel_DateofthestartofRadiation();
             }
 
@@ -285,9 +286,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date1, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date1, myCalendar1
+                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
+                        myCalendar1.get(Calendar.DAY_OF_MONTH));
 
                 dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.show();
@@ -300,9 +301,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 /*new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
-                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar2
+                        .get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH),
+                        myCalendar2.get(Calendar.DAY_OF_MONTH));
 
                 dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.show();
@@ -489,7 +490,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setText(sdf.format(myCalendar.getTime()));
+        mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setText(sdf.format(myCalendar1.getTime()));
 
     }
 
@@ -498,7 +499,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
 
-        mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(sdf.format(myCalendar.getTime()));
+        mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(sdf.format(myCalendar2.getTime()));
 
     }
 

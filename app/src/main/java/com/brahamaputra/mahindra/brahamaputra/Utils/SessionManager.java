@@ -44,6 +44,9 @@ public class SessionManager {
     private static final String PREFS_SESSION_User_Designation = "Designation";
     private static final String PREFS_SESSION_User_Circle = "Circle";
 
+    private static final String PREFS_SESSION_User_State = "State";
+    private static final String PREFS_SESSION_User_Ssa = "SSA";
+
 
     private SharedPreferences sharedPrefs;
 
@@ -186,7 +189,15 @@ public class SessionManager {
         return this.sharedPrefs.getString(PREFS_SESSION_User_Circle, "");
     }
 
-  /*  public ArrayList<UserData> getLoggedUsersList() {
+    public  String getUser_State() {
+        return this.sharedPrefs.getString(PREFS_SESSION_User_State, "");
+    }
+
+    public  String getUser_Ssa() {
+        return this.sharedPrefs.getString(PREFS_SESSION_User_Ssa, "");
+    }
+
+    /*  public ArrayList<UserData> getLoggedUsersList() {
         try {
             return (ArrayList<UserData>) ObjectSerializer.deserialize(this.sharedPrefs.getString(PREFS_SESSION_LOGGEDUSERSLIST, ObjectSerializer.serialize(new ArrayList<UserData>())));
         } catch (IOException e) {
@@ -427,6 +438,28 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void updateSessionState(String State) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((State != null) && (State.length() > 0)) {
+            editor.putString(PREFS_SESSION_User_State, State);
+        } else {
+            editor.remove(PREFS_SESSION_User_State);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionSsa(String SSA) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((SSA != null) && (SSA.length() > 0)) {
+            editor.putString(PREFS_SESSION_User_Ssa, SSA);
+        } else {
+            editor.remove(PREFS_SESSION_User_Ssa);
+        }
+        editor.commit();
+    }
+
     public void updateSessionDesignation(String Designation) {
 
         Editor editor = this.sharedPrefs.edit();
@@ -578,6 +611,8 @@ public class SessionManager {
 
         this.updateSessionUserTicketId(null);
         this.updateSessionUserTicketName(null);
+        this.updateSessionState(null);
+        this.updateSessionSsa(null);
 //        this.updateLoggedUserList(null);
 //        this.updateLoggedUsersCredentials(null);
 //        this.updateLoggedUserData(null);

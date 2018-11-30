@@ -50,9 +50,18 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView mUserProfileTextViewDesignation;
     TextView mUserProfileTextViewDesignationText;
 
+    private ImageView mUserProfileImageViewState;
+    private TextView mUserProfileTextViewState;
+    private TextView mUserProfileTextViewStateText;
+
+    private ImageView mUserProfileImageViewSsa;
+    private TextView mUserProfileTextViewSsa;
+    private TextView mUserProfileTextViewSsaText;
+
     ImageView mUserProfileImageViewUserName;
     TextView mUserProfileTextViewUserName;
     TextView mUserProfileTextViewUserNameText;
+
 
     private SessionManager sessionManager;
     private AlertDialogManager alertDialogManager;
@@ -81,6 +90,8 @@ public class UserProfileActivity extends AppCompatActivity {
             mUserProfileTextViewMobileNoText.setText(sessionManager.getSessionMobileNo().toString());
             mUserProfileTextViewDesignationText.setText(sessionManager.getSessionDesignation().toString());
             mUserProfileTextViewCircleText.setText(sessionManager.getSessionCircle().toString());
+            mUserProfileTextViewStateText.setText(sessionManager.getUser_State().toString());
+            mUserProfileTextViewSsaText.setText(sessionManager.getUser_Ssa().toString());
             //mImageView2.setImageBitmap(getBitmapFromURL(sessionManager.getSessionProfileImageUrl().toString()));
 
             String imageUri = sessionManager.getSessionProfileImageUrl().toString();
@@ -187,6 +198,16 @@ public class UserProfileActivity extends AppCompatActivity {
         mUserProfileImageViewDesignation = (ImageView) findViewById(R.id.userProfile_imageView_designation);
         mUserProfileTextViewDesignation = (TextView) findViewById(R.id.userProfile_textView_designation);
         mUserProfileTextViewDesignationText = (TextView) findViewById(R.id.userProfile_textView_designationText);
+
+        mUserProfileImageViewState = (ImageView) findViewById(R.id.userProfile_imageView_state);
+        mUserProfileTextViewState = (TextView) findViewById(R.id.userProfile_textView_state);
+        mUserProfileTextViewStateText = (TextView) findViewById(R.id.userProfile_textView_stateText);
+
+        mUserProfileImageViewSsa = (ImageView) findViewById(R.id.userProfile_imageView_ssa);
+        mUserProfileTextViewSsa = (TextView) findViewById(R.id.userProfile_textView_ssa);
+        mUserProfileTextViewSsaText = (TextView) findViewById(R.id.userProfile_textView_ssaText);
+
+
     }
 
     @Override

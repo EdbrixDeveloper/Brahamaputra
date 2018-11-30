@@ -160,6 +160,8 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionCircle(response.getUser().getCircle());
                                 sessionManager.updateSessionProfileImageUrl(response.getUser().getProfileImageUrl());
                                 sessionManager.updateSessionDeviceToken(response.getAccessToken());
+                                sessionManager.updateSessionState(response.getUser().getState());
+                                sessionManager.updateSessionSsa(response.getUser().getSSA());
                                 finish();
 
                                 startActivity(new Intent(LoginActivity.this, DashboardCircularActivity.class));

@@ -249,6 +249,66 @@
                         android:textColor="#2196F3" />
 
 
+
+                    <ImageView
+                        android:id="@+id/userProfile_imageView_state"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/userProfile_textView_circleText"
+                        android:clickable="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/ic_circle" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userProfile_textView_circleText"
+                        android:layout_toRightOf="@+id/userProfile_imageView_state"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="State" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_stateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userProfile_textView_state"
+                        android:layout_marginBottom="@dimen/app_big_margin"
+                        android:layout_toRightOf="@+id/userProfile_imageView_state"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="state name"
+                        android:textColor="#2196F3" />
+
+
+
+                    <ImageView
+                        android:id="@+id/userProfile_imageView_ssa"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/userProfile_textView_stateText"
+                        android:clickable="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/ic_circle" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_ssa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userProfile_textView_stateText"
+                        android:layout_toRightOf="@+id/userProfile_imageView_ssa"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="SSA" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_ssaText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userProfile_textView_ssa"
+                        android:layout_marginBottom="@dimen/app_big_margin"
+                        android:layout_toRightOf="@+id/userProfile_imageView_ssa"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="ssa name"
+                        android:textColor="#2196F3" />
                 </RelativeLayout>
             </LinearLayout>
 

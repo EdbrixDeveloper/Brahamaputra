@@ -18,7 +18,7 @@
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/tickets_icon"
-            android:tint="@color/colorWhite"
+            android:tint="@color/colorPrimary"
             circle:name="My HOTO" />
 
         <TextView
@@ -29,7 +29,7 @@
             
             android:text="My HOTO"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp"
             />
 
@@ -43,7 +43,7 @@
          android:elevation="2dp"
          android:padding="5dp"
          android:src="@drawable/tickets_icon"
-         android:tint="@color/colorWhite"
+         android:tint="@color/colorPrimary"
          circle:name="My HOTO">
 
      </com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView>-->
@@ -61,7 +61,7 @@
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/assets_icon"
-            android:tint="@color/colorWhite"
+            android:tint="@color/colorPrimary"
             circle:name="My Assets"
             android:layout_centerHorizontal="true"/>
 
@@ -71,7 +71,7 @@
             android:layout_below="@+id/dashboard_myAsset"
             android:text="My Assets"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp"
             android:layout_centerHorizontal="true"/>
 
@@ -84,7 +84,7 @@
         android:elevation="2dp"
         android:padding="5dp"
         android:src="@drawable/assets_icon"
-        android:tint="@color/colorWhite"
+        android:tint="@color/colorPrimary"
         circle:name="My Assets" />-->
 
 
@@ -110,7 +110,7 @@
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/electricity_icon"
-            android:tint="@color/colorWhite"
+            android:tint="@color/colorPrimary"
             circle:name="My Energy"
             android:layout_centerHorizontal="true"/>
 
@@ -121,7 +121,7 @@
             
             android:text="My Energy"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp"
             android:layout_centerHorizontal="true"/>
 
@@ -134,7 +134,7 @@
         android:elevation="2dp"
         android:padding="5dp"
         android:src="@drawable/electricity_icon"
-        android:tint="@color/colorWhite"
+        android:tint="@color/colorPrimary"
         circle:name="My Energy" />-->
     <RelativeLayout
         android:id="@+id/dashboard_myPrevitive_layout"
@@ -150,7 +150,7 @@
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/prevetive_icon"
-            android:tint="@color/colorWhite"
+            android:tint="@color/colorPrimary"
             circle:name="My Preventive"
             android:layout_centerHorizontal="true"/>
 
@@ -162,7 +162,7 @@
             
             android:text="My Preventive"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
 
     </RelativeLayout>
@@ -174,7 +174,7 @@
         android:elevation="2dp"
         android:padding="5dp"
         android:src="@drawable/prevetive_icon"
-        android:tint="@color/colorWhite"
+        android:tint="@color/colorPrimary"
         circle:name="My Prevetive" />-->
     <RelativeLayout
         android:id="@+id/dashboard_myIncident_layout"
@@ -190,7 +190,7 @@
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/incident_icon"
-            android:tint="@color/colorWhite"
+            android:tint="@color/colorPrimary"
             circle:name="My Incident"
             android:layout_centerHorizontal="true"/>
 
@@ -202,7 +202,7 @@
             
             android:text="My Incident"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
 
     </RelativeLayout>
@@ -214,7 +214,7 @@
          android:elevation="2dp"
          android:padding="5dp"
          android:src="@drawable/incident_icon"
-         android:tint="@color/colorWhite"
+         android:tint="@color/colorPrimary"
          circle:name="My Incident" />-->
 
 </merge>
