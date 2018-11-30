@@ -22,7 +22,7 @@
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:layout_gravity="top"
-android:layout_weight="0.4"
+            android:layout_weight="0.4"
             android:scaleType="fitStart"
             android:src="@drawable/dashboard_topcorner" />
 
@@ -33,9 +33,21 @@ android:layout_weight="0.4"
             android:layout_marginTop="10dp"
             android:layout_weight="0.4"
             android:scaleType="fitStart"
+
             android:src="@drawable/dashboard_mahindra" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imageView2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/applogo"
+            app:civ_border_color="#8BC34A"
+            app:civ_border_width="1dp" />
+       <!-- <ImageView
             android:id="@+id/imageView2"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -43,7 +55,9 @@ android:layout_weight="0.4"
             android:layout_marginRight="5dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0.2"
-            android:src="@drawable/ic_person_outline_white_24dp" />
+            android:background="@drawable/img"/>-->
+
+
     </LinearLayout>
     <!-- <android.support.v7.widget.Toolbar
          android:id="@+id/toolbar"
