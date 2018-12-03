@@ -57,8 +57,7 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
         final HotoTicket HotoTicket = (HotoTicket) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.item_user_hoto_list, null);
         }
 

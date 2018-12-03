@@ -30,7 +30,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type of Land*" />
+                    android:text="Type of Land*"
+                    android:textColor="@color/colorBlueLink"/>
 
 
                 <TextView
@@ -59,7 +60,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Area of Land(Sq.Mtr)*" />
+                    android:text="Area of Land(Sq.Mtr)*"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/landDetails_editText_areaOfLand"
@@ -86,7 +88,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Rent/Lease(In Rs.)" />
+                    android:text="Rent/Lease(In Rs.)"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/landDetails_editText_rentLeaseInNumber"
@@ -115,7 +118,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="In Words Rs." />
+                    android:text="In Words Rs."
+                    android:textColor="@color/colorBlueLink"/>
 
                 <TextView
                     android:id="@+id/landDetails_textView_rentLeaseInWords_val"
@@ -141,7 +145,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Name of owner" />
+                    android:text="Name of owner"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/landDetails_editText_nameOfOwner"
@@ -169,7 +174,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Mobile no of owner" />
+                    android:text="Mobile no of owner"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/landDetails_editText_mobileNoOfOwner"
@@ -199,7 +205,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Layout of Land" />
+                    android:text="Layout of Land"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <ImageView
                     android:id="@+id/landDetails_button_layoutOfLand"
@@ -235,7 +242,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Copy of agreement with owner*" />
+                    android:text="Copy of agreement with owner*"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <TextView
                     android:id="@+id/landDetails_textView_copyAgreementWithOwner_val"
@@ -262,7 +270,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Validity of the agreement" />
+                    android:text="Validity of the agreement"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/landDetails_editText_dateOfvalidityOfAgreement"

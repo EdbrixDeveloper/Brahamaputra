@@ -29,6 +29,11 @@ public class EarthResistanceTowerData {
         this.earthResistanceInOhms = earthResistanceInOhms;
         this.earthResistanceMeasuredDate = earthResistanceMeasuredDate;
         //this.isSubmited=true;//007
+        if(!this.earthType.isEmpty() && !this.earthResistanceInOhms.isEmpty() && !this.earthResistanceMeasuredDate.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getEarthType() {

@@ -56,6 +56,11 @@ public class PowerBackupsDGParentData {
         this.numberOfWorkingDg = numberOfWorkingDg;
         this.powerBackupsDGData = powerBackupsDGData;
         //this.isSubmited = true;//007
+        if(!this.noOfEngineAlternator.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
     public PowerBackupsDGParentData(){
         this.noOfEngineAlternator = "";

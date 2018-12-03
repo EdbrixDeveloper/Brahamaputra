@@ -169,6 +169,12 @@ public class ElectricConnectionData {
         this.bankIfscCode=bankIfscCode;
         this.bankAccountNo=bankAccountNo;
         //this.isSubmited=true;//007
+        if(!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
+            !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getElectricConnectionType() {

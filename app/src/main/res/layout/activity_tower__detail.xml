@@ -30,7 +30,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Tower" />
+                    android:text="Tower*"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <TextView
                     android:id="@+id/towerDetail_textView_tower_val"
@@ -56,7 +57,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type of tower" />
+                    android:text="Type of tower*"
+                    android:textColor="@color/colorBlueLink"/>
 
 
                 <TextView
@@ -83,8 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Height of the tower(In Mtr)"
-
-                    />
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/towerDetail_editText_heightOfTower"
@@ -112,7 +113,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Date of painting of the Tower" />
+                    android:text="Date of painting of the Tower*"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/towerDetail_editText_dateOfPaintingOfTheTower"
@@ -141,7 +143,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="CAUTION Signage Board" />
+                    android:text="CAUTION Signage Board"
+                    android:textColor="@color/colorBlueLink" />
 
                 <TextView
                     android:id="@+id/towerDetail_textView_cautionSignageboard_val"
@@ -167,7 +170,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="WARNING Signage Board" />
+                    android:text="WARNING Signage Board"
+                    android:textColor="@color/colorBlueLink" />
 
                 <TextView
                     android:id="@+id/towerDetail_textView_warningSignageboard_val"
@@ -192,7 +196,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="DANGER Signage Board" />
+                    android:text="DANGER Signage Board"
+                    android:textColor="@color/colorBlueLink" />
 
 
                 <TextView
@@ -218,7 +223,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Sign Board" />
+                    android:text="Sign Board"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <TextView
                     android:id="@+id/towerDetail_textView_signboard_val"

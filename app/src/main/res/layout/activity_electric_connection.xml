@@ -30,7 +30,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type of Electric Connection" />
+                    android:text="Type of Electric Connection*"
+                    android:textColor="@color/colorBlueLink"/>
 
 
                 <TextView
@@ -57,7 +58,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Tariff" />
+                    android:text="Tariff*"
+                    android:textColor="@color/colorBlueLink"/>
 
 
                 <TextView
@@ -83,7 +85,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Sanctioned load (KVA)" />
+                    android:text="Sanctioned load (KVA)"
+                    android:textColor="@color/colorBlueLink" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_sanctionedLoadKVA"
@@ -109,7 +112,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Existing load at site (KVA)" />
+                    android:text="Existing load at site (KVA)"
+                    android:textColor="@color/colorBlueLink"/>
 
                 <EditText
                     android:id="@+id/electricConnection_editText_existingLoadAtSiteKVA"
@@ -135,7 +139,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Name of the supply company" />
+                    android:text="Name of the supply company*" />
 
                 <EditText
                     android:id="@+id/electricConnection_textView_nameOfSupplyCompany_val"
@@ -212,7 +216,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="EB Meter Reading(KWH)" />
+                    android:text="EB Meter Reading(KWH)*" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_ebMeterReadingInKWh"
@@ -456,7 +460,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Consumer Number" />
+                    android:text="Consumer Number*" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_consumerNumber"
@@ -801,7 +805,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type|Mode of Payment" />
+                    android:text="Type|Mode of Payment*" />
 
 
                 <TextView

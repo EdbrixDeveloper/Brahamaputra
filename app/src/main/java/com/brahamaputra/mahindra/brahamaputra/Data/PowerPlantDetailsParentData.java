@@ -48,6 +48,11 @@ public class PowerPlantDetailsParentData {
         this.numberOfWorkingPowerPlant = numberOfWorkingPowerPlant;
         this.powerPlantDetailsData = powerPlantDetailsData;
         //this.isSubmited = true;//007
+        if(!this.numberOfPowerPlant.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public PowerPlantDetailsParentData() {

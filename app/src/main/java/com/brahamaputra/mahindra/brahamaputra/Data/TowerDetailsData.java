@@ -54,6 +54,11 @@ public class TowerDetailsData {
         this.cautionSignBoard = cautionSignBoard;
         this.warningSignBoard = warningSignBoard;
         //this.isSubmited=true;//007
+        if(!this.towerName.isEmpty() && !this.towerType.isEmpty() && !this.dateOfTowerPainting.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getTowerName() {

@@ -39,6 +39,11 @@ public class AirConditionParentData {
         this.numberOfACInWorkingCondition = "";
         this.airConditionersData = new ArrayList<>();
         //this.isSubmited = false;//007
+        if(!this.noOfACprovided.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getNoOfACprovided() {

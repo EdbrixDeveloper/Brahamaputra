@@ -53,12 +53,21 @@ public class ShelterData {
         this.noOfBtsInsideShelter = noOfBtsInsideShelter;
         this.noOfBtsOutsideShelter = noOfBtsOutsideShelter;
         this.shelterLock = shelterLock;
+
         this.outdoorShelterLock = outdoorShelterLock;
+
         this.igbStatus = igbStatus;
         this.egbStatus = egbStatus;
         this.noOfOdcAvailable = noOfOdcAvailable;
         this.odcLock = odcLock;
         //this.isSubmited=true;//007
+        if(!this.physicalCondition.isEmpty() && !this.noOfBtsInsideShelter.isEmpty() && !this.noOfBtsOutsideShelter.isEmpty() &&
+            !this.shelterLock.isEmpty() && !this.igbStatus.isEmpty() && !this.egbStatus.isEmpty() &&
+            !this.noOfOdcAvailable.isEmpty() && !this.odcLock.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getPhysicalCondition() {

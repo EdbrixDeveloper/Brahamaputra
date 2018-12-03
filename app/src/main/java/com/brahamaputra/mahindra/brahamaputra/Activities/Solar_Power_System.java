@@ -93,7 +93,6 @@ public class Solar_Power_System extends BaseActivity {
     LinearLayout mSolarPowerSystemLinearLayoutAmcYesNo;
     LinearLayout mSolarPowerSystemLinearLayoutValidityOfAmc;
 
-
     String str_available;
     String str_assetOwner;
     String str_cellPanel;

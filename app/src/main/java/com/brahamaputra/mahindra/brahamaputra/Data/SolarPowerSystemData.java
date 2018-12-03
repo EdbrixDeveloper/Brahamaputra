@@ -59,6 +59,11 @@ public class SolarPowerSystemData {
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
         this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;//007
+        if(!this.available.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getqRCodeScan() {

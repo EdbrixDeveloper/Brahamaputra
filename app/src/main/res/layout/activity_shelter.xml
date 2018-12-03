@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Shelter">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_margin="@dimen/app_normal_margin"
@@ -30,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Physical Condition of Shelter and Platform" />
+                    android:text="Physical Condition of Shelter and Platform*" />
 
 
                 <TextView
@@ -59,7 +62,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of BTS Inside Shelter" />
+                    android:text="Number of BTS Inside Shelter*" />
 
 
                 <TextView
@@ -86,7 +89,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of BTS Outside Shelter" />
+                    android:text="Number of BTS Outside Shelter*" />
 
 
                 <TextView
@@ -113,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Shelter Lock" />
+                    android:text="Shelter Lock*" />
 
 
                 <TextView
@@ -168,7 +171,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="IGB Status" />
+                    android:text="IGB Status*" />
 
 
                 <TextView
@@ -196,7 +199,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="EGB Status" />
+                    android:text="EGB Status*" />
 
 
                 <TextView
@@ -223,7 +226,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="NO OF ODC Available" />
+                    android:text="NO OF ODC Available*" />
 
 
                 <TextView
@@ -251,7 +254,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="ODC Lock" />
+                    android:text="ODC Lock*" />
 
 
                 <TextView
