@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type of Land" />
+                    android:text="Type of Land*" />
 
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Area of Land(Sq.Mtr)" />
+                    android:text="Area of Land(Sq.Mtr)*" />
 
                 <EditText
                     android:id="@+id/landDetails_editText_areaOfLand"
@@ -235,7 +235,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Copy of agreement with owner" />
+                    android:text="Copy of agreement with owner*" />
 
                 <TextView
                     android:id="@+id/landDetails_textView_copyAgreementWithOwner_val"

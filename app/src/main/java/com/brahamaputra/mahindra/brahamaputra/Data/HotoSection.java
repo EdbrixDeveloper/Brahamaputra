@@ -4,9 +4,10 @@ public class HotoSection {
 
     String secNo;
     String secName;
-    boolean secReadingStatus;
+    //boolean secReadingStatus;
+    int secReadingStatus;
 
-    public HotoSection(String secNo, String secName, boolean secReadingStatus) {
+    public HotoSection(String secNo, String secName, int secReadingStatus) {
         this.secNo = secNo;
         this.secName = secName;
         this.secReadingStatus = secReadingStatus;
@@ -28,11 +29,11 @@ public class HotoSection {
         this.secName = secName;
     }
 
-    public boolean getSecReadingStatus() {
+    public int getSecReadingStatus() {
         return secReadingStatus;
     }
 
-    public void setSecReadingStatus(boolean secReadingStatus) {
+    public void setSecReadingStatus(int secReadingStatus) {
         this.secReadingStatus = secReadingStatus;
     }
 }

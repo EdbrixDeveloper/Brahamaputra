@@ -34,7 +34,8 @@ public class SitePhotoCaptureData {
     private String base64StringDgOverview;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public SitePhotoCaptureData(){
         this.imageFileNameOfSite = "";
@@ -51,7 +52,7 @@ public class SitePhotoCaptureData {
         this.base64StringDgHmr = "";
         this.imageFileNameOfDgOverview = "";
         this.base64StringDgOverview = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
     public SitePhotoCaptureData(String imageFileNameOfSite, String base64StringSite, String imageFileNameOfShelter, String base64StringShelter, String imageFileNameOfEbMeterBox, String base64StringEbMeterBox, String imageFileNameOfSmps, String base64StringSmps, String imageFileNameOfEbMeter, String base64StringEbMeter, String imageFileNameOfDgHmr, String base64StringDgHmr, String imageFileNameOfDgOverview, String base64StringDgOverview) {
         this.imageFileNameOfSite = imageFileNameOfSite;
@@ -68,7 +69,7 @@ public class SitePhotoCaptureData {
         this.base64StringDgHmr = base64StringDgHmr;
         this.imageFileNameOfDgOverview = imageFileNameOfDgOverview;
         this.base64StringDgOverview = base64StringDgOverview;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 
     public String getImageFileNameOfSite() {
@@ -183,11 +184,11 @@ public class SitePhotoCaptureData {
         this.base64StringDgOverview = base64StringDgOverview;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

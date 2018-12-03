@@ -227,7 +227,6 @@ public class Land_Details extends BaseActivity {
                 }
             }
         });
-
     }
 
     private void assignViews() {
@@ -256,9 +255,7 @@ public class Land_Details extends BaseActivity {
         mLandDetailsLinearLayoutValidityOfAgreement = (LinearLayout) findViewById(R.id.landDetails_linearLayout_validityOfAgreement);
         //mLandDetailsEditTextAreaOfLand.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
 
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     private void initCombo() {
@@ -374,7 +371,6 @@ public class Land_Details extends BaseActivity {
                                 mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
                             }
                         }
-
 //                mLandDetailsSpinnerCopyAgreementWithOwner.setSelection(1);
                         mLandDetailsTextViewTypeOfLandVal.setText(landDetailsData.getLandType());
                         mLandDetailsEditTextDateOfvalidityOfAgreement.setText(landDetailsData.getLandAgreementValidity());
@@ -502,7 +498,6 @@ public class Land_Details extends BaseActivity {
     }
 
     //Camera//
-
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);

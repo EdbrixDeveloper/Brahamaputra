@@ -101,12 +101,20 @@ public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements
 
         viewHolder.txtHotoNo.setText(dataModel.getSecNo());
         viewHolder.txtHotoName.setText(dataModel.getSecName());
-        if(dataModel.getSecReadingStatus()){
+
+        if(dataModel.getSecReadingStatus() == 0){
+            //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
+        }
+
+        if(dataModel.getSecReadingStatus() == 1){
             //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
             viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.yellow));
-        }else {
-            //viewHolder.imageViewStatus.setImageResource(R.drawable.baseline_done_white_18dp);
-            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
+        }
+
+        if(dataModel.getSecReadingStatus() == 2){
+            //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.limegreen));
         }
 
         return convertView;

@@ -69,7 +69,6 @@ public class BaseActivity extends AppCompatActivity {
         // by doing this, the activity will be notified each time a new message arrives
 //        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
 //                new IntentFilter(Config.PUSH_NOTIFICATION));
-
         // clear the notification area when the app is opened
         NotificationUtils.clearNotifications(getApplicationContext());
     }

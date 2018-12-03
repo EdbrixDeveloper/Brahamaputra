@@ -59,9 +59,9 @@ public class HotoSectionsListActivity extends BaseActivity {
         dataModels = new ArrayList<>();
         for (int i = 0; i < values.length; i++) {
             if (i / 2 == 0) {
-                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], false));
+                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], 0));
             } else {
-                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], false));
+                dataModels.add(new HotoSection("" + (i + 1), "" + values[i], 0));
             }
             //dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
         }
@@ -204,7 +204,7 @@ public class HotoSectionsListActivity extends BaseActivity {
 
     }
 
-    public Boolean checkIsSubmited(Integer SecNo) {
+    public int checkIsSubmited(Integer SecNo) {
         switch (SecNo) {
             case 0:
                 return hotoTransactionData.getLandDetailsData().getSubmited();
@@ -250,7 +250,8 @@ public class HotoSectionsListActivity extends BaseActivity {
                 return hotoTransactionData.getSitePhotoCaptureData().getSubmited();
 
         }
-        return false;
+        //return false;
+        return 0;
     }
 
     public void refreshList() {
@@ -270,13 +271,17 @@ public class HotoSectionsListActivity extends BaseActivity {
 
             values = getResources().getStringArray(R.array.listView_hotoSections_sections);
             dataModels = new ArrayList<>();
-            Boolean greenStatus = false;
-            for (int i = 0; i < values.length; i++) {
-                greenStatus = checkIsSubmited(i);
+            //Boolean greenStatus = false;
+            int status = 0;
+
+            for (int i = 0; i < values.length; i++)
+            {
+                status = checkIsSubmited(i);
+
                 if (i / 2 == 0) {
-                    dataModels.add(new HotoSection("" + (i + 1), "" + values[i], greenStatus));
+                    dataModels.add(new HotoSection("" + (i + 1), "" + values[i], status));
                 } else {
-                    dataModels.add(new HotoSection("" + (i + 1), "" + values[i], greenStatus));
+                    dataModels.add(new HotoSection("" + (i + 1), "" + values[i], status));
                 }
                 //dataModels.add(new HotoSection(""+(i+1),""+values[i],true));
 

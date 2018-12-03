@@ -14,20 +14,21 @@ public class EarthResistanceTowerData {
     private String earthResistanceMeasuredDate;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public EarthResistanceTowerData() {
         this.earthType = "";
         this.earthResistanceInOhms = "";
         this.earthResistanceMeasuredDate = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public EarthResistanceTowerData(String earthType, String earthResistanceInOhms, String earthResistanceMeasuredDate) {
         this.earthType = earthType;
         this.earthResistanceInOhms = earthResistanceInOhms;
         this.earthResistanceMeasuredDate = earthResistanceMeasuredDate;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 
     public String getEarthType() {
@@ -54,11 +55,11 @@ public class EarthResistanceTowerData {
         this.earthResistanceMeasuredDate = earthResistanceMeasuredDate;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

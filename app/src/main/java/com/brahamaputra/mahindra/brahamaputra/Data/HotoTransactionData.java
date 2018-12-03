@@ -376,93 +376,93 @@ public class HotoTransactionData {
     }
 
     public boolean isAllHotoFormsSubmit() {
-        if (!landDetailsData.getSubmited()) {
+        if (landDetailsData.getSubmited() != 2) {
             return false;
-        } else if (!towerDetailsData.getSubmited()) {
+        } else if (towerDetailsData.getSubmited() != 2) {
             return false;
-        } else if (!earthResistanceTowerData.getSubmited()) {
+        } else if (earthResistanceTowerData.getSubmited() != 2) {
             return false;
-        } else if (!earthResistanceEquipmentData.getSubmited()) {
+        } else if (earthResistanceEquipmentData.getSubmited() != 2) {
             return false;
-        } else if (!electricConnectionData.getSubmited()) {
+        } else if (electricConnectionData.getSubmited() != 2) {
             return false;
-        } else if (!airConditionParentData.getSubmited()) {
+        } else if (airConditionParentData.getSubmited() != 2) {
             return false;
-        } else if (!solarPowerSystemData.getSubmited()) {
+        } else if (solarPowerSystemData.getSubmited() != 2) {
             return false;
-        } else if (!powerPlantDetailsParentData.getSubmited()) {
+        } else if (powerPlantDetailsParentData.getSubmited() != 2) {
             return false;
-        } else if (!powerBackupsDGParentData.getSubmited()) {
+        } else if (powerBackupsDGParentData.getSubmited() != 2) {
             return false;
-        } else if (!shelterData.getSubmited()) {
+        } else if (shelterData.getSubmited() != 2) {
             return false;
-        } else if (!mediaData.getSubmited()) {
+        } else if (mediaData.getSubmited() != 2) {
             return false;
-        } else if (!batterySetParentData.getSubmited()) {
+        } else if (batterySetParentData.getSubmited() != 2) {
             return false;
-        } else if (!externalTenantsPersonalDetailsParentData.getSubmited()) {
+        } else if (externalTenantsPersonalDetailsParentData.getSubmited() != 2) {
             return false;
-        } else if (!totalDCLoadofSiteData.getSubmited()) {
+        } else if (totalDCLoadofSiteData.getSubmited() != 2) {
             return false;
-        } else if (!activeequipmentDetailsData.getSubmited()) {
+        } else if (activeequipmentDetailsData.getSubmited() != 2) {
             return false;
-        } else if (!powerManagementSystemData.getSubmited()) {
+        } else if (powerManagementSystemData.getSubmited() != 2) {
             return false;
-        } else if (!generalSafetyMeasuresParentData.getSubmited()) {
+        } else if (generalSafetyMeasuresParentData.getSubmited() != 2) {
             return false;
-        } else if (!acdb_dcdb_data.getSubmited()) {
+        } else if (acdb_dcdb_data.getSubmited() != 2) {
             return false;
-        } else if (!servoStabilizerData.getSubmited()) {
+        } else if (servoStabilizerData.getSubmited() != 2) {
             return false;
-        } else if (!detailsOfUnusedMaterialsParentData.getSubmited()) {
+        } else if (detailsOfUnusedMaterialsParentData.getSubmited() != 2) {
             return false;
-        } else if (!sitePhotoCaptureData.getSubmited()) {
+        } else if (sitePhotoCaptureData.getSubmited() != 2) {
             return false;
         } else return true;
     }
 
     public boolean isAtLeastOneHotoFormsSubmit() {
-        if (landDetailsData.getSubmited()) {
+        if (landDetailsData.getSubmited() == 2) {
             return true;
-        } else if (towerDetailsData.getSubmited()) {
+        } else if (towerDetailsData.getSubmited() == 2) {
             return true;
-        } else if (earthResistanceTowerData.getSubmited()) {
+        } else if (earthResistanceTowerData.getSubmited() == 2) {
             return true;
-        } else if (earthResistanceEquipmentData.getSubmited()) {
+        } else if (earthResistanceEquipmentData.getSubmited() == 2) {
             return true;
-        } else if (electricConnectionData.getSubmited()) {
+        } else if (electricConnectionData.getSubmited() == 2) {
             return true;
-        } else if (airConditionParentData.getSubmited()) {
+        } else if (airConditionParentData.getSubmited() == 2) {
             return true;
-        } else if (solarPowerSystemData.getSubmited()) {
+        } else if (solarPowerSystemData.getSubmited() == 2) {
             return true;
-        } else if (powerPlantDetailsParentData.getSubmited()) {
+        } else if (powerPlantDetailsParentData.getSubmited() == 2) {
             return true;
-        } else if (powerBackupsDGParentData.getSubmited()) {
+        } else if (powerBackupsDGParentData.getSubmited() == 2) {
             return true;
-        } else if (shelterData.getSubmited()) {
+        } else if (shelterData.getSubmited() == 2) {
             return true;
-        } else if (mediaData.getSubmited()) {
+        } else if (mediaData.getSubmited() == 2) {
             return true;
-        } else if (batterySetParentData.getSubmited()) {
+        } else if (batterySetParentData.getSubmited() == 2) {
             return true;
-        } else if (externalTenantsPersonalDetailsParentData.getSubmited()) {
+        } else if (externalTenantsPersonalDetailsParentData.getSubmited() == 2) {
             return true;
-        } else if (totalDCLoadofSiteData.getSubmited()) {
+        } else if (totalDCLoadofSiteData.getSubmited() == 2) {
             return true;
-        } else if (activeequipmentDetailsData.getSubmited()) {
+        } else if (activeequipmentDetailsData.getSubmited() == 2) {
             return true;
-        } else if (powerManagementSystemData.getSubmited()) {
+        } else if (powerManagementSystemData.getSubmited() == 2) {
             return true;
-        } else if (generalSafetyMeasuresParentData.getSubmited()) {
+        } else if (generalSafetyMeasuresParentData.getSubmited() == 2) {
             return true;
-        } else if (acdb_dcdb_data.getSubmited()) {
+        } else if (acdb_dcdb_data.getSubmited() == 2) {
             return true;
-        } else if (servoStabilizerData.getSubmited()) {
+        } else if (servoStabilizerData.getSubmited() == 2) {
             return true;
-        } else if (detailsOfUnusedMaterialsParentData.getSubmited()) {
+        } else if (detailsOfUnusedMaterialsParentData.getSubmited() == 2) {
             return true;
-        } else if (sitePhotoCaptureData.getSubmited()) {
+        } else if (sitePhotoCaptureData.getSubmited() == 2) {
             return true;
         } else return false;
     }

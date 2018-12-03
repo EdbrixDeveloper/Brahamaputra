@@ -16,7 +16,8 @@ public class PowerPlantDetailsParentData {
     ArrayList<PowerPlantDetailsData> powerPlantDetailsData;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public String getNumberOfPowerPlant() {
         return numberOfPowerPlant;
@@ -34,11 +35,11 @@ public class PowerPlantDetailsParentData {
         this.powerPlantDetailsData = powerPlantDetailsData;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 
@@ -46,14 +47,14 @@ public class PowerPlantDetailsParentData {
         this.numberOfPowerPlant = numberOfPowerPlant;
         this.numberOfWorkingPowerPlant = numberOfWorkingPowerPlant;
         this.powerPlantDetailsData = powerPlantDetailsData;
-        this.isSubmited = true;
+        //this.isSubmited = true;//007
     }
 
     public PowerPlantDetailsParentData() {
         this.numberOfPowerPlant = "";
         this.numberOfWorkingPowerPlant = "";
         this.powerPlantDetailsData = new ArrayList<>();
-        this.isSubmited = false;
+        this.isSubmited = 0;
     }
 
     public String getNumberOfWorkingPowerPlant() {

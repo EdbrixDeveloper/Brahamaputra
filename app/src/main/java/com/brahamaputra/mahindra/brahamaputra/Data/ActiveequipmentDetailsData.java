@@ -14,7 +14,8 @@ public class ActiveequipmentDetailsData {
     private String PositionofAntennaTower;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public ActiveequipmentDetailsData() {
         this.typeofBTS = "";
@@ -24,7 +25,7 @@ public class ActiveequipmentDetailsData {
         this.DCLoadofBTSequipment = "";
         this.YearofInstallationatsite = "";
         this.PositionofAntennaTower = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public ActiveequipmentDetailsData(String typeofBTS, String importanceOfSite, String numberOfDependantSites, String make, String DCLoadofBTSequipment, String yearofInstallationatsite, String positionofAntennaTower) {
@@ -35,7 +36,7 @@ public class ActiveequipmentDetailsData {
         this.DCLoadofBTSequipment = DCLoadofBTSequipment;
         this.YearofInstallationatsite = yearofInstallationatsite;
         this.PositionofAntennaTower = positionofAntennaTower;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 
     public String getTypeofBTS() {
@@ -94,11 +95,11 @@ public class ActiveequipmentDetailsData {
         PositionofAntennaTower = positionofAntennaTower;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 

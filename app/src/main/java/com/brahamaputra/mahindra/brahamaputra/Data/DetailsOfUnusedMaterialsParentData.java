@@ -13,18 +13,19 @@ public class DetailsOfUnusedMaterialsParentData {
     ArrayList<DetailsOfUnusedMaterialsData> detailsOfUnusedMaterialsData;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public DetailsOfUnusedMaterialsParentData(String numberofUnusedAssetinSite, ArrayList<DetailsOfUnusedMaterialsData> detailsOfUnusedMaterialsData) {
         this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
         this.detailsOfUnusedMaterialsData = detailsOfUnusedMaterialsData;
-        this.isSubmited = true;
+        //this.isSubmited = true;//007
     }
 
     public DetailsOfUnusedMaterialsParentData(){
         this.numberofUnusedAssetinSite = "";
         this.detailsOfUnusedMaterialsData = new ArrayList<>();
-        this.isSubmited = false;
+        this.isSubmited = 0;
     }
 
     public String getNumberofUnusedAssetinSite() {
@@ -43,11 +44,11 @@ public class DetailsOfUnusedMaterialsParentData {
         this.detailsOfUnusedMaterialsData = detailsOfUnusedMaterialsData;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

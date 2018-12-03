@@ -89,7 +89,8 @@ public class GeneralSafetyMeasuresParentData {
     ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
 
     public GeneralSafetyMeasuresParentData() {
@@ -118,7 +119,7 @@ public class GeneralSafetyMeasuresParentData {
         this.doorOpenSensor = "";
         this.fuelSensor = "";
         this.fireSmokeSensor = "";
-        this.isSubmited = false;
+        this.isSubmited = 0;
         this.agencyName = "";
         this.generalSafetyMeasuresData = new ArrayList<>();
     }
@@ -152,7 +153,7 @@ public class GeneralSafetyMeasuresParentData {
         this.fireSmokeSensor = fireSmokeSensor;
         this.agencyName = agencyName;
         this.generalSafetyMeasuresData = generalSafetyMeasuresData;
-        this.isSubmited = true;
+        //this.isSubmited = true;//007
 
     }
 
@@ -376,11 +377,11 @@ public class GeneralSafetyMeasuresParentData {
         this.generalSafetyMeasuresData = generalSafetyMeasuresData;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 

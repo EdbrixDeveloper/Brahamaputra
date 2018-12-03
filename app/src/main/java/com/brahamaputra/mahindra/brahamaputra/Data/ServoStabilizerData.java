@@ -26,7 +26,8 @@ public class ServoStabilizerData {
     private String qrCodeImageFileName;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public ServoStabilizerData() {
         this.servoStabilizer_Qr = "";
@@ -36,7 +37,7 @@ public class ServoStabilizerData {
         this.workingCondition = "";
         this.natureofProblem = "";
         this.qrCodeImageFileName = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public ServoStabilizerData(String servoStabilizer_Qr, String servoStabilizerWorkingStatus, String makeofServo, String ratingofServo, String workingCondition, String natureofProblem,String qrCodeImageFileName) {
@@ -47,7 +48,7 @@ public class ServoStabilizerData {
         this.workingCondition = workingCondition;
         this.natureofProblem = natureofProblem;
         this.qrCodeImageFileName=qrCodeImageFileName;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 
     public String getServoStabilizer_Qr() {
@@ -106,11 +107,11 @@ public class ServoStabilizerData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 

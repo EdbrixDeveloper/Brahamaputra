@@ -16,13 +16,14 @@ public class AirConditionParentData {
     ArrayList<AirConditionersData> airConditionersData;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 
@@ -30,14 +31,14 @@ public class AirConditionParentData {
         this.noOfACprovided = noOfACprovided;
         this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
         this.airConditionersData = airConditionersData;
-        this.isSubmited = true;
+        this.isSubmited = 0;
     }
 
     public AirConditionParentData(){
         this.noOfACprovided = "";
         this.numberOfACInWorkingCondition = "";
         this.airConditionersData = new ArrayList<>();
-        this.isSubmited = false;
+        //this.isSubmited = false;//007
     }
 
     public String getNoOfACprovided() {

@@ -670,7 +670,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             // hotoTransactionData.setTicketNo(ticketId);
             String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
 
-            externalTenantsPersonalDetailsParentData.setSubmited(true);
+            //externalTenantsPersonalDetailsParentData.setSubmited(true);
             externalTenantsPersonalDetailsParentData.setTotalNumberofTanents(totalNumberofTanents);
             externalTenantsPersonalDetailsParentData.setExternalTenantsPersonalDetailsData(externalTenantsPersonalDetailsDataList);
 

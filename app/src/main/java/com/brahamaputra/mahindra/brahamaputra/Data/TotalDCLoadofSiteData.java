@@ -9,16 +9,17 @@ public class TotalDCLoadofSiteData
     private String totalDcLoadOfSite;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public TotalDCLoadofSiteData() {
         this.totalDcLoadOfSite = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public TotalDCLoadofSiteData(String totalDcLoadOfSite) {
         this.totalDcLoadOfSite = totalDcLoadOfSite;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 
     public String getTotalDcLoadOfSite() {
@@ -29,11 +30,11 @@ public class TotalDCLoadofSiteData
         this.totalDcLoadOfSite = totalDcLoadOfSite;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

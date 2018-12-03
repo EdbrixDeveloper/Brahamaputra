@@ -29,7 +29,8 @@ public class TowerDetailsData {
     private String warningSignBoard;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public TowerDetailsData() {
         this.towerName = "";
@@ -40,7 +41,7 @@ public class TowerDetailsData {
         this.dangerSignBoard = "";
         this.cautionSignBoard = "";
         this.warningSignBoard = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public TowerDetailsData(String towerName, String towerType, String towerHeight, String dateOfTowerPainting, String boardSign, String dangerSignBoard, String cautionSignBoard, String warningSignBoard) {
@@ -52,7 +53,7 @@ public class TowerDetailsData {
         this.dangerSignBoard = dangerSignBoard;
         this.cautionSignBoard = cautionSignBoard;
         this.warningSignBoard = warningSignBoard;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 
     public String getTowerName() {
@@ -119,11 +120,11 @@ public class TowerDetailsData {
         this.warningSignBoard = warningSignBoard;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

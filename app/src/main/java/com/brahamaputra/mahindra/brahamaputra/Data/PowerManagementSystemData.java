@@ -35,7 +35,8 @@ public class PowerManagementSystemData {
     private String qrCodeImageFileName;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public String getPowerManagementSystemQR() {
         return powerManagementSystemQR;
@@ -109,11 +110,11 @@ public class PowerManagementSystemData {
         this.natureofProblem = natureofProblem;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 
@@ -128,7 +129,7 @@ public class PowerManagementSystemData {
         this.workingCondition = "";
         this.natureofProblem = "";
         this.qrCodeImageFileName="";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public String getQrCodeImageFileName() {
@@ -150,6 +151,6 @@ public class PowerManagementSystemData {
         this.workingCondition = workingCondition;
         this.natureofProblem = natureofProblem;
         this.qrCodeImageFileName=qrCodeImageFileName;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 }

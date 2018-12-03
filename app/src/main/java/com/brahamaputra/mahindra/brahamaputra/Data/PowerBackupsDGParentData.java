@@ -16,7 +16,8 @@ public class PowerBackupsDGParentData {
     ArrayList<PowerBackupsDGData> powerBackupsDGData;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public String getNoOfEngineAlternator() {
         return noOfEngineAlternator;
@@ -42,11 +43,11 @@ public class PowerBackupsDGParentData {
         this.powerBackupsDGData = powerBackupsDGData;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 
@@ -54,12 +55,12 @@ public class PowerBackupsDGParentData {
         this.noOfEngineAlternator = noOfEngineAlternator;
         this.numberOfWorkingDg = numberOfWorkingDg;
         this.powerBackupsDGData = powerBackupsDGData;
-        this.isSubmited = true;
+        //this.isSubmited = true;//007
     }
     public PowerBackupsDGParentData(){
         this.noOfEngineAlternator = "";
         this.numberOfWorkingDg = "";
         this.powerBackupsDGData = new ArrayList<>();
-        this.isSubmited = false;
+        this.isSubmited = 0;
     }
 }

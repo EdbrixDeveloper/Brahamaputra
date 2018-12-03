@@ -16,19 +16,20 @@ public class BatterySetParentData {
     ArrayList<BatterySetData> batterySetData;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public BatterySetParentData(String noOfBatterySet, String noOfBatteryBankWorking, ArrayList<BatterySetData> batterySetData) {
         this.noOfBatterySet = noOfBatterySet;
         this.noOfBatteryBankWorking = noOfBatteryBankWorking;
         this.batterySetData = batterySetData;
-        this.isSubmited = true;
+        //this.isSubmited = true;//007
     }
     public BatterySetParentData(){
         this.noOfBatterySet = "";
         this.noOfBatteryBankWorking = "";
         this.batterySetData = new ArrayList<>();
-        this.isSubmited = false;
+        this.isSubmited = 0;
     }
 
     public String getNoOfBatterySet() {
@@ -55,11 +56,11 @@ public class BatterySetParentData {
         this.batterySetData = batterySetData;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

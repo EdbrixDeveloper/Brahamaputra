@@ -17,14 +17,15 @@ public class ACDB_DCDB_Data {
     String freeCoolingDeviseStausFCU;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public ACDB_DCDB_Data() {
         this.numberofACDB = "";
         this.acdbRatingAMP = "";
         this.numberofDCDB = "";
         this.freeCoolingDeviseStausFCU = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public ACDB_DCDB_Data(String numberofACDB, String acdbRatingAMP, String numberofDCDB, String freeCoolingDeviseStausFCU) {
@@ -32,7 +33,7 @@ public class ACDB_DCDB_Data {
         this.acdbRatingAMP = acdbRatingAMP;
         this.numberofDCDB = numberofDCDB;
         this.freeCoolingDeviseStausFCU = freeCoolingDeviseStausFCU;
-        this.isSubmited=true;
+        //this.isSubmited=true;//007
     }
 
     public String getNumberofACDB() {
@@ -67,11 +68,11 @@ public class ACDB_DCDB_Data {
         this.freeCoolingDeviseStausFCU = freeCoolingDeviseStausFCU;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

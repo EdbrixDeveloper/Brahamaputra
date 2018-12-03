@@ -13,18 +13,19 @@ public class ExternalTenantsPersonalDetailsParentData {
     ArrayList<ExternalTenantsPersonalDetailsData> externalTenantsPersonalDetailsData;
 
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     public ExternalTenantsPersonalDetailsParentData(String totalNumberofTanents, ArrayList<ExternalTenantsPersonalDetailsData> externalTenantsPersonalDetailsData ) {
         this.totalNumberofTanents = totalNumberofTanents;
         this.externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsData;
-        this.isSubmited = true;
+        //this.isSubmited = true;//007
     }
 
     public ExternalTenantsPersonalDetailsParentData(){
         this.totalNumberofTanents = "";
         this.externalTenantsPersonalDetailsData = new ArrayList<>();
-        this.isSubmited = false;
+        this.isSubmited = 0;
     }
 
     public String getTotalNumberofTanents() {
@@ -43,11 +44,11 @@ public class ExternalTenantsPersonalDetailsParentData {
         this.externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsData;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }

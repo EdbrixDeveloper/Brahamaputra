@@ -32,10 +32,9 @@ public class LandDetailsData  {
     @SerializedName("landAgreementValidity")
     private String landAgreementValidity;
 
-
-
     @SerializedName("isSubmited")
-    private Boolean isSubmited;
+    //private Boolean isSubmited;
+    private int isSubmited;
 
     private String landLayoutFileName;
 
@@ -50,7 +49,7 @@ public class LandDetailsData  {
         this.landAgreementCopy = "";
         this.landAgreementValidity = "";
         this.landLayoutFileName = "";
-        this.isSubmited=false;
+        this.isSubmited=0;
     }
 
     public LandDetailsData(String landType, String landArea, String rentLeaseValue, String rentLeaseValueInWords, String landOwnerName, String landOwnerMob, String landLayout, String landAgreementCopy, String landAgreementValidity, String landLayoutFileName) {
@@ -64,7 +63,13 @@ public class LandDetailsData  {
         this.landAgreementCopy = landAgreementCopy;
         this.landAgreementValidity = landAgreementValidity;
         this.landLayoutFileName = landLayoutFileName;
-        this.isSubmited=true;
+
+        //this.isSubmited=true;//007
+        if(!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getLandType() {
@@ -149,11 +154,11 @@ public class LandDetailsData  {
         this.landLayoutFileName = landLayoutFileName;
     }
 
-    public Boolean getSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setSubmited(Boolean submited) {
+    public void setSubmited(int submited) {
         isSubmited = submited;
     }
 }
