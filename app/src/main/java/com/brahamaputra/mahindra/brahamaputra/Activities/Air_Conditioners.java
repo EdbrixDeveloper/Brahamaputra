@@ -401,7 +401,7 @@ public class Air_Conditioners extends BaseActivity {
 
                         str_numberOfACInWorkingCondition = item.get(position);
                         mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText("");
-                        if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), str_numberOfACInWorkingCondition) == true) {
+                        if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), str_numberOfACInWorkingCondition, "onClick") == true) {
                             mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(str_numberOfACInWorkingCondition);
                         }
                     }
@@ -545,10 +545,11 @@ public class Air_Conditioners extends BaseActivity {
                         displayACRecords(currentPos);
 
                     } else if (currentPos == (totalAcCount - 1)) {
+                        saveACRecords(currentPos);
                         //if (checkValidationOnNoOfAcSelection() == true) {
-                        if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim()) == true) {
+                        if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim(), "onSubmit") == true) {
                             //Save Final current reading and submit all AC data
-                            saveACRecords(currentPos);
+                            //saveACRecords(currentPos);
                             submitDetails();
                             startActivity(new Intent(Air_Conditioners.this, Solar_Power_System.class));
                             finish();
@@ -804,7 +805,7 @@ public class Air_Conditioners extends BaseActivity {
                     showToast("Please select no of ac");
                 } else {
                     // if (checkValidationOnNoOfAcSelection() == true) {
-                    if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim()) == true) {
+                    if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim(), "onSubmit") == true) {
                         submitDetails();
                         startActivity(new Intent(this, Solar_Power_System.class));
                         finish();
@@ -1008,9 +1009,9 @@ public class Air_Conditioners extends BaseActivity {
     }
 
     /*Arjun 28112018*/
-    public boolean checkValidationOnChangeNoOfAcSelection(String noOfACprovided, String numberOfACInWorkingCondition) {
+    public boolean checkValidationOnChangeNoOfAcSelection(String noOfACprovided, String numberOfACInWorkingCondition, String methodFlag) {
 
-        if (!noOfACprovided.isEmpty() && noOfACprovided != null) {
+        /*if (!noOfACprovided.isEmpty() && noOfACprovided != null) {
             if (noOfACprovided.matches("\\d+(?:\\.\\d+)?")) {
                 if (Integer.valueOf(noOfACprovided) > 0) {
                     if (!numberOfACInWorkingCondition.isEmpty() && numberOfACInWorkingCondition != null) {
@@ -1033,7 +1034,24 @@ public class Air_Conditioners extends BaseActivity {
         } else {
             showToast("Select No of Air Conditioners(AC) provided");
             return false;
-        }
+        }*/
+
+
+        if (noOfACprovided.isEmpty() || noOfACprovided == null) {
+            showToast("Select No of Air Conditioners(AC) provided");
+            return false;
+        } else if (Integer.valueOf(noOfACprovided) > 0) {
+            if (numberOfACInWorkingCondition.isEmpty() || numberOfACInWorkingCondition == null) {
+                showToast("Select Number of AC in working condition");
+                return false;
+            } else if (Integer.valueOf(numberOfACInWorkingCondition) > Integer.valueOf(noOfACprovided)) {
+                showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
+                return false;
+            } else if ((airConditionersData.size() != Integer.valueOf(noOfACprovided) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings .");//as a mentioned AC in no of AC provided
+                return false;
+            } else return true;
+        } else return true;
 
     }
 

@@ -25,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -44,6 +45,7 @@ public class LoginActivity extends BaseActivity {
     private EditText mLoginEditTextPassword;
     private Button mLoginButtonLogin;
     private TextView loginTextViewForgotPassword;
+    private TextView textViewAppVersion;
     final public int CHECK_PERMISSIONS = 123;
     private SessionManager sessionManager;
 
@@ -63,6 +65,7 @@ public class LoginActivity extends BaseActivity {
             assignViews();
             setListener();
             hideKeyboard();
+            textViewAppVersion.setText("App Version : "+BuildConfig.VERSION_NAME);
         }
         checkPermission();
         sessionManager = new SessionManager(LoginActivity.this);
@@ -72,6 +75,7 @@ public class LoginActivity extends BaseActivity {
         mImageView = (ImageView) findViewById(R.id.imageView);
         mLoginEditTextUsername = (EditText) findViewById(R.id.login_editText_username);
         mLoginEditTextPassword = (EditText) findViewById(R.id.login_editText_password);
+        textViewAppVersion = (TextView) findViewById(R.id.textView_appVersion);
         mLoginEditTextPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

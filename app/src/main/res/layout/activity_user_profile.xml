@@ -70,6 +70,26 @@
 
                 </LinearLayout>
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView_appVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|bottom"
+                        android:layout_marginBottom="@dimen/app_min_margin"
+                        android:layout_marginLeft="@dimen/app_big_margin"
+                        android:layout_marginRight="@dimen/app_big_margin"
+                        android:layout_marginTop="@dimen/app_min_margin"
+                        android:padding="@dimen/app_normal_padding"
+                        android:text="App Version:"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+                </FrameLayout>
+
             </LinearLayout>
 
             <LinearLayout

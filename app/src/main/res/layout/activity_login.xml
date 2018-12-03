@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.LoginActivity"
+    android:background="@drawable/loginbg"
     android:orientation="vertical"
-    android:background="@drawable/loginbg">
+    tools:context=".Activities.LoginActivity">
 
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -25,30 +23,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="0.9">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <FrameLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="270dp"
-                    android:layout_height="230dp"
-                    android:src="@drawable/mahindra_rise_logo_white"
-                    android:layout_marginTop="60dp"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:text="We provide service"
-                    android:textColor="@color/gray"
-                    android:textSize="16dp"
-                    android:textAlignment="center"
-                    android:layout_gravity="bottom"
-                    android:textStyle="italic"
-                    android:visibility="gone"/>
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="270dp"
+                        android:layout_height="230dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="60dp"
+                        android:src="@drawable/mahindra_rise_logo_white" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="We provide service"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray"
+                        android:textSize="16dp"
+                        android:textStyle="italic"
+                        android:visibility="gone" />
                 </FrameLayout>
 
             </LinearLayout>
@@ -56,82 +55,98 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/login_editText_username"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:hint="Username"
-                    android:inputType="textPersonName"
+                    android:layout_marginBottom="@dimen/app_normal_margin"
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
-                    android:layout_marginBottom="@dimen/app_normal_margin"
-                    android:drawableLeft="@drawable/username_icon"
-                    android:textColorHint="@color/colorWhite"
-                    android:drawablePadding="@dimen/app_normal_padding"
-                    android:imeOptions="actionNext"
-                    android:imeActionLabel="Password"
                     android:backgroundTint="@color/colorWhite"
+                    android:drawableLeft="@drawable/username_icon"
+                    android:drawablePadding="@dimen/app_normal_padding"
+                    android:hint="Username"
+                    android:imeActionLabel="Password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
                     android:textColor="@color/colorWhite"
-                    />
+                    android:textColorHint="@color/colorWhite" />
 
                 <EditText
                     android:id="@+id/login_editText_password"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:ems="10"
-                    android:hint="Password"
-                    android:inputType="textPassword"
+                    android:layout_marginBottom="@dimen/app_big_margin"
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
-                    android:layout_marginBottom="@dimen/app_big_margin"
-                    android:imeOptions="actionDone"
-                    android:imeActionLabel="Sign In"
-                    android:drawableLeft="@drawable/password_icon"
-                    android:textColorHint="@color/colorWhite"
-                    android:drawablePadding="@dimen/app_normal_padding"
                     android:backgroundTint="@color/colorWhite"
-                    android:textColor="@color/colorWhite" />
+                    android:drawableLeft="@drawable/password_icon"
+                    android:drawablePadding="@dimen/app_normal_padding"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:imeActionLabel="Sign In"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/colorWhite" />
 
 
                 <Button
                     android:id="@+id/login_button_login"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:layout_marginTop="@dimen/app_normal_margin"
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:text="Sign in"
+                    android:layout_marginTop="@dimen/app_normal_margin"
                     android:background="@color/whitesmoke"
-                    android:textColor="@color/red"
+                    android:text="Sign in"
                     android:textAllCaps="false"
-                    android:textSize="18dp"/>
+                    android:textColor="@color/red"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/login_textView_forgotPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Forgot password?"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="16dp"
-                    android:textStyle="normal"
-                    android:textAlignment="textEnd"
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
+                    android:layout_marginTop="@dimen/app_min_margin"
                     android:padding="@dimen/app_normal_padding"
-                    android:layout_marginBottom="@dimen/app_min_margin"
-                    android:layout_marginTop="@dimen/app_min_margin"/>
+                    android:text="Forgot password?"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16dp"
+                    android:textStyle="normal" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_gravity="right|bottom"
+                        android:id="@+id/textView_appVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/app_min_margin"
+                        android:layout_marginLeft="@dimen/app_big_margin"
+                        android:layout_marginRight="@dimen/app_big_margin"
+                        android:layout_marginTop="@dimen/app_min_margin"
+                        android:padding="@dimen/app_normal_padding"
+                        android:text="App Version:"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+                </FrameLayout>
 
             </LinearLayout>
 
+
         </LinearLayout>
     </ScrollView>
-
-
-
 
 
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -62,9 +63,9 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView mUserProfileTextViewUserName;
     TextView mUserProfileTextViewUserNameText;
 
-
     private SessionManager sessionManager;
     private AlertDialogManager alertDialogManager;
+    private TextView textViewAppVersion;
 
     public static final int RESULT_UPDATE_PROFILE = 328;
 
@@ -78,6 +79,7 @@ public class UserProfileActivity extends AppCompatActivity {
         alertDialogManager = new AlertDialogManager(UserProfileActivity.this);
         sessionManager = new SessionManager(UserProfileActivity.this);
         setValues();
+        textViewAppVersion.setText("App Version : " + BuildConfig.VERSION_NAME);
     }
 
     private void setValues() {
@@ -208,6 +210,8 @@ public class UserProfileActivity extends AppCompatActivity {
         mUserProfileTextViewSsaText = (TextView) findViewById(R.id.userProfile_textView_ssaText);
 
 
+
+        textViewAppVersion = (TextView) findViewById(R.id.textView_appVersion);
     }
 
     @Override

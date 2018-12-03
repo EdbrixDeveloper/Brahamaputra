@@ -410,7 +410,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
                         str_numberOfPowerPlantWorking = item.get(position);
                         mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText("");
-                        if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), str_numberOfPowerPlantWorking) == true) {
+                        if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), str_numberOfPowerPlantWorking, "onClick") == true) {
                             mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText(str_numberOfPowerPlantWorking);
                         }
                     }
@@ -625,10 +625,11 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                         displayPlantRecords(currentPos);
 
                     } else if (currentPos == (totalPlantCount - 1)) {
+                        savePlantRecords(currentPos);
                         //if (checkValidationOnNoOfPowerPlant() == true) {
-                        if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim()) == true) {
+                        if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim(), "onSubmit") == true) {
                             //Save Final current reading and submit all  data
-                            savePlantRecords(currentPos);
+                            //savePlantRecords(currentPos);
                             submitDetails();
                             startActivity(new Intent(PowerPlantDetailsActivity.this, Power_Backups_DG.class));
                             finish();
@@ -832,13 +833,13 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsTextViewSpdStatusVal.setText("");
         mPowerPlantDetailsTextViewWorkingConditionVal.setText("");
         mPowerPlantDetailsEditTextNatureOfProblem.setText("");
-        base64StringQRCodeScan="";
+        base64StringQRCodeScan = "";
     }
 
     /*Arjun 21112018*/
-    public boolean checkValidationOnChangeNoOfPowerPlant(String numberOfPowerPlant, String numberOfWorkingPowerPlant) {
+    public boolean checkValidationOnChangeNoOfPowerPlant(String numberOfPowerPlant, String numberOfWorkingPowerPlant, String methodFlag) {
 
-        if (!numberOfPowerPlant.isEmpty() && numberOfPowerPlant != null) {
+        /*if (!numberOfPowerPlant.isEmpty() && numberOfPowerPlant != null) {
             if (Integer.valueOf(numberOfPowerPlant) > 0) {
                 if (!numberOfWorkingPowerPlant.isEmpty() && numberOfWorkingPowerPlant != null) {
                     if (Integer.valueOf(numberOfWorkingPowerPlant) <= Integer.valueOf(numberOfPowerPlant)) {
@@ -857,7 +858,23 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else {
             showToast("Select number of Power Plant");
             return false;
-        }
+        }*/
+        if (numberOfPowerPlant.isEmpty() || numberOfPowerPlant == null) {
+            showToast("Select number of Power Plant");
+            return false;
+        } else if (Integer.valueOf(numberOfPowerPlant) > 0) {
+            if (numberOfWorkingPowerPlant.isEmpty() || numberOfWorkingPowerPlant == null) {
+                showToast("Select number of working Power Plant");
+                return false;
+            } else if (Integer.valueOf(numberOfWorkingPowerPlant) > Integer.valueOf(numberOfPowerPlant)) {
+                showToast("Select number of working Power Plant is less than or equal to number Of Power Plant");
+                return false;
+            } else if ((powerPlantDetailsDataList.size() != Integer.valueOf(numberOfPowerPlant) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");
+                return false;
+            } else return true;
+
+        } else return true;
 
     }
 
@@ -1304,7 +1321,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 return true;
             case R.id.menuSubmit:
                 //if (checkValidationOnNoOfPowerPlant() == true) {
-                if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim()) == true) {
+                if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim(), "onSubmit") == true) {
                     submitDetails();
                     startActivity(new Intent(this, Power_Backups_DG.class));
                     finish();

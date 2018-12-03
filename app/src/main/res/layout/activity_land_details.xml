@@ -124,9 +124,8 @@
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
                     android:textAlignment="viewStart"
-
-                    android:textAllCaps="true"
                     android:textSize="16sp" />
+                <!--android:textAllCaps="true"-->
 
             </LinearLayout>
 

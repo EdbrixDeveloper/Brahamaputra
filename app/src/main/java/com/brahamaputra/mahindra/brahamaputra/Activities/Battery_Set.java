@@ -248,7 +248,7 @@ public class Battery_Set extends BaseActivity {
 
                         str_numberofBatteryBankWorking = item.get(position);
                         mBatterySetTextViewNumberofBatteryBankWorkingVal.setText("");
-                        if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), str_numberofBatteryBankWorking) == true) {
+                        if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), str_numberofBatteryBankWorking, "onClick") == true) {
                             mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(str_numberofBatteryBankWorking);
                         }
                     }
@@ -446,9 +446,10 @@ public class Battery_Set extends BaseActivity {
                         displayRecords(currentPos);
 
                     } else if (currentPos == (totalCount - 1)) {
+                        saveRecords(currentPos);
                         //Save Final current reading and submit all AC data
-                        if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim()) == true) {
-                            saveRecords(currentPos);
+                        if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim(), "onSubmit") == true) {
+                            //saveRecords(currentPos);
                             submitDetails();
                             startActivity(new Intent(Battery_Set.this, ExternalTenantsPersonaldetails.class));
                             finish();
@@ -669,7 +670,7 @@ public class Battery_Set extends BaseActivity {
                 return true;
             case R.id.menuDone:
                 ///if (checkValidation()) {
-                if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim()) == true) {
+                if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim(), "onSubmit") == true) {
                     submitDetails();
                     finish();
                     startActivity(new Intent(this, ExternalTenantsPersonaldetails.class));
@@ -682,11 +683,11 @@ public class Battery_Set extends BaseActivity {
     }
 
 
-    private boolean checkValidation(String noOfBatterySet, String noOfBatteryBankWorking) {
+    private boolean checkValidation(String noOfBatterySet, String noOfBatteryBankWorking, String methodFlag) {
         //String noOfBatterySet = mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim();
         //String noOfBatteryBankWorking = mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim();
 
-        if (noOfBatterySet.isEmpty() || noOfBatterySet == null) {
+        /*if (noOfBatterySet.isEmpty() || noOfBatterySet == null) {
             showToast("Select No of Battery Set Provided ");
             return false;
         } else if (noOfBatteryBankWorking.isEmpty() || noOfBatteryBankWorking == null) {
@@ -695,6 +696,23 @@ public class Battery_Set extends BaseActivity {
         } else if (Integer.valueOf(noOfBatteryBankWorking) > Integer.valueOf(noOfBatterySet)) {
             showToast("Number of battery bank working  is not more than number of battery set provided ");
             return false;
+        } else return true;*/
+
+
+        if (noOfBatterySet.isEmpty() || noOfBatterySet == null) {
+            showToast("Select No of Battery Set Provided ");
+            return false;
+        } else if (Integer.valueOf(noOfBatterySet) > 0) {
+            if (noOfBatteryBankWorking.isEmpty() || noOfBatteryBankWorking == null) {
+                showToast("Select No of Battery Bank Working ");
+                return false;
+            } else if (Integer.valueOf(noOfBatteryBankWorking) > Integer.valueOf(noOfBatterySet)) {
+                showToast("Number of battery bank working  is not more than number of battery set provided ");
+                return false;
+            } else if ((batterySetData.size() != Integer.valueOf(noOfBatterySet) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");
+                return false;
+            } else return true;
         } else return true;
     }
 

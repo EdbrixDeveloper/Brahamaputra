@@ -76,6 +76,7 @@ import org.json.JSONObject;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_CustomerName;
+
 public class UserHotoTransactionActivity extends BaseActivity {
 
 
@@ -123,35 +124,36 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_hoto_transaction);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_user_hoto_transaction);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        checkInBatteryData = "" + GlobalMethods.getBattery_percentage(UserHotoTransactionActivity.this);
+            checkInBatteryData = "" + GlobalMethods.getBattery_percentage(UserHotoTransactionActivity.this);
 
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("ticketNO");
-        this.setTitle(id);
-        checkInLat = intent.getStringExtra("latitude");
-        checkInLong = intent.getStringExtra("longitude");
-        assignViews();
-        initCombo();
-        disableInput();
+            Intent intent = getIntent();
+            String id = intent.getStringExtra("ticketNO");
+            this.setTitle(id);
+            checkInLat = intent.getStringExtra("latitude");
+            checkInLong = intent.getStringExtra("longitude");
+            assignViews();
+            initCombo();
+            disableInput();
 
-        alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+            alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
 
-        sessionManager = new SessionManager(UserHotoTransactionActivity.this);
-        userId = sessionManager.getSessionUserId();
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = sessionManager.getSessionUserTicketName();
+            sessionManager = new SessionManager(UserHotoTransactionActivity.this);
+            userId = sessionManager.getSessionUserId();
+            ticketId = sessionManager.getSessionUserTicketId();
+            ticketName = sessionManager.getSessionUserTicketName();
 
-        hotoTransactionData = new HotoTransactionData();
+            hotoTransactionData = new HotoTransactionData();
 
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName));
+            offlineStorageWrapper = OfflineStorageWrapper.getInstance(UserHotoTransactionActivity.this, userId, GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName));
 
-        getOfflineData();
+            getOfflineData();
 
-        gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
+            gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
         /*Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         if (gpsTracker.canGetLocation()) {
             //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
@@ -160,10 +162,10 @@ public class UserHotoTransactionActivity extends BaseActivity {
             showToast("Could not detect location");
             finish();
         }*/
-
-        mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            //mUserHotoTransButtonSubmitHotoTrans.setAllCaps(false);
+            mUserHotoTransButtonSubmitHotoTrans.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
                 /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                     checkInLat = String.valueOf(gpsTracker.getLatitude());
@@ -176,18 +178,21 @@ public class UserHotoTransactionActivity extends BaseActivity {
                     showToast("Could not detecting location.");
                 }*/
 
-                submitDetails();
-                hototicket_Selected_SiteType = mUserHotoTransEditTextTypeOfSites.getText().toString();
-                hototicket_Selected_CustomerName = mUserHotoTransEditTextCustomerName.getText().toString();
+                    submitDetails();
+                    hototicket_Selected_SiteType = mUserHotoTransEditTextTypeOfSites.getText().toString();
+                    hototicket_Selected_CustomerName = mUserHotoTransEditTextCustomerName.getText().toString();
 
-                Intent intent = new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class);
-                intent.putExtra("ticketName", ticketName);
+                    Intent intent = new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class);
+                    intent.putExtra("ticketName", ticketName);
 
-                startActivityForResult(intent, RESULT_HOTO_READING);
+                    startActivityForResult(intent, RESULT_HOTO_READING);
 
-            }
-        });
-        checkNetworkConnection();
+                }
+            });
+            checkNetworkConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initCombo() {
@@ -334,6 +339,15 @@ public class UserHotoTransactionActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.userhoto_transaction_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+
+        // show the button when some condition is true
+        shareItem.setVisible(false);
+        if (hotoTransactionData.isAtLeastOneHotoFormsSubmit() == true) {
+            shareItem.setVisible(true);
+        }
+
         return true;
     }
 
@@ -406,7 +420,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             if (!hotoTransactionData.isAllHotoFormsSubmit()) {
                 hideBusyProgress();
                 alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
-                alertDialogManager.Dialog("Confirmation", "Some section incomplete. Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                alertDialogManager.Dialog("Confirmation", "Some section incomplete.Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         showSettingsAlert();
@@ -612,6 +626,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        invalidateOptionsMenu();
         if (requestCode == RESULT_HOTO_READING && resultCode == RESULT_OK) {
             getOfflineData();
         }

@@ -558,7 +558,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuDone:
-                if (checkValidationonSubmit()) {
+                if (checkValidationonSubmit("onSubmit")) {
                     submitDetails();
                     startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
                     finish();
@@ -569,14 +569,24 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private boolean checkValidationonSubmit() {
+    private boolean checkValidationonSubmit(String methodFlag) {
         String UnusedAssetNo = mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.getText().toString().trim();
-        if (!UnusedAssetNo.isEmpty() && UnusedAssetNo != null) {
+        /*if (!UnusedAssetNo.isEmpty() && UnusedAssetNo != null) {
             return true;
         } else {
             showToast("Enter Number of Unused Asset in Site ");
             return false;
-        }
+        }*/
+
+        if (UnusedAssetNo.isEmpty() || UnusedAssetNo == null) {
+            showToast("Enter Number of Unused Asset in Site ");
+            return false;
+        } else if (Integer.valueOf(UnusedAssetNo) > 0) {
+            if ((detailsOfUnusedMaterialsData.size() != Integer.valueOf(UnusedAssetNo) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");
+                return false;
+            } else return true;
+        } else return true;
     }
 
     private void setInputDetails(int index) {

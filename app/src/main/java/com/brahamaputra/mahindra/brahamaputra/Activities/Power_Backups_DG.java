@@ -516,7 +516,7 @@ public class Power_Backups_DG extends BaseActivity {
 
                         str_numberOfWorkingDg = item.get(position);
                         mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText("");
-                        if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), str_numberOfWorkingDg) == true) {
+                        if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), str_numberOfWorkingDg, "onClick") == true) {
                             mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(str_numberOfWorkingDg);
                         }
                     }
@@ -853,10 +853,11 @@ public class Power_Backups_DG extends BaseActivity {
                         displayRecords(currentPos);
 
                     } else if (currentPos == (totalCount - 1)) {
+                        saveRecords(currentPos);
                         //if (checkValidationOnNoOfEngineAlternatorSelection() == true) {
-                        if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim()) == true) {
+                        if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim(), "onSubmit") == true) {
                             //Save Final current reading and submit all AC data
-                            saveRecords(currentPos);
+                            //saveRecords(currentPos);
                             submitDetails();
                             startActivity(new Intent(Power_Backups_DG.this, Shelter.class));
                             finish();
@@ -1106,7 +1107,7 @@ public class Power_Backups_DG extends BaseActivity {
                 return true;
             case R.id.menuSubmit:
                 //if (checkValidationOnNoOfEngineAlternatorSelection() == true) {
-                if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim()) == true) {
+                if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim(), "onSubmit") == true) {
                     submitDetails();
                     startActivity(new Intent(this, Shelter.class));
                     finish();
@@ -1394,10 +1395,10 @@ public class Power_Backups_DG extends BaseActivity {
 
 
     /*Arjun 21112018*/
-    public boolean checkValidationOnChangeNoOfEngineAlternatorSelection(String noOfEngineAlternator, String numberOfWorkingDg) {
+    public boolean checkValidationOnChangeNoOfEngineAlternatorSelection(String noOfEngineAlternator, String numberOfWorkingDg, String methodFlag) {
         //String noOfEngineAlternator = mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim();
         //String numberOfWorkingDg = mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim();
-        if (!noOfEngineAlternator.isEmpty() && noOfEngineAlternator != null) {
+        /*if (!noOfEngineAlternator.isEmpty() && noOfEngineAlternator != null) {
             if (Integer.valueOf(noOfEngineAlternator) > 0) {
                 if (!numberOfWorkingDg.isEmpty() && numberOfWorkingDg != null) {
                     if (Integer.valueOf(numberOfWorkingDg) <= Integer.valueOf(noOfEngineAlternator)) {
@@ -1416,7 +1417,25 @@ public class Power_Backups_DG extends BaseActivity {
         } else {
             showToast("Select Number of Engine Alternator sets provided");
             return false;
-        }
+        }*/
+
+
+        if (noOfEngineAlternator.isEmpty() || noOfEngineAlternator == null) {
+            showToast("Select Number of Engine Alternator sets provided");
+            return false;
+        } else if (Integer.valueOf(noOfEngineAlternator) > 0) {
+            if (numberOfWorkingDg.isEmpty() || numberOfWorkingDg == null) {
+                showToast("Select Number of working DG");
+                return false;
+            } else if (Integer.valueOf(numberOfWorkingDg) > Integer.valueOf(noOfEngineAlternator)) {
+                showToast("Select Number of working DG is less than or equal to Number of Engine Alternator sets provided");
+                return false;
+            } else if ((powerBackupsDGData.size() != Integer.valueOf(noOfEngineAlternator) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");
+                return false;
+            } else return true;
+        } else return true;
+
 
     }
 

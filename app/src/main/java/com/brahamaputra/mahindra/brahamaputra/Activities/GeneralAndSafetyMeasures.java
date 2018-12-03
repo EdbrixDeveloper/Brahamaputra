@@ -838,9 +838,11 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                     } else if (currentPos == (totalCount - 1)) {
                         //Save Final current reading and submit all AC data
                         saveRecords(currentPos);
-                        submitDetails();
-                        startActivity(new Intent(GeneralAndSafetyMeasures.this, ACDB_DCDB.class));
-                        finish();
+                        if (checkValidationonSubmit("onSubmit") == true) {
+                            submitDetails();
+                            startActivity(new Intent(GeneralAndSafetyMeasures.this, ACDB_DCDB.class));
+                            finish();
+                        }
                     }
                 }
             }
@@ -954,14 +956,19 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                 // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
-                submitDetails();
-                finish();
-                startActivity(new Intent(this, ACDB_DCDB.class));
-                return true;
+                if (checkValidationonSubmit("onSubmit") == true) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, ACDB_DCDB.class));
+                    return true;
+                }
 
 
         }
-        return super.onOptionsItemSelected(item);
+        return super.
+
+                onOptionsItemSelected(item);
+
     }
 
 
@@ -1007,6 +1014,18 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean checkValidationonSubmit(String methodFlag) {
+        String noOfFireExtuinguisher = mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal.getText().toString().trim();
+        if (!noOfFireExtuinguisher.isEmpty() && noOfFireExtuinguisher != null) {
+            if (Integer.valueOf(noOfFireExtuinguisher) > 0) {
+                if ((generalSafetyMeasuresData.size() != Integer.valueOf(noOfFireExtuinguisher) && methodFlag.equals("onSubmit"))) {
+                    showToast("Complete the all readings.");
+                    return false;
+                } else return true;
+            } else return true;
+        } else return true;
     }
 
     private void setInputDetails(int index) {

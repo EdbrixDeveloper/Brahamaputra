@@ -223,6 +223,7 @@ public class Land_Details extends BaseActivity {
                 if (rentLease.toString().length() > 0) {
                     String str_rentLease = EnglishNumberToWords.convert(Long.valueOf(rentLease));
                     mLandDetailsTextViewRentLeaseInWords_val.setText(str_rentLease);
+                    mLandDetailsTextViewRentLeaseInWords_val.setAllCaps(true);
                 }
             }
         });

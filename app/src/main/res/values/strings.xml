@@ -290,10 +290,10 @@
     <string-array name="array_batterySet_ManufacturerMakeModel">
         <item>Amara Raja</item>
         <item>C&amp;D</item>
-        <item>Coslite</item>
+        <item>Coslight</item>
         <item>Delta</item>
-        <item>Enersis</item>
-        <item>Excide</item>
+        <item>Enersys</item>
+        <item>Exide</item>
         <item>Exicom</item>
         <item>GFM</item>
         <item>GNB</item>
@@ -302,7 +302,7 @@
         <item>Leoch</item>
         <item>Liberty</item>
         <item>Mahindra</item>
-        <item>Microtex</item>
+        <item>Microtek</item>
         <item>Narada</item>
         <item>NED</item>
         <item>Panasonic</item>
@@ -692,11 +692,11 @@
 
     <string-array name="array_detailsOfUnusedMaterials_AssetMake_AC">
         <item>ACME</item>
-        <item>Arisys</item>
+        <item>Airsys</item>
         <item>Blue Star</item>
         <item>Carrier</item>
         <item>Daikin</item>
-        <item>Godreg</item>
+        <item>Godrej</item>
         <item>Haier</item>
         <item>Hitachi</item>
         <item>LG</item>
@@ -720,10 +720,10 @@
     <string-array name="array_detailsOfUnusedMaterials_AssetMake_BatteryBank">
         <item>Amara Raja</item>
         <item>C&amp;D</item>
-        <item>Coslite</item>
+        <item>Coslight</item>
         <item>Delta</item>
-        <item>Enersis</item>
-        <item>Excide</item>
+        <item>Enersys</item>
+        <item>Exide</item>
         <item>Exicom</item>
         <item>GFM</item>
         <item>GNB</item>
@@ -732,7 +732,7 @@
         <item>Leoch</item>
         <item>Liberty</item>
         <item>Mahindra</item>
-        <item>Microtex</item>
+        <item>Microtek</item>
         <item>Narada</item>
         <item>NED</item>
         <item>Panasonic</item>
@@ -751,13 +751,13 @@
         <item>Eicher</item>
         <item>Elgi</item>
         <item>Escorts</item>
-        <item>Greeves</item>
+        <item>Greaves</item>
         <item>Honda</item>
-        <item>Jackson</item>
+        <item>Jakson</item>
         <item>Koel</item>
-        <item>Lister Pitter</item>
+        <item>Lister Petter</item>
         <item>Mahindra</item>
-        <item>Mistubishi</item>
+        <item>Mitsubishi</item>
         <item>Perfect</item>
         <item>Perkins</item>
         <item>Powerica</item>
@@ -770,15 +770,15 @@
     </string-array>
 
     <string-array name="array_detailsOfUnusedMaterials_AssetMake_PowerPlant">
-        <item>Ador Poweron</item>
-        <item>Amaraja</item>
+        <item>Ador Powertron</item>
+        <item>Amara Raja</item>
         <item>BFU</item>
         <item>Delta</item>
         <item>Eltek</item>
         <item>Emerson</item>
         <item>Exicom</item>
-        <item>HBL Sabnif</item>
-        <item>INMPS</item>
+        <item>HBL Saving</item>
+        <item>INPS</item>
         <item>Intex</item>
         <item>ITI</item>
         <item>Lineage</item>
@@ -790,15 +790,15 @@
     </string-array>
 
     <string-array name="array_detailsOfUnusedMaterials_AssetMake_RectifierModule">
-        <item>Ador Poweron</item>
-        <item>Amaraja</item>
+        <item>Ador Powertron</item>
+        <item>Amara Raja</item>
         <item>BFU</item>
         <item>Delta</item>
         <item>Eltek</item>
         <item>Emerson</item>
         <item>Exicom</item>
-        <item>HBL Sabnif</item>
-        <item>INMPS</item>
+        <item>HBL Saving</item>
+        <item>INPS</item>
         <item>Intex</item>
         <item>ITI</item>
         <item>Lineage</item>
@@ -840,9 +840,9 @@
 
     <string-array name="array_detailsOfUnusedMaterials_AssetMake">
         <item>ACME</item>
-        <item>Ador Poweron</item>
-        <item>Amaraja</item>
-        <item>Arisys</item>
+        <item>Ador Powertron</item>
+        <item>Amara Raja</item>
+        <item>Airsys</item>
         <item>Ashok Leyland</item>
         <item>BFU</item>
         <item>Blue Star</item>
@@ -851,7 +851,7 @@
         <item>Carrier</item>
         <item>Caterpillar</item>
         <item>Civil Room</item>
-        <item>Coslite</item>
+        <item>Coslight</item>
         <item>Cummins</item>
         <item>Daikin</item>
         <item>Delta</item>
@@ -859,35 +859,35 @@
         <item>Elgi</item>
         <item>Eltek</item>
         <item>Emerson</item>
-        <item>Enersis</item>
+        <item>Enersys</item>
         <item>Escorts</item>
-        <item>Excide</item>
+        <item>Exide</item>
         <item>Exicom</item>
         <item>GFM</item>
         <item>GNB</item>
-        <item>Godreg</item>
-        <item>Greeves</item>
+        <item>Godrej</item>
+        <item>Greaves</item>
         <item>Haier</item>
         <item>HBL</item>
-        <item>HBL Sabnif</item>
+        <item>HBL Saving</item>
         <item>Hitachi</item>
         <item>Honda</item>
         <item>Huwavai</item>
-        <item>INMPS</item>
+        <item>INPS</item>
         <item>Intex</item>
         <item>ITI</item>
-        <item>Jackson</item>
+        <item>Jakson</item>
         <item>Koel</item>
         <item>Leoch</item>
         <item>LG</item>
         <item>Liberty</item>
         <item>Lineage</item>
-        <item>Lister Pitter</item>
+        <item>Lister Petter</item>
         <item>Local</item>
         <item>Mahindra</item>
         <item>Mahindra</item>
-        <item>Microtex</item>
-        <item>Mistubishi</item>
+        <item>Microtek</item>
+        <item>Mitsubishi</item>
         <item>Narada</item>
         <item>NED</item>
         <item>OG</item>
@@ -995,11 +995,11 @@
 
     <string-array name="array_airConditioners_manufacturerMakeModel">
         <item>ACME</item>
-        <item>Arisys</item>
+        <item>Airsys</item>
         <item>Blue Star</item>
         <item>Carrier</item>
         <item>Daikin</item>
-        <item>Godreg</item>
+        <item>Godrej</item>
         <item>Haier</item>
         <item>Hitachi</item>
         <item>LG</item>
@@ -1113,13 +1113,13 @@
         <item>Eicher</item>
         <item>Elgi</item>
         <item>Escorts</item>
-        <item>Greeves</item>
+        <item>Greaves</item>
         <item>Honda</item>
-        <item>Jackson</item>
+        <item>Jakson</item>
         <item>Koel</item>
-        <item>Lister Pitter</item>
+        <item>Lister Petter</item>
         <item>Mahindra</item>
-        <item>Mistubishi</item>
+        <item>Mitsubishi</item>
         <item>Perfect</item>
         <item>Perkins</item>
         <item>Powerica</item>
@@ -1236,15 +1236,15 @@
     </string-array>
 
     <string-array name="array_powerPlantDetails_manufacturerMakeModel">
-        <item>Ador Poweron</item>
-        <item>Amaraja</item>
+        <item>Ador Powertron</item>
+        <item>Amara Raja</item>
         <item>BFU</item>
         <item>Delta</item>
         <item>Eltek</item>
         <item>Emerson</item>
         <item>Exicom</item>
-        <item>HBL Sabnif</item>
-        <item>INMPS</item>
+        <item>HBL Saving</item>
+        <item>INPS</item>
         <item>Intex</item>
         <item>ITI</item>
         <item>Lineage</item>

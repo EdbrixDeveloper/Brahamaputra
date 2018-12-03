@@ -886,11 +886,10 @@
                         android:layout_weight="1"
                         android:background="@color/red"
                         android:text="Prev Reading"
-                        android:textAllCaps="false"
                         android:textColor="@color/whitesmoke"
                         android:textSize="18sp"
                         android:visibility="invisible" />
-
+                    <!--android:textAllCaps="false"-->
                     <Button
                         android:id="@+id/powerBackupsDg_button_nextReading"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -901,10 +900,9 @@
                         android:layout_weight="1"
                         android:background="@color/red"
                         android:text="Next Reading"
-                        android:textAllCaps="false"
                         android:textColor="@color/whitesmoke"
                         android:textSize="18sp" />
-
+                    <!--android:textAllCaps="false"-->
                 </LinearLayout>
 
             </LinearLayout>

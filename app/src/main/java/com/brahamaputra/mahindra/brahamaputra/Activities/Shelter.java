@@ -406,7 +406,8 @@ public class Shelter extends BaseActivity {
         try {
             if (hototicket_Selected_SiteType.equals("Outdoor")) {
 
-                mshelterLinearLayoutNumberOfBtsInsideShelter.setVisibility(View.GONE);
+                mshelterLinearLayoutOutdoorShelterLock.setVisibility(View.VISIBLE);
+                /*mshelterLinearLayoutNumberOfBtsInsideShelter.setVisibility(View.GONE);
                 mshelterLinearLayoutNumberOfBtsOutsideShelter.setVisibility(View.GONE);
                 mshelterLinearLayoutShelterLock.setVisibility(View.GONE);
                 mshelterLinearLayoutOutdoorShelterLock.setVisibility(View.GONE);
@@ -422,7 +423,7 @@ public class Shelter extends BaseActivity {
                 mShelterTextViewIgbStatusVal.setText("");
                 mShelterTextViewEgbStatusVal.setText("");
                 mShelterTextViewNoOfOdcAvailableVal.setText("");
-                mShelterTextViewOdcLockVal.setText("");
+                mShelterTextViewOdcLockVal.setText("");*/
 
             } else if (hototicket_Selected_SiteType.equals("Indoor")) {
                 mshelterLinearLayoutOutdoorShelterLock.setVisibility(View.GONE);

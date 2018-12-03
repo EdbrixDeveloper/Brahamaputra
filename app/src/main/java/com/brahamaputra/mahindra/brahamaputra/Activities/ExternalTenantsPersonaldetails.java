@@ -337,9 +337,11 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                     } else if (currentPos == (totalTenantCount - 1)) {
                         //Save Final current reading and submit all  data
                         saveTenantRecords(currentPos);
-                        submitDetails();
-                        startActivity(new Intent(ExternalTenantsPersonaldetails.this, Total_DC_Load_site.class));
-                        finish();
+                        if (checkValidationonSubmit("onSubmit")) {
+                            submitDetails();
+                            startActivity(new Intent(ExternalTenantsPersonaldetails.this, Total_DC_Load_site.class));
+                            finish();
+                        }
                     }
                 }
             }
@@ -466,6 +468,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             Date date2 = formatter.parse(dateStartRadiation);
             if (date1 != null && date2 != null) {
                 if (date2.compareTo(date1) < 0) {
+                    showToast("Select Date of the start of Tenancy is less than or equal to Date of Start of Radiation");
                     return false;
                 }
             }
@@ -499,7 +502,11 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
 
-        mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(sdf.format(myCalendar2.getTime()));
+        //mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(sdf.format(myCalendar2.getTime()));
+        mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText("");
+        if (date_compare(mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.getText().toString().trim(), sdf.format(myCalendar2.getTime())) == true) {
+            mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(sdf.format(myCalendar2.getTime()));
+        }
 
     }
 
@@ -512,7 +519,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                 return true;
             case R.id.menuDone:
                 DecimalFormatConversion();
-                if (checkValidationonSubmit()) {
+                if (checkValidationonSubmit("onSubmit")) {
                     submitDetails();
                     finish();
                     startActivity(new Intent(this, Total_DC_Load_site.class));
@@ -637,14 +644,25 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         }
     }
 
-    private boolean checkValidationonSubmit() {
-        String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
+    private boolean checkValidationonSubmit(String methodFlag) {
+        /*String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
         if (!totalNumberofTanents.isEmpty() && totalNumberofTanents != null) {
             return true;
         } else {
             showToast("Select Number Of Tenant ");
             return false;
-        }
+        }*/
+
+        String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
+        if (totalNumberofTanents.isEmpty() || totalNumberofTanents == null) {
+            showToast("Select Number Of Tenant ");
+            return false;
+        } else if (Integer.valueOf(totalNumberofTanents) > 0) {
+            if ((externalTenantsPersonalDetailsDataList.size() != Integer.valueOf(totalNumberofTanents) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");
+                return false;
+            } else return true;
+        } else return true;
     }
 
     private void submitDetails() {
