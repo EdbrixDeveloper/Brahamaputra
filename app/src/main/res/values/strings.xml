@@ -825,16 +825,11 @@
         <item>Zavline</item>
     </string-array>
 
-    <string-array name="array_detailsOfUnusedMaterials_AssetMake_FireExtinngusher">
-    </string-array>
-    <string-array name="array_detailsOfUnusedMaterials_AssetMake_FireAlarmPanel">
-    </string-array>
-    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Piu">
-    </string-array>
-    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Fcu">
-    </string-array>
-    <string-array name="array_detailsOfUnusedMaterials_AssetMake_OutDoorCabinet">
-    </string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_FireExtinngusher"></string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_FireAlarmPanel"></string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Piu"></string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_Fcu"></string-array>
+    <string-array name="array_detailsOfUnusedMaterials_AssetMake_OutDoorCabinet"></string-array>
 
     <!--End 16 Arrary List For Type Of Asset bind In Asset Make OnChange of type Of Asset List-->
 
@@ -1316,5 +1311,24 @@
         <item>Receipt</item>
     </string-array>
 
+    <string-array name="array_powerPlantDetails_moduleMake">
+        <item>Ador Poweron</item>
+        <item>Amaraja</item>
+        <item>BFU</item>
+        <item>Delta</item>
+        <item>Eltek</item>
+        <item>Emerson</item>
+        <item>Exicom</item>
+        <item>HBL Sabnif</item>
+        <item>INMPS</item>
+        <item>Intex</item>
+        <item>ITI</item>
+        <item>Lineage</item>
+        <item>Mahindra</item>
+        <item>Pace</item>
+        <item>UTL</item>
+        <item>Valere</item>
+        <item>XL Telecom</item>
+    </string-array>
 
 </resources>

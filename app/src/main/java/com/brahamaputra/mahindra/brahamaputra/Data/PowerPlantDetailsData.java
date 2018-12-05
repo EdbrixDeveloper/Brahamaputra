@@ -2,6 +2,8 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class PowerPlantDetailsData {
 
     @SerializedName("qRCodeScan")
@@ -42,6 +44,11 @@ public class PowerPlantDetailsData {
 
     @SerializedName("noOfFaultyModulese")
     String noOfFaultyModulese;
+
+
+    @SerializedName("PowerPlantDetailsModulesData")
+    ArrayList<PowerPlantDetailsModulesData> PowerPlantDetailsModulesData;
+
 
     @SerializedName("smpsExpandable")
     String smpsExpandable;
@@ -85,10 +92,11 @@ public class PowerPlantDetailsData {
         this.natureOfProblem = "";
         this.qrCodeImageFileName ="";
         //this.isSubmited=false;
+        this.PowerPlantDetailsModulesData = new ArrayList<>();
     }
 
 
-    public PowerPlantDetailsData(String qRCodeScan, String assetOwner,String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
+    public PowerPlantDetailsData(String qRCodeScan, String assetOwner,String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem, String qrCodeImageFileName ,ArrayList<PowerPlantDetailsModulesData> PowerPlantDetailsModulesData) {
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
         //this.numberOfPowerPlant = numberOfPowerPlant;
@@ -109,6 +117,16 @@ public class PowerPlantDetailsData {
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;
+
+        this.PowerPlantDetailsModulesData = PowerPlantDetailsModulesData;
+    }
+
+    public ArrayList<PowerPlantDetailsModulesData> getPowerPlantDetailsModulesData() {
+        return PowerPlantDetailsModulesData;
+    }
+
+    public void setPowerPlantDetailsModulesData(ArrayList<PowerPlantDetailsModulesData> PowerPlantDetailsModulesData) {
+        this.PowerPlantDetailsModulesData = PowerPlantDetailsModulesData;
     }
 
     public String getqRCodeScan() {

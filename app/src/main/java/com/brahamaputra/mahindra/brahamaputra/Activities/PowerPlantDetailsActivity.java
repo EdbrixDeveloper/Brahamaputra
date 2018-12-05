@@ -36,6 +36,7 @@ import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsModulesData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
@@ -112,6 +113,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private EditText mPowerPlantDetailsEditTextNatureOfProblem;
     private Button btnPrevReadingPowerPlant;
     private Button btnNextReadingPowerPlant;
+    private ImageView powerPlantDetails_imageview_modules;
     private LinearLayout lnrPlantDetails;
 
     LinearLayout mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking;
@@ -150,11 +152,14 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     //
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final int MY_FLAG_MODULE_RESULT = 200;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
     public String date_flag = "no";
 
     private AlertDialogManager alertDialogManager;
+
+    private ArrayList<PowerPlantDetailsModulesData> powerPlantDetailsModulesData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +173,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
         powerPlantDetailsDataList = new ArrayList<>();
+        powerPlantDetailsModulesData = new ArrayList<>();
         sessionManager = new SessionManager(PowerPlantDetailsActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -302,6 +308,8 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsEditTextNatureOfProblem = (EditText) findViewById(R.id.powerPlantDetails_editText_natureOfProblem);
         btnPrevReadingPowerPlant = (Button) findViewById(R.id.btnPrevReadingPowerPlant);
         btnNextReadingPowerPlant = (Button) findViewById(R.id.btnNextReadingPowerPlant);
+        powerPlantDetails_imageview_modules = (ImageView)findViewById(R.id.powerPlantDetails_imageview_modules);
+
         lnrPlantDetails = (LinearLayout) findViewById(R.id.lnrPlantDetails);
         lnrPlantDetails.setVisibility(View.GONE);
 
@@ -374,6 +382,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                             powerPlantDetailsDataList.clear();
                         }
                         if (totalPlantCount > 0) {
+
                             mpowerPlantDetails_textView_PlantNumber.setText("Plant: #1");
                             lnrPlantDetails.setVisibility(View.VISIBLE);
                             mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.VISIBLE);
@@ -524,14 +533,41 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                         str_numberOfModules = item.get(position);
                         if (checkValidationOnChangeNoOfModuleSlots(mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim(), str_numberOfModules) == true) {
                             mPowerPlantDetailsTextViewNumberOfModulesVal.setText(str_numberOfModules);
+                            int count = Integer.parseInt(str_numberOfModules);
+                            if (count > 0) {
+                                powerPlantDetails_imageview_modules.setVisibility(View.VISIBLE);
+                            } else {
+                                powerPlantDetails_imageview_modules.setVisibility(View.GONE);
+                            }
                         }
                     }
                 });
             }
         });
 
-        mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setOnClickListener(new View.OnClickListener()
+        powerPlantDetails_imageview_modules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //007
+                str_numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString();
+                if (str_numberOfModules == null || str_numberOfModules.isEmpty()) {
+                    showToast("Select number of Modules");
+                }else{
+                    int count = Integer.parseInt(str_numberOfModules);
+                    if (count > 0) {
+                        Intent i = new Intent(PowerPlantDetailsActivity.this, PowerPlantDetailsModulesReadingsActivity.class);
+                        i.putExtra("numberOfModules", count);
+                        i.putExtra("powerPlantDetailsModulesData",powerPlantDetailsModulesData);
+                        //startActivity(i);
+                        startActivityForResult(i,MY_FLAG_MODULE_RESULT);
+                    } else {
+                        showToast("Number of Modules is zero.");
+                    }
+                }
+            }
+        });
 
+        mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
@@ -668,6 +704,15 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                         mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
                     }
 
+                    powerPlantDetailsModulesData.addAll(powerPlantDetailsData.getPowerPlantDetailsModulesData());
+                    str_numberOfModules = ""+powerPlantDetailsModulesData.size();
+                    int count = powerPlantDetailsModulesData.size();
+                    if (count > 0) {
+                        powerPlantDetails_imageview_modules.setVisibility(View.VISIBLE);
+                    } else {
+                        powerPlantDetails_imageview_modules.setVisibility(View.GONE);
+                    }
+
                     mPowerPlantDetailsTextViewAssetOwnerVal.setText(powerPlantDetailsData.getAssetOwner());
                     mPowerPlantDetailsTextViewManufacturerMakeModelVal.setText(powerPlantDetailsData.getManufacturerMakeModel());
                     mPowerPlantDetailsEditTextPowerPlantModel.setText(powerPlantDetailsData.getPowerPlantModel());
@@ -717,6 +762,17 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
             if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                 mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+            }
+
+            powerPlantDetailsModulesData.clear();
+            powerPlantDetailsModulesData.addAll(powerPlantDetailsData.getPowerPlantDetailsModulesData());
+
+            str_numberOfModules = ""+powerPlantDetailsModulesData.size();
+            int count = powerPlantDetailsModulesData.size();
+            if (count > 0) {
+                powerPlantDetails_imageview_modules.setVisibility(View.VISIBLE);
+            } else {
+                powerPlantDetails_imageview_modules.setVisibility(View.GONE);
             }
 
             mPowerPlantDetailsTextViewAssetOwnerVal.setText(powerPlantDetailsData.getAssetOwner());
@@ -779,8 +835,12 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         String spdStatus = mPowerPlantDetailsTextViewSpdStatusVal.getText().toString().trim();
         String workingCondition = mPowerPlantDetailsTextViewWorkingConditionVal.getText().toString().trim();
         String natureOfProblem = mPowerPlantDetailsEditTextNatureOfProblem.getText().toString().trim();
-        PowerPlantDetailsData powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, assetOwner, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem, imageFileName);
 
+        ArrayList<PowerPlantDetailsModulesData> arr_powerPlantDetailsModulesData = new ArrayList<>();
+        arr_powerPlantDetailsModulesData.addAll(powerPlantDetailsModulesData);
+
+        //007
+        PowerPlantDetailsData powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, assetOwner, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem, imageFileName,arr_powerPlantDetailsModulesData);
 
         if (powerPlantDetailsDataList.size() > 0) {
             if (pos == powerPlantDetailsDataList.size()) {
@@ -791,7 +851,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else {
             powerPlantDetailsDataList.add(powerPlantDetailsData);
         }
-
     }
 
 
@@ -834,6 +893,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsTextViewWorkingConditionVal.setText("");
         mPowerPlantDetailsEditTextNatureOfProblem.setText("");
         base64StringQRCodeScan = "";
+        powerPlantDetailsModulesData.clear();
     }
 
     /*Arjun 21112018*/
@@ -1137,8 +1197,20 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MY_FLAG_MODULE_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Bundle b = data.getExtras();
+                //powerPlantDetailsModulesData = data.getBundleExtra("powerPlantDetailsModulesData");
+                //powerPlantDetailsModulesData = (ArrayList<PowerPlantDetailsModulesData>)data.getExtras().getSerializable("powerPlantDetailsModulesData");
+                powerPlantDetailsModulesData.clear();
+                powerPlantDetailsModulesData.addAll((ArrayList<PowerPlantDetailsModulesData>)b.getSerializable("powerPlantDetailsModulesData"));
+                Log.e("123","123");
+            }
+        }
+
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
@@ -1152,6 +1224,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 }
             }
         }
+
 
         /*if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
@@ -1296,8 +1369,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         }
     }
 
-    public static void saveToPreferences(Context context, String key,
-                                         Boolean allowed) {
+    public static void saveToPreferences(Context context, String key,Boolean allowed) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = myPrefs.edit();

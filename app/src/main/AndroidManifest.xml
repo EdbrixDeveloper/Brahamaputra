@@ -175,7 +175,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.UserEditProfileActivity" />
         <activity android:name=".Activities.UserChangePasswordActivity" />
-        <activity android:name=".Activities.UploadEBReceiptActivity"></activity>
+        <activity android:name=".Activities.UploadEBReceiptActivity" />
+        <activity android:name=".Activities.PowerPlantDetailsModulesReadingsActivity"></activity>
     </application>
 
 </manifest>
