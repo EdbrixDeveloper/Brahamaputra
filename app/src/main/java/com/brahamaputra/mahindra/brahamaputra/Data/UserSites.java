@@ -24,6 +24,28 @@ public class UserSites {
     @SerializedName("TowerType")
     private String TowerType;
 
+    @SerializedName("Latitude")
+    private String Latitude;
+
+    @SerializedName("Longitude")
+    private String Longitude;
+
+    public String getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        Latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        Longitude = longitude;
+    }
+
     public String getId() {
         return Id;
     }

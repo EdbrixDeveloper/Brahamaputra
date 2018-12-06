@@ -111,13 +111,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Select DG ID / QR code" />
+                <ImageView
+                    android:id="@+id/dieselFilling_button_qrCode"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:layout_weight="0.1"
+                    android:clickable="true"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/dieselFilling_textView_selectDgIdQrCodeVal"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_weight="0.6"
+                    android:layout_weight="0.5"
                     android:textAlignment="viewStart"
                     android:hint="Select"></TextView>
 

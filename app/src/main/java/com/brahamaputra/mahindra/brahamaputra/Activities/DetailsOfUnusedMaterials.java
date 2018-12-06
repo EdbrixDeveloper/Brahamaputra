@@ -162,10 +162,10 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                         str_typeOfAsset = item.get(position);
                         mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setText(str_typeOfAsset);
 
-                        if(str_typeOfAsset.equals("General")){
+                        if (str_typeOfAsset.equals("General")) {
                             linearLayout_assetStatus.setVisibility(View.GONE);
                             linearLayout_assetMake.setVisibility(View.GONE);
-                        }else{
+                        } else {
                             linearLayout_assetStatus.setVisibility(View.VISIBLE);
                             linearLayout_assetMake.setVisibility(View.VISIBLE);
                         }
@@ -508,9 +508,9 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
             showToast("Select Asset Make ");
             return false;
         } else*/
-        if (typeOfAsset.equals("General")){
+        if (typeOfAsset.equals("General")) {
             return true;
-        }else if ((assetStatus.isEmpty() || assetStatus == null) && (!assetDescription.isEmpty() && assetDescription != null)) {
+        } else if ((assetStatus.isEmpty() || assetStatus == null) && (!assetDescription.isEmpty() && assetDescription != null)) {
             showToast("Select Asset Status");
             return false;
         } else/* if (assetDescription.isEmpty() || assetDescription == null) {

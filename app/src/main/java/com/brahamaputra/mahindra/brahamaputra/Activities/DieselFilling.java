@@ -1,7 +1,10 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -54,6 +57,8 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,6 +97,7 @@ public class DieselFilling extends BaseActivity {
 
     private String base64StringHmrPhoto = "";
     private String base64StringEbReadingKwh = "";
+    private String base64StringQRCodeScan = "";
 
 
     private TextView mDieselFillingTextViewSiteName;
@@ -122,6 +128,7 @@ public class DieselFilling extends BaseActivity {
     private ImageView mDieselFillingButtonPresentEbReadingKwhPhotoView;
     private TextView mDieselFillingTextViewPresentFillingDate;
     private TextView mDieselFillingTextViewPresentFillingDateVal;
+    private ImageView dieselFilling_button_qrCode;
     public GPSTracker gpsTracker;
 
     private ToastMessage toastMessage;
@@ -130,7 +137,14 @@ public class DieselFilling extends BaseActivity {
     String str_siteName = "";
     DecimalConversion decimalConversion;
 
+    private ArrayList<String> DgIdList;
+    public static final int MY_FLAG_QR_RESULT = 100;
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
+
     public int site_id = 0;
+    public double siteLongitude = 0;
+    public double siteLatitude = 0;
 
     private void assignViews() {
         mDieselFillingTextViewSiteName = (TextView) findViewById(R.id.dieselFilling_textView_siteName);
@@ -159,6 +173,7 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingTextViewPresentEbReadingKwhPhoto = (TextView) findViewById(R.id.dieselFilling_textView_presentEbReadingKwhPhoto);
         mDieselFillingButtonPresentEbReadingKwhPhoto = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhoto);
         mDieselFillingButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhotoView);
+        dieselFilling_button_qrCode = (ImageView)findViewById(R.id.dieselFilling_button_qrCode);
       /*  mDieselFillingTextViewPresentFillingDate = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDate);
         mDieselFillingTextViewPresentFillingDateVal = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDateVal);*/
         mDieselFillingEditTextTankBalanceBeforeFilling.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
@@ -199,13 +214,81 @@ public class DieselFilling extends BaseActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         setInputDetails();
         prepareUserSites(true);
+    }
+
+    public void onClicked(View v) {
+
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setOrientationLocked(false);
+        integrator.initiateScan();
+    }
+
+    public static Boolean getFromPref(Context context, String key) {
+        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF, Context.MODE_PRIVATE);
+        return (myPrefs.getBoolean(key, false));
+    }
+
+    private void showAlert() {
+        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+
+                final EditText taskEditText = new EditText(DieselFilling.this);
+                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(DieselFilling.this)
+                        .setTitle("Permission")
+                        .setMessage("Need Camera Access")
+                        .setView(taskEditText)
+                        .setPositiveButton("ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                ActivityCompat.requestPermissions(DieselFilling.this, new String[]{Manifest.permission.CAMERA}, MY_FLAG_QR_RESULT);
+                            }
+                        })
+                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        })
+                        .create();
+                dialog.show();
+            }
+        }).show();
+
 
     }
 
     public void set_listener() {
+        dieselFilling_button_qrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(DgIdList.size()>1){
+                    if (ContextCompat.checkSelfPermission(DieselFilling.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        if (getFromPref(DieselFilling.this, ALLOW_KEY)) {
+                            showSettingsAlert();
+                        } else if (ContextCompat.checkSelfPermission(DieselFilling.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            // Should we show an explanation?
+                            if (ActivityCompat.shouldShowRequestPermissionRationale(DieselFilling.this, Manifest.permission.CAMERA)) {
+                                showAlert();
+                            } else {
+                                // No explanation needed, we can request the permission.
+                                ActivityCompat.requestPermissions(DieselFilling.this, new String[]{Manifest.permission.CAMERA}, MY_FLAG_QR_RESULT);
+                            }
+                        }
+                    } else {
+                        //openCamera();
+                        onClicked(v);
+                    }
+                }else{
+                    //
+                }
+            }
+        });
         mDieselFillingButtonHmrPhotoUploadView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -317,10 +400,7 @@ public class DieselFilling extends BaseActivity {
                     } else {
                         toastMessage.showToast("No Internet Found..");
                     }
-
-
                 }
-
             }
         });
 
@@ -329,7 +409,23 @@ public class DieselFilling extends BaseActivity {
             public void onClick(View v) {
                 if (site_id > 0) {
                     if (Conditions.isNetworkConnected(DieselFilling.this)) {
-                        prepareDgId_from_Sites();
+                        //prepareDgId_from_Sites();
+
+                        SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFilling.this,
+                                DgIdList,
+                                "Select Dg ID / QR Code",
+                                "Close", "#000000");
+                        searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                        searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                            @Override
+                            public void onClick(ArrayList<String> item, int position) {
+
+                                str_siteName = item.get(position);
+                                mDieselFillingTextViewSelectDgIdQrCodeVal.setText(str_siteName);
+                            }
+                        });
+
                     } else {
                         toastMessage.showToast("No Internet Found..");
                     }
@@ -392,17 +488,43 @@ public class DieselFilling extends BaseActivity {
             case R.id.menuDone:
                 /*if (site_id > 0) {*/
                 DecimalFormatConversion();
-                if (checkValidationOnSubmitDiselTicket() == true) {
-                    // Code For Next Validation by Arjun on 22112018
-                    showSettingsAlert();
+                if (checkValidationOnSubmitDiselTicket() == true)
+                {
+                    if (gpsTracker.canGetLocation()) {
+                        //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                        //Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                        // Code For Next Validation by Arjun on 22112018
+                        if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                            //showToast(""+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
+                            if(gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude) <0.310686){///// ( 0.310686 MILE == 500 Meter )
+                                //showToast("in Area \n"+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
+                                showSettingsAlert();
+                            }else{
+                                //showToast("not in Area\n"+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
+                            }
+
+
+                        } else {
+                            //showToast("Could not detecting location. Please try again later.");
+                            alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                @Override
+                                public void onPositiveClick() {
+                                    if (gpsTracker.canGetLocation()) {
+                                        //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                                        Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                    }
+                                }
+                            }).show();
+                        }
+                    }
+
+
                     //submitDetails();
                     return true;
                 }
                 /*} else {
                     showToast("No Site Selected");
                 }*/
-
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -439,12 +561,10 @@ public class DieselFilling extends BaseActivity {
 
     private void showSettingsAlert() {
 
-
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
                 submitDetails();
-
             }
 
             @Override
@@ -553,7 +673,36 @@ public class DieselFilling extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+            if (result.getContents() == null) {
+                base64StringQRCodeScan = "";
+                showToast("Cancelled");
+            } else {
+                base64StringQRCodeScan = result.getContents();
+                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                    //mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    //dgIdQrCodeList
+                    //dgIdQrCodeList.
+                    if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
+
+                        for(int i=0;i<dgIdQrCodeList.getPowerBackupsDGMRQRList().size();i++){
+                            if(base64StringQRCodeScan.equals(dgIdQrCodeList.getPowerBackupsDGMRQRList().get(i).getqRCodeScan().toString())){
+                                str_siteName = base64StringQRCodeScan;
+                                mDieselFillingTextViewSelectDgIdQrCodeVal.setText(str_siteName);
+                            }
+                        }
+                    } else {
+                        mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
+                        //No sites found
+                    }
+                }
+            }
+        }
+
+        switch (requestCode)
+        {
             case MY_PERMISSIONS_REQUEST_CAMERA_HmrPhoto:
                 if (resultCode == RESULT_OK) {
                     if (HmrPhoto_imageFileUri != null) {
@@ -639,8 +788,30 @@ public class DieselFilling extends BaseActivity {
                                                     mDieselFillingTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                     mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
                                                     mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
+
+                                                    if(userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null){
+                                                        siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
+                                                        siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
+                                                        showToast(""+siteLatitude+","+siteLongitude);
+                                                    }else {
+                                                        siteLatitude = 0;
+                                                        siteLongitude = 0;
+                                                        showToast(""+siteLatitude+","+siteLongitude);
+                                                    }
+
+
                                                     site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
                                                     mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
+
+                                                    if (site_id > 0) {
+                                                        if (Conditions.isNetworkConnected(DieselFilling.this)) {
+                                                            prepareDgId_from_Sites();
+                                                        } else {
+                                                            toastMessage.showToast("No Internet Found..");
+                                                        }
+                                                    } else {
+                                                        toastMessage.showToast("Please Select Site ID First..");
+                                                    }
                                                 }
                                             });
 
@@ -716,27 +887,10 @@ public class DieselFilling extends BaseActivity {
 
                                 if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
 
-                                    final ArrayList<String> DgIdList = new ArrayList<String>();
+                                    DgIdList = new ArrayList<String>();
                                     for (DgIdQrCode ids : dgIdQrCodeList.getPowerBackupsDGMRQRList()) {
                                         DgIdList.add(ids.getqRCodeScan());
                                     }
-
-
-                                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFilling.this,
-                                            DgIdList,
-                                            "Select Dg ID / QR Code",
-                                            "Close", "#000000");
-                                    searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                                        @Override
-                                        public void onClick(ArrayList<String> item, int position) {
-
-                                            str_siteName = item.get(position);
-                                            mDieselFillingTextViewSelectDgIdQrCodeVal.setText(str_siteName);
-                                        }
-                                    });
-
 
                                 } else {
                                     mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
@@ -833,6 +987,5 @@ public class DieselFilling extends BaseActivity {
         } else return true;
 
     }
-
 
 }
