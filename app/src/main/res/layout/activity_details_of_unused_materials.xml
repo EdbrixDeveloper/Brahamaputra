@@ -29,7 +29,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of Unused Asset in Site" />
+                    android:text="Number of Unused Asset in Site*" />
 
                 <TextView
                     android:id="@+id/detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite_val"

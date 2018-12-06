@@ -139,6 +139,110 @@ public class Battery_Set extends BaseActivity {
     private Button batterySet_button_nextReading;
     private TextView batterySet_textView_Number;
     private LinearLayout linearLayout_container;
+    private LinearLayout batterySetLinearLayoutNumberOfBatteryBankWorking;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_battery_set);
+        this.setTitle("Battery Set");
+
+        sessionManager = new SessionManager(Battery_Set.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Battery_Set.this, userId, ticketName);
+        alertDialogManager = new AlertDialogManager(this);
+
+        assignViews();
+        initCombo();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        batterySetData = new ArrayList<>();
+        currentPos = 0;
+        setInputDetails(currentPos);
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        mBatterySetEditTextDateofInstallation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(Battery_Set.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
+            }
+        });
+
+        mBatterySetButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(Battery_Set.this,
+                        Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    if (getFromPref(Battery_Set.this, ALLOW_KEY)) {
+
+                        showSettingsAlert();
+
+                    } else if (ContextCompat.checkSelfPermission(Battery_Set.this,
+                            Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Should we show an explanation?
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(Battery_Set.this,
+                                Manifest.permission.CAMERA)) {
+                            showAlert();
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            ActivityCompat.requestPermissions(Battery_Set.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    MY_PERMISSIONS_REQUEST_CAMERA);
+                        }
+                    }
+                } else {
+                    //openCameraIntent();
+                    onClicked(v);
+                }
+
+            }
+        });
+
+        mBatterySetEditTextBackupduration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(Battery_Set.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
+                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
+                        mBatterySetEditTextBackupduration.setText(selectedHour1 + ":" + selectedMinute1);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time For Scheduled Power Cut");
+                mTimePicker.show();
+
+            }
+        });
+
+    }
 
     private void assignViews() {
         mBatterySetTextViewNoofBatterySetProvided = (TextView) findViewById(R.id.batterySet_textView_NoofBatterySetProvided);
@@ -176,6 +280,7 @@ public class Battery_Set extends BaseActivity {
         batterySet_button_previousReading = (Button) findViewById(R.id.batterySet_button_previousReading);
         batterySet_textView_Number = (TextView) findViewById(R.id.batterySet_textView_Number);
         linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
+        batterySetLinearLayoutNumberOfBatteryBankWorking = (LinearLayout) findViewById(R.id.batterySet_linearLayout_NumberofBatteryBankWorking);
 
         mBatterySetEditTextBackupduration.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         getWindow().setSoftInputMode(
@@ -185,7 +290,6 @@ public class Battery_Set extends BaseActivity {
         //hotoTransactionData = new HotoTransactionData();
         //setInputDetails();
     }
-
 
     private void initCombo() {
 
@@ -203,6 +307,7 @@ public class Battery_Set extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
                         str_noofBatterySetProvided = item.get(position);
                         mBatterySetTextViewNoofBatterySetProvidedVal.setText(str_noofBatterySetProvided);
+                        mBatterySetTextViewNumberofBatteryBankWorkingVal.setText("");
 
                         //clear AC collection empty by select / changing value of No of Ac provided
                         if (batterySetData != null && batterySetData.size() > 0) {
@@ -218,6 +323,7 @@ public class Battery_Set extends BaseActivity {
 
                             batterySet_textView_Number.setText("Reading: #1");
                             linearLayout_container.setVisibility(View.VISIBLE);
+                            batterySetLinearLayoutNumberOfBatteryBankWorking.setVisibility(View.VISIBLE);
                             batterySet_button_previousReading.setVisibility(View.GONE);
                             batterySet_button_nextReading.setVisibility(View.VISIBLE);
                             if (totalCount > 0 && totalCount == 1) {
@@ -227,6 +333,7 @@ public class Battery_Set extends BaseActivity {
                             }
                         } else {
                             linearLayout_container.setVisibility(View.GONE);
+                            batterySetLinearLayoutNumberOfBatteryBankWorking.setVisibility(View.GONE);
                         }
 
                     }
@@ -545,109 +652,6 @@ public class Battery_Set extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battery_set);
-        this.setTitle("Battery Set");
-
-        sessionManager = new SessionManager(Battery_Set.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Battery_Set.this, userId, ticketName);
-        alertDialogManager = new AlertDialogManager(this);
-
-        assignViews();
-        initCombo();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        batterySetData = new ArrayList<>();
-        currentPos = 0;
-        setInputDetails(currentPos);
-
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
-        };
-
-        mBatterySetEditTextDateofInstallation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(Battery_Set.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-
-                dialog.getDatePicker().setMaxDate(new Date().getTime());
-                dialog.show();
-            }
-        });
-
-        mBatterySetButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(Battery_Set.this,
-                        Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    if (getFromPref(Battery_Set.this, ALLOW_KEY)) {
-
-                        showSettingsAlert();
-
-                    } else if (ContextCompat.checkSelfPermission(Battery_Set.this,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Should we show an explanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(Battery_Set.this,
-                                Manifest.permission.CAMERA)) {
-                            showAlert();
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(Battery_Set.this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    MY_PERMISSIONS_REQUEST_CAMERA);
-                        }
-                    }
-                } else {
-                    //openCameraIntent();
-                    onClicked(v);
-                }
-
-            }
-        });
-
-        mBatterySetEditTextBackupduration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(Battery_Set.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
-                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
-                        mBatterySetEditTextBackupduration.setText(selectedHour1 + ":" + selectedMinute1);
-                    }
-                }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time For Scheduled Power Cut");
-                mTimePicker.show();
-
-            }
-        });
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
@@ -938,6 +942,11 @@ public class Battery_Set extends BaseActivity {
 
                 totalCount = Integer.parseInt(batterySetParentData.getNoOfBatterySet());
                 mBatterySetTextViewNoofBatterySetProvidedVal.setText(batterySetParentData.getNoOfBatterySet());
+
+                batterySetLinearLayoutNumberOfBatteryBankWorking.setVisibility(View.GONE);
+                if (!batterySetParentData.getNoOfBatteryBankWorking().isEmpty() && batterySetParentData.getNoOfBatteryBankWorking() != null) {
+                    batterySetLinearLayoutNumberOfBatteryBankWorking.setVisibility(View.VISIBLE);
+                }
                 mBatterySetTextViewNumberofBatteryBankWorkingVal.setText(batterySetParentData.getNoOfBatteryBankWorking());
 
                 if (batterySetData != null && batterySetData.size() > 0) {
@@ -988,6 +997,7 @@ public class Battery_Set extends BaseActivity {
             } else {
                 Toast.makeText(Battery_Set.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 linearLayout_container.setVisibility(View.GONE);
+                batterySetLinearLayoutNumberOfBatteryBankWorking.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="QR Code Scan" />
+                    android:text="QR Code Scan*" />
 
                 <ImageView
                     android:id="@+id/powerManagementSystem_button_QRCodeScan"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Asset Owner" />
+                    android:text="Asset Owner*" />
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_AssetOwner_val"
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Power Management System Type" />
+                    android:text="Power Management System Type*" />
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType_val"
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Power Management System Make" />
+                    android:text="Power Management System Make*" />
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake_val"
@@ -200,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Power Management System Serial Number" />
+                    android:text="Power Management System Serial Number*" />
 
                 <EditText
                     android:id="@+id/powerManagementSystem_editText_PowerManagementSystemSerialNumber"

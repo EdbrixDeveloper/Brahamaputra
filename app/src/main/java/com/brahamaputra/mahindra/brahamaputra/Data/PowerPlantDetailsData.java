@@ -46,7 +46,7 @@ public class PowerPlantDetailsData {
     String noOfFaultyModulese;
 
 
-    @SerializedName("PowerPlantDetailsModulesData")
+    @SerializedName("powerPlantDetailsModulesData")
     ArrayList<PowerPlantDetailsModulesData> PowerPlantDetailsModulesData;
 
 

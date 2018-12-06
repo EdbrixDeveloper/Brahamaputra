@@ -468,6 +468,7 @@ public class Power_Backups_DG extends BaseActivity {
 
                         str_noOfEngineAlternatorSetsprovided = item.get(position);
                         mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(str_noOfEngineAlternatorSetsprovided);
+                        mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText("");
 
                         //clear AC collection empty by select / changing value of No of Ac provided
                         if (powerBackupsDGData != null && powerBackupsDGData.size() > 0) {

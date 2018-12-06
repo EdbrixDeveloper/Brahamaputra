@@ -25,7 +25,7 @@ public class ACDB_DCDB_Data {
         this.acdbRatingAMP = "";
         this.numberofDCDB = "";
         this.freeCoolingDeviseStausFCU = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
     public ACDB_DCDB_Data(String numberofACDB, String acdbRatingAMP, String numberofDCDB, String freeCoolingDeviseStausFCU) {
@@ -34,6 +34,11 @@ public class ACDB_DCDB_Data {
         this.numberofDCDB = numberofDCDB;
         this.freeCoolingDeviseStausFCU = freeCoolingDeviseStausFCU;
         //this.isSubmited=true;//007
+        if (!this.numberofACDB.isEmpty() && !this.numberofDCDB.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getNumberofACDB() {

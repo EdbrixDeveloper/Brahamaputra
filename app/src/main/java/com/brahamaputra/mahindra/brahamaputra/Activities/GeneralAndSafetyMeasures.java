@@ -166,8 +166,11 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     TextView mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisher;
     TextView mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal;
 
+    TextView mGeneralAndSafetyMeasureTextViewSiteAccessStatus;
+    TextView mGeneralAndSafetyMeasureTextViewSiteAccessStatusVal;
 
     String str_NoOfFireExtuinguisher;
+    String str_SiteAccessStatus;
 
     private GeneralSafetyMeasuresParentData generalSafetyMeasuresParentData;
     private int totalCount = 0;
@@ -311,6 +314,10 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
         mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisher = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_noOfFireExtuinguisher);
         mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_noOfFireExtuinguisher_val);
+
+        mGeneralAndSafetyMeasureTextViewSiteAccessStatus = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_siteAccessStatus);
+        mGeneralAndSafetyMeasureTextViewSiteAccessStatusVal = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_siteAccessStatus_val);
+
 
         mGeneralAndSafetyMeasureTextViewNumber = (TextView) findViewById(R.id.generalAndSafetyMeasure_textView_Number);
         mGeneralAndSafetyMeasureButtonPreviousReading = (Button) findViewById(R.id.generalAndSafetyMeasure_button_previousReading);
@@ -811,6 +818,28 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
             }
         });
 
+        mGeneralAndSafetyMeasureTextViewSiteAccessStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(GeneralAndSafetyMeasures.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_generalAndSafetyMeasure_SiteAccessStatus))),
+                        "Site Access status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_SiteAccessStatus = item.get(position);
+                        mGeneralAndSafetyMeasureTextViewSiteAccessStatusVal.setText(str_SiteAccessStatus);
+
+                    }
+                });
+
+            }
+        });
+
         mGeneralAndSafetyMeasureButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1038,8 +1067,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 generalSafetyMeasuresParentData = hotoTransactionData.getGeneralSafetyMeasuresParentData();
                 generalSafetyMeasuresData.addAll(generalSafetyMeasuresParentData.getGeneralSafetyMeasuresData());
-
-                totalCount = Integer.parseInt(generalSafetyMeasuresParentData.getNoOfFireExtuinguisher());
+                totalCount = Integer.parseInt(generalSafetyMeasuresParentData.getNoOfFireExtuinguisher().isEmpty() || generalSafetyMeasuresParentData.getNoOfFireExtuinguisher() == null ? "0" : generalSafetyMeasuresParentData.getNoOfFireExtuinguisher());
                 mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal.setText(generalSafetyMeasuresParentData.getNoOfFireExtuinguisher());
 
                 mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setText(generalSafetyMeasuresParentData.getPrevailingSLA());
@@ -1066,7 +1094,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
                 mGeneralAndSafetyMeasureTextViewFuelSensorVal.setText(generalSafetyMeasuresParentData.getFuelSensor());
                 mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.setText(generalSafetyMeasuresParentData.getFireSmokeSensor());
                 mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.setText(generalSafetyMeasuresParentData.getAgencyName());
-
+                mGeneralAndSafetyMeasureTextViewSiteAccessStatusVal.setText(generalSafetyMeasuresParentData.getSiteAccessStatus());
                 if (generalSafetyMeasuresData != null && generalSafetyMeasuresData.size() > 0) {
                     linearLayout_container.setVisibility(View.VISIBLE);
                     mGeneralAndSafetyMeasureTextViewNumber.setText("Reading: #1");
@@ -1126,8 +1154,9 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
             String fuelSensor = mGeneralAndSafetyMeasureTextViewFuelSensorVal.getText().toString().trim();
             String fireSmokeSensor = mGeneralAndSafetyMeasureTextViewFireSmokeSensorVal.getText().toString().trim();
             String str_AgencyName = mGeneralAndSafetyMeasureEditTextAgencyNameSalaryPaid.getText().toString();
+            String siteAccessStatus = mGeneralAndSafetyMeasureTextViewSiteAccessStatusVal.getText().toString();
 
-            generalSafetyMeasuresParentData = new GeneralSafetyMeasuresParentData(prevailingSLA, siteBoundaryStatus, siteHygieneVegitationStatus, gateLock, dgRoomLock, fireExtuinguisher, noOfFireExtuinguisher, fireBucket, securityStatus, noofSecurityPerson, mobileNumberofSecurity, caretakerStatusUpOnEmergency, mobileNumberofCaretaker, isSecurityCaretakeristheOwnerofSite, salaryofSecurityCaretaker, caretakerSecuritySalaryPaidBy, caretakerSecurityStayinginSite, numberofEarthPit, lightningArresterStatus, fencingCompoundWallCondition, numberoffreeODPaltformAvailable, alarmMultipluxerStatus, doorOpenSensor, fuelSensor, fireSmokeSensor, str_AgencyName, generalSafetyMeasuresData);
+            generalSafetyMeasuresParentData = new GeneralSafetyMeasuresParentData(prevailingSLA, siteBoundaryStatus, siteHygieneVegitationStatus, gateLock, dgRoomLock, fireExtuinguisher, noOfFireExtuinguisher, fireBucket, securityStatus, noofSecurityPerson, mobileNumberofSecurity, caretakerStatusUpOnEmergency, mobileNumberofCaretaker, isSecurityCaretakeristheOwnerofSite, salaryofSecurityCaretaker, caretakerSecuritySalaryPaidBy, caretakerSecurityStayinginSite, numberofEarthPit, lightningArresterStatus, fencingCompoundWallCondition, numberoffreeODPaltformAvailable, alarmMultipluxerStatus, doorOpenSensor, fuelSensor, fireSmokeSensor, str_AgencyName, siteAccessStatus, generalSafetyMeasuresData);
             hotoTransactionData.setGeneralSafetyMeasuresParentData(generalSafetyMeasuresParentData);
 
             Gson gson2 = new GsonBuilder().create();

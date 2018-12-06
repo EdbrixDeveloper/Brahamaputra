@@ -1,34 +1,35 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.UserDetails;
+import com.brahamaputra.mahindra.brahamaputra.Data.UserDetailsParent;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.bumptech.glide.Glide;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends BaseActivity {
 
     //private ImageView mImageView2;
     CircleImageView mImageView2;
@@ -78,7 +79,8 @@ public class UserProfileActivity extends AppCompatActivity {
         assignViews();
         alertDialogManager = new AlertDialogManager(UserProfileActivity.this);
         sessionManager = new SessionManager(UserProfileActivity.this);
-        setValues();
+        prepareUserPersonalData();
+        //setValues();
         textViewAppVersion.setText("App Version : " + BuildConfig.VERSION_NAME);
     }
 
@@ -210,8 +212,64 @@ public class UserProfileActivity extends AppCompatActivity {
         mUserProfileTextViewSsaText = (TextView) findViewById(R.id.userProfile_textView_ssaText);
 
 
-
         textViewAppVersion = (TextView) findViewById(R.id.textView_appVersion);
+    }
+
+    private void prepareUserPersonalData() {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+
+
+            GsonRequest<UserDetailsParent> userProfileRequestGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.GetUserDetails, jo.toString(), UserDetailsParent.class,
+                    new Response.Listener<UserDetailsParent>() {
+                        @Override
+                        public void onResponse(@NonNull UserDetailsParent response) {
+                            hideBusyProgress();
+                           /* if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {*/
+
+                            if (response.getSuccess() == 1) {
+                                sessionManager.updateSessionUsername(response.getUserDetails().getUsername());
+                                sessionManager.updateSessionUserID(response.getUserDetails().getId());
+                                sessionManager.updateSessionUserFirstName(response.getUserDetails().getFirstName());
+                                sessionManager.updateSessionUserLastName(response.getUserDetails().getLastName());
+                                sessionManager.updateSessionUserEmail(response.getUserDetails().getEmail());
+                                sessionManager.updateSessionMobileNo(response.getUserDetails().getMobileNo());
+                                sessionManager.updateSessionDesignation(response.getUserDetails().getDesignation());
+                                sessionManager.updateSessionProfileImageUrl(response.getUserDetails().getProfileImageUrl());
+                                sessionManager.updateSessionCircle(response.getUserDetails().getUserAdditionalDetails().getCircleName());
+                                sessionManager.updateSessionState(response.getUserDetails().getUserAdditionalDetails().getStateName());
+                                sessionManager.updateSessionSsa(response.getUserDetails().getUserAdditionalDetails().getSsaName());
+
+                                setValues();
+                            }
+                            /*}*/
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
+                        showToast("No Internet Connection.");
+                    }
+                    hideBusyProgress();
+
+                }
+            });
+            userProfileRequestGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            userProfileRequestGsonRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(userProfileRequestGsonRequest, "userProfileRequestGsonRequest");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
+
     }
 
     @Override

@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type of media" />
+                    android:text="Type of media*" />
 
                 <TextView
                     android:id="@+id/media_textView_Typeofmedia_val"

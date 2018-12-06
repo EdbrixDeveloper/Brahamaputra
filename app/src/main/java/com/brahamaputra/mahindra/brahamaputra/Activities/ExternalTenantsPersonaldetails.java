@@ -49,7 +49,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 public class ExternalTenantsPersonaldetails extends BaseActivity {
 
 
-     Calendar myCalendar1 = Calendar.getInstance();
+    Calendar myCalendar1 = Calendar.getInstance();
     Calendar myCalendar2 = Calendar.getInstance();
 
 
@@ -671,9 +671,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             String totalNumberofTanents = mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.getText().toString().trim();
 
             //externalTenantsPersonalDetailsParentData.setSubmited(true);
-            externalTenantsPersonalDetailsParentData.setTotalNumberofTanents(totalNumberofTanents);
-            externalTenantsPersonalDetailsParentData.setExternalTenantsPersonalDetailsData(externalTenantsPersonalDetailsDataList);
-
+            //externalTenantsPersonalDetailsParentData.setTotalNumberofTanents(totalNumberofTanents);
+            //externalTenantsPersonalDetailsParentData.setExternalTenantsPersonalDetailsData(externalTenantsPersonalDetailsDataList);
+            externalTenantsPersonalDetailsParentData = new ExternalTenantsPersonalDetailsParentData(totalNumberofTanents, externalTenantsPersonalDetailsDataList);
             hotoTransactionData.setExternalTenantsPersonalDetailsParentData(externalTenantsPersonalDetailsParentData);
 
             Gson gson2 = new GsonBuilder().create();
@@ -709,7 +709,10 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             spinnerArray = (Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_NameoftheTenant)));
             ss = new ArrayList<>(spinnerArray);
             ss.remove(CurrentCustomer);
-
+        } else {
+            List<String> spinnerArray = new ArrayList<String>();
+            spinnerArray = (Arrays.asList(getResources().getStringArray(R.array.array_externalTenantsPersonaldetails_NameoftheTenant)));
+            ss = new ArrayList<>(spinnerArray);
         }
         return ss;
 

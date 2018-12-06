@@ -20,9 +20,14 @@ public class DetailsOfUnusedMaterialsParentData {
         this.numberofUnusedAssetinSite = numberofUnusedAssetinSite;
         this.detailsOfUnusedMaterialsData = detailsOfUnusedMaterialsData;
         //this.isSubmited = true;//007
+        if (!this.numberofUnusedAssetinSite.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
-    public DetailsOfUnusedMaterialsParentData(){
+    public DetailsOfUnusedMaterialsParentData() {
         this.numberofUnusedAssetinSite = "";
         this.detailsOfUnusedMaterialsData = new ArrayList<>();
         this.isSubmited = 0;

@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of ACDB" />
+                    android:text="Number of ACDB*" />
 
                 <TextView
                     android:id="@+id/acdb_dcdb_textView_NumberofACDB_val"
@@ -84,7 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of DCDB" />
+                    android:text="Number of DCDB*" />
 
                 <TextView
                     android:id="@+id/acdb_dcdb_textView_NumberofDCDB_val"

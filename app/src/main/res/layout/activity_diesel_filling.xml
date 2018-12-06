@@ -66,9 +66,8 @@
                     android:paddingTop="5dp"
                     android:imeOptions="actionNext"
                     android:textAlignment="viewStart"
-                    android:textAllCaps="true"
                     android:textSize="16sp" />
-
+                <!--android:textAllCaps="true"-->
 
             </LinearLayout>
 
@@ -94,9 +93,8 @@
                     android:imeOptions="actionNext"
                     android:textAlignment="viewStart"
                     android:paddingTop="5dp"
-                    android:textAllCaps="true"
                     android:textSize="16sp" />
-
+                <!--android:textAllCaps="true"-->
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -269,10 +267,8 @@
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
                     android:textAlignment="viewStart"
-
-                    android:textAllCaps="true"
                     android:textSize="16sp" />
-
+                <!--android:textAllCaps="true"-->
             </LinearLayout>
 
             <LinearLayout

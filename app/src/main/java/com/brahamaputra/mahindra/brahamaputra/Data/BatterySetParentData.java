@@ -24,8 +24,14 @@ public class BatterySetParentData {
         this.noOfBatteryBankWorking = noOfBatteryBankWorking;
         this.batterySetData = batterySetData;
         //this.isSubmited = true;//007
+        if (!this.noOfBatterySet.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
-    public BatterySetParentData(){
+
+    public BatterySetParentData() {
         this.noOfBatterySet = "";
         this.noOfBatteryBankWorking = "";
         this.batterySetData = new ArrayList<>();

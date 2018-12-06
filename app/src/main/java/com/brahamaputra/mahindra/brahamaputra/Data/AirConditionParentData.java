@@ -31,19 +31,20 @@ public class AirConditionParentData {
         this.noOfACprovided = noOfACprovided;
         this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
         this.airConditionersData = airConditionersData;
-        this.isSubmited = 0;
+        //this.isSubmited = 0;
+        if (!this.noOfACprovided.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
-    public AirConditionParentData(){
+    public AirConditionParentData() {
         this.noOfACprovided = "";
         this.numberOfACInWorkingCondition = "";
         this.airConditionersData = new ArrayList<>();
         //this.isSubmited = false;//007
-        if(!this.noOfACprovided.isEmpty()){
-            this.isSubmited = 2;
-        }else {
-            this.isSubmited = 1;
-        }
+        this.isSubmited = 0;
     }
 
     public String getNoOfACprovided() {

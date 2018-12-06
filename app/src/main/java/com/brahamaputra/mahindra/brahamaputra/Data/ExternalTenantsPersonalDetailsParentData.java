@@ -20,6 +20,11 @@ public class ExternalTenantsPersonalDetailsParentData {
         this.totalNumberofTanents = totalNumberofTanents;
         this.externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsData;
         //this.isSubmited = true;//007
+        if (!this.totalNumberofTanents.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
     public ExternalTenantsPersonalDetailsParentData(){

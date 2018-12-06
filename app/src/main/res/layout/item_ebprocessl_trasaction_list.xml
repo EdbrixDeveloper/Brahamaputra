@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
@@ -41,6 +42,40 @@
                 android:text="Date: dd/mmm/yyyy" />
         </LinearLayout>
 
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textView_SiteName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_normal_margin"
+                android:layout_weight="1"
+                android:text="Site Name: " />
+
+            <TextView
+                android:id="@+id/textView_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_normal_margin"
+                android:layout_weight="0.5"
+                android:gravity="right"
+                android:text=""
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="right"
+                android:text=""
+                android:textStyle="bold" />&lt;!&ndash;android:layout_marginLeft="@dimen/app_normal_margin"&ndash;&gt;
+        </LinearLayout>-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,14 +91,23 @@
                 android:text="Site Name: " />
 
             <TextView
-                android:id="@+id/textView_status"
+                android:id="@+id/textView_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/app_normal_margin"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:gravity="right"
                 android:text=""
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="right"
+                android:text=""
+                android:textStyle="bold" /><!--android:layout_marginLeft="@dimen/app_normal_margin"-->
         </LinearLayout>
 
         <LinearLayout
@@ -119,7 +163,26 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="1.5"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:paddingRight="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView_details"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/app_normal_margin"
+                    android:src="@drawable/ic_details_black_18dp"
+                    android:visibility="visible"></ImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
                 android:gravity="right"
                 android:orientation="vertical"
                 android:paddingRight="20dp">

@@ -373,6 +373,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
                         str_numberOfPowerPlant = item.get(position);
                         mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(str_numberOfPowerPlant);
+                        mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText("");
 
                         currentPos = 0;
                         totalPlantCount = Integer.parseInt(str_numberOfPowerPlant);
@@ -689,10 +690,14 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 powerPlantDetailsDataList.addAll(powerPlantDetailsParentData.getPowerPlantDetailsData());
 
                 mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsParentData.getNumberOfPowerPlant());
-                mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText(powerPlantDetailsParentData.getNumberOfWorkingPowerPlant());
-                mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.VISIBLE);
-                if (powerPlantDetailsDataList != null && powerPlantDetailsDataList.size() > 0) {
 
+                mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.GONE);
+                if (!powerPlantDetailsParentData.getNumberOfWorkingPowerPlant().isEmpty() && powerPlantDetailsParentData.getNumberOfWorkingPowerPlant() != null) {
+                    mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.VISIBLE);
+                }
+                mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText(powerPlantDetailsParentData.getNumberOfWorkingPowerPlant());
+
+                if (powerPlantDetailsDataList != null && powerPlantDetailsDataList.size() > 0) {
                     totalPlantCount = powerPlantDetailsDataList.size();
                     //mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(powerPlantDetailsParentData.getNumberOfPowerPlant());
                     lnrPlantDetails.setVisibility(View.VISIBLE);

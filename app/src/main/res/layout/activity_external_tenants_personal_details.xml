@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Total Number of Tenants" />
+                    android:text="Total Number of Tenants*" />
 
                 <TextView
                     android:id="@+id/externalTenantsPersonaldetails_textView_TotalNumberofTanents_val"

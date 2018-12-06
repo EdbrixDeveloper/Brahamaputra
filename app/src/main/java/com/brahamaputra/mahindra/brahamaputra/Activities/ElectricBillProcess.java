@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -54,6 +55,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.Site;
 import com.brahamaputra.mahindra.brahamaputra.Data.SiteList;
 import com.brahamaputra.mahindra.brahamaputra.Data.State;
 import com.brahamaputra.mahindra.brahamaputra.Data.StateList;
+import com.brahamaputra.mahindra.brahamaputra.Data.UserDetailsParent;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserSites;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserSitesList;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -104,7 +106,7 @@ public class ElectricBillProcess extends BaseActivity {
     private EbSiteConnectedData ebSiteConnectedData;
     private SessionManager sessionManager;
     private ElectricBillProcessData electricBillProcessData;
-     Calendar myCalendar1 = Calendar.getInstance();
+    Calendar myCalendar1 = Calendar.getInstance();
     Calendar myCalendar2 = Calendar.getInstance();
     Calendar myCalendar3 = Calendar.getInstance();
     Calendar myCalendar4 = Calendar.getInstance();
@@ -240,72 +242,6 @@ public class ElectricBillProcess extends BaseActivity {
 
     };
 
-    private void assignViews() {
-        mEbProcessTextViewCustomer = (TextView) findViewById(R.id.ebProcess_textView_customer);
-        mEbProcessTextViewCustomerVal = (TextView) findViewById(R.id.ebProcess_textView_customerVal);
-        mEbProcessTextViewCircle = (TextView) findViewById(R.id.ebProcess_textView_circle);
-        mEbProcessTextViewCircleVal = (TextView) findViewById(R.id.ebProcess_textView_circleVal);
-        mEbProcessTextViewState = (TextView) findViewById(R.id.ebProcess_textView_state);
-        mEbProcessTextViewStateVal = (TextView) findViewById(R.id.ebProcess_textView_stateVal);
-        mEbProcessTextViewSsa = (TextView) findViewById(R.id.ebProcess_textView_ssa);
-        mEbProcessTextViewSsaVal = (TextView) findViewById(R.id.ebProcess_textView_ssaVal);
-        mEbProcessTextViewSite = (TextView) findViewById(R.id.ebProcess_textView_site);
-        mEbProcessTextViewSiteVal = (TextView) findViewById(R.id.ebProcess_textView_siteVal);
-        mEbProcessTextViewSiteID = (TextView) findViewById(R.id.ebProcess_textView_siteID);
-        mEbProcessTextViewSiteIDVal = (TextView) findViewById(R.id.ebProcess_textView_siteID_val);
-        mEbProcessTextViewSiteDetails = (TextView) findViewById(R.id.ebProcess_textView_siteDetails);
-        mEbProcessTextViewSiteDetailsVal = (TextView) findViewById(R.id.ebProcess_textView_siteDetails_val);
-        mEbProcessTextViewEbServiceProvider = (TextView) findViewById(R.id.ebProcess_textView_ebServiceProvider);
-        mEbProcessTextViewEbServiceProviderVal = (TextView) findViewById(R.id.ebProcess_textView_ebServiceProviderVal);
-        mEbProcessTextViewEbConsumerNumber = (TextView) findViewById(R.id.ebProcess_textView_ebConsumerNumber);
-        mEbProcessTextViewEbConsumerNumberVal = (TextView) findViewById(R.id.ebProcess_textView_ebConsumerNumberVal);
-        mEbProcessTextViewTypeModeOfPayement = (TextView) findViewById(R.id.ebProcess_textView_typeModeOfPayement);
-        mEbProcessTextViewTypeModeOfPayementVal = (TextView) findViewById(R.id.ebProcess_textView_typeModeOfPayementVal);
-        mEbProcessTextViewTypeOfElectricConnection = (TextView) findViewById(R.id.ebProcess_textView_typeOfElectricConnection);
-        mEbProcessTextViewTypeOfElectricConnectionVal = (TextView) findViewById(R.id.ebProcess_textView_typeOfElectricConnectionVal);
-        mEbProcessTextViewTariff = (TextView) findViewById(R.id.ebProcess_textView_tariff);
-        mEbProcessTextViewTariffVal = (TextView) findViewById(R.id.ebProcess_textView_tariffVal);
-        mEbProcessTextViewUnitConsumed = (TextView) findViewById(R.id.ebProcess_textView_unitConsumed);
-        mEbProcessEditTextUnitConsumed = (EditText) findViewById(R.id.ebProcess_editText_unitConsumed);
-        mEbProcessTextViewBillingFrom = (TextView) findViewById(R.id.ebProcess_textView_billingFrom);
-        mEbProcessEditTextBillingFrom = (EditText) findViewById(R.id.ebProcess_editText_billingFrom);
-        mEbProcessTextViewBillingTo = (TextView) findViewById(R.id.ebProcess_textView_billingTo);
-        mEbProcessEditTextBillingTo = (EditText) findViewById(R.id.ebProcess_editText_billingTo);
-        mEbProcessTextViewBillNo = (TextView) findViewById(R.id.ebProcess_textView_billNo);
-        mEbProcessEditTextBillNo = (EditText) findViewById(R.id.ebProcess_editText_billNo);
-        mEbProcessTextViewBillingIssueDate = (TextView) findViewById(R.id.ebProcess_textView_billingIssueDate);
-        mEbProcessEditTextBillingIssueDate = (EditText) findViewById(R.id.ebProcess_editText_billingIssueDate);
-        mEbProcessTextViewBilliDueDate = (TextView) findViewById(R.id.ebProcess_textView_billiDueDate);
-        mEbProcessEditTextBilliDueDate = (EditText) findViewById(R.id.ebProcess_editText_billiDueDate);
-        mEbProcessTextViewGrossAmount = (TextView) findViewById(R.id.ebProcess_textView_grossAmount);
-        mEbProcessEditTextGrossAmount = (EditText) findViewById(R.id.ebProcess_editText_grossAmount);
-        mEbProcessTextViewNetPaybleBeforeDueDate = (TextView) findViewById(R.id.ebProcess_textView_netPaybleBeforeDueDate);
-        mEbProcessEditTextNetPaybleBeforeDueDate = (EditText) findViewById(R.id.ebProcess_editText_netPaybleBeforeDueDate);
-        mEbProcessTextViewEbBillScanCopy = (TextView) findViewById(R.id.ebProcess_textView_ebBillScanCopy);
-        mEbProcessButtonEbBillScanCopy = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopy);
-        mEbProcessButtonEbBillScanCopyiew = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopyiew);
-        mEbProcessTextViewNetPayableWords = (TextView) findViewById(R.id.ebProcess_textView_netPayableWords);
-        mEbProcessTextViewNetPayableWordsVal = (TextView) findViewById(R.id.ebProcess_textView_netPayableWordsVal);
-
-        mEbProcessEditTextUnitConsumed.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
-        mEbProcessEditTextGrossAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
-        mEbProcessEditTextNetPaybleBeforeDueDate.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
-
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-    }
-
-    public void DecimalFormatConversion() {
-        mEbProcessEditTextUnitConsumed.setText(decimalConversion.convertDecimal(mEbProcessEditTextUnitConsumed.getText().toString()));
-        mEbProcessEditTextGrossAmount.setText(decimalConversion.convertDecimal(mEbProcessEditTextGrossAmount.getText().toString()));
-        mEbProcessEditTextNetPaybleBeforeDueDate.setText(decimalConversion.convertDecimal(mEbProcessEditTextNetPaybleBeforeDueDate.getText().toString()));
-
-    }
-
-    private void initCombo() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -320,7 +256,7 @@ public class ElectricBillProcess extends BaseActivity {
         assignViews();
         initCombo();
         set_listener();
-
+        prepareUserPersonalData();//arj
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -380,13 +316,83 @@ public class ElectricBillProcess extends BaseActivity {
 
     }
 
+    private void assignViews() {
+        mEbProcessTextViewCustomer = (TextView) findViewById(R.id.ebProcess_textView_customer);
+        mEbProcessTextViewCustomerVal = (TextView) findViewById(R.id.ebProcess_textView_customerVal);
+        mEbProcessTextViewCircle = (TextView) findViewById(R.id.ebProcess_textView_circle);
+        mEbProcessTextViewCircleVal = (TextView) findViewById(R.id.ebProcess_textView_circleVal);
+        mEbProcessTextViewState = (TextView) findViewById(R.id.ebProcess_textView_state);
+        mEbProcessTextViewStateVal = (TextView) findViewById(R.id.ebProcess_textView_stateVal);
+        mEbProcessTextViewSsa = (TextView) findViewById(R.id.ebProcess_textView_ssa);
+        mEbProcessTextViewSsaVal = (TextView) findViewById(R.id.ebProcess_textView_ssaVal);
+        mEbProcessTextViewSite = (TextView) findViewById(R.id.ebProcess_textView_site);
+        mEbProcessTextViewSiteVal = (TextView) findViewById(R.id.ebProcess_textView_siteVal);
+        mEbProcessTextViewSiteID = (TextView) findViewById(R.id.ebProcess_textView_siteID);
+        mEbProcessTextViewSiteIDVal = (TextView) findViewById(R.id.ebProcess_textView_siteID_val);
+        mEbProcessTextViewSiteDetails = (TextView) findViewById(R.id.ebProcess_textView_siteDetails);
+        mEbProcessTextViewSiteDetailsVal = (TextView) findViewById(R.id.ebProcess_textView_siteDetails_val);
+        mEbProcessTextViewEbServiceProvider = (TextView) findViewById(R.id.ebProcess_textView_ebServiceProvider);
+        mEbProcessTextViewEbServiceProviderVal = (TextView) findViewById(R.id.ebProcess_textView_ebServiceProviderVal);
+        mEbProcessTextViewEbConsumerNumber = (TextView) findViewById(R.id.ebProcess_textView_ebConsumerNumber);
+        mEbProcessTextViewEbConsumerNumberVal = (TextView) findViewById(R.id.ebProcess_textView_ebConsumerNumberVal);
+        mEbProcessTextViewTypeModeOfPayement = (TextView) findViewById(R.id.ebProcess_textView_typeModeOfPayement);
+        mEbProcessTextViewTypeModeOfPayementVal = (TextView) findViewById(R.id.ebProcess_textView_typeModeOfPayementVal);
+        mEbProcessTextViewTypeOfElectricConnection = (TextView) findViewById(R.id.ebProcess_textView_typeOfElectricConnection);
+        mEbProcessTextViewTypeOfElectricConnectionVal = (TextView) findViewById(R.id.ebProcess_textView_typeOfElectricConnectionVal);
+        mEbProcessTextViewTariff = (TextView) findViewById(R.id.ebProcess_textView_tariff);
+        mEbProcessTextViewTariffVal = (TextView) findViewById(R.id.ebProcess_textView_tariffVal);
+        mEbProcessTextViewUnitConsumed = (TextView) findViewById(R.id.ebProcess_textView_unitConsumed);
+        mEbProcessEditTextUnitConsumed = (EditText) findViewById(R.id.ebProcess_editText_unitConsumed);
+        mEbProcessTextViewBillingFrom = (TextView) findViewById(R.id.ebProcess_textView_billingFrom);
+        mEbProcessEditTextBillingFrom = (EditText) findViewById(R.id.ebProcess_editText_billingFrom);
+        mEbProcessTextViewBillingTo = (TextView) findViewById(R.id.ebProcess_textView_billingTo);
+        mEbProcessEditTextBillingTo = (EditText) findViewById(R.id.ebProcess_editText_billingTo);
+        mEbProcessTextViewBillNo = (TextView) findViewById(R.id.ebProcess_textView_billNo);
+        mEbProcessEditTextBillNo = (EditText) findViewById(R.id.ebProcess_editText_billNo);
+        mEbProcessTextViewBillingIssueDate = (TextView) findViewById(R.id.ebProcess_textView_billingIssueDate);
+        mEbProcessEditTextBillingIssueDate = (EditText) findViewById(R.id.ebProcess_editText_billingIssueDate);
+        mEbProcessTextViewBilliDueDate = (TextView) findViewById(R.id.ebProcess_textView_billiDueDate);
+        mEbProcessEditTextBilliDueDate = (EditText) findViewById(R.id.ebProcess_editText_billiDueDate);
+        mEbProcessTextViewGrossAmount = (TextView) findViewById(R.id.ebProcess_textView_grossAmount);
+        mEbProcessEditTextGrossAmount = (EditText) findViewById(R.id.ebProcess_editText_grossAmount);
+        mEbProcessTextViewNetPaybleBeforeDueDate = (TextView) findViewById(R.id.ebProcess_textView_netPaybleBeforeDueDate);
+        mEbProcessEditTextNetPaybleBeforeDueDate = (EditText) findViewById(R.id.ebProcess_editText_netPaybleBeforeDueDate);
+        mEbProcessTextViewEbBillScanCopy = (TextView) findViewById(R.id.ebProcess_textView_ebBillScanCopy);
+        mEbProcessButtonEbBillScanCopy = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopy);
+        mEbProcessButtonEbBillScanCopyiew = (ImageView) findViewById(R.id.ebProcess_button_ebBillScanCopyiew);
+        mEbProcessTextViewNetPayableWords = (TextView) findViewById(R.id.ebProcess_textView_netPayableWords);
+        mEbProcessTextViewNetPayableWordsVal = (TextView) findViewById(R.id.ebProcess_textView_netPayableWordsVal);
+
+        mEbProcessEditTextUnitConsumed.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mEbProcessEditTextGrossAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mEbProcessEditTextNetPaybleBeforeDueDate.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+
+        mEbProcessTextViewSiteIDVal.setAllCaps(true);
+        mEbProcessTextViewSiteDetailsVal.setAllCaps(true);
+        mEbProcessTextViewEbServiceProviderVal.setAllCaps(true);
+        mEbProcessTextViewNetPayableWordsVal.setAllCaps(true);
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
+    public void DecimalFormatConversion() {
+        mEbProcessEditTextUnitConsumed.setText(decimalConversion.convertDecimal(mEbProcessEditTextUnitConsumed.getText().toString()));
+        mEbProcessEditTextGrossAmount.setText(decimalConversion.convertDecimal(mEbProcessEditTextGrossAmount.getText().toString()));
+        mEbProcessEditTextNetPaybleBeforeDueDate.setText(decimalConversion.convertDecimal(mEbProcessEditTextNetPaybleBeforeDueDate.getText().toString()));
+
+    }
+
+    private void initCombo() {
+    }
 
     public void set_listener() {
         mEbProcessTextViewCustomerVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                prepareCustomer();
+                ////prepareCustomer();arj
 
             }
         });
@@ -394,7 +400,7 @@ public class ElectricBillProcess extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (!mEbProcessTextViewCustomerVal.getText().toString().trim().isEmpty()) {
-                    prepareCircle();
+                    ////prepareCircle();arj
                 } else {
                     showToast("Please Select Customer");
                 }
@@ -407,7 +413,7 @@ public class ElectricBillProcess extends BaseActivity {
             public void onClick(View v) {
                 // prepareStates();
                 if (!mEbProcessTextViewCircleVal.getText().toString().trim().isEmpty()) {
-                    prepareStates();
+                    ////prepareStates();arj
                 } else {
                     showToast("Please Select Circle");
                 }
@@ -419,7 +425,7 @@ public class ElectricBillProcess extends BaseActivity {
             public void onClick(View v) {
                 // prepareSSA();
                 if (!mEbProcessTextViewStateVal.getText().toString().trim().isEmpty()) {
-                    prepareSSA();
+                    ////prepareSSA();arj
                 } else {
                     showToast("Please Select State");
                 }
@@ -430,7 +436,7 @@ public class ElectricBillProcess extends BaseActivity {
             public void onClick(View v) {
                 //prepareSite();
                 if (!mEbProcessTextViewSsaVal.getText().toString().trim().isEmpty()) {
-                    prepareSite();
+                    ////prepareSite();arj
                 } else {
                     showToast("Please Select SSA");
                 }
@@ -677,7 +683,7 @@ public class ElectricBillProcess extends BaseActivity {
     }
 
     private void BillFromToDateValidation() {
-        if (date_BillFrom != null && date_BillTo!= null) {
+        if (date_BillFrom != null && date_BillTo != null) {
             if (!date_BillFrom.isEmpty() && !date_BillTo.isEmpty()) {
                 if (!dateFromToValid(date_BillFrom, date_BillTo)) {
                     showToast("Bill To Date should  grater than Bill From Date ");
@@ -1464,6 +1470,95 @@ public class ElectricBillProcess extends BaseActivity {
     private void openCamera() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivity(intent);
+    }
+
+    private void prepareUserPersonalData() {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+
+
+            GsonRequest<UserDetailsParent> userProfileRequestGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.GetUserDetails, jo.toString(), UserDetailsParent.class,
+                    new Response.Listener<UserDetailsParent>() {
+                        @Override
+                        public void onResponse(@NonNull UserDetailsParent response) {
+
+                            if (response.getSuccess() == 1) {
+                                /*sessionManager.updateSessionUsername(response.getUserDetails().getUsername());
+                                sessionManager.updateSessionUserID(response.getUserDetails().getId());
+                                sessionManager.updateSessionUserFirstName(response.getUserDetails().getFirstName());
+                                sessionManager.updateSessionUserLastName(response.getUserDetails().getLastName());
+                                sessionManager.updateSessionUserEmail(response.getUserDetails().getEmail());
+                                sessionManager.updateSessionMobileNo(response.getUserDetails().getMobileNo());
+                                sessionManager.updateSessionDesignation(response.getUserDetails().getDesignation());
+                                sessionManager.updateSessionProfileImageUrl(response.getUserDetails().getProfileImageUrl());
+                                sessionManager.updateSessionCircle(response.getUserDetails().getUserAdditionalDetails().getCircleName());
+                                sessionManager.updateSessionState(response.getUserDetails().getUserAdditionalDetails().getStateName());
+                                sessionManager.updateSessionSsa(response.getUserDetails().getUserAdditionalDetails().getSsaName());*/
+
+                                ConsumerNoList = null;
+                                PaymentTypeList = null;
+                                ElectricConnectionTypeList = null;
+                                ConnectionTariffList = null;
+                                mEbProcessTextViewEbConsumerNumberVal.setText("");
+                                mEbProcessTextViewTypeModeOfPayementVal.setText("");
+                                mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
+                                mEbProcessTextViewTariffVal.setText("");
+
+                                str_customerName = response.getUserDetails().getUserAdditionalDetails().getCustomerName();
+                                mEbProcessTextViewCustomerVal.setText(str_customerName);
+                                customerId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCustomerId());
+
+                                str_circleName = response.getUserDetails().getUserAdditionalDetails().getCircleName();
+                                mEbProcessTextViewCircleVal.setText(str_circleName);
+                                circleId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCircleId());
+
+                                str_stateName = response.getUserDetails().getUserAdditionalDetails().getStateName();
+                                mEbProcessTextViewStateVal.setText(str_stateName);
+                                StateId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getStateId());
+
+                                str_ssa = response.getUserDetails().getUserAdditionalDetails().getSsaName();
+                                mEbProcessTextViewSsaVal.setText(str_ssa);
+                                ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());
+
+
+                                str_siteName = response.getUserDetails().getUserAdditionalDetails().getSiteName();
+                                mEbProcessTextViewSiteVal.setText(str_siteName);
+                                siteID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSiteId());
+                                mEbProcessTextViewSiteIDVal.setText(response.getUserDetails().getUserAdditionalDetails().getSiteId());
+                                String siteAddress = String.valueOf(response.getUserDetails().getUserAdditionalDetails().getSiteAddress());
+                                if (!siteAddress.isEmpty()) {
+                                    mEbProcessTextViewSiteDetailsVal.setText(siteAddress);
+                                }
+                                mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(response.getUserDetails().getUserAdditionalDetails().getEbOfficeName()));
+                                prepareEbSiteConnectedData();
+                                //prepareSite();
+                                hideBusyProgress();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
+                        showToast("No Internet Connection.");
+                    }
+                    hideBusyProgress();
+
+                }
+            });
+            userProfileRequestGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            userProfileRequestGsonRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(userProfileRequestGsonRequest, "ebPaymentRequestGsonRequest");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
+
     }
 
 

@@ -31,7 +31,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="No of Battery Set Provided" />
+                    android:text="No of Battery Set Provided*" />
 
                 <TextView
                     android:id="@+id/batterySet_textView_NoofBatterySetProvided_val"
@@ -45,6 +45,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/batterySet_linearLayout_NumberofBatteryBankWorking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"

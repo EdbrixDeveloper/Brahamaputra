@@ -2,8 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TotalDCLoadofSiteData
-{
+public class TotalDCLoadofSiteData {
 
     @SerializedName("totalDcLoadOfSite")
     private String totalDcLoadOfSite;
@@ -14,12 +13,17 @@ public class TotalDCLoadofSiteData
 
     public TotalDCLoadofSiteData() {
         this.totalDcLoadOfSite = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
     public TotalDCLoadofSiteData(String totalDcLoadOfSite) {
         this.totalDcLoadOfSite = totalDcLoadOfSite;
         //this.isSubmited=true;//007
+        if (!this.totalDcLoadOfSite.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getTotalDcLoadOfSite() {

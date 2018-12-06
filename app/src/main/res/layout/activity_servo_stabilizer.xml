@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="QR Code Scan"
+                    android:text="QR Code Scan*"
 
                     />
 
@@ -69,7 +69,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Servo Stabilizer Working Status" />
+                    android:text="Servo Stabilizer Working Status*" />
 
                 <TextView
                     android:id="@+id/servoStabilizer_textView_ServoStabilizerWorkingStatus_val"

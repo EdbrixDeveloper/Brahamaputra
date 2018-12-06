@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Site Hygiene/Vegitation Status" />
+                    android:text="Site Hygiene/Vegitation Status*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_SiteHygieneVegitationStatus_val"
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Gate Lock" />
+                    android:text="Gate Lock*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_GateLock_val"
@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Fire Bucket" />
+                    android:text="Fire Bucket*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_FireBucket_val"
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Security Status (24x7)" />
+                    android:text="Security Status (24x7)*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_SecurityStatus24x7_val"
@@ -288,7 +288,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Caretaker Status (Up-On Emergency)" />
+                    android:text="Caretaker Status (Up-On Emergency)*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_CaretakerStatusUpOnEmergency_val"
@@ -488,7 +488,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Number of Earth Pit" />
+                    android:text="Number of Earth Pit*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_NumberofEarthPit_val"
@@ -601,7 +601,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Alarm Multipluxer Status" />
+                    android:text="Alarm Multipluxer Status*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_AlarmMultipluxerStatus_val"
@@ -736,12 +736,38 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_siteAccessStatus"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site Access status" />
+
+                <TextView
+                    android:id="@+id/generalAndSafetyMeasure_textView_siteAccessStatus_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_noOfFireExtuinguisher"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="No of Fire Extuinguisher" />
+                    android:text="No of Fire Extuinguisher*" />
 
                 <TextView
                     android:id="@+id/generalAndSafetyMeasure_textView_noOfFireExtuinguisher_val"

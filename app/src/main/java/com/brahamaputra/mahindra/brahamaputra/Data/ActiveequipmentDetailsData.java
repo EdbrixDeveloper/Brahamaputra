@@ -25,7 +25,7 @@ public class ActiveequipmentDetailsData {
         this.DCLoadofBTSequipment = "";
         this.YearofInstallationatsite = "";
         this.PositionofAntennaTower = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
     public ActiveequipmentDetailsData(String typeofBTS, String importanceOfSite, String numberOfDependantSites, String make, String DCLoadofBTSequipment, String yearofInstallationatsite, String positionofAntennaTower) {
@@ -37,6 +37,11 @@ public class ActiveequipmentDetailsData {
         this.YearofInstallationatsite = yearofInstallationatsite;
         this.PositionofAntennaTower = positionofAntennaTower;
         //this.isSubmited=true;//007
+        if (!this.typeofBTS.isEmpty() && !this.make.isEmpty() && !this.DCLoadofBTSequipment.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getTypeofBTS() {

@@ -2,7 +2,8 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class EBBillUploadReceipt  {
+
+public class EBBillUploadReceipt {
 
     @SerializedName("UserId")
     @Expose
@@ -19,6 +20,19 @@ public class EBBillUploadReceipt  {
     @SerializedName("EbReceiptScanCopyImageName")
     @Expose
     private String ebReceiptScanCopyImageName;
+
+    @SerializedName("EbPaymentReceiptNumber")
+    @Expose
+    private String ebPaymentReceiptNumber;
+
+    @SerializedName("EbPaymentDate")
+    @Expose
+    private String ebPaymentDate;
+
+    @SerializedName("EbPaymentAmount")
+    @Expose
+    private String ebPaymentAmount;
+
 
     public String getUserId() {
         return userId;
@@ -60,11 +74,38 @@ public class EBBillUploadReceipt  {
         this.ebReceiptScanCopyImageName = ebReceiptScanCopyImageName;
     }
 
-    public EBBillUploadReceipt(String userId, String accessToken, String ebpaymentrequestId, String ebPaymentRemark, String ebReceiptScanCopyImageName) {
+    public String getEbPaymentReceiptNumber() {
+        return ebPaymentReceiptNumber;
+    }
+
+    public void setEbPaymentReceiptNumber(String ebPaymentReceiptNumber) {
+        this.ebPaymentReceiptNumber = ebPaymentReceiptNumber;
+    }
+
+    public String getEbPaymentDate() {
+        return ebPaymentDate;
+    }
+
+    public void setEbPaymentDate(String ebPaymentDate) {
+        this.ebPaymentDate = ebPaymentDate;
+    }
+
+    public String getEbPaymentAmount() {
+        return ebPaymentAmount;
+    }
+
+    public void setEbPaymentAmount(String ebPaymentAmount) {
+        this.ebPaymentAmount = ebPaymentAmount;
+    }
+
+    public EBBillUploadReceipt(String userId, String accessToken, String ebpaymentrequestId, String ebPaymentRemark,String ebPaymentReceiptNumber,String ebPaymentDate,String ebPaymentAmount, String ebReceiptScanCopyImageName) {
         this.userId = userId;
         this.accessToken = accessToken;
         this.ebpaymentrequestId = ebpaymentrequestId;
         this.ebPaymentRemark = ebPaymentRemark;
+        this.ebPaymentReceiptNumber = ebPaymentReceiptNumber;
+        this.ebPaymentDate = ebPaymentDate;
+        this.ebPaymentAmount = ebPaymentAmount;
         this.ebReceiptScanCopyImageName = ebReceiptScanCopyImageName;
     }
 }

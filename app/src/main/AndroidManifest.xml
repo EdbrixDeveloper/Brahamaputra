@@ -173,6 +173,10 @@
             android:name=".Activities.ElectricBillProcess"
             android:label="Sections"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.UploadEBPaymentDetailsActivity"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activities.UserEditProfileActivity" />
         <activity android:name=".Activities.UserChangePasswordActivity" />
         <activity android:name=".Activities.UploadEBReceiptActivity" />

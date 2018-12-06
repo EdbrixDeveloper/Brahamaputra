@@ -37,18 +37,23 @@ public class ServoStabilizerData {
         this.workingCondition = "";
         this.natureofProblem = "";
         this.qrCodeImageFileName = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
-    public ServoStabilizerData(String servoStabilizer_Qr, String servoStabilizerWorkingStatus, String makeofServo, String ratingofServo, String workingCondition, String natureofProblem,String qrCodeImageFileName) {
+    public ServoStabilizerData(String servoStabilizer_Qr, String servoStabilizerWorkingStatus, String makeofServo, String ratingofServo, String workingCondition, String natureofProblem, String qrCodeImageFileName) {
         this.servoStabilizer_Qr = servoStabilizer_Qr;
         this.servoStabilizerWorkingStatus = servoStabilizerWorkingStatus;
         this.makeofServo = makeofServo;
         this.ratingofServo = ratingofServo;
         this.workingCondition = workingCondition;
         this.natureofProblem = natureofProblem;
-        this.qrCodeImageFileName=qrCodeImageFileName;
+        this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;//007
+        if (!this.servoStabilizer_Qr.isEmpty() && !this.servoStabilizerWorkingStatus.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getServoStabilizer_Qr() {

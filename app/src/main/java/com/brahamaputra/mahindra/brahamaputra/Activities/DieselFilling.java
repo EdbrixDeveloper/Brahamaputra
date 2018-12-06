@@ -180,12 +180,14 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingEditTextFillingQty.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         mDieselFillingEditTextDieselPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
 
+        mDieselFillingTextViewSiteIDVal.setAllCaps(true);
+        mDieselFillingTextViewSiteDetailsVal.setAllCaps(true);
+        mDieselFillingTextViewFinalDieselStockVal.setAllCaps(true);
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
     }
-
 
 
     private void initCombo() {

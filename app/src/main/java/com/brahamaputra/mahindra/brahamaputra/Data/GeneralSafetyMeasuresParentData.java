@@ -85,6 +85,9 @@ public class GeneralSafetyMeasuresParentData {
     @SerializedName("agencyName")
     private String agencyName;
 
+    @SerializedName("siteAccessStatus")
+    private String siteAccessStatus;
+
     @SerializedName("generalSafetyMeasuresData")
     ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData;
 
@@ -121,11 +124,12 @@ public class GeneralSafetyMeasuresParentData {
         this.fireSmokeSensor = "";
         this.isSubmited = 0;
         this.agencyName = "";
+        this.siteAccessStatus="";
         this.generalSafetyMeasuresData = new ArrayList<>();
     }
 
 
-    public GeneralSafetyMeasuresParentData(String prevailingSLA, String siteBoundaryStatus, String siteHygieneVegitationStatus, String gateLock, String dgRoomLock, String fireExtuinguisher, String noOfFireExtuinguisher, String fireBucket, String securityStatus, String noofSecurityPerson, String mobileNumberofSecurity, String caretakerStatusUpOnEmergency, String mobileNumberofCaretaker, String isSecurityCaretakeristheOwnerofSite, String salaryofSecurityCaretaker, String caretakerSecuritySalaryPaidBy, String caretakerSecurityStayinginSite, String numberofEarthPit, String lightningArresterStatus, String fencingCompoundWallCondition, String numberoffreeODPaltformAvailable, String alarmMultipluxerStatus, String doorOpenSensor, String fuelSensor, String fireSmokeSensor, String agencyName, ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData) {
+    public GeneralSafetyMeasuresParentData(String prevailingSLA, String siteBoundaryStatus, String siteHygieneVegitationStatus, String gateLock, String dgRoomLock, String fireExtuinguisher, String noOfFireExtuinguisher, String fireBucket, String securityStatus, String noofSecurityPerson, String mobileNumberofSecurity, String caretakerStatusUpOnEmergency, String mobileNumberofCaretaker, String isSecurityCaretakeristheOwnerofSite, String salaryofSecurityCaretaker, String caretakerSecuritySalaryPaidBy, String caretakerSecurityStayinginSite, String numberofEarthPit, String lightningArresterStatus, String fencingCompoundWallCondition, String numberoffreeODPaltformAvailable, String alarmMultipluxerStatus, String doorOpenSensor, String fuelSensor, String fireSmokeSensor, String agencyName,String siteAccessStatus, ArrayList<GeneralSafetyMeasuresData> generalSafetyMeasuresData) {
         this.prevailingSLA = prevailingSLA;
         this.siteBoundaryStatus = siteBoundaryStatus;
         this.siteHygieneVegitationStatus = siteHygieneVegitationStatus;
@@ -152,8 +156,14 @@ public class GeneralSafetyMeasuresParentData {
         this.fuelSensor = fuelSensor;
         this.fireSmokeSensor = fireSmokeSensor;
         this.agencyName = agencyName;
+        this.siteAccessStatus=siteAccessStatus;
         this.generalSafetyMeasuresData = generalSafetyMeasuresData;
         //this.isSubmited = true;//007
+        if (!this.siteHygieneVegitationStatus.isEmpty() && !this.gateLock.isEmpty() && !this.noOfFireExtuinguisher.isEmpty() && !this.fireBucket.isEmpty() && !this.securityStatus.isEmpty() && !this.caretakerStatusUpOnEmergency.isEmpty() && !this.numberofEarthPit.isEmpty() && !this.alarmMultipluxerStatus.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
 
     }
 
@@ -368,6 +378,14 @@ public class GeneralSafetyMeasuresParentData {
         this.agencyName = agencyName;
     }
 
+
+    public String getSiteAccessStatus() {
+        return siteAccessStatus;
+    }
+
+    public void setSiteAccessStatus(String siteAccessStatus) {
+        this.siteAccessStatus = siteAccessStatus;
+    }
 
     public ArrayList<GeneralSafetyMeasuresData> getGeneralSafetyMeasuresData() {
         return generalSafetyMeasuresData;

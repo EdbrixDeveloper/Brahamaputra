@@ -269,9 +269,9 @@ public class Electric_Connection extends BaseActivity {
 
         //showToast(hototicket_nameOfSupplyCompany);
 
-        if(hototicket_nameOfSupplyCompany.isEmpty() || hototicket_nameOfSupplyCompany.length() < 0){
+        if (hototicket_nameOfSupplyCompany.isEmpty() || hototicket_nameOfSupplyCompany.length() < 0) {
             //
-        }else{
+        } else {
             mElectricConnectionTextViewNameOfSupplyCompanyVal.setText(hototicket_nameOfSupplyCompany);
             mElectricConnectionTextViewNameOfSupplyCompanyVal.setKeyListener(null);
         }
@@ -756,8 +756,8 @@ public class Electric_Connection extends BaseActivity {
                 mElectricConnectionTextViewSafetyFuseUnitVal.setText(electricConnectionData.getSafetyFuseUnit());
                 mElectricConnectionTextViewKitKatClayFuseStatusVal.setText(electricConnectionData.getKitKatFuseStatus());
                 mElectricConnectionTextViewEbNeutralEarthingVal.setText(electricConnectionData.getEbNeutralEarthing());
-                mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(electricConnectionData.getAverageEbAvailability());
-                mElectricConnectionEditTextScheduledPowerCutInHrs.setText(electricConnectionData.getScheduledPowerCut());
+                mElectricConnectionEditTextAverageEbAvailabilityPerDay.setText(electricConnectionData.getAverageEbAvailability().isEmpty() ? "00:00" : electricConnectionData.getAverageEbAvailability());
+                mElectricConnectionEditTextScheduledPowerCutInHrs.setText(electricConnectionData.getScheduledPowerCut().isEmpty() ? "00:00" : electricConnectionData.getScheduledPowerCut());
                 //mElectricConnectionEditTextEbBillDate.setText(electricConnectionData.getEbBillDate());
                 mElectricConnectionTextViewEbBillDateVal.setText(electricConnectionData.getEbBillDate());
                 //mElectricConnectionEditTextSapVendorCode.setText(electricConnectionData.getSapVendorCode());

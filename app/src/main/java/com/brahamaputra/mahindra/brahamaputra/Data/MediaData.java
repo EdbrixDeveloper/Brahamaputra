@@ -33,6 +33,11 @@ public class MediaData {
     public MediaData(String typeOfMedia) {
         this.typeOfMedia = typeOfMedia;
         //this.isSubmited=true;//007
+        if(!this.typeOfMedia.isEmpty()){
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
     }
 
 }

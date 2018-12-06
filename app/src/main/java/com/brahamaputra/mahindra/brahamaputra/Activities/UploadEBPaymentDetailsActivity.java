@@ -4,10 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
@@ -29,7 +28,6 @@ import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.EBBillUploadReceipt;
 import com.brahamaputra.mahindra.brahamaputra.Data.EBlSubmitResposeData;
-import com.brahamaputra.mahindra.brahamaputra.Data.ElectricBillProcessData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -53,9 +51,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class UploadEBReceiptActivity extends BaseActivity {
+public class UploadEBPaymentDetailsActivity extends BaseActivity {
 
-    private static final String TAG = UploadEBReceiptActivity.class.getSimpleName();
+    private static final String TAG = UploadEBPaymentDetailsActivity.class.getSimpleName();
 
     private TextView mUploadEbReceiptEditTextTicketNumber;
     private TextView mUploadEbReceiptEditTextSiteId;
@@ -118,9 +116,9 @@ public class UploadEBReceiptActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_ebreceipt);
+        setContentView(R.layout.activity_upload_eb_payment_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("Upload Receipt");
+        this.setTitle("Upload Payment Details");
 
         Intent intent = getIntent();
         request_id = intent.getStringExtra("request_id");
@@ -129,12 +127,12 @@ public class UploadEBReceiptActivity extends BaseActivity {
         site_name = intent.getStringExtra("site_name");
         assignViews();
         setListners();
-        alertDialogManager = new AlertDialogManager(UploadEBReceiptActivity.this);
-        sessionManager = new SessionManager(UploadEBReceiptActivity.this);
+        alertDialogManager = new AlertDialogManager(UploadEBPaymentDetailsActivity.this);
+        sessionManager = new SessionManager(UploadEBPaymentDetailsActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UploadEBReceiptActivity.this, userId, ticketName);
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(UploadEBPaymentDetailsActivity.this, userId, ticketName);
 
         mUploadEbReceiptEditTextTicketNumber.setText(ticket_no);
         mUploadEbReceiptEditTextSiteId.setText(site_id);
@@ -143,7 +141,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         mUploadEbReceiptTextViewPaymentTypeVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(UploadEBReceiptActivity.this,
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(UploadEBPaymentDetailsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_payment_type))),
                         "Type of Payment",
                         "close", "#000000");
@@ -163,9 +161,9 @@ public class UploadEBReceiptActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (imageFileNameUri != null) {
-                    GlobalMethods.showImageDialog(UploadEBReceiptActivity.this, imageFileNameUri);
+                    GlobalMethods.showImageDialog(UploadEBPaymentDetailsActivity.this, imageFileNameUri);
                 } else {
-                    Toast.makeText(UploadEBReceiptActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UploadEBPaymentDetailsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -350,7 +348,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                new DatePickerDialog(UploadEBReceiptActivity.this, dateBillfrom, myCalendar1
+                new DatePickerDialog(UploadEBPaymentDetailsActivity.this, dateBillfrom, myCalendar1
                         .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
                         myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -369,7 +367,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
             imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_site.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-            imageFileNameUri = FileProvider.getUriForFile(UploadEBReceiptActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            imageFileNameUri = FileProvider.getUriForFile(UploadEBPaymentDetailsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileNameUri);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);

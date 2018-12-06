@@ -128,8 +128,8 @@ public class PowerManagementSystemData {
         this.serialNumber = "";
         this.workingCondition = "";
         this.natureofProblem = "";
-        this.qrCodeImageFileName="";
-        this.isSubmited=0;
+        this.qrCodeImageFileName = "";
+        this.isSubmited = 0;
     }
 
     public String getQrCodeImageFileName() {
@@ -140,7 +140,7 @@ public class PowerManagementSystemData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
-    public PowerManagementSystemData(String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem,String qrCodeImageFileName) {
+    public PowerManagementSystemData(String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem, String qrCodeImageFileName) {
         this.powerManagementSystemQR = powerManagementSystemQR;
         this.assetOwner = assetOwner;
         this.powerManagementSystemType = powerManagementSystemType;
@@ -150,7 +150,13 @@ public class PowerManagementSystemData {
         this.serialNumber = serialNumber;
         this.workingCondition = workingCondition;
         this.natureofProblem = natureofProblem;
-        this.qrCodeImageFileName=qrCodeImageFileName;
+        this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;//007
+
+        if (!this.powerManagementSystemQR.isEmpty() && !this.assetOwner.isEmpty() && !this.powerManagementSystemType.isEmpty() && !this.powerManagementSystemMake.isEmpty() && !this.serialNumber.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 }

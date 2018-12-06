@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Type of BTS" />
+                    android:text="Type of BTS*" />
 
                 <TextView
                     android:id="@+id/activeEquipmentDetails_textView_TypeofBTS_val"
@@ -55,7 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Manufacturer/ Make" />
+                    android:text="Manufacturer/ Make*" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_Make"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="DC Load of BTS equipment(Amp)" />
+                    android:text="DC Load of BTS equipment(Amp)*" />
 
                 <EditText
                     android:id="@+id/activeEquipmentDetails_editText_DCLoadofBTSequipment"

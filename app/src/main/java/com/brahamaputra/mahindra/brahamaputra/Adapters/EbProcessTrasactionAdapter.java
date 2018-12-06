@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.Activities.ElectricBillProcessList;
+import com.brahamaputra.mahindra.brahamaputra.Activities.UploadEBPaymentDetailsActivity;
 import com.brahamaputra.mahindra.brahamaputra.Activities.UploadEBReceiptActivity;
 import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentRequestList;
@@ -33,6 +34,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
     String site_id;
     String site_name;
     public static final int RESULT_EB_REC_SUBMIT = 259;
+
     // View lookup cache
     private static class ViewHolder {
 
@@ -46,6 +48,9 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
         TextView textView_status;
         ImageView imageView_status;
         LinearLayout linearLayout_item;
+
+        TextView textView_details;
+        ImageView imageView_details;
 
 
     }
@@ -98,8 +103,10 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
             viewHolder.textView_BillGrossAmt = (TextView) convertView.findViewById(R.id.textView_BillGrossAmt);
             viewHolder.textView_status = (TextView) convertView.findViewById(R.id.textView_status);
             viewHolder.imageView_status = (ImageView) convertView.findViewById(R.id.imageView_status);
-            viewHolder.linearLayout_item =(LinearLayout) convertView.findViewById(R.id.linearLayout_item);
+            viewHolder.linearLayout_item = (LinearLayout) convertView.findViewById(R.id.linearLayout_item);
 
+            viewHolder.textView_details = (TextView) convertView.findViewById(R.id.textView_details);
+            viewHolder.imageView_details = (ImageView) convertView.findViewById(R.id.imageView_details);
 
             result = convertView;
 
@@ -123,12 +130,23 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
             viewHolder.textView_status.setText("Approved");
             viewHolder.textView_status.setTextColor(Color.BLACK);
             viewHolder.imageView_status.setVisibility(View.VISIBLE);
-            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext,R.color.limegreen));
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+
+            viewHolder.textView_details.setText("Details");
+            viewHolder.textView_details.setTextColor(Color.BLACK);
+            viewHolder.textView_details.setVisibility(View.VISIBLE);
+            viewHolder.imageView_details.setVisibility(View.VISIBLE);
+
         } else if (dataModel.getStatusId().equals("0")) {
             viewHolder.textView_status.setText("Waiting for Approve");
             viewHolder.textView_status.setTextColor(Color.RED);
             viewHolder.imageView_status.setVisibility(View.GONE);
-            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
+
+            viewHolder.textView_details.setText("");
+            viewHolder.textView_status.setTextColor(Color.BLACK);
+            viewHolder.textView_details.setVisibility(View.GONE);
+            viewHolder.imageView_details.setVisibility(View.GONE);
         }
         getStatus = dataModel.getStatusId();
         request_id = dataModel.getId();
@@ -136,6 +154,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
         site_id = dataModel.getSiteId();
         site_name = dataModel.getSiteName();
         viewHolder.imageView_status.setTag(position);
+        viewHolder.imageView_details.setTag(position);
 
 
         viewHolder.imageView_status.setOnClickListener(new View.OnClickListener() {
@@ -150,13 +169,32 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                     intent.putExtra("ticket_no", lst.getRequestTicketeNo());
                     intent.putExtra("site_id", lst.getSiteId());
                     intent.putExtra("site_name", lst.getSiteName());
-                   // c.startActivity(intent);
-                    ((ElectricBillProcessList) mContext).startActivityForResult(intent,RESULT_EB_REC_SUBMIT);
+                    // c.startActivity(intent);
+                    ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                     //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                 }
             }
         });
 
+
+        viewHolder.imageView_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (Integer) v.getTag();
+                EbPaymentRequestList lst = getItem(position);
+                Context c = getContext();
+                if (lst.getStatusId().equals("1")) {
+                    Intent intent = new Intent(getContext(), UploadEBPaymentDetailsActivity.class);
+                    intent.putExtra("request_id", lst.getId());
+                    intent.putExtra("ticket_no", lst.getRequestTicketeNo());
+                    intent.putExtra("site_id", lst.getSiteId());
+                    intent.putExtra("site_name", lst.getSiteName());
+                    // c.startActivity(intent);
+                    ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                    //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                }
+            }
+        });
         // Return the completed view to render on screen
         return convertView;
     }

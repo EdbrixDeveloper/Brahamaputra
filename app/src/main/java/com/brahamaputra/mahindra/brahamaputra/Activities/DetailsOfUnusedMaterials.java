@@ -73,6 +73,29 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
     private LinearLayout linearLayout_assetMake;
     private LinearLayout linearLayout_assetStatus;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details_of_unused_materials);
+        this.setTitle("Details Of Unused Materials");
+
+        sessionManager = new SessionManager(DetailsOfUnusedMaterials.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(DetailsOfUnusedMaterials.this, userId, ticketName);
+
+        assignViews();
+        initCombo();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+
+
+        detailsOfUnusedMaterialsData = new ArrayList<>();
+        currentPos = 0;
+        setInputDetails(currentPos);
+    }
+
     private void assignViews() {
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSite = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite);
         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal = (TextView) findViewById(R.id.detailsOfUnusedMaterials_textView_NumberofUnusedAssetinSite_val);
@@ -92,6 +115,8 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
         linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
         linearLayout_assetMake = (LinearLayout) findViewById(R.id.linearLayout_assetMake);
         linearLayout_assetStatus = (LinearLayout) findViewById(R.id.linearLayout_assetStatus);
+
+        linearLayout_container.setVisibility(View.GONE);
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -162,10 +187,10 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                         str_typeOfAsset = item.get(position);
                         mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.setText(str_typeOfAsset);
 
-                        if (str_typeOfAsset.equals("General")) {
+                        if (str_typeOfAsset.equals("General Item")) {
                             linearLayout_assetStatus.setVisibility(View.GONE);
                             linearLayout_assetMake.setVisibility(View.GONE);
-                        } else {
+                        }else{
                             linearLayout_assetStatus.setVisibility(View.VISIBLE);
                             linearLayout_assetMake.setVisibility(View.VISIBLE);
                         }
@@ -508,7 +533,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
             showToast("Select Asset Make ");
             return false;
         } else*/
-        if (typeOfAsset.equals("General")) {
+        if (typeOfAsset.equals("General Item")) {
             return true;
         } else if ((assetStatus.isEmpty() || assetStatus == null) && (!assetDescription.isEmpty() && assetDescription != null)) {
             showToast("Select Asset Status");
@@ -520,29 +545,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
             return true;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_of_unused_materials);
-        this.setTitle("Details Of Unused Materials");
 
-        sessionManager = new SessionManager(DetailsOfUnusedMaterials.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(DetailsOfUnusedMaterials.this, userId, ticketName);
-
-        assignViews();
-        initCombo();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        hotoTransactionData = new HotoTransactionData();
-
-
-        detailsOfUnusedMaterialsData = new ArrayList<>();
-        currentPos = 0;
-        setInputDetails(currentPos);
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -619,6 +619,16 @@
         <item>Not Available</item>
     </string-array>
 
+    <string-array name="array_generalAndSafetyMeasure_SiteAccessStatus">
+        <item>24 x 7 Access available</item>
+        <item>Night Access Issue</item>
+        <item>Day Access issue</item>
+        <item>Intermittent Access issue</item>
+        <item>Access restricted during lunch hour</item>
+        <item>24 x 7 Access issue</item>
+        <item>Prior approval required for access</item>
+    </string-array>
+
 
     <!--ACDB_DCDB activity   Array -->
     <string-array name="array_acdb_dcdb_NumberofACDB">
@@ -685,7 +695,7 @@
         <item>Shelter</item>
         <!--<item>Solar Panel</item>-->
         <item>Stabilizer</item>
-        <item>General</item>
+        <item>General Item</item>
     </string-array>
 
     <!--End 16 Arrary List For Type Of Asset bind In Asset Make OnChange of type Of Asset List-->
@@ -1306,9 +1316,10 @@
     </string-array>
 
     <string-array name="array_payment_type">
+        <item>Cash</item>
         <item>Cheque</item>
         <item>DD</item>
-        <item>Receipt</item>
+        <item>NEFT</item>
     </string-array>
 
     <string-array name="array_powerPlantDetails_moduleMake">
