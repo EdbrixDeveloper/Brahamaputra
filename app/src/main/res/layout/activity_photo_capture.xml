@@ -23,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1"
-                android:background="@color/lightgrey">
+                android:background="@color/lightgrey"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/FontStyle"
@@ -44,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
-                android:background="#000000" />
+                android:background="#000000"
+                android:visibility="gone"/>
 
 
             <LinearLayout

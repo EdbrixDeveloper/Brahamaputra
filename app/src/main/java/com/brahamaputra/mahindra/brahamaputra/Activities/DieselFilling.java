@@ -519,8 +519,6 @@ public class DieselFilling extends BaseActivity {
                             }).show();
                         }
                     }
-
-
                     //submitDetails();
                     return true;
                 }
@@ -574,7 +572,6 @@ public class DieselFilling extends BaseActivity {
 
             }
         }).show();
-
     }
 
     private void submitDetails() {
@@ -794,11 +791,11 @@ public class DieselFilling extends BaseActivity {
                                                     if(userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null){
                                                         siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
                                                         siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
-                                                        showToast(""+siteLatitude+","+siteLongitude);
+                                                        //showToast(""+siteLatitude+","+siteLongitude);
                                                     }else {
                                                         siteLatitude = 0;
                                                         siteLongitude = 0;
-                                                        showToast(""+siteLatitude+","+siteLongitude);
+                                                        //showToast(""+siteLatitude+","+siteLongitude);
                                                     }
 
 

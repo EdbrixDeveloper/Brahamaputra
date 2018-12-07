@@ -189,6 +189,9 @@ public class ElectricBillProcess extends BaseActivity {
     private List<String> ElectricConnectionTypeList = null;
     private List<String> ConnectionTariffList = null;
 
+    public GPSTracker gpsTracker;
+    private ArrayList<String> siteArray;
+
 
     final DatePickerDialog.OnDateSetListener dateBillfrom = new DatePickerDialog.OnDateSetListener() {
 
@@ -247,6 +250,9 @@ public class ElectricBillProcess extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electric_bill_process);
         this.setTitle("Electric Bill Process");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        gpsTracker = new GPSTracker(ElectricBillProcess.this);
+
         decimalConversion = new DecimalConversion();
         sessionManager = new SessionManager(ElectricBillProcess.this);
         alertDialogManager = new AlertDialogManager(ElectricBillProcess.this);
@@ -257,7 +263,7 @@ public class ElectricBillProcess extends BaseActivity {
         initCombo();
         set_listener();
         prepareUserPersonalData();//arj
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         // setInputDetails();
@@ -313,6 +319,7 @@ public class ElectricBillProcess extends BaseActivity {
                 }
             }
         });
+
 
     }
 
@@ -436,7 +443,32 @@ public class ElectricBillProcess extends BaseActivity {
             public void onClick(View v) {
                 //prepareSite();
                 if (!mEbProcessTextViewSsaVal.getText().toString().trim().isEmpty()) {
-                    ////prepareSite();arj
+                    //prepareSite();
+
+                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
+                            siteArray,
+                            "Select Site",
+                            "Close", "#000000");
+                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                        @Override
+                        public void onClick(ArrayList<String> item, int position) {
+
+                            str_siteName = item.get(position);
+                            mEbProcessTextViewSiteVal.setText(str_siteName);
+                            siteID = Integer.valueOf(site.getSiteList().get(position).getId());
+                            mEbProcessTextViewSiteIDVal.setText(site.getSiteList().get(position).getSiteId());
+                            String siteAddress = String.valueOf(site.getSiteList().get(position).getSiteAddress());
+                            if (!siteAddress.isEmpty()) {
+                                mEbProcessTextViewSiteDetailsVal.setText(String.valueOf(site.getSiteList().get(position).getSiteAddress()));
+                            }
+                            mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(site.getSiteList().get(position).getEbOfficeName()));
+                            prepareEbSiteConnectedData();
+                        }
+                    });
+
+
                 } else {
                     showToast("Please Select SSA");
                 }
@@ -716,7 +748,23 @@ public class ElectricBillProcess extends BaseActivity {
             case R.id.menuDone:
                 DecimalFormatConversion();
                 if (checkValiadtion()) {
-                    showSettingsAlert();
+                    //showSettingsAlert();
+                    if (gpsTracker.canGetLocation()) {
+                        if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                            showSettingsAlert();
+                        } else {
+                            //showToast("Could not detecting location. Please try again later.");
+                            alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                @Override
+                                public void onPositiveClick() {
+                                    if (gpsTracker.canGetLocation()) {
+                                        //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                                        Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                    }
+                                }
+                            }).show();
+                        }
+                    }
                 }
                 return true;
 
@@ -873,6 +921,7 @@ public class ElectricBillProcess extends BaseActivity {
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
+
                 submitDetails();
 
             }
@@ -955,12 +1004,9 @@ public class ElectricBillProcess extends BaseActivity {
             Application.getInstance().addToRequestQueue(eBlSubmitResposeDataGsonRequest, "eBlSubmitResposeDataGsonRequest");
 
 
-        } catch (Exception e)
-
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -970,7 +1016,6 @@ public class ElectricBillProcess extends BaseActivity {
             JSONObject jo = new JSONObject();
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
-
 
             GsonRequest<Customer> getCustomer = new GsonRequest<>(Request.Method.POST, Constants.GetCustomer, jo.toString(), Customer.class,
                     new Response.Listener<Customer>() {
@@ -1332,13 +1377,12 @@ public class ElectricBillProcess extends BaseActivity {
                                 site = response;
 
                                 if (site.getSiteList().size() > 0) {
-
-                                    final ArrayList<String> siteArray = new ArrayList<String>();
+                                    siteArray = new ArrayList<String>();
                                     for (SiteList siteList : site.getSiteList()) {
                                         siteArray.add(siteList.getSiteName());
                                     }
 
-                                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
+                                    /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
                                             siteArray,
                                             "Select Site",
                                             "Close", "#000000");
@@ -1360,7 +1404,7 @@ public class ElectricBillProcess extends BaseActivity {
                                             prepareEbSiteConnectedData();
                                         }
                                     });
-
+*/
 
                                 } else {
                                     mEbProcessTextViewSiteIDVal.setText("No Site Found");
@@ -1417,7 +1461,6 @@ public class ElectricBillProcess extends BaseActivity {
                                 showToast("No Data Found Of Selected Site");
 
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -1463,8 +1506,6 @@ public class ElectricBillProcess extends BaseActivity {
                 mEbProcessButtonEbBillScanCopyiew.setVisibility(View.GONE);
             }
         }
-
-
     }
 
     private void openCamera() {
@@ -1525,17 +1566,18 @@ public class ElectricBillProcess extends BaseActivity {
                                 ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());
 
 
-                                str_siteName = response.getUserDetails().getUserAdditionalDetails().getSiteName();
-                                mEbProcessTextViewSiteVal.setText(str_siteName);
-                                siteID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSiteId());
-                                mEbProcessTextViewSiteIDVal.setText(response.getUserDetails().getUserAdditionalDetails().getSiteId());
-                                String siteAddress = String.valueOf(response.getUserDetails().getUserAdditionalDetails().getSiteAddress());
-                                if (!siteAddress.isEmpty()) {
-                                    mEbProcessTextViewSiteDetailsVal.setText(siteAddress);
-                                }
+                                //str_siteName = response.getUserDetails().getUserAdditionalDetails().getSiteName();
+                                //mEbProcessTextViewSiteVal.setText(str_siteName);
+                                //siteID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSiteId());
+                                //mEbProcessTextViewSiteIDVal.setText(response.getUserDetails().getUserAdditionalDetails().getSiteId());
+                                //String siteAddress = String.valueOf(response.getUserDetails().getUserAdditionalDetails().getSiteAddress());
+
+                                //if (!siteAddress.isEmpty()) {
+                                //    mEbProcessTextViewSiteDetailsVal.setText(siteAddress);
+                                //}
                                 mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(response.getUserDetails().getUserAdditionalDetails().getEbOfficeName()));
                                 prepareEbSiteConnectedData();
-                                //prepareSite();
+                                prepareSite();
                                 hideBusyProgress();
                             }
 
@@ -1560,6 +1602,4 @@ public class ElectricBillProcess extends BaseActivity {
         }
 
     }
-
-
 }

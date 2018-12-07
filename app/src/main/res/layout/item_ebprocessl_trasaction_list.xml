@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/app_normal_margin"
                 android:layout_weight="0.5"
-                android:gravity="right"
+                android:textAlignment="textEnd"
                 android:text=""
                 android:textStyle="bold" />
 

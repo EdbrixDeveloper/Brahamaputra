@@ -31,7 +31,7 @@
                     android:text="Ticket Number" />
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_ticketNumber"
+                    android:id="@+id/uploadEbPayment_textView_ticketNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -56,7 +56,7 @@
                     android:text="Site Id" />
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_siteId"
+                    android:id="@+id/uploadEbPayment_textView_siteId"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -80,7 +80,7 @@
                     android:text="Site Name" />
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_siteName"
+                    android:id="@+id/uploadEbPayment_textView_siteName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -104,7 +104,7 @@
                     android:text="Mode of Payment" /><!--Payment Method-->
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_paymentType_val"
+                    android:id="@+id/uploadEbPayment_textView_paymentType_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -114,16 +114,138 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DD/Cheque Number" />
+
+                    <TextView
+                        android:id="@+id/uploadEbPayment_textView_DdChequeNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="0000"
+                        android:imeOptions="actionDone"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/uploadEbPayment_textView_ddPaymentApprovedDate"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DD/Cheque Date" />
+
+                    <EditText
+                        android:id="@+id/uploadEbPayment_editText_ddChequeDate"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MMM/YYYY"
+                        android:imeOptions="actionDone"
+                        android:inputType="none"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DD/Cheque Amount" />
+
+                    <TextView
+                        android:id="@+id/uploadEbPayment_textView_DdChequeAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="0000/-"
+                        android:imeOptions="actionDone"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:visibility="visible"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="DD/Cheque Photo" />
+
+                    <ImageView
+                        android:id="@+id/uploadEbPayment_button_ddChequePhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/uploadEbPayment_button_ddChequePhotoView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
             <!--NEFT Section Start-->
             <!--<LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_neftPaymentReceiptNumber"
+                android:id="@+id/uploadEbPayment_linearLayout_neftPaymentReceiptNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_neftPaymentReceiptNumber"
+                    android:id="@+id/uploadEbPayment_textView_neftPaymentReceiptNumber"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -131,7 +253,7 @@
                     android:text="Payment Receipt Number" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_neftPaymentReceiptNumber"
+                    android:id="@+id/uploadEbPayment_editText_neftPaymentReceiptNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -144,14 +266,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_neftPaymentDate"
+                android:id="@+id/uploadEbPayment_linearLayout_neftPaymentDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_neftPaymentDate"
+                    android:id="@+id/uploadEbPayment_textView_neftPaymentDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -159,7 +281,7 @@
                     android:text="Payment Date" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_neftPaymentDate"
+                    android:id="@+id/uploadEbPayment_editText_neftPaymentDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,14 +297,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_neftAmountPaid"
+                android:id="@+id/uploadEbPayment_linearLayout_neftAmountPaid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_neftAmountPaid"
+                    android:id="@+id/uploadEbPayment_textView_neftAmountPaid"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -190,7 +312,7 @@
                     android:text="Amount Paid" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_neftAmountPaid"
+                    android:id="@+id/uploadEbPayment_editText_neftAmountPaid"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -202,14 +324,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_neftTransactionDetails"
+                android:id="@+id/uploadEbPayment_linearLayout_neftTransactionDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_neftTransactionDetails"
+                    android:id="@+id/uploadEbPayment_textView_neftTransactionDetails"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -217,7 +339,7 @@
                     android:text="Transaction Details" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_neftTransactionDetails"
+                    android:id="@+id/uploadEbPayment_editText_neftTransactionDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -233,14 +355,14 @@
 
             <!--DD Section Start-->
             <!--<LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_ddBankDetails"
+                android:id="@+id/uploadEbPayment_linearLayout_ddBankDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_ddBankDetails"
+                    android:id="@+id/uploadEbPayment_textView_ddBankDetails"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -248,7 +370,7 @@
                     android:text="Bank Details" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_ddBankDetails"
+                    android:id="@+id/uploadEbPayment_editText_ddBankDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -260,14 +382,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_ddPaymentApprovedDate"
+                android:id="@+id/uploadEbPayment_linearLayout_ddPaymentApprovedDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_ddPaymentApprovedDate"
+                    android:id="@+id/uploadEbPayment_textView_ddPaymentApprovedDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -275,7 +397,7 @@
                     android:text="Payment Approved Date" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_ddPaymentApprovedDate"
+                    android:id="@+id/uploadEbPayment_editText_ddPaymentApprovedDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -291,14 +413,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_ddPaymentDate"
+                android:id="@+id/uploadEbPayment_linearLayout_ddPaymentDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_ddPaymentDate"
+                    android:id="@+id/uploadEbPayment_textView_ddPaymentDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -306,7 +428,7 @@
                     android:text="Payment Date" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_ddPaymentDate"
+                    android:id="@+id/uploadEbPayment_editText_ddPaymentDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -322,14 +444,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_ddAmountPaid"
+                android:id="@+id/uploadEbPayment_linearLayout_ddAmountPaid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_ddAmountPaid"
+                    android:id="@+id/uploadEbPayment_textView_ddAmountPaid"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -337,7 +459,7 @@
                     android:text="Amount Paid" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_ddAmountPaid"
+                    android:id="@+id/uploadEbPayment_editText_ddAmountPaid"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -349,14 +471,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_ddTransactionDetails"
+                android:id="@+id/uploadEbPayment_linearLayout_ddTransactionDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_ddTransactionDetails"
+                    android:id="@+id/uploadEbPayment_textView_ddTransactionDetails"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -364,7 +486,7 @@
                     android:text="Transaction Details" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_ddTransactionDetails"
+                    android:id="@+id/uploadEbPayment_editText_ddTransactionDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -380,14 +502,14 @@
 
             <!--Cheque/DD Section Start-->
             <!--<LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_chequeChequeNumber"
+                android:id="@+id/uploadEbPayment_linearLayout_chequeChequeNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_chequeChequeNumber"
+                    android:id="@+id/uploadEbPayment_textView_chequeChequeNumber"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -395,7 +517,7 @@
                     android:text="Cheque Number" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_chequeChequeNumber"
+                    android:id="@+id/uploadEbPayment_editText_chequeChequeNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -407,14 +529,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_chequeChequeDate"
+                android:id="@+id/uploadEbPayment_linearLayout_chequeChequeDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_chequeChequeDate"
+                    android:id="@+id/uploadEbPayment_textView_chequeChequeDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -422,7 +544,7 @@
                     android:text="Cheque Date" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_chequeChequeDate"
+                    android:id="@+id/uploadEbPayment_editText_chequeChequeDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -438,14 +560,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_chequeChequeAmount"
+                android:id="@+id/uploadEbPayment_linearLayout_chequeChequeAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_chequeChequeAmount"
+                    android:id="@+id/uploadEbPayment_textView_chequeChequeAmount"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -453,7 +575,7 @@
                     android:text="Cheque Amount" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_chequeChequeAmount"
+                    android:id="@+id/uploadEbPayment_editText_chequeChequeAmount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -465,14 +587,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_ddTransactionDetails"
+                android:id="@+id/uploadEbPayment_linearLayout_ddTransactionDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_ddTransactionDetails"
+                    android:id="@+id/uploadEbPayment_textView_ddTransactionDetails"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -480,7 +602,7 @@
                     android:text="Transaction Details" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_ddTransactionDetails"
+                    android:id="@+id/uploadEbPayment_editText_ddTransactionDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -495,7 +617,7 @@
 
             <!--Receipt Section Start-->
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_paymentReceiptNumber"
+                android:id="@+id/uploadEbPayment_linearLayout_paymentReceiptNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -503,7 +625,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_paymentReceiptNumber"
+                    android:id="@+id/uploadEbPayment_textView_paymentReceiptNumber"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -511,7 +633,7 @@
                     android:text="Payment Receipt Number" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_paymentReceiptNumber"
+                    android:id="@+id/uploadEbPayment_editText_paymentReceiptNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -524,7 +646,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_receiptPaymentDate"
+                android:id="@+id/uploadEbPayment_linearLayout_receiptPaymentDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -532,7 +654,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_receiptPaymentDate"
+                    android:id="@+id/uploadEbPayment_textView_receiptPaymentDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -540,7 +662,7 @@
                     android:text="Payment Date" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_receiptPaymentDate"
+                    android:id="@+id/uploadEbPayment_editText_receiptPaymentDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -556,7 +678,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_paymentAmount"
+                android:id="@+id/uploadEbPayment_linearLayout_paymentAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -564,7 +686,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/uploadEbReceipt_textView_paymentAmount"
+                    android:id="@+id/uploadEbPayment_textView_paymentAmount"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -572,7 +694,7 @@
                     android:text="Payment Amount" />
 
                 <EditText
-                    android:id="@+id/uploadEbReceipt_editText_paymentAmount"
+                    android:id="@+id/uploadEbPayment_editText_paymentAmount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -586,7 +708,7 @@
 
 
             <LinearLayout
-                android:id="@+id/uploadEbReceipt_linearLayout_uploadPhoto"
+                android:id="@+id/uploadEbPayment_linearLayout_uploadPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -603,7 +725,7 @@
                     />
 
                 <ImageView
-                    android:id="@+id/uploadEbReceipt_button_uploadPhoto"
+                    android:id="@+id/uploadEbPayment_button_uploadPhoto"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="0.3"
@@ -612,7 +734,7 @@
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
 
                 <ImageView
-                    android:id="@+id/uploadEbReceipt_button_uploadPhotoView"
+                    android:id="@+id/uploadEbPayment_button_uploadPhotoView"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="0.3"
@@ -621,9 +743,7 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/view_image"
                     android:visibility="gone" />
-
             </LinearLayout>
-
 
         </LinearLayout>
 

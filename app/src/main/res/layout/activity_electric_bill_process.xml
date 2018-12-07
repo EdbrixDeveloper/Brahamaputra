@@ -172,7 +172,7 @@
                     android:layout_weight="0.4"
                     android:text="Site" />
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/ebProcess_textView_siteVal"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -180,16 +180,16 @@
                     android:imeOptions="actionNext"
                     android:paddingTop="5dp"
                     android:textAlignment="viewStart"
-                    android:textSize="16sp" />
+                    android:textSize="16sp" />-->
 
-                <!--<TextView
+                <TextView
                     android:id="@+id/ebProcess_textView_siteVal"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select "
-                    android:textAlignment="viewStart"></TextView>-->
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 

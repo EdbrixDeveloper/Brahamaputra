@@ -434,7 +434,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                         try {
                             //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri);
                             Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri);
-                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri), ORIENTATION_ROTATE);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri), 180);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
@@ -463,7 +463,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                         try {
                             //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri);
                             Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri);
-                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri), ORIENTATION_ROTATE);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
@@ -491,7 +491,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                         try {
                             //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri);
                             Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri);
-                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri), ORIENTATION_ROTATE);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
@@ -519,7 +519,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                         try {
                             //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri);
                             Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri);
-                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri), ORIENTATION_ROTATE);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
@@ -547,7 +547,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                         try {
                             //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri);
                             Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri);
-                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri), ORIENTATION_ROTATE);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
@@ -575,7 +575,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                         try {
                             //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri);
                             Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri);
-                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri), ORIENTATION_ROTATE);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
@@ -603,7 +603,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                         try {
                             //Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri);
                             Bitmap rotateImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri);
-                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri), ORIENTATION_ROTATE);
+                            Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri), 180);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);

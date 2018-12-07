@@ -55,31 +55,31 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
 
     private static final String TAG = UploadEBPaymentDetailsActivity.class.getSimpleName();
 
-    private TextView mUploadEbReceiptEditTextTicketNumber;
-    private TextView mUploadEbReceiptEditTextSiteId;
-    private TextView mUploadEbReceiptEditTextSiteName;
-    private TextView mUploadEbReceiptTextViewPaymentTypeVal;
-    private ImageView mUploadEbReceiptButtonUploadPhoto;
-    private ImageView mUploadEbReceiptButtonUploadPhotoView;
+    private TextView mUploadEbPaymentEditTextTicketNumber;
+    private TextView mUploadEbPaymentEditTextSiteId;
+    private TextView mUploadEbPaymentEditTextSiteName;
+    private TextView mUploadEbPaymentTextViewPaymentTypeVal;
+    private ImageView mUploadEbPaymentButtonUploadPhoto;
+    private ImageView mUploadEbPaymentButtonUploadPhotoView;
     private EBBillUploadReceipt ebBillUploadReceipt;
 
-    private TextView mUploadEbReceiptTextViewPaymentReceiptNumber;
-    private EditText mUploadEbReceiptEditTextPaymentReceiptNumber;
-    private TextView mUploadEbReceiptTextViewReceiptPaymentDate;
-    private EditText mUploadEbReceiptEditTextReceiptPaymentDate;
-    private TextView mUploadEbReceiptTextViewPaymentAmount;
-    private EditText mUploadEbReceiptEditTextPaymentAmount;
+    private TextView mUploadEbPaymentTextViewPaymentReceiptNumber;
+    private EditText mUploadEbPaymentEditTextPaymentReceiptNumber;
+    private TextView mUploadEbPaymentTextViewReceiptPaymentDate;
+    private EditText mUploadEbPaymentEditTextReceiptPaymentDate;
+    private TextView mUploadEbPaymentTextViewPaymentAmount;
+    private EditText mUploadEbPaymentEditTextPaymentAmount;
 
 
-    private LinearLayout mUploadEbReceiptLinearLayout_paymentReceiptNumber;
-    private LinearLayout mUploadEbReceiptLinearLayout_receiptPaymentDate;
-    private LinearLayout mUploadEbReceiptLinearLayout_paymentAmount;
-    private LinearLayout mUploadEbReceiptLinearLayout_uploadPhoto;
+    private LinearLayout mUploadEbPaymentLinearLayout_paymentReceiptNumber;
+    private LinearLayout mUploadEbPaymentLinearLayout_receiptPaymentDate;
+    private LinearLayout mUploadEbPaymentLinearLayout_paymentAmount;
+    private LinearLayout mUploadEbPaymentLinearLayout_uploadPhoto;
 
-    /*uploadEbReceipt_linearLayout_paymentReceiptNumber;
-    uploadEbReceipt_linearLayout_receiptPaymentDate;
-    uploadEbReceipt_linearLayout_paymentAmount;
-    uploadEbReceipt_linearLayout_uploadPhoto;*/
+    /*uploadEbPayment_linearLayout_paymentReceiptNumber;
+    uploadEbPayment_linearLayout_receiptPaymentDate;
+    uploadEbPayment_linearLayout_paymentAmount;
+    uploadEbPayment_linearLayout_uploadPhoto;*/
 
 
     private OfflineStorageWrapper offlineStorageWrapper;
@@ -134,11 +134,11 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(UploadEBPaymentDetailsActivity.this, userId, ticketName);
 
-        mUploadEbReceiptEditTextTicketNumber.setText(ticket_no);
-        mUploadEbReceiptEditTextSiteId.setText(site_id);
-        mUploadEbReceiptEditTextSiteName.setText(site_name);
+        mUploadEbPaymentEditTextTicketNumber.setText(ticket_no);
+        mUploadEbPaymentEditTextSiteId.setText(site_id);
+        mUploadEbPaymentEditTextSiteName.setText(site_name);
 
-        mUploadEbReceiptTextViewPaymentTypeVal.setOnClickListener(new View.OnClickListener() {
+        mUploadEbPaymentTextViewPaymentTypeVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(UploadEBPaymentDetailsActivity.this,
@@ -151,13 +151,13 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
                         visibilityOfLayout();
-                        mUploadEbReceiptTextViewPaymentTypeVal.setText(item.get(position));
+                        mUploadEbPaymentTextViewPaymentTypeVal.setText(item.get(position));
                     }
                 });
             }
         });
 
-        mUploadEbReceiptButtonUploadPhotoView.setOnClickListener(new View.OnClickListener() {
+        mUploadEbPaymentButtonUploadPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (imageFileNameUri != null) {
@@ -197,11 +197,11 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
     }
 
     private boolean checkValidation() {
-        String payment_type = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();
+        String payment_type = mUploadEbPaymentTextViewPaymentTypeVal.getText().toString();
 
-        String ebPaymentReceiptNumber = mUploadEbReceiptEditTextPaymentReceiptNumber.getText().toString();
-        String ebPaymentDate = mUploadEbReceiptEditTextReceiptPaymentDate.getText().toString();
-        String ebPaymentAmount = mUploadEbReceiptEditTextPaymentAmount.getText().toString();
+        String ebPaymentReceiptNumber = mUploadEbPaymentEditTextPaymentReceiptNumber.getText().toString();
+        String ebPaymentDate = mUploadEbPaymentEditTextReceiptPaymentDate.getText().toString();
+        String ebPaymentAmount = mUploadEbPaymentEditTextPaymentAmount.getText().toString();
 
         if (request_id.isEmpty() || request_id == null) {
             showToast("Invalid Request ID ");
@@ -235,7 +235,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
 
     private void showSettingsAlert() {
 
-        //alertDialogManager = new AlertDialogManager(UploadEBReceiptActivity.this);
+        //alertDialogManager = new AlertDialogManager(uploadEbPaymentActivity.this);
         alertDialogManager.Dialog("Confirmation", "Do you want to Upload Receipt?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
@@ -256,11 +256,11 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
             showBusyProgress();
             String userId = sessionManager.getSessionUserId();
             String accessToken = sessionManager.getSessionDeviceToken();
-            String paymentMode = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();
+            String paymentMode = mUploadEbPaymentTextViewPaymentTypeVal.getText().toString();
 
-            String ebPaymentReceiptNumber = mUploadEbReceiptEditTextPaymentReceiptNumber.getText().toString();
-            String ebPaymentDate = mUploadEbReceiptEditTextReceiptPaymentDate.getText().toString();
-            String ebPaymentAmount = mUploadEbReceiptEditTextPaymentAmount.getText().toString();
+            String ebPaymentReceiptNumber = mUploadEbPaymentEditTextPaymentReceiptNumber.getText().toString();
+            String ebPaymentDate = mUploadEbPaymentEditTextReceiptPaymentDate.getText().toString();
+            String ebPaymentAmount = mUploadEbPaymentEditTextPaymentAmount.getText().toString();
 
 
             ebBillUploadReceipt = new EBBillUploadReceipt(userId, accessToken, request_id, paymentMode, ebPaymentReceiptNumber, ebPaymentDate, ebPaymentAmount, base64String);
@@ -312,39 +312,39 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
 
 
     private void assignViews() {
-        mUploadEbReceiptEditTextTicketNumber = (TextView) findViewById(R.id.uploadEbReceipt_textView_ticketNumber);
-        mUploadEbReceiptEditTextSiteId = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteId);
-        mUploadEbReceiptEditTextSiteName = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteName);
-        mUploadEbReceiptTextViewPaymentTypeVal = (TextView) findViewById(R.id.uploadEbReceipt_textView_paymentType_val);
-        mUploadEbReceiptButtonUploadPhoto = (ImageView) findViewById(R.id.uploadEbReceipt_button_uploadPhoto);
-        mUploadEbReceiptButtonUploadPhotoView = (ImageView) findViewById(R.id.uploadEbReceipt_button_uploadPhotoView);
+        mUploadEbPaymentEditTextTicketNumber = (TextView) findViewById(R.id.uploadEbPayment_textView_ticketNumber);
+        mUploadEbPaymentEditTextSiteId = (TextView) findViewById(R.id.uploadEbPayment_textView_siteId);
+        mUploadEbPaymentEditTextSiteName = (TextView) findViewById(R.id.uploadEbPayment_textView_siteName);
+        mUploadEbPaymentTextViewPaymentTypeVal = (TextView) findViewById(R.id.uploadEbPayment_textView_paymentType_val);
+        mUploadEbPaymentButtonUploadPhoto = (ImageView) findViewById(R.id.uploadEbPayment_button_uploadPhoto);
+        mUploadEbPaymentButtonUploadPhotoView = (ImageView) findViewById(R.id.uploadEbPayment_button_uploadPhotoView);
 
-        mUploadEbReceiptTextViewPaymentReceiptNumber = (TextView) findViewById(R.id.uploadEbReceipt_textView_paymentReceiptNumber);
-        mUploadEbReceiptEditTextPaymentReceiptNumber = (EditText) findViewById(R.id.uploadEbReceipt_editText_paymentReceiptNumber);
-        mUploadEbReceiptTextViewReceiptPaymentDate = (TextView) findViewById(R.id.uploadEbReceipt_textView_receiptPaymentDate);
-        mUploadEbReceiptEditTextReceiptPaymentDate = (EditText) findViewById(R.id.uploadEbReceipt_editText_receiptPaymentDate);
-        mUploadEbReceiptTextViewPaymentAmount = (TextView) findViewById(R.id.uploadEbReceipt_textView_paymentAmount);
-        mUploadEbReceiptEditTextPaymentAmount = (EditText) findViewById(R.id.uploadEbReceipt_editText_paymentAmount);
+        mUploadEbPaymentTextViewPaymentReceiptNumber = (TextView) findViewById(R.id.uploadEbPayment_textView_paymentReceiptNumber);
+        mUploadEbPaymentEditTextPaymentReceiptNumber = (EditText) findViewById(R.id.uploadEbPayment_editText_paymentReceiptNumber);
+        mUploadEbPaymentTextViewReceiptPaymentDate = (TextView) findViewById(R.id.uploadEbPayment_textView_receiptPaymentDate);
+        mUploadEbPaymentEditTextReceiptPaymentDate = (EditText) findViewById(R.id.uploadEbPayment_editText_receiptPaymentDate);
+        mUploadEbPaymentTextViewPaymentAmount = (TextView) findViewById(R.id.uploadEbPayment_textView_paymentAmount);
+        mUploadEbPaymentEditTextPaymentAmount = (EditText) findViewById(R.id.uploadEbPayment_editText_paymentAmount);
 
-        mUploadEbReceiptLinearLayout_paymentReceiptNumber = (LinearLayout) findViewById(R.id.uploadEbReceipt_linearLayout_paymentReceiptNumber);
-        mUploadEbReceiptLinearLayout_receiptPaymentDate = (LinearLayout) findViewById(R.id.uploadEbReceipt_linearLayout_receiptPaymentDate);
-        mUploadEbReceiptLinearLayout_paymentAmount = (LinearLayout) findViewById(R.id.uploadEbReceipt_linearLayout_paymentAmount);
-        mUploadEbReceiptLinearLayout_uploadPhoto = (LinearLayout) findViewById(R.id.uploadEbReceipt_linearLayout_uploadPhoto);
+        mUploadEbPaymentLinearLayout_paymentReceiptNumber = (LinearLayout) findViewById(R.id.uploadEbPayment_linearLayout_paymentReceiptNumber);
+        mUploadEbPaymentLinearLayout_receiptPaymentDate = (LinearLayout) findViewById(R.id.uploadEbPayment_linearLayout_receiptPaymentDate);
+        mUploadEbPaymentLinearLayout_paymentAmount = (LinearLayout) findViewById(R.id.uploadEbPayment_linearLayout_paymentAmount);
+        mUploadEbPaymentLinearLayout_uploadPhoto = (LinearLayout) findViewById(R.id.uploadEbPayment_linearLayout_uploadPhoto);
 
-        mUploadEbReceiptEditTextPaymentAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mUploadEbPaymentEditTextPaymentAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
     }
 
     private void updateLabelPaymentDate() {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mUploadEbReceiptEditTextReceiptPaymentDate.setText(sdf.format(myCalendar1.getTime()));
+        mUploadEbPaymentEditTextReceiptPaymentDate.setText(sdf.format(myCalendar1.getTime()));
 
 
     }
 
     private void setListners() {
-        mUploadEbReceiptEditTextReceiptPaymentDate.setOnClickListener(new View.OnClickListener() {
+        mUploadEbPaymentEditTextReceiptPaymentDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -353,7 +353,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                         myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        mUploadEbReceiptButtonUploadPhoto.setOnClickListener(new View.OnClickListener() {
+        mUploadEbPaymentButtonUploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePhoto();
@@ -377,17 +377,17 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
     }
 
     private void visibilityOfLayout() {
-        mUploadEbReceiptLinearLayout_paymentReceiptNumber.setVisibility(View.VISIBLE);
-        mUploadEbReceiptLinearLayout_receiptPaymentDate.setVisibility(View.VISIBLE);
-        mUploadEbReceiptLinearLayout_paymentAmount.setVisibility(View.VISIBLE);
-        mUploadEbReceiptLinearLayout_uploadPhoto.setVisibility(View.VISIBLE);
+        mUploadEbPaymentLinearLayout_paymentReceiptNumber.setVisibility(View.VISIBLE);
+        mUploadEbPaymentLinearLayout_receiptPaymentDate.setVisibility(View.VISIBLE);
+        mUploadEbPaymentLinearLayout_paymentAmount.setVisibility(View.VISIBLE);
+        mUploadEbPaymentLinearLayout_uploadPhoto.setVisibility(View.VISIBLE);
 
-        mUploadEbReceiptEditTextPaymentReceiptNumber.setText("");
-        mUploadEbReceiptEditTextReceiptPaymentDate.setText("");
-        mUploadEbReceiptEditTextPaymentAmount.setText("");
+        mUploadEbPaymentEditTextPaymentReceiptNumber.setText("");
+        mUploadEbPaymentEditTextReceiptPaymentDate.setText("");
+        mUploadEbPaymentEditTextPaymentAmount.setText("");
         imageFileName = "";
         imageFileNameUri = null;
-        mUploadEbReceiptButtonUploadPhotoView.setVisibility(View.GONE);
+        mUploadEbPaymentButtonUploadPhotoView.setVisibility(View.GONE);
 
     }
 
@@ -403,7 +403,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64String = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                            mUploadEbReceiptButtonUploadPhotoView.setVisibility(View.VISIBLE);
+                            mUploadEbPaymentButtonUploadPhotoView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -411,7 +411,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                 } else {
                     imageFileName = "";
                     imageFileNameUri = null;
-                    mUploadEbReceiptButtonUploadPhotoView.setVisibility(View.GONE);
+                    mUploadEbPaymentButtonUploadPhotoView.setVisibility(View.GONE);
                 }
                 break;
         }
