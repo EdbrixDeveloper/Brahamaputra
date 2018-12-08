@@ -204,6 +204,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                     intent.putExtra("ticket_no", lst.getRequestTicketeNo());
                     intent.putExtra("site_id", lst.getSiteId());
                     intent.putExtra("site_name", lst.getSiteName());
+                    intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
                     // c.startActivity(intent);
                     ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                     //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
@@ -224,6 +225,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                     intent.putExtra("ticket_no", lst.getRequestTicketeNo());
                     intent.putExtra("site_id", lst.getSiteId());
                     intent.putExtra("site_name", lst.getSiteName());
+                    intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
                     // c.startActivity(intent);
                     ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                     //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
