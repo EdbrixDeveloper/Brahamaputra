@@ -78,6 +78,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
     private EditText mUploadEbReceiptTextViewEbPaymentReceiptNumber;
     private EditText mUploadEbReceiptTextViewuploadEbPaymentDate;
     private EditText mUploadEbReceiptTextViewEbPaymentAmount;
+    private EditText mUploadEbReceiptTextViewEbPaymentRemark;
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
@@ -253,14 +254,16 @@ public class UploadEBReceiptActivity extends BaseActivity {
             showBusyProgress();
             String userId = sessionManager.getSessionUserId();
             String accessToken = sessionManager.getSessionDeviceToken();
-            String paymentMode = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();
+            //String paymentMode = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();
+            String ebPaymentRemark = mUploadEbReceiptTextViewEbPaymentRemark.getText().toString();
+
 
             String ebPaymentReceiptNumber = mUploadEbReceiptTextViewEbPaymentReceiptNumber.getText().toString();
             String ebPaymentDate = mUploadEbReceiptTextViewuploadEbPaymentDate.getText().toString();
             String ebPaymentAmount = mUploadEbReceiptTextViewEbPaymentAmount.getText().toString();
 
             //ebPaymentReceiptNumber, ebPaymentDate, ebPaymentAmount,
-            ebBillUploadReceipt = new EBBillUploadReceipt(userId, accessToken, request_id, paymentMode, ebPaymentReceiptNumber, ebPaymentDate, ebPaymentAmount, base64String);
+            ebBillUploadReceipt = new EBBillUploadReceipt(userId, accessToken, request_id, ebPaymentRemark, ebPaymentReceiptNumber, ebPaymentDate, ebPaymentAmount, base64String);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(ebBillUploadReceipt);
@@ -315,6 +318,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         mUploadEbReceiptTextViewEbPaymentReceiptNumber = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentReceiptNumber);
         mUploadEbReceiptTextViewuploadEbPaymentDate = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentDate);
         mUploadEbReceiptTextViewEbPaymentAmount = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentAmount);
+        mUploadEbReceiptTextViewEbPaymentRemark = (EditText) findViewById(R.id.uploadEbPayment_editText_DdChequeRemark);
 
         mUploadEbReceiptTextViewEbPaymentAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
     }
