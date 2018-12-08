@@ -173,7 +173,7 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingTextViewPresentEbReadingKwhPhoto = (TextView) findViewById(R.id.dieselFilling_textView_presentEbReadingKwhPhoto);
         mDieselFillingButtonPresentEbReadingKwhPhoto = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhoto);
         mDieselFillingButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhotoView);
-        dieselFilling_button_qrCode = (ImageView) findViewById(R.id.dieselFilling_button_qrCode);
+        dieselFilling_button_qrCode = (ImageView)findViewById(R.id.dieselFilling_button_qrCode);
       /*  mDieselFillingTextViewPresentFillingDate = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDate);
         mDieselFillingTextViewPresentFillingDateVal = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDateVal);*/
         mDieselFillingEditTextTankBalanceBeforeFilling.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
@@ -286,7 +286,7 @@ public class DieselFilling extends BaseActivity {
                         //openCamera();
                         onClicked(v);
                     }
-                } else {
+                }else{
                     //
                 }
             }
@@ -490,7 +490,8 @@ public class DieselFilling extends BaseActivity {
             case R.id.menuDone:
                 /*if (site_id > 0) {*/
                 DecimalFormatConversion();
-                if (checkValidationOnSubmitDiselTicket() == true) {
+                if (checkValidationOnSubmitDiselTicket() == true)
+                {
                     if (gpsTracker.canGetLocation()) {
                         //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                         //Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
@@ -500,7 +501,7 @@ public class DieselFilling extends BaseActivity {
                             if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.310686) {///// ( 0.310686 MILE == 500 Meter )
                                 //showToast("in Area \n"+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
                                 showSettingsAlert();
-                            } else {
+                            }else{
                                 //showToast("not in Area\n"+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
                             }
 
@@ -685,8 +686,8 @@ public class DieselFilling extends BaseActivity {
                     //dgIdQrCodeList.
                     if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
 
-                        for (int i = 0; i < dgIdQrCodeList.getPowerBackupsDGMRQRList().size(); i++) {
-                            if (base64StringQRCodeScan.equals(dgIdQrCodeList.getPowerBackupsDGMRQRList().get(i).getqRCodeScan().toString())) {
+                        for(int i=0;i<dgIdQrCodeList.getPowerBackupsDGMRQRList().size();i++){
+                            if(base64StringQRCodeScan.equals(dgIdQrCodeList.getPowerBackupsDGMRQRList().get(i).getqRCodeScan().toString())){
                                 str_siteName = base64StringQRCodeScan;
                                 mDieselFillingTextViewSelectDgIdQrCodeVal.setText(str_siteName);
                             }
@@ -786,11 +787,11 @@ public class DieselFilling extends BaseActivity {
                                                     mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
                                                     mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
 
-                                                    if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null) {
+                                                    if(userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null){
                                                         siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
                                                         siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
                                                         //showToast(""+siteLatitude+","+siteLongitude);
-                                                    } else {
+                                                    }else {
                                                         siteLatitude = 0;
                                                         siteLongitude = 0;
                                                         //showToast(""+siteLatitude+","+siteLongitude);

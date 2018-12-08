@@ -46,13 +46,11 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
         TextView textView_ModeOfPayment;
         TextView textView_BillGrossAmt;
         TextView textView_status;
-        ImageView imageView_status;
         LinearLayout linearLayout_item;
 
         TextView textView_details;
         ImageView imageView_details;
-
-
+        ImageView imageView_status;
     }
 
     public EbProcessTrasactionAdapter(ArrayList<EbPaymentRequestList> data, Context context) {
@@ -102,11 +100,11 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
             viewHolder.textView_ModeOfPayment = (TextView) convertView.findViewById(R.id.textView_ModeOfPayment);
             viewHolder.textView_BillGrossAmt = (TextView) convertView.findViewById(R.id.textView_BillGrossAmt);
             viewHolder.textView_status = (TextView) convertView.findViewById(R.id.textView_status);
-            viewHolder.imageView_status = (ImageView) convertView.findViewById(R.id.imageView_status);
             viewHolder.linearLayout_item = (LinearLayout) convertView.findViewById(R.id.linearLayout_item);
 
             viewHolder.textView_details = (TextView) convertView.findViewById(R.id.textView_details);
             viewHolder.imageView_details = (ImageView) convertView.findViewById(R.id.imageView_details);
+            viewHolder.imageView_status = (ImageView) convertView.findViewById(R.id.imageView_status);
 
             result = convertView;
 
@@ -126,28 +124,65 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
         viewHolder.textView_ModeOfPayment.setText("Mode Of Payment: " + dataModel.getModeOfPayment());
         viewHolder.textView_BillGrossAmt.setText("Gross Amt: " + dataModel.getGrossAmount());
 
-        if (dataModel.getStatusId().equals("1")) {
+        if (dataModel.getStatusId().equals("1")) { ///////// 1
             viewHolder.textView_status.setText("Approved");
             viewHolder.textView_status.setTextColor(Color.BLACK);
-            viewHolder.imageView_status.setVisibility(View.VISIBLE);
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+
+            viewHolder.textView_details.setText("Details");
+            viewHolder.textView_details.setTextColor(Color.BLACK);
+            viewHolder.textView_details.setVisibility(View.GONE);
+
+            viewHolder.imageView_details.setVisibility(View.GONE);
+            viewHolder.imageView_status.setVisibility(View.GONE);
+
+        }else if (dataModel.getStatusId().equals("2")) { ///////// 2
+            viewHolder.textView_status.setText("Approved");
+            viewHolder.textView_status.setTextColor(Color.BLACK);
             viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
 
             viewHolder.textView_details.setText("Details");
             viewHolder.textView_details.setTextColor(Color.BLACK);
             viewHolder.textView_details.setVisibility(View.VISIBLE);
-            viewHolder.imageView_details.setVisibility(View.VISIBLE);
 
+            viewHolder.imageView_details.setVisibility(View.VISIBLE);
+            viewHolder.imageView_status.setVisibility(View.GONE);
+
+        }else if (dataModel.getStatusId().equals("3")) { ///////// 3
+            viewHolder.textView_status.setText("Approved");
+            viewHolder.textView_status.setTextColor(Color.BLACK);
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+
+            viewHolder.textView_details.setText("Details");
+            viewHolder.textView_details.setTextColor(Color.BLACK);
+            viewHolder.textView_details.setVisibility(View.VISIBLE);
+
+            viewHolder.imageView_details.setVisibility(View.VISIBLE);
+            viewHolder.imageView_status.setVisibility(View.GONE);
+        }else if (dataModel.getStatusId().equals("4")) { ///////// 4
+            viewHolder.textView_status.setText("Approved");
+            viewHolder.textView_status.setTextColor(Color.BLACK);
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+
+            viewHolder.textView_details.setText("Details");
+            viewHolder.textView_details.setTextColor(Color.BLACK);
+            viewHolder.textView_details.setVisibility(View.VISIBLE);
+
+            viewHolder.imageView_details.setVisibility(View.VISIBLE);
+            viewHolder.imageView_status.setVisibility(View.VISIBLE);
         } else if (dataModel.getStatusId().equals("0")) {
             viewHolder.textView_status.setText("Waiting for Approve");
             viewHolder.textView_status.setTextColor(Color.RED);
-            viewHolder.imageView_status.setVisibility(View.GONE);
             viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
 
             viewHolder.textView_details.setText("");
             viewHolder.textView_status.setTextColor(Color.BLACK);
             viewHolder.textView_details.setVisibility(View.GONE);
+
             viewHolder.imageView_details.setVisibility(View.GONE);
+            viewHolder.imageView_status.setVisibility(View.GONE);
         }
+
         getStatus = dataModel.getStatusId();
         request_id = dataModel.getId();
         ticket_no = dataModel.getRequestTicketeNo();
@@ -163,7 +198,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 int position = (Integer) v.getTag();
                 EbPaymentRequestList lst = getItem(position);
                 Context c = getContext();
-                if (lst.getStatusId().equals("1")) {
+                //if (lst.getStatusId().equals("1")) {
                     Intent intent = new Intent(getContext(), UploadEBReceiptActivity.class);
                     intent.putExtra("request_id", lst.getId());
                     intent.putExtra("ticket_no", lst.getRequestTicketeNo());
@@ -172,7 +207,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                     // c.startActivity(intent);
                     ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                     //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
-                }
+               // }
             }
         });
 
@@ -183,7 +218,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 int position = (Integer) v.getTag();
                 EbPaymentRequestList lst = getItem(position);
                 Context c = getContext();
-                if (lst.getStatusId().equals("1")) {
+                //if (lst.getStatusId().equals("1")) {
                     Intent intent = new Intent(getContext(), UploadEBPaymentDetailsActivity.class);
                     intent.putExtra("request_id", lst.getId());
                     intent.putExtra("ticket_no", lst.getRequestTicketeNo());
@@ -192,7 +227,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                     // c.startActivity(intent);
                     ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                     //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
-                }
+               // }
             }
         });
         // Return the completed view to render on screen

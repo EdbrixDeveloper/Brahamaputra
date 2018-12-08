@@ -67,6 +67,13 @@ public class UploadEBReceiptActivity extends BaseActivity {
 
     private EBBillUploadReceipt ebBillUploadReceipt;
 
+    private TextView mUploadEbReceiptTextViewPaymentReceiptNumber;
+    private EditText mUploadEbReceiptEditTextPaymentReceiptNumber;
+    private TextView mUploadEbReceiptTextViewReceiptPaymentDate;
+    private EditText mUploadEbReceiptEditTextReceiptPaymentDate;
+    private TextView mUploadEbReceiptTextViewPaymentAmount;
+    private EditText mUploadEbReceiptEditTextPaymentAmount;
+
 
     private EditText mUploadEbReceiptTextViewEbPaymentReceiptNumber;
     private EditText mUploadEbReceiptTextViewuploadEbPaymentDate;
@@ -186,49 +193,6 @@ public class UploadEBReceiptActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void assignViews() {
-        mUploadEbReceiptEditTextTicketNumber = (TextView) findViewById(R.id.uploadEbReceipt_textView_ticketNumber);
-        mUploadEbReceiptEditTextSiteId = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteId);
-        mUploadEbReceiptEditTextSiteName = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteName);
-        mUploadEbReceiptTextViewPaymentTypeVal = (TextView) findViewById(R.id.uploadEbReceipt_textView_paymentType_val);
-
-        mUploadEbReceiptButtonEbReceiptPhoto = (ImageView) findViewById(R.id.uploadEbReceipt_button_ebReceiptPhoto);
-        mUploadEbReceiptButtonEbReceiptPhotoView = (ImageView) findViewById(R.id.uploadEbReceipt_button_ebReceiptPhotoView);
-
-        mUploadEbReceiptTextViewEbPaymentReceiptNumber = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentReceiptNumber);
-        mUploadEbReceiptTextViewuploadEbPaymentDate = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentDate);
-        mUploadEbReceiptTextViewEbPaymentAmount = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentAmount);
-
-        mUploadEbReceiptTextViewEbPaymentAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
-    }
-
-    private void updateLabelPaymentDate() {
-        String myFormat = "dd/MMM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        mUploadEbReceiptTextViewuploadEbPaymentDate.setText(sdf.format(myCalendar1.getTime()));
-
-
-    }
-
-    private void setListners() {
-        mUploadEbReceiptTextViewuploadEbPaymentDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                new DatePickerDialog(UploadEBReceiptActivity.this, dateBillfrom, myCalendar1
-                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
-                        myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-        mUploadEbReceiptButtonEbReceiptPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takePhoto();
-            }
-        });
-    }
-
     private boolean checkValidation() {
         String payment_type = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();
 
@@ -333,14 +297,53 @@ public class UploadEBReceiptActivity extends BaseActivity {
             eBlSubmitResposeDataGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
             eBlSubmitResposeDataGsonRequest.setShouldCache(false);
             Application.getInstance().addToRequestQueue(eBlSubmitResposeDataGsonRequest, "eBlSubmitResposeDataGsonRequest");
-
-
-        } catch (Exception e)
-
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+
+    private void assignViews() {
+        mUploadEbReceiptEditTextTicketNumber = (TextView) findViewById(R.id.uploadEbReceipt_textView_ticketNumber);
+        mUploadEbReceiptEditTextSiteId = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteId);
+        mUploadEbReceiptEditTextSiteName = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteName);
+        mUploadEbReceiptTextViewPaymentTypeVal = (TextView) findViewById(R.id.uploadEbReceipt_textView_paymentType_val);
+
+        mUploadEbReceiptButtonEbReceiptPhoto = (ImageView) findViewById(R.id.uploadEbReceipt_button_ebReceiptPhoto);
+        mUploadEbReceiptButtonEbReceiptPhotoView = (ImageView) findViewById(R.id.uploadEbReceipt_button_ebReceiptPhotoView);
+
+        mUploadEbReceiptTextViewEbPaymentReceiptNumber = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentReceiptNumber);
+        mUploadEbReceiptTextViewuploadEbPaymentDate = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentDate);
+        mUploadEbReceiptTextViewEbPaymentAmount = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentAmount);
+
+        mUploadEbReceiptTextViewEbPaymentAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+    }
+
+    private void updateLabelPaymentDate() {
+        String myFormat = "dd/MMM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        mUploadEbReceiptTextViewuploadEbPaymentDate.setText(sdf.format(myCalendar1.getTime()));
+
+
+    }
+
+    private void setListners() {
+        mUploadEbReceiptTextViewuploadEbPaymentDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new DatePickerDialog(UploadEBReceiptActivity.this, dateBillfrom, myCalendar1
+                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
+                        myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        mUploadEbReceiptButtonEbReceiptPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePhoto();
+            }
+        });
     }
 
     private void takePhoto() {
