@@ -37,7 +37,7 @@ public class SitePhotoCaptureData {
     //private Boolean isSubmited;
     private int isSubmited;
 
-    public SitePhotoCaptureData(){
+    public SitePhotoCaptureData() {
         this.imageFileNameOfSite = "";
         this.base64StringSite = "";
         this.imageFileNameOfShelter = "";
@@ -52,8 +52,9 @@ public class SitePhotoCaptureData {
         this.base64StringDgHmr = "";
         this.imageFileNameOfDgOverview = "";
         this.base64StringDgOverview = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
+
     public SitePhotoCaptureData(String imageFileNameOfSite, String base64StringSite, String imageFileNameOfShelter, String base64StringShelter, String imageFileNameOfEbMeterBox, String base64StringEbMeterBox, String imageFileNameOfSmps, String base64StringSmps, String imageFileNameOfEbMeter, String base64StringEbMeter, String imageFileNameOfDgHmr, String base64StringDgHmr, String imageFileNameOfDgOverview, String base64StringDgOverview) {
         this.imageFileNameOfSite = imageFileNameOfSite;
         this.base64StringSite = base64StringSite;
@@ -70,6 +71,11 @@ public class SitePhotoCaptureData {
         this.imageFileNameOfDgOverview = imageFileNameOfDgOverview;
         this.base64StringDgOverview = base64StringDgOverview;
         //this.isSubmited=true;//007
+        if (!this.imageFileNameOfSite.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
     }
 
     public String getImageFileNameOfSite() {

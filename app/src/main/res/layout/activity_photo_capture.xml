@@ -11,8 +11,7 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_normal_margin"
@@ -21,10 +20,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1"
                 android:background="@color/lightgrey"
-                android:visibility="gone">
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
 
                 <TextView
                     style="@style/FontStyle"
@@ -37,7 +36,7 @@
                     android:id="@+id/photoCapture_switch_captureMode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"/>
+                    android:checked="false" />
 
             </LinearLayout>
 
@@ -46,7 +45,7 @@
                 android:layout_height="1dp"
                 android:layout_gravity="center"
                 android:background="#000000"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
 
             <LinearLayout
@@ -103,7 +102,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="From the entrance of the gate" />
+                    android:text="From the entrance of the gate"
+                    android:textColor="@color/colorBlack" />
 
             </LinearLayout>
 
@@ -166,7 +166,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="from the entrance of the shelter" />
+                    android:text="From the entrance of the shelter"
+                    android:textColor="@color/colorBlack" />
                 <!--(Supress if outdoor site)-->
 
             </LinearLayout>
@@ -229,7 +230,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="Keeping the box in open condition" />
+                    android:text="Keeping the box in open condition"
+                    android:textColor="@color/colorBlack" />
 
             </LinearLayout>
 
@@ -291,7 +293,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="Overview" />
+                    android:text="Overview"
+                    android:textColor="@color/colorBlack" />
 
             </LinearLayout>
 
@@ -353,7 +356,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="During KWH display only" />
+                    android:text="During KWH display only"
+                    android:textColor="@color/colorBlack" />
 
             </LinearLayout>
 
@@ -415,7 +419,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="In front of DG HMR" />
+                    android:text="In front of DG HMR"
+                    android:textColor="@color/colorBlack" />
                 <!--(Supress if Non-DG Site)-->
 
             </LinearLayout>
@@ -478,7 +483,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="By Keeping the canopy door open" />
+                    android:text="By Keeping the canopy door open"
+                    android:textColor="@color/colorBlack" />
                 <!--(Supress if Non-DG Site)-->
 
             </LinearLayout>

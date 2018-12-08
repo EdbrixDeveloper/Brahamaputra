@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
@@ -42,72 +41,64 @@
                 android:text="Date: dd/mmm/yyyy" />
         </LinearLayout>
 
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/textView_SiteName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/app_normal_margin"
-                android:layout_weight="1"
-                android:text="Site Name: " />
-
-            <TextView
-                android:id="@+id/textView_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/app_normal_margin"
-                android:layout_weight="0.5"
-                android:gravity="right"
-                android:text=""
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="right"
-                android:text=""
-                android:textStyle="bold" />&lt;!&ndash;android:layout_marginLeft="@dimen/app_normal_margin"&ndash;&gt;
-        </LinearLayout>-->
+        <!---->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="10">
 
-            <TextView
-                android:id="@+id/textView_SiteName"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/app_normal_margin"
-                android:layout_weight="1"
-                android:text="Site Name: " />
+                android:layout_gravity="left"
+                android:layout_weight="7"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_details"
+                <TextView
+                    android:id="@+id/textView_SiteName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:layout_weight="1"
+                    android:text="Site Name: " />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:gravity="right"
                 android:layout_marginLeft="@dimen/app_normal_margin"
-                android:layout_weight="0.5"
-                android:textAlignment="textEnd"
-                android:text=""
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_status"
+                <TextView
+                    android:id="@+id/textView_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="0.5"
+                    android:text=""
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:gravity="right"
-                android:text=""
-                android:textStyle="bold" /><!--android:layout_marginLeft="@dimen/app_normal_margin"-->
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:text=""
+                    android:textStyle="bold" /><!--android:layout_marginLeft="@dimen/app_normal_margin"-->
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -199,6 +190,8 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <!---->
     </LinearLayout>
 
 </LinearLayout>

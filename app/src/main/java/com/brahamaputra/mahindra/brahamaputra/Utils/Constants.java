@@ -78,5 +78,7 @@ public class Constants {
     public final static String GetElectriBillTransactionslist = BASE_URL.concat("electricbill/getelectribilltransactionslist");
     public final static String SubmitEbfillingPaymentEeceipt = BASE_URL.concat("electricbill/submitebfillingpaymentreceipt");
     public final static String GetUserDetails = BASE_URL.concat("common/getuserdetails");
+    public final static String GetEbPaymentDetails = BASE_URL.concat("common/getuserdetails");
+    public final static String SubmitEbPaymentDetails = BASE_URL.concat("common/getuserdetails");
 
 }

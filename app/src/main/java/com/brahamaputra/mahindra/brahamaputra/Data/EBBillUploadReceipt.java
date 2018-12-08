@@ -33,6 +33,10 @@ public class EBBillUploadReceipt {
     @Expose
     private String ebPaymentAmount;
 
+    @SerializedName("EbDdChequeTransactionDetails")
+    @Expose
+    private String ebDdChequeTransactionDetails;
+
 
     public String getUserId() {
         return userId;
@@ -98,7 +102,15 @@ public class EBBillUploadReceipt {
         this.ebPaymentAmount = ebPaymentAmount;
     }
 
-    public EBBillUploadReceipt(String userId, String accessToken, String ebpaymentrequestId, String ebPaymentRemark,String ebPaymentReceiptNumber,String ebPaymentDate,String ebPaymentAmount, String ebReceiptScanCopyImageName) {
+    public String getEbDdChequeTransactionDetails() {
+        return ebDdChequeTransactionDetails;
+    }
+
+    public void setEbDdChequeTransactionDetails(String ebDdChequeTransactionDetails) {
+        this.ebDdChequeTransactionDetails = ebDdChequeTransactionDetails;
+    }
+
+    public EBBillUploadReceipt(String userId, String accessToken, String ebpaymentrequestId, String ebPaymentRemark, String ebPaymentReceiptNumber, String ebPaymentDate, String ebPaymentAmount, String ebReceiptScanCopyImageName) {
         this.userId = userId;
         this.accessToken = accessToken;
         this.ebpaymentrequestId = ebpaymentrequestId;
@@ -107,5 +119,6 @@ public class EBBillUploadReceipt {
         this.ebPaymentDate = ebPaymentDate;
         this.ebPaymentAmount = ebPaymentAmount;
         this.ebReceiptScanCopyImageName = ebReceiptScanCopyImageName;
+        //this.ebDdChequeTransactionDetails = ebDdChequeTransactionDetails;, String ebDdChequeTransactionDetails
     }
 }
