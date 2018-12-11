@@ -8,15 +8,19 @@ public class EBBillUploadReceipt {
     @SerializedName("UserId")
     @Expose
     private String userId;
+
     @SerializedName("AccessToken")
     @Expose
     private String accessToken;
+
     @SerializedName("EbpaymentrequestId")
     @Expose
     private String ebpaymentrequestId;
+
     @SerializedName("EbPaymentRemark")
     @Expose
     private String ebPaymentRemark;
+
     @SerializedName("EbReceiptScanCopyImageName")
     @Expose
     private String ebReceiptScanCopyImageName;
@@ -32,10 +36,6 @@ public class EBBillUploadReceipt {
     @SerializedName("EbPaymentAmount")
     @Expose
     private String ebPaymentAmount;
-
-    @SerializedName("EbDdChequeTransactionDetails")
-    @Expose
-    private String ebDdChequeTransactionDetails;
 
 
     public String getUserId() {
@@ -102,23 +102,16 @@ public class EBBillUploadReceipt {
         this.ebPaymentAmount = ebPaymentAmount;
     }
 
-    public String getEbDdChequeTransactionDetails() {
-        return ebDdChequeTransactionDetails;
-    }
+    public EBBillUploadReceipt(String userId, String accessToken, String ebpaymentrequestId, String ebPaymentReceiptNumber, String ebPaymentDate, String ebPaymentAmount, String ebPaymentRemark, String ebReceiptScanCopyImageName) {
 
-    public void setEbDdChequeTransactionDetails(String ebDdChequeTransactionDetails) {
-        this.ebDdChequeTransactionDetails = ebDdChequeTransactionDetails;
-    }
-
-    public EBBillUploadReceipt(String userId, String accessToken, String ebpaymentrequestId, String ebPaymentRemark, String ebPaymentReceiptNumber, String ebPaymentDate, String ebPaymentAmount, String ebReceiptScanCopyImageName) {
         this.userId = userId;
         this.accessToken = accessToken;
         this.ebpaymentrequestId = ebpaymentrequestId;
-        this.ebPaymentRemark = ebPaymentRemark;
+
         this.ebPaymentReceiptNumber = ebPaymentReceiptNumber;
         this.ebPaymentDate = ebPaymentDate;
         this.ebPaymentAmount = ebPaymentAmount;
+        this.ebPaymentRemark = ebPaymentRemark;
         this.ebReceiptScanCopyImageName = ebReceiptScanCopyImageName;
-        //this.ebDdChequeTransactionDetails = ebDdChequeTransactionDetails;, String ebDdChequeTransactionDetails
     }
 }

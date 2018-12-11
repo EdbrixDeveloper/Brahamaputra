@@ -48,6 +48,7 @@ import android.widget.Toast;
 
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.bumptech.glide.Glide;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -443,7 +444,7 @@ public class GlobalMethods {
         return base64;
     }
 
-    public static void showImageDialog(Context context, Uri imageUri){
+    public static void showImageDialog(Context context, Uri imageUri) {
         final Dialog builder = new Dialog(context);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
         builder.getWindow().setBackgroundDrawable(
@@ -459,7 +460,7 @@ public class GlobalMethods {
         imageView.setImageURI(imageUri);
         ImageView closeBtn = new ImageView(context);
 //        closeBtn.setText("Close");
-        closeBtn.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_cancel_white_48dp));
+        closeBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_cancel_white_48dp));
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -580,7 +581,7 @@ public class GlobalMethods {
      *
      * @param uri
      * @return Extension including the dot("."); "" if there is no extension;
-     *         null if uri was null.
+     * null if uri was null.
      */
     public static String getExtension(String uri) {
         if (uri == null) {
@@ -1177,7 +1178,7 @@ public class GlobalMethods {
         MediaPlayer mp = MediaPlayer.create(context, Uri.fromFile(uriOfFile));
         int duration = mp.getDuration();
         mp.release();
-/*convert millis to appropriate time*/
+        /*convert millis to appropriate time*/
         return String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(duration),
                 TimeUnit.MILLISECONDS.toSeconds(duration) -
@@ -1553,7 +1554,7 @@ fos.close();
             context.startActivity(smsIntent);
             Log.i("Finished sending SMS...", "");
         } catch (android.content.ActivityNotFoundException ex) {
-           Toast.makeText(context,"SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -1568,25 +1569,72 @@ fos.close();
 
     /**
      * Replace Special character in between string as underscore
+     *
      * @param stringSpecialChar
      * @return
      */
-    public static String replaceAllSpecialCharAtUnderscore(String stringSpecialChar){
+    public static String replaceAllSpecialCharAtUnderscore(String stringSpecialChar) {
         stringSpecialChar = stringSpecialChar.replaceAll("[^a-zA-Z0-9 -]", "_");
         return stringSpecialChar;
     }
 
-    public static String getBattery_percentage(Context context)
-    {
+    public static String getBattery_percentage(Context context) {
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = context.registerReceiver(null, ifilter);
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-        float batteryPct = level / (float)scale;
+        float batteryPct = level / (float) scale;
         float p = batteryPct * 100;
 
-        Log.d("Battery percentage",String.valueOf(Math.round(p)));
+        Log.d("Battery percentage", String.valueOf(Math.round(p)));
 
         return String.valueOf(Math.round(p));
+    }
+
+    public static void showImageDialogFromUrl(Context context, String imageUri) {
+        final Dialog builder = new Dialog(context);
+        builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        builder.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                //nothing;
+            }
+        });
+
+        ImageView imageView = new ImageView(context);
+        //imageView.setImageURI(imageUri);
+        //imageView.setBackgroundResource(R.drawable.ic_loading_loop_black_18dp);
+        imageView.setImageResource(R.drawable.ic_loading_loop_black_18dp);
+        Glide.with(context)
+                .load(imageUri)
+                .into(imageView);
+
+        ImageView closeBtn = new ImageView(context);
+//        closeBtn.setText("Close");
+        closeBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_cancel_white_48dp));
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder.dismiss();
+            }
+        });
+        RelativeLayout viewMain = new RelativeLayout(context);
+        viewMain.addView(imageView);
+        viewMain.addView(closeBtn);
+
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        lp.addRule(RelativeLayout.ABOVE, closeBtn.getId());
+
+        viewMain.setLayoutParams(lp);
+
+        builder.addContentView(viewMain, new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        builder.show();
+
+
     }
 }

@@ -28,18 +28,18 @@ public class Constants {
     public final static String submitDataType_LongAnswer = "longanswer";
     public final static String availabilityType_TrainingSession = "TS";
     public final static String availabilityType_ZOOM = "ZOOM";
-    public final static String TolkBox_APIKey= "45467242";
-    public final static String TolkBox_Token= "Token";
-    public final static String TolkBox_SessionId= "SessionId";
-    public final static String TolkBox_MeetingId= "MeetingId";
-    public final static String TolkBox_MeetingName= "MeetingName";
-    public final static String TolkBox_MeetingType= "MeetingType";
-    public final static String FileType_Playwire= "playwire";
-    public final static String FileType_Document= "document";
-    public static int meetingUserCount=0;
-    public  static String hototicket_Selected_SiteType= "";
-    public  static String hototicket_Selected_CustomerName = "";
-    public  static String hototicket_nameOfSupplyCompany = "";
+    public final static String TolkBox_APIKey = "45467242";
+    public final static String TolkBox_Token = "Token";
+    public final static String TolkBox_SessionId = "SessionId";
+    public final static String TolkBox_MeetingId = "MeetingId";
+    public final static String TolkBox_MeetingName = "MeetingName";
+    public final static String TolkBox_MeetingType = "MeetingType";
+    public final static String FileType_Playwire = "playwire";
+    public final static String FileType_Document = "document";
+    public static int meetingUserCount = 0;
+    public static String hototicket_Selected_SiteType = "";
+    public static String hototicket_Selected_CustomerName = "";
+    public static String hototicket_nameOfSupplyCompany = "";
 
     // TODO Change it to your web domain
     public final static String WEB_DOMAIN = "http://brahmaputra-dev-api.us-west-2.elasticbeanstalk.com";
@@ -49,7 +49,6 @@ public class Constants {
     public final static String APP_SECRET__ = "MjQ1QDEyIzJZSEQtODVEQTJTM0RFQTg1Mz1JRTVCNEE1MTA=";
     // TODO change it to your user ID
     final static String USER_ID = "604813"; // 604813  ijTMthVYQzSy06ba9Elxdw
-
 
 
     private final static String BASE_URL = "http://brahmaputra-dev-api.us-west-2.elasticbeanstalk.com/";
@@ -78,7 +77,7 @@ public class Constants {
     public final static String GetElectriBillTransactionslist = BASE_URL.concat("electricbill/getelectribilltransactionslist");
     public final static String SubmitEbfillingPaymentEeceipt = BASE_URL.concat("electricbill/submitebfillingpaymentreceipt");
     public final static String GetUserDetails = BASE_URL.concat("common/getuserdetails");
-    public final static String GetEbPaymentDetails = BASE_URL.concat("common/getuserdetails");
-    public final static String SubmitEbPaymentDetails = BASE_URL.concat("common/getuserdetails");
+    public final static String GetEbPaymentDetails = BASE_URL.concat("electricbill/getelectribillchequedddetails");
+    public final static String SubmitEbPaymentDetails = BASE_URL.concat("electricbill/submitebfillingddchequereceipt");
 
 }

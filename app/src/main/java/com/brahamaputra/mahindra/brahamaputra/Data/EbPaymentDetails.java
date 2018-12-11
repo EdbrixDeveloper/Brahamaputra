@@ -3,46 +3,8 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EBBillUploadPaymentDetails {
+public class EbPaymentDetails {
 
-    @SerializedName("Success")
-    @Expose
-    private Integer success;
-
-    @SerializedName("Code")
-    @Expose
-    private String code;
-
-    @SerializedName("Message")
-    @Expose
-    private String message;
-
-
-    public Integer getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Integer success) {
-        this.success = success;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    /////////////////////////////
 
     @SerializedName("UserId")
     @Expose
@@ -56,10 +18,13 @@ public class EBBillUploadPaymentDetails {
     @Expose
     private String ebpaymentrequestId;
 
-    @SerializedName("EbPaymentRemark")
+    @SerializedName("EbPaymentTicketNumber")
     @Expose
-    private String ebPaymentRemark;
+    private String ebPaymentTicketNumber;
 
+    @SerializedName("ModeOfPayment")
+    @Expose
+    private String ModeOfPayment;
 
     @SerializedName("EbPaymentDdChequeScanCopyImageName")
     @Expose
@@ -73,7 +38,7 @@ public class EBBillUploadPaymentDetails {
 
     @SerializedName("EbPaymentDdChequeDate")
     @Expose
-    private String ebPaymenDdChequetDate;
+    private String ebPaymentDdChequetDate;
 
     @SerializedName("EbPaymentDdChequeAmount")
     @Expose
@@ -82,6 +47,18 @@ public class EBBillUploadPaymentDetails {
     @SerializedName("EbPaymentDdChequeTransactionDetails")
     @Expose
     private String ebPaymentDdChequeTransactionDetails;
+
+    @SerializedName("EbPaymentDdChequeScanCopyImageUrl")
+    @Expose
+    private String ebPaymentDdChequeScanCopyImageUrl;
+
+    @SerializedName("EbPaymentRemark")
+    @Expose
+    private String ebPaymentRemark;
+
+    @SerializedName("EbPaymentDDUploadRemark")
+    @Expose
+    private String ebPaymentDDUploadRemark;
 
     public String getUserId() {
         return userId;
@@ -105,6 +82,22 @@ public class EBBillUploadPaymentDetails {
 
     public void setEbpaymentrequestId(String ebpaymentrequestId) {
         this.ebpaymentrequestId = ebpaymentrequestId;
+    }
+
+    public String getEbPaymentTicketNumber() {
+        return ebPaymentTicketNumber;
+    }
+
+    public void setEbPaymentTicketNumber(String ebPaymentTicketNumber) {
+        this.ebPaymentTicketNumber = ebPaymentTicketNumber;
+    }
+
+    public String getModeOfPayment() {
+        return ModeOfPayment;
+    }
+
+    public void setModeOfPayment(String modeOfPayment) {
+        ModeOfPayment = modeOfPayment;
     }
 
     public String getEbPaymentRemark() {
@@ -131,12 +124,12 @@ public class EBBillUploadPaymentDetails {
         this.ebPaymentDdChequeNumber = ebPaymentDdChequeNumber;
     }
 
-    public String getEbPaymenDdChequetDate() {
-        return ebPaymenDdChequetDate;
+    public String getEbPaymentDdChequetDate() {
+        return ebPaymentDdChequetDate;
     }
 
-    public void setEbPaymenDdChequetDate(String ebPaymenDdChequetDate) {
-        this.ebPaymenDdChequetDate = ebPaymenDdChequetDate;
+    public void setEbPaymentDdChequetDate(String ebPaymentDdChequetDate) {
+        this.ebPaymentDdChequetDate = ebPaymentDdChequetDate;
     }
 
     public String getEbPaymentDdChequeAmount() {
@@ -155,18 +148,35 @@ public class EBBillUploadPaymentDetails {
         this.ebPaymentDdChequeTransactionDetails = ebPaymentDdChequeTransactionDetails;
     }
 
-    public EBBillUploadPaymentDetails(String userId, String accessToken, String ebpaymentrequestId, String ebPaymentRemark, String ebPaymentDdChequeNumber, String ebPaymenDdChequetDate, String ebPaymentDdChequeAmount, String ebPaymentDdChequeTransactionDetails, String ebPaymentDdChequeScanCopyImageName) {
+    public String getEbPaymentDdChequeScanCopyImageUrl() {
+        return ebPaymentDdChequeScanCopyImageUrl;
+    }
+
+    public void setEbPaymentDdChequeScanCopyImageUrl(String ebPaymentDdChequeScanCopyImageUrl) {
+        this.ebPaymentDdChequeScanCopyImageUrl = ebPaymentDdChequeScanCopyImageUrl;
+    }
+
+    public String getEbPaymentDDUploadRemark() {
+        return ebPaymentDDUploadRemark;
+    }
+
+    public void setEbPaymentDDUploadRemark(String ebPaymentDDUploadRemark) {
+        this.ebPaymentDDUploadRemark = ebPaymentDDUploadRemark;
+    }
+
+    public EbPaymentDetails(String userId, String accessToken, String ebpaymentrequestId, String ModeOfPayment, String ebPaymentDdChequeNumber, String ebPaymentDdChequetDate, String ebPaymentDdChequeAmount, String ebPaymentDdChequeTransactionDetails, String ebPaymentDdChequeScanCopyImageName, String ebPaymentRemark, String ebPaymentDDUploadRemark) {
         this.userId = userId;
         this.accessToken = accessToken;
-
         this.ebpaymentrequestId = ebpaymentrequestId;
-        this.ebPaymentRemark = ebPaymentRemark;
+        this.ModeOfPayment = ModeOfPayment;
 
         this.ebPaymentDdChequeNumber = ebPaymentDdChequeNumber;
-        this.ebPaymenDdChequetDate = ebPaymenDdChequetDate;
+        this.ebPaymentDdChequetDate = ebPaymentDdChequetDate;
         this.ebPaymentDdChequeAmount = ebPaymentDdChequeAmount;
         this.ebPaymentDdChequeTransactionDetails = ebPaymentDdChequeTransactionDetails;
         this.ebPaymentDdChequeScanCopyImageName = ebPaymentDdChequeScanCopyImageName;
+        this.ebPaymentRemark = ebPaymentRemark;
+        this.ebPaymentDDUploadRemark = ebPaymentDDUploadRemark;
 
     }
 }

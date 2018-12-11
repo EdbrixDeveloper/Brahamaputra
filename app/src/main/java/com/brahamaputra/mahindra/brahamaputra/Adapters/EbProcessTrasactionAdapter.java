@@ -113,8 +113,6 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
             viewHolder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
-
-
         viewHolder.textView_ticketNo.setText("Ticket No: " + dataModel.getRequestTicketeNo());
         viewHolder.textView_SiteName.setText("Site Name: " + dataModel.getSiteName());
         /*viewHolder.textView_DateOfRequest.setText(dataModel.getDateOfRequest());*/
@@ -136,7 +134,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
             viewHolder.imageView_details.setVisibility(View.GONE);
             viewHolder.imageView_status.setVisibility(View.GONE);
 
-        }else if (dataModel.getStatusId().equals("2")) { ///////// 2
+        } else if (dataModel.getStatusId().equals("2")) { ///////// 2
             viewHolder.textView_status.setText("Approved");
             viewHolder.textView_status.setTextColor(Color.BLACK);
             viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
@@ -148,28 +146,69 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
             viewHolder.imageView_details.setVisibility(View.VISIBLE);
             viewHolder.imageView_status.setVisibility(View.GONE);
 
-        }else if (dataModel.getStatusId().equals("3")) { ///////// 3
-            viewHolder.textView_status.setText("Approved");
-            viewHolder.textView_status.setTextColor(Color.BLACK);
-            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+        } else if (dataModel.getStatusId().equals("3")) { ///////// 3
+            if (dataModel.getStatusId().equals("3") && dataModel.getModeOfPayment().equals("Cash")) {
 
-            viewHolder.textView_details.setText("Details");
-            viewHolder.textView_details.setTextColor(Color.BLACK);
-            viewHolder.textView_details.setVisibility(View.VISIBLE);
+                viewHolder.textView_status.setText("Approved");
+                viewHolder.textView_status.setTextColor(Color.BLACK);
+                viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
 
-            viewHolder.imageView_details.setVisibility(View.VISIBLE);
-            viewHolder.imageView_status.setVisibility(View.GONE);
-        }else if (dataModel.getStatusId().equals("4")) { ///////// 4
-            viewHolder.textView_status.setText("Approved");
-            viewHolder.textView_status.setTextColor(Color.BLACK);
-            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+                viewHolder.textView_details.setText("");
+                viewHolder.textView_details.setTextColor(Color.BLACK);
+                viewHolder.textView_details.setVisibility(View.GONE);
 
-            viewHolder.textView_details.setText("Details");
-            viewHolder.textView_details.setTextColor(Color.BLACK);
-            viewHolder.textView_details.setVisibility(View.VISIBLE);
+                viewHolder.imageView_details.setVisibility(View.GONE);
+                viewHolder.imageView_status.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.textView_status.setText("Approved");
+                viewHolder.textView_status.setTextColor(Color.BLACK);
+                viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
 
-            viewHolder.imageView_details.setVisibility(View.VISIBLE);
-            viewHolder.imageView_status.setVisibility(View.VISIBLE);
+                viewHolder.textView_details.setText("Details");
+                viewHolder.textView_details.setTextColor(Color.BLACK);
+                viewHolder.textView_details.setVisibility(View.VISIBLE);
+
+                viewHolder.imageView_details.setVisibility(View.VISIBLE);
+                viewHolder.imageView_status.setVisibility(View.VISIBLE);
+            }
+        } else if (dataModel.getStatusId().equals("4")) { ///////// 4
+            if (dataModel.getStatusId().equals("4") && dataModel.getModeOfPayment().equals("NEFT")) {
+                viewHolder.textView_status.setText("Approved");
+                viewHolder.textView_status.setTextColor(Color.BLACK);
+                viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+
+                viewHolder.textView_details.setText("Details");
+                viewHolder.textView_details.setTextColor(Color.BLACK);
+                viewHolder.textView_details.setVisibility(View.GONE);
+
+                viewHolder.imageView_details.setVisibility(View.GONE);
+                viewHolder.imageView_status.setVisibility(View.GONE);
+            } else if (dataModel.getStatusId().equals("4") && dataModel.getModeOfPayment().equals("Cash")) {
+
+                viewHolder.textView_status.setText("Approved");
+                viewHolder.textView_status.setTextColor(Color.BLACK);
+                viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+
+                viewHolder.textView_details.setText("");
+                viewHolder.textView_details.setTextColor(Color.BLACK);
+                viewHolder.textView_details.setVisibility(View.GONE);
+
+                viewHolder.imageView_details.setVisibility(View.GONE);
+                viewHolder.imageView_status.setVisibility(View.VISIBLE);
+            } else {
+                ////////////////////////////
+                viewHolder.textView_status.setText("Approved");
+                viewHolder.textView_status.setTextColor(Color.BLACK);
+                viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+
+                viewHolder.textView_details.setText("Details");
+                viewHolder.textView_details.setTextColor(Color.BLACK);
+                viewHolder.textView_details.setVisibility(View.VISIBLE);
+
+                viewHolder.imageView_details.setVisibility(View.VISIBLE);
+                viewHolder.imageView_status.setVisibility(View.VISIBLE);
+            }
+
         } else if (dataModel.getStatusId().equals("0")) {
             viewHolder.textView_status.setText("Waiting for Approve");
             viewHolder.textView_status.setTextColor(Color.RED);
@@ -199,16 +238,16 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 EbPaymentRequestList lst = getItem(position);
                 Context c = getContext();
                 //if (lst.getStatusId().equals("1")) {
-                    Intent intent = new Intent(getContext(), UploadEBReceiptActivity.class);
-                    intent.putExtra("request_id", lst.getId());
-                    intent.putExtra("ticket_no", lst.getRequestTicketeNo());
-                    intent.putExtra("site_id", lst.getSiteId());
-                    intent.putExtra("site_name", lst.getSiteName());
-                    intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
-                    // c.startActivity(intent);
-                    ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
-                    //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
-               // }
+                Intent intent = new Intent(getContext(), UploadEBReceiptActivity.class);
+                intent.putExtra("request_id", lst.getId());
+                intent.putExtra("ticket_no", lst.getRequestTicketeNo());
+                intent.putExtra("site_id", lst.getSiteId());
+                intent.putExtra("site_name", lst.getSiteName());
+                intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
+                // c.startActivity(intent);
+                ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                // }
             }
         });
 
@@ -220,16 +259,16 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 EbPaymentRequestList lst = getItem(position);
                 Context c = getContext();
                 //if (lst.getStatusId().equals("1")) {
-                    Intent intent = new Intent(getContext(), UploadEBPaymentDetailsActivity.class);
-                    intent.putExtra("request_id", lst.getId());
-                    intent.putExtra("ticket_no", lst.getRequestTicketeNo());
-                    intent.putExtra("site_id", lst.getSiteId());
-                    intent.putExtra("site_name", lst.getSiteName());
-                    intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
-                    // c.startActivity(intent);
-                    ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
-                    //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
-               // }
+                Intent intent = new Intent(getContext(), UploadEBPaymentDetailsActivity.class);
+                intent.putExtra("request_id", lst.getId());
+                intent.putExtra("ticket_no", lst.getRequestTicketeNo());
+                intent.putExtra("site_id", lst.getSiteId());
+                intent.putExtra("site_name", lst.getSiteName());
+                intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
+                // c.startActivity(intent);
+                ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                // }
             }
         });
         // Return the completed view to render on screen

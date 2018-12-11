@@ -69,6 +69,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class DieselFilling extends BaseActivity {
@@ -173,7 +174,7 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingTextViewPresentEbReadingKwhPhoto = (TextView) findViewById(R.id.dieselFilling_textView_presentEbReadingKwhPhoto);
         mDieselFillingButtonPresentEbReadingKwhPhoto = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhoto);
         mDieselFillingButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhotoView);
-        dieselFilling_button_qrCode = (ImageView)findViewById(R.id.dieselFilling_button_qrCode);
+        dieselFilling_button_qrCode = (ImageView) findViewById(R.id.dieselFilling_button_qrCode);
       /*  mDieselFillingTextViewPresentFillingDate = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDate);
         mDieselFillingTextViewPresentFillingDateVal = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDateVal);*/
         mDieselFillingEditTextTankBalanceBeforeFilling.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
@@ -286,7 +287,7 @@ public class DieselFilling extends BaseActivity {
                         //openCamera();
                         onClicked(v);
                     }
-                }else{
+                } else {
                     //
                 }
             }
@@ -409,7 +410,11 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingTextViewSelectDgIdQrCodeVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (site_id > 0) {
+                if (site_id < 1) {// && DgIdList.size() > 0
+                    toastMessage.showToast("Please Select Site ID First..");
+                } else if (DgIdList == null) {
+                    mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
+                } else {
                     if (Conditions.isNetworkConnected(DieselFilling.this)) {
                         //prepareDgId_from_Sites();
 
@@ -431,9 +436,9 @@ public class DieselFilling extends BaseActivity {
                     } else {
                         toastMessage.showToast("No Internet Found..");
                     }
-                } else {
+                } /*else {
                     toastMessage.showToast("Please Select Site ID First..");
-                }
+                }*/
             }
         });
 
@@ -490,8 +495,7 @@ public class DieselFilling extends BaseActivity {
             case R.id.menuDone:
                 /*if (site_id > 0) {*/
                 DecimalFormatConversion();
-                if (checkValidationOnSubmitDiselTicket() == true)
-                {
+                if (checkValidationOnSubmitDiselTicket() == true) {
                     if (gpsTracker.canGetLocation()) {
                         //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                         //Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
@@ -499,10 +503,12 @@ public class DieselFilling extends BaseActivity {
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                             //showToast(""+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
                             if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.310686) {///// ( 0.310686 MILE == 500 Meter )
-                                //showToast("in Area \n"+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
+                                Log.i(DieselFilling.class.getName(),""+"in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
+                                showToast("User in Site Area");
                                 showSettingsAlert();
-                            }else{
-                                //showToast("not in Area\n"+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
+                            } else {
+                                Log.i(DieselFilling.class.getName(),""+"not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
+                                showToast("User not in Site Area");
                             }
 
 
@@ -686,8 +692,8 @@ public class DieselFilling extends BaseActivity {
                     //dgIdQrCodeList.
                     if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
 
-                        for(int i=0;i<dgIdQrCodeList.getPowerBackupsDGMRQRList().size();i++){
-                            if(base64StringQRCodeScan.equals(dgIdQrCodeList.getPowerBackupsDGMRQRList().get(i).getqRCodeScan().toString())){
+                        for (int i = 0; i < dgIdQrCodeList.getPowerBackupsDGMRQRList().size(); i++) {
+                            if (base64StringQRCodeScan.equals(dgIdQrCodeList.getPowerBackupsDGMRQRList().get(i).getqRCodeScan().toString())) {
                                 str_siteName = base64StringQRCodeScan;
                                 mDieselFillingTextViewSelectDgIdQrCodeVal.setText(str_siteName);
                             }
@@ -769,6 +775,7 @@ public class DieselFilling extends BaseActivity {
                                     for (UserSites site : userSitesList.getSiteList()) {
                                         Sitelist.add(site.getSiteId() + ":" + site.getSiteName());
                                     }
+                                    Collections.sort(Sitelist, String.CASE_INSENSITIVE_ORDER);
                                     mDieselFillingTextViewSiteNameVal.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -787,11 +794,11 @@ public class DieselFilling extends BaseActivity {
                                                     mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
                                                     mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
 
-                                                    if(userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null){
+                                                    if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null) {
                                                         siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
                                                         siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
                                                         //showToast(""+siteLatitude+","+siteLongitude);
-                                                    }else {
+                                                    } else {
                                                         siteLatitude = 0;
                                                         siteLongitude = 0;
                                                         //showToast(""+siteLatitude+","+siteLongitude);
@@ -882,13 +889,14 @@ public class DieselFilling extends BaseActivity {
                             hideBusyProgress();
                             if (response.getSuccess() == 1) {
                                 dgIdQrCodeList = response;
-
+                                DgIdList = new ArrayList<String>();
                                 if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
 
-                                    DgIdList = new ArrayList<String>();
+                                    //DgIdList = new ArrayList<String>();
                                     for (DgIdQrCode ids : dgIdQrCodeList.getPowerBackupsDGMRQRList()) {
                                         DgIdList.add(ids.getqRCodeScan());
                                     }
+                                    Collections.sort(DgIdList, String.CASE_INSENSITIVE_ORDER);
 
                                 } else {
                                     mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");

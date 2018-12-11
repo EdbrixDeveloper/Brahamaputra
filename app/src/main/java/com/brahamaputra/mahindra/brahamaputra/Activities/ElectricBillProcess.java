@@ -89,6 +89,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -263,7 +264,6 @@ public class ElectricBillProcess extends BaseActivity {
         initCombo();
         set_listener();
         prepareUserPersonalData();//arj
-
 
 
         // setInputDetails();
@@ -454,6 +454,18 @@ public class ElectricBillProcess extends BaseActivity {
                     searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
                         @Override
                         public void onClick(ArrayList<String> item, int position) {
+
+                            ConsumerNoList = null;
+                            PaymentTypeList = null;
+                            ElectricConnectionTypeList = null;
+                            ConnectionTariffList = null;
+                            mEbProcessTextViewEbConsumerNumberVal.setText("");
+                            mEbProcessTextViewTypeModeOfPayementVal.setText("");
+                            mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
+                            mEbProcessTextViewTariffVal.setText("");
+                            mEbProcessTextViewSiteIDVal.setText("");
+                            mEbProcessTextViewSiteDetailsVal.setText("");
+                            mEbProcessTextViewEbServiceProviderVal.setText("");
 
                             str_siteName = item.get(position);
                             mEbProcessTextViewSiteVal.setText(str_siteName);
@@ -1381,7 +1393,8 @@ public class ElectricBillProcess extends BaseActivity {
                                     for (SiteList siteList : site.getSiteList()) {
                                         siteArray.add(siteList.getSiteName());
                                     }
-
+                                    //siteArray.sort(String::compareToIgnoreCase);
+                                    Collections.sort(siteArray, String.CASE_INSENSITIVE_ORDER);
                                     /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
                                             siteArray,
                                             "Select Site",
@@ -1452,10 +1465,18 @@ public class ElectricBillProcess extends BaseActivity {
                             hideBusyProgress();
                             if (response.getSuccess() == 1) {
                                 ebSiteConnectedData = response;
+
                                 ConsumerNoList = ebSiteConnectedData.getConsumerNoList();
+                                Collections.sort(ConsumerNoList, String.CASE_INSENSITIVE_ORDER);
+
                                 PaymentTypeList = ebSiteConnectedData.getPaymentTypeList();
+                                Collections.sort(PaymentTypeList, String.CASE_INSENSITIVE_ORDER);
+
                                 ElectricConnectionTypeList = ebSiteConnectedData.getElectricConnectionTypeList();
+                                Collections.sort(ElectricConnectionTypeList, String.CASE_INSENSITIVE_ORDER);
+
                                 ConnectionTariffList = ebSiteConnectedData.getConnectionTariffList();
+                                Collections.sort(ConnectionTariffList, String.CASE_INSENSITIVE_ORDER);
 
                             } else {
                                 showToast("No Data Found Of Selected Site");

@@ -151,7 +151,7 @@ public class ElectricBillProcessList extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_item_menu, menu);
+        menuInflater.inflate(R.menu.eb_add_item_menu, menu);
         return true;
     }
 
@@ -165,6 +165,9 @@ public class ElectricBillProcessList extends BaseActivity {
             case R.id.menuAdd:
                 Intent intent = new Intent(ElectricBillProcessList.this, ElectricBillProcess.class);
                 startActivityForResult(intent, RESULT_TRAN_SUBMIT);
+                return true;
+            case R.id.menuRefresh:
+                prepareListData();
                 return true;
 
 

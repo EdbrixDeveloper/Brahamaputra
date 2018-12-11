@@ -44,6 +44,8 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -57,28 +59,20 @@ public class UploadEBReceiptActivity extends BaseActivity {
 
     private static final String TAG = UploadEBReceiptActivity.class.getSimpleName();
 
-    private TextView mUploadEbReceiptEditTextTicketNumber;
-    private TextView mUploadEbReceiptEditTextSiteId;
-    private TextView mUploadEbReceiptEditTextSiteName;
+    private TextView mUploadEbReceiptTextViewTicketNumber;
+    private TextView mUploadEbReceiptTextViewSiteId;
+    private TextView mUploadEbReceiptTextViewSiteName;
     private TextView mUploadEbReceiptTextViewPaymentTypeVal;
 
+    private EditText mUploadEbReceiptEditTextEbPaymentReceiptNumber;
+    private TextView mUploadEbReceiptTextViewDdPaymentDate;
+    private EditText mUploadEbReceiptEditTextEbPaymentDate;
+
+    private EditText mUploadEbReceiptEditTextEbPaymentAmount;
+    private EditText mUploadEbReceiptEditTextEbReceiptRemark;
     private ImageView mUploadEbReceiptButtonEbReceiptPhoto;
     private ImageView mUploadEbReceiptButtonEbReceiptPhotoView;
-
     private EBBillUploadReceipt ebBillUploadReceipt;
-
-    private TextView mUploadEbReceiptTextViewPaymentReceiptNumber;
-    private EditText mUploadEbReceiptEditTextPaymentReceiptNumber;
-    private TextView mUploadEbReceiptTextViewReceiptPaymentDate;
-    private EditText mUploadEbReceiptEditTextReceiptPaymentDate;
-    private TextView mUploadEbReceiptTextViewPaymentAmount;
-    private EditText mUploadEbReceiptEditTextPaymentAmount;
-
-
-    private EditText mUploadEbReceiptTextViewEbPaymentReceiptNumber;
-    private EditText mUploadEbReceiptTextViewuploadEbPaymentDate;
-    private EditText mUploadEbReceiptTextViewEbPaymentAmount;
-    private EditText mUploadEbReceiptTextViewEbPaymentRemark;
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
@@ -93,6 +87,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
     String ticket_no;
     String site_id;
     String site_name;
+    String modeOfPayment;
     private AlertDialogManager alertDialogManager;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 101;
@@ -123,6 +118,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         ticket_no = intent.getStringExtra("ticket_no");
         site_id = intent.getStringExtra("site_id");
         site_name = intent.getStringExtra("site_name");
+        modeOfPayment = intent.getStringExtra("ModeOfPayment");
         assignViews();
         setListners();
         alertDialogManager = new AlertDialogManager(UploadEBReceiptActivity.this);
@@ -132,11 +128,12 @@ public class UploadEBReceiptActivity extends BaseActivity {
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(UploadEBReceiptActivity.this, userId, ticketName);
 
-        mUploadEbReceiptEditTextTicketNumber.setText(ticket_no);
-        mUploadEbReceiptEditTextSiteId.setText(site_id);
-        mUploadEbReceiptEditTextSiteName.setText(site_name);
+        mUploadEbReceiptTextViewTicketNumber.setText(ticket_no);//mUploadEbReceiptEditTextTicketNumber
+        mUploadEbReceiptTextViewSiteId.setText(site_id);//mUploadEbReceiptEditTextSiteId
+        mUploadEbReceiptTextViewSiteName.setText(site_name);//mUploadEbReceiptEditTextSiteName
+        mUploadEbReceiptTextViewPaymentTypeVal.setText(modeOfPayment);
 
-        mUploadEbReceiptTextViewPaymentTypeVal.setOnClickListener(new View.OnClickListener() {
+        /*mUploadEbReceiptTextViewPaymentTypeVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(UploadEBReceiptActivity.this,
@@ -153,7 +150,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
                     }
                 });
             }
-        });
+        });*/
 
         mUploadEbReceiptButtonEbReceiptPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,9 +194,10 @@ public class UploadEBReceiptActivity extends BaseActivity {
     private boolean checkValidation() {
         String payment_type = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();
 
-        String ebPaymentReceiptNumber = mUploadEbReceiptTextViewEbPaymentReceiptNumber.getText().toString();
-        String ebPaymentDate = mUploadEbReceiptTextViewuploadEbPaymentDate.getText().toString();
-        String ebPaymentAmount = mUploadEbReceiptTextViewEbPaymentAmount.getText().toString();
+        String ebPaymentReceiptNumber = mUploadEbReceiptEditTextEbPaymentReceiptNumber.getText().toString();
+        String ebPaymentDate = mUploadEbReceiptEditTextEbPaymentDate.getText().toString();
+        String ebPaymentAmount = mUploadEbReceiptEditTextEbPaymentAmount.getText().toString();
+        String ebReceiptRemark = mUploadEbReceiptEditTextEbReceiptRemark.getText().toString();
 
         if (request_id.isEmpty() || request_id == null) {
             showToast("Invalid Request ID ");
@@ -214,7 +212,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
             showToast("Invalid Site Name ");
             return false;
         } else if (payment_type.isEmpty() || payment_type == null) {
-            showToast("Select Payment Type ");
+            showToast("Invalid Mode of Payment ");
             return false;
         } else if (ebPaymentReceiptNumber.isEmpty() || ebPaymentReceiptNumber == null) {
             showToast("Enter Payment Receipt Number ");
@@ -224,6 +222,9 @@ public class UploadEBReceiptActivity extends BaseActivity {
             return false;
         } else if (ebPaymentAmount.isEmpty() || ebPaymentAmount == null) {
             showToast("Enter Payment Amount ");
+            return false;
+        } else if (ebReceiptRemark.isEmpty() || ebReceiptRemark == null) {
+            showToast("Enter EB Receipt Remark ");
             return false;
         } else if (base64String.isEmpty() || base64String == null) {
             showToast("Upload Receipt ");
@@ -252,25 +253,35 @@ public class UploadEBReceiptActivity extends BaseActivity {
 
         try {
             showBusyProgress();
-            String userId = sessionManager.getSessionUserId();
+            /*String userId = sessionManager.getSessionUserId();
             String accessToken = sessionManager.getSessionDeviceToken();
-            //String paymentMode = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();
-            String ebPaymentRemark = mUploadEbReceiptTextViewEbPaymentRemark.getText().toString();
+            String paymentMode = mUploadEbReceiptTextViewPaymentTypeVal.getText().toString();*/
+
+            String ebPaymentReceiptNumber = mUploadEbReceiptEditTextEbPaymentReceiptNumber.getText().toString();
+            String ebPaymentDate = mUploadEbReceiptEditTextEbPaymentDate.getText().toString();
+            String ebPaymentAmount = mUploadEbReceiptEditTextEbPaymentAmount.getText().toString();
+            String ebReceiptRemark = mUploadEbReceiptEditTextEbReceiptRemark.getText().toString();
 
 
-            String ebPaymentReceiptNumber = mUploadEbReceiptTextViewEbPaymentReceiptNumber.getText().toString();
-            String ebPaymentDate = mUploadEbReceiptTextViewuploadEbPaymentDate.getText().toString();
-            String ebPaymentAmount = mUploadEbReceiptTextViewEbPaymentAmount.getText().toString();
-
-            //ebPaymentReceiptNumber, ebPaymentDate, ebPaymentAmount,
-            ebBillUploadReceipt = new EBBillUploadReceipt(userId, accessToken, request_id, ebPaymentRemark, ebPaymentReceiptNumber, ebPaymentDate, ebPaymentAmount, base64String);
+            /*ebBillUploadReceipt = new EBBillUploadReceipt(userId, accessToken, request_id, ebPaymentReceiptNumber, ebPaymentDate, ebPaymentAmount, ebReceiptRemark, base64String);
 
             Gson gson2 = new GsonBuilder().create();
-            String jsonString = gson2.toJson(ebBillUploadReceipt);
+            String jsonString = gson2.toJson(ebBillUploadReceipt);*/
 
             //offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
-            GsonRequest<EBlSubmitResposeData> eBlSubmitResposeDataGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.SubmitEbfillingPaymentEeceipt, jsonString, EBlSubmitResposeData.class,
+            JSONObject jo = new JSONObject();
+
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jo.put("EbpaymentrequestId", request_id);
+            jo.put("BillPaymentReceiptNumber", ebPaymentReceiptNumber);
+            jo.put("BillPaymentAmount", ebPaymentAmount);
+            jo.put("BillPaymentDate", ebPaymentDate);
+            jo.put("EbPaymentRemark", ebReceiptRemark);
+            jo.put("EbReceiptScanCopyImageName", base64String);
+
+            GsonRequest<EBlSubmitResposeData> eBlSubmitResposeDataGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.SubmitEbfillingPaymentEeceipt, jo.toString(), EBlSubmitResposeData.class,
                     new Response.Listener<EBlSubmitResposeData>() {
                         @Override
                         public void onResponse(EBlSubmitResposeData response) {
@@ -305,35 +316,31 @@ public class UploadEBReceiptActivity extends BaseActivity {
         }
     }
 
-
     private void assignViews() {
-        mUploadEbReceiptEditTextTicketNumber = (TextView) findViewById(R.id.uploadEbReceipt_textView_ticketNumber);
-        mUploadEbReceiptEditTextSiteId = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteId);
-        mUploadEbReceiptEditTextSiteName = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteName);
+        mUploadEbReceiptTextViewTicketNumber = (TextView) findViewById(R.id.uploadEbReceipt_textView_ticketNumber);
+        mUploadEbReceiptTextViewSiteId = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteId);
+        mUploadEbReceiptTextViewSiteName = (TextView) findViewById(R.id.uploadEbReceipt_textView_siteName);
         mUploadEbReceiptTextViewPaymentTypeVal = (TextView) findViewById(R.id.uploadEbReceipt_textView_paymentType_val);
-
+        mUploadEbReceiptEditTextEbPaymentReceiptNumber = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentReceiptNumber);
+        mUploadEbReceiptTextViewDdPaymentDate = (TextView) findViewById(R.id.uploadEbReceipt_textView_ddPaymentDate);
+        mUploadEbReceiptEditTextEbPaymentDate = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentDate);
+        mUploadEbReceiptEditTextEbPaymentAmount = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentAmount);
+        mUploadEbReceiptEditTextEbReceiptRemark = (EditText) findViewById(R.id.uploadEbReceipt_editText_EbReceiptRemark);
         mUploadEbReceiptButtonEbReceiptPhoto = (ImageView) findViewById(R.id.uploadEbReceipt_button_ebReceiptPhoto);
         mUploadEbReceiptButtonEbReceiptPhotoView = (ImageView) findViewById(R.id.uploadEbReceipt_button_ebReceiptPhotoView);
-
-        mUploadEbReceiptTextViewEbPaymentReceiptNumber = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentReceiptNumber);
-        mUploadEbReceiptTextViewuploadEbPaymentDate = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentDate);
-        mUploadEbReceiptTextViewEbPaymentAmount = (EditText) findViewById(R.id.uploadEbReceipt_editText_ebPaymentAmount);
-        mUploadEbReceiptTextViewEbPaymentRemark = (EditText) findViewById(R.id.uploadEbPayment_editText_DdChequeRemark);
-
-        mUploadEbReceiptTextViewEbPaymentAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
     }
 
     private void updateLabelPaymentDate() {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mUploadEbReceiptTextViewuploadEbPaymentDate.setText(sdf.format(myCalendar1.getTime()));
+        mUploadEbReceiptEditTextEbPaymentDate.setText(sdf.format(myCalendar1.getTime()));
 
 
     }
 
     private void setListners() {
-        mUploadEbReceiptTextViewuploadEbPaymentDate.setOnClickListener(new View.OnClickListener() {
+        mUploadEbReceiptEditTextEbPaymentDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
