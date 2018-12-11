@@ -2,7 +2,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -279,7 +277,7 @@ public class Tower_Detail extends BaseActivity {
 
 
     private void updateLabel() {
-        String myFormat = "dd/MMM/yyyy"; //In which you need put here
+        String myFormat = "dd/MMM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         mTowerDetailEditTextDateOfPaintingOfTheTower.setText(sdf.format(myCalendar.getTime()));
@@ -353,7 +351,6 @@ public class Tower_Detail extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
             case R.id.menuSubmit:

@@ -3,7 +3,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,21 +15,17 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -105,7 +100,7 @@ public class Land_Details extends BaseActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
-    public String date_flag = "no";
+    //public String date_flag = "no";
 
     private AlertDialogManager alertDialogManager;
 
@@ -168,9 +163,7 @@ public class Land_Details extends BaseActivity {
                 if (ContextCompat.checkSelfPermission(Land_Details.this,
                         Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
-
                     if (getFromPref(Land_Details.this, ALLOW_KEY)) {
-
                         showSettingsAlert();
 
                     } else if (ContextCompat.checkSelfPermission(Land_Details.this,
@@ -231,7 +224,6 @@ public class Land_Details extends BaseActivity {
 
     private void assignViews() {
         mLandDetailsTextViewTypeOfLand = (TextView) findViewById(R.id.landDetails_textView_typeOfLand);
-        //mLandDetailsSpinnerTypeOfLand = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_typeOfLand);
         mLandDetailsTextViewTypeOfLandVal = (TextView) findViewById(R.id.landDetails_textView_typeOfLand_val);
         mLandDetailsTextViewAreaOfLand = (TextView) findViewById(R.id.landDetails_textView_areaOfLand);
         mLandDetailsEditTextAreaOfLand = (EditText) findViewById(R.id.landDetails_editText_areaOfLand);
@@ -247,12 +239,12 @@ public class Land_Details extends BaseActivity {
         mLandDetailsButtonLayoutOfLand = (ImageView) findViewById(R.id.landDetails_button_layoutOfLand);
         mLandDetailsButtonLayoutOfLandView = (ImageView) findViewById(R.id.landDetails_button_layoutOfLandView);
         mLandDetailsTextViewCopyAgreementWithOwner = (TextView) findViewById(R.id.landDetails_textView_copyAgreementWithOwner);
-        //mLandDetailsSpinnerCopyAgreementWithOwner = (SearchableSpinner) findViewById(R.id.landDetails_Spinner_copyAgreementWithOwner);
         mLandDetailsTextViewCopyAgreementWithOwnerVal = (TextView) findViewById(R.id.landDetails_textView_copyAgreementWithOwner_val);
         mLandDetailsTextViewValidityOfAgreement = (TextView) findViewById(R.id.landDetails_textView_validityOfAgreement);
         mLandDetailsEditTextDateOfvalidityOfAgreement = (EditText) findViewById(R.id.landDetails_editText_dateOfvalidityOfAgreement);
 
         mLandDetailsLinearLayoutValidityOfAgreement = (LinearLayout) findViewById(R.id.landDetails_linearLayout_validityOfAgreement);
+
         //mLandDetailsEditTextAreaOfLand.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -384,7 +376,7 @@ public class Land_Details extends BaseActivity {
         }
     }
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     private void visibilityOfValidityOfAgreement(String ValidityOfAgreement) {
         if (ValidityOfAgreement.equals("Available")) {
             mLandDetailsLinearLayoutValidityOfAgreement.setVisibility(View.VISIBLE);

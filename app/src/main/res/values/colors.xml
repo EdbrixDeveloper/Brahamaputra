@@ -39,6 +39,7 @@
 
     <color name="limegreen">#cbfdcb</color>
     <color name="mahindralogo">#e51937</color>
-    <color name="yellow">#FFFF00</color>
+    <!--<color name="yellow">#FFFF00</color>-->
+    <color name="yellow">#F0E68C</color>
 
 </resources>

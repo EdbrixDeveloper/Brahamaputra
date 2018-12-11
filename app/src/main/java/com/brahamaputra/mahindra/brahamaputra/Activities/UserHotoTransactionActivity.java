@@ -1,16 +1,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
-import android.os.BatteryManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,39 +14,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.ACDB_DCDB_Data;
-import com.brahamaputra.mahindra.brahamaputra.Data.ActiveequipmentDetailsData;
-import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionersData;
-import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetData;
-import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
-import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceEquipmentData;
-import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ElectricConnectionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetailsData;
-import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
-import com.brahamaputra.mahindra.brahamaputra.Data.MediaData;
-import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
-import com.brahamaputra.mahindra.brahamaputra.Data.PowerManagementSystemData;
-import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
-import com.brahamaputra.mahindra.brahamaputra.Data.ServoStabilizerData;
-import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePhotoCaptureData;
-import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
-import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
-import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
-import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
@@ -156,7 +128,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
             gpsTracker = new GPSTracker(UserHotoTransactionActivity.this);
         /*Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         if (gpsTracker.canGetLocation()) {
-            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
             Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         } else {
             showToast("Could not detect location");
@@ -171,7 +143,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                     checkInLat = String.valueOf(gpsTracker.getLatitude());
                     checkInLong = String.valueOf(gpsTracker.getLongitude());*/
 
-                /*Commented by arjun 24112018
+                /*Commented by 008 24112018
                 startActivityForResult(new Intent(UserHotoTransactionActivity.this, HotoSectionsListActivity.class), RESULT_HOTO_READING);*/
 
                 /*} else {
@@ -359,7 +331,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                //submitHotoTicket(); Comment by Arjun on 10-11-2018
+                //submitHotoTicket(); Comment by 008 on 10-11-2018
                 //sessionManager.updateSessionUserTicketId(null);
                 //sessionManager.updateSessionUserTicketName(null);
                 //finish();
@@ -389,7 +361,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                         checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
                         submitDetails();
-                        CheckSubmitFlagOfAllHotoForms();//24112018 by arjun
+                        CheckSubmitFlagOfAllHotoForms();//24112018 by 008
                         //showSettingsAlert();
 
                     } else {
@@ -399,7 +371,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
                                     Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
@@ -414,7 +386,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         }
     }
 
-    ////added by arjun on 10-11-2018 Start
+    ////added by 008 on 10-11-2018 Start
     private void CheckSubmitFlagOfAllHotoForms() {
         try {
             if (!hotoTransactionData.isAllHotoFormsSubmit()) {
@@ -462,7 +434,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
         }).show();
 
     }
-////added by arjun on 10-11-2018 End
+    ////added by 008 on 10-11-2018 End
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -475,10 +447,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
-
                 Gson gson = new Gson();
-//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
-
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
 
                 if (hotoTransactionData != null) {
@@ -563,7 +532,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
             offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
         } catch (Exception e) {
@@ -633,7 +601,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
     }
 
 
-    //Arjun Added Code For Source Of Power Field Validation on 20112018 0654pm
+    //008 Added Code For Source Of Power Field Validation on 20112018 0654pm
     private ElectricConnectionData electricConnectionData;
 
     private void setElectricConnectionDataOnSourceOfPowerChangedValidation() {
@@ -686,8 +654,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
                 submitHotoTicket();
-            } else {
-                //Toast.makeText(UserHotoTransactionActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();

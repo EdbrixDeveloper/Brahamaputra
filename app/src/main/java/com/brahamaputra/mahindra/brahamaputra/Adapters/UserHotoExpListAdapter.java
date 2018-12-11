@@ -14,7 +14,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketsDate;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
@@ -22,15 +21,16 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<HotoTicketsDate> _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<Object, List<HotoTicket>> _listDataChild;
     private HotoTicketList hotoTicketList;
+    /*import java.util.HashMap;
+    private HashMap<Object, List<HotoTicket>> _listDataChild;
 
     public UserHotoExpListAdapter(Context context, List<HotoTicketsDate> listDataHeader,
                                   HashMap<Object, List<HotoTicket>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
-    }
+    }*/
 
     public UserHotoExpListAdapter(Context _context, HotoTicketList hotoTicketList) {
         this._context = _context;
@@ -134,4 +134,5 @@ public class UserHotoExpListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
 }

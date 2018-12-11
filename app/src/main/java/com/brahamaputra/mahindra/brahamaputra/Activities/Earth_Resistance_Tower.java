@@ -2,7 +2,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.Menu;
@@ -12,13 +11,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -160,7 +157,7 @@ public class Earth_Resistance_Tower extends BaseActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd/MMM/yyyy"; //In which you need put here
+        String myFormat = "dd/MMM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         mEarthResistanceTowerEditTextDateOfearthResistanceMeasured.setText(sdf.format(myCalendar.getTime()));
@@ -225,7 +222,6 @@ public class Earth_Resistance_Tower extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
             case R.id.menuSubmit:

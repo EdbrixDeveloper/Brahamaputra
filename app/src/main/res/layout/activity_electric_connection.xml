@@ -31,8 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Type of Electric Connection*"
-                    android:textColor="@color/colorBlueLink"/>
-
+                    android:textColor="@color/colorBlueLink" />
 
                 <TextView
                     android:id="@+id/electricConnection_textView_typeOfElectricConnection_val"
@@ -42,7 +41,6 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
-
 
             </LinearLayout>
 
@@ -59,8 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Tariff*"
-                    android:textColor="@color/colorBlueLink"/>
-
+                    android:textColor="@color/colorBlueLink" />
 
                 <TextView
                     android:id="@+id/electricConnection_textView_tariff_val"
@@ -113,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Existing load at site (KVA)"
-                    android:textColor="@color/colorBlueLink"/>
+                    android:textColor="@color/colorBlueLink" />
 
                 <EditText
                     android:id="@+id/electricConnection_editText_existingLoadAtSiteKVA"
@@ -144,7 +141,7 @@
                 <EditText
                     android:id="@+id/electricConnection_textView_nameOfSupplyCompany_val"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="65dp"
                     android:layout_weight="0.6"
                     android:hint="Name of the supply company"
                     android:textAlignment="viewStart" />
@@ -202,7 +199,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/electricConnection_linearLayout_ebMeterReadingInKWh"
                 android:layout_width="match_parent"
@@ -231,7 +227,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/electricConnection_linearLayout_ebSupplier"
                 android:layout_width="match_parent"
@@ -257,7 +252,6 @@
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
-
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/electricConnection_linearLayout_ebCostPerUnitForSharedConnection"
@@ -336,6 +330,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -355,7 +350,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_transformerCapacityInKva"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -389,6 +383,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -408,7 +403,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_sectionName"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -436,7 +430,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_sectionNumber"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -464,7 +457,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_consumerNumber"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -498,6 +490,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -517,7 +510,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_ebMeterSerialNumber"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -551,6 +543,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -576,6 +569,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -601,6 +595,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -626,6 +621,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -651,6 +647,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -684,7 +681,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_averageEbAvailabilityPerDay"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -716,7 +712,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_scheduledPowerCutInHrs"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -807,7 +802,6 @@
                     android:layout_weight="0.4"
                     android:text="Type|Mode of Payment*" />
 
-
                 <TextView
                     android:id="@+id/electricConnection_textView_typeModeOfPayment_Val"
                     style="@style/MyTheme"
@@ -817,9 +811,7 @@
                     android:hint="Select"
                     android:textAlignment="viewStart" />
 
-
             </LinearLayout>
-
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -864,7 +856,6 @@
 
                 <EditText
                     android:id="@+id/electricConnection_editText_bankAccountNo"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

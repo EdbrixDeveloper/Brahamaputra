@@ -407,6 +407,8 @@ public class Shelter extends BaseActivity {
             if (hototicket_Selected_SiteType.equals("Outdoor")) {
 
                 mshelterLinearLayoutOutdoorShelterLock.setVisibility(View.VISIBLE);
+                mshelterLinearLayoutShelterLock.setVisibility(View.GONE);
+                mShelterTextViewShelterLockVal.setText("");
                 /*mshelterLinearLayoutNumberOfBtsInsideShelter.setVisibility(View.GONE);
                 mshelterLinearLayoutNumberOfBtsOutsideShelter.setVisibility(View.GONE);
                 mshelterLinearLayoutShelterLock.setVisibility(View.GONE);
@@ -428,6 +430,7 @@ public class Shelter extends BaseActivity {
             } else if (hototicket_Selected_SiteType.equals("Indoor")) {
                 mshelterLinearLayoutOutdoorShelterLock.setVisibility(View.GONE);
                 mShelterTextViewOutdoorShelterLockVal.setText("");
+                mshelterLinearLayoutShelterLock.setVisibility(View.VISIBLE);
             }
         } catch (Exception e) {
             e.printStackTrace();

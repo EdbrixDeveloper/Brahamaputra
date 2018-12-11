@@ -24,17 +24,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -55,16 +50,16 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
     public static final String ARG_LAYOUT = "layout";
 
     protected CircleLayout circleLayout;
-   // protected TextView selectedTextView;
+    // protected TextView selectedTextView;
     protected ImageView mDashboard_myMaster;
 
     final public int CHECK_PERMISSIONS = 123;
     private AlertDialogManager alertDialogManager;
     private SessionManager sessionManager;
     ToastMessage toastMessage;
-    boolean isItemClicked = false;
-    String MenuSelected = "";
-    View view_pass;
+    //boolean isItemClicked = false;
+    //String MenuSelected = "";
+    //View view_pass;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -97,11 +92,11 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
 
         //selectedTextView = (TextView) findViewById(R.id.selected_textView);
         toastMessage = new ToastMessage(DashboardCircularActivity.this);
-        String name = null;
+        /*String name = null;
         final View view = circleLayout.getSelectedItem();
         if (view instanceof CircleImageView) {
             name = ((CircleImageView) view).getName();
-        }
+        } by008 */
         //selectedTextView.setText(name);
 
         //selectedTextView.setText("Brahmputra");
@@ -140,14 +135,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         });
 
     }
-
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.dashboard_menu, menu);
-        return true;
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -243,40 +230,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
 
     }
 
-   /* public void Rotate(View view) {
-        Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
-        animation.setDuration(250);
-        view.startAnimation(animation);
-        view_pass = view;
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                menu_selected(view_pass);
-            }
-        }, 100);
-    }
-*/
-
-    @Override
-    public void onCenterClick() {
-        // Toast.makeText(getApplicationContext(), R.string.center_click, Toast.LENGTH_SHORT).show();
-    }
-
-    public void onAddClick(View view) {
-      /*  CircleImageView newMenu = new CircleImageView(this);
-        newMenu.setBackgroundResource(R.drawable.circle);
-        newMenu.setImageResource(R.drawable.ic_voice);
-        newMenu.setName(getString(R.string.voice_search));
-        circleLayout.addView(newMenu);*/
-    }
-
-    public void onRemoveClick(View view) {
-        if (circleLayout.getChildCount() > 0) {
-            circleLayout.removeViewAt(circleLayout.getChildCount() - 1);
-        }
-    }
-
     public void checkSystemLocation() {
         LocationManager lm = (LocationManager) DashboardCircularActivity.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
@@ -315,11 +268,9 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        //TicketID = String.valueOf(taskEditText.getText());
                                         Intent intent = new Intent(DashboardCircularActivity.this, UserHotoTransactionActivity.class);
                                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardCircularActivity.this));
                                         intent.putExtra("ticketNO", String.valueOf(taskEditText.getText()));
-                                        //sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
                                         sessionManager.updateSessionUserTicketName(String.valueOf(taskEditText.getText()));
 
                                         startActivity(intent);
@@ -352,4 +303,46 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
             }
         }, 2000);
     }
+
+    @Override
+    public void onCenterClick() {
+        // Toast.makeText(getApplicationContext(), R.string.center_click, Toast.LENGTH_SHORT).show();
+    }
+
+    public void onAddClick(View view) {
+      /*  CircleImageView newMenu = new CircleImageView(this);
+        newMenu.setBackgroundResource(R.drawable.circle);
+        newMenu.setImageResource(R.drawable.ic_voice);
+        newMenu.setName(getString(R.string.voice_search));
+        circleLayout.addView(newMenu);*/
+    }
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.dashboard_menu, menu);
+        return true;
+    }*/
+
+    public void onRemoveClick(View view) {
+        if (circleLayout.getChildCount() > 0) {
+            circleLayout.removeViewAt(circleLayout.getChildCount() - 1);
+        }
+    }
+
+    /* public void Rotate(View view) {
+        Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
+        animation.setDuration(250);
+        view.startAnimation(animation);
+        view_pass = view;
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                menu_selected(view_pass);
+            }
+        }, 100);
+    }
+    */
+
 }

@@ -65,7 +65,7 @@ public class LoginActivity extends BaseActivity {
             assignViews();
             setListener();
             hideKeyboard();
-            textViewAppVersion.setText("App Version : "+BuildConfig.VERSION_NAME);
+            textViewAppVersion.setText("App Version : " + BuildConfig.VERSION_NAME);
         }
         checkPermission();
         sessionManager = new SessionManager(LoginActivity.this);
@@ -206,7 +206,7 @@ public class LoginActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case CHECK_PERMISSIONS: {
-                boolean isPerpermissionForAllGranted = false;
+                //boolean isPerpermissionForAllGranted = false;
                 if (grantResults.length > 0) {
                     boolean CAMERA = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean READ_EXTERNAL_STORAGE = grantResults[1] == PackageManager.PERMISSION_GRANTED;

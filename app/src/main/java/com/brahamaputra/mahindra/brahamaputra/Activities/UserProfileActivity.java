@@ -102,10 +102,6 @@ public class UserProfileActivity extends BaseActivity {
             Glide.with(getApplicationContext())
                     .load(imageUri)
                     .into(mImageView2);
-
-           /* GlideApp.with(context)
-                    .load("http://via.placeholder.com/300.png")
-                    .into(ivImg);*/
         }
     }
 
@@ -128,7 +124,7 @@ public class UserProfileActivity extends BaseActivity {
                 /*sessionManager.clearSessionCredentials();
                 finish();
                 //moveTaskToBack(true);
-                startActivity(new Intent(UserProfileActivity.this,LoginActivity.class)); Commented by Arjun on 10-11-2018*/
+                startActivity(new Intent(UserProfileActivity.this,LoginActivity.class)); Commented by 008 on 10-11-2018*/
                 showSettingsAlert();
                 return true;
 
@@ -145,7 +141,7 @@ public class UserProfileActivity extends BaseActivity {
         }
     }
 
-    ////added by arjun on 10-11-2018 Start
+    ////added by 008 on 10-11-2018 Start
 
 
     private void showSettingsAlert() {
@@ -165,7 +161,7 @@ public class UserProfileActivity extends BaseActivity {
         }).show();
 
     }
-////added by arjun on 10-11-2018 End
+////added by 008 on 10-11-2018 End
 
     @Override
     public void onBackPressed() {

@@ -1,21 +1,16 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -23,11 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoExpListAdapter;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoListTiketData;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketsDate;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -41,32 +32,25 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 
 public class UsersHotoListActivity extends BaseActivity {
 
-    private UserHotoListAdapter mAdapter;
+    //import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoListAdapter;
+    //private UserHotoListAdapter mAdapter;
     private UserHotoExpListAdapter userHotoExpListAdapter;
     public ExpandableListView userHotoList_listView_hotoList;
-    private List<HotoTicketsDate> HotoTicketsDates;
-    private HashMap<Object, List<HotoTicket>> HotoTicketMap;
     private AlertDialogManager alertDialogManager;
-
     private SessionManager sessionManager;
-
     private HotoTicketList hotoTicketList;
+    public GPSTracker gpsTracker;
 
-    private TextView txtNoTicketFound;
 
     /////////////////////////
     public static final int RESULT_HOTO_SUBMIT = 257;
+    private TextView txtNoTicketFound;
 
-    public GPSTracker gpsTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +68,7 @@ public class UsersHotoListActivity extends BaseActivity {
         sessionManager = new SessionManager(UsersHotoListActivity.this);
         gpsTracker = new GPSTracker(UsersHotoListActivity.this);
         if (gpsTracker.canGetLocation()) {
-            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
             Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         }
 
@@ -138,11 +122,10 @@ public class UsersHotoListActivity extends BaseActivity {
                             String customerName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCustomerName().toString();
                             String circleName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getCircleName().toString();
                             String ssaName = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getSsaName().toString();
-                            hototicket_Selected_SiteType =siteType;
+                            hototicket_Selected_SiteType = siteType;
 
                             String hotoTickStatus = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getStatus().toString();
                             hototicket_nameOfSupplyCompany = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getNameOfSupplyCompany().toString();
-                            //showToast(hototicket_nameOfSupplyCompany);
 
                             if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP") || hotoTickStatus.equals("Reassigned")) {
                                 checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
@@ -156,7 +139,7 @@ public class UsersHotoListActivity extends BaseActivity {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
                                     Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
@@ -207,7 +190,6 @@ public class UsersHotoListActivity extends BaseActivity {
                         @Override
                         public void onResponse(@NonNull HotoTicketList response) {
                             hideBusyProgress();
-                            //showToast(""+response.getSuccess().toString());
                             if (response.getSuccess() == 1) {
                                 hotoTicketList = response;
                                 if (hotoTicketList.getHotoTicketsDates() != null && hotoTicketList.getHotoTicketsDates().size() > 0) {
@@ -279,50 +261,6 @@ public class UsersHotoListActivity extends BaseActivity {
             showToast("Something went wrong. Please try again later.");
         }
 
-
-       /* HotoTicketsDates = new ArrayList<>();
-        HotoTicketMap = new HashMap<Object, List<HotoTicket>>();
-
-        // Adding child data
-        List<HotoTicket> header1  = new ArrayList<HotoTicket>();
-        header1.add(new HotoTicket("TKT_26_121","Closed"));
-        header1.add(new HotoTicket("TKT_26_122","Closed"));
-        header1.add(new HotoTicket("TKT_26_123","Open"));
-        HotoTicketsDates.add(new HotoTicketsDate("26 Oct 2018", ""+header1.size()));
-
-        List<HotoTicket> header2  = new ArrayList<HotoTicket>();
-        header2.add(new HotoTicket("TKT_27_131","Closed"));
-        header2.add(new HotoTicket("TKT_27_132","Closed"));
-        header2.add(new HotoTicket("TKT_27_133","Closed"));
-        header2.add(new HotoTicket("TKT_27_134","Closed"));
-        header2.add(new HotoTicket("TKT_27_135","Closed"));
-        HotoTicketsDates.add(new HotoTicketsDate("27 Oct 2018", ""+header2.size()));
-
-        List<HotoTicket> header3  = new ArrayList<HotoTicket>();
-        header3.add(new HotoTicket("TKT_28_121","Closed"));
-        header3.add(new HotoTicket("TKT_28_122","Closed"));
-        header3.add(new HotoTicket("TKT_28_123","Closed"));
-        HotoTicketsDates.add(new HotoTicketsDate("28 Oct 2018", ""+header3.size()));
-
-        List<HotoTicket> header4  = new ArrayList<HotoTicket>();
-        header4.add(new HotoTicket("TKT_29_121","Closed"));
-        header4.add(new HotoTicket("TKT_29_122","Closed"));
-        header4.add(new HotoTicket("TKT_29_123","Closed"));
-        header4.add(new HotoTicket("TKT_29_124","Closed"));
-        HotoTicketsDates.add(new HotoTicketsDate("29 Oct 2018", ""+header4.size()));
-
-        HotoTicketMap.put(HotoTicketsDates.get(0), header1); // Header, Child data
-        HotoTicketMap.put(HotoTicketsDates.get(1), header2);
-        HotoTicketMap.put(HotoTicketsDates.get(2), header3);
-        HotoTicketMap.put(HotoTicketsDates.get(3), header4);
-
-        userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this,HotoTicketsDates,HotoTicketMap);
-
-        userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
-
-        for(int i=0; i<HotoTicketsDates.size();i++){
-            userHotoList_listView_hotoList.expandGroup(i);
-        }*/
     }
 
     @Override
@@ -354,8 +292,10 @@ public class UsersHotoListActivity extends BaseActivity {
         }
     }
 
-    public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId, String hotoTicketDate, String siteId, String siteName, String siteAddress,
-                                    String status, String siteType, String stateName, String customerName, String circleName, String ssaName) {
+    public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId, String hotoTicketDate, String siteId,
+                                    String siteName, String siteAddress, String status, String siteType, String stateName,
+                                    String customerName, String circleName, String ssaName) {
+
         LocationManager lm = (LocationManager) UsersHotoListActivity.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;

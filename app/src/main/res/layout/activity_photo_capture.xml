@@ -102,7 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="From the entrance of the gate"
+                    android:text="From the entrance of the gate (Landscape)"
                     android:textColor="@color/colorBlack" />
 
             </LinearLayout>
@@ -166,7 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="From the entrance of the shelter"
+                    android:text="From the entrance of the shelter (Portrait)"
                     android:textColor="@color/colorBlack" />
                 <!--(Supress if outdoor site)-->
 
@@ -230,7 +230,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="Keeping the box in open condition"
+                    android:text="Keeping the box in open condition (Portrait)"
                     android:textColor="@color/colorBlack" />
 
             </LinearLayout>
@@ -293,7 +293,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="Overview"
+                    android:text="Overview (Portrait)"
                     android:textColor="@color/colorBlack" />
 
             </LinearLayout>
@@ -356,7 +356,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="During KWH display only"
+                    android:text="During KWH display only (Portrait)"
                     android:textColor="@color/colorBlack" />
 
             </LinearLayout>
@@ -419,7 +419,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="In front of DG HMR"
+                    android:text="In front of DG HMR (Portrait)"
                     android:textColor="@color/colorBlack" />
                 <!--(Supress if Non-DG Site)-->
 
@@ -483,7 +483,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:text="By Keeping the canopy door open"
+                    android:text="By Keeping the canopy door open (Landscape)"
                     android:textColor="@color/colorBlack" />
                 <!--(Supress if Non-DG Site)-->
 

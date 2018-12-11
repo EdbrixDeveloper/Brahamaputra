@@ -1,7 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,8 +45,6 @@ public class HotoSectionsListActivity extends BaseActivity {
         setContentView(R.layout.activity_hoto_sections_list);
 
         hotoSections_listView_sections = (ListView) findViewById(R.id.hotoSections_listView_sections);
-
-        //this.setTitle("Readings");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -250,7 +247,6 @@ public class HotoSectionsListActivity extends BaseActivity {
                 return hotoTransactionData.getSitePhotoCaptureData().getSubmited();
 
         }
-        //return false;
         return 0;
     }
 
@@ -274,8 +270,7 @@ public class HotoSectionsListActivity extends BaseActivity {
             //Boolean greenStatus = false;
             int status = 0;
 
-            for (int i = 0; i < values.length; i++)
-            {
+            for (int i = 0; i < values.length; i++) {
                 status = checkIsSubmited(i);
 
                 if (i / 2 == 0) {

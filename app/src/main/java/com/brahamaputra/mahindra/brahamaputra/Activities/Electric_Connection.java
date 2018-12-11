@@ -2,10 +2,8 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,9 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceTowerData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ElectricConnectionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -101,8 +97,8 @@ public class Electric_Connection extends BaseActivity {
     private TextView mElectricConnectionTextViewEbBillDateVal;
 
 
-    private TextView mElectricConnectionTextViewSapVendorCode;
-    private EditText mElectricConnectionEditTextSapVendorCode;
+    //private TextView mElectricConnectionTextViewSapVendorCode;
+    //private EditText mElectricConnectionEditTextSapVendorCode;
 
     private TextView mElectricConnectionTextViewTypeModeOfPayment;
     private TextView mElectricConnectionTextViewTypeModeOfPayment_Val;
@@ -134,11 +130,11 @@ public class Electric_Connection extends BaseActivity {
 
     DecimalConversion decimalConversion;
     private static final String TAG = Electric_Connection.class.getSimpleName();
-    String selectedHour = "HH", selectedMinute = "MM";
+    //String selectedHour = "HH", selectedMinute = "MM";
 
     String str_typeOfElectricConnection;
     String str_tariff;
-    String str_nameOfSupplyCompany;
+    //String str_nameOfSupplyCompany;
     String str_copyOfElectricBills;
     String str_ebSupplier;
     String str_ebStatus;
@@ -335,8 +331,8 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionTextViewEbBillDate = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate);
         //mElectricConnectionEditTextEbBillDate = (EditText) findViewById(R.id.electricConnection_editText_ebBillDate);
         mElectricConnectionTextViewEbBillDateVal = (TextView) findViewById(R.id.electricConnection_textView_ebBillDate_Val);
-        mElectricConnectionTextViewSapVendorCode = (TextView) findViewById(R.id.electricConnection_textView_sapVendorCode);
-        mElectricConnectionEditTextSapVendorCode = (EditText) findViewById(R.id.electricConnection_editText_sapVendorCode);
+        //mElectricConnectionTextViewSapVendorCode = (TextView) findViewById(R.id.electricConnection_textView_sapVendorCode);
+        //mElectricConnectionEditTextSapVendorCode = (EditText) findViewById(R.id.electricConnection_editText_sapVendorCode);
 
         mElectricConnectionTextViewTypeModeOfPayment = (TextView) findViewById(R.id.electricConnection_textView_typeModeOfPayment);
         mElectricConnectionTextViewTypeModeOfPayment_Val = (TextView) findViewById(R.id.electricConnection_textView_typeModeOfPayment_Val);
@@ -774,7 +770,6 @@ public class Electric_Connection extends BaseActivity {
         }
     }
 
-
     private void submitDetails() {
         try {
 
@@ -932,7 +927,6 @@ public class Electric_Connection extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
 
             case R.id.menuSubmit:
@@ -946,8 +940,6 @@ public class Electric_Connection extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    /**/
 
 
 }
