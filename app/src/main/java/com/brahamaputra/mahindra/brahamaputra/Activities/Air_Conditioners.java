@@ -100,6 +100,7 @@ public class Air_Conditioners extends BaseActivity {
     private TextView mAirConditionersTextViewWorkingConditionVal;
     private TextView mAirConditionersTextViewNatureOfProblem;
     private EditText mAirConditionersEditTextNatureOfProblem;
+    private ImageView button_ClearQRCodeScanView;
 
     private Button airCondition_button_previousReading;
     private Button airCondition_button_nextReading;
@@ -260,6 +261,16 @@ public class Air_Conditioners extends BaseActivity {
                 }
             }
         });
+        button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringQRCodeScan = "";
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
+                mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+
+            }
+        });
 
     }
 
@@ -312,6 +323,7 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersTextViewWorkingConditionVal = (TextView) findViewById(R.id.airConditioners_textView_workingCondition_val);
         mAirConditionersTextViewNatureOfProblem = (TextView) findViewById(R.id.airConditioners_textView_natureOfProblem);
         mAirConditionersEditTextNatureOfProblem = (EditText) findViewById(R.id.airConditioners_editText_natureOfProblem);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
 
         airCondition_button_nextReading = (Button) findViewById(R.id.airCondition_button_nextReading);
         airCondition_button_previousReading = (Button) findViewById(R.id.airCondition_button_previousReading);
@@ -614,8 +626,11 @@ public class Air_Conditioners extends BaseActivity {
                     //mAirConditionersButtonQRCodeScan;
                     base64StringQRCodeScan = airConditionersData.get(index).getqRCodeScan();
                     mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+                    button_ClearQRCodeScanView.setVisibility(View.GONE);
+
                     if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                         mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
 
                     mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.get(index).getAssetOwner());
@@ -695,8 +710,10 @@ public class Air_Conditioners extends BaseActivity {
 
             base64StringQRCodeScan = airConditionersData.get(pos).getqRCodeScan();
             mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                 mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
             }
 
             mAirConditionersTextViewAssetOwnerVal.setText(airConditionersData.get(pos).getAssetOwner());
@@ -759,6 +776,8 @@ public class Air_Conditioners extends BaseActivity {
         airConditioners_textView_AcNumber.setText("Reading: #" + (indexPos + 1));
 
         mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView.setVisibility(View.GONE);
+
         mAirConditionersTextViewAssetOwnerVal.setText("");
         mAirConditionersTextViewTypeOfAcSpliWindowVal.setText("");
         //mAirConditionersEditTextManufacturerMakeModel.setText("");
@@ -778,8 +797,10 @@ public class Air_Conditioners extends BaseActivity {
         base64StringQRCodeScan = "";
         if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
             mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+            button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
         } else {
             mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
         }
     }
 
@@ -847,14 +868,23 @@ public class Air_Conditioners extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mAirConditionersButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
+
             if (result.getContents() == null) {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                base64StringQRCodeScan = result.getContents();
-                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                    mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringQRCodeScan = result.getContents();
+                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                        mAirConditionersButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringQRCodeScan = "";
+                    showToast("QR Code Already Used in Application");
                 }
+
             }
         }
         /*This Commented by Arjun On 15-12-2018 For QR Code Scan Purpose

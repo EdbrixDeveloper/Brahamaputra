@@ -115,7 +115,7 @@
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.2"
                         android:clickable="true"
                         android:padding="2dp"
                         android:scaleType="fitStart"
@@ -125,11 +125,23 @@
                         android:id="@+id/powerPlantDetails_button_QRCodeScanView"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.2"
                         android:clickable="true"
                         android:padding="2dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/baseline_done_black_18dp"
+                        android:visibility="gone" />
+
+
+                    <ImageView
+                        android:id="@+id/button_ClearQRCodeScanView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.2"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_close_black_24dp"
                         android:visibility="gone" />
 
                 </LinearLayout>

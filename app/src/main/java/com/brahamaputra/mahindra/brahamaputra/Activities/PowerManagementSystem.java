@@ -103,6 +103,7 @@ public class PowerManagementSystem extends BaseActivity {
     private TextView mPowerManagementSystemTextViewWorkingConditionVal;
     private TextView mPowerManagementSystemTextViewNatureofProblem;
     private EditText mPowerManagementSystemEditTextNatureofProblem;
+    private ImageView button_ClearQRCodeScanView;
 
     private void assignViews() {
         mPowerManagementSystemTextViewQRCodeScan = (TextView) findViewById(R.id.powerManagementSystem_textView_QRCodeScan);
@@ -124,6 +125,7 @@ public class PowerManagementSystem extends BaseActivity {
         mPowerManagementSystemTextViewWorkingConditionVal = (TextView) findViewById(R.id.powerManagementSystem_textView_WorkingCondition_val);
         mPowerManagementSystemTextViewNatureofProblem = (TextView) findViewById(R.id.powerManagementSystem_textView_NatureofProblem);
         mPowerManagementSystemEditTextNatureofProblem = (EditText) findViewById(R.id.powerManagementSystem_editText_NatureofProblem);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -252,6 +254,15 @@ public class PowerManagementSystem extends BaseActivity {
                     }
                 });
 
+            }
+        });
+        button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringPowerManagementSystem = "";
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
+                mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
             }
         });
 
@@ -384,8 +395,10 @@ public class PowerManagementSystem extends BaseActivity {
                 mPowerManagementSystemEditTextNatureofProblem.setText(powerManagementSystemData.getNatureofProblem());
 
                 mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
                 if (!base64StringPowerManagementSystem.isEmpty() && base64StringPowerManagementSystem != null) {
                     mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                 }
 
                 // New added for image #ImageSet
@@ -557,14 +570,23 @@ public class PowerManagementSystem extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (result.getContents() == null) {
                 base64StringPowerManagementSystem = "";
                 showToast("Cancelled");
             } else {
-                base64StringPowerManagementSystem = result.getContents();
-                if (!base64StringPowerManagementSystem.isEmpty() && base64StringPowerManagementSystem != null) {
-                    mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringPowerManagementSystem = result.getContents();
+                    if (!base64StringPowerManagementSystem.isEmpty() && base64StringPowerManagementSystem != null) {
+                        mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringPowerManagementSystem = "";
+                    showToast("QR Code Already Used in Application");
                 }
+
+
             }
         }
 

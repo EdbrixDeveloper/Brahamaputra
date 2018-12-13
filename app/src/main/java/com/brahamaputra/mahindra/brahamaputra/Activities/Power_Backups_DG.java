@@ -1038,10 +1038,17 @@ public class Power_Backups_DG extends BaseActivity {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                base64StringQRCodeScan = result.getContents();
-                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                    mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringQRCodeScan = result.getContents();
+                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringQRCodeScan = "";
+                    showToast("QR Code Already Used in Application");
                 }
+
+
             }
         }
     }

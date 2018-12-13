@@ -36,7 +36,7 @@
                     android:id="@+id/powerManagementSystem_button_QRCodeScan"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.2"
                     android:clickable="true"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
@@ -45,11 +45,23 @@
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:padding="2dp"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.2"
                     android:clickable="true"
                     android:scaleType="fitCenter"
                     android:visibility="gone"
                     android:src="@drawable/baseline_done_black_18dp" />
+
+
+                <ImageView
+                    android:id="@+id/button_ClearQRCodeScanView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.2"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_close_black_24dp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout

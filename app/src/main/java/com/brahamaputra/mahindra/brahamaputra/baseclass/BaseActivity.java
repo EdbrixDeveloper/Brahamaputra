@@ -15,6 +15,8 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Activities.Land_Details;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 
@@ -22,8 +24,12 @@ import com.brahamaputra.mahindra.brahamaputra.app.Config;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.DialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.commons.ToastMessage;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 /**
  * Created by rajk
@@ -42,6 +48,8 @@ public class BaseActivity extends AppCompatActivity {
 
     public static String checkOutBatteryData = "0";
     public static String checkInBatteryData = "0";
+
+    public static boolean isDuplicateQRcode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +119,6 @@ public class BaseActivity extends AppCompatActivity {
         dialogManager.hideBusyProgress();
     }
 
-
     protected void onNetworkStatusChanged(boolean status) {
 
     }
@@ -173,5 +180,79 @@ public class BaseActivity extends AppCompatActivity {
 //        else
 //            showToast("Firebase Reg Id is not received yet!");
 
+    }
+
+    public boolean isDuplicateQRcode (String strQrcode){
+
+        OfflineStorageWrapper offlineStorageWrapper;
+        HotoTransactionData hotoTransactionData = null;
+
+        String ticketId = sessionManager.getSessionUserTicketId();
+        String ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        String userId = sessionManager.getSessionUserId();
+
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(this, userId, ticketName);
+        //hotoTransactionData = new HotoTransactionData();
+
+        try {
+            String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+            Gson gson = new Gson();
+            hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ///Air Conditioners*
+        for(int i=0;i<hotoTransactionData.getAirConditionParentData().getAirConditionersData().size();i++){
+            if(hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)){
+                return true;
+            }
+        }
+
+        ///Solar Power System*
+        if(hotoTransactionData.getSolarPowerSystemData().getqRCodeScan().contains(strQrcode)){
+            return true;
+        }
+
+        ///Power Plant*
+        for(int i=0;i<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size();i++){
+            if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)){
+                return true;
+            }else{
+                for(int j=0;j<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size();j++){
+                    if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)){
+                        return true;
+                    }
+                }
+            }
+        }
+
+        ///Power Backups (DG)*
+        for(int i=0;i<hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size();i++){
+            if(hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)){
+                return true;
+            }
+        }
+
+        ///Battery Set*
+        for(int i=0;i<hotoTransactionData.getBatterySetParentData().getBatterySetData().size();i++){
+            if(hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)){
+                return true;
+            }
+        }
+
+        ///Power mgmt System*
+        if (hotoTransactionData.getPowerManagementSystemData().getPowerManagementSystemQR().contains(strQrcode)) {
+            return true;
+        }
+
+        ///Server Stabilizer
+        if (hotoTransactionData.getServoStabilizerData().getServoStabilizer_Qr().contains(strQrcode)) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -54,6 +54,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     private EditText mPowerPlantDetailsEditTextModuleCapacity;
     private Button mBtnPrevReadingModulesPowerPlant;
     private Button mBtnNextReadingModulesPowerPlant;
+    private ImageView button_ClearQRCodeScanView;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_FLAG_MODULE_RESULT = 200;
@@ -251,6 +252,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         mPowerPlantDetailsEditTextModuleCapacity = (EditText) findViewById(R.id.powerPlantDetails_editText_ModuleCapacity);
         mBtnPrevReadingModulesPowerPlant = (Button) findViewById(R.id.btnPrevReadingModulesPowerPlant);
         mBtnNextReadingModulesPowerPlant = (Button) findViewById(R.id.btnNextReadingModulesPowerPlant);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
     }
 
     private void initCombo() {
@@ -342,14 +344,21 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (result.getContents() == null) {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                base64StringQRCodeScan = result.getContents();
-                //showToast(base64StringQRCodeScan);
-                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                    mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringQRCodeScan = result.getContents();
+                    //showToast(base64StringQRCodeScan);
+                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                        mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringQRCodeScan = "";
+                    showToast("QR Code Already Used in Application");
                 }
             }
         }

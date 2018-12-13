@@ -1,339 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="2"
     tools:context=".Activities.UserProfileActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="2">
+            android:layout_weight="1.5"
+            android:background="@drawable/profile_bg"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/profile_bg"
-                android:orientation="vertical">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imageView2"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/app_big_margin"
-                    android:orientation="vertical">
+                    android:src="@drawable/applogo"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="1dp"
+                    android:layout_margin="@dimen/app_normal_margin"
+                    android:padding="@dimen/app_normal_padding"/>
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/imageView2"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/applogo"
-                        app:civ_border_color="@color/colorPrimary"
-                        app:civ_border_width="1dp" />
-
-                    <!--<ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/applogo" />-->
-
-                    <TextView
-                        android:id="@+id/textView_userProfile_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Venkatesh Prabhu"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView_userProfile_userName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="venkatesh.prabhu@gmail.com"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="16dp"
-                        android:visibility="gone" />
-
-                </LinearLayout>
-
-                <FrameLayout
+                <TextView
+                    android:id="@+id/textView_userProfile_name"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:text="Venkatesh Prabhu"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
+             </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView_appVersion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|bottom"
-                        android:layout_marginBottom="@dimen/app_min_margin"
-                        android:layout_marginLeft="@dimen/app_big_margin"
-                        android:layout_marginRight="@dimen/app_big_margin"
-                        android:layout_marginTop="@dimen/app_min_margin"
-                        android:padding="@dimen/app_normal_padding"
-                        android:text="App Version:"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="10dp"
-                        android:textStyle="normal" />
-                </FrameLayout>
+            <TextView
+                android:id="@+id/textView_userProfile_userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="venkatesh.prabhu@gmail.com"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="16dp"
+                android:visibility="gone" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textView_appVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_marginRight="@dimen/app_min_margin"
+                android:padding="@dimen/app_min_padding"
+                android:text="App Version:"
+                android:textColor="@color/colorWhite"
+                android:textSize="9dp"
+                android:textStyle="normal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
 
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.5"
                 android:background="@color/colorWhite"
                 android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/app_normal_margin"
-                    android:layout_marginRight="@dimen/app_normal_margin"
-                    android:layout_marginTop="@dimen/app_big_margin"
-                    android:gravity="left">
-
-                    <ImageView
-                        android:id="@+id/userProfile_imageView_userName"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:clickable="true"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_user" />
-
-                    <TextView
-                        android:id="@+id/userProfile_textView_userName"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/userProfile_imageView_userName"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="Username" />
+                        android:layout_marginLeft="@dimen/app_normal_margin"
+                        android:layout_marginRight="@dimen/app_normal_margin"
+                        android:layout_marginTop="@dimen/app_normal_margin"
+                        android:gravity="left">
 
-                    <TextView
-                        android:id="@+id/userProfile_textView_userNameText"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/userProfile_imageView_userName"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:clickable="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_user" />
+
+                        <TextView
+                            android:id="@+id/userProfile_textView_userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/userProfile_imageView_userName"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="Username" />
+
+                        <TextView
+                            android:id="@+id/userProfile_textView_userNameText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_userName"
+                            android:layout_marginBottom="@dimen/app_big_margin"
+                            android:layout_toRightOf="@+id/userProfile_imageView_userName"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="abcde"
+                            android:textColor="#2196F3" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_userName"
-                        android:layout_marginBottom="@dimen/app_big_margin"
-                        android:layout_toRightOf="@+id/userProfile_imageView_userName"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="abcde"
-                        android:textColor="#2196F3" />
-                </RelativeLayout>
+                        android:layout_marginLeft="@dimen/app_normal_margin"
+                        android:layout_marginRight="@dimen/app_normal_margin"
+                        android:gravity="left">
 
-                <!--android:layout_marginTop="@dimen/app_big_margin"-->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/app_normal_margin"
-                    android:layout_marginRight="@dimen/app_normal_margin"
-                    android:gravity="left">
+                        <ImageView
+                            android:id="@+id/userProfile_imageView_email"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
 
-                    <ImageView
-                        android:id="@+id/userProfile_imageView_email"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                            android:clickable="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_mail_outline_red_24dp" />
 
-                        android:clickable="true"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_mail_outline_red_24dp" />
+                        <TextView
+                            android:id="@+id/userProfile_textView_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/userProfile_imageView_email"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="Email" />
 
-                    <TextView
-                        android:id="@+id/userProfile_textView_email"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/userProfile_textView_emailText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_email"
+                            android:layout_marginBottom="@dimen/app_big_margin"
+                            android:layout_toRightOf="@+id/userProfile_imageView_email"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="venkatesh.prabhu@gmail.com"
+                            android:textColor="#2196F3" />
+
+
+                        <ImageView
+                            android:id="@+id/userProfile_imageView_mobileNo"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/userProfile_textView_emailText"
+                            android:clickable="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_mobile" />
+
+                        <TextView
+                            android:id="@+id/userProfile_textView_mobileNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_emailText"
+                            android:layout_toRightOf="@+id/userProfile_imageView_mobileNo"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="Mobile No" />
+
+                        <TextView
+                            android:id="@+id/userProfile_textView_mobileNoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_mobileNo"
+                            android:layout_marginBottom="@dimen/app_big_margin"
+                            android:layout_toRightOf="@+id/userProfile_imageView_mobileNo"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="8600328869"
+                            android:textColor="#2196F3" />
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/userProfile_imageView_email"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="Email" />
+                        android:layout_marginRight="@dimen/app_normal_margin"
+                        android:gravity="left"
+                        android:paddingLeft="@dimen/app_normal_padding">
 
-                    <TextView
-                        android:id="@+id/userProfile_textView_emailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_email"
-                        android:layout_marginBottom="@dimen/app_big_margin"
-                        android:layout_toRightOf="@+id/userProfile_imageView_email"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="venkatesh.prabhu@gmail.com"
-                        android:textColor="#2196F3" />
+                        <ImageView
+                            android:id="@+id/userProfile_imageView_designation"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="@dimen/app_min_margin"
+                            android:clickable="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_user" />
 
+                        <TextView
+                            android:id="@+id/userProfile_textView_designation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/userProfile_imageView_designation"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="Designation" />
 
-                    <ImageView
-                        android:id="@+id/userProfile_imageView_mobileNo"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@+id/userProfile_textView_emailText"
-                        android:clickable="true"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_mobile" />
-
-                    <TextView
-                        android:id="@+id/userProfile_textView_mobileNo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_emailText"
-                        android:layout_toRightOf="@+id/userProfile_imageView_mobileNo"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="Mobile No" />
-
-                    <TextView
-                        android:id="@+id/userProfile_textView_mobileNoText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_mobileNo"
-                        android:layout_marginBottom="@dimen/app_big_margin"
-                        android:layout_toRightOf="@+id/userProfile_imageView_mobileNo"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="8600328869"
-                        android:textColor="#2196F3" />
+                        <TextView
+                            android:id="@+id/userProfile_textView_designationText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_designation"
+                            android:layout_marginBottom="@dimen/app_big_margin"
+                            android:layout_toRightOf="@+id/userProfile_imageView_designation"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="Tech"
+                            android:textColor="#2196F3" />
 
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/userProfile_imageView_circle"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/userProfile_textView_designationText"
+                            android:clickable="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_circle" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/app_normal_margin"
-                    android:gravity="left"
-                    android:paddingLeft="@dimen/app_normal_padding">
+                        <TextView
+                            android:id="@+id/userProfile_textView_circle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_designationText"
+                            android:layout_toRightOf="@+id/userProfile_imageView_circle"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="Circle" />
 
-                    <ImageView
-                        android:id="@+id/userProfile_imageView_designation"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="@dimen/app_min_margin"
-                        android:clickable="true"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_user" />
-
-                    <TextView
-                        android:id="@+id/userProfile_textView_designation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/userProfile_imageView_designation"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="Designation" />
-
-                    <TextView
-                        android:id="@+id/userProfile_textView_designationText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_designation"
-                        android:layout_marginBottom="@dimen/app_big_margin"
-                        android:layout_toRightOf="@+id/userProfile_imageView_designation"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="Tech"
-                        android:textColor="#2196F3" />
-
-
-                    <ImageView
-                        android:id="@+id/userProfile_imageView_circle"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@+id/userProfile_textView_designationText"
-                        android:clickable="true"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_circle" />
-
-                    <TextView
-                        android:id="@+id/userProfile_textView_circle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_designationText"
-                        android:layout_toRightOf="@+id/userProfile_imageView_circle"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="Circle" />
-
-                    <TextView
-                        android:id="@+id/userProfile_textView_circleText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_circle"
-                        android:layout_marginBottom="@dimen/app_big_margin"
-                        android:layout_toRightOf="@+id/userProfile_imageView_circle"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="abcde"
-                        android:textColor="#2196F3" />
+                        <TextView
+                            android:id="@+id/userProfile_textView_circleText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_circle"
+                            android:layout_marginBottom="@dimen/app_big_margin"
+                            android:layout_toRightOf="@+id/userProfile_imageView_circle"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="abcde"
+                            android:textColor="#2196F3" />
 
 
 
-                    <ImageView
-                        android:id="@+id/userProfile_imageView_state"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@+id/userProfile_textView_circleText"
-                        android:clickable="true"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_circle" />
+                        <ImageView
+                            android:id="@+id/userProfile_imageView_state"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/userProfile_textView_circleText"
+                            android:clickable="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_circle" />
 
-                    <TextView
-                        android:id="@+id/userProfile_textView_state"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_circleText"
-                        android:layout_toRightOf="@+id/userProfile_imageView_state"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="State" />
+                        <TextView
+                            android:id="@+id/userProfile_textView_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_circleText"
+                            android:layout_toRightOf="@+id/userProfile_imageView_state"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="State" />
 
-                    <TextView
-                        android:id="@+id/userProfile_textView_stateText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_state"
-                        android:layout_marginBottom="@dimen/app_big_margin"
-                        android:layout_toRightOf="@+id/userProfile_imageView_state"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="state name"
-                        android:textColor="#2196F3" />
+                        <TextView
+                            android:id="@+id/userProfile_textView_stateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_state"
+                            android:layout_marginBottom="@dimen/app_big_margin"
+                            android:layout_toRightOf="@+id/userProfile_imageView_state"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="state name"
+                            android:textColor="#2196F3" />
 
 
 
-                    <ImageView
-                        android:id="@+id/userProfile_imageView_ssa"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@+id/userProfile_textView_stateText"
-                        android:clickable="true"
-                        android:scaleType="fitStart"
-                        android:src="@drawable/ic_circle" />
+                        <ImageView
+                            android:id="@+id/userProfile_imageView_ssa"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/userProfile_textView_stateText"
+                            android:clickable="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_circle" />
 
-                    <TextView
-                        android:id="@+id/userProfile_textView_ssa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_stateText"
-                        android:layout_toRightOf="@+id/userProfile_imageView_ssa"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="SSA" />
+                        <TextView
+                            android:id="@+id/userProfile_textView_ssa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_stateText"
+                            android:layout_toRightOf="@+id/userProfile_imageView_ssa"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="SSA" />
 
-                    <TextView
-                        android:id="@+id/userProfile_textView_ssaText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_ssa"
-                        android:layout_marginBottom="@dimen/app_big_margin"
-                        android:layout_toRightOf="@+id/userProfile_imageView_ssa"
-                        android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="ssa name"
-                        android:textColor="#2196F3" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/userProfile_textView_ssaText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/userProfile_textView_ssa"
+                            android:layout_marginBottom="@dimen/app_big_margin"
+                            android:layout_toRightOf="@+id/userProfile_imageView_ssa"
+                            android:paddingLeft="@dimen/app_normal_padding"
+                            android:text="ssa name"
+                            android:textColor="#2196F3" />
+                    </RelativeLayout>
             </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

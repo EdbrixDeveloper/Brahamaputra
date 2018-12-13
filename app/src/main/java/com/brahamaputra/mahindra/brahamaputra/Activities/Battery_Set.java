@@ -120,6 +120,7 @@ public class Battery_Set extends BaseActivity {
     private TextView mBatterySetTextViewBACKUPConditionVal;
     private TextView mBatterySetTextViewNatureofProblem;
     private EditText mBatterySetEditTextNatureofProblem;
+    private ImageView button_ClearQRCodeScanView;
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
@@ -275,6 +276,7 @@ public class Battery_Set extends BaseActivity {
         mBatterySetTextViewBACKUPConditionVal = (TextView) findViewById(R.id.batterySet_textView_BACKUPCondition_val);
         mBatterySetTextViewNatureofProblem = (TextView) findViewById(R.id.batterySet_textView_NatureofProblem);
         mBatterySetEditTextNatureofProblem = (EditText) findViewById(R.id.batterySet_editText_NatureofProblem);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
 
         batterySet_button_nextReading = (Button) findViewById(R.id.batterySet_button_nextReading);
         batterySet_button_previousReading = (Button) findViewById(R.id.batterySet_button_previousReading);
@@ -578,6 +580,16 @@ public class Battery_Set extends BaseActivity {
             }
         });
 
+        button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringBatterySet = "";
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
+                mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
+
 
     }
 
@@ -869,14 +881,23 @@ public class Battery_Set extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (result.getContents() == null) {
                 base64StringBatterySet = "";
                 showToast("Cancelled");
             } else {
-                base64StringBatterySet = result.getContents();
-                if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
-                    mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringBatterySet = result.getContents();
+                    if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
+                        mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringBatterySet = "";
+                    showToast("QR Code Already Used in Application");
                 }
+
+
             }
         }
 
@@ -957,8 +978,10 @@ public class Battery_Set extends BaseActivity {
 
                     base64StringBatterySet = (batterySetData.get(index).getBatterySet_Qr());
                     mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+                    button_ClearQRCodeScanView.setVisibility(View.GONE);
                     if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
                         mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
 
                     mBatterySetTextViewAssetOwnerVal.setText(batterySetData.get(index).getAssetOwner());
@@ -1057,8 +1080,10 @@ public class Battery_Set extends BaseActivity {
 
             base64StringBatterySet = batterySetData.get(pos).getBatterySet_Qr();
             mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
                 mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
             }
 
             mBatterySetTextViewAssetOwnerVal.setText(batterySetData.get(pos).getAssetOwner());
@@ -1100,6 +1125,7 @@ public class Battery_Set extends BaseActivity {
         batterySet_textView_Number.setText("Reading: #" + (indexPos + 1));
 
         mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView.setVisibility(View.GONE);
 
         mBatterySetTextViewAssetOwnerVal.setText("");
         mBatterySetTextViewManufacturerMakeModelVal.setText("");
@@ -1126,8 +1152,10 @@ public class Battery_Set extends BaseActivity {
 
         if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
             mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
+            button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
         } else {
             mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
         }
     }
 

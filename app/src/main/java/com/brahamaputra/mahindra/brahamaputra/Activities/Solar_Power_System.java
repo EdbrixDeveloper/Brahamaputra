@@ -84,6 +84,7 @@ public class Solar_Power_System extends BaseActivity {
     private TextView mSolarPowerSystemTextViewAmcYesNoVal;
     private TextView mSolarPowerSystemTextViewValidityOfAmc;
     private EditText mSolarPowerSystemEditTextDateOfvalidityOfAmc;
+    private ImageView button_ClearQRCodeScanView;
 
     LinearLayout mSolarPowerSystemLinearLayoutQRCodeScan;
     LinearLayout mSolarPowerSystemLinearLayoutAssetOwner;
@@ -207,6 +208,15 @@ public class Solar_Power_System extends BaseActivity {
                 }
             }
         });
+        button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringQRCodeScan = "";
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
+                mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
 
 
         /*This Commented By Arjun on 14-11-2018 For QR Code Purpose
@@ -267,6 +277,7 @@ public class Solar_Power_System extends BaseActivity {
         mSolarPowerSystemLinearLayoutCapacityKW = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_capacityKW);
         mSolarPowerSystemLinearLayoutAmcYesNo = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_amcYesNo);
         mSolarPowerSystemLinearLayoutValidityOfAmc = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_validityOfAmc);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
 
         mSolarPowerSystemEditTextCapacityKW.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
 
@@ -416,8 +427,10 @@ public class Solar_Power_System extends BaseActivity {
                 base64StringQRCodeScan = solarPowerSystemData.getqRCodeScan();
 
                 mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
                 if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                     mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                    button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                 }
                 // New added for image #ImageSet
                /* This Commented By Arjun on 14-11-2018 For QR Code Purpose
@@ -575,13 +588,20 @@ public class Solar_Power_System extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (result.getContents() == null) {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                base64StringQRCodeScan = result.getContents();
-                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                    mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringQRCodeScan = result.getContents();
+                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                        mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringQRCodeScan = "";
+                    showToast("QR Code Already Used in Application");
                 }
                 //showToast(base64StringQRCodeScan);
             }

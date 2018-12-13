@@ -77,6 +77,7 @@ public class ServoStabilizer extends BaseActivity {
     private TextView mServoStabilizerTextViewWorkingConditionVal;
     private TextView mServoStabilizerTextViewNatureofProblem;
     private EditText mServoStabilizerEditTextNatureofProblem;
+    private ImageView button_ClearQRCodeScanView;
 
 
   /*  mBatterySetButtonQRCodeScan;
@@ -114,6 +115,7 @@ public class ServoStabilizer extends BaseActivity {
         mServoStabilizerTextViewWorkingConditionVal = (TextView) findViewById(R.id.servoStabilizer_textView_WorkingCondition_val);
         mServoStabilizerTextViewNatureofProblem = (TextView) findViewById(R.id.servoStabilizer_textView_NatureofProblem);
         mServoStabilizerEditTextNatureofProblem = (EditText) findViewById(R.id.servoStabilizer_editText_NatureofProblem);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -333,8 +335,10 @@ public class ServoStabilizer extends BaseActivity {
                 mServoStabilizerEditTextNatureofProblem.setText(servoStabilizerData.getNatureofProblem());
 
                 mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
                 if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
                     mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                    button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                 }
 
                 // New added for image #ImageSet
@@ -503,14 +507,23 @@ public class ServoStabilizer extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (result.getContents() == null) {
                 base64StringServoStablizer = "";
                 showToast("Cancelled");
             } else {
-                base64StringServoStablizer = result.getContents();
-                if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
-                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringServoStablizer = result.getContents();
+                    if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
+                        mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringServoStablizer = "";
+                    showToast("QR Code Already Used in Application");
                 }
+
+
             }
         }
 

@@ -115,6 +115,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private Button btnNextReadingPowerPlant;
     private ImageView powerPlantDetails_imageview_modules;
     private LinearLayout lnrPlantDetails;
+    private ImageView button_ClearQRCodeScanView;
 
     LinearLayout mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking;
     TextView mPowerPlantDetailsTextViewNumberOfPowerPlantWorking;
@@ -309,6 +310,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         btnPrevReadingPowerPlant = (Button) findViewById(R.id.btnPrevReadingPowerPlant);
         btnNextReadingPowerPlant = (Button) findViewById(R.id.btnNextReadingPowerPlant);
         powerPlantDetails_imageview_modules = (ImageView)findViewById(R.id.powerPlantDetails_imageview_modules);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
 
         lnrPlantDetails = (LinearLayout) findViewById(R.id.lnrPlantDetails);
         lnrPlantDetails.setVisibility(View.GONE);
@@ -676,6 +678,16 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             }
         });
 
+        button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringQRCodeScan = "";
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
+                mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
+
 
     }
 
@@ -705,8 +717,10 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
                     base64StringQRCodeScan = powerPlantDetailsData.getqRCodeScan();
                     mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+                    button_ClearQRCodeScanView.setVisibility(View.GONE);
                     if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                         mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
 
                     powerPlantDetailsModulesData.addAll(powerPlantDetailsData.getPowerPlantDetailsModulesData());
@@ -765,8 +779,10 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
             base64StringQRCodeScan = powerPlantDetailsData.getqRCodeScan();
             mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                 mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
             }
 
             powerPlantDetailsModulesData.clear();
@@ -880,6 +896,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mpowerPlantDetails_textView_PlantNumber.setText("Tenant: #" + (indexPos + 1));
 
         mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView.setVisibility(View.GONE);
 
         mPowerPlantDetailsTextViewAssetOwnerVal.setText("");
         mPowerPlantDetailsTextViewManufacturerMakeModelVal.setText("");
@@ -1219,13 +1236,20 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
             if (result.getContents() == null) {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                base64StringQRCodeScan = result.getContents();
-                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                    mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                if(!isDuplicateQRcode(result.getContents())){
+                    base64StringQRCodeScan = result.getContents();
+                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                        mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    base64StringQRCodeScan = "";
+                    showToast("QR Code Already Used in Application");
                 }
             }
         }
