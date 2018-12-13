@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsModulesData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -67,6 +68,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     private String str_makeModule = "";
 
     private ArrayList<PowerPlantDetailsModulesData> powerPlantDetailsModulesData;
+    private ArrayList<PowerPlantDetailsData> powerPlantDetailsDataList;
     private int totalCount = 0;
     private int currentPos = 0;
 
@@ -91,11 +93,13 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
 
         alertDialogManager = new AlertDialogManager(PowerPlantDetailsModulesReadingsActivity.this);
         powerPlantDetailsModulesData = new ArrayList<>();
+        powerPlantDetailsDataList = new ArrayList<>();
         currentPos = 0;
         setInputDetails(currentPos);
 
         Intent intent = getIntent();
-        totalCount = intent.getIntExtra("numberOfModules",0);
+        totalCount = intent.getIntExtra("numberOfModules", 0);
+
         if (totalCount > 0) {
 
             mPowerPlantDetailsModulesTextViewModuleNumber.setText("Reading: #1");
@@ -112,6 +116,17 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
             //lnrPlantDetails.setVisibility(View.GONE);
             //mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking.setVisibility(View.GONE);
         }
+
+        button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringQRCodeScan = "";
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
+                mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+
+            }
+        });
     }
 
     private void setListners() {
@@ -151,7 +166,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setPrompt("Scan a barcode or QRcode");
@@ -279,12 +294,14 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         mBtnPrevReadingModulesPowerPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPos > 0) {
-                    //Save current ac reading
-                    saveRecords(currentPos);
-                    currentPos = currentPos - 1;
-                    //move to Next reading
-                    displayRecords(currentPos);
+                if (checkValidtionForArrayFields() == true) {
+                    if (currentPos > 0) {
+                        //Save current ac reading
+                        saveRecords(currentPos);
+                        currentPos = currentPos - 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
+                    }
                 }
             }
         });
@@ -292,7 +309,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         mBtnNextReadingModulesPowerPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidtionForArrayFields()) {
+                if (checkValidtionForArrayFields() == true) {
                     if (currentPos < (totalCount - 1)) {
                         //Save current ac reading
                         saveRecords(currentPos);
@@ -314,17 +331,19 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
 
     private void submitDetails() {
         Intent data = new Intent();
-        data.putExtra("powerPlantDetailsModulesData",powerPlantDetailsModulesData);
+        data.putExtra("powerPlantDetailsModulesData", powerPlantDetailsModulesData);
         //data.putExtra("powerPlantDetailsModulesData","eq");
-        setResult(Activity.RESULT_OK,data);
+        setResult(Activity.RESULT_OK, data);
         finish();
     }
 
     private boolean checkValidtionForArrayFields() {
-        if (!base64StringQRCodeScan.isEmpty()) {
-            return true;
-        }
-        return false;
+        if (base64StringQRCodeScan.isEmpty()) {
+            showToast("Please Scan QR Code");
+            return false;
+        } else if (checkDuplicationQrCode(currentPos)) {
+            return false;
+        } else return true;
     }
 
     @Override
@@ -349,14 +368,14 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                if(!isDuplicateQRcode(result.getContents())){
+                if (!isDuplicateQRcode(result.getContents())) {
                     base64StringQRCodeScan = result.getContents();
                     //showToast(base64StringQRCodeScan);
                     if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                         mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.VISIBLE);
                         button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     base64StringQRCodeScan = "";
                     showToast("QR Code Already Used in Application");
                 }
@@ -373,7 +392,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         String capacity = mPowerPlantDetailsEditTextModuleCapacity.getText().toString().trim();
 
         //DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(typeOfAsset, assetMake, assetStatus, assetDescription);
-        PowerPlantDetailsModulesData obj_powerPlantDetailsModulesData= new PowerPlantDetailsModulesData(qrCode,manufacturer,capacity);
+        PowerPlantDetailsModulesData obj_powerPlantDetailsModulesData = new PowerPlantDetailsModulesData(qrCode, manufacturer, capacity);
 
         if (powerPlantDetailsModulesData.size() > 0) {
             if (pos == powerPlantDetailsModulesData.size()) {
@@ -423,15 +442,25 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
 
         mPowerPlantDetailsTextViewModuleMakeVal.setText("");
         mPowerPlantDetailsEditTextModuleCapacity.setText("");
+        mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView.setVisibility(View.GONE);
 
         str_makeModule = "";
         base64StringQRCodeScan = "";
+        if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+            mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.VISIBLE);
+            button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+        } else {
+            mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView.setVisibility(View.GONE);
+        }
     }
 
     private void setInputDetails(int index) {
         try {
             /*if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
-             */   Intent intent = getIntent();
+             */
+            Intent intent = getIntent();
                 /*String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
@@ -439,34 +468,43 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 detailsOfUnusedMaterialsParentData = hotoTransactionData.getDetailsOfUnusedMaterialsParentData();*/
 
-                powerPlantDetailsModulesData = (ArrayList<PowerPlantDetailsModulesData>)intent.getSerializableExtra("powerPlantDetailsModulesData");
+            powerPlantDetailsDataList = (ArrayList<PowerPlantDetailsData>) intent.getSerializableExtra("powerPlantDetailsDataList");
+            powerPlantDetailsModulesData = (ArrayList<PowerPlantDetailsModulesData>) intent.getSerializableExtra("powerPlantDetailsModulesData");
 
-                //detailsOfUnusedMaterialsData.addAll(detailsOfUnusedMaterialsParentData.getDetailsOfUnusedMaterialsData());
+            //detailsOfUnusedMaterialsData.addAll(detailsOfUnusedMaterialsParentData.getDetailsOfUnusedMaterialsData());
 
-                totalCount = intent.getIntExtra("numberOfModules",0);
+            totalCount = intent.getIntExtra("numberOfModules", 0);
 
-                //mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
+            //mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(detailsOfUnusedMaterialsParentData.getNumberofUnusedAssetinSite());
 
-                if (powerPlantDetailsModulesData != null && powerPlantDetailsModulesData.size() > 0) {
+            if (powerPlantDetailsModulesData != null && powerPlantDetailsModulesData.size() > 0) {
 
-                    //linearLayout_container.setVisibility(View.VISIBLE);
-                    mPowerPlantDetailsModulesTextViewModuleNumber.setText("Reading: #1");
+                //linearLayout_container.setVisibility(View.VISIBLE);
+                mPowerPlantDetailsModulesTextViewModuleNumber.setText("Reading: #1");
 
-                    mPowerPlantDetailsEditTextModuleCapacity.setText(powerPlantDetailsModulesData.get(index).getModuleCapacity());
-                    mPowerPlantDetailsTextViewModuleMakeVal.setText(powerPlantDetailsModulesData.get(index).getModuleMake());
-                    base64StringQRCodeScan = powerPlantDetailsModulesData.get(index).getModuleQrCodeScan();
-                    //mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetDescription());
+                mPowerPlantDetailsEditTextModuleCapacity.setText(powerPlantDetailsModulesData.get(index).getModuleCapacity());
+                mPowerPlantDetailsTextViewModuleMakeVal.setText(powerPlantDetailsModulesData.get(index).getModuleMake());
+                base64StringQRCodeScan = powerPlantDetailsModulesData.get(index).getModuleQrCodeScan();
 
-                    mBtnPrevReadingModulesPowerPlant.setVisibility(View.GONE);
-                    mBtnNextReadingModulesPowerPlant.setVisibility(View.VISIBLE);
+                mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.GONE);
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
 
-                    //if (detailsOfUnusedMaterialsData.size() > 1) {
-                    if (totalCount > 1) {
-                        mBtnNextReadingModulesPowerPlant.setText("Next Reading");
-                    } else {
-                        mBtnNextReadingModulesPowerPlant.setText("Finish");
-                    }
+                if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                    mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.VISIBLE);
+                    button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                 }
+                //mDetailsOfUnusedMaterialsEditTextDescriptionVal.setText(detailsOfUnusedMaterialsData.get(index).getAssetDescription());
+
+                mBtnPrevReadingModulesPowerPlant.setVisibility(View.GONE);
+                mBtnNextReadingModulesPowerPlant.setVisibility(View.VISIBLE);
+
+                //if (detailsOfUnusedMaterialsData.size() > 1) {
+                if (totalCount > 1) {
+                    mBtnNextReadingModulesPowerPlant.setText("Next Reading");
+                } else {
+                    mBtnNextReadingModulesPowerPlant.setText("Finish");
+                }
+            }
 
             /*} else {
                 showToast("No previous saved data available");
@@ -474,6 +512,36 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    //008
+    private boolean checkDuplicationQrCode(int curr_pos) {
+        for (int i = 0; i < powerPlantDetailsModulesData.size(); i++) {
+            if (base64StringQRCodeScan.equals(powerPlantDetailsModulesData.get(i).getModuleQrCodeScan().toString())) {
+                if (i == curr_pos) {
+                    return checkDuplicationQrCodeInParent();
+                } else {
+                    int dup_pos = i + 1;
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+            } else if (powerPlantDetailsDataList.size() > 0) {
+                return checkDuplicationQrCodeInParent();
+            }
+        }
+        return false;
+    }
+
+    private boolean checkDuplicationQrCodeInParent() {
+        for (int j = 0; j < powerPlantDetailsDataList.size(); j++) {
+            if (base64StringQRCodeScan.equals(powerPlantDetailsDataList.get(j).getqRCodeScan().toString())) {
+                int dup_pos = j + 1;
+                showToast("This QR Code Already scanned in Power Plant Details Reading Number: " + dup_pos);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

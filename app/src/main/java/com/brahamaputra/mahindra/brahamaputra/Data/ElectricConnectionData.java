@@ -94,10 +94,14 @@ public class ElectricConnectionData {
     @SerializedName("bankIfscCode")
     private String bankIfscCode;
 
+    @SerializedName("bankAccountNo")
+    private String bankAccountNo;
+
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
 
+    //region Region of Constructors
     public ElectricConnectionData() {
         this.electricConnectionType = "";
         this.connectionTariff = "";
@@ -126,17 +130,13 @@ public class ElectricConnectionData {
         this.averageEbAvailability = "";
         this.scheduledPowerCut = "";
         this.ebBillDate = "";
-        this.typeModeOfPayment_Val="";
-        this.bankIfscCode="";
-        this.bankAccountNo="";
-        this.isSubmited=0;
+        this.typeModeOfPayment_Val = "";
+        this.bankIfscCode = "";
+        this.bankAccountNo = "";
+        this.isSubmited = 0;
     }
 
-    @SerializedName("bankAccountNo")
-    private String bankAccountNo;
-
-
-    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate,String sapVendorCode,String typeModeOfPayment_Val,String bankIfscCode,String bankAccountNo) {
+    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate, String sapVendorCode, String typeModeOfPayment_Val, String bankIfscCode, String bankAccountNo) {
         this.electricConnectionType = electricConnectionType;
         this.connectionTariff = connectionTariff;
         this.sanctionLoad = sanctionLoad;
@@ -165,18 +165,21 @@ public class ElectricConnectionData {
         this.scheduledPowerCut = scheduledPowerCut;
         this.ebBillDate = ebBillDate;
         this.sapVendorCode = sapVendorCode;
-        this.typeModeOfPayment_Val=typeModeOfPayment_Val;
-        this.bankIfscCode=bankIfscCode;
-        this.bankAccountNo=bankAccountNo;
+        this.typeModeOfPayment_Val = typeModeOfPayment_Val;
+        this.bankIfscCode = bankIfscCode;
+        this.bankAccountNo = bankAccountNo;
         //this.isSubmited=true;//007
-        if(!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
-            !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()){
+        this.isSubmited = 1;
+        if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
+                !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
             this.isSubmited = 2;
-        }else {
+        } /*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
+    //endregion
 
+    //region Region of Getter() Setter() Properties
     public String getElectricConnectionType() {
         return electricConnectionType;
     }
@@ -345,7 +348,6 @@ public class ElectricConnectionData {
         this.paymentScheduleEB = paymentScheduleEB;
     }
 
-
     public String getSafetyFuseUnit() {
         return safetyFuseUnit;
     }
@@ -433,4 +435,5 @@ public class ElectricConnectionData {
     public void setSubmited(int submited) {
         isSubmited = submited;
     }
+    //endregion
 }

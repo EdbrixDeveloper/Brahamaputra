@@ -171,7 +171,7 @@ public class BaseActivity extends AppCompatActivity {
     // and displays on the screen
     private void displayFirebaseRegId() {
 
-        String regId =sessionManager.getSessionFCMToken();
+        String regId = sessionManager.getSessionFCMToken();
 
         Log.e("BaseActivity", "Firebase reg id: " + regId);
 
@@ -182,7 +182,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    public boolean isDuplicateQRcode (String strQrcode){
+    public boolean isDuplicateQRcode(String strQrcode) {
 
         OfflineStorageWrapper offlineStorageWrapper;
         HotoTransactionData hotoTransactionData = null;
@@ -205,24 +205,24 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         ///Air Conditioners*
-        for(int i=0;i<hotoTransactionData.getAirConditionParentData().getAirConditionersData().size();i++){
-            if(hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)){
+        for (int i = 0; i < hotoTransactionData.getAirConditionParentData().getAirConditionersData().size(); i++) {
+            if (hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)) {
                 return true;
             }
         }
 
         ///Solar Power System*
-        if(hotoTransactionData.getSolarPowerSystemData().getqRCodeScan().contains(strQrcode)){
+        if (hotoTransactionData.getSolarPowerSystemData().getqRCodeScan().contains(strQrcode)) {
             return true;
         }
 
         ///Power Plant*
-        for(int i=0;i<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size();i++){
-            if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)){
+        for (int i = 0; i < hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size(); i++) {
+            if (hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)) {
                 return true;
-            }else{
-                for(int j=0;j<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size();j++){
-                    if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)){
+            } else {
+                for (int j = 0; j < hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size(); j++) {
+                    if (hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)) {
                         return true;
                     }
                 }
@@ -230,15 +230,17 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         ///Power Backups (DG)*
-        for(int i=0;i<hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size();i++){
-            if(hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)){
+        for (int i = 0; i < hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size(); i++) {
+            if (hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)) {
+                return true;
+            } else if (hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getDgBatteryStatusQRCodeScan().contains(strQrcode)) {
                 return true;
             }
         }
 
         ///Battery Set*
-        for(int i=0;i<hotoTransactionData.getBatterySetParentData().getBatterySetData().size();i++){
-            if(hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)){
+        for (int i = 0; i < hotoTransactionData.getBatterySetParentData().getBatterySetData().size(); i++) {
+            if (hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)) {
                 return true;
             }
         }

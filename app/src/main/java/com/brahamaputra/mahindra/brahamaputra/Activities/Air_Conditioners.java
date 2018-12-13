@@ -2,25 +2,20 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,7 +26,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,8 +33,6 @@ import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.AirConditionersData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
-import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -49,7 +41,6 @@ import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
-import com.brahamaputra.mahindra.brahamaputra.commons.ToastMessage;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
@@ -57,15 +48,12 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class Air_Conditioners extends BaseActivity {
@@ -126,7 +114,7 @@ public class Air_Conditioners extends BaseActivity {
     private String ticketName = "28131";
     private HotoTransactionData hotoTransactionData;
     private ArrayList<AirConditionersData> airConditionersData;
-    private AirConditionersData airConditionersDataTemp;
+    //private AirConditionersData airConditionersDataTemp;
     private String base64StringQRCodeScan = "";
     private SessionManager sessionManager;
     private Uri imageFileUri;
@@ -210,7 +198,7 @@ public class Air_Conditioners extends BaseActivity {
                     }
                 } else {
                     //openCamera();
-                    //openCameraIntent();This Commented by Arjun On 15-12-2018 For QR Code Scan Purpose
+                    //openCameraIntent();This Commented by 008 On 15-12-2018 For QR Code Scan Purpose
                     onClicked(v);
                 }
 
@@ -242,7 +230,7 @@ public class Air_Conditioners extends BaseActivity {
         });
 
 
-        /*This Commented by Arjun On 15-12-2018 For QR Code Scan Purpose
+        /*This Commented by 008 On 15-12-2018 For QR Code Scan Purpose
         mAirConditionersButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -360,8 +348,8 @@ public class Air_Conditioners extends BaseActivity {
 
                         str_noOfAirConditionersACprovided = item.get(position);
                         mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(str_noOfAirConditionersACprovided);
-                        mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText("");//arjun
-                        //checkValidationOnNoOfAcSelection();//arjun
+                        mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText("");//008
+                        //checkValidationOnNoOfAcSelection();//008
 
                         //clear AC collection empty by select / changing value of No of Ac provided
                         if (airConditionersData != null && airConditionersData.size() > 0) {
@@ -620,7 +608,7 @@ public class Air_Conditioners extends BaseActivity {
                     linearLayout_container.setVisibility(View.VISIBLE);
                     airConditioners_textView_AcNumber.setText("Reading: #1");
                     totalAcCount = Integer.parseInt(dataList.getNoOfACprovided());
-                    /*commented by arjun on 21-11-2018
+                    /*commented by 008 on 21-11-2018
                     mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(dataList.getNoOfACprovided());
                     mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(dataList.getNumberOfACInWorkingCondition());*/
                     //mAirConditionersButtonQRCodeScan;
@@ -642,7 +630,7 @@ public class Air_Conditioners extends BaseActivity {
                     mAirConditionersEditTextCapacityTr.setText(airConditionersData.get(index).getCapacityTr());
                     mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.get(index).getDateOfInstallation());
                     mAirConditionersTextViewAmcYesNoVal.setText(airConditionersData.get(index).getAmcYesNo());
-                    visibilityOfValidityOfTheAMC(airConditionersData.get(index).getAmcYesNo());//arjun
+                    visibilityOfValidityOfTheAMC(airConditionersData.get(index).getAmcYesNo());//008
                     mAirConditionersEditTextDateOfvalidityOfAmc.setText(airConditionersData.get(index).getDateOfvalidityOfAmc());
                     mAirConditionersTextViewWorkingConditionVal.setText(airConditionersData.get(index).getWorkingCondition());
                     mAirConditionersEditTextNatureOfProblem.setText(airConditionersData.get(index).getNatureOfProblem());
@@ -657,7 +645,6 @@ public class Air_Conditioners extends BaseActivity {
                         airCondition_button_nextReading.setText("Finish");
                     }
 
-
                 }
 
             } else {
@@ -669,7 +656,6 @@ public class Air_Conditioners extends BaseActivity {
             //showToast(e.getMessage().toString());
         }
     }
-
 
     private void saveACRecords(int pos) {
 
@@ -752,7 +738,6 @@ public class Air_Conditioners extends BaseActivity {
 
     }
 
-
     private void submitDetails() {
         try {
             String noOfACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim();
@@ -816,7 +801,6 @@ public class Air_Conditioners extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
 
@@ -836,6 +820,181 @@ public class Air_Conditioners extends BaseActivity {
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /*008 28112018*/
+    public boolean checkValidationOnChangeNoOfAcSelection(String noOfACprovided, String numberOfACInWorkingCondition, String methodFlag) {
+
+        /*if (!noOfACprovided.isEmpty() && noOfACprovided != null) {
+            if (noOfACprovided.matches("\\d+(?:\\.\\d+)?")) {
+                if (Integer.valueOf(noOfACprovided) > 0) {
+                    if (!numberOfACInWorkingCondition.isEmpty() && numberOfACInWorkingCondition != null) {
+                        if (Integer.valueOf(numberOfACInWorkingCondition) <= Integer.valueOf(noOfACprovided)) {
+                            return true;
+                        } else {
+                            showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
+                            return false;
+                        }
+                    } else {
+                        showToast("Select Number of AC in working condition");
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            showToast("Select No of Air Conditioners(AC) provided");
+            return false;
+        }*/
+
+
+        if (noOfACprovided.isEmpty() || noOfACprovided == null) {
+            showToast("Select No of Air Conditioners(AC) provided");
+            return false;
+        } else if (Integer.valueOf(noOfACprovided) > 0) {
+            if (numberOfACInWorkingCondition.isEmpty() || numberOfACInWorkingCondition == null) {
+                showToast("Select Number of AC in working condition");
+                return false;
+            } else if (Integer.valueOf(numberOfACInWorkingCondition) > Integer.valueOf(noOfACprovided)) {
+                showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
+                return false;
+            } else if ((airConditionersData.size() != Integer.valueOf(noOfACprovided) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings .");//as a mentioned AC in no of AC provided
+                return false;
+            } else return true;
+        } else return true;
+
+    }
+
+    /*008 21112018*/
+    public boolean checkValidationOnNoOfAcSelection() {
+        String noOfACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim();
+        String numberOfACInWorkingCondition = mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim().equals("Non AC") ? "0" : mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim();
+
+        if (!noOfACprovided.isEmpty() && noOfACprovided != null) {
+            if (noOfACprovided.matches("\\d+(?:\\.\\d+)?")) {
+                if (Integer.valueOf(noOfACprovided) > 0) {
+                    if (!numberOfACInWorkingCondition.isEmpty() && numberOfACInWorkingCondition != null) {
+                        if (Integer.valueOf(numberOfACInWorkingCondition) <= Integer.valueOf(noOfACprovided)) {
+                            return true;
+                        } else {
+                            showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
+                            return false;
+                        }
+                    } else {
+                        showToast("Select Number of AC in working condition");
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            showToast("Select No of Air Conditioners(AC) provided");
+            return false;
+        }
+
+    }
+
+    /*008 21112018*/
+    public boolean checkValidationOfArrayFields() {
+        DecimalFormatConversion();
+        String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
+        /*String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
+        String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
+        String manufacturerMakeModel = mAirConditionersTextViewManufacturerMakeModelVal.getText().toString().trim();
+        String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
+        String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
+        String dateOfInstallation = mAirConditionersEditTextDateOfInstallation.getText().toString().trim();
+        String amcYesNo = mAirConditionersTextViewAmcYesNoVal.getText().toString().trim();
+        String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
+        String workingCondition = mAirConditionersTextViewWorkingConditionVal.getText().toString().trim();
+        String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();*/
+
+
+        if (qRCodeScan.isEmpty() || qRCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        }/* else if (assetOwner.isEmpty() || assetOwner == null) {
+            showToast("Select Asset Owner");
+            return false;
+        } else if (typeOfAcSplitWindow.isEmpty() || typeOfAcSplitWindow == null) {
+            showToast("Select Type of AC");
+            return false;
+        } else if (manufacturerMakeModel.isEmpty() || manufacturerMakeModel == null) {
+            showToast("Select Manufacturer/Make/Model");
+            return false;
+        } else if (acSerialNumber.isEmpty() || acSerialNumber == null) {
+            showToast("Enter AC Serial Number");
+            return false;
+        } else if (capacityTr.isEmpty() || capacityTr == null) {
+            showToast("Enter Capacity(TR)");
+            return false;
+        } else if (dateOfInstallation.isEmpty() || dateOfInstallation == null) {
+            showToast("Select Date of Installation");
+            return false;
+        } else if (amcYesNo.isEmpty() || amcYesNo == null) {
+            showToast("Select AMC");
+            return false;
+        } else if ((dateOfvalidityOfAmc.isEmpty() || dateOfvalidityOfAmc == null) && amcYesNo.equals("Yes")) {
+            showToast("Select Validity of the AMC");
+            return false;
+        } else if (workingCondition.isEmpty() || workingCondition == null) {
+            showToast("Enter Working Condition");
+            return false;
+        } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
+            showToast("Enter Nature of Problem");
+            return false;
+        }*/ else if (checkDuplicationQrCode(currentPos)) {
+            return false;
+        } else return true;
+
+    }
+
+    private boolean checkDuplicationQrCode(int curr_pos) {
+        for (int i = 0; i < airConditionersData.size(); i++) {
+            if (i != curr_pos) {
+                if (base64StringQRCodeScan.equals(airConditionersData.get(i).getqRCodeScan().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /*008 21112018*/
+    private void visibilityOfValidityOfTheAMC(String amcYesNo) {
+        if (amcYesNo.equals("Yes")) {
+            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
+        } else {
+            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.GONE);
+            mAirConditionersEditTextDateOfvalidityOfAmc.setText("");
+
+        }
+    }
+
+    /*008 21112018*/
+    private boolean validityOfValidityOfTheAMC(String amcYesNo) {
+        String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
+        if (amcYesNo.equals("Yes")) {
+            if (!dateOfvalidityOfAmc.isEmpty() && dateOfvalidityOfAmc != null) {
+                return true;
+            }
+            {
+                showToast("Select Validity of the AMC");
+                return false;
+            }
+        } else {
+            return true;
+
         }
     }
 
@@ -887,7 +1046,7 @@ public class Air_Conditioners extends BaseActivity {
 
             }
         }
-        /*This Commented by Arjun On 15-12-2018 For QR Code Scan Purpose
+        /*This Commented by 008 On 15-12-2018 For QR Code Scan Purpose
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {
@@ -1038,179 +1197,6 @@ public class Air_Conditioners extends BaseActivity {
         prefsEditor.commit();
     }
 
-    /*Arjun 28112018*/
-    public boolean checkValidationOnChangeNoOfAcSelection(String noOfACprovided, String numberOfACInWorkingCondition, String methodFlag) {
 
-        /*if (!noOfACprovided.isEmpty() && noOfACprovided != null) {
-            if (noOfACprovided.matches("\\d+(?:\\.\\d+)?")) {
-                if (Integer.valueOf(noOfACprovided) > 0) {
-                    if (!numberOfACInWorkingCondition.isEmpty() && numberOfACInWorkingCondition != null) {
-                        if (Integer.valueOf(numberOfACInWorkingCondition) <= Integer.valueOf(noOfACprovided)) {
-                            return true;
-                        } else {
-                            showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
-                            return false;
-                        }
-                    } else {
-                        showToast("Select Number of AC in working condition");
-                        return false;
-                    }
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        } else {
-            showToast("Select No of Air Conditioners(AC) provided");
-            return false;
-        }*/
-
-
-        if (noOfACprovided.isEmpty() || noOfACprovided == null) {
-            showToast("Select No of Air Conditioners(AC) provided");
-            return false;
-        } else if (Integer.valueOf(noOfACprovided) > 0) {
-            if (numberOfACInWorkingCondition.isEmpty() || numberOfACInWorkingCondition == null) {
-                showToast("Select Number of AC in working condition");
-                return false;
-            } else if (Integer.valueOf(numberOfACInWorkingCondition) > Integer.valueOf(noOfACprovided)) {
-                showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
-                return false;
-            } else if ((airConditionersData.size() != Integer.valueOf(noOfACprovided) && methodFlag.equals("onSubmit"))) {
-                showToast("Complete the all readings .");//as a mentioned AC in no of AC provided
-                return false;
-            } else return true;
-        } else return true;
-
-    }
-
-    /*Arjun 21112018*/
-    public boolean checkValidationOnNoOfAcSelection() {
-        String noOfACprovided = mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim();
-        String numberOfACInWorkingCondition = mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim().equals("Non AC") ? "0" : mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim();
-
-        if (!noOfACprovided.isEmpty() && noOfACprovided != null) {
-            if (noOfACprovided.matches("\\d+(?:\\.\\d+)?")) {
-                if (Integer.valueOf(noOfACprovided) > 0) {
-                    if (!numberOfACInWorkingCondition.isEmpty() && numberOfACInWorkingCondition != null) {
-                        if (Integer.valueOf(numberOfACInWorkingCondition) <= Integer.valueOf(noOfACprovided)) {
-                            return true;
-                        } else {
-                            showToast("Select AC in working condition is less than or equal to Air Conditioners(AC) provided");
-                            return false;
-                        }
-                    } else {
-                        showToast("Select Number of AC in working condition");
-                        return false;
-                    }
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        } else {
-            showToast("Select No of Air Conditioners(AC) provided");
-            return false;
-        }
-
-    }
-
-    /*Arjun 21112018*/
-    public boolean checkValidationOfArrayFields() {
-        DecimalFormatConversion();
-        String qRCodeScan = base64StringQRCodeScan;//mAirConditionersButtonQRCodeScan.getText().toString().trim();
-        /*String assetOwner = mAirConditionersTextViewAssetOwnerVal.getText().toString().trim();
-        String typeOfAcSplitWindow = mAirConditionersTextViewTypeOfAcSpliWindowVal.getText().toString().trim();
-        String manufacturerMakeModel = mAirConditionersTextViewManufacturerMakeModelVal.getText().toString().trim();
-        String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
-        String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
-        String dateOfInstallation = mAirConditionersEditTextDateOfInstallation.getText().toString().trim();
-        String amcYesNo = mAirConditionersTextViewAmcYesNoVal.getText().toString().trim();
-        String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
-        String workingCondition = mAirConditionersTextViewWorkingConditionVal.getText().toString().trim();
-        String natureOfProblem = mAirConditionersEditTextNatureOfProblem.getText().toString().trim();*/
-
-
-        if (qRCodeScan.isEmpty() || qRCodeScan == null) {
-            showToast("Please Scan QR Code");
-            return false;
-        }/* else if (assetOwner.isEmpty() || assetOwner == null) {
-            showToast("Select Asset Owner");
-            return false;
-        } else if (typeOfAcSplitWindow.isEmpty() || typeOfAcSplitWindow == null) {
-            showToast("Select Type of AC");
-            return false;
-        } else if (manufacturerMakeModel.isEmpty() || manufacturerMakeModel == null) {
-            showToast("Select Manufacturer/Make/Model");
-            return false;
-        } else if (acSerialNumber.isEmpty() || acSerialNumber == null) {
-            showToast("Enter AC Serial Number");
-            return false;
-        } else if (capacityTr.isEmpty() || capacityTr == null) {
-            showToast("Enter Capacity(TR)");
-            return false;
-        } else if (dateOfInstallation.isEmpty() || dateOfInstallation == null) {
-            showToast("Select Date of Installation");
-            return false;
-        } else if (amcYesNo.isEmpty() || amcYesNo == null) {
-            showToast("Select AMC");
-            return false;
-        } else if ((dateOfvalidityOfAmc.isEmpty() || dateOfvalidityOfAmc == null) && amcYesNo.equals("Yes")) {
-            showToast("Select Validity of the AMC");
-            return false;
-        } else if (workingCondition.isEmpty() || workingCondition == null) {
-            showToast("Enter Working Condition");
-            return false;
-        } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
-            showToast("Enter Nature of Problem");
-            return false;
-        }*/ else if (checkDuplicationQrCode(currentPos)) {
-            return false;
-        } else return true;
-
-    }
-
-    private boolean checkDuplicationQrCode(int curr_pos) {
-        for (int i = 0; i < airConditionersData.size(); i++) {
-            if (i != curr_pos) {
-                if (base64StringQRCodeScan.equals(airConditionersData.get(i).getqRCodeScan().toString())) {
-                    int dup_pos = i + 1;
-                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /*Arjun 21112018*/
-    private void visibilityOfValidityOfTheAMC(String amcYesNo) {
-        if (amcYesNo.equals("Yes")) {
-            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
-        } else {
-            mAirConditionersLinearLayoutValidityOfAmc.setVisibility(View.GONE);
-            mAirConditionersEditTextDateOfvalidityOfAmc.setText("");
-
-        }
-    }
-
-    /*Arjun 21112018*/
-    private boolean validityOfValidityOfTheAMC(String amcYesNo) {
-        String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
-        if (amcYesNo.equals("Yes")) {
-            if (!dateOfvalidityOfAmc.isEmpty() && dateOfvalidityOfAmc != null) {
-                return true;
-            }
-            {
-                showToast("Select Validity of the AMC");
-                return false;
-            }
-        } else {
-            return true;
-
-        }
-    }
 
 }

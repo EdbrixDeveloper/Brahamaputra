@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class PowerPlantDetailsData {
+public class PowerPlantDetailsData implements java.io.Serializable{
 
     @SerializedName("qRCodeScan")
     String qRCodeScan;

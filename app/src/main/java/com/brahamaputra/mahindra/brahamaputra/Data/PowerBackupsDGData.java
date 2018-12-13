@@ -64,6 +64,9 @@ public class PowerBackupsDGData {
     @SerializedName("dgStartingBatteryStatus")
     String dgStartingBatteryStatus;
 
+    @SerializedName("dgBatteryStatusQRCodeScan")
+    String dgBatteryStatusQRCodeScan;
+
     @SerializedName("chargingAlternator")
     String chargingAlternator;
 
@@ -98,8 +101,8 @@ public class PowerBackupsDGData {
     //private Boolean isSubmited;
 
     public PowerBackupsDGData() {
-       // this.noOfEngineAlternator = "";
-       // this.numberOfWorkingDg = "";
+        // this.noOfEngineAlternator = "";
+        // this.numberOfWorkingDg = "";
         this.qRCodeScan = "";
         this.assetOwner = "";
         this.manufacturerMakeModel = "";
@@ -118,6 +121,7 @@ public class PowerBackupsDGData {
         this.dgMainAltSerialNo = "";
         this.dgCanopyStatus = "";
         this.dgStartingBatteryStatus = "";
+        this.dgBatteryStatusQRCodeScan = "";
         this.chargingAlternator = "";
         this.batteryCharger = "";
         this.presentDieselStock = "";
@@ -131,9 +135,9 @@ public class PowerBackupsDGData {
         //this.isSubmited=false;
     }
 
-    public PowerBackupsDGData(String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
-       // this.noOfEngineAlternator = noOfEngineAlternator;
-       // this.numberOfWorkingDg = numberOfWorkingDg;
+    public PowerBackupsDGData(String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String dgBatteryStatusQRCodeScan, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
+        // this.noOfEngineAlternator = noOfEngineAlternator;
+        // this.numberOfWorkingDg = numberOfWorkingDg;
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
         this.manufacturerMakeModel = manufacturerMakeModel;
@@ -152,6 +156,7 @@ public class PowerBackupsDGData {
         this.dgMainAltSerialNo = dgMainAltSerialNo;
         this.dgCanopyStatus = dgCanopyStatus;
         this.dgStartingBatteryStatus = dgStartingBatteryStatus;
+        this.dgBatteryStatusQRCodeScan = dgBatteryStatusQRCodeScan;
         this.chargingAlternator = chargingAlternator;
         this.batteryCharger = batteryCharger;
         this.presentDieselStock = presentDieselStock;
@@ -323,6 +328,14 @@ public class PowerBackupsDGData {
 
     public void setDgStartingBatteryStatus(String dgStartingBatteryStatus) {
         this.dgStartingBatteryStatus = dgStartingBatteryStatus;
+    }
+
+    public String getDgBatteryStatusQRCodeScan() {
+        return dgBatteryStatusQRCodeScan;
+    }
+
+    public void setDgBatteryStatusQRCodeScan(String dgBatteryStatusQRCodeScan) {
+        this.dgBatteryStatusQRCodeScan = dgBatteryStatusQRCodeScan;
     }
 
     public String getChargingAlternator() {

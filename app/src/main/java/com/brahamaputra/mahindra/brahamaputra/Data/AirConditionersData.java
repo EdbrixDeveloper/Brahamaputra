@@ -43,6 +43,9 @@ public class AirConditionersData {
     @SerializedName("natureOfProblem")
     String natureOfProblem;
 
+    @SerializedName("qrCodeImageFileName")
+    String qrCodeImageFileName;
+
     @SerializedName("isSubmited")
     private Boolean isSubmited;
 
@@ -63,9 +66,6 @@ public class AirConditionersData {
         this.qrCodeImageFileName ="";
         this.isSubmited=false;
     }
-    @SerializedName("qrCodeImageFileName")
-    String qrCodeImageFileName;
-
 
     public AirConditionersData(String qRCodeScan, String assetOwner, String typeOfAcSplitWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
        // this.noOfACprovided = noOfACprovided;
@@ -85,6 +85,7 @@ public class AirConditionersData {
         this.isSubmited=true;
     }
 
+    //region comment
    /* public String getNoOfACprovided() {
         return noOfACprovided;
     }
@@ -100,6 +101,7 @@ public class AirConditionersData {
     public void setNumberOfACInWorkingCondition(String numberOfACInWorkingCondition) {
         this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
     }*/
+   //endregion
 
     public String getqRCodeScan() {
         return qRCodeScan;
@@ -196,8 +198,7 @@ public class AirConditionersData {
     public void setQrCodeImageFileName(String qrCodeImageFileName) {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
-
-
+    
     public Boolean getSubmited() {
         return isSubmited;
     }

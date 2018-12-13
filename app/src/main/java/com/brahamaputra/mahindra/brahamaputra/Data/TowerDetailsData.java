@@ -32,6 +32,7 @@ public class TowerDetailsData {
     //private Boolean isSubmited;
     private int isSubmited;
 
+    //region Region Of Constructors
     public TowerDetailsData() {
         this.towerName = "";
         this.towerType = "";
@@ -41,7 +42,7 @@ public class TowerDetailsData {
         this.dangerSignBoard = "";
         this.cautionSignBoard = "";
         this.warningSignBoard = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
     public TowerDetailsData(String towerName, String towerType, String towerHeight, String dateOfTowerPainting, String boardSign, String dangerSignBoard, String cautionSignBoard, String warningSignBoard) {
@@ -54,13 +55,16 @@ public class TowerDetailsData {
         this.cautionSignBoard = cautionSignBoard;
         this.warningSignBoard = warningSignBoard;
         //this.isSubmited=true;//007
-        if(!this.towerName.isEmpty() && !this.towerType.isEmpty() && !this.dateOfTowerPainting.isEmpty()){
+        this.isSubmited = 1;
+        if (!this.towerName.isEmpty() && !this.towerType.isEmpty() && !this.dateOfTowerPainting.isEmpty()) {
             this.isSubmited = 2;
-        }else {
+        }/*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
+    //endregion
 
+    //region Region of Getter() Setter() property
     public String getTowerName() {
         return towerName;
     }
@@ -132,4 +136,5 @@ public class TowerDetailsData {
     public void setSubmited(int submited) {
         isSubmited = submited;
     }
+    //endregion
 }

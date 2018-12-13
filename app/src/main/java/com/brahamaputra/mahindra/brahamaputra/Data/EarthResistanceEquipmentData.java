@@ -17,11 +17,12 @@ public class EarthResistanceEquipmentData {
     //private Boolean isSubmited;
     private int isSubmited;
 
+    //region Region of Constructors
     public EarthResistanceEquipmentData() {
         this.earthType = "";
         this.earthResistanceInOhms = "";
         this.earthResistanceMeasuredDate = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
     public EarthResistanceEquipmentData(String earthType, String earthResistanceInOhms, String earthResistanceMeasuredDate) {
@@ -29,13 +30,16 @@ public class EarthResistanceEquipmentData {
         this.earthResistanceInOhms = earthResistanceInOhms;
         this.earthResistanceMeasuredDate = earthResistanceMeasuredDate;
         //this.isSubmited=true;//007
-        if(!this.earthType.isEmpty() && !this.earthResistanceInOhms.isEmpty() && !this.earthResistanceMeasuredDate.isEmpty()){
+        this.isSubmited = 1;
+        if (!this.earthType.isEmpty() && !this.earthResistanceInOhms.isEmpty() && !this.earthResistanceMeasuredDate.isEmpty()) {
             this.isSubmited = 2;
-        }else {
+        }/*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
+    //endregion
 
+    //region Region Of Getter() Setter() Properties
     public String getEarthType() {
         return earthType;
     }
@@ -67,4 +71,5 @@ public class EarthResistanceEquipmentData {
     public void setSubmited(int submited) {
         isSubmited = submited;
     }
+    //endregion
 }

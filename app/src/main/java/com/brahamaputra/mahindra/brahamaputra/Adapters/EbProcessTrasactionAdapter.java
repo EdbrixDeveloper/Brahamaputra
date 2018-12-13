@@ -33,6 +33,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
     String ticket_no;
     String site_id;
     String site_name;
+    String StatusId;
     public static final int RESULT_EB_REC_SUBMIT = 259;
 
     // View lookup cache
@@ -227,6 +228,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
         ticket_no = dataModel.getRequestTicketeNo();
         site_id = dataModel.getSiteId();
         site_name = dataModel.getSiteName();
+        StatusId = dataModel.getStatus();
         viewHolder.imageView_status.setTag(position);
         viewHolder.imageView_details.setTag(position);
 
@@ -244,6 +246,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 intent.putExtra("site_id", lst.getSiteId());
                 intent.putExtra("site_name", lst.getSiteName());
                 intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
+                intent.putExtra("StatusId", lst.getStatusId());
                 // c.startActivity(intent);
                 ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                 //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
@@ -265,6 +268,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 intent.putExtra("site_id", lst.getSiteId());
                 intent.putExtra("site_name", lst.getSiteName());
                 intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
+                intent.putExtra("StatusId", lst.getStatusId());
                 // c.startActivity(intent);
                 ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                 //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);

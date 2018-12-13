@@ -86,6 +86,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
     String site_id;
     String site_name;
     String modeOfPayment;
+    String StatusId;
     private AlertDialogManager alertDialogManager;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 101;
@@ -117,6 +118,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         site_id = intent.getStringExtra("site_id");
         site_name = intent.getStringExtra("site_name");
         modeOfPayment = intent.getStringExtra("ModeOfPayment");
+        StatusId = intent.getStringExtra("StatusId");
         assignViews();
         setListners();
         alertDialogManager = new AlertDialogManager(UploadEBPaymentDetailsActivity.this);
@@ -164,7 +166,9 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                 }
             }
         });
-
+        if (StatusId.equals("3")) {
+            invalidateOptionsMenu();
+        }
 
     }
 
@@ -177,7 +181,8 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
 
         // show the button when some condition is true
         shareItem.setVisible(true);
-        if (imageUri.length() > 0) {
+        //if (imageUri.length() > 0) {
+        if (StatusId.equals("3")) {
             shareItem.setVisible(false);
         }
 
@@ -270,15 +275,20 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                                 mUploadEbPaymentTextViewDdChequeDate.setText(response.getEbPaymentDetails().getEbPaymentDdChequetDate() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequetDate());
                                 mUploadEbPaymentTextViewDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());
                                 mUploadEbPaymentEditTextDdChequeRemark.setText(response.getEbPaymentDetails().getEbPaymentDDUploadRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentDDUploadRemark());
+                                if (StatusId.equals("3")) {
+                                    mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
+                                    mUploadEbPaymentButtonDdChequePhotoView.setVisibility(View.GONE);
+                                    //invalidateOptionsMenu();
+                                }
                                 if (response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl() != null && !response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl().isEmpty() && response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl().length() > 0) {
                                     imageUri = response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl();
                                     imageFileName = "";
                                     imageFileNameUri = null;
                                     mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
                                     mUploadEbPaymentButtonDdChequePhotoView.setVisibility(View.VISIBLE);
-                                    invalidateOptionsMenu();
+                                    //invalidateOptionsMenu();
                                 }
-
+                                invalidateOptionsMenu();
                             }
 
                         }
@@ -383,7 +393,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
 
             eBBillUploadPaymentDetails = new EbPaymentDetails(userId, accessToken, request_id, ModeOfPayment,
                     DdChequeNumber, DdChequeDate, DdChequeAmount,
-                    ddChequeTransactionDetails, base64String, ebPaymentRemark,ebPaymentDDUploadRemark);
+                    ddChequeTransactionDetails, base64String, ebPaymentRemark, ebPaymentDDUploadRemark);
 
             Gson gson2 = new GsonBuilder().create();
 

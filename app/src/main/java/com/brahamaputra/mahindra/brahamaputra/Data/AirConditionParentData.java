@@ -32,11 +32,12 @@ public class AirConditionParentData {
         this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
         this.airConditionersData = airConditionersData;
         //this.isSubmited = 0;
+        this.isSubmited = 1;
         if (!this.noOfACprovided.isEmpty()) {
             this.isSubmited = 2;
-        } else {
+        } /*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
 
     public AirConditionParentData() {

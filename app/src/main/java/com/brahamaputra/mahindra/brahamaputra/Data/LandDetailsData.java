@@ -3,7 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 import com.google.gson.annotations.SerializedName;
 
 
-public class LandDetailsData  {
+public class LandDetailsData {
 
     @SerializedName("landType")
     private String landType;
@@ -38,6 +38,7 @@ public class LandDetailsData  {
 
     private String landLayoutFileName;
 
+    //region Region Of Constructors
     public LandDetailsData() {
         this.landType = "";
         this.landArea = "";
@@ -49,7 +50,7 @@ public class LandDetailsData  {
         this.landAgreementCopy = "";
         this.landAgreementValidity = "";
         this.landLayoutFileName = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
     public LandDetailsData(String landType, String landArea, String rentLeaseValue, String rentLeaseValueInWords, String landOwnerName, String landOwnerMob, String landLayout, String landAgreementCopy, String landAgreementValidity, String landLayoutFileName) {
@@ -65,13 +66,15 @@ public class LandDetailsData  {
         this.landLayoutFileName = landLayoutFileName;
 
         //this.isSubmited=true;//007
-        if(!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()){
+        if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
             this.isSubmited = 2;
-        }else {
+        } else {
             this.isSubmited = 1;
         }
     }
+    //endregion
 
+    //region Region Of Getter() Setter() Properties()
     public String getLandType() {
         return landType;
     }
@@ -100,7 +103,6 @@ public class LandDetailsData  {
         return rentLeaseValueInWords;
     }
 
-
     public void setRentLeaseValueInWords(String rentLeaseValueInWords) {
         this.rentLeaseValueInWords = rentLeaseValueInWords;
     }
@@ -108,7 +110,6 @@ public class LandDetailsData  {
     public String getLandOwnerName() {
         return landOwnerName;
     }
-
 
     public void setLandOwnerName(String landOwnerName) {
         this.landOwnerName = landOwnerName;
@@ -161,4 +162,5 @@ public class LandDetailsData  {
     public void setSubmited(int submited) {
         isSubmited = submited;
     }
+    //endregion
 }

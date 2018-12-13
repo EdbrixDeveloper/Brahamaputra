@@ -132,6 +132,11 @@ public class Power_Backups_DG extends BaseActivity {
     private TextView mPowerBackupsDgTextViewNatureOfProblem;
     private EditText mPowerBackupsDgEditTextNatureOfProblem;
 
+    LinearLayout mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan;
+    TextView mPowerBackupsDgTextViewDgBatteryStatusQRCodeScan;
+    ImageView mPowerBackupsDgButtonDgBatteryStatusQRCodeScan;
+    ImageView mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView;
+
     LinearLayout mPowerBackupsDgLinearLayoutNumberOfWorkingDg;
 
     String str_noOfEngineAlternatorSetsprovided;
@@ -160,7 +165,9 @@ public class Power_Backups_DG extends BaseActivity {
     private String ticketName = "28131";
     private HotoTransactionData hotoTransactionData;
     private ArrayList<PowerBackupsDGData> powerBackupsDGData;
+    private byte qrScanFlag = 0;
     private String base64StringQRCodeScan = "";
+    private String base64StringDgBatteryStatusQRCodeScan = "";
 
     private SessionManager sessionManager;
     private Uri imageFileUri;
@@ -185,6 +192,8 @@ public class Power_Backups_DG extends BaseActivity {
     private LinearLayout linearLayout_container;
     private LinearLayout mPowerBackupsDgLinearLayoutValidityOfAmc;
 
+    private ImageView button_ClearQRCodeScanView1;
+    private ImageView button_ClearQRCodeScanView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,6 +259,7 @@ public class Power_Backups_DG extends BaseActivity {
                 } else {
                     //openCamera();
                     //openCameraIntent();
+                    qrScanFlag = 1;
                     onClicked(v);
                 }
 
@@ -329,6 +339,39 @@ public class Power_Backups_DG extends BaseActivity {
             }
         });
 
+        mPowerBackupsDgButtonDgBatteryStatusQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(Power_Backups_DG.this,
+                        Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    if (getFromPref(Power_Backups_DG.this, ALLOW_KEY)) {
+
+                        showSettingsAlert();
+
+                    } else if (ContextCompat.checkSelfPermission(Power_Backups_DG.this,
+                            Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Should we show an explanation?
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(Power_Backups_DG.this,
+                                Manifest.permission.CAMERA)) {
+                            showAlert();
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            ActivityCompat.requestPermissions(Power_Backups_DG.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    MY_PERMISSIONS_REQUEST_CAMERA);
+                        }
+                    }
+                } else {
+                    qrScanFlag = 2;
+                    onClicked(v);
+                }
+
+            }
+        });
+
         /*mPowerBackupsDgButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -339,6 +382,28 @@ public class Power_Backups_DG extends BaseActivity {
                 }
             }
         });*/
+
+        button_ClearQRCodeScanView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringQRCodeScan = "";
+                button_ClearQRCodeScanView1.setVisibility(View.GONE);
+                mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+
+            }
+        });
+
+        button_ClearQRCodeScanView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringDgBatteryStatusQRCodeScan = "";
+                button_ClearQRCodeScanView2.setVisibility(View.GONE);
+                mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+
+            }
+        });
 
     }
 
@@ -428,6 +493,14 @@ public class Power_Backups_DG extends BaseActivity {
         powerBackupsDg_textView_Number = (TextView) findViewById(R.id.powerBackupsDg_textView_Number);
         linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
 
+        mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan = (LinearLayout) findViewById(R.id.powerBackupsDg_linearLayout_dgBatteryStatusQRCodeScan);
+        mPowerBackupsDgTextViewDgBatteryStatusQRCodeScan = (TextView) findViewById(R.id.powerBackupsDg_textView_dgBatteryStatusQRCodeScan);
+        mPowerBackupsDgButtonDgBatteryStatusQRCodeScan = (ImageView) findViewById(R.id.powerBackupsDg_button_dgBatteryStatusQRCodeScan);
+        mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView = (ImageView) findViewById(R.id.powerBackupsDg_button_dgBatteryStatusQRCodeScanView);
+
+        button_ClearQRCodeScanView1 = (ImageView) findViewById(R.id.button_ClearQRCodeScanView1);
+        button_ClearQRCodeScanView2 = (ImageView) findViewById(R.id.button_ClearQRCodeScanView2);
+
         mPowerBackupsDgLinearLayoutNumberOfWorkingDg = (LinearLayout) findViewById(R.id.powerBackupsDg_linearLayout_numberOfWorkingDg);
         mPowerBackupsDgLinearLayoutValidityOfAmc = (LinearLayout) findViewById(R.id.powerBackupsDg_linearLayout_validityOfAmc);
 
@@ -484,7 +557,7 @@ public class Power_Backups_DG extends BaseActivity {
 
                             powerBackupsDg_textView_Number.setText("Reading: #1");
                             linearLayout_container.setVisibility(View.VISIBLE);
-                            mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.VISIBLE);//arjun
+                            mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.VISIBLE);//008
                             powerBackupsDg_button_previousReading.setVisibility(View.GONE);
                             powerBackupsDg_button_nextReading.setVisibility(View.VISIBLE);
                             if (totalCount > 0 && totalCount == 1) {
@@ -494,7 +567,7 @@ public class Power_Backups_DG extends BaseActivity {
                             }
                         } else {
                             linearLayout_container.setVisibility(View.GONE);
-                            mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//arjun
+                            mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//008
 
                         }
                     }
@@ -728,6 +801,8 @@ public class Power_Backups_DG extends BaseActivity {
 
                         str_dgStartingBatteryStatus = item.get(position);
                         mPowerBackupsDgTextViewDgStartingBatteryStatusVal.setText(str_dgStartingBatteryStatus);
+                        visibilityOfDgBatteryStatusQRCodeScan(str_dgStartingBatteryStatus);
+
                     }
                 });
             }
@@ -897,7 +972,6 @@ public class Power_Backups_DG extends BaseActivity {
         }
     }
 
-
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
                 (CAMERA_PREF, Context.MODE_PRIVATE);
@@ -1033,22 +1107,42 @@ public class Power_Backups_DG extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-            if (result.getContents() == null) {
-                base64StringQRCodeScan = "";
-                showToast("Cancelled");
-            } else {
-                if(!isDuplicateQRcode(result.getContents())){
-                    base64StringQRCodeScan = result.getContents();
-                    if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
-                        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                    }
-                }else {
+            if (qrScanFlag == 1) {
+                mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+                button_ClearQRCodeScanView1.setVisibility(View.GONE);
+                if (result.getContents() == null) {
                     base64StringQRCodeScan = "";
-                    showToast("QR Code Already Used in Application");
+                    showToast("Cancelled");
+                } else {
+                    if (!isDuplicateQRcode(result.getContents())) {
+                        base64StringQRCodeScan = result.getContents();
+                        if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
+                            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                            button_ClearQRCodeScanView1.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        base64StringQRCodeScan = "";
+                        showToast("QR Code Already Used in Application");
+                    }
                 }
-
-
+            } else if (qrScanFlag == 2) {
+                mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+                button_ClearQRCodeScanView2.setVisibility(View.GONE);
+                if (result.getContents() == null) {
+                    base64StringDgBatteryStatusQRCodeScan = "";
+                    showToast("Cancelled");
+                } else {
+                    if (!isDuplicateQRcode(result.getContents())) {
+                        base64StringDgBatteryStatusQRCodeScan = result.getContents();
+                        if (!base64StringDgBatteryStatusQRCodeScan.isEmpty() && base64StringDgBatteryStatusQRCodeScan != null) {
+                            mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
+                            button_ClearQRCodeScanView2.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        base64StringDgBatteryStatusQRCodeScan = "";
+                        showToast("QR Code Already Used in Application");
+                    }
+                }
             }
         }
     }
@@ -1143,24 +1237,35 @@ public class Power_Backups_DG extends BaseActivity {
                 mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(powerBackupsDGParentData.getNumberOfWorkingDg());
 
                 linearLayout_container.setVisibility(View.GONE);
-                mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//arjun
+                mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//008
                 if (powerBackupsDGData != null && powerBackupsDGData.size() > 0) {
 
                     linearLayout_container.setVisibility(View.VISIBLE);
-                    mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.VISIBLE);//arjun
+                    mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.VISIBLE);//008
                     powerBackupsDg_textView_Number.setText("Reading: #1");
                     totalCount = Integer.parseInt(powerBackupsDGParentData.getNoOfEngineAlternator());
 
-                    /*Comment By Arjun
+                    /*Comment By 008
                     mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(powerBackupsDGParentData.getNoOfEngineAlternator());
                     mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(powerBackupsDGParentData.getNumberOfWorkingDg());*/
 
                     base64StringQRCodeScan = powerBackupsDGData.get(index).getqRCodeScan();
                     mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+                    button_ClearQRCodeScanView1.setVisibility(View.GONE);
                     if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                         mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView1.setVisibility(View.VISIBLE);
                     }
 
+                    visibilityOfDgBatteryStatusQRCodeScan(powerBackupsDGData.get(index).getDgStartingBatteryStatus());
+
+                    base64StringDgBatteryStatusQRCodeScan = powerBackupsDGData.get(index).getDgBatteryStatusQRCodeScan();
+                    mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+                    button_ClearQRCodeScanView2.setVisibility(View.GONE);
+                    if (!base64StringDgBatteryStatusQRCodeScan.isEmpty() && base64StringDgBatteryStatusQRCodeScan != null) {
+                        mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView2.setVisibility(View.VISIBLE);
+                    }
                     // New added for image #ImageSet
                     /*imageFileName = powerBackupsDGData.get(index).getQrCodeImageFileName();
                     mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
@@ -1214,7 +1319,7 @@ public class Power_Backups_DG extends BaseActivity {
             } else {
                 Toast.makeText(Power_Backups_DG.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 linearLayout_container.setVisibility(View.GONE);
-                mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//arjun
+                mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//008
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1258,6 +1363,7 @@ public class Power_Backups_DG extends BaseActivity {
         String dgMainAltSerialNo = mPowerBackupsDgEditTextDgMainAlternatorSerialNumber.getText().toString().trim();
         String dgCanopyStatus = mPowerBackupsDgTextViewDgCanopyStatusVal.getText().toString().trim();
         String dgStartingBatteryStatus = mPowerBackupsDgTextViewDgStartingBatteryStatusVal.getText().toString().trim();
+        String dgBatteryQRCodeScan = base64StringDgBatteryStatusQRCodeScan;
         String chargingAlternator = mPowerBackupsDgTextViewChargingAlternatorVal.getText().toString().trim();
         String batteryCharger = mPowerBackupsDgTextViewBatteryChargerVal.getText().toString().trim();
         String presentDieselStock = mPowerBackupsDgEditTextPresentDieselStock.getText().toString().trim();
@@ -1271,7 +1377,7 @@ public class Power_Backups_DG extends BaseActivity {
         String imageFileName = "";
 
 
-        PowerBackupsDGData obj_powerBackupsDGData = new PowerBackupsDGData(qRCodeScan, assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
+        PowerBackupsDGData obj_powerBackupsDGData = new PowerBackupsDGData(qRCodeScan, assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, dgBatteryQRCodeScan, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
         if (powerBackupsDGData.size() > 0) {
             if (pos == powerBackupsDGData.size()) {
                 powerBackupsDGData.add(obj_powerBackupsDGData);
@@ -1290,8 +1396,20 @@ public class Power_Backups_DG extends BaseActivity {
 
             base64StringQRCodeScan = powerBackupsDGData.get(pos).getqRCodeScan();
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView1.setVisibility(View.GONE);
             if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                 mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                button_ClearQRCodeScanView1.setVisibility(View.VISIBLE);
+            }
+
+            visibilityOfDgBatteryStatusQRCodeScan(powerBackupsDGData.get(pos).getDgStartingBatteryStatus());
+
+            base64StringDgBatteryStatusQRCodeScan = powerBackupsDGData.get(pos).getDgBatteryStatusQRCodeScan();
+            mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView2.setVisibility(View.GONE);
+            if (!base64StringDgBatteryStatusQRCodeScan.isEmpty() && base64StringDgBatteryStatusQRCodeScan != null) {
+                mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
+                button_ClearQRCodeScanView2.setVisibility(View.VISIBLE);
             }
 
             mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.get(pos).getAssetOwner());
@@ -1348,6 +1466,7 @@ public class Power_Backups_DG extends BaseActivity {
 
         powerBackupsDg_textView_Number.setText("Reading: #" + (indexPos + 1));
         mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView1.setVisibility(View.GONE);
 
         mPowerBackupsDgTextViewAssetOwnerVal.setText("");
         mPowerBackupsDgTextViewManufacturerMakeModelVal.setText("");
@@ -1393,16 +1512,30 @@ public class Power_Backups_DG extends BaseActivity {
         str_fuelTankPosition = "";
         str_workingCondition = "";
         base64StringQRCodeScan = "";
+        base64StringDgBatteryStatusQRCodeScan = "";
+        mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+        mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan.setVisibility(View.GONE);
+        button_ClearQRCodeScanView2.setVisibility(View.GONE);
 
         if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
+            button_ClearQRCodeScanView1.setVisibility(View.VISIBLE);
         } else {
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView1.setVisibility(View.GONE);
+        }
+
+        if (!base64StringDgBatteryStatusQRCodeScan.isEmpty() && base64StringDgBatteryStatusQRCodeScan != null) {
+            mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
+            button_ClearQRCodeScanView2.setVisibility(View.VISIBLE);
+        } else {
+            mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+            button_ClearQRCodeScanView2.setVisibility(View.GONE);
         }
     }
 
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     public boolean checkValidationOnChangeNoOfEngineAlternatorSelection(String noOfEngineAlternator, String numberOfWorkingDg, String methodFlag) {
         //String noOfEngineAlternator = mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim();
         //String numberOfWorkingDg = mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim();
@@ -1447,7 +1580,7 @@ public class Power_Backups_DG extends BaseActivity {
 
     }
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     public boolean checkValidationOnNoOfEngineAlternatorSelection() {
         String noOfEngineAlternator = mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim();
         String numberOfWorkingDg = mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim();
@@ -1475,10 +1608,12 @@ public class Power_Backups_DG extends BaseActivity {
 
     }
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     public boolean checkValidationOfArrayFields() {
         DecimalFormatConversion();
         String qRCodeScan = base64StringQRCodeScan;
+        String dgqRCodeScan = base64StringDgBatteryStatusQRCodeScan;
+        String dgStartingBatteryStatus = mPowerBackupsDgTextViewDgStartingBatteryStatusVal.getText().toString().trim();
         /*String assetOwner = mPowerBackupsDgTextViewAssetOwnerVal.getText().toString().trim();
         String manufacturerMakeModel = mPowerBackupsDgTextViewManufacturerMakeModelVal.getText().toString().trim();
         String capacityInKva = mPowerBackupsDgTextViewCapacityInKvaVal.getText().toString().trim();
@@ -1585,7 +1720,10 @@ public class Power_Backups_DG extends BaseActivity {
         } else if (workingCondition.isEmpty() || workingCondition == null) {
             showToast("Select Working Condition");
             return false;
-        }*/ else if (checkDuplicationQrCode(currentPos)) {
+        }*/ else if ((dgqRCodeScan.isEmpty() || dgqRCodeScan == null) && dgStartingBatteryStatus.equals("Yes")) {
+            showToast("Please Scan DG Starting Battery QR Code ");
+            return false;
+        } else if (checkDuplicationQrCode(currentPos)) {
             return false;
         } else return true;
 
@@ -1599,12 +1737,41 @@ public class Power_Backups_DG extends BaseActivity {
                     showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
                     return true;
                 }
+
+                if (base64StringQRCodeScan.equals(powerBackupsDGData.get(i).getDgBatteryStatusQRCodeScan().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+
+                if (base64StringDgBatteryStatusQRCodeScan.equals(powerBackupsDGData.get(i).getqRCodeScan().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
+
+                if (base64StringDgBatteryStatusQRCodeScan.equals(powerBackupsDGData.get(i).getDgBatteryStatusQRCodeScan().toString())) {
+                    int dup_pos = i + 1;
+                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
+                    return true;
+                }
             }
+            if (i == curr_pos) {
+                if (base64StringQRCodeScan.equals(base64StringDgBatteryStatusQRCodeScan)) {
+                    int dup_pos = i + 1;
+                    showToast("This QR Code Already scanned in that Reading " + dup_pos);
+                    return true;
+                }
+            }
+        }
+        if (base64StringQRCodeScan.equals(base64StringDgBatteryStatusQRCodeScan)) {
+            showToast("This QR Code Already scanned in that Reading ");
+            return true;
         }
         return false;
     }
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     private void visibilityOfValidityOfTheAMC(String amcYesNo) {
         if (amcYesNo.equals("Yes")) {
             mPowerBackupsDgLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
@@ -1612,6 +1779,15 @@ public class Power_Backups_DG extends BaseActivity {
             mPowerBackupsDgLinearLayoutValidityOfAmc.setVisibility(View.GONE);
             mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText("");
 
+        }
+    }
+
+    private void visibilityOfDgBatteryStatusQRCodeScan(String dgBatteryStatus) {
+        base64StringDgBatteryStatusQRCodeScan = "";
+        mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+        mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan.setVisibility(View.GONE);
+        if (dgBatteryStatus.equals("Yes")) {
+            mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan.setVisibility(View.VISIBLE);
         }
     }
 }
