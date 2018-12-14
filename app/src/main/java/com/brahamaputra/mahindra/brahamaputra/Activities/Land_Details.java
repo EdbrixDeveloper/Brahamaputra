@@ -345,6 +345,7 @@ public class Land_Details extends BaseActivity {
 
 //                mLandDetailsSpinnerTypeOfLand.setSelection(1);
                         mLandDetailsTextViewCopyAgreementWithOwnerVal.setText(landDetailsData.getLandAgreementCopy());
+                        visibilityOfValidityOfAgreement(landDetailsData.getLandAgreementCopy());
                         mLandDetailsEditTextAreaOfLand.setText(landDetailsData.getLandArea());
                         mLandDetailsEditTextRentLeaseInNumber.setText(landDetailsData.getRentLeaseValue());
                         mLandDetailsTextViewRentLeaseInWords_val.setText(landDetailsData.getRentLeaseValueInWords().toString().toUpperCase());

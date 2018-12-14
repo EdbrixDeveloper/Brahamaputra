@@ -45,10 +45,10 @@ public class SolarPowerSystemData {
         this.amcYesNo = "";
         this.dateOfvalidityOfAmc = "";
         this.qrCodeImageFileName = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
-    public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc,String qrCodeImageFileName) {
+    public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc, String qrCodeImageFileName) {
         this.qRCodeScan = qRCodeScan;
         this.available = available;
         this.assetOwner = assetOwner;
@@ -59,11 +59,12 @@ public class SolarPowerSystemData {
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
         this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;//007
-        if(!this.available.isEmpty()){
+        this.isSubmited = 1;
+        if (!this.available.isEmpty()) {
             this.isSubmited = 2;
-        }else {
+        }/*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
 
     public String getqRCodeScan() {

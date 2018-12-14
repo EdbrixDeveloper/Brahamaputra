@@ -49,9 +49,10 @@ public class AirConditionersData {
     @SerializedName("isSubmited")
     private Boolean isSubmited;
 
+    //region Region Of Constructors
     public AirConditionersData() {
         //this.noOfACprovided = "";
-       // this.numberOfACInWorkingCondition = "";
+        // this.numberOfACInWorkingCondition = "";
         this.qRCodeScan = "";
         this.assetOwner = "";
         this.typeOfAcSplitWindow = "";
@@ -63,13 +64,13 @@ public class AirConditionersData {
         this.dateOfvalidityOfAmc = "";
         this.workingCondition = "";
         this.natureOfProblem = "";
-        this.qrCodeImageFileName ="";
-        this.isSubmited=false;
+        this.qrCodeImageFileName = "";
+        this.isSubmited = false;
     }
 
     public AirConditionersData(String qRCodeScan, String assetOwner, String typeOfAcSplitWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
-       // this.noOfACprovided = noOfACprovided;
-       // this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
+        // this.noOfACprovided = noOfACprovided;
+        // this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
         this.typeOfAcSplitWindow = typeOfAcSplitWindow;
@@ -82,10 +83,11 @@ public class AirConditionersData {
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
-        this.isSubmited=true;
+        this.isSubmited = true;
     }
+    //endregion
 
-    //region comment
+    //region comment Section
    /* public String getNoOfACprovided() {
         return noOfACprovided;
     }
@@ -101,8 +103,9 @@ public class AirConditionersData {
     public void setNumberOfACInWorkingCondition(String numberOfACInWorkingCondition) {
         this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
     }*/
-   //endregion
+    //endregion
 
+    //region Region of Getter() Setter Properties
     public String getqRCodeScan() {
         return qRCodeScan;
     }
@@ -198,7 +201,7 @@ public class AirConditionersData {
     public void setQrCodeImageFileName(String qrCodeImageFileName) {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
-    
+
     public Boolean getSubmited() {
         return isSubmited;
     }
@@ -206,4 +209,5 @@ public class AirConditionersData {
     public void setSubmited(Boolean submited) {
         isSubmited = submited;
     }
+    //endregion
 }

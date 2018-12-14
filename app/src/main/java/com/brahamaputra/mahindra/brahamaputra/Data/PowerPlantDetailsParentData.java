@@ -19,6 +19,26 @@ public class PowerPlantDetailsParentData {
     //private Boolean isSubmited;
     private int isSubmited;
 
+    public PowerPlantDetailsParentData() {
+        this.numberOfPowerPlant = "";
+        this.numberOfWorkingPowerPlant = "";
+        this.powerPlantDetailsData = new ArrayList<>();
+        this.isSubmited = 0;
+    }
+
+    public PowerPlantDetailsParentData(String numberOfPowerPlant, String numberOfWorkingPowerPlant, ArrayList<PowerPlantDetailsData> powerPlantDetailsData) {
+        this.numberOfPowerPlant = numberOfPowerPlant;
+        this.numberOfWorkingPowerPlant = numberOfWorkingPowerPlant;
+        this.powerPlantDetailsData = powerPlantDetailsData;
+        //this.isSubmited = true;//007
+        this.isSubmited = 1;
+        if (!this.numberOfPowerPlant.isEmpty()) {
+            this.isSubmited = 2;
+        }/*else {
+            this.isSubmited = 1;
+        }*/
+    }
+
     public String getNumberOfPowerPlant() {
         return numberOfPowerPlant;
     }
@@ -41,25 +61,6 @@ public class PowerPlantDetailsParentData {
 
     public void setSubmited(int submited) {
         isSubmited = submited;
-    }
-
-    public PowerPlantDetailsParentData(String numberOfPowerPlant, String numberOfWorkingPowerPlant, ArrayList<PowerPlantDetailsData> powerPlantDetailsData) {
-        this.numberOfPowerPlant = numberOfPowerPlant;
-        this.numberOfWorkingPowerPlant = numberOfWorkingPowerPlant;
-        this.powerPlantDetailsData = powerPlantDetailsData;
-        //this.isSubmited = true;//007
-        if(!this.numberOfPowerPlant.isEmpty()){
-            this.isSubmited = 2;
-        }else {
-            this.isSubmited = 1;
-        }
-    }
-
-    public PowerPlantDetailsParentData() {
-        this.numberOfPowerPlant = "";
-        this.numberOfWorkingPowerPlant = "";
-        this.powerPlantDetailsData = new ArrayList<>();
-        this.isSubmited = 0;
     }
 
     public String getNumberOfWorkingPowerPlant() {

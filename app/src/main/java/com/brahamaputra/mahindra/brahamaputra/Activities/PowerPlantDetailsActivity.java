@@ -2,25 +2,19 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,17 +22,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
-import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsModulesData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsParentData;
-import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -51,8 +42,6 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.google.gson.Gson;
@@ -60,20 +49,16 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class PowerPlantDetailsActivity extends BaseActivity {
 
     private TextView mPowerPlantDetailsTextViewQRCodeScan;
     private ImageView mPowerPlantDetailsButtonQRCodeScan;
-
     private ImageView mPowerPlantDetailsButtonQRCodeScanView;
 
     private TextView mpowerPlantDetails_textView_PlantNumber;
@@ -117,22 +102,21 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private LinearLayout lnrPlantDetails;
     private ImageView button_ClearQRCodeScanView;
 
-    LinearLayout mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking;
-    TextView mPowerPlantDetailsTextViewNumberOfPowerPlantWorking;
-    TextView mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal;
+    private LinearLayout mPowerPlantDetailsLinearLayoutNumberOfPowerPlantWorking;
+    private TextView mPowerPlantDetailsTextViewNumberOfPowerPlantWorking;
+    private TextView mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal;
 
-
-    String str_assetOwner;
-    String str_numberOfPowerPlant;
-    String str_manufacturerMakeModel;
-    String str_numberModuleSlots;
-    String str_powerPlantEarthingStatus;
-    String str_typeOfPowerPlantCommercialSmps;
-    String str_numberOfModules;
-    String str_noOfFaultyModulese;
-    String str_spdStatus;
-    String str_workingCondition;
-    String str_numberOfPowerPlantWorking;
+    private String str_assetOwner;
+    private String str_numberOfPowerPlant;
+    private String str_manufacturerMakeModel;
+    private String str_numberModuleSlots;
+    private String str_powerPlantEarthingStatus;
+    private String str_typeOfPowerPlantCommercialSmps;
+    private String str_numberOfModules;
+    private String str_noOfFaultyModulese;
+    private String str_spdStatus;
+    private String str_workingCondition;
+    private String str_numberOfPowerPlantWorking;
 
     private static final String TAG = PowerPlantDetailsActivity.class.getSimpleName();
     DecimalConversion decimalConversion;
@@ -156,7 +140,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     public static final int MY_FLAG_MODULE_RESULT = 200;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
-    public String date_flag = "no";
+    //public String date_flag = "no";
 
     private AlertDialogManager alertDialogManager;
 
@@ -182,7 +166,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerPlantDetailsActivity.this, userId, ticketName);
 
         setInputDetails(0);
-
 
         mPowerPlantDetailsButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,7 +233,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         });
 
 
-        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
+        /*This Commented By 008 on 15-11-2018 For QR Code Purpose
         mPowerPlantDetailsButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -686,7 +669,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             }
         });
 
-
     }
 
     private void setInputDetails(int index) {
@@ -760,7 +742,8 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 }
 
             } else {
-                Toast.makeText(PowerPlantDetailsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PowerPlantDetailsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -915,7 +898,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         powerPlantDetailsModulesData.clear();
     }
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     public boolean checkValidationOnChangeNoOfPowerPlant(String numberOfPowerPlant, String numberOfWorkingPowerPlant, String methodFlag) {
 
         /*if (!numberOfPowerPlant.isEmpty() && numberOfPowerPlant != null) {
@@ -1446,6 +1429,5 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }

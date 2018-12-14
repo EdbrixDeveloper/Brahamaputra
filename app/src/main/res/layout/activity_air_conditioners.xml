@@ -24,7 +24,6 @@
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
-
                 <TextView
                     android:id="@+id/airConditioners_textView_noOfAirConditionersACprovided"
                     style="@style/FontStyle"
@@ -32,7 +31,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="No.of Air Conditioners (AC) provided*" />
-
 
                 <TextView
                     android:id="@+id/airConditioners_textView_noOfAirConditionersACprovided_val"
@@ -43,7 +41,6 @@
                     android:hint="Select"
                     android:textAlignment="viewStart" />
 
-
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -53,7 +50,6 @@
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
-
                 <TextView
                     android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition"
                     style="@style/FontStyle"
@@ -61,7 +57,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Number of AC in Working Condition" />
-
 
                 <TextView
                     android:id="@+id/airConditioners_textView_numberOfACInWorkingCondition_val"
@@ -81,8 +76,6 @@
                 android:layout_margin="@dimen/app_normal_margin"
                 android:orientation="vertical"
                 android:visibility="gone">
-
-
 
                 <TextView
                     android:id="@+id/airConditioners_textView_AcNumber"
@@ -113,7 +106,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="QR Code Scan" />
-
 
                     <ImageView
                         android:id="@+id/airConditioners_button_QRCodeScan"
@@ -146,7 +138,6 @@
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_close_black_24dp"
                         android:visibility="gone" />
-
                     <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
 
                 </LinearLayout>
@@ -164,7 +155,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Asset Owner" />
-
 
                     <TextView
                         android:id="@+id/airConditioners_textView_assetOwner_val"
@@ -190,7 +180,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Type of AC (Split/Window)" />
-
 
                     <TextView
                         android:id="@+id/airConditioners_textView_typeOfAcSpliWindow_val"
@@ -282,7 +271,6 @@
 
                     <EditText
                         android:id="@+id/airConditioners_editText_capacityTr"
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
@@ -299,7 +287,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
-
 
                     <TextView
                         android:id="@+id/airConditioners_textView_dateOfInstallation"
@@ -337,7 +324,6 @@
                         android:layout_weight="0.4"
                         android:text="AMC (Yes / No)" />
 
-
                     <TextView
                         android:id="@+id/airConditioners_textView_amcYesNo_val"
                         style="@style/MyTheme"
@@ -355,7 +341,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
-
 
                     <TextView
                         android:id="@+id/airConditioners_textView_validityOfAmc"
@@ -379,13 +364,11 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
-
 
                     <TextView
                         android:id="@+id/airConditioners_textView_workingCondition"
@@ -394,7 +377,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Working Condition" />
-
 
                     <TextView
                         android:id="@+id/airConditioners_textView_workingCondition_val"
@@ -405,9 +387,7 @@
                         android:hint="Select"
                         android:textAlignment="viewStart" />
 
-
                 </LinearLayout>
-
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
@@ -423,7 +403,6 @@
                         android:layout_weight="0.4"
                         android:text="Nature of Problem" />
 
-
                     <EditText
                         android:id="@+id/airConditioners_editText_natureOfProblem"
                         android:layout_width="0dp"
@@ -433,8 +412,8 @@
                         android:inputType="text"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
-                </LinearLayout>
 
+                </LinearLayout>
 
                 <!--<Button
                     android:id="@+id/airCondition_button_save"
@@ -485,7 +464,9 @@
                     <!--android:textAllCaps="false"-->
 
                 </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

@@ -316,7 +316,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
         // show the button when some condition is true
         shareItem.setVisible(false);
-        if (hotoTransactionData.isAtLeastOneHotoFormsSubmit() == true) {
+        if (hotoTransactionData.isAtLeastOneHotoFormsSubmit()) {
             shareItem.setVisible(true);
         }
 

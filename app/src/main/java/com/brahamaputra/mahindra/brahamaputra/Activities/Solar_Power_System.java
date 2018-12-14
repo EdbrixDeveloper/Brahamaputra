@@ -2,24 +2,20 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,8 +27,6 @@ import android.widget.ImageView;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
-import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
 import com.brahamaputra.mahindra.brahamaputra.Data.SolarPowerSystemData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -54,7 +48,6 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -142,7 +135,6 @@ public class Solar_Power_System extends BaseActivity {
 
         setInputDetails();
 
-
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -183,7 +175,7 @@ public class Solar_Power_System extends BaseActivity {
                     }
                 } else {
                     //openCamera();
-                    //openCameraIntent();This Commented By Arjun on 14-11-2018 For QR Code Purpose
+                    //openCameraIntent();This Commented By 008 on 14-11-2018 For QR Code Purpose
                     onClicked(v);
                 }
 
@@ -219,7 +211,7 @@ public class Solar_Power_System extends BaseActivity {
         });
 
 
-        /*This Commented By Arjun on 14-11-2018 For QR Code Purpose
+        /*This Commented By 008 on 14-11-2018 For QR Code Purpose
         mSolarPowerSystemButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -288,7 +280,6 @@ public class Solar_Power_System extends BaseActivity {
 
     public void DecimalFormatConversion() {
         mSolarPowerSystemEditTextCapacityKW.setText(decimalConversion.convertDecimal(mSolarPowerSystemEditTextCapacityKW.getText().toString()));
-
     }
 
     private void initCombo() {
@@ -412,7 +403,6 @@ public class Solar_Power_System extends BaseActivity {
         }
     }
 
-
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -433,7 +423,7 @@ public class Solar_Power_System extends BaseActivity {
                     button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                 }
                 // New added for image #ImageSet
-               /* This Commented By Arjun on 14-11-2018 For QR Code Purpose
+               /* This Commented By 008 on 14-11-2018 For QR Code Purpose
                imageFileName = solarPowerSystemData.getQrCodeImageFileName();
                 mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
                 if (imageFileName != null && imageFileName.length() > 0) {
@@ -455,18 +445,17 @@ public class Solar_Power_System extends BaseActivity {
 
                 changeVisibilityOfFields(solarPowerSystemData.getAvailable());
             } else {
-                Toast.makeText(Solar_Power_System.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
+                //Toast.makeText(Solar_Power_System.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
     private void submitDetails() {
         try {
             //hotoTransactionData.setTicketNo(ticketName);
-
 
             String qRCodeScan = base64StringQRCodeScan;
             String available = mSolarPowerSystemTextViewAvailableVal.getText().toString().trim();
@@ -507,6 +496,8 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.GONE);
 
                 base64StringQRCodeScan = "";
+                mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
                 //mSolarPowerSystemTextViewAvailableVal.setText("");
                 mSolarPowerSystemTextViewAssetOwnerVal.setText("");
                 mSolarPowerSystemEditTextManufacturerMakeModel.setText("");
@@ -520,7 +511,7 @@ public class Solar_Power_System extends BaseActivity {
         }
     }
 
-    /*Arjun 29112018*/
+    /*008 29112018*/
     public boolean checkValidation() {
         String qRCodeScan = base64StringQRCodeScan;
         String available = mSolarPowerSystemTextViewAvailableVal.getText().toString().trim();
@@ -531,7 +522,7 @@ public class Solar_Power_System extends BaseActivity {
 
     }
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     private boolean validityOfValidityOfTheAMC(String amcYesNo) {
         String dateOfvalidityOfAmc = mSolarPowerSystemEditTextDateOfvalidityOfAmc.getText().toString().trim();
         if (amcYesNo.equals("Yes")) {
@@ -548,14 +539,13 @@ public class Solar_Power_System extends BaseActivity {
         }
     }
 
-    /*Arjun 21112018*/
+    /*008 21112018*/
     private void visibilityOfValidityOfTheAMC(String amcYesNo) {
         if (amcYesNo.equals("Yes")) {
             mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
         } else {
             mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.GONE);
             mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText("");
-
         }
     }
 
@@ -593,13 +583,13 @@ public class Solar_Power_System extends BaseActivity {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                if(!isDuplicateQRcode(result.getContents())){
+                if (!isDuplicateQRcode(result.getContents())) {
                     base64StringQRCodeScan = result.getContents();
                     if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                         mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
                         button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     base64StringQRCodeScan = "";
                     showToast("QR Code Already Used in Application");
                 }
@@ -610,7 +600,7 @@ public class Solar_Power_System extends BaseActivity {
 
         }*/
 
-        /*This Commented By Arjun on 14-11-2018 For QR Code Purpose
+        /*This Commented By 008 on 14-11-2018 For QR Code Purpose
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {
@@ -756,7 +746,6 @@ public class Solar_Power_System extends BaseActivity {
         }
     }
 
-
     public static void saveToPreferences(Context context, String key,
                                          Boolean allowed) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -765,6 +754,5 @@ public class Solar_Power_System extends BaseActivity {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
-
 
 }
