@@ -1,23 +1,18 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
@@ -29,9 +24,7 @@ import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class Total_DC_Load_site extends BaseActivity {
 
@@ -44,7 +37,7 @@ public class Total_DC_Load_site extends BaseActivity {
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private TotalDCLoadofSiteData totalDCLoadofSiteData;
-    private String base64StringLayoutOfLand = "eji39jjj";
+    //private String base64StringLayoutOfLand = "eji39jjj";
     private SessionManager sessionManager;
 
     private void assignViews() {
@@ -60,7 +53,6 @@ public class Total_DC_Load_site extends BaseActivity {
     public void DecimalFormatConversion() {
         mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setText(decimalConversion.convertDecimal(mTotalDCLoadsiteEditTextTotalDcLoadOfSite.getText().toString()));
     }
-
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -125,7 +117,6 @@ public class Total_DC_Load_site extends BaseActivity {
         } else return true;
     }
 
-
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -141,7 +132,8 @@ public class Total_DC_Load_site extends BaseActivity {
                 mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setText(totalDCLoadofSiteData.getTotalDcLoadOfSite());
 
             } else {
-                Toast.makeText(Total_DC_Load_site.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Total_DC_Load_site.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,14 +145,11 @@ public class Total_DC_Load_site extends BaseActivity {
             //hotoTransactionData.setTicketNo(ticketId);
 
             String totalDcLoadOfSite = mTotalDCLoadsiteEditTextTotalDcLoadOfSite.getText().toString().trim();
-
             totalDCLoadofSiteData = new TotalDCLoadofSiteData(totalDcLoadOfSite);
-
             hotoTransactionData.setTotalDCLoadofSiteData(totalDCLoadofSiteData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-
 
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
@@ -168,6 +157,5 @@ public class Total_DC_Load_site extends BaseActivity {
         }
 
     }
-
 
 }

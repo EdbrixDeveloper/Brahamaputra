@@ -44,6 +44,34 @@ public class ExternalTenantsPersonalDetailsData {
         this.totalNumberofTanents = totalNumberofTanents;
     }*/
 
+    public ExternalTenantsPersonalDetailsData() {
+        //  this.totalNumberofTanents = "";
+        this.nameofTenant = "";
+        this.typeofTenant = "";
+        this.positionattheTower = "";
+        this.dateofstartofTenancy = "";
+        this.dateofstartofRadiation = "";
+        this.nameofContactPerson = "";
+        this.addressofContactPerson = "";
+        this.contactPersonMobile = "";
+        this.contactPersonLandline = "";
+        // this.isSubmited=false;
+    }
+
+    public ExternalTenantsPersonalDetailsData(String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
+        //this.totalNumberofTanents = totalNumberofTanents;
+        this.nameofTenant = nameofTenant;
+        this.typeofTenant = typeofTenant;
+        this.positionattheTower = positionattheTower;
+        this.dateofstartofTenancy = dateofstartofTenancy;
+        this.dateofstartofRadiation = dateofstartofRadiation;
+        this.nameofContactPerson = nameofContactPerson;
+        this.addressofContactPerson = addressofContactPerson;
+        this.contactPersonMobile = contactPersonMobile;
+        this.contactPersonLandline = contactPersonLandline;
+        // this.isSubmited=true;
+    }
+
     public String getNameofTenant() {
         return nameofTenant;
     }
@@ -122,33 +150,5 @@ public class ExternalTenantsPersonalDetailsData {
 
     public void setSubmited(Boolean submited) {
         isSubmited = submited;
-    }
-*/
-    public ExternalTenantsPersonalDetailsData() {
-      //  this.totalNumberofTanents = "";
-        this.nameofTenant = "";
-        this.typeofTenant = "";
-        this.positionattheTower = "";
-        this.dateofstartofTenancy = "";
-        this.dateofstartofRadiation = "";
-        this.nameofContactPerson = "";
-        this.addressofContactPerson = "";
-        this.contactPersonMobile = "";
-        this.contactPersonLandline = "";
-       // this.isSubmited=false;
-    }
-
-    public ExternalTenantsPersonalDetailsData(String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
-        //this.totalNumberofTanents = totalNumberofTanents;
-        this.nameofTenant = nameofTenant;
-        this.typeofTenant = typeofTenant;
-        this.positionattheTower = positionattheTower;
-        this.dateofstartofTenancy = dateofstartofTenancy;
-        this.dateofstartofRadiation = dateofstartofRadiation;
-        this.nameofContactPerson = nameofContactPerson;
-        this.addressofContactPerson = addressofContactPerson;
-        this.contactPersonMobile = contactPersonMobile;
-        this.contactPersonLandline = contactPersonLandline;
-       // this.isSubmited=true;
-    }
+    }*/
 }

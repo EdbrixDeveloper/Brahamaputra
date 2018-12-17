@@ -19,11 +19,12 @@ public class TotalDCLoadofSiteData {
     public TotalDCLoadofSiteData(String totalDcLoadOfSite) {
         this.totalDcLoadOfSite = totalDcLoadOfSite;
         //this.isSubmited=true;//007
+        this.isSubmited = 1;
         if (!this.totalDcLoadOfSite.isEmpty()) {
             this.isSubmited = 2;
-        } else {
+        } /*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
 
     public String getTotalDcLoadOfSite() {

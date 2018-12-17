@@ -4,13 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class ActiveequipmentDetailsData {
 
-
+    @SerializedName("typeofBTS")
     private String typeofBTS;
+
+    @SerializedName("importanceOfSite")
     private String importanceOfSite;
+
+    @SerializedName("numberOfDependantSites")
     private String numberOfDependantSites;
+
+    @SerializedName("make")
     private String make;
+
+    @SerializedName("DCLoadofBTSequipment")
     private String DCLoadofBTSequipment;
+
+    @SerializedName("YearofInstallationatsite")
     private String YearofInstallationatsite;
+
+    @SerializedName("PositionofAntennaTower")
     private String PositionofAntennaTower;
 
     @SerializedName("isSubmited")
@@ -37,11 +49,12 @@ public class ActiveequipmentDetailsData {
         this.YearofInstallationatsite = yearofInstallationatsite;
         this.PositionofAntennaTower = positionofAntennaTower;
         //this.isSubmited=true;//007
+        this.isSubmited = 1;
         if (!this.typeofBTS.isEmpty() && !this.make.isEmpty() && !this.DCLoadofBTSequipment.isEmpty()) {
             this.isSubmited = 2;
-        } else {
+        } /*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
 
     public String getTypeofBTS() {

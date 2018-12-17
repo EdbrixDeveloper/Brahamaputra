@@ -12,8 +12,6 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -58,7 +56,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     private ImageView button_ClearQRCodeScanView;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final int MY_FLAG_MODULE_RESULT = 200;
+    //public static final int MY_FLAG_MODULE_RESULT = 200;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 

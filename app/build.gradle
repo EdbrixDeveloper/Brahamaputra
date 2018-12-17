@@ -8,7 +8,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.brahamaputra.mahindra.brahamaputra"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 0
         versionName "0.25"

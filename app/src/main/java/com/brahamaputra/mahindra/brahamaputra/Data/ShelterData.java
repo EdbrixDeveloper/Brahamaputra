@@ -45,7 +45,7 @@ public class ShelterData {
         this.egbStatus = "";
         this.noOfOdcAvailable = "";
         this.odcLock = "";
-        this.isSubmited=0;
+        this.isSubmited = 0;
     }
 
     public ShelterData(String physicalCondition, String noOfBtsInsideShelter, String noOfBtsOutsideShelter, String shelterLock, String outdoorShelterLock, String igbStatus, String egbStatus, String noOfOdcAvailable, String odcLock) {
@@ -61,13 +61,14 @@ public class ShelterData {
         this.noOfOdcAvailable = noOfOdcAvailable;
         this.odcLock = odcLock;
         //this.isSubmited=true;//007
-        if(!this.physicalCondition.isEmpty() && !this.noOfBtsInsideShelter.isEmpty() && !this.noOfBtsOutsideShelter.isEmpty() &&
-            !this.shelterLock.isEmpty() && !this.igbStatus.isEmpty() && !this.egbStatus.isEmpty() &&
-            !this.noOfOdcAvailable.isEmpty() && !this.odcLock.isEmpty()){
-            this.isSubmited = 2;
-        }else {
+        this.isSubmited = 1;
+        if (!this.physicalCondition.isEmpty() && !this.noOfBtsInsideShelter.isEmpty() && !this.noOfBtsOutsideShelter.isEmpty() &&
+                !this.igbStatus.isEmpty() && !this.egbStatus.isEmpty() &&
+                !this.noOfOdcAvailable.isEmpty() && !this.odcLock.isEmpty()) {
+            this.isSubmited = 2;//!this.shelterLock.isEmpty() &&
+        }/*else {
             this.isSubmited = 1;
-        }
+        }*/
     }
 
     public String getPhysicalCondition() {

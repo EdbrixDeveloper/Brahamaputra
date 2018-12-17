@@ -1,22 +1,15 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.MediaData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -28,11 +21,9 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class Media extends BaseActivity {
 
@@ -154,7 +145,8 @@ public class Media extends BaseActivity {
                 mMediaTextViewTypeofmediaVal.setText(mediaData.getTypeOfMedia());
 
             } else {
-                Toast.makeText(Media.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Media.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

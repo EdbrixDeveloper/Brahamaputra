@@ -1,13 +1,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,21 +13,17 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerManagementSystemData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -45,16 +39,12 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import android.Manifest;
-import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class PowerManagementSystem extends BaseActivity {
 
@@ -75,12 +65,12 @@ public class PowerManagementSystem extends BaseActivity {
     private String base64StringPowerManagementSystem = "";
     private SessionManager sessionManager;
 
-    String str_assetOwner;
-    String str_powerManagementSystemType;
-    String str_powerManagementSystemMake;
-    String str_powerManagementSystemPosition;
-    String str_powerManagementSystemStaus;
-    String str_workingCondition;
+    private String str_assetOwner;
+    private String str_powerManagementSystemType;
+    private String str_powerManagementSystemMake;
+    private String str_powerManagementSystemPosition;
+    private String str_powerManagementSystemStaus;
+    private String str_workingCondition;
 
     private AlertDialogManager alertDialogManager;
 
@@ -104,6 +94,59 @@ public class PowerManagementSystem extends BaseActivity {
     private TextView mPowerManagementSystemTextViewNatureofProblem;
     private EditText mPowerManagementSystemEditTextNatureofProblem;
     private ImageView button_ClearQRCodeScanView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_power_management_system);
+        this.setTitle("Power Management System");
+        sessionManager = new SessionManager(PowerManagementSystem.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerManagementSystem.this, userId, ticketName);
+        assignViews();
+        initCombo();
+        alertDialogManager = new AlertDialogManager(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
+
+        mPowerManagementSystemButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(PowerManagementSystem.this,
+                        Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    if (getFromPref(PowerManagementSystem.this, ALLOW_KEY)) {
+
+                        showSettingsAlert();
+
+                    } else if (ContextCompat.checkSelfPermission(PowerManagementSystem.this,
+                            Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Should we show an explanation?
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(PowerManagementSystem.this,
+                                Manifest.permission.CAMERA)) {
+                            showAlert();
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            ActivityCompat.requestPermissions(PowerManagementSystem.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    MY_PERMISSIONS_REQUEST_CAMERA);
+                        }
+                    }
+                } else {
+                    //openCameraIntent();This Commented By 008 on 15-11-2018 For QR Code Purpose
+                    onClicked(v);
+                }
+
+            }
+        });
+
+    }
 
     private void assignViews() {
         mPowerManagementSystemTextViewQRCodeScan = (TextView) findViewById(R.id.powerManagementSystem_textView_QRCodeScan);
@@ -130,7 +173,6 @@ public class PowerManagementSystem extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-
 
     }
 
@@ -266,7 +308,7 @@ public class PowerManagementSystem extends BaseActivity {
             }
         });
 
-        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
+        /*This Commented By 008 on 15-11-2018 For QR Code Purpose
         mPowerManagementSystemButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -277,59 +319,6 @@ public class PowerManagementSystem extends BaseActivity {
                 }
             }
         });*/
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_power_management_system);
-        this.setTitle("Power Management System");
-        sessionManager = new SessionManager(PowerManagementSystem.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerManagementSystem.this, userId, ticketName);
-        assignViews();
-        initCombo();
-        alertDialogManager = new AlertDialogManager(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
-
-        mPowerManagementSystemButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(PowerManagementSystem.this,
-                        Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    if (getFromPref(PowerManagementSystem.this, ALLOW_KEY)) {
-
-                        showSettingsAlert();
-
-                    } else if (ContextCompat.checkSelfPermission(PowerManagementSystem.this,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Should we show an explanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(PowerManagementSystem.this,
-                                Manifest.permission.CAMERA)) {
-                            showAlert();
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(PowerManagementSystem.this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    MY_PERMISSIONS_REQUEST_CAMERA);
-                        }
-                    }
-                } else {
-                    //openCameraIntent();This Commented By Arjun on 15-11-2018 For QR Code Purpose
-                    onClicked(v);
-                }
-
-            }
-        });
-
     }
 
     public void onClicked(View v) {
@@ -402,7 +391,7 @@ public class PowerManagementSystem extends BaseActivity {
                 }
 
                 // New added for image #ImageSet
-                /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
+                /*This Commented By 008 on 15-11-2018 For QR Code Purpose
                 imageFileName = powerManagementSystemData.getQrCodeImageFileName();
                 mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
                 if (imageFileName != null && imageFileName.length() > 0) {
@@ -415,7 +404,8 @@ public class PowerManagementSystem extends BaseActivity {
                 }*/
 
             } else {
-                Toast.makeText(PowerManagementSystem.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PowerManagementSystem.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -450,7 +440,7 @@ public class PowerManagementSystem extends BaseActivity {
         }
     }
 
-    /*Arjun 29112018*/
+    /*008 29112018*/
     public boolean checkValidation() {
         String qRCodeScan = base64StringPowerManagementSystem;
         if (qRCodeScan.isEmpty() || qRCodeScan == null) {
@@ -575,13 +565,13 @@ public class PowerManagementSystem extends BaseActivity {
                 base64StringPowerManagementSystem = "";
                 showToast("Cancelled");
             } else {
-                if(!isDuplicateQRcode(result.getContents())){
+                if (!isDuplicateQRcode(result.getContents())) {
                     base64StringPowerManagementSystem = result.getContents();
                     if (!base64StringPowerManagementSystem.isEmpty() && base64StringPowerManagementSystem != null) {
                         mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
                         button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     base64StringPowerManagementSystem = "";
                     showToast("QR Code Already Used in Application");
                 }
@@ -590,7 +580,7 @@ public class PowerManagementSystem extends BaseActivity {
             }
         }
 
-        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
+        /*This Commented By 008 on 15-11-2018 For QR Code Purpose
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {

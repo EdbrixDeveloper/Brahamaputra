@@ -16,21 +16,22 @@ public class ExternalTenantsPersonalDetailsParentData {
     //private Boolean isSubmited;
     private int isSubmited;
 
-    public ExternalTenantsPersonalDetailsParentData(String totalNumberofTanents, ArrayList<ExternalTenantsPersonalDetailsData> externalTenantsPersonalDetailsData ) {
-        this.totalNumberofTanents = totalNumberofTanents;
-        this.externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsData;
-        //this.isSubmited = true;//007
-        if (!this.totalNumberofTanents.isEmpty()) {
-            this.isSubmited = 2;
-        } else {
-            this.isSubmited = 1;
-        }
-    }
-
-    public ExternalTenantsPersonalDetailsParentData(){
+    public ExternalTenantsPersonalDetailsParentData() {
         this.totalNumberofTanents = "";
         this.externalTenantsPersonalDetailsData = new ArrayList<>();
         this.isSubmited = 0;
+    }
+
+    public ExternalTenantsPersonalDetailsParentData(String totalNumberofTanents, ArrayList<ExternalTenantsPersonalDetailsData> externalTenantsPersonalDetailsData) {
+        this.totalNumberofTanents = totalNumberofTanents;
+        this.externalTenantsPersonalDetailsData = externalTenantsPersonalDetailsData;
+        //this.isSubmited = true;//007
+        this.isSubmited = 1;
+        if (!this.totalNumberofTanents.isEmpty()) {
+            this.isSubmited = 2;
+        }/* else {
+            this.isSubmited = 1;
+        }*/
     }
 
     public String getTotalNumberofTanents() {

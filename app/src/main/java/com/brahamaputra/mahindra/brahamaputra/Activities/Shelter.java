@@ -1,16 +1,12 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ShelterData;
@@ -23,8 +19,6 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.google.gson.Gson;
@@ -32,7 +26,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
@@ -58,25 +51,25 @@ public class Shelter extends BaseActivity {
     private TextView mShelterTextViewOdcLock;
     private TextView mShelterTextViewOdcLockVal;
 
-    LinearLayout mshelterLinearLayoutNumberOfBtsInsideShelter;
-    LinearLayout mshelterLinearLayoutNumberOfBtsOutsideShelter;
-    LinearLayout mshelterLinearLayoutShelterLock;
-    LinearLayout mshelterLinearLayoutOutdoorShelterLock;
-    LinearLayout mshelterLinearLayoutIgbStatus;
-    LinearLayout mshelterLinearLayoutEgbStatus;
-    LinearLayout mshelterLinearLayoutNoOfOdcAvailable;
-    LinearLayout mshelterLinearLayoutOdcLock;
+    private LinearLayout mshelterLinearLayoutNumberOfBtsInsideShelter;
+    private LinearLayout mshelterLinearLayoutNumberOfBtsOutsideShelter;
+    private LinearLayout mshelterLinearLayoutShelterLock;
+    private LinearLayout mshelterLinearLayoutOutdoorShelterLock;
+    private LinearLayout mshelterLinearLayoutIgbStatus;
+    private LinearLayout mshelterLinearLayoutEgbStatus;
+    private LinearLayout mshelterLinearLayoutNoOfOdcAvailable;
+    private LinearLayout mshelterLinearLayoutOdcLock;
 
 
-    String str_physicalConditionOfShelterPlatform;
-    String str_numberOfBtsInsideShelter;
-    String str_numberOfBtsOutsideShelter;
-    String str_shelterLock;
-    String str_outdoorShelterLock;
-    String str_igbStatus;
-    String str_egbStatus;
-    String str_noOfOdcAvailable;
-    String str_odcLock;
+    private String str_physicalConditionOfShelterPlatform;
+    private String str_numberOfBtsInsideShelter;
+    private String str_numberOfBtsOutsideShelter;
+    private String str_shelterLock;
+    private String str_outdoorShelterLock;
+    private String str_igbStatus;
+    private String str_egbStatus;
+    private String str_noOfOdcAvailable;
+    private String str_odcLock;
 
     private static final String TAG = Shelter.class.getSimpleName();
 
@@ -365,7 +358,8 @@ public class Shelter extends BaseActivity {
                 mShelterTextViewOdcLockVal.setText(shelterData.getOdcLock());
 
             } else {
-                Toast.makeText(Shelter.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Shelter.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

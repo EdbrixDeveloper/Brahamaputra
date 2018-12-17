@@ -2,26 +2,20 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,7 +30,6 @@ import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
-import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -49,8 +42,6 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.google.gson.Gson;
@@ -58,7 +49,6 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -132,30 +122,30 @@ public class Power_Backups_DG extends BaseActivity {
     private TextView mPowerBackupsDgTextViewNatureOfProblem;
     private EditText mPowerBackupsDgEditTextNatureOfProblem;
 
-    LinearLayout mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan;
-    TextView mPowerBackupsDgTextViewDgBatteryStatusQRCodeScan;
-    ImageView mPowerBackupsDgButtonDgBatteryStatusQRCodeScan;
-    ImageView mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView;
+    private LinearLayout mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan;
+    private TextView mPowerBackupsDgTextViewDgBatteryStatusQRCodeScan;
+    private ImageView mPowerBackupsDgButtonDgBatteryStatusQRCodeScan;
+    private ImageView mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView;
 
-    LinearLayout mPowerBackupsDgLinearLayoutNumberOfWorkingDg;
+    private LinearLayout mPowerBackupsDgLinearLayoutNumberOfWorkingDg;
 
-    String str_noOfEngineAlternatorSetsprovided;
-    String str_numberOfWorkingDg;
-    String str_assetOwner;
-    String str_manufacturerMakeModel;
-    String str_capacityInKva;
-    String str_autoManual;
-    String str_amc;
-    String str_dgWorkingType;
-    String str_dgMainAlternatorType;
-    String str_dgMainAlternatorMake;
-    String str_DgCanopyStatus;
-    String str_dgStartingBatteryStatus;
-    String str_chargingAlternator;
-    String str_batteryCharger;
-    String str_dgAvrWorkingStatus;
-    String str_fuelTankPosition;
-    String str_workingCondition;
+    private String str_noOfEngineAlternatorSetsprovided;
+    private String str_numberOfWorkingDg;
+    private String str_assetOwner;
+    private String str_manufacturerMakeModel;
+    private String str_capacityInKva;
+    private String str_autoManual;
+    private String str_amc;
+    private String str_dgWorkingType;
+    private String str_dgMainAlternatorType;
+    private String str_dgMainAlternatorMake;
+    private String str_DgCanopyStatus;
+    private String str_dgStartingBatteryStatus;
+    private String str_chargingAlternator;
+    private String str_batteryCharger;
+    private String str_dgAvrWorkingStatus;
+    private String str_fuelTankPosition;
+    private String str_workingCondition;
 
     private static final String TAG = Power_Backups_DG.class.getSimpleName();
     DecimalConversion decimalConversion;
@@ -1317,7 +1307,8 @@ public class Power_Backups_DG extends BaseActivity {
                 }
 
             } else {
-                Toast.makeText(Power_Backups_DG.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Power_Backups_DG.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
                 linearLayout_container.setVisibility(View.GONE);
                 mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//008
             }
@@ -1465,8 +1456,8 @@ public class Power_Backups_DG extends BaseActivity {
     public void clearFields(int indexPos) {
 
         powerBackupsDg_textView_Number.setText("Reading: #" + (indexPos + 1));
-        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-        button_ClearQRCodeScanView1.setVisibility(View.GONE);
+        //mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+        //button_ClearQRCodeScanView1.setVisibility(View.GONE);
 
         mPowerBackupsDgTextViewAssetOwnerVal.setText("");
         mPowerBackupsDgTextViewManufacturerMakeModelVal.setText("");
@@ -1513,27 +1504,31 @@ public class Power_Backups_DG extends BaseActivity {
         str_workingCondition = "";
         base64StringQRCodeScan = "";
         base64StringDgBatteryStatusQRCodeScan = "";
-        mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
-        mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan.setVisibility(View.GONE);
-        button_ClearQRCodeScanView2.setVisibility(View.GONE);
 
+        mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan.setVisibility(View.GONE);
+        //mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+        //button_ClearQRCodeScanView2.setVisibility(View.GONE);
+
+        mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView1.setVisibility(View.GONE);
         if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
             button_ClearQRCodeScanView1.setVisibility(View.VISIBLE);
-        } else {
+        } /*else {
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
             button_ClearQRCodeScanView1.setVisibility(View.GONE);
-        }
+        }*/
 
+        mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView2.setVisibility(View.GONE);
         if (!base64StringDgBatteryStatusQRCodeScan.isEmpty() && base64StringDgBatteryStatusQRCodeScan != null) {
             mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
             button_ClearQRCodeScanView2.setVisibility(View.VISIBLE);
-        } else {
+        } /*else {
             mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
             button_ClearQRCodeScanView2.setVisibility(View.GONE);
-        }
+        }*/
     }
-
 
     /*008 21112018*/
     public boolean checkValidationOnChangeNoOfEngineAlternatorSelection(String noOfEngineAlternator, String numberOfWorkingDg, String methodFlag) {

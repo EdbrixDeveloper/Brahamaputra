@@ -3,7 +3,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,15 +12,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.ExternalTenantsPersonalDetailsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -34,7 +30,6 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,14 +43,12 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 
 public class ExternalTenantsPersonaldetails extends BaseActivity {
 
-
     Calendar myCalendar1 = Calendar.getInstance();
     Calendar myCalendar2 = Calendar.getInstance();
 
-
-    String str_totalNumberofTanents;
-    String str_nameoftheTenant;
-    String str_typeofTenant;
+    private String str_totalNumberofTanents;
+    private String str_nameoftheTenant;
+    private String str_typeofTenant;
     DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
@@ -64,7 +57,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     private HotoTransactionData hotoTransactionData;
     private ExternalTenantsPersonalDetailsParentData externalTenantsPersonalDetailsParentData;
     private ArrayList<ExternalTenantsPersonalDetailsData> externalTenantsPersonalDetailsDataList;
-    private String base64StringLayoutOfLand = "eji39jjj";
+    //private String base64StringLayoutOfLand = "eji39jjj";
     private SessionManager sessionManager;
     private int totalTenantCount = 0;
     private int currentPos = 0;
@@ -94,6 +87,126 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     private LinearLayout lnrTentantDetails;
 
     private TextView mexternalTenantsPersonaldetails_textView_TentantCount;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_external_tenants_personal_details);
+        this.setTitle("External Tenants Personal details");
+        decimalConversion = new DecimalConversion();
+        sessionManager = new SessionManager(ExternalTenantsPersonaldetails.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ExternalTenantsPersonaldetails.this, userId, ticketName);
+        assignViews();
+        initCombo();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+        externalTenantsPersonalDetailsDataList = new ArrayList<>();
+        setInputDetails(0);
+
+
+        final DatePickerDialog.OnDateSetListener date1 = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar1.set(Calendar.YEAR, year);
+                myCalendar1.set(Calendar.MONTH, monthOfYear);
+                myCalendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel_DateofthestartofTenancy();
+            }
+
+        };
+
+        final DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar2.set(Calendar.YEAR, year);
+                myCalendar2.set(Calendar.MONTH, monthOfYear);
+                myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel_DateofthestartofRadiation();
+            }
+
+        };
+
+        mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date1, myCalendar1
+                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
+                        myCalendar1.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
+            }
+        });
+
+        mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
+                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar2
+                        .get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH),
+                        myCalendar2.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
+            }
+        });
+
+        btnPrevReadingExtTenants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPos > 0) {
+                    //Save current reading
+                    saveTenantRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayTenantRecords(currentPos);
+                }
+            }
+        });
+
+        btnNextReadingExtTenants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidtionForArrayFields()) {
+                    if (currentPos < (totalTenantCount - 1)) {
+                        //Save current  reading
+                        saveTenantRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayTenantRecords(currentPos);
+
+                    } else if (currentPos == (totalTenantCount - 1)) {
+                        //Save Final current reading and submit all  data
+                        saveTenantRecords(currentPos);
+                        if (checkValidationonSubmit("onSubmit")) {
+                            submitDetails();
+                            startActivity(new Intent(ExternalTenantsPersonaldetails.this, Total_DC_Load_site.class));
+                            finish();
+                        }
+                    }
+                }
+            }
+        });
+
+        mExternalTenantsPersonaldetailsEditTextPositionattheTower.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
+    }
 
     private void assignViews() {
         mExternalTenantsPersonaldetailsTextViewTotalNumberofTanents = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_TotalNumberofTanents);
@@ -236,126 +349,6 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_external_tenants_personal_details);
-        this.setTitle("External Tenants Personal details");
-        decimalConversion = new DecimalConversion();
-        sessionManager = new SessionManager(ExternalTenantsPersonaldetails.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ExternalTenantsPersonaldetails.this, userId, ticketName);
-        assignViews();
-        initCombo();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        hotoTransactionData = new HotoTransactionData();
-        externalTenantsPersonalDetailsDataList = new ArrayList<>();
-        setInputDetails(0);
-
-
-        final DatePickerDialog.OnDateSetListener date1 = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar1.set(Calendar.YEAR, year);
-                myCalendar1.set(Calendar.MONTH, monthOfYear);
-                myCalendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel_DateofthestartofTenancy();
-            }
-
-        };
-
-        final DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar2.set(Calendar.YEAR, year);
-                myCalendar2.set(Calendar.MONTH, monthOfYear);
-                myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel_DateofthestartofRadiation();
-            }
-
-        };
-
-        mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date1, myCalendar1
-                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
-                        myCalendar1.get(Calendar.DAY_OF_MONTH));
-
-                dialog.getDatePicker().setMaxDate(new Date().getTime());
-                dialog.show();
-            }
-        });
-
-        mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
-                DatePickerDialog dialog = new DatePickerDialog(ExternalTenantsPersonaldetails.this, date2, myCalendar2
-                        .get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH),
-                        myCalendar2.get(Calendar.DAY_OF_MONTH));
-
-                dialog.getDatePicker().setMaxDate(new Date().getTime());
-                dialog.show();
-            }
-        });
-
-        btnPrevReadingExtTenants.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentPos > 0) {
-                    //Save current reading
-                    saveTenantRecords(currentPos);
-                    currentPos = currentPos - 1;
-                    //move to Next reading
-                    displayTenantRecords(currentPos);
-                }
-            }
-        });
-
-        btnNextReadingExtTenants.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkValidtionForArrayFields()) {
-                    if (currentPos < (totalTenantCount - 1)) {
-                        //Save current  reading
-                        saveTenantRecords(currentPos);
-                        currentPos = currentPos + 1;
-                        //move to Next reading
-                        displayTenantRecords(currentPos);
-
-                    } else if (currentPos == (totalTenantCount - 1)) {
-                        //Save Final current reading and submit all  data
-                        saveTenantRecords(currentPos);
-                        if (checkValidationonSubmit("onSubmit")) {
-                            submitDetails();
-                            startActivity(new Intent(ExternalTenantsPersonaldetails.this, Total_DC_Load_site.class));
-                            finish();
-                        }
-                    }
-                }
-            }
-        });
-
-        mExternalTenantsPersonaldetailsEditTextPositionattheTower.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    DecimalFormatConversion();
-                }
-            }
-        });
-
     }
 
     private boolean checkValidtionForArrayFields() {
@@ -573,7 +566,8 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
 
 
             } else {
-                Toast.makeText(ExternalTenantsPersonaldetails.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ExternalTenantsPersonaldetails.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

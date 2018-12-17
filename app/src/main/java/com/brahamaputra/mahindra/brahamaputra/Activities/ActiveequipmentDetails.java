@@ -3,7 +3,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,13 +11,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.ActiveequipmentDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
@@ -40,12 +36,11 @@ import java.util.Locale;
 
 public class ActiveequipmentDetails extends BaseActivity {
 
-
     final Calendar myCalendar = Calendar.getInstance();
 
-    String str_typeofBTS;
-    String str_importanceOfSite;
-    String str_numberOfDependantSites;
+    private String str_typeofBTS;
+    private String str_importanceOfSite;
+    private String str_numberOfDependantSites;
     DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
@@ -54,7 +49,6 @@ public class ActiveequipmentDetails extends BaseActivity {
     private HotoTransactionData hotoTransactionData;
     private ActiveequipmentDetailsData activeequipmentDetailsData;
     private SessionManager sessionManager;
-
 
     private TextView mActiveEquipmentDetailsTextViewTypeofBTS;
     private TextView mActiveEquipmentDetailsTextViewTypeofBTSVal;
@@ -70,6 +64,55 @@ public class ActiveequipmentDetails extends BaseActivity {
     private EditText mActiveEquipmentDetailsEditTextYearofInstallationatsite;
     private TextView mActiveEquipmentDetailsTextViewPositionoftheantennaatTowerinMtrs;
     private EditText mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_active_equipment_details);
+        this.setTitle("Active equipment Details");
+
+        sessionManager = new SessionManager(ActiveequipmentDetails.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ActiveequipmentDetails.this, userId, ticketName);
+        decimalConversion = new DecimalConversion();
+        assignViews();
+        initCombo();
+        set_listener();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        mActiveEquipmentDetailsEditTextYearofInstallationatsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
+                DatePickerDialog dialog = new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
+
+            }
+        });
+    }
 
     private void assignViews() {
         mActiveEquipmentDetailsTextViewTypeofBTS = (TextView) findViewById(R.id.activeEquipmentDetails_textView_TypeofBTS);
@@ -120,7 +163,6 @@ public class ActiveequipmentDetails extends BaseActivity {
             }
         });
     }
-
 
     private void initCombo() {
 
@@ -188,68 +230,11 @@ public class ActiveequipmentDetails extends BaseActivity {
         });
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_active_equipment_details);
-        this.setTitle("Active equipment Details");
-
-        sessionManager = new SessionManager(ActiveequipmentDetails.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ActiveequipmentDetails.this, userId, ticketName);
-        decimalConversion = new DecimalConversion();
-        assignViews();
-        initCombo();
-        set_listener();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
-
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
-        };
-
-        mActiveEquipmentDetailsEditTextYearofInstallationatsite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
-                DatePickerDialog dialog = new DatePickerDialog(ActiveequipmentDetails.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-
-                dialog.getDatePicker().setMaxDate(new Date().getTime());
-                dialog.show();
-
-            }
-        });
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
         return true;
-    }
-
-    private void updateLabel() {
-        String myFormat = "dd/MMM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        mActiveEquipmentDetailsEditTextYearofInstallationatsite.setText(sdf.format(myCalendar.getTime()));
     }
 
     @Override
@@ -270,6 +255,13 @@ public class ActiveequipmentDetails extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void updateLabel() {
+        String myFormat = "dd/MMM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        mActiveEquipmentDetailsEditTextYearofInstallationatsite.setText(sdf.format(myCalendar.getTime()));
+    }
+
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -282,7 +274,6 @@ public class ActiveequipmentDetails extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 activeequipmentDetailsData = hotoTransactionData.getActiveequipmentDetailsData();
 
-
                 mActiveEquipmentDetailsTextViewTypeofBTSVal.setText(activeequipmentDetailsData.getTypeofBTS());
                 mActiveEquipmentDetailsTextViewImportanceOfSiteVal.setText(activeequipmentDetailsData.getImportanceOfSite());
                 mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.setText(activeequipmentDetailsData.getNumberOfDependantSites());
@@ -291,29 +282,28 @@ public class ActiveequipmentDetails extends BaseActivity {
                 mActiveEquipmentDetailsEditTextYearofInstallationatsite.setText(activeequipmentDetailsData.getYearofInstallationatsite());
                 mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.setText(activeequipmentDetailsData.getPositionofAntennaTower());
 
-
             } else {
-                Toast.makeText(ActiveequipmentDetails.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ActiveequipmentDetails.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     private void submitDetails() {
         try {
             //hotoTransactionData.setTicketNo(ticketId);
 
-
-            String typeofBTS= mActiveEquipmentDetailsTextViewTypeofBTSVal.getText().toString().trim();
-            String importanceOfSite= mActiveEquipmentDetailsTextViewImportanceOfSiteVal.getText().toString().trim();
-            String numberOfDependantSites= mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.getText().toString().trim();
-            String make= mActiveEquipmentDetailsEditTextMake.getText().toString().trim();
-            String DCLoadofBTSequipment= mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString().trim();
-            String yearofInstallationatsite= mActiveEquipmentDetailsEditTextYearofInstallationatsite.getText().toString().trim();
-            String positionofAntennaTower= mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString().trim();
+            String typeofBTS = mActiveEquipmentDetailsTextViewTypeofBTSVal.getText().toString().trim();
+            String importanceOfSite = mActiveEquipmentDetailsTextViewImportanceOfSiteVal.getText().toString().trim();
+            String numberOfDependantSites = mActiveEquipmentDetailsTextViewNumberOfDependantSitesVal.getText().toString().trim();
+            String make = mActiveEquipmentDetailsEditTextMake.getText().toString().trim();
+            String DCLoadofBTSequipment = mActiveEquipmentDetailsEditTextDCLoadofBTSequipment.getText().toString().trim();
+            String yearofInstallationatsite = mActiveEquipmentDetailsEditTextYearofInstallationatsite.getText().toString().trim();
+            String positionofAntennaTower = mActiveEquipmentDetailsEditTextPositionoftheantennaatTowerinMtrs.getText().toString().trim();
 
             activeequipmentDetailsData = new ActiveequipmentDetailsData(typeofBTS, importanceOfSite, numberOfDependantSites, make, DCLoadofBTSequipment, yearofInstallationatsite, positionofAntennaTower);
-
             hotoTransactionData.setActiveequipmentDetailsData(activeequipmentDetailsData);
 
             Gson gson2 = new GsonBuilder().create();

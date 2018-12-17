@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,9 +15,7 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,20 +26,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import android.Manifest;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatterySetParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
-import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -56,7 +49,6 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,16 +70,16 @@ public class Battery_Set extends BaseActivity {
     private AlertDialogManager alertDialogManager;
 
     final Calendar myCalendar = Calendar.getInstance();
-    String str_noofBatterySetProvided;
-    String str_numberofBatteryBankWorking;
-    String str_assetOwner;
-    String str_manufacturerMakeModel;
-    String str_capacityinAH;
-    String str_typeofBattery;
-    String str_positionofBatteryBank;
-    String str_batteryBankCableSizeinSQMM;
-    String str_batteryBankEarthingStatus;
-    String str_backupCondition;
+    private String str_noofBatterySetProvided;
+    private String str_numberofBatteryBankWorking;
+    private String str_assetOwner;
+    private String str_manufacturerMakeModel;
+    private String str_capacityinAH;
+    private String str_typeofBattery;
+    private String str_positionofBatteryBank;
+    private String str_batteryBankCableSizeinSQMM;
+    private String str_batteryBankEarthingStatus;
+    private String str_backupCondition;
 
 
     private TextView mBatterySetTextViewNoofBatterySetProvided;
@@ -698,7 +690,6 @@ public class Battery_Set extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     private boolean checkValidation(String noOfBatterySet, String noOfBatteryBankWorking, String methodFlag) {
         //String noOfBatterySet = mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim();
         //String noOfBatteryBankWorking = mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim();
@@ -886,13 +877,13 @@ public class Battery_Set extends BaseActivity {
                 base64StringBatterySet = "";
                 showToast("Cancelled");
             } else {
-                if(!isDuplicateQRcode(result.getContents())){
+                if (!isDuplicateQRcode(result.getContents())) {
                     base64StringBatterySet = result.getContents();
                     if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
                         mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
                         button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     base64StringBatterySet = "";
                     showToast("QR Code Already Used in Application");
                 }
@@ -1018,7 +1009,8 @@ public class Battery_Set extends BaseActivity {
                     }
                 }
             } else {
-                Toast.makeText(Battery_Set.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Battery_Set.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
                 linearLayout_container.setVisibility(View.GONE);
                 batterySetLinearLayoutNumberOfBatteryBankWorking.setVisibility(View.GONE);
             }
@@ -1124,8 +1116,8 @@ public class Battery_Set extends BaseActivity {
 
         batterySet_textView_Number.setText("Reading: #" + (indexPos + 1));
 
-        mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
-        button_ClearQRCodeScanView.setVisibility(View.GONE);
+        //mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+        //button_ClearQRCodeScanView.setVisibility(View.GONE);
 
         mBatterySetTextViewAssetOwnerVal.setText("");
         mBatterySetTextViewManufacturerMakeModelVal.setText("");
@@ -1150,13 +1142,16 @@ public class Battery_Set extends BaseActivity {
         str_backupCondition = "";
         base64StringBatterySet = "";
 
+        mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
+        button_ClearQRCodeScanView.setVisibility(View.GONE);
+
         if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
             mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
             button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
-        } else {
+        } /*else {
             mBatterySetButtonQRCodeScanView.setVisibility(View.GONE);
             button_ClearQRCodeScanView.setVisibility(View.GONE);
-        }
+        }*/
     }
 
     public void onClicked(View v) {
