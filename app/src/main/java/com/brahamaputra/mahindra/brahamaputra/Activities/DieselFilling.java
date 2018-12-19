@@ -147,6 +147,7 @@ public class DieselFilling extends BaseActivity {
     public double siteLongitude = 0;
     public double siteLatitude = 0;
 
+
     private void assignViews() {
         mDieselFillingTextViewSiteName = (TextView) findViewById(R.id.dieselFilling_textView_siteName);
         mDieselFillingTextViewSiteNameVal = (TextView) findViewById(R.id.dieselFilling_textView_siteNameVal);
@@ -504,11 +505,17 @@ public class DieselFilling extends BaseActivity {
                             //showToast(""+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
                             if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.310686) {///// ( 0.310686 MILE == 500 Meter )
                                 Log.i(DieselFilling.class.getName(),""+"in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
-                                showToast("User in Site Area");
+                                //showToast("User in Site Area");
                                 showSettingsAlert();
                             } else {
                                 Log.i(DieselFilling.class.getName(),""+"not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
-                                showToast("User not in Site Area");
+                                //showToast("User not in Site Area");
+                                alertDialogManager.Dialog("Information", "User not in area of site", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                    @Override
+                                    public void onPositiveClick() {
+
+                                    }
+                                }).show();
                             }
 
 
@@ -713,7 +720,7 @@ public class DieselFilling extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), HmrPhoto_imageFileUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringHmrPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mDieselFillingButtonHmrPhotoUploadView.setVisibility(View.VISIBLE);
@@ -734,7 +741,7 @@ public class DieselFilling extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), EbReadingKwh_imageFileUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringEbReadingKwh = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mDieselFillingButtonPresentEbReadingKwhPhotoView.setVisibility(View.VISIBLE);

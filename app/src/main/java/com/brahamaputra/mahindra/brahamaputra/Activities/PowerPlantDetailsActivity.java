@@ -247,6 +247,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     }
 
+
     private void assignViews() {
         mPowerPlantDetailsTextViewQRCodeScan = (TextView) findViewById(R.id.powerPlantDetails_textView_QRCodeScan);
         mPowerPlantDetailsButtonQRCodeScan = (ImageView) findViewById(R.id.powerPlantDetails_button_QRCodeScan);
@@ -339,9 +340,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             }
         });
 
-        mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setOnClickListener(new View.OnClickListener()
-
-        {
+        mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
@@ -574,9 +573,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             }
         });
 
-        mPowerPlantDetailsTextViewSpdStatusVal.setOnClickListener(new View.OnClickListener()
-
-        {
+        mPowerPlantDetailsTextViewSpdStatusVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerPlantDetailsActivity.this,
@@ -636,7 +633,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         btnNextReadingPowerPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true) {
+                if (checkValidationOfArrayFields() == true){
                     if (currentPos < (totalPlantCount - 1)) {
                         //Save current  reading
                         savePlantRecords(currentPos);
@@ -1153,7 +1150,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     }
 
 
-    /*008 28112018*/
+    /*Arjun 28112018*/
     public boolean checkValidationOnChangeNoOfModuleSlots(String numberModuleSlots, String numberOfModules) {
         //String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
 
@@ -1163,7 +1160,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else return checkValidationOnNoOfModuleSlots(numberModuleSlots, numberOfModules);
     }
 
-    /*008 28112018*/
+    /*Arjun 28112018*/
     public boolean checkValidationOnChangeNoOfFaultyModulese(String numberOfModules, String noOfFaultyModulese) {
 
         //String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();

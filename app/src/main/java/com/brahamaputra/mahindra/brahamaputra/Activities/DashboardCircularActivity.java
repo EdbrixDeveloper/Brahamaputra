@@ -256,7 +256,8 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardCircularActivity.this));
                 startActivity(intent);
             } else {
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                startActivity(new Intent(DashboardCircularActivity.this,UsersOfflineHotoListActivity.class));
+                /*alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
 
@@ -280,7 +281,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                                 .create();
                         dialog.show();
                     }
-                }).show();
+                }).show();*/
             }
         }
     }

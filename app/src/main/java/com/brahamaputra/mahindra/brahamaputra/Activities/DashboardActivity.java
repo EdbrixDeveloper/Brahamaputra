@@ -137,7 +137,8 @@ public class DashboardActivity extends BaseActivity {
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
                 startActivity(intent);
             } else {
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                startActivity(new Intent(DashboardActivity.this,UsersOfflineHotoListActivity.class));
+                /*alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
 
@@ -162,7 +163,7 @@ public class DashboardActivity extends BaseActivity {
                                 .create();
                         dialog.show();
                     }
-                }).show();
+                }).show();*/
             }
         }
     }

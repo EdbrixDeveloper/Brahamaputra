@@ -437,7 +437,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSiteUri), 180);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
 
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
                             imageFileNameOfSiteUri = Uri.parse(path);
@@ -466,7 +466,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfShelterUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
 
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
                             imageFileNameOfShelterUri = Uri.parse(path);
@@ -494,7 +494,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterBoxUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
 
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
                             imageFileNameOfEbMeterBoxUri = Uri.parse(path);
@@ -522,7 +522,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfSmpsUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
 
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
                             imageFileNameOfSmpsUri = Uri.parse(path);
@@ -550,7 +550,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfEbMeterUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
 
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
                             imageFileNameOfEbMeterUri = Uri.parse(path);
@@ -578,7 +578,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgHmrUri), 90);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
 
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
                             imageFileNameOfDgHmrUri = Uri.parse(path);
@@ -606,7 +606,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                             Bitmap imageBitmap = rotateImage(MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameOfDgOverviewUri), 180);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
 
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageBitmap, "Title", null);
                             imageFileNameOfDgOverviewUri = Uri.parse(path);

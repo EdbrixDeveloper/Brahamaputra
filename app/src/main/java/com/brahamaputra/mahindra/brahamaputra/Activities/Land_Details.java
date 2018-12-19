@@ -475,7 +475,7 @@ public class Land_Details extends BaseActivity {
 //                            (Bitmap) data.getExtras().get("data");
 //                mImageView.setImageBitmap(imageBitmap);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
                     byte[] bitmapDataArray = stream.toByteArray();
                     base64StringLayoutOfLand = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                     mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);

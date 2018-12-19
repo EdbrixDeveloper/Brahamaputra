@@ -396,7 +396,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileNameUri);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64String = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mUploadEbReceiptButtonEbReceiptPhotoView.setVisibility(View.VISIBLE);

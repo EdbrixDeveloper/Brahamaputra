@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -256,5 +257,78 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+    public Pair<String, Boolean> isDuplicateQRcodeNew (String strQrcode){
+
+        OfflineStorageWrapper offlineStorageWrapper;
+        HotoTransactionData hotoTransactionData = null;
+
+        String ticketId = sessionManager.getSessionUserTicketId();
+        String ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        String userId = sessionManager.getSessionUserId();
+
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(this, userId, ticketName);
+        //hotoTransactionData = new HotoTransactionData();
+
+        try {
+            String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+            Gson gson = new Gson();
+            hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ///Air Conditioners*
+        for(int i=0;i<hotoTransactionData.getAirConditionParentData().getAirConditionersData().size();i++){
+            if(hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)){
+                return new Pair<String, Boolean>("Air Conditioners ", true);
+            }
+        }
+
+        ///Solar Power System*
+        if(hotoTransactionData.getSolarPowerSystemData().getqRCodeScan().contains(strQrcode)){
+            return new Pair<String, Boolean>("Solar Power System ", true);
+        }
+
+        ///Power Plant*
+        for(int i=0;i<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size();i++){
+            if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)){
+                return new Pair<String, Boolean>("Power Plant", true);
+            }else{
+                for(int j=0;j<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size();j++){
+                    if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)){
+                        return new Pair<String, Boolean>("Power Plant", true);
+                    }
+                }
+            }
+        }
+
+        ///Power Backups (DG)*
+        for(int i=0;i<hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size();i++){
+            if(hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)){
+                return new Pair<String, Boolean>("Power Backups (DG)", true);
+            }
+        }
+
+        ///Battery Set*
+        for(int i=0;i<hotoTransactionData.getBatterySetParentData().getBatterySetData().size();i++){
+            if(hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)){
+                return new Pair<String, Boolean>("Battery Set", true);
+            }
+        }
+
+        ///Power mgmt System*
+        if (hotoTransactionData.getPowerManagementSystemData().getPowerManagementSystemQR().contains(strQrcode)) {
+            return new Pair<String, Boolean>("Power Management System", true);
+        }
+
+        ///Server Stabilizer
+        if (hotoTransactionData.getServoStabilizerData().getServoStabilizer_Qr().contains(strQrcode)) {
+            return new Pair<String, Boolean>("Servo Stabilizer", true);
+        }
+
+        return new Pair<String, Boolean>("default", false);
     }
 }

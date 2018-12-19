@@ -711,6 +711,7 @@ public class ElectricBillProcess extends BaseActivity {
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_issue = sdf1.format(myCalendar3.getTime());
+        BillIsseuDueDateValidation();
     }
 
     private void updateLabelDueDate() {
@@ -724,13 +725,34 @@ public class ElectricBillProcess extends BaseActivity {
         SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat1, Locale.US);
 
         date_due = sdf1.format(myCalendar4.getTime());
+        BillIsseuDueDateValidation();
     }
 
     private void BillFromToDateValidation() {
         if (date_BillFrom != null && date_BillTo != null) {
             if (!date_BillFrom.isEmpty() && !date_BillTo.isEmpty()) {
                 if (!dateFromToValid(date_BillFrom, date_BillTo)) {
-                    showToast("Bill To Date should  grater than Bill From Date ");
+                    showToast("Bill To Date should grater than Bill From Date ");
+                    mEbProcessEditTextBillingFrom.setText("");
+                    date_BillFrom = "";
+                    mEbProcessEditTextBillingTo.setText("");
+                    date_BillTo = "";
+                }
+            }
+        }
+    }
+    //from = issue
+    //to = due
+
+    private void BillIsseuDueDateValidation() {
+        if (date_issue != null && date_due != null) {
+            if (!date_issue.isEmpty() && !date_due.isEmpty()) {
+                if (!dateFromToValid(date_issue, date_due)) {
+                    showToast("Bill due Date should grater than Bill issue Date ");
+                    mEbProcessEditTextBillingIssueDate.setText("");
+                    date_issue = "";
+                    mEbProcessEditTextBilliDueDate.setText("");
+                    date_due = "";
                 }
             }
         }
@@ -882,8 +904,7 @@ public class ElectricBillProcess extends BaseActivity {
     private boolean dateFromToValid(String startdate, String enddate) {
 
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date_1 = new Date();
         Date date_2 = new Date();
         try {
@@ -1513,7 +1534,7 @@ public class ElectricBillProcess extends BaseActivity {
                     try {
                         Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
                         byte[] bitmapDataArray = stream.toByteArray();
                         base64StringBillUpload = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                         mEbProcessButtonEbBillScanCopyiew.setVisibility(View.VISIBLE);

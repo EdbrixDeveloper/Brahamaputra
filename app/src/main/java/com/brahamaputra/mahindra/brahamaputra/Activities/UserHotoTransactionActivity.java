@@ -420,11 +420,18 @@ public class UserHotoTransactionActivity extends BaseActivity {
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
-                if (mUserHotoTransSpinnerSourceOfPowerVal.getText().toString().trim().equals("Non EB")) {
-                    setElectricConnectionDataOnSourceOfPowerChangedValidation();
-                } else {
-                    submitHotoTicket();
+                if(isNetworkConnected()){
+                    if (mUserHotoTransSpinnerSourceOfPowerVal.getText().toString().trim().equals("Non EB")) {
+                        setElectricConnectionDataOnSourceOfPowerChangedValidation();
+                    } else {
+                        submitHotoTicket();
+                    }
+                }else {
+                    showToast("No Internet Available");
+                    finish();
                 }
+
+
             }
 
             @Override
