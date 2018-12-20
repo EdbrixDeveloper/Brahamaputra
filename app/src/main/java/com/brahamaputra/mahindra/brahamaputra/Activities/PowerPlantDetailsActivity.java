@@ -354,6 +354,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
 
                         str_numberOfPowerPlant = item.get(position);
+                        invalidateOptionsMenu();
                         mPowerPlantDetailsTextViewNumberOfPowerPlantVal.setText(str_numberOfPowerPlant);
                         mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.setText("");
 
@@ -633,7 +634,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         btnNextReadingPowerPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true){
+                if (checkValidationOfArrayFields() == true) {
                     if (currentPos < (totalPlantCount - 1)) {
                         //Save current  reading
                         savePlantRecords(currentPos);
@@ -1405,6 +1406,17 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_numberOfPowerPlant != null && !str_numberOfPowerPlant.isEmpty()) {
+            if (Integer.valueOf(str_numberOfPowerPlant) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 

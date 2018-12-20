@@ -263,6 +263,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
 
                         str_totalNumberofTanents = item.get(position);
+                        invalidateOptionsMenu();
                         mExternalTenantsPersonaldetailsTextViewTotalNumberofTanentsVal.setText(str_totalNumberofTanents);
 
                         currentPos = 0;
@@ -479,6 +480,17 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuDone);
+
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_totalNumberofTanents != null && !str_totalNumberofTanents.isEmpty()) {
+            if (Integer.valueOf(str_totalNumberofTanents) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 

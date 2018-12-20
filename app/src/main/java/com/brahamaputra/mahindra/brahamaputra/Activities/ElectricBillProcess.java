@@ -732,7 +732,7 @@ public class ElectricBillProcess extends BaseActivity {
         if (date_BillFrom != null && date_BillTo != null) {
             if (!date_BillFrom.isEmpty() && !date_BillTo.isEmpty()) {
                 if (!dateFromToValid(date_BillFrom, date_BillTo)) {
-                    showToast("Bill To Date should grater than Bill From Date ");
+                    showToast("Bill To Date should greater than Bill From Date ");
                     mEbProcessEditTextBillingFrom.setText("");
                     date_BillFrom = "";
                     mEbProcessEditTextBillingTo.setText("");
@@ -748,7 +748,7 @@ public class ElectricBillProcess extends BaseActivity {
         if (date_issue != null && date_due != null) {
             if (!date_issue.isEmpty() && !date_due.isEmpty()) {
                 if (!dateFromToValid(date_issue, date_due)) {
-                    showToast("Bill due Date should grater than Bill issue Date ");
+                    showToast("Bill due Date should greater than Bill issue Date ");
                     mEbProcessEditTextBillingIssueDate.setText("");
                     date_issue = "";
                     mEbProcessEditTextBilliDueDate.setText("");
@@ -902,7 +902,6 @@ public class ElectricBillProcess extends BaseActivity {
     }
 
     private boolean dateFromToValid(String startdate, String enddate) {
-
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date_1 = new Date();

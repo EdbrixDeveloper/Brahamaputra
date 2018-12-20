@@ -300,6 +300,7 @@ public class Battery_Set extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
                         str_noofBatterySetProvided = item.get(position);
+                        invalidateOptionsMenu();
                         mBatterySetTextViewNoofBatterySetProvidedVal.setText(str_noofBatterySetProvided);
                         mBatterySetTextViewNumberofBatteryBankWorkingVal.setText("");
 
@@ -659,6 +660,17 @@ public class Battery_Set extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuDone);
+
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_noofBatterySetProvided != null && !str_noofBatterySetProvided.isEmpty()) {
+            if (Integer.valueOf(str_noofBatterySetProvided) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 

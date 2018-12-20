@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +31,8 @@ import com.brahamaputra.mahindra.brahamaputra.Data.EBlSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentDetailsParent;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -59,10 +62,17 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
     private TextView mUploadEbPaymentTextViewPaymentTypeVal;
 
     private TextView mUploadEbPaymentTextViewDdChequeTransactionDetails;//uploadEbPayment_textView_DdChequeTransactionDetails
-    private TextView mUploadEbPaymentTextViewDdChequeNumber;
+    /*private TextView mUploadEbPaymentTextViewDdChequeNumber;
     //private EditText mUploadEbPaymentEditTextDdChequeDate;
     private TextView mUploadEbPaymentTextViewDdChequeDate;
-    private TextView mUploadEbPaymentTextViewDdChequeAmount;
+    private TextView mUploadEbPaymentTextViewDdChequeAmount;*/
+
+    /*private EditText mUploadEbPaymentEditTextDdChequeTransactionDetails;*/
+    private EditText mUploadEbPaymentEditTextDdChequeNumber;
+    //private EditText mUploadEbPaymentEditTextDdChequeDate;
+    private EditText mUploadEbPaymentEditTextDdChequeDate;
+    private EditText mUploadEbPaymentEditTextDdChequeAmount;
+
 
     private EditText mUploadEbPaymentEditTextDdChequeRemark;
 
@@ -90,7 +100,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
     private AlertDialogManager alertDialogManager;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 101;
-
+    DecimalConversion decimalConversion;
     Calendar myCalendar1 = Calendar.getInstance();
     final DatePickerDialog.OnDateSetListener dateBillfrom = new DatePickerDialog.OnDateSetListener() {
 
@@ -119,6 +129,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         site_name = intent.getStringExtra("site_name");
         modeOfPayment = intent.getStringExtra("ModeOfPayment");
         StatusId = intent.getStringExtra("StatusId");
+        decimalConversion = new DecimalConversion();
         assignViews();
         setListners();
         alertDialogManager = new AlertDialogManager(UploadEBPaymentDetailsActivity.this);
@@ -153,6 +164,44 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
             }
         });*/
 
+       /* mUploadEbPaymentTextViewDdChequeAmount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });*/
+
+        mUploadEbPaymentEditTextDdChequeAmount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
+        /*mUploadEbPaymentTextViewDdChequeDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(UploadEBPaymentDetailsActivity.this, dateBillfrom, myCalendar1
+                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
+                        myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });*/
+
+        mUploadEbPaymentEditTextDdChequeDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(UploadEBPaymentDetailsActivity.this, dateBillfrom, myCalendar1
+                        .get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH),
+                        myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+
         mUploadEbPaymentButtonDdChequePhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,9 +215,13 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                 }
             }
         });
+
+        EditTextEnable(true);
         if (StatusId.equals("3")) {
             invalidateOptionsMenu();
+            EditTextEnable(false);
         }
+
 
     }
 
@@ -217,18 +270,25 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         mUploadEbPaymentButtonDdChequePhotoView = (ImageView) findViewById(R.id.uploadEbPayment_button_ddChequePhotoView);
 
         mUploadEbPaymentTextViewDdChequeTransactionDetails = (TextView) findViewById(R.id.uploadEbPayment_textView_DdChequeTransactionDetails);
-        mUploadEbPaymentTextViewDdChequeNumber = (TextView) findViewById(R.id.uploadEbPayment_textView_DdChequeNumber);
+        /*mUploadEbPaymentTextViewDdChequeNumber = (TextView) findViewById(R.id.uploadEbPayment_textView_DdChequeNumber);
         mUploadEbPaymentTextViewDdChequeDate = (TextView) findViewById(R.id.uploadEbPayment_textView_ddChequeDate);
-        mUploadEbPaymentTextViewDdChequeAmount = (TextView) findViewById(R.id.uploadEbPayment_textView_DdChequeAmount);
+        mUploadEbPaymentTextViewDdChequeAmount = (TextView) findViewById(R.id.uploadEbPayment_textView_DdChequeAmount);*/
+
+        /*mUploadEbPaymentEditTextDdChequeTransactionDetails = (EditText) findViewById(R.id.uploadEbPayment_editText_DdChequeTransactionDetails);*/
+        mUploadEbPaymentEditTextDdChequeNumber = (EditText) findViewById(R.id.uploadEbPayment_editText_DdChequeNumber);
+        mUploadEbPaymentEditTextDdChequeDate = (EditText) findViewById(R.id.uploadEbPayment_editText_ddChequeDate);
+        mUploadEbPaymentEditTextDdChequeAmount = (EditText) findViewById(R.id.uploadEbPayment_editText_DdChequeAmount);
 
         mUploadEbPaymentEditTextDdChequeRemark = (EditText) findViewById(R.id.uploadEbPayment_editText_DdChequeRemark);
+        mUploadEbPaymentEditTextDdChequeAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(9, 2)});
     }
 
     private void updateLabelPaymentDate() {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        //mUploadEbPaymentEditTextDdChequeDate.setText(sdf.format(myCalendar1.getTime()));
+        mUploadEbPaymentEditTextDdChequeDate.setText(sdf.format(myCalendar1.getTime()));
+        //mUploadEbPaymentTextViewDdChequeDate.setText(sdf.format(myCalendar1.getTime()));
 
 
     }
@@ -251,6 +311,12 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         });
     }
 
+    public void DecimalFormatConversion() {
+        //mUploadEbPaymentTextViewDdChequeAmount.setText(decimalConversion.convertDecimal(mUploadEbPaymentTextViewDdChequeAmount.getText().toString()));
+        mUploadEbPaymentEditTextDdChequeAmount.setText(decimalConversion.convertDecimal(mUploadEbPaymentEditTextDdChequeAmount.getText().toString()));
+
+    }
+
     private void getEbPaymentDetailsInDDCheque() {
         try {
             showBusyProgress();
@@ -271,9 +337,15 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                                 //mUploadEbPaymentTextViewPaymentTypeVal.setText(response.getEbPaymentDetails().getEbPaymentRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentRemark());
 
                                 mUploadEbPaymentTextViewDdChequeTransactionDetails.setText(response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails());
-                                mUploadEbPaymentTextViewDdChequeNumber.setText(response.getEbPaymentDetails().getEbPaymentDdChequeNumber() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeNumber());
+                                /*mUploadEbPaymentTextViewDdChequeNumber.setText(response.getEbPaymentDetails().getEbPaymentDdChequeNumber() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeNumber());
                                 mUploadEbPaymentTextViewDdChequeDate.setText(response.getEbPaymentDetails().getEbPaymentDdChequetDate() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequetDate());
-                                mUploadEbPaymentTextViewDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());
+                                mUploadEbPaymentTextViewDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());*/
+
+                                /*mUploadEbPaymentEditTextDdChequeTransactionDetails.setText(response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails());*/
+                                mUploadEbPaymentEditTextDdChequeNumber.setText(response.getEbPaymentDetails().getEbPaymentDdChequeNumber() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeNumber());
+                                mUploadEbPaymentEditTextDdChequeDate.setText(response.getEbPaymentDetails().getEbPaymentDdChequetDate() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequetDate());
+                                mUploadEbPaymentEditTextDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());
+
                                 mUploadEbPaymentEditTextDdChequeRemark.setText(response.getEbPaymentDetails().getEbPaymentDDUploadRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentDDUploadRemark());
                                 if (StatusId.equals("3")) {
                                     mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
@@ -313,12 +385,33 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
 
     }
 
+    private void EditTextEnable(boolean flag) {
+        mUploadEbPaymentEditTextDdChequeNumber.setEnabled(flag);
+        mUploadEbPaymentEditTextDdChequeDate.setEnabled(flag);
+        mUploadEbPaymentEditTextDdChequeAmount.setEnabled(flag);
+        mUploadEbPaymentEditTextDdChequeRemark.setEnabled(flag);
+        //mUploadEbPaymentEditTextDdChequeRemark.setTextIsSelectable(false);
+        //mUploadEbPaymentEditTextDdChequeRemark.setFocusable(false);
+        //mUploadEbPaymentEditTextDdChequeRemark.setFocusableInTouchMode(false);
+    }
+
     private boolean checkValidation() {
         String payment_type = mUploadEbPaymentTextViewPaymentTypeVal.getText().toString();
         String DdChequeRemark = mUploadEbPaymentEditTextDdChequeRemark.getText().toString();
         /*String ebPaymentReceiptNumber = mUploadEbPaymentEditTextPaymentReceiptNumber.getText().toString();
         String ebPaymentDate = mUploadEbPaymentEditTextReceiptPaymentDate.getText().toString();
         String ebPaymentAmount = mUploadEbPaymentEditTextPaymentAmount.getText().toString();*/
+
+        String ddChequeTransactionDetails = mUploadEbPaymentTextViewDdChequeTransactionDetails.getText().toString();
+        /*String DdChequeNumber = mUploadEbPaymentTextViewDdChequeNumber.getText().toString();
+        String DdChequeDate = mUploadEbPaymentTextViewDdChequeDate.getText().toString();
+        String DdChequeAmount = mUploadEbPaymentTextViewDdChequeAmount.getText().toString();*/
+
+
+        /*String ddChequeTransactionDetails = mUploadEbPaymentEditTextDdChequeTransactionDetails.getText().toString();*/
+        String DdChequeNumber = mUploadEbPaymentEditTextDdChequeNumber.getText().toString();
+        String DdChequeDate = mUploadEbPaymentEditTextDdChequeDate.getText().toString();
+        String DdChequeAmount = mUploadEbPaymentEditTextDdChequeAmount.getText().toString();
 
         if (request_id.isEmpty() || request_id == null) {
             showToast("Invalid Request ID ");
@@ -335,16 +428,19 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         } else if (payment_type.isEmpty() || payment_type == null) {
             showToast("Invalid Payment Type ");
             return false;
-        } /*else if (ebPaymentReceiptNumber.isEmpty() || ebPaymentReceiptNumber == null) {
-            showToast("Enter Payment Receipt Number ");
+        } else if (ddChequeTransactionDetails.isEmpty() || ddChequeTransactionDetails == null) {
+            showToast("Enter Transaction Details ");
             return false;
-        } else if (ebPaymentDate.isEmpty() || ebPaymentDate == null) {
-            showToast("Select Payment Date ");
+        } else if (DdChequeNumber.isEmpty() || DdChequeNumber == null) {
+            showToast("Enter DD/Cheque Number ");
             return false;
-        } else if (ebPaymentAmount.isEmpty() || ebPaymentAmount == null) {
-            showToast("Enter Payment Amount ");
+        } else if (DdChequeDate.isEmpty() || DdChequeDate == null) {
+            showToast("Select Date ");
             return false;
-        }*/ else if (DdChequeRemark.isEmpty() || DdChequeRemark == null) {
+        } else if (DdChequeAmount.isEmpty() || DdChequeAmount == null) {
+            showToast("Enter Amount ");
+            return false;
+        } else if (DdChequeRemark.isEmpty() || DdChequeRemark == null) {
             showToast("Enter Payment Remark ");
             return false;
         } else if (base64String.isEmpty() || base64String == null) {
@@ -379,9 +475,16 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
             String ModeOfPayment = mUploadEbPaymentTextViewPaymentTypeVal.getText().toString();
 
             String ddChequeTransactionDetails = mUploadEbPaymentTextViewDdChequeTransactionDetails.getText().toString();
-            String DdChequeNumber = mUploadEbPaymentTextViewDdChequeNumber.getText().toString();
+            /*String DdChequeNumber = mUploadEbPaymentTextViewDdChequeNumber.getText().toString();
             String DdChequeDate = mUploadEbPaymentTextViewDdChequeDate.getText().toString();
             String DdChequeAmount = mUploadEbPaymentTextViewDdChequeAmount.getText().toString();
+            String ebPaymentDDUploadRemark = mUploadEbPaymentEditTextDdChequeRemark.getText().toString();
+            String ebPaymentRemark = mUploadEbPaymentEditTextDdChequeRemark.getText().toString();*/
+
+            /*String ddChequeTransactionDetails = mUploadEbPaymentEditTextDdChequeTransactionDetails.getText().toString();*/
+            String DdChequeNumber = mUploadEbPaymentEditTextDdChequeNumber.getText().toString();
+            String DdChequeDate = mUploadEbPaymentEditTextDdChequeDate.getText().toString();
+            String DdChequeAmount = mUploadEbPaymentEditTextDdChequeAmount.getText().toString();
             String ebPaymentDDUploadRemark = mUploadEbPaymentEditTextDdChequeRemark.getText().toString();
             String ebPaymentRemark = mUploadEbPaymentEditTextDdChequeRemark.getText().toString();
 

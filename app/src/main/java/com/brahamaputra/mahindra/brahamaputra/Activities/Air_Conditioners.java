@@ -341,6 +341,7 @@ public class Air_Conditioners extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
 
                         str_noOfAirConditionersACprovided = item.get(position);
+                        invalidateOptionsMenu();
                         mAirConditionersTextViewNoOfAirConditionersACprovidedVal.setText(str_noOfAirConditionersACprovided);
                         mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText("");//008
                         //checkValidationOnNoOfAcSelection();//008
@@ -779,6 +780,17 @@ public class Air_Conditioners extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_noOfAirConditionersACprovided != null && !str_noOfAirConditionersACprovided.isEmpty()) {
+            if (Integer.valueOf(str_noOfAirConditionersACprovided) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 
@@ -1184,5 +1196,5 @@ public class Air_Conditioners extends BaseActivity {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
-    
+
 }

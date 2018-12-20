@@ -150,6 +150,15 @@
                         android:imeOptions="actionDone"
                         android:textAlignment="viewStart" />
 
+                   <!-- <EditText
+                        android:id="@+id/uploadEbPayment_editText_DdChequeTransactionDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Transaction Details"
+                        android:imeOptions="actionDone"
+                        android:textAlignment="viewStart" />-->
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -165,14 +174,26 @@
                         android:layout_weight="0.4"
                         android:text="DD/Cheque Number" />
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/uploadEbPayment_textView_DdChequeNumber"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:hint="0000"
                         android:imeOptions="actionDone"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart" />-->
+
+                    <EditText
+                        android:id="@+id/uploadEbPayment_editText_DdChequeNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Number"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -204,14 +225,28 @@
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />-->
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/uploadEbPayment_textView_ddChequeDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:hint="DD/MMM/YYYY"
                         android:imeOptions="actionDone"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart" />-->
+
+                    <EditText
+                        android:id="@+id/uploadEbPayment_editText_ddChequeDate"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MMM/YYYY"
+                        android:imeOptions="actionDone"
+                        android:inputType="none"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -226,16 +261,28 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
+
                         android:text="DD/Cheque Amount" />
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/uploadEbPayment_textView_DdChequeAmount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:hint="0000/-"
                         android:imeOptions="actionDone"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart" />-->
+
+                    <EditText
+                        android:id="@+id/uploadEbPayment_editText_DdChequeAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Amount"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 

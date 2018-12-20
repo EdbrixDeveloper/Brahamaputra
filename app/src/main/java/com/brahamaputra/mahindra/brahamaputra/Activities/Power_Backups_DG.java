@@ -530,6 +530,7 @@ public class Power_Backups_DG extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
 
                         str_noOfEngineAlternatorSetsprovided = item.get(position);
+                        invalidateOptionsMenu();
                         mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(str_noOfEngineAlternatorSetsprovided);
                         mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText("");
 
@@ -1191,6 +1192,17 @@ public class Power_Backups_DG extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_noOfEngineAlternatorSetsprovided != null && !str_noOfEngineAlternatorSetsprovided.isEmpty()) {
+            if (Integer.valueOf(str_noOfEngineAlternatorSetsprovided) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 

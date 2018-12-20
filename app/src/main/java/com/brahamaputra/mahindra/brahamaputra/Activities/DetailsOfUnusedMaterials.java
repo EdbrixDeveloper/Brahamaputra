@@ -138,6 +138,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
 
                         str_numberofUnusedAssetinSite = item.get(position);
+                        invalidateOptionsMenu();
                         mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal.setText(str_numberofUnusedAssetinSite);
 
                         //clear AC collection empty by select / changing value of No of Ac provided
@@ -190,7 +191,7 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
                         if (str_typeOfAsset.equals("General Item")) {
                             linearLayout_assetStatus.setVisibility(View.GONE);
                             linearLayout_assetMake.setVisibility(View.GONE);
-                        }else{
+                        } else {
                             linearLayout_assetStatus.setVisibility(View.VISIBLE);
                             linearLayout_assetMake.setVisibility(View.VISIBLE);
                         }
@@ -545,12 +546,21 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
             return true;
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuDone);
+
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_numberofUnusedAssetinSite != null && !str_numberofUnusedAssetinSite.isEmpty()) {
+            if (Integer.valueOf(str_numberofUnusedAssetinSite) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 

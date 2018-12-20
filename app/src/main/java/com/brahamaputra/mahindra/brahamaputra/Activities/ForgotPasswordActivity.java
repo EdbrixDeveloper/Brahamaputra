@@ -53,6 +53,7 @@ public class ForgotPasswordActivity extends BaseActivity {
                 checkValidations();
             }
         });
+        mForgotPasswordButtonSubmit.setAllCaps(false);
     }
 
     private void checkValidations() {
@@ -69,7 +70,7 @@ public class ForgotPasswordActivity extends BaseActivity {
     private void doForgot(String userName) {
 
         showBusyProgress();
-        try{
+        try {
             JSONObject jo = new JSONObject();
             try {
                 jo.put("APIKEY", Constants.APP_KEY__);
@@ -115,7 +116,7 @@ public class ForgotPasswordActivity extends BaseActivity {
             forgotPasswordReq.setShouldCache(false);
             Application.getInstance().addToRequestQueue(forgotPasswordReq, "forgotPasswordReq");
 
-        }catch(Exception e){
+        } catch (Exception e) {
             hideBusyProgress();
             e.printStackTrace();
         }
