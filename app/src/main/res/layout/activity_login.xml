@@ -62,7 +62,6 @@
                     android:id="@+id/login_editText_username"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginBottom="@dimen/app_normal_margin"
                     android:layout_marginLeft="@dimen/app_big_margin"
                     android:layout_marginRight="@dimen/app_big_margin"
                     android:backgroundTint="@color/colorWhite"
@@ -74,8 +73,8 @@
                     android:inputType="textPersonName"
                     android:textColor="@color/colorWhite"
                     android:textColorHint="@color/colorWhite" />
-
-                <EditText
+                <!--android:layout_marginBottom="@dimen/app_normal_margin"-->
+                <!--<EditText
                     android:id="@+id/login_editText_password"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -91,8 +90,49 @@
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:textColor="@color/colorWhite"
-                    android:textColorHint="@color/colorWhite" />
+                    android:textColorHint="@color/colorWhite" />-->
 
+                <!--<ImageView
+                    android:id="@+id/eyeIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/app_min_padding"
+                    android:src="@drawable/eye_invisible" />-->
+
+                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <EditText
+                        android:id="@+id/login_editText_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="@dimen/app_big_margin"
+                        android:layout_marginLeft="@dimen/app_big_margin"
+                        android:layout_marginRight="@dimen/app_big_margin"
+                        android:backgroundTint="@color/colorWhite"
+                        android:drawableLeft="@drawable/password_icon"
+                        android:drawablePadding="@dimen/app_normal_padding"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:imeActionLabel="Sign In"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textColor="@color/colorWhite"
+                        android:textColorHint="@color/colorWhite" />
+
+
+                    <ImageView
+                        android:id="@+id/eyeIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="35dp"
+                        android:layout_marginTop="@dimen/view_big_width"
+                        android:src="@drawable/baseline_visibility_off_white_18dp" />
+
+                </FrameLayout>
 
                 <Button
                     android:id="@+id/login_button_login"
@@ -127,10 +167,10 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:layout_gravity="right|bottom"
                         android:id="@+id/textView_appVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="right|bottom"
                         android:layout_marginBottom="@dimen/app_min_margin"
                         android:layout_marginLeft="@dimen/app_big_margin"
                         android:layout_marginRight="@dimen/app_big_margin"

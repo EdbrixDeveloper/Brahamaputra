@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -51,6 +52,8 @@ public class LoginActivity extends BaseActivity {
 
     boolean doubleBackToExitPressedOnce = false;
 
+    private ImageView eyeIcon;
+    private boolean isPasswordVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,8 @@ public class LoginActivity extends BaseActivity {
 
         mLoginButtonLogin = (Button) findViewById(R.id.login_button_login);
         loginTextViewForgotPassword = (TextView) findViewById(R.id.login_textView_forgotPassword);
+        eyeIcon = (ImageView) findViewById(R.id.eyeIcon);//
+        isPasswordVisible = false;//
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -110,6 +115,15 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
+        /**/
+        this.eyeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setPasswordVisible(isPasswordVisible);
+                isPasswordVisible = !isPasswordVisible;
             }
         });
     }
@@ -285,5 +299,15 @@ public class LoginActivity extends BaseActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    private void setPasswordVisible(boolean isVisible) {
+        if (isVisible) {
+            eyeIcon.setImageDrawable(ContextCompat.getDrawable(LoginActivity.this, R.drawable.baseline_visibility_off_white_18dp));
+            mLoginEditTextPassword.setTransformationMethod(new PasswordTransformationMethod());
+        } else {
+            eyeIcon.setImageDrawable(ContextCompat.getDrawable(LoginActivity.this, R.drawable.baseline_visibility_white_18dp));
+            mLoginEditTextPassword.setTransformationMethod(null);
+        }
     }
 }

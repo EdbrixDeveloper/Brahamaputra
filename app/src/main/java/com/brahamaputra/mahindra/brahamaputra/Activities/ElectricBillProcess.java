@@ -1414,7 +1414,7 @@ public class ElectricBillProcess extends BaseActivity {
                                         siteArray.add(siteList.getSiteName());
                                     }
                                     //siteArray.sort(String::compareToIgnoreCase);
-                                    Collections.sort(siteArray, String.CASE_INSENSITIVE_ORDER);
+                                    ////Collections.sort(siteArray, String.CASE_INSENSITIVE_ORDER); by 008
                                     /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
                                             siteArray,
                                             "Select Site",
@@ -1487,16 +1487,16 @@ public class ElectricBillProcess extends BaseActivity {
                                 ebSiteConnectedData = response;
 
                                 ConsumerNoList = ebSiteConnectedData.getConsumerNoList();
-                                Collections.sort(ConsumerNoList, String.CASE_INSENSITIVE_ORDER);
+                                //Collections.sort(ConsumerNoList, String.CASE_INSENSITIVE_ORDER); by 008
 
                                 PaymentTypeList = ebSiteConnectedData.getPaymentTypeList();
-                                Collections.sort(PaymentTypeList, String.CASE_INSENSITIVE_ORDER);
+                                //Collections.sort(PaymentTypeList, String.CASE_INSENSITIVE_ORDER);
 
                                 ElectricConnectionTypeList = ebSiteConnectedData.getElectricConnectionTypeList();
-                                Collections.sort(ElectricConnectionTypeList, String.CASE_INSENSITIVE_ORDER);
+                                //Collections.sort(ElectricConnectionTypeList, String.CASE_INSENSITIVE_ORDER);
 
                                 ConnectionTariffList = ebSiteConnectedData.getConnectionTariffList();
-                                Collections.sort(ConnectionTariffList, String.CASE_INSENSITIVE_ORDER);
+                                //Collections.sort(ConnectionTariffList, String.CASE_INSENSITIVE_ORDER);
 
                             } else {
                                 showToast("No Data Found Of Selected Site");
