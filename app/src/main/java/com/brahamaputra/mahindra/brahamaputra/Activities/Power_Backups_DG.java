@@ -1104,7 +1104,9 @@ public class Power_Backups_DG extends BaseActivity {
                     base64StringQRCodeScan = "";
                     showToast("Cancelled");
                 } else {
-                    if (!isDuplicateQRcode(result.getContents())) {
+                    Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                    boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                    if (!flagIsDuplicateQRcode) {
                         base64StringQRCodeScan = result.getContents();
                         if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
@@ -1112,7 +1114,7 @@ public class Power_Backups_DG extends BaseActivity {
                         }
                     } else {
                         base64StringQRCodeScan = "";
-                        showToast("QR Code Already Used in Application");
+                        showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
                     }
                 }
             } else if (qrScanFlag == 2) {
@@ -1122,7 +1124,9 @@ public class Power_Backups_DG extends BaseActivity {
                     base64StringDgBatteryStatusQRCodeScan = "";
                     showToast("Cancelled");
                 } else {
-                    if (!isDuplicateQRcode(result.getContents())) {
+                    Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                    boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                    if (!flagIsDuplicateQRcode) {
                         base64StringDgBatteryStatusQRCodeScan = result.getContents();
                         if (!base64StringDgBatteryStatusQRCodeScan.isEmpty() && base64StringDgBatteryStatusQRCodeScan != null) {
                             mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
@@ -1130,7 +1134,7 @@ public class Power_Backups_DG extends BaseActivity {
                         }
                     } else {
                         base64StringDgBatteryStatusQRCodeScan = "";
-                        showToast("QR Code Already Used in Application");
+                        showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
                     }
                 }
             }

@@ -512,7 +512,9 @@ public class ServoStabilizer extends BaseActivity {
                 base64StringServoStablizer = "";
                 showToast("Cancelled");
             } else {
-                if(!isDuplicateQRcode(result.getContents())){
+                Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                if (!flagIsDuplicateQRcode) {
                     base64StringServoStablizer = result.getContents();
                     if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
                         mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
@@ -520,7 +522,7 @@ public class ServoStabilizer extends BaseActivity {
                     }
                 }else {
                     base64StringServoStablizer = "";
-                    showToast("QR Code Already Used in Application");
+                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
                 }
 
 

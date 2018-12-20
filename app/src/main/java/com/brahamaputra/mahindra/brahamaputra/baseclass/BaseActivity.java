@@ -183,7 +183,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    public boolean isDuplicateQRcode(String strQrcode) {
+    /*public boolean isDuplicateQRcodeold(String strQrcode) {
 
         OfflineStorageWrapper offlineStorageWrapper;
         HotoTransactionData hotoTransactionData = null;
@@ -257,13 +257,12 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         return false;
-    }
-    public Pair<String, Boolean> isDuplicateQRcodeNew (String strQrcode){
+    }*/
+    public Object[] isDuplicateQRcode(String strQrcode){
 
         OfflineStorageWrapper offlineStorageWrapper;
         HotoTransactionData hotoTransactionData = null;
 
-        String ticketId = sessionManager.getSessionUserTicketId();
         String ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         String userId = sessionManager.getSessionUserId();
 
@@ -283,23 +282,23 @@ public class BaseActivity extends AppCompatActivity {
         ///Air Conditioners*
         for(int i=0;i<hotoTransactionData.getAirConditionParentData().getAirConditionersData().size();i++){
             if(hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Pair<String, Boolean>("Air Conditioners ", true);
+                return new Object[]{"Air Conditioners in Reading "+i+1, true};
             }
         }
 
         ///Solar Power System*
         if(hotoTransactionData.getSolarPowerSystemData().getqRCodeScan().contains(strQrcode)){
-            return new Pair<String, Boolean>("Solar Power System ", true);
+            return new Object[]{"Solar Power System ", true};
         }
 
         ///Power Plant*
         for(int i=0;i<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size();i++){
             if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Pair<String, Boolean>("Power Plant", true);
+                return new Object[]{"Power Plant in Reading "+i+1, true};
             }else{
                 for(int j=0;j<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size();j++){
                     if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)){
-                        return new Pair<String, Boolean>("Power Plant", true);
+                        return new Object[]{"Power Plant Modules in Reading "+j+1, true};
                     }
                 }
             }
@@ -308,27 +307,27 @@ public class BaseActivity extends AppCompatActivity {
         ///Power Backups (DG)*
         for(int i=0;i<hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size();i++){
             if(hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Pair<String, Boolean>("Power Backups (DG)", true);
+                return new Object[]{"Power Backups (DG) in Reading "+i+1, true};
             }
         }
 
         ///Battery Set*
         for(int i=0;i<hotoTransactionData.getBatterySetParentData().getBatterySetData().size();i++){
             if(hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)){
-                return new Pair<String, Boolean>("Battery Set", true);
+                return new Object[]{"Battery Set in Reading "+i+1, true};
             }
         }
 
         ///Power mgmt System*
         if (hotoTransactionData.getPowerManagementSystemData().getPowerManagementSystemQR().contains(strQrcode)) {
-            return new Pair<String, Boolean>("Power Management System", true);
+            return new Object[]{"Power Management System", true};
         }
 
         ///Server Stabilizer
         if (hotoTransactionData.getServoStabilizerData().getServoStabilizer_Qr().contains(strQrcode)) {
-            return new Pair<String, Boolean>("Servo Stabilizer", true);
+            return new Object[]{"Servo Stabilizer", true};
         }
 
-        return new Pair<String, Boolean>("default", false);
+        return new Object[]{"default", false};
     }
 }

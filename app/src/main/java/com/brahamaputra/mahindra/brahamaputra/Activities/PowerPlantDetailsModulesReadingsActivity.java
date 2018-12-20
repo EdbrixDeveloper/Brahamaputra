@@ -366,7 +366,9 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                 base64StringQRCodeScan = "";
                 showToast("Cancelled");
             } else {
-                if (!isDuplicateQRcode(result.getContents())) {
+                Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                if (!flagIsDuplicateQRcode) {
                     base64StringQRCodeScan = result.getContents();
                     //showToast(base64StringQRCodeScan);
                     if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
@@ -375,7 +377,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                     }
                 } else {
                     base64StringQRCodeScan = "";
-                    showToast("QR Code Already Used in Application");
+                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
                 }
             }
         }

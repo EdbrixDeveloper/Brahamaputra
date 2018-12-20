@@ -877,7 +877,9 @@ public class Battery_Set extends BaseActivity {
                 base64StringBatterySet = "";
                 showToast("Cancelled");
             } else {
-                if (!isDuplicateQRcode(result.getContents())) {
+                Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                if (!flagIsDuplicateQRcode) {
                     base64StringBatterySet = result.getContents();
                     if (!base64StringBatterySet.isEmpty() && base64StringBatterySet != null) {
                         mBatterySetButtonQRCodeScanView.setVisibility(View.VISIBLE);
@@ -885,10 +887,8 @@ public class Battery_Set extends BaseActivity {
                     }
                 } else {
                     base64StringBatterySet = "";
-                    showToast("QR Code Already Used in Application");
+                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
                 }
-
-
             }
         }
 
