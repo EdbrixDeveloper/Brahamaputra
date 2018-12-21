@@ -63,8 +63,8 @@ public class Constants {
     public final static String forgotpassword = BASE_URL.concat("auth/forgotpassword");  // forgotpassword
 
 
-    public final static String GetUserSites = BASE_URL.concat("common/getusersites");  // getusersites //used in diesel filling activity
-    public final static String GetDgId_from_Sites = BASE_URL.concat("common/getdgmrqrcodesbysiteid");  // getdgmrqrcodesbysiteid //used in diesel filling activity
+    public final static String GetUserSites = BASE_URL.concat("common/getusersites"); //* // getusersites //used in diesel filling activity
+    public final static String GetDgId_from_Sites = BASE_URL.concat("common/getdgmrqrcodesbysiteid");//*  // getdgmrqrcodesbysiteid //used in diesel filling activity
     public final static String Submitdieselfillingtransaction = BASE_URL.concat("diesel/submitdieselfillingtransaction");  // Submitdieselfillingtransaction //used in diesel filling activity
     public final static String Getdieseltransactionticketlist = BASE_URL.concat("diesel/getdieseltransactionticketlist");//used in diesel filling List activity
 
@@ -73,13 +73,12 @@ public class Constants {
     public final static String GetCircle = BASE_URL.concat("common/getcircles");
     public final static String GetState = BASE_URL.concat("/common/getstates");
     public final static String GetSSA = BASE_URL.concat("common/getssa");
-    public final static String GetSite = BASE_URL.concat("common/getsites");
-    public final static String GetSiteSelectConnectiondata = BASE_URL.concat("common/getsiteselectricconnectiondata");
+    public final static String GetSite = BASE_URL.concat("common/getsites");//*
+    public final static String GetSiteSelectConnectiondata = BASE_URL.concat("common/getsiteselectricconnectiondata");//*
     public final static String SubmitElectricityBillTicketList = BASE_URL.concat("electricbill/submitebfillingtransaction");
     public final static String GetElectriBillTransactionslist = BASE_URL.concat("electricbill/getelectribilltransactionslist");
     public final static String SubmitEbfillingPaymentEeceipt = BASE_URL.concat("electricbill/submitebfillingpaymentreceipt");
     public final static String GetUserDetails = BASE_URL.concat("common/getuserdetails");
     public final static String GetEbPaymentDetails = BASE_URL.concat("electricbill/getelectribillchequedddetails");
     public final static String SubmitEbPaymentDetails = BASE_URL.concat("electricbill/submitebfillingddchequereceipt");
-
 }

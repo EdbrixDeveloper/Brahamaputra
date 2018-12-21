@@ -265,38 +265,13 @@ public class DieselFilling extends BaseActivity {
     }
 
     public void set_listener() {
-        /*dieselFilling_button_qrCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (DgIdList.size() > 0) {
-                    if (ContextCompat.checkSelfPermission(DieselFilling.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        if (getFromPref(DieselFilling.this, ALLOW_KEY)) {
-                            showSettingsAlert();
-                        } else if (ContextCompat.checkSelfPermission(DieselFilling.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            // Should we show an explanation?
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(DieselFilling.this, Manifest.permission.CAMERA)) {
-                                showAlert();
-                            } else {
-                                // No explanation needed, we can request the permission.
-                                ActivityCompat.requestPermissions(DieselFilling.this, new String[]{Manifest.permission.CAMERA}, MY_FLAG_QR_RESULT);
-                            }
-                        }
-                    } else {
-                        //openCamera();
-                        onClicked(v);
-                    }
-                } else {
-                    //
-                }
-            }
-        });*/
         dieselFilling_button_qrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (site_id < 1) {// && DgIdList.size() > 0
                     showToast("Please Select Site ID First..");
                 } else if (DgIdList == null) {
+                    showToast("No Data Found");
                     mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
                 } else if (DgIdList.size() > 0) {
                     if (ContextCompat.checkSelfPermission(DieselFilling.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

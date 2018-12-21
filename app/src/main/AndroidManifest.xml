@@ -182,6 +182,9 @@
         <activity android:name=".Activities.UploadEBReceiptActivity" />
         <activity android:name=".Activities.PowerPlantDetailsModulesReadingsActivity" />
         <activity android:name=".Activities.UsersOfflineHotoListActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d4631a7ecef417fb3eec16291cdf2f285f48493c" />
     </application>
 
 </manifest>

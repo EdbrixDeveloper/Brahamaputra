@@ -12,6 +12,8 @@ import com.android.volley.toolbox.Volley;
 import com.brahamaputra.mahindra.brahamaputra.Utils.FontsOverride;
 import com.brahamaputra.mahindra.brahamaputra.Volley.OkHttpStack;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.io.File;
 
 public class Application extends android.app.Application {
@@ -41,6 +43,7 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         mInstance = this;
 
