@@ -807,8 +807,10 @@ public class DieselFilling extends BaseActivity {
 
                                     final ArrayList<String> Sitelist = new ArrayList<String>();
                                     for (UserSites site : userSitesList.getSiteList()) {
-                                        Sitelist.add(site.getSiteId() + ":" + site.getSiteName());
+                                        //Sitelist.add(site.getSiteId() + ":" + site.getSiteName());
+                                        Sitelist.add(site.getSiteName());
                                     }
+                                    //Collections.sort(Sitelist);
                                     //Collections.sort(Sitelist, String.CASE_INSENSITIVE_ORDER);
                                     mDieselFillingTextViewSiteNameVal.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -824,6 +826,13 @@ public class DieselFilling extends BaseActivity {
                                                 public void onClick(ArrayList<String> item, int position) {
 
                                                     /*str_siteName = item.get(position);*/
+                                                    /*String tttt = item.get(position);
+                                                    String kept = tttt.substring(0, tttt.indexOf(":"));
+                                                    UserSites userSites = new UserSites();
+                                                    userSites.setSiteId(kept);
+                                                    int getCategoryPos = userSitesList.getSiteList().indexOf(userSites.getSiteId());*/
+
+
                                                     mDieselFillingTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                     mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
                                                     mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
