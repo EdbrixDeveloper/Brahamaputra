@@ -1,18 +1,26 @@
 package com.brahamaputra.mahindra.brahamaputra;
 
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.brahamaputra.mahindra.brahamaputra.Utils.FontsOverride;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.OkHttpStack;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
 import io.fabric.sdk.android.Fabric;
 import java.io.File;
 
@@ -23,6 +31,7 @@ public class Application extends android.app.Application {
     public static String ANDROID_ID = "0000000000000000";
     private static Application mInstance;
     private RequestQueue mRequestQueue;
+    private SessionManager sessionManager;
 
     public static synchronized Application getInstance() {
         return mInstance;
@@ -44,8 +53,9 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-
         mInstance = this;
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         File yourAppStorageDir = new File(Environment.getExternalStorageDirectory(), "/" + getResources().getString(R.string.app_name) + "/");
         if (!yourAppStorageDir.exists()) {
@@ -57,7 +67,30 @@ public class Application extends android.app.Application {
       //  FontsOverride.setDefaultFont(this, "MONOSPACE");
         // FontsOverride.setDefaultFont(this, "SERIF", "MyFontAsset3.ttf");
         // FontsOverride.setDefaultFont(this, "SANS_SERIF", "MyFontAsset4.ttf");
+        getFirebaseToken();
+    }
 
+    private void getFirebaseToken() {
+        // Get token
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        //String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, token);
+                        sessionManager.updateSessionFCMToken(token);
+                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     //////////////////////// Volley request ///////////////////////////////////////////////////////////////////////////////////////
