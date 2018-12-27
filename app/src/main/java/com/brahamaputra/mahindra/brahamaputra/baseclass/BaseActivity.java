@@ -282,7 +282,7 @@ public class BaseActivity extends AppCompatActivity {
         ///Air Conditioners*
         for(int i=0;i<hotoTransactionData.getAirConditionParentData().getAirConditionersData().size();i++){
             if(hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Object[]{"Air Conditioners in Reading "+i+1, true};
+                return new Object[]{"Air Conditioners in Reading "+String.valueOf(i+1), true};
             }
         }
 
@@ -294,11 +294,11 @@ public class BaseActivity extends AppCompatActivity {
         ///Power Plant*
         for(int i=0;i<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size();i++){
             if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Object[]{"Power Plant in Reading "+i+1, true};
+                return new Object[]{"Power Plant in Reading "+String.valueOf(i+1), true};
             }else{
                 for(int j=0;j<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size();j++){
                     if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)){
-                        return new Object[]{"Power Plant Modules in Reading "+j+1, true};
+                        return new Object[]{"Power Plant Modules in Reading "+String.valueOf(j+1), true};
                     }
                 }
             }
@@ -307,14 +307,14 @@ public class BaseActivity extends AppCompatActivity {
         ///Power Backups (DG)*
         for(int i=0;i<hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size();i++){
             if(hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Object[]{"Power Backups (DG) in Reading "+i+1, true};
+                return new Object[]{"Power Backups (DG) in Reading "+String.valueOf(i+1), true};
             }
         }
 
         ///Battery Set*
         for(int i=0;i<hotoTransactionData.getBatterySetParentData().getBatterySetData().size();i++){
             if(hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)){
-                return new Object[]{"Battery Set in Reading "+i+1, true};
+                return new Object[]{"Battery Set in Reading "+String.valueOf(i+1), true};
             }
         }
 

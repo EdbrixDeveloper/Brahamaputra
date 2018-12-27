@@ -71,6 +71,7 @@ public class UserProfileActivity extends BaseActivity {
     private TextView textViewAppVersion;
 
     public static final int RESULT_UPDATE_PROFILE = 328;
+    public static final int RESULT_NOTIFICATION = 328;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class UserProfileActivity extends BaseActivity {
 
         #c31432*/
 
-                
+
         //getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
 
         this.setTitle("Profile");
@@ -142,6 +143,10 @@ public class UserProfileActivity extends BaseActivity {
 
             case R.id.menuEditProf:
                 startActivityForResult(new Intent(UserProfileActivity.this, UserEditProfileActivity.class), RESULT_UPDATE_PROFILE);
+                return true;
+
+            case R.id.menuNotification:
+                startActivityForResult(new Intent(UserProfileActivity.this, NotificationList.class), RESULT_NOTIFICATION);
                 return true;
 
             case R.id.menuChangePassword:

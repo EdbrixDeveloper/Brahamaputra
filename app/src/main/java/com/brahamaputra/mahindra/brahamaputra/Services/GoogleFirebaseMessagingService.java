@@ -19,6 +19,7 @@ import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardActivity;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
 import com.brahamaputra.mahindra.brahamaputra.app.Config;
+import com.brahamaputra.mahindra.brahamaputra.helper.DatabaseHelper;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
@@ -148,7 +149,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
 
     /**
      * Persist token to third-party servers.
-     *
+     * <p>
      * Modify this method to associate the user's FCM InstanceID token with any server-side account
      * maintained by your application.
      *
@@ -160,7 +161,6 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
 
     /**
      * Create and show a simple notification containing the received FCM message.
-     *
      */
     //private void sendNotification(String messageBody) {
     private void sendNotification(Context context, String title, String message, String timeStamp, Intent intent) {
@@ -182,7 +182,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
-                        //.setGroupSummary(true);
+        //.setGroupSummary(true);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
@@ -209,13 +209,14 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             // play notification sound
             NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
             notificationUtils.playNotificationSound();
-        }else{
+        } else {
             // If the app is in background, firebase itself handles the notification
         }
     }
 
     private void handleDataMessage(JSONObject json) {
         Log.e(TAG, "push json: " + json.toString());
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
         try {
             JSONObject data = json.getJSONObject("data");
 
@@ -233,6 +234,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "imageUrl: " + imageUrl);
             Log.e(TAG, "timestamp: " + timestamp);
 
+            databaseHelper.insert(title, message, timestamp);
 
             if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
                 // app is in foreground, broadcast the push message
@@ -243,7 +245,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                 // play notification sound
                 NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
                 notificationUtils.playNotificationSound();
-                sendNotification(getApplicationContext(),title,message,timestamp,pushNotification);
+                sendNotification(getApplicationContext(), title, message, timestamp, pushNotification);
 
             } else {
                 // app is in background, show the notification in notification tray
@@ -264,6 +266,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
     }
+
     /**
      * Showing notification with text only
      */
@@ -271,7 +274,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
         notificationUtils = new NotificationUtils(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         notificationUtils.showNotificationMessage(title, message, timeStamp, intent);
-        sendNotification(context,title,message,timeStamp,intent);
+        sendNotification(context, title, message, timeStamp, intent);
     }
 
     /**
@@ -281,7 +284,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
         notificationUtils = new NotificationUtils(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
-        sendNotification(context,title,message,timeStamp,intent);
+        sendNotification(context, title, message, timeStamp, intent);
 
     }
 }
