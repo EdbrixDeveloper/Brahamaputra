@@ -1,8 +1,12 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +23,7 @@ import com.brahamaputra.mahindra.brahamaputra.Adapters.NotificationListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.Notification;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Services.GoogleFirebaseMessagingService;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
@@ -34,6 +39,8 @@ import java.util.ArrayList;
 
 public class NotificationList extends BaseActivity {
 
+    //implements NotificationReceiver
+
     private OfflineStorageWrapper offlineStorageWrapper;
     private String userId = "";
     private String ticketName = "";
@@ -46,7 +53,11 @@ public class NotificationList extends BaseActivity {
     private AlertDialogManager alertDialogManager;
     private NotificationListAdapter notificationListAdapter;
     private DatabaseHelper databaseHelper;
-    public static final int RESULT_TRAN_SUBMIT = 259;
+
+    private BroadcastReceiver broadcastReceiver;
+    private final String SERVICE_RESULT = "com.service.result";
+    private final String SERVICE_MESSAGE = "com.service.message";
+    ArrayList<Notification> dd;
 
     private void assignViews() {
         mNotificationListView = (ListView) findViewById(R.id.listViewNotification);
@@ -62,7 +73,6 @@ public class NotificationList extends BaseActivity {
         alertDialogManager = new AlertDialogManager(NotificationList.this);
         sessionManager = new SessionManager(NotificationList.this);
         userId = sessionManager.getSessionUserId();
-        //offlineStorageWrapper = OfflineStorageWrapper.getInstance(NotificationList.this, userId, ticketName);
         notification = new Notification();
         databaseHelper = new DatabaseHelper(getApplicationContext());
         assignViews();
@@ -73,19 +83,38 @@ public class NotificationList extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Notification dataModel = dd.get(position);
-                int b4 = dataModel.getIsRead();
+                //int b4 = dataModel.getIsRead();
                 databaseHelper = new DatabaseHelper(getApplicationContext());
                 databaseHelper.updateNotification(dataModel);
-
-                //dd.set(position,dataModel);
-                notificationListAdapter.notifyDataSetChanged();
-               prepareListData();
+                prepareListData();
             }
         });
 
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                // do something here.
+                String receiveFlag = intent.getStringExtra(SERVICE_MESSAGE);
+                if (receiveFlag.equals("receive")) {
+                    prepareListData();
+                }
+            }
+        };
+
     }
 
-    ArrayList<Notification> dd;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver((broadcastReceiver),
+                new IntentFilter(SERVICE_RESULT));
+    }
+
+    @Override
+    protected void onStop() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+        super.onStop();
+    }
 
     private void prepareListData() {
         if (databaseHelper.getAllNotification() != null && databaseHelper.getAllNotification().size() > 0) {
@@ -93,11 +122,12 @@ public class NotificationList extends BaseActivity {
             dd.addAll(databaseHelper.getAllNotification());
             notificationListAdapter = new NotificationListAdapter(dd, NotificationList.this);
             mNotificationListView.setAdapter(notificationListAdapter);
+            mNotificationListView.setVisibility(View.VISIBLE);
+            mTxtNoNotificationFound.setVisibility(View.GONE);
         } else {
             mNotificationListView.setVisibility(View.GONE);
             mTxtNoNotificationFound.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
@@ -107,7 +137,6 @@ public class NotificationList extends BaseActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -116,7 +145,6 @@ public class NotificationList extends BaseActivity {
                 return true;
 
             case R.id.menuRefresh:
-
                 prepareListData();
                 return true;
 
@@ -139,7 +167,6 @@ public class NotificationList extends BaseActivity {
         alertDialogManager.Dialog("Confirmation", "Do you want to delete all notification?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
-                //showSettingsAlert();
                 databaseHelper.deleteAllNotification();
                 prepareListData();
             }

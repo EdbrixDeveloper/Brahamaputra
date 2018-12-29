@@ -15,7 +15,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardActivity;
+import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardCircularActivity;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
 import com.brahamaputra.mahindra.brahamaputra.app.Config;
@@ -39,6 +39,10 @@ import java.util.Random;
 public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "FirebaseMsgService";
     private NotificationUtils notificationUtils;
+
+    private LocalBroadcastManager localBroadcastManager;
+    private final String SERVICE_RESULT = "com.service.result";
+    private final String SERVICE_MESSAGE = "com.service.message";
 
     /**
      * Called when message is received.
@@ -242,14 +246,21 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                 pushNotification.putExtra("message", message);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
+                //0008
+                localBroadcastManager = LocalBroadcastManager.getInstance(this);
+                //0008
+
+
                 // play notification sound
                 NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
                 notificationUtils.playNotificationSound();
                 sendNotification(getApplicationContext(), title, message, timestamp, pushNotification);
 
+                sendResult("receive");//0008 for notification list update
+
             } else {
                 // app is in background, show the notification in notification tray
-                Intent resultIntent = new Intent(getApplicationContext(), DashboardActivity.class);
+                Intent resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
                 resultIntent.putExtra("message", message);
 
                 // check for image attachment
@@ -260,6 +271,8 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                     showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }
             }
+
+
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());
         } catch (Exception e) {
@@ -286,5 +299,13 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
         notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
         sendNotification(context, title, message, timeStamp, intent);
 
+    }
+
+
+    private void sendResult(String message) {
+        Intent intent = new Intent(SERVICE_RESULT);
+        if(message != null)
+            intent.putExtra(SERVICE_MESSAGE, message);
+        localBroadcastManager.sendBroadcast(intent);
     }
 }

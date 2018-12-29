@@ -26,12 +26,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_myHoto"
             android:layout_centerHorizontal="true"
-            
-            android:text="My HOTO"
+
+            android:text="my HOTO"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
     </RelativeLayout>
 
@@ -57,23 +56,23 @@
             android:id="@+id/dashboard_myAsset"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
             android:background="@color/zxing_transparent"
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/assets_icon"
             android:tint="@color/colorPrimary"
-            circle:name="My Assets"
-            android:layout_centerHorizontal="true"/>
+            circle:name="My Assets" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_myAsset"
-            android:text="My Assets"
+            android:layout_centerHorizontal="true"
+            android:text="my Assets"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="15dp"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="15dp" />
 
     </RelativeLayout>
     <!--<com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
@@ -106,24 +105,24 @@
             android:id="@+id/dashboard_myEnergy"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
             android:background="@color/zxing_transparent"
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/electricity_icon"
             android:tint="@color/colorPrimary"
-            circle:name="My Energy"
-            android:layout_centerHorizontal="true"/>
+            circle:name="My Energy" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_myEnergy"
-            
-            android:text="My Energy"
+
+            android:layout_centerHorizontal="true"
+            android:text="my Energy"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="15dp"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="15dp" />
 
     </RelativeLayout>
     <!--<com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
@@ -139,28 +138,27 @@
     <RelativeLayout
         android:id="@+id/dashboard_myPrevitive_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
             android:id="@+id/dashboard_myPrevitive"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
             android:background="@color/zxing_transparent"
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/prevetive_icon"
             android:tint="@color/colorPrimary"
-            circle:name="My Preventive"
-            android:layout_centerHorizontal="true"/>
+            circle:name="My Preventive" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_myPrevitive"
             android:layout_centerHorizontal="true"
-            
-            android:text="My Preventive"
+
+            android:text="my Preventive"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
@@ -179,28 +177,27 @@
     <RelativeLayout
         android:id="@+id/dashboard_myIncident_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
             android:id="@+id/dashboard_myIncident"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
             android:background="@color/zxing_transparent"
             android:elevation="2dp"
             android:padding="5dp"
             android:src="@drawable/incident_icon"
             android:tint="@color/colorPrimary"
-            circle:name="My Incident"
-            android:layout_centerHorizontal="true"/>
+            circle:name="My Incident" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_myIncident"
             android:layout_centerHorizontal="true"
-            
-            android:text="My Incident"
+
+            android:text="my Incident"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />

@@ -1,13 +1,19 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.Notification;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserDetailsParent;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -24,10 +31,13 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.helper.DatabaseHelper;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -73,6 +83,14 @@ public class UserProfileActivity extends BaseActivity {
     public static final int RESULT_UPDATE_PROFILE = 328;
     public static final int RESULT_NOTIFICATION = 328;
 
+    private DatabaseHelper databaseHelper;
+    TextView textCartItemCount;
+    int mCartItemCount = 10;
+
+    private BroadcastReceiver broadcastReceiver;
+    private final String SERVICE_RESULT = "com.service.result";
+    private final String SERVICE_MESSAGE = "com.service.message";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,13 +98,12 @@ public class UserProfileActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#c31432")));
+
         /*#C92143
         #94203D
-
         #c31432*/
-
-
         //getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
+
 
         this.setTitle("Profile");
         assignViews();
@@ -95,6 +112,39 @@ public class UserProfileActivity extends BaseActivity {
         prepareUserPersonalData();
         //setValues();
         textViewAppVersion.setText("App Version : " + BuildConfig.VERSION_NAME);
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                // do something here.
+                String receiveFlag = intent.getStringExtra(SERVICE_MESSAGE);
+                if (receiveFlag.equals("receive")) {
+                    invalidateOptionsMenu();
+                }
+            }
+        };
+        invalidateOptionsMenu();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver((broadcastReceiver),
+                new IntentFilter(SERVICE_RESULT));
+    }
+
+    @Override
+    protected void onStop() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+        super.onStop();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        invalidateOptionsMenu();
     }
 
     private void setValues() {
@@ -122,7 +172,59 @@ public class UserProfileActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.profile_menu, menu);
+
+
+        final MenuItem menuItem = menu.findItem(R.id.menuNotification);
+
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        setupBadge();
+
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
+
+
         return true;
+    }
+
+
+    private void setupBadge() {
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        if (databaseHelper.getAllNotification() != null && databaseHelper.getAllNotification().size() > 0) {
+            ArrayList<Notification> dd = new ArrayList<Notification>(databaseHelper.getAllNotification().size());
+            dd.addAll(databaseHelper.getAllNotification());
+            mCartItemCount = countUnreadNotifications(dd);
+            //mCartItemCount = databaseHelper.getAllNotification().size();
+        } else {
+            mCartItemCount = 0;
+        }
+        if (textCartItemCount != null) {
+            /*if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {*/
+            //textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+            textCartItemCount.setText(String.valueOf(mCartItemCount > 99 ? "99+" : mCartItemCount));
+            if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                textCartItemCount.setVisibility(View.VISIBLE);
+            }
+            /*}*/
+        }
+    }
+
+    public int countUnreadNotifications(ArrayList<Notification> dd) {
+        int duplicates = 0;
+        for (int i = 0; i < dd.size(); i++) {
+            if (dd.get(i).getIsRead() == 0)
+                duplicates++;
+        }
+        return duplicates;
     }
 
     @Override

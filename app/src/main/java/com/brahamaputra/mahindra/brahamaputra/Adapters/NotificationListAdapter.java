@@ -85,10 +85,13 @@ public class NotificationListAdapter extends ArrayAdapter<Notification>
         viewHolder.textView_message.setText(dataModel.getMessage());
         viewHolder.textView_messageDate.setText(parseTime(dataModel.getTimestamp()));
         viewHolder.button_deleteMessage.setTag(position);
+        //viewHolder.linearLayout_item.setTag(position);
 
+        viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
         if (dataModel.getIsRead() == 1) {
             viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
         }
+
 
         viewHolder.button_deleteMessage.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -169,7 +169,7 @@
             android:layout_below="@+id/dashboard_myMaster"
             android:layout_centerHorizontal="true"
 
-            android:text="My Masters"
+            android:text="my Masters"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
