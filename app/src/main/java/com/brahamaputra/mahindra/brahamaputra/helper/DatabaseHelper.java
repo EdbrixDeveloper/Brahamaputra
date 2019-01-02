@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Notification> getAllNotification() {
         List<Notification> notes = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + Notification.TABLE_NAME + " ORDER BY " + Notification.COLUMN_TIMESTAMP + " DESC";
+        String selectQuery = "SELECT  * FROM " + Notification.TABLE_NAME + " ORDER BY " + Notification.COLUMN_TIMESTAMP + " ASC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list

@@ -35,6 +35,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.helper.DatabaseHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -180,6 +181,21 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionDeviceToken(response.getAccessToken());
                                 sessionManager.updateSessionState(response.getUser().getState());
                                 sessionManager.updateSessionSsa(response.getUser().getSSA());
+
+                                //String s1 = sessionManager.getSessionPreviousUserId().toString();
+                                //String S2 = response.getUser().getId().toString();
+
+                                if (!sessionManager.getSessionPreviousUserId().toString().equals(response.getUser().getId().toString())) {
+                                    //showToast("Another USer Logged in....");
+                                    DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+                                    databaseHelper.deleteAllNotification();
+                                }
+                                /*else
+                                {
+                                    showToast("Ok Previous User Log in....");
+                                }*/
+                                sessionManager.updateSessionPreviousUserID(response.getUser().getId());
+
                                 finish();
 
                                 startActivity(new Intent(LoginActivity.this, DashboardCircularActivity.class));

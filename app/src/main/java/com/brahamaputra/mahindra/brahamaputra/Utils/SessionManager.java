@@ -28,6 +28,7 @@ public class SessionManager {
     private static final String PREFS_SESSION_DEVICE_TYPE = "SessionDeviceType";
     private static final String PREFS_SESSION_ORG_ID = "SessionOrgId";
     private static final String PREFS_SESSION_USER_ID = "SessionUserId";
+    private static final String PREFS_SESSION_PREVIOUS_USER_ID = "SessionPreviousUserId";
 
     private static final String PREFS_SESSION_USER_FIRST_NAME = "SessionUserFirstName";
     private static final String PREFS_SESSION_USER_LAST_NAME = "SessionUserLastName";
@@ -121,6 +122,10 @@ public class SessionManager {
         return this.sharedPrefs.getString(PREFS_SESSION_USER_ID, "");
     }
 
+    public String getSessionPreviousUserId() {
+        return this.sharedPrefs.getString(PREFS_SESSION_PREVIOUS_USER_ID, "");
+    }
+
     /**
      * Gets the session's saved user First Name.
      *
@@ -189,11 +194,11 @@ public class SessionManager {
         return this.sharedPrefs.getString(PREFS_SESSION_User_Circle, "");
     }
 
-    public  String getUser_State() {
+    public String getUser_State() {
         return this.sharedPrefs.getString(PREFS_SESSION_User_State, "");
     }
 
-    public  String getUser_Ssa() {
+    public String getUser_Ssa() {
         return this.sharedPrefs.getString(PREFS_SESSION_User_Ssa, "");
     }
 
@@ -341,6 +346,17 @@ public class SessionManager {
             editor.putString(PREFS_SESSION_USER_ID, Id);
         } else {
             editor.remove(PREFS_SESSION_USER_ID);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionPreviousUserID(String Id) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((Id != null) && (Id.length() > 0)) {
+            editor.putString(PREFS_SESSION_PREVIOUS_USER_ID, Id);
+        } else {
+            editor.remove(PREFS_SESSION_PREVIOUS_USER_ID);
         }
         editor.commit();
     }

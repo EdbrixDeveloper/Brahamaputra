@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardCircularActivity;
+import com.brahamaputra.mahindra.brahamaputra.Activities.UsersHotoListActivity;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
 import com.brahamaputra.mahindra.brahamaputra.app.Config;
@@ -231,6 +232,24 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             String timestamp = data.getString("timestamp");
             JSONObject payload = data.getJSONObject("payload");
 
+            String hototicketid = "";
+            if (payload.has("hototicketdetails")) {
+                JSONObject hototicketdetails = payload.getJSONObject("hototicketdetails");
+                hototicketid = hototicketdetails.getString("hototicketid");
+            } else {
+                Log.e(TAG, "HototicketDetails No...");
+            }
+
+            //JSONObject hototicketdetails = payload.getJSONObject("hototicketdetails");
+            //String hototicketid = hototicketdetails.getString("hototicketid");
+            Intent resultIntent;
+            if (!hototicketid.isEmpty() && hototicketid != null)
+                resultIntent = new Intent(getApplicationContext(), UsersHotoListActivity.class);
+            else
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+            //{"hototicketdetails":{"hototicketid":"1"}}
+            //
+
             Log.e(TAG, "title: " + title);
             Log.e(TAG, "message: " + message);
             Log.e(TAG, "isBackground: " + isBackground);
@@ -241,6 +260,39 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             databaseHelper.insert(title, message, timestamp);
 
             if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
+                // app is in foreground, broadcast the push message
+                //Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
+                //pushNotification.putExtra("message", message);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
+
+                //0008
+                localBroadcastManager = LocalBroadcastManager.getInstance(this);
+                //0008
+
+
+                // play notification sound
+                NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
+                notificationUtils.playNotificationSound();
+                sendNotification(getApplicationContext(), title, message, timestamp, resultIntent);
+
+                sendResult("receive");//0008 for notification list update
+
+            } else {
+                // app is in background, show the notification in notification tray
+
+                //Intent resultIntent = new Intent(getApplicationContext(), UsersHotoListActivity.class);//DashboardCircularActivity
+                //resultIntent.putExtra("message", message);
+
+                // check for image attachment
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
+                } else {
+                    // image is present, show notification with image
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
+                }
+            }
+
+            /*if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
                 // app is in foreground, broadcast the push message
                 Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
                 pushNotification.putExtra("message", message);
@@ -260,7 +312,8 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
 
             } else {
                 // app is in background, show the notification in notification tray
-                Intent resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+
+                Intent resultIntent = new Intent(getApplicationContext(), UsersHotoListActivity.class);//DashboardCircularActivity
                 resultIntent.putExtra("message", message);
 
                 // check for image attachment
@@ -270,7 +323,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                     // image is present, show notification with image
                     showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }
-            }
+            }*/
 
 
         } catch (JSONException e) {
@@ -304,7 +357,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
 
     private void sendResult(String message) {
         Intent intent = new Intent(SERVICE_RESULT);
-        if(message != null)
+        if (message != null)
             intent.putExtra(SERVICE_MESSAGE, message);
         localBroadcastManager.sendBroadcast(intent);
     }
