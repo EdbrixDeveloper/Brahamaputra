@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  * Created by shashank on 18/04/2018.
- */
+ **/
 
 public class SearchableSpinnerDialog {
 
@@ -74,8 +74,7 @@ public class SearchableSpinnerDialog {
                 t.setTextColor(Color.parseColor(itemTextColorCode));
                 for(int j=0;j<itemsString.size();j++)
                 {
-                    if(t.getText().toString().equalsIgnoreCase(itemsString.get(j).toString()))
-                    {
+                    if(t.getText().toString().equalsIgnoreCase(itemsString.get(j).toString())) {
                         pos=j;
                     }
                 }

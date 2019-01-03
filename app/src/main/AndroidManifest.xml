@@ -11,8 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-
+    
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -180,11 +179,21 @@
             android:name=".Activities.UploadEBPaymentDetailsActivity"
             android:label="Sections"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.UserEditProfileActivity" />
-        <activity android:name=".Activities.UserChangePasswordActivity" />
-        <activity android:name=".Activities.UploadEBReceiptActivity" />
-        <activity android:name=".Activities.PowerPlantDetailsModulesReadingsActivity" />
-        <activity android:name=".Activities.UsersOfflineHotoListActivity"></activity>
+        <activity
+            android:name=".Activities.UserEditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.UserChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.UploadEBReceiptActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.PowerPlantDetailsModulesReadingsActivity"
+            android:screenOrientation="portrait"  />
+        <activity
+            android:name=".Activities.UsersOfflineHotoListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.NotificationList"
             android:label="Sections"

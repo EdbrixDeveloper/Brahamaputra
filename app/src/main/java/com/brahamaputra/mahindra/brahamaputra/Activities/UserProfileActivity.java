@@ -172,23 +172,16 @@ public class UserProfileActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.profile_menu, menu);
-
-
         final MenuItem menuItem = menu.findItem(R.id.menuNotification);
-
         View actionView = MenuItemCompat.getActionView(menuItem);
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
-
         setupBadge();
-
         actionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onOptionsItemSelected(menuItem);
             }
         });
-
-
         return true;
     }
 

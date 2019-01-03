@@ -31,6 +31,7 @@ import org.json.JSONObject;
 public class ForgotPasswordActivity extends BaseActivity {
 
     private EditText mForgotPasswordEditTextUserName;
+    //private EditText mForgotPasswordEditTextEmail;
     private Button mForgotPasswordButtonSubmit;
     private GlobalMethods globalMethods;
 
@@ -64,10 +65,18 @@ public class ForgotPasswordActivity extends BaseActivity {
         } else {
             doForgot(userName);
         }
+        /*String email = mForgotPasswordEditTextEmail.getText().toString();
+        Conditions.hideKeyboard(ForgotPasswordActivity.this);
+        if (email.isEmpty()) {
+            mForgotPasswordEditTextEmail.setError("Field can not be empty");
+        } else {
+            doForgot(email);
+        }*/
 
     }
 
     private void doForgot(String userName) {
+    //private void doForgot(String email) {
 
         showBusyProgress();
         try {
@@ -76,6 +85,7 @@ public class ForgotPasswordActivity extends BaseActivity {
                 jo.put("APIKEY", Constants.APP_KEY__);
                 jo.put("SECRETKEY", Constants.APP_SECRET__);
                 jo.put("Username", userName);
+                //jo.put("Email", email);
 
             } catch (JSONException e) {
                 Log.e(ForgotPasswordActivity.class.getName(), e.getMessage().toString());
@@ -136,6 +146,7 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     private void assignViews() {
         mForgotPasswordEditTextUserName = (EditText) findViewById(R.id.forgotPassword_editText_username);
+        //mForgotPasswordEditTextEmail= (EditText) findViewById(R.id.forgotPassword_editText_email);
         mForgotPasswordButtonSubmit = (Button) findViewById(R.id.forgotPassword_button_submit);
     }
 }
