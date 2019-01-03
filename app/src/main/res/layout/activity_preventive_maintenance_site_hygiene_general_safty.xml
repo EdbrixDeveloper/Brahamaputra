@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.PreventiveMaintenanceSiteHygieneGeneralSaftyActivity">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_sitePremisesCleaning"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site Premises Cleaning"
+                    android:textColor="@color/colorBlueLink" />
+
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_sitePremisesCleaningVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_uploadPhotoOfSitePremises"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Upload Photo of Site Premises (JPJ/PDF)"
+                    android:textColor="@color/colorBlueLink" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_uploadPhotoOfSitePremises"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_uploadPhotoOfSitePremisesView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_equipmentCleaning"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Equipment Cleaning"
+                    android:textColor="@color/colorBlueLink" />
+
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_equipmentCleaningVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_anyHivesInTower"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Any Eagle/Crow/Honey Hives in Tower"
+                    android:textColor="@color/colorBlueLink" />
+
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_anyHivesInTowerVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_compoundWallFencingStatus"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Compound Wall/Fencing Status"
+                    android:textColor="@color/colorBlueLink" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_compoundWallFencingStatusVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_gateLockAvailablity"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Gate Lock Availablity"
+                    android:textColor="@color/colorBlueLink" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_gateLockAvailablityVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_shelterLockAvailablity"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Shelter Lock Availablity"
+                    android:textColor="@color/colorBlueLink" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_shelterLockAvailablityVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_dgLockAvailablity"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="DG Lock Availablity"
+                    android:textColor="@color/colorBlueLink" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_dgLockAvailablityVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireExtingisherAvailablity"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Fire Extinguisher Avilability"
+                    android:textColor="@color/colorBlueLink" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireExtingisherAvailablityVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_noOfFireExtingisherAvailablity"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="No of Fire Extinguisher"
+                    android:textColor="@color/colorBlueLink" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_noOfFireExtingisherAvailablityVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireExtingisherExpiryDate"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Fire Extinguisher Expiry Date"
+                    android:textColor="@color/colorBlueLink" />
+
+                <EditText
+                    android:id="@+id/landDetails_editText_dateOfvalidityOfAgreement"
+
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MMM/YYYY"
+                    android:imeOptions="actionDone"
+                    android:inputType="none"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireBucketAvailablity"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Fire Bucket"
+                    android:textColor="@color/colorBlueLink" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireBucketAvailablityVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/app_min_padding"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_cautionSignBoardPhoto"
+                style="@style/FontStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="CAUTION Sign Board Photo"
+                android:textColor="@color/colorBlueLink" />
+
+            <ImageView
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_cautionSignBoardPhoto"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.3"
+                android:clickable="true"
+                android:padding="2dp"
+                android:scaleType="fitStart"
+                android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+            <ImageView
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_cautionSignBoardPhotoView"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.3"
+                android:clickable="true"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/view_image"
+                android:visibility="gone"
+                tools:layout_editor_absoluteX="384dp"
+                tools:layout_editor_absoluteY="197dp" />
+             </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_warningSignBoardPhoto"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="WARNING Sign Board Photo"
+                    android:textColor="@color/colorBlueLink" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_warningSignBoardPhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_warningSignBoardPhotoView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone"
+                    tools:layout_editor_absoluteX="384dp"
+                    tools:layout_editor_absoluteY="197dp" />
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_dangerSignBoardPhoto"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="DANGER Sign Board Photo"
+                    android:textColor="@color/colorBlueLink" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_dangerSignBoardPhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_button_dangerSignBoardPhotoView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone"
+                    tools:layout_editor_absoluteX="384dp"
+                    tools:layout_editor_absoluteY="197dp" />
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_safetyChartsAndCalendar"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Safety Charts &amp; Calendar"
+                    android:textColor="@color/colorBlueLink"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_safetyChartsAndCalendarVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_unusedMaterialInSite"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Un-Used Material in Site"
+                    android:textColor="@color/colorBlueLink"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_unusedMaterialInSiteVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_registerFault"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Register Fault"
+                    android:textColor="@color/colorBlueLink"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_registerFaultVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFault"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Type of Fault"
+                    android:textColor="@color/colorBlueLink"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFaultVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

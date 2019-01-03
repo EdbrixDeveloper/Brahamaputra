@@ -6,12 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    
+
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -21,13 +20,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".Activities.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -190,7 +193,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.PowerPlantDetailsModulesReadingsActivity"
-            android:screenOrientation="portrait"  />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.UsersOfflineHotoListActivity"
             android:screenOrientation="portrait" />
@@ -217,16 +220,47 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
             </intent-filter>
         </service>
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/applogo" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorBlack" />
+
+
+
+        <activity
+            android:name=".Activities.PreventiveMaintanceAcFieldEngineerActivity"
+            android:label="Preventive Maintenance AC FSE"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceAcTechnicianActivity"
+            android:label="Preventive Maintenance AC Technician"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PriventiveMaintenanceSiteTransactionActivity"
+            android:label="Priventive Maintenance Site Transaction"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteHygieneGeneralSaftyActivity"
+            android:label="Preventive Maintenance Site Hygiene General Safty"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.preventiveMaintenanceSiteAlarmCheckPointsActivity"
+            android:label="Preventive Maintenance Site Alarm Check Points"
+            android:screenOrientation="portrait" />
 
     </application>
 
