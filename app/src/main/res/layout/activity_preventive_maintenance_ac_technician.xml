@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".Activities.PreventiveMaintenanceAcTechnicianActivity">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/app_normal_margin"
-        android:fillViewport="true">
+    <ScrollView
+        android:layout_width="395dp"
+        android:layout_height="587dp"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -253,10 +254,6 @@
             </LinearLayout>
 
 
-
-
-
-
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -264,7 +261,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/preventiveMaintenanceAcTechnician_textView_noOfAirConditionersACprovided"
+                    android:id="@+id/preventiveMaintenanceAcTechnician_textView_noOfAcAtSite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -272,7 +269,7 @@
                     android:text="No of AC at site" />
 
                 <TextView
-                    android:id="@+id/preventiveMaintenanceAcTechnician_textView_noOfAirConditionersACprovided_val"
+                    android:id="@+id/preventiveMaintenanceAcTechnician_textView_noOfAcAtSiteVal"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -282,7 +279,7 @@
 
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/preventiveMaintenanceAcTechnician_linearLayout_numberOfACInWorkingCondition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -306,7 +303,7 @@
                     android:hint="Select"
                     android:textAlignment="viewStart" />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/linearLayout_container"
@@ -314,7 +311,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/app_normal_margin"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceAcTechnician_textView_AcNumber"
@@ -381,179 +378,152 @@
 
                 </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_assetOwner"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acModel"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Asset Owner" />
+                        android:text="AC Model" />
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_assetOwner_val"
-                        style="@style/MyTheme"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acModelVal"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_typeOfAcSpliWindow"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Type of AC (Split/Window)" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_typeOfAcSpliWindow_val"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_manufacturerMakeModel"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Manufacturer / Make / Model" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_manufacturerMakeModel_val"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acSerialNumber"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="AC Serial Number" />
-
-                    <EditText
-                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_acSerialNumber"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:hint="Enter Serial Number"
                         android:imeOptions="actionNext"
-                        android:inputType="text"
+                        android:paddingTop="5dp"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
                 </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_capacityTr"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acType"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Capacity(TR)" />
+                        android:text="AC Type" />
 
-                    <EditText
-                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_capacityTr"
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acTypeVal"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_weight="0.6"
-                        android:hint="Enter Capacity(TR)"
                         android:imeOptions="actionNext"
-                        android:inputType="numberDecimal"
+                        android:paddingTop="5dp"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
                 </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_dateOfInstallation"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acMake"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Date of Installation" />
+                        android:text="AC Make" />
 
-                    <EditText
-                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_dateOfInstallation"
-                        style="@android:style/Widget.Holo.Light.Spinner"
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acMakeVal"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_weight="0.6"
-                        android:editable="false"
-                        android:focusable="false"
-                        android:hint="DD/MMM/YYYY"
-                        android:inputType="none"
-                        android:textAlignment="viewStart" />
+                        android:imeOptions="actionNext"
+                        android:paddingTop="5dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_amcYesNo"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acCapacity"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="AMC (Yes / No)" />
+                        android:text="AC Capacity" />
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_amcYesNo_val"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acCapacityVal"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:imeOptions="actionNext"
+                        android:paddingTop="5dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acSerialNo"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Serial No." />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acSerialNoVal"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:imeOptions="actionNext"
+                        android:paddingTop="5dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_mainMcbStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Main MCB Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_mainMcbStatusVal"
                         style="@style/MyTheme"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
@@ -563,51 +533,22 @@
 
                 </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/preventiveMaintenanceAcTechnician_linearLayout_validityOfAmc"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_validityOfAmc"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_subMcbStatus"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="If yes, Validity of the AMC" />
-
-                    <EditText
-                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_dateOfvalidityOfAmc"
-                        style="@android:style/Widget.Holo.Light.Spinner"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:editable="false"
-                        android:focusable="false"
-                        android:hint="DD/MMM/YYYY"
-                        android:inputType="none"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
+                        android:text="Sub MCB Status" />
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_workingCondition"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Working Condition" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_workingCondition_val"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_subMcbStatusVal"
                         style="@style/MyTheme"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
@@ -617,32 +558,1113 @@
 
                 </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_natureOfProblem"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_metalCladPlugStatus"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Nature of Problem" />
+                        android:text="Metal Clad Plug Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_metalCladPlugStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_metalCladSocketStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Metal Clad Socket Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_metalCladSocketStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stablizerStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Stablizer Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stablizerStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stabilizerMake"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Stabilizer Make" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stabilizerMakeVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stabilizerCapacity"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Stabilizer Capacity" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stabilizerCapacityVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stablizerWorkingStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Stablizer Working Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_stablizerWorkingStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_inputAcVoltage"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Input AC Voltage" />
 
                     <EditText
-                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_natureOfProblem"
+                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_inputAcVoltage"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:hint="Enter Nature of Problem"
-                        android:inputType="text"
+                        android:hint="Enter Input AC Voltage"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acEarthingStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Earthing Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acEarthingStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_filterCleaned"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Filter Cleaned" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_filterCleanedVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_filterCleanedBeforePhoto"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Filter Cleaned Before Photo"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_filterCleanedBeforePhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_filterCleanedBeforePhotoView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_filterCleanedAfterPhoto"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Filter Cleaned After Photo"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_filterCleanedAfterPhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_filterCleanedAfterPhotoView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_condenserCoilCleaned"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Condenser Coil Cleaned" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_condenserCoilCleanedVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_condenserCoilCleanedBeforePhoto"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Condenser Coil Cleaned Before Photo"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_condenserCoilCleanedBeforePhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_condenserCoilCleanedBeforePhotoView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_condenserCoilCleanedAfterPhoto"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Condenser Coil Cleaned After Photo"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_condenserCoilCleanedAfterPhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_condenserCoilCleanedAfterPhotoView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_coolingCoilCleaned"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Cooling Coil Cleaned " />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_coolingCoilCleanedVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_coolingCoilCleanedBeforePhoto"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Cooling Coil Cleaned Before Photo"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_coolingCoilCleanedBeforePhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_coolingCoilCleanedBeforePhotoView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_coolingCoilCleanedAfterPhoto"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Cooling Coil Cleaned After Photo"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_coolingCoilCleanedAfterPhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_button_coolingCoilCleanedAfterPhotoView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acCoolingStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Cooling Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acCoolingStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acStartingLoadcurrent"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Starting Load current" />
+
+                    <EditText
+                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_acStartingLoadcurrent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Starting Load current"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acRunningLoadCurrent"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Running Load Current" />
+
+                    <EditText
+                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_acRunningLoadCurrent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Running Load current"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_indoorFilterCleanedStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Indoor filter Cleaned Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_indoorFilterCleanedStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_indoorFanMotorCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Indoor Fan motor condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_indoorFanMotorConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_blowerWheelCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Blower Wheel condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_blowerWheelConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_noiseIndoorMotor"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="If any noise Indoor Motor" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_noiseIndoorMotorVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_outdoorFanMotorCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Outdoor Fan motor condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_outdoorFanMotorConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_fanLeafCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Fan Leaf Condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_fanLeafConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_noiseOutdoorMotor"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="If any noise Outdoor Motor" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_noiseOutdoorMotorVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_compressorCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Compressor condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_compressorConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_compCapacitorCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Comp - Capacitor condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_compCapacitorConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_controllerCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Controller condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_controllerConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acAlarmStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Alarm Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acAlarmStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acSensorCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Sensor condition" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acSensorConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_roomTemperature"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Room Temperature" />
+
+                    <EditText
+                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_roomTemperature"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Room Temperature"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_setTemperature"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Set Temperature" />
+
+                    <EditText
+                        android:id="@+id/preventiveMaintenanceAcTechnician_editText_setTemperature"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Set Temperature"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_vibrationOfAc"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="If any Vibration of AC" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_vibrationOfAcVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_freeCoolingUnitStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Free Cooling Unit Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_freeCoolingUnitStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_freeCoolingAvailableWorkingStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="If Free Cooling Available, Working Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_freeCoolingAvailableWorkingStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_waterLeakage"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Water Leakage if Any" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_waterLeakageVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acCabinateStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Cabinate Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_acCabinateStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_shelterDoorStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Shelter Door Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_shelterDoorStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcTechnician_textView_remarks"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="EB Payment Remark" />
+
+                    <EditText
+                        android:id="@+id/preventiveMaintenanceAcTechnician_EditText_remarks"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Remark"
+                        android:imeOptions="actionDone"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -683,6 +1705,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
