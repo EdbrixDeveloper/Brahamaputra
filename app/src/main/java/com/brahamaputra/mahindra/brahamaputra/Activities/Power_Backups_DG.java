@@ -1115,7 +1115,7 @@ public class Power_Backups_DG extends BaseActivity {
                         }
                     } else {
                         base64StringQRCodeScan = "";
-                        showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                        showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                     }
                 }
             } else if (qrScanFlag == 2) {
@@ -1135,7 +1135,7 @@ public class Power_Backups_DG extends BaseActivity {
                         }
                     } else {
                         base64StringDgBatteryStatusQRCodeScan = "";
-                        showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                        showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                     }
                 }
             }
@@ -1760,11 +1760,12 @@ public class Power_Backups_DG extends BaseActivity {
                     showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
                     return true;
                 }
-
-                if (base64StringDgBatteryStatusQRCodeScan.equals(powerBackupsDGData.get(i).getDgBatteryStatusQRCodeScan().toString())) {
-                    int dup_pos = i + 1;
-                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
-                    return true;
+                if (!base64StringDgBatteryStatusQRCodeScan.isEmpty()) {
+                    if (base64StringDgBatteryStatusQRCodeScan.equals(powerBackupsDGData.get(i).getDgBatteryStatusQRCodeScan().toString())) {
+                        int dup_pos = i + 1;
+                        showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
+                        return true;
+                    }
                 }
             }
             if (i == curr_pos) {
