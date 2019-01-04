@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,6 +42,8 @@ public class preventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_alarm_check_points);
+        this.setTitle("Alarm Check Points");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
 
@@ -87,7 +90,7 @@ public class preventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
 
             case R.id.menuSubmit:
                 //submitDetails();
-                //startActivity(new Intent(this, Tower_Detail.class));
+                startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                 finish();
                 return true;
 
@@ -96,5 +99,9 @@ public class preventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
+    }
 }

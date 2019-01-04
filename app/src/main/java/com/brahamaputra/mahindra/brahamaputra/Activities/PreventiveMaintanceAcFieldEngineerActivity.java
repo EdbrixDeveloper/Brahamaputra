@@ -53,6 +53,8 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintance_ac_field_engineer);
+        this.setTitle("Preventive Maintanance For Ac ");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
     private void assignViews() {
@@ -115,5 +117,11 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivit
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

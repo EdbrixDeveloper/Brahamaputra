@@ -28,6 +28,7 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_other_electrical_check_points);
         this.setTitle("Other Electrical Check Points");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
     private void assignViews() {
@@ -64,5 +65,11 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

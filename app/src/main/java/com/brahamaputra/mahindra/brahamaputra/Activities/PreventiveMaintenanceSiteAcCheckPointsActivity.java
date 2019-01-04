@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,6 +61,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_ac_check_points);
+        this.setTitle("Ac Check Points");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
 
@@ -121,7 +124,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
             case R.id.menuSubmit:
                 //submitDetails();
-                //startActivity(new Intent(this, Tower_Detail.class));
+                startActivity(new Intent(this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
                 finish();
                 return true;
 
@@ -130,4 +133,9 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
+    }
 }

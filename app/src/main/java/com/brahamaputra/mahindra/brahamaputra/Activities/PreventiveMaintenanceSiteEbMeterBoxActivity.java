@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,7 +41,8 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_eb_meter_box);
-        setTitle("EB METER BOX");
+        setTitle("Eb Meter Box");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
 
@@ -86,9 +88,10 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
             case R.id.menuSubmit:
+                startActivity(new Intent(this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
                 finish();
                 return true;
 
@@ -97,4 +100,9 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
+    }
 }

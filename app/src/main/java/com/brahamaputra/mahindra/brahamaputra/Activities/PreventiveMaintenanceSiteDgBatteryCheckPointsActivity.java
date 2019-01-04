@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,6 +44,8 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_dg_battery_check_points);
+        this.setTitle("Dg Battery Check Points");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
     private void assignViews() {
@@ -86,12 +89,18 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
             case R.id.menuSubmit:
                 //submitDetails();
-                //startActivity(new Intent(this, Tower_Detail.class));
+                startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
                 finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

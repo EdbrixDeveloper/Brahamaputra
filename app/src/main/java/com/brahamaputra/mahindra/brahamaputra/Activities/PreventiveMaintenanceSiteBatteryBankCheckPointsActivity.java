@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,6 +45,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends App
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_battery_bank_check_points);
+        this.setTitle("Battery Bank Check Points");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
 
@@ -90,12 +93,18 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends App
 
             case R.id.menuSubmit:
                 //submitDetails();
-                //startActivity(new Intent(this, Tower_Detail.class));
+                startActivity(new Intent(this, PreventiveMaintenanceSiteEarthingCheckPointsActivity.class));
                 finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

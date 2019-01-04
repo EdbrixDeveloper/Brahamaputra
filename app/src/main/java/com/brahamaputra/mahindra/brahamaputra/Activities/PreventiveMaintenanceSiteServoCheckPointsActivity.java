@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,6 +33,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_servo_check_points);
         this.setTitle("Servo Check Points");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
     private void assignViews() {
@@ -67,12 +69,18 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
 
             case R.id.menuSubmit:
                 //submitDetails();
-                //startActivity(new Intent(this, Tower_Detail.class));
+                startActivity(new Intent(this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
                 finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

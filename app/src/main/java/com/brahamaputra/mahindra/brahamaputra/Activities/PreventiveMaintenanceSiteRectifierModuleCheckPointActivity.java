@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,6 +49,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_rectifier_module_check_point);
         this.setTitle("Rectifier Module Check Point");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
     private void assignViews() {
@@ -95,12 +97,18 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
 
             case R.id.menuSubmit:
                 //submitDetails();
-                //startActivity(new Intent(this, Tower_Detail.class));
+                startActivity(new Intent(this, PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
                 finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

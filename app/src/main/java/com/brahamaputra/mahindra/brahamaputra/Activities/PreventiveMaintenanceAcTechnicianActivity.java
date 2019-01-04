@@ -155,6 +155,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_ac_technician);
         this.setTitle("Preventive Maintenance AC");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
 
@@ -319,4 +320,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
+    }
 }

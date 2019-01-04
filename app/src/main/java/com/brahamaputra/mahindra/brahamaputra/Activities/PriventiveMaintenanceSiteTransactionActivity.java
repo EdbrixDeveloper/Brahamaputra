@@ -24,6 +24,8 @@ public class PriventiveMaintenanceSiteTransactionActivity extends AppCompatActiv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_priventive_maintenance_site_transaction);
+        this.setTitle("Priventive Maintenance Site Transaction");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private void assignViews() {
         mPriventiveMaintenanceSiteTransEditTextCustomerName = (EditText) findViewById(R.id.priventiveMaintenanceSiteTrans_editText_customerName);
