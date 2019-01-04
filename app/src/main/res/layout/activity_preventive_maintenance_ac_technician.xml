@@ -6,12 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Activities.PreventiveMaintenanceAcTechnicianActivity">
 
-    <ScrollView
-        android:layout_width="395dp"
-        android:layout_height="587dp"
-        android:fillViewport="true"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"

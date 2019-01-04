@@ -40,7 +40,7 @@ public class MyPreventiveListActivity extends BaseActivity {
 
                 if (Conditions.isNetworkConnected(MyPreventiveListActivity.this)) {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        startActivity(new Intent(MyPreventiveListActivity.this, PriventiveMaintenanceSiteTransactionActivity.class));
+                        startActivity(new Intent(MyPreventiveListActivity.this, AcPreventiveMaintenanceSectionsListActivity.class));
                     } else {
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override

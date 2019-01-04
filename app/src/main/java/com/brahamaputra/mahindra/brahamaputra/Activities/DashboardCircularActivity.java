@@ -57,9 +57,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
     private AlertDialogManager alertDialogManager;
     private SessionManager sessionManager;
     ToastMessage toastMessage;
-    //boolean isItemClicked = false;
-    //String MenuSelected = "";
-    //View view_pass;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -74,14 +71,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         ImageView imageViewProfilePhoto = (ImageView) findViewById(R.id.imageView2);
         //CircleImageView imageViewProfilePhoto = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.imageView2);
         alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
-        //setting the title com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
-
-
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        //placing toolbar in place of actionbar
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle(null);
 
         // Set listeners
         circleLayout = (CircleLayout) findViewById(R.id.circle_layout);
@@ -92,15 +81,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
 
         //selectedTextView = (TextView) findViewById(R.id.selected_textView);
         toastMessage = new ToastMessage(DashboardCircularActivity.this);
-        /*String name = null;
-        final View view = circleLayout.getSelectedItem();
-        if (view instanceof CircleImageView) {
-            name = ((CircleImageView) view).getName();
-        } by008 */
-        //selectedTextView.setText(name);
-
-        //selectedTextView.setText("Brahmputra");
-
 
         mDashboard_myMaster = (ImageView) findViewById(R.id.dashboard_myMaster);
         mDashboard_myMaster.setOnClickListener(new View.OnClickListener() {
@@ -115,16 +95,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         Glide.with(getApplicationContext())
                 .load(imageUri)
                 .into(imageViewProfilePhoto);
-
-       /* CircleImageView circleImageView = (CircleImageView) circleLayout.findViewById(R.id.dashboard_myHoto);
-        circleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isItemClicked = true;
-                *//*toastMessage.showToast("my hoto");
-                Rotate(v);*//*
-            }
-        });*/
 
         imageViewProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,29 +128,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         } else {
             name = null;
         }
-
-        // selectedTextView.setText(name);
-
-        /*switch (view.getId()) {
-            case R.id.main_calendar_image:
-                // Handle calendar selection
-                break;
-            case R.id.main_cloud_image:
-                // Handle cloud selection
-                break;
-            case R.id.main_key_image:
-                // Handle key selection
-                break;
-            *//*case R.id.main_mail_image:
-                // Handle mail selection
-                break;*//*
-            case R.id.main_profile_image:
-                // Handle profile selection
-                break;
-            case R.id.main_tap_image:
-                // Handle tap selection
-                break;
-        }*/
     }
 
     @Override
@@ -211,6 +158,8 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 break;*/
             case R.id.dashboard_myPrevitive_layout:
                 // Handle profile click
+                intent = new Intent(DashboardCircularActivity.this, MyPreventiveListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.dashboard_myIncident_layout:
                 // Handle tap click
@@ -256,32 +205,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardCircularActivity.this));
                 startActivity(intent);
             } else {
-                startActivity(new Intent(DashboardCircularActivity.this,UsersOfflineHotoListActivity.class));
-                /*alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-
-                        final EditText taskEditText = new EditText(DashboardCircularActivity.this);
-                        AlertDialog dialog = new AlertDialog.Builder(DashboardCircularActivity.this)
-                                .setTitle("Information")
-                                .setMessage("Enter Ticket ID")
-                                .setView(taskEditText)
-                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(DashboardCircularActivity.this, UserHotoTransactionActivity.class);
-                                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardCircularActivity.this));
-                                        intent.putExtra("ticketNO", String.valueOf(taskEditText.getText()));
-                                        sessionManager.updateSessionUserTicketName(String.valueOf(taskEditText.getText()));
-
-                                        startActivity(intent);
-                                    }
-                                })
-                                .setNegativeButton("cancel", null)
-                                .create();
-                        dialog.show();
-                    }
-                }).show();*/
+                startActivity(new Intent(DashboardCircularActivity.this, UsersOfflineHotoListActivity.class));
             }
         }
     }

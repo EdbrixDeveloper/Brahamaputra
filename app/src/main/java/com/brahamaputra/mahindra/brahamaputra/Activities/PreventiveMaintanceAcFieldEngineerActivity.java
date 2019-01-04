@@ -48,15 +48,15 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivit
     private EditText mPreventiveMaintanceAcFieldEngineerEditTextRemark;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintance_ac_field_engineer);
-        this.setTitle("Preventive Maintanance For Ac ");
+        setTitle("Ticket Submission from Field Engineer");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
+
     private void assignViews() {
         mPreventiveMaintanceAcFieldEngineerTextViewCustomer = (TextView) findViewById(R.id.preventiveMaintanceAcFieldEngineer_textView_customer);
         mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal = (TextView) findViewById(R.id.preventiveMaintanceAcFieldEngineer_textView_customerVal);

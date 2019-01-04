@@ -1342,9 +1342,12 @@
         <item>XL Telecom</item>
     </string-array>
 
-    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string-array name="listView_acPreventiveMaintenanceSections_sections">
+        <item>AC Preventive Maintenance Process</item>
+        <item>Ticket Submission from Field Engineer</item>
+    </string-array>
 
-    <string-array name="tt">
+    <string-array name="listView_sitePreventiveMaintenanceSections_sections">
         <item>SITE HYGIENE-GENERAL SAFETY PARAMETERS</item>
         <item>ALARM CHECK POINTS</item>
         <item>BATTERY BANK CHECK POINTS</item>
@@ -1360,4 +1363,7 @@
         <item>SHELTER CHECK POINTS</item>
         <item>OTHER ELECTRICAL CHECK POINTS</item>
     </string-array>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
 </resources>

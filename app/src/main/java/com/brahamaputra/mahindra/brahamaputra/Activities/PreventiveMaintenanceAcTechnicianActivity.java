@@ -154,7 +154,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_ac_technician);
-        this.setTitle("Preventive Maintenance AC");
+        this.setTitle("AC Preventive Maintenance Process");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }
@@ -296,12 +296,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
-
-        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
-
-        // show the button when some condition is true
-        shareItem.setVisible(true);
-
         return true;
     }
 
@@ -309,12 +303,11 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
             case R.id.menuSubmit:
-                finish();
+                onBackPressed();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -322,7 +315,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(RESULT_OK);
         finish();
     }
+
 }

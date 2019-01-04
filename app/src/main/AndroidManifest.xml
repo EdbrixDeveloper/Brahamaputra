@@ -235,6 +235,21 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorBlack" />
 
+
+        <activity
+        android:name=".Activities.MyPreventiveListActivity"
+        android:label="My Preventive List"
+        android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.SitePreventiveMaintenanceSectionsListActivity"
+            android:label="Site Preventive Maintenance Sections"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.AcPreventiveMaintenanceSectionsListActivity"
+            android:label="AC Preventive Maintenance Sections List"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.PreventiveMaintanceAcFieldEngineerActivity"
             android:label="Preventive Maintenance AC FSE"
@@ -295,12 +310,14 @@
             android:name=".Activities.PreventiveMaintenanceSiteRectifierModuleCheckPointActivity"
             android:label="Preventive Maintenance Site Rectifier Module Check Point"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.PreventiveMaintenanceSiteBatteryBankCheckPointsActivity"
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteBatteryBankCheckPointsActivity"
             android:label="Preventive Maintenance Site Battery Bank Check Points"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.PreventiveMaintenanceSiteEarthingCheckPointsActivity"
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteEarthingCheckPointsActivity"
             android:label="Preventive Maintenance Site Earthing Check Points"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

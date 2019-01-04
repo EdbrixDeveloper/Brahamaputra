@@ -38,8 +38,8 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
     }
 
     private static class ViewHolder {
-        TextView txtHotoNo;
-        TextView txtHotoName;
+        TextView txtPmAcNo;
+        TextView txtPmAcName;
         ImageView imageViewStatus;
         LinearLayout linearLayout_container;
         public boolean readingStatus=false;
@@ -58,10 +58,10 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
 
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.item_hoto_section, parent, false);
-            viewHolder.txtHotoNo = (TextView) convertView.findViewById(R.id.hotoSection_textView_no);
-            viewHolder.txtHotoName = (TextView) convertView.findViewById(R.id.hotoSection_textView_name);
-            viewHolder.imageViewStatus = (ImageView) convertView.findViewById(R.id.hotoSection_imageView_status);
+            convertView = inflater.inflate(R.layout.item_ac_preventive_maintenance_section, parent, false);
+            viewHolder.txtPmAcNo = (TextView) convertView.findViewById(R.id.acPreventiveMaintenanceSection_textView_no);
+            viewHolder.txtPmAcName = (TextView) convertView.findViewById(R.id.acPreventiveMaintenanceSection_textView_name);
+            viewHolder.imageViewStatus = (ImageView) convertView.findViewById(R.id.acPreventiveMaintenanceSection_imageView_status);
             viewHolder.linearLayout_container = (LinearLayout)convertView.findViewById(R.id.linearLayout_container);
 
             result=convertView;
@@ -76,8 +76,8 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
         //result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.txtHotoNo.setText(dataModel.getSecNo());
-        viewHolder.txtHotoName.setText(dataModel.getSecName());
+        viewHolder.txtPmAcNo.setText(dataModel.getSecNo());
+        viewHolder.txtPmAcName.setText(dataModel.getSecName());
 
         if(dataModel.getSecReadingStatus() == 0){
             //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
