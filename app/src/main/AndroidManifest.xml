@@ -255,8 +255,22 @@
             android:name=".Activities.preventiveMaintenanceSiteAlarmCheckPointsActivity"
             android:label="Preventive Maintenance Site Alarm Check Points"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.PreventiveMaintenanceSiteEbMeterBoxActivity" />
-        <activity android:name=".Activities.PreventiveMaintenanceSiteDgCheckPointsActivity"></activity>
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteEbMeterBoxActivity"
+            android:label="Preventive Maintenance Site EB Meter Box"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteDgCheckPointsActivity"
+            android:label="Preventive Maintenance Site DG Check Points"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteSmpsCheckPointsActivity"
+            android:label="Preventive Maintenance Site SMPS Check Points"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity"
+            android:label="Preventive Maintenance Site PMS AMF Panel Check Points"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -149,6 +149,15 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private Button mPreventiveMaintenanceAcTechnicianButtonPreviousReading;
     private Button mPreventiveMaintenanceAcTechnicianButtonNextReading;
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preventive_maintenance_ac_technician);
+        this.setTitle("Preventive Maintenance AC");
+        assignViews();
+    }
+
     private void assignViews() {
         mPreventiveMaintenanceAcTechnicianTextViewCircle = (TextView) findViewById(R.id.preventiveMaintenanceAcTechnician_textView_circle);
         mPreventiveMaintenanceAcTechnicianTextViewCircleVal = (TextView) findViewById(R.id.preventiveMaintenanceAcTechnician_textView_circleVal);
@@ -281,18 +290,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         mPreventiveMaintenanceAcTechnicianButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceAcTechnician_button_previousReading);
         mPreventiveMaintenanceAcTechnicianButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceAcTechnician_button_nextReading);
     }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preventive_maintenance_ac_technician);
-
-        this.setTitle("Preventive Maintenance AC");
-        assignViews();
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

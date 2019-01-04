@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.PreventiveMaintenanceSiteDgCheckPointsActivity">
+    tools:context=".Activities.PreventiveMaintenanceSiteAcCheckPointsActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -24,15 +24,15 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_noOfDgAvailableAtSite"
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_noOfAcAvailableAtSite"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="No of DG available at site" />
+                    android:text="No of AC available at site" />
 
                 <TextView
-                    android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_noOfDgAvailableAtSiteVal"
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_noOfAcAvailableAtSiteVal"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -43,20 +43,20 @@
             </LinearLayout>
 
             <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_linearLayout_numberOfACInWorkingCondition"
+                android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_linearLayout_numberOfACInWorkingCondition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
                 <TextView
-                    android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_numberOfACInWorkingCondition"
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_numberOfACInWorkingCondition"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Number of AC in Working Condition" />
                 <TextView
-                    android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_numberOfACInWorkingCondition_val"
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_numberOfACInWorkingCondition_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -74,7 +74,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_dgNumber"
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_acNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/app_min_margin"
@@ -89,6 +89,7 @@
                     android:layout_gravity="center"
                     android:background="#a40404" />
 
+
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,7 +97,7 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_QRCodeScan"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_QRCodeScan"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -104,7 +105,7 @@
                         android:text="QR Code Scan" />
 
                     <ImageView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_button_QRCodeScan"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_QRCodeScan"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="0.2"
@@ -114,7 +115,7 @@
                         android:src="@drawable/baseline_photo_camera_black_18dp" />
 
                     <ImageView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_button_QRCodeScanView"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_QRCodeScanView"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="0.2"
@@ -138,6 +139,30 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_acWorkingCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Working Condition of AC" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_acWorkingConditionVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -146,19 +171,218 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_dgHmrReading"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_automationOfAcController"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="DG HMR Reading" />
+                        android:text="Automation Of AC Controller" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_automationOfAcControllerVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_acEarthingStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Earthing Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_acEarthingStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_acFilterStatus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AC Filter Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_acFilterStatusVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_photoOfAcFiltersBeforeCleaning"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Take Photo of AC Filters Before Cleaning"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_photoOfAcFiltersBeforeCleaning"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_photoOfAcFiltersBeforeCleaningView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_photoOfAcFiltersAfterCleaning"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Take Photo of AC Filters After Cleaning"
+                        android:textColor="@color/colorBlueLink" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_photoOfAcFiltersAfterCleaning"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_photoOfAcFiltersAfterCleaningView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.3"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/view_image"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_cleaningOfCooling"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Cleaning of Cooling/Condensor Coils" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_cleaningOfCoolingVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_abnormalSoundOfMotor"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Any abnormal Sound from Motor" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_abnormalSoundOfMotorVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_shelterTemperature"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Shelter Temperature" />
 
                     <EditText
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_editText_dgHmrReading"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_editText_shelterTemperature"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:hint="Enter DG HMR Reading"
+                        android:hint="Enter Shelter Temperature"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:textAlignment="viewStart"
@@ -173,16 +397,16 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_photoOfDgHmr"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_photoOfTemperature"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Take Photo of DG HMR"
+                        android:text="Take Photo of Temperature"
                         android:textColor="@color/colorBlueLink" />
 
                     <ImageView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_button_photoOfDgHmr"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_photoOfTemperature"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="0.3"
@@ -192,7 +416,7 @@
                         android:src="@drawable/baseline_photo_camera_black_18dp" />
 
                     <ImageView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_button_photoOfDgHmrView"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_photoOfTemperatureView"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="0.3"
@@ -201,8 +425,8 @@
                         android:scaleType="fitCenter"
                         android:src="@drawable/view_image"
                         android:visibility="gone" />
-                </LinearLayout>
 
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -211,15 +435,15 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_dgWorkingCondition"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_shelterDoorStatus"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="DG Working Condition" />
+                        android:text="Shelter Door Status" />
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_dgWorkingConditionVal"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_shelterDoorStatusVal"
                         style="@style/MyTheme"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
@@ -236,132 +460,7 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_coolentLevel"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Coolent Level" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_coolentLevelVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_beltTension"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Belt Tension" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_beltTensionVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_engineLubeOilLevel"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Engine Lube Oil Level" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_engineLubeOilLevelVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_safetyWorkingStatus"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Safety Working Status" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_safetyWorkingStatusVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_powerCableConnectionStatus"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Power Cable Connection Status" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_powerCableConnectionStatusVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_registerFault"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_registerFault"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -369,7 +468,7 @@
                         android:text="Register Fault" />
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_registerFaultVal"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_registerFaultVal"
                         style="@style/MyTheme"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
@@ -386,7 +485,7 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFault"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFault"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -394,7 +493,7 @@
                         android:text="Type of Fault" />
 
                     <TextView
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFaultVal"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFaultVal"
                         style="@style/MyTheme"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
@@ -403,7 +502,6 @@
                         android:textAlignment="viewStart" />
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -412,7 +510,7 @@
                     android:weightSum="2">
 
                     <Button
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_button_previousReading"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_previousReading"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -426,7 +524,7 @@
                         android:visibility="invisible" />
                     <!--android:textAllCaps="false"-->
                     <Button
-                        android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_button_nextReading"
+                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_button_nextReading"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
