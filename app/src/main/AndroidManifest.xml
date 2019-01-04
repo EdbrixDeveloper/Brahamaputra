@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -236,34 +235,28 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorBlack" />
 
-
-
         <activity
             android:name=".Activities.PreventiveMaintanceAcFieldEngineerActivity"
             android:label="Preventive Maintenance AC FSE"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.PreventiveMaintenanceAcTechnicianActivity"
             android:label="Preventive Maintenance AC Technician"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.PriventiveMaintenanceSiteTransactionActivity"
             android:label="Priventive Maintenance Site Transaction"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.PreventiveMaintenanceSiteHygieneGeneralSaftyActivity"
             android:label="Preventive Maintenance Site Hygiene General Safty"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.preventiveMaintenanceSiteAlarmCheckPointsActivity"
             android:label="Preventive Maintenance Site Alarm Check Points"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Activities.PreventiveMaintenanceSiteEbMeterBoxActivity"></activity>
+        <activity android:name=".Activities.PreventiveMaintenanceSiteEbMeterBoxActivity" />
+        <activity android:name=".Activities.PreventiveMaintenanceSiteDgCheckPointsActivity"></activity>
     </application>
 
 </manifest>
