@@ -42,7 +42,7 @@ public class Constants {
     public static String hototicket_nameOfSupplyCompany = "";
 
     // TODO Change it to your web domain
-    public final static String WEB_DOMAIN = "http://brahmaputra-dev-api.us-west-2.elasticbeanstalk.com";
+    public final static String WEB_DOMAIN = "http://mahindradeveb2-api-env.srumj83md3.ap-south-1.elasticbeanstalk.com/";
     // TODO Change it to your APP Key
     public final static String APP_KEY__ = "QVBAMTIjMllIRC1TREFTNUQtNUFTRksyMjExMA==";
     // TODO Change it to your APP Secret

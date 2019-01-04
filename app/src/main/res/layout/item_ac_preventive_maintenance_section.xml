@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:weightSum="3"
+    android:id="@+id/linearLayout_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hotoSection_textView_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_normal_margin"
+            android:layout_marginBottom="@dimen/app_normal_margin"
+            android:text="100"
+            android:textColor="@color/colorMainText"
+            android:textAlignment="center"
+            style="@style/FontStyle"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hotoSection_textView_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:layout_marginTop="@dimen/app_normal_margin"
+            android:layout_marginBottom="@dimen/app_normal_margin"
+            android:text="TextView"
+            android:textColor="@color/colorMainText"
+            style="@style/FontStyle"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.3"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/hotoSection_imageView_status"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/app_min_margin"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_done_black_18dp"
+            android:visibility="invisible"
+            style="@style/FontStyle"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -91,7 +91,6 @@ public class ForgotPasswordActivity extends BaseActivity {
                 Log.e(ForgotPasswordActivity.class.getName(), e.getMessage().toString());
                 return;
             }
-
             JsonRequest forgotPasswordReq = new JsonRequest(Request.Method.POST, Constants.forgotpassword, jo,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -125,7 +124,6 @@ public class ForgotPasswordActivity extends BaseActivity {
             forgotPasswordReq.setRetryPolicy(Application.getDefaultRetryPolice());
             forgotPasswordReq.setShouldCache(false);
             Application.getInstance().addToRequestQueue(forgotPasswordReq, "forgotPasswordReq");
-
         } catch (Exception e) {
             hideBusyProgress();
             e.printStackTrace();
