@@ -244,6 +244,10 @@
             android:label="Preventive Maintenance AC Technician"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Activities.PreventiveMaintenanceSiteAcCheckPointsActivity"
+            android:label="Preventive Maintenance Site AC Check Points"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Activities.PriventiveMaintenanceSiteTransactionActivity"
             android:label="Priventive Maintenance Site Transaction"
             android:screenOrientation="portrait" />
@@ -271,6 +275,33 @@
             android:name=".Activities.PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity"
             android:label="Preventive Maintenance Site PMS AMF Panel Check Points"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteDgBatteryCheckPointsActivity"
+            android:label="Preventive Maintenance Site Dg Battery Check Points"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity"
+            android:label="Preventive Maintenance Site Other Electrical Check Points"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteServoCheckPointsActivity"
+            android:label="Preventive Maintenance Site Servo Check Points"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteShelterCheckPointsActivity"
+            android:label="Preventive Maintenance Site Shelter Check Points"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteRectifierModuleCheckPointActivity"
+            android:label="Preventive Maintenance Site Rectifier Module Check Point"
+            android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>
