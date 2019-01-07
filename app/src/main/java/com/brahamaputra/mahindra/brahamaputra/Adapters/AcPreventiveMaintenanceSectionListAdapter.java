@@ -26,7 +26,6 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
         super(context, R.layout.item_ac_preventive_maintenance_section, data);
         this.dataSet = data;
         this.mContext=context;
-
     }
 
     @Override
@@ -34,7 +33,6 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
         int position=(Integer) v.getTag();
         Object object= getItem(position);
         AcPreventiveMaintenanceSection dataModel=(AcPreventiveMaintenanceSection)object;
-
     }
 
     private static class ViewHolder {
@@ -63,9 +61,7 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
             viewHolder.txtPmAcName = (TextView) convertView.findViewById(R.id.acPreventiveMaintenanceSection_textView_name);
             viewHolder.imageViewStatus = (ImageView) convertView.findViewById(R.id.acPreventiveMaintenanceSection_imageView_status);
             viewHolder.linearLayout_container = (LinearLayout)convertView.findViewById(R.id.linearLayout_container);
-
             result=convertView;
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
