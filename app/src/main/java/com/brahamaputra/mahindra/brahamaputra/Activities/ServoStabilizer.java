@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.Manifest;
@@ -78,6 +79,7 @@ public class ServoStabilizer extends BaseActivity {
     private TextView mServoStabilizerTextViewNatureofProblem;
     private EditText mServoStabilizerEditTextNatureofProblem;
     private ImageView button_ClearQRCodeScanView;
+    private LinearLayout linearLayoutServoDetails;
 
 
   /*  mBatterySetButtonQRCodeScan;
@@ -102,6 +104,7 @@ public class ServoStabilizer extends BaseActivity {
     String str_workingCondition;
 
     private void assignViews() {
+        linearLayoutServoDetails = (LinearLayout)findViewById(R.id.linearLayout_servoDetails);
         mServoStabilizerTextViewQRCodeScan = (TextView) findViewById(R.id.servoStabilizer_textView_QRCodeScan);
         mServoStabilizerbuttonQRCodeScan = (ImageView) findViewById(R.id.servoStabilizer_button_QRCodeScan);
         mServoStabilizerbuttonQRCodeScanView = (ImageView) findViewById(R.id.servoStabilizer_button_QRCodeScanView);
@@ -119,12 +122,9 @@ public class ServoStabilizer extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-
-
     }
 
     private void initCombo() {
-
 
         mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +141,22 @@ public class ServoStabilizer extends BaseActivity {
 
                         str_ServoStabilizerWorkingStatus = item.get(position);
                         mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(str_ServoStabilizerWorkingStatus);
+
+                        // Added Code By Pranav For Handling Field Visibility In Servo Stabilizer
+                        if(str_ServoStabilizerWorkingStatus.equals("Not Available"))
+                        {
+                            base64StringServoStablizer = "";
+                            button_ClearQRCodeScanView.setVisibility(View.GONE);
+                            mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
+                            mServoStabilizerTextViewMakeofServoVal.setText("");
+                            mServoStabilizerTextViewRatingofServoVal.setText("");
+                            mServoStabilizerTextViewWorkingConditionVal.setText("");
+                            mServoStabilizerEditTextNatureofProblem.setText("");
+                            linearLayoutServoDetails.setVisibility(View.GONE);
+                        }else
+                        {
+                            linearLayoutServoDetails.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 
@@ -305,14 +321,23 @@ public class ServoStabilizer extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuDone:
-                if (checkValidation() == true) {
+                // Added Code By Pranav For Handling Field Visibility In Servo Stabilizer
+                if(mServoStabilizerTextViewServoStabilizerWorkingStatusVal.getText().toString().equals("Not Available"))
+                {
                     submitDetails();
                     finish();
                     startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
                     return true;
                 }
-
-
+                else
+                {
+                    if (checkValidation() == true) {
+                        submitDetails();
+                        finish();
+                        startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
+                        return true;
+                    }
+                }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -327,19 +352,28 @@ public class ServoStabilizer extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 servoStabilizerData = hotoTransactionData.getServoStabilizerData();
 
-                base64StringServoStablizer = servoStabilizerData.getServoStabilizer_Qr();
-                mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(servoStabilizerData.getServoStabilizerWorkingStatus());
-                mServoStabilizerTextViewMakeofServoVal.setText(servoStabilizerData.getMakeofServo());
-                mServoStabilizerTextViewRatingofServoVal.setText(servoStabilizerData.getRatingofServo());
-                mServoStabilizerTextViewWorkingConditionVal.setText(servoStabilizerData.getWorkingCondition());
-                mServoStabilizerEditTextNatureofProblem.setText(servoStabilizerData.getNatureofProblem());
-
-                mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
-                button_ClearQRCodeScanView.setVisibility(View.GONE);
-                if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
-                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
-                    button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                if(servoStabilizerData.getServoStabilizerWorkingStatus().equals("Not Available"))
+                {
+                    mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(servoStabilizerData.getServoStabilizerWorkingStatus());
+                    linearLayoutServoDetails.setVisibility(View.GONE);
                 }
+                else
+                {
+                    base64StringServoStablizer = servoStabilizerData.getServoStabilizer_Qr();
+                    mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(servoStabilizerData.getServoStabilizerWorkingStatus());
+                    mServoStabilizerTextViewMakeofServoVal.setText(servoStabilizerData.getMakeofServo());
+                    mServoStabilizerTextViewRatingofServoVal.setText(servoStabilizerData.getRatingofServo());
+                    mServoStabilizerTextViewWorkingConditionVal.setText(servoStabilizerData.getWorkingCondition());
+                    mServoStabilizerEditTextNatureofProblem.setText(servoStabilizerData.getNatureofProblem());
+
+                    mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
+                    button_ClearQRCodeScanView.setVisibility(View.GONE);
+                    if (!base64StringServoStablizer.isEmpty() && base64StringServoStablizer != null) {
+                        mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
+                        button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+                }
+
 
                 // New added for image #ImageSet
                 /*This Commented By Arjun on 15-11-2018 For QR Code Purpose

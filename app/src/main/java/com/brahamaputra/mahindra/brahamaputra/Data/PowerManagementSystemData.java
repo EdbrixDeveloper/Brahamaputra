@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class PowerManagementSystemData {
 
+    @SerializedName("newFieldAvailability")
+    private  String newFieldAvailability;
+
     @SerializedName("powerManagementSystemQR")
     private String powerManagementSystemQR;
 
@@ -38,6 +41,12 @@ public class PowerManagementSystemData {
     //private Boolean isSubmited;
     private int isSubmited;
 
+    public String getNewFieldAvailability() {
+        return newFieldAvailability;
+    }
+    public void setNewFieldAvailability(String newFieldAvailability){
+        this.newFieldAvailability = newFieldAvailability;
+    }
     public String getPowerManagementSystemQR() {
         return powerManagementSystemQR;
     }
@@ -119,6 +128,7 @@ public class PowerManagementSystemData {
     }
 
     public PowerManagementSystemData() {
+        this.newFieldAvailability = "";
         this.powerManagementSystemQR = "";
         this.assetOwner = "";
         this.powerManagementSystemType = "";
@@ -140,7 +150,8 @@ public class PowerManagementSystemData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
-    public PowerManagementSystemData(String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem, String qrCodeImageFileName) {
+    public PowerManagementSystemData(String newFieldAvailability,String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem, String qrCodeImageFileName) {
+        this.newFieldAvailability = newFieldAvailability;
         this.powerManagementSystemQR = powerManagementSystemQR;
         this.assetOwner = assetOwner;
         this.powerManagementSystemType = powerManagementSystemType;

@@ -422,6 +422,11 @@
 
 
     <!--Power Management System activity  spinners Array -->
+    <string-array name="array_powerManagementSystem_NewFieldAvailability">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+
     <string-array name="array_powerManagementSystem_AssetOwner">
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>

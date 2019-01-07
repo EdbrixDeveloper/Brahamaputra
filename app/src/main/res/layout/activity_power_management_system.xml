@@ -17,7 +17,6 @@
             android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -25,62 +24,16 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_QRCodeScan"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="QR Code Scan*" />
-
-                <ImageView
-                    android:id="@+id/powerManagementSystem_button_QRCodeScan"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.2"
-                    android:clickable="true"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp" />
-                <ImageView
-                    android:id="@+id/powerManagementSystem_button_QRCodeScanView"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:padding="2dp"
-                    android:layout_weight="0.2"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/baseline_done_black_18dp" />
-
-
-                <ImageView
-                    android:id="@+id/button_ClearQRCodeScanView"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="0.2"
-                    android:clickable="true"
-                    android:padding="2dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_close_black_24dp"
-                    android:visibility="gone" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_AssetOwner"
+                    android:id="@+id/powerManagementSystem_textView_availability"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Asset Owner*" />
+                    android:text="Availability" />
 
                 <TextView
-                    android:id="@+id/powerManagementSystem_textView_AssetOwner_val"
+                    android:id="@+id/powerManagementSystem_textView_availability_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -92,195 +45,275 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout_powerManagementDetails"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/app_normal_margin"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Power Management System Type*" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_QRCodeScan"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="QR Code Scan*" />
+
+                    <ImageView
+                        android:id="@+id/powerManagementSystem_button_QRCodeScan"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.2"
+                        android:clickable="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                    <ImageView
+                        android:id="@+id/powerManagementSystem_button_QRCodeScanView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.2"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/baseline_done_black_18dp"
+                        android:visibility="gone" />
 
 
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/button_ClearQRCodeScanView"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.2"
+                        android:clickable="true"
+                        android:padding="2dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_close_black_24dp"
+                        android:visibility="gone" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Power Management System Make*" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_AssetOwner"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Asset Owner*" />
+
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_AssetOwner_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemPosition"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Power Management System Position" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemPosition_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Power Management System Type*" />
+
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemType_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Power Management System Status" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Power Management System Make*" />
+
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemMake_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_PowerManagementSystemSerialNumber"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Power Management System Serial Number*" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/powerManagementSystem_editText_PowerManagementSystemSerialNumber"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemPosition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Power Management System Position" />
+
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemPosition_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Power Management System Serial Number "
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textAlignment="viewStart" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Power Management System Status" />
+
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemStaus_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_WorkingCondition"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Working Condition" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_WorkingCondition_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_PowerManagementSystemSerialNumber"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Power Management System Serial Number*" />
+
+                    <EditText
+                        android:id="@+id/powerManagementSystem_editText_PowerManagementSystemSerialNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Power Management System Serial Number "
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAlignment="viewStart" />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/powerManagementSystem_textView_NatureofProblem"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:singleLine="false"
-                    android:text="Nature of Problem" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/powerManagementSystem_editText_NatureofProblem"
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_WorkingCondition"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Working Condition" />
 
-                    android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_WorkingCondition_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart"></TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Nature of Problem "
-                    android:imeOptions="actionDone"
-                    android:inputType="textMultiLine"
-                    android:textAlignment="viewStart" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
+                    <TextView
+                        android:id="@+id/powerManagementSystem_textView_NatureofProblem"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Nature of Problem" />
 
+                    <EditText
+                        android:id="@+id/powerManagementSystem_editText_NatureofProblem"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Nature of Problem "
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
