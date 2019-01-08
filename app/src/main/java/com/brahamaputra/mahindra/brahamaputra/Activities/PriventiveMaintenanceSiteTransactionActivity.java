@@ -23,7 +23,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends AppCompatActiv
     private EditText mPriventiveMaintenanceSiteTransEditTextNameOfSite;
     private EditText mPriventiveMaintenanceSiteTransEditTextSiteID;
     private EditText mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm;
-    private EditText mPriventiveMaintenanceSiteTransEditTextActualPmExicutionDate;
+    private EditText mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate;
     private Button mPriventiveMaintenanceSiteTransButtonSubmit;
     public static final int RESULT_PRIVENTIVE_MAINTENANCE_SITE_READING = 258;
 
@@ -58,7 +58,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends AppCompatActiv
         mPriventiveMaintenanceSiteTransEditTextNameOfSite = (EditText) findViewById(R.id.priventiveMaintenanceSiteTrans_editText_nameOfSite);
         mPriventiveMaintenanceSiteTransEditTextSiteID = (EditText) findViewById(R.id.priventiveMaintenanceSiteTrans_editText_siteID);
         mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm = (EditText) findViewById(R.id.priventiveMaintenanceSiteTrans_editText_sheduledDateOfPm);
-        mPriventiveMaintenanceSiteTransEditTextActualPmExicutionDate = (EditText) findViewById(R.id.priventiveMaintenanceSiteTrans_editText_actualPmExicutionDate);
+        mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate = (EditText) findViewById(R.id.priventiveMaintenanceSiteTrans_editText_actualPmExecutionDate);
         mPriventiveMaintenanceSiteTransButtonSubmit = (Button) findViewById(R.id.priventiveMaintenanceSiteTrans_button_submit);
     }
 

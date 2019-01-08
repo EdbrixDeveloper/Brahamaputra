@@ -1353,20 +1353,20 @@
     </string-array>
 
     <string-array name="listView_sitePreventiveMaintenanceSections_sections">
-        <item>SITE HYGIENE-GENERAL SAFETY PARAMETERS</item>
-        <item>ALARM CHECK POINTS</item>
-        <item>BATTERY BANK CHECK POINTS</item>
-        <item>EARTHING CHECK POINTS</item>
-        <item>EB METER BOX</item>
-        <item>DG CHECK POINTS</item>
-        <item>DG BATTERY CHECK POINTS</item>
-        <item>AC CHECK POINTS</item>
-        <item>SMPS CHECK POINTS</item>
-        <item>RECTIFIER MODULE CHECK POINT</item>
-        <item>PMS/AMF PANEL CHECK POINTS</item>
-        <item>SERVO CHECK POINTS</item>
-        <item>SHELTER CHECK POINTS</item>
-        <item>OTHER ELECTRICAL CHECK POINTS</item>
+        <item>Site Hygiene-General Safety Parameters</item>
+        <item>Alarm Check Points</item>
+        <item>Battery Bank Check Points</item>
+        <item>Earthing Check Points</item>
+        <item>EB Meter Box</item>
+        <item>DG Check Points</item>
+        <item>DG Battery Check Points</item>
+        <item>AC Check Points</item>
+        <item>SMPS Check Points</item>
+        <item>Rectifier Module Check Point</item>
+        <item>PMS/AMF Panel Check Points</item>
+        <item>Servo Check Points</item>
+        <item>Shelter Check Points</item>
+        <item>Other Electrical Check Points</item>
     </string-array>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>

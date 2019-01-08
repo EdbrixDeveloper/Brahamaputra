@@ -44,7 +44,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_dg_battery_check_points);
-        this.setTitle("Dg Battery Check Points");
+        this.setTitle("DG Battery Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }

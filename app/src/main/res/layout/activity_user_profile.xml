@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Venkatesh Prabhu"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="20dp"
@@ -48,7 +48,7 @@
             android:id="@+id/textView_userProfile_userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="venkatesh.prabhu@gmail.com"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="16dp"
@@ -155,7 +155,7 @@
                         android:layout_marginBottom="@dimen/app_big_margin"
                         android:layout_toRightOf="@+id/userProfile_imageView_email"
                         android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="venkatesh.prabhu@gmail.com"
+                        android:text="aaaa.@gmail.com"
                         android:textColor="#2196F3" />
 
 
@@ -185,7 +185,7 @@
                         android:layout_marginBottom="@dimen/app_big_margin"
                         android:layout_toRightOf="@+id/userProfile_imageView_mobileNo"
                         android:paddingLeft="@dimen/app_normal_padding"
-                        android:text="8600328869"
+                        android:text="0000000000"
                         android:textColor="#2196F3" />
 
 

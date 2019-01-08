@@ -61,7 +61,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_ac_check_points);
-        this.setTitle("Ac Check Points");
+        this.setTitle("AC Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }

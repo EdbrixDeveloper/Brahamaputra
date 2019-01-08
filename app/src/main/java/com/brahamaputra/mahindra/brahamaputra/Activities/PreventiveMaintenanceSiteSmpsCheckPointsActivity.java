@@ -48,7 +48,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_smps_check_points);
-        this.setTitle("Smps Check Points");
+        this.setTitle("SMPS Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }

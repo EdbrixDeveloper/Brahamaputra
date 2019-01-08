@@ -40,7 +40,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_pms_amf_panel_check_points);
-        this.setTitle("Pms/Amf Panel Check Points");
+        this.setTitle("PMS/AMF Panel Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }

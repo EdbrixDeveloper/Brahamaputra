@@ -60,8 +60,5 @@
             android:src="@drawable/baseline_done_black_18dp"
             android:visibility="invisible"
             style="@style/FontStyle"/>
-
     </LinearLayout>
-
-
 </LinearLayout>

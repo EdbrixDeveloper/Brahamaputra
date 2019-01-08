@@ -49,11 +49,8 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
         AcPreventiveMaintenanceSection dataModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
-
         final View result;
-
         if (convertView == null) {
-
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_ac_preventive_maintenance_section, parent, false);
@@ -89,10 +86,6 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
             //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
             viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.limegreen));
         }
-
         return convertView;
     }
-
-
-
 }

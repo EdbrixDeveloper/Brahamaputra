@@ -41,7 +41,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_eb_meter_box);
-        setTitle("Eb Meter Box");
+        setTitle("EB Meter Box");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
     }

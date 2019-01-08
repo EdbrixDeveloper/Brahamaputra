@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,6 +45,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserProfileActivity extends BaseActivity {
 
     //private ImageView mImageView2;
+    private static final String TAG = "UserProfileActivity";
     CircleImageView mImageView2;
     private TextView mTextView;
     private TextView mTextView2;
@@ -187,27 +189,31 @@ public class UserProfileActivity extends BaseActivity {
 
 
     private void setupBadge() {
-        databaseHelper = new DatabaseHelper(getApplicationContext());
-        if (databaseHelper.getAllNotification() != null && databaseHelper.getAllNotification().size() > 0) {
-            ArrayList<Notification> dd = new ArrayList<Notification>(databaseHelper.getAllNotification().size());
-            dd.addAll(databaseHelper.getAllNotification());
-            mCartItemCount = countUnreadNotifications(dd);
-            //mCartItemCount = databaseHelper.getAllNotification().size();
-        } else {
-            mCartItemCount = 0;
-        }
-        if (textCartItemCount != null) {
+        try {
+            databaseHelper = new DatabaseHelper(getApplicationContext());
+            if (databaseHelper.getAllNotification() != null && databaseHelper.getAllNotification().size() > 0) {
+                ArrayList<Notification> dd = new ArrayList<Notification>(databaseHelper.getAllNotification().size());
+                dd.addAll(databaseHelper.getAllNotification());
+                mCartItemCount = countUnreadNotifications(dd);
+                //mCartItemCount = databaseHelper.getAllNotification().size();
+            } else {
+                mCartItemCount = 0;
+            }
+            if (textCartItemCount != null) {
             /*if (mCartItemCount == 0) {
                 if (textCartItemCount.getVisibility() != View.GONE) {
                     textCartItemCount.setVisibility(View.GONE);
                 }
             } else {*/
-            //textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
-            textCartItemCount.setText(String.valueOf(mCartItemCount > 99 ? "99+" : mCartItemCount));
-            if (textCartItemCount.getVisibility() != View.VISIBLE) {
-                textCartItemCount.setVisibility(View.VISIBLE);
+                //textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                textCartItemCount.setText(String.valueOf(mCartItemCount > 99 ? "99+" : mCartItemCount));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+                /*}*/
             }
-            /*}*/
+        } catch (Exception ex) {
+            Log.e(TAG, "Exception: " + ex.getMessage());
         }
     }
 
@@ -366,7 +372,7 @@ public class UserProfileActivity extends BaseActivity {
                         showToast("No Internet Connection.");
                     }
                     hideBusyProgress();
-
+                    setValues();
                 }
             });
             userProfileRequestGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
@@ -376,6 +382,7 @@ public class UserProfileActivity extends BaseActivity {
         } catch (JSONException e) {
             hideBusyProgress();
             showToast("Something went wrong. Please try again later.");
+            setValues();
         }
 
     }
