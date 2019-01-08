@@ -24,12 +24,12 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/preventiveMaintenanceSiteServoCheckPoints_textView_detailsOfServo"
+                    android:id="@+id/preventiveMaintenanceSiteServoCheckPoints_textView_detailsOfServoQRCodeScan"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Details of Servo" />
+                    android:text="QR Code Scan" />
 
                 <ImageView
                     android:id="@+id/preventiveMaintenanceSiteServoCheckPoints_button_detailsOfServoQRCodeScan"

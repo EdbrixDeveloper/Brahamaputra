@@ -223,7 +223,7 @@ public class ServoStabilizer extends BaseActivity {
             }
         });
 
-        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
+        /*This Commented By 0008 on 15-11-2018 For QR Code Purpose
         mServoStabilizerbuttonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -280,7 +280,7 @@ public class ServoStabilizer extends BaseActivity {
                         }
                     }
                 } else {
-                    //openCameraIntent();This Commented By Arjun on 15-11-2018 For QR Code Purpose
+                    //openCameraIntent();This Commented By 0008 on 15-11-2018 For QR Code Purpose
                     onClicked(v);
                 }
 
@@ -376,7 +376,7 @@ public class ServoStabilizer extends BaseActivity {
 
 
                 // New added for image #ImageSet
-                /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
+                /*This Commented By 0008 on 15-11-2018 For QR Code Purpose
                 imageFileName = servoStabilizerData.getQrCodeImageFileName();
                 mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
                 if (imageFileName != null && imageFileName.length() > 0) {
@@ -422,7 +422,7 @@ public class ServoStabilizer extends BaseActivity {
     }
 
 
-    /*Arjun 29112018*/
+    /*0008 29112018*/
     public boolean checkValidation() {
         String qRCodeScan = base64StringServoStablizer;
         if (qRCodeScan.isEmpty() || qRCodeScan == null) {
@@ -563,7 +563,7 @@ public class ServoStabilizer extends BaseActivity {
             }
         }
 
-        /*This Commented By Arjun on 15-11-2018 For QR Code Purpose
+        /*This Commented By 0008 on 15-11-2018 For QR Code Purpose
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
                 resultCode == RESULT_OK) {
             if (imageFileUri != null) {

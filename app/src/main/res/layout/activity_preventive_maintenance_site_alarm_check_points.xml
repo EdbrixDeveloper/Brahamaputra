@@ -24,12 +24,12 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_textView_detailsOfWrms"
+                    android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_textView_detailsOfWrmsQRCodeScan"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Details of WRMS" />
+                    android:text="QR Code Scan" />
 
                 <ImageView
                     android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_button_detailsOfWrmsQRCodeScan"
