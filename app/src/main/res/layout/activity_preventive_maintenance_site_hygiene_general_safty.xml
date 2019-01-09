@@ -298,8 +298,7 @@
                     android:textColor="@color/colorBlueLink" />
 
                 <EditText
-                    android:id="@+id/landDetails_editText_dateOfvalidityOfAgreement"
-
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_editText_fireExtingisherExpiryDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
