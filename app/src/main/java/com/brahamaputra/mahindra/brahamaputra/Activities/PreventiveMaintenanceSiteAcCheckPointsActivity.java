@@ -90,7 +90,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAcCheckPoints_noOfAcAvailableAtSite))),
-                        "No Of AC Available At Site",
+                        "No of AC available at site",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -130,7 +130,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAcCheckPoints_automationOfAcController))),
-                        "Automation Of AC Controller",
+                        "Automation of AC Controller",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -190,7 +190,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAcCheckPoints_cleaningOfCoolingOrCondensorCoils))),
-                        "Cleaning Of Cooling/Condensor Coils",
+                        "Cleaning of Cooling/Condensor Coils",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -210,7 +210,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAcCheckPoints_anyAbnormalSoundFromMotor))),
-                        "Any Abnormal Sound From Motor",
+                        "Any abnormal Sound from Motor",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -270,7 +270,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAcCheckPoints_typeOfFault))),
-                        "Type Of Fault",
+                        "Type of Fault",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 

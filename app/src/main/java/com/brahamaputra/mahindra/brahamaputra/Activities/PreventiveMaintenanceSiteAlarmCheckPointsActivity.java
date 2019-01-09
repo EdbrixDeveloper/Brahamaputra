@@ -117,7 +117,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAlarmCheckPoints_dgOn))),
-                        "Dg On",
+                        "DG ON",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -137,7 +137,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAlarmCheckPoints_dgOutputAvailable))),
-                        "Dg Output Available",
+                        "DG Output Available",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -217,7 +217,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAlarmCheckPoints_alarmConfirmedByNoc))),
-                        "Alarm Confirmed By NOC",
+                        "Alarm Confirmed by NOC",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -237,7 +237,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAlarmCheckPoints_registerFault))),
-                        "Alarm Confirmed By NOC",
+                        "Register Fault",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -257,7 +257,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends AppCompat
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAlarmCheckPoints_typeOfFault))),
-                        "Alarm Confirmed By NOC",
+                        "Type of Fault",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 

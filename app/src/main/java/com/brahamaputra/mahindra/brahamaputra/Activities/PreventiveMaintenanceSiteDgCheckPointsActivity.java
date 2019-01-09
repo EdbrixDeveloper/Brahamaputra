@@ -241,7 +241,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgCheckPoints_typeOfFault))),
-                        "Register Fault",
+                        "Type of Fault",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 

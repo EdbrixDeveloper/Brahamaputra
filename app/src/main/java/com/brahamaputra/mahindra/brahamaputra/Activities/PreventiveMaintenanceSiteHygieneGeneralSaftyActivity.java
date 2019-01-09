@@ -299,7 +299,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_noOfFireExtinguisher))),
-                        "No Of Fire Extingisher",
+                        "No of Fire Extingisher",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -359,7 +359,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_unusedMaterialOnSite))),
-                        "Un-Used Material In Site",
+                        "Un-Used Material in Site",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -399,7 +399,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_typeOfFault))),
-                        "Type Of Fault",
+                        "Type of Fault",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
