@@ -2056,6 +2056,13 @@
         <item>4</item>
     </string-array>
 
+    <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfFaultyModulesInSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
     <string-array name="array_pmSiteRectifierModuleCheckPoints_rectifierCleaning">
         <item>Cleaned</item>
     </string-array>
@@ -2131,29 +2138,6 @@
         <item>General Faults</item>
     </string-array>
 
-    <!-- Array Of PM Site OtherElectricalCheckPoints Model -->
-    <string-array name="array_pmSiteOtherElectricalCheckPoints_shelterDoorStatus">
-        <item>OK</item>
-        <item>Faulty</item>
-    </string-array>
-
-    <string-array name="array_pmSiteOtherElectricalCheckPoints_aviationLamp">
-        <item>Working</item>
-        <item>Not Working</item>
-    </string-array>
-
-    <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInsideTheShelter">
-        <item>Working</item>
-        <item>Not Working</item>
-        <item>Corrected</item>
-    </string-array>
-
-    <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInSitePremisesOrBulkHead">
-        <item>Working</item>
-        <item>Not Working</item>
-        <item>Corrected</item>
-    </string-array>
-
     <!-- Array Of PM Site ShelterCheckPoints Model -->
     <string-array name="array_pmSiteShelterCheckPoints_shelterCleaning">
         <item>OK</item>
@@ -2190,5 +2174,29 @@
         <item>Shelter Repair Required</item>
         <item>Shelter Lock Faulty</item>
     </string-array>
+
+    <!-- Array Of PM Site OtherElectricalCheckPoints Model -->
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_dcEnergyMeterStatus">
+        <item>OK</item>
+        <item>Faulty</item>
+    </string-array>
+
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_aviationLamp">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInsideTheShelter">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInSitePremisesOrBulkHead">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Corrected</item>
+    </string-array>
+
 
 </resources>

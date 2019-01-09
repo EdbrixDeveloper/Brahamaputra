@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +14,11 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
@@ -149,6 +155,38 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private Button mPreventiveMaintenanceAcTechnicianButtonPreviousReading;
     private Button mPreventiveMaintenanceAcTechnicianButtonNextReading;
 
+    String str_noOfAcAtSiteVal;
+    String str_mainMcbStatusVal;
+    String str_subMcbStatusVal;
+    String str_metalCladPlugStatusVal;
+    String str_metalCladSocketStatusVal;
+    String str_stablizerStatusVal;
+    String str_stabilizerMakeVal;
+    String str_stabilizerCapacityVal;
+    String str_stablizerWorkingStatusVal;
+    String str_acEarthingStatusVal;
+    String str_filterCleanedVal;
+    String str_condenserCoilCleanedVal;
+    String str_coolingCoilCleanedVal;
+    String str_acCoolingStatusVal;
+    String str_indoorFilterCleanedStatusVal;
+    String str_indoorFanMotorConditionVal;
+    String str_blowerWheelConditionVal;
+    String str_noiseIndoorMotorVal;
+    String str_outdoorFanMotorConditionVal;
+    String str_fanLeafConditionVal;
+    String str_noiseOutdoorMotorVal;
+    String str_compressorConditionVal;
+    String str_compCapacitorConditionVal;
+    String str_controllerConditionVal;
+    String str_acAlarmStatusVal;
+    String str_acSensorConditionVal;
+    String str_vibrationOfAcVal;
+    String str_freeCoolingUnitStatusVal;
+    String str_freeCoolingAvailableWorkingStatusVal;
+    String str_waterLeakageVal;
+    String str_acCabinateStatusVal;
+    String str_shelterDoorStatusVal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +195,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         this.setTitle("AC Preventive Maintenance Process");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
+        initCombo();
     }
 
     private void assignViews() {
@@ -290,6 +329,651 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         mPreventiveMaintenanceAcTechnicianEditTextRemarks = (EditText) findViewById(R.id.preventiveMaintenanceAcTechnician_EditText_remarks);
         mPreventiveMaintenanceAcTechnicianButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceAcTechnician_button_previousReading);
         mPreventiveMaintenanceAcTechnicianButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceAcTechnician_button_nextReading);
+    }
+
+    private void initCombo() {
+        mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_noOfAcAtSite))),
+                        "No of AC at site",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noOfAcAtSiteVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.setText(str_noOfAcAtSiteVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewMainMcbStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_mainMcbStatus))),
+                        "Main MCB Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_mainMcbStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewMainMcbStatusVal.setText(str_mainMcbStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewSubMcbStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_subMcbStatus))),
+                        "Sub MCB Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_subMcbStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewSubMcbStatusVal.setText(str_subMcbStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewMetalCladPlugStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_metalCladPlugStatus))),
+                        "Metal Clad Plug Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_metalCladPlugStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewMetalCladPlugStatusVal.setText(str_metalCladPlugStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewMetalCladSocketStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_metalCladSocketStatus))),
+                        "Metal Clad Socket Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_metalCladSocketStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewMetalCladSocketStatusVal.setText(str_metalCladSocketStatusVal);
+                    }
+                });
+            }
+        });
+
+
+        mPreventiveMaintenanceAcTechnicianTextViewStablizerStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_stablizerStatus))),
+                        "Stablizer Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_stablizerStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewStablizerStatusVal.setText(str_stablizerStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewStabilizerMakeVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_StabilizerMake))),
+                        "Stabilizer Make",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_stabilizerMakeVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewStabilizerMakeVal.setText(str_stabilizerMakeVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewStabilizerCapacityVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_stabilizerCapacity))),
+                        "Stabilizer Capacity",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_stabilizerCapacityVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewStabilizerCapacityVal.setText(str_stabilizerCapacityVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewStablizerWorkingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_stablizerWorkingStatus))),
+                        "Stablizer Working Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_stablizerWorkingStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewStablizerWorkingStatusVal.setText(str_stablizerWorkingStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewAcEarthingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_acEarthingStatus))),
+                        "AC Earthing Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_acEarthingStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewAcEarthingStatusVal.setText(str_acEarthingStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_filterCleaned))),
+                        "Filter Cleaned",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_filterCleanedVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedVal.setText(str_filterCleanedVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_condenserCoilCleaned))),
+                        "Condenser Coil Cleaned",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_condenserCoilCleanedVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal.setText(str_condenserCoilCleanedVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_coolingCoilCleaned))),
+                        "Cooling Coil Cleaned",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_coolingCoilCleanedVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal.setText(str_coolingCoilCleanedVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewAcCoolingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_acCoolingStatus))),
+                        "AC Cooling Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_acCoolingStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewAcCoolingStatusVal.setText(str_acCoolingStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewIndoorFilterCleanedStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_indoorFilterCleanedStatus))),
+                        "Indoor filter Cleaned Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_indoorFilterCleanedStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewIndoorFilterCleanedStatusVal.setText(str_indoorFilterCleanedStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewIndoorFanMotorConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_indoorFanMotorCondition))),
+                        "Indoor Fan motor condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_indoorFanMotorConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewIndoorFanMotorConditionVal.setText(str_indoorFanMotorConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewBlowerWheelConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_blowerWheelCondition))),
+                        "Blower Wheel condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_blowerWheelConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewBlowerWheelConditionVal.setText(str_blowerWheelConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewNoiseIndoorMotorVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_noiseIndoorMotor))),
+                        "If any noise Indoor Motor",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noiseIndoorMotorVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewNoiseIndoorMotorVal.setText(str_noiseIndoorMotorVal);
+                    }
+                });
+            }
+        });
+
+
+        mPreventiveMaintenanceAcTechnicianTextViewOutdoorFanMotorConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_outdoorFanMotorCondition))),
+                        "Outdoor Fan motor condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_outdoorFanMotorConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewOutdoorFanMotorConditionVal.setText(str_outdoorFanMotorConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewFanLeafConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_fanLeafCondition))),
+                        "Fan Leaf Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_fanLeafConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewFanLeafConditionVal.setText(str_fanLeafConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewNoiseOutdoorMotorVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_noiseOutdoorMotor))),
+                        "If any noise Outdoor Motor",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_noiseOutdoorMotorVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewNoiseOutdoorMotorVal.setText(str_noiseOutdoorMotorVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewCompressorConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_compressorCondition))),
+                        "Compressor condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_compressorConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewCompressorConditionVal.setText(str_compressorConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewCompCapacitorConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_compCapacitorCondition))),
+                        "Comp - Capacitor condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_compCapacitorConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewCompCapacitorConditionVal.setText(str_compCapacitorConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewControllerConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_controllerCondition))),
+                        "Controller condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_controllerConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewControllerConditionVal.setText(str_controllerConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewAcAlarmStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_acAlarmStatus))),
+                        "AC Alarm Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_acAlarmStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewAcAlarmStatusVal.setText(str_acAlarmStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_acSensorCondition))),
+                        "AC Sensor condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_acSensorConditionVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.setText(str_acSensorConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewVibrationOfAcVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_vibrationOfAc))),
+                        "If any Vibration of AC",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_vibrationOfAcVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewVibrationOfAcVal.setText(str_vibrationOfAcVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingUnitStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_freeCoolingUnitStatus))),
+                        "Free Cooling Unit Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_freeCoolingUnitStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingUnitStatusVal.setText(str_freeCoolingUnitStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingAvailableWorkingStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_freeCoolingAvailableWorkingStatus))),
+                        "If Free Cooling Available, Working Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_freeCoolingAvailableWorkingStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingAvailableWorkingStatusVal.setText(str_freeCoolingAvailableWorkingStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewWaterLeakageVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_waterLeakage))),
+                        "Water Leakage if Any",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_waterLeakageVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewWaterLeakageVal.setText(str_waterLeakageVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewAcCabinateStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_acCabinateStatus))),
+                        "AC Cabinate Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_acCabinateStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewAcCabinateStatusVal.setText(str_acCabinateStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianTextViewShelterDoorStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceAcTechnicianActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcTechnician_shelterDoorStatus))),
+                        "Shelter Door Status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_shelterDoorStatusVal = item.get(position);
+                        mPreventiveMaintenanceAcTechnicianTextViewShelterDoorStatusVal.setText(str_shelterDoorStatusVal);
+                    }
+                });
+            }
+        });
+
     }
 
     @Override

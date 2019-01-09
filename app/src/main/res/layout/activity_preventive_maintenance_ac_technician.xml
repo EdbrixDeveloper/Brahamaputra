@@ -969,7 +969,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Cooling Coil Cleaned " />
+                        android:text="Cooling Coil Cleaned" />
 
                     <TextView
                         android:id="@+id/preventiveMaintenanceAcTechnician_textView_coolingCoilCleanedVal"
