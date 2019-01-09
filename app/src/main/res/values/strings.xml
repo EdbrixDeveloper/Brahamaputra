@@ -1371,6 +1371,211 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
+    <!-- Array Of PM AC FSE Model -->
+    <string-array name="array_pmAcFieldEngineer_feedBack">
+        <item>Satisfied</item>
+        <item>Not Satisfied</item>
+    </string-array>
+
+    <!-- Array Of PM AC Tech Model -->
+    <string-array name="array_pmAcTechnician_noOfAcAtSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_mainMcbStatus">
+        <item>OK</item>
+        <item>Fault</item>
+        <item>Need to be replace</item>
+        <item>Not Applicable</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_subMcbStatus">
+        <item>OK</item>
+        <item>Fault</item>
+        <item>Need to be replace</item>
+        <item>Not Applicable</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_metalCladPlugStatus">
+        <item>OK</item>
+        <item>Fault</item>
+        <item>Need to be replace</item>
+        <item>Not Applicable</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_metalCladSocketStatus">
+        <item>OK</item>
+        <item>Fault</item>
+        <item>Need to be replace</item>
+        <item>Not Applicable</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_stablizerStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_StabilizerMake">
+        <item>Godrej</item>
+        <item>Haier</item>
+        <item>Hitachi</item>
+        <item>LG</item>
+        <item>V Guard</item>
+        <item>Mitsubishi</item>
+        <item>OG</item>
+        <item>Panasonic</item>
+        <item>Samsung</item>
+        <item>Spacemaker</item>
+        <item>Tata Liberty</item>
+        <item>Toshiba</item>
+        <item>Uniflair</item>
+        <item>Voltas</item>
+        <item>Whirlpool</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_stabilizerCapacity">
+        <item>ingle Boost</item>
+        <item>4KVA Double Boost</item>
+        <item>5KVA Single Boost</item>
+        <item>5 KVA Double Boost</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_stablizerWorkingStatus">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_acEarthingStatus">
+        <item>OK</item>
+        <item>Not OK</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_filterCleaned">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_condenserCoilCleaned">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_coolingCoilCleaned">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_acCoolingStatus">
+        <item>OK</item>
+        <item>ICE Formation</item>
+        <item>Not OK</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_indoorFilterCleanedStatus">
+        <item>Ok</item>
+        <item>Poor condition</item>
+        <item>Need to be Replace</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_indoorFanMotorCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Repair Required</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_blowerWheelCondition">
+        <item>Ok</item>
+        <item>Need to be Replace</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_noiseIndoorMotor">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_outdoorFanMotorCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Repair Required</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_fanLeafCondition">
+        <item>Ok</item>
+        <item>Need to be Replace</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_noiseOutdoorMotor">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_compressorCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Poor Pumping</item>
+        <item>Need to be Replace</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_compCapacitorCondition">
+        <item>Ok</item>
+        <item>Need to be Replace</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_controllerCondition">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Repair Required</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_acAlarmStatus">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_acSensorCondition">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_vibrationOfAc">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_freeCoolingUnitStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_freeCoolingAvailableWorkingStatus">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Repair required</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_waterLeakage">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_acCabinateStatus">
+        <item>Ok</item>
+        <item>Poor condition</item>
+        <item>Need to be Replace</item>
+    </string-array>
+
+    <string-array name="array_pmAcTechnician_shelterDoorStatus">
+        <item>Close</item>
+        <item>Open</item>
+        <item>Partially Open</item>
+    </string-array>
+
     <!--PM Site Hygiene General Safty Parameter-->
     <string-array name="array_pmSiteHygieneGeneralSafetyParameters_sitePremisesCleaning">
         <item>Ok</item>
@@ -1925,4 +2130,65 @@
         <item>SERVO Not Working</item>
         <item>General Faults</item>
     </string-array>
+
+    <!-- Array Of PM Site OtherElectricalCheckPoints Model -->
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_shelterDoorStatus">
+        <item>OK</item>
+        <item>Faulty</item>
+    </string-array>
+
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_aviationLamp">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInsideTheShelter">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInSitePremisesOrBulkHead">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <!-- Array Of PM Site ShelterCheckPoints Model -->
+    <string-array name="array_pmSiteShelterCheckPoints_shelterCleaning">
+        <item>OK</item>
+        <item>Not OK-Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteShelterCheckPoints_shelterLeakage">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteShelterCheckPoints_hatchPlateEntrySealed">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteShelterCheckPoints_shelterFloorStatus">
+        <item>OK</item>
+        <item>Floor Damaged</item>
+    </string-array>
+
+    <string-array name="array_pmSiteShelterCheckPoints_shelterEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteShelterCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteShelterCheckPoints_typeOfFault">
+        <item>Shelter Repair Required</item>
+        <item>Shelter Lock Faulty</item>
+    </string-array>
+
 </resources>

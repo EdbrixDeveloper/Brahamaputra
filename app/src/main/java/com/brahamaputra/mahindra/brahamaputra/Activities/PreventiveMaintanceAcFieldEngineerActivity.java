@@ -5,11 +5,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivity {
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewCustomer;
@@ -47,6 +53,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivit
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewRemark;
     private EditText mPreventiveMaintanceAcFieldEngineerEditTextRemark;
 
+    String str_feedBackVal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivit
         setTitle("Ticket Submission from Field Engineer");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
+        initCombo();
     }
 
     private void assignViews() {
@@ -92,6 +100,29 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivit
         mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal = (TextView) findViewById(R.id.preventiveMaintanceAcFieldEngineer_textView_feedBackVal);
         mPreventiveMaintanceAcFieldEngineerTextViewRemark = (TextView) findViewById(R.id.preventiveMaintanceAcFieldEngineer_textView_remark);
         mPreventiveMaintanceAcFieldEngineerEditTextRemark = (EditText) findViewById(R.id.preventiveMaintanceAcFieldEngineer_editText_remark);
+    }
+
+    private void initCombo() {
+        mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintanceAcFieldEngineerActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmAcFieldEngineer_feedBack))),
+                        "Feed Back",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_feedBackVal = item.get(position);
+                        mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setText(str_feedBackVal);
+                    }
+                });
+            }
+        });
+
     }
 
     @Override
