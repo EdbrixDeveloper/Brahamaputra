@@ -1373,8 +1373,8 @@
 
     <!-- Array Of PM AC FSE Model -->
     <string-array name="array_pmAcFieldEngineer_feedBack">
-        <item>Satisfied</item>
         <item>Not Satisfied</item>
+        <item>Satisfied</item>
     </string-array>
 
     <!-- Array Of PM AC Tech Model -->
@@ -1387,31 +1387,31 @@
     </string-array>
 
     <string-array name="array_pmAcTechnician_mainMcbStatus">
-        <item>OK</item>
         <item>Fault</item>
         <item>Need to be replace</item>
         <item>Not Applicable</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_subMcbStatus">
-        <item>OK</item>
         <item>Fault</item>
         <item>Need to be replace</item>
         <item>Not Applicable</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_metalCladPlugStatus">
-        <item>OK</item>
         <item>Fault</item>
         <item>Need to be replace</item>
         <item>Not Applicable</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_metalCladSocketStatus">
-        <item>OK</item>
         <item>Fault</item>
         <item>Need to be replace</item>
         <item>Not Applicable</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_stablizerStatus">
@@ -1424,128 +1424,128 @@
         <item>Haier</item>
         <item>Hitachi</item>
         <item>LG</item>
-        <item>V Guard</item>
         <item>Mitsubishi</item>
         <item>OG</item>
+        <item>Others</item>
         <item>Panasonic</item>
         <item>Samsung</item>
         <item>Spacemaker</item>
         <item>Tata Liberty</item>
         <item>Toshiba</item>
         <item>Uniflair</item>
+        <item>V Guard</item>
         <item>Voltas</item>
         <item>Whirlpool</item>
-        <item>Others</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_stabilizerCapacity">
-        <item>ingle Boost</item>
         <item>4KVA Double Boost</item>
+        <item>5KVA Double Boost</item>
         <item>5KVA Single Boost</item>
-        <item>5 KVA Double Boost</item>
+        <item>ingle Boost</item>
         <item>Others</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_stablizerWorkingStatus">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_acEarthingStatus">
-        <item>OK</item>
         <item>Not OK</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_filterCleaned">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_condenserCoilCleaned">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_coolingCoilCleaned">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_acCoolingStatus">
-        <item>OK</item>
         <item>ICE Formation</item>
         <item>Not OK</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_indoorFilterCleanedStatus">
-        <item>Ok</item>
-        <item>Poor condition</item>
         <item>Need to be Replace</item>
+        <item>OK</item>
+        <item>Poor condition</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_indoorFanMotorCondition">
-        <item>Working</item>
         <item>Not Working</item>
         <item>Repair Required</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_blowerWheelCondition">
-        <item>Ok</item>
         <item>Need to be Replace</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_noiseIndoorMotor">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_outdoorFanMotorCondition">
-        <item>Working</item>
         <item>Not Working</item>
         <item>Repair Required</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_fanLeafCondition">
-        <item>Ok</item>
         <item>Need to be Replace</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_noiseOutdoorMotor">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_compressorCondition">
-        <item>Working</item>
+        <item>Need to be Replace</item>
         <item>Not Working</item>
         <item>Poor Pumping</item>
-        <item>Need to be Replace</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_compCapacitorCondition">
-        <item>Ok</item>
         <item>Need to be Replace</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_controllerCondition">
-        <item>Working</item>
         <item>Not Working</item>
         <item>Repair Required</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_acAlarmStatus">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_acSensorCondition">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_vibrationOfAc">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_freeCoolingUnitStatus">
@@ -1560,14 +1560,14 @@
     </string-array>
 
     <string-array name="array_pmAcTechnician_waterLeakage">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_acCabinateStatus">
+        <item>Need to be Replace</item>
         <item>Ok</item>
         <item>Poor condition</item>
-        <item>Need to be Replace</item>
     </string-array>
 
     <string-array name="array_pmAcTechnician_shelterDoorStatus">
@@ -1578,8 +1578,8 @@
 
     <!--PM Site Hygiene General Safty Parameter-->
     <string-array name="array_pmSiteHygieneGeneralSafetyParameters_sitePremisesCleaning">
-        <item>Ok</item>
         <item>Cleaning Required</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteHygieneGeneralSafetyParameters_equipmentCleaning">
@@ -1587,8 +1587,8 @@
     </string-array>
 
     <string-array name="array_pmSiteHygieneGeneralSafetyParameters_anyEagleOrCrowOrHoneyHivesInTower">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteHygieneGeneralSafetyParameters_compoundWallOrFencingStatus">
@@ -1641,70 +1641,70 @@
     </string-array>
 
     <string-array name="array_pmSiteHygieneGeneralSafetyParameters_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteHygieneGeneralSafetyParameters_typeOfFault">
-        <item>Site Hygiene</item>
         <item>Compound Wall</item>
         <item>Safety</item>
         <item>Signage Board</item>
+        <item>Site Hygiene</item>
         <item>Site Return Material</item>
     </string-array>
 
     <!--PM Alarm Check Points-->
     <string-array name="array_pmSiteAlarmCheckPoints_doorOpenAlarm">
+        <item>Not Ok</item>
         <item>Ok</item>
         <item>Rectified</item>
-        <item>Not Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_dgOn">
+        <item>Not Ok</item>
         <item>Ok</item>
         <item>Rectified</item>
-        <item>Not Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_dgOutputAvailable">
+        <item>Not Ok</item>
         <item>Ok</item>
         <item>Rectified</item>
-        <item>Not Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_highRoomTemp">
+        <item>Not Ok</item>
         <item>Ok</item>
         <item>Rectified</item>
-        <item>Not Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_fireAndSmoke">
+        <item>Not Ok</item>
         <item>Ok</item>
         <item>Rectified</item>
-        <item>Not Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_powerPlantFailure">
+        <item>Not Ok</item>
         <item>Ok</item>
         <item>Rectified</item>
-        <item>Not Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_alarmConfirmedByNoc">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteAlarmCheckPoints_typeOfFault">
-        <item>WRMS Faulty</item>
-        <item>Sensor Faulty</item>
+        <item>Alarm Cable</item>
         <item>Alarm Panel Faulty</item>
-        <item> Alarm Cable</item>
+        <item>Sensor Faulty</item>
+        <item>WRMS Faulty</item>
     </string-array>
 
     <!--PM Battery Bank Check points-->
@@ -1716,8 +1716,8 @@
     </string-array>
 
     <string-array name="array_pmSiteBatteryBankCheckPoints_batteryBankDischargeTest">
-        <item>Execute BD Test</item>
         <item>Abort</item>
+        <item>Execute BD Test</item>
     </string-array>
 
     <string-array name="array_pmSiteBatteryBankCheckPoints_stripTightnessAsPerTorque">
@@ -1725,31 +1725,31 @@
     </string-array>
 
     <string-array name="array_pmSiteBatteryBankCheckPoints_petroleumJellyApplied">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteBatteryBankCheckPoints_batteryVentPlugStatus">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteBatteryBankCheckPoints_bbEarthingStatus">
         <item>Available</item>
-        <item>Not Available</item>
         <item>Corrected</item>
+        <item>Not Available</item>
     </string-array>
 
     <string-array name="array_pmSiteBatteryBankCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteBatteryBankCheckPoints_typeOfFault">
-        <item>Low Back-up</item>
         <item>Battery Cable Replacement Required</item>
-        <item>Strip Replace</item>
         <item>General Faults</item>
+        <item>Low Back-up</item>
+        <item>Strip Replace</item>
     </string-array>
 
     <!--PM Earthing Check Points-->
@@ -1763,8 +1763,8 @@
     </string-array>
 
     <string-array name="array_pmSiteEarthingCheckPoints_lightningArresterStatus">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteEarthingCheckPoints_noOfEarthPit">
@@ -1792,56 +1792,55 @@
     </string-array>
 
     <string-array name="array_pmSiteEarthingCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteEarthingCheckPoints_typeOfFault">
+        <item>Earth PIT Correction</item>
         <item>IGB/EGB Required</item>
         <item>Lightning Arrester Correction Required</item>
-        <item>Earth PIT Correction</item>
     </string-array>
 
     <!--PM EB Meter Box-->
     <string-array name="array_pmSiteEbMeterBox_ebMeterBoxCondition">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteEbMeterBox_ebMeterBoxWorkingStatus">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteEbMeterBox_kitkatOrClayFuseStatus">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteEbMeterBox_sfuOrMccbStatus">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteEbMeterBox_hrcFuseStatus">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteEbMeterBox_ebServiceWireCondition">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteEbMeterBox_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteEbMeterBox_typeOfFault">
-        <item>EB Meter Faulty</item>
         <item>EB Meter Box Faulty</item>
-        <item>Fuse Faulty</item>
+        <item>EB Meter Faulty</item>
         <item>MCCB/SFU Faulty</item>
         <item>Wire Damaged</item>
     </string-array>
@@ -1855,50 +1854,50 @@
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_dgWorkingCondition">
-        <item>Running</item>
         <item>Breakdown</item>
+        <item>Running</item>
         <item>Running with Problem</item>
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_coolentLevel">
-        <item>Ok</item>
         <item>Not Ok-Corrected</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_beltTension">
-        <item>Ok</item>
         <item>Not Ok-Corrected</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_engineLubeOilLevel">
-        <item>Ok</item>
         <item>Not Ok-Corrected</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_safetyWorkingStatus">
-        <item>Working</item>
-        <item>Not Working</item>
         <item>Corrected</item>
+        <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_powerCableConnecionStatus">
-        <item>Ok</item>
         <item>Not Ok-Corrected</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteDgCheckPoints_typeOfFault">
-        <item>Oil Service Required</item>
+        <item>DG Canopy Issue</item>
         <item>Engine Not Starting</item>
         <item>Engine Not Stopping</item>
-        <item>DG Canopy Issue</item>
+        <item>Higher/Lower RPM</item>
         <item>Leakage/Choke-up/Breakage</item>
         <item>No Output from Alternator</item>
-        <item>Higher/Lower RPM</item>
+        <item>Oil Service Required</item>
         <item>Over Smoke/Water-Fuel Content in Oil</item>
     </string-array>
 
@@ -1911,8 +1910,8 @@
     </string-array>
 
     <string-array name="array_pmSiteDgBatteryCheckPoints_dgBatteryCondition">
-        <item>Ok</item>
         <item>Not Ok</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteDgBatteryCheckPoints_dgBatteryWaterAvailable">
@@ -1922,26 +1921,26 @@
     </string-array>
 
     <string-array name="array_pmSiteDgBatteryCheckPoints_petroleumJellyToDgBatteryTerminal">
-        <item>Ok</item>
         <item>Jelly Applied</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_pmSiteDgBatteryCheckPoints_dgBatteryCharger">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteDgBatteryCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteDgBatteryCheckPoints_typeOfFault">
-        <item>Battery Falty</item>
+        <item>Battery Faulty</item>
         <item>Battery Not Charging</item>
-        <item>Theft</item>
-        <item>DG Battery Cable Damage</item>
         <item>Battery Terminal Damage</item>
+        <item>DG Battery Cable Damage</item>
+        <item>Theft</item>
     </string-array>
 
     <!--PM AC Check Points-->
@@ -1956,20 +1955,20 @@
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_workingConditionOfAc">
-        <item>Working</item>
         <item>Not Working</item>
         <item>Running with Fault</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_automationOfAcController">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_acEarthingStatus">
         <item>Available</item>
-        <item>Not Available</item>
         <item>Corrected</item>
+        <item>Not Available</item>
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_acFilterStatus">
@@ -1983,26 +1982,26 @@
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_anyAbnormalSoundFromMotor">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_shelterDoorStatus">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_typeOfFault">
-        <item>Low Cooling</item>
         <item>Compressor Faulty</item>
-        <item>Not Working</item>
         <item>Gas Leakage</item>
         <item>General Fault</item>
+        <item>Low Cooling</item>
+        <item>Not Working</item>
     </string-array>
 
     <!--PM SMPS Check Points-->
@@ -2019,26 +2018,26 @@
     </string-array>
 
     <string-array name="array_pmSiteSmpsCheckPoints_smpsControlerStatus">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteSmpsCheckPoints_smpsEarthingStatus">
         <item>Available</item>
-        <item>Not Available</item>
         <item>Corrected</item>
+        <item>Not Available</item>
     </string-array>
 
     <string-array name="array_pmSiteSmpsCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteSmpsCheckPoints_typeOfFault">
-        <item>MCB Replacement Required</item>
         <item>Controller Not Working</item>
-        <item>No Output from SMPS</item>
         <item>General Fault</item>
+        <item>MCB Replacement Required</item>
+        <item>No Output from SMPS</item>
     </string-array>
 
     <!--PM Rectifier Module Check Points-->
@@ -2068,13 +2067,13 @@
     </string-array>
 
     <string-array name="array_pmSiteRectifierModuleCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteRectifierModuleCheckPoints_typeOfFault">
-        <item>Rectifier Faulty</item>
         <item>Load Not Sharing</item>
+        <item>Rectifier Faulty</item>
     </string-array>
 
     <!--PM PMS/AMF/PIU Available At Site-->
@@ -2096,13 +2095,13 @@
 
     <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_pmsOrAmfOrPiuEarthingStatus">
         <item>Available</item>
-        <item>Not Available</item>
         <item>Corrected</item>
+        <item>Not Available</item>
     </string-array>
 
     <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_typeOfFault">
@@ -2113,89 +2112,89 @@
 
     <!--PM Servo Check Points-->
     <string-array name="array_pmSiteServoCheckPoints_servoWorkingStatus">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteServoCheckPoints_anyBypassInSvs">
-        <item>Yes</item>
         <item>No Bypass</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteServoCheckPoints_svsEarthingStatus">
         <item>Available</item>
-        <item>Not Available</item>
         <item>Corrected</item>
+        <item>Not Available</item>
     </string-array>
 
     <string-array name="array_pmSiteServoCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteServoCheckPoints_typeOfFault">
-        <item>SERVO Not Working</item>
         <item>General Faults</item>
+        <item>SERVO Not Working</item>
     </string-array>
 
     <!-- Array Of PM Site ShelterCheckPoints Model -->
     <string-array name="array_pmSiteShelterCheckPoints_shelterCleaning">
-        <item>OK</item>
         <item>Not OK-Corrected</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmSiteShelterCheckPoints_shelterLeakage">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteShelterCheckPoints_hatchPlateEntrySealed">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteShelterCheckPoints_shelterFloorStatus">
-        <item>OK</item>
         <item>Floor Damaged</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmSiteShelterCheckPoints_shelterEarthingStatus">
         <item>Available</item>
-        <item>Not Available</item>
         <item>Corrected</item>
+        <item>Not Available</item>
     </string-array>
 
     <string-array name="array_pmSiteShelterCheckPoints_registerFault">
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
 
     <string-array name="array_pmSiteShelterCheckPoints_typeOfFault">
-        <item>Shelter Repair Required</item>
         <item>Shelter Lock Faulty</item>
+        <item>Shelter Repair Required</item>
     </string-array>
 
     <!-- Array Of PM Site OtherElectricalCheckPoints Model -->
     <string-array name="array_pmSiteOtherElectricalCheckPoints_dcEnergyMeterStatus">
-        <item>OK</item>
         <item>Faulty</item>
+        <item>OK</item>
     </string-array>
 
     <string-array name="array_pmSiteOtherElectricalCheckPoints_aviationLamp">
-        <item>Working</item>
         <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInsideTheShelter">
-        <item>Working</item>
-        <item>Not Working</item>
         <item>Corrected</item>
+        <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
     <string-array name="array_pmSiteOtherElectricalCheckPoints_lightsInSitePremisesOrBulkHead">
-        <item>Working</item>
-        <item>Not Working</item>
         <item>Corrected</item>
+        <item>Not Working</item>
+        <item>Working</item>
     </string-array>
 
 
