@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +14,11 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseActivity {
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSite;
@@ -38,7 +44,13 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     private Button mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading;
 
-
+    String str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = "";
+    String str_pmSiteDgbcpDGBatteryConditionVal = "";
+    String str_pmSiteDgbcpDGBatteryWaterAvailableVal = "";
+    String str_pmSiteDgbcpPetroleumJellyToDGBatteryTerminalVal = "";
+    String str_pmSiteDgbcpDGBatteryChargerVal = "";
+    String str_pmSiteDgbcpRegisterFaultVal = "";
+    String str_pmSiteDgbcpTypeOfFaultVal = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +59,151 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         this.setTitle("DG Battery Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
+        initCombo();
     }
+
+    private void initCombo() {
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_noOfDgBatteryAvailableAtSite))),
+                        "No of DG Battery available at site",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.setText(str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_dgBatteryCondition))),
+                        "DG Battery Condition",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteDgbcpDGBatteryConditionVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal.setText(str_pmSiteDgbcpDGBatteryConditionVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_dgBatteryWaterAvailable))),
+                        "DG Battery Water Available",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteDgbcpDGBatteryWaterAvailableVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal.setText(str_pmSiteDgbcpDGBatteryWaterAvailableVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_petroleumJellyToDgBatteryTerminal))),
+                        "Petroleum Jelly to DG Battery Terminal",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteDgbcpPetroleumJellyToDGBatteryTerminalVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal.setText(str_pmSiteDgbcpPetroleumJellyToDGBatteryTerminalVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_dgBatteryCharger))),
+                        "DG Battery Charger",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteDgbcpDGBatteryChargerVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal.setText(str_pmSiteDgbcpDGBatteryChargerVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_registerFault))),
+                        "Register Fault",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteDgbcpRegisterFaultVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.setText(str_pmSiteDgbcpRegisterFaultVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_typeOfFault))),
+                        "Type Of Fault",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteDgbcpTypeOfFaultVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteDgbcpTypeOfFaultVal);
+                    }
+                });
+            }
+        });
+    }
+
     private void assignViews() {
         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSite = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_textView_noOfDgBatteryAvailableAtSite);
         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_textView_noOfDgBatteryAvailableAtSiteVal);
