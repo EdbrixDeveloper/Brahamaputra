@@ -157,7 +157,7 @@
         <item>Fully Damage</item>
         <item>Minor Damage</item>
         <item>Not Available</item>
-        <item>OK</item>
+        <item>Ok</item>
     </string-array>
 
     <string-array name="array_electricConnection_ebMeterWorkingStatus">
@@ -488,7 +488,7 @@
     </string-array>
 
     <string-array name="array_generalAndSafetyMeasure_SiteHygieneVegitationStatus">
-        <item>Cleaning OK</item>
+        <item>Cleaning Ok</item>
         <item>Cleaning Required</item>
     </string-array>
 
@@ -591,7 +591,7 @@
         <item>Compound Wall Damaged</item>
         <item>Fencing Damaged</item>
         <item>NA</item>
-        <item>OK</item>
+        <item>Ok</item>
     </string-array>
     <string-array name="array_generalAndSafetyMeasure_NumberoffreeODPaltformAvailable">
         <item>0</item>
@@ -1371,4 +1371,558 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
+    <!--PM Site Hygiene General Safty Parameter-->
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_sitePremisesCleaning">
+        <item>Ok</item>
+        <item>Cleaning Required</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_equipmentCleaning">
+        <item>Done</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_anyEagleOrCrowOrHoneyHivesInTower">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_compoundWallOrFencingStatus">
+        <item>Ok</item>
+        <item>Repairing Required</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_gateLockAvailablity">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_shelterLockAvailablity">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_dgLockAvailablity">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_fireExtinguisherAvailablity">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_noOfFireExtinguisher">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_fireBucket">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_safetyChartsAndCalender">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_unusedMaterialOnSite">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteHygieneGeneralSafetyParameters_typeOfFault">
+        <item>Site Hygiene</item>
+        <item>Compound Wall</item>
+        <item>Safety</item>
+        <item>Signage Board</item>
+        <item>Site Return Material</item>
+    </string-array>
+
+    <!--PM Alarm Check Points-->
+    <string-array name="array_pmSiteAlarmCheckPoints_doorOpenAlarm">
+        <item>Ok</item>
+        <item>Rectified</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_dgOn">
+        <item>Ok</item>
+        <item>Rectified</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_dgOutputAvailable">
+        <item>Ok</item>
+        <item>Rectified</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_highRoomTemp">
+        <item>Ok</item>
+        <item>Rectified</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_fireAndSmoke">
+        <item>Ok</item>
+        <item>Rectified</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_powerPlantFailure">
+        <item>Ok</item>
+        <item>Rectified</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_alarmConfirmedByNoc">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAlarmCheckPoints_typeOfFault">
+        <item>WRMS Faulty</item>
+        <item>Sensor Faulty</item>
+        <item>Alarm Panel Faulty</item>
+        <item> Alarm Cable</item>
+    </string-array>
+
+    <!--PM Battery Bank Check points-->
+    <string-array name="array_pmSiteBatteryBankCheckPoints_noOfBatteryBank">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="array_pmSiteBatteryBankCheckPoints_batteryBankDischargeTest">
+        <item>Execute BD Test</item>
+        <item>Abort</item>
+    </string-array>
+
+    <string-array name="array_pmSiteBatteryBankCheckPoints_stripTightnessAsPerTorque">
+        <item>Checked &amp; Tightened</item>
+    </string-array>
+
+    <string-array name="array_pmSiteBatteryBankCheckPoints_petroleumJellyApplied">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteBatteryBankCheckPoints_batteryVentPlugStatus">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteBatteryBankCheckPoints_bbEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteBatteryBankCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteBatteryBankCheckPoints_typeOfFault">
+        <item>Low Back-up</item>
+        <item>Battery Cable Replacement Required</item>
+        <item>Strip Replace</item>
+        <item>General Faults</item>
+    </string-array>
+
+    <!--PM Earthing Check Points-->
+    <string-array name="array_pmSiteEarthingCheckPoints_allNutOrBoltsAreIntact">
+        <item>Yes</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEarthingCheckPoints_igbOrOgbStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEarthingCheckPoints_lightningArresterStatus">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEarthingCheckPoints_noOfEarthPit">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEarthingCheckPoints_noOfEarthPitVisible">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEarthingCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEarthingCheckPoints_typeOfFault">
+        <item>IGB/EGB Required</item>
+        <item>Lightning Arrester Correction Required</item>
+        <item>Earth PIT Correction</item>
+    </string-array>
+
+    <!--PM EB Meter Box-->
+    <string-array name="array_pmSiteEbMeterBox_ebMeterBoxCondition">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEbMeterBox_ebMeterBoxWorkingStatus">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEbMeterBox_kitkatOrClayFuseStatus">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEbMeterBox_sfuOrMccbStatus">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEbMeterBox_hrcFuseStatus">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEbMeterBox_ebServiceWireCondition">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEbMeterBox_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteEbMeterBox_typeOfFault">
+        <item>EB Meter Faulty</item>
+        <item>EB Meter Box Faulty</item>
+        <item>Fuse Faulty</item>
+        <item>MCCB/SFU Faulty</item>
+        <item>Wire Damaged</item>
+    </string-array>
+
+    <!--PM DG Check Points-->
+    <string-array name="array_pmSiteDgCheckPoints_noOfDgAvailableAtSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_dgWorkingCondition">
+        <item>Running</item>
+        <item>Breakdown</item>
+        <item>Running with Problem</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_coolentLevel">
+        <item>Ok</item>
+        <item>Not Ok-Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_beltTension">
+        <item>Ok</item>
+        <item>Not Ok-Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_engineLubeOilLevel">
+        <item>Ok</item>
+        <item>Not Ok-Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_safetyWorkingStatus">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_powerCableConnecionStatus">
+        <item>Ok</item>
+        <item>Not Ok-Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgCheckPoints_typeOfFault">
+        <item>Oil Service Required</item>
+        <item>Engine Not Starting</item>
+        <item>Engine Not Stopping</item>
+        <item>DG Canopy Issue</item>
+        <item>Leakage/Choke-up/Breakage</item>
+        <item>No Output from Alternator</item>
+        <item>Higher/Lower RPM</item>
+        <item>Over Smoke/Water-Fuel Content in Oil</item>
+    </string-array>
+
+    <!--PM DG Battery Check Points-->
+    <string-array name="array_pmSiteDgBatteryCheckPoints_noOfDgBatteryAvailableAtSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgBatteryCheckPoints_dgBatteryCondition">
+        <item>Ok</item>
+        <item>Not Ok</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgBatteryCheckPoints_dgBatteryWaterAvailable">
+        <item>Available</item>
+        <item>Corrected</item>
+        <item>Not Applicable</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgBatteryCheckPoints_petroleumJellyToDgBatteryTerminal">
+        <item>Ok</item>
+        <item>Jelly Applied</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgBatteryCheckPoints_dgBatteryCharger">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgBatteryCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteDgBatteryCheckPoints_typeOfFault">
+        <item>Battery Falty</item>
+        <item>Battery Not Charging</item>
+        <item>Theft</item>
+        <item>DG Battery Cable Damage</item>
+        <item>Battery Terminal Damage</item>
+    </string-array>
+
+    <!--PM AC Check Points-->
+    <string-array name="array_pmSiteAcCheckPoints_noOfAcAvailableAtSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_workingConditionOfAc">
+        <item>Working</item>
+        <item>Not Working</item>
+        <item>Running with Fault</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_automationOfAcController">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_acEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_acFilterStatus">
+        <item>Cleaned</item>
+        <item>Need Replacement</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_cleaningOfCoolingOrCondensorCoils">
+        <item>Cleaned</item>
+        <item>Need Replacement</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_anyAbnormalSoundFromMotor">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_shelterDoorStatus">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteAcCheckPoints_typeOfFault">
+        <item>Low Cooling</item>
+        <item>Compressor Faulty</item>
+        <item>Not Working</item>
+        <item>Gas Leakage</item>
+        <item>General Fault</item>
+    </string-array>
+
+    <!--PM SMPS Check Points-->
+    <string-array name="array_pmSiteSmpsCheckPoints_noOfSMPSAvailableAtSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="array_pmSiteSmpsCheckPoints_smpsCondition">
+        <item>Ok</item>
+        <item>Running with Problem</item>
+    </string-array>
+
+    <string-array name="array_pmSiteSmpsCheckPoints_smpsControlerStatus">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmSiteSmpsCheckPoints_smpsEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteSmpsCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteSmpsCheckPoints_typeOfFault">
+        <item>MCB Replacement Required</item>
+        <item>Controller Not Working</item>
+        <item>No Output from SMPS</item>
+        <item>General Fault</item>
+    </string-array>
+
+    <!--PM Rectifier Module Check Points-->
+    <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfRectifierModuleAvailableAtSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfModulesWorking">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="array_pmSiteRectifierModuleCheckPoints_rectifierCleaning">
+        <item>Cleaned</item>
+    </string-array>
+
+    <string-array name="array_pmSiteRectifierModuleCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteRectifierModuleCheckPoints_typeOfFault">
+        <item>Rectifier Faulty</item>
+        <item>Load Not Sharing</item>
+    </string-array>
+
+    <!--PM PMS/AMF/PIU Available At Site-->
+    <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_noOfPmsOrAmfOrPiuAvailableAtSite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_siteInAutoOrManual">
+        <item>Auto</item>
+        <item>Manual</item>
+    </string-array>
+
+    <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_anyLooseConnectionOrBypass">
+        <item>Check-Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_pmsOrAmfOrPiuEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSitePmsOrAmfOrPiuAvailableAtSite_typeOfFault">
+        <item>Automation Not Working</item>
+        <item>Controller Faulty</item>
+        <item>General Fault</item>
+    </string-array>
+
+    <!--PM Servo Check Points-->
+    <string-array name="array_pmSiteServoCheckPoints_servoWorkingStatus">
+        <item>Working</item>
+        <item>Not Working</item>
+    </string-array>
+
+    <string-array name="array_pmSiteServoCheckPoints_anyBypassInSvs">
+        <item>Yes</item>
+        <item>No Bypass</item>
+    </string-array>
+
+    <string-array name="array_pmSiteServoCheckPoints_svsEarthingStatus">
+        <item>Available</item>
+        <item>Not Available</item>
+        <item>Corrected</item>
+    </string-array>
+
+    <string-array name="array_pmSiteServoCheckPoints_registerFault">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="array_pmSiteServoCheckPoints_typeOfFault">
+        <item>SERVO Not Working</item>
+        <item>General Faults</item>
+    </string-array>
 </resources>
