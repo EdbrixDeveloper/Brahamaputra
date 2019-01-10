@@ -37,6 +37,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -93,6 +95,20 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
     private AlertDialogManager alertDialogManager;
 
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfDgHmr = 101;
+    //public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
+
+
+    private String base64StringDgCheckPointsQRCodeScan = "";
+    private String base64StringPhotoOfDgHmr = "";
+
+    //private String imageFileDgCheckPointsQRCodeScan;
+    private String imageFilePhotoOfDgHmr;
+
+    //private Uri imageFileUriDgCheckPointsQRCodeScan = null;
+    private Uri imageFileUriPhotoOfDgHmr = null;
+
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
@@ -103,9 +119,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
-    private Uri imageFileUri = null;
-    private String imageFileName = "";
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 
@@ -125,49 +138,41 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteDgCheckPointsActivity.this, userId, ticketName);
+        setListner();
+    }
 
-        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteDgCheckPointsActivity.this,
-                        Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    if (getFromPref(PreventiveMaintenanceSiteDgCheckPointsActivity.this, ALLOW_KEY)) {
-                        showSettingsAlert();
-
-                    } else if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteDgCheckPointsActivity.this,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Should we show an explanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(PreventiveMaintenanceSiteDgCheckPointsActivity.this,
-                                Manifest.permission.CAMERA)) {
-                            showAlert();
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteDgCheckPointsActivity.this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    MY_PERMISSIONS_REQUEST_CAMERA);
-                        }
-                    }
-                }
-                else
-                {
-                    openCameraIntent();
-                }
-            }
-        });
-
-        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (imageFileUri != null) {
-                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteDgCheckPointsActivity.this, imageFileUri);
-                } else {
-                    Toast.makeText(PreventiveMaintenanceSiteDgCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+    private void assignViews() {
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSite = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_noOfDgAvailableAtSite);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_noOfDgAvailableAtSiteVal);
+        mLinearLayoutContainer = (LinearLayout) findViewById(R.id.linearLayout_container);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgNumber = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgNumber);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewQRCodeScan = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_QRCodeScan);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScan = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_QRCodeScan);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScanView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_QRCodeScanView);
+        mButtonClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgHmrReading = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgHmrReading);
+        mPreventiveMaintenanceSiteDgCheckPointsEditTextDgHmrReading = (EditText) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_editText_dgHmrReading);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewPhotoOfDgHmr = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_photoOfDgHmr);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmr = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_photoOfDgHmr);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_photoOfDgHmrView);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingCondition = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgWorkingCondition);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingConditionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgWorkingConditionVal);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewCoolentLevel = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_coolentLevel);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewCoolentLevelVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_coolentLevelVal);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewBeltTension = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_beltTension);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewBeltTensionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_beltTensionVal);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevel = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_engineLubeOilLevel);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevelVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_engineLubeOilLevelVal);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_safetyWorkingStatus);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_safetyWorkingStatusVal);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_powerCableConnectionStatus);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_powerCableConnectionStatusVal);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_registerFault);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_registerFaultVal);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFault);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFaultVal);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_previousReading);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_nextReading);
     }
 
     private void initCombo() {
@@ -304,7 +309,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteDgcpPowerCableConnectionStatusVal= item.get(position);
+                        str_pmSiteDgcpPowerCableConnectionStatusVal = item.get(position);
                         mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal.setText(str_pmSiteDgcpPowerCableConnectionStatusVal);
                     }
                 });
@@ -324,7 +329,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteDgcpRegisterFaultVal= item.get(position);
+                        str_pmSiteDgcpRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText(str_pmSiteDgcpRegisterFaultVal);
                     }
                 });
@@ -344,7 +349,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteDgcpTypeOfFaultVal= item.get(position);
+                        str_pmSiteDgcpTypeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteDgcpTypeOfFaultVal);
                     }
                 });
@@ -352,161 +357,145 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         });
     }
 
-    private void assignViews() {
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSite = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_noOfDgAvailableAtSite);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_noOfDgAvailableAtSiteVal);
-        mLinearLayoutContainer = (LinearLayout) findViewById(R.id.linearLayout_container);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgNumber = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgNumber);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewQRCodeScan = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_QRCodeScan);
-        mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScan = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_QRCodeScan);
-        mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScanView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_QRCodeScanView);
-        mButtonClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgHmrReading = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgHmrReading);
-        mPreventiveMaintenanceSiteDgCheckPointsEditTextDgHmrReading = (EditText) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_editText_dgHmrReading);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewPhotoOfDgHmr = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_photoOfDgHmr);
-        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmr = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_photoOfDgHmr);
-        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_photoOfDgHmrView);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingCondition = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgWorkingCondition);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingConditionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_dgWorkingConditionVal);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewCoolentLevel = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_coolentLevel);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewCoolentLevelVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_coolentLevelVal);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewBeltTension = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_beltTension);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewBeltTensionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_beltTensionVal);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevel = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_engineLubeOilLevel);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevelVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_engineLubeOilLevelVal);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_safetyWorkingStatus);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_safetyWorkingStatusVal);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_powerCableConnectionStatus);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_powerCableConnectionStatusVal);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_registerFault);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_registerFaultVal);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFault);
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFaultVal);
-        mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_previousReading);
-        mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_nextReading);
-    }
+    private void setListner() {
 
-    public static Boolean getFromPref(Context context, String key) {
-        SharedPreferences myPrefs = context.getSharedPreferences
-                (CAMERA_PREF, Context.MODE_PRIVATE);
-        return (myPrefs.getBoolean(key, false));
-    }
-
-    private void showSettingsAlert() {
-
-        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmr.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPositiveClick() {
-
-                final EditText taskEditText = new EditText(PreventiveMaintenanceSiteDgCheckPointsActivity.this);
-                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceSiteDgCheckPointsActivity.this)
-                        .setTitle("Permission")
-                        .setMessage("Need Camera Access")
-                        .setView(taskEditText)
-                        .setPositiveButton("SETTINGS", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                startInstalledAppDetailsActivity(PreventiveMaintenanceSiteDgCheckPointsActivity.this);
-                            }
-                        })
-                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create();
-                dialog.show();
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    PhotoOfDgHmr();
+                }
             }
-        }).show();
+        });
 
-    }
-
-    public static void startInstalledAppDetailsActivity(final Activity context) {
-        if (context == null) {
-            return;
-        }
-        final Intent i = new Intent();
-        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        i.addCategory(Intent.CATEGORY_DEFAULT);
-        i.setData(Uri.parse("package:" + context.getPackageName()));
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        context.startActivity(i);
-    }
-
-    private void showAlert() {
-        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPositiveClick() {
-
-                final EditText taskEditText = new EditText(PreventiveMaintenanceSiteDgCheckPointsActivity.this);
-                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceSiteDgCheckPointsActivity.this)
-                        .setTitle("Permission")
-                        .setMessage("Need Camera Access")
-                        .setView(taskEditText)
-                        .setPositiveButton("ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                ActivityCompat.requestPermissions(PreventiveMaintenanceSiteDgCheckPointsActivity.this,
-                                        new String[]{Manifest.permission.CAMERA},
-                                        MY_PERMISSIONS_REQUEST_CAMERA);
-                            }
-                        })
-                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                finish();
-                            }
-                        })
-                        .create();
-                dialog.show();
+            public void onClick(View v) {
+                if (imageFileUriPhotoOfDgHmr != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteDgCheckPointsActivity.this, imageFileUriPhotoOfDgHmr);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteDgCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
             }
-        }).show();
+        });
+
+        mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    DgCheckPointsQRCodeScan();
+                }
+            }
+        });
+
+        mButtonClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringDgCheckPointsQRCodeScan = "";
+                mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
+
     }
 
-    public void openCameraIntent() {
+    private void PhotoOfDgHmr() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
-
-            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-
-            imageFileUri = FileProvider.getUriForFile(PreventiveMaintenanceSiteDgCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
+            imageFilePhotoOfDgHmr = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFilePhotoOfDgHmr);
+            imageFileUriPhotoOfDgHmr = FileProvider.getUriForFile(PreventiveMaintenanceSiteDgCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriPhotoOfDgHmr);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfDgHmr);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void DgCheckPointsQRCodeScan() {
+        try {
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.setPrompt("Scan a barcode or QRcode");
+            integrator.setOrientationLocked(true);
+            integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
+            integrator.initiateScan();
+
+            //        Use this for more customization
+            //        IntentIntegrator integrator = new IntentIntegrator(this);
+            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            //        integrator.setPrompt("Scan a barcode");
+            //        integrator.setCameraId(0);  // Use a specific camera of the device
+            //        integrator.setBeepEnabled(false);
+            //        integrator.setBarcodeImageEnabled(true);
+            //        integrator.initiateScan();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteDgCheckPointsActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteDgCheckPointsActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            return true;
+        }
+
+
+        return false;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA && resultCode == RESULT_OK) {
-            if (imageFileUri != null) {
-                try {
-                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
-                    byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringTakePhotoOfDgHmr = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                    mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.VISIBLE);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfDgHmr:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriPhotoOfDgHmr != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriPhotoOfDgHmr);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringPhotoOfDgHmr = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFilePhotoOfDgHmr = "";
+                    imageFileUriPhotoOfDgHmr = null;
+                    mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
                 }
-            }
-        } else {
-            imageFileName = "";
-            imageFileUri = null;
-            mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+                if (result != null) {
+                    mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                    if (result.getContents() == null) {
+                        base64StringDgCheckPointsQRCodeScan = "";
+                        showToast("Cancelled");
+                    } else {
+                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                        if (!flagIsDuplicateQRcode) {*/
+                            base64StringDgCheckPointsQRCodeScan = result.getContents();
+                            if (!base64StringDgCheckPointsQRCodeScan.isEmpty() && base64StringDgCheckPointsQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
+                        /*} else {
+                            base64StringDgCheckPointsQRCodeScan = "";
+                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
+                        }*/
+                    }
+                }
+                break;
         }
     }
 

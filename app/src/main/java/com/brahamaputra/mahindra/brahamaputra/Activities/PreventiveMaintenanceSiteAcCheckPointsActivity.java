@@ -31,6 +31,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -98,6 +100,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersBeforeCleaning = 101;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersAfterCleaning = 102;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfTemperature = 103;
+
+    private String base64StringAcCheckPointsQRCodeScan = "";
+    //private String imageFileAcCheckPointsQRCodeScan;
+    //private Uri imageFileUriAcCheckPointsQRCodeScan = null;
 
     private String base64StringTakePhotoOfAcFiltersBeforeCleaning = "";
     private String base64StringTakePhotoOfAcFiltersAfterCleaning = "";
@@ -277,7 +283,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteAcpAnyAbnormalSoundFromMotorVal= item.get(position);
+                        str_pmSiteAcpAnyAbnormalSoundFromMotorVal = item.get(position);
                         mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText(str_pmSiteAcpAnyAbnormalSoundFromMotorVal);
                     }
                 });
@@ -297,7 +303,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteAcpShelterDoorStatusVal= item.get(position);
+                        str_pmSiteAcpShelterDoorStatusVal = item.get(position);
                         mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(str_pmSiteAcpShelterDoorStatusVal);
                     }
                 });
@@ -317,7 +323,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteAcpRegisterFaultVal= item.get(position);
+                        str_pmSiteAcpRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(str_pmSiteAcpRegisterFaultVal);
                     }
                 });
@@ -337,7 +343,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteAcpTypeOfFaultVal= item.get(position);
+                        str_pmSiteAcpTypeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteAcpTypeOfFaultVal);
                     }
                 });
@@ -400,6 +406,28 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     }
 
     private void setListner() {
+
+        mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    AcCheckPointsQRCodeScan();
+                }
+            }
+        });
+
+        mButtonClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringAcCheckPointsQRCodeScan = "";
+                mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
+
+        ///////////////
+
         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -461,10 +489,29 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
     }
 
-    private void takePhotoOfAcFiltersBeforeCleaning()
-    {
-        try
-        {
+    private void AcCheckPointsQRCodeScan() {
+        try {
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.setPrompt("Scan a barcode or QRcode");
+            integrator.setOrientationLocked(true);
+            integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
+            integrator.initiateScan();
+
+            //        Use this for more customization
+            //        IntentIntegrator integrator = new IntentIntegrator(this);
+            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            //        integrator.setPrompt("Scan a barcode");
+            //        integrator.setCameraId(0);  // Use a specific camera of the device
+            //        integrator.setBeepEnabled(false);
+            //        integrator.setBarcodeImageEnabled(true);
+            //        integrator.initiateScan();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void takePhotoOfAcFiltersBeforeCleaning() {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             imageFileAcFiltersBeforeCleaning = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileAcFiltersBeforeCleaning);
@@ -472,17 +519,14 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriAcFiltersBeforeCleaning);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersBeforeCleaning);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    private void takePhotoOfAcFiltersAfterCleaning()
-    {
-        try
-        {
+    private void takePhotoOfAcFiltersAfterCleaning() {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             imageFileAcFiltersAfterCleaning = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileAcFiltersAfterCleaning);
@@ -490,16 +534,13 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriAcFiltersAfterCleaning);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersAfterCleaning);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void takePhotoOfTemperature()
-    {
-        try
-        {
+    private void takePhotoOfTemperature() {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             imageFileTemperature = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileTemperature);
@@ -507,8 +548,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriTemperature);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfTemperature);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -516,6 +556,31 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+                if (result != null) {
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                    if (result.getContents() == null) {
+                        base64StringAcCheckPointsQRCodeScan = "";
+                        showToast("Cancelled");
+                    } else {
+                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                        if (!flagIsDuplicateQRcode) {*/
+                        base64StringAcCheckPointsQRCodeScan = result.getContents();
+                        if (!base64StringAcCheckPointsQRCodeScan.isEmpty() && base64StringAcCheckPointsQRCodeScan != null) {
+                            mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                        }
+                        /*} else {
+                            base64StringAcCheckPointsQRCodeScan = "";
+                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
+                        }*/
+                    }
+                }
+                break;
+
             case MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersBeforeCleaning:
                 if (resultCode == RESULT_OK) {
                     if (imageFileUriAcFiltersBeforeCleaning != null) {
@@ -567,7 +632,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringTakePhotoOfTemperature  = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            base64StringTakePhotoOfTemperature = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
                             e.printStackTrace();

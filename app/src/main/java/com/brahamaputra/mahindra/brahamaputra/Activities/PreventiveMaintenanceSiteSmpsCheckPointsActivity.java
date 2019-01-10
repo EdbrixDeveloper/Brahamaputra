@@ -36,6 +36,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -85,19 +87,30 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
 
     private AlertDialogManager alertDialogManager;
 
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_PhotoDcLoadCurrent = 101;
+    //public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
+
+
+    private String base64StringSmpsCheckPointsQRCodeScan = "";
+    private String base64StringPhotoDcLoadCurrent = "";
+
+    //private String imageFileSmpsCheckPointsQRCodeScan;
+    private String imageFilePhotoDcLoadCurrent;
+
+    //private Uri imageFileUriSmpsCheckPointsQRCodeScan = null;
+    private Uri imageFileUriPhotoDcLoadCurrent = null;
+
+
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
 
     /*private HotoTransactionData hotoTransactionData;
     private LandDetailsData landDetailsData;*/
-    private String base64StringDcLoadCurrentPhoto = "";
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
-    private Uri imageFileUri = null;
-    private String imageFileName = "";
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 
@@ -107,59 +120,16 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         setContentView(R.layout.activity_preventive_maintenance_site_smps_check_points);
         this.setTitle("SMPS Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        assignViews();
-        initCombo();
-
         alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
-
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, userId, ticketName);
-
-        mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
-                        Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    if (getFromPref(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, ALLOW_KEY)) {
-                        showSettingsAlert();
-
-                    } else if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Should we show an explanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
-                                Manifest.permission.CAMERA)) {
-                            showAlert();
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    MY_PERMISSIONS_REQUEST_CAMERA);
-                        }
-                    }
-                }
-                else
-                {
-                    openCameraIntent();
-                }
-            }
-        });
-
-        mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (imageFileUri != null) {
-                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, imageFileUri);
-                } else {
-                    Toast.makeText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        assignViews();
+        checkCameraPermission();
+        initCombo();
+        setListner();
     }
 
     private void assignViews() {
@@ -317,128 +287,147 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
 
     }
 
-    public static Boolean getFromPref(Context context, String key) {
-        SharedPreferences myPrefs = context.getSharedPreferences
-                (CAMERA_PREF, Context.MODE_PRIVATE);
-        return (myPrefs.getBoolean(key, false));
-    }
+    private void setListner() {
 
-    private void showSettingsAlert() {
-
-        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPositiveClick() {
-
-                final EditText taskEditText = new EditText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
-                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this)
-                        .setTitle("Permission")
-                        .setMessage("Need Camera Access")
-                        .setView(taskEditText)
-                        .setPositiveButton("SETTINGS", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                startInstalledAppDetailsActivity(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
-                            }
-                        })
-                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create();
-                dialog.show();
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    PhotoDcLoadCurrent();
+                }
             }
-        }).show();
+        });
 
-    }
-
-    public static void startInstalledAppDetailsActivity(final Activity context) {
-        if (context == null) {
-            return;
-        }
-        final Intent i = new Intent();
-        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        i.addCategory(Intent.CATEGORY_DEFAULT);
-        i.setData(Uri.parse("package:" + context.getPackageName()));
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        context.startActivity(i);
-    }
-
-    private void showAlert() {
-        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPositiveClick() {
-
-                final EditText taskEditText = new EditText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
-                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this)
-                        .setTitle("Permission")
-                        .setMessage("Need Camera Access")
-                        .setView(taskEditText)
-                        .setPositiveButton("ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                ActivityCompat.requestPermissions(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
-                                        new String[]{Manifest.permission.CAMERA},
-                                        MY_PERMISSIONS_REQUEST_CAMERA);
-                            }
-                        })
-                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                finish();
-                            }
-                        })
-                        .create();
-                dialog.show();
+            public void onClick(View v) {
+                if (imageFileUriPhotoDcLoadCurrent != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, imageFileUriPhotoDcLoadCurrent);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
             }
-        }).show();
+        });
+
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    DgCheckPointsQRCodeScan();
+                }
+            }
+        });
+
+        mButtonClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringSmpsCheckPointsQRCodeScan = "";
+                mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
+
     }
 
-    public void openCameraIntent() {
+    private void PhotoDcLoadCurrent() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
-
-            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-
-            imageFileUri = FileProvider.getUriForFile(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
+            imageFilePhotoDcLoadCurrent = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFilePhotoDcLoadCurrent);
+            imageFileUriPhotoDcLoadCurrent = FileProvider.getUriForFile(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriPhotoDcLoadCurrent);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_PhotoDcLoadCurrent);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void DgCheckPointsQRCodeScan() {
+        try {
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.setPrompt("Scan a barcode or QRcode");
+            integrator.setOrientationLocked(true);
+            integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
+            integrator.initiateScan();
+
+            //        Use this for more customization
+            //        IntentIntegrator integrator = new IntentIntegrator(this);
+            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            //        integrator.setPrompt("Scan a barcode");
+            //        integrator.setCameraId(0);  // Use a specific camera of the device
+            //        integrator.setBeepEnabled(false);
+            //        integrator.setBarcodeImageEnabled(true);
+            //        integrator.initiateScan();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            return true;
+        }
+
+
+        return false;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA && resultCode == RESULT_OK) {
-            if (imageFileUri != null) {
-                try {
-                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
-                    byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringDcLoadCurrentPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.VISIBLE);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA_PhotoDcLoadCurrent:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriPhotoDcLoadCurrent != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriPhotoDcLoadCurrent);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringPhotoDcLoadCurrent = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFilePhotoDcLoadCurrent = "";
+                    imageFileUriPhotoDcLoadCurrent = null;
+                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.GONE);
                 }
-            }
-        } else {
-            imageFileName = "";
-            imageFileUri = null;
-            mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.GONE);
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+                if (result != null) {
+                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                    if (result.getContents() == null) {
+                        base64StringSmpsCheckPointsQRCodeScan = "";
+                        showToast("Cancelled");
+                    } else {
+                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                        if (!flagIsDuplicateQRcode) {*/
+                        base64StringSmpsCheckPointsQRCodeScan = result.getContents();
+                        if (!base64StringSmpsCheckPointsQRCodeScan.isEmpty() && base64StringSmpsCheckPointsQRCodeScan != null) {
+                            mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                        }
+                        /*} else {
+                            base64StringSmpsCheckPointsQRCodeScan = "";
+                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
+                        }*/
+                    }
+                }
+                break;
         }
+
     }
 
     @Override
@@ -472,3 +461,4 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         finish();
     }
 }
+

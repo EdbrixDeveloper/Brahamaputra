@@ -24,6 +24,7 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -77,8 +78,8 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private String base64StringDetailsOfWrmsQRCodeScan = "";
-    private String imageFileUploadPhotoOfSitePremises;
-    private Uri imageFileUriUploadPhotoOfSitePremises = null;
+    //private String imageFileUploadPhotoOfSitePremises;
+    //private Uri imageFileUriUploadPhotoOfSitePremises = null;
 
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -104,6 +105,11 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         checkCameraPermission();
         initCombo();
         setListner();
+        sessionManager = new SessionManager(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this, userId, ticketName);
     }
 
     private void assignViews() {

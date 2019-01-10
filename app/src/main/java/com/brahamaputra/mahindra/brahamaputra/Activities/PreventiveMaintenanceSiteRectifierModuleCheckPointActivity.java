@@ -31,6 +31,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -82,6 +84,10 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_RectifierPhotoBeforeCleaning = 101;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_RectifierPhotoAfterCleaning = 102;
 
+    private String base64StringDetailsOfRectifierModuleQRCodeScan = "";
+    //private String imageFileDetailsOfRectifierModuleQRCodeScan;
+    //private Uri imageFileUriDetailsOfRectifierModuleQRCodeScan = null;
+
     private String base64StringRectifierPhotoBeforeCleaning = "";
     private String base64StringRectifierPhotoAfterCleaning = "";
 
@@ -121,8 +127,6 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, userId, ticketName);
     }
-
-
 
     private void initCombo() {
 
@@ -278,20 +282,27 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
 
     }
 
-    private boolean checkCameraPermission() {
+    private void setListner() {
 
-        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            return true;
-        }
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonDetailsOfRectifierModuleQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    DgCheckPointsQRCodeScan();
+                }
+            }
+        });
 
+        mButtonClearDetailsOfRectifierModuleQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringDetailsOfRectifierModuleQRCodeScan = "";
+                mButtonClearDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
 
-        return false;
-    }
-
-    private void setListner()
-    {
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonRectifierPhotoBeforeCleaning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -332,10 +343,29 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         });
     }
 
-    private void rectifierPhotoBeforeCleaning()
-    {
-        try
-        {
+    private void DgCheckPointsQRCodeScan() {
+        try {
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.setPrompt("Scan a barcode or QRcode");
+            integrator.setOrientationLocked(true);
+            integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
+            integrator.initiateScan();
+
+            //        Use this for more customization
+            //        IntentIntegrator integrator = new IntentIntegrator(this);
+            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            //        integrator.setPrompt("Scan a barcode");
+            //        integrator.setCameraId(0);  // Use a specific camera of the device
+            //        integrator.setBeepEnabled(false);
+            //        integrator.setBarcodeImageEnabled(true);
+            //        integrator.initiateScan();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void rectifierPhotoBeforeCleaning() {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             imageFileRectifierPhotoBeforeCleaning = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileRectifierPhotoBeforeCleaning);
@@ -343,16 +373,13 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriRectifierPhotoBeforeCleaning);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_RectifierPhotoBeforeCleaning);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void rectifierPhotoAfterCleaning()
-    {
-        try
-        {
+    private void rectifierPhotoAfterCleaning() {
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             imageFileRectifierPhotoAfterCleaning = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileRectifierPhotoAfterCleaning);
@@ -360,15 +387,52 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriRectifierPhotoAfterCleaning);
             startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_RectifierPhotoAfterCleaning);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean checkCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            return true;
+        }
+
+
+        return false;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+                if (result != null) {
+                    mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.GONE);
+                    if (result.getContents() == null) {
+                        base64StringDetailsOfRectifierModuleQRCodeScan = "";
+                        showToast("Cancelled");
+                    } else {
+                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                        if (!flagIsDuplicateQRcode) {*/
+                        base64StringDetailsOfRectifierModuleQRCodeScan = result.getContents();
+                        if (!base64StringDetailsOfRectifierModuleQRCodeScan.isEmpty() && base64StringDetailsOfRectifierModuleQRCodeScan != null) {
+                            mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
+                            mButtonClearDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
+                        }
+                        /*} else {
+                            base64StringDetailsOfRectifierModuleQRCodeScan = "";
+                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
+                        }*/
+                    }
+                }
+                break;
+
             case MY_PERMISSIONS_REQUEST_CAMERA_RectifierPhotoBeforeCleaning:
                 if (resultCode == RESULT_OK) {
                     if (imageFileUriRectifierPhotoBeforeCleaning != null) {
