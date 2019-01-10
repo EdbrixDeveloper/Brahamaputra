@@ -1,7 +1,21 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,16 +25,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivity {
+
+    private static final String TAG = PreventiveMaintenanceSiteSmpsCheckPointsActivity.class.getSimpleName();
 
     private TextView mPreventiveMaintenanceSiteSmpsCheckPointsTextViewNoOfSmpsAvailableAtSite;
     private TextView mPreventiveMaintenanceSiteSmpsCheckPointsTextViewNoOfSmpsAvailableAtSiteVal;
@@ -57,6 +83,24 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     String str_segisterFaultVal;
     String str_sypeOfFaultVal;
 
+    private AlertDialogManager alertDialogManager;
+
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+
+    /*private HotoTransactionData hotoTransactionData;
+    private LandDetailsData landDetailsData;*/
+    private String base64StringDcLoadCurrentPhoto = "";
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private SessionManager sessionManager;
+
+    private Uri imageFileUri = null;
+    private String imageFileName = "";
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +109,57 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+
+        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
+        sessionManager = new SessionManager(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
+
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, userId, ticketName);
+
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
+                        Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    if (getFromPref(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, ALLOW_KEY)) {
+                        showSettingsAlert();
+
+                    } else if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
+                            Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Should we show an explanation?
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
+                                Manifest.permission.CAMERA)) {
+                            showAlert();
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    MY_PERMISSIONS_REQUEST_CAMERA);
+                        }
+                    }
+                }
+                else
+                {
+                    openCameraIntent();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUri != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, imageFileUri);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void assignViews() {
@@ -220,6 +315,130 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         });
 
 
+    }
+
+    public static Boolean getFromPref(Context context, String key) {
+        SharedPreferences myPrefs = context.getSharedPreferences
+                (CAMERA_PREF, Context.MODE_PRIVATE);
+        return (myPrefs.getBoolean(key, false));
+    }
+
+    private void showSettingsAlert() {
+
+        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+
+                final EditText taskEditText = new EditText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
+                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this)
+                        .setTitle("Permission")
+                        .setMessage("Need Camera Access")
+                        .setView(taskEditText)
+                        .setPositiveButton("SETTINGS", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                startInstalledAppDetailsActivity(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
+                            }
+                        })
+                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                dialog.show();
+            }
+        }).show();
+
+    }
+
+    public static void startInstalledAppDetailsActivity(final Activity context) {
+        if (context == null) {
+            return;
+        }
+        final Intent i = new Intent();
+        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        i.addCategory(Intent.CATEGORY_DEFAULT);
+        i.setData(Uri.parse("package:" + context.getPackageName()));
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        context.startActivity(i);
+    }
+
+    private void showAlert() {
+        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+
+                final EditText taskEditText = new EditText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
+                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this)
+                        .setTitle("Permission")
+                        .setMessage("Need Camera Access")
+                        .setView(taskEditText)
+                        .setPositiveButton("ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                ActivityCompat.requestPermissions(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this,
+                                        new String[]{Manifest.permission.CAMERA},
+                                        MY_PERMISSIONS_REQUEST_CAMERA);
+                            }
+                        })
+                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        })
+                        .create();
+                dialog.show();
+            }
+        }).show();
+    }
+
+    public void openCameraIntent() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
+
+            imageFileUri = FileProvider.getUriForFile(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA && resultCode == RESULT_OK) {
+            if (imageFileUri != null) {
+                try {
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                    byte[] bitmapDataArray = stream.toByteArray();
+                    base64StringDcLoadCurrentPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            imageFileName = "";
+            imageFileUri = null;
+            mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -1,7 +1,16 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,16 +20,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity {
+
+    private static final String TAG = PreventiveMaintenanceSiteAcCheckPointsActivity.class.getSimpleName();
 
     private TextView mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSite;
     private TextView mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal;
@@ -73,6 +94,36 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     String str_pmSiteAcpRegisterFaultVal = "";
     String str_pmSiteAcpTypeOfFaultVal = "";
 
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersBeforeCleaning = 101;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersAfterCleaning = 102;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfTemperature = 103;
+
+    private String base64StringTakePhotoOfAcFiltersBeforeCleaning = "";
+    private String base64StringTakePhotoOfAcFiltersAfterCleaning = "";
+    private String base64StringTakePhotoOfTemperature = "";
+
+    private String imageFileAcFiltersBeforeCleaning;
+    private String imageFileAcFiltersAfterCleaning;
+    private String imageFileTemperature;
+
+    private Uri imageFileUriAcFiltersBeforeCleaning = null;
+    private Uri imageFileUriAcFiltersAfterCleaning = null;
+    private Uri imageFileUriTemperature = null;
+
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
+
+    private AlertDialogManager alertDialogManager;
+
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+
+    /*private HotoTransactionData hotoTransactionData;
+    private LandDetailsData landDetailsData;*/
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +133,14 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+        checkCameraPermission();
+        setListner();
+        sessionManager = new SessionManager(PreventiveMaintenanceSiteAcCheckPointsActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteAcCheckPointsActivity.this, userId, ticketName);
+
     }
 
     private void initCombo() {
@@ -328,6 +387,201 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_nextReading);
     }
 
+    private boolean checkCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteAcCheckPointsActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteAcCheckPointsActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            return true;
+        }
+
+
+        return false;
+    }
+
+    private void setListner() {
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    takePhotoOfAcFiltersBeforeCleaning();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    takePhotoOfAcFiltersAfterCleaning();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    takePhotoOfTemperature();
+                }
+            }
+        });
+        //////////////////////////
+
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriAcFiltersBeforeCleaning != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriAcFiltersBeforeCleaning);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriAcFiltersAfterCleaning != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriAcFiltersAfterCleaning);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriTemperature != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriTemperature);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void takePhotoOfAcFiltersBeforeCleaning()
+    {
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileAcFiltersBeforeCleaning = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileAcFiltersBeforeCleaning);
+            imageFileUriAcFiltersBeforeCleaning = FileProvider.getUriForFile(PreventiveMaintenanceSiteAcCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriAcFiltersBeforeCleaning);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersBeforeCleaning);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void takePhotoOfAcFiltersAfterCleaning()
+    {
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileAcFiltersAfterCleaning = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileAcFiltersAfterCleaning);
+            imageFileUriAcFiltersAfterCleaning = FileProvider.getUriForFile(PreventiveMaintenanceSiteAcCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriAcFiltersAfterCleaning);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersAfterCleaning);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void takePhotoOfTemperature()
+    {
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileTemperature = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileTemperature);
+            imageFileUriTemperature = FileProvider.getUriForFile(PreventiveMaintenanceSiteAcCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriTemperature);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfTemperature);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersBeforeCleaning:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriAcFiltersBeforeCleaning != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriAcFiltersBeforeCleaning);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringTakePhotoOfAcFiltersBeforeCleaning = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileAcFiltersBeforeCleaning = "";
+                    imageFileUriAcFiltersBeforeCleaning = null;
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersAfterCleaning:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriAcFiltersAfterCleaning != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriAcFiltersAfterCleaning);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringTakePhotoOfAcFiltersAfterCleaning = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileAcFiltersAfterCleaning = "";
+                    imageFileUriAcFiltersAfterCleaning = null;
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfTemperature:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriTemperature != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriTemperature);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringTakePhotoOfTemperature  = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileTemperature = "";
+                    imageFileUriTemperature = null;
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
+                }
+                break;
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

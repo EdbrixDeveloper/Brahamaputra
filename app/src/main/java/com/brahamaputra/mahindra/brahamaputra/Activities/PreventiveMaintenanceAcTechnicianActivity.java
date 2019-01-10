@@ -245,8 +245,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceAcTechnicianActivity.this);
 
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        //ticketId = sessionManager.getSessionUserTicketId();
+        //ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceAcTechnicianActivity.this, userId, ticketName);
 
