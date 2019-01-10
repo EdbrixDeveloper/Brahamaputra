@@ -9,10 +9,10 @@
         android:id="@+id/linearLayout_Status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_normal_margin"
         android:orientation="horizontal"
         android:padding="@dimen/app_normal_padding"
-        android:weightSum="2"
-        android:layout_marginTop="@dimen/app_normal_margin">
+        android:weightSum="2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,9 +56,9 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimary"
+                    android:layout_margin="@dimen/app_min_margin"
                     android:layout_weight="1.6"
-                    android:layout_margin="@dimen/app_min_margin"/>
+                    android:background="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:text="3"
                         android:textColor="@color/colorMainText"
-                        android:textSize="30sp"/>
+                        android:textSize="30sp" />
 
                     <TextView
                         android:id="@+id/acPreventiveMaintenanceSection_textView_no"
@@ -83,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:text="OPEN TICKETS"
                         android:textColor="@color/colorMainText"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -101,8 +101,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/app_min_margin"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                        />
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -118,9 +117,9 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/lightgrey"
+                    android:layout_margin="@dimen/app_min_margin"
                     android:layout_weight="1.6"
-                    android:layout_margin="@dimen/app_min_margin"/>
+                    android:background="@color/lightgrey" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -136,16 +135,16 @@
                         android:layout_height="wrap_content"
                         android:text="21"
                         android:textColor="@color/colorMainText"
-                        android:textSize="30sp"/>
+                        android:textSize="30sp" />
 
                     <TextView
                         android:id="@+id/acPreventiveMaintenanceSection_textView_no2"
                         style="@style/FontStyle"
-                        android:textSize="14sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="ALL TICKETS"
-                        android:textColor="@color/colorMainText" />
+                        android:textColor="@color/colorMainText"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -162,8 +161,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/app_min_margin"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                        />
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -173,9 +171,9 @@
 
 
     <LinearLayout
-        android:layout_below="@+id/linearLayout_Status"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout_Status"
         android:orientation="vertical">
 
         <View
@@ -186,12 +184,13 @@
 
 
         <LinearLayout
+            android:id="@+id/pmSiteDashboard_linearLayout_ticket1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
             android:orientation="horizontal"
-            android:weightSum="2"
             android:padding="@dimen/app_normal_padding"
-            android:background="@color/colorWhite">
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -203,40 +202,40 @@
                     android:id="@+id/textView_HotoName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TKT_1"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
                     android:layout_marginBottom="@dimen/app_min_margin"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="TKT_1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_SiteID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site ID: 1500"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site ID: 1500" />
 
                 <TextView
                     android:id="@+id/textView_SiteName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site Name: ST_MH_01"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site Name: ST_MH_01" />
 
                 <TextView
                     android:id="@+id/textView_SiteSSA"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site SSA: Mahi_01_AA"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site SSA: Mahi_01_AA" />
 
                 <TextView
                     android:id="@+id/textView_SiteAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site Address: Plot No.213, Whites Road, Royapettah, Chennai, Tamil Nadu, 600014 "
                     android:layout_marginBottom="@dimen/app_min_margin"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site Address: Plot No.213, Whites Road, Royapettah, Chennai, Tamil Nadu, 600014 " />
             </LinearLayout>
 
             <RelativeLayout
@@ -248,19 +247,20 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
             </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/pmSiteDashboard_linearLayout_ticket2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
             android:orientation="horizontal"
-            android:weightSum="2"
             android:padding="@dimen/app_normal_padding"
-            android:background="@color/colorWhite">
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -272,40 +272,40 @@
                     android:id="@+id/textView_HotoName1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TKT_1"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
                     android:layout_marginBottom="@dimen/app_min_margin"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="TKT_1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView_SiteID1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site ID: 1500"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site ID: 1500" />
 
                 <TextView
                     android:id="@+id/textView_SiteName1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site Name: ST_MH_01"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site Name: ST_MH_01" />
 
                 <TextView
                     android:id="@+id/textView_SiteSSA1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site SSA: Mahi_01_AA"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site SSA: Mahi_01_AA" />
 
                 <TextView
                     android:id="@+id/textView_SiteAddress1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Site Address: Plot No.213, Whites Road, Royapettah, Chennai, Tamil Nadu, 600014 "
                     android:layout_marginBottom="@dimen/app_min_margin"
-                    android:layout_marginLeft="@dimen/app_normal_margin"/>
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site Address: Plot No.213, Whites Road, Royapettah, Chennai, Tamil Nadu, 600014 " />
             </LinearLayout>
 
             <RelativeLayout
@@ -317,9 +317,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
             </RelativeLayout>
         </LinearLayout>
 

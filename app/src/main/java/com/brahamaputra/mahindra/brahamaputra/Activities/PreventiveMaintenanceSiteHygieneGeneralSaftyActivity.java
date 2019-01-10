@@ -1,8 +1,17 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,19 +20,31 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseActivity {
+
+
+    private static final String TAG = PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class.getSimpleName();
 
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaning;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal;
@@ -78,11 +99,46 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     String str_pmSiteNoOfFireExtinguisherVal = "";
     String str_pmSiteFireBucketVal = "";
     String str_pmSiteSafetyChartsAndCalendarVal = "";
-    String str_pmSiteUnusedMaterialInSiteVal  = "";
+    String str_pmSiteUnusedMaterialInSiteVal = "";
     String str_pmSiteRegisterFaultVal = "";
     String str_pmSiteTypeOfFaultVal = "";
 
     final Calendar myCalendar = Calendar.getInstance();
+
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfSitePremises = 101;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_WarningSignBoard = 103;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_DangerSignBoard = 104;
+
+    private String base64StringUploadPhotoOfSitePremises = "";
+    private String base64StringCautionSignBoard = "";
+    private String base64StringWarningSignBoard = "";
+    private String base64StringDangerSignBoard = "";
+
+    private String imageFileUploadPhotoOfSitePremises;
+    private String imageFileCautionSignBoard;
+    private String imageFileWarningSignBoard;
+    private String imageFileDangerSignBoard;
+
+    private Uri imageFileUriUploadPhotoOfSitePremises = null;
+    private Uri imageFileUriCautionSignBoard = null;
+    private Uri imageFileUriWarningSignBoard = null;
+    private Uri imageFileUriDangerSignBoard = null;
+
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
+
+    private AlertDialogManager alertDialogManager;
+
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+
+    /*private HotoTransactionData hotoTransactionData;
+    private LandDetailsData landDetailsData;*/
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +148,14 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+        checkCameraPermission();
+        setListner();
+        sessionManager = new SessionManager(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, userId, ticketName);
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -416,7 +480,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteRegisterFaultVal= item.get(position);
+                        str_pmSiteRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.setText(str_pmSiteRegisterFaultVal);
                     }
                 });
@@ -436,7 +500,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteTypeOfFaultVal= item.get(position);
+                        str_pmSiteTypeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(str_pmSiteTypeOfFaultVal);
                     }
                 });
@@ -451,6 +515,251 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.setText(sdf.format(myCalendar.getTime()));
     }
 
+    private void setListner() {
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremises.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    UploadPhotoOfSitePremises();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    CautionSignBoardPhoto();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    WarningSignBoardPhoto();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    DangerSignBoardPhoto();
+                }
+            }
+        });
+
+        //////////////////////////
+
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriUploadPhotoOfSitePremises != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriUploadPhotoOfSitePremises);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriCautionSignBoard != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriCautionSignBoard);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriWarningSignBoard != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriWarningSignBoard);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriDangerSignBoard != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriDangerSignBoard);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void UploadPhotoOfSitePremises() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileUploadPhotoOfSitePremises = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfSitePremises);
+            imageFileUriUploadPhotoOfSitePremises = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriUploadPhotoOfSitePremises);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfSitePremises);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void CautionSignBoardPhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileCautionSignBoard = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_cautionBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileCautionSignBoard);
+            imageFileUriCautionSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriCautionSignBoard);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void WarningSignBoardPhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileWarningSignBoard = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_warningBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileWarningSignBoard);
+            imageFileUriWarningSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriWarningSignBoard);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_WarningSignBoard);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void DangerSignBoardPhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileDangerSignBoard = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_dangerBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileDangerSignBoard);
+            imageFileUriDangerSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriDangerSignBoard);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_DangerSignBoard);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private boolean checkCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            return true;
+        }
+
+
+        return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfSitePremises:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfSitePremises != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfSitePremises);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfSitePremises = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfSitePremises = "";
+                    imageFileUriUploadPhotoOfSitePremises = null;
+                    mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriCautionSignBoard != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCautionSignBoard);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringCautionSignBoard = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileCautionSignBoard = "";
+                    imageFileUriCautionSignBoard = null;
+                    mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_WarningSignBoard:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriWarningSignBoard != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriWarningSignBoard);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringWarningSignBoard = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileWarningSignBoard = "";
+                    imageFileUriWarningSignBoard = null;
+                    mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_DangerSignBoard:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriDangerSignBoard != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriDangerSignBoard);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringDangerSignBoard = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileDangerSignBoard = "";
+                    imageFileUriDangerSignBoard = null;
+                    mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.GONE);
+                }
+                break;
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
