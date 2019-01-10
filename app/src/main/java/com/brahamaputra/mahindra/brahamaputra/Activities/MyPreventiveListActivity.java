@@ -70,7 +70,8 @@ public class MyPreventiveListActivity extends BaseActivity {
 
                 if (Conditions.isNetworkConnected(MyPreventiveListActivity.this)) {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        startActivity(new Intent(MyPreventiveListActivity.this, PriventiveMaintenanceSiteTransactionActivity.class));
+                        //startActivity(new Intent(MyPreventiveListActivity.this, PriventiveMaintenanceSiteTransactionActivity.class));
+                        startActivity(new Intent(MyPreventiveListActivity.this, PreventiveMaintenanceDashboard.class));
                     } else {
                         //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {

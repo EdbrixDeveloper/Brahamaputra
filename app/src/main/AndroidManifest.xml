@@ -235,17 +235,14 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorBlack" />
 
-
         <activity
-        android:name=".Activities.MyPreventiveListActivity"
-        android:label="My Preventive List"
-        android:screenOrientation="portrait" />
-
+            android:name=".Activities.MyPreventiveListActivity"
+            android:label="My Preventive List"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.SitePreventiveMaintenanceSectionsListActivity"
             android:label="Site Preventive Maintenance Sections"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Activities.AcPreventiveMaintenanceSectionsListActivity"
             android:label="AC Preventive Maintenance Sections List"
@@ -317,9 +314,8 @@
         <activity
             android:name=".Activities.PreventiveMaintenanceSiteEarthingCheckPointsActivity"
             android:label="Preventive Maintenance Site Earthing Check Points"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activities.PreventiveMaintenanceDashboard"></activity>
     </application>
 
 </manifest>
