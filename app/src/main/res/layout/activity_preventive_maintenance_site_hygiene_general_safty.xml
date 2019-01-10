@@ -169,7 +169,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Gate Lock Availability"
+                    android:text="Gate Lock Availablity"
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView
@@ -194,7 +194,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Shelter Lock Availability"
+                    android:text="Shelter Lock Availablity"
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView
@@ -219,7 +219,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="DG Lock Availability"
+                    android:text="DG Lock Availablty"
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView
@@ -244,7 +244,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Fire Extinguisher Availability"
+                    android:text="Fire Extinguisher Availablity"
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView
@@ -298,8 +298,7 @@
                     android:textColor="@color/colorBlueLink" />
 
                 <EditText
-                    android:id="@+id/landDetails_editText_dateOfvalidityOfAgreement"
-
+                    android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_editText_fireExtingisherExpiryDate"
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

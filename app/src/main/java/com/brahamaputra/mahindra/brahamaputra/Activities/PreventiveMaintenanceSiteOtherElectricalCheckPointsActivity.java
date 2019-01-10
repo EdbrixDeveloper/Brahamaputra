@@ -5,10 +5,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends BaseActivity {
     private TextView mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatus;
@@ -20,7 +26,10 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
     private TextView mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHead;
     private TextView mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal;
 
-
+    String str_dcEnergyMeterStatusVal;
+    String str_aviationLampVal;
+    String str_lightsInsideTheShelterVal;
+    String str_lightsInSitePremisesOrBulkHeadVal;
 
 
     @Override
@@ -30,7 +39,9 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
         this.setTitle("Other Electrical Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
+        initCombo();
     }
+
     private void assignViews() {
         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_dcEnergyMeterStatus);
         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_dcEnergyMeterStatusVal);
@@ -40,6 +51,89 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_lightsInsideTheShelterVal);
         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHead = (TextView) findViewById(R.id.preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_lightsInSitePremisesOrBulkHead);
         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_lightsInSitePremisesOrBulkHeadVal);
+    }
+
+    private void initCombo() {
+
+        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteOtherElectricalCheckPoints_dcEnergyMeterStatus))),
+                        "DC Energy Meter status",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_dcEnergyMeterStatusVal = item.get(position);
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.setText(str_dcEnergyMeterStatusVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteOtherElectricalCheckPoints_aviationLamp))),
+                        "Aviation Lamp",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_aviationLampVal = item.get(position);
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.setText(str_aviationLampVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteOtherElectricalCheckPoints_lightsInsideTheShelter))),
+                        "Lights Inside the Shelter",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_lightsInsideTheShelterVal = item.get(position);
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.setText(str_lightsInsideTheShelterVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteOtherElectricalCheckPoints_lightsInSitePremisesOrBulkHead))),
+                        "Lights in Site Premises/Bulk head",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_lightsInSitePremisesOrBulkHeadVal = item.get(position);
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.setText(str_lightsInSitePremisesOrBulkHeadVal);
+                    }
+                });
+            }
+        });
     }
 
     @Override

@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import com.brahamaputra.mahindra.brahamaputra.Adapters.SitePreventiveMaintenanceSectionListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePreventiveMaintenanceSection;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePreventiveMaintenanceSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class));
                         break;
                     case 1:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, preventiveMaintenanceSiteAlarmCheckPointsActivity.class));
+                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
                         break;
                     case 2:
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));

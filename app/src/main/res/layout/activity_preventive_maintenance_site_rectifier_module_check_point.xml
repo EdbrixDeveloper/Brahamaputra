@@ -86,11 +86,11 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:enabled="false"
+
                     android:hint="Select"
                     android:textAlignment="viewStart" />
-                <!---->
             </LinearLayout>
+            <!--android:enabled="false"-->
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/linearLayout_container"
@@ -163,6 +163,7 @@
                         android:visibility="gone" />
                     <!--android:src="@drawable/baseline_photo_camera_black_18dp"-->
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -187,6 +188,7 @@
                         android:textAlignment="viewStart" />
 
                 </LinearLayout>
+
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -200,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Rectifier Photo Before Cleaning"
-                        android:textColor="@color/colorBlueLink"/>
+                        android:textColor="@color/colorBlueLink" />
 
                     <ImageView
                         android:id="@+id/preventiveMaintenanceSiteRectifierModuleCheckPoint_button_rectifierPhotoBeforeCleaning"
@@ -223,6 +225,7 @@
                         android:src="@drawable/view_image"
                         android:visibility="gone" />
                 </LinearLayout>
+
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -236,7 +239,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Rectifier Photo After Cleaning"
-                        android:textColor="@color/colorBlueLink"/>
+                        android:textColor="@color/colorBlueLink" />
 
                     <ImageView
                         android:id="@+id/preventiveMaintenanceSiteRectifierModuleCheckPoint_button_rectifierPhotoAfterCleaning"
@@ -259,6 +262,7 @@
                         android:src="@drawable/view_image"
                         android:visibility="gone" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -283,6 +287,7 @@
                         android:textAlignment="viewStart" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -307,6 +312,7 @@
                         android:textAlignment="viewStart" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

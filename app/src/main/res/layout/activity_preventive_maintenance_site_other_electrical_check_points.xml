@@ -37,7 +37,7 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    android:textAlignment="viewStart"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    android:textAlignment="viewStart"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

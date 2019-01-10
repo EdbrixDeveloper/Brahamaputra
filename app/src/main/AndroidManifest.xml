@@ -268,7 +268,7 @@
             android:label="Preventive Maintenance Site Hygiene General Safty"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.preventiveMaintenanceSiteAlarmCheckPointsActivity"
+            android:name=".Activities.PreventiveMaintenanceSiteAlarmCheckPointsActivity"
             android:label="Preventive Maintenance Site Alarm Check Points"
             android:screenOrientation="portrait" />
         <activity
