@@ -2,15 +2,15 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AcPreventiveMaintenanceProcessData implements Serializable
-{
+public class AcPreventiveMaintenanceProcessData implements Serializable {
 
-    @SerializedName("acPreventiveMaintenanceProcessqrCodeScan")
+    @SerializedName("acPreventiveMaintenanceProcessQrCodeScan")
     @Expose
-    private String acPreventiveMaintenanceProcessqrCodeScan;
+    private String acPreventiveMaintenanceProcessQrCodeScan;
     @SerializedName("acModel")
     @Expose
     private String acModel;
@@ -159,66 +159,62 @@ public class AcPreventiveMaintenanceProcessData implements Serializable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public AcPreventiveMaintenanceProcessData() {
+        this.acPreventiveMaintenanceProcessQrCodeScan ="";
+        this.acModel ="";
+        this.acType ="";
+        this.acMake ="";
+        this.acCapacity ="";
+        this.acSerialNo ="";
+        this.mainMcbStatus ="";
+        this.subMcbStatus ="";
+        this.metalCladPlugStatus ="";
+        this.metalCladSocketStatus ="";
+        this.stablizerStatus ="";
+        this.stabilizerMake ="";
+        this.stabilizerCapacity ="";
+        this.stablizerWorkingStatus ="";
+        this.inputAcVoltage ="";
+        this.acEarthingStatus ="";
+        this.filterCleaned ="";
+        this.base64filterCleanedBeforePhoto ="";
+        this.base64filterCleanedAfterPhoto ="";
+        this.condenserCoilCleaned ="";
+        this.base64condenserCoilCleanedBeforePhoto ="";
+        this.base64condenserCoilCleanedAfterPhoto ="";
+        this.coolingCoilCleaned ="";
+        this.base64coolingCoilCleanedBeforePhoto ="";
+        this.base64coolingCoilCleanedAfterPhoto ="";
+        this.acCoolingStatus ="";
+        this.acStartingLoadCurrent ="";
+        this.acRunningLoadCurrent ="";
+        this.indoorFilterCleanedStatus ="";
+        this.indoorFanMotorCondition ="";
+        this.blowerWheelCondition ="";
+        this.noiseIndoorMotor ="";
+        this.outdoorFanmotorCondition ="";
+        this.fanLeafCondition ="";
+        this.noiseOutdoorMotor ="";
+        this.compressorCondition ="";
+        this.compCapacitorCondition ="";
+        this.controllerCondition ="";
+        this.acAlarmStatus ="";
+        this.acSensorCondition ="";
+        this.roomTemperature ="";
+        this.setTemperature ="";
+        this.vibrationOfAc ="";
+        this.freeCoolingUnitStatus ="";
+        this.freeCoolingAvailable ="";
+        this.waterLeakage ="";
+        this.acCabinateStatus ="";
+        this.shelterDoorStatus ="";
+        this.remarks ="";
+
     }
 
-    /**
-     * 
-     * @param acMake
-     * @param mainMcbStatus
-     * @param acSerialNo
-     * @param waterLeakage
-     * @param acCabinateStatus
-     * @param acPreventiveMaintenanceProcessqrCodeScan
-     * @param controllerCondition
-     * @param acModel
-     * @param setTemperature
-     * @param blowerWheelCondition
-     * @param coolingCoilCleaned
-     * @param base64filterCleanedBeforePhoto
-     * @param outdoorFanmotorCondition
-     * @param acAlarmStatus
-     * @param base64condenserCoilCleanedBeforePhoto
-     * @param freeCoolingAvailable
-     * @param stabilizerCapacity
-     * @param acType
-     * @param roomTemperature
-     * @param metalCladSocketStatus
-     * @param fanLeafCondition
-     * @param inputAcVoltage
-     * @param acCapacity
-     * @param condenserCoilCleaned
-     * @param acStartingLoadCurrent
-     * @param acRunningLoadCurrent
-     * @param indoorFilterCleanedStatus
-     * @param subMcbStatus
-     * @param filterCleaned
-     * @param acCoolingStatus
-     * @param stablizerWorkingStatus
-     * @param noiseOutdoorMotor
-     * @param freeCoolingUnitStatus
-     * @param remarks
-     * @param vibrationOfAc
-     * @param acSensorCondition
-     * @param base64coolingCoilCleanedBeforePhoto
-     * @param base64coolingCoilCleanedAfterPhoto
-     * @param indoorFanMotorCondition
-     * @param compressorCondition
-     * @param shelterDoorStatus
-     * @param noiseIndoorMotor
-     * @param base64filterCleanedAfterPhoto
-     * @param stablizerStatus
-     * @param compCapacitorCondition
-     * @param base64condenserCoilCleanedAfterPhoto
-     * @param acEarthingStatus
-     * @param metalCladPlugStatus
-     * @param stabilizerMake
-     */
-    public AcPreventiveMaintenanceProcessData(String acPreventiveMaintenanceProcessqrCodeScan, String acModel, String acType, String acMake, String acCapacity, String acSerialNo, String mainMcbStatus, String subMcbStatus, String metalCladPlugStatus, String metalCladSocketStatus, String stablizerStatus, String stabilizerMake, String stabilizerCapacity, String stablizerWorkingStatus, String inputAcVoltage, String acEarthingStatus, String filterCleaned, String base64filterCleanedBeforePhoto, String base64filterCleanedAfterPhoto, String condenserCoilCleaned, String base64condenserCoilCleanedBeforePhoto, String base64condenserCoilCleanedAfterPhoto, String coolingCoilCleaned, String base64coolingCoilCleanedBeforePhoto, String base64coolingCoilCleanedAfterPhoto, String acCoolingStatus, String acStartingLoadCurrent, String acRunningLoadCurrent, String indoorFilterCleanedStatus, String indoorFanMotorCondition, String blowerWheelCondition, String noiseIndoorMotor, String outdoorFanmotorCondition, String fanLeafCondition, String noiseOutdoorMotor, String compressorCondition, String compCapacitorCondition, String controllerCondition, String acAlarmStatus, String acSensorCondition, String roomTemperature, String setTemperature, String vibrationOfAc, String freeCoolingUnitStatus, String freeCoolingAvailable, String waterLeakage, String acCabinateStatus, String shelterDoorStatus, String remarks) {
-        super();
-        this.acPreventiveMaintenanceProcessqrCodeScan = acPreventiveMaintenanceProcessqrCodeScan;
+    public AcPreventiveMaintenanceProcessData(String acPreventiveMaintenanceProcessQrCodeScan, String acModel, String acType, String acMake, String acCapacity, String acSerialNo, String mainMcbStatus, String subMcbStatus, String metalCladPlugStatus, String metalCladSocketStatus, String stablizerStatus, String stabilizerMake, String stabilizerCapacity, String stablizerWorkingStatus, String inputAcVoltage, String acEarthingStatus, String filterCleaned, String base64filterCleanedBeforePhoto, String base64filterCleanedAfterPhoto, String condenserCoilCleaned, String base64condenserCoilCleanedBeforePhoto, String base64condenserCoilCleanedAfterPhoto, String coolingCoilCleaned, String base64coolingCoilCleanedBeforePhoto, String base64coolingCoilCleanedAfterPhoto, String acCoolingStatus, String acStartingLoadCurrent, String acRunningLoadCurrent, String indoorFilterCleanedStatus, String indoorFanMotorCondition, String blowerWheelCondition, String noiseIndoorMotor, String outdoorFanmotorCondition, String fanLeafCondition, String noiseOutdoorMotor, String compressorCondition, String compCapacitorCondition, String controllerCondition, String acAlarmStatus, String acSensorCondition, String roomTemperature, String setTemperature, String vibrationOfAc, String freeCoolingUnitStatus, String freeCoolingAvailable, String waterLeakage, String acCabinateStatus, String shelterDoorStatus, String remarks) {
+        this.acPreventiveMaintenanceProcessQrCodeScan = acPreventiveMaintenanceProcessQrCodeScan;
         this.acModel = acModel;
         this.acType = acType;
         this.acMake = acMake;
@@ -269,12 +265,12 @@ public class AcPreventiveMaintenanceProcessData implements Serializable
         this.remarks = remarks;
     }
 
-    public String getAcPreventiveMaintenanceProcessqrCodeScan() {
-        return acPreventiveMaintenanceProcessqrCodeScan;
+    public String getAcPreventiveMaintenanceProcessQrCodeScan() {
+        return acPreventiveMaintenanceProcessQrCodeScan;
     }
 
-    public void setAcPreventiveMaintenanceProcessqrCodeScan(String acPreventiveMaintenanceProcessqrCodeScan) {
-        this.acPreventiveMaintenanceProcessqrCodeScan = acPreventiveMaintenanceProcessqrCodeScan;
+    public void setAcPreventiveMaintenanceProcessQrCodeScan(String acPreventiveMaintenanceProcessQrCodeScan) {
+        this.acPreventiveMaintenanceProcessQrCodeScan = acPreventiveMaintenanceProcessQrCodeScan;
     }
 
     public String getAcModel() {
