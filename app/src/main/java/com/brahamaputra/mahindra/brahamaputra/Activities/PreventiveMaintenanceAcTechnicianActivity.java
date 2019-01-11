@@ -39,6 +39,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -110,25 +112,31 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private TextView mPreventiveMaintenanceAcTechnicianTextViewFilterCleaned;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedVal;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedBeforePhoto;
+
     private ImageView mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhoto;
     private ImageView mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedAfterPhoto;
+
     private ImageView mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhoto;
     private ImageView mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleaned;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedBeforePhoto;
+
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhoto;
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedAfterPhoto;
+
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhoto;
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleaned;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedBeforePhoto;
+
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhoto;
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedAfterPhoto;
+
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhoto;
     private ImageView mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView;
     private TextView mPreventiveMaintenanceAcTechnicianTextViewAcCoolingStatus;
@@ -215,6 +223,43 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     String str_acCabinateStatusVal;
     String str_shelterDoorStatusVal;
 
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_FilterCleanedBeforePhoto = 101;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_FilterCleanedAfterPhoto = 102;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_CondenserCoilCleanedBeforePhoto = 103;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_CondenserCoilCleanedAfterPhoto = 104;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedBeforePhoto = 105;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedAfterPhoto = 106;
+
+
+    private String base64StringAcTechnicianQRCodeScan = "";
+    //private String imageFileAcTechnicianQRCodeScan;
+    //private Uri imageFileUriAcTechnicianQRCodeScan = null;
+
+    private String base64StringFilterCleanedBeforePhoto = "";
+    private String base64StringFilterCleanedAfterPhoto = "";
+    private String base64StringCondenserCoilCleanedBeforePhoto = "";
+    private String base64StringCondenserCoilCleanedAfterPhoto = "";
+    private String base64StringCoolingCoilCleanedBeforePhoto = "";
+    private String base64StringCoolingCoilCleanedAfterPhoto = "";
+
+    private String imageFileFilterCleanedBeforePhoto;
+    private String imageFileFilterCleanedAfterPhoto;
+    private String imageFileCondenserCoilCleanedBeforePhoto;
+    private String imageFileCondenserCoilCleanedAfterPhoto;
+    private String imageFileCoolingCoilCleanedBeforePhoto;
+    private String imageFileCoolingCoilCleanedAfterPhoto;
+
+    private Uri imageFileUriFilterCleanedBeforePhoto = null;
+    private Uri imageFileUriFilterCleanedAfterPhoto = null;
+    private Uri imageFileUriCondenserCoilCleanedBeforePhoto = null;
+    private Uri imageFileUriCondenserCoilCleanedAfterPhoto = null;
+    private Uri imageFileUriCoolingCoilCleanedBeforePhoto = null;
+    private Uri imageFileUriCoolingCoilCleanedAfterPhoto = null;
+
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
+
     private AlertDialogManager alertDialogManager;
 
     private String userId = "1111";
@@ -223,15 +268,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
     /*private HotoTransactionData hotoTransactionData;
     private LandDetailsData landDetailsData;*/
-    private String base64StringFilterCleanedBeforePhoto = "";
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
-
-    private Uri imageFileUri = null;
-    private String imageFileName = "";
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,58 +277,17 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         setContentView(R.layout.activity_preventive_maintenance_ac_technician);
         this.setTitle("AC Preventive Maintenance Process");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        assignViews();
-        initCombo();
 
         alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceAcTechnicianActivity.this);
-
         //ticketId = sessionManager.getSessionUserTicketId();
         //ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceAcTechnicianActivity.this, userId, ticketName);
 
-        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(PreventiveMaintenanceAcTechnicianActivity.this,
-                        Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    if (getFromPref(PreventiveMaintenanceAcTechnicianActivity.this, ALLOW_KEY)) {
-                        showSettingsAlert();
-
-                    } else if (ContextCompat.checkSelfPermission(PreventiveMaintenanceAcTechnicianActivity.this,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Should we show an explanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(PreventiveMaintenanceAcTechnicianActivity.this,
-                                Manifest.permission.CAMERA)) {
-                            showAlert();
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(PreventiveMaintenanceAcTechnicianActivity.this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    MY_PERMISSIONS_REQUEST_CAMERA);
-                        }
-                    }
-                } else {
-                    openCameraIntent();
-                }
-
-            }
-        });
-
-
-        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (imageFileUri != null) {
-                    GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUri);
-                } else {
-                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        assignViews();
+        initCombo();
+        setListner();
 
 
     }
@@ -1074,135 +1071,433 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     }
 
 
-    //Camera Code Start
+    private void setListner() {
 
-    public static Boolean getFromPref(Context context, String key) {
-        SharedPreferences myPrefs = context.getSharedPreferences
-                (CAMERA_PREF, Context.MODE_PRIVATE);
-        return (myPrefs.getBoolean(key, false));
-    }
-
-    private void showSettingsAlert() {
-
-        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+        mPreventiveMaintenanceAcTechnicianButtonQRCodeScan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPositiveClick() {
-
-                final EditText taskEditText = new EditText(PreventiveMaintenanceAcTechnicianActivity.this);
-                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceAcTechnicianActivity.this)
-                        .setTitle("Permission")
-                        .setMessage("Need Camera Access")
-                        .setView(taskEditText)
-                        .setPositiveButton("SETTINGS", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                startInstalledAppDetailsActivity(PreventiveMaintenanceAcTechnicianActivity.this);
-                            }
-                        })
-                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .create();
-                dialog.show();
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    AcTechnicianQRCodeScan();
+                }
             }
-        }).show();
+        });
+
+        mButtonClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringAcTechnicianQRCodeScan = "";
+                mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
+
+        //////////////
+
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    FilterCleanedBeforePhoto();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    FilterCleanedAfterPhoto();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    CondenserCoilCleanedBeforePhoto();
+                }
+            }
+        });
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    CondenserCoilCleanedAfterPhoto();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    CoolingCoilCleanedBeforePhoto();
+                }
+            }
+        });
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    CoolingCoilCleanedAfterPhoto();
+                }
+            }
+        });
+
+        //////////////////////////
+
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriFilterCleanedBeforePhoto != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriFilterCleanedBeforePhoto);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriFilterCleanedAfterPhoto != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriFilterCleanedAfterPhoto);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriCondenserCoilCleanedBeforePhoto != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCondenserCoilCleanedBeforePhoto);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriCondenserCoilCleanedAfterPhoto != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCondenserCoilCleanedAfterPhoto);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriCoolingCoilCleanedBeforePhoto != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCoolingCoilCleanedBeforePhoto);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriCoolingCoilCleanedAfterPhoto != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCoolingCoilCleanedAfterPhoto);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 
-    public static void startInstalledAppDetailsActivity(final Activity context) {
-        if (context == null) {
-            return;
+    private void AcTechnicianQRCodeScan() {
+        try {
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.setPrompt("Scan a barcode or QRcode");
+            integrator.setOrientationLocked(true);
+            integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
+            integrator.initiateScan();
+
+            //        Use this for more customization
+            //        IntentIntegrator integrator = new IntentIntegrator(this);
+            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            //        integrator.setPrompt("Scan a barcode");
+            //        integrator.setCameraId(0);  // Use a specific camera of the device
+            //        integrator.setBeepEnabled(false);
+            //        integrator.setBarcodeImageEnabled(true);
+            //        integrator.initiateScan();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        final Intent i = new Intent();
-        i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        i.addCategory(Intent.CATEGORY_DEFAULT);
-        i.setData(Uri.parse("package:" + context.getPackageName()));
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        context.startActivity(i);
     }
 
-    private void showAlert() {
-        alertDialogManager.Dialog("Permission", "App needs to access the Camera.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-            @Override
-            public void onPositiveClick() {
-
-                final EditText taskEditText = new EditText(PreventiveMaintenanceAcTechnicianActivity.this);
-                android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(PreventiveMaintenanceAcTechnicianActivity.this)
-                        .setTitle("Permission")
-                        .setMessage("Need Camera Access")
-                        .setView(taskEditText)
-                        .setPositiveButton("ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                ActivityCompat.requestPermissions(PreventiveMaintenanceAcTechnicianActivity.this,
-                                        new String[]{Manifest.permission.CAMERA},
-                                        MY_PERMISSIONS_REQUEST_CAMERA);
-                            }
-                        })
-                        .setNegativeButton("DONT ALLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                finish();
-                            }
-                        })
-                        .create();
-                dialog.show();
-            }
-        }).show();
-
-
-    }
-
-    public void openCameraIntent() {
+    private void FilterCleanedBeforePhoto() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+            imageFileFilterCleanedBeforePhoto = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
 
-            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-
-            imageFileUri = FileProvider.getUriForFile(PreventiveMaintenanceAcTechnicianActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileFilterCleanedBeforePhoto);
+            imageFileUriFilterCleanedBeforePhoto = FileProvider.getUriForFile(PreventiveMaintenanceAcTechnicianActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
             Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriFilterCleanedBeforePhoto);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_FilterCleanedBeforePhoto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
+    private void FilterCleanedAfterPhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileFilterCleanedAfterPhoto = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_cautionBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileFilterCleanedAfterPhoto);
+            imageFileUriFilterCleanedAfterPhoto = FileProvider.getUriForFile(PreventiveMaintenanceAcTechnicianActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriFilterCleanedAfterPhoto);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_FilterCleanedAfterPhoto);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    //Camera Code End
+    private void CondenserCoilCleanedBeforePhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileCondenserCoilCleanedBeforePhoto = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_warningBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileCondenserCoilCleanedBeforePhoto);
+            imageFileUriCondenserCoilCleanedBeforePhoto = FileProvider.getUriForFile(PreventiveMaintenanceAcTechnicianActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriCondenserCoilCleanedBeforePhoto);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_CondenserCoilCleanedBeforePhoto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void CondenserCoilCleanedAfterPhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileCondenserCoilCleanedAfterPhoto = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_dangerBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileCondenserCoilCleanedAfterPhoto);
+            imageFileUriCondenserCoilCleanedAfterPhoto = FileProvider.getUriForFile(PreventiveMaintenanceAcTechnicianActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriCondenserCoilCleanedAfterPhoto);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_CondenserCoilCleanedAfterPhoto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void CoolingCoilCleanedBeforePhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileCoolingCoilCleanedBeforePhoto = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_warningBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileCoolingCoilCleanedBeforePhoto);
+            imageFileUriCoolingCoilCleanedBeforePhoto = FileProvider.getUriForFile(PreventiveMaintenanceAcTechnicianActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriCoolingCoilCleanedBeforePhoto);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedBeforePhoto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void CoolingCoilCleanedAfterPhoto() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileCoolingCoilCleanedAfterPhoto = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_dangerBoard.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileCoolingCoilCleanedAfterPhoto);
+            imageFileUriCoolingCoilCleanedAfterPhoto = FileProvider.getUriForFile(PreventiveMaintenanceAcTechnicianActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriCoolingCoilCleanedAfterPhoto);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedAfterPhoto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private boolean checkCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceAcTechnicianActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PreventiveMaintenanceAcTechnicianActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            return true;
+        }
+
+
+        return false;
+    }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA && resultCode == RESULT_OK) {
-            if (imageFileUri != null) {
-                try {
-                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
-                    byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringFilterCleanedBeforePhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                    mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.VISIBLE);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        switch (requestCode) {
+
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+                if (result != null) {
+                    mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                    if (result.getContents() == null) {
+                        base64StringAcTechnicianQRCodeScan = "";
+                        showToast("Cancelled");
+                    } else {
+                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                        if (!flagIsDuplicateQRcode) {*/
+                        base64StringAcTechnicianQRCodeScan = result.getContents();
+                        if (!base64StringAcTechnicianQRCodeScan.isEmpty() && base64StringAcTechnicianQRCodeScan != null) {
+                            mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                        }
+                        /*} else {
+                            base64StringAcTechnicianQRCodeScan = "";
+                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
+                        }*/
+                    }
                 }
-            }
-        } else {
-            imageFileName = "";
-            imageFileUri = null;
-            mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.GONE);
+                break;
+
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_FilterCleanedBeforePhoto:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriFilterCleanedBeforePhoto != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriFilterCleanedBeforePhoto);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringFilterCleanedBeforePhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileFilterCleanedBeforePhoto = "";
+                    imageFileUriFilterCleanedBeforePhoto = null;
+                    mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_FilterCleanedAfterPhoto:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriFilterCleanedAfterPhoto != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriFilterCleanedAfterPhoto);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringFilterCleanedAfterPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileFilterCleanedAfterPhoto = "";
+                    imageFileUriFilterCleanedAfterPhoto = null;
+                    mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_CondenserCoilCleanedBeforePhoto:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriCondenserCoilCleanedBeforePhoto != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCondenserCoilCleanedBeforePhoto);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringCondenserCoilCleanedBeforePhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileCondenserCoilCleanedBeforePhoto = "";
+                    imageFileUriCondenserCoilCleanedBeforePhoto = null;
+                    mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_CondenserCoilCleanedAfterPhoto:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriCondenserCoilCleanedAfterPhoto != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCondenserCoilCleanedAfterPhoto);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringCondenserCoilCleanedAfterPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileCondenserCoilCleanedAfterPhoto = "";
+                    imageFileUriCondenserCoilCleanedAfterPhoto = null;
+                    mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedBeforePhoto:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriCoolingCoilCleanedBeforePhoto != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCoolingCoilCleanedBeforePhoto);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringCoolingCoilCleanedBeforePhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileCoolingCoilCleanedBeforePhoto = "";
+                    imageFileUriCoolingCoilCleanedBeforePhoto = null;
+                    mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedAfterPhoto:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriCoolingCoilCleanedAfterPhoto != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCoolingCoilCleanedAfterPhoto);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringCoolingCoilCleanedAfterPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileCoolingCoilCleanedAfterPhoto = "";
+                    imageFileUriCoolingCoilCleanedAfterPhoto = null;
+                    mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.GONE);
+                }
+                break;
         }
+
     }
 
 
@@ -1231,5 +1526,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     public void onBackPressed() {
         finish();
     }
+
 
 }
