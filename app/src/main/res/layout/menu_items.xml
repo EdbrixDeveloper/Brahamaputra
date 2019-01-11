@@ -27,7 +27,7 @@
             android:layout_below="@+id/dashboard_myHoto"
             android:layout_centerHorizontal="true"
 
-            android:text="my HOTO"
+            android:text="HOTO"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_myAsset"
             android:layout_centerHorizontal="true"
-            android:text="my Assets"
+            android:text="Assets"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
@@ -119,7 +119,7 @@
             android:layout_below="@+id/dashboard_myEnergy"
 
             android:layout_centerHorizontal="true"
-            android:text="my Energy"
+            android:text="Energy"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
@@ -158,7 +158,7 @@
             android:layout_below="@+id/dashboard_myPrevitive"
             android:layout_centerHorizontal="true"
 
-            android:text="my Preventive"
+            android:text="Preventive"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
@@ -197,7 +197,7 @@
             android:layout_below="@+id/dashboard_myIncident"
             android:layout_centerHorizontal="true"
 
-            android:text="my Incident"
+            android:text="Incident"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
