@@ -442,9 +442,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         } else {
             return true;
         }
-
-
-        return false;
+      return false;
     }
 
     @Override

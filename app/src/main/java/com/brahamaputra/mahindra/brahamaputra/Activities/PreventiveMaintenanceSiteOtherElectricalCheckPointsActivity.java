@@ -7,11 +7,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.OtherElectricalCheckPoints;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +40,17 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
     String str_lightsInsideTheShelterVal;
     String str_lightsInSitePremisesOrBulkHeadVal;
 
+    private OfflineStorageWrapper offlineStorageWrapper;
+
+    private PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
+    private OtherElectricalCheckPoints otherElectricalCheckPoints;
+
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+
+    private SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +60,16 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+
+        sessionManager = new SessionManager(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this, userId, ticketName);
+
+        preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
+        setInputDetails();
+
     }
 
     private void assignViews() {
@@ -151,13 +181,62 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
-                //startActivity(new Intent(this, Tower_Detail.class));
+                submitDetails();
                 finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt"))
+            {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                Gson gson = new Gson();
+                preventiveMaintanceSiteTransactionDetails = gson.fromJson(jsonInString,PreventiveMaintanceSiteTransactionDetails.class);
+
+                if(preventiveMaintanceSiteTransactionDetails != null)
+                {
+                    otherElectricalCheckPoints = preventiveMaintanceSiteTransactionDetails.getOtherElectricalCheckPoints();
+                    if(otherElectricalCheckPoints != null)
+                    {
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.setText(otherElectricalCheckPoints.getDcEnergyMeterstatus());
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.setText(otherElectricalCheckPoints.getAviationLamp());
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.setText(otherElectricalCheckPoints.getLightsInsideTheShelter());
+                        mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.setText(otherElectricalCheckPoints.getLightsInSitePremisesBulkhead());
+                    }
+                }
+
+            }
+            else
+            {
+                Toast.makeText(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+                String dcEnergyMeterStatus =  mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.getText().toString().trim();
+                String aviationLamp = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.getText().toString().trim();
+                String lightInsideTheShelter = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.getText().toString().trim();
+                String lightsInSitePremisesBulkHead = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.getText().toString().trim();
+
+                otherElectricalCheckPoints = new OtherElectricalCheckPoints(dcEnergyMeterStatus,aviationLamp,lightInsideTheShelter,lightsInSitePremisesBulkHead);
+                preventiveMaintanceSiteTransactionDetails.setOtherElectricalCheckPoints(otherElectricalCheckPoints);
+
+                Gson gson2 = new GsonBuilder().create();
+                String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);
+                offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 

@@ -8,11 +8,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
+import com.brahamaputra.mahindra.brahamaputra.Data.ShelterCheckPoints;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +49,17 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
     String str_registerFaultVal;
     String str_typeOfFaultVal;
 
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+
+    private SessionManager sessionManager;
+    private OfflineStorageWrapper offlineStorageWrapper;
+
+    PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
+    ShelterCheckPoints shelterCheckPoints;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +68,15 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+
+        sessionManager = new SessionManager(PreventiveMaintenanceSiteShelterCheckPointsActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteShelterCheckPointsActivity.this, userId, ticketName);
+
+        preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
+        setInputDetails();
     }
 
     private void assignViews() {
@@ -228,13 +256,67 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
+                submitDetails();
                 startActivity(new Intent(this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
                 finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void setInputDetails() {
+        try {
+                 if(offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt"))
+                 {
+                     String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                     Gson gson = new Gson();
+                     preventiveMaintanceSiteTransactionDetails = gson.fromJson(jsonInString,PreventiveMaintanceSiteTransactionDetails.class);
+
+                     if(preventiveMaintanceSiteTransactionDetails != null)
+                     {
+                         shelterCheckPoints = preventiveMaintanceSiteTransactionDetails.getShelterCheckPoints();
+                         if(shelterCheckPoints != null)
+                         {
+                             mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterCleaningVal.setText(shelterCheckPoints.getShelterCleaning());
+                             mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterLeakageVal.setText(shelterCheckPoints.getShelterLeakage());
+                             mPreventiveMaintenanceSiteShelterCheckPointsTextViewHatchPlateEntrySealedVal.setText(shelterCheckPoints.getHatchPlateEntrysealed());
+                             mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterFloorStatusVal.setText(shelterCheckPoints.getShleterFloorStatus());
+                             mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterEarthingStatusVal.setText(shelterCheckPoints.getShelterEarthingStatus());
+                             mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal.setText(shelterCheckPoints.getRegisterFault());
+                             mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(shelterCheckPoints.getTypeOfFault());
+                         }
+                     }
+                 }
+                 else
+                 {
+                     Toast.makeText(PreventiveMaintenanceSiteShelterCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                 }
+        }catch (Exception e){
+                e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+               String shelterCleaning =  mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterCleaningVal.getText().toString().trim();
+               String shelterLeakage =  mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterLeakageVal.getText().toString().trim();
+               String hatchPlateEntrySealed =  mPreventiveMaintenanceSiteShelterCheckPointsTextViewHatchPlateEntrySealedVal.getText().toString().trim();
+               String shelterFloorStatus = mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterFloorStatusVal.getText().toString().trim();
+               String shelterEarthingStatus = mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterEarthingStatusVal.getText().toString().trim();
+               String resultFault = mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+               String typeOfFault = mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+               shelterCheckPoints = new ShelterCheckPoints(shelterCleaning,shelterLeakage,hatchPlateEntrySealed,shelterFloorStatus,shelterEarthingStatus,resultFault,typeOfFault);
+               preventiveMaintanceSiteTransactionDetails.setShelterCheckPoints(shelterCheckPoints);
+               Gson gson2 = new GsonBuilder().create();
+               String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);
+               offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 

@@ -357,7 +357,6 @@
                         android:textColor="@color/whitesmoke"
                         android:textSize="18sp" />
                     <!--android:textAllCaps="false"-->
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
