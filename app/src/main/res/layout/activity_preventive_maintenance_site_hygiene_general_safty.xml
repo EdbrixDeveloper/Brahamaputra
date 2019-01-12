@@ -18,6 +18,7 @@
             android:orientation="vertical">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_sitePremisesCleaning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -32,7 +33,6 @@
                     android:text="Site Premises Cleaning"
                     android:textColor="@color/colorBlueLink" />
 
-
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_sitePremisesCleaningVal"
                     style="@style/MyTheme"
@@ -41,9 +41,11 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_uploadPhotoOfSitePremises"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -81,6 +83,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_equipmentCleaning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -95,7 +98,6 @@
                     android:text="Equipment Cleaning"
                     android:textColor="@color/colorBlueLink" />
 
-
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_equipmentCleaningVal"
                     style="@style/MyTheme"
@@ -104,9 +106,11 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_anyHivesInTower"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -121,7 +125,6 @@
                     android:text="Any Eagle/Crow/Honey Hives in Tower"
                     android:textColor="@color/colorBlueLink" />
 
-
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_textView_anyHivesInTowerVal"
                     style="@style/MyTheme"
@@ -130,12 +133,15 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_compoundWallFencingStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -155,9 +161,11 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_gateLockAvailablity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -180,12 +188,15 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_shelterLockAvailablity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -205,12 +216,15 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_dgLockAvailablity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -230,12 +244,15 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_fireExtingisherAvailablity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+
                 android:weightSum="1">
 
                 <TextView
@@ -255,9 +272,11 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_noOfFireExtingisherAvailablity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -280,12 +299,15 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_fireExtingisherExpiryDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -310,9 +332,11 @@
                     android:inputType="none"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_fireBucketAvailablity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -335,9 +359,11 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_cautionSignBoardPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -377,6 +403,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_warningSignBoardPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -416,6 +443,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_dangerSignBoardPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -455,6 +483,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_safetyChartsAndCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -481,6 +510,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_unusedMaterialInSite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -507,6 +537,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_registerFault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -533,10 +564,12 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_typesOfFault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_normal_margin"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -557,6 +590,7 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
             </LinearLayout>
 
         </LinearLayout>

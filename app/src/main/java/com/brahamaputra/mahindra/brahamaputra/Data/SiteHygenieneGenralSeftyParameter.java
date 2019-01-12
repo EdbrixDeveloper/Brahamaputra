@@ -2,11 +2,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SiteHygenieneGenralSeftyParameter implements Serializable
-{
+public class SiteHygenieneGenralSeftyParameter implements Serializable {
 
     @SerializedName("sitePremisesCleaning")
     @Expose
@@ -65,7 +65,66 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
-    private final static long serialVersionUID = 2983840755754588275L;
+
+    @SerializedName("isSubmited")
+    private int isSubmited;
+    //private final static long serialVersionUID = 2983840755754588275L;
+
+
+    public SiteHygenieneGenralSeftyParameter() {
+        this.sitePremisesCleaning = "";
+        this.base64StringUploadPhotoOfSitePremises = "";
+        this.equipmentCleaning = "";
+        this.anyEagleCrowHoneyHivesInTower = "";
+        this.compoundWallFencingStatus = "";
+        this.gateLockAvailablity = "";
+        this.shelterLockAvailablity = "";
+        this.dgLockAvailablity = "";
+        this.fireExtinguisherAvilability = "";
+        this.noOfFireExtinguisher = "";
+        this.fireExtinguisherExpiryDate = "";
+        this.fireBucket = "";
+        this.base64StringCautionSignBoardPhoto = "";
+        this.base64StringWarningSignBoardPhoto = "";
+        this.base64StringDangerSignBoardPhoto = "";
+        this.safetyChartsCalendar = "";
+        this.unusedMaterialInSite = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+        isSubmited=0;
+    }
+
+
+    public SiteHygenieneGenralSeftyParameter(String sitePremisesCleaning, String base64StringUploadPhotoOfSitePremises, String equipmentCleaning, String anyEagleCrowHoneyHivesInTower, String compoundWallFencingStatus, String gateLockAvailablity, String shelterLockAvailablity, String dgLockAvailablity, String fireExtinguisherAvilability, String noOfFireExtinguisher, String fireExtinguisherExpiryDate, String fireBucket, String base64StringCautionSignBoardPhoto, String base64StringWarningSignBoardPhoto, String base64StringDangerSignBoardPhoto, String safetyChartsCalendar, String unusedMaterialInSite, String registerFault, String typeOfFault) {
+        this.sitePremisesCleaning = sitePremisesCleaning;
+        this.base64StringUploadPhotoOfSitePremises = base64StringUploadPhotoOfSitePremises;
+        this.equipmentCleaning = equipmentCleaning;
+        this.anyEagleCrowHoneyHivesInTower = anyEagleCrowHoneyHivesInTower;
+        this.compoundWallFencingStatus = compoundWallFencingStatus;
+        this.gateLockAvailablity = gateLockAvailablity;
+        this.shelterLockAvailablity = shelterLockAvailablity;
+        this.dgLockAvailablity = dgLockAvailablity;
+        this.fireExtinguisherAvilability = fireExtinguisherAvilability;
+        this.noOfFireExtinguisher = noOfFireExtinguisher;
+        this.fireExtinguisherExpiryDate = fireExtinguisherExpiryDate;
+        this.fireBucket = fireBucket;
+        this.base64StringCautionSignBoardPhoto = base64StringCautionSignBoardPhoto;
+        this.base64StringWarningSignBoardPhoto = base64StringWarningSignBoardPhoto;
+        this.base64StringDangerSignBoardPhoto = base64StringDangerSignBoardPhoto;
+        this.safetyChartsCalendar = safetyChartsCalendar;
+        this.unusedMaterialInSite = unusedMaterialInSite;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+
+        this.isSubmited = 2;
+        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }*/
+
+    }
+
 
     public String getSitePremisesCleaning() {
         return sitePremisesCleaning;
@@ -218,5 +277,14 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
     }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int submited) {
+        isSubmited = submited;
+    }
+
 
 }

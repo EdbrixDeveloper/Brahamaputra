@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,10 +20,14 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -30,7 +35,11 @@ import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
+import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerMultiSelectionItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerSelectionDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -46,48 +55,69 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
     private static final String TAG = PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class.getSimpleName();
 
+
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutSitePremisesCleaning;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaning;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfSitePremises;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUploadPhotoOfSitePremises;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremises;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutEquipmentCleaning;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaning;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaningVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutAnyHivesInTower;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTower;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTowerVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCompoundWallFencingStatus;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatus;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutGateLockAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablityVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutNoOfFireExtingisherAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherExpiryDate;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherExpiryDate;
     private EditText mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireBucketAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablity;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablityVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCautionSignBoardPhoto;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCautionSignBoardPhoto;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhoto;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutWarningSignBoardPhoto;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewWarningSignBoardPhoto;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhoto;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDangerSignBoardPhoto;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDangerSignBoardPhoto;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhoto;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutSafetyChartsAndCalendar;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendar;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendarVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUnusedMaterialInSite;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSite;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutRegisterFault;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFault;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal;
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFault;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal;
+
 
     String str_pmSitePremisesCleaningVal = "";
     String str_pmSiteanyEagleOrCrowOrHoneyHivesInTowerVal = "";
@@ -139,6 +169,8 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+    MultiSelectDialog multiSelectDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,49 +211,109 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             }
         });
 
+        visibilityOfCompoundWallFencingStatus("");
+        visibilityOfShelterLockAvailablity("");
+        visibilityOfDgLockAvailablity("");
+
+        ArrayList<MultiSelectModel> listOfCountries = new ArrayList<>();
+        listOfCountries.add(new MultiSelectModel(1, "Compound Wall"));
+        listOfCountries.add(new MultiSelectModel(2, "Safety"));
+        listOfCountries.add(new MultiSelectModel(3, "Signage Board"));
+        listOfCountries.add(new MultiSelectModel(4, "Site Hygiene"));
+        listOfCountries.add(new MultiSelectModel(5, "Site Return Material"));
+
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(listOfCountries.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfCountries) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        /*for (int i = 0; i < selectedIds.size(); i++) {
+                            Toast.makeText(MainActivity.this, "Selected Ids : " + selectedIds.get(i) + "\n" +
+                                    "Selected Names : " + selectedNames.get(i) + "\n" +
+                                    "DataString : " + dataString, Toast.LENGTH_SHORT).show();
+                        }*/
+                        str_pmSiteTypeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(str_pmSiteTypeOfFaultVal);
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+
+                    }
+                });
     }
 
     private void assignViews() {
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutSitePremisesCleaning = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_sitePremisesCleaning);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaning = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_sitePremisesCleaning);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_sitePremisesCleaningVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfSitePremises = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_uploadPhotoOfSitePremises);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUploadPhotoOfSitePremises = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_uploadPhotoOfSitePremises);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremises = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_uploadPhotoOfSitePremises);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_uploadPhotoOfSitePremisesView);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutEquipmentCleaning = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_equipmentCleaning);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaning = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_equipmentCleaning);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaningVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_equipmentCleaningVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutAnyHivesInTower = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_anyHivesInTower);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTower = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_anyHivesInTower);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTowerVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_anyHivesInTowerVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCompoundWallFencingStatus = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_compoundWallFencingStatus);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_compoundWallFencingStatus);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_compoundWallFencingStatusVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutGateLockAvailablity = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_gateLockAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablity = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_gateLockAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablityVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_gateLockAvailablityVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_shelterLockAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablity = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_shelterLockAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_shelterLockAvailablityVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_dgLockAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablity = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_dgLockAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_dgLockAvailablityVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherAvailablity = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_fireExtingisherAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablity = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireExtingisherAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireExtingisherAvailablityVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutNoOfFireExtingisherAvailablity = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_noOfFireExtingisherAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablity = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_noOfFireExtingisherAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_noOfFireExtingisherAvailablityVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherExpiryDate = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_fireExtingisherExpiryDate);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherExpiryDate = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireExtingisherExpiryDate);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate = (EditText) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_editText_fireExtingisherExpiryDate);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireBucketAvailablity = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_fireBucketAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablity = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireBucketAvailablity);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablityVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_fireBucketAvailablityVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCautionSignBoardPhoto = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_cautionSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCautionSignBoardPhoto = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_cautionSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhoto = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_cautionSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_cautionSignBoardPhotoView);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutWarningSignBoardPhoto = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_warningSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewWarningSignBoardPhoto = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_warningSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhoto = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_warningSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_warningSignBoardPhotoView);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDangerSignBoardPhoto = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_dangerSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDangerSignBoardPhoto = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_dangerSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhoto = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_dangerSignBoardPhoto);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_dangerSignBoardPhotoView);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutSafetyChartsAndCalendar = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_safetyChartsAndCalendar);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendar = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_safetyChartsAndCalendar);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendarVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_safetyChartsAndCalendarVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUnusedMaterialInSite = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_unusedMaterialInSite);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSite = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_unusedMaterialInSite);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_unusedMaterialInSiteVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_registerFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_registerFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_registerFaultVal);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_typesOfFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFaultVal);
     }
@@ -382,6 +474,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
                         str_pmSiteFireExtinguisherAvilabilityVal = item.get(position);
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.setText(str_pmSiteFireExtinguisherAvilabilityVal);
+                        visibilityOfFireExtingisherAvailablity(str_pmSiteFireExtinguisherAvilabilityVal);
                     }
                 });
             }
@@ -482,28 +575,38 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
                         str_pmSiteRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.setText(str_pmSiteRegisterFaultVal);
+                        visibilityOfTypesOfFault(str_pmSiteRegisterFaultVal);
                     }
                 });
             }
         });
 
+
+
+
+        //final String[] item = new String[0];
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this,
+
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+
+                /*SearchableSpinnerSelectionDialog searchableSpinnerDialog = new SearchableSpinnerSelectionDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_typeOfFault))),
                         "Type of Fault",
-                        "close", "#000000");
+                        "close", "#000000",
+                        "done", mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.getText().toString());
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerMultiSelectionItemClick() {
                     @Override
-                    public void onClick(ArrayList<String> item, int position) {
+                    public void onClick(String item, String position) {
 
-                        str_pmSiteTypeOfFaultVal = item.get(position);
+
+                        str_pmSiteTypeOfFaultVal = item;
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(str_pmSiteTypeOfFaultVal);
                     }
-                });
+                });*/
             }
         });
     }
@@ -669,6 +772,77 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
         return false;
     }
+
+    private void visibilityOfCompoundWallFencingStatus(String site) {
+        //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.setText("");
+        if (site.isEmpty() || site.equals("Outdoor")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCompoundWallFencingStatus.setVisibility(View.GONE);
+        } else {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCompoundWallFencingStatus.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void visibilityOfShelterLockAvailablity(String site) {
+        //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.setText("");
+        if (site.isEmpty() || site.equals("Outdoor")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity.setVisibility(View.GONE);
+        } else {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void visibilityOfDgLockAvailablity(String SourceOfPower) {
+        if (SourceOfPower.isEmpty() || SourceOfPower.equals("Non DG")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity.setVisibility(View.GONE);
+        } else {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void visibilityOfFireExtingisherAvailablity(String FireExtingisherAvailablity) {
+
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherExpiryDate.setVisibility(View.VISIBLE);
+        if (FireExtingisherAvailablity.equals("Not Available")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.setText("");
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherExpiryDate.setVisibility(View.GONE);
+        }
+    }
+
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.VISIBLE);
+        if (RegisterFault.equals("No")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.GONE);
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            /*String landType = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
+            String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
+            String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
+            String rentLeaseValueInWords = mLandDetailsTextViewRentLeaseInWords_val.getText().toString().trim().toUpperCase();
+            String landOwnerName = mLandDetailsEditTextNameOfOwner.getText().toString().trim();
+            String landOwnerMob = mLandDetailsEditTextMobileNoOfOwner.getText().toString().trim();
+            String landLayout = base64StringLayoutOfLand;
+            //String landAgreementCopy = "0";
+            String landAgreementCopy = mLandDetailsTextViewCopyAgreementWithOwnerVal.getText().toString().trim();
+            String landAgreementValidity = mLandDetailsEditTextDateOfvalidityOfAgreement.getText().toString();
+
+            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity, imageFileName);
+
+            hotoTransactionData.setLandDetailsData(landDetailsData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(hotoTransactionData);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
