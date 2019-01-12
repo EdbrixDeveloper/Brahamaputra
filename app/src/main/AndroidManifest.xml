@@ -314,8 +314,8 @@
         <activity
             android:name=".Activities.PreventiveMaintenanceSiteEarthingCheckPointsActivity"
             android:label="Preventive Maintenance Site Earthing Check Points"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Activities.PreventiveMaintenanceDashboard"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activities.PreventiveMaintenanceDashboard" />
     </application>
 
 </manifest>

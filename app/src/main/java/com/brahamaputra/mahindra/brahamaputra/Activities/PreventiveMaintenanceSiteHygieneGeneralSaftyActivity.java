@@ -215,13 +215,14 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         visibilityOfShelterLockAvailablity("");
         visibilityOfDgLockAvailablity("");
 
-        ArrayList<MultiSelectModel> listOfCountries = new ArrayList<>();
-        listOfCountries.add(new MultiSelectModel(1, "Compound Wall"));
-        listOfCountries.add(new MultiSelectModel(2, "Safety"));
-        listOfCountries.add(new MultiSelectModel(3, "Signage Board"));
-        listOfCountries.add(new MultiSelectModel(4, "Site Hygiene"));
-        listOfCountries.add(new MultiSelectModel(5, "Site Return Material"));
-
+        //Code For MultiSelect Type Of Fault
+        ArrayList<String> typeOfFaultList =  new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_typeOfFault)));
+        ArrayList<MultiSelectModel> listOfFaultsTypes = new ArrayList<>();
+        int id=1;
+        for(int i=0;i<typeOfFaultList.size();i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
         //MultiSelectModel
         multiSelectDialog = new MultiSelectDialog()
                 .title("Type of Fault") //setting title for dialog
@@ -229,18 +230,13 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 .positiveText("Done")
                 .negativeText("Cancel")
                 .setMinSelectionLimit(0)
-                .setMaxSelectionLimit(listOfCountries.size())
+                .setMaxSelectionLimit(typeOfFaultList.size())
                 //List of ids that you need to be selected
-                .multiSelectList(listOfCountries) // the multi select model list with ids and name
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
                 .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
                     @Override
                     public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
                         //will return list of selected IDS
-                        /*for (int i = 0; i < selectedIds.size(); i++) {
-                            Toast.makeText(MainActivity.this, "Selected Ids : " + selectedIds.get(i) + "\n" +
-                                    "Selected Names : " + selectedNames.get(i) + "\n" +
-                                    "DataString : " + dataString, Toast.LENGTH_SHORT).show();
-                        }*/
                         str_pmSiteTypeOfFaultVal = dataString;
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(str_pmSiteTypeOfFaultVal);
 
@@ -581,32 +577,10 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             }
         });
 
-
-
-
-        //final String[] item = new String[0];
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
-
-                /*SearchableSpinnerSelectionDialog searchableSpinnerDialog = new SearchableSpinnerSelectionDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_typeOfFault))),
-                        "Type of Fault",
-                        "close", "#000000",
-                        "done", mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.getText().toString());
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerMultiSelectionItemClick() {
-                    @Override
-                    public void onClick(String item, String position) {
-
-
-                        str_pmSiteTypeOfFaultVal = item;
-                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(str_pmSiteTypeOfFaultVal);
-                    }
-                });*/
             }
         });
     }
