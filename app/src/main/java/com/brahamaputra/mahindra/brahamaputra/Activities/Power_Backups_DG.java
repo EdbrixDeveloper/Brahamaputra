@@ -83,6 +83,7 @@ public class Power_Backups_DG extends BaseActivity {
     private EditText mPowerBackupsDgEditTextDateOfInstallation;
     private TextView mPowerBackupsDgTextViewAverageDieselConsumption;
     private EditText mPowerBackupsDgEditTextAverageDieselConsumption;
+    private EditText mPowerBackupsDgEditTextBookValue;
     private TextView mPowerBackupsDgTextViewAmc;
     private TextView mPowerBackupsDgTextViewAmcVal;
     private TextView mPowerBackupsDgTextViewValidityOfAmc;
@@ -439,6 +440,9 @@ public class Power_Backups_DG extends BaseActivity {
         mPowerBackupsDgEditTextDateOfInstallation = (EditText) findViewById(R.id.powerBackupsDg_editText_dateOfInstallation);
         mPowerBackupsDgTextViewAverageDieselConsumption = (TextView) findViewById(R.id.powerBackupsDg_textView_averageDieselConsumption);
         mPowerBackupsDgEditTextAverageDieselConsumption = (EditText) findViewById(R.id.powerBackupsDg_editText_averageDieselConsumption);
+
+        mPowerBackupsDgEditTextBookValue = (EditText) findViewById(R.id.powerBackupsDg_editText_bookValue);
+
         mPowerBackupsDgTextViewAmc = (TextView) findViewById(R.id.powerBackupsDg_textView_amc);
         mPowerBackupsDgTextViewAmcVal = (TextView) findViewById(R.id.powerBackupsDg_textView_amc_val);
         mPowerBackupsDgTextViewValidityOfAmc = (TextView) findViewById(R.id.powerBackupsDg_textView_validityOfAmc);
@@ -1291,6 +1295,9 @@ public class Power_Backups_DG extends BaseActivity {
                     mPowerBackupsDgEditTextDieselTankCapacity.setText(powerBackupsDGData.get(index).getDieselTankCapacity());
                     mPowerBackupsDgEditTextDateOfInstallation.setText(powerBackupsDGData.get(index).getDateOfInstallation());
                     mPowerBackupsDgEditTextAverageDieselConsumption.setText(powerBackupsDGData.get(index).getAverageDieselConsumption());
+
+                    mPowerBackupsDgEditTextBookValue.setText(powerBackupsDGData.get(index).getBookValue());
+
                     mPowerBackupsDgTextViewAmcVal.setText(powerBackupsDGData.get(index).getAmc());
                     mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText(powerBackupsDGData.get(index).getDateOfvalidityOfAmc());
                     mPowerBackupsDgTextViewDgWorkingTypeVal.setText(powerBackupsDGData.get(index).getDgWorkingType());
@@ -1360,6 +1367,7 @@ public class Power_Backups_DG extends BaseActivity {
         String dieselTankCapacity = mPowerBackupsDgEditTextDieselTankCapacity.getText().toString().trim();
         String dateOfInstallation = mPowerBackupsDgEditTextDateOfInstallation.getText().toString().trim();
         String averageDieselConsumption = mPowerBackupsDgEditTextAverageDieselConsumption.getText().toString().trim();
+        String bookValue = mPowerBackupsDgEditTextBookValue.getText().toString().trim();
         String amc = mPowerBackupsDgTextViewAmcVal.getText().toString().trim();
         String dateOfvalidityOfAmc = mPowerBackupsDgEditTextDateOfvalidityOfAmc.getText().toString().trim();
         String dgWorkingType = mPowerBackupsDgTextViewDgWorkingTypeVal.getText().toString().trim();
@@ -1384,7 +1392,7 @@ public class Power_Backups_DG extends BaseActivity {
         String imageFileName = "";
 
 
-        PowerBackupsDGData obj_powerBackupsDGData = new PowerBackupsDGData(qRCodeScan, assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, dgBatteryQRCodeScan, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
+        PowerBackupsDGData obj_powerBackupsDGData = new PowerBackupsDGData(qRCodeScan, bookValue,assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, dgBatteryQRCodeScan, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
         if (powerBackupsDGData.size() > 0) {
             if (pos == powerBackupsDGData.size()) {
                 powerBackupsDGData.add(obj_powerBackupsDGData);
@@ -1426,6 +1434,7 @@ public class Power_Backups_DG extends BaseActivity {
             mPowerBackupsDgEditTextDieselTankCapacity.setText(powerBackupsDGData.get(pos).getDieselTankCapacity());
             mPowerBackupsDgEditTextDateOfInstallation.setText(powerBackupsDGData.get(pos).getDateOfInstallation());
             mPowerBackupsDgEditTextAverageDieselConsumption.setText(powerBackupsDGData.get(pos).getAverageDieselConsumption());
+            mPowerBackupsDgEditTextBookValue.setText(powerBackupsDGData.get(pos).getBookValue());
             mPowerBackupsDgTextViewAmcVal.setText(powerBackupsDGData.get(pos).getAmc());
             mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText(powerBackupsDGData.get(pos).getDateOfvalidityOfAmc());
             mPowerBackupsDgTextViewDgWorkingTypeVal.setText(powerBackupsDGData.get(pos).getDgWorkingType());
@@ -1482,6 +1491,7 @@ public class Power_Backups_DG extends BaseActivity {
         mPowerBackupsDgEditTextDieselTankCapacity.setText("");
         mPowerBackupsDgEditTextDateOfInstallation.setText("");
         mPowerBackupsDgEditTextAverageDieselConsumption.setText("");
+        mPowerBackupsDgEditTextBookValue.setText("");
         mPowerBackupsDgTextViewAmcVal.setText("");
         mPowerBackupsDgEditTextDateOfvalidityOfAmc.setText("");
         mPowerBackupsDgTextViewDgWorkingTypeVal.setText("");

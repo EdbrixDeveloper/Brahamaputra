@@ -97,6 +97,16 @@ public class PowerBackupsDGData {
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
 
+    @SerializedName("bookValue")
+    String bookValue;
+
+    public String getBookValue() {
+        return bookValue;
+    }
+
+    public void setBookValue(String bookValue) {
+        this.bookValue = bookValue;
+    }
     //@SerializedName("isSubmited")
     //private Boolean isSubmited;
 
@@ -132,10 +142,11 @@ public class PowerBackupsDGData {
         this.workingCondition = "";
         this.natureOfProblem = "";
         this.qrCodeImageFileName = "";
+        this.bookValue = "";
         //this.isSubmited=false;
     }
 
-    public PowerBackupsDGData(String qRCodeScan, String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String dgBatteryStatusQRCodeScan, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
+    public PowerBackupsDGData(String qRCodeScan, String bookValue,String assetOwner, String manufacturerMakeModel, String capacityInKva, String autoManual, String dieselTankCapacity, String dateOfInstallation, String averageDieselConsumption, String amc, String dateOfvalidityOfAmc, String dgWorkingType, String dgHmrReading, String dgEngineSerialNo, String dgMainAltType, String dgMainAltMake, String dgMainAltSerialNo, String dgCanopyStatus, String dgStartingBatteryStatus, String dgBatteryStatusQRCodeScan, String chargingAlternator, String batteryCharger, String presentDieselStock, String gcuRunHrs, String gcuKwh, String dgAvrWorkingStatus, String fuelTankPosition, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
         // this.noOfEngineAlternator = noOfEngineAlternator;
         // this.numberOfWorkingDg = numberOfWorkingDg;
         this.qRCodeScan = qRCodeScan;
@@ -168,6 +179,7 @@ public class PowerBackupsDGData {
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;
+        this.bookValue=bookValue;
     }
 
     /*public String getNoOfEngineAlternator() {

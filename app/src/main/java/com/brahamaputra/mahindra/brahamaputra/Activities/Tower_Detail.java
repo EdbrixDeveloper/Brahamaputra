@@ -42,6 +42,7 @@ public class Tower_Detail extends BaseActivity {
     private TextView mTowerDetailTextViewTypeOfTowerVal;
     private TextView mTowerDetailTextViewHeightOfTower;
     private EditText mTowerDetailEditTextHeightOfTower;
+    private EditText mTowerDetailEditTextBookValueOfTheTower;
     private TextView mTowerDetailTextViewDateOfPaintingOfTheTower;
     private EditText mTowerDetailEditTextDateOfPaintingOfTheTower;
     private TextView mTowerDetailTextViewSignboard;
@@ -121,6 +122,7 @@ public class Tower_Detail extends BaseActivity {
         mTowerDetailTextViewTowerVal = (TextView) findViewById(R.id.towerDetail_textView_tower_val);
         mTowerDetailTextViewTypeOfTower = (TextView) findViewById(R.id.towerDetail_textView_typeOfTower);
         mTowerDetailTextViewTypeOfTowerVal = (TextView) findViewById(R.id.towerDetail_textView_typeOfTower_val);
+        mTowerDetailEditTextBookValueOfTheTower = (EditText) findViewById(R.id.towerDetail_editText_BookValueOfTheTower);
         mTowerDetailTextViewHeightOfTower = (TextView) findViewById(R.id.towerDetail_textView_HeightOfTower);
         mTowerDetailEditTextHeightOfTower = (EditText) findViewById(R.id.towerDetail_editText_heightOfTower);
         mTowerDetailTextViewDateOfPaintingOfTheTower = (TextView) findViewById(R.id.towerDetail_textView_dateOfPaintingOfTheTower);
@@ -296,6 +298,7 @@ public class Tower_Detail extends BaseActivity {
 
                 mTowerDetailTextViewTowerVal.setText(towerDetailsData.getTowerName());
                 mTowerDetailTextViewTypeOfTowerVal.setText(towerDetailsData.getTowerType());
+                mTowerDetailEditTextBookValueOfTheTower.setText(towerDetailsData.getBookValueOfTheTower());
                 mTowerDetailEditTextHeightOfTower.setText(towerDetailsData.getTowerHeight());
                 mTowerDetailEditTextDateOfPaintingOfTheTower.setText(towerDetailsData.getDateOfTowerPainting());
                 mTowerDetailTextViewSignboardVal.setText(towerDetailsData.getBoardSign());
@@ -318,6 +321,7 @@ public class Tower_Detail extends BaseActivity {
 
             String towerName = mTowerDetailTextViewTowerVal.getText().toString().trim();
             String towerType = mTowerDetailTextViewTypeOfTowerVal.getText().toString().trim();
+            String bookValueOfTheTower = mTowerDetailEditTextBookValueOfTheTower.getText().toString().trim();
             String towerHeight = mTowerDetailEditTextHeightOfTower.getText().toString().trim();
             String dateOfTowerPainting = mTowerDetailEditTextDateOfPaintingOfTheTower.getText().toString().trim();
             String boardSign = mTowerDetailTextViewSignboardVal.getText().toString().trim();
@@ -325,7 +329,7 @@ public class Tower_Detail extends BaseActivity {
             String cautionSignBoard = mTowerDetailTextViewCautionSignageboardVal.getText().toString().trim();
             String warningSignBoard = mTowerDetailTextViewWarningSignageboardVal.getText().toString().trim();
 
-            towerDetailsData = new TowerDetailsData(towerName, towerType, towerHeight, dateOfTowerPainting, boardSign, dangerSignBoard, cautionSignBoard, warningSignBoard);
+            towerDetailsData = new TowerDetailsData(towerName, towerType, bookValueOfTheTower,towerHeight, dateOfTowerPainting, boardSign, dangerSignBoard, cautionSignBoard, warningSignBoard);
 
             hotoTransactionData.setTowerDetailsData(towerDetailsData);
 

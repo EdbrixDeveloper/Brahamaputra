@@ -33,6 +33,16 @@ public class ExternalTenantsPersonalDetailsData {
     @SerializedName("contactPersonLandline")
     private String contactPersonLandline;
 
+    @SerializedName("rentalValue")
+    private String rentalValue;
+
+    public String getRentalValue() {
+        return rentalValue;
+    }
+
+    public void setRentalValue(String rentalValue) {
+        this.rentalValue = rentalValue;
+    }
     /*@SerializedName("isSubmited")
     private Boolean isSubmited;*/
 
@@ -56,9 +66,10 @@ public class ExternalTenantsPersonalDetailsData {
         this.contactPersonMobile = "";
         this.contactPersonLandline = "";
         // this.isSubmited=false;
+        this.rentalValue = "";
     }
 
-    public ExternalTenantsPersonalDetailsData(String nameofTenant, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
+    public ExternalTenantsPersonalDetailsData(String nameofTenant,String rentalValue, String typeofTenant, String positionattheTower, String dateofstartofTenancy, String dateofstartofRadiation, String nameofContactPerson, String addressofContactPerson, String contactPersonMobile, String contactPersonLandline) {
         //this.totalNumberofTanents = totalNumberofTanents;
         this.nameofTenant = nameofTenant;
         this.typeofTenant = typeofTenant;
@@ -69,6 +80,7 @@ public class ExternalTenantsPersonalDetailsData {
         this.addressofContactPerson = addressofContactPerson;
         this.contactPersonMobile = contactPersonMobile;
         this.contactPersonLandline = contactPersonLandline;
+        this.rentalValue = rentalValue;
         // this.isSubmited=true;
     }
 

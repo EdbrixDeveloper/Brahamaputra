@@ -14,6 +14,17 @@ public class LandDetailsData {
     @SerializedName("rentLeaseValue")
     private String rentLeaseValue;
 
+    @SerializedName("bookValueOfLand")
+    private String baseValueOfLand;
+
+    public String getBaseValueOfLand() {
+        return baseValueOfLand;
+    }
+
+    public void setBaseValueOfLand(String baseValueOfLand) {
+        this.baseValueOfLand = baseValueOfLand;
+    }
+
     @SerializedName("rentLeaseValueInWords")
     private String rentLeaseValueInWords;
 
@@ -50,13 +61,15 @@ public class LandDetailsData {
         this.landAgreementCopy = "";
         this.landAgreementValidity = "";
         this.landLayoutFileName = "";
+        this.rentLeaseValue = "";
         this.isSubmited = 0;
     }
 
-    public LandDetailsData(String landType, String landArea, String rentLeaseValue, String rentLeaseValueInWords, String landOwnerName, String landOwnerMob, String landLayout, String landAgreementCopy, String landAgreementValidity, String landLayoutFileName) {
+    public LandDetailsData(String landType, String landArea, String rentLeaseValue,String baseValueOfLand, String rentLeaseValueInWords, String landOwnerName, String landOwnerMob, String landLayout, String landAgreementCopy, String landAgreementValidity, String landLayoutFileName) {
         this.landType = landType;
         this.landArea = landArea;
         this.rentLeaseValue = rentLeaseValue;
+        this.baseValueOfLand = baseValueOfLand;
         this.rentLeaseValueInWords = rentLeaseValueInWords;
         this.landOwnerName = landOwnerName;
         this.landOwnerMob = landOwnerMob;

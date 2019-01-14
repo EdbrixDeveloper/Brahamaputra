@@ -296,7 +296,6 @@
 
                     <EditText
                         android:id="@+id/powerBackupsDg_editText_dieselTankCapacity"
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
@@ -332,6 +331,31 @@
                         android:focusable="false"
                         android:hint="DD/MMM/YYYY"
                         android:inputType="none"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Book Value in Rs" />
+
+                    <EditText
+                        android:id="@+id/powerBackupsDg_editText_bookValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Book Value"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal|none"
                         android:textAlignment="viewStart" />
 
                 </LinearLayout>

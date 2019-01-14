@@ -68,7 +68,17 @@ public class PowerPlantDetailsData implements java.io.Serializable{
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
 
-    /*@SerializedName("isSubmited")
+    @SerializedName("bookValue")
+    String bookValue;
+
+    public String getBookValue() {
+        return bookValue;
+    }
+
+    public void setBookValue(String bookValue) {
+        this.bookValue = bookValue;
+    }
+/*@SerializedName("isSubmited")
     private Boolean isSubmited;*/
 
     public PowerPlantDetailsData() {
@@ -93,10 +103,11 @@ public class PowerPlantDetailsData implements java.io.Serializable{
         this.qrCodeImageFileName ="";
         //this.isSubmited=false;
         this.PowerPlantDetailsModulesData = new ArrayList<>();
+        this.bookValue = bookValue;
     }
 
 
-    public PowerPlantDetailsData(String qRCodeScan, String assetOwner,String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem, String qrCodeImageFileName ,ArrayList<PowerPlantDetailsModulesData> PowerPlantDetailsModulesData) {
+    public PowerPlantDetailsData(String qRCodeScan, String bookValue,String assetOwner,String manufacturerMakeModel, String powerPlantModel, String numberModuleSlots, String earthingStatus, String dcLoadInDisplay, String serialNumber, String typeOfPowerPlantCommercialSmps, String capacityInAmp, String numberOfModules, String noOfFaultyModulese, String smpsExpandable, String smpsUltimateCapacity, String spdStatus, String workingCondition, String natureOfProblem, String qrCodeImageFileName ,ArrayList<PowerPlantDetailsModulesData> PowerPlantDetailsModulesData) {
         this.qRCodeScan = qRCodeScan;
         this.assetOwner = assetOwner;
         //this.numberOfPowerPlant = numberOfPowerPlant;
@@ -119,6 +130,7 @@ public class PowerPlantDetailsData implements java.io.Serializable{
         //this.isSubmited=true;
 
         this.PowerPlantDetailsModulesData = PowerPlantDetailsModulesData;
+        this.bookValue = bookValue;
     }
 
     public ArrayList<PowerPlantDetailsModulesData> getPowerPlantDetailsModulesData() {

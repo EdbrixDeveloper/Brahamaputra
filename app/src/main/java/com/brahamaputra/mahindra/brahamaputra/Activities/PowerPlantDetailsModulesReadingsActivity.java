@@ -51,6 +51,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     private ImageView mPowerPlantDetailsButtonModuleQRCodeScanView;
     private TextView mPowerPlantDetailsTextViewModuleMakeVal;
     private EditText mPowerPlantDetailsEditTextModuleCapacity;
+    private EditText mPowerPlantDetailsEditTextBookValueModule;
     private Button mBtnPrevReadingModulesPowerPlant;
     private Button mBtnNextReadingModulesPowerPlant;
     private ImageView button_ClearQRCodeScanView;
@@ -263,6 +264,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         mPowerPlantDetailsButtonModuleQRCodeScanView = (ImageView) findViewById(R.id.powerPlantDetails_button_ModuleQRCodeScanView);
         mPowerPlantDetailsTextViewModuleMakeVal = (TextView) findViewById(R.id.powerPlantDetails_textView_ModuleMake_val);
         mPowerPlantDetailsEditTextModuleCapacity = (EditText) findViewById(R.id.powerPlantDetails_editText_ModuleCapacity);
+        mPowerPlantDetailsEditTextBookValueModule = (EditText) findViewById(R.id.powerPlantDetails_editText_bookValueModule);
         mBtnPrevReadingModulesPowerPlant = (Button) findViewById(R.id.btnPrevReadingModulesPowerPlant);
         mBtnNextReadingModulesPowerPlant = (Button) findViewById(R.id.btnNextReadingModulesPowerPlant);
         button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
@@ -390,9 +392,10 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         String qrCode = base64StringQRCodeScan;
         String manufacturer = mPowerPlantDetailsTextViewModuleMakeVal.getText().toString().trim();
         String capacity = mPowerPlantDetailsEditTextModuleCapacity.getText().toString().trim();
+        String bookValue = mPowerPlantDetailsEditTextBookValueModule.getText().toString().trim();
 
         //DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(typeOfAsset, assetMake, assetStatus, assetDescription);
-        PowerPlantDetailsModulesData obj_powerPlantDetailsModulesData = new PowerPlantDetailsModulesData(qrCode, manufacturer, capacity);
+        PowerPlantDetailsModulesData obj_powerPlantDetailsModulesData = new PowerPlantDetailsModulesData(qrCode, manufacturer, capacity,bookValue);
 
         if (powerPlantDetailsModulesData.size() > 0) {
             if (pos == powerPlantDetailsModulesData.size()) {
@@ -412,6 +415,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
 
             mPowerPlantDetailsTextViewModuleMakeVal.setText(powerPlantDetailsModulesData.get(pos).getModuleMake());
             mPowerPlantDetailsEditTextModuleCapacity.setText(powerPlantDetailsModulesData.get(pos).getModuleCapacity());
+            mPowerPlantDetailsEditTextBookValueModule.setText(powerPlantDetailsModulesData.get(pos).getBookValueModules());
             base64StringQRCodeScan = powerPlantDetailsModulesData.get(pos).getModuleQrCodeScan();
 
             mBtnPrevReadingModulesPowerPlant.setVisibility(View.VISIBLE);
@@ -442,6 +446,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
 
         mPowerPlantDetailsTextViewModuleMakeVal.setText("");
         mPowerPlantDetailsEditTextModuleCapacity.setText("");
+        mPowerPlantDetailsEditTextBookValueModule.setText("");
         mPowerPlantDetailsButtonModuleQRCodeScanView.setVisibility(View.GONE);
         button_ClearQRCodeScanView.setVisibility(View.GONE);
 
@@ -483,6 +488,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                 mPowerPlantDetailsModulesTextViewModuleNumber.setText("Reading: #1");
 
                 mPowerPlantDetailsEditTextModuleCapacity.setText(powerPlantDetailsModulesData.get(index).getModuleCapacity());
+                mPowerPlantDetailsEditTextBookValueModule.setText(powerPlantDetailsModulesData.get(index).getBookValueModules());
                 mPowerPlantDetailsTextViewModuleMakeVal.setText(powerPlantDetailsModulesData.get(index).getModuleMake());
                 base64StringQRCodeScan = powerPlantDetailsModulesData.get(index).getModuleQrCodeScan();
 

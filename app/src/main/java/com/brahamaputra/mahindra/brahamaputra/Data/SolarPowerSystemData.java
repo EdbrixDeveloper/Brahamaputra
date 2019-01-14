@@ -35,6 +35,25 @@ public class SolarPowerSystemData {
     //private Boolean isSubmited;
     private int isSubmited;
 
+    @SerializedName("bookValue")
+    String bookValue;
+
+    public String getBookValue() {
+        return bookValue;
+    }
+
+    public void setBookValue(String bookValue) {
+        this.bookValue = bookValue;
+    }
+
+    public int getIsSubmited() {
+        return isSubmited;
+    }
+
+    public void setIsSubmited(int isSubmited) {
+        this.isSubmited = isSubmited;
+    }
+
     public SolarPowerSystemData() {
         this.qRCodeScan = "";
         this.available = "";
@@ -46,9 +65,10 @@ public class SolarPowerSystemData {
         this.dateOfvalidityOfAmc = "";
         this.qrCodeImageFileName = "";
         this.isSubmited = 0;
+        this.bookValue ="";
     }
 
-    public SolarPowerSystemData(String qRCodeScan, String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc, String qrCodeImageFileName) {
+    public SolarPowerSystemData(String qRCodeScan, String bookValue,String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc, String qrCodeImageFileName) {
         this.qRCodeScan = qRCodeScan;
         this.available = available;
         this.assetOwner = assetOwner;
@@ -58,6 +78,7 @@ public class SolarPowerSystemData {
         this.amcYesNo = amcYesNo;
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
         this.qrCodeImageFileName = qrCodeImageFileName;
+        this.bookValue = bookValue;
         //this.isSubmited=true;//007
         this.isSubmited = 1;
         if (!this.available.isEmpty()) {
@@ -95,9 +116,7 @@ public class SolarPowerSystemData {
         return manufacturerMakeModel;
     }
 
-    public void setManufacturerMakeModel(String manufacturerMakeModel) {
-        this.manufacturerMakeModel = manufacturerMakeModel;
-    }
+    public void setManufacturerMakeModel(String manufacturerMakeModel) { this.manufacturerMakeModel = manufacturerMakeModel; }
 
     public String getCellPanel() {
         return cellPanel;

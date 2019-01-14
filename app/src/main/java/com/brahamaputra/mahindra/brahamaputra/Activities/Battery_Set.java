@@ -100,6 +100,7 @@ public class Battery_Set extends BaseActivity {
     private TextView mBatterySetTextViewTypeofBatteryVal;
     private TextView mBatterySetTextViewDateofInstallation;
     private EditText mBatterySetEditTextDateofInstallation;
+    private EditText mBatterySetEditTextbookValue;
     private TextView mBatterySetTextViewBackupduration;
     private EditText mBatterySetEditTextBackupduration;
     private TextView mBatterySetTextViewPositionofBatteryBank;
@@ -256,6 +257,8 @@ public class Battery_Set extends BaseActivity {
         mBatterySetTextViewTypeofBatteryVal = (TextView) findViewById(R.id.batterySet_textView_TypeofBattery_val);
         mBatterySetTextViewDateofInstallation = (TextView) findViewById(R.id.batterySet_textView_DateofInstallation);
         mBatterySetEditTextDateofInstallation = (EditText) findViewById(R.id.batterySet_editText_DateofInstallation);
+
+        mBatterySetEditTextbookValue = (EditText) findViewById(R.id.batterySet_editText_bookValue);
         mBatterySetTextViewBackupduration = (TextView) findViewById(R.id.batterySet_textView_Backupduration);
         mBatterySetEditTextBackupduration = (EditText) findViewById(R.id.batterySet_editText_Backupduration);
         mBatterySetTextViewPositionofBatteryBank = (TextView) findViewById(R.id.batterySet_textView_PositionofBatteryBank);
@@ -992,6 +995,7 @@ public class Battery_Set extends BaseActivity {
                     mBatterySetTextViewCapacityinAHVal.setText(batterySetData.get(index).getCapacityInAH());
                     mBatterySetTextViewTypeofBatteryVal.setText(batterySetData.get(index).getTypeOfBattery());
                     mBatterySetEditTextDateofInstallation.setText(batterySetData.get(index).getDateOfInstallation());
+                    mBatterySetEditTextbookValue.setText(batterySetData.get(index).getBookValue());
                     mBatterySetEditTextBackupduration.setText(batterySetData.get(index).getBackupDuaration());
                     mBatterySetTextViewPositionofBatteryBankVal.setText(batterySetData.get(index).getPositionOfBatteryBank());
                     mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText(batterySetData.get(index).getBatteryBankCableSize());
@@ -1055,6 +1059,7 @@ public class Battery_Set extends BaseActivity {
         String capacityInAH = mBatterySetTextViewCapacityinAHVal.getText().toString().trim();
         String typeOfBattery = mBatterySetTextViewTypeofBatteryVal.getText().toString().trim();
         String dateOfInstallation = mBatterySetEditTextDateofInstallation.getText().toString().trim();
+        String bookValue = mBatterySetEditTextbookValue.getText().toString().trim();
         String backupDuaration = mBatterySetEditTextBackupduration.getText().toString().trim();
         String positionOfBatteryBank = mBatterySetTextViewPositionofBatteryBankVal.getText().toString().trim();
         String batteryBankCableSize = mBatterySetTextViewBatteryBankCableSizeinSQMMVal.getText().toString().trim();
@@ -1063,7 +1068,7 @@ public class Battery_Set extends BaseActivity {
         String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
 
 
-        BatterySetData obj_batterySetData = new BatterySetData(batterySet_Qr, assetOwner, manufactureMakeModel, capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank, batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem, imageFileName);
+        BatterySetData obj_batterySetData = new BatterySetData(batterySet_Qr,bookValue, assetOwner, manufactureMakeModel, capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank, batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem, imageFileName);
 
         if (batterySetData.size() > 0) {
             if (pos == batterySetData.size()) {
@@ -1095,6 +1100,7 @@ public class Battery_Set extends BaseActivity {
             mBatterySetTextViewCapacityinAHVal.setText(batterySetData.get(pos).getCapacityInAH());
             mBatterySetTextViewTypeofBatteryVal.setText(batterySetData.get(pos).getTypeOfBattery());
             mBatterySetEditTextDateofInstallation.setText(batterySetData.get(pos).getDateOfInstallation());
+            mBatterySetEditTextbookValue.setText(batterySetData.get(pos).getBookValue());
             mBatterySetEditTextBackupduration.setText(batterySetData.get(pos).getBackupDuaration());
             mBatterySetTextViewPositionofBatteryBankVal.setText(batterySetData.get(pos).getPositionOfBatteryBank());
             mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText(batterySetData.get(pos).getBatteryBankCableSize());
@@ -1136,6 +1142,7 @@ public class Battery_Set extends BaseActivity {
         mBatterySetTextViewCapacityinAHVal.setText("");
         mBatterySetTextViewTypeofBatteryVal.setText("");
         mBatterySetEditTextDateofInstallation.setText("");
+        mBatterySetEditTextbookValue.setText("");
         mBatterySetEditTextBackupduration.setText("00:00");
         mBatterySetTextViewPositionofBatteryBankVal.setText("");
         mBatterySetTextViewBatteryBankCableSizeinSQMMVal.setText("");

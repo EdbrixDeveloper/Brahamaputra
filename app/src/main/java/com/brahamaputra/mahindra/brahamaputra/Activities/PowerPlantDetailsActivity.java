@@ -85,6 +85,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private TextView mPowerPlantDetailsTextViewNumberOfModules;
     private TextView mPowerPlantDetailsTextViewNumberOfModulesVal;
     private TextView mPowerPlantDetailsTextViewNoOfFaultyModulese;
+    private EditText mPowerPlantDetailsEditTextBookValue;
     private TextView mPowerPlantDetailsTextViewNoOfFaultyModuleseVal;
     private TextView mPowerPlantDetailsTextViewSmpsExpandableUpToKW;
     private EditText mPowerPlantDetailsEditTextSmpsExpandableUpToKW;
@@ -279,6 +280,9 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsTextViewNumberOfModules = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfModules);
         mPowerPlantDetailsTextViewNumberOfModulesVal = (TextView) findViewById(R.id.powerPlantDetails_textView_numberOfModules_val);
         mPowerPlantDetailsTextViewNoOfFaultyModulese = (TextView) findViewById(R.id.powerPlantDetails_textView_noOfFaultyModulese);
+
+        mPowerPlantDetailsEditTextBookValue = (EditText) findViewById(R.id.powerPlantDetails_editText_bookValue);
+
         mPowerPlantDetailsTextViewNoOfFaultyModuleseVal = (TextView) findViewById(R.id.powerPlantDetails_textView_noOfFaultyModulese_val);
         mPowerPlantDetailsTextViewSmpsExpandableUpToKW = (TextView) findViewById(R.id.powerPlantDetails_textView_smpsExpandableUpToKW);
         mPowerPlantDetailsEditTextSmpsExpandableUpToKW = (EditText) findViewById(R.id.powerPlantDetails_editText_smpsExpandableUpToKW);
@@ -720,6 +724,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.setText(powerPlantDetailsData.getTypeOfPowerPlantCommercialSmps());
                     mPowerPlantDetailsEditTextCapacityInAmp.setText(powerPlantDetailsData.getCapacityInAmp());
                     mPowerPlantDetailsTextViewNumberOfModulesVal.setText(powerPlantDetailsData.getNumberOfModules());
+                    mPowerPlantDetailsEditTextBookValue.setText(powerPlantDetailsData.getBookValue());
                     mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setText(powerPlantDetailsData.getNoOfFaultyModulese());
                     mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setText(powerPlantDetailsData.getSmpsExpandable());
                     mPowerPlantDetailsEditTextSmpsUltimateCapacity.setText(powerPlantDetailsData.getSmpsUltimateCapacity());
@@ -785,6 +790,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.setText(powerPlantDetailsData.getTypeOfPowerPlantCommercialSmps());
             mPowerPlantDetailsEditTextCapacityInAmp.setText(powerPlantDetailsData.getCapacityInAmp());
             mPowerPlantDetailsTextViewNumberOfModulesVal.setText(powerPlantDetailsData.getNumberOfModules());
+            mPowerPlantDetailsEditTextBookValue.setText(powerPlantDetailsData.getBookValue());
             mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setText(powerPlantDetailsData.getNoOfFaultyModulese());
             mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setText(powerPlantDetailsData.getSmpsExpandable());
             mPowerPlantDetailsEditTextSmpsUltimateCapacity.setText(powerPlantDetailsData.getSmpsUltimateCapacity());
@@ -829,6 +835,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         String typeOfPowerPlantCommercialSmps = mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.getText().toString().trim();
         String capacityInAmp = mPowerPlantDetailsEditTextCapacityInAmp.getText().toString().trim();
         String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
+        String bookedValue = mPowerPlantDetailsEditTextBookValue.getText().toString().trim();
         String noOfFaultyModulese = mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.getText().toString().trim();
         String smpsExpandable = mPowerPlantDetailsEditTextSmpsExpandableUpToKW.getText().toString().trim();
         String SmpsUltimateCapacity = mPowerPlantDetailsEditTextSmpsUltimateCapacity.getText().toString().trim();
@@ -840,7 +847,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         arr_powerPlantDetailsModulesData.addAll(powerPlantDetailsModulesData);
 
         //007
-        PowerPlantDetailsData powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, assetOwner, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem, imageFileName, arr_powerPlantDetailsModulesData);
+        PowerPlantDetailsData powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, bookedValue,assetOwner, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem, imageFileName, arr_powerPlantDetailsModulesData);
 
         if (powerPlantDetailsDataList.size() > 0) {
             if (pos == powerPlantDetailsDataList.size()) {
@@ -886,6 +893,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.setText("");
         mPowerPlantDetailsEditTextCapacityInAmp.setText("");
         mPowerPlantDetailsTextViewNumberOfModulesVal.setText("");
+        mPowerPlantDetailsEditTextBookValue.setText("");
         mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setText("");
         mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setText("");
         mPowerPlantDetailsEditTextSmpsUltimateCapacity.setText("");

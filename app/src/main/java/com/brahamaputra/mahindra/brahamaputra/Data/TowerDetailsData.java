@@ -28,9 +28,21 @@ public class TowerDetailsData {
     @SerializedName("warningSignBoard")
     private String warningSignBoard;
 
+    @SerializedName("bookValueOfTheTower")
+    private String bookValueOfTheTower;
+
+    public String getBookValueOfTheTower() {
+        return bookValueOfTheTower;
+    }
+
+    public void setBookValueOfTheTower(String bookValueOfTheTower) {
+        this.bookValueOfTheTower = bookValueOfTheTower;
+    }
+
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
+
 
     //region Region Of Constructors
     public TowerDetailsData() {
@@ -43,11 +55,13 @@ public class TowerDetailsData {
         this.cautionSignBoard = "";
         this.warningSignBoard = "";
         this.isSubmited = 0;
+        this.bookValueOfTheTower = "";
     }
 
-    public TowerDetailsData(String towerName, String towerType, String towerHeight, String dateOfTowerPainting, String boardSign, String dangerSignBoard, String cautionSignBoard, String warningSignBoard) {
+    public TowerDetailsData(String towerName, String towerType,String bookValueOfTheTower, String towerHeight, String dateOfTowerPainting, String boardSign, String dangerSignBoard, String cautionSignBoard, String warningSignBoard) {
         this.towerName = towerName;
         this.towerType = towerType;
+        this.bookValueOfTheTower = bookValueOfTheTower;
         this.towerHeight = towerHeight;
         this.dateOfTowerPainting = dateOfTowerPainting;
         this.boardSign = boardSign;

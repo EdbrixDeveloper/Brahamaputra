@@ -73,6 +73,7 @@ public class Solar_Power_System extends BaseActivity {
     private TextView mSolarPowerSystemTextViewCellPanelVal;
     private TextView mSolarPowerSystemTextViewCapacityKW;
     private EditText mSolarPowerSystemEditTextCapacityKW;
+    private EditText mSolarPowerSystemEditTextBookValue;
     private TextView mSolarPowerSystemTextViewAmcYesNo;
     private TextView mSolarPowerSystemTextViewAmcYesNoVal;
     private TextView mSolarPowerSystemTextViewValidityOfAmc;
@@ -257,6 +258,7 @@ public class Solar_Power_System extends BaseActivity {
         mSolarPowerSystemTextViewCellPanelVal = (TextView) findViewById(R.id.solarPowerSystem_textView_cellPanel_val);
         mSolarPowerSystemTextViewCapacityKW = (TextView) findViewById(R.id.solarPowerSystem_textView_capacityKW);
         mSolarPowerSystemEditTextCapacityKW = (EditText) findViewById(R.id.solarPowerSystem_editText_capacityKW);
+        mSolarPowerSystemEditTextBookValue = (EditText) findViewById(R.id.solarPowerSystem_editText_bookValue);
         mSolarPowerSystemTextViewAmcYesNo = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo);
         mSolarPowerSystemTextViewAmcYesNoVal = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo_val);
         mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
@@ -440,6 +442,7 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemEditTextManufacturerMakeModel.setText(solarPowerSystemData.getManufacturerMakeModel());
                 mSolarPowerSystemTextViewCellPanelVal.setText(solarPowerSystemData.getCellPanel());
                 mSolarPowerSystemEditTextCapacityKW.setText(solarPowerSystemData.getCapacityKW());
+                mSolarPowerSystemEditTextBookValue.setText(solarPowerSystemData.getBookValue());
                 mSolarPowerSystemTextViewAmcYesNoVal.setText(solarPowerSystemData.getAmcYesNo());
                 mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText(solarPowerSystemData.getDateOfvalidityOfAmc());
 
@@ -462,11 +465,12 @@ public class Solar_Power_System extends BaseActivity {
             String assetOwner = mSolarPowerSystemTextViewAssetOwnerVal.getText().toString().trim();
             String manufacturerMakeModel = mSolarPowerSystemEditTextManufacturerMakeModel.getText().toString().trim();
             String cellPanel = mSolarPowerSystemTextViewCellPanelVal.getText().toString().trim();
+            String bookValue = mSolarPowerSystemEditTextBookValue.getText().toString().trim();
             String capacityKW = mSolarPowerSystemEditTextCapacityKW.getText().toString().trim();
             String amcYesNo = mSolarPowerSystemTextViewAmcYesNoVal.getText().toString().trim();
             String dateOfvalidityOfAmc = mSolarPowerSystemEditTextDateOfvalidityOfAmc.getText().toString().trim();
 
-            solarPowerSystemData = new SolarPowerSystemData(qRCodeScan, available, assetOwner, manufacturerMakeModel, cellPanel, capacityKW, amcYesNo, dateOfvalidityOfAmc, imageFileName);
+            solarPowerSystemData = new SolarPowerSystemData(qRCodeScan,bookValue ,available, assetOwner, manufacturerMakeModel, cellPanel, capacityKW, amcYesNo, dateOfvalidityOfAmc, imageFileName);
             hotoTransactionData.setSolarPowerSystemData(solarPowerSystemData);
 
             Gson gson2 = new GsonBuilder().create();
@@ -503,6 +507,7 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemEditTextManufacturerMakeModel.setText("");
                 mSolarPowerSystemTextViewCellPanelVal.setText("");
                 mSolarPowerSystemEditTextCapacityKW.setText("");
+                mSolarPowerSystemEditTextBookValue.setText("");
                 mSolarPowerSystemTextViewAmcYesNoVal.setText("");
                 mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText("");
             }

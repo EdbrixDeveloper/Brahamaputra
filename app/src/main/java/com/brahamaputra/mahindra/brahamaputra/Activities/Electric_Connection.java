@@ -48,6 +48,7 @@ public class Electric_Connection extends BaseActivity {
     private EditText mElectricConnectionEditTextSanctionedLoadKVA;
     private TextView mElectricConnectionTextViewExistingLoadAtSiteKVA;
     private EditText mElectricConnectionEditTextExistingLoadAtSiteKVA;
+    private EditText mElectricConnectionEditTextSecurityAmountPaidToTheCompany;
     private TextView mElectricConnectionTextViewNameOfSupplyCompany;
     private EditText mElectricConnectionTextViewNameOfSupplyCompanyVal;
     private TextView mElectricConnectionTextViewCopyOfElectricBills;
@@ -283,6 +284,8 @@ public class Electric_Connection extends BaseActivity {
         mElectricConnectionEditTextSanctionedLoadKVA = (EditText) findViewById(R.id.electricConnection_editText_sanctionedLoadKVA);
         mElectricConnectionTextViewExistingLoadAtSiteKVA = (TextView) findViewById(R.id.electricConnection_textView_existingLoadAtSiteKVA);
         mElectricConnectionEditTextExistingLoadAtSiteKVA = (EditText) findViewById(R.id.electricConnection_editText_existingLoadAtSiteKVA);
+
+        mElectricConnectionEditTextSecurityAmountPaidToTheCompany = (EditText) findViewById(R.id.electricConnection_editText_SecurityAmountPaidToTheCompany);
         mElectricConnectionTextViewNameOfSupplyCompany = (TextView) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany);
         //nameOfSupplyCompany
         mElectricConnectionTextViewNameOfSupplyCompanyVal = (EditText) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany_val);
@@ -731,6 +734,7 @@ public class Electric_Connection extends BaseActivity {
                 mElectricConnectionTextViewTypeOfElectricConnectionVal.setText(electricConnectionData.getElectricConnectionType());
                 mElectricConnectionTextViewTariffVal.setText(electricConnectionData.getConnectionTariff());
                 mElectricConnectionEditTextSanctionedLoadKVA.setText(electricConnectionData.getSanctionLoad());
+                mElectricConnectionEditTextSecurityAmountPaidToTheCompany.setText(electricConnectionData.getSecurityAmountPaid());
                 mElectricConnectionEditTextExistingLoadAtSiteKVA.setText(electricConnectionData.getExistingLoadAtSite());
                 mElectricConnectionTextViewNameOfSupplyCompanyVal.setText(electricConnectionData.getNameSupplyCompany());
                 mElectricConnectionTextViewCopyOfElectricBillsVal.setText(electricConnectionData.getElectricBillCopyStatus());
@@ -778,6 +782,7 @@ public class Electric_Connection extends BaseActivity {
             String electricConnectionType = mElectricConnectionTextViewTypeOfElectricConnectionVal.getText().toString().trim();
             String connectionTariff = mElectricConnectionTextViewTariffVal.getText().toString().trim();
             String sanctionLoad = mElectricConnectionEditTextSanctionedLoadKVA.getText().toString().trim();
+            String securityAmountPaid = mElectricConnectionEditTextSecurityAmountPaidToTheCompany.getText().toString().trim();
             String existingLoadAtSite = mElectricConnectionEditTextExistingLoadAtSiteKVA.getText().toString().trim();
             String nameSupplyCompany = mElectricConnectionTextViewNameOfSupplyCompanyVal.getText().toString().trim();
             String electricBillCopyStatus = mElectricConnectionTextViewCopyOfElectricBillsVal.getText().toString().trim();
@@ -810,7 +815,7 @@ public class Electric_Connection extends BaseActivity {
             String bankAccountNo = mElectricConnectionEditTextBankAccountNo.getText().toString().trim();
 
 
-            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
+            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, securityAmountPaid,existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
 
             hotoTransactionData.setElectricConnectionData(electricConnectionData);
 

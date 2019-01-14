@@ -97,6 +97,17 @@ public class ElectricConnectionData {
     @SerializedName("bankAccountNo")
     private String bankAccountNo;
 
+    @SerializedName("securityAmountPaid")
+    private String securityAmountPaid;
+
+    public String getSecurityAmountPaid() {
+        return securityAmountPaid;
+    }
+
+    public void setSecurityAmountPaid(String securityAmountPaid) {
+        this.securityAmountPaid = securityAmountPaid;
+    }
+
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
@@ -134,12 +145,14 @@ public class ElectricConnectionData {
         this.bankIfscCode = "";
         this.bankAccountNo = "";
         this.isSubmited = 0;
+        this.securityAmountPaid = "";
     }
 
-    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate, String sapVendorCode, String typeModeOfPayment_Val, String bankIfscCode, String bankAccountNo) {
+    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad,String securityAmountPaid, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate, String sapVendorCode, String typeModeOfPayment_Val, String bankIfscCode, String bankAccountNo) {
         this.electricConnectionType = electricConnectionType;
         this.connectionTariff = connectionTariff;
         this.sanctionLoad = sanctionLoad;
+        this.securityAmountPaid = securityAmountPaid;
         this.existingLoadAtSite = existingLoadAtSite;
         this.nameSupplyCompany = nameSupplyCompany;
         this.electricBillCopyStatus = electricBillCopyStatus;

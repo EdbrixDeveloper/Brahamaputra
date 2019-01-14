@@ -69,6 +69,7 @@ public class Land_Details extends BaseActivity {
     private EditText mLandDetailsEditTextAreaOfLand;
     private TextView mLandDetailsTextViewRentLeaseInNumber;
     private EditText mLandDetailsEditTextRentLeaseInNumber;
+    private EditText mLandDetailsEditTextBookValueOfTheLand;
     private TextView mLandDetailsTextViewRentLeaseInWords;
     private TextView mLandDetailsTextViewRentLeaseInWords_val;
     private TextView mLandDetailsTextViewNameOfOwner;
@@ -83,6 +84,7 @@ public class Land_Details extends BaseActivity {
     private TextView mLandDetailsTextViewValidityOfAgreement;
     private EditText mLandDetailsEditTextDateOfvalidityOfAgreement;
     private OfflineStorageWrapper offlineStorageWrapper;
+    private LinearLayout landDetails_LinearLayout_BookValueOfTheLand;
 
     private LinearLayout mLandDetailsLinearLayoutValidityOfAgreement;
 
@@ -229,6 +231,10 @@ public class Land_Details extends BaseActivity {
         mLandDetailsEditTextAreaOfLand = (EditText) findViewById(R.id.landDetails_editText_areaOfLand);
         mLandDetailsTextViewRentLeaseInNumber = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInNumber);
         mLandDetailsEditTextRentLeaseInNumber = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInNumber);
+        mLandDetailsEditTextBookValueOfTheLand = (EditText) findViewById(R.id.landDetails_editText_BookValueOfTheLand);
+        landDetails_LinearLayout_BookValueOfTheLand = (LinearLayout)findViewById(R.id.landDetails_LinearLayout_BookValueOfTheLand);
+
+
         mLandDetailsTextViewRentLeaseInWords = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords);
         mLandDetailsTextViewRentLeaseInWords_val = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords_val);
         mLandDetailsTextViewNameOfOwner = (TextView) findViewById(R.id.landDetails_textView_nameOfOwner);
@@ -266,6 +272,11 @@ public class Land_Details extends BaseActivity {
 
                         str_landDetailsTypeOfLandVal = item.get(position);
                         mLandDetailsTextViewTypeOfLandVal.setText(str_landDetailsTypeOfLandVal);
+                        if(str_landDetailsTypeOfLandVal.equals("Free Hold")){
+                            landDetails_LinearLayout_BookValueOfTheLand.setVisibility(View.VISIBLE);
+                        }else {
+                            landDetails_LinearLayout_BookValueOfTheLand.setVisibility(View.GONE);
+                        }//009
                     }
                 });
             }
@@ -348,6 +359,9 @@ public class Land_Details extends BaseActivity {
                         visibilityOfValidityOfAgreement(landDetailsData.getLandAgreementCopy());
                         mLandDetailsEditTextAreaOfLand.setText(landDetailsData.getLandArea());
                         mLandDetailsEditTextRentLeaseInNumber.setText(landDetailsData.getRentLeaseValue());
+
+                        mLandDetailsEditTextBookValueOfTheLand.setText(landDetailsData.getBaseValueOfLand());
+
                         mLandDetailsTextViewRentLeaseInWords_val.setText(landDetailsData.getRentLeaseValueInWords().toString().toUpperCase());
                         mLandDetailsEditTextNameOfOwner.setText(landDetailsData.getLandOwnerName());
                         mLandDetailsEditTextMobileNoOfOwner.setText(landDetailsData.getLandOwnerMob());
@@ -396,6 +410,8 @@ public class Land_Details extends BaseActivity {
             String landType = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
             String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
             String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
+            String baseValueOfLand = mLandDetailsEditTextBookValueOfTheLand.getText().toString().trim();
+
             String rentLeaseValueInWords = mLandDetailsTextViewRentLeaseInWords_val.getText().toString().trim().toUpperCase();
             String landOwnerName = mLandDetailsEditTextNameOfOwner.getText().toString().trim();
             String landOwnerMob = mLandDetailsEditTextMobileNoOfOwner.getText().toString().trim();
@@ -404,7 +420,7 @@ public class Land_Details extends BaseActivity {
             String landAgreementCopy = mLandDetailsTextViewCopyAgreementWithOwnerVal.getText().toString().trim();
             String landAgreementValidity = mLandDetailsEditTextDateOfvalidityOfAgreement.getText().toString();
 
-            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity, imageFileName);
+            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue,baseValueOfLand ,rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity, imageFileName);
 
             hotoTransactionData.setLandDetailsData(landDetailsData);
 

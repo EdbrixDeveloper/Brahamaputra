@@ -46,6 +46,17 @@ public class AirConditionersData {
     @SerializedName("qrCodeImageFileName")
     String qrCodeImageFileName;
 
+    @SerializedName("bookValue")
+    String bookValue;
+
+    public String getBookValue() {
+        return bookValue;
+    }
+
+    public void setBookValue(String bookValue) {
+        this.bookValue = bookValue;
+    }
+
     @SerializedName("isSubmited")
     private Boolean isSubmited;
 
@@ -66,9 +77,10 @@ public class AirConditionersData {
         this.natureOfProblem = "";
         this.qrCodeImageFileName = "";
         this.isSubmited = false;
+        this.bookValue = "";
     }
 
-    public AirConditionersData(String qRCodeScan, String assetOwner, String typeOfAcSplitWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
+    public AirConditionersData(String qRCodeScan, String assetOwner, String typeOfAcSplitWindow, String manufacturerMakeModel, String acSerialNumber, String capacityTr, String bookValue,String dateOfInstallation, String amcYesNo, String dateOfvalidityOfAmc, String workingCondition, String natureOfProblem, String qrCodeImageFileName) {
         // this.noOfACprovided = noOfACprovided;
         // this.numberOfACInWorkingCondition = numberOfACInWorkingCondition;
         this.qRCodeScan = qRCodeScan;
@@ -83,6 +95,7 @@ public class AirConditionersData {
         this.workingCondition = workingCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
+        this.bookValue = bookValue;
         this.isSubmited = true;
     }
     //endregion

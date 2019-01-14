@@ -125,6 +125,32 @@
         </LinearLayout>
 
         <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/app_min_padding"
+            android:weightSum="1">
+
+            <TextView
+                style="@style/FontStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="Book value in Rs" />
+
+            <EditText
+                android:id="@+id/powerPlantDetails_editText_bookValueModule"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:hint="Enter Book Value"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                android:textAlignment="viewStart" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

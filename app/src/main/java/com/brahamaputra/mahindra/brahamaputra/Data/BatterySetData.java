@@ -49,7 +49,17 @@ public class BatterySetData {
     @SerializedName("qrCodeImageFileName")
     private String qrCodeImageFileName;
 
-   /* @SerializedName("isSubmited")
+    @SerializedName("bookValue")
+    private String bookValue;
+
+    public String getBookValue() {
+        return bookValue;
+    }
+
+    public void setBookValue(String bookValue) {
+        this.bookValue = bookValue;
+    }
+    /* @SerializedName("isSubmited")
     private Boolean isSubmited;*/
 
      public BatterySetData() {
@@ -69,9 +79,10 @@ public class BatterySetData {
          this.natureOfProblem = "";
          this.qrCodeImageFileName = "";
          //this.isSubmited=false;
+         this.bookValue = "";
     }
 
-    public BatterySetData(String batterySet_Qr, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {
+    public BatterySetData(String batterySet_Qr,String bookValue, String assetOwner, String manufactureMakeModel, String capacityInAH, String typeOfBattery, String dateOfInstallation, String backupDuaration, String positionOfBatteryBank, String batteryBankCableSize, String batteryBankEarthingStatus, String backupCondition, String natureOfProblem,String qrCodeImageFileName) {
         //this.noOfBatterySet = noOfBatterySet;
         //this.noOfBatteryBankWorking = noOfBatteryBankWorking;
         this.batterySet_Qr = batterySet_Qr;
@@ -87,6 +98,7 @@ public class BatterySetData {
         this.backupCondition = backupCondition;
         this.natureOfProblem = natureOfProblem;
         this.qrCodeImageFileName=qrCodeImageFileName;
+        this.bookValue = bookValue;
         //this.isSubmited=true;
     }
 

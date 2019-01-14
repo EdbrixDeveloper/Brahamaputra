@@ -124,6 +124,8 @@
 
             </LinearLayout>
 
+
+
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,6 +146,31 @@
                     android:layout_height="65dp"
                     android:layout_weight="0.6"
                     android:hint="Name of the supply company"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Security Amount paid to the company, Rs" />
+
+                <EditText
+                    android:id="@+id/electricConnection_editText_SecurityAmountPaidToTheCompany"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Security Amount"
+                    android:imeOptions="actionNext"
+                    android:inputType="number|none"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>

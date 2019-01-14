@@ -306,7 +306,32 @@
                         android:hint="DD/MMM/YYYY"
                         android:inputType="none"
                         android:textAlignment="viewStart" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Book Value in Rs" />
+
+                    <EditText
+                        android:id="@+id/batterySet_editText_bookValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Book Value"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:text="00:00"
+                        android:textAlignment="viewStart"
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -322,13 +347,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Back up duration"
-
-                        />
+                        android:text="Back up duration" />
 
                     <EditText
                         android:id="@+id/batterySet_editText_Backupduration"
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"

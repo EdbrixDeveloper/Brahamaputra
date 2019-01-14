@@ -77,6 +77,7 @@ public class Air_Conditioners extends BaseActivity {
     private EditText mAirConditionersEditTextCapacityTr;
     private TextView mAirConditionersTextViewDateOfInstallation;
     private EditText mAirConditionersEditTextDateOfInstallation;
+    private EditText mAirConditionersEditTextBookValue;
     private TextView mAirConditionersTextViewAmcYesNo;
     private TextView mAirConditionersTextViewAmcYesNoVal;
     private TextView mAirConditionersTextViewValidityOfAmc;
@@ -297,6 +298,7 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersEditTextCapacityTr = (EditText) findViewById(R.id.airConditioners_editText_capacityTr);
         mAirConditionersTextViewDateOfInstallation = (TextView) findViewById(R.id.airConditioners_textView_dateOfInstallation);
         mAirConditionersEditTextDateOfInstallation = (EditText) findViewById(R.id.airConditioners_editText_dateOfInstallation);
+        mAirConditionersEditTextBookValue = (EditText) findViewById(R.id.airConditioners_editText_bookValue);
         mAirConditionersTextViewAmcYesNo = (TextView) findViewById(R.id.airConditioners_textView_amcYesNo);
         mAirConditionersTextViewAmcYesNoVal = (TextView) findViewById(R.id.airConditioners_textView_amcYesNo_val);
         mAirConditionersTextViewValidityOfAmc = (TextView) findViewById(R.id.airConditioners_textView_validityOfAmc);
@@ -615,6 +617,8 @@ public class Air_Conditioners extends BaseActivity {
                     mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.get(index).getAcSerialNumber());
                     mAirConditionersEditTextCapacityTr.setText(airConditionersData.get(index).getCapacityTr());
                     mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.get(index).getDateOfInstallation());
+                    mAirConditionersEditTextBookValue.setText(airConditionersData.get(index).getBookValue());
+
                     mAirConditionersTextViewAmcYesNoVal.setText(airConditionersData.get(index).getAmcYesNo());
                     visibilityOfValidityOfTheAMC(airConditionersData.get(index).getAmcYesNo());//008
                     mAirConditionersEditTextDateOfvalidityOfAmc.setText(airConditionersData.get(index).getDateOfvalidityOfAmc());
@@ -653,6 +657,7 @@ public class Air_Conditioners extends BaseActivity {
         String manufacturerMakeModel = mAirConditionersTextViewManufacturerMakeModelVal.getText().toString().trim();
         String acSerialNumber = mAirConditionersEditTextAcSerialNumber.getText().toString().trim();
         String capacityTr = mAirConditionersEditTextCapacityTr.getText().toString().trim();
+        String bookValue = mAirConditionersEditTextBookValue.getText().toString().trim();
         String dateOfInstallation = mAirConditionersEditTextDateOfInstallation.getText().toString().trim();
         String amcYesNo = mAirConditionersTextViewAmcYesNoVal.getText().toString().trim();
         String dateOfvalidityOfAmc = mAirConditionersEditTextDateOfvalidityOfAmc.getText().toString().trim();
@@ -661,7 +666,7 @@ public class Air_Conditioners extends BaseActivity {
 
 
         //airConditionersData = new ArrayList<>();
-        AirConditionersData air_conditioners = new AirConditionersData(qRCodeScan, assetOwner, typeOfAcSplitWindow, manufacturerMakeModel, acSerialNumber, capacityTr, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem, imageFileName);
+        AirConditionersData air_conditioners = new AirConditionersData(qRCodeScan, assetOwner, typeOfAcSplitWindow, manufacturerMakeModel, acSerialNumber, capacityTr,bookValue, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem, imageFileName);
         //airConditionersData.add(air_conditioners);
 
         if (airConditionersData.size() > 0) {
@@ -695,6 +700,7 @@ public class Air_Conditioners extends BaseActivity {
             mAirConditionersTextViewManufacturerMakeModelVal.setText(airConditionersData.get(pos).getManufacturerMakeModel());
             mAirConditionersEditTextAcSerialNumber.setText(airConditionersData.get(pos).getAcSerialNumber());
             mAirConditionersEditTextCapacityTr.setText(airConditionersData.get(pos).getCapacityTr());
+            mAirConditionersEditTextBookValue.setText(airConditionersData.get(pos).getBookValue());
             mAirConditionersEditTextDateOfInstallation.setText(airConditionersData.get(pos).getDateOfInstallation());
             mAirConditionersTextViewAmcYesNoVal.setText(airConditionersData.get(pos).getAmcYesNo());
             mAirConditionersEditTextDateOfvalidityOfAmc.setText(airConditionersData.get(pos).getDateOfvalidityOfAmc());
@@ -753,6 +759,7 @@ public class Air_Conditioners extends BaseActivity {
         mAirConditionersTextViewManufacturerMakeModelVal.setText("");
         mAirConditionersEditTextAcSerialNumber.setText("");
         mAirConditionersEditTextCapacityTr.setText("");
+        mAirConditionersEditTextBookValue.setText("");
         mAirConditionersEditTextDateOfInstallation.setText("");
         mAirConditionersTextViewAmcYesNoVal.setText("");
         mAirConditionersEditTextDateOfvalidityOfAmc.setText("");

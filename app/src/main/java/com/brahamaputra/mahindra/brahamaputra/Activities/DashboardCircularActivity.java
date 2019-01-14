@@ -45,8 +45,7 @@ import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnItemSelecte
 import com.brahamaputra.mahindra.brahamaputra.commons.CircleLayout.OnRotationFinishedListener;
 import com.bumptech.glide.Glide;
 
-public class DashboardCircularActivity extends BaseActivity implements OnItemSelectedListener,
-        OnItemClickListener, OnRotationFinishedListener, OnCenterClickListener {
+public class DashboardCircularActivity extends BaseActivity implements OnItemSelectedListener, OnItemClickListener, OnRotationFinishedListener, OnCenterClickListener {
     public static final String ARG_LAYOUT = "layout";
 
     protected CircleLayout circleLayout;

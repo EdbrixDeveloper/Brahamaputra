@@ -79,6 +79,32 @@
                 android:weightSum="1">
 
                 <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Book Value of the Tower, Rs"
+                    android:textColor="@color/colorBlueLink"/>
+
+                <EditText
+                    android:id="@+id/towerDetail_editText_BookValueOfTheTower"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Book Value"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
                     android:id="@+id/towerDetail_textView_HeightOfTower"
                     style="@style/FontStyle"
                     android:layout_width="0dp"

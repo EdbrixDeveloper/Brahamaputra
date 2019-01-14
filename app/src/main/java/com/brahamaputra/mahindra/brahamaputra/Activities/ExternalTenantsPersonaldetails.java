@@ -76,6 +76,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     private EditText mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation;
     private TextView mExternalTenantsPersonaldetailsTextViewNameoftheContactPerson;
     private EditText mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson;
+    private EditText mExternalTenantsPersonaldetailsEditTextrentalValue;
     private TextView mExternalTenantsPersonaldetailsTextViewAddressoftheContactPerson;
     private EditText mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson;
     private TextView mExternalTenantsPersonaldetailsTextViewTelephoneNoofContactPersonMobile;
@@ -223,6 +224,9 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation = (EditText) findViewById(R.id.externalTenantsPersonaldetails_editText_DateofthestartofRadiation);
         mExternalTenantsPersonaldetailsTextViewNameoftheContactPerson = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_NameoftheContactPerson);
         mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson = (EditText) findViewById(R.id.externalTenantsPersonaldetails_editText_NameoftheContactPerson);
+
+        mExternalTenantsPersonaldetailsEditTextrentalValue = (EditText) findViewById(R.id.externalTenantsPersonaldetails_editText_rentalValue);
+
         mExternalTenantsPersonaldetailsTextViewAddressoftheContactPerson = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_AddressoftheContactPerson);
         mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson = (EditText) findViewById(R.id.externalTenantsPersonaldetails_editText_AddressoftheContactPerson);
         mExternalTenantsPersonaldetailsTextViewTelephoneNoofContactPersonMobile = (TextView) findViewById(R.id.externalTenantsPersonaldetails_textView_TelephoneNoofContactPersonMobile);
@@ -360,6 +364,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         String dateofstartofTenancy = mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.getText().toString().trim();
         String dateofstartofRadiation = mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.getText().toString().trim();
         String nameofContactPerson = mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.getText().toString().trim();
+        //String rentalValue = mExternalTenantsPersonaldetailsEditTextrentalValue.getText().toString().trim();
         String addressofContactPerson = mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.getText().toString().trim();
         String contactPersonMobile = mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.getText().toString().trim();
         String contactPersonLandline = mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.getText().toString().trim();
@@ -561,6 +566,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
                     mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setText(externalTenantsPersonalDetailsData.getDateofstartofTenancy());
                     mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(externalTenantsPersonalDetailsData.getDateofstartofRadiation());
                     mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.setText(externalTenantsPersonalDetailsData.getNameofContactPerson());
+                    mExternalTenantsPersonaldetailsEditTextrentalValue.setText(externalTenantsPersonalDetailsData.getRentalValue());
                     mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.setText(externalTenantsPersonalDetailsData.getAddressofContactPerson());
                     mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.setText(externalTenantsPersonalDetailsData.getContactPersonMobile());
                     mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.setText(externalTenantsPersonalDetailsData.getContactPersonLandline());
@@ -599,6 +605,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setText(externalTenantsPersonalDetailsData.getDateofstartofTenancy());
             mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText(externalTenantsPersonalDetailsData.getDateofstartofRadiation());
             mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.setText(externalTenantsPersonalDetailsData.getNameofContactPerson());
+            mExternalTenantsPersonaldetailsEditTextrentalValue.setText(externalTenantsPersonalDetailsData.getRentalValue());
             mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.setText(externalTenantsPersonalDetailsData.getAddressofContactPerson());
             mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.setText(externalTenantsPersonalDetailsData.getContactPersonMobile());
             mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.setText(externalTenantsPersonalDetailsData.getContactPersonLandline());
@@ -633,10 +640,11 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         String dateofstartofTenancy = mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.getText().toString().trim();
         String dateofstartofRadiation = mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.getText().toString().trim();
         String nameofContactPerson = mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.getText().toString().trim();
+        String rentalValue = mExternalTenantsPersonaldetailsEditTextrentalValue.getText().toString().trim();
         String addressofContactPerson = mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.getText().toString().trim();
         String contactPersonMobile = mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.getText().toString().trim();
         String contactPersonLandline = mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.getText().toString().trim();
-        ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData(nameofTenant, typeofTenant, positionattheTower, dateofstartofTenancy, dateofstartofRadiation, nameofContactPerson, addressofContactPerson, contactPersonMobile, contactPersonLandline);
+        ExternalTenantsPersonalDetailsData externalTenantsPersonalDetailsData = new ExternalTenantsPersonalDetailsData(nameofTenant, rentalValue,typeofTenant, positionattheTower, dateofstartofTenancy, dateofstartofRadiation, nameofContactPerson, addressofContactPerson, contactPersonMobile, contactPersonLandline);
 
 
         if (externalTenantsPersonalDetailsDataList.size() > 0) {
@@ -702,6 +710,7 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
         mExternalTenantsPersonaldetailsEditTextDateofthestartofTenancy.setText("");
         mExternalTenantsPersonaldetailsEditTextDateofthestartofRadiation.setText("");
         mExternalTenantsPersonaldetailsEditTextNameoftheContactPerson.setText("");
+        mExternalTenantsPersonaldetailsEditTextrentalValue.setText("");
         mExternalTenantsPersonaldetailsEditTextAddressoftheContactPerson.setText("");
         mExternalTenantsPersonaldetailsEditTextTelephoneNoofContactPersonMobile.setText("");
         mExternalTenantsPersonaldetailseditTextTelephoneNoofContactPersonLandline.setText("");
@@ -721,8 +730,6 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
             ss = new ArrayList<>(spinnerArray);
         }
         return ss;
-
-
     }
 
 

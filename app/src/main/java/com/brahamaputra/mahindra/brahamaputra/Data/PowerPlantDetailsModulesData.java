@@ -13,16 +13,29 @@ public class PowerPlantDetailsModulesData implements java.io.Serializable {
     @SerializedName("moduleCapacity")
     String moduleCapacity;
 
-    public PowerPlantDetailsModulesData(String moduleQrCodeScan, String moduleMake, String moduleCapacity) {
+    @SerializedName("bookValueModules")
+    String bookValueModules;
+
+    public String getBookValueModules() {
+        return bookValueModules;
+    }
+
+    public void setBookValueModules(String bookValueModules) {
+        this.bookValueModules = bookValueModules;
+    }
+
+    public PowerPlantDetailsModulesData(String moduleQrCodeScan, String moduleMake, String moduleCapacity,String bookValueModules) {
         this.moduleQrCodeScan = moduleQrCodeScan;
         this.moduleMake = moduleMake;
         this.moduleCapacity = moduleCapacity;
+        this.bookValueModules = bookValueModules;
     }
 
     public PowerPlantDetailsModulesData() {
         this.moduleQrCodeScan = "";
         this.moduleMake = "";
         this.moduleCapacity = "";
+        this.bookValueModules = "";
     }
 
     public String getModuleQrCodeScan() {

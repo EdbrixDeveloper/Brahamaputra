@@ -212,6 +212,31 @@
                     android:weightSum="1">
 
                     <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:singleLine="false"
+                        android:text="Rental Value" />
+
+                    <EditText
+                        android:id="@+id/externalTenantsPersonaldetails_editText_rentalValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Rental Value"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
                         android:id="@+id/externalTenantsPersonaldetails_textView_NameoftheContactPerson"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
