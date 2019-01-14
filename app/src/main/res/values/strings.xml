@@ -311,6 +311,8 @@
     </string-array>
 
     <string-array name="array_batterySet_CapacityinAH">
+        <item>50AH</item>
+        <item>75AH</item>
         <item>100AH</item>
         <item>200AH</item>
         <item>250AH</item>

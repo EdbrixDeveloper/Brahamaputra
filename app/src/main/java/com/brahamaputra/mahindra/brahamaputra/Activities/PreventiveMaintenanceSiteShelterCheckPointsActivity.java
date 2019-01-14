@@ -28,6 +28,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseActivity {
     private static final String TAG = PreventiveMaintenanceSiteShelterCheckPointsActivity.class.getSimpleName();
@@ -66,6 +67,9 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
 
     PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
     ShelterCheckPoints shelterCheckPoints;
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<String> typeOfFaultList;
 
 
     @Override
@@ -82,24 +86,29 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteShelterCheckPointsActivity.this, userId, ticketName);
-
         preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
-        setInputDetails();
 
         //Code For MultiSelect Type Of Fault
-        ArrayList<String> typeOfFaultList =  new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteShelterCheckPoints_typeOfFault)));
-        ArrayList<MultiSelectModel> listOfFaultsTypes = new ArrayList<>();
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+        typeOfFaultList =  new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteShelterCheckPoints_typeOfFault)));
         int id=1;
         for(int i=0;i<typeOfFaultList.size();i++) {
             listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
             id++;
         }
+        setInputDetails();
+        setMultiSelectModel();
+    }
+
+    private void setMultiSelectModel(){
         //MultiSelectModel
         multiSelectDialog = new MultiSelectDialog()
                 .title("Type of Fault") //setting title for dialog
                 .titleSize(25)
                 .positiveText("Done")
                 .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
                 .setMinSelectionLimit(0)
                 .setMaxSelectionLimit(typeOfFaultList.size())
                 //List of ids that you need to be selected
@@ -137,7 +146,6 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteShelterCheckPoints_textView_typeOfFault);
         mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteShelterCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteShelterCheckPoints_linearLayout_typeOfFault);
-
     }
 
     private void initCombo() {
@@ -257,7 +265,16 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
 
                         str_registerFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal.setText(str_registerFaultVal);
-                        visibilityOfTypesOfFault(str_registerFaultVal);
+
+                        if(str_registerFaultVal.equals("Yes")){
+                            mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
+                        }else if(str_registerFaultVal.equals("No")){
+                            mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText("");
+                            mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
+                        }
+                            /*mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText("");
+                        mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
+                        visibilityOfTypesOfFault(str_registerFaultVal);*/
                     }
                 });
             }
@@ -313,6 +330,20 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
 
 
 
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     private void setInputDetails() {
         try {
@@ -334,6 +365,13 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                              mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterEarthingStatusVal.setText(shelterCheckPoints.getShelterEarthingStatus());
                              mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal.setText(shelterCheckPoints.getRegisterFault());
                              mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(shelterCheckPoints.getTypeOfFault());
+
+                             if(shelterCheckPoints.getRegisterFault().equals("Yes")){
+                                 mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
+                                 setArrayValuesOfTypeOfFault(shelterCheckPoints.getTypeOfFault());
+                             }else if(shelterCheckPoints.getRegisterFault().equals("No")){
+                                 mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
+                             }
                          }
                      }
                  }
@@ -369,10 +407,16 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
 
     private void visibilityOfTypesOfFault(String RegisterFault) {
 
-        mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
+
         if (RegisterFault.equals("No")) {
             mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
+            /*str_typeOfFaultVal = "";
+            mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(str_typeOfFaultVal);
+            mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);*/
+        }else {
+            mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(RegisterFault);
+            mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
         }
     }
 
