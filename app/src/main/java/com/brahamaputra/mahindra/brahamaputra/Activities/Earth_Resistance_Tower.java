@@ -37,7 +37,6 @@ import java.util.Locale;
 
 public class Earth_Resistance_Tower extends BaseActivity {
 
-
     private TextView mEarthResistanceTowerTextViewTypeOfEarth;
     private TextView mEarthResistanceTowerTextViewTypeOfEarthVal;
     private TextView mEarthResistanceTowerTextViewEarthResistance;
@@ -78,7 +77,6 @@ public class Earth_Resistance_Tower extends BaseActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(Earth_Resistance_Tower.this, userId, ticketName);
 
         setInputDetails();
-
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 

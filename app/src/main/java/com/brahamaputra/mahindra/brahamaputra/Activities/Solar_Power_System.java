@@ -108,7 +108,7 @@ public class Solar_Power_System extends BaseActivity {
 
     final Calendar myCalendar = Calendar.getInstance();
 
-    /////////////////////////
+    ///////////////////////////////
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -227,7 +227,8 @@ public class Solar_Power_System extends BaseActivity {
 
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+        integrator.setPrompt("Scan a QRcode");
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
 

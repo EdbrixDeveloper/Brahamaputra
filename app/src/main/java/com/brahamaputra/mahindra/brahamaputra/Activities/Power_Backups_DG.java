@@ -400,7 +400,8 @@ public class Power_Backups_DG extends BaseActivity {
 
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setPrompt("Scan a barcode or QRcode");
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+        integrator.setPrompt("Scan QRcode");
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
 

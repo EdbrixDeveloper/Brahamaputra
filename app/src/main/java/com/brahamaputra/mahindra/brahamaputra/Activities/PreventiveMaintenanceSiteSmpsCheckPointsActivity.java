@@ -347,7 +347,8 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     private void DgCheckPointsQRCodeScan() {
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
-            integrator.setPrompt("Scan a barcode or QRcode");
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+            integrator.setPrompt("Scan QRcode");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
