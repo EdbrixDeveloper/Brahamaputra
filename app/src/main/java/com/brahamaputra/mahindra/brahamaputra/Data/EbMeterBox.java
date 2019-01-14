@@ -2,11 +2,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EbMeterBox implements Serializable
-{
+public class EbMeterBox implements Serializable {
 
     @SerializedName("ebMeterBoxCondition")
     @Expose
@@ -23,9 +23,19 @@ public class EbMeterBox implements Serializable
     @SerializedName("hrcFuseStatus")
     @Expose
     private String hrcFuseStatus;
-    @SerializedName("acLoadAmpPh")
+
+    @SerializedName("acLoadAmpRPh")
     @Expose
-    private String acLoadAmpPh;
+    private String acLoadAmpRPh;
+
+    @SerializedName("acLoadAmpYPh")
+    @Expose
+    private String acLoadAmpYPh;
+
+    @SerializedName("acLoadAmpBPh")
+    @Expose
+    private String acLoadAmpBPh;
+
     @SerializedName("ebMeterReadingKwh")
     @Expose
     private String ebMeterReadingKwh;
@@ -38,7 +48,48 @@ public class EbMeterBox implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+
+    @SerializedName("isSubmited")
+    private int isSubmited;
+
     private final static long serialVersionUID = -7989704559019063986L;
+
+    public EbMeterBox() {
+        this.ebMeterBoxCondition = "";
+        this.ebMeterWorkingStatus = "";
+        this.kitkatClayFuseStatus = "";
+        this.sfuMccbStatus = "";
+        this.hrcFuseStatus = "";
+        this.acLoadAmpRPh = "";
+        this.acLoadAmpYPh = "";
+        this.acLoadAmpBPh = "";
+        this.ebMeterReadingKwh = "";
+        this.ebServiceWireCondition = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+        this.isSubmited = 0;
+    }
+
+    public EbMeterBox(String ebMeterBoxCondition, String ebMeterWorkingStatus, String kitkatClayFuseStatus, String sfuMccbStatus, String hrcFuseStatus, String acLoadAmpRPh, String acLoadAmpYPh, String acLoadAmpBPh, String ebMeterReadingKwh, String ebServiceWireCondition, String registerFault, String typeOfFault) {
+        this.ebMeterBoxCondition = ebMeterBoxCondition;
+        this.ebMeterWorkingStatus = ebMeterWorkingStatus;
+        this.kitkatClayFuseStatus = kitkatClayFuseStatus;
+        this.sfuMccbStatus = sfuMccbStatus;
+        this.hrcFuseStatus = hrcFuseStatus;
+        this.acLoadAmpRPh = acLoadAmpRPh;
+        this.acLoadAmpYPh = acLoadAmpYPh;
+        this.acLoadAmpBPh = acLoadAmpBPh;
+        this.ebMeterReadingKwh = ebMeterReadingKwh;
+        this.ebServiceWireCondition = ebServiceWireCondition;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+        this.isSubmited = 2;
+        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }*/
+    }
 
     public String getEbMeterBoxCondition() {
         return ebMeterBoxCondition;
@@ -80,12 +131,28 @@ public class EbMeterBox implements Serializable
         this.hrcFuseStatus = hrcFuseStatus;
     }
 
-    public String getAcLoadAmpPh() {
-        return acLoadAmpPh;
+    public String getAcLoadAmpRPh() {
+        return acLoadAmpRPh;
     }
 
-    public void setAcLoadAmpPh(String acLoadAmpPh) {
-        this.acLoadAmpPh = acLoadAmpPh;
+    public void setAcLoadAmpRPh(String acLoadAmpRPh) {
+        this.acLoadAmpRPh = acLoadAmpRPh;
+    }
+
+    public String getAcLoadAmpYPh() {
+        return acLoadAmpYPh;
+    }
+
+    public void setAcLoadAmpYPh(String acLoadAmpYPh) {
+        this.acLoadAmpYPh = acLoadAmpYPh;
+    }
+
+    public String getAcLoadAmpBPh() {
+        return acLoadAmpBPh;
+    }
+
+    public void setAcLoadAmpBPh(String acLoadAmpBPh) {
+        this.acLoadAmpBPh = acLoadAmpBPh;
     }
 
     public String getEbMeterReadingKwh() {
@@ -119,5 +186,14 @@ public class EbMeterBox implements Serializable
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
     }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int submited) {
+        isSubmited = submited;
+    }
+
 
 }

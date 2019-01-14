@@ -2,11 +2,12 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AlarmCheckPoints implements Serializable
-{
+public class AlarmCheckPoints implements Serializable {
+
 
     @SerializedName("detailsOfWrmsQrCodeScan")
     @Expose
@@ -41,7 +42,46 @@ public class AlarmCheckPoints implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+
+    @SerializedName("isSubmited")
+    private int isSubmited;
+
     private final static long serialVersionUID = -5880192528663814251L;
+
+    public AlarmCheckPoints() {
+        this.detailsOfWrmsQrCodeScan = "";
+        this.doorOpenAlarm = "";
+        this.dgOn = "";
+        this.dgOutputAvailable = "";
+        this.highRoomTemp = "";
+        this.fireSmoke = "";
+        this.powerPlantFailure = "";
+        this.alarmConfirmedByNoc = "";
+        this.remarks = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+        isSubmited = 0;
+    }
+
+    public AlarmCheckPoints(String detailsOfWrmsQrCodeScan, String doorOpenAlarm, String dgOn, String dgOutputAvailable, String highRoomTemp, String fireSmoke, String powerPlantFailure, String alarmConfirmedByNoc, String remarks, String registerFault, String typeOfFault) {
+        this.detailsOfWrmsQrCodeScan = detailsOfWrmsQrCodeScan;
+        this.doorOpenAlarm = doorOpenAlarm;
+        this.dgOn = dgOn;
+        this.dgOutputAvailable = dgOutputAvailable;
+        this.highRoomTemp = highRoomTemp;
+        this.fireSmoke = fireSmoke;
+        this.powerPlantFailure = powerPlantFailure;
+        this.alarmConfirmedByNoc = alarmConfirmedByNoc;
+        this.remarks = remarks;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+        this.isSubmited = 2;
+        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }*/
+    }
 
     public String getDetailsOfWrmsQrCodeScan() {
         return detailsOfWrmsQrCodeScan;
@@ -129,6 +169,14 @@ public class AlarmCheckPoints implements Serializable
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int submited) {
+        isSubmited = submited;
     }
 
 }

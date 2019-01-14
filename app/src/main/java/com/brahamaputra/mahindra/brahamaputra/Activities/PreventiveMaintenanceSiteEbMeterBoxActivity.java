@@ -3,23 +3,37 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
+import com.brahamaputra.mahindra.brahamaputra.Data.EbMeterBox;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
 
+    private static final String TAG = PreventiveMaintenanceSiteEbMeterBoxActivity.class.getSimpleName();
     private TextView mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxCondition;
     private TextView mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxConditionVal;
     private TextView mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatus;
@@ -52,6 +66,36 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
     String str_pmSiteEbmbRegisterFaultVal = "";
     String str_pmSiteEbmbTypeOfFaultVal = "";
 
+    private AlertDialogManager alertDialogManager;
+
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private SessionManager sessionManager;
+    private PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails;
+    private EbMeterBox ebMeterBox;
+    //private EbMeterBox ebMeterBox;
+
+    MultiSelectDialog multiSelectDialog;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    ArrayList<String> typeOfFaultList;
+
+    /*private String ebMeterBoxCondition;
+    private String ebMeterWorkingStatus;
+    private String kitkatClayFuseStatus;
+    private String sfuMccbStatus;
+    private String hrcFuseStatus;
+    String acLoadAmpRPh,
+    String acLoadAmpYPh,
+    String acLoadAmpBPh,
+    private String ebMeterReadingKwh;
+    private String ebServiceWireCondition;
+    private String registerFault;
+    private String typeOfFault;*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +105,166 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
+
+        sessionManager = new SessionManager(PreventiveMaintenanceSiteEbMeterBoxActivity.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteEbMeterBoxActivity.this, userId, ticketName);
+
+
+        pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+
+        //Code For MultiSelect Type Of Fault
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteEbMeterBox_typeOfFault)));
+        int id = 1;
+        for (int i = 0; i < typeOfFaultList.size(); i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
+        setInputDetails();
+        setMultiSelectModel();
+    }
+
+    private void assignViews() {
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxCondition = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterBoxCondition);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxConditionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterBoxConditionVal);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterWorkingStatus);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterWorkingStatusVal);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_KitKatClayFuseStatus);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_KitKatClayFuseStatusVal);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_SfuMccbStatus);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_SfuMccbStatusVal);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_HrcFuseStatus);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_HrcFuseStatusVal);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewAcLoadAmpPh = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_acLoadAmpPh);
+        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhRPhase = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_acLoadAmpPh_rPhase);
+        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhYPhase = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_acLoadAmpPh_yPhase);
+        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhBPhase = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_acLoadAmpPh_bPhase);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterReadingKwh = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterReadingKwh);
+        mPreventiveMaintenanceSiteEbMeterBoxEditTextEbMeterReadingKwh = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_ebMeterReadingKwh);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireCondition = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebServiceWireCondition);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireConditionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebServiceWireConditionVal);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_registerFault);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_registerFaultVal);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_typeOfFault);
+        mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_typeOfFaultVal);
+    }
+
+    public void setMultiSelectModel() {
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        str_pmSiteEbmbTypeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.setText(str_pmSiteEbmbTypeOfFaultVal);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+                    }
+                });
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+                pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+
+                if (pmSiteTransactionDetails != null) {
+
+                    ebMeterBox = pmSiteTransactionDetails.getEbMeterBox();
+
+                    if (ebMeterBox != null) {
+
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxConditionVal.setText(ebMeterBox.getEbMeterBoxCondition());
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatusVal.setText(ebMeterBox.getEbMeterWorkingStatus());
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatusVal.setText(ebMeterBox.getKitkatClayFuseStatus());
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatusVal.setText(ebMeterBox.getSfuMccbStatus());
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatusVal.setText(ebMeterBox.getHrcFuseStatus());
+                        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhRPhase.setText(ebMeterBox.getAcLoadAmpRPh());
+                        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhYPhase.setText(ebMeterBox.getAcLoadAmpYPh());
+                        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhBPhase.setText(ebMeterBox.getAcLoadAmpBPh());
+                        mPreventiveMaintenanceSiteEbMeterBoxEditTextEbMeterReadingKwh.setText(ebMeterBox.getEbMeterReadingKwh());
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireConditionVal.setText(ebMeterBox.getEbServiceWireCondition());
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFaultVal.setText(ebMeterBox.getRegisterFault());
+                        mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.setText(ebMeterBox.getTypeOfFault());
+
+                        if (ebMeterBox.getTypeOfFault() != null && ebMeterBox.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+
+                            setArrayValuesOfTypeOfFault(ebMeterBox.getTypeOfFault());
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(PreventiveMaintenanceSiteEbMeterBoxActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+            String ebMeterBoxCondition = mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxConditionVal.getText().toString().trim();
+            String ebMeterWorkingStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatusVal.getText().toString().trim();
+            String kitkatClayFuseStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatusVal.getText().toString().trim();
+            String sfuMccbStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatusVal.getText().toString().trim();
+            String hrcFuseStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatusVal.getText().toString().trim();
+            String acLoadAmpRPh = mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhRPhase.getText().toString().trim();
+            String acLoadAmpYPh = mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhYPhase.getText().toString().trim();
+            String acLoadAmpBPh = mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhBPhase.getText().toString().trim();
+            String ebMeterReadingKwh = mPreventiveMaintenanceSiteEbMeterBoxEditTextEbMeterReadingKwh.getText().toString().trim();
+            String ebServiceWireCondition = mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireConditionVal.getText().toString().trim();
+            String registerFault = mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.getText().toString().trim();
+            //int isSubmited = 1;
+
+            ebMeterBox = new EbMeterBox(ebMeterBoxCondition, ebMeterWorkingStatus, kitkatClayFuseStatus, sfuMccbStatus, hrcFuseStatus, acLoadAmpRPh, acLoadAmpYPh, acLoadAmpBPh, ebMeterReadingKwh, ebServiceWireCondition, registerFault, typeOfFault);
+            pmSiteTransactionDetails.setEbMeterBox(ebMeterBox);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(pmSiteTransactionDetails);
+            //Log.d(TAG, "jsonString: " + jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private void initCombo() {
@@ -97,7 +301,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteEbmbEBMeterWorkingStatusVal= item.get(position);
+                        str_pmSiteEbmbEBMeterWorkingStatusVal = item.get(position);
                         mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatusVal.setText(str_pmSiteEbmbEBMeterWorkingStatusVal);
                     }
                 });
@@ -117,7 +321,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteEbmbKitkatOrClayFuseStatusVal= item.get(position);
+                        str_pmSiteEbmbKitkatOrClayFuseStatusVal = item.get(position);
                         mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatusVal.setText(str_pmSiteEbmbKitkatOrClayFuseStatusVal);
                     }
                 });
@@ -137,7 +341,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteEbmbSfuOrMccbStatusVal= item.get(position);
+                        str_pmSiteEbmbSfuOrMccbStatusVal = item.get(position);
                         mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatusVal.setText(str_pmSiteEbmbSfuOrMccbStatusVal);
                     }
                 });
@@ -157,7 +361,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteEbmbHRCFuseStatusVal= item.get(position);
+                        str_pmSiteEbmbHRCFuseStatusVal = item.get(position);
                         mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatusVal.setText(str_pmSiteEbmbHRCFuseStatusVal);
                     }
                 });
@@ -177,7 +381,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteEbmbEBServiceWireConditionVal= item.get(position);
+                        str_pmSiteEbmbEBServiceWireConditionVal = item.get(position);
                         mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireConditionVal.setText(str_pmSiteEbmbEBServiceWireConditionVal);
                     }
                 });
@@ -197,7 +401,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteEbmbRegisterFaultVal= item.get(position);
+                        str_pmSiteEbmbRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFaultVal.setText(str_pmSiteEbmbRegisterFaultVal);
                     }
                 });
@@ -207,7 +411,8 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
         mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteEbMeterBoxActivity.this,
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+                /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteEbMeterBoxActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteEbMeterBox_typeOfFault))),
                         "Type of Fault",
                         "close", "#000000");
@@ -217,37 +422,12 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        str_pmSiteEbmbTypeOfFaultVal= item.get(position);
+                        str_pmSiteEbmbTypeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.setText(str_pmSiteEbmbTypeOfFaultVal);
                     }
-                });
+                });*/
             }
         });
-    }
-
-    private void assignViews() {
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxCondition = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterBoxCondition);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxConditionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterBoxConditionVal);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterWorkingStatus);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterWorkingStatusVal);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_KitKatClayFuseStatus);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_KitKatClayFuseStatusVal);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_SfuMccbStatus);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_SfuMccbStatusVal);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_HrcFuseStatus);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_HrcFuseStatusVal);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewAcLoadAmpPh = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_acLoadAmpPh);
-        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhRPhase = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_acLoadAmpPh_rPhase);
-        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhYPhase = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_acLoadAmpPh_yPhase);
-        mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhBPhase = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_acLoadAmpPh_bPhase);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterReadingKwh = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebMeterReadingKwh);
-        mPreventiveMaintenanceSiteEbMeterBoxEditTextEbMeterReadingKwh = (EditText) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_editText_ebMeterReadingKwh);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireCondition = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebServiceWireCondition);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireConditionVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_ebServiceWireConditionVal);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_registerFault);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_registerFaultVal);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_typeOfFault);
-        mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEbMeterBox_textView_typeOfFaultVal);
     }
 
     @Override
@@ -270,6 +450,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case R.id.menuSubmit:
+                submitDetails();
                 startActivity(new Intent(this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
                 finish();
                 return true;

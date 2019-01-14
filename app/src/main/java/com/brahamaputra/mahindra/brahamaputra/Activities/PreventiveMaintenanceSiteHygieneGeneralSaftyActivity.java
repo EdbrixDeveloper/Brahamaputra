@@ -490,7 +490,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);
-            Log.d(TAG, "jsonString: " + jsonString);
+            //Log.d(TAG, "jsonString: " + jsonString);
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
         } catch (Exception e) {
