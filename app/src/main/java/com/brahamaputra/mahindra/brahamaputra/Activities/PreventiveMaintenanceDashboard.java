@@ -64,7 +64,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         assignViews();
         sessionManager = new SessionManager(PreventiveMaintenanceDashboard.this);
         setListner();
-
     }
 
     private void assignViews() {
@@ -101,33 +100,13 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-
-                if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
-                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
-                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
-                        intent.putExtra("ticketNO", "SIKL19012222");
-                        sessionManager.updateSessionUserTicketId("SIKL19012222");
-                        sessionManager.updateSessionUserTicketName("SIKL19012222");
-                        startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
-                    } else {
-                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                            @Override
-                            public void onPositiveClick() {
-                                if (gpsTracker.canGetLocation()) {
-                                    Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                                }
-                            }
-                        }).show();
+                alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        openTicket1();
                     }
-                } else {
-                    alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                        @Override
-                        public void onPositiveClick() {
-                            finish();
-                        }
-                    }).show();
-                }
+                }).show();
+
             }
         });
 
@@ -135,37 +114,73 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-
-                if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
-                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
-                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
-                        intent.putExtra("ticketNO", "SIKL19019999");
-                        sessionManager.updateSessionUserTicketId("SIKL19019999");
-                        sessionManager.updateSessionUserTicketName("SIKL19019999");
-                        startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
-                    } else {
-                        //showToast("Could not detecting location. Please try again later.");
-                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                            @Override
-                            public void onPositiveClick() {
-                                if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
-                                    Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                                }
-                            }
-                        }).show();
+                alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        openTicket2();
                     }
-                } else {
-                    alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                        @Override
-                        public void onPositiveClick() {
-                            finish();
-                        }
-                    }).show();
-                }
+                }).show();
             }
         });
+    }
+    private void openTicket2(){
+        if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
+            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
+                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
+                intent.putExtra("ticketNO", "SIKL19019999");
+                sessionManager.updateSessionUserTicketId("SIKL19019999");
+                sessionManager.updateSessionUserTicketName("SIKL19019999");
+                startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
+            } else {
+                //showToast("Could not detecting location. Please try again later.");
+                alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        if (gpsTracker.canGetLocation()) {
+                            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                            Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                        }
+                    }
+                }).show();
+            }
+        } else {
+            alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                @Override
+                public void onPositiveClick() {
+                    finish();
+                }
+            }).show();
+        }
+    }
+
+    private void openTicket1(){
+        if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
+            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
+                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
+                intent.putExtra("ticketNO", "SIKL19012222");
+                sessionManager.updateSessionUserTicketId("SIKL19012222");
+                sessionManager.updateSessionUserTicketName("SIKL19012222");
+                startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
+            } else {
+                alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        if (gpsTracker.canGetLocation()) {
+                            Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                        }
+                    }
+                }).show();
+            }
+        } else {
+            alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                @Override
+                public void onPositiveClick() {
+                    finish();
+                }
+            }).show();
+        }
     }
 
     @Override
