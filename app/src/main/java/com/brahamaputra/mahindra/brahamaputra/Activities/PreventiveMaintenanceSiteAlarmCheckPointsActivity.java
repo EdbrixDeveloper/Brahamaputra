@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,8 +19,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.AlarmCheckPoints;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
+import com.brahamaputra.mahindra.brahamaputra.Data.SiteHygenieneGenralSeftyParameter;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -28,6 +35,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -36,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActivity {
 
@@ -90,16 +100,34 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+
+    private PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails;
+    private AlarmCheckPoints alarmCheckPoints;
+
+    MultiSelectDialog multiSelectDialog;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    ArrayList<String> typeOfFaultList;
+
+     /*String detailsOfWrmsQrCodeScan;
+     String doorOpenAlarm;
+     String dgOn;
+     String dgOutputAvailable;
+     String highRoomTemp;
+     String fireSmoke;
+     String powerPlantFailure;
+     String alarmConfirmedByNoc;
+     String remarks;
+     String registerFault;
+     String typeOfFault;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_alarm_check_points);
-                    this.setTitle("Alarm Check Points");
+        this.setTitle("Alarm Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         checkCameraPermission();
@@ -110,6 +138,22 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this, userId, ticketName);
+
+
+        pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+
+        //Code For MultiSelect Type Of Fault
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAlarmCheckPoints_typeOfFault)));
+        int id = 1;
+        for (int i = 0; i < typeOfFaultList.size(); i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
+        setInputDetails();
+        setMultiSelectModel();
+
     }
 
     private void assignViews() {
@@ -138,6 +182,197 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_typeOfFault);
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_typeOfFaultVal);
     }
+
+
+    public void setMultiSelectModel() {
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        str_pmSiteAcpTypeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteAcpTypeOfFaultVal);
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+
+                    }
+                });
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
+
+                pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+
+                if (pmSiteTransactionDetails != null) {
+
+                    alarmCheckPoints = pmSiteTransactionDetails.getAlarmCheckPoints();
+
+                    if (alarmCheckPoints != null) {
+
+
+                        /*mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.setText(alarmCheckPoints.getSitePremisesCleaning());
+                        this.base64StringUploadPhotoOfSitePremises = alarmCheckPoints.getBase64StringUploadPhotoOfSitePremises();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaningVal.setText(alarmCheckPoints.getEquipmentCleaning());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTowerVal.setText(alarmCheckPoints.getAnyEagleCrowHoneyHivesInTower());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.setText(alarmCheckPoints.getCompoundWallFencingStatus());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablityVal.setText(alarmCheckPoints.getGateLockAvailablity());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal.setText(alarmCheckPoints.getShelterLockAvailablity());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal.setText(alarmCheckPoints.getDgLockAvailablity());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.setText(alarmCheckPoints.getFireExtinguisherAvilability());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal.setText(alarmCheckPoints.getNoOfFireExtinguisher());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.setText(alarmCheckPoints.getFireExtinguisherExpiryDate());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablityVal.setText(alarmCheckPoints.getFireBucket());
+                        this.base64StringCautionSignBoard = alarmCheckPoints.getBase64StringCautionSignBoardPhoto();
+                        this.base64StringWarningSignBoard = alarmCheckPoints.getBase64StringWarningSignBoardPhoto();
+                        this.base64StringDangerSignBoard = alarmCheckPoints.getBase64StringDangerSignBoardPhoto();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendarVal.setText(alarmCheckPoints.getSafetyChartsCalendar());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal.setText(alarmCheckPoints.getUnusedMaterialInSite());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.setText(alarmCheckPoints.getRegisterFault());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(alarmCheckPoints.getTypeOfFault());
+
+                        visibilityOfFireExtingisherAvailablity(mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.getText().toString());
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.getText().toString());
+
+                        // New added for image #ImageSet
+
+                        imageFileUploadPhotoOfSitePremises = alarmCheckPoints.getImageFileUploadPhotoOfSitePremises();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.GONE);
+                        if (imageFileUploadPhotoOfSitePremises != null && imageFileUploadPhotoOfSitePremises.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfSitePremises);
+                            imageFileUriUploadPhotoOfSitePremises = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriUploadPhotoOfSitePremises != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileCautionSignBoard = alarmCheckPoints.getImageFileCautionSignBoard();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.GONE);
+                        if (imageFileCautionSignBoard != null && imageFileCautionSignBoard.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileCautionSignBoard);
+                            imageFileUriCautionSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriCautionSignBoard != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileWarningSignBoard = alarmCheckPoints.getImageFileWarningSignBoard();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.GONE);
+                        if (imageFileWarningSignBoard != null && imageFileWarningSignBoard.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileWarningSignBoard);
+                            imageFileUriWarningSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriWarningSignBoard != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileDangerSignBoard = alarmCheckPoints.getImageFileDangerSignBoard();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.GONE);
+                        if (imageFileDangerSignBoard != null && imageFileDangerSignBoard.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileDangerSignBoard);
+                            imageFileUriDangerSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriDangerSignBoard != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            }
+                        }*/
+
+                        if (alarmCheckPoints.getTypeOfFault() != null && alarmCheckPoints.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+
+                            setArrayValuesOfTypeOfFault(alarmCheckPoints.getTypeOfFault());
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+
+
+
+            /*String sitePremisesCleaning = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.getText().toString().trim();
+            String base64StringUploadPhotoOfSitePremises = this.base64StringUploadPhotoOfSitePremises;
+            String equipmentCleaning = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaningVal.getText().toString().trim();
+            String anyEagleCrowHoneyHivesInTower = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTowerVal.getText().toString().trim();
+            String compoundWallFencingStatus = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.getText().toString().trim();
+            String gateLockAvailablity = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablityVal.getText().toString().trim();
+            String shelterLockAvailablity = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal.getText().toString().trim();
+            String dgLockAvailablity = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal.getText().toString().trim();
+            String fireExtinguisherAvilability = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.getText().toString().trim();
+            String noOfFireExtinguisher = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal.getText().toString().trim();
+            String fireExtinguisherExpiryDate = mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.getText().toString().trim();
+            String fireBucket = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablityVal.getText().toString().trim();
+            String base64StringCautionSignBoardPhoto = this.base64StringCautionSignBoard;
+            String base64StringWarningSignBoardPhoto = this.base64StringWarningSignBoard;
+            String base64StringDangerSignBoardPhoto = this.base64StringDangerSignBoard;
+            String safetyChartsCalendar = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendarVal.getText().toString().trim();
+            String unusedMaterialInSite = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal.getText().toString().trim();
+            String registerFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.getText().toString().trim();
+            //int isSubmited = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.getText().toString().trim();
+
+
+            alarmCheckPoints = new AlarmCheckPoints(sitePremisesCleaning, base64StringUploadPhotoOfSitePremises, equipmentCleaning,
+                    anyEagleCrowHoneyHivesInTower, compoundWallFencingStatus, gateLockAvailablity, shelterLockAvailablity, dgLockAvailablity,
+                    fireExtinguisherAvilability, noOfFireExtinguisher, fireExtinguisherExpiryDate, fireBucket, base64StringCautionSignBoardPhoto,
+                    base64StringWarningSignBoardPhoto, base64StringDangerSignBoardPhoto, safetyChartsCalendar,
+                    unusedMaterialInSite, registerFault, typeOfFault,
+                    imageFileUploadPhotoOfSitePremises, imageFileCautionSignBoard,
+                    imageFileWarningSignBoard, imageFileDangerSignBoard);
+
+            pmSiteTransactionDetails.setAlarmCheckPoints(alarmCheckPoints);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(pmSiteTransactionDetails);
+            Log.d(TAG, "jsonString: " + jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);*/
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
 
     private void initCombo() {
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewDoorOpenAlarmVal.setOnClickListener(new View.OnClickListener() {
@@ -303,7 +538,9 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this,
+
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+                /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAlarmCheckPoints_typeOfFault))),
                         "Type of Fault",
                         "close", "#000000");
@@ -316,7 +553,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                         str_pmSiteAcpTypeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteAcpTypeOfFaultVal);
                     }
-                });
+                });*/
             }
         });
     }

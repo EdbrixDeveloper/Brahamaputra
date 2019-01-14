@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer implements Serializable
+public class PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer implements Serializable
 {
 
     @SerializedName("customer")
@@ -65,7 +65,7 @@ public class AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer implements
      * No args constructor for use in serialization
      * 
      */
-    public AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer() {
+    public PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer() {
     }
 
     /**
@@ -88,7 +88,7 @@ public class AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer implements
      * @param acTechnicianMobNo
      * @param siteName
      */
-    public AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer(String customer, String circle, String state, String ssa, String siteName, String siteId, String scheduledDateOfAcPm, String modeOfOperation, String ticketNo, String vendorName, String acTechnicianName, String acTechnicianMobNo, String ticketStatus, String status, String submittedDate, String feedBack, String remarks) {
+    public PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer(String customer, String circle, String state, String ssa, String siteName, String siteId, String scheduledDateOfAcPm, String modeOfOperation, String ticketNo, String vendorName, String acTechnicianName, String acTechnicianMobNo, String ticketStatus, String status, String submittedDate, String feedBack, String remarks) {
         super();
         this.customer = customer;
         this.circle = circle;

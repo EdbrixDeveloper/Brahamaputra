@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AcPreventiveMaintenanceTransactionData implements Serializable
+public class PreventiveMaintenanceAcTransactionData implements Serializable
 {
 
     @SerializedName("AccessToken")
@@ -49,16 +49,16 @@ public class AcPreventiveMaintenanceTransactionData implements Serializable
     private String ticketNo;
     @SerializedName("ticketSubmissionFromFieldEngineer")
     @Expose
-    private AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer ticketSubmissionFromFieldEngineer;
+    private PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer ticketSubmissionFromFieldEngineer;
     @SerializedName("acPreventiveMaintenanceProcessParentData")
     @Expose
-    private AcPreventiveMaintenanceProcessParentData acPreventiveMaintenanceProcessParentData;
+    private PreventiveMaintenanceAcProcessParentData acPreventiveMaintenanceProcessParentData;
     private final static long serialVersionUID = 128514140580365061L;
 
-    public AcPreventiveMaintenanceTransactionData() {
+    public PreventiveMaintenanceAcTransactionData() {
     }
 
-    public AcPreventiveMaintenanceTransactionData(String accessToken, String userId, String checkInBatteryData, String checkInLatitude, String checkInLongitude, String checkOutBatteryData, String checkOutLatitude, String checkOutLongitude, String siteAddress, String siteId, String sourceOfPower, String ticketId, String ticketNo, AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer ticketSubmissionFromFieldEngineer, AcPreventiveMaintenanceProcessParentData acPreventiveMaintenanceProcessParentData) {
+    public PreventiveMaintenanceAcTransactionData(String accessToken, String userId, String checkInBatteryData, String checkInLatitude, String checkInLongitude, String checkOutBatteryData, String checkOutLatitude, String checkOutLongitude, String siteAddress, String siteId, String sourceOfPower, String ticketId, String ticketNo, PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer ticketSubmissionFromFieldEngineer, PreventiveMaintenanceAcProcessParentData acPreventiveMaintenanceProcessParentData) {
         super();
         this.accessToken = accessToken;
         this.userId = userId;
@@ -181,19 +181,19 @@ public class AcPreventiveMaintenanceTransactionData implements Serializable
         this.ticketNo = ticketNo;
     }
 
-    public AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer getTicketSubmissionFromFieldEngineer() {
+    public PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer getTicketSubmissionFromFieldEngineer() {
         return ticketSubmissionFromFieldEngineer;
     }
 
-    public void setTicketSubmissionFromFieldEngineer(AcPreventiveMaintenanceTicketSubmissionFromFieldEngineer ticketSubmissionFromFieldEngineer) {
+    public void setTicketSubmissionFromFieldEngineer(PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer ticketSubmissionFromFieldEngineer) {
         this.ticketSubmissionFromFieldEngineer = ticketSubmissionFromFieldEngineer;
     }
 
-    public AcPreventiveMaintenanceProcessParentData getAcPreventiveMaintenanceProcessParentData() {
+    public PreventiveMaintenanceAcProcessParentData getAcPreventiveMaintenanceProcessParentData() {
         return acPreventiveMaintenanceProcessParentData;
     }
 
-    public void setAcPreventiveMaintenanceProcessParentData(AcPreventiveMaintenanceProcessParentData acPreventiveMaintenanceProcessParentData) {
+    public void setAcPreventiveMaintenanceProcessParentData(PreventiveMaintenanceAcProcessParentData acPreventiveMaintenanceProcessParentData) {
         this.acPreventiveMaintenanceProcessParentData = acPreventiveMaintenanceProcessParentData;
     }
 

@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AcPreventiveMaintenanceProcessParentData implements Serializable
+public class PreventiveMaintenanceAcProcessParentData implements Serializable
 {
 
     @SerializedName("circle")
@@ -41,14 +41,14 @@ public class AcPreventiveMaintenanceProcessParentData implements Serializable
     private String noOfAcAtSite;
     @SerializedName("acPreventiveMaintenanceProcessData")
     @Expose
-    private List<AcPreventiveMaintenanceProcessData> acPreventiveMaintenanceProcessData = null;
+    private List<PreventiveMaintenanceAcProcessData> acPreventiveMaintenanceProcessData = null;
     private final static long serialVersionUID = -6031411276255719168L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public AcPreventiveMaintenanceProcessParentData() {
+    public PreventiveMaintenanceAcProcessParentData() {
     }
 
     /**
@@ -65,7 +65,7 @@ public class AcPreventiveMaintenanceProcessParentData implements Serializable
      * @param siteName
      * @param ticketDate
      */
-    public AcPreventiveMaintenanceProcessParentData(String circle, String state, String ssa, String siteId, String siteName, String ticketNo, String ticketDate, String pmPlanDate, String submittedDate, String noOfAcAtSite, List<AcPreventiveMaintenanceProcessData> acPreventiveMaintenanceProcessData) {
+    public PreventiveMaintenanceAcProcessParentData(String circle, String state, String ssa, String siteId, String siteName, String ticketNo, String ticketDate, String pmPlanDate, String submittedDate, String noOfAcAtSite, List<PreventiveMaintenanceAcProcessData> acPreventiveMaintenanceProcessData) {
         super();
         this.circle = circle;
         this.state = state;
@@ -160,11 +160,11 @@ public class AcPreventiveMaintenanceProcessParentData implements Serializable
         this.noOfAcAtSite = noOfAcAtSite;
     }
 
-    public List<AcPreventiveMaintenanceProcessData> getAcPreventiveMaintenanceProcessData() {
+    public List<PreventiveMaintenanceAcProcessData> getAcPreventiveMaintenanceProcessData() {
         return acPreventiveMaintenanceProcessData;
     }
 
-    public void setAcPreventiveMaintenanceProcessData(List<AcPreventiveMaintenanceProcessData> acPreventiveMaintenanceProcessData) {
+    public void setAcPreventiveMaintenanceProcessData(List<PreventiveMaintenanceAcProcessData> acPreventiveMaintenanceProcessData) {
         this.acPreventiveMaintenanceProcessData = acPreventiveMaintenanceProcessData;
     }
 

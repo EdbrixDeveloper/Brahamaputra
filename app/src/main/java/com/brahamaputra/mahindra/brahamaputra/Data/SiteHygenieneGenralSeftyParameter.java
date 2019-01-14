@@ -68,6 +68,11 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
 
     @SerializedName("isSubmited")
     private int isSubmited;
+
+    private String imageFileUploadPhotoOfSitePremises;
+    private String imageFileCautionSignBoard;
+    private String imageFileWarningSignBoard;
+    private String imageFileDangerSignBoard;
     //private final static long serialVersionUID = 2983840755754588275L;
 
 
@@ -91,11 +96,24 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
         this.unusedMaterialInSite = "";
         this.registerFault = "";
         this.typeOfFault = "";
-        isSubmited=0;
+
+        this.imageFileUploadPhotoOfSitePremises = "";
+        this.imageFileCautionSignBoard = "";
+        this.imageFileWarningSignBoard = "";
+        this.imageFileDangerSignBoard = "";
+
+        isSubmited = 0;
     }
 
 
-    public SiteHygenieneGenralSeftyParameter(String sitePremisesCleaning, String base64StringUploadPhotoOfSitePremises, String equipmentCleaning, String anyEagleCrowHoneyHivesInTower, String compoundWallFencingStatus, String gateLockAvailablity, String shelterLockAvailablity, String dgLockAvailablity, String fireExtinguisherAvilability, String noOfFireExtinguisher, String fireExtinguisherExpiryDate, String fireBucket, String base64StringCautionSignBoardPhoto, String base64StringWarningSignBoardPhoto, String base64StringDangerSignBoardPhoto, String safetyChartsCalendar, String unusedMaterialInSite, String registerFault, String typeOfFault) {
+    public SiteHygenieneGenralSeftyParameter(String sitePremisesCleaning, String base64StringUploadPhotoOfSitePremises, String equipmentCleaning,
+                                             String anyEagleCrowHoneyHivesInTower, String compoundWallFencingStatus, String gateLockAvailablity,
+                                             String shelterLockAvailablity, String dgLockAvailablity, String fireExtinguisherAvilability, String noOfFireExtinguisher,
+                                             String fireExtinguisherExpiryDate, String fireBucket, String base64StringCautionSignBoardPhoto,
+                                             String base64StringWarningSignBoardPhoto, String base64StringDangerSignBoardPhoto, String safetyChartsCalendar,
+                                             String unusedMaterialInSite, String registerFault, String typeOfFault,
+                                             String imageFileUploadPhotoOfSitePremises, String imageFileCautionSignBoard,
+                                             String imageFileWarningSignBoard, String imageFileDangerSignBoard) {
         this.sitePremisesCleaning = sitePremisesCleaning;
         this.base64StringUploadPhotoOfSitePremises = base64StringUploadPhotoOfSitePremises;
         this.equipmentCleaning = equipmentCleaning;
@@ -116,12 +134,21 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
 
+        this.imageFileUploadPhotoOfSitePremises = imageFileUploadPhotoOfSitePremises;
+        this.imageFileCautionSignBoard = imageFileCautionSignBoard;
+        this.imageFileWarningSignBoard = imageFileWarningSignBoard;
+        this.imageFileDangerSignBoard = imageFileDangerSignBoard;
+
         this.isSubmited = 2;
         /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
         }*/
+
+
+        //sitePremisesCleaning,base64StringUploadPhotoOfSitePremises,equipmentCleaning,anyEagleCrowHoneyHivesInTower,compoundWallFencingStatus,gateLockAvailablity,shelterLockAvailablity,dgLockAvailablity,fireExtinguisherAvilability,noOfFireExtinguisher,fireExtinguisherExpiryDate,fireBucket,base64StringCautionSignBoardPhoto,base64StringWarningSignBoardPhoto,base64StringDangerSignBoardPhoto,safetyChartsCalendar,unusedMaterialInSite,registerFault,typeOfFault
+
 
     }
 
@@ -276,6 +303,39 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+
+    public String getImageFileUploadPhotoOfSitePremises() {
+        return imageFileUploadPhotoOfSitePremises;
+    }
+
+    public void setImageFileUploadPhotoOfSitePremises(String imageFileUploadPhotoOfSitePremises) {
+        this.imageFileUploadPhotoOfSitePremises = imageFileUploadPhotoOfSitePremises;
+    }
+
+    public String getImageFileCautionSignBoard() {
+        return imageFileCautionSignBoard;
+    }
+
+    public void setImageFileCautionSignBoard(String imageFileCautionSignBoard) {
+        this.imageFileCautionSignBoard = imageFileCautionSignBoard;
+    }
+
+    public String getImageFileWarningSignBoard() {
+        return imageFileWarningSignBoard;
+    }
+
+    public void setImageFileWarningSignBoard(String imageFileWarningSignBoard) {
+        this.imageFileWarningSignBoard = imageFileWarningSignBoard;
+    }
+
+    public String getImageFileDangerSignBoard() {
+        return imageFileDangerSignBoard;
+    }
+
+    public void setImageFileDangerSignBoard(String imageFileDangerSignBoard) {
+        this.imageFileDangerSignBoard = imageFileDangerSignBoard;
     }
 
     public int getSubmited() {

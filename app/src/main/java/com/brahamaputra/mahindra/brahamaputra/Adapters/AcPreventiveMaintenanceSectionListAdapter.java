@@ -10,19 +10,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintenanceSection;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSection;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.ArrayList;
 
-public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPreventiveMaintenanceSection> implements View.OnClickListener{
+public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<PreventiveMaintenanceAcSection> implements View.OnClickListener{
 
-    private ArrayList<AcPreventiveMaintenanceSection> dataSet;
+    private ArrayList<PreventiveMaintenanceAcSection> dataSet;
     Context mContext;
     private int lastPosition = -1;
 
-    public AcPreventiveMaintenanceSectionListAdapter(ArrayList<AcPreventiveMaintenanceSection> data, Context context) {
+    public AcPreventiveMaintenanceSectionListAdapter(ArrayList<PreventiveMaintenanceAcSection> data, Context context) {
         super(context, R.layout.item_ac_preventive_maintenance_section, data);
         this.dataSet = data;
         this.mContext=context;
@@ -32,7 +33,7 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
     public void onClick(View v) {
         int position=(Integer) v.getTag();
         Object object= getItem(position);
-        AcPreventiveMaintenanceSection dataModel=(AcPreventiveMaintenanceSection)object;
+        PreventiveMaintenanceAcSection dataModel=(PreventiveMaintenanceAcSection)object;
     }
 
     private static class ViewHolder {
@@ -46,7 +47,7 @@ public class AcPreventiveMaintenanceSectionListAdapter extends ArrayAdapter<AcPr
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        AcPreventiveMaintenanceSection dataModel = getItem(position);
+        PreventiveMaintenanceAcSection dataModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
         final View result;

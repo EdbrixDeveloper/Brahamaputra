@@ -27,7 +27,8 @@ import android.widget.Toast;
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.SiteHygenieneGenralSeftyParameter;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -48,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseActivity {
@@ -165,11 +167,36 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
+    private PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails;
+    private SiteHygenieneGenralSeftyParameter siteHygenSaftyDetailsData;
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+
     MultiSelectDialog multiSelectDialog;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    ArrayList<String> typeOfFaultList;
+
+    /*private String sitePremisesCleaning;
+    private String base64StringUploadPhotoOfSitePremises;
+    private String equipmentCleaning;
+    private String anyEagleCrowHoneyHivesInTower;
+    private String compoundWallFencingStatus;
+    private String gateLockAvailablity;
+    private String shelterLockAvailablity;
+    private String dgLockAvailablity;
+    private String fireExtinguisherAvilability;
+    private String noOfFireExtinguisher;
+    private String fireExtinguisherExpiryDate;
+    private String fireBucket;
+    private String base64StringCautionSignBoardPhoto;
+    private String base64StringWarningSignBoardPhoto;
+    private String base64StringDangerSignBoardPhoto;
+    private String safetyChartsCalendar;
+    private String unusedMaterialInSite;
+    private String registerFault;
+    private String typeOfFault;
+    private int isSubmited;*/
 
 
     @Override
@@ -187,6 +214,8 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, userId, ticketName);
+
+        pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -211,43 +240,26 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             }
         });
 
-        visibilityOfCompoundWallFencingStatus("");
-        visibilityOfShelterLockAvailablity("");
-        visibilityOfDgLockAvailablity("");
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCompoundWallFencingStatus.setVisibility(View.VISIBLE);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity.setVisibility(View.VISIBLE);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity.setVisibility(View.VISIBLE);
+
+        //visibilityOfCompoundWallFencingStatus("");
+        //visibilityOfShelterLockAvailablity("");
+        //visibilityOfDgLockAvailablity("");
+
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
 
         //Code For MultiSelect Type Of Fault
-        ArrayList<String> typeOfFaultList =  new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_typeOfFault)));
-        ArrayList<MultiSelectModel> listOfFaultsTypes = new ArrayList<>();
-        int id=1;
-        for(int i=0;i<typeOfFaultList.size();i++) {
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteHygieneGeneralSafetyParameters_typeOfFault)));
+        int id = 1;
+        for (int i = 0; i < typeOfFaultList.size(); i++) {
             listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
             id++;
         }
-        //MultiSelectModel
-        multiSelectDialog = new MultiSelectDialog()
-                .title("Type of Fault") //setting title for dialog
-                .titleSize(25)
-                .positiveText("Done")
-                .negativeText("Cancel")
-                .setMinSelectionLimit(0)
-                .setMaxSelectionLimit(typeOfFaultList.size())
-                //List of ids that you need to be selected
-                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
-                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
-                    @Override
-                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
-                        //will return list of selected IDS
-                        str_pmSiteTypeOfFaultVal = dataString;
-                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(str_pmSiteTypeOfFaultVal);
-
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Log.d(TAG, "Dialog cancelled");
-
-                    }
-                });
+        setInputDetails();
+        setMultiSelectModel();
     }
 
     private void assignViews() {
@@ -312,6 +324,194 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_typesOfFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFaultVal);
+    }
+
+    public void setMultiSelectModel() {
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        str_pmSiteTypeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(str_pmSiteTypeOfFaultVal);
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+
+                    }
+                });
+    }
+
+    private void setInputDetails() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
+
+                pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+
+                if (pmSiteTransactionDetails != null) {
+
+                    siteHygenSaftyDetailsData = pmSiteTransactionDetails.getSiteHygenieneGenralSeftyParameter();
+
+                    if (siteHygenSaftyDetailsData != null) {
+
+
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.setText(siteHygenSaftyDetailsData.getSitePremisesCleaning());
+                        this.base64StringUploadPhotoOfSitePremises = siteHygenSaftyDetailsData.getBase64StringUploadPhotoOfSitePremises();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaningVal.setText(siteHygenSaftyDetailsData.getEquipmentCleaning());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTowerVal.setText(siteHygenSaftyDetailsData.getAnyEagleCrowHoneyHivesInTower());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.setText(siteHygenSaftyDetailsData.getCompoundWallFencingStatus());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablityVal.setText(siteHygenSaftyDetailsData.getGateLockAvailablity());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal.setText(siteHygenSaftyDetailsData.getShelterLockAvailablity());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal.setText(siteHygenSaftyDetailsData.getDgLockAvailablity());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.setText(siteHygenSaftyDetailsData.getFireExtinguisherAvilability());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal.setText(siteHygenSaftyDetailsData.getNoOfFireExtinguisher());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.setText(siteHygenSaftyDetailsData.getFireExtinguisherExpiryDate());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablityVal.setText(siteHygenSaftyDetailsData.getFireBucket());
+                        this.base64StringCautionSignBoard = siteHygenSaftyDetailsData.getBase64StringCautionSignBoardPhoto();
+                        this.base64StringWarningSignBoard = siteHygenSaftyDetailsData.getBase64StringWarningSignBoardPhoto();
+                        this.base64StringDangerSignBoard = siteHygenSaftyDetailsData.getBase64StringDangerSignBoardPhoto();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendarVal.setText(siteHygenSaftyDetailsData.getSafetyChartsCalendar());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal.setText(siteHygenSaftyDetailsData.getUnusedMaterialInSite());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.setText(siteHygenSaftyDetailsData.getRegisterFault());
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(siteHygenSaftyDetailsData.getTypeOfFault());
+
+                        visibilityOfFireExtingisherAvailablity(mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.getText().toString());
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.getText().toString());
+
+                        // New added for image #ImageSet
+
+                        imageFileUploadPhotoOfSitePremises = siteHygenSaftyDetailsData.getImageFileUploadPhotoOfSitePremises();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.GONE);
+                        if (imageFileUploadPhotoOfSitePremises != null && imageFileUploadPhotoOfSitePremises.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfSitePremises);
+                            imageFileUriUploadPhotoOfSitePremises = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriUploadPhotoOfSitePremises != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileCautionSignBoard = siteHygenSaftyDetailsData.getImageFileCautionSignBoard();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.GONE);
+                        if (imageFileCautionSignBoard != null && imageFileCautionSignBoard.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileCautionSignBoard);
+                            imageFileUriCautionSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriCautionSignBoard != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileWarningSignBoard = siteHygenSaftyDetailsData.getImageFileWarningSignBoard();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.GONE);
+                        if (imageFileWarningSignBoard != null && imageFileWarningSignBoard.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileWarningSignBoard);
+                            imageFileUriWarningSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriWarningSignBoard != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        imageFileDangerSignBoard = siteHygenSaftyDetailsData.getImageFileDangerSignBoard();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.GONE);
+                        if (imageFileDangerSignBoard != null && imageFileDangerSignBoard.length() > 0) {
+                            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileDangerSignBoard);
+                            imageFileUriDangerSignBoard = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+                            if (imageFileUriDangerSignBoard != null) {
+                                mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        if (siteHygenSaftyDetailsData.getTypeOfFault() != null && siteHygenSaftyDetailsData.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+
+                            setArrayValuesOfTypeOfFault(siteHygenSaftyDetailsData.getTypeOfFault());
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+
+            String sitePremisesCleaning = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.getText().toString().trim();
+            String base64StringUploadPhotoOfSitePremises = this.base64StringUploadPhotoOfSitePremises;
+            String equipmentCleaning = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaningVal.getText().toString().trim();
+            String anyEagleCrowHoneyHivesInTower = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTowerVal.getText().toString().trim();
+
+            String compoundWallFencingStatus = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.getText().toString().trim();
+            String gateLockAvailablity = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablityVal.getText().toString().trim();
+            String shelterLockAvailablity = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal.getText().toString().trim();
+            String dgLockAvailablity = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal.getText().toString().trim();
+            String fireExtinguisherAvilability = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.getText().toString().trim();
+            String noOfFireExtinguisher = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal.getText().toString().trim();
+            String fireExtinguisherExpiryDate = mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.getText().toString().trim();
+            String fireBucket = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablityVal.getText().toString().trim();
+            String base64StringCautionSignBoardPhoto = this.base64StringCautionSignBoard;
+            String base64StringWarningSignBoardPhoto = this.base64StringWarningSignBoard;
+            String base64StringDangerSignBoardPhoto = this.base64StringDangerSignBoard;
+            String safetyChartsCalendar = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendarVal.getText().toString().trim();
+            String unusedMaterialInSite = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal.getText().toString().trim();
+            String registerFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.getText().toString().trim();
+            //int isSubmited = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.getText().toString().trim();
+
+
+            siteHygenSaftyDetailsData = new SiteHygenieneGenralSeftyParameter(sitePremisesCleaning, base64StringUploadPhotoOfSitePremises, equipmentCleaning,
+                    anyEagleCrowHoneyHivesInTower, compoundWallFencingStatus, gateLockAvailablity, shelterLockAvailablity, dgLockAvailablity,
+                    fireExtinguisherAvilability, noOfFireExtinguisher, fireExtinguisherExpiryDate, fireBucket, base64StringCautionSignBoardPhoto,
+                    base64StringWarningSignBoardPhoto, base64StringDangerSignBoardPhoto, safetyChartsCalendar,
+                    unusedMaterialInSite, registerFault, typeOfFault,
+                    imageFileUploadPhotoOfSitePremises, imageFileCautionSignBoard,
+                    imageFileWarningSignBoard, imageFileDangerSignBoard);
+
+            pmSiteTransactionDetails.setSiteHygenieneGenralSeftyParameter(siteHygenSaftyDetailsData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(pmSiteTransactionDetails);
+            Log.d(TAG, "jsonString: " + jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private void initCombo() {
@@ -791,33 +991,6 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         }
     }
 
-    private void submitDetails() {
-        try {
-            /*String landType = mLandDetailsTextViewTypeOfLandVal.getText().toString().trim();
-            String landArea = mLandDetailsEditTextAreaOfLand.getText().toString().trim();
-            String rentLeaseValue = mLandDetailsEditTextRentLeaseInNumber.getText().toString().trim();
-            String rentLeaseValueInWords = mLandDetailsTextViewRentLeaseInWords_val.getText().toString().trim().toUpperCase();
-            String landOwnerName = mLandDetailsEditTextNameOfOwner.getText().toString().trim();
-            String landOwnerMob = mLandDetailsEditTextMobileNoOfOwner.getText().toString().trim();
-            String landLayout = base64StringLayoutOfLand;
-            //String landAgreementCopy = "0";
-            String landAgreementCopy = mLandDetailsTextViewCopyAgreementWithOwnerVal.getText().toString().trim();
-            String landAgreementValidity = mLandDetailsEditTextDateOfvalidityOfAgreement.getText().toString();
-
-            landDetailsData = new LandDetailsData(landType, landArea, rentLeaseValue, rentLeaseValueInWords, landOwnerName, landOwnerMob, landLayout, landAgreementCopy, landAgreementValidity, imageFileName);
-
-            hotoTransactionData.setLandDetailsData(landDetailsData);
-
-            Gson gson2 = new GsonBuilder().create();
-            String jsonString = gson2.toJson(hotoTransactionData);
-            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);*/
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -924,7 +1097,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
+                submitDetails();
                 startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
                 finish();
                 return true;
@@ -939,4 +1112,5 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         setResult(RESULT_OK);
         finish();
     }
+
 }

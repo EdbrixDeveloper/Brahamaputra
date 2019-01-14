@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintenanceSection;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSection;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePreventiveMaintenanceSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
 

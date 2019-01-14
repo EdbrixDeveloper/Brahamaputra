@@ -11,8 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.brahamaputra.mahindra.brahamaputra.Adapters.AcPreventiveMaintenanceSectionListAdapter;
-import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintenanceSection;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivity {
 
     public ListView acPreventiveMaintenanceSections_listView_sections;
-    ArrayList<AcPreventiveMaintenanceSection> dataModels;
+    ArrayList<PreventiveMaintenanceAcSection> dataModels;
     String[] values;
     private static AcPreventiveMaintenanceSectionListAdapter adapter;
     public static final int RESULT_READING_COMPLETED = 650;
@@ -60,9 +60,9 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
         dataModels = new ArrayList<>();
         for (int i = 0; i < values.length; i++) {
             if (i / 2 == 0) {
-                dataModels.add(new AcPreventiveMaintenanceSection("" + (i + 1), "" + values[i], 0));
+                dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
             } else {
-                dataModels.add(new AcPreventiveMaintenanceSection("" + (i + 1), "" + values[i], 0));
+                dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
             }
             //dataModels.add(new AcPreventiveMaintenanceSection(""+(i+1),""+values[i],true));
         }

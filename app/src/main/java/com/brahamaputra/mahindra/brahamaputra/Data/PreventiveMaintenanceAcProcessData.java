@@ -6,7 +6,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AcPreventiveMaintenanceProcessData implements Serializable {
+public class PreventiveMaintenanceAcProcessData implements Serializable {
 
     @SerializedName("acPreventiveMaintenanceProcessQrCodeScan")
     @Expose
@@ -160,7 +160,7 @@ public class AcPreventiveMaintenanceProcessData implements Serializable {
     /**
      * No args constructor for use in serialization
      */
-    public AcPreventiveMaintenanceProcessData() {
+    public PreventiveMaintenanceAcProcessData() {
         this.acPreventiveMaintenanceProcessQrCodeScan ="";
         this.acModel ="";
         this.acType ="";
@@ -213,7 +213,7 @@ public class AcPreventiveMaintenanceProcessData implements Serializable {
 
     }
 
-    public AcPreventiveMaintenanceProcessData(String acPreventiveMaintenanceProcessQrCodeScan, String acModel, String acType, String acMake, String acCapacity, String acSerialNo, String mainMcbStatus, String subMcbStatus, String metalCladPlugStatus, String metalCladSocketStatus, String stablizerStatus, String stabilizerMake, String stabilizerCapacity, String stablizerWorkingStatus, String inputAcVoltage, String acEarthingStatus, String filterCleaned, String base64filterCleanedBeforePhoto, String base64filterCleanedAfterPhoto, String condenserCoilCleaned, String base64condenserCoilCleanedBeforePhoto, String base64condenserCoilCleanedAfterPhoto, String coolingCoilCleaned, String base64coolingCoilCleanedBeforePhoto, String base64coolingCoilCleanedAfterPhoto, String acCoolingStatus, String acStartingLoadCurrent, String acRunningLoadCurrent, String indoorFilterCleanedStatus, String indoorFanMotorCondition, String blowerWheelCondition, String noiseIndoorMotor, String outdoorFanmotorCondition, String fanLeafCondition, String noiseOutdoorMotor, String compressorCondition, String compCapacitorCondition, String controllerCondition, String acAlarmStatus, String acSensorCondition, String roomTemperature, String setTemperature, String vibrationOfAc, String freeCoolingUnitStatus, String freeCoolingAvailable, String waterLeakage, String acCabinateStatus, String shelterDoorStatus, String remarks) {
+    public PreventiveMaintenanceAcProcessData(String acPreventiveMaintenanceProcessQrCodeScan, String acModel, String acType, String acMake, String acCapacity, String acSerialNo, String mainMcbStatus, String subMcbStatus, String metalCladPlugStatus, String metalCladSocketStatus, String stablizerStatus, String stabilizerMake, String stabilizerCapacity, String stablizerWorkingStatus, String inputAcVoltage, String acEarthingStatus, String filterCleaned, String base64filterCleanedBeforePhoto, String base64filterCleanedAfterPhoto, String condenserCoilCleaned, String base64condenserCoilCleanedBeforePhoto, String base64condenserCoilCleanedAfterPhoto, String coolingCoilCleaned, String base64coolingCoilCleanedBeforePhoto, String base64coolingCoilCleanedAfterPhoto, String acCoolingStatus, String acStartingLoadCurrent, String acRunningLoadCurrent, String indoorFilterCleanedStatus, String indoorFanMotorCondition, String blowerWheelCondition, String noiseIndoorMotor, String outdoorFanmotorCondition, String fanLeafCondition, String noiseOutdoorMotor, String compressorCondition, String compCapacitorCondition, String controllerCondition, String acAlarmStatus, String acSensorCondition, String roomTemperature, String setTemperature, String vibrationOfAc, String freeCoolingUnitStatus, String freeCoolingAvailable, String waterLeakage, String acCabinateStatus, String shelterDoorStatus, String remarks) {
         this.acPreventiveMaintenanceProcessQrCodeScan = acPreventiveMaintenanceProcessQrCodeScan;
         this.acModel = acModel;
         this.acType = acType;

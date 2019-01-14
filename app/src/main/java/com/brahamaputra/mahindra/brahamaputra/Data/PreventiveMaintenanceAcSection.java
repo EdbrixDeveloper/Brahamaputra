@@ -1,13 +1,13 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
-public class AcPreventiveMaintenanceSection {
+public class PreventiveMaintenanceAcSection {
 
     String secNo;
     String secName;
     //boolean secReadingStatus;
     int secReadingStatus;
 
-    public AcPreventiveMaintenanceSection(String secNo, String secName, int secReadingStatus) {
+    public PreventiveMaintenanceAcSection(String secNo, String secName, int secReadingStatus) {
         this.secNo = secNo;
         this.secName = secName;
         this.secReadingStatus = secReadingStatus;
