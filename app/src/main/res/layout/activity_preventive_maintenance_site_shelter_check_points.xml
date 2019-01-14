@@ -143,6 +143,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteShelterCheckPoints_linearLayout_registerFault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
@@ -168,9 +169,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteShelterCheckPoints_linearLayout_typeOfFault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView

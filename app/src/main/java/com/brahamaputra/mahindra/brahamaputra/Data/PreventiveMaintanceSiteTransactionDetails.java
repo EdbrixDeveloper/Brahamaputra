@@ -89,7 +89,25 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
     @SerializedName("dgBatteryCheckPoints")
     @Expose
     private DgBatteryCheckPoints dgBatteryCheckPoints;
-    private final static long serialVersionUID = 4468678041836209812L;
+   // private final static long serialVersionUID = 4468678041836209812L;
+
+    public PreventiveMaintanceSiteTransactionDetails()
+    {
+        siteHygenieneGenralSeftyParameter = new SiteHygenieneGenralSeftyParameter();
+        alarmCheckPoints = new AlarmCheckPoints();
+        batteryBankCheckPoints = new BatteryBankCheckPoints();
+        earthingCheckPoints = new EarthingCheckPoints();
+        ebMeterBox = new EbMeterBox();
+        dgCheckPoints = new DgCheckPoints();
+        dgBatteryCheckPoints = new DgBatteryCheckPoints();
+        acCheckPoints = new AcCheckPoints();
+        smpsCheckPoints = new SmpsCheckPoints();
+        rectifierModuleCheckPoint = new RectifierModuleCheckPoint();
+        pmsAmfPanelCheckPoints = new PmsAmfPanelCheckPoints();
+        servoCheckPoints = new ServoCheckPoints();
+        shelterCheckPoints = new ShelterCheckPoints();
+        otherElectricalCheckPoints = new OtherElectricalCheckPoints();
+    }
 
     public String getAccessToken() {
         return accessToken;
@@ -306,5 +324,10 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
     public void setDgBatteryCheckPoints(DgBatteryCheckPoints dgBatteryCheckPoints) {
         this.dgBatteryCheckPoints = dgBatteryCheckPoints;
     }
+
+   /* public boolean isAllPreventiveMaintainanceFormSubmitted()
+    {
+        if(siteHygenieneGenralSeftyParameter)
+    }*/
 
 }

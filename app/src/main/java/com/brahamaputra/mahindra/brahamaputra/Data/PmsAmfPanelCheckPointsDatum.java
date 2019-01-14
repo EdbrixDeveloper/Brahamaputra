@@ -28,6 +28,25 @@ public class PmsAmfPanelCheckPointsDatum implements Serializable
     private String typeOfFault;
     private final static long serialVersionUID = -7367757211641983319L;
 
+    public PmsAmfPanelCheckPointsDatum()
+    {
+        this.detailsOfPmsAmfPiuQrCodeScan = "";
+        this.siteInAutoManual = "";
+        this.anyLooseConnectionBypass = "";
+        this.pmsAmfPiuEarthingStatus = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+    }
+
+    public PmsAmfPanelCheckPointsDatum(String detailsOfPmsAmfQrCodeScan, String siteInAutoManual, String anyLooseConnectionBypass, String pmsAmfPuiEarthingStatus, String registerFault, String typeOfFault) {
+        this.detailsOfPmsAmfPiuQrCodeScan = detailsOfPmsAmfQrCodeScan;
+        this.siteInAutoManual = siteInAutoManual;
+        this.anyLooseConnectionBypass =anyLooseConnectionBypass;
+        this.pmsAmfPiuEarthingStatus = pmsAmfPuiEarthingStatus;
+        this.registerFault =registerFault;
+        this.typeOfFault = typeOfFault;
+    }
+
     public String getDetailsOfPmsAmfPiuQrCodeScan() {
         return detailsOfPmsAmfPiuQrCodeScan;
     }

@@ -50,6 +50,8 @@ public class AcCheckPoint implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+
+
     private final static long serialVersionUID = -6436987330345681329L;
 
     public String getDetailsOfAcQrCodeScan() {

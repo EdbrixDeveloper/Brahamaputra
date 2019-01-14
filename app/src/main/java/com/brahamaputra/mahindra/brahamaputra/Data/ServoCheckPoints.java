@@ -26,10 +26,37 @@ public class ServoCheckPoints implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+
+    @SerializedName("isSubmited")
+    //private Boolean isSubmited;
+    private int isSubmited;
+
     private final static long serialVersionUID = -725516690069653860L;
 
+    public ServoCheckPoints()
+    {
+        this.detailsOfServoQrCodeScan = "";
+        this.servoWorkingStatus = "";
+        this.anyBypassInSVS = "";
+        this.svsEarthingStatus = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+        this.isSubmited = 0;
+    }
+
     public ServoCheckPoints(String detailsOfServoQRCodeScan, String servoWorkingStatus, String anyBypassInSvs, String svsEarthingStatus, String registerFault, String typeOfFault) {
-        
+        this.detailsOfServoQrCodeScan = detailsOfServoQRCodeScan;
+        this.servoWorkingStatus = servoWorkingStatus;
+        this.anyBypassInSVS = anyBypassInSvs;
+        this.svsEarthingStatus = svsEarthingStatus;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+
+        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }*/
     }
 
     public String getDetailsOfServoQrCodeScan() {
@@ -78,6 +105,14 @@ public class ServoCheckPoints implements Serializable
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int submited) {
+        isSubmited = submited;
     }
 
 }

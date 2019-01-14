@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
+import com.brahamaputra.mahindra.brahamaputra.Data.ServoCheckPoints;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -22,6 +24,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -71,6 +75,8 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
     private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+    PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
+    ServoCheckPoints servoCheckPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +93,9 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         checkCameraPermission();
         initCombo();
         setListner();
+
+        preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
+        setInputDetails();
     }
 
     private void assignViews() {
@@ -314,7 +323,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
+                submitDetails();
                 startActivity(new Intent(this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
                 finish();
                 return true;
@@ -324,6 +333,63 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         }
     }
 
+
+    private void setInputDetails() {
+        try {
+                if(offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt"))
+                {
+                    String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                    Gson gson = new Gson();
+                    preventiveMaintanceSiteTransactionDetails = gson.fromJson(jsonInString,PreventiveMaintanceSiteTransactionDetails.class);
+
+                    if(preventiveMaintanceSiteTransactionDetails != null)
+                    {
+                        servoCheckPoints = preventiveMaintanceSiteTransactionDetails.getServoCheckPoints();
+                        if (servoCheckPoints != null)
+                        {
+                            base64StringDetailsOfServoQRCodeScan = servoCheckPoints.getDetailsOfServoQrCodeScan();
+                            mPreventiveMaintenanceSiteServoCheckPointsButtonDetailsOfServoQRCodeScanView.setVisibility(View.GONE);
+                            mButtonClearDetailsOfServoQRCodeScanView.setVisibility(View.GONE);
+                            if (!base64StringDetailsOfServoQRCodeScan.isEmpty() && base64StringDetailsOfServoQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteServoCheckPointsButtonDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
+
+                            mPreventiveMaintenanceSiteServoCheckPointsTextViewServoWorkingStatusVal.setText(servoCheckPoints.getServoWorkingStatus());
+                            mPreventiveMaintenanceSiteServoCheckPointsTextViewAnyBypassInSvsVal.setText(servoCheckPoints.getAnyBypassInSVS());
+                            mPreventiveMaintenanceSiteServoCheckPointsTextViewSvsEarthingStatusVal.setText(servoCheckPoints.getSvsEarthingStatus());
+                            mPreventiveMaintenanceSiteServoCheckPointsTextViewRegisterFaultVal.setText(servoCheckPoints.getRegisterFault());
+                            mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.setText(servoCheckPoints.getTypeOfFault());
+                        }
+                    }
+                }else {
+                    showToast("No previous saved data available");
+                }
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void submitDetails() {
+        try {
+                String detailsOfServoQRCodeScan = base64StringDetailsOfServoQRCodeScan;
+                String servoWorkingStatus = mPreventiveMaintenanceSiteServoCheckPointsTextViewServoWorkingStatusVal.getText().toString().trim();
+                String anyBypassInSvs = mPreventiveMaintenanceSiteServoCheckPointsTextViewAnyBypassInSvsVal.getText().toString().trim();
+                String svsEarthingStatus = mPreventiveMaintenanceSiteServoCheckPointsTextViewSvsEarthingStatusVal.getText().toString().trim();
+                String registerFault = mPreventiveMaintenanceSiteServoCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+                String typeOfFault = mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+                servoCheckPoints = new ServoCheckPoints(detailsOfServoQRCodeScan,servoWorkingStatus,anyBypassInSvs,svsEarthingStatus,registerFault,typeOfFault);
+                preventiveMaintanceSiteTransactionDetails.setServoCheckPoints(servoCheckPoints);
+                Gson gson2 = new GsonBuilder().create();
+                String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);
+                offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void onBackPressed() {
         setResult(RESULT_OK);

@@ -20,6 +20,11 @@ public class OtherElectricalCheckPoints implements Serializable
     @SerializedName("lightsInSitePremisesBulkhead")
     @Expose
     private String lightsInSitePremisesBulkhead;
+
+    @SerializedName("isSubmited")
+    //private Boolean isSubmited;
+    private int isSubmited;
+
     private final static long serialVersionUID = -102542994464311110L;
 
     public OtherElectricalCheckPoints()
@@ -28,6 +33,7 @@ public class OtherElectricalCheckPoints implements Serializable
         this.aviationLamp = "";
         this.lightsInsideTheShelter = "";
         this.lightsInSitePremisesBulkhead = "";
+        this.isSubmited = 0;
     }
 
     public OtherElectricalCheckPoints(String dcEnergyMeterstatus,String aviationLamp,String lightsInsideTheShelter,String lightsInSitePremisesBulkhead)
@@ -36,6 +42,12 @@ public class OtherElectricalCheckPoints implements Serializable
         this.aviationLamp = aviationLamp;
         this.lightsInsideTheShelter = lightsInsideTheShelter;
         this.lightsInSitePremisesBulkhead = lightsInSitePremisesBulkhead;
+
+         /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }*/
     }
 
     public String getDcEnergyMeterstatus() {
@@ -70,4 +82,11 @@ public class OtherElectricalCheckPoints implements Serializable
         this.lightsInSitePremisesBulkhead = lightsInSitePremisesBulkhead;
     }
 
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int submited) {
+        isSubmited = submited;
+    }
 }

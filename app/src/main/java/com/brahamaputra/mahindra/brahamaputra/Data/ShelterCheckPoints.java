@@ -29,6 +29,10 @@ public class ShelterCheckPoints implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+
+    @SerializedName("isSubmited")
+    //private Boolean isSubmited;
+    private int isSubmited;
     private final static long serialVersionUID = -536383988018643670L;
 
     public ShelterCheckPoints(){
@@ -39,6 +43,7 @@ public class ShelterCheckPoints implements Serializable
         this.shelterEarthingStatus = "";
         this.registerFault = "";
         this.typeOfFault = "";
+        this.isSubmited = 0;
     }
 
     public ShelterCheckPoints(String shelterCleaning, String shelterLeakage, String hatchPlateEntrySealed, String shelterFloorStatus, String shelterEarthingStatus, String resultFault, String typeOfFault) {
@@ -49,6 +54,12 @@ public class ShelterCheckPoints implements Serializable
         this.shelterEarthingStatus = shelterEarthingStatus;
         this.registerFault = resultFault;
         this.typeOfFault = typeOfFault;
+
+         /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }*/
     }
 
     public String getShelterCleaning() {
@@ -105,6 +116,14 @@ public class ShelterCheckPoints implements Serializable
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int submited) {
+        isSubmited = submited;
     }
 
 }

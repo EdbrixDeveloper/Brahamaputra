@@ -3,13 +3,17 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.ShelterCheckPoints;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -26,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseActivity {
+    private static final String TAG = PreventiveMaintenanceSiteShelterCheckPointsActivity.class.getSimpleName();
     private TextView mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterCleaning;
     private TextView mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterCleaningVal;
     private TextView mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterLeakage;
@@ -40,6 +45,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
     private TextView mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal;
     private TextView mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFault;
     private TextView mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal;
+    private LinearLayout mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal;
 
     String str_shelterCleaningVal;
     String str_shelterLeakageVal;
@@ -55,6 +61,8 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
 
     private SessionManager sessionManager;
     private OfflineStorageWrapper offlineStorageWrapper;
+
+    MultiSelectDialog multiSelectDialog;
 
     PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
     ShelterCheckPoints shelterCheckPoints;
@@ -77,6 +85,40 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
 
         preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
         setInputDetails();
+
+        //Code For MultiSelect Type Of Fault
+        ArrayList<String> typeOfFaultList =  new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteShelterCheckPoints_typeOfFault)));
+        ArrayList<MultiSelectModel> listOfFaultsTypes = new ArrayList<>();
+        int id=1;
+        for(int i=0;i<typeOfFaultList.size();i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        str_typeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(str_typeOfFaultVal);
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+
+                    }
+                });
     }
 
     private void assignViews() {
@@ -94,7 +136,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteShelterCheckPoints_textView_registerFaultVal);
         mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteShelterCheckPoints_textView_typeOfFault);
         mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteShelterCheckPoints_textView_typeOfFaultVal);
-
+        mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteShelterCheckPoints_linearLayout_typeOfFault);
 
     }
 
@@ -215,6 +257,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
 
                         str_registerFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal.setText(str_registerFaultVal);
+                        visibilityOfTypesOfFault(str_registerFaultVal);
                     }
                 });
             }
@@ -223,7 +266,9 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteShelterCheckPointsActivity.this,
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+
+                /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteShelterCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteShelterCheckPoints_typeOfFault))),
                         "Type of Fault",
                         "close", "#000000");
@@ -236,7 +281,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                         str_typeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(str_typeOfFaultVal);
                     }
-                });
+                });*/
             }
         });
     }
@@ -265,6 +310,8 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
 
     private void setInputDetails() {
@@ -317,6 +364,15 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         }catch (Exception e)
         {
             e.printStackTrace();
+        }
+    }
+
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
+        if (RegisterFault.equals("No")) {
+            mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
         }
     }
 
