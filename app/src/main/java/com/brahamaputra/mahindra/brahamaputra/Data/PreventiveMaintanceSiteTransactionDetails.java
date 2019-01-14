@@ -56,9 +56,9 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
     @SerializedName("batteryBankCheckPoints")
     @Expose
     private BatteryBankCheckPoints batteryBankCheckPoints;
-    @SerializedName("earthingCheckPoints")
+    @SerializedName("earthingCheckPointsParentData")
     @Expose
-    private EarthingCheckPoints earthingCheckPoints;
+    private EarthingCheckPointsParentData EarthingCheckPointsParentData;
     @SerializedName("ebMeterBox")
     @Expose
     private EbMeterBox ebMeterBox;
@@ -96,7 +96,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         siteHygenieneGenralSeftyParameter = new SiteHygenieneGenralSeftyParameter();
         alarmCheckPoints = new AlarmCheckPoints();
         batteryBankCheckPoints = new BatteryBankCheckPoints();
-        earthingCheckPoints = new EarthingCheckPoints();
+        EarthingCheckPointsParentData = new EarthingCheckPointsParentData();
         ebMeterBox = new EbMeterBox();
         dgCheckPoints = new DgCheckPoints();
         dgBatteryCheckPoints = new DgBatteryCheckPoints();
@@ -237,12 +237,12 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         this.batteryBankCheckPoints = batteryBankCheckPoints;
     }
 
-    public EarthingCheckPoints getEarthingCheckPoints() {
-        return earthingCheckPoints;
+    public EarthingCheckPointsParentData getEarthingCheckPointsParentData() {
+        return EarthingCheckPointsParentData;
     }
 
-    public void setEarthingCheckPoints(EarthingCheckPoints earthingCheckPoints) {
-        this.earthingCheckPoints = earthingCheckPoints;
+    public void setEarthingCheckPointsParentData(EarthingCheckPointsParentData EarthingCheckPointsParentData) {
+        this.EarthingCheckPointsParentData = EarthingCheckPointsParentData;
     }
 
     public EbMeterBox getEbMeterBox() {
