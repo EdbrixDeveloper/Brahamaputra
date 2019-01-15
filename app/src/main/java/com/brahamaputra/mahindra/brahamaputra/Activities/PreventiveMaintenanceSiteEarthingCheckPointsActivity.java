@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthingCheckPointsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthingCheckPointsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
@@ -28,6 +31,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseActivity {
 
@@ -83,6 +87,11 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
     private int totalAcCount = 0;
     private int currentPos = 0;
 
+    MultiSelectDialog multiSelectDialog;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    ArrayList<String> typeOfFaultList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +112,21 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         //dataList = new ArrayList<>();
         earthingCheckPointsData = new ArrayList<>();
         currentPos = 0;
+
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+
+        //Code For MultiSelect Type Of Fault
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteEarthingCheckPoints_typeOfFault)));
+        int id = 1;
+        for (int i = 0; i < typeOfFaultList.size(); i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
+
         setInputDetails(currentPos);
         invalidateOptionsMenu();
+        setMultiSelectModel();
 
     }
 
@@ -168,6 +190,12 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                     mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.setText(earthingCheckPointsData.get(index).getRegisterFault());
                     mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(earthingCheckPointsData.get(index).getTypeOfFault());
 
+                    if (earthingCheckPointsData.get(index).getTypeOfFault() != null && earthingCheckPointsData.get(index).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+
+                        //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(index).getTypeOfFault());
+                        setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
+                    }
+
                     mPreventiveMaintenanceSiteEarthingCheckPointsButtonPreviousReading.setVisibility(View.GONE);
                     mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
 
@@ -186,6 +214,51 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         } catch (Exception e) {
             e.printStackTrace();
 
+        }
+    }
+
+
+    public void setMultiSelectModel() {
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        str_pmSiteEcpTypeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteEcpTypeOfFaultVal);
+                        //str_pmSiteEbmbTypeOfFaultVal = dataString;
+                        //mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.setText(str_pmSiteEbmbTypeOfFaultVal);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+                    }
+                });
+    }
+
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -351,7 +424,8 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteEarthingCheckPointsActivity.this,
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+                /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteEarthingCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteEarthingCheckPoints_typeOfFault))),
                         "Type of Fault",
                         "close", "#000000");
@@ -364,7 +438,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                         str_pmSiteEcpTypeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteEcpTypeOfFaultVal);
                     }
-                });
+                });*/
             }
         });
 
@@ -457,6 +531,13 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.setText(earthingCheckPointsData.get(pos).getRegisterFault());
             mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(earthingCheckPointsData.get(pos).getTypeOfFault());
 
+            if (earthingCheckPointsData.get(pos).getTypeOfFault() != null && earthingCheckPointsData.get(pos).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+                alreadySelectedTypeOfFaultList=new ArrayList<>();
+                //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(pos).getTypeOfFault());
+                setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
+                setMultiSelectModel();
+            }
+
             mPreventiveMaintenanceSiteEarthingCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
 
@@ -511,6 +592,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthPitValue.setText("");
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.setText("");
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText("");
+        alreadySelectedTypeOfFaultList=new ArrayList<>();
 
     }
 
