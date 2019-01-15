@@ -139,10 +139,8 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 Gson gson = new Gson();
 
                 pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
-
                 dataList = pmSiteTransactionDetails.getEarthingCheckPointsParentData();
                 earthingCheckPointsData.addAll(dataList.getEarthingCheckPointsData());
-
 
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewAllNutOrBoltsAreIntactVal.setText(dataList.getAllNutBoltsAreIntact());
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewIgbOrOgbStatusVal.setText(dataList.getIgbOgbStatus());
@@ -150,6 +148,8 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.setText(dataList.getNumberOfEarthPit());
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.setText(dataList.getNumberOfEarthPitVisible());
 
+                str_pmSiteEcpNumberOfEarthPitVal = dataList.getNumberOfEarthPit();
+                invalidateOptionsMenu();
 
                 /*mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
                 if (!dataList.getNumberOfEarthPitVisible().isEmpty() && dataList.getNumberOfEarthPitVisible() != null) {
@@ -177,17 +177,15 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                     } else {
                         mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading.setText("Finish");
                     }
-
                 }
 
             } else {
                 showToast("No previous saved data available");
-                //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 mLinearLayoutContainer.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //showToast(e.getMessage().toString());
+
         }
     }
 
@@ -268,7 +266,6 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                         //str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
                         //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.setText(str_pmSiteEcpNumberOfEarthPitVal);
                         /////////////////
-
 
                         str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
                         invalidateOptionsMenu();
@@ -517,7 +514,6 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
     }
 
-    /*008 28112018*/
     public boolean checkValidationOnChangeNoOfEarthPitValue(String noOfEarthPitValue, String noOfEarthPitValueVisible, String methodFlag) {
 
         if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
@@ -570,7 +566,6 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 if (str_pmSiteEcpNumberOfEarthPitVal == null || str_pmSiteEcpNumberOfEarthPitVal.equals("")) {
                     showToast("Please select no of earth pit");
                 } else {
-                    // if (checkValidationOnNoOfAcSelection() == true) {
                     if (checkValidationOnChangeNoOfEarthPitValue(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim(), mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim(), "onSubmit") == true) {
                         submitDetails();
                         startActivity(new Intent(this, PreventiveMaintenanceSiteEbMeterBoxActivity.class));
