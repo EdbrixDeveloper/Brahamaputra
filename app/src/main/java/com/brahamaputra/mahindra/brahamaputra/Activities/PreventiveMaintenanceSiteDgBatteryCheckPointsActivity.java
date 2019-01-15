@@ -3,10 +3,13 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +19,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.DgBatteryCheckPointsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.DgBatteryCheckPointsParentData;
+import com.brahamaputra.mahindra.brahamaputra.Data.DgCheckPointsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.DgCheckPointsParentData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -24,21 +35,31 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseActivity {
+
+    private static final String TAG = PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class.getSimpleName();
+
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSite;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal;
+
     private LinearLayout mLinearLayoutContainer;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewBatteryNumber;
+
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDetailsOfDgBatteryQRCodeScan;
     private ImageView mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScan;
     private ImageView mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView;
     private ImageView mButtonClearDetailsOfDgBatteryQRCodeScanView;
+
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryCondition;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailable;
@@ -47,10 +68,12 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryCharger;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal;
+
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFault;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFault;
     private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal;
+
     private Button mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading;
 
@@ -76,10 +99,21 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+
+    private PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails;
+    private ArrayList<DgBatteryCheckPointsData> dgBatteryCheckPointsData;// replce airConditionersData
+
+    private DgBatteryCheckPointsParentData dataList;
+
+    private int totalAcCount = 0;
+    private int currentPos = 0;
+
+    MultiSelectDialog multiSelectDialog;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    ArrayList<String> typeOfFaultList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +123,40 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
-        setListner();
-
+        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this);
+
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, userId, ticketName);
+        setListner();
+
+        ////////////////////////
+
+        ///////////////
+
+        pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
+
+        dgBatteryCheckPointsData = new ArrayList<>();
+        currentPos = 0;
+
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+
+        //Code For MultiSelect Type Of Fault
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_typeOfFault)));
+        int id = 1;
+        for (int i = 0; i < typeOfFaultList.size(); i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
+
+        setInputDetails(currentPos);
+        invalidateOptionsMenu();
+        setMultiSelectModel();
+
+
     }
 
     private void initCombo() {
@@ -112,8 +173,39 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
+                        /*str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.setText(str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal);*/
+
                         str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = item.get(position);
+                        invalidateOptionsMenu();
                         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.setText(str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal);
+                        //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.setText("");//008
+
+                        if (dgBatteryCheckPointsData != null && dgBatteryCheckPointsData.size() > 0) {
+                            dgBatteryCheckPointsData.clear();
+                        }
+                        currentPos = 0;
+                        totalAcCount = 0;
+                        clearFields(currentPos);
+
+                        // Clear all field value and hide layout If Non AC or O //
+                        if (str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal.equals("0")) {
+                            mLinearLayoutContainer.setVisibility(View.GONE);
+                            //mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
+                        } else {
+                            str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = item.get(position);
+                            totalAcCount = Integer.parseInt(str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal);
+                            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewBatteryNumber.setText("Reading: #1");
+                            mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                            //mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.VISIBLE);
+                            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+                            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
+                            if (totalAcCount > 0 && totalAcCount == 1) {
+                                mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Finish");
+                            } else {
+                                mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Next Reading");
+                            }
+                        }
                     }
                 });
             }
@@ -222,7 +314,9 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+
+                /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_typeOfFault))),
                         "Type of Fault",
                         "close", "#000000");
@@ -235,12 +329,54 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                         str_pmSiteDgbcpTypeOfFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteDgbcpTypeOfFaultVal);
                     }
-                });
+                });*/
             }
         });
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetMultiSelectModel();
+                if (checkValidationOfArrayFields() == true) {
+                    if (currentPos > 0) {
+                        //Save current ac reading
+                        saveDGCheckRecords(currentPos);
+                        currentPos = currentPos - 1;
+                        //move to Next reading
+                        displayDGCheckRecords(currentPos);
+                    }
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetMultiSelectModel();
+                if (checkValidationOfArrayFields() == true) {
+                    if (currentPos < (totalAcCount - 1)) {
+                        //Save current ac reading
+                        saveDGCheckRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayDGCheckRecords(currentPos);
+
+                    } else if (currentPos == (totalAcCount - 1)) {
+                        saveDGCheckRecords(currentPos);
+                        //if (checkValidationOnNoOfAcSelection() == true) {
+                        if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
+                            submitDetails();
+                            startActivity(new Intent(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                            finish();
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
     private void assignViews() {
+
         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSite = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_textView_noOfDgBatteryAvailableAtSite);
         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_textView_noOfDgBatteryAvailableAtSiteVal);
         mLinearLayoutContainer = (LinearLayout) findViewById(R.id.linearLayout_container);
@@ -264,6 +400,339 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_button_nextReading);
     }
+
+
+    /////////////
+    private void setInputDetails(int index) {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+                dataList = pmSiteTransactionDetails.getDgBatteryCheckPointsParentData();
+                dgBatteryCheckPointsData.addAll(dataList.getDgBatteryCheckPointsData());
+
+
+                mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.setText(dataList.getNoOfDgBatteryavailableAtSite());
+                //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal .setText(dataList.getNumberOfEarthPitVisible());
+
+                str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = dataList.getNoOfDgBatteryavailableAtSite();
+                invalidateOptionsMenu();
+
+                /*mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
+                if (!dataList.getNumberOfEarthPitVisible().isEmpty() && dataList.getNumberOfEarthPitVisible() != null) {
+                    mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.VISIBLE);
+                }
+                mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(dataList.getNumberOfEarthPitVisible());*/
+
+
+                if (dgBatteryCheckPointsData != null && dgBatteryCheckPointsData.size() > 0) {
+                    mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewBatteryNumber.setText("Reading: #1");
+                    totalAcCount = Integer.parseInt(dataList.getNoOfDgBatteryavailableAtSite());
+
+                    base64StringDetailsOfDgBatteryQRCodeScan = dgBatteryCheckPointsData.get(index).getDetailsOfDgBatteryQrCodeScan();
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearDetailsOfDgBatteryQRCodeScanView.setVisibility(View.GONE);
+
+                    if (!base64StringDetailsOfDgBatteryQRCodeScan.isEmpty() && base64StringDetailsOfDgBatteryQRCodeScan != null) {
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
+                        mButtonClearDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal.setText(dgBatteryCheckPointsData.get(index).getDgBatteryCondition());
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal.setText(dgBatteryCheckPointsData.get(index).getDgBatteryWaterAvailable());
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal.setText(dgBatteryCheckPointsData.get(index).getPetroleumJellyToDgBatteryTerminal());
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal.setText(dgBatteryCheckPointsData.get(index).getDgBatteryCharger());
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.setText(dgBatteryCheckPointsData.get(index).getRegisterFault());
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText(dgBatteryCheckPointsData.get(index).getTypeOfFault());
+
+                    if (dgBatteryCheckPointsData.get(index).getTypeOfFault() != null && dgBatteryCheckPointsData.get(index).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+                        //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(index).getTypeOfFault());
+                        setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
+                    }
+
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
+
+                    //if (airConditionersData.size() > 1) {
+                    if (totalAcCount > 1) {
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Next Reading");
+                    } else {
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Finish");
+                    }
+                }
+
+            } else {
+                showToast("No previous saved data available");
+                mLinearLayoutContainer.setVisibility(View.GONE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public void setMultiSelectModel() {
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        str_pmSiteDgbcpTypeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteDgbcpTypeOfFaultVal);
+
+                        /*str_pmSiteDgbcpTypeOfFaultVal = item.get(position);
+                        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteDgbcpTypeOfFaultVal);*/
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+                    }
+                });
+    }
+
+    private void resetMultiSelectModel() {
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+        setMultiSelectModel();
+    }
+
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean checkValidationOfArrayFields() {
+
+        String detailsOfDgBatteryQrCodeScan = base64StringDetailsOfDgBatteryQRCodeScan;
+        String dgBatteryCondition = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal.getText().toString().trim();
+        String dgBatteryWaterAvailable = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal.getText().toString().trim();
+        String petroleumJellyToDgBatteryTerminal = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal.getText().toString().trim();
+        String dgBatteryCharger = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+        if (detailsOfDgBatteryQrCodeScan.isEmpty() || detailsOfDgBatteryQrCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        } /*else if (dgBatteryCondition.isEmpty() || dgBatteryCondition == null) {
+            showToast("Please Enter DG Battery Condition");
+            return false;
+        }*/ else if (registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        } /*else if (typeOfFault.isEmpty() || typeOfFault == null) {
+            showToast("Select Type of Fault");
+            return false;
+        }*/ else return true;
+
+    }
+
+    private void saveDGCheckRecords(int pos) {
+
+        String detailsOfDgBatteryQrCodeScan = base64StringDetailsOfDgBatteryQRCodeScan;
+        String dgBatteryCondition = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal.getText().toString().trim();
+        String dgBatteryWaterAvailable = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal.getText().toString().trim();
+        String petroleumJellyToDgBatteryTerminal = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal.getText().toString().trim();
+        String dgBatteryCharger = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+        //detailsOfDgBatteryQrCodeScan;
+        //                    String dgBatteryCondition;
+        //                    String dgBatteryWaterAvailable;
+        //                    String petroleumJellyToDgBatteryTerminal;
+        //                    String dgBatteryCharger;
+        //                    String registerFault;
+        //                    String typeOfFault
+
+
+        DgBatteryCheckPointsData dgBatteryCheckPointsDataChild = new DgBatteryCheckPointsData(detailsOfDgBatteryQrCodeScan,
+                dgBatteryCondition,
+                dgBatteryWaterAvailable,
+                petroleumJellyToDgBatteryTerminal,
+                dgBatteryCharger,
+                registerFault,
+                typeOfFault);
+
+        if (dgBatteryCheckPointsData.size() > 0) {
+            if (pos == dgBatteryCheckPointsData.size()) {
+                dgBatteryCheckPointsData.add(dgBatteryCheckPointsDataChild);
+            } else if (pos < dgBatteryCheckPointsData.size()) {
+                dgBatteryCheckPointsData.set(pos, dgBatteryCheckPointsDataChild);
+            }
+        } else {
+            dgBatteryCheckPointsData.add(dgBatteryCheckPointsDataChild);
+        }
+    }
+
+    private void displayDGCheckRecords(int pos) {
+
+        if (dgBatteryCheckPointsData.size() > 0 && pos < dgBatteryCheckPointsData.size()) {
+
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewBatteryNumber.setText("Reading: #" + (pos + 1));
+
+            base64StringDetailsOfDgBatteryQRCodeScan = dgBatteryCheckPointsData.get(pos).getDetailsOfDgBatteryQrCodeScan();
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView.setVisibility(View.GONE);
+            mButtonClearDetailsOfDgBatteryQRCodeScanView.setVisibility(View.GONE);
+
+            if (!base64StringDetailsOfDgBatteryQRCodeScan.isEmpty() && base64StringDetailsOfDgBatteryQRCodeScan != null) {
+                mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
+                mButtonClearDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
+            }
+
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal.setText(dgBatteryCheckPointsData.get(pos).getDgBatteryCondition());
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal.setText(dgBatteryCheckPointsData.get(pos).getDgBatteryWaterAvailable());
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal.setText(dgBatteryCheckPointsData.get(pos).getPetroleumJellyToDgBatteryTerminal());
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal.setText(dgBatteryCheckPointsData.get(pos).getDgBatteryCharger());
+
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.setText(dgBatteryCheckPointsData.get(pos).getRegisterFault());
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText(dgBatteryCheckPointsData.get(pos).getTypeOfFault());
+
+            if (dgBatteryCheckPointsData.get(pos).getTypeOfFault() != null && dgBatteryCheckPointsData.get(pos).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+                alreadySelectedTypeOfFaultList = new ArrayList<>();
+                //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(pos).getTypeOfFault());
+                setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
+                setMultiSelectModel();
+            }
+
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
+
+        } else {
+            clearFields(pos);
+        }
+
+        if (pos > 0 && pos < (totalAcCount - 1)) {
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Next Reading");
+        } else if (pos > 0 && pos == (totalAcCount - 1)) {
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Finish");
+        } else if (pos == 0) {
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+            if (pos == (totalAcCount - 1)) {
+                mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Finish");
+            } else {
+                mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setText("Next Reading");
+            }
+        }
+
+    }
+
+    private void submitDetails() {
+        try {
+
+            String noOfDgBatteryAvailableAtSite = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim();
+            //String numberOfEarthPitVisible = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim();
+
+            dataList = new DgBatteryCheckPointsParentData(noOfDgBatteryAvailableAtSite, dgBatteryCheckPointsData);
+
+            pmSiteTransactionDetails.setDgBatteryCheckPointsParentData(dataList);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(pmSiteTransactionDetails);
+
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clearFields(int indexPos) {
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewBatteryNumber.setText("Reading: #" + (indexPos + 1));
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal.setText("");
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal.setText("");
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal.setText("");
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal.setText("");
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.setText("");
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText("");
+
+        str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = "";
+        str_pmSiteDgbcpDGBatteryConditionVal = "";
+        str_pmSiteDgbcpDGBatteryWaterAvailableVal = "";
+        str_pmSiteDgbcpPetroleumJellyToDGBatteryTerminalVal = "";
+        str_pmSiteDgbcpDGBatteryChargerVal = "";
+        str_pmSiteDgbcpRegisterFaultVal = "";
+
+        base64StringDetailsOfDgBatteryQRCodeScan = "";
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView.setVisibility(View.GONE);
+        mButtonClearDetailsOfDgBatteryQRCodeScanView.setVisibility(View.GONE);
+
+    }
+
+    public boolean checkValidationOnChangeNoOfDgBatteryAvailable(String NoOfDgBatteryAvailable, String methodFlag) {
+
+        /*String detailsOfDgBatteryQrCodeScan;
+                    String dgBatteryCondition;
+                    String dgBatteryWaterAvailable;
+                    String petroleumJellyToDgBatteryTerminal;
+                    String dgBatteryCharger;
+                    String registerFault;
+                    String typeOfFault;*/
+
+                   /* mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryConditionVal
+                            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryWaterAvailableVal
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewPetroleumJellyToDGBatteryTerminalVal
+                            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewDgBatteryChargerVal
+                    mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal
+                            mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal*/
+
+        if (NoOfDgBatteryAvailable.isEmpty() || NoOfDgBatteryAvailable == null) {
+            showToast("Select No of DG Battery Available");
+            return false;
+        } else if ((dgBatteryCheckPointsData.size() != Integer.valueOf(NoOfDgBatteryAvailable) && methodFlag.equals("onSubmit"))) {
+            showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
+            return false;
+        } else return true;
+
+
+        /*String noOfEarthPitValue, String noOfEarthPitValueVisible,
+        if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
+            showToast("Select No of Earth Pit");
+            return false;
+        } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {
+            if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
+                showToast("Select Number of Earth Pit Visible");
+                return false;
+            } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
+                showToast("Select Earth Pit Visible is less than or equal to Earth Pit");
+                return false;
+            } else if ((dgBatteryCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
+                return false;
+            } else return true;
+        } else return true;*/
+
+    }
+
+    //////////////////
 
     private void setListner() {
 
@@ -357,6 +826,16 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal != null && !str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal.isEmpty()) {
+            if (Integer.valueOf(str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 
@@ -368,9 +847,21 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
-                finish();
+
+                str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString();
+
+                if (str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal == null || str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal.equals("")) {
+                    showToast("Please select no of ac");
+                } else {
+                    if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
+                        submitDetails();
+                        startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                        finish();
+                    }
+                }
+
+                /*startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                finish();*/
                 return true;
 
             default:

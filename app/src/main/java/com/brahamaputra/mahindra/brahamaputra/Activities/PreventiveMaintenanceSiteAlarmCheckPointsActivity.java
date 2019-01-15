@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,8 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     private TextView mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRegisterFaultVal;
     private TextView mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFault;
     private TextView mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal;
+
+    private LinearLayout mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault;
 
     String str_pmSiteAcpDoorOpenAlarmVal = "";
     String str_pmSiteAcpDgOnVal = "";
@@ -179,6 +182,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRemarksVal = (EditText) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_remarksVal);
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_registerFault);
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_registerFaultVal);
+        mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_linearLayout_typeOfFault);
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_typeOfFault);
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_typeOfFaultVal);
     }
@@ -249,6 +253,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRegisterFaultVal.setText(alarmCheckPoints.getRegisterFault());
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setText(alarmCheckPoints.getTypeOfFault());
 
+                        visibilityOfTypesOfFault(alarmCheckPoints.getRegisterFault());
                         if (alarmCheckPoints.getTypeOfFault() != null && alarmCheckPoints.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
 
                             setArrayValuesOfTypeOfFault(alarmCheckPoints.getTypeOfFault());
@@ -309,6 +314,14 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         }
     }
 
+    private void visibilityOfTypesOfFault(String str_pmSiteAcpRegisterFaultVal) {
+
+        mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+        if (str_pmSiteAcpRegisterFaultVal.equals("No")) {
+            mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        }
+    }
 
     private void initCombo() {
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewDoorOpenAlarmVal.setOnClickListener(new View.OnClickListener() {
@@ -466,6 +479,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
 
                         str_pmSiteAcpRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRegisterFaultVal.setText(str_pmSiteAcpRegisterFaultVal);
+                        visibilityOfTypesOfFault(str_pmSiteAcpRegisterFaultVal);
                     }
                 });
             }

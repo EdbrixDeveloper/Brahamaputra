@@ -2,15 +2,16 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DgBatteryCheckPointsData implements Serializable
-{
+public class DgBatteryCheckPointsData implements Serializable {
 
     @SerializedName("detailsOfDgBatteryQrCodeScan")
     @Expose
     private String detailsOfDgBatteryQrCodeScan;
+
     @SerializedName("dgBatteryCondition")
     @Expose
     private String dgBatteryCondition;
@@ -29,7 +30,28 @@ public class DgBatteryCheckPointsData implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
-    private final static long serialVersionUID = -7689901156568939001L;
+
+    //private final static long serialVersionUID = -7689901156568939001L;
+
+    public DgBatteryCheckPointsData() {
+        this.detailsOfDgBatteryQrCodeScan = "";
+        this.dgBatteryCondition = "";
+        this.dgBatteryWaterAvailable = "";
+        this.petroleumJellyToDgBatteryTerminal = "";
+        this.dgBatteryCharger = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+    }
+
+    public DgBatteryCheckPointsData(String detailsOfDgBatteryQrCodeScan, String dgBatteryCondition, String dgBatteryWaterAvailable, String petroleumJellyToDgBatteryTerminal, String dgBatteryCharger, String registerFault, String typeOfFault) {
+        this.detailsOfDgBatteryQrCodeScan = detailsOfDgBatteryQrCodeScan;
+        this.dgBatteryCondition = dgBatteryCondition;
+        this.dgBatteryWaterAvailable = dgBatteryWaterAvailable;
+        this.petroleumJellyToDgBatteryTerminal = petroleumJellyToDgBatteryTerminal;
+        this.dgBatteryCharger = dgBatteryCharger;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+    }
 
     public String getDetailsOfDgBatteryQrCodeScan() {
         return detailsOfDgBatteryQrCodeScan;

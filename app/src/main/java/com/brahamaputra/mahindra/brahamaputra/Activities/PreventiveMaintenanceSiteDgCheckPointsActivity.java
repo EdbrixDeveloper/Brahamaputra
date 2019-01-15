@@ -182,7 +182,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         alreadySelectedTypeOfFaultList = new ArrayList<>();
 
         //Code For MultiSelect Type Of Fault
-        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteEarthingCheckPoints_typeOfFault)));
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgCheckPoints_typeOfFault)));
         int id = 1;
         for (int i = 0; i < typeOfFaultList.size(); i++) {
             listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
@@ -344,6 +344,11 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         Log.d(TAG, "Dialog cancelled");
                     }
                 });
+    }
+
+    private void resetMultiSelectModel() {
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+        setMultiSelectModel();
     }
 
     private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
@@ -549,12 +554,12 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
     }
 
-    public boolean checkValidationOnChangeNoOfDgAvailable(String noOfEarthPitValue, String methodFlag) {
+    public boolean checkValidationOnChangeNoOfDgAvailable(String NoOfDgAvailable, String methodFlag) {
 
-        if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
-            showToast("Select No of Earth Pit");
+        if (NoOfDgAvailable.isEmpty() || NoOfDgAvailable == null) {
+            showToast("Select No of DG Available");
             return false;
-        } else if ((dgCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
+        } else if ((dgCheckPointsData.size() != Integer.valueOf(NoOfDgAvailable) && methodFlag.equals("onSubmit"))) {
             showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
             return false;
         } else return true;
@@ -801,6 +806,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resetMultiSelectModel();
                 if (checkValidationOfArrayFields() == true) {
                     if (currentPos > 0) {
                         //Save current ac reading
@@ -815,6 +821,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resetMultiSelectModel();
                 if (checkValidationOfArrayFields() == true) {
                     if (currentPos < (totalAcCount - 1)) {
                         //Save current ac reading
@@ -1017,8 +1024,8 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                     }
                 }
 
-                startActivity(new Intent(this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
-                finish();
+                /*startActivity(new Intent(this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
+                finish();*/
                 return true;
 
             default:
