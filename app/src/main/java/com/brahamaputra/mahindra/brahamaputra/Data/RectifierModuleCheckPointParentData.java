@@ -2,11 +2,12 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RectifierModuleCheckPoint implements Serializable
+public class RectifierModuleCheckPointParentData implements Serializable
 {
 
     @SerializedName("noOfRectifierModuleAvailableAtSite")
@@ -20,8 +21,32 @@ public class RectifierModuleCheckPoint implements Serializable
     private String noOfFaultyModulesInSite;
     @SerializedName("rectifierModuleCheckPointData")
     @Expose
-    private List<RectifierModuleCheckPointDatum> rectifierModuleCheckPointData = null;
+    private List<RectifierModuleCheckPointData> rectifierModuleCheckPointData = null;
+
+    @SerializedName("isSubmited")
+    //private Boolean isSubmited;
+    private int isSubmited;
     private final static long serialVersionUID = 1961740297699264464L;
+
+    public RectifierModuleCheckPointParentData()
+    {
+        this.noOfRectifierModuleAvailableAtSite = "";
+        this.noOfModulesWorking = "";
+        this.noOfFaultyModulesInSite = "";
+        this.rectifierModuleCheckPointData = null;
+    }
+
+    public RectifierModuleCheckPointParentData(String noOfRectifierModuleAvailableAtSite, String noOfModulesWorking, String noOfFaultyModulesAtSite, ArrayList<RectifierModuleCheckPointData> rectifierModuleCheckPointDataList) {
+        this.noOfRectifierModuleAvailableAtSite = noOfRectifierModuleAvailableAtSite;
+        this.noOfModulesWorking = noOfModulesWorking;
+        this.noOfFaultyModulesInSite = noOfFaultyModulesAtSite;
+        this.rectifierModuleCheckPointData = rectifierModuleCheckPointDataList;
+        if (!this.noOfRectifierModuleAvailableAtSite.isEmpty()) {
+            this.isSubmited = 2;
+        } else {
+            this.isSubmited = 1;
+        }
+    }
 
     public String getNoOfRectifierModuleAvailableAtSite() {
         return noOfRectifierModuleAvailableAtSite;
@@ -47,12 +72,19 @@ public class RectifierModuleCheckPoint implements Serializable
         this.noOfFaultyModulesInSite = noOfFaultyModulesInSite;
     }
 
-    public List<RectifierModuleCheckPointDatum> getRectifierModuleCheckPointData() {
+    public List<RectifierModuleCheckPointData> getRectifierModuleCheckPointData() {
         return rectifierModuleCheckPointData;
     }
 
-    public void setRectifierModuleCheckPointData(List<RectifierModuleCheckPointDatum> rectifierModuleCheckPointData) {
+    public void setRectifierModuleCheckPointData(List<RectifierModuleCheckPointData> rectifierModuleCheckPointData) {
         this.rectifierModuleCheckPointData = rectifierModuleCheckPointData;
     }
 
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int submited) {
+        isSubmited = submited;
+    }
 }

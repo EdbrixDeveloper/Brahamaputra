@@ -2044,6 +2044,7 @@
 
     <!--PM Rectifier Module Check Points-->
     <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfRectifierModuleAvailableAtSite">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>

@@ -82,15 +82,15 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     private ServoCheckPoints servoCheckPoints;
     @SerializedName("pmsAmfPanelCheckPoints")
     @Expose
-    private PmsAmfPanelCheckPoints pmsAmfPanelCheckPoints;
+    private PmsAmfPanelCheckPointsParentData pmsAmfPanelCheckPoints;
 
     @SerializedName("rectifierModuleCheckPoint")
     @Expose
-    private RectifierModuleCheckPoint rectifierModuleCheckPoint;
+    private RectifierModuleCheckPointParentData rectifierModuleCheckPoint;
 
     @SerializedName("smpsCheckPoints")
     @Expose
-    private SmpsCheckPoints smpsCheckPoints;
+    private SmpsCheckPointParentData smpsCheckPoints;
 
     private SmpsCheckPointParentData smpsCheckPointParentData;
     @SerializedName("acCheckPointParentData")
@@ -110,8 +110,8 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         dgBatteryCheckPointsParentData = new DgBatteryCheckPointsParentData();
         acCheckPointParentData = new AcCheckPointParentData();
         smpsCheckPointParentData = new SmpsCheckPointParentData();
-        rectifierModuleCheckPoint = new RectifierModuleCheckPoint();
-        pmsAmfPanelCheckPoints = new PmsAmfPanelCheckPoints();
+        rectifierModuleCheckPoint = new RectifierModuleCheckPointParentData();
+        pmsAmfPanelCheckPoints = new PmsAmfPanelCheckPointsParentData();
         servoCheckPoints = new ServoCheckPoints();
         shelterCheckPoints = new ShelterCheckPoints();
         otherElectricalCheckPoints = new OtherElectricalCheckPoints();
@@ -293,19 +293,19 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         this.servoCheckPoints = servoCheckPoints;
     }
 
-    public PmsAmfPanelCheckPoints getPmsAmfPanelCheckPoints() {
+    public PmsAmfPanelCheckPointsParentData getPmsAmfPanelCheckPoints() {
         return pmsAmfPanelCheckPoints;
     }
 
-    public void setPmsAmfPanelCheckPoints(PmsAmfPanelCheckPoints pmsAmfPanelCheckPoints) {
+    public void setPmsAmfPanelCheckPoints(PmsAmfPanelCheckPointsParentData pmsAmfPanelCheckPoints) {
         this.pmsAmfPanelCheckPoints = pmsAmfPanelCheckPoints;
     }
 
-    public RectifierModuleCheckPoint getRectifierModuleCheckPoint() {
+    public RectifierModuleCheckPointParentData getRectifierModuleCheckPoint() {
         return rectifierModuleCheckPoint;
     }
 
-    public void setRectifierModuleCheckPoint(RectifierModuleCheckPoint rectifierModuleCheckPoint) {
+    public void setRectifierModuleCheckPoint(RectifierModuleCheckPointParentData rectifierModuleCheckPoint) {
         this.rectifierModuleCheckPoint = rectifierModuleCheckPoint;
     }
 

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RectifierModuleCheckPointDatum implements Serializable
+public class RectifierModuleCheckPointData implements Serializable
 {
 
     @SerializedName("detailsOfRectifierModuleQrCodeScan")
@@ -27,6 +27,15 @@ public class RectifierModuleCheckPointDatum implements Serializable
     @Expose
     private String typeOfFault;
     private final static long serialVersionUID = -6106004319522608280L;
+
+    public RectifierModuleCheckPointData(String base64RectifierModuleDetailsQrCodeScan, String base64RectifierPhotoBeforeCleaning, String base64RectifierPhotoAfterCleaning, String rectifierCleaning, String registerFault, String typeOfFault) {
+        this.base64RectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
+        this.base64RectifierPhotoBeforeCleaning = base64RectifierPhotoBeforeCleaning;
+        this.detailsOfRectifierModuleQrCodeScan = base64RectifierModuleDetailsQrCodeScan;
+        this.rectifierCleaning = rectifierCleaning;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+    }
 
     public String getDetailsOfRectifierModuleQrCodeScan() {
         return detailsOfRectifierModuleQrCodeScan;

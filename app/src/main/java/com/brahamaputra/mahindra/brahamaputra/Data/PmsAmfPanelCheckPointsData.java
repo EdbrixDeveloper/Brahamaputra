@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PmsAmfPanelCheckPointsDatum implements Serializable
+public class PmsAmfPanelCheckPointsData implements Serializable
 {
 
     @SerializedName("detailsOfPmsAmfPiuQrCodeScan")
@@ -28,7 +28,7 @@ public class PmsAmfPanelCheckPointsDatum implements Serializable
     private String typeOfFault;
     private final static long serialVersionUID = -7367757211641983319L;
 
-    public PmsAmfPanelCheckPointsDatum()
+    public PmsAmfPanelCheckPointsData()
     {
         this.detailsOfPmsAmfPiuQrCodeScan = "";
         this.siteInAutoManual = "";
@@ -38,7 +38,7 @@ public class PmsAmfPanelCheckPointsDatum implements Serializable
         this.typeOfFault = "";
     }
 
-    public PmsAmfPanelCheckPointsDatum(String detailsOfPmsAmfQrCodeScan, String siteInAutoManual, String anyLooseConnectionBypass, String pmsAmfPuiEarthingStatus, String registerFault, String typeOfFault) {
+    public PmsAmfPanelCheckPointsData(String detailsOfPmsAmfQrCodeScan, String siteInAutoManual, String anyLooseConnectionBypass, String pmsAmfPuiEarthingStatus, String registerFault, String typeOfFault) {
         this.detailsOfPmsAmfPiuQrCodeScan = detailsOfPmsAmfQrCodeScan;
         this.siteInAutoManual = siteInAutoManual;
         this.anyLooseConnectionBypass =anyLooseConnectionBypass;
