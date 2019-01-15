@@ -80,9 +80,9 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
     @SerializedName("rectifierModuleCheckPoint")
     @Expose
     private RectifierModuleCheckPoint rectifierModuleCheckPoint;
-    @SerializedName("smpsCheckPoints")
+    @SerializedName("smpsCheckPointParentData")
     @Expose
-    private SmpsCheckPoints smpsCheckPoints;
+    private SmpsCheckPointParentData smpsCheckPointParentData;
     @SerializedName("acCheckPointParentData")
     @Expose
     private AcCheckPointParentData acCheckPointParentData;
@@ -101,7 +101,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         dgCheckPoints = new DgCheckPoints();
         dgBatteryCheckPoints = new DgBatteryCheckPoints();
         acCheckPointParentData = new AcCheckPointParentData();
-        smpsCheckPoints = new SmpsCheckPoints();
+        smpsCheckPointParentData = new SmpsCheckPointParentData();
         rectifierModuleCheckPoint = new RectifierModuleCheckPoint();
         pmsAmfPanelCheckPoints = new PmsAmfPanelCheckPoints();
         servoCheckPoints = new ServoCheckPoints();
@@ -301,12 +301,12 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         this.rectifierModuleCheckPoint = rectifierModuleCheckPoint;
     }
 
-    public SmpsCheckPoints getSmpsCheckPoints() {
-        return smpsCheckPoints;
+    public SmpsCheckPointParentData getSmpsCheckPointParentData() {
+        return smpsCheckPointParentData;
     }
 
-    public void setSmpsCheckPoints(SmpsCheckPoints smpsCheckPoints) {
-        this.smpsCheckPoints = smpsCheckPoints;
+    public void setSmpsCheckPointParentData(SmpsCheckPointParentData smpsCheckPointParentData) {
+        this.smpsCheckPointParentData = smpsCheckPointParentData;
     }
 
     public AcCheckPointParentData getAcCheckPointParentData() {

@@ -790,6 +790,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 acCheckPointsData.addAll(dataList.getAcCheckPoints());
 
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.setText(dataList.getNoOfAcAvailableAtsite());
+                str_pmSiteAcpNoOfAcAvailableAtSiteVal = dataList.getNoOfAcAvailableAtsite();
+                invalidateOptionsMenu();
                 if (acCheckPointsData != null && acCheckPointsData.size() > 0) {
                     mLinearLayoutContainer.setVisibility(View.VISIBLE);
                     mPreventiveMaintenanceSiteAcCheckPointsTextViewAcNumber.setText("Reading: #1");
@@ -869,7 +871,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     }
 
     private void saveRecords(int pos){
-
 
         String workingConditionOfAc = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcWorkingConditionVal.getText().toString().trim();
         String automationOfAcController = mPreventiveMaintenanceSiteAcCheckPointsTextViewAutomationOfAcControllerVal.getText().toString().trim();

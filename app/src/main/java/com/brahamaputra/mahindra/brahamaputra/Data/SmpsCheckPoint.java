@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SmpsCheckPointsDatum implements Serializable
+public class SmpsCheckPoint implements Serializable
 {
 
     @SerializedName("detailsOfSmpsQrCodeScan")
@@ -109,4 +109,27 @@ public class SmpsCheckPointsDatum implements Serializable
         this.typeOfFault = typeOfFault;
     }
 
+
+    public SmpsCheckPoint(String detailsOfSmpsQrCodeScan, String smpsCondition, String smpsControlerStatus, String smpsEarthingStatus, String dcLoadCurrentInFloat, String base64DcLoadCurrentPhoto, String dcLoadAmpPh, String registerFault, String typeOfFault) {
+        this.detailsOfSmpsQrCodeScan = detailsOfSmpsQrCodeScan;
+        this.smpsCondition = smpsCondition;
+        this.smpsControlerStatus = smpsControlerStatus;
+        this.smpsEarthingStatus = smpsEarthingStatus;
+        this.dcLoadCurrentInFloat = dcLoadCurrentInFloat;
+        this.base64DcLoadCurrentPhoto = base64DcLoadCurrentPhoto;
+        this.dcLoadAmpPh = dcLoadAmpPh;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+    }
+    public SmpsCheckPoint(){
+        this.detailsOfSmpsQrCodeScan = "";
+        this.smpsCondition = "";
+        this.smpsControlerStatus = "";
+        this.smpsEarthingStatus = "";
+        this.dcLoadCurrentInFloat = "";
+        this.base64DcLoadCurrentPhoto = "";
+        this.dcLoadAmpPh = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+    }
 }
