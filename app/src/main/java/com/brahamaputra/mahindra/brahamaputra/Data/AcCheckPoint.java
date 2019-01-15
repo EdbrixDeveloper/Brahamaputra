@@ -54,6 +54,39 @@ public class AcCheckPoint implements Serializable
 
     private final static long serialVersionUID = -6436987330345681329L;
 
+    public AcCheckPoint(){
+        this.detailsOfAcQrCodeScan = "";
+        this.workingConditionOfAc = "";
+        this.automationOfAcController = "";
+        this.acEarthingStatus = "";
+        this.acFilterStatus = "";
+        this.base64TakePhotoOfAcFiltersBeforeCleaning = "";
+        this.base64TakePhotoOfAcFiltersAfterCleaning = "";
+        this.cleaningOfCoolingCondensorCoils = "";
+        this.anyAbnormalSoundFromMotor = "";
+        this.shelterTemperature = "";
+        this.base64TakePhotoOfTemperature = "";
+        this.shelterDoorStatus = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+    }
+    public AcCheckPoint(String detailsOfAcQrCodeScan, String workingConditionOfAc, String automationOfAcController, String acEarthingStatus, String acFilterStatus, String base64TakePhotoOfAcFiltersBeforeCleaning, String base64TakePhotoOfAcFiltersAfterCleaning, String cleaningOfCoolingCondensorCoils, String anyAbnormalSoundFromMotor, String shelterTemperature, String base64TakePhotoOfTemperature, String shelterDoorStatus, String registerFault, String typeOfFault) {
+        this.detailsOfAcQrCodeScan = detailsOfAcQrCodeScan;
+        this.workingConditionOfAc = workingConditionOfAc;
+        this.automationOfAcController = automationOfAcController;
+        this.acEarthingStatus = acEarthingStatus;
+        this.acFilterStatus = acFilterStatus;
+        this.base64TakePhotoOfAcFiltersBeforeCleaning = base64TakePhotoOfAcFiltersBeforeCleaning;
+        this.base64TakePhotoOfAcFiltersAfterCleaning = base64TakePhotoOfAcFiltersAfterCleaning;
+        this.cleaningOfCoolingCondensorCoils = cleaningOfCoolingCondensorCoils;
+        this.anyAbnormalSoundFromMotor = anyAbnormalSoundFromMotor;
+        this.shelterTemperature = shelterTemperature;
+        this.base64TakePhotoOfTemperature = base64TakePhotoOfTemperature;
+        this.shelterDoorStatus = shelterDoorStatus;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+    }
+
     public String getDetailsOfAcQrCodeScan() {
         return detailsOfAcQrCodeScan;
     }

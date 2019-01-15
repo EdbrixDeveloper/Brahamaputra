@@ -83,9 +83,9 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
     @SerializedName("smpsCheckPoints")
     @Expose
     private SmpsCheckPoints smpsCheckPoints;
-    @SerializedName("acCheckPoints")
+    @SerializedName("acCheckPointParentData")
     @Expose
-    private AcCheckPoints acCheckPoints;
+    private AcCheckPointParentData acCheckPointParentData;
     @SerializedName("dgBatteryCheckPoints")
     @Expose
     private DgBatteryCheckPoints dgBatteryCheckPoints;
@@ -100,7 +100,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         ebMeterBox = new EbMeterBox();
         dgCheckPoints = new DgCheckPoints();
         dgBatteryCheckPoints = new DgBatteryCheckPoints();
-        acCheckPoints = new AcCheckPoints();
+        acCheckPointParentData = new AcCheckPointParentData();
         smpsCheckPoints = new SmpsCheckPoints();
         rectifierModuleCheckPoint = new RectifierModuleCheckPoint();
         pmsAmfPanelCheckPoints = new PmsAmfPanelCheckPoints();
@@ -309,12 +309,12 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         this.smpsCheckPoints = smpsCheckPoints;
     }
 
-    public AcCheckPoints getAcCheckPoints() {
-        return acCheckPoints;
+    public AcCheckPointParentData getAcCheckPointParentData() {
+        return acCheckPointParentData;
     }
 
-    public void setAcCheckPoints(AcCheckPoints acCheckPoints) {
-        this.acCheckPoints = acCheckPoints;
+    public void setAcCheckPointParentData(AcCheckPointParentData acCheckPointParentData) {
+        this.acCheckPointParentData = acCheckPointParentData;
     }
 
     public DgBatteryCheckPoints getDgBatteryCheckPoints() {

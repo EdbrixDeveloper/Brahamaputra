@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +23,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.AcCheckPoint;
+import com.brahamaputra.mahindra.brahamaputra.Data.AcCheckPointParentData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -31,6 +37,8 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -131,6 +139,19 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
+    private PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails;
+    private AcCheckPointParentData dataList;
+    private ArrayList<AcCheckPoint> acCheckPointsData;// replce airConditionersData
+    private int totalCount = 0;
+    private int currentPos = 0;
+
+    private ArrayList<AcCheckPoint> arr_acCheckPoints;// replce airConditionersData
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    MultiSelectDialog multiSelectDialog;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<Integer> alreadySelected;
+    ArrayList<String> typeOfFaultList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,6 +167,27 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteAcCheckPointsActivity.this, userId, ticketName);
+
+
+        acCheckPointsData = new ArrayList<>();
+        //dataList = new ArrayList<>();
+        arr_acCheckPoints = new ArrayList<>();
+        currentPos = 0;
+
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+
+        //Code For MultiSelect Type Of Fault
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAcCheckPoints_typeOfFault)));
+        int id = 1;
+        for (int i = 0; i < typeOfFaultList.size(); i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
+
+        setInputDetails(currentPos);
+        invalidateOptionsMenu();
+        setMultiSelectModel();
 
     }
 
@@ -165,6 +207,30 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
                         str_pmSiteAcpNoOfAcAvailableAtSiteVal = item.get(position);
                         mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.setText(str_pmSiteAcpNoOfAcAvailableAtSiteVal);
+
+                        invalidateOptionsMenu();
+                        if (acCheckPointsData != null && acCheckPointsData.size() > 0) {
+                            acCheckPointsData.clear();
+                        }
+                        currentPos = 0;
+                        totalCount = 0;
+                        clearFields(currentPos);
+                        if (str_pmSiteAcpNoOfAcAvailableAtSiteVal.equals("0")) {
+                            mLinearLayoutContainer.setVisibility(View.GONE);
+                            //mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
+                        } else {
+                            totalCount = Integer.parseInt(str_pmSiteAcpNoOfAcAvailableAtSiteVal);
+                            mPreventiveMaintenanceSiteAcCheckPointsTextViewAcNumber.setText("Reading: #1");
+                            mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                            //mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.VISIBLE);
+                            mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+                            mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
+                            if (totalCount > 0 && totalCount == 1) {
+                                mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Finish");
+                            } else {
+                                mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Next Reading");
+                            }
+                        }
                     }
                 });
             }
@@ -333,20 +399,43 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteAcCheckPoints_typeOfFault))),
-                        "Type of Fault",
-                        "close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+            }
+        });
 
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_pmSiteAcpTypeOfFaultVal = item.get(position);
-                        mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteAcpTypeOfFaultVal);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidationOfArrayFields() == true) {
+                    if (currentPos > 0) {
+                        //Save current ac reading
+                        saveRecords(currentPos);
+                        currentPos = currentPos - 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
                     }
-                });
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidationOfArrayFields() == true) {
+                    if (currentPos < (totalCount - 1)) {
+                        //Save current ac reading
+                        saveRecords(currentPos);
+                        currentPos = currentPos + 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
+                    } else if (currentPos == (totalCount - 1)) {
+                        saveRecords(currentPos);
+                        if (checkValidationonSubmit("onSubmit") == true) {
+                            submitDetails();
+                            startActivity(new Intent(PreventiveMaintenanceSiteAcCheckPointsActivity.this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
+                            finish();
+                        }
+                    }
+                }
             }
         });
     }
@@ -653,6 +742,14 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_pmSiteAcpNoOfAcAvailableAtSiteVal != null && !str_pmSiteAcpNoOfAcAvailableAtSiteVal.isEmpty()) {
+            if (Integer.valueOf(str_pmSiteAcpNoOfAcAvailableAtSiteVal) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
         return true;
     }
 
@@ -678,5 +775,361 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void setInputDetails(int index) {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+                dataList = pmSiteTransactionDetails.getAcCheckPointParentData();
+                acCheckPointsData.addAll(dataList.getAcCheckPoints());
+
+                mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.setText(dataList.getNoOfAcAvailableAtsite());
+                if (acCheckPointsData != null && acCheckPointsData.size() > 0) {
+                    mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewAcNumber.setText("Reading: #1");
+                    totalCount = Integer.parseInt(dataList.getNoOfAcAvailableAtsite());
+
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewAcWorkingConditionVal.setText(acCheckPointsData.get(index).getWorkingConditionOfAc());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewAutomationOfAcControllerVal.setText(acCheckPointsData.get(index).getAutomationOfAcController());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewAcEarthingStatusVal.setText(acCheckPointsData.get(index).getAcEarthingStatus());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.setText(acCheckPointsData.get(index).getAcFilterStatus());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText(acCheckPointsData.get(index).getCleaningOfCoolingCondensorCoils());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText(acCheckPointsData.get(index).getAnyAbnormalSoundFromMotor());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(acCheckPointsData.get(index).getShelterDoorStatus());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(acCheckPointsData.get(index).getRegisterFault());
+                    mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(acCheckPointsData.get(index).getTypeOfFault());
+                    mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(acCheckPointsData.get(index).getShelterTemperature());
+
+                    base64StringAcCheckPointsQRCodeScan = acCheckPointsData.get(index).getDetailsOfAcQrCodeScan();//////001
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearQRCodeScanView.setVisibility(View.GONE);
+                    if (!base64StringAcCheckPointsQRCodeScan.isEmpty() && base64StringAcCheckPointsQRCodeScan != null) {
+                        mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                        mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                    }
+
+                    base64StringTakePhotoOfAcFiltersBeforeCleaning = acCheckPointsData.get(index).getBase64TakePhotoOfAcFiltersBeforeCleaning();//////002
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.GONE);
+                    if (!base64StringTakePhotoOfAcFiltersBeforeCleaning.isEmpty() && base64StringTakePhotoOfAcFiltersBeforeCleaning != null) {
+                        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.VISIBLE);
+
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfAcFiltersBeforeCleaning);
+                        inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                        imageFileUriAcFiltersBeforeCleaning = Uri.parse(path);
+                    }
+
+                    base64StringTakePhotoOfAcFiltersAfterCleaning= acCheckPointsData.get(index).getBase64TakePhotoOfAcFiltersAfterCleaning();//////003
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.GONE);
+                    if (!base64StringTakePhotoOfAcFiltersAfterCleaning.isEmpty() && base64StringTakePhotoOfAcFiltersAfterCleaning != null) {
+                        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.VISIBLE);
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfAcFiltersAfterCleaning);
+                        inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                        imageFileUriAcFiltersAfterCleaning = Uri.parse(path);
+                    }
+
+                    base64StringTakePhotoOfTemperature= acCheckPointsData.get(index).getBase64TakePhotoOfTemperature();//////004
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
+                    if (!base64StringTakePhotoOfTemperature.isEmpty() && base64StringTakePhotoOfTemperature != null) {
+                        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfTemperature);
+                        inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                        imageFileUriTemperature = Uri.parse(path);
+                    }
+
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
+
+                    if (totalCount > 1) {
+                        mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Next Reading");
+                    } else {
+                        mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Finish");
+                    }
+                }
+            } else {
+            showToast("No previous saved data available");
+            //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+            mLinearLayoutContainer.setVisibility(View.GONE);
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //showToast(e.getMessage().toString());
+        }
+    }
+
+    private void saveRecords(int pos){
+
+
+        String workingConditionOfAc = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcWorkingConditionVal.getText().toString().trim();
+        String automationOfAcController = mPreventiveMaintenanceSiteAcCheckPointsTextViewAutomationOfAcControllerVal.getText().toString().trim();
+        String acEarthingStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcEarthingStatusVal.getText().toString().trim();
+        String acFilterStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.getText().toString().trim();
+        String cleaningOfCoolingCondensorCoils = mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.getText().toString().trim();
+        String anyAbnormalSoundFromMotor = mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.getText().toString().trim();
+        String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+        String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
+        String detailsOfAcQrCodeScan = base64StringAcCheckPointsQRCodeScan;
+        String base64TakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
+        String base64TakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
+        String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
+
+        AcCheckPoint acCheckPointChild = new AcCheckPoint (detailsOfAcQrCodeScan, workingConditionOfAc, automationOfAcController,
+                                                acEarthingStatus, acFilterStatus, base64TakePhotoOfAcFiltersBeforeCleaning,
+                                                base64TakePhotoOfAcFiltersAfterCleaning, cleaningOfCoolingCondensorCoils,
+                                                anyAbnormalSoundFromMotor, shelterTemperature, base64TakePhotoOfTemperature,
+                                                shelterDoorStatus, registerFault, typeOfFault);
+        if (acCheckPointsData.size() > 0) {
+            if (pos == acCheckPointsData.size()) {
+                acCheckPointsData.add(acCheckPointChild);
+            } else if (pos < acCheckPointsData.size()) {
+                acCheckPointsData.set(pos, acCheckPointChild);
+            }
+        } else {
+            acCheckPointsData.add(acCheckPointChild);
+        }
+    }
+
+    private void displayRecords(int pos){
+
+        if (acCheckPointsData.size() > 0 && pos < acCheckPointsData.size()) {
+
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewAcNumber.setText("Reading: #" + (pos + 1));
+
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewAcWorkingConditionVal.setText(acCheckPointsData.get(pos).getWorkingConditionOfAc());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewAutomationOfAcControllerVal.setText(acCheckPointsData.get(pos).getAutomationOfAcController());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewAcEarthingStatusVal.setText(acCheckPointsData.get(pos).getAcEarthingStatus());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.setText(acCheckPointsData.get(pos).getAcFilterStatus());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText(acCheckPointsData.get(pos).getCleaningOfCoolingCondensorCoils());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText(acCheckPointsData.get(pos).getAnyAbnormalSoundFromMotor());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(acCheckPointsData.get(pos).getShelterDoorStatus());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(acCheckPointsData.get(pos).getRegisterFault());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(acCheckPointsData.get(pos).getTypeOfFault());
+            mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(acCheckPointsData.get(pos).getShelterTemperature());
+
+            base64StringAcCheckPointsQRCodeScan = acCheckPointsData.get(pos).getDetailsOfAcQrCodeScan();//////001
+            mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+            mButtonClearQRCodeScanView.setVisibility(View.GONE);
+            if (!base64StringAcCheckPointsQRCodeScan.isEmpty() && base64StringAcCheckPointsQRCodeScan != null) {
+                mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+            }
+
+            base64StringTakePhotoOfAcFiltersBeforeCleaning = acCheckPointsData.get(pos).getBase64TakePhotoOfAcFiltersBeforeCleaning();//////002
+            mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.GONE);
+            if (!base64StringTakePhotoOfAcFiltersBeforeCleaning.isEmpty() && base64StringTakePhotoOfAcFiltersBeforeCleaning != null) {
+                mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.VISIBLE);
+
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfAcFiltersBeforeCleaning);
+                inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                imageFileUriAcFiltersBeforeCleaning = Uri.parse(path);
+            }
+
+            base64StringTakePhotoOfAcFiltersAfterCleaning= acCheckPointsData.get(pos).getBase64TakePhotoOfAcFiltersAfterCleaning();//////003
+            mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.GONE);
+            if (!base64StringTakePhotoOfAcFiltersAfterCleaning.isEmpty() && base64StringTakePhotoOfAcFiltersAfterCleaning != null) {
+                mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.VISIBLE);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfAcFiltersAfterCleaning);
+                inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                imageFileUriAcFiltersAfterCleaning = Uri.parse(path);
+            }
+
+            base64StringTakePhotoOfTemperature= acCheckPointsData.get(pos).getBase64TakePhotoOfTemperature();//////004
+            mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
+            if (!base64StringTakePhotoOfTemperature.isEmpty() && base64StringTakePhotoOfTemperature != null) {
+                mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfTemperature);
+                inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                imageFileUriTemperature = Uri.parse(path);
+            }
+
+            mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
+
+
+
+        } else {
+            clearFields(pos);
+        }
+
+        if (pos > 0 && pos < (totalCount - 1)) {
+            mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Next Reading");
+        } else if (pos > 0 && pos == (totalCount - 1)) {
+            mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Finish");
+        } else if (pos == 0) {
+            mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+            if (pos == (totalCount - 1)) {
+                mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Finish");
+            } else {
+                mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setText("Next Reading");
+            }
+        }
+    }
+
+    private void clearFields(int pos) {
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewAcWorkingConditionVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewAutomationOfAcControllerVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewAcEarthingStatusVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText("");
+
+        base64StringAcCheckPointsQRCodeScan = "";
+        base64StringTakePhotoOfAcFiltersBeforeCleaning = "";
+        base64StringTakePhotoOfAcFiltersAfterCleaning= "";
+        base64StringTakePhotoOfTemperature= "";
+
+        mButtonClearQRCodeScanView.setVisibility(View.GONE);
+        mButtonClearQRCodeScanView.setVisibility(View.GONE);
+
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
+        alreadySelectedTypeOfFaultList=new ArrayList<>();
+
+    }
+
+    private void submitDetails() {
+        try {
+            String noOfAcAvailableAtSite = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
+            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite, acCheckPointsData);
+            pmSiteTransactionDetails.setAcCheckPointParentData(dataList);
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(pmSiteTransactionDetails);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkValidationOfArrayFields() {
+
+        String workingConditionOfAc = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcWorkingConditionVal.getText().toString().trim();
+        String automationOfAcController = mPreventiveMaintenanceSiteAcCheckPointsTextViewAutomationOfAcControllerVal.getText().toString().trim();
+        String acEarthingStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcEarthingStatusVal.getText().toString().trim();
+        String acFilterStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.getText().toString().trim();
+        String cleaningOfCoolingCondensorCoils = mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.getText().toString().trim();
+        String anyAbnormalSoundFromMotor = mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.getText().toString().trim();
+        String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+        String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
+        String detailsOfAcQrCodeScan = base64StringAcCheckPointsQRCodeScan;
+        String base64TakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
+        String base64TakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
+        String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
+
+        if (workingConditionOfAc.isEmpty() || workingConditionOfAc == null) {
+            showToast("Select workingConditionOfAc");
+            return false;
+        } else if (automationOfAcController.isEmpty() || automationOfAcController == null) {
+            showToast("Select automationOfAcController");
+            return false;
+        } else  if (acEarthingStatus.isEmpty() || acEarthingStatus == null) {
+            showToast("Select acEarthingStatus");
+            return false;
+        } else  if (acFilterStatus.isEmpty() || acFilterStatus == null) {
+            showToast("Select Register Fault");
+            return false;
+        } else  if (cleaningOfCoolingCondensorCoils.isEmpty() || cleaningOfCoolingCondensorCoils == null) {
+            showToast("Select cleaningOfCoolingCondensorCoils");
+            return false;
+        } else  if (anyAbnormalSoundFromMotor.isEmpty() || anyAbnormalSoundFromMotor == null) {
+            showToast("Select anyAbnormalSoundFromMotor");
+            return false;
+        } else  if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
+            showToast("Select shelterDoorStatus");
+            return false;
+        } else  if (shelterTemperature.isEmpty() || shelterTemperature == null) {
+            showToast("Select shelterTemperature");
+            return false;
+        } else  if (detailsOfAcQrCodeScan.isEmpty() || detailsOfAcQrCodeScan == null) {
+            showToast("Scan AcQrCodeScan");
+            return false;
+        } else  if (base64TakePhotoOfAcFiltersBeforeCleaning.isEmpty() || base64TakePhotoOfAcFiltersBeforeCleaning == null) {
+            showToast("TakePhotoOfAcFiltersBeforeCleaning");
+            return false;
+        } else  if (base64TakePhotoOfAcFiltersAfterCleaning.isEmpty() || base64TakePhotoOfAcFiltersAfterCleaning == null) {
+            showToast("TakePhotoOfAcFiltersAfterCleaning");
+            return false;
+        } else  if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
+            showToast("TakePhotoOfTemperature");
+            return false;
+        } else if (registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        } else if (typeOfFault.isEmpty() || typeOfFault == null) {
+            showToast("Select Type of Fault");
+            return false;
+        } else return true;
+
+    }
+
+    private boolean checkValidationonSubmit(String methodFlag) {
+
+        String totalNumberval = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
+        if (totalNumberval.isEmpty() || totalNumberval == null) {
+            showToast("Select Number Of Tenant ");
+            return false;
+        } else if (Integer.valueOf(totalNumberval) > 0) {
+            if ((acCheckPointsData.size() != Integer.valueOf(totalNumberval) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");
+                return false;
+            } else return true;
+        } else return true;
+    }
+
+    public void setMultiSelectModel() {
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        //str_pmSiteEcpTypeOfFaultVal = dataString;
+                        //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteEcpTypeOfFaultVal);
+
+                        str_pmSiteAcpTypeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteAcpTypeOfFaultVal);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+                    }
+                });
     }
 }

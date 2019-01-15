@@ -334,7 +334,8 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
                     @Override
-                    public void onClick(ArrayList<String> item, int position) {
+                    public void onClick(ArrayList<String> item, int position)
+                    {
 
                         //str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
                         //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.setText(str_pmSiteEcpNumberOfEarthPitVal);

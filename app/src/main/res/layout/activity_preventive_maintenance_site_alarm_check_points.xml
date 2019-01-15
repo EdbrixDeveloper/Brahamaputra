@@ -324,7 +324,6 @@
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
