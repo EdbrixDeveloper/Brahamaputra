@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DgBatteryCheckPoints implements Serializable
+public class DgBatteryCheckPointsParentData implements Serializable
 {
 
     @SerializedName("noOfDgBatteryavailableAtSite")
@@ -14,8 +14,8 @@ public class DgBatteryCheckPoints implements Serializable
     private String noOfDgBatteryavailableAtSite;
     @SerializedName("dgBatteryCheckPointsData")
     @Expose
-    private List<DgBatteryCheckPointsDatum> dgBatteryCheckPointsData = null;
-    private final static long serialVersionUID = -7106565427034794128L;
+    private List<DgBatteryCheckPointsData> dgBatteryCheckPointsData = null;
+    //private final static long serialVersionUID = -7106565427034794128L;
 
     public String getNoOfDgBatteryavailableAtSite() {
         return noOfDgBatteryavailableAtSite;
@@ -25,11 +25,11 @@ public class DgBatteryCheckPoints implements Serializable
         this.noOfDgBatteryavailableAtSite = noOfDgBatteryavailableAtSite;
     }
 
-    public List<DgBatteryCheckPointsDatum> getDgBatteryCheckPointsData() {
+    public List<DgBatteryCheckPointsData> getDgBatteryCheckPointsData() {
         return dgBatteryCheckPointsData;
     }
 
-    public void setDgBatteryCheckPointsData(List<DgBatteryCheckPointsDatum> dgBatteryCheckPointsData) {
+    public void setDgBatteryCheckPointsData(List<DgBatteryCheckPointsData> dgBatteryCheckPointsData) {
         this.dgBatteryCheckPointsData = dgBatteryCheckPointsData;
     }
 

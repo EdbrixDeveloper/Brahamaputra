@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DgBatteryCheckPointsDatum implements Serializable
+public class DgBatteryCheckPointsData implements Serializable
 {
 
     @SerializedName("detailsOfDgBatteryQrCodeScan")

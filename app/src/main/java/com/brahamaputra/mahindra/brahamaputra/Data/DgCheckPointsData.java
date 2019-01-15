@@ -2,15 +2,16 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DgCheckPoints implements Serializable
-{
+public class DgCheckPointsData implements Serializable {
 
-    @SerializedName("noOfDgAvailableAtSite")
+    /*@SerializedName("noOfDgAvailableAtSite")
     @Expose
-    private String noOfDgAvailableAtSite;
+    private String noOfDgAvailableAtSite;*/
+
     @SerializedName("detailsOfDgQrCodeScan")
     @Expose
     private String detailsOfDgQrCodeScan;
@@ -44,14 +45,45 @@ public class DgCheckPoints implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
-    private final static long serialVersionUID = 2712088718549900683L;
 
-    public String getNoOfDgAvailableAtSite() {
+    private String imageFileTakePhotoOfDgHmr;
+
+    /*public String getNoOfDgAvailableAtSite() {
         return noOfDgAvailableAtSite;
     }
 
     public void setNoOfDgAvailableAtSite(String noOfDgAvailableAtSite) {
         this.noOfDgAvailableAtSite = noOfDgAvailableAtSite;
+    }*/
+
+    public DgCheckPointsData() {
+        this.detailsOfDgQrCodeScan = "";
+        this.dgHmrReading = "";
+        this.base64StringTakePhotoOfDgHmr = "";
+        this.dgWorkingCondition = "";
+        this.coolentLevel = "";
+        this.beltTension = "";
+        this.engineLubeOilLevel = "";
+        this.safetyWorkingStatus = "";
+        this.powerCableConnectionStatus = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
+        this.imageFileTakePhotoOfDgHmr = "";
+    }
+
+    public DgCheckPointsData(String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, String imageFileTakePhotoOfDgHmr, String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus, String powerCableConnectionStatus, String registerFault, String typeOfFault) {
+        this.detailsOfDgQrCodeScan = detailsOfDgQrCodeScan;
+        this.dgHmrReading = dgHmrReading;
+        this.base64StringTakePhotoOfDgHmr = base64StringTakePhotoOfDgHmr;
+        this.imageFileTakePhotoOfDgHmr = imageFileTakePhotoOfDgHmr;
+        this.dgWorkingCondition = dgWorkingCondition;
+        this.coolentLevel = coolentLevel;
+        this.beltTension = beltTension;
+        this.engineLubeOilLevel = engineLubeOilLevel;
+        this.safetyWorkingStatus = safetyWorkingStatus;
+        this.powerCableConnectionStatus = powerCableConnectionStatus;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
     }
 
     public String getDetailsOfDgQrCodeScan() {
@@ -136,6 +168,14 @@ public class DgCheckPoints implements Serializable
 
     public String getTypeOfFault() {
         return typeOfFault;
+    }
+
+    public String getImageFileTakePhotoOfDgHmr() {
+        return imageFileTakePhotoOfDgHmr;
+    }
+
+    public void setImageFileTakePhotoOfDgHmr(String imageFileTakePhotoOfDgHmr) {
+        this.imageFileTakePhotoOfDgHmr = imageFileTakePhotoOfDgHmr;
     }
 
     public void setTypeOfFault(String typeOfFault) {
