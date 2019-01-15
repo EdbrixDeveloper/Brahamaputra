@@ -5,8 +5,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PreventiveMaintanceSiteTransactionDetails implements Serializable
-{
+public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
 
     @SerializedName("AccessToken")
     @Expose
@@ -62,12 +61,19 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
     @SerializedName("ebMeterBox")
     @Expose
     private EbMeterBox ebMeterBox;
-    @SerializedName("dgCheckPoints")
+
+    @SerializedName("dgCheckPointsParentData")
     @Expose
-    private DgCheckPoints dgCheckPoints;
+    private DgCheckPointsParentData dgCheckPointsParentData;
+
+    @SerializedName("dgBatteryCheckPointsParentData")
+    @Expose
+    private DgBatteryCheckPointsParentData dgBatteryCheckPointsParentData;
+
     @SerializedName("otherElectricalCheckPoints")
     @Expose
     private OtherElectricalCheckPoints otherElectricalCheckPoints;
+
     @SerializedName("shelterCheckPoints")
     @Expose
     private ShelterCheckPoints shelterCheckPoints;
@@ -77,29 +83,31 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
     @SerializedName("pmsAmfPanelCheckPoints")
     @Expose
     private PmsAmfPanelCheckPoints pmsAmfPanelCheckPoints;
+
     @SerializedName("rectifierModuleCheckPoint")
     @Expose
     private RectifierModuleCheckPoint rectifierModuleCheckPoint;
-    @SerializedName("smpsCheckPointParentData")
+
+    @SerializedName("smpsCheckPoints")
     @Expose
+    private SmpsCheckPoints smpsCheckPoints;
+
     private SmpsCheckPointParentData smpsCheckPointParentData;
     @SerializedName("acCheckPointParentData")
-    @Expose
     private AcCheckPointParentData acCheckPointParentData;
-    @SerializedName("dgBatteryCheckPoints")
-    @Expose
-    private DgBatteryCheckPoints dgBatteryCheckPoints;
-   // private final static long serialVersionUID = 4468678041836209812L;
 
-    public PreventiveMaintanceSiteTransactionDetails()
-    {
+    // private final static long serialVersionUID = 4468678041836209812L;
+
+    public PreventiveMaintanceSiteTransactionDetails() {
         siteHygenieneGenralSeftyParameter = new SiteHygenieneGenralSeftyParameter();
         alarmCheckPoints = new AlarmCheckPoints();
         batteryBankCheckPoints = new BatteryBankCheckPoints();
         EarthingCheckPointsParentData = new EarthingCheckPointsParentData();
         ebMeterBox = new EbMeterBox();
-        dgCheckPoints = new DgCheckPoints();
-        dgBatteryCheckPoints = new DgBatteryCheckPoints();
+        dgCheckPointsParentData = new DgCheckPointsParentData();
+        dgBatteryCheckPointsParentData = new DgBatteryCheckPointsParentData();
+        dgCheckPointsParentData = new DgCheckPointsParentData();
+        dgBatteryCheckPointsParentData = new DgBatteryCheckPointsParentData();
         acCheckPointParentData = new AcCheckPointParentData();
         smpsCheckPointParentData = new SmpsCheckPointParentData();
         rectifierModuleCheckPoint = new RectifierModuleCheckPoint();
@@ -253,12 +261,12 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         this.ebMeterBox = ebMeterBox;
     }
 
-    public DgCheckPoints getDgCheckPoints() {
-        return dgCheckPoints;
+    public DgCheckPointsParentData getDgCheckPointsParentData() {
+        return dgCheckPointsParentData;
     }
 
-    public void setDgCheckPoints(DgCheckPoints dgCheckPoints) {
-        this.dgCheckPoints = dgCheckPoints;
+    public void setDgCheckPointsParentData(DgCheckPointsParentData dgCheckPointsParentData) {
+        this.dgCheckPointsParentData = dgCheckPointsParentData;
     }
 
     public OtherElectricalCheckPoints getOtherElectricalCheckPoints() {
@@ -317,12 +325,12 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable
         this.acCheckPointParentData = acCheckPointParentData;
     }
 
-    public DgBatteryCheckPoints getDgBatteryCheckPoints() {
-        return dgBatteryCheckPoints;
+    public DgBatteryCheckPointsParentData getDgBatteryCheckPointsParentData() {
+        return dgBatteryCheckPointsParentData;
     }
 
-    public void setDgBatteryCheckPoints(DgBatteryCheckPoints dgBatteryCheckPoints) {
-        this.dgBatteryCheckPoints = dgBatteryCheckPoints;
+    public void setDgBatteryCheckPointsParentData(DgBatteryCheckPointsParentData dgBatteryCheckPointsParentData) {
+        this.dgBatteryCheckPointsParentData = dgBatteryCheckPointsParentData;
     }
 
    /* public boolean isAllPreventiveMaintainanceFormSubmitted()
