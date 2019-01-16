@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/app_normal_margin"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteSmpsCheckPoints_textView_smpsNumber"
@@ -333,9 +333,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_typeOfFault"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
+                    android:visibility="gone"
                     android:weightSum="1">
 
                     <TextView

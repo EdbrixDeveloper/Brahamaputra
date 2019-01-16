@@ -85,6 +85,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     private TextView mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal;
     private Button mPreventiveMaintenanceSiteSmpsCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading;
+    private LinearLayout mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault;
 
     String str_noOfSmpsAvailableAtSiteVal;
     String str_smpsConditionVal;
@@ -203,6 +204,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_nextReading);
+        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_typeOfFault);
     }
 
     private void initCombo() {
@@ -326,6 +328,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
 
                         str_segisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText(str_segisterFaultVal);
+                        visibilityOfTypesOfFault(str_segisterFaultVal);
                     }
                 });
             }
@@ -348,6 +351,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -362,8 +366,10 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                         if (checkValidationonSubmit("onSubmit") == true) {
                             submitDetails();
                             startActivity(new Intent(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.class));
@@ -621,6 +627,15 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         }
     }
 
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
+            //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void saveRecords(int pos){
 
         String smpsCondition = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.getText().toString().trim();
@@ -773,7 +788,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         } else if (detailsOfSmpsQrCodeScan.isEmpty() || detailsOfSmpsQrCodeScan == null) {
             showToast("Scan detailsOfSmpsQrCodeScan");
             return false;
-        } else if (typeOfFault.isEmpty() || typeOfFault == null) {
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
         } else return true;
