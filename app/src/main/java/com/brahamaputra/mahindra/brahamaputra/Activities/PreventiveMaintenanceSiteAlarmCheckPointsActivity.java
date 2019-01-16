@@ -682,6 +682,9 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         }else if(registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
+        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type Of Fault");
+            return false;
         }else return true;
     }
 
