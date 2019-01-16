@@ -93,6 +93,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     private Button mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading;
 
+    private LinearLayout mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault;
+
     String str_pmSiteAcpNoOfAcAvailableAtSiteVal = "";
     String str_pmSiteAcpWorkingConditionOfAcVal = "";
     String str_pmSiteAcpAutomationOfAcControllerVal = "";
@@ -391,6 +393,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
                         str_pmSiteAcpRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(str_pmSiteAcpRegisterFaultVal);
+                        visibilityOfTypesOfFault(str_pmSiteAcpRegisterFaultVal);
                     }
                 });
             }
@@ -413,6 +416,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -427,8 +431,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                         if (checkValidationonSubmit("onSubmit") == true) {
                             submitDetails();
                             startActivity(new Intent(PreventiveMaintenanceSiteAcCheckPointsActivity.this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
@@ -438,6 +444,15 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 }
             }
         });
+    }
+
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
+           // mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+        }
     }
 
     private void assignViews() {
@@ -480,6 +495,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_nextReading);
+        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_linearLayout_typeOfFault);
     }
 
     private boolean checkCameraPermission() {
@@ -1083,7 +1099,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
-        } else if (typeOfFault.isEmpty() || typeOfFault == null) {
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
         } else return true;
