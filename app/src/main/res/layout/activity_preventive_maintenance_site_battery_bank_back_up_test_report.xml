@@ -17,7 +17,6 @@
             android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
-
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -323,6 +322,475 @@
                     android:paddingTop="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutBatteryTypeLiIonReadings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/app_min_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Battery Type Li Ion Readings"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Module"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Voltage"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Current"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="SOC"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="SOH"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1"/>
+
+                        <EditText
+                            android:id="@+id/bdTestVoltageModuleReading1EditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="volt 1"
+                            android:ellipsize="start" />
+
+                        <EditText
+                            android:id="@+id/bdTestCurrentModuleReading1EditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="curr 1"
+                            android:ellipsize="start"/>
+
+                        <EditText
+                            android:id="@+id/bdTestSocModuleReadingEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="soc 1"
+                            android:ellipsize="start"/>
+
+                        <EditText
+                            android:id="@+id/bdTestSohModuleReadingEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="soh 1"
+                            android:ellipsize="start"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1"/>
+
+                        <EditText
+                            android:id="@+id/bdTestVoltageModuleReading1EditText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="volt 2"
+                            android:ellipsize="start" />
+
+                        <EditText
+                            android:id="@+id/bdTestCurrentModuleReading1EditText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="curr 2"
+                            android:ellipsize="start"/>
+
+                        <EditText
+                            android:id="@+id/bdTestSocModuleReadingEditText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="soc 2"
+                            android:ellipsize="start"/>
+
+                        <EditText
+                            android:id="@+id/bdTestSohModuleReadingEditText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="soh 2"
+                            android:ellipsize="start"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_weight="1"/>
+
+                        <EditText
+                            android:id="@+id/bdTestVoltageModuleReading1EditText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="volt 3"
+                            android:ellipsize="start" />
+
+                        <EditText
+                            android:id="@+id/bdTestCurrentModuleReading1EditText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="curr 3"
+                            android:ellipsize="start"/>
+
+                        <EditText
+                            android:id="@+id/bdTestSocModuleReadingEditText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="soc 3"
+                            android:ellipsize="start"/>
+
+                        <EditText
+                            android:id="@+id/bdTestSohModuleReadingEditText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="soh 3"
+                            android:ellipsize="start"/>
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutBatteryTypeVRLAAndVRLAPlusReadings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/app_min_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Battery Type VRLA/VRLA+ Readings"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="4">
+
+                            <EditText
+                                android:id="@+id/bdTestCellReadingEditText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:inputType="numberDecimal"
+                                android:hint="Cell1"/>
+
+                            <EditText
+                                android:id="@+id/bdTestCellReadingEditText2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:inputType="numberDecimal"
+                                android:hint="Cell2"/>
+
+                            <EditText
+                                android:id="@+id/bdTestCellReadingEditText3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:inputType="numberDecimal"
+                                android:hint="Cell3"/>
+
+                            <EditText
+                                android:id="@+id/bdTestCellReadingEditText4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:inputType="numberDecimal"
+                                android:hint="Cell4"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="4">
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell5"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell6"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell7"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell8"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="4">
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText9"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell9"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell10"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell11"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell12"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="4">
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText13"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell13"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell14"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell15"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText16"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell16"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="4">
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText17"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell17"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText18"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell18"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell19"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell20"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="4">
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText21"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell21"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText22"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell22"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText23"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell23"/>
+
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText24"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"
+                            android:hint="Cell24"/>
+                    </TableRow>
+
+                </TableLayout>
 
             </LinearLayout>
 
