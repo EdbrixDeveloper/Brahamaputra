@@ -46,7 +46,7 @@ public class DgCheckPointsData implements Serializable {
     @Expose
     private String typeOfFault;
 
-    private String imageFileTakePhotoOfDgHmr;
+    /*private String imageFileTakePhotoOfDgHmr;*/
 
     /*public String getNoOfDgAvailableAtSite() {
         return noOfDgAvailableAtSite;
@@ -68,14 +68,14 @@ public class DgCheckPointsData implements Serializable {
         this.powerCableConnectionStatus = "";
         this.registerFault = "";
         this.typeOfFault = "";
-        this.imageFileTakePhotoOfDgHmr = "";
+        /*this.imageFileTakePhotoOfDgHmr = "";*/
     }
 
-    public DgCheckPointsData(String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, String imageFileTakePhotoOfDgHmr, String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus, String powerCableConnectionStatus, String registerFault, String typeOfFault) {
+    public DgCheckPointsData(String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, /*String imageFileTakePhotoOfDgHmr,*/ String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus, String powerCableConnectionStatus, String registerFault, String typeOfFault) {
         this.detailsOfDgQrCodeScan = detailsOfDgQrCodeScan;
         this.dgHmrReading = dgHmrReading;
         this.base64StringTakePhotoOfDgHmr = base64StringTakePhotoOfDgHmr;
-        this.imageFileTakePhotoOfDgHmr = imageFileTakePhotoOfDgHmr;
+        /*this.imageFileTakePhotoOfDgHmr = imageFileTakePhotoOfDgHmr;*/
         this.dgWorkingCondition = dgWorkingCondition;
         this.coolentLevel = coolentLevel;
         this.beltTension = beltTension;
@@ -170,13 +170,13 @@ public class DgCheckPointsData implements Serializable {
         return typeOfFault;
     }
 
-    public String getImageFileTakePhotoOfDgHmr() {
+    /*public String getImageFileTakePhotoOfDgHmr() {
         return imageFileTakePhotoOfDgHmr;
     }
 
     public void setImageFileTakePhotoOfDgHmr(String imageFileTakePhotoOfDgHmr) {
         this.imageFileTakePhotoOfDgHmr = imageFileTakePhotoOfDgHmr;
-    }
+    }*/
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;

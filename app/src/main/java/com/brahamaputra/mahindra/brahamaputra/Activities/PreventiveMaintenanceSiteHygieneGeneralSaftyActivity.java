@@ -398,7 +398,47 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
                         // New added for image #ImageSet
 
-                        imageFileUploadPhotoOfSitePremises = siteHygenSaftyDetailsData.getImageFileUploadPhotoOfSitePremises();
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.GONE);
+                        if (!this.base64StringUploadPhotoOfSitePremises.isEmpty() && this.base64StringUploadPhotoOfSitePremises != null) {
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.VISIBLE);
+                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                            Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfSitePremises);
+                            inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                            imageFileUriUploadPhotoOfSitePremises = Uri.parse(path);
+                        }
+
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.GONE);
+                        if (!this.base64StringCautionSignBoard.isEmpty() && this.base64StringCautionSignBoard != null) {
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                            Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringCautionSignBoard);
+                            inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                            imageFileUriCautionSignBoard = Uri.parse(path);
+                        }
+
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.GONE);
+                        if (!this.base64StringWarningSignBoard.isEmpty() && this.base64StringWarningSignBoard != null) {
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                            Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringWarningSignBoard);
+                            inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                            imageFileUriWarningSignBoard = Uri.parse(path);
+                        }
+
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.GONE);
+                        if (!this.base64StringDangerSignBoard.isEmpty() && this.base64StringDangerSignBoard != null) {
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.VISIBLE);
+                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                            Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringDangerSignBoard);
+                            inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                            imageFileUriDangerSignBoard = Uri.parse(path);
+                        }
+
+                        /*imageFileUploadPhotoOfSitePremises = siteHygenSaftyDetailsData.getImageFileUploadPhotoOfSitePremises();
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.GONE);
                         if (imageFileUploadPhotoOfSitePremises != null && imageFileUploadPhotoOfSitePremises.length() > 0) {
                             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfSitePremises);
@@ -436,7 +476,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                             if (imageFileUriDangerSignBoard != null) {
                                 mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.VISIBLE);
                             }
-                        }
+                        }*/
 
                         if (siteHygenSaftyDetailsData.getTypeOfFault() != null && siteHygenSaftyDetailsData.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
 
@@ -482,9 +522,9 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                     anyEagleCrowHoneyHivesInTower, compoundWallFencingStatus, gateLockAvailablity, shelterLockAvailablity, dgLockAvailablity,
                     fireExtinguisherAvilability, noOfFireExtinguisher, fireExtinguisherExpiryDate, fireBucket, base64StringCautionSignBoardPhoto,
                     base64StringWarningSignBoardPhoto, base64StringDangerSignBoardPhoto, safetyChartsCalendar,
-                    unusedMaterialInSite, registerFault, typeOfFault,
+                    unusedMaterialInSite, registerFault, typeOfFault/*,
                     imageFileUploadPhotoOfSitePremises, imageFileCautionSignBoard,
-                    imageFileWarningSignBoard, imageFileDangerSignBoard);
+                    imageFileWarningSignBoard, imageFileDangerSignBoard*/);
 
             pmSiteTransactionDetails.setSiteHygenieneGenralSeftyParameter(siteHygenSaftyDetailsData);
 

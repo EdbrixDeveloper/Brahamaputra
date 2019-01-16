@@ -270,7 +270,19 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
 
-                    imageFilePhotoOfDgHmr = dgCheckPointsData.get(index).getImageFileTakePhotoOfDgHmr();
+
+                    base64StringPhotoOfDgHmr = dgCheckPointsData.get(index).getBase64StringTakePhotoOfDgHmr();
+                    mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
+                    if (!base64StringPhotoOfDgHmr.isEmpty() && base64StringPhotoOfDgHmr != null) {
+                        mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.VISIBLE);
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        Bitmap inImage = decodeFromBase64ToBitmap(base64StringPhotoOfDgHmr);
+                        inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                        imageFileUriPhotoOfDgHmr = Uri.parse(path);
+                    }
+
+                    /*imageFilePhotoOfDgHmr = dgCheckPointsData.get(index).getImageFileTakePhotoOfDgHmr();
                     mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
                     if (imageFilePhotoOfDgHmr != null && imageFilePhotoOfDgHmr.length() > 0) {
                         File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFilePhotoOfDgHmr);
@@ -278,7 +290,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         if (imageFileUriPhotoOfDgHmr != null) {
                             mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.VISIBLE);
                         }
-                    }
+                    }*/
 
                     mPreventiveMaintenanceSiteDgCheckPointsEditTextDgHmrReading.setText(dgCheckPointsData.get(index).getDgHmrReading());
                     mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingConditionVal.setText(dgCheckPointsData.get(index).getDgWorkingCondition());
@@ -417,7 +429,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         // String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus,
         // String powerCableConnectionStatus, String registerFault, String typeOfFault
         DgCheckPointsData dgCheckPointsChild = new DgCheckPointsData(detailsOfDgQrCodeScan, dgHmrReading,
-                base64StringTakePhotoOfDgHmr, imageFilePhotoOfDgHmr, dgWorkingCondition, coolentLevel, beltTension, engineLubeOilLevel, safetyWorkingStatus,
+                base64StringTakePhotoOfDgHmr, /*imageFilePhotoOfDgHmr,*/ dgWorkingCondition, coolentLevel, beltTension, engineLubeOilLevel, safetyWorkingStatus,
                 powerCableConnectionStatus, registerFault, typeOfFault);
 
         if (dgCheckPointsData.size() > 0) {
@@ -446,7 +458,18 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                 mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
             }
 
-            imageFilePhotoOfDgHmr = dgCheckPointsData.get(pos).getImageFileTakePhotoOfDgHmr();
+            base64StringPhotoOfDgHmr = dgCheckPointsData.get(pos).getBase64StringTakePhotoOfDgHmr();
+            mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
+            if (!base64StringPhotoOfDgHmr.isEmpty() && base64StringPhotoOfDgHmr != null) {
+                mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.VISIBLE);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                Bitmap inImage = decodeFromBase64ToBitmap(base64StringPhotoOfDgHmr);
+                inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                imageFileUriPhotoOfDgHmr = Uri.parse(path);
+            }
+
+            /*imageFilePhotoOfDgHmr = dgCheckPointsData.get(pos).getImageFileTakePhotoOfDgHmr();
             mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
             if (imageFilePhotoOfDgHmr != null && imageFilePhotoOfDgHmr.length() > 0) {
                 File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFilePhotoOfDgHmr);
@@ -454,7 +477,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                 if (imageFileUriPhotoOfDgHmr != null) {
                     mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.VISIBLE);
                 }
-            }
+            }*/
 
             //String detailsOfDgQrCodeScan = base64StringDgCheckPointsQRCodeScan;
             //String base64StringTakePhotoOfDgHmr = base64StringPhotoOfDgHmr;
