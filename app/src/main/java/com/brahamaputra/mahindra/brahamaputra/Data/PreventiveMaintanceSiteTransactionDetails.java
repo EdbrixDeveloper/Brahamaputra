@@ -54,7 +54,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     private AlarmCheckPoints alarmCheckPoints;
     @SerializedName("batteryBankCheckPoints")
     @Expose
-    private BatteryBankCheckPoints batteryBankCheckPoints;
+    private BatteryBankCheckPointsParentData batteryBankCheckPoints;
     @SerializedName("earthingCheckPointsParentData")
     @Expose
     private EarthingCheckPointsParentData EarthingCheckPointsParentData;
@@ -101,7 +101,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     public PreventiveMaintanceSiteTransactionDetails() {
         siteHygenieneGenralSeftyParameter = new SiteHygenieneGenralSeftyParameter();
         alarmCheckPoints = new AlarmCheckPoints();
-        batteryBankCheckPoints = new BatteryBankCheckPoints();
+        batteryBankCheckPoints = new BatteryBankCheckPointsParentData();
         EarthingCheckPointsParentData = new EarthingCheckPointsParentData();
         ebMeterBox = new EbMeterBox();
         dgCheckPointsParentData = new DgCheckPointsParentData();
@@ -237,11 +237,11 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         this.alarmCheckPoints = alarmCheckPoints;
     }
 
-    public BatteryBankCheckPoints getBatteryBankCheckPoints() {
+    public BatteryBankCheckPointsParentData getBatteryBankCheckPoints() {
         return batteryBankCheckPoints;
     }
 
-    public void setBatteryBankCheckPoints(BatteryBankCheckPoints batteryBankCheckPoints) {
+    public void setBatteryBankCheckPoints(BatteryBankCheckPointsParentData batteryBankCheckPoints) {
         this.batteryBankCheckPoints = batteryBankCheckPoints;
     }
 
