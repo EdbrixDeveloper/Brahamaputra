@@ -76,6 +76,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
     private Button mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading;
+    private LinearLayout mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutTypeOfFault;
 
     String str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = "";
     String str_pmSiteDgbcpDGBatteryConditionVal = "";
@@ -306,6 +307,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
                         str_pmSiteDgbcpRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.setText(str_pmSiteDgbcpRegisterFaultVal);
+                        visibilityOfTypesOfFault(str_pmSiteDgbcpRegisterFaultVal);
                     }
                 });
             }
@@ -344,6 +346,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -359,9 +362,11 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                         //if (checkValidationOnNoOfAcSelection() == true) {
                         if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                             submitDetails();
@@ -399,6 +404,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_button_nextReading);
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteDgBatteryCheckPoints_linearLayout_typeOfFault);
     }
 
 
@@ -538,16 +544,25 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         if (detailsOfDgBatteryQrCodeScan.isEmpty() || detailsOfDgBatteryQrCodeScan == null) {
             showToast("Please Scan QR Code");
             return false;
-        } /*else if (dgBatteryCondition.isEmpty() || dgBatteryCondition == null) {
-            showToast("Please Enter DG Battery Condition");
+        } else if (dgBatteryCondition.isEmpty() || dgBatteryCondition == null) {
+            showToast("Select DG Battery Condition");
             return false;
-        }*/ else if (registerFault.isEmpty() || registerFault == null) {
+        }else if (dgBatteryWaterAvailable.isEmpty() || dgBatteryWaterAvailable == null) {
+            showToast("Select DG Battery Water Available");
+            return false;
+        }else if (petroleumJellyToDgBatteryTerminal.isEmpty() || petroleumJellyToDgBatteryTerminal == null) {
+            showToast("Select Petroleum Jelly To DG Battery Terminal");
+            return false;
+        }else if (dgBatteryCharger.isEmpty() || dgBatteryCharger == null) {
+            showToast("Select DG Battery Charger");
+            return false;
+        } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
-        } /*else if (typeOfFault.isEmpty() || typeOfFault == null) {
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
-        }*/ else return true;
+        } else return true;
 
     }
 
@@ -733,6 +748,14 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     }
 
     //////////////////
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
+            //mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+        }
+    }
 
     private void setListner() {
 

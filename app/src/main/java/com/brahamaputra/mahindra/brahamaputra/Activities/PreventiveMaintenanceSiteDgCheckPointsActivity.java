@@ -636,7 +636,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
         mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-            mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText("");
+            //mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
         }
     }
@@ -869,6 +869,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -884,9 +885,11 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                         //if (checkValidationOnNoOfAcSelection() == true) {
                         if (checkValidationOnChangeNoOfDgAvailable(mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                             submitDetails();
