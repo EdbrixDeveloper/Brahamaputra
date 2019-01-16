@@ -241,7 +241,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                             totalCount = Integer.parseInt(str_noOfPmsAmfPiuAvailableAtSiteVal);
                             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewPmsAmfPiuNumber.setText("Reading: #1");
                             mLinearLayoutContainer.setVisibility(View.VISIBLE);
-                            mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+                            mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonPreviousReading .setVisibility(View.GONE);
                             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
                             if (totalCount > 0 && totalCount == 1) {
                                 mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonNextReading.setText("Finish");
