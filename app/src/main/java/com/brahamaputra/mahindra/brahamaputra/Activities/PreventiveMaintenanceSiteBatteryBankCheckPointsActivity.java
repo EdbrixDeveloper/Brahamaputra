@@ -44,6 +44,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     private ImageView mButtonClearDetailsOfBatteryBankQRCodeScanView;
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTest;
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal;
+    private ImageView mPreventiveMaintenanceSiteBatteryBankCheckPointsImageViewBatteryBankDischargeTest;
+
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewStripBoltTightnessAsPerTorque;
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewStripBoltTightnessAsPerTorqueVal;
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewPetroleumJellyApplied;
@@ -86,6 +88,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+    public static final int RESULT_PRIVENTIVE_MAINTENANCE_SITE_BATTERY_BANK_CHECK = 258;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +121,9 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         mButtonClearDetailsOfBatteryBankQRCodeScanView = (ImageView) findViewById(R.id.button_ClearDetailsOfBatteryBankQRCodeScanView);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTest = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_batteryBankDischargeTest);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_batteryBankDischargeTestVal);
+
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsImageViewBatteryBankDischargeTest = (ImageView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_imageview_batteryBankDischargeTest);
+
         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewStripBoltTightnessAsPerTorque = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_stripBoltTightnessAsPerTorque);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewStripBoltTightnessAsPerTorqueVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_stripBoltTightnessAsPerTorqueVal);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewPetroleumJellyApplied = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_petroleumJellyApplied);
@@ -170,6 +176,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
                         str_pmSiteBbcpBatteryBankDischargeTestVal = item.get(position);
                         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal.setText(str_pmSiteBbcpBatteryBankDischargeTestVal);
+                        visibilityOfImageViewBatteryBankDischargeTest(str_pmSiteBbcpBatteryBankDischargeTestVal);
                     }
                 });
             }
@@ -296,6 +303,13 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         });
     }
 
+    private void visibilityOfImageViewBatteryBankDischargeTest(String str_pmSiteBbcpBatteryBankDischargeTestVal) {
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsImageViewBatteryBankDischargeTest.setVisibility(View.GONE);
+        if (str_pmSiteBbcpBatteryBankDischargeTestVal.equals("Execute BD Test")) {
+            mPreventiveMaintenanceSiteBatteryBankCheckPointsImageViewBatteryBankDischargeTest.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void setListner() {
 
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScan.setOnClickListener(new View.OnClickListener() {
@@ -317,6 +331,17 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             }
         });
 
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsImageViewBatteryBankDischargeTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this, PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.class);
+                //intent.putExtra("ticketName", "");
+
+                startActivityForResult(intent, RESULT_PRIVENTIVE_MAINTENANCE_SITE_BATTERY_BANK_CHECK);
+
+            }
+        });
     }
 
     private void DetailsOfBatteryBankQRCodeScan() {

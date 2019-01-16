@@ -88,7 +88,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     @Expose
     private RectifierModuleCheckPointParentData rectifierModuleCheckPoint;
 
-    @SerializedName("smpsCheckPoints")
+    @SerializedName("smpsCheckPointParentData")
     @Expose
     private SmpsCheckPointParentData smpsCheckPoints;
 

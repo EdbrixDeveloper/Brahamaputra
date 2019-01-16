@@ -312,6 +312,11 @@
             android:label="Preventive Maintenance Site Battery Bank Check Points"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Activities.PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity"
+            android:label="Preventive Maintenance Site Battery Bank BackUpTestReport"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".Activities.PreventiveMaintenanceSiteEarthingCheckPointsActivity"
             android:label="Preventive Maintenance Site Earthing Check Points"
             android:screenOrientation="portrait" />
