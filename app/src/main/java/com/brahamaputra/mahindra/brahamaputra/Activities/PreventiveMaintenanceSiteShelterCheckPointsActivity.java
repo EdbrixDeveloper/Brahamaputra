@@ -406,16 +406,9 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
     }
 
     private void visibilityOfTypesOfFault(String RegisterFault) {
-
-
-        if (RegisterFault.equals("No")) {
+        mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
             mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText("");
-            mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
-            /*str_typeOfFaultVal = "";
-            mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(str_typeOfFaultVal);
-            mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);*/
-        }else {
-            mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(RegisterFault);
             mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
         }
     }
@@ -424,5 +417,39 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    public boolean checkValidationOfArrayFields() {
+        String shelterCleaning = mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterCleaningVal.getText().toString().trim();
+        String shelterLeakage = mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterLeakageVal.getText().toString().trim();
+        String hatchPlateEntrySealed = mPreventiveMaintenanceSiteShelterCheckPointsTextViewHatchPlateEntrySealedVal.getText().toString().trim();
+        String shelterEarthingStatus = mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterEarthingStatusVal.getText().toString().trim();
+        String shelterFloorStatus = mPreventiveMaintenanceSiteShelterCheckPointsTextViewShelterFloorStatusVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteShelterCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault= mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+
+        if (shelterCleaning.isEmpty() || shelterCleaning == null) {
+            showToast("Select Shelter Cleaning");
+            return false;
+        }else if(shelterLeakage.isEmpty() || shelterLeakage == null) {
+            showToast("Select Shelter Leakage");
+            return false;
+        }else if(hatchPlateEntrySealed.isEmpty() || hatchPlateEntrySealed == null) {
+            showToast("Select Hatch Plate Entry Sealed");
+            return false;
+        }else if(shelterEarthingStatus.isEmpty() || shelterEarthingStatus == null) {
+            showToast("Select Shelter Earthing Status");
+            return false;
+        }else if(shelterFloorStatus.isEmpty() || shelterFloorStatus == null) {
+            showToast("Select Shelter Floor Status");
+            return false;
+        }else if(registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type Of Fault");
+            return false;
+        }else return true;
     }
 }
