@@ -329,7 +329,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
 
                         str_registerFaultVal = item.get(position);
                         mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewRegisterFaultVal.setText(str_registerFaultVal);
-                        visibleTypeOfFaultField();
+                        visibilityOfTypesOfFault(str_registerFaultVal);
                     }
                 });
             }
@@ -353,6 +353,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                     currentPos = currentPos - 1;
                     //move to Next reading
                     displayRecords(currentPos);
+                    visibilityOfTypesOfFault(mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
                 }
             }
         });
@@ -369,10 +370,12 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
 
                     } else if (currentPos == (totalCount - 1)) {
                         //Save Final current reading and submit all AC data
                         saveRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
                         submitDetails();
                         startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
                         finish();
@@ -576,7 +579,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
 
                     mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonPreviousReading.setVisibility(View.GONE);
                     mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
-                    visibleTypeOfFaultField();
+                    ;
                     if (totalCount > 1) {
                         mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonNextReading.setText("Next Reading");
                     } else {
@@ -660,9 +663,11 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         }
     }
 
-    private void visibleTypeOfFaultField() {
-        String registerFaultVal = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        if (!registerFaultVal.equals("No") || !registerFaultVal.equals("")) {
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSitePmsAmfPanelCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
+           // mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
         }
     }
@@ -685,5 +690,35 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewPmfAmfPiuEarthingStatusVal.setText("");
         mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewRegisterFaultVal.setText("");
         mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.setText("");
+    }
+
+    public boolean checkValidationOfArrayFields() {
+        String qrCodeScan = base64StringPmsAmfPanelCheckPointsQRCodeScan;
+        String siteInAutoManual = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewSiteInAutoManualVal.getText().toString().trim();
+        String anyLooseConnectionBypass = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewLooseConnectionBypassVal.getText().toString().trim();
+        String pmsAmfPiuEarthingStatus = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewPmfAmfPiuEarthingStatusVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault= mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+
+        if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        }else if(siteInAutoManual.isEmpty() || siteInAutoManual == null) {
+            showToast("Select Site In Auto Manual");
+            return false;
+        }else if(anyLooseConnectionBypass.isEmpty() || anyLooseConnectionBypass == null) {
+            showToast("Select Any Loose Connection/Bypass");
+            return false;
+        }else if(pmsAmfPiuEarthingStatus.isEmpty() || pmsAmfPiuEarthingStatus == null) {
+            showToast("Select PMS/AMF/PIU Earthing Status");
+            return false;
+        }else if(registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type Of Fault");
+            return false;
+        }else return true;
     }
 }
