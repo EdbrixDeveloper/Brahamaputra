@@ -80,6 +80,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     private TextView mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal;
     private Button mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading;
+    private LinearLayout mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault;
 
 
     String str_noOfRectifierModuleAvailableAtSiteVal;
@@ -534,7 +535,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_button_previousReading);
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_button_nextReading);
-
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_linearLayout_typeOfFault);
     }
 
     private void saveRecords(int currentPos) {
@@ -627,8 +628,42 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         }
     }
 
-    private boolean checkValidationOfArrayFields() {
-        return true;
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
+            //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public boolean checkValidationOfArrayFields() {
+        String qrCodeScan = base64StringDetailsOfRectifierModuleQRCodeScan;
+        String rectifierCleaning = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.getText().toString().trim();
+        String rectifierPhotoBeforeCleaning = base64StringRectifierPhotoBeforeCleaning;
+        String rectifierPhotoAfterCleaning = base64StringRectifierPhotoAfterCleaning;
+        String registerFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim();
+
+        if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        }else if(rectifierCleaning.isEmpty() || rectifierCleaning == null) {
+            showToast("Select Rectifier Cleaning");
+            return false;
+        }else if(rectifierPhotoBeforeCleaning.isEmpty() || rectifierPhotoBeforeCleaning == null) {
+            showToast("Please Take Rectifier Photo Before Cleaning");
+            return false;
+        }else if(rectifierPhotoAfterCleaning.isEmpty() || rectifierPhotoAfterCleaning == null) {
+            showToast("Please Take Rectifier Photo After Cleaning");
+            return false;
+        }else if(registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type Of Fault");
+            return false;
+        }else return true;
     }
 
     private boolean checkValidationonSubmit(String methodFlag) {
