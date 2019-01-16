@@ -78,6 +78,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     private TextView mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal;
 
     private LinearLayout mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault;
+    private LinearLayout mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks;
 
     String str_pmSiteAcpDoorOpenAlarmVal = "";
     String str_pmSiteAcpDgOnVal = "";
@@ -86,6 +87,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     String str_pmSiteAcpFireAndSmokeVal = "";
     String str_pmSiteAcpPowerPlantFailureVal = "";
     String str_pmSiteAcpAlarmConfirmedByNocVal = "";
+    String str_pmSiteAcpRemarks = "";
     String str_pmSiteAcpRegisterFaultVal = "";
     String str_pmSiteAcpTypeOfFaultVal = "";
 
@@ -185,6 +187,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_linearLayout_typeOfFault);
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_typeOfFault);
         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_textView_typeOfFaultVal);
+        mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteAlarmCheckPoints_linearLayout_remarks);
     }
 
     public void setMultiSelectModel() {
@@ -320,6 +323,15 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         if (str_pmSiteAcpRegisterFaultVal.equals("No")) {
             mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        }
+    }
+
+    private void visibilityOfRemarks(String str_pmSiteAcpRemarks)
+    {
+        mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.VISIBLE);
+        if(str_pmSiteAcpRemarks.equals("No")){
+            mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRemarksVal.setText("");
+            mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.GONE);
         }
     }
 
@@ -459,6 +471,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
 
                         str_pmSiteAcpAlarmConfirmedByNocVal = item.get(position);
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewAlarmConfirmedByNocVal.setText(str_pmSiteAcpAlarmConfirmedByNocVal);
+                        visibilityOfRemarks(str_pmSiteAcpAlarmConfirmedByNocVal);
                     }
                 });
             }
@@ -611,11 +624,13 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                 return true;
 
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
-                finish();
-                return true;
-
+                if(checkValidationOfArrayFields()==true)
+                {
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -626,4 +641,48 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         setResult(RESULT_OK);
         finish();
     }
+
+    public boolean checkValidationOfArrayFields() {
+        String qrCodeScan = base64StringDetailsOfWrmsQRCodeScan;
+        String doorOpenAlarm = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewDoorOpenAlarmVal.getText().toString().trim();
+        String dgOn = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewDgOnVal.getText().toString().trim();
+        String dgOutputAvailable = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewDgOutputAvailableVal.getText().toString().trim();
+        String highRoomTemp = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewHighRoomTempVal.getText().toString().trim();
+        String fireAndSmoke = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewFireSmokeVal.getText().toString().trim();
+        String powerPlantFailure = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewPowerPlantFailureVal.getText().toString().trim();
+        String alarmConfirmedByNoc = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewAlarmConfirmedByNocVal.getText().toString().trim();
+       // String remarks = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRemarksVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+        if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+            showToast("Scan QR Code");
+            return false;
+        }else if(doorOpenAlarm.isEmpty() || doorOpenAlarm == null) {
+            showToast("Select Door Open Alarm");
+            return false;
+        }else if(dgOn.isEmpty() || dgOn == null) {
+            showToast("Select DG On");
+            return false;
+        }else if(dgOutputAvailable.isEmpty() || dgOutputAvailable == null) {
+            showToast("Select DG Output Available");
+            return false;
+        }else if(highRoomTemp.isEmpty() || highRoomTemp == null) {
+            showToast("Select High Room Temp");
+            return false;
+        }else if(fireAndSmoke.isEmpty() || fireAndSmoke == null) {
+            showToast("Select Fire And Smoke");
+            return false;
+        }else if(powerPlantFailure.isEmpty() || powerPlantFailure == null) {
+            showToast("Select Power Plant Failure");
+            return false;
+        }else if(alarmConfirmedByNoc.isEmpty() || alarmConfirmedByNoc == null) {
+            showToast("Select Alarm Confirmed By Noc");
+            return false;
+        }else if(registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        }else return true;
+    }
+
 }

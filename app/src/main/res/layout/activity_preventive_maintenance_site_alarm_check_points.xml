@@ -247,9 +247,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_linearLayout_remarks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView

@@ -1230,9 +1230,6 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         }else if(registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
-        }else if(typeOfFault.isEmpty() || typeOfFault == null) {
-            showToast("Select Type Of Fault");
-            return false;
         }else return true;
     }
 
