@@ -6,7 +6,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BatteryBankCheckPointData implements Serializable {
+public class BatteryBankCheckPointsData implements Serializable {
 
     @SerializedName("detailsOfBatteryBankQrCodeScan")
     @Expose
@@ -224,7 +224,7 @@ public class BatteryBankCheckPointData implements Serializable {
     //private final static long serialVersionUID = 7893320750069795826L;
 
 
-    public BatteryBankCheckPointData() {
+    public BatteryBankCheckPointsData() {
         this.detailsOfBatteryBankQrCodeScan = "";
         this.batteryBankDischargeTest = "";
         this.stripBoltTightnessAsPerTorque = "";
@@ -299,7 +299,27 @@ public class BatteryBankCheckPointData implements Serializable {
 
     }
 
-    public BatteryBankCheckPointData(String detailsOfBatteryBankQrCodeScan, String batteryBankDischargeTest, String stripBoltTightnessAsPerTorque, String petroleumJellyApplied, String batteryCharger, String batteryVentPlugStatus, String bbEarthingStatus, String registerFault, String typeOfFault, String bdTestDetailsBatteryBankBackUpOfQRCodeScan, String bdTestBatteryBankBackUpTicketNo, String bdTestCustomer, String bdTestCircle, String bdTestState, String bdTestSiteName, String bdTestSiteId, String bdTestSsa, String bdTestUserFseNameDesignation, String bdTestBatteryTestDateTime, String typeOfBattery, String bdTestBatteryBankMake, String bdTestBatteryBankCapacity, String bdTestNumberOfRectifireModuleWorking, String bdTestSiteLoadOnBatteryInAmps, String bdTestFloatVoltageBeforeBBTest, String bdTestSingleModuleRating, String bdTestNumberOfBatteryModule, String bdTestReadingTakenAt, String bdTestCellReading1, String bdTestCellReading2, String bdTestCellReading3, String bdTestCellReading4, String bdTestCellReading5, String bdTestCellReading6, String bdTestCellReading7, String bdTestCellReading8, String bdTestCellReading9, String bdTestCellReading10, String bdTestCellReading11, String bdTestCellReading12, String bdTestCellReading13, String bdTestCellReading14, String bdTestCellReading15, String bdTestCellReading16, String bdTestCellReading17, String bdTestCellReading18, String bdTestCellReading19, String bdTestCellReading20, String bdTestCellReading21, String bdTestCellReading22, String bdTestCellReading23, String bdTestCellReading24, String bdTestCellFloatVoltageInSmpsBusBarAfter30Min, String bdTestCellTotalLoadCurrentInAmps, String bdTestVoltageModuleReading1, String bdTestVoltageModuleReading2, String bdTestVoltageModuleReading3, String bdTestCurrentModuleReading1, String bdTestCurrentModuleReading2, String bdTestCurrentModuleReading3, String bdTestSocModuleReading1, String bdTestSocModuleReading2, String bdTestSocModuleReading3, String bdTestSohModuleReading1, String bdTestSohModuleReading2, String bdTestSohModuleReading3, String bdTestModuleFloatVoltageInSmpsBusBarAfter30Min, String bdTestModuleTotalLoadCurrentInAmps, String bdTestLastReadingTakenAt, String base64StringPhotoOfBatteryBank, String bdTestRemarks) {
+    public BatteryBankCheckPointsData(String detailsOfBatteryBankQrCodeScan, String batteryBankDischargeTest, String stripBoltTightnessAsPerTorque,
+                                      String petroleumJellyApplied, String batteryCharger, String batteryVentPlugStatus, String bbEarthingStatus,
+                                      String registerFault, String typeOfFault, String bdTestDetailsBatteryBankBackUpOfQRCodeScan,
+                                      String bdTestBatteryBankBackUpTicketNo, String bdTestCustomer, String bdTestCircle, String bdTestState,
+                                      String bdTestSiteName, String bdTestSiteId, String bdTestSsa, String bdTestUserFseNameDesignation,
+                                      String bdTestBatteryTestDateTime, String typeOfBattery, String bdTestBatteryBankMake, String bdTestBatteryBankCapacity,
+                                      String bdTestNumberOfRectifireModuleWorking, String bdTestSiteLoadOnBatteryInAmps, String bdTestFloatVoltageBeforeBBTest,
+                                      String bdTestSingleModuleRating, String bdTestNumberOfBatteryModule, String bdTestReadingTakenAt, String bdTestCellReading1,
+                                      String bdTestCellReading2, String bdTestCellReading3, String bdTestCellReading4, String bdTestCellReading5,
+                                      String bdTestCellReading6, String bdTestCellReading7, String bdTestCellReading8, String bdTestCellReading9,
+                                      String bdTestCellReading10, String bdTestCellReading11, String bdTestCellReading12, String bdTestCellReading13,
+                                      String bdTestCellReading14, String bdTestCellReading15, String bdTestCellReading16, String bdTestCellReading17,
+                                      String bdTestCellReading18, String bdTestCellReading19, String bdTestCellReading20, String bdTestCellReading21,
+                                      String bdTestCellReading22, String bdTestCellReading23, String bdTestCellReading24,
+                                      String bdTestCellFloatVoltageInSmpsBusBarAfter30Min, String bdTestCellTotalLoadCurrentInAmps,
+                                      String bdTestVoltageModuleReading1, String bdTestVoltageModuleReading2, String bdTestVoltageModuleReading3,
+                                      String bdTestCurrentModuleReading1, String bdTestCurrentModuleReading2, String bdTestCurrentModuleReading3,
+                                      String bdTestSocModuleReading1, String bdTestSocModuleReading2, String bdTestSocModuleReading3, String bdTestSohModuleReading1,
+                                      String bdTestSohModuleReading2, String bdTestSohModuleReading3, String bdTestModuleFloatVoltageInSmpsBusBarAfter30Min,
+                                      String bdTestModuleTotalLoadCurrentInAmps, String bdTestLastReadingTakenAt, String base64StringPhotoOfBatteryBank,
+                                      String bdTestRemarks) {
         this.detailsOfBatteryBankQrCodeScan = detailsOfBatteryBankQrCodeScan;
         this.batteryBankDischargeTest = batteryBankDischargeTest;
         this.stripBoltTightnessAsPerTorque = stripBoltTightnessAsPerTorque;

@@ -15,7 +15,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     private String noOfBatteryBankAvailableAtSite;
     @SerializedName("batteryBankCheckPointData")
     @Expose
-    private List<BatteryBankCheckPointData> batteryBankCheckPointData = null;
+    private List<BatteryBankCheckPointsData> batteryBankCheckPointsData = null;
     @SerializedName("isSubmited")
     @Expose
     private int isSubmited = 0;
@@ -25,13 +25,13 @@ public class BatteryBankCheckPointsParentData implements Serializable {
 
     public BatteryBankCheckPointsParentData() {
         this.noOfBatteryBankAvailableAtSite = "";
-        this.batteryBankCheckPointData = new ArrayList<>();
+        this.batteryBankCheckPointsData = new ArrayList<>();
         this.isSubmited = 0;
     }
 
-    public BatteryBankCheckPointsParentData(String noOfBatteryBankAvailableAtSite, List<BatteryBankCheckPointData> batteryBankCheckPointData) {
+    public BatteryBankCheckPointsParentData(String noOfBatteryBankAvailableAtSite, List<BatteryBankCheckPointsData> batteryBankCheckPointsData) {
         this.noOfBatteryBankAvailableAtSite = noOfBatteryBankAvailableAtSite;
-        this.batteryBankCheckPointData = batteryBankCheckPointData;
+        this.batteryBankCheckPointsData = batteryBankCheckPointsData;
         this.isSubmited = 2;
     }
 
@@ -51,12 +51,12 @@ public class BatteryBankCheckPointsParentData implements Serializable {
         this.noOfBatteryBankAvailableAtSite = noOfBatteryBankAvailableAtSite;
     }
 
-    public List<BatteryBankCheckPointData> getBatteryBankCheckPointData() {
-        return batteryBankCheckPointData;
+    public List<BatteryBankCheckPointsData> getBatteryBankCheckPointsData() {
+        return batteryBankCheckPointsData;
     }
 
-    public void setBatteryBankCheckPointData(List<BatteryBankCheckPointData> batteryBankCheckPointData) {
-        this.batteryBankCheckPointData = batteryBankCheckPointData;
+    public void setBatteryBankCheckPointsData(List<BatteryBankCheckPointsData> batteryBankCheckPointsData) {
+        this.batteryBankCheckPointsData = batteryBankCheckPointsData;
     }
 
 }

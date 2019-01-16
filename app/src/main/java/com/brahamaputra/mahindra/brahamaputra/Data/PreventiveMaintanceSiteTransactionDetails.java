@@ -52,9 +52,9 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     @SerializedName("alarmCheckPoints")
     @Expose
     private AlarmCheckPoints alarmCheckPoints;
-    @SerializedName("batteryBankCheckPoints")
+    @SerializedName("batteryBankCheckPointsParentData")
     @Expose
-    private BatteryBankCheckPointsParentData batteryBankCheckPoints;
+    private BatteryBankCheckPointsParentData batteryBankCheckPointsParentData;
     @SerializedName("earthingCheckPointsParentData")
     @Expose
     private EarthingCheckPointsParentData EarthingCheckPointsParentData;
@@ -101,7 +101,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     public PreventiveMaintanceSiteTransactionDetails() {
         siteHygenieneGenralSeftyParameter = new SiteHygenieneGenralSeftyParameter();
         alarmCheckPoints = new AlarmCheckPoints();
-        batteryBankCheckPoints = new BatteryBankCheckPointsParentData();
+        batteryBankCheckPointsParentData = new BatteryBankCheckPointsParentData();
         EarthingCheckPointsParentData = new EarthingCheckPointsParentData();
         ebMeterBox = new EbMeterBox();
         dgCheckPointsParentData = new DgCheckPointsParentData();
@@ -237,12 +237,12 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         this.alarmCheckPoints = alarmCheckPoints;
     }
 
-    public BatteryBankCheckPointsParentData getBatteryBankCheckPoints() {
-        return batteryBankCheckPoints;
+    public BatteryBankCheckPointsParentData getBatteryBankCheckPointsParentData() {
+        return batteryBankCheckPointsParentData;
     }
 
-    public void setBatteryBankCheckPoints(BatteryBankCheckPointsParentData batteryBankCheckPoints) {
-        this.batteryBankCheckPoints = batteryBankCheckPoints;
+    public void setBatteryBankCheckPointsParentData(BatteryBankCheckPointsParentData batteryBankCheckPointsParentData) {
+        this.batteryBankCheckPointsParentData = batteryBankCheckPointsParentData;
     }
 
     public EarthingCheckPointsParentData getEarthingCheckPointsParentData() {
