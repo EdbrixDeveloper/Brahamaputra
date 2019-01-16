@@ -7,13 +7,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.ServoCheckPoints;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -34,7 +38,7 @@ import java.util.Arrays;
 
 public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActivity {
 
-
+    private static final String TAG = PreventiveMaintenanceSiteServoCheckPointsActivity.class.getSimpleName();
 
     private TextView mPreventiveMaintenanceSiteServoCheckPointsTextViewDetailsOfServo;
     private ImageView mPreventiveMaintenanceSiteServoCheckPointsButtonDetailsOfServoQRCodeScan;
@@ -50,6 +54,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
     private TextView mPreventiveMaintenanceSiteServoCheckPointsTextViewRegisterFaultVal;
     private TextView mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFault;
     private TextView mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal;
+    private LinearLayout mPreventiveMaintenanceSiteServoCheckPointsLinearLayoutTypeOfFault;
 
     String str_servoWorkingStatusVal;
     String str_anyBypassInSvsVal;
@@ -78,6 +83,11 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
     PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
     ServoCheckPoints servoCheckPoints;
 
+    MultiSelectDialog multiSelectDialog;
+    ArrayList<MultiSelectModel> listOfFaultsTypes;
+    ArrayList<Integer> alreadySelectedTypeOfFaultList;
+    ArrayList<String> typeOfFaultList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,8 +106,47 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
 
         preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
         setInputDetails();
-    }
 
+        listOfFaultsTypes = new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
+
+        //Code For MultiSelect Type Of Fault
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteServoCheckPoints_typeOfFault)));
+        int id = 1;
+        for (int i = 0; i < typeOfFaultList.size(); i++) {
+            listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
+            id++;
+        }
+        setMultiSelectModel();
+    }
+    public void setMultiSelectModel() {
+        //MultiSelectModel
+        multiSelectDialog = new MultiSelectDialog()
+                .title("Type of Fault") //setting title for dialog
+                .titleSize(25)
+                .positiveText("Done")
+                .negativeText("Cancel")
+                .preSelectIDsList(alreadySelectedTypeOfFaultList)
+                .setMinSelectionLimit(0)
+                .setMaxSelectionLimit(typeOfFaultList.size())
+                //List of ids that you need to be selected
+                .multiSelectList(listOfFaultsTypes) // the multi select model list with ids and name
+                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                    @Override
+                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                        //will return list of selected IDS
+                        str_typeOfFaultVal = dataString;
+                        mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.setText(str_typeOfFaultVal);
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "Dialog cancelled");
+
+                    }
+                });
+    }
     private void assignViews() {
         mPreventiveMaintenanceSiteServoCheckPointsTextViewDetailsOfServo = (TextView) findViewById(R.id.preventiveMaintenanceSiteServoCheckPoints_textView_detailsOfServoQRCodeScan);
         mPreventiveMaintenanceSiteServoCheckPointsButtonDetailsOfServoQRCodeScan = (ImageView) findViewById(R.id.preventiveMaintenanceSiteServoCheckPoints_button_detailsOfServoQRCodeScan);
@@ -113,7 +162,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         mPreventiveMaintenanceSiteServoCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteServoCheckPoints_textView_registerFaultVal);
         mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteServoCheckPoints_textView_typeOfFault);
         mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteServoCheckPoints_textView_typeOfFaultVal);
-
+        mPreventiveMaintenanceSiteServoCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteServoCheckPoints_linearLayout_typeOfFault);
 
     }
 
@@ -194,6 +243,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
 
                         str_registerFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteServoCheckPointsTextViewRegisterFaultVal.setText(str_registerFaultVal);
+                        visibilityOfTypesOfFault(str_registerFaultVal);
                     }
                 });
             }
@@ -202,20 +252,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteServoCheckPointsActivity.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteServoCheckPoints_typeOfFault))),
-                        "Type of Fault",
-                        "close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_typeOfFaultVal = item.get(position);
-                        mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.setText(str_typeOfFaultVal);
-                    }
-                });
+                multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
             }
         });
 
@@ -324,11 +361,13 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
                 return true;
 
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
-                finish();
-                return true;
-
+                if(checkValidationOfArrayFields()==true)
+                {
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -395,5 +434,44 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteServoCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
+            mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteServoCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public boolean checkValidationOfArrayFields() {
+        String qrCodeScan = base64StringDetailsOfServoQRCodeScan;
+        String servoWorkingStatus = mPreventiveMaintenanceSiteServoCheckPointsTextViewServoWorkingStatusVal.getText().toString().trim();
+        String anyBypassInSvs = mPreventiveMaintenanceSiteServoCheckPointsTextViewAnyBypassInSvsVal.getText().toString().trim();
+        String svsEarthingStatus = mPreventiveMaintenanceSiteServoCheckPointsTextViewSvsEarthingStatusVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteServoCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault= mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+
+        if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+            showToast("Please Scan QR Code");
+            return false;
+        }else if(servoWorkingStatus.isEmpty() || servoWorkingStatus == null) {
+            showToast("Select Servo Working Status");
+            return false;
+        }else if(anyBypassInSvs.isEmpty() || anyBypassInSvs == null) {
+            showToast("Select Any Bypass In SVS");
+            return false;
+        }else if(svsEarthingStatus.isEmpty() || svsEarthingStatus == null) {
+            showToast("Select SVS Earthing Status");
+            return false;
+        }else if(registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type Of Fault");
+            return false;
+        }else return true;
     }
 }
