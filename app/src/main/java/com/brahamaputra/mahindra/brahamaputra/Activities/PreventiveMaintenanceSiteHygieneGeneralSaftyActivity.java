@@ -1024,10 +1024,10 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
     private void visibilityOfTypesOfFault(String RegisterFault) {
 
-        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.VISIBLE);
-        if (RegisterFault.equals("No")) {
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
             mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
-            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.VISIBLE);
         }
     }
 
@@ -1137,11 +1137,13 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 return true;
 
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
-                finish();
-                return true;
-
+                if(checkValidationOfArrayFields() == true)
+                {
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -1151,6 +1153,84 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    public boolean checkValidationOfArrayFields() {
+        String sitePremisesCleaning = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.getText().toString().trim();
+        String uploadPhotoOfSitePremises = base64StringUploadPhotoOfSitePremises;
+        String equipmentCleaning = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewEquipmentCleaningVal.getText().toString().trim();
+        String anyEagleCrowHoneyHivesInTower = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewAnyHivesInTowerVal.getText().toString().trim();
+        String compoundWallFencingStatus = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.getText().toString().trim();
+        String gateLockAvailability = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewGateLockAvailablityVal.getText().toString().trim();
+        String shelterLockAvailability = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal.getText().toString().trim();
+        String dgLockAvailability = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal.getText().toString().trim();
+        String fireExtinguisherAvaliability = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.getText().toString().trim();
+        String noOfFireExtingusher = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal.getText().toString().trim();
+        String fireExtinguisherExpiryDate = mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.getText().toString().trim();
+        String fireBucket = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireBucketAvailablityVal.getText().toString().trim();
+        String cautionSignBoardPhoto = base64StringCautionSignBoard;
+        String warningSignBoardPhoto = base64StringWarningSignBoard;
+        String dangerSignBoardPhoto = base64StringDangerSignBoard;
+        String safetyChartsAndCalender = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSafetyChartsAndCalendarVal.getText().toString().trim();
+        String unusedMaterialInSite = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.getText().toString().trim();
+
+        if (sitePremisesCleaning.isEmpty() || sitePremisesCleaning == null) {
+            showToast("Select Site Premises Cleaning");
+            return false;
+        }else if(uploadPhotoOfSitePremises.isEmpty() || uploadPhotoOfSitePremises == null) {
+            showToast("Select Upload Photo Of Site Premises");
+            return false;
+        }else if(equipmentCleaning.isEmpty() || equipmentCleaning == null) {
+            showToast("Select Equipment Cleaning");
+            return false;
+        }else if(anyEagleCrowHoneyHivesInTower.isEmpty() || anyEagleCrowHoneyHivesInTower == null) {
+            showToast("Select Any Eagle/Crow/Honey Hives In Tower");
+            return false;
+        }else if(compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) {
+            showToast("Select Compound Wall Fencing Status");
+            return false;
+        }else if(gateLockAvailability.isEmpty() || gateLockAvailability == null) {
+            showToast("Select Gate Lock Availability");
+            return false;
+        }else if(shelterLockAvailability.isEmpty() || shelterLockAvailability == null) {
+            showToast("Select Shelter Lock Availability");
+            return false;
+        }else if(dgLockAvailability.isEmpty() || dgLockAvailability == null) {
+            showToast("Select DG Lock Availability");
+            return false;
+        }else if(fireExtinguisherAvaliability.isEmpty() || fireExtinguisherAvaliability == null) {
+            showToast("Select Fire Extinguisher Avaliability");
+            return false;
+        }else if(noOfFireExtingusher.isEmpty() || noOfFireExtingusher == null) {
+            showToast("Select No Of Fire Extingusher");
+            return false;
+        }else if(fireExtinguisherExpiryDate.isEmpty() || fireExtinguisherExpiryDate == null) {
+            showToast("Select Fire Extinguisher Expiry Date");
+            return false;
+        }else if(fireBucket.isEmpty() || fireBucket == null) {
+            showToast("Select Fire Bucket");
+            return false;
+        }else if(cautionSignBoardPhoto.isEmpty() || cautionSignBoardPhoto == null) {
+            showToast("Select Caution Sign Board Photo");
+            return false;
+        }else if(warningSignBoardPhoto.isEmpty() || warningSignBoardPhoto == null) {
+            showToast("Select Warning Sign Board Photo");
+            return false;
+        }else if(dangerSignBoardPhoto.isEmpty() || dangerSignBoardPhoto == null) {
+            showToast("Select Danger Sign Board Photo");
+            return false;
+        }else if(safetyChartsAndCalender.isEmpty() || safetyChartsAndCalender == null) {
+            showToast("Select Safety Charts And Calender");
+            return false;
+        }else if(unusedMaterialInSite.isEmpty() || unusedMaterialInSite == null) {
+            showToast("Select Unused Material In Site");
+            return false;
+        }else if(registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        }else return true;
     }
 
 }
