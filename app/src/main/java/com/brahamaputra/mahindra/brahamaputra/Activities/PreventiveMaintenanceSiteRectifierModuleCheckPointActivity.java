@@ -437,6 +437,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
 
                         str_registerFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.setText(str_registerFaultVal);
+                        visibilityOfTypesOfFault(str_registerFaultVal);
                     }
                 });
             }
@@ -460,6 +461,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -475,8 +477,10 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
+                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
                         if (checkValidationonSubmit("onSubmit") == true) {
                             submitDetails();
                             startActivity(new Intent(getApplicationContext(), PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
