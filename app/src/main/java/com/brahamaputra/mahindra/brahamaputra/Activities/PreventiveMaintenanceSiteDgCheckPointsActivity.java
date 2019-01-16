@@ -101,6 +101,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
     private Button mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading;
+    private LinearLayout mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault;
 
     String str_pmSiteDgcpNoOfDgAvailableAtSiteVal = "";
     String str_pmSiteDgcpDGWorkingConditionVal = "";
@@ -227,6 +228,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_nextReading);
+        mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_linearLayout_typeOfFault);
     }
 
 
@@ -399,13 +401,34 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         } else if (dgHmrReading.isEmpty() || dgHmrReading == null) {
             showToast("Please Enter DG HMR Reading");
             return false;
+        }else if (base64StringTakePhotoOfDgHmr.isEmpty() || base64StringTakePhotoOfDgHmr == null) {
+            showToast("Please Take A Photo Of DG HMR ");
+            return false;
+        }else if (dgWorkingCondition.isEmpty() || dgWorkingCondition == null) {
+            showToast("Select DG Working Condition");
+            return false;
+        }else if (coolentLevel.isEmpty() || coolentLevel == null) {
+            showToast("Select Coolent Level");
+            return false;
+        }else if (beltTension.isEmpty() || beltTension == null) {
+            showToast("Select Belt Tension");
+            return false;
+        }else if (engineLubeOilLevel.isEmpty() || engineLubeOilLevel == null) {
+            showToast("Select Engine Lube Oil Level");
+            return false;
+        }else if (safetyWorkingStatus.isEmpty() || safetyWorkingStatus == null) {
+            showToast("Select Safety Working Status");
+            return false;
+        }else if (powerCableConnectionStatus.isEmpty() || powerCableConnectionStatus == null) {
+            showToast("Select Power Cable Connection Status");
+            return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
-        } /*else if (typeOfFault.isEmpty() || typeOfFault == null) {
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
-        }*/ else return true;
+        } else return true;
 
     }
 
@@ -609,6 +632,14 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
     //////////////////
 
+    private void visibilityOfTypesOfFault(String RegisterFault) {
+
+        mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        if (RegisterFault.equals("Yes")) {
+            mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+        }
+    }
 
     private void initCombo() {
         mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.setOnClickListener(new View.OnClickListener() {
@@ -800,6 +831,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
                         str_pmSiteDgcpRegisterFaultVal = item.get(position);
                         mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText(str_pmSiteDgcpRegisterFaultVal);
+                        visibilityOfTypesOfFault(str_pmSiteDgcpRegisterFaultVal);
                     }
                 });
             }

@@ -465,11 +465,13 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
-                finish();
-                return true;
-
+                if(checkValidationOfArrayFields()== true)
+                {
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -479,5 +481,58 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    public boolean checkValidationOfArrayFields() {
+        String ebMeterBoxCondition = mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterBoxConditionVal.getText().toString().trim();
+        String ebMeterWorkingStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewEbMeterWorkingStatusVal.getText().toString().trim();
+        String kitkatClayFuseStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewKitKatClayFuseStatusVal.getText().toString().trim();
+        String sfuMccbStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewSfuMccbStatusVal.getText().toString().trim();
+        String hrcFuseStatus = mPreventiveMaintenanceSiteEbMeterBoxTextViewHrcFuseStatusVal.getText().toString().trim();
+        String acLoadAmpPhRPhase = mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhRPhase.getText().toString().trim();
+        String acLoadAmpPhYPhase = mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhYPhase.getText().toString().trim();
+        String acLoadAmpPhBPhase = mPreventiveMaintenanceSiteEbMeterBoxEditTextAcLoadAmpPhBPhase.getText().toString().trim();
+        String ebMeterReadingKwh = mPreventiveMaintenanceSiteEbMeterBoxEditTextEbMeterReadingKwh.getText().toString().trim();
+        String ebServiceWireCondition = mPreventiveMaintenanceSiteEbMeterBoxTextViewEbServiceWireConditionVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteEbMeterBoxTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.getText().toString().trim();
+
+        if (ebMeterBoxCondition.isEmpty() || ebMeterBoxCondition == null) {
+            showToast("Select EB Meter Box Condition");
+            return false;
+        }else if(ebMeterWorkingStatus.isEmpty() || ebMeterWorkingStatus == null) {
+            showToast("Select EB Meter Working Status");
+            return false;
+        }else if(kitkatClayFuseStatus.isEmpty() || kitkatClayFuseStatus == null) {
+            showToast("Select KITKAT/Clay Fuse Status");
+            return false;
+        }else if(sfuMccbStatus.isEmpty() || sfuMccbStatus == null) {
+            showToast("Select SFU/MCCB Status");
+            return false;
+        }else if(hrcFuseStatus.isEmpty() || hrcFuseStatus == null) {
+            showToast("Select HRC/Fuse Status");
+            return false;
+        }else if(acLoadAmpPhRPhase.isEmpty() || acLoadAmpPhRPhase == null) {
+            showToast("Please Enter AC Load Amp R Phase");
+            return false;
+        }else if(acLoadAmpPhYPhase.isEmpty() || acLoadAmpPhYPhase == null) {
+            showToast("Please Enter AC Load Amp Y Phase");
+            return false;
+        }else if(acLoadAmpPhBPhase.isEmpty() || acLoadAmpPhBPhase == null) {
+            showToast("Please Enter AC Load Amp B Phase");
+            return false;
+        }else if(ebMeterReadingKwh.isEmpty() || ebMeterReadingKwh == null) {
+            showToast("Please Enter EB Meter Reading KWH");
+            return false;
+        }else if(ebServiceWireCondition.isEmpty() || ebServiceWireCondition == null) {
+            showToast("Select EB Service Wire Condition");
+            return false;
+        }else if(registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type Of Fault");
+            return false;
+        }else return true;
     }
 }
