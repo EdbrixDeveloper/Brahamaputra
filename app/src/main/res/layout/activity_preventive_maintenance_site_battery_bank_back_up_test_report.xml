@@ -1069,6 +1069,33 @@
 
             </LinearLayout>
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_lastReadingTaketAt"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Last Reading Taken At" />
+
+                <EditText
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_lastReadingTaketAtVal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Last Reading Taken At"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1095,7 +1122,7 @@
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
 
                 <ImageView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfDgHmrView"
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfBatteryBankView"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="0.3"

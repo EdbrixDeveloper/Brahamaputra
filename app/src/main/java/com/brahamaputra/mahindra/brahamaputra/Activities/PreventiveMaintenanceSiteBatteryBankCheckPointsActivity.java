@@ -600,7 +600,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
 
         BatteryBankCheckPointsData batteryBankCheckPointsDataChild = new BatteryBankCheckPointsData(
-
                 detailsOfBatteryBankQRCodeScan, batteryBankDischargeTest, stripBoltTightnessAsPerTorque,
                 petroleumJellyApplied, "", batteryVentPlugStatus, bbEarthingStatus,
                 registerFault, typeOfFault, "",
@@ -621,9 +620,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 "", "", "", "",
                 "", "", "",
                 "",
-                ""
-
-        );
+                "");
 
         /*batteryBankCheckPointsDataChild.setDetailsOfBatteryBankQrCodeScan(detailsOfBatteryBankQRCodeScan);
         batteryBankCheckPointsDataChild.setBatteryBankDischargeTest(batteryBankDischargeTest);
@@ -651,7 +648,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
             mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBattreyBankNumber.setText("Reading: #" + (pos + 1));
 
-            base64StringDetailsOfBatteryBankQRCodeScan = batteryBankCheckPointsData.get(pos).getBase64StringPhotoOfBatteryBank();
+            base64StringDetailsOfBatteryBankQRCodeScan = batteryBankCheckPointsData.get(pos).getDetailsOfBatteryBankQrCodeScan();
             mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
             mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
 

@@ -3,9 +3,14 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +20,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.AlarmCheckPoints;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -24,11 +34,16 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extends BaseActivity {
 
@@ -115,18 +130,27 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAt;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal;
+
+    private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewLastReadingTaketAt;
+    private EditText mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal;
+
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewPhotoOfBatteryBank;
     private ImageView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBank;
-    private ImageView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfDgHmrView;
+    private ImageView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewRemarks;
     private EditText mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks;
 
 
     private String str_readingTaketAtVal = "";
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfBatteryBank = 101;
+
     private String base64StringDetailsOfBatteryBankQRCodeScan = "";
-    //private String imageFileDetailsOfBatteryBankQRCodeScan;
-    //private Uri imageFileUriDetailsOfBatteryBankQRCodeScan = null;
+
+    private String base64StringPhotoOfBatteryBank = "";
+    private String imageFilePhotoOfBatteryBank;
+    private Uri imageFileUriPhotoOfBatteryBank = null;
+
 
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -137,11 +161,11 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
+    private PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails;
+    private BatteryBankCheckPointsData batteryBankCheckPointsData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,145 +183,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         initCombo();
         setListner();
 
-    }
 
-    private void initCombo() {
-        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankCheckPoints_noOfBatteryBank))),
-                        "Reading Taket At",
-                        "close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_readingTaketAtVal = item.get(position);
-                        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setText(str_readingTaketAtVal);
-                    }
-                });
-            }
-        });
-    }
-
-    private void setListner() {
-
-        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkCameraPermission()) {
-                    DetailsOfBatteryBankBackUpQRCodeScan();
-                }
-            }
-        });
-
-        mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                base64StringDetailsOfBatteryBankQRCodeScan = "";
-                mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.GONE);
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.GONE);
-                showToast("Cleared");
-            }
-        });
-
-    }
-
-    private void DetailsOfBatteryBankBackUpQRCodeScan() {
-        try {
-            IntentIntegrator integrator = new IntentIntegrator(this);
-            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QR Code");
-            integrator.setOrientationLocked(true);
-            integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
-            integrator.initiateScan();
-
-            //        Use this for more customization
-            //        IntentIntegrator integrator = new IntentIntegrator(this);
-            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            //        integrator.setPrompt("Scan a barcode");
-            //        integrator.setCameraId(0);  // Use a specific camera of the device
-            //        integrator.setBeepEnabled(false);
-            //        integrator.setBarcodeImageEnabled(true);
-            //        integrator.initiateScan();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private boolean checkCameraPermission() {
-
-        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            return true;
-        }
-
-
-        return false;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_CAMERA:
-                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
-                if (result != null) {
-                    mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.GONE);
-                    mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.GONE);
-                    if (result.getContents() == null) {
-                        base64StringDetailsOfBatteryBankQRCodeScan = "";
-                        showToast("Cancelled");
-                    } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
-                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringDetailsOfBatteryBankQRCodeScan = result.getContents();
-                        if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
-                        /*} else {
-                            base64StringDetailsOfBatteryBankQRCodeScan = "";
-                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
-                    }
-                }
-                break;
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.submit_icon_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-
-            case R.id.menuSubmit:
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        setResult(RESULT_OK);
-        finish();
+        //setInputDetails(batteryBankCheckPointsData);
     }
 
     private void assignViews() {
@@ -381,11 +268,301 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfBatteryModuleVal);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAt = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAt);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAtVal);
+
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewLastReadingTaketAt = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_lastReadingTaketAt);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal = (EditText) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_lastReadingTaketAtVal);
+
+
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewPhotoOfBatteryBank = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_photoOfBatteryBank);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBank = (ImageView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfBatteryBank);
-        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfDgHmrView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfDgHmrView);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfBatteryBankView);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewRemarks = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_remarks);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks = (EditText) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_remarks);
+    }
+
+    private void setInputDetails(BatteryBankCheckPointsData batteryBankCheckPointsData) {
+        try {
+            if (batteryBankCheckPointsData != null) {
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewTicketNoVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankBackUpTicketNo());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCustomerVal.setText(batteryBankCheckPointsData.getBdTestCustomer());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCircleVal.setText(batteryBankCheckPointsData.getBdTestCircle());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewStateVal.setText(batteryBankCheckPointsData.getBdTestState());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSiteNameVal.setText(batteryBankCheckPointsData.getBdTestSiteName());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSiteIdVal.setText(batteryBankCheckPointsData.getBdTestSiteId());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSsaVal.setText(batteryBankCheckPointsData.getBdTestSsa());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewUserFseNameDesignationVal.setText(batteryBankCheckPointsData.getBdTestUserFseNameDesignation());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.setText(batteryBankCheckPointsData.getTypeOfBattery());
+
+                mBdTestVoltageModuleReading1EditText1.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading1());
+                mBdTestCurrentModuleReading1EditText1.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading1());
+                mBdTestSocModuleReadingEditText1.setText(batteryBankCheckPointsData.getBdTestSocModuleReading1());
+                mBdTestSohModuleReadingEditText1.setText(batteryBankCheckPointsData.getBdTestSohModuleReading1());
+                mBdTestVoltageModuleReading1EditText2.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading2());
+                mBdTestCurrentModuleReading1EditText2.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading2());
+                mBdTestSocModuleReadingEditText2.setText(batteryBankCheckPointsData.getBdTestSocModuleReading2());
+                mBdTestSohModuleReadingEditText2.setText(batteryBankCheckPointsData.getBdTestSohModuleReading2());
+                mBdTestVoltageModuleReading1EditText3.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading3());
+                mBdTestCurrentModuleReading1EditText3.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading3());
+                mBdTestSocModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSocModuleReading3());
+                mBdTestSohModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSohModuleReading3());
+
+
+                mBdTestCellReadingEditText1.setText(batteryBankCheckPointsData.getBdTestCellReading1());
+                mBdTestCellReadingEditText2.setText(batteryBankCheckPointsData.getBdTestCellReading2());
+                mBdTestCellReadingEditText3.setText(batteryBankCheckPointsData.getBdTestCellReading3());
+                mBdTestCellReadingEditText4.setText(batteryBankCheckPointsData.getBdTestCellReading4());
+                mBdTestCellReadingEditText5.setText(batteryBankCheckPointsData.getBdTestCellReading5());
+                mBdTestCellReadingEditText6.setText(batteryBankCheckPointsData.getBdTestCellReading6());
+                mBdTestCellReadingEditText7.setText(batteryBankCheckPointsData.getBdTestCellReading7());
+                mBdTestCellReadingEditText8.setText(batteryBankCheckPointsData.getBdTestCellReading8());
+                mBdTestCellReadingEditText9.setText(batteryBankCheckPointsData.getBdTestCellReading9());
+                mBdTestCellReadingEditText10.setText(batteryBankCheckPointsData.getBdTestCellReading10());
+                mBdTestCellReadingEditText11.setText(batteryBankCheckPointsData.getBdTestCellReading11());
+                mBdTestCellReadingEditText12.setText(batteryBankCheckPointsData.getBdTestCellReading12());
+                mBdTestCellReadingEditText13.setText(batteryBankCheckPointsData.getBdTestCellReading13());
+                mBdTestCellReadingEditText14.setText(batteryBankCheckPointsData.getBdTestCellReading14());
+                mBdTestCellReadingEditText15.setText(batteryBankCheckPointsData.getBdTestCellReading15());
+                mBdTestCellReadingEditText16.setText(batteryBankCheckPointsData.getBdTestCellReading16());
+                mBdTestCellReadingEditText17.setText(batteryBankCheckPointsData.getBdTestCellReading17());
+                mBdTestCellReadingEditText18.setText(batteryBankCheckPointsData.getBdTestCellReading18());
+                mBdTestCellReadingEditText19.setText(batteryBankCheckPointsData.getBdTestCellReading19());
+                mBdTestCellReadingEditText20.setText(batteryBankCheckPointsData.getBdTestCellReading20());
+                mBdTestCellReadingEditText21.setText(batteryBankCheckPointsData.getBdTestCellReading21());
+                mBdTestCellReadingEditText22.setText(batteryBankCheckPointsData.getBdTestCellReading22());
+                mBdTestCellReadingEditText23.setText(batteryBankCheckPointsData.getBdTestCellReading23());
+                mBdTestCellReadingEditText24.setText(batteryBankCheckPointsData.getBdTestCellReading24());
+
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setText(batteryBankCheckPointsData.getBdTestFloatVoltageInSmpsBusBarAfter30Min());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setText(batteryBankCheckPointsData.getBdTestTotalLoadCurrentInAmps());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMakeVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankMake());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankCapacityVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankCapacity());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfWorkingRectifireModuleVal.setText(batteryBankCheckPointsData.getBdTestNumberOfRectifireModuleWorking());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setText(batteryBankCheckPointsData.getBdTestSiteLoadOnBatteryInAmps());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest.setText(batteryBankCheckPointsData.getBdTestFloatVoltageBeforeBBTest());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating.setText(batteryBankCheckPointsData.getBdTestSingleModuleRating());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal.setText(batteryBankCheckPointsData.getBdTestNumberOfBatteryModule());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setText(batteryBankCheckPointsData.getBdTestReadingTakenAt());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.setText(batteryBankCheckPointsData.getBdTestLastReadingTakenAt());
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks.setText(batteryBankCheckPointsData.getBdTestRemarks());
+
+                base64StringDetailsOfBatteryBankQRCodeScan = batteryBankCheckPointsData.getBdTestDetailsBatteryBankBackUpOfQRCodeScan();
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.GONE);
+                mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.GONE);
+                if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
+                    mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
+                    mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
+                }
+
+                base64StringPhotoOfBatteryBank = batteryBankCheckPointsData.getBdTestBase64StringPhotoOfBatteryBank();
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.GONE);
+                if (!base64StringPhotoOfBatteryBank.isEmpty() && base64StringPhotoOfBatteryBank != null) {
+                    mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap inImage = decodeFromBase64ToBitmap(base64StringPhotoOfBatteryBank);
+                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                    imageFileUriPhotoOfBatteryBank = Uri.parse(path);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initCombo() {
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankBackUpTestReport_readingTakenAt))),
+                        "Reading Taket At",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_readingTaketAtVal = item.get(position);
+                        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setText(str_readingTaketAtVal);
+                    }
+                });
+            }
+        });
+    }
+
+    private void setListner() {
+
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    DetailsOfBatteryBankBackUpQRCodeScan();
+                }
+            }
+        });
+
+        mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringDetailsOfBatteryBankQRCodeScan = "";
+                mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
+
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    PhotoOfBatteryBank();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriPhotoOfBatteryBank != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, imageFileUriPhotoOfBatteryBank);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void PhotoOfBatteryBank() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFilePhotoOfBatteryBank = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFilePhotoOfBatteryBank);
+            imageFileUriPhotoOfBatteryBank = FileProvider.getUriForFile(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriPhotoOfBatteryBank);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfBatteryBank);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void DetailsOfBatteryBankBackUpQRCodeScan() {
+        try {
+            IntentIntegrator integrator = new IntentIntegrator(this);
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+            integrator.setPrompt("Scan QR Code");
+            integrator.setOrientationLocked(true);
+            integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
+            integrator.initiateScan();
+
+            //        Use this for more customization
+            //        IntentIntegrator integrator = new IntentIntegrator(this);
+            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            //        integrator.setPrompt("Scan a barcode");
+            //        integrator.setCameraId(0);  // Use a specific camera of the device
+            //        integrator.setBeepEnabled(false);
+            //        integrator.setBarcodeImageEnabled(true);
+            //        integrator.initiateScan();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            return true;
+        }
+
+
+        return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfBatteryBank:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriPhotoOfBatteryBank != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriPhotoOfBatteryBank);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringPhotoOfBatteryBank = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFilePhotoOfBatteryBank = "";
+                    imageFileUriPhotoOfBatteryBank = null;
+                    mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.GONE);
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+                if (result != null) {
+                    mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.GONE);
+                    if (result.getContents() == null) {
+                        base64StringDetailsOfBatteryBankQRCodeScan = "";
+                        showToast("Cancelled");
+                    } else {
+                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                        if (!flagIsDuplicateQRcode) {*/
+                        base64StringDetailsOfBatteryBankQRCodeScan = result.getContents();
+                        if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
+                            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
+                            mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
+                        }
+                        /*} else {
+                            base64StringDetailsOfBatteryBankQRCodeScan = "";
+                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
+                        }*/
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            case R.id.menuSubmit:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
     }
 
 }
