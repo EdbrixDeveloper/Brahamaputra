@@ -34,6 +34,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     private static final String TAG = PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.class.getSimpleName();
 
+
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewDetailsOfQRCodeScan;
     private ImageView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScan;
     private ImageView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView;
@@ -94,6 +95,10 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private EditText mBdTestCellReadingEditText22;
     private EditText mBdTestCellReadingEditText23;
     private EditText mBdTestCellReadingEditText24;
+    private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewFloatVoltageInSmpsBusBarAfter30Min;
+    private EditText mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min;
+    private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewTotalLoadCurrentInAmps;
+    private EditText mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMake;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMakeVal;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankCapacity;
@@ -110,6 +115,11 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAt;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal;
+    private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewPhotoOfBatteryBank;
+    private ImageView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBank;
+    private ImageView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfDgHmrView;
+    private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewRemarks;
+    private EditText mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks;
 
 
     private String str_readingTaketAtVal = "";
@@ -131,6 +141,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -350,6 +361,10 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mBdTestCellReadingEditText22 = (EditText) findViewById(R.id.bdTestCellReadingEditText22);
         mBdTestCellReadingEditText23 = (EditText) findViewById(R.id.bdTestCellReadingEditText23);
         mBdTestCellReadingEditText24 = (EditText) findViewById(R.id.bdTestCellReadingEditText24);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewFloatVoltageInSmpsBusBarAfter30Min = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_floatVoltageInSmpsBusBarAfter30Min);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min = (EditText) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewTotalLoadCurrentInAmps = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_totalLoadCurrentInAmps);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps = (EditText) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_totalLoadCurrentInAmps);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMake = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankMake);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMakeVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankMakeVal);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankCapacity = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankCapacity);
@@ -366,6 +381,11 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfBatteryModuleVal);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAt = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAt);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAtVal);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewPhotoOfBatteryBank = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_photoOfBatteryBank);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBank = (ImageView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfBatteryBank);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfDgHmrView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfDgHmrView);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewRemarks = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_remarks);
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks = (EditText) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_remarks);
     }
 
 }

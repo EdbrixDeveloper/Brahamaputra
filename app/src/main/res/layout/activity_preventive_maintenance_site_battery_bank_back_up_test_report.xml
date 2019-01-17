@@ -329,16 +329,16 @@
                 android:id="@+id/LinearLayoutBatteryTypeLiIonReadings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/app_min_margin">
+                android:layout_marginBottom="@dimen/app_min_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Battery Type Li Ion Readings"
-                    android:textStyle="bold"
                     android:textAlignment="center"
-                    android:layout_weight="1"/>
+                    android:textStyle="bold" />
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -352,42 +352,42 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Module"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Voltage"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Current"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="SOC"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="SOH"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1" />
+                            android:textStyle="bold" />
                     </TableRow>
 
                     <TableRow
@@ -398,46 +398,46 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="1"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1"/>
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/bdTestVoltageModuleReading1EditText1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="volt 1"
-                            android:ellipsize="start" />
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="curr 1"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="soc 1"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="soh 1"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                     <TableRow
@@ -448,46 +448,46 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="2"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1"/>
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/bdTestVoltageModuleReading1EditText2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="volt 2"
-                            android:ellipsize="start" />
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="curr 2"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="soc 2"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="soh 2"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                     <TableRow
@@ -498,46 +498,46 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="3"
-                            android:textStyle="bold"
                             android:textAlignment="center"
-                            android:layout_weight="1"/>
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/bdTestVoltageModuleReading1EditText3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="volt 3"
-                            android:ellipsize="start" />
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="curr 3"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="soc 3"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
+                            android:ellipsize="start"
                             android:hint="soh 3"
-                            android:ellipsize="start"/>
+                            android:inputType="numberDecimal" />
                     </TableRow>
                 </TableLayout>
 
@@ -547,16 +547,16 @@
                 android:id="@+id/LinearLayoutBatteryTypeVRLAAndVRLAPlusReadings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/app_min_margin">
+                android:layout_marginBottom="@dimen/app_min_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Battery Type VRLA/VRLA+ Readings"
-                    android:textStyle="bold"
                     android:textAlignment="center"
-                    android:layout_weight="1"/>
+                    android:textStyle="bold" />
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -567,37 +567,37 @@
                         android:layout_height="match_parent"
                         android:weightSum="4">
 
-                            <EditText
-                                android:id="@+id/bdTestCellReadingEditText1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:inputType="numberDecimal"
-                                android:hint="Cell1"/>
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Cell1"
+                            android:inputType="numberDecimal" />
 
-                            <EditText
-                                android:id="@+id/bdTestCellReadingEditText2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:inputType="numberDecimal"
-                                android:hint="Cell2"/>
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Cell2"
+                            android:inputType="numberDecimal" />
 
-                            <EditText
-                                android:id="@+id/bdTestCellReadingEditText3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:inputType="numberDecimal"
-                                android:hint="Cell3"/>
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Cell3"
+                            android:inputType="numberDecimal" />
 
-                            <EditText
-                                android:id="@+id/bdTestCellReadingEditText4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:inputType="numberDecimal"
-                                android:hint="Cell4"/>
+                        <EditText
+                            android:id="@+id/bdTestCellReadingEditText4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Cell4"
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                     <TableRow
@@ -610,32 +610,32 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell5"/>
+                            android:hint="Cell5"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell6"/>
+                            android:hint="Cell6"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText7"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell7"/>
+                            android:hint="Cell7"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText8"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell8"/>
+                            android:hint="Cell8"
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                     <TableRow
@@ -648,32 +648,32 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell9"/>
+                            android:hint="Cell9"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText10"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell10"/>
+                            android:hint="Cell10"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText11"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell11"/>
+                            android:hint="Cell11"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText12"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell12"/>
+                            android:hint="Cell12"
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                     <TableRow
@@ -686,32 +686,32 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell13"/>
+                            android:hint="Cell13"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell14"/>
+                            android:hint="Cell14"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText15"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell15"/>
+                            android:hint="Cell15"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell16"/>
+                            android:hint="Cell16"
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                     <TableRow
@@ -724,32 +724,32 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell17"/>
+                            android:hint="Cell17"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText18"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell18"/>
+                            android:hint="Cell18"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText19"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell19"/>
+                            android:hint="Cell19"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText20"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell20"/>
+                            android:hint="Cell20"
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                     <TableRow
@@ -762,37 +762,99 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell21"/>
+                            android:hint="Cell21"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText22"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell22"/>
+                            android:hint="Cell22"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText23"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell23"/>
+                            android:hint="Cell23"
+                            android:inputType="numberDecimal" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText24"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:inputType="numberDecimal"
-                            android:hint="Cell24"/>
+                            android:hint="Cell24"
+                            android:inputType="numberDecimal" />
                     </TableRow>
 
                 </TableLayout>
 
             </LinearLayout>
+
+
+            <!--Float Voltage in SMPS Bus Bar after 30 Minute
+            Total Load Current ( in Amps)-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_floatVoltageInSmpsBusBarAfter30Min"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Float Voltage in SMPS Bus Bar after 30 Minute" />
+
+
+                <EditText
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Float Voltage in SMPS Bus Bar"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_totalLoadCurrentInAmps"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Total Load Current(in Amps)" />
+
+
+                <EditText
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_totalLoadCurrentInAmps"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Total Load Current"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -894,7 +956,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Site Load on Battery"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
 
@@ -1004,6 +1066,71 @@
                     android:layout_weight="0.6"
                     android:hint="Select"
                     android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_photoOfBatteryBank"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Photo of Battery Bank"
+                    android:textColor="@color/colorBlueLink" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfBatteryBank"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfDgHmrView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_remarks"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Remarks" />
+
+
+                <EditText
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_remarks"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Remarks"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
