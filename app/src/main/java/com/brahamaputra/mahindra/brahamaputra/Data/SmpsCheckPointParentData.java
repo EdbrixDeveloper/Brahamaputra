@@ -18,6 +18,10 @@ public class SmpsCheckPointParentData implements Serializable
     private List<SmpsCheckPoint> smpsCheckPointsData = null;
     private final static long serialVersionUID = -2356912691505734753L;
 
+    @SerializedName("isSubmited")
+    @Expose
+    private int isSubmited = 0;
+
     public String getNoOfSmpsAvailableAtSite() {
         return noOfSmpsAvailableAtSite;
     }
@@ -37,10 +41,25 @@ public class SmpsCheckPointParentData implements Serializable
     public SmpsCheckPointParentData(String noOfSmpsAvailableAtSite, List<SmpsCheckPoint> smpsCheckPointsData) {
         this.noOfSmpsAvailableAtSite = noOfSmpsAvailableAtSite;
         this.smpsCheckPointsData = smpsCheckPointsData;
+        if(!this.noOfSmpsAvailableAtSite.isEmpty())
+        {
+            isSubmited = 2;
+        }else{
+            isSubmited = 1;
+        }
     }
 
     public SmpsCheckPointParentData(){
         this.noOfSmpsAvailableAtSite = "";
         this.smpsCheckPointsData = new ArrayList<>();;
+        this.isSubmited = 0;
+    }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int isSubmited) {
+        this.isSubmited = isSubmited;
     }
 }

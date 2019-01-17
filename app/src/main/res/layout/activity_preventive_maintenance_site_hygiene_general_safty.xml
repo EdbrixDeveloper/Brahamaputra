@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Site Premises Cleaning"
+                    android:text="Site Premises Cleaning*"
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Upload Photo of Site Premises"
+                    android:text="Upload Photo of Site Premises*"
                     android:textColor="@color/colorBlueLink" />
 
                 <ImageView
@@ -95,7 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Equipment Cleaning"
+                    android:text="Equipment Cleaning*"
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView

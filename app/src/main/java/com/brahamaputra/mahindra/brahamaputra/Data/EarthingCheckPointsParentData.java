@@ -1,6 +1,9 @@
 
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +53,7 @@ public class EarthingCheckPointsParentData implements Serializable {
 
     }
 
+    @SuppressLint("LongLogTag")
     public EarthingCheckPointsParentData(String allNutBoltsAreIntact, String igbOgbStatus, String lightningArresterStatus,
                                          String numberOfEarthPit, String numberOfEarthPitVisible, List<EarthingCheckPointsData> earthingCheckPointsData) {
         this.allNutBoltsAreIntact = allNutBoltsAreIntact;
@@ -59,11 +63,11 @@ public class EarthingCheckPointsParentData implements Serializable {
         this.numberOfEarthPitVisible = numberOfEarthPitVisible;
         this.earthingCheckPointsData = earthingCheckPointsData;
 
-        /*if (!this.numberOfEarthPit.isEmpty()) {
+        if (!this.numberOfEarthPit.isEmpty()){
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
-        }*/
+        }
     }
 
     public String getAllNutBoltsAreIntact() {

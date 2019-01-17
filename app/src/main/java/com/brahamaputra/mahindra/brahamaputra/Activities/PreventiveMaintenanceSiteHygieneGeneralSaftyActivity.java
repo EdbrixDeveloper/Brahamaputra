@@ -1137,13 +1137,13 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 return true;
 
             case R.id.menuSubmit:
-                if(checkValidationOfArrayFields() == true)
-                {
+                /*if(checkValidationOfArrayFields() == true)
+                {*/
                     submitDetails();
                     startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
                     finish();
                     return true;
-                }
+               /* }*/
             default:
                 return super.onOptionsItemSelected(item);
         }

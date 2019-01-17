@@ -18,14 +18,27 @@ public class DgBatteryCheckPointsParentData implements Serializable {
     private List<DgBatteryCheckPointsData> dgBatteryCheckPointsData;
     //private final static long serialVersionUID = -7106565427034794128L;
 
+    @SerializedName("isSubmited")
+    @Expose
+    private int isSubmited = 0;
+
     public DgBatteryCheckPointsParentData() {
         this.noOfDgBatteryavailableAtSite = "";
         this.dgBatteryCheckPointsData = new ArrayList<>();
+        this.isSubmited = 0;
     }
 
     public DgBatteryCheckPointsParentData(String noOfDgBatteryavailableAtSite, List<DgBatteryCheckPointsData> dgBatteryCheckPointsData) {
         this.noOfDgBatteryavailableAtSite = noOfDgBatteryavailableAtSite;
         this.dgBatteryCheckPointsData = dgBatteryCheckPointsData;
+        if(!this.noOfDgBatteryavailableAtSite.isEmpty())
+        {
+            this.isSubmited = 2;
+        }
+        else
+        {
+            this.isSubmited = 1;
+        }
     }
 
     public String getNoOfDgBatteryavailableAtSite() {
@@ -42,6 +55,14 @@ public class DgBatteryCheckPointsParentData implements Serializable {
 
     public void setDgBatteryCheckPointsData(List<DgBatteryCheckPointsData> dgBatteryCheckPointsData) {
         this.dgBatteryCheckPointsData = dgBatteryCheckPointsData;
+    }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int isSubmited) {
+        this.isSubmited = isSubmited;
     }
 
 }

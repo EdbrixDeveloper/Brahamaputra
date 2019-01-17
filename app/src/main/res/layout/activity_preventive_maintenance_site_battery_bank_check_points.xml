@@ -29,7 +29,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="No of Battery Bank available at Site" />
+                    android:text="No of Battery Bank available at Site*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_textView_noOfBatteryBankAvailableAtSiteVal"

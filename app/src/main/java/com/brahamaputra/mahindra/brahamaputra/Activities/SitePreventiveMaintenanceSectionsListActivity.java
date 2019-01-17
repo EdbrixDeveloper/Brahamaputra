@@ -11,8 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.brahamaputra.mahindra.brahamaputra.Adapters.SitePreventiveMaintenanceSectionListAdapter;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePreventiveMaintenanceSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -25,13 +30,14 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
     public static final int RESULT_READING_COMPLETED = 650;
 
     //vinayak code start
-    /*private OfflineStorageWrapper offlineStorageWrapper;
+    private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
 
-    private HotoTransactionData hotoTransactionData;*/
+
+    private PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
     //vinayak code end
 
     @Override
@@ -43,9 +49,9 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*Intent intent = getIntent();
+        Intent intent = getIntent();
         String tic_Name = intent.getStringExtra("ticketName");
-        this.setTitle(tic_Name);*/
+        this.setTitle(tic_Name);
 
         this.setTitle("Site Preventive Maintenance Sections List");
 
@@ -157,12 +163,12 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
 
     @Override
     protected void onResume() {
-        //refreshList();
+        refreshList();
         super.onResume();
     }
 
 
-    /*public void refreshList() {
+    public void refreshList() {
 
         sessionManager = new SessionManager(SitePreventiveMaintenanceSectionsListActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
@@ -170,7 +176,7 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(SitePreventiveMaintenanceSectionsListActivity.this, userId, ticketName);
 
-        hotoTransactionData = new HotoTransactionData();
+        preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
         if (getHotoObj()) {
 
 
@@ -208,9 +214,9 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
 
                 Gson gson = new Gson();
 
-                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                preventiveMaintanceSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
 
-                if (hotoTransactionData != null) {
+                if (preventiveMaintanceSiteTransactionDetails != null) {
                     return true;
                 }
             }
@@ -225,51 +231,36 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
     public int checkIsSubmited(Integer SecNo) {
         switch (SecNo) {
             case 0:
-                return hotoTransactionData.getLandDetailsData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getSiteHygenieneGenralSeftyParameter().getSubmited();
             case 1:
-                return hotoTransactionData.getTowerDetailsData().getSubmited();
-            *//*case 2:
-                return hotoTransactionData.getEarthResistanceTowerData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getAlarmCheckPoints().getSubmited();
+            case 2:
+                return preventiveMaintanceSiteTransactionDetails.getBatteryBankCheckPointsParentData().getSubmited();
             case 3:
-                return hotoTransactionData.getEarthResistanceEquipmentData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getEarthingCheckPointsParentData().getSubmited();
             case 4:
-                return hotoTransactionData.getElectricConnectionData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getEbMeterBox().getSubmited();
             case 5:
-                return hotoTransactionData.getAirConditionParentData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getDgCheckPointsParentData().getSubmited();
             case 6:
-                return hotoTransactionData.getSolarPowerSystemData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getDgBatteryCheckPointsParentData().getSubmited();
             case 7:
-                return hotoTransactionData.getPowerPlantDetailsParentData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getAcCheckPointParentData().getSubmited();
             case 8:
-                return hotoTransactionData.getPowerBackupsDGParentData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getSmpsCheckPointParentData().getSubmited();
             case 9:
-                return hotoTransactionData.getShelterData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getRectifierModuleCheckPoint().getSubmited();
             case 10:
-                return hotoTransactionData.getMediaData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getPmsAmfPanelCheckPoints().getSubmited();
             case 11:
-                return hotoTransactionData.getBatterySetParentData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getServoCheckPoints().getSubmited();
             case 12:
-                return hotoTransactionData.getExternalTenantsPersonalDetailsParentData().getSubmited();
+                return preventiveMaintanceSiteTransactionDetails.getShelterCheckPoints().getSubmited();
             case 13:
-                return hotoTransactionData.getTotalDCLoadofSiteData().getSubmited();
-            case 14:
-                return hotoTransactionData.getActiveequipmentDetailsData().getSubmited();
-            case 15:
-                return hotoTransactionData.getPowerManagementSystemData().getSubmited();
-            case 16:
-                return hotoTransactionData.getGeneralSafetyMeasuresParentData().getSubmited();
-            case 17:
-                return hotoTransactionData.getAcdb_dcdb_data().getSubmited();
-            case 18:
-                return hotoTransactionData.getServoStabilizerData().getSubmited();
-            case 19:
-                return hotoTransactionData.getDetailsOfUnusedMaterialsParentData().getSubmited();
-            case 20:
-                return hotoTransactionData.getSitePhotoCaptureData().getSubmited();*//*
-
+                return preventiveMaintanceSiteTransactionDetails.getOtherElectricalCheckPoints().getSubmited();
         }
         return 0;
-    }*/
+    }
 
 
 }

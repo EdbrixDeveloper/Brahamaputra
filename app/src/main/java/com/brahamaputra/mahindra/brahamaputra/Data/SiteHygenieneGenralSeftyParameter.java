@@ -139,12 +139,12 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
         this.imageFileWarningSignBoard = imageFileWarningSignBoard;
         this.imageFileDangerSignBoard = imageFileDangerSignBoard;*/
 
-        this.isSubmited = 2;
-        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+        //this.isSubmited = 2;
+        if (!this.sitePremisesCleaning.isEmpty() && !this.base64StringUploadPhotoOfSitePremises.isEmpty() && !this.equipmentCleaning.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
-        }*/
+        }
 
 
         //sitePremisesCleaning,base64StringUploadPhotoOfSitePremises,equipmentCleaning,anyEagleCrowHoneyHivesInTower,compoundWallFencingStatus,gateLockAvailablity,shelterLockAvailablity,dgLockAvailablity,fireExtinguisherAvilability,noOfFireExtinguisher,fireExtinguisherExpiryDate,fireBucket,base64StringCautionSignBoardPhoto,base64StringWarningSignBoardPhoto,base64StringDangerSignBoardPhoto,safetyChartsCalendar,unusedMaterialInSite,registerFault,typeOfFault

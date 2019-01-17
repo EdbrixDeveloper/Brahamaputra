@@ -25,7 +25,7 @@ public class RectifierModuleCheckPointParentData implements Serializable
 
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
-    private int isSubmited;
+    private int isSubmited = 0;
     private final static long serialVersionUID = 1961740297699264464L;
 
     public RectifierModuleCheckPointParentData()
@@ -34,6 +34,7 @@ public class RectifierModuleCheckPointParentData implements Serializable
         this.noOfModulesWorking = "";
         this.noOfFaultyModulesInSite = "";
         this.rectifierModuleCheckPointData = null;
+        this.isSubmited = 0;
     }
 
     public RectifierModuleCheckPointParentData(String noOfRectifierModuleAvailableAtSite, String noOfModulesWorking, String noOfFaultyModulesAtSite, ArrayList<RectifierModuleCheckPointData> rectifierModuleCheckPointDataList) {

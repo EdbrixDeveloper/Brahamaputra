@@ -105,7 +105,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Number of Earth PIT" />
+                    android:text="Number of Earth PIT*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteEarthingCheckPoints_textView_numberOfEarthPitVal"

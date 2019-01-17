@@ -43,11 +43,11 @@ public class OtherElectricalCheckPoints implements Serializable
         this.lightsInsideTheShelter = lightsInsideTheShelter;
         this.lightsInSitePremisesBulkhead = lightsInSitePremisesBulkhead;
 
-         /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+         if (!this.dcEnergyMeterstatus.isEmpty() && !this.aviationLamp.isEmpty() && !this.lightsInsideTheShelter.isEmpty() && !this.lightsInSitePremisesBulkhead.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
-        }*/
+        }
     }
 
     public String getDcEnergyMeterstatus() {

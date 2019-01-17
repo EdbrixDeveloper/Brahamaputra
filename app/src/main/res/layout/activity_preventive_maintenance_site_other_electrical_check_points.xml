@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="DC Energy Meter status" />
+                    android:text="DC Energy Meter status*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_dcEnergyMeterStatusVal"
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Aviation Lamp" />
+                    android:text="Aviation Lamp*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_aviationLampVal"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Lights Inside the Shelter" />
+                    android:text="Lights Inside the Shelter*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_lightsInsideTheShelterVal"
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Lights in Site Premises/Bulk head" />
+                    android:text="Lights in Site Premises/Bulk head*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteOtherElectricalCheckPoints_textView_lightsInSitePremisesOrBulkHeadVal"

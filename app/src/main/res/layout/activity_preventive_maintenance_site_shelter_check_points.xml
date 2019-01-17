@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Shelter Cleaning" />
+                    android:text="Shelter Cleaning*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteShelterCheckPoints_textView_shelterCleaningVal"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Shelter Leakage" />
+                    android:text="Shelter Leakage*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteShelterCheckPoints_textView_shelterLeakageVal"
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Hatch Plate Entry sealed" />
+                    android:text="Hatch Plate Entry sealed*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteShelterCheckPoints_textView_hatchPlateEntrySealedVal"

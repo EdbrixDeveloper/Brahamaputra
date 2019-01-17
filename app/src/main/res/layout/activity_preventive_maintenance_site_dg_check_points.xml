@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="No of DG available at site" />
+                    android:text="No of DG available at site*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_noOfDgAvailableAtSiteVal"

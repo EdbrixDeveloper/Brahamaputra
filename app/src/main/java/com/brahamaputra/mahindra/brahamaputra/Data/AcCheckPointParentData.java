@@ -18,6 +18,10 @@ public class AcCheckPointParentData implements Serializable
     private List<AcCheckPoint> acCheckPoints = null;
     private final static long serialVersionUID = 3555383886849176421L;
 
+    @SerializedName("isSubmited")
+    @Expose
+    private int isSubmited = 0;
+
     public String getNoOfAcAvailableAtsite() {
         return noOfAcAvailableAtsite;
     }
@@ -37,10 +41,25 @@ public class AcCheckPointParentData implements Serializable
     public AcCheckPointParentData(String noOfAcAvailableAtsite, List<AcCheckPoint> acCheckPoints) {
         this.noOfAcAvailableAtsite = noOfAcAvailableAtsite;
         this.acCheckPoints = acCheckPoints;
+        if(!this.noOfAcAvailableAtsite.isEmpty())
+        {
+            isSubmited = 2;
+        }else {
+            isSubmited = 1;
+        }
     }
 
     public AcCheckPointParentData() {
         this.noOfAcAvailableAtsite = "";
         this.acCheckPoints = new ArrayList<>();
+        this.isSubmited = 0;
+    }
+
+    public int getSubmited() {
+        return isSubmited;
+    }
+
+    public void setSubmited(int isSubmited) {
+        this.isSubmited = isSubmited;
     }
 }

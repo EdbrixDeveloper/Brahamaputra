@@ -55,11 +55,11 @@ public class ShelterCheckPoints implements Serializable
         this.registerFault = resultFault;
         this.typeOfFault = typeOfFault;
 
-         /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+         if (!this.shelterCleaning.isEmpty() && !this.hatchPlateEntrysealed.isEmpty() && !this.shelterLeakage.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
-        }*/
+        }
     }
 
     public String getShelterCleaning() {

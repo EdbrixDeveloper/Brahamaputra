@@ -52,11 +52,11 @@ public class ServoCheckPoints implements Serializable
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
 
-        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+        if (!this.detailsOfServoQrCodeScan.isEmpty() && !this.servoWorkingStatus.isEmpty() && !this.anyBypassInSVS.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
-        }*/
+        }
     }
 
     public String getDetailsOfServoQrCodeScan() {

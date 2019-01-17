@@ -32,14 +32,20 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     public BatteryBankCheckPointsParentData(String noOfBatteryBankAvailableAtSite, List<BatteryBankCheckPointsData> batteryBankCheckPointsData) {
         this.noOfBatteryBankAvailableAtSite = noOfBatteryBankAvailableAtSite;
         this.batteryBankCheckPointsData = batteryBankCheckPointsData;
-        this.isSubmited = 2;
+        if(!noOfBatteryBankAvailableAtSite.isEmpty())
+        {
+            this.isSubmited = 2;
+        }else {
+            this.isSubmited = 1;
+        }
+
     }
 
-    public int getIsSubmited() {
+    public int getSubmited() {
         return isSubmited;
     }
 
-    public void setIsSubmited(int isSubmited) {
+    public void setSubmited(int isSubmited) {
         this.isSubmited = isSubmited;
     }
 

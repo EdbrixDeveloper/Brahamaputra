@@ -75,12 +75,12 @@ public class AlarmCheckPoints implements Serializable {
         this.remarks = remarks;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
-        this.isSubmited = 2;
-        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+        /*this.isSubmited = 2;*/
+        if (!this.detailsOfWrmsQrCodeScan.isEmpty() && !this.doorOpenAlarm.isEmpty() && !this.dgOn.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
-        }*/
+        }
     }
 
     public String getDetailsOfWrmsQrCodeScan() {

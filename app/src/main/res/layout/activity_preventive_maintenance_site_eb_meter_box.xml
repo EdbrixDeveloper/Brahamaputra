@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="EB Meter Box Condition" />
+                    android:text="EB Meter Box Condition*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteEbMeterBox_textView_ebMeterBoxConditionVal"
@@ -55,7 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="EB Meter Working Status" />
+                    android:text="EB Meter Working Status*" />
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteEbMeterBox_textView_ebMeterWorkingStatusVal"

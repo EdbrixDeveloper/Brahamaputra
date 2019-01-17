@@ -83,12 +83,12 @@ public class EbMeterBox implements Serializable {
         this.ebServiceWireCondition = ebServiceWireCondition;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
-        this.isSubmited = 2;
-        /*if (!this.landType.isEmpty() && !this.landArea.isEmpty() && !this.landAgreementCopy.isEmpty()) {
+        /*this.isSubmited = 2;*/
+        if (!this.ebMeterBoxCondition.isEmpty() && !this.ebMeterWorkingStatus.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
-        }*/
+        }
     }
 
     public String getEbMeterBoxCondition() {
