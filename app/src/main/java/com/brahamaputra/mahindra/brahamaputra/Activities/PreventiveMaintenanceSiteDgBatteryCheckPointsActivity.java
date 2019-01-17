@@ -660,7 +660,6 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
     private void submitDetails() {
         try {
-
             String noOfDgBatteryAvailableAtSite = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim();
             //String numberOfEarthPitVisible = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim();
 
