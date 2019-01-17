@@ -1,6 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -182,10 +183,10 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, userId, ticketName);
         initCombo();
         setListner();
-        getInputDetails();
-
-
-        //setInputDetails(batteryBankCheckPointsData);
+        batteryBankCheckPointsData = new BatteryBankCheckPointsData();
+        setClassBatteryBankCheckPointsData();
+        getInputDetails(batteryBankCheckPointsData);
+        //setInputDetails();
     }
 
     private void assignViews() {
@@ -281,7 +282,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks = (EditText) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_remarks);
     }
 
-    private void setInputDetails(){
+    private void setInputDetails() {
         batteryBankCheckPointsData.setBdTestBatteryBankBackUpTicketNo(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewTicketNoVal.getText().toString());
         batteryBankCheckPointsData.setBdTestCustomer(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCustomerVal.getText().toString());
         batteryBankCheckPointsData.setBdTestCircle(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCircleVal.getText().toString());
@@ -345,94 +346,96 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
         batteryBankCheckPointsData.setBdTestDetailsBatteryBankBackUpOfQRCodeScan(base64StringDetailsOfBatteryBankQRCodeScan);
         batteryBankCheckPointsData.setBdTestBase64StringPhotoOfBatteryBank(base64StringPhotoOfBatteryBank);
+        submitDetails();
     }
 
     //private void getInputDetails(BatteryBankCheckPointsData batteryBankCheckPointsData) {
-    private void getInputDetails() {
+    private void getInputDetails(BatteryBankCheckPointsData batteryBankCheckPointsData) {
         //try {
-            if (batteryBankCheckPointsData != null) {
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewTicketNoVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankBackUpTicketNo());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCustomerVal.setText(batteryBankCheckPointsData.getBdTestCustomer());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCircleVal.setText(batteryBankCheckPointsData.getBdTestCircle());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewStateVal.setText(batteryBankCheckPointsData.getBdTestState());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSiteNameVal.setText(batteryBankCheckPointsData.getBdTestSiteName());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSiteIdVal.setText(batteryBankCheckPointsData.getBdTestSiteId());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSsaVal.setText(batteryBankCheckPointsData.getBdTestSsa());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewUserFseNameDesignationVal.setText(batteryBankCheckPointsData.getBdTestUserFseNameDesignation());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.setText(batteryBankCheckPointsData.getTypeOfBattery());
+        if (batteryBankCheckPointsData != null) {
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewTicketNoVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankBackUpTicketNo() == null ? "" : batteryBankCheckPointsData.getBdTestBatteryBankBackUpTicketNo());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCustomerVal.setText(batteryBankCheckPointsData.getBdTestCustomer() == null ? "" : batteryBankCheckPointsData.getBdTestCustomer());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewCircleVal.setText(batteryBankCheckPointsData.getBdTestCircle() == null ? "" : batteryBankCheckPointsData.getBdTestCircle());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewStateVal.setText(batteryBankCheckPointsData.getBdTestState() == null ? "" : batteryBankCheckPointsData.getBdTestState());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSiteNameVal.setText(batteryBankCheckPointsData.getBdTestSiteName() == null ? "" : batteryBankCheckPointsData.getBdTestSiteName());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSiteIdVal.setText(batteryBankCheckPointsData.getBdTestSiteId() == null ? "" : batteryBankCheckPointsData.getBdTestSiteId());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSsaVal.setText(batteryBankCheckPointsData.getBdTestSsa() == null ? "" : batteryBankCheckPointsData.getBdTestSsa());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewUserFseNameDesignationVal.setText(batteryBankCheckPointsData.getBdTestUserFseNameDesignation() == null ? "" : batteryBankCheckPointsData.getBdTestUserFseNameDesignation());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.setText(batteryBankCheckPointsData.getTypeOfBattery() == null ? "" : batteryBankCheckPointsData.getTypeOfBattery());
 
-                mBdTestVoltageModuleReading1EditText1.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading1());
-                mBdTestCurrentModuleReading1EditText1.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading1());
-                mBdTestSocModuleReadingEditText1.setText(batteryBankCheckPointsData.getBdTestSocModuleReading1());
-                mBdTestSohModuleReadingEditText1.setText(batteryBankCheckPointsData.getBdTestSohModuleReading1());
-                mBdTestVoltageModuleReading1EditText2.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading2());
-                mBdTestCurrentModuleReading1EditText2.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading2());
-                mBdTestSocModuleReadingEditText2.setText(batteryBankCheckPointsData.getBdTestSocModuleReading2());
-                mBdTestSohModuleReadingEditText2.setText(batteryBankCheckPointsData.getBdTestSohModuleReading2());
-                mBdTestVoltageModuleReading1EditText3.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading3());
-                mBdTestCurrentModuleReading1EditText3.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading3());
-                mBdTestSocModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSocModuleReading3());
-                mBdTestSohModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSohModuleReading3());
+            mBdTestVoltageModuleReading1EditText1.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading1() == null ? "" : batteryBankCheckPointsData.getBdTestVoltageModuleReading1());
+            mBdTestCurrentModuleReading1EditText1.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading1() == null ? "" : batteryBankCheckPointsData.getBdTestCurrentModuleReading1());
+            mBdTestSocModuleReadingEditText1.setText(batteryBankCheckPointsData.getBdTestSocModuleReading1() == null ? "" : batteryBankCheckPointsData.getBdTestSocModuleReading1());
+            mBdTestSohModuleReadingEditText1.setText(batteryBankCheckPointsData.getBdTestSohModuleReading1() == null ? "" : batteryBankCheckPointsData.getBdTestSohModuleReading1());
+            mBdTestVoltageModuleReading1EditText2.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading2() == null ? "" : batteryBankCheckPointsData.getBdTestVoltageModuleReading2());
+            mBdTestCurrentModuleReading1EditText2.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading2() == null ? "" : batteryBankCheckPointsData.getBdTestCurrentModuleReading2());
+            mBdTestSocModuleReadingEditText2.setText(batteryBankCheckPointsData.getBdTestSocModuleReading2() == null ? "" : batteryBankCheckPointsData.getBdTestSocModuleReading2());
+            mBdTestSohModuleReadingEditText2.setText(batteryBankCheckPointsData.getBdTestSohModuleReading2() == null ? "" : batteryBankCheckPointsData.getBdTestSohModuleReading2());
+            mBdTestVoltageModuleReading1EditText3.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading3() == null ? "" : batteryBankCheckPointsData.getBdTestVoltageModuleReading3());
+            mBdTestCurrentModuleReading1EditText3.setText(batteryBankCheckPointsData.getBdTestCurrentModuleReading3() == null ? "" : batteryBankCheckPointsData.getBdTestCurrentModuleReading3());
+            mBdTestSocModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSocModuleReading3() == null ? "" : batteryBankCheckPointsData.getBdTestSocModuleReading3());
+            mBdTestSohModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSohModuleReading3() == null ? "" : batteryBankCheckPointsData.getBdTestSohModuleReading3());
 
 
-                mBdTestCellReadingEditText1.setText(batteryBankCheckPointsData.getBdTestCellReading1());
-                mBdTestCellReadingEditText2.setText(batteryBankCheckPointsData.getBdTestCellReading2());
-                mBdTestCellReadingEditText3.setText(batteryBankCheckPointsData.getBdTestCellReading3());
-                mBdTestCellReadingEditText4.setText(batteryBankCheckPointsData.getBdTestCellReading4());
-                mBdTestCellReadingEditText5.setText(batteryBankCheckPointsData.getBdTestCellReading5());
-                mBdTestCellReadingEditText6.setText(batteryBankCheckPointsData.getBdTestCellReading6());
-                mBdTestCellReadingEditText7.setText(batteryBankCheckPointsData.getBdTestCellReading7());
-                mBdTestCellReadingEditText8.setText(batteryBankCheckPointsData.getBdTestCellReading8());
-                mBdTestCellReadingEditText9.setText(batteryBankCheckPointsData.getBdTestCellReading9());
-                mBdTestCellReadingEditText10.setText(batteryBankCheckPointsData.getBdTestCellReading10());
-                mBdTestCellReadingEditText11.setText(batteryBankCheckPointsData.getBdTestCellReading11());
-                mBdTestCellReadingEditText12.setText(batteryBankCheckPointsData.getBdTestCellReading12());
-                mBdTestCellReadingEditText13.setText(batteryBankCheckPointsData.getBdTestCellReading13());
-                mBdTestCellReadingEditText14.setText(batteryBankCheckPointsData.getBdTestCellReading14());
-                mBdTestCellReadingEditText15.setText(batteryBankCheckPointsData.getBdTestCellReading15());
-                mBdTestCellReadingEditText16.setText(batteryBankCheckPointsData.getBdTestCellReading16());
-                mBdTestCellReadingEditText17.setText(batteryBankCheckPointsData.getBdTestCellReading17());
-                mBdTestCellReadingEditText18.setText(batteryBankCheckPointsData.getBdTestCellReading18());
-                mBdTestCellReadingEditText19.setText(batteryBankCheckPointsData.getBdTestCellReading19());
-                mBdTestCellReadingEditText20.setText(batteryBankCheckPointsData.getBdTestCellReading20());
-                mBdTestCellReadingEditText21.setText(batteryBankCheckPointsData.getBdTestCellReading21());
-                mBdTestCellReadingEditText22.setText(batteryBankCheckPointsData.getBdTestCellReading22());
-                mBdTestCellReadingEditText23.setText(batteryBankCheckPointsData.getBdTestCellReading23());
-                mBdTestCellReadingEditText24.setText(batteryBankCheckPointsData.getBdTestCellReading24());
+            mBdTestCellReadingEditText1.setText(batteryBankCheckPointsData.getBdTestCellReading1() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading1());
+            mBdTestCellReadingEditText2.setText(batteryBankCheckPointsData.getBdTestCellReading2() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading2());
+            mBdTestCellReadingEditText3.setText(batteryBankCheckPointsData.getBdTestCellReading3() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading3());
+            mBdTestCellReadingEditText4.setText(batteryBankCheckPointsData.getBdTestCellReading4() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading4());
+            mBdTestCellReadingEditText5.setText(batteryBankCheckPointsData.getBdTestCellReading5() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading5());
+            mBdTestCellReadingEditText6.setText(batteryBankCheckPointsData.getBdTestCellReading6() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading6());
+            mBdTestCellReadingEditText7.setText(batteryBankCheckPointsData.getBdTestCellReading7() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading7());
+            mBdTestCellReadingEditText8.setText(batteryBankCheckPointsData.getBdTestCellReading8() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading8());
+            mBdTestCellReadingEditText9.setText(batteryBankCheckPointsData.getBdTestCellReading9() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading9());
+            mBdTestCellReadingEditText10.setText(batteryBankCheckPointsData.getBdTestCellReading10() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading10());
+            mBdTestCellReadingEditText11.setText(batteryBankCheckPointsData.getBdTestCellReading11() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading11());
+            mBdTestCellReadingEditText12.setText(batteryBankCheckPointsData.getBdTestCellReading12() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading12());
+            mBdTestCellReadingEditText13.setText(batteryBankCheckPointsData.getBdTestCellReading13() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading13());
+            mBdTestCellReadingEditText14.setText(batteryBankCheckPointsData.getBdTestCellReading14() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading14());
+            mBdTestCellReadingEditText15.setText(batteryBankCheckPointsData.getBdTestCellReading15() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading15());
+            mBdTestCellReadingEditText16.setText(batteryBankCheckPointsData.getBdTestCellReading16() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading16());
+            mBdTestCellReadingEditText17.setText(batteryBankCheckPointsData.getBdTestCellReading17() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading17());
+            mBdTestCellReadingEditText18.setText(batteryBankCheckPointsData.getBdTestCellReading18() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading18());
+            mBdTestCellReadingEditText19.setText(batteryBankCheckPointsData.getBdTestCellReading19() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading19());
+            mBdTestCellReadingEditText20.setText(batteryBankCheckPointsData.getBdTestCellReading20() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading20());
+            mBdTestCellReadingEditText21.setText(batteryBankCheckPointsData.getBdTestCellReading21() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading21());
+            mBdTestCellReadingEditText22.setText(batteryBankCheckPointsData.getBdTestCellReading22() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading22());
+            mBdTestCellReadingEditText23.setText(batteryBankCheckPointsData.getBdTestCellReading23() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading23());
+            mBdTestCellReadingEditText24.setText(batteryBankCheckPointsData.getBdTestCellReading24() == null ? "" : batteryBankCheckPointsData.getBdTestCellReading24());
 
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setText(batteryBankCheckPointsData.getBdTestFloatVoltageInSmpsBusBarAfter30Min());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setText(batteryBankCheckPointsData.getBdTestTotalLoadCurrentInAmps());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMakeVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankMake());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankCapacityVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankCapacity());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfWorkingRectifireModuleVal.setText(batteryBankCheckPointsData.getBdTestNumberOfRectifireModuleWorking());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setText(batteryBankCheckPointsData.getBdTestSiteLoadOnBatteryInAmps());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest.setText(batteryBankCheckPointsData.getBdTestFloatVoltageBeforeBBTest());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating.setText(batteryBankCheckPointsData.getBdTestSingleModuleRating());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal.setText(batteryBankCheckPointsData.getBdTestNumberOfBatteryModule());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setText(batteryBankCheckPointsData.getBdTestReadingTakenAt());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.setText(batteryBankCheckPointsData.getBdTestLastReadingTakenAt());
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks.setText(batteryBankCheckPointsData.getBdTestRemarks());
 
-                base64StringDetailsOfBatteryBankQRCodeScan = batteryBankCheckPointsData.getBdTestDetailsBatteryBankBackUpOfQRCodeScan();
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.GONE);
-                mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.GONE);
-                if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
-                    mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
-                    mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
-                }
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setText(batteryBankCheckPointsData.getBdTestFloatVoltageInSmpsBusBarAfter30Min() == null ? "" : batteryBankCheckPointsData.getBdTestFloatVoltageInSmpsBusBarAfter30Min());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setText(batteryBankCheckPointsData.getBdTestTotalLoadCurrentInAmps() == null ? "" : batteryBankCheckPointsData.getBdTestTotalLoadCurrentInAmps());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMakeVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankMake() == null ? "" : batteryBankCheckPointsData.getBdTestBatteryBankMake());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankCapacityVal.setText(batteryBankCheckPointsData.getBdTestBatteryBankCapacity() == null ? "" : batteryBankCheckPointsData.getBdTestBatteryBankCapacity());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfWorkingRectifireModuleVal.setText(batteryBankCheckPointsData.getBdTestNumberOfRectifireModuleWorking() == null ? "" : batteryBankCheckPointsData.getBdTestNumberOfRectifireModuleWorking());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setText(batteryBankCheckPointsData.getBdTestSiteLoadOnBatteryInAmps() == null ? "" : batteryBankCheckPointsData.getBdTestSiteLoadOnBatteryInAmps());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest.setText(batteryBankCheckPointsData.getBdTestFloatVoltageBeforeBBTest() == null ? "" : batteryBankCheckPointsData.getBdTestFloatVoltageBeforeBBTest());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating.setText(batteryBankCheckPointsData.getBdTestSingleModuleRating() == null ? "" : batteryBankCheckPointsData.getBdTestSingleModuleRating());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal.setText(batteryBankCheckPointsData.getBdTestNumberOfBatteryModule() == null ? "" : batteryBankCheckPointsData.getBdTestNumberOfBatteryModule());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setText(batteryBankCheckPointsData.getBdTestReadingTakenAt() == null ? "" : batteryBankCheckPointsData.getBdTestReadingTakenAt());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.setText(batteryBankCheckPointsData.getBdTestLastReadingTakenAt() == null ? "" : batteryBankCheckPointsData.getBdTestLastReadingTakenAt());
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks.setText(batteryBankCheckPointsData.getBdTestRemarks() == null ? "" : batteryBankCheckPointsData.getBdTestRemarks());
 
-                base64StringPhotoOfBatteryBank = batteryBankCheckPointsData.getBdTestBase64StringPhotoOfBatteryBank();
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.GONE);
-                if (!base64StringPhotoOfBatteryBank.isEmpty() && base64StringPhotoOfBatteryBank != null) {
-                    mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.VISIBLE);
-                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    Bitmap inImage = decodeFromBase64ToBitmap(base64StringPhotoOfBatteryBank);
-                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
-                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
-                    imageFileUriPhotoOfBatteryBank = Uri.parse(path);
-                }
-
+            base64StringDetailsOfBatteryBankQRCodeScan = batteryBankCheckPointsData.getBdTestDetailsBatteryBankBackUpOfQRCodeScan() == null ? "" : batteryBankCheckPointsData.getBdTestDetailsBatteryBankBackUpOfQRCodeScan();
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.GONE);
+            mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.GONE);
+            if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
+                mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
             }
+
+            base64StringPhotoOfBatteryBank = batteryBankCheckPointsData.getBdTestBase64StringPhotoOfBatteryBank() == null ? "" : batteryBankCheckPointsData.getBdTestBase64StringPhotoOfBatteryBank();
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.GONE);
+            if (!base64StringPhotoOfBatteryBank.isEmpty() && base64StringPhotoOfBatteryBank != null) {
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.VISIBLE);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                Bitmap inImage = decodeFromBase64ToBitmap(base64StringPhotoOfBatteryBank);
+                inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                imageFileUriPhotoOfBatteryBank = Uri.parse(path);
+            }
+
+        }
         /*} catch (Exception e) {
             e.printStackTrace();
         }*/
@@ -458,6 +461,16 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                 });
             }
         });
+    }
+
+    private void setClassBatteryBankCheckPointsData() {
+        /*try {*/
+
+        Intent intent = getIntent();
+        batteryBankCheckPointsData = (BatteryBankCheckPointsData) intent.getSerializableExtra("batteryBankCheckPointsData");
+        /*} catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 
     private void setListner() {
@@ -631,7 +644,15 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     @Override
     public void onBackPressed() {
+        setInputDetails();
         setResult(RESULT_OK);
+        finish();
+    }
+
+    private void submitDetails() {
+        Intent data = new Intent();
+        data.putExtra("batteryBankCheckPointsData", batteryBankCheckPointsData);
+        setResult(Activity.RESULT_OK, data);
         finish();
     }
 
