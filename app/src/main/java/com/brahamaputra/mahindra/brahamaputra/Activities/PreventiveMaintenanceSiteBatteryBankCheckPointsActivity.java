@@ -620,7 +620,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 "", "", "",
                 "", "", "", "",
                 "", "", "",
-                "", "", "",
+                "",
                 ""
 
         );

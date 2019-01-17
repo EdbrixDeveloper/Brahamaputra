@@ -164,12 +164,6 @@ public class BatteryBankCheckPointsData implements Serializable {
     @SerializedName("bdTestCellReading24")
     @Expose
     private String bdTestCellReading24;
-    @SerializedName("bdTestCellFloatVoltageInSmpsBusBarAfter30Min")
-    @Expose
-    private String bdTestCellFloatVoltageInSmpsBusBarAfter30Min;
-    @SerializedName("bdTestCellTotalLoadCurrentInAmps")
-    @Expose
-    private String bdTestCellTotalLoadCurrentInAmps;
     @SerializedName("bdTestVoltageModuleReading1")
     @Expose
     private String bdTestVoltageModuleReading1;
@@ -206,12 +200,12 @@ public class BatteryBankCheckPointsData implements Serializable {
     @SerializedName("bdTestSohModuleReading3")
     @Expose
     private String bdTestSohModuleReading3;
-    @SerializedName("bdTestModuleFloatVoltageInSmpsBusBarAfter30Min")
+    @SerializedName("bdTestFloatVoltageInSmpsBusBarAfter30Min")
     @Expose
-    private String bdTestModuleFloatVoltageInSmpsBusBarAfter30Min;
-    @SerializedName("bdTestModuleTotalLoadCurrentInAmps")
+    private String bdTestFloatVoltageInSmpsBusBarAfter30Min;
+    @SerializedName("bdTestTotalLoadCurrentInAmps")
     @Expose
-    private String bdTestModuleTotalLoadCurrentInAmps;
+    private String bdTestTotalLoadCurrentInAmps;
     @SerializedName("bdTestLastReadingTakenAt")
     @Expose
     private String bdTestLastReadingTakenAt;
@@ -277,8 +271,6 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestCellReading22 = "";
         this.bdTestCellReading23 = "";
         this.bdTestCellReading24 = "";
-        this.bdTestCellFloatVoltageInSmpsBusBarAfter30Min = "";
-        this.bdTestCellTotalLoadCurrentInAmps = "";
         this.bdTestVoltageModuleReading1 = "";
         this.bdTestVoltageModuleReading2 = "";
         this.bdTestVoltageModuleReading3 = "";
@@ -291,8 +283,8 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestSohModuleReading1 = "";
         this.bdTestSohModuleReading2 = "";
         this.bdTestSohModuleReading3 = "";
-        this.bdTestModuleFloatVoltageInSmpsBusBarAfter30Min = "";
-        this.bdTestModuleTotalLoadCurrentInAmps = "";
+        this.bdTestFloatVoltageInSmpsBusBarAfter30Min = "";
+        this.bdTestTotalLoadCurrentInAmps = "";
         this.bdTestLastReadingTakenAt = "";
         this.base64StringPhotoOfBatteryBank = "";
         this.bdTestRemarks = "";
@@ -313,12 +305,11 @@ public class BatteryBankCheckPointsData implements Serializable {
                                       String bdTestCellReading14, String bdTestCellReading15, String bdTestCellReading16, String bdTestCellReading17,
                                       String bdTestCellReading18, String bdTestCellReading19, String bdTestCellReading20, String bdTestCellReading21,
                                       String bdTestCellReading22, String bdTestCellReading23, String bdTestCellReading24,
-                                      String bdTestCellFloatVoltageInSmpsBusBarAfter30Min, String bdTestCellTotalLoadCurrentInAmps,
                                       String bdTestVoltageModuleReading1, String bdTestVoltageModuleReading2, String bdTestVoltageModuleReading3,
                                       String bdTestCurrentModuleReading1, String bdTestCurrentModuleReading2, String bdTestCurrentModuleReading3,
                                       String bdTestSocModuleReading1, String bdTestSocModuleReading2, String bdTestSocModuleReading3, String bdTestSohModuleReading1,
-                                      String bdTestSohModuleReading2, String bdTestSohModuleReading3, String bdTestModuleFloatVoltageInSmpsBusBarAfter30Min,
-                                      String bdTestModuleTotalLoadCurrentInAmps, String bdTestLastReadingTakenAt, String base64StringPhotoOfBatteryBank,
+                                      String bdTestSohModuleReading2, String bdTestSohModuleReading3, String bdTestFloatVoltageInSmpsBusBarAfter30Min,
+                                      String bdTestTotalLoadCurrentInAmps, String bdTestLastReadingTakenAt, String base64StringPhotoOfBatteryBank,
                                       String bdTestRemarks) {
         this.detailsOfBatteryBankQrCodeScan = detailsOfBatteryBankQrCodeScan;
         this.batteryBankDischargeTest = batteryBankDischargeTest;
@@ -372,8 +363,6 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestCellReading22 = bdTestCellReading22;
         this.bdTestCellReading23 = bdTestCellReading23;
         this.bdTestCellReading24 = bdTestCellReading24;
-        this.bdTestCellFloatVoltageInSmpsBusBarAfter30Min = bdTestCellFloatVoltageInSmpsBusBarAfter30Min;
-        this.bdTestCellTotalLoadCurrentInAmps = bdTestCellTotalLoadCurrentInAmps;
         this.bdTestVoltageModuleReading1 = bdTestVoltageModuleReading1;
         this.bdTestVoltageModuleReading2 = bdTestVoltageModuleReading2;
         this.bdTestVoltageModuleReading3 = bdTestVoltageModuleReading3;
@@ -386,8 +375,8 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestSohModuleReading1 = bdTestSohModuleReading1;
         this.bdTestSohModuleReading2 = bdTestSohModuleReading2;
         this.bdTestSohModuleReading3 = bdTestSohModuleReading3;
-        this.bdTestModuleFloatVoltageInSmpsBusBarAfter30Min = bdTestModuleFloatVoltageInSmpsBusBarAfter30Min;
-        this.bdTestModuleTotalLoadCurrentInAmps = bdTestModuleTotalLoadCurrentInAmps;
+        this.bdTestFloatVoltageInSmpsBusBarAfter30Min = bdTestFloatVoltageInSmpsBusBarAfter30Min;
+        this.bdTestTotalLoadCurrentInAmps = bdTestTotalLoadCurrentInAmps;
         this.bdTestLastReadingTakenAt = bdTestLastReadingTakenAt;
         this.base64StringPhotoOfBatteryBank = base64StringPhotoOfBatteryBank;
         this.bdTestRemarks = bdTestRemarks;
@@ -809,22 +798,6 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestCellReading24 = bdTestCellReading24;
     }
 
-    public String getBdTestCellFloatVoltageInSmpsBusBarAfter30Min() {
-        return bdTestCellFloatVoltageInSmpsBusBarAfter30Min;
-    }
-
-    public void setBdTestCellFloatVoltageInSmpsBusBarAfter30Min(String bdTestCellFloatVoltageInSmpsBusBarAfter30Min) {
-        this.bdTestCellFloatVoltageInSmpsBusBarAfter30Min = bdTestCellFloatVoltageInSmpsBusBarAfter30Min;
-    }
-
-    public String getBdTestCellTotalLoadCurrentInAmps() {
-        return bdTestCellTotalLoadCurrentInAmps;
-    }
-
-    public void setBdTestCellTotalLoadCurrentInAmps(String bdTestCellTotalLoadCurrentInAmps) {
-        this.bdTestCellTotalLoadCurrentInAmps = bdTestCellTotalLoadCurrentInAmps;
-    }
-
     public String getBdTestVoltageModuleReading1() {
         return bdTestVoltageModuleReading1;
     }
@@ -921,20 +894,20 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestSohModuleReading3 = bdTestSohModuleReading3;
     }
 
-    public String getBdTestModuleFloatVoltageInSmpsBusBarAfter30Min() {
-        return bdTestModuleFloatVoltageInSmpsBusBarAfter30Min;
+    public String getBdTestFloatVoltageInSmpsBusBarAfter30Min() {
+        return bdTestFloatVoltageInSmpsBusBarAfter30Min;
     }
 
-    public void setBdTestModuleFloatVoltageInSmpsBusBarAfter30Min(String bdTestModuleFloatVoltageInSmpsBusBarAfter30Min) {
-        this.bdTestModuleFloatVoltageInSmpsBusBarAfter30Min = bdTestModuleFloatVoltageInSmpsBusBarAfter30Min;
+    public void setBdTestFloatVoltageInSmpsBusBarAfter30Min(String bdTestFloatVoltageInSmpsBusBarAfter30Min) {
+        this.bdTestFloatVoltageInSmpsBusBarAfter30Min = bdTestFloatVoltageInSmpsBusBarAfter30Min;
     }
 
-    public String getBdTestModuleTotalLoadCurrentInAmps() {
-        return bdTestModuleTotalLoadCurrentInAmps;
+    public String getBdTestTotalLoadCurrentInAmps() {
+        return bdTestTotalLoadCurrentInAmps;
     }
 
-    public void setBdTestModuleTotalLoadCurrentInAmps(String bdTestModuleTotalLoadCurrentInAmps) {
-        this.bdTestModuleTotalLoadCurrentInAmps = bdTestModuleTotalLoadCurrentInAmps;
+    public void setBdTestTotalLoadCurrentInAmps(String bdTestTotalLoadCurrentInAmps) {
+        this.bdTestTotalLoadCurrentInAmps = bdTestTotalLoadCurrentInAmps;
     }
 
     public String getBdTestLastReadingTakenAt() {
