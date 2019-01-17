@@ -15,7 +15,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     private String noOfBatteryBankAvailableAtSite;
     @SerializedName("batteryBankCheckPointData")
     @Expose
-    private List<BatteryBankCheckPointsData> batteryBankCheckPointsData = null;
+    private List<BatteryBankCheckPointsData> batteryBankCheckPointsData;
     @SerializedName("isSubmited")
     @Expose
     private int isSubmited = 0;

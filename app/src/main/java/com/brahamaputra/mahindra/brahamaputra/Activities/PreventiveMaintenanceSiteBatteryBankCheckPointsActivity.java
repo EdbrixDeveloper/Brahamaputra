@@ -192,7 +192,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_button_nextReading);
-        mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_linearLayout_typeOfFault);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_linearLayout_typeOfFault);
     }
 
     private void initCombo() {
@@ -493,7 +493,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBattreyBankNumber.setText("Reading: #1");
                     totalAcCount = Integer.parseInt(dataList.getNoOfBatteryBankAvailableAtSite());
 
-                    base64StringDetailsOfBatteryBankQRCodeScan = batteryBankCheckPointsData.get(index).getBase64StringPhotoOfBatteryBank();
+                    base64StringDetailsOfBatteryBankQRCodeScan = batteryBankCheckPointsData.get(index).getDetailsOfBatteryBankQrCodeScan();
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
                     mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
 
@@ -602,25 +602,25 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         BatteryBankCheckPointsData batteryBankCheckPointsDataChild = new BatteryBankCheckPointsData(
 
                 detailsOfBatteryBankQRCodeScan, batteryBankDischargeTest, stripBoltTightnessAsPerTorque,
-                 petroleumJellyApplied, "", batteryVentPlugStatus,  bbEarthingStatus,
-                 registerFault, typeOfFault, "",
+                petroleumJellyApplied, "", batteryVentPlugStatus, bbEarthingStatus,
+                registerFault, typeOfFault, "",
                 "", "", "", "",
-                "","" , "", "",
-                "", "", "","" ,
+                "", "", "", "",
+                "", "", "", "",
                 "", "", "",
                 "", "", "", "",
-                "", "","" ,"" ,
-                "","" ,"" ,"" ,
-                "",  "",  "", "" ,
-                "",  "", "" ,""  ,
-                "", "" , "" , "" ,
-                "",  "", "" ,
-                "",  "",
-                "",  "",""  ,
-                "",  "", "" ,
-                "", "" ,  "", "" ,
-                "",  "",  "",
-                "",  "",  "",
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "",
+                "", "",
+                "", "", "",
+                "", "", "",
+                "", "", "", "",
+                "", "", "",
+                "", "", "",
                 ""
 
         );
@@ -720,6 +720,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         }
     }
 
+    // class com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails declares multiple JSON fields named smpsCheckPointParentData
+
     public void clearFields(int indexPos) {
 
         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBattreyBankNumber.setText("Reading: #" + (indexPos + 1));
@@ -791,7 +793,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             mPreventiveMaintenanceSiteBatteryBankCheckPointsImageViewBatteryBankDischargeTest.setVisibility(View.VISIBLE);
         }
     }
-
 
 
     private void setListner() {
@@ -866,7 +867,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
         mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-           // mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText("");
+            // mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
         }
     }
@@ -970,30 +971,30 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         if (noOfBatteryBankAvailableAtSite.isEmpty() || noOfBatteryBankAvailableAtSite == null) {
             showToast("Select No Of Battery Bank Available At Site");
             return false;
-        }else if(qrCodeScan.isEmpty() || qrCodeScan == null) {
+        } else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Scan QR Code");
             return false;
-        }else if(batteryBankDischargeTest.isEmpty() || batteryBankDischargeTest == null) {
+        } else if (batteryBankDischargeTest.isEmpty() || batteryBankDischargeTest == null) {
             showToast("Select Battery Bank Discharge Test");
             return false;
-        }else if(stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
+        } else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
             showToast("Select Strip Bolt Tightness As Per Torque");
             return false;
-        }else if(petroleumJellyApplied.isEmpty() || petroleumJellyApplied == null) {
+        } else if (petroleumJellyApplied.isEmpty() || petroleumJellyApplied == null) {
             showToast("Select Petroleum Jelly Applied");
             return false;
-        }else if(batteryVentPlugStatus.isEmpty() || batteryVentPlugStatus == null) {
+        } else if (batteryVentPlugStatus.isEmpty() || batteryVentPlugStatus == null) {
             showToast("Select Battery Vent Plug Status");
             return false;
-        }else if(bbEarthingStatus.isEmpty() || bbEarthingStatus == null) {
+        } else if (bbEarthingStatus.isEmpty() || bbEarthingStatus == null) {
             showToast("Select BB Earthing Status");
             return false;
-        }else if(registerFault.isEmpty() || registerFault == null) {
+        } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
-        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Types Of Fault");
             return false;
-        }else return true;
+        } else return true;
     }
 }
