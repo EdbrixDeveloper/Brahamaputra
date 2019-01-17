@@ -1756,13 +1756,13 @@
 
     <!--BatteryBankBackUpTestReport-->
     <string-array name="array_pmSiteBatteryBankBackUpTestReport_readingTakenAt">
-    <item>Initial</item>
-    <item>30 Minutes</item>
-    <item>60 Minutes</item>
-    <item>90minutes</item>
-    <item>120 minutes</item>
-    <item>150 Minutes</item>
-    <item>180 Minutes</item>
+        <item>Initial</item>
+        <item>30 Minutes</item>
+        <item>60 Minutes</item>
+        <item>90minutes</item>
+        <item>120 minutes</item>
+        <item>150 Minutes</item>
+        <item>180 Minutes</item>
     </string-array>
 
     <!--PM Earthing Check Points-->

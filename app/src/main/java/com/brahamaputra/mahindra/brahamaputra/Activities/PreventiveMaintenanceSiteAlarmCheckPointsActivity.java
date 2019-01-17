@@ -624,13 +624,13 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                 return true;
 
             case R.id.menuSubmit:
-                if(checkValidationOfArrayFields()==true)
-                {
+               /* if(checkValidationOfArrayFields()==true)
+                {*/
                     submitDetails();
                     startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                     finish();
                     return true;
-                }
+                /*}*/
             default:
                 return super.onOptionsItemSelected(item);
         }
