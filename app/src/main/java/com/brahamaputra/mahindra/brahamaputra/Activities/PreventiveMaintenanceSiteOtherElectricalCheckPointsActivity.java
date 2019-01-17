@@ -181,10 +181,12 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
                 return true;
 
             case R.id.menuSubmit:
-                submitDetails();
-                finish();
-                return true;
-
+                if(checkValidationOfArrayFields()==true)
+                {
+                    submitDetails();
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -244,5 +246,26 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    public boolean checkValidationOfArrayFields(){
+        String dcEnergyMeterStatus = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.getText().toString().trim();
+        String aviationLamp = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.getText().toString().trim();
+        String lightsInsideTheShelter = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.getText().toString().trim();
+        String lightsInSitePremisesBulkHead = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.getText().toString().trim();
+
+        if (dcEnergyMeterStatus.isEmpty() || dcEnergyMeterStatus == null) {
+            showToast("Select DC Energy Meter Status");
+            return false;
+        }else if(aviationLamp.isEmpty() || aviationLamp == null) {
+            showToast("Select Aviation Lamp");
+            return false;
+        }else if(lightsInsideTheShelter.isEmpty() || lightsInsideTheShelter == null) {
+            showToast("Select Lights Inside The Shelter");
+            return false;
+        }else if(lightsInSitePremisesBulkHead.isEmpty() || lightsInSitePremisesBulkHead == null) {
+            showToast("Select Lights In Site Premises Bulk Head");
+            return false;
+        }else return true;
     }
 }
