@@ -24,12 +24,7 @@ public class DgBatteryCheckPointsData implements Serializable {
     @SerializedName("dgBatteryCharger")
     @Expose
     private String dgBatteryCharger;
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
+
 
     //private final static long serialVersionUID = -7689901156568939001L;
 
@@ -39,18 +34,17 @@ public class DgBatteryCheckPointsData implements Serializable {
         this.dgBatteryWaterAvailable = "";
         this.petroleumJellyToDgBatteryTerminal = "";
         this.dgBatteryCharger = "";
-        this.registerFault = "";
-        this.typeOfFault = "";
+
     }
 
-    public DgBatteryCheckPointsData(String detailsOfDgBatteryQrCodeScan, String dgBatteryCondition, String dgBatteryWaterAvailable, String petroleumJellyToDgBatteryTerminal, String dgBatteryCharger, String registerFault, String typeOfFault) {
+    public DgBatteryCheckPointsData(String detailsOfDgBatteryQrCodeScan, String dgBatteryCondition, String dgBatteryWaterAvailable,
+                                    String petroleumJellyToDgBatteryTerminal, String dgBatteryCharger) {
         this.detailsOfDgBatteryQrCodeScan = detailsOfDgBatteryQrCodeScan;
         this.dgBatteryCondition = dgBatteryCondition;
         this.dgBatteryWaterAvailable = dgBatteryWaterAvailable;
         this.petroleumJellyToDgBatteryTerminal = petroleumJellyToDgBatteryTerminal;
         this.dgBatteryCharger = dgBatteryCharger;
-        this.registerFault = registerFault;
-        this.typeOfFault = typeOfFault;
+
     }
 
     public String getDetailsOfDgBatteryQrCodeScan() {
@@ -91,22 +85,6 @@ public class DgBatteryCheckPointsData implements Serializable {
 
     public void setDgBatteryCharger(String dgBatteryCharger) {
         this.dgBatteryCharger = dgBatteryCharger;
-    }
-
-    public String getRegisterFault() {
-        return registerFault;
-    }
-
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
     }
 
 }
