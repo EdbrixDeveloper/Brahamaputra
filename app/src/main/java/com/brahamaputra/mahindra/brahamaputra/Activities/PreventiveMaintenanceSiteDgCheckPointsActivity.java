@@ -99,6 +99,11 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
     private TextView mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFault;
     private TextView mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal;
 
+    private LinearLayout mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView mPreventiveMaintenanceSiteDgCheckPointsTextViewUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView;
+
     private Button mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading;
     private LinearLayout mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault;
@@ -117,6 +122,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfDgHmr = 101;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
     //public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
 
     private String base64StringDgCheckPointsQRCodeScan = "";
@@ -127,6 +133,10 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
     //private Uri imageFileUriDgCheckPointsQRCodeScan = null;
     private Uri imageFileUriPhotoOfDgHmr = null;
+
+    private String base64StringUploadPhotoOfRegisterFault = "";
+    private String imageFileUploadPhotoOfRegisterFault;
+    private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
     private String userId = "";
     private String ticketId = "";
@@ -169,10 +179,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteDgCheckPointsActivity.this, userId, ticketName);
         setListner();
-
-        /////////////////////////
-
-        //////////////////////////////
 
         pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
 
@@ -226,9 +232,15 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_registerFaultVal);
         mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFault);
         mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_typeOfFaultVal);
+
+        mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteDgCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_uploadPhotoOfRegisterFaultView);
+
         mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_button_nextReading);
-        mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_linearLayout_typeOfFault);
+        mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteDgCheckPoints_linearLayout_typeOfFault);
     }
 
 
@@ -246,16 +258,29 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
 
                 mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.setText(dataList.getNoOfDgAvailableAtSite());
-                //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal .setText(dataList.getNumberOfEarthPitVisible());
+
+                mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
+                mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
+                this.base64StringUploadPhotoOfRegisterFault = dataList.getBase64StringUploadPhotoOfRegisterFault();
+                visibilityOfTypesOfFault(dataList.getRegisterFault());
+
+                mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                if (!this.base64StringUploadPhotoOfRegisterFault.isEmpty() && this.base64StringUploadPhotoOfRegisterFault != null) {
+                    mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfRegisterFault);
+                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                    imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
+                }
+
+                if (dataList.getTypeOfFault() != null && dataList.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+                    setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
+                }
+
 
                 str_pmSiteDgcpNoOfDgAvailableAtSiteVal = dataList.getNoOfDgAvailableAtSite();
                 invalidateOptionsMenu();
-
-                /*mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
-                if (!dataList.getNumberOfEarthPitVisible().isEmpty() && dataList.getNumberOfEarthPitVisible() != null) {
-                    mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.VISIBLE);
-                }
-                mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(dataList.getNumberOfEarthPitVisible());*/
 
 
                 if (dgCheckPointsData != null && dgCheckPointsData.size() > 0) {
@@ -284,16 +309,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         imageFileUriPhotoOfDgHmr = Uri.parse(path);
                     }
 
-                    /*imageFilePhotoOfDgHmr = dgCheckPointsData.get(index).getImageFileTakePhotoOfDgHmr();
-                    mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
-                    if (imageFilePhotoOfDgHmr != null && imageFilePhotoOfDgHmr.length() > 0) {
-                        File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFilePhotoOfDgHmr);
-                        imageFileUriPhotoOfDgHmr = FileProvider.getUriForFile(PreventiveMaintenanceSiteDgCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
-                        if (imageFileUriPhotoOfDgHmr != null) {
-                            mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.VISIBLE);
-                        }
-                    }*/
-
                     mPreventiveMaintenanceSiteDgCheckPointsEditTextDgHmrReading.setText(dgCheckPointsData.get(index).getDgHmrReading());
                     mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingConditionVal.setText(dgCheckPointsData.get(index).getDgWorkingCondition());
                     mPreventiveMaintenanceSiteDgCheckPointsTextViewCoolentLevelVal.setText(dgCheckPointsData.get(index).getCoolentLevel());
@@ -301,13 +316,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                     mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevelVal.setText(dgCheckPointsData.get(index).getEngineLubeOilLevel());
                     mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatusVal.setText(dgCheckPointsData.get(index).getSafetyWorkingStatus());
                     mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal.setText(dgCheckPointsData.get(index).getPowerCableConnectionStatus());
-                    mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText(dgCheckPointsData.get(index).getRegisterFault());
-                    mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText(dgCheckPointsData.get(index).getTypeOfFault());
 
-                    if (dgCheckPointsData.get(index).getTypeOfFault() != null && dgCheckPointsData.get(index).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
-                        //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(index).getTypeOfFault());
-                        setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
-                    }
 
                     mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading.setVisibility(View.GONE);
                     mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
@@ -392,8 +401,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         String engineLubeOilLevel = mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevelVal.getText().toString().trim();
         String safetyWorkingStatus = mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatusVal.getText().toString().trim();
         String powerCableConnectionStatus = mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
 
         if (detailsOfDgQrCodeScan.isEmpty() || detailsOfDgQrCodeScan == null) {
             showToast("Please Scan QR Code");
@@ -401,32 +409,26 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         } else if (dgHmrReading.isEmpty() || dgHmrReading == null) {
             showToast("Please Enter DG HMR Reading");
             return false;
-        }else if (base64StringTakePhotoOfDgHmr.isEmpty() || base64StringTakePhotoOfDgHmr == null) {
+        } else if (base64StringTakePhotoOfDgHmr.isEmpty() || base64StringTakePhotoOfDgHmr == null) {
             showToast("Please Take A Photo Of DG HMR ");
             return false;
-        }else if (dgWorkingCondition.isEmpty() || dgWorkingCondition == null) {
+        } else if (dgWorkingCondition.isEmpty() || dgWorkingCondition == null) {
             showToast("Select DG Working Condition");
             return false;
-        }else if (coolentLevel.isEmpty() || coolentLevel == null) {
+        } else if (coolentLevel.isEmpty() || coolentLevel == null) {
             showToast("Select Coolent Level");
             return false;
-        }else if (beltTension.isEmpty() || beltTension == null) {
+        } else if (beltTension.isEmpty() || beltTension == null) {
             showToast("Select Belt Tension");
             return false;
-        }else if (engineLubeOilLevel.isEmpty() || engineLubeOilLevel == null) {
+        } else if (engineLubeOilLevel.isEmpty() || engineLubeOilLevel == null) {
             showToast("Select Engine Lube Oil Level");
             return false;
-        }else if (safetyWorkingStatus.isEmpty() || safetyWorkingStatus == null) {
+        } else if (safetyWorkingStatus.isEmpty() || safetyWorkingStatus == null) {
             showToast("Select Safety Working Status");
             return false;
-        }else if (powerCableConnectionStatus.isEmpty() || powerCableConnectionStatus == null) {
+        } else if (powerCableConnectionStatus.isEmpty() || powerCableConnectionStatus == null) {
             showToast("Select Power Cable Connection Status");
-            return false;
-        } else if (registerFault.isEmpty() || registerFault == null) {
-            showToast("Select Register Fault");
-            return false;
-        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
-            showToast("Select Type of Fault");
             return false;
         } else return true;
 
@@ -444,8 +446,8 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         String engineLubeOilLevel = mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevelVal.getText().toString().trim();
         String safetyWorkingStatus = mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatusVal.getText().toString().trim();
         String powerCableConnectionStatus = mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+        /*String registerFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();*/
 
 
         //String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, String imageFileUploadPhotoOfSitePremises,
@@ -453,7 +455,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         // String powerCableConnectionStatus, String registerFault, String typeOfFault
         DgCheckPointsData dgCheckPointsChild = new DgCheckPointsData(detailsOfDgQrCodeScan, dgHmrReading,
                 base64StringTakePhotoOfDgHmr, /*imageFilePhotoOfDgHmr,*/ dgWorkingCondition, coolentLevel, beltTension, engineLubeOilLevel, safetyWorkingStatus,
-                powerCableConnectionStatus, registerFault, typeOfFault);
+                powerCableConnectionStatus/*, registerFault, typeOfFault*/);
 
         if (dgCheckPointsData.size() > 0) {
             if (pos == dgCheckPointsData.size()) {
@@ -502,10 +504,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                 }
             }*/
 
-            //String detailsOfDgQrCodeScan = base64StringDgCheckPointsQRCodeScan;
-            //String base64StringTakePhotoOfDgHmr = base64StringPhotoOfDgHmr;
-            //String imageFileUploadPhotoOfSitePremises= "";
-
             mPreventiveMaintenanceSiteDgCheckPointsEditTextDgHmrReading.setText(dgCheckPointsData.get(pos).getDgHmrReading());
             mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingConditionVal.setText(dgCheckPointsData.get(pos).getDgWorkingCondition());
             mPreventiveMaintenanceSiteDgCheckPointsTextViewCoolentLevelVal.setText(dgCheckPointsData.get(pos).getCoolentLevel());
@@ -513,15 +511,14 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevelVal.setText(dgCheckPointsData.get(pos).getEngineLubeOilLevel());
             mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatusVal.setText(dgCheckPointsData.get(pos).getSafetyWorkingStatus());
             mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal.setText(dgCheckPointsData.get(pos).getPowerCableConnectionStatus());
-            mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText(dgCheckPointsData.get(pos).getRegisterFault());
+            /*mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText(dgCheckPointsData.get(pos).getRegisterFault());
             mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText(dgCheckPointsData.get(pos).getTypeOfFault());
 
             if (dgCheckPointsData.get(pos).getTypeOfFault() != null && dgCheckPointsData.get(pos).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
                 alreadySelectedTypeOfFaultList = new ArrayList<>();
-                //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(pos).getTypeOfFault());
                 setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
                 setMultiSelectModel();
-            }
+            }*/
 
             mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
@@ -551,9 +548,12 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         try {
 
             String noOfDgAvailableAtSite = mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.getText().toString().trim();
+            String registerFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+            String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
             //String numberOfEarthPitVisible = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim();
 
-            dataList = new DgCheckPointsParentData(noOfDgAvailableAtSite, dgCheckPointsData);
+            dataList = new DgCheckPointsParentData(noOfDgAvailableAtSite, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault, dgCheckPointsData);
 
             pmSiteTransactionDetails.setDgCheckPointsParentData(dataList);
 
@@ -577,8 +577,8 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteDgCheckPointsTextViewEngineLubeOilLevelVal.setText("");
         mPreventiveMaintenanceSiteDgCheckPointsTextViewSafetyWorkingStatusVal.setText("");
         mPreventiveMaintenanceSiteDgCheckPointsTextViewPowerCableConnectionStatusVal.setText("");
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText("");
-        mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText("");
+        //mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.setText("");
+        //mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText("");
 
         str_pmSiteDgcpDGWorkingConditionVal = "";
         str_pmSiteDgcpCoolentLevelVal = "";
@@ -586,8 +586,8 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         str_pmSiteDgcpEngineLubeOilLevelVal = "";
         str_pmSiteDgcpSafetyWorkingStatusVal = "";
         str_pmSiteDgcpPowerCableConnectionStatusVal = "";
-        str_pmSiteDgcpRegisterFaultVal = "";
-        str_pmSiteDgcpTypeOfFaultVal = "";
+        //str_pmSiteDgcpRegisterFaultVal = "";
+        //str_pmSiteDgcpTypeOfFaultVal = "";
 
         base64StringDgCheckPointsQRCodeScan = "";
         base64StringPhotoOfDgHmr = "";
@@ -602,31 +602,30 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
     public boolean checkValidationOnChangeNoOfDgAvailable(String NoOfDgAvailable, String methodFlag) {
 
+        String registerFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+        /*else if (registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type of Fault");
+            return false;
+        }*/
+
+
         if (NoOfDgAvailable.isEmpty() || NoOfDgAvailable == null) {
             showToast("Select No of DG Available");
+            return false;
+        } else if (registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type of Fault");
             return false;
         } else if ((dgCheckPointsData.size() != Integer.valueOf(NoOfDgAvailable) && methodFlag.equals("onSubmit"))) {
             showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
             return false;
         } else return true;
-
-
-        /*String noOfEarthPitValue, String noOfEarthPitValueVisible,
-        if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
-            showToast("Select No of Earth Pit");
-            return false;
-        } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {
-            if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
-                showToast("Select Number of Earth Pit Visible");
-                return false;
-            } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
-                showToast("Select Earth Pit Visible is less than or equal to Earth Pit");
-                return false;
-            } else if ((dgCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
-                showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
-                return false;
-            } else return true;
-        } else return true;*/
 
     }
 
@@ -635,10 +634,17 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
     private void visibilityOfTypesOfFault(String RegisterFault) {
 
         mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-            //mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteDgCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
+        } else {
+            mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+            base64StringUploadPhotoOfRegisterFault = "";
+            imageFileUploadPhotoOfRegisterFault = "";
         }
+
     }
 
     private void initCombo() {
@@ -655,15 +661,10 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        /*str_pmSiteDgcpNoOfDgAvailableAtSiteVal = item.get(position);
-                        mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.setText(str_pmSiteDgcpNoOfDgAvailableAtSiteVal);*/
-                        /////
-
 
                         str_pmSiteDgcpNoOfDgAvailableAtSiteVal = item.get(position);
                         invalidateOptionsMenu();
                         mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.setText(str_pmSiteDgcpNoOfDgAvailableAtSiteVal);
-                        //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.setText("");//008
 
                         if (dgCheckPointsData != null && dgCheckPointsData.size() > 0) {
                             dgCheckPointsData.clear();
@@ -675,12 +676,10 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         // Clear all field value and hide layout If Non AC or O //
                         if (str_pmSiteDgcpNoOfDgAvailableAtSiteVal.equals("0")) {
                             mLinearLayoutContainer.setVisibility(View.GONE);
-                            //mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
                         } else {
                             totalAcCount = Integer.parseInt(str_pmSiteDgcpNoOfDgAvailableAtSiteVal);
                             mPreventiveMaintenanceSiteDgCheckPointsTextViewDgNumber.setText("Reading: #1");
                             mLinearLayoutContainer.setVisibility(View.VISIBLE);
-                            //mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.VISIBLE);
                             mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading.setVisibility(View.GONE);
                             mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
                             if (totalAcCount > 0 && totalAcCount == 1) {
@@ -869,7 +868,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -885,12 +884,11 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
-                        //if (checkValidationOnNoOfAcSelection() == true) {
+                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                         if (checkValidationOnChangeNoOfDgAvailable(mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                             submitDetails();
                             startActivity(new Intent(PreventiveMaintenanceSiteDgCheckPointsActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
@@ -944,6 +942,26 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             }
         });
 
+        mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    UploadPhotoOfRegisterFault();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteDgCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteDgCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     private void PhotoOfDgHmr() {
@@ -982,8 +1000,22 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         }
     }
 
-    private boolean checkCameraPermission() {
+    private void UploadPhotoOfRegisterFault() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_alarmCheckReg.jpg";
 
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfRegisterFault);
+            imageFileUriUploadPhotoOfRegisterFault = FileProvider.getUriForFile(PreventiveMaintenanceSiteDgCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriUploadPhotoOfRegisterFault);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteDgCheckPointsActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(PreventiveMaintenanceSiteDgCheckPointsActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         } else {
@@ -1039,6 +1071,28 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                         }*/
                     }
+                }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfRegisterFault = "";
+                    imageFileUriUploadPhotoOfRegisterFault = null;
+                    mPreventiveMaintenanceSiteDgCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
                 }
                 break;
         }

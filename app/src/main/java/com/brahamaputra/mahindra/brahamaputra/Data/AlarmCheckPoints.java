@@ -63,7 +63,7 @@ public class AlarmCheckPoints implements Serializable {
         this.remarks = "";
         this.registerFault = "";
         this.typeOfFault = "";
-        base64StringUploadPhotoOfRegisterFault = "";
+        this.base64StringUploadPhotoOfRegisterFault = "";
         isSubmited = 0;
     }
 

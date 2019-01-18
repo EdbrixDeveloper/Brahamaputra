@@ -39,12 +39,7 @@ public class DgCheckPointsData implements Serializable {
     @SerializedName("powerCableConnectionStatus")
     @Expose
     private String powerCableConnectionStatus;
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
+
 
     /*private String imageFileTakePhotoOfDgHmr;*/
 
@@ -66,12 +61,11 @@ public class DgCheckPointsData implements Serializable {
         this.engineLubeOilLevel = "";
         this.safetyWorkingStatus = "";
         this.powerCableConnectionStatus = "";
-        this.registerFault = "";
-        this.typeOfFault = "";
+
         /*this.imageFileTakePhotoOfDgHmr = "";*/
     }
 
-    public DgCheckPointsData(String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, /*String imageFileTakePhotoOfDgHmr,*/ String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus, String powerCableConnectionStatus, String registerFault, String typeOfFault) {
+    public DgCheckPointsData(String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, /*String imageFileTakePhotoOfDgHmr,*/ String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus, String powerCableConnectionStatus) {
         this.detailsOfDgQrCodeScan = detailsOfDgQrCodeScan;
         this.dgHmrReading = dgHmrReading;
         this.base64StringTakePhotoOfDgHmr = base64StringTakePhotoOfDgHmr;
@@ -82,8 +76,7 @@ public class DgCheckPointsData implements Serializable {
         this.engineLubeOilLevel = engineLubeOilLevel;
         this.safetyWorkingStatus = safetyWorkingStatus;
         this.powerCableConnectionStatus = powerCableConnectionStatus;
-        this.registerFault = registerFault;
-        this.typeOfFault = typeOfFault;
+
     }
 
     public String getDetailsOfDgQrCodeScan() {
@@ -158,18 +151,6 @@ public class DgCheckPointsData implements Serializable {
         this.powerCableConnectionStatus = powerCableConnectionStatus;
     }
 
-    public String getRegisterFault() {
-        return registerFault;
-    }
-
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
     /*public String getImageFileTakePhotoOfDgHmr() {
         return imageFileTakePhotoOfDgHmr;
     }
@@ -178,8 +159,5 @@ public class DgCheckPointsData implements Serializable {
         this.imageFileTakePhotoOfDgHmr = imageFileTakePhotoOfDgHmr;
     }*/
 
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
-    }
 
 }
