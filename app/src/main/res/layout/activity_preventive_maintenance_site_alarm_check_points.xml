@@ -261,7 +261,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="REMARKS" />
+                    android:text="Remarks" />
 
                 <EditText
                     android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_textView_remarksVal"
@@ -328,6 +328,46 @@
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_linearLayout_uploadPhotoOfRegisterFault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_textView_uploadPhotoOfRegisterFault"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Upload Photo"
+                    android:textColor="@color/colorBlueLink" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_button_uploadPhotoOfRegisterFault"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteAlarmCheckPoints_button_uploadPhotoOfRegisterFaultView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

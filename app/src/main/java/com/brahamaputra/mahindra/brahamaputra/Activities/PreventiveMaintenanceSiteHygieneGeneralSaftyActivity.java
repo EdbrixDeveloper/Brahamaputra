@@ -1022,7 +1022,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private void UploadPhotoOfRegisterFault() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremisesReg.jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfRegisterFault);
             imageFileUriUploadPhotoOfRegisterFault = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
@@ -1090,7 +1090,10 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
             mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
             base64StringUploadPhotoOfRegisterFault = "";
+            imageFileUploadPhotoOfRegisterFault = "";
+
         }
     }
 

@@ -42,6 +42,9 @@ public class AlarmCheckPoints implements Serializable {
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    private String base64StringUploadPhotoOfRegisterFault;
 
     @SerializedName("isSubmited")
     private int isSubmited;
@@ -60,10 +63,13 @@ public class AlarmCheckPoints implements Serializable {
         this.remarks = "";
         this.registerFault = "";
         this.typeOfFault = "";
+        base64StringUploadPhotoOfRegisterFault = "";
         isSubmited = 0;
     }
 
-    public AlarmCheckPoints(String detailsOfWrmsQrCodeScan, String doorOpenAlarm, String dgOn, String dgOutputAvailable, String highRoomTemp, String fireSmoke, String powerPlantFailure, String alarmConfirmedByNoc, String remarks, String registerFault, String typeOfFault) {
+    public AlarmCheckPoints(String detailsOfWrmsQrCodeScan, String doorOpenAlarm, String dgOn, String dgOutputAvailable, String highRoomTemp,
+                            String fireSmoke, String powerPlantFailure, String alarmConfirmedByNoc, String remarks, String registerFault,
+                            String typeOfFault, String base64StringUploadPhotoOfRegisterFault) {
         this.detailsOfWrmsQrCodeScan = detailsOfWrmsQrCodeScan;
         this.doorOpenAlarm = doorOpenAlarm;
         this.dgOn = dgOn;
@@ -75,6 +81,7 @@ public class AlarmCheckPoints implements Serializable {
         this.remarks = remarks;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
         /*this.isSubmited = 2;*/
         if (!this.detailsOfWrmsQrCodeScan.isEmpty() && !this.doorOpenAlarm.isEmpty() && !this.dgOn.isEmpty()) {
             this.isSubmited = 2;
@@ -169,6 +176,14 @@ public class AlarmCheckPoints implements Serializable {
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
     }
 
     public int getSubmited() {
