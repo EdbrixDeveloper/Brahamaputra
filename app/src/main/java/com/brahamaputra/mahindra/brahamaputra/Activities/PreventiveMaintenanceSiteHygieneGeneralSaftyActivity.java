@@ -120,6 +120,11 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFault;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal;
 
+    private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView;
+
 
     String str_pmSitePremisesCleaningVal = "";
     String str_pmSiteanyEagleOrCrowOrHoneyHivesInTowerVal = "";
@@ -142,21 +147,25 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_WarningSignBoard = 103;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_DangerSignBoard = 104;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
 
     private String base64StringUploadPhotoOfSitePremises = "";
     private String base64StringCautionSignBoard = "";
     private String base64StringWarningSignBoard = "";
     private String base64StringDangerSignBoard = "";
+    private String base64StringUploadPhotoOfRegisterFault = "";
 
     private String imageFileUploadPhotoOfSitePremises;
     private String imageFileCautionSignBoard;
     private String imageFileWarningSignBoard;
     private String imageFileDangerSignBoard;
+    private String imageFileUploadPhotoOfRegisterFault;
 
     private Uri imageFileUriUploadPhotoOfSitePremises = null;
     private Uri imageFileUriCautionSignBoard = null;
     private Uri imageFileUriWarningSignBoard = null;
     private Uri imageFileUriDangerSignBoard = null;
+    private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -196,6 +205,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private String unusedMaterialInSite;
     private String registerFault;
     private String typeOfFault;
+    private String base64StringUploadPhotoOfRegisterFault;
     private int isSubmited;*/
 
 
@@ -324,6 +334,11 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_typesOfFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFault);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_typesOfFaultVal);
+
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUploadPhotoOfRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFault = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteHygieneGeneralSafty_button_uploadPhotoOfRegisterFaultView);
     }
 
     public void setMultiSelectModel() {
@@ -359,10 +374,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
-
                 Gson gson = new Gson();
-//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
 
                 pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
 
@@ -371,7 +383,6 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                     siteHygenSaftyDetailsData = pmSiteTransactionDetails.getSiteHygenieneGenralSeftyParameter();
 
                     if (siteHygenSaftyDetailsData != null) {
-
 
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.setText(siteHygenSaftyDetailsData.getSitePremisesCleaning());
                         this.base64StringUploadPhotoOfSitePremises = siteHygenSaftyDetailsData.getBase64StringUploadPhotoOfSitePremises();
@@ -392,6 +403,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal.setText(siteHygenSaftyDetailsData.getUnusedMaterialInSite());
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.setText(siteHygenSaftyDetailsData.getRegisterFault());
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText(siteHygenSaftyDetailsData.getTypeOfFault());
+                        this.base64StringUploadPhotoOfRegisterFault = siteHygenSaftyDetailsData.getBase64StringUploadPhotoOfRegisterFault();
 
                         visibilityOfFireExtingisherAvailablity(mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewFireExtingisherAvailablityVal.getText().toString());
                         visibilityOfTypesOfFault(mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.getText().toString());
@@ -437,6 +449,18 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
                             imageFileUriDangerSignBoard = Uri.parse(path);
                         }
+
+
+                        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                        if (!this.base64StringUploadPhotoOfRegisterFault.isEmpty() && this.base64StringUploadPhotoOfRegisterFault != null) {
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                            Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfRegisterFault);
+                            inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                            imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
+                        }
+
 
                         /*imageFileUploadPhotoOfSitePremises = siteHygenSaftyDetailsData.getImageFileUploadPhotoOfSitePremises();
                         mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.GONE);
@@ -515,6 +539,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             String unusedMaterialInSite = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewUnusedMaterialInSiteVal.getText().toString().trim();
             String registerFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewRegisterFaultVal.getText().toString().trim();
             String typeOfFault = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.getText().toString().trim();
+            String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
             //int isSubmited = mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal.getText().toString().trim();
 
 
@@ -522,7 +547,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                     anyEagleCrowHoneyHivesInTower, compoundWallFencingStatus, gateLockAvailablity, shelterLockAvailablity, dgLockAvailablity,
                     fireExtinguisherAvilability, noOfFireExtinguisher, fireExtinguisherExpiryDate, fireBucket, base64StringCautionSignBoardPhoto,
                     base64StringWarningSignBoardPhoto, base64StringDangerSignBoardPhoto, safetyChartsCalendar,
-                    unusedMaterialInSite, registerFault, typeOfFault/*,
+                    unusedMaterialInSite, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault/*,
                     imageFileUploadPhotoOfSitePremises, imageFileCautionSignBoard,
                     imageFileWarningSignBoard, imageFileDangerSignBoard*/);
 
@@ -867,6 +892,14 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 }
             }
         });
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    UploadPhotoOfRegisterFault();
+                }
+            }
+        });
 
         //////////////////////////
 
@@ -905,6 +938,17 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             public void onClick(View v) {
                 if (imageFileUriDangerSignBoard != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriDangerSignBoard);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
                     Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
                 }
@@ -975,6 +1019,21 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
     }
 
+    private void UploadPhotoOfRegisterFault() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfRegisterFault);
+            imageFileUriUploadPhotoOfRegisterFault = FileProvider.getUriForFile(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriUploadPhotoOfRegisterFault);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private boolean checkCameraPermission() {
 
         if (ContextCompat.checkSelfPermission(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -1025,9 +1084,13 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private void visibilityOfTypesOfFault(String RegisterFault) {
 
         mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-            mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
+        } else {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
+            base64StringUploadPhotoOfRegisterFault = "";
         }
     }
 
@@ -1118,6 +1181,28 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                     mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.GONE);
                 }
                 break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfRegisterFault = "";
+                    imageFileUriUploadPhotoOfRegisterFault = null;
+                    mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                }
+                break;
         }
 
     }
@@ -1139,11 +1224,11 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             case R.id.menuSubmit:
                 /*if(checkValidationOfArrayFields() == true)
                 {*/
-                    submitDetails();
-                    startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
-                    finish();
-                    return true;
-               /* }*/
+                submitDetails();
+                startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
+                finish();
+                return true;
+            /* }*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -1179,61 +1264,61 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         if (sitePremisesCleaning.isEmpty() || sitePremisesCleaning == null) {
             showToast("Select Site Premises Cleaning");
             return false;
-        }else if(uploadPhotoOfSitePremises.isEmpty() || uploadPhotoOfSitePremises == null) {
+        } else if (uploadPhotoOfSitePremises.isEmpty() || uploadPhotoOfSitePremises == null) {
             showToast("Select Upload Photo Of Site Premises");
             return false;
-        }else if(equipmentCleaning.isEmpty() || equipmentCleaning == null) {
+        } else if (equipmentCleaning.isEmpty() || equipmentCleaning == null) {
             showToast("Select Equipment Cleaning");
             return false;
-        }else if(anyEagleCrowHoneyHivesInTower.isEmpty() || anyEagleCrowHoneyHivesInTower == null) {
+        } else if (anyEagleCrowHoneyHivesInTower.isEmpty() || anyEagleCrowHoneyHivesInTower == null) {
             showToast("Select Any Eagle/Crow/Honey Hives In Tower");
             return false;
-        }else if(compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) {
+        } else if (compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) {
             showToast("Select Compound Wall Fencing Status");
             return false;
-        }else if(gateLockAvailability.isEmpty() || gateLockAvailability == null) {
+        } else if (gateLockAvailability.isEmpty() || gateLockAvailability == null) {
             showToast("Select Gate Lock Availability");
             return false;
-        }else if(shelterLockAvailability.isEmpty() || shelterLockAvailability == null) {
+        } else if (shelterLockAvailability.isEmpty() || shelterLockAvailability == null) {
             showToast("Select Shelter Lock Availability");
             return false;
-        }else if(dgLockAvailability.isEmpty() || dgLockAvailability == null) {
+        } else if (dgLockAvailability.isEmpty() || dgLockAvailability == null) {
             showToast("Select DG Lock Availability");
             return false;
-        }else if(fireExtinguisherAvaliability.isEmpty() || fireExtinguisherAvaliability == null) {
+        } else if (fireExtinguisherAvaliability.isEmpty() || fireExtinguisherAvaliability == null) {
             showToast("Select Fire Extinguisher Avaliability");
             return false;
-        }else if(noOfFireExtingusher.isEmpty() || noOfFireExtingusher == null) {
+        } else if (noOfFireExtingusher.isEmpty() || noOfFireExtingusher == null) {
             showToast("Select No Of Fire Extingusher");
             return false;
-        }else if(fireExtinguisherExpiryDate.isEmpty() || fireExtinguisherExpiryDate == null) {
+        } else if (fireExtinguisherExpiryDate.isEmpty() || fireExtinguisherExpiryDate == null) {
             showToast("Select Fire Extinguisher Expiry Date");
             return false;
-        }else if(fireBucket.isEmpty() || fireBucket == null) {
+        } else if (fireBucket.isEmpty() || fireBucket == null) {
             showToast("Select Fire Bucket");
             return false;
-        }else if(cautionSignBoardPhoto.isEmpty() || cautionSignBoardPhoto == null) {
+        } else if (cautionSignBoardPhoto.isEmpty() || cautionSignBoardPhoto == null) {
             showToast("Select Caution Sign Board Photo");
             return false;
-        }else if(warningSignBoardPhoto.isEmpty() || warningSignBoardPhoto == null) {
+        } else if (warningSignBoardPhoto.isEmpty() || warningSignBoardPhoto == null) {
             showToast("Select Warning Sign Board Photo");
             return false;
-        }else if(dangerSignBoardPhoto.isEmpty() || dangerSignBoardPhoto == null) {
+        } else if (dangerSignBoardPhoto.isEmpty() || dangerSignBoardPhoto == null) {
             showToast("Select Danger Sign Board Photo");
             return false;
-        }else if(safetyChartsAndCalender.isEmpty() || safetyChartsAndCalender == null) {
+        } else if (safetyChartsAndCalender.isEmpty() || safetyChartsAndCalender == null) {
             showToast("Select Safety Charts And Calender");
             return false;
-        }else if(unusedMaterialInSite.isEmpty() || unusedMaterialInSite == null) {
+        } else if (unusedMaterialInSite.isEmpty() || unusedMaterialInSite == null) {
             showToast("Select Unused Material In Site");
             return false;
-        }else if(registerFault.isEmpty() || registerFault == null) {
+        } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
-        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        }else return true;
+        } else return true;
     }
 
 }

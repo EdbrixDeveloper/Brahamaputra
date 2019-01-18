@@ -65,6 +65,9 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    private String base64StringUploadPhotoOfRegisterFault;
 
     @SerializedName("isSubmited")
     private int isSubmited;
@@ -96,7 +99,7 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
         this.unusedMaterialInSite = "";
         this.registerFault = "";
         this.typeOfFault = "";
-
+        this.base64StringUploadPhotoOfRegisterFault = "";
         /*this.imageFileUploadPhotoOfSitePremises = "";
         this.imageFileCautionSignBoard = "";
         this.imageFileWarningSignBoard = "";
@@ -111,7 +114,7 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
                                              String shelterLockAvailablity, String dgLockAvailablity, String fireExtinguisherAvilability, String noOfFireExtinguisher,
                                              String fireExtinguisherExpiryDate, String fireBucket, String base64StringCautionSignBoardPhoto,
                                              String base64StringWarningSignBoardPhoto, String base64StringDangerSignBoardPhoto, String safetyChartsCalendar,
-                                             String unusedMaterialInSite, String registerFault, String typeOfFault/*,
+                                             String unusedMaterialInSite, String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault/*,
                                              String imageFileUploadPhotoOfSitePremises, String imageFileCautionSignBoard,
                                              String imageFileWarningSignBoard, String imageFileDangerSignBoard*/) {
         this.sitePremisesCleaning = sitePremisesCleaning;
@@ -133,6 +136,7 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
         this.unusedMaterialInSite = unusedMaterialInSite;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
 
         /*this.imageFileUploadPhotoOfSitePremises = imageFileUploadPhotoOfSitePremises;
         this.imageFileCautionSignBoard = imageFileCautionSignBoard;
@@ -305,6 +309,13 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
         this.typeOfFault = typeOfFault;
     }
 
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
+    }
 
     /*public String getImageFileUploadPhotoOfSitePremises() {
         return imageFileUploadPhotoOfSitePremises;
