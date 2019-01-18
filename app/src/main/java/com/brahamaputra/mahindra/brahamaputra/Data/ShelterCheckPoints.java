@@ -30,6 +30,10 @@ public class ShelterCheckPoints implements Serializable
     @Expose
     private String typeOfFault;
 
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    String base64StringUploadPhotoOfRegisterFault;
+
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
@@ -43,10 +47,11 @@ public class ShelterCheckPoints implements Serializable
         this.shelterEarthingStatus = "";
         this.registerFault = "";
         this.typeOfFault = "";
+        this.base64StringUploadPhotoOfRegisterFault = "";
         this.isSubmited = 0;
     }
 
-    public ShelterCheckPoints(String shelterCleaning, String shelterLeakage, String hatchPlateEntrySealed, String shelterFloorStatus, String shelterEarthingStatus, String resultFault, String typeOfFault) {
+    public ShelterCheckPoints(String shelterCleaning, String shelterLeakage, String hatchPlateEntrySealed, String shelterFloorStatus, String shelterEarthingStatus, String resultFault, String typeOfFault,String base64StringUploadPhotoOfRegisterFault) {
         this.shelterCleaning = shelterCleaning;
         this.hatchPlateEntrysealed = hatchPlateEntrySealed;
         this.shelterLeakage = shelterLeakage;
@@ -54,6 +59,7 @@ public class ShelterCheckPoints implements Serializable
         this.shelterEarthingStatus = shelterEarthingStatus;
         this.registerFault = resultFault;
         this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault=base64StringUploadPhotoOfRegisterFault;
 
          if (!this.shelterCleaning.isEmpty() && !this.hatchPlateEntrysealed.isEmpty() && !this.shelterLeakage.isEmpty()) {
             this.isSubmited = 2;
@@ -116,6 +122,14 @@ public class ShelterCheckPoints implements Serializable
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
     }
 
     public int getSubmited() {
