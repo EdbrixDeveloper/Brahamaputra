@@ -86,7 +86,7 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout
@@ -111,7 +111,7 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,7 +136,7 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout
@@ -161,7 +161,7 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"/>
+                    android:textAlignment="viewStart" />
             </LinearLayout>
 
             <LinearLayout
@@ -190,6 +190,47 @@
                     android:hint="Select"
                     android:textAlignment="viewStart"></TextView>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteServoCheckPoints_linearLayout_uploadPhotoOfRegisterFault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteServoCheckPoints_textView_uploadPhotoOfRegisterFault"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Upload Photo"
+                    android:textColor="@color/colorBlueLink" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteServoCheckPoints_button_uploadPhotoOfRegisterFault"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteServoCheckPoints_button_uploadPhotoOfRegisterFaultView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
