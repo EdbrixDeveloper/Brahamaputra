@@ -880,8 +880,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         } else {
             return true;
         }
-
-
         return false;
     }
 

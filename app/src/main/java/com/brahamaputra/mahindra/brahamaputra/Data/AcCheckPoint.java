@@ -44,12 +44,8 @@ public class AcCheckPoint implements Serializable
     @SerializedName("shelterDoorStatus")
     @Expose
     private String shelterDoorStatus;
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
+
+
 
 
     private final static long serialVersionUID = -6436987330345681329L;
@@ -67,10 +63,9 @@ public class AcCheckPoint implements Serializable
         this.shelterTemperature = "";
         this.base64TakePhotoOfTemperature = "";
         this.shelterDoorStatus = "";
-        this.registerFault = "";
-        this.typeOfFault = "";
+
     }
-    public AcCheckPoint(String detailsOfAcQrCodeScan, String workingConditionOfAc, String automationOfAcController, String acEarthingStatus, String acFilterStatus, String base64TakePhotoOfAcFiltersBeforeCleaning, String base64TakePhotoOfAcFiltersAfterCleaning, String cleaningOfCoolingCondensorCoils, String anyAbnormalSoundFromMotor, String shelterTemperature, String base64TakePhotoOfTemperature, String shelterDoorStatus, String registerFault, String typeOfFault) {
+    public AcCheckPoint(String detailsOfAcQrCodeScan, String workingConditionOfAc, String automationOfAcController, String acEarthingStatus, String acFilterStatus, String base64TakePhotoOfAcFiltersBeforeCleaning, String base64TakePhotoOfAcFiltersAfterCleaning, String cleaningOfCoolingCondensorCoils, String anyAbnormalSoundFromMotor, String shelterTemperature, String base64TakePhotoOfTemperature, String shelterDoorStatus) {
         this.detailsOfAcQrCodeScan = detailsOfAcQrCodeScan;
         this.workingConditionOfAc = workingConditionOfAc;
         this.automationOfAcController = automationOfAcController;
@@ -83,8 +78,7 @@ public class AcCheckPoint implements Serializable
         this.shelterTemperature = shelterTemperature;
         this.base64TakePhotoOfTemperature = base64TakePhotoOfTemperature;
         this.shelterDoorStatus = shelterDoorStatus;
-        this.registerFault = registerFault;
-        this.typeOfFault = typeOfFault;
+
     }
 
     public String getDetailsOfAcQrCodeScan() {
@@ -183,20 +177,6 @@ public class AcCheckPoint implements Serializable
         this.shelterDoorStatus = shelterDoorStatus;
     }
 
-    public String getRegisterFault() {
-        return registerFault;
-    }
 
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
-    }
 
 }

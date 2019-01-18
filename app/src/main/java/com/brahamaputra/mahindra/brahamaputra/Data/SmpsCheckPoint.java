@@ -29,12 +29,9 @@ public class SmpsCheckPoint implements Serializable
     @SerializedName("dcLoadAmpPh")
     @Expose
     private String dcLoadAmpPh;
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
+
+
+
     private final static long serialVersionUID = 311885327518270776L;
 
     public String getDetailsOfSmpsQrCodeScan() {
@@ -93,24 +90,8 @@ public class SmpsCheckPoint implements Serializable
         this.dcLoadAmpPh = dcLoadAmpPh;
     }
 
-    public String getRegisterFault() {
-        return registerFault;
-    }
 
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
-    }
-
-
-    public SmpsCheckPoint(String detailsOfSmpsQrCodeScan, String smpsCondition, String smpsControlerStatus, String smpsEarthingStatus, String dcLoadCurrentInFloat, String base64DcLoadCurrentPhoto, String dcLoadAmpPh, String registerFault, String typeOfFault) {
+    public SmpsCheckPoint(String detailsOfSmpsQrCodeScan, String smpsCondition, String smpsControlerStatus, String smpsEarthingStatus, String dcLoadCurrentInFloat, String base64DcLoadCurrentPhoto, String dcLoadAmpPh) {
         this.detailsOfSmpsQrCodeScan = detailsOfSmpsQrCodeScan;
         this.smpsCondition = smpsCondition;
         this.smpsControlerStatus = smpsControlerStatus;
@@ -118,8 +99,7 @@ public class SmpsCheckPoint implements Serializable
         this.dcLoadCurrentInFloat = dcLoadCurrentInFloat;
         this.base64DcLoadCurrentPhoto = base64DcLoadCurrentPhoto;
         this.dcLoadAmpPh = dcLoadAmpPh;
-        this.registerFault = registerFault;
-        this.typeOfFault = typeOfFault;
+
     }
     public SmpsCheckPoint(){
         this.detailsOfSmpsQrCodeScan = "";
@@ -129,7 +109,5 @@ public class SmpsCheckPoint implements Serializable
         this.dcLoadCurrentInFloat = "";
         this.base64DcLoadCurrentPhoto = "";
         this.dcLoadAmpPh = "";
-        this.registerFault = "";
-        this.typeOfFault = "";
     }
 }

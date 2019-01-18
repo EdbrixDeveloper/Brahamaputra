@@ -579,6 +579,9 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                 smpsCheckPointsData.addAll(dataList.getSmpsCheckPointsData());
 
                 mPreventiveMaintenanceSiteSmpsCheckPointsTextViewNoOfSmpsAvailableAtSiteVal.setText(dataList.getNoOfSmpsAvailableAtSite());
+                mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
+                mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
+
                 str_noOfSmpsAvailableAtSiteVal = dataList.getNoOfSmpsAvailableAtSite();
                 invalidateOptionsMenu();
 
@@ -590,8 +593,6 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                     mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.setText(smpsCheckPointsData.get(index).getSmpsCondition());
                     mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsControlerStatusVal.setText(smpsCheckPointsData.get(index).getSmpsControlerStatus());
                     mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsEarthingStatusVal.setText(smpsCheckPointsData.get(index).getSmpsEarthingStatus());
-                    mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText(smpsCheckPointsData.get(index).getRegisterFault());
-                    mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText(smpsCheckPointsData.get(index).getTypeOfFault());
                     mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadCurrent.setText(smpsCheckPointsData.get(index).getDcLoadCurrentInFloat());
                     mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadAmpPh.setText(smpsCheckPointsData.get(index).getDcLoadAmpPh());
 
@@ -641,8 +642,6 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         String smpsCondition = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.getText().toString().trim();
         String smpsControlerStatus = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsControlerStatusVal.getText().toString().trim();
         String smpsEarthingStatus = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsEarthingStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         String dcLoadCurrentInFloat = mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadCurrent.getText().toString().trim();
         String dcLoadAmpPh = mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadAmpPh.getText().toString().trim();
         String detailsOfSmpsQrCodeScan = base64StringSmpsCheckPointsQRCodeScan;
@@ -650,7 +649,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
 
         SmpsCheckPoint smpsCheckPointchild = new SmpsCheckPoint(detailsOfSmpsQrCodeScan, smpsCondition, smpsControlerStatus,
                                                             smpsEarthingStatus, dcLoadCurrentInFloat, base64DcLoadCurrentPhoto,
-                                                            dcLoadAmpPh, registerFault, typeOfFault);
+                                                            dcLoadAmpPh);
         if (smpsCheckPointsData.size() > 0) {
             if (pos == smpsCheckPointsData.size()) {
                 smpsCheckPointsData.add(smpsCheckPointchild);
@@ -671,8 +670,8 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
             mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.setText(smpsCheckPointsData.get(pos).getSmpsCondition());
             mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsControlerStatusVal.setText(smpsCheckPointsData.get(pos).getSmpsControlerStatus());
             mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsEarthingStatusVal.setText(smpsCheckPointsData.get(pos).getSmpsEarthingStatus());
-            mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText(smpsCheckPointsData.get(pos).getRegisterFault());
-            mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText(smpsCheckPointsData.get(pos).getTypeOfFault());
+           /* mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText(smpsCheckPointsData.get(pos).getRegisterFault());
+            mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText(smpsCheckPointsData.get(pos).getTypeOfFault());*/
             mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadCurrent.setText(smpsCheckPointsData.get(pos).getDcLoadCurrentInFloat());
             mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadAmpPh.setText(smpsCheckPointsData.get(pos).getDcLoadAmpPh());
 
@@ -740,7 +739,10 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     private void submitDetails() {
         try {
             String noOfsmpsAtSite = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewNoOfSmpsAvailableAtSiteVal.getText().toString().trim();
-            dataList = new SmpsCheckPointParentData(noOfsmpsAtSite, smpsCheckPointsData);
+            String registerFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+            dataList = new SmpsCheckPointParentData(noOfsmpsAtSite, smpsCheckPointsData,registerFault,typeOfFault);
             pmSiteTransactionDetails.setSmpsCheckPointParentData(dataList);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);

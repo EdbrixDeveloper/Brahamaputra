@@ -806,6 +806,9 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 acCheckPointsData.addAll(dataList.getAcCheckPoints());
 
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.setText(dataList.getNoOfAcAvailableAtsite());
+                mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
+                mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
+
                 str_pmSiteAcpNoOfAcAvailableAtSiteVal = dataList.getNoOfAcAvailableAtsite();
                 invalidateOptionsMenu();
                 if (acCheckPointsData != null && acCheckPointsData.size() > 0) {
@@ -820,8 +823,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText(acCheckPointsData.get(index).getCleaningOfCoolingCondensorCoils());
                     mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText(acCheckPointsData.get(index).getAnyAbnormalSoundFromMotor());
                     mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(acCheckPointsData.get(index).getShelterDoorStatus());
-                    mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(acCheckPointsData.get(index).getRegisterFault());
-                    mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(acCheckPointsData.get(index).getTypeOfFault());
+
                     mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(acCheckPointsData.get(index).getShelterTemperature());
 
                     base64StringAcCheckPointsQRCodeScan = acCheckPointsData.get(index).getDetailsOfAcQrCodeScan();//////001
@@ -895,8 +897,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String cleaningOfCoolingCondensorCoils = mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.getText().toString().trim();
         String anyAbnormalSoundFromMotor = mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.getText().toString().trim();
         String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
         String detailsOfAcQrCodeScan = base64StringAcCheckPointsQRCodeScan;
         String base64TakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
@@ -907,7 +907,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                                                 acEarthingStatus, acFilterStatus, base64TakePhotoOfAcFiltersBeforeCleaning,
                                                 base64TakePhotoOfAcFiltersAfterCleaning, cleaningOfCoolingCondensorCoils,
                                                 anyAbnormalSoundFromMotor, shelterTemperature, base64TakePhotoOfTemperature,
-                                                shelterDoorStatus, registerFault, typeOfFault);
+                                                shelterDoorStatus);
         if (acCheckPointsData.size() > 0) {
             if (pos == acCheckPointsData.size()) {
                 acCheckPointsData.add(acCheckPointChild);
@@ -932,8 +932,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText(acCheckPointsData.get(pos).getCleaningOfCoolingCondensorCoils());
             mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText(acCheckPointsData.get(pos).getAnyAbnormalSoundFromMotor());
             mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(acCheckPointsData.get(pos).getShelterDoorStatus());
-            mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(acCheckPointsData.get(pos).getRegisterFault());
-            mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(acCheckPointsData.get(pos).getTypeOfFault());
+           /* mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(acCheckPointsData.get(pos).getRegisterFault());
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(acCheckPointsData.get(pos).getTypeOfFault());*/
             mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(acCheckPointsData.get(pos).getShelterTemperature());
 
             base64StringAcCheckPointsQRCodeScan = acCheckPointsData.get(pos).getDetailsOfAcQrCodeScan();//////001
@@ -1033,7 +1033,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     private void submitDetails() {
         try {
             String noOfAcAvailableAtSite = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
-            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite, acCheckPointsData);
+            String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+            
+            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite, acCheckPointsData,registerFault, typeOfFault);
             pmSiteTransactionDetails.setAcCheckPointParentData(dataList);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);

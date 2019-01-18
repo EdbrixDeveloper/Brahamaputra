@@ -65,7 +65,6 @@ public class ToastMessage extends ViewGroup {
             View toastLayout = inflater.inflate(R.layout.toast_layout,
                     (ViewGroup) findViewById(R.id.toast_layout_root));
 
-
             ImageView image = (ImageView) toastLayout.findViewById(R.id.image);
 //            image.setImageResource(R.drawable.white);
             image.setVisibility(GONE);

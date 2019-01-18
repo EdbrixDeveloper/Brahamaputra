@@ -42,6 +42,57 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_registerFault"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Register Fault" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_registerFaultVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_linearLayout_typeOfFault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFault"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Type of Fault" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFaultVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
             <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_linearLayout_numberOfACInWorkingCondition"
                 android:layout_width="match_parent"
@@ -90,7 +141,7 @@
                     android:background="#a40404" />
 
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
@@ -456,57 +507,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_registerFault"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Register Fault" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_registerFaultVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_linearLayout_typeOfFault"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFault"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Type of Fault" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFaultVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.6"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -545,6 +545,5 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 </android.support.constraint.ConstraintLayout>
