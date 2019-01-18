@@ -778,7 +778,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
-            mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.setText("");
+
             base64StringUploadPhotoOfRegisterFault = "";
             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);

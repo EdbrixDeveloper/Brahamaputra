@@ -82,6 +82,11 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     private Button mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading;
     private LinearLayout mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault;
 
+    private LinearLayout mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView;
+
 
     String str_noOfRectifierModuleAvailableAtSiteVal;
     String str_noOfModulesWorkingVal;
@@ -133,6 +138,12 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
 
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
+
+    private String base64StringUploadPhotoOfRegisterFault = "";
+    private String imageFileUploadPhotoOfRegisterFault;
+    private Uri imageFileUriUploadPhotoOfRegisterFault = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,12 +188,31 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                 pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
                 dataList = pmSiteTransactionDetails.getRectifierModuleCheckPoint();
                 rectifierModuleCheckPointDataList.addAll(dataList.getRectifierModuleCheckPointData());
-                totalCount  = Integer.parseInt(dataList.getNoOfRectifierModuleAvailableAtSite());
+                totalCount = Integer.parseInt(dataList.getNoOfRectifierModuleAvailableAtSite());
 
-                mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.setText(""+totalCount);
+                mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.setText("" + totalCount);
                 mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText(dataList.getNoOfModulesWorking());
                 mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setText(dataList.getNoOfFaultyModulesInSite());
 
+                mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
+                mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
+                this.base64StringUploadPhotoOfRegisterFault = dataList.getBase64StringUploadPhotoOfRegisterFault();
+
+                visibilityOfTypesOfFault(dataList.getRegisterFault());
+
+                mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                if (!this.base64StringUploadPhotoOfRegisterFault.isEmpty() && this.base64StringUploadPhotoOfRegisterFault != null) {
+                    mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfRegisterFault);
+                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                    imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
+                }
+
+                if (dataList.getTypeOfFault() != null && dataList.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+                    setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim());
+                }
                 invalidateOptionsMenu();
 
                 if (rectifierModuleCheckPointDataList != null && rectifierModuleCheckPointDataList.size() > 0) {
@@ -224,15 +254,6 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         imageFileUriRectifierPhotoAfterCleaning = Uri.parse(path);
                     }
 
-                    mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.setText(rectifierModuleCheckPointDataList.get(currentPos).getRegisterFault());
-                    mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText(rectifierModuleCheckPointDataList.get(currentPos).getTypeOfFault());
-
-                    if (rectifierModuleCheckPointDataList.get(currentPos).getTypeOfFault() != null && rectifierModuleCheckPointDataList.get(currentPos).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
-
-                        //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(index).getTypeOfFault());
-                        setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim());
-                    }
-
                     mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonPreviousReading.setVisibility(View.GONE);
                     mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading.setVisibility(View.VISIBLE);
                     //visibleTypeOfFaultField();
@@ -242,15 +263,13 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading.setText("Finish");
                     }
 
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "No previous saved data available", Toast.LENGTH_SHORT).show();
                     mLinearLayoutContainer.setVisibility(View.GONE);
                 }
 
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -317,7 +336,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.setText(str_noOfRectifierModuleAvailableAtSiteVal);
 
                         invalidateOptionsMenu();
-                        if(rectifierModuleCheckPointDataList != null && rectifierModuleCheckPointDataList.size() > 0) {
+                        if (rectifierModuleCheckPointDataList != null && rectifierModuleCheckPointDataList.size() > 0) {
                             rectifierModuleCheckPointDataList.clear();
                         }
                         currentPos = 0;
@@ -367,15 +386,12 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         int noOfWorkingModules = Integer.parseInt(str_noOfModulesWorkingVal);
                         int noOfModuleAvailableInSite = Integer.parseInt(str_noOfRectifierModuleAvailableAtSiteVal);
                         int remainingFaultyModules = 0;
-                        if(noOfWorkingModules>noOfModuleAvailableInSite)
-                        {
+                        if (noOfWorkingModules > noOfModuleAvailableInSite) {
                             mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText("");
-                            Toast.makeText(getApplicationContext(),"Wrong input must be less then or equal to no of available module in site.",Toast.LENGTH_LONG).show();
-                        }
-                        else
-                        {
-                            remainingFaultyModules = noOfModuleAvailableInSite-noOfWorkingModules;
-                            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setText(""+remainingFaultyModules);
+                            Toast.makeText(getApplicationContext(), "Wrong input must be less then or equal to no of available module in site.", Toast.LENGTH_LONG).show();
+                        } else {
+                            remainingFaultyModules = noOfModuleAvailableInSite - noOfWorkingModules;
+                            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setText("" + remainingFaultyModules);
                         }
                     }
                 });
@@ -461,7 +477,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
+                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -477,10 +493,10 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
+                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
+                        // visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
                         if (checkValidationonSubmit("onSubmit") == true) {
                             submitDetails();
                             startActivity(new Intent(getApplicationContext(), PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
@@ -495,19 +511,22 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
 
     private void submitDetails() {
         try {
-                String noOfRectifierModuleAvailableAtSite = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.getText().toString().trim();
-                String noOfModulesWorking = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.getText().toString().trim();
-                String noOfFaultyModulesAtSite = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.getText().toString().trim();
-                dataList = new RectifierModuleCheckPointParentData(noOfRectifierModuleAvailableAtSite,noOfModulesWorking,noOfFaultyModulesAtSite,rectifierModuleCheckPointDataList);
-                pmSiteTransactionDetails.setRectifierModuleCheckPoint(dataList);
+            String noOfRectifierModuleAvailableAtSite = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.getText().toString().trim();
+            String noOfModulesWorking = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.getText().toString().trim();
+            String noOfFaultyModulesAtSite = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.getText().toString().trim();
+            String registerFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim();
+            String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
+            dataList = new RectifierModuleCheckPointParentData(noOfRectifierModuleAvailableAtSite, noOfModulesWorking,
+                    noOfFaultyModulesAtSite, rectifierModuleCheckPointDataList, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault);
+            pmSiteTransactionDetails.setRectifierModuleCheckPoint(dataList);
 
-                Gson gson2 = new GsonBuilder().create();
-                String jsonString = gson2.toJson(pmSiteTransactionDetails);
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(pmSiteTransactionDetails);
 
-                offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -539,32 +558,34 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_button_previousReading);
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_button_nextReading);
-        mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_linearLayout_typeOfFault);
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_linearLayout_typeOfFault);
+
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewUploadPhotoOfRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFault = (ImageView) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteRectifierModuleCheckPoint_button_uploadPhotoOfRegisterFaultView);
     }
 
     private void saveRecords(int currentPos) {
         try {
-                String base64RectifierModuleDetailsQrCodeScan = base64StringDetailsOfRectifierModuleQRCodeScan;
-                String base64RectifierPhotoBeforeCleaning = base64StringRectifierPhotoBeforeCleaning;
-                String base64RectifierPhotoAfterCleaning = base64StringRectifierPhotoAfterCleaning;
-                String rectifierCleaning = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.getText().toString().trim();
-                String registerFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim();
-                String typeOfFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim();
+            String base64RectifierModuleDetailsQrCodeScan = base64StringDetailsOfRectifierModuleQRCodeScan;
+            String base64RectifierPhotoBeforeCleaning = base64StringRectifierPhotoBeforeCleaning;
+            String base64RectifierPhotoAfterCleaning = base64StringRectifierPhotoAfterCleaning;
+            String rectifierCleaning = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.getText().toString().trim();
 
-                rectifierModuleCheckPointData = new RectifierModuleCheckPointData(base64RectifierModuleDetailsQrCodeScan,base64RectifierPhotoBeforeCleaning,base64RectifierPhotoAfterCleaning
-                ,rectifierCleaning,registerFault,typeOfFault);
-                if (rectifierModuleCheckPointDataList.size() > 0) {
-                    if (currentPos == rectifierModuleCheckPointDataList.size()) {
-                        rectifierModuleCheckPointDataList.add(rectifierModuleCheckPointData);
-                    } else if (currentPos < rectifierModuleCheckPointDataList.size()) {
-                        rectifierModuleCheckPointDataList.set(currentPos, rectifierModuleCheckPointData);
-                    }
-                } else {
+            rectifierModuleCheckPointData = new RectifierModuleCheckPointData(base64RectifierModuleDetailsQrCodeScan, base64RectifierPhotoBeforeCleaning, base64RectifierPhotoAfterCleaning
+                    , rectifierCleaning);
+            if (rectifierModuleCheckPointDataList.size() > 0) {
+                if (currentPos == rectifierModuleCheckPointDataList.size()) {
                     rectifierModuleCheckPointDataList.add(rectifierModuleCheckPointData);
+                } else if (currentPos < rectifierModuleCheckPointDataList.size()) {
+                    rectifierModuleCheckPointDataList.set(currentPos, rectifierModuleCheckPointData);
                 }
+            } else {
+                rectifierModuleCheckPointDataList.add(rectifierModuleCheckPointData);
+            }
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -606,13 +627,12 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             }
 
             mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.setText(rectifierModuleCheckPointDataList.get(currentPos).getRectifierCleaning());
-            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.setText(rectifierModuleCheckPointDataList.get(currentPos).getRegisterFault());
-            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText(rectifierModuleCheckPointDataList.get(currentPos).getTypeOfFault());
+           /* mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.setText(rectifierModuleCheckPointDataList.get(currentPos).getRegisterFault());
+            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText(rectifierModuleCheckPointDataList.get(currentPos).getTypeOfFault());*/
 
             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonPreviousReading.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             clearFields(currentPos);
         }
 
@@ -633,11 +653,16 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     }
 
     private void visibilityOfTypesOfFault(String RegisterFault) {
-
         mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-            //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
             mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
+        } else {
+            base64StringUploadPhotoOfRegisterFault = "";
+            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+            imageFileUploadPhotoOfRegisterFault = "";
         }
     }
 
@@ -652,22 +677,22 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Please Scan QR Code");
             return false;
-        }else if(rectifierCleaning.isEmpty() || rectifierCleaning == null) {
+        } else if (rectifierCleaning.isEmpty() || rectifierCleaning == null) {
             showToast("Select Rectifier Cleaning");
             return false;
-        }else if(rectifierPhotoBeforeCleaning.isEmpty() || rectifierPhotoBeforeCleaning == null) {
+        } else if (rectifierPhotoBeforeCleaning.isEmpty() || rectifierPhotoBeforeCleaning == null) {
             showToast("Please Take Rectifier Photo Before Cleaning");
             return false;
-        }else if(rectifierPhotoAfterCleaning.isEmpty() || rectifierPhotoAfterCleaning == null) {
+        } else if (rectifierPhotoAfterCleaning.isEmpty() || rectifierPhotoAfterCleaning == null) {
             showToast("Please Take Rectifier Photo After Cleaning");
             return false;
-        }else if(registerFault.isEmpty() || registerFault == null) {
+        } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
-        }else if((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        }else return true;
+        } else return true;
     }
 
     private boolean checkValidationonSubmit(String methodFlag) {
@@ -691,8 +716,8 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonRectifierPhotoAfterCleaningView.setVisibility(View.GONE);
 
         mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.setText("");
-        mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.setText("");
-        mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText("");
+        //mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.setText("");
+        //mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText("");
     }
 
     private void setListner() {
@@ -754,7 +779,43 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                 }
             }
         });
+
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    UploadPhotoOfRegisterFault();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, imageFileUriUploadPhotoOfRegisterFault);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
+
+    private void UploadPhotoOfRegisterFault() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfRegisterFault);
+            imageFileUriUploadPhotoOfRegisterFault = FileProvider.getUriForFile(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriUploadPhotoOfRegisterFault);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void DgCheckPointsQRCodeScan() {
         try {
@@ -887,6 +948,27 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                     imageFileRectifierPhotoAfterCleaning = "";
                     imageFileUriRectifierPhotoAfterCleaning = null;
                     mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonRectifierPhotoAfterCleaningView.setVisibility(View.GONE);
+                }
+                break;
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfRegisterFault = "";
+                    imageFileUriUploadPhotoOfRegisterFault = null;
+                    mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
                 }
                 break;
         }

@@ -20,21 +20,15 @@ public class RectifierModuleCheckPointData implements Serializable
     @SerializedName("base64RectifierPhotoAfterCleaning")
     @Expose
     private String base64RectifierPhotoAfterCleaning;
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
     private final static long serialVersionUID = -6106004319522608280L;
 
-    public RectifierModuleCheckPointData(String base64RectifierModuleDetailsQrCodeScan, String base64RectifierPhotoBeforeCleaning, String base64RectifierPhotoAfterCleaning, String rectifierCleaning, String registerFault, String typeOfFault) {
+    public RectifierModuleCheckPointData(String base64RectifierModuleDetailsQrCodeScan, String base64RectifierPhotoBeforeCleaning, String base64RectifierPhotoAfterCleaning, String rectifierCleaning) {
         this.base64RectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
         this.base64RectifierPhotoBeforeCleaning = base64RectifierPhotoBeforeCleaning;
         this.detailsOfRectifierModuleQrCodeScan = base64RectifierModuleDetailsQrCodeScan;
         this.rectifierCleaning = rectifierCleaning;
-        this.registerFault = registerFault;
-        this.typeOfFault = typeOfFault;
+        /*this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;*/
     }
 
     public String getDetailsOfRectifierModuleQrCodeScan() {
@@ -69,20 +63,6 @@ public class RectifierModuleCheckPointData implements Serializable
         this.base64RectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
     }
 
-    public String getRegisterFault() {
-        return registerFault;
-    }
 
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
-    }
 
 }

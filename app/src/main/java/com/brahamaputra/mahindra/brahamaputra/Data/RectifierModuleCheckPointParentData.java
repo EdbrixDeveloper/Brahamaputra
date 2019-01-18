@@ -22,6 +22,15 @@ public class RectifierModuleCheckPointParentData implements Serializable
     @SerializedName("rectifierModuleCheckPointData")
     @Expose
     private List<RectifierModuleCheckPointData> rectifierModuleCheckPointData = null;
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    String base64StringUploadPhotoOfRegisterFault;
+    @SerializedName("registerFault")
+    @Expose
+    private String registerFault;
+    @SerializedName("typeOfFault")
+    @Expose
+    private String typeOfFault;
 
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
@@ -34,14 +43,21 @@ public class RectifierModuleCheckPointParentData implements Serializable
         this.noOfModulesWorking = "";
         this.noOfFaultyModulesInSite = "";
         this.rectifierModuleCheckPointData = null;
+        this.registerFault = "";
+        this.typeOfFault = "";
+        this.base64StringUploadPhotoOfRegisterFault = "";
         this.isSubmited = 0;
     }
 
-    public RectifierModuleCheckPointParentData(String noOfRectifierModuleAvailableAtSite, String noOfModulesWorking, String noOfFaultyModulesAtSite, ArrayList<RectifierModuleCheckPointData> rectifierModuleCheckPointDataList) {
+    public RectifierModuleCheckPointParentData(String noOfRectifierModuleAvailableAtSite, String noOfModulesWorking, String noOfFaultyModulesAtSite, ArrayList<RectifierModuleCheckPointData> rectifierModuleCheckPointDataList, String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault) {
         this.noOfRectifierModuleAvailableAtSite = noOfRectifierModuleAvailableAtSite;
         this.noOfModulesWorking = noOfModulesWorking;
         this.noOfFaultyModulesInSite = noOfFaultyModulesAtSite;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
         this.rectifierModuleCheckPointData = rectifierModuleCheckPointDataList;
+
         if (!this.noOfRectifierModuleAvailableAtSite.isEmpty()) {
             this.isSubmited = 2;
         } else {
@@ -79,6 +95,28 @@ public class RectifierModuleCheckPointParentData implements Serializable
 
     public void setRectifierModuleCheckPointData(List<RectifierModuleCheckPointData> rectifierModuleCheckPointData) {
         this.rectifierModuleCheckPointData = rectifierModuleCheckPointData;
+    }
+    public String getRegisterFault() {
+        return registerFault;
+    }
+
+    public void setRegisterFault(String registerFault) {
+        this.registerFault = registerFault;
+    }
+
+    public String getTypeOfFault() {
+        return typeOfFault;
+    }
+
+    public void setTypeOfFault(String typeOfFault) {
+        this.typeOfFault = typeOfFault;
+    }
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
     }
 
     public int getSubmited() {
