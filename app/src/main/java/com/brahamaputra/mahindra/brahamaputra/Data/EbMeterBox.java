@@ -48,6 +48,9 @@ public class EbMeterBox implements Serializable {
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    private String base64StringUploadPhotoOfRegisterFault;
 
     @SerializedName("isSubmited")
     private int isSubmited;
@@ -67,10 +70,13 @@ public class EbMeterBox implements Serializable {
         this.ebServiceWireCondition = "";
         this.registerFault = "";
         this.typeOfFault = "";
+        base64StringUploadPhotoOfRegisterFault = "";
         this.isSubmited = 0;
     }
 
-    public EbMeterBox(String ebMeterBoxCondition, String ebMeterWorkingStatus, String kitkatClayFuseStatus, String sfuMccbStatus, String hrcFuseStatus, String acLoadAmpRPh, String acLoadAmpYPh, String acLoadAmpBPh, String ebMeterReadingKwh, String ebServiceWireCondition, String registerFault, String typeOfFault) {
+    public EbMeterBox(String ebMeterBoxCondition, String ebMeterWorkingStatus, String kitkatClayFuseStatus, String sfuMccbStatus,
+                      String hrcFuseStatus, String acLoadAmpRPh, String acLoadAmpYPh, String acLoadAmpBPh, String ebMeterReadingKwh,
+                      String ebServiceWireCondition, String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault) {
         this.ebMeterBoxCondition = ebMeterBoxCondition;
         this.ebMeterWorkingStatus = ebMeterWorkingStatus;
         this.kitkatClayFuseStatus = kitkatClayFuseStatus;
@@ -83,6 +89,7 @@ public class EbMeterBox implements Serializable {
         this.ebServiceWireCondition = ebServiceWireCondition;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
         /*this.isSubmited = 2;*/
         if (!this.ebMeterBoxCondition.isEmpty() && !this.ebMeterWorkingStatus.isEmpty()) {
             this.isSubmited = 2;
@@ -185,6 +192,14 @@ public class EbMeterBox implements Serializable {
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
     }
 
     public int getSubmited() {
