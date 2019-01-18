@@ -20,12 +20,7 @@ public class PmsAmfPanelCheckPointsData implements Serializable
     @SerializedName("PmsAmfPiuEarthingStatus")
     @Expose
     private String pmsAmfPiuEarthingStatus;
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
+
     private final static long serialVersionUID = -7367757211641983319L;
 
     public PmsAmfPanelCheckPointsData()
@@ -34,17 +29,15 @@ public class PmsAmfPanelCheckPointsData implements Serializable
         this.siteInAutoManual = "";
         this.anyLooseConnectionBypass = "";
         this.pmsAmfPiuEarthingStatus = "";
-        this.registerFault = "";
-        this.typeOfFault = "";
+
     }
 
-    public PmsAmfPanelCheckPointsData(String detailsOfPmsAmfQrCodeScan, String siteInAutoManual, String anyLooseConnectionBypass, String pmsAmfPuiEarthingStatus, String registerFault, String typeOfFault) {
+    public PmsAmfPanelCheckPointsData(String detailsOfPmsAmfQrCodeScan, String siteInAutoManual, String anyLooseConnectionBypass, String pmsAmfPuiEarthingStatus) {
         this.detailsOfPmsAmfPiuQrCodeScan = detailsOfPmsAmfQrCodeScan;
         this.siteInAutoManual = siteInAutoManual;
         this.anyLooseConnectionBypass =anyLooseConnectionBypass;
         this.pmsAmfPiuEarthingStatus = pmsAmfPuiEarthingStatus;
-        this.registerFault =registerFault;
-        this.typeOfFault = typeOfFault;
+
     }
 
     public String getDetailsOfPmsAmfPiuQrCodeScan() {
@@ -79,20 +72,6 @@ public class PmsAmfPanelCheckPointsData implements Serializable
         this.pmsAmfPiuEarthingStatus = pmsAmfPiuEarthingStatus;
     }
 
-    public String getRegisterFault() {
-        return registerFault;
-    }
 
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
-    }
 
 }

@@ -17,6 +17,16 @@ public class PmsAmfPanelCheckPointsParentData implements Serializable
     @Expose
     private List<PmsAmfPanelCheckPointsData> pmsAmfPanelCheckPointsData = null;
 
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    String base64StringUploadPhotoOfRegisterFault;
+    @SerializedName("registerFault")
+    @Expose
+    private String registerFault;
+    @SerializedName("typeOfFault")
+    @Expose
+    private String typeOfFault;
+
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
@@ -26,12 +36,17 @@ public class PmsAmfPanelCheckPointsParentData implements Serializable
     {
         this.noOfPmsAmfPiuAvailableAtSite = "";
         this.pmsAmfPanelCheckPointsData = new ArrayList<>();
+        this.registerFault = "";
+        this.typeOfFault = "";
+        this.base64StringUploadPhotoOfRegisterFault = "";
         isSubmited = 0;
     }
-    public PmsAmfPanelCheckPointsParentData(String noOfPmsAmfPuiAvailableAtSite, ArrayList<PmsAmfPanelCheckPointsData> pmsAmfPanelCheckPointsArrayList) {
+    public PmsAmfPanelCheckPointsParentData(String noOfPmsAmfPuiAvailableAtSite, ArrayList<PmsAmfPanelCheckPointsData> pmsAmfPanelCheckPointsArrayList, String base64StringUploadPhotoOfRegisterFault, String registerFault, String typeOfFault) {
         this.noOfPmsAmfPiuAvailableAtSite = noOfPmsAmfPuiAvailableAtSite;
         this.pmsAmfPanelCheckPointsData = pmsAmfPanelCheckPointsArrayList;
-
+        this.registerFault =registerFault;
+        this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
         if (!this.noOfPmsAmfPiuAvailableAtSite.isEmpty()) {
             this.isSubmited = 2;
         } else {
@@ -55,6 +70,30 @@ public class PmsAmfPanelCheckPointsParentData implements Serializable
     public void setPmsAmfPanelCheckPointsData(List<PmsAmfPanelCheckPointsData> pmsAmfPanelCheckPointsData) {
         this.pmsAmfPanelCheckPointsData = pmsAmfPanelCheckPointsData;
     }
+    public String getRegisterFault() {
+        return registerFault;
+    }
+
+    public void setRegisterFault(String registerFault) {
+        this.registerFault = registerFault;
+    }
+
+    public String getTypeOfFault() {
+        return typeOfFault;
+    }
+
+    public void setTypeOfFault(String typeOfFault) {
+        this.typeOfFault = typeOfFault;
+    }
+
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
+    }
+
     public int getSubmited() {
         return isSubmited;
     }
