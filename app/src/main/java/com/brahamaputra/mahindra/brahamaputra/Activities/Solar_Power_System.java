@@ -79,6 +79,7 @@ public class Solar_Power_System extends BaseActivity {
     private TextView mSolarPowerSystemTextViewValidityOfAmc;
     private EditText mSolarPowerSystemEditTextDateOfvalidityOfAmc;
     private ImageView button_ClearQRCodeScanView;
+    private TextView mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier;
 
     LinearLayout mSolarPowerSystemLinearLayoutQRCodeScan;
     LinearLayout mSolarPowerSystemLinearLayoutAssetOwner;
@@ -87,8 +88,11 @@ public class Solar_Power_System extends BaseActivity {
     LinearLayout mSolarPowerSystemLinearLayoutCapacityKW;
     LinearLayout mSolarPowerSystemLinearLayoutAmcYesNo;
     LinearLayout mSolarPowerSystemLinearLayoutValidityOfAmc;
+    LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier;
+    LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierBookValue;
 
     String str_available;
+    String str_supplier_same_as_Solar_Supplier;
     String str_assetOwner;
     String str_cellPanel;
     String str_amcYesNoVal;
@@ -105,6 +109,8 @@ public class Solar_Power_System extends BaseActivity {
     private SessionManager sessionManager;
     private Uri imageFileUri;
     private String imageFileName = "";
+
+
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -274,6 +280,10 @@ public class Solar_Power_System extends BaseActivity {
         mSolarPowerSystemLinearLayoutValidityOfAmc = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_validityOfAmc);
         button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
 
+        mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier = (TextView)findViewById(R.id.solarPowerSystem_textView_batterySupplierSameAsSolarSupplier_val);
+        mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_batterySupplierSameAsSolarSupplier);
+        mSolarPowerSystemLinearLayoutBatterySupplierBookValue  = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_bookValue);
+
         mSolarPowerSystemEditTextCapacityKW.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
 
         getWindow().setSoftInputMode(
@@ -302,6 +312,26 @@ public class Solar_Power_System extends BaseActivity {
                         str_available = item.get(position);
                         mSolarPowerSystemTextViewAvailableVal.setText(str_available);
                         changeVisibilityOfFields(str_available);
+                    }
+                });
+            }
+        });
+
+        mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Solar_Power_System.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_solarPowerSystem_supplierAsSamesupplier))),
+                        "Battery supplier same as Solar Supplier",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_supplier_same_as_Solar_Supplier = item.get(position);
+                        mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier.setText(str_supplier_same_as_Solar_Supplier);
                     }
                 });
             }
@@ -446,6 +476,7 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemEditTextBookValue.setText(solarPowerSystemData.getBookValue());
                 mSolarPowerSystemTextViewAmcYesNoVal.setText(solarPowerSystemData.getAmcYesNo());
                 mSolarPowerSystemEditTextDateOfvalidityOfAmc.setText(solarPowerSystemData.getDateOfvalidityOfAmc());
+                mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier.setText(solarPowerSystemData.getBattery_supplier_same_as_Solar_Supplier());
 
                 changeVisibilityOfFields(solarPowerSystemData.getAvailable());
             } else {
@@ -458,7 +489,7 @@ public class Solar_Power_System extends BaseActivity {
     }
 
     private void submitDetails() {
-        try {
+
             //hotoTransactionData.setTicketNo(ticketName);
 
             String qRCodeScan = base64StringQRCodeScan;
@@ -471,9 +502,27 @@ public class Solar_Power_System extends BaseActivity {
             String amcYesNo = mSolarPowerSystemTextViewAmcYesNoVal.getText().toString().trim();
             String dateOfvalidityOfAmc = mSolarPowerSystemEditTextDateOfvalidityOfAmc.getText().toString().trim();
 
-            solarPowerSystemData = new SolarPowerSystemData(qRCodeScan,bookValue ,available, assetOwner, manufacturerMakeModel, cellPanel, capacityKW, amcYesNo, dateOfvalidityOfAmc, imageFileName);
-            hotoTransactionData.setSolarPowerSystemData(solarPowerSystemData);
+            String battery_supplier_same_as_Solar_Supplier = mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier.getText().toString().trim();
 
+            if(str_supplier_same_as_Solar_Supplier.equals("Yes")){//both
+
+                String battery_manufacturerMakeModel = mSolarPowerSystemEditTextManufacturerMakeModel.getText().toString().trim();
+                String battery_bookValue = mSolarPowerSystemEditTextBookValue.getText().toString().trim();
+                String battery_capacityKW = mSolarPowerSystemEditTextCapacityKW.getText().toString().trim();
+                String battery_amcYesNo = mSolarPowerSystemTextViewAmcYesNoVal.getText().toString().trim();
+                String battery_dateOfvalidityOfAmc = mSolarPowerSystemEditTextDateOfvalidityOfAmc.getText().toString().trim();
+
+                solarPowerSystemData = new SolarPowerSystemData(qRCodeScan,bookValue ,available, assetOwner, manufacturerMakeModel, cellPanel,
+                        capacityKW, amcYesNo, dateOfvalidityOfAmc, imageFileName,battery_manufacturerMakeModel,battery_capacityKW,battery_bookValue,battery_amcYesNo
+                        ,battery_dateOfvalidityOfAmc,battery_supplier_same_as_Solar_Supplier);
+
+            }else {//single
+                solarPowerSystemData = new SolarPowerSystemData(qRCodeScan,bookValue ,available, assetOwner, manufacturerMakeModel, cellPanel,
+                        capacityKW, amcYesNo, dateOfvalidityOfAmc, imageFileName,"","","","","",battery_supplier_same_as_Solar_Supplier);
+            }
+
+            hotoTransactionData.setSolarPowerSystemData(solarPowerSystemData);
+        try {
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
@@ -491,6 +540,8 @@ public class Solar_Power_System extends BaseActivity {
             mSolarPowerSystemLinearLayoutCapacityKW.setVisibility(View.VISIBLE);
             mSolarPowerSystemLinearLayoutAmcYesNo.setVisibility(View.VISIBLE);
             mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier.setVisibility(View.VISIBLE);
+            mSolarPowerSystemLinearLayoutBatterySupplierBookValue.setVisibility(View.VISIBLE);
             if (str_available.equals("No")) {
                 mSolarPowerSystemLinearLayoutQRCodeScan.setVisibility(View.GONE);
                 mSolarPowerSystemLinearLayoutAssetOwner.setVisibility(View.GONE);
@@ -499,6 +550,8 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemLinearLayoutCapacityKW.setVisibility(View.GONE);
                 mSolarPowerSystemLinearLayoutAmcYesNo.setVisibility(View.GONE);
                 mSolarPowerSystemLinearLayoutValidityOfAmc.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier.setVisibility(View.GONE);
+                mSolarPowerSystemLinearLayoutBatterySupplierBookValue.setVisibility(View.GONE);
 
                 base64StringQRCodeScan = "";
                 mSolarPowerSystemButtonQRCodeScanView.setVisibility(View.GONE);

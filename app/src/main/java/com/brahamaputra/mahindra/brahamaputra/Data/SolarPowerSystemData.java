@@ -37,6 +37,25 @@ public class SolarPowerSystemData {
 
     @SerializedName("bookValue")
     String bookValue;
+//
+    @SerializedName("battery_manufacturerMakeModel")
+    String battery_manufacturerMakeModel;
+
+    @SerializedName("battery_capacityKW")
+    String battery_capacityKW;
+
+    @SerializedName("battery_bookValue")
+    String battery_bookValue;
+
+    @SerializedName("battery_amcYesNo")
+    String battery_amcYesNo;
+
+    @SerializedName("battery_dateOfvalidityOfAmc")
+    String battery_dateOfvalidityOfAmc;
+
+    @SerializedName("battery_supplier_same_as_Solar_Supplier")
+    String battery_supplier_same_as_Solar_Supplier;
+
 
     public String getBookValue() {
         return bookValue;
@@ -66,9 +85,20 @@ public class SolarPowerSystemData {
         this.qrCodeImageFileName = "";
         this.isSubmited = 0;
         this.bookValue ="";
+
+
+        this.battery_manufacturerMakeModel = "";
+        this.battery_capacityKW = "";
+        this.battery_bookValue = "";
+        this.battery_amcYesNo = "";
+        this.battery_dateOfvalidityOfAmc = "";
+        this.battery_supplier_same_as_Solar_Supplier = "";
     }
 
-    public SolarPowerSystemData(String qRCodeScan, String bookValue,String available, String assetOwner, String manufacturerMakeModel, String cellPanel, String capacityKW, String amcYesNo, String dateOfvalidityOfAmc, String qrCodeImageFileName) {
+    public SolarPowerSystemData(String qRCodeScan, String bookValue,String available, String assetOwner, String manufacturerMakeModel, String cellPanel,
+                                String capacityKW, String amcYesNo, String dateOfvalidityOfAmc, String qrCodeImageFileName,
+                                String battery_manufacturerMakeModel, String battery_capacityKW, String battery_bookValue, String battery_amcYesNo,
+                                String battery_dateOfvalidityOfAmc,String battery_supplier_same_as_Solar_Supplier) {
         this.qRCodeScan = qRCodeScan;
         this.available = available;
         this.assetOwner = assetOwner;
@@ -79,6 +109,14 @@ public class SolarPowerSystemData {
         this.dateOfvalidityOfAmc = dateOfvalidityOfAmc;
         this.qrCodeImageFileName = qrCodeImageFileName;
         this.bookValue = bookValue;
+
+        this.battery_manufacturerMakeModel = battery_manufacturerMakeModel;
+        this.battery_capacityKW = battery_capacityKW;
+        this.battery_bookValue = battery_bookValue;
+        this.battery_amcYesNo = battery_amcYesNo;
+        this.battery_dateOfvalidityOfAmc = battery_dateOfvalidityOfAmc;
+        this.battery_supplier_same_as_Solar_Supplier = battery_supplier_same_as_Solar_Supplier;
+
         //this.isSubmited=true;//007
         this.isSubmited = 1;
         if (!this.available.isEmpty()) {
@@ -86,6 +124,8 @@ public class SolarPowerSystemData {
         }/*else {
             this.isSubmited = 1;
         }*/
+
+
     }
 
     public String getqRCodeScan() {
@@ -164,5 +204,53 @@ public class SolarPowerSystemData {
 
     public void setSubmited(int submited) {
         isSubmited = submited;
+    }
+
+    public String getBattery_manufacturerMakeModel() {
+        return battery_manufacturerMakeModel;
+    }
+
+    public void setBattery_manufacturerMakeModel(String battery_manufacturerMakeModel) {
+        this.battery_manufacturerMakeModel = battery_manufacturerMakeModel;
+    }
+
+    public String getBattery_capacityKW() {
+        return battery_capacityKW;
+    }
+
+    public void setBattery_capacityKW(String battery_capacityKW) {
+        this.battery_capacityKW = battery_capacityKW;
+    }
+
+    public String getBattery_bookValue() {
+        return battery_bookValue;
+    }
+
+    public void setBattery_bookValue(String battery_bookValue) {
+        this.battery_bookValue = battery_bookValue;
+    }
+
+    public String getBattery_amcYesNo() {
+        return battery_amcYesNo;
+    }
+
+    public void setBattery_amcYesNo(String battery_amcYesNo) {
+        this.battery_amcYesNo = battery_amcYesNo;
+    }
+
+    public String getBattery_dateOfvalidityOfAmc() {
+        return battery_dateOfvalidityOfAmc;
+    }
+
+    public void setBattery_dateOfvalidityOfAmc(String battery_dateOfvalidityOfAmc) {
+        this.battery_dateOfvalidityOfAmc = battery_dateOfvalidityOfAmc;
+    }
+
+    public String getBattery_supplier_same_as_Solar_Supplier() {
+        return battery_supplier_same_as_Solar_Supplier;
+    }
+
+    public void setBattery_supplier_same_as_Solar_Supplier(String battery_supplier_same_as_Solar_Supplier) {
+        this.battery_supplier_same_as_Solar_Supplier = battery_supplier_same_as_Solar_Supplier;
     }
 }

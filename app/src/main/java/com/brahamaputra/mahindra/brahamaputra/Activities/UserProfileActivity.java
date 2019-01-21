@@ -343,30 +343,27 @@ public class UserProfileActivity extends BaseActivity {
                         @Override
                         public void onResponse(@NonNull UserDetailsParent response) {
                             hideBusyProgress();
-                           /* if (response.getError() != null) {
-                                showToast(response.getError().getErrorMessage());
-                            } else {*/
                             if (response.getError() != null) {
                                 showToast(response.getError().getErrorMessage());
                             } else {
 
-                                if (response.getSuccess() == 1) {
-                                    sessionManager.updateSessionUsername(response.getUserDetails().getUsername());
-                                    sessionManager.updateSessionUserID(response.getUserDetails().getId());
-                                    sessionManager.updateSessionUserFirstName(response.getUserDetails().getFirstName());
-                                    sessionManager.updateSessionUserLastName(response.getUserDetails().getLastName());
-                                    sessionManager.updateSessionUserEmail(response.getUserDetails().getEmail());
-                                    sessionManager.updateSessionMobileNo(response.getUserDetails().getMobileNo());
-                                    sessionManager.updateSessionDesignation(response.getUserDetails().getDesignation());
-                                    sessionManager.updateSessionProfileImageUrl(response.getUserDetails().getProfileImageUrl());
-                                    sessionManager.updateSessionCircle(response.getUserDetails().getUserAdditionalDetails().getCircleName());
-                                    sessionManager.updateSessionState(response.getUserDetails().getUserAdditionalDetails().getStateName());
-                                    sessionManager.updateSessionSsa(response.getUserDetails().getUserAdditionalDetails().getSsaName());
+                            if (response.getSuccess() == 1) {
+                                sessionManager.updateSessionUsername(response.getUserDetails().getUsername());
+                                sessionManager.updateSessionUserID(response.getUserDetails().getId());
+                                sessionManager.updateSessionUserFirstName(response.getUserDetails().getFirstName());
+                                sessionManager.updateSessionUserLastName(response.getUserDetails().getLastName());
+                                sessionManager.updateSessionUserEmail(response.getUserDetails().getEmail());
+                                sessionManager.updateSessionMobileNo(response.getUserDetails().getMobileNo());
+                                sessionManager.updateSessionDesignation(response.getUserDetails().getDesignation());
+                                sessionManager.updateSessionProfileImageUrl(response.getUserDetails().getProfileImageUrl());
+                                sessionManager.updateSessionCircle(response.getUserDetails().getUserAdditionalDetails().getCircleName());
+                                sessionManager.updateSessionState(response.getUserDetails().getUserAdditionalDetails().getStateName());
+                                sessionManager.updateSessionSsa(response.getUserDetails().getUserAdditionalDetails().getSsaName());
 
-                                    setValues();
-                                }
-                                /*}*/
+                                setValues();
                             }
+                            }
+
                         }
                     }, new Response.ErrorListener() {
                 @Override

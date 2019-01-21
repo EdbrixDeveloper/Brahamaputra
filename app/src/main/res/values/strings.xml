@@ -245,6 +245,11 @@
         <item>Yes</item>
     </string-array>
 
+    <string-array name="array_solarPowerSystem_supplierAsSamesupplier">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+
     <string-array name="array_solarPowerSystem_assetOwner">
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>

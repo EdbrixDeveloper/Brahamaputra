@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        sessionManager = new SessionManager(LoginActivity.this);
         if (validateUser()) {
             finish();
             startActivity(new Intent(LoginActivity.this, DashboardCircularActivity.class));
@@ -72,7 +72,6 @@ public class LoginActivity extends BaseActivity {
             textViewAppVersion.setText("App Version : " + BuildConfig.VERSION_NAME);
         }
         checkPermission();
-        sessionManager = new SessionManager(LoginActivity.this);
     }
 
     private void assignViews() {
@@ -135,11 +134,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     private boolean validateUser() {
-        sessionManager = new SessionManager(LoginActivity.this);
+        //sessionManager = new SessionManager(LoginActivity.this);
         if (sessionManager.getSessionUsername().equals("") && sessionManager.getSessionUserId().equals("")) {
-            return false;
+            return false;////user not available
         } else {
-            return true;
+            return true;////user available
         }
     }
 

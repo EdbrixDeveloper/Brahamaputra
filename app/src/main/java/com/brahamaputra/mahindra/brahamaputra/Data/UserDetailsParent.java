@@ -20,6 +20,10 @@ public class UserDetailsParent {
     @Expose
     private UserDetails userDetails;
 
+    @SerializedName("Error")
+    @Expose
+    private Error error;
+
 
     public Integer getSuccess() {
         return success;
@@ -61,7 +65,5 @@ public class UserDetailsParent {
         this.error = error;
     }
 
-    @SerializedName("Error")
-    @Expose
-    private Error error;
+
 }

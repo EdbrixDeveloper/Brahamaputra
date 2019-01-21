@@ -17,12 +17,11 @@
             android:layout_margin="@dimen/app_normal_margin"
             android:orientation="vertical">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
-
 
                 <TextView
                     android:id="@+id/solarPowerSystem_textView_available"
@@ -136,6 +135,60 @@
 
             </LinearLayout>
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_cellPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_cellPanel"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Cell / Panel" />
+
+
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_cellPanel_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_batterySupplierSameAsSolarSupplier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Battery supplier same as Solar Supplier" />
+
+                <TextView
+                    android:id="@+id/solarPowerSystem_textView_batterySupplierSameAsSolarSupplier_val"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+
+
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/solarPowerSystem_linearLayout_manufacturerMakeModel"
@@ -165,32 +218,7 @@
 
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/solarPowerSystem_linearLayout_cellPanel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_cellPanel"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Cell / Panel" />
-
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_cellPanel_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -221,6 +249,7 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/solarPowerSystem_linearLayout_bookValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
