@@ -24,6 +24,9 @@ public class SmpsCheckPointParentData implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    private String base64StringUploadPhotoOfRegisterFault;
 
     @SerializedName("isSubmited")
     @Expose
@@ -45,11 +48,12 @@ public class SmpsCheckPointParentData implements Serializable
         this.smpsCheckPointsData = smpsCheckPointsData;
     }
 
-    public SmpsCheckPointParentData(String noOfSmpsAvailableAtSite, List<SmpsCheckPoint> smpsCheckPointsData, String registerFault, String typeOfFault) {
+    public SmpsCheckPointParentData(String noOfSmpsAvailableAtSite, List<SmpsCheckPoint> smpsCheckPointsData, String registerFault, String typeOfFault,String base64StringUploadPhotoOfRegisterFault) {
         this.noOfSmpsAvailableAtSite = noOfSmpsAvailableAtSite;
         this.smpsCheckPointsData = smpsCheckPointsData;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
         if(!this.noOfSmpsAvailableAtSite.isEmpty())
         {
             isSubmited = 2;
@@ -63,6 +67,7 @@ public class SmpsCheckPointParentData implements Serializable
         this.registerFault = "";
         this.typeOfFault = "";
         this.smpsCheckPointsData = new ArrayList<>();
+        this.base64StringUploadPhotoOfRegisterFault = "";
         this.isSubmited = 0;
     }
 
@@ -88,5 +93,13 @@ public class SmpsCheckPointParentData implements Serializable
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
     }
 }

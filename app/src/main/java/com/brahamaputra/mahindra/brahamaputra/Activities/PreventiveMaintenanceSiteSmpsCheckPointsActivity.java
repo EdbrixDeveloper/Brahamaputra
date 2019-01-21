@@ -87,6 +87,11 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     private Button mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading;
     private LinearLayout mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault;
 
+    private LinearLayout  mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView  mPreventiveMaintenanceSiteSmpsCheckPointsTextViewUploadPhotoOfRegisterFault;
+    private ImageView  mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFault;
+    private ImageView  mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView;
+
     String str_noOfSmpsAvailableAtSiteVal;
     String str_smpsConditionVal;
     String str_smpsControlerStatusVal;
@@ -98,11 +103,16 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_PhotoDcLoadCurrent = 101;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
     //public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
 
 
     private String base64StringSmpsCheckPointsQRCodeScan = "";
     private String base64StringPhotoDcLoadCurrent = "";
+
+    private String base64StringUploadPhotoOfRegisterFault = "";
+    private String imageFileUploadPhotoOfRegisterFault;
+    private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
     //private String imageFileSmpsCheckPointsQRCodeScan;
     private String imageFilePhotoDcLoadCurrent;
@@ -205,6 +215,11 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_nextReading);
         mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_typeOfFault);
+
+        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteSmpsCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_uploadPhotoOfRegisterFaultView);
     }
 
     private void initCombo() {
@@ -351,7 +366,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+
                     }
                 }
             }
@@ -366,10 +381,9 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                         if (checkValidationonSubmit("onSubmit") == true) {
                             submitDetails();
                             startActivity(new Intent(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.class));
@@ -424,6 +438,41 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
             }
         });
 
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    UploadPhotoOfRegisterFault();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void UploadPhotoOfRegisterFault() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_alarmCheckReg.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfRegisterFault);
+            imageFileUriUploadPhotoOfRegisterFault = FileProvider.getUriForFile(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriUploadPhotoOfRegisterFault);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void PhotoDcLoadCurrent() {
@@ -523,6 +572,27 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                     }
                 }
                 break;
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfRegisterFault = "";
+                    imageFileUriUploadPhotoOfRegisterFault = null;
+                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                }
+                break;
         }
 
     }
@@ -582,6 +652,19 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                 mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
                 mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
 
+                this.base64StringUploadPhotoOfRegisterFault = dataList.getBase64StringUploadPhotoOfRegisterFault();
+                visibilityOfTypesOfFault(dataList.getRegisterFault());
+
+                mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                if (!this.base64StringUploadPhotoOfRegisterFault.isEmpty() && this.base64StringUploadPhotoOfRegisterFault != null) {
+                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfRegisterFault);
+                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                    imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
+                }
+
                 str_noOfSmpsAvailableAtSiteVal = dataList.getNoOfSmpsAvailableAtSite();
                 invalidateOptionsMenu();
 
@@ -629,11 +712,16 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     }
 
     private void visibilityOfTypesOfFault(String RegisterFault) {
-
         mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-            //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
             mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
+        } else {
+            mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+            base64StringUploadPhotoOfRegisterFault = "";
+            imageFileUploadPhotoOfRegisterFault = "";
         }
     }
 
@@ -741,8 +829,9 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
             String noOfsmpsAtSite = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewNoOfSmpsAvailableAtSiteVal.getText().toString().trim();
             String registerFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
             String typeOfFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+            String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
 
-            dataList = new SmpsCheckPointParentData(noOfsmpsAtSite, smpsCheckPointsData,registerFault,typeOfFault);
+            dataList = new SmpsCheckPointParentData(noOfsmpsAtSite, smpsCheckPointsData,registerFault,typeOfFault,base64StringUploadPhotoOfRegisterFault);
             pmSiteTransactionDetails.setSmpsCheckPointParentData(dataList);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);
