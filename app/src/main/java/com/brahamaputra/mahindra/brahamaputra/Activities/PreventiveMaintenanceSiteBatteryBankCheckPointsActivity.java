@@ -353,8 +353,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     public void onClick(ArrayList<String> item, int position) {
 
                         str_pmSiteBbcpTestDoneAs = item.get(position);
-                        mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.setText(str_pmSiteBbcpBatteryBankDischargeTestVal);
-                        visibilityOfImageViewBatteryBankDischargeTest(str_pmSiteBbcpTestDoneAs);
+                        mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.setText(str_pmSiteBbcpTestDoneAs);
                     }
                 });
             }
