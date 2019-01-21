@@ -786,19 +786,19 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
                 showToast("Select Earth Pit Visible is less than or equal to Earth Pit");
                 return false;
-            } else if (executeEarthPitTest.isEmpty() || executeEarthPitTest == null) {
-                showToast("Select Execute Earth Pit Testt");
-                return false;
-            } else if (registerFault.isEmpty() || registerFault == null) {
-                showToast("Select Register Fault");
-                return false;
-            } else if ((typeOfFault.isEmpty() || typeOfFault == null) && (registerFault.equals("Yes"))) {
-                showToast("Select Type of Fault");
-                return false;
-            } /*else if ((earthingCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
+            }  /*else if ((earthingCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
                 showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
                 return false;
             }*/ else return true;
+        } else if ((executeEarthPitTest.isEmpty() || executeEarthPitTest == null) && methodFlag.equals("onSubmit")) {
+            showToast("Select Execute Earth Pit Test");
+            return false;
+        } else if ((registerFault.isEmpty() || registerFault == null) && methodFlag.equals("onSubmit")) {
+            showToast("Select Register Fault");
+            return false;
+        } else if ((((typeOfFault.isEmpty() || typeOfFault == null) && (registerFault.equals("Yes"))) && methodFlag.equals("onSubmit"))) {
+            showToast("Select Type of Fault");
+            return false;
         } else return true;
 
     }
