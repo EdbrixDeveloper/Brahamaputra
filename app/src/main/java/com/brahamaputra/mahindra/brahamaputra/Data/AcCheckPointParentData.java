@@ -24,6 +24,9 @@ public class AcCheckPointParentData implements Serializable
     @SerializedName("typeOfFault")
     @Expose
     private String typeOfFault;
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    private String base64StringUploadPhotoOfRegisterFault;
 
     @SerializedName("isSubmited")
     @Expose
@@ -45,11 +48,12 @@ public class AcCheckPointParentData implements Serializable
         this.acCheckPoints = acCheckPoints;
     }
 
-    public AcCheckPointParentData(String noOfAcAvailableAtsite, List<AcCheckPoint> acCheckPoints, String registerFault, String typeOfFault) {
+    public AcCheckPointParentData(String noOfAcAvailableAtsite, List<AcCheckPoint> acCheckPoints,String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault) {
         this.noOfAcAvailableAtsite = noOfAcAvailableAtsite;
         this.acCheckPoints = acCheckPoints;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
         if(!this.noOfAcAvailableAtsite.isEmpty()) {
             isSubmited = 2;
         }else {
@@ -62,6 +66,7 @@ public class AcCheckPointParentData implements Serializable
         this.registerFault = "";
         this.typeOfFault = "";
         this.acCheckPoints = new ArrayList<>();
+        this.base64StringUploadPhotoOfRegisterFault = "";
         this.isSubmited = 0;
     }
 
@@ -87,5 +92,13 @@ public class AcCheckPointParentData implements Serializable
 
     public void setTypeOfFault(String typeOfFault) {
         this.typeOfFault = typeOfFault;
+    }
+
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
     }
 }

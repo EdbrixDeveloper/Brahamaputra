@@ -95,6 +95,11 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
     private LinearLayout mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault;
 
+    private LinearLayout mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView mPreventiveMaintenanceSiteAcCheckPointsTextViewUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView;
+
     String str_pmSiteAcpNoOfAcAvailableAtSiteVal = "";
     String str_pmSiteAcpWorkingConditionOfAcVal = "";
     String str_pmSiteAcpAutomationOfAcControllerVal = "";
@@ -110,6 +115,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersBeforeCleaning = 101;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfAcFiltersAfterCleaning = 102;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_TakePhotoOfTemperature = 103;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
 
     private String base64StringAcCheckPointsQRCodeScan = "";
     //private String imageFileAcCheckPointsQRCodeScan;
@@ -126,6 +132,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     private Uri imageFileUriAcFiltersBeforeCleaning = null;
     private Uri imageFileUriAcFiltersAfterCleaning = null;
     private Uri imageFileUriTemperature = null;
+
+    private String base64StringUploadPhotoOfRegisterFault = "";
+    private String imageFileUploadPhotoOfRegisterFault;
+    private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -153,6 +163,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     ArrayList<MultiSelectModel> listOfFaultsTypes;
     ArrayList<Integer> alreadySelected;
     ArrayList<String> typeOfFaultList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -416,7 +428,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+
                     }
                 }
             }
@@ -431,10 +443,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+
                         if (checkValidationonSubmit("onSubmit") == true) {
                             submitDetails();
                             startActivity(new Intent(PreventiveMaintenanceSiteAcCheckPointsActivity.this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
@@ -447,11 +459,16 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     }
 
     private void visibilityOfTypesOfFault(String RegisterFault) {
-
         mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-           // mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
             mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
+        } else {
+            mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+            base64StringUploadPhotoOfRegisterFault = "";
+            imageFileUploadPhotoOfRegisterFault = "";
         }
     }
 
@@ -496,6 +513,11 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_nextReading);
         mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_linearLayout_typeOfFault);
+
+        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_uploadPhotoOfRegisterFaultView);
     }
 
     private boolean checkCameraPermission() {
@@ -592,6 +614,42 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             }
         });
 
+        //////////////////////////
+        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    UploadPhotoOfRegisterFault();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void UploadPhotoOfRegisterFault() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_alarmCheckReg.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfRegisterFault);
+            imageFileUriUploadPhotoOfRegisterFault = FileProvider.getUriForFile(PreventiveMaintenanceSiteAcCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriUploadPhotoOfRegisterFault);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void AcCheckPointsQRCodeScan() {
@@ -750,6 +808,27 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
                 }
                 break;
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfRegisterFault = "";
+                    imageFileUriUploadPhotoOfRegisterFault = null;
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                }
+                break;
         }
 
     }
@@ -808,6 +887,19 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.setText(dataList.getNoOfAcAvailableAtsite());
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
+
+                this.base64StringUploadPhotoOfRegisterFault = dataList.getBase64StringUploadPhotoOfRegisterFault();
+                visibilityOfTypesOfFault(dataList.getRegisterFault());
+
+                mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                if (!this.base64StringUploadPhotoOfRegisterFault.isEmpty() && this.base64StringUploadPhotoOfRegisterFault != null) {
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfRegisterFault);
+                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                    imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
+                }
 
                 str_pmSiteAcpNoOfAcAvailableAtSiteVal = dataList.getNoOfAcAvailableAtsite();
                 invalidateOptionsMenu();
@@ -1035,8 +1127,9 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             String noOfAcAvailableAtSite = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
             String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
             String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+            String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
             
-            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite, acCheckPointsData,registerFault, typeOfFault);
+            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite,acCheckPointsData,registerFault, typeOfFault,base64StringUploadPhotoOfRegisterFault);
             pmSiteTransactionDetails.setAcCheckPointParentData(dataList);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);
