@@ -1809,6 +1809,11 @@
         <item>8</item>
     </string-array>
 
+    <string-array name="array_pmSiteEarthingCheckPoints_executeEarthPitTest">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
+
     <string-array name="array_pmSiteEarthingCheckPoints_registerFault">
         <item>No</item>
         <item>Yes</item>

@@ -55,34 +55,71 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
     private static final String TAG = PreventiveMaintenanceSiteEarthingCheckPointsActivity.class.getSimpleName();
 
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutAllNutOrBoltsAreIntact;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewAllNutOrBoltsAreIntact;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewAllNutOrBoltsAreIntactVal;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutIgbOrOgbStatus;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewIgbOrOgbStatus;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewIgbOrOgbStatusVal;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutLightningArresterStatus;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewLightningArresterStatus;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewLightningArresterStatusVal;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutNumberOfEarthPit;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPit;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutNumberOfEarthPitVisible;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisible;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal;
 
-    private LinearLayout mLinearLayoutContainer;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutExecuteEarthPitTest;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTest;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal;
 
-    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthingPitNumber;
-    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthPitValue;
-    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthPitValue;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutExecuteEarthPitTestFields;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo1;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo2;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo3;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo4;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo5;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo6;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo7;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo8;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthNuetralVoltage;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewObservationConclusion;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion;
 
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFault;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal;
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutTypeOfFault;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFault;
     private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal;
-    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutTypeOfFault;
-
-    private LinearLayout mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
-    private TextView mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewUploadPhotoOfRegisterFault;
-    private ImageView mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFault;
-    private ImageView mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView;
-
+    private LinearLayout mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView;
+    private LinearLayout mLinearLayoutContainer;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthingPitNumber;
+    private TextView mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthPitValue;
+    private EditText mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthPitValue;
     private Button mPreventiveMaintenanceSiteEarthingCheckPointsButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading;
 
@@ -98,10 +135,9 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
     String str_pmSiteEcpNumberOfEarthPitVal = "";
     String str_pmSiteEcpNumberOfEarthPitVisibleVal = "";
-
+    String str_pmSiteEcpExecuteEarthPitTestVal = "";
     String str_pmSiteEcpRegisterFaultVal = "";
     String str_pmSiteEcpTypeOfFaultVal = "";
-
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
@@ -163,31 +199,69 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
     }
 
     private void assignViews() {
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutAllNutOrBoltsAreIntact = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_allNutOrBoltsAreIntact);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewAllNutOrBoltsAreIntact = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_allNutOrBoltsAreIntact);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewAllNutOrBoltsAreIntactVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_allNutOrBoltsAreIntactVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutIgbOrOgbStatus = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_igbOrOgbStatus);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewIgbOrOgbStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_igbOrOgbStatus);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewIgbOrOgbStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_igbOrOgbStatusVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutLightningArresterStatus = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_lightningArresterStatus);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewLightningArresterStatus = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_lightningArresterStatus);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewLightningArresterStatusVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_lightningArresterStatusVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutNumberOfEarthPit = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_numberOfEarthPit);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPit = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_numberOfEarthPit);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_numberOfEarthPitVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutNumberOfEarthPitVisible = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_numberOfEarthPitVisible);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisible = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_numberOfEarthPitVisible);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_numberOfEarthPitVisibleVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutExecuteEarthPitTest = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_executeEarthPitTest);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTest = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_executeEarthPitTest);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_executeEarthPitTestVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutExecuteEarthPitTestFields = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_executeEarthPitTestFields);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo1);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo1 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo1);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo1);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo2);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo2 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo2);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo2);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo3);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo3 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo3);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo3);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo4);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo4 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo4);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo4);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo5);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo5 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo5);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo5);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo6);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo6 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo6);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo6);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo7);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo7 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo7);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo7);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8 = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_valuePITNo8);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewValuePITNo8 = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_valuePITNo8);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8 = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_valuePITNo8);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_earthNuetralVoltage);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthNuetralVoltage = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_earthNuetralVoltage);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_earthNuetralVoltage);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_observationConclusion);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewObservationConclusion = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_observationConclusion);
+        mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_observationConclusion);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_registerFault);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_registerFaultVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_typeOfFault);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_typeOfFault);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_typeOfFaultVal);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_button_uploadPhotoOfRegisterFaultView);
+
         mLinearLayoutContainer = (LinearLayout) findViewById(R.id.linearLayout_container);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthingPitNumber = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_earthingPitNumber);
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthPitValue = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_earthPitValue);
         mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthPitValue = (EditText) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_editText_earthPitValue);
-        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_registerFault);
-        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_registerFaultVal);
-        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_typeOfFault);
-        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_typeOfFaultVal);
-        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_typeOfFault);
-
-        mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_textView_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_button_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_button_uploadPhotoOfRegisterFaultView);
-
         mPreventiveMaintenanceSiteEarthingCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteEarthingCheckPoints_button_nextReading);
     }
@@ -201,7 +275,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
                 pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
                 dataList = pmSiteTransactionDetails.getEarthingCheckPointsParentData();
-                earthingCheckPointsData.addAll(dataList.getEarthingCheckPointsData());
+                //earthingCheckPointsData.addAll(dataList.getEarthingCheckPointsData());
 
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewAllNutOrBoltsAreIntactVal.setText(dataList.getAllNutBoltsAreIntact());
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewIgbOrOgbStatusVal.setText(dataList.getIgbOgbStatus());
@@ -212,15 +286,30 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 str_pmSiteEcpNumberOfEarthPitVal = dataList.getNumberOfEarthPit();
                 invalidateOptionsMenu();
 
+                mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.setText(dataList.getExecuteEarthPitTest());
+                visibilityOfExecuteEarthPitTest(dataList.getExecuteEarthPitTest());
+
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.setText(dataList.getValuePITNo1());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.setText(dataList.getValuePITNo2());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.setText(dataList.getValuePITNo3());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.setText(dataList.getValuePITNo4());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText(dataList.getValuePITNo5());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText(dataList.getValuePITNo6());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText(dataList.getValuePITNo7());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText(dataList.getValuePITNo8());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText(dataList.getEarthNuetralVoltage());
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText(dataList.getObservationConclusion());
+
+
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
                 mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
                 this.base64StringUploadPhotoOfRegisterFault = dataList.getBase64StringUploadPhotoOfRegisterFault();
 
                 visibilityOfTypesOfFault(dataList.getRegisterFault());
 
-                mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
                 if (!this.base64StringUploadPhotoOfRegisterFault.isEmpty() && this.base64StringUploadPhotoOfRegisterFault != null) {
-                    mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                    mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfRegisterFault);
                     inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
@@ -232,14 +321,9 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                     setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
                 }
 
-                /*mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
-                if (!dataList.getNumberOfEarthPitVisible().isEmpty() && dataList.getNumberOfEarthPitVisible() != null) {
-                    mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.VISIBLE);
-                }
-                mAirConditionersTextViewNumberOfACInWorkingConditionVal.setText(dataList.getNumberOfEarthPitVisible());*/
 
-
-                if (earthingCheckPointsData != null && earthingCheckPointsData.size() > 0) {
+                /*Multi Form Set Value Purpose
+                /*if (earthingCheckPointsData != null && earthingCheckPointsData.size() > 0) {
                     mLinearLayoutContainer.setVisibility(View.VISIBLE);
                     mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthingPitNumber.setText("Reading: #1");
                     totalAcCount = Integer.parseInt(dataList.getNumberOfEarthPit());
@@ -256,7 +340,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                     } else {
                         mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading.setText("Finish");
                     }
-                }
+                }*/
 
             } else {
                 showToast("No previous saved data available");
@@ -303,7 +387,6 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
     }
 
     private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
-
         if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
             List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
             for (String ss : items) {
@@ -391,10 +474,10 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
-                        //str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
-                        //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.setText(str_pmSiteEcpNumberOfEarthPitVal);
+                        str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
+                        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.setText(str_pmSiteEcpNumberOfEarthPitVal);
                         /////////////////
-
+                        /*Multi Form Dropdown Value Purpose
                         str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
                         invalidateOptionsMenu();
                         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.setText(str_pmSiteEcpNumberOfEarthPitVal);
@@ -423,7 +506,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                             } else {
                                 mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading.setText("Next Reading");
                             }
-                        }
+                        }*/
 
 
                     }
@@ -456,6 +539,27 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             }
         });
 
+        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteEarthingCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteEarthingCheckPoints_executeEarthPitTest))),
+                        "Execute Earth Pit Test",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteEcpExecuteEarthPitTestVal = item.get(position);
+                        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.setText(str_pmSiteEcpExecuteEarthPitTestVal);
+                        visibilityOfExecuteEarthPitTest(str_pmSiteEcpExecuteEarthPitTestVal);
+                    }
+                });
+            }
+        });
+
         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -481,26 +585,13 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             @Override
             public void onClick(View v) {
                 multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
-                /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteEarthingCheckPointsActivity.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteEarthingCheckPoints_typeOfFault))),
-                        "Type of Fault",
-                        "close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_pmSiteEcpTypeOfFaultVal = item.get(position);
-                        mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(str_pmSiteEcpTypeOfFaultVal);
-                    }
-                });*/
             }
         });
 
 
         ////////////////////////////////
 
+        /*Multi Form Button Purpose
         mPreventiveMaintenanceSiteEarthingCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -537,7 +628,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                     }
                 }
             }
-        });
+        });*/
 
     }
 
@@ -554,6 +645,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
     private void saveEartPitRecords(int pos) {
 
+        /*Multi Form Purpose
         String earthPitValue = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthPitValue.getText().toString().trim();
 
         EarthingCheckPointsData earthingCheckPointsChild = new EarthingCheckPointsData(earthPitValue);
@@ -566,17 +658,18 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             }
         } else {
             earthingCheckPointsData.add(earthingCheckPointsChild);
-        }
+        }*/
     }
 
     private void displayEartPitRecords(int pos) {
 
+        /*Multi Form Purpose
         if (earthingCheckPointsData.size() > 0 && pos < earthingCheckPointsData.size()) {
 
             mPreventiveMaintenanceSiteEarthingCheckPointsTextViewEarthingPitNumber.setText("Reading: #" + (pos + 1));
 
             mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthPitValue.setText(earthingCheckPointsData.get(pos).getEarthPitValue());
-            /*mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.setText(earthingCheckPointsData.get(pos).getRegisterFault());
+            *//*mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.setText(earthingCheckPointsData.get(pos).getRegisterFault());
             mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText(earthingCheckPointsData.get(pos).getTypeOfFault());
 
             visibilityOfTypesOfFault(earthingCheckPointsData.get(pos).getRegisterFault());
@@ -585,7 +678,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 alreadySelectedTypeOfFaultList = new ArrayList<>();
                 setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
                 setMultiSelectModel();
-            }*/
+            }*//*
 
             mPreventiveMaintenanceSiteEarthingCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
@@ -607,7 +700,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             } else {
                 mPreventiveMaintenanceSiteEarthingCheckPointsButtonNextReading.setText("Next Reading");
             }
-        }
+        }*/
 
     }
 
@@ -619,13 +712,29 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             String lightningArresterStatus = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewLightningArresterStatusVal.getText().toString().trim();
             String numberOfEarthPit = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim();
             String numberOfEarthPitVisible = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim();
+
+            String executeEarthPitTest = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.getText().toString().trim();
+            String valuePITNo1 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.getText().toString().trim();
+            String valuePITNo2 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.getText().toString().trim();
+            String valuePITNo3 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.getText().toString().trim();
+            String valuePITNo4 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.getText().toString().trim();
+            String valuePITNo5 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.getText().toString().trim();
+            String valuePITNo6 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.getText().toString().trim();
+            String valuePITNo7 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.getText().toString().trim();
+            String valuePITNo8 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.getText().toString().trim();
+            String earthNuetralVoltage = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.getText().toString().trim();
+            String observationConclusion = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.getText().toString().trim();
+
             String registerFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
             String typeOfFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
             String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
 
             dataList = new EarthingCheckPointsParentData(allNutBoltsAreIntact, igbOgbStatus,
-                    lightningArresterStatus, numberOfEarthPit, numberOfEarthPitVisible, registerFault,
-                    typeOfFault, base64StringUploadPhotoOfRegisterFault, earthingCheckPointsData);
+                    lightningArresterStatus, numberOfEarthPit, numberOfEarthPitVisible, executeEarthPitTest, valuePITNo1,
+                    valuePITNo2, valuePITNo3, valuePITNo4, valuePITNo5, valuePITNo6, valuePITNo7,
+                    valuePITNo8, earthNuetralVoltage, observationConclusion, registerFault,
+                    typeOfFault, base64StringUploadPhotoOfRegisterFault);
+            //, earthingCheckPointsData);
 
             pmSiteTransactionDetails.setEarthingCheckPointsParentData(dataList);
 
@@ -651,6 +760,19 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
     public boolean checkValidationOnChangeNoOfEarthPitValue(String noOfEarthPitValue, String noOfEarthPitValueVisible, String methodFlag) {
 
+        String executeEarthPitTest = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.getText().toString().trim();
+        /*For Future validation
+        String valuePITNo1 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.getText().toString().trim();
+        String valuePITNo2 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.getText().toString().trim();
+        String valuePITNo3 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.getText().toString().trim();
+        String valuePITNo4 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.getText().toString().trim();
+        String valuePITNo5 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.getText().toString().trim();
+        String valuePITNo6 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.getText().toString().trim();
+        String valuePITNo7 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.getText().toString().trim();
+        String valuePITNo8 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.getText().toString().trim();
+        String earthNuetralVoltage = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.getText().toString().trim();
+        String observationConclusion = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.getText().toString().trim();*/
+
         String registerFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
 
@@ -664,23 +786,26 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
                 showToast("Select Earth Pit Visible is less than or equal to Earth Pit");
                 return false;
+            } else if (executeEarthPitTest.isEmpty() || executeEarthPitTest == null) {
+                showToast("Select Execute Earth Pit Testt");
+                return false;
             } else if (registerFault.isEmpty() || registerFault == null) {
                 showToast("Select Register Fault");
                 return false;
             } else if ((typeOfFault.isEmpty() || typeOfFault == null) && (registerFault.equals("Yes"))) {
                 showToast("Select Type of Fault");
                 return false;
-            } else if ((earthingCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
+            } /*else if ((earthingCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
                 showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
                 return false;
-            } else return true;
+            }*/ else return true;
         } else return true;
 
     }
 
     private void setListner() {
 
-        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
+        mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkCameraPermission()) {
@@ -689,7 +814,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             }
         });
 
-        mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
+        mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
@@ -705,15 +830,66 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
     private void visibilityOfTypesOfFault(String pmSiteEcpRegisterFaultVal) {
 
         mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
-        mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
         if (pmSiteEcpRegisterFaultVal.equals("Yes")) {
             mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
-            mPreventiveMaintenanceSiteDgBatteryCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
             mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.setText("");
-            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
             base64StringUploadPhotoOfRegisterFault = "";
             imageFileUploadPhotoOfRegisterFault = "";
+        }
+    }
+
+    private void visibilityOfExecuteEarthPitTest(String pmSiteEcpExecuteEarthPitTestVal) {
+        if (pmSiteEcpExecuteEarthPitTestVal.equals("Yes")) {
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutExecuteEarthPitTestFields.setVisibility(View.VISIBLE);
+            /*For Fuure Purpose
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);*/
+        } else {
+
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutExecuteEarthPitTestFields.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            /*For Fuure Purpose
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");*/
         }
     }
 
@@ -758,7 +934,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                            mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -767,7 +943,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 } else {
                     imageFileUploadPhotoOfRegisterFault = "";
                     imageFileUriUploadPhotoOfRegisterFault = null;
-                    mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                    mPreventiveMaintenanceSiteEarthingCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
                 }
                 break;
         }
@@ -782,11 +958,11 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
         // show the button when some condition is true
         shareItem.setVisible(true);
-        if (str_pmSiteEcpNumberOfEarthPitVal != null && !str_pmSiteEcpNumberOfEarthPitVal.isEmpty()) {
+        /*if (str_pmSiteEcpNumberOfEarthPitVal != null && !str_pmSiteEcpNumberOfEarthPitVal.isEmpty()) {
             if (Integer.valueOf(str_pmSiteEcpNumberOfEarthPitVal) > 0) {
                 shareItem.setVisible(false);
             }
-        }
+        }*/
 
         return true;
     }
