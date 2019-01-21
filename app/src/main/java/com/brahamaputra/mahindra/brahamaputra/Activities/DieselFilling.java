@@ -625,14 +625,18 @@ public class DieselFilling extends BaseActivity {
                         @Override
                         public void onResponse(DieselSubmitResposeData response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                hideBusyProgress();
-                                setResult(RESULT_OK);
-                                showToast("Record submitted successfully.");
-                                finish();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
                             } else {
-                                hideBusyProgress();
-                                showToast("Something went wrong");
+                                if (response.getSuccess() == 1) {
+                                    hideBusyProgress();
+                                    setResult(RESULT_OK);
+                                    showToast("Record submitted successfully.");
+                                    finish();
+                                } else {
+                                    hideBusyProgress();
+                                    showToast("Something went wrong");
+                                }
                             }
                         }
                     },
@@ -776,21 +780,75 @@ public class DieselFilling extends BaseActivity {
                         @Override
                         public void onResponse(UserSitesList response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                userSitesList = response;
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    userSitesList = response;
 
-                                if (userSitesList.getSiteList().size() > 0) {
+                                    if (userSitesList.getSiteList().size() > 0) {
 
-                                    final ArrayList<String> Sitelist = new ArrayList<String>();
-                                    for (UserSites site : userSitesList.getSiteList()) {
-                                        //Sitelist.add(site.getSiteId() + ":" + site.getSiteName());
-                                        Sitelist.add(site.getSiteName());
-                                    }
-                                    //Collections.sort(Sitelist);
-                                    //Collections.sort(Sitelist, String.CASE_INSENSITIVE_ORDER);
-                                    mDieselFillingTextViewSiteNameVal.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
+                                        final ArrayList<String> Sitelist = new ArrayList<String>();
+                                        for (UserSites site : userSitesList.getSiteList()) {
+                                            //Sitelist.add(site.getSiteId() + ":" + site.getSiteName());
+                                            Sitelist.add(site.getSiteName());
+                                        }
+                                        //Collections.sort(Sitelist);
+                                        //Collections.sort(Sitelist, String.CASE_INSENSITIVE_ORDER);
+                                        mDieselFillingTextViewSiteNameVal.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFilling.this,
+                                                        Sitelist,
+                                                        "Select Site",
+                                                        "Close", "#000000");
+                                                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                                                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                                                    @Override
+                                                    public void onClick(ArrayList<String> item, int position) {
+
+                                                        /*str_siteName = item.get(position);*/
+                                                    /*String tttt = item.get(position);
+                                                    String kept = tttt.substring(0, tttt.indexOf(":"));
+                                                    UserSites userSites = new UserSites();
+                                                    userSites.setSiteId(kept);
+                                                    int getCategoryPos = userSitesList.getSiteList().indexOf(userSites.getSiteId());*/
+
+
+                                                        mDieselFillingTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
+                                                        mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
+                                                        mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
+
+                                                        if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null) {
+                                                            siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
+                                                            siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
+                                                            //showToast(""+siteLatitude+","+siteLongitude);
+                                                        } else {
+                                                            siteLatitude = 0;
+                                                            siteLongitude = 0;
+                                                            //showToast(""+siteLatitude+","+siteLongitude);
+                                                        }
+
+
+                                                        site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+                                                        mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
+
+                                                        if (site_id > 0) {
+                                                            if (Conditions.isNetworkConnected(DieselFilling.this)) {
+                                                                prepareDgId_from_Sites();
+                                                            } else {
+                                                                showToast("No Internet Found..");
+                                                            }
+                                                        } else {
+                                                            showToast("Please Select Site ID First..");
+                                                        }
+                                                    }
+                                                });
+
+                                            }
+                                        });
+                                        if (!listbind_only) {
                                             SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFilling.this,
                                                     Sitelist,
                                                     "Select Site",
@@ -801,74 +859,23 @@ public class DieselFilling extends BaseActivity {
                                                 @Override
                                                 public void onClick(ArrayList<String> item, int position) {
 
-                                                    /*str_siteName = item.get(position);*/
-                                                    /*String tttt = item.get(position);
-                                                    String kept = tttt.substring(0, tttt.indexOf(":"));
-                                                    UserSites userSites = new UserSites();
-                                                    userSites.setSiteId(kept);
-                                                    int getCategoryPos = userSitesList.getSiteList().indexOf(userSites.getSiteId());*/
-
-
+                                                    //str_siteName = item.get(position);
                                                     mDieselFillingTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                     mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
                                                     mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
-
-                                                    if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null) {
-                                                        siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
-                                                        siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
-                                                        //showToast(""+siteLatitude+","+siteLongitude);
-                                                    } else {
-                                                        siteLatitude = 0;
-                                                        siteLongitude = 0;
-                                                        //showToast(""+siteLatitude+","+siteLongitude);
-                                                    }
-
-
                                                     site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
                                                     mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
-
-                                                    if (site_id > 0) {
-                                                        if (Conditions.isNetworkConnected(DieselFilling.this)) {
-                                                            prepareDgId_from_Sites();
-                                                        } else {
-                                                            showToast("No Internet Found..");
-                                                        }
-                                                    } else {
-                                                        showToast("Please Select Site ID First..");
-                                                    }
                                                 }
                                             });
-
                                         }
-                                    });
-                                    if (!listbind_only) {
-                                        SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFilling.this,
-                                                Sitelist,
-                                                "Select Site",
-                                                "Close", "#000000");
-                                        searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                                        searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                                            @Override
-                                            public void onClick(ArrayList<String> item, int position) {
 
-                                                //str_siteName = item.get(position);
-                                                mDieselFillingTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
-                                                mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
-                                                mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
-                                                site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
-                                                mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
-                                            }
-                                        });
+                                    } else {
+                                        mDieselFillingTextViewSiteNameVal.setText("No Site Found");
+                                        //No sites found
                                     }
-
-
-                                } else {
-                                    mDieselFillingTextViewSiteNameVal.setText("No Site Found");
-                                    //No sites found
                                 }
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -906,23 +913,26 @@ public class DieselFilling extends BaseActivity {
                         @Override
                         public void onResponse(DgIdQrCodeList response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                dgIdQrCodeList = response;
-                                DgIdList = new ArrayList<String>();
-                                if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    dgIdQrCodeList = response;
+                                    DgIdList = new ArrayList<String>();
+                                    if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
 
-                                    //DgIdList = new ArrayList<String>();
-                                    for (DgIdQrCode ids : dgIdQrCodeList.getPowerBackupsDGMRQRList()) {
-                                        DgIdList.add(ids.getqRCodeScan());
+                                        //DgIdList = new ArrayList<String>();
+                                        for (DgIdQrCode ids : dgIdQrCodeList.getPowerBackupsDGMRQRList()) {
+                                            DgIdList.add(ids.getqRCodeScan());
+                                        }
+                                        //Collections.sort(DgIdList, String.CASE_INSENSITIVE_ORDER);
+
+                                    } else {
+                                        mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
+                                        //No sites found
                                     }
-                                    //Collections.sort(DgIdList, String.CASE_INSENSITIVE_ORDER);
-
-                                } else {
-                                    mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
-                                    //No sites found
                                 }
                             }
-
                         }
                     },
                     new Response.ErrorListener() {

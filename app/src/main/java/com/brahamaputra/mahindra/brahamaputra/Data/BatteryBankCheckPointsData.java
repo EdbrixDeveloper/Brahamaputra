@@ -29,12 +29,6 @@ public class BatteryBankCheckPointsData implements Serializable {
     @SerializedName("bbEarthingStatus")
     @Expose
     private String bbEarthingStatus;
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
     @SerializedName("bdTestDetailsBatteryBankBackUpOfQRCodeScan")
     @Expose
     private String bdTestDetailsBatteryBankBackUpOfQRCodeScan;
@@ -226,8 +220,6 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.batteryCharger = "";
         this.batteryVentPlugStatus = "";
         this.bbEarthingStatus = "";
-        this.registerFault = "";
-        this.typeOfFault = "";
         this.bdTestDetailsBatteryBankBackUpOfQRCodeScan = "";
         this.bdTestBatteryBankBackUpTicketNo = "";
         this.bdTestCustomer = "";
@@ -318,8 +310,6 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.batteryCharger = batteryCharger;
         this.batteryVentPlugStatus = batteryVentPlugStatus;
         this.bbEarthingStatus = bbEarthingStatus;
-        this.registerFault = registerFault;
-        this.typeOfFault = typeOfFault;
         this.bdTestDetailsBatteryBankBackUpOfQRCodeScan = bdTestDetailsBatteryBankBackUpOfQRCodeScan;
         this.bdTestBatteryBankBackUpTicketNo = bdTestBatteryBankBackUpTicketNo;
         this.bdTestCustomer = bdTestCustomer;
@@ -436,22 +426,6 @@ public class BatteryBankCheckPointsData implements Serializable {
 
     public void setBbEarthingStatus(String bbEarthingStatus) {
         this.bbEarthingStatus = bbEarthingStatus;
-    }
-
-    public String getRegisterFault() {
-        return registerFault;
-    }
-
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
     }
 
     public String getBdTestDetailsBatteryBankBackUpOfQRCodeScan() {

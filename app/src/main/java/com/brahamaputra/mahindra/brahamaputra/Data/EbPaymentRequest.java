@@ -50,4 +50,16 @@ public class EbPaymentRequest {
     public void setEbPaymentRequestList(List<EbPaymentRequestList> ebPaymentRequestList) {
         this.ebPaymentRequestList = ebPaymentRequestList;
     }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 }

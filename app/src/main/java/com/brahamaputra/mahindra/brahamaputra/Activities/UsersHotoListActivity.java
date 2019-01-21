@@ -203,20 +203,23 @@ public class UsersHotoListActivity extends BaseActivity {
                         @Override
                         public void onResponse(@NonNull HotoTicketList response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                hotoTicketList = response;
-                                if (hotoTicketList.getHotoTicketsDates() != null && hotoTicketList.getHotoTicketsDates().size() > 0) {
-                                    txtNoTicketFound.setVisibility(View.GONE);
-                                    userHotoList_listView_hotoList.setVisibility(View.VISIBLE);
-                                    userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this, hotoTicketList);
-                                    userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
-                                    for (int i = 0; i < hotoTicketList.getHotoTicketsDates().size(); i++) {
-                                        userHotoList_listView_hotoList.expandGroup(i);
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    hotoTicketList = response;
+                                    if (hotoTicketList.getHotoTicketsDates() != null && hotoTicketList.getHotoTicketsDates().size() > 0) {
+                                        txtNoTicketFound.setVisibility(View.GONE);
+                                        userHotoList_listView_hotoList.setVisibility(View.VISIBLE);
+                                        userHotoExpListAdapter = new UserHotoExpListAdapter(UsersHotoListActivity.this, hotoTicketList);
+                                        userHotoList_listView_hotoList.setAdapter(userHotoExpListAdapter);
+                                        for (int i = 0; i < hotoTicketList.getHotoTicketsDates().size(); i++) {
+                                            userHotoList_listView_hotoList.expandGroup(i);
+                                        }
+                                    } else {
+                                        userHotoList_listView_hotoList.setVisibility(View.GONE);
+                                        txtNoTicketFound.setVisibility(View.VISIBLE);
                                     }
-                                } else {
-                                    userHotoList_listView_hotoList.setVisibility(View.GONE);
-                                    txtNoTicketFound.setVisibility(View.VISIBLE);
-                                }
 
 
                                 /*HotoTicketsDates = new ArrayList<>();
@@ -255,8 +258,8 @@ public class UsersHotoListActivity extends BaseActivity {
                                 for(int i=0; i<response.getHotoTicketsDates().size();i++){
                                     userHotoList_listView_hotoList.expandGroup(i);
                                 }*/
+                                }
                             }
-
                         }
                     }, new Response.ErrorListener() {
                 @Override

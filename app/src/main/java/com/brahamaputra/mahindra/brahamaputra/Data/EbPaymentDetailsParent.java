@@ -53,4 +53,16 @@ public class EbPaymentDetailsParent {
     public void setEbPaymentDetails(EbPaymentDetails ebPaymentDetails) {
         this.ebPaymentDetails = ebPaymentDetails;
     }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 }

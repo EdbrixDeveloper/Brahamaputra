@@ -1012,14 +1012,18 @@ public class ElectricBillProcess extends BaseActivity {
                             if (response.getError() != null) {
                                 showToast(response.getError().getErrorMessage());
                             } else {
-                                if (response.getSuccess() == 1) {
-
-                                    setResult(RESULT_OK);
-                                    showToast("Record submitted successfully.");
-                                    finish();
+                                if (response.getError() != null) {
+                                    showToast(response.getError().getErrorMessage());
                                 } else {
+                                    if (response.getSuccess() == 1) {
 
-                                    showToast("Something went wrong");
+                                        setResult(RESULT_OK);
+                                        showToast("Record submitted successfully.");
+                                        finish();
+                                    } else {
+
+                                        showToast("Something went wrong");
+                                    }
                                 }
                             }
                         }
@@ -1054,58 +1058,61 @@ public class ElectricBillProcess extends BaseActivity {
                         @Override
                         public void onResponse(Customer response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                customer = response;
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    customer = response;
 
-                                if (customer.getCustomerList().size() > 0) {
+                                    if (customer.getCustomerList().size() > 0) {
 
-                                    final ArrayList<String> cust = new ArrayList<String>();
-                                    for (CustomerList site : customer.getCustomerList()) {
-                                        cust.add(site.getCustomerName());
-                                    }
-
-                                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
-                                            cust,
-                                            "Select Customer",
-                                            "Close", "#000000");
-                                    searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                                        @Override
-                                        public void onClick(ArrayList<String> item, int position) {
-
-                                            str_customerName = item.get(position);
-                                            if (!mEbProcessTextViewCustomerVal.getText().equals(str_customerName)) {
-                                                mEbProcessTextViewCustomerVal.setText(str_customerName);
-                                                customerId = Integer.valueOf(customer.getCustomerList().get(position).getId());
-
-                                                mEbProcessTextViewCircleVal.setText("");
-                                                mEbProcessTextViewStateVal.setText("");
-                                                mEbProcessTextViewSsaVal.setText("");
-                                                mEbProcessTextViewSiteVal.setText("");
-                                                ConsumerNoList = null;
-                                                PaymentTypeList = null;
-                                                ElectricConnectionTypeList = null;
-                                                ConnectionTariffList = null;
-                                                mEbProcessTextViewEbConsumerNumberVal.setText("");
-                                                mEbProcessTextViewTypeModeOfPayementVal.setText("");
-                                                mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
-                                                mEbProcessTextViewTariffVal.setText("");
-                                                mEbProcessTextViewSiteIDVal.setText("");
-                                                mEbProcessTextViewSiteDetailsVal.setText("");
-                                                mEbProcessTextViewEbServiceProviderVal.setText("");
-                                            }
-
+                                        final ArrayList<String> cust = new ArrayList<String>();
+                                        for (CustomerList site : customer.getCustomerList()) {
+                                            cust.add(site.getCustomerName());
                                         }
-                                    });
+
+                                        SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
+                                                cust,
+                                                "Select Customer",
+                                                "Close", "#000000");
+                                        searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                                        searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                                            @Override
+                                            public void onClick(ArrayList<String> item, int position) {
+
+                                                str_customerName = item.get(position);
+                                                if (!mEbProcessTextViewCustomerVal.getText().equals(str_customerName)) {
+                                                    mEbProcessTextViewCustomerVal.setText(str_customerName);
+                                                    customerId = Integer.valueOf(customer.getCustomerList().get(position).getId());
+
+                                                    mEbProcessTextViewCircleVal.setText("");
+                                                    mEbProcessTextViewStateVal.setText("");
+                                                    mEbProcessTextViewSsaVal.setText("");
+                                                    mEbProcessTextViewSiteVal.setText("");
+                                                    ConsumerNoList = null;
+                                                    PaymentTypeList = null;
+                                                    ElectricConnectionTypeList = null;
+                                                    ConnectionTariffList = null;
+                                                    mEbProcessTextViewEbConsumerNumberVal.setText("");
+                                                    mEbProcessTextViewTypeModeOfPayementVal.setText("");
+                                                    mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
+                                                    mEbProcessTextViewTariffVal.setText("");
+                                                    mEbProcessTextViewSiteIDVal.setText("");
+                                                    mEbProcessTextViewSiteDetailsVal.setText("");
+                                                    mEbProcessTextViewEbServiceProviderVal.setText("");
+                                                }
+
+                                            }
+                                        });
 
 
-                                } else {
-                                    mEbProcessTextViewCustomerVal.setText("No Customer Found");
-                                    //No sites found
+                                    } else {
+                                        mEbProcessTextViewCustomerVal.setText("No Customer Found");
+                                        //No sites found
+                                    }
                                 }
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -1144,57 +1151,60 @@ public class ElectricBillProcess extends BaseActivity {
                         @Override
                         public void onResponse(Circle response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                circle = response;
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    circle = response;
 
-                                if (circle.getCircleList().size() > 0) {
+                                    if (circle.getCircleList().size() > 0) {
 
-                                    final ArrayList<String> circ = new ArrayList<String>();
-                                    for (CircleList circleList : circle.getCircleList()) {
-                                        circ.add(circleList.getCircleName());
-                                    }
-
-                                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
-                                            circ,
-                                            "Select Circle",
-                                            "Close", "#000000");
-                                    searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                                        @Override
-                                        public void onClick(ArrayList<String> item, int position) {
-
-                                            str_circleName = item.get(position);
-                                            if (!mEbProcessTextViewCircleVal.getText().equals(str_circleName)) {
-                                                mEbProcessTextViewCircleVal.setText(str_circleName);
-                                                circleId = Integer.valueOf(circle.getCircleList().get(position).getId());
-
-                                                mEbProcessTextViewStateVal.setText("");
-                                                mEbProcessTextViewSsaVal.setText("");
-                                                mEbProcessTextViewSiteVal.setText("");
-                                                ConsumerNoList = null;
-                                                PaymentTypeList = null;
-                                                ElectricConnectionTypeList = null;
-                                                ConnectionTariffList = null;
-                                                mEbProcessTextViewEbConsumerNumberVal.setText("");
-                                                mEbProcessTextViewTypeModeOfPayementVal.setText("");
-                                                mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
-                                                mEbProcessTextViewTariffVal.setText("");
-                                                mEbProcessTextViewSiteIDVal.setText("");
-                                                mEbProcessTextViewSiteDetailsVal.setText("");
-                                                mEbProcessTextViewEbServiceProviderVal.setText("");
-                                            }
-
+                                        final ArrayList<String> circ = new ArrayList<String>();
+                                        for (CircleList circleList : circle.getCircleList()) {
+                                            circ.add(circleList.getCircleName());
                                         }
-                                    });
+
+                                        SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
+                                                circ,
+                                                "Select Circle",
+                                                "Close", "#000000");
+                                        searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                                        searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                                            @Override
+                                            public void onClick(ArrayList<String> item, int position) {
+
+                                                str_circleName = item.get(position);
+                                                if (!mEbProcessTextViewCircleVal.getText().equals(str_circleName)) {
+                                                    mEbProcessTextViewCircleVal.setText(str_circleName);
+                                                    circleId = Integer.valueOf(circle.getCircleList().get(position).getId());
+
+                                                    mEbProcessTextViewStateVal.setText("");
+                                                    mEbProcessTextViewSsaVal.setText("");
+                                                    mEbProcessTextViewSiteVal.setText("");
+                                                    ConsumerNoList = null;
+                                                    PaymentTypeList = null;
+                                                    ElectricConnectionTypeList = null;
+                                                    ConnectionTariffList = null;
+                                                    mEbProcessTextViewEbConsumerNumberVal.setText("");
+                                                    mEbProcessTextViewTypeModeOfPayementVal.setText("");
+                                                    mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
+                                                    mEbProcessTextViewTariffVal.setText("");
+                                                    mEbProcessTextViewSiteIDVal.setText("");
+                                                    mEbProcessTextViewSiteDetailsVal.setText("");
+                                                    mEbProcessTextViewEbServiceProviderVal.setText("");
+                                                }
+
+                                            }
+                                        });
 
 
-                                } else {
-                                    mEbProcessTextViewCircleVal.setText("No Site Found");
-                                    //No sites found
+                                    } else {
+                                        mEbProcessTextViewCircleVal.setText("No Site Found");
+                                        //No sites found
+                                    }
                                 }
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -1232,56 +1242,59 @@ public class ElectricBillProcess extends BaseActivity {
                         @Override
                         public void onResponse(State response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                state = response;
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    state = response;
 
-                                if (state.getStateList().size() > 0) {
+                                    if (state.getStateList().size() > 0) {
 
-                                    final ArrayList<String> stateArray = new ArrayList<String>();
-                                    for (StateList stateList : state.getStateList()) {
-                                        stateArray.add(stateList.getStateName());
-                                    }
-
-                                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
-                                            stateArray,
-                                            "Select State",
-                                            "Close", "#000000");
-                                    searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                                        @Override
-                                        public void onClick(ArrayList<String> item, int position) {
-
-                                            str_stateName = item.get(position);
-                                            if (!mEbProcessTextViewStateVal.getText().equals(str_stateName)) {
-                                                mEbProcessTextViewStateVal.setText(str_stateName);
-                                                StateId = Integer.valueOf(state.getStateList().get(position).getId());
-
-                                                mEbProcessTextViewSsaVal.setText("");
-                                                mEbProcessTextViewSiteVal.setText("");
-                                                ConsumerNoList = null;
-                                                PaymentTypeList = null;
-                                                ElectricConnectionTypeList = null;
-                                                ConnectionTariffList = null;
-                                                mEbProcessTextViewEbConsumerNumberVal.setText("");
-                                                mEbProcessTextViewTypeModeOfPayementVal.setText("");
-                                                mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
-                                                mEbProcessTextViewTariffVal.setText("");
-                                                mEbProcessTextViewSiteIDVal.setText("");
-                                                mEbProcessTextViewSiteDetailsVal.setText("");
-                                                mEbProcessTextViewEbServiceProviderVal.setText("");
-                                            }
-
+                                        final ArrayList<String> stateArray = new ArrayList<String>();
+                                        for (StateList stateList : state.getStateList()) {
+                                            stateArray.add(stateList.getStateName());
                                         }
-                                    });
+
+                                        SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
+                                                stateArray,
+                                                "Select State",
+                                                "Close", "#000000");
+                                        searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                                        searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                                            @Override
+                                            public void onClick(ArrayList<String> item, int position) {
+
+                                                str_stateName = item.get(position);
+                                                if (!mEbProcessTextViewStateVal.getText().equals(str_stateName)) {
+                                                    mEbProcessTextViewStateVal.setText(str_stateName);
+                                                    StateId = Integer.valueOf(state.getStateList().get(position).getId());
+
+                                                    mEbProcessTextViewSsaVal.setText("");
+                                                    mEbProcessTextViewSiteVal.setText("");
+                                                    ConsumerNoList = null;
+                                                    PaymentTypeList = null;
+                                                    ElectricConnectionTypeList = null;
+                                                    ConnectionTariffList = null;
+                                                    mEbProcessTextViewEbConsumerNumberVal.setText("");
+                                                    mEbProcessTextViewTypeModeOfPayementVal.setText("");
+                                                    mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
+                                                    mEbProcessTextViewTariffVal.setText("");
+                                                    mEbProcessTextViewSiteIDVal.setText("");
+                                                    mEbProcessTextViewSiteDetailsVal.setText("");
+                                                    mEbProcessTextViewEbServiceProviderVal.setText("");
+                                                }
+
+                                            }
+                                        });
 
 
-                                } else {
-                                    mEbProcessTextViewStateVal.setText("No State Found");
-                                    //No sites found
+                                    } else {
+                                        mEbProcessTextViewStateVal.setText("No State Found");
+                                        //No sites found
+                                    }
                                 }
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -1319,55 +1332,58 @@ public class ElectricBillProcess extends BaseActivity {
                         @Override
                         public void onResponse(SSA response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                ssa = response;
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    ssa = response;
 
-                                if (ssa.getSSAList().size() > 0) {
+                                    if (ssa.getSSAList().size() > 0) {
 
-                                    final ArrayList<String> ssaArray = new ArrayList<String>();
-                                    for (SSAList ssaList : ssa.getSSAList()) {
-                                        ssaArray.add(ssaList.getSsaName());
-                                    }
-
-                                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
-                                            ssaArray,
-                                            "Select SSA",
-                                            "Close", "#000000");
-                                    searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                                        @Override
-                                        public void onClick(ArrayList<String> item, int position) {
-                                            str_ssa = item.get(position);
-                                            if (!mEbProcessTextViewSsaVal.getText().equals(str_ssa)) {
-
-                                                mEbProcessTextViewSsaVal.setText(str_ssa);
-                                                ssaID = Integer.valueOf(ssa.getSSAList().get(position).getId());
-
-                                                mEbProcessTextViewSiteVal.setText("");
-                                                ConsumerNoList = null;
-                                                PaymentTypeList = null;
-                                                ElectricConnectionTypeList = null;
-                                                ConnectionTariffList = null;
-                                                mEbProcessTextViewEbConsumerNumberVal.setText("");
-                                                mEbProcessTextViewTypeModeOfPayementVal.setText("");
-                                                mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
-                                                mEbProcessTextViewTariffVal.setText("");
-                                                mEbProcessTextViewSiteIDVal.setText("");
-                                                mEbProcessTextViewSiteDetailsVal.setText("");
-                                                mEbProcessTextViewEbServiceProviderVal.setText("");
-                                            }
-
+                                        final ArrayList<String> ssaArray = new ArrayList<String>();
+                                        for (SSAList ssaList : ssa.getSSAList()) {
+                                            ssaArray.add(ssaList.getSsaName());
                                         }
-                                    });
+
+                                        SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
+                                                ssaArray,
+                                                "Select SSA",
+                                                "Close", "#000000");
+                                        searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                                        searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                                            @Override
+                                            public void onClick(ArrayList<String> item, int position) {
+                                                str_ssa = item.get(position);
+                                                if (!mEbProcessTextViewSsaVal.getText().equals(str_ssa)) {
+
+                                                    mEbProcessTextViewSsaVal.setText(str_ssa);
+                                                    ssaID = Integer.valueOf(ssa.getSSAList().get(position).getId());
+
+                                                    mEbProcessTextViewSiteVal.setText("");
+                                                    ConsumerNoList = null;
+                                                    PaymentTypeList = null;
+                                                    ElectricConnectionTypeList = null;
+                                                    ConnectionTariffList = null;
+                                                    mEbProcessTextViewEbConsumerNumberVal.setText("");
+                                                    mEbProcessTextViewTypeModeOfPayementVal.setText("");
+                                                    mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
+                                                    mEbProcessTextViewTariffVal.setText("");
+                                                    mEbProcessTextViewSiteIDVal.setText("");
+                                                    mEbProcessTextViewSiteDetailsVal.setText("");
+                                                    mEbProcessTextViewEbServiceProviderVal.setText("");
+                                                }
+
+                                            }
+                                        });
 
 
-                                } else {
-                                    mEbProcessTextViewSsaVal.setText("No SSA Found");
-                                    //No sites found
+                                    } else {
+                                        mEbProcessTextViewSsaVal.setText("No SSA Found");
+                                        //No sites found
+                                    }
                                 }
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -1405,16 +1421,19 @@ public class ElectricBillProcess extends BaseActivity {
                         @Override
                         public void onResponse(Site response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                site = response;
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    site = response;
 
-                                if (site.getSiteList().size() > 0) {
-                                    siteArray = new ArrayList<String>();
-                                    for (SiteList siteList : site.getSiteList()) {
-                                        siteArray.add(siteList.getSiteName());
-                                    }
-                                    //siteArray.sort(String::compareToIgnoreCase);
-                                    ////Collections.sort(siteArray, String.CASE_INSENSITIVE_ORDER); by 008
+                                    if (site.getSiteList().size() > 0) {
+                                        siteArray = new ArrayList<String>();
+                                        for (SiteList siteList : site.getSiteList()) {
+                                            siteArray.add(siteList.getSiteName());
+                                        }
+                                        //siteArray.sort(String::compareToIgnoreCase);
+                                        ////Collections.sort(siteArray, String.CASE_INSENSITIVE_ORDER); by 008
                                     /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
                                             siteArray,
                                             "Select Site",
@@ -1439,12 +1458,12 @@ public class ElectricBillProcess extends BaseActivity {
                                     });
 */
 
-                                } else {
-                                    mEbProcessTextViewSiteIDVal.setText("No Site Found");
-                                    //No sites found
+                                    } else {
+                                        mEbProcessTextViewSiteIDVal.setText("No Site Found");
+                                        //No sites found
+                                    }
                                 }
                             }
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -1483,24 +1502,28 @@ public class ElectricBillProcess extends BaseActivity {
                         @Override
                         public void onResponse(EbSiteConnectedData response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                ebSiteConnectedData = response;
-
-                                ConsumerNoList = ebSiteConnectedData.getConsumerNoList();
-                                //Collections.sort(ConsumerNoList, String.CASE_INSENSITIVE_ORDER); by 008
-
-                                PaymentTypeList = ebSiteConnectedData.getPaymentTypeList();
-                                //Collections.sort(PaymentTypeList, String.CASE_INSENSITIVE_ORDER);
-
-                                ElectricConnectionTypeList = ebSiteConnectedData.getElectricConnectionTypeList();
-                                //Collections.sort(ElectricConnectionTypeList, String.CASE_INSENSITIVE_ORDER);
-
-                                ConnectionTariffList = ebSiteConnectedData.getConnectionTariffList();
-                                //Collections.sort(ConnectionTariffList, String.CASE_INSENSITIVE_ORDER);
-
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
                             } else {
-                                showToast("No Data Found Of Selected Site");
+                                if (response.getSuccess() == 1) {
+                                    ebSiteConnectedData = response;
 
+                                    ConsumerNoList = ebSiteConnectedData.getConsumerNoList();
+                                    //Collections.sort(ConsumerNoList, String.CASE_INSENSITIVE_ORDER); by 008
+
+                                    PaymentTypeList = ebSiteConnectedData.getPaymentTypeList();
+                                    //Collections.sort(PaymentTypeList, String.CASE_INSENSITIVE_ORDER);
+
+                                    ElectricConnectionTypeList = ebSiteConnectedData.getElectricConnectionTypeList();
+                                    //Collections.sort(ElectricConnectionTypeList, String.CASE_INSENSITIVE_ORDER);
+
+                                    ConnectionTariffList = ebSiteConnectedData.getConnectionTariffList();
+                                    //Collections.sort(ConnectionTariffList, String.CASE_INSENSITIVE_ORDER);
+
+                                } else {
+                                    showToast("No Data Found Of Selected Site");
+
+                                }
                             }
                         }
                     },

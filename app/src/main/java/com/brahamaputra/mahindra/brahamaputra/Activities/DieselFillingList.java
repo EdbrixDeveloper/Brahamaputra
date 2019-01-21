@@ -104,24 +104,25 @@ public class DieselFillingList extends BaseActivity {
                         public void onResponse(@NonNull DieselFillingtransaction response) {
                             hideBusyProgress();
                             //showToast(""+response.getSuccess().toString());
-                            if (response.getSuccess() == 1) {
-                                dieselFillingtransaction = response;
-                                if (dieselFillingtransaction.getDiselFillingTransactionList() != null && dieselFillingtransaction.getDiselFillingTransactionList().size() > 0) {
-                                    mTxtNoTicketFound.setVisibility(View.GONE);
-                                    mDieselFillingListListViewTickets.setVisibility(View.VISIBLE);
-                                    ArrayList<DiselFillingTransactionList> dd = new ArrayList<DiselFillingTransactionList>(dieselFillingtransaction.getDiselFillingTransactionList().size());
-                                    dd.addAll(dieselFillingtransaction.getDiselFillingTransactionList());
-                                    dieselTrasactionAdapter = new DieselTrasactionAdapter(dd, DieselFillingList.this);
-                                    mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    dieselFillingtransaction = response;
+                                    if (dieselFillingtransaction.getDiselFillingTransactionList() != null && dieselFillingtransaction.getDiselFillingTransactionList().size() > 0) {
+                                        mTxtNoTicketFound.setVisibility(View.GONE);
+                                        mDieselFillingListListViewTickets.setVisibility(View.VISIBLE);
+                                        ArrayList<DiselFillingTransactionList> dd = new ArrayList<DiselFillingTransactionList>(dieselFillingtransaction.getDiselFillingTransactionList().size());
+                                        dd.addAll(dieselFillingtransaction.getDiselFillingTransactionList());
+                                        dieselTrasactionAdapter = new DieselTrasactionAdapter(dd, DieselFillingList.this);
+                                        mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);
 
-                                } else {
-                                    mDieselFillingListListViewTickets.setVisibility(View.GONE);
-                                    mTxtNoTicketFound.setVisibility(View.VISIBLE);
+                                    } else {
+                                        mDieselFillingListListViewTickets.setVisibility(View.GONE);
+                                        mTxtNoTicketFound.setVisibility(View.VISIBLE);
+                                    }
                                 }
-
-
                             }
-
                         }
                     }, new Response.ErrorListener() {
                 @Override

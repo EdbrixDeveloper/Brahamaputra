@@ -3,9 +3,14 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,9 +20,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
+import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.DgBatteryCheckPointsData;
@@ -36,8 +43,12 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends BaseActivity {
@@ -68,6 +79,12 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatus;
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatusVal;
 
+    private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAs;
+    private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal;
+    private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBank;
+    private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal;
+
+
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFault;
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal;
     private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFault;
@@ -79,6 +96,11 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     private Button mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading;
     private LinearLayout mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFault;
 
+    private LinearLayout mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView;
+
     String str_noOfBatteryBankAvailableAtSiteVal = "";
     String str_pmSiteBbcpBatteryBankDischargeTestVal = "";
     String str_pmSiteBbcpStripBoltTightnessAsPerTorque = "";
@@ -87,6 +109,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     String str_pmSiteBbcpBBEarthingStatusVal = "";
     String str_pmSiteBbcpRegisterFaultVal = "";
     String str_pmSiteBbcpTypeOfFaultVal = "";
+    String str_pmSiteBbcpTestDoneAs = "";
+    String str_pmSiteBbcpSelectBatteryBank = "";
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private String base64StringDetailsOfBatteryBankQRCodeScan = "";
@@ -122,6 +146,12 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     public static final int MY_FLAG_MODULE_RESULT = 200;
 
     private BatteryBankCheckPointsData batteryBankCheckPointsDataChild;
+
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
+
+    private String base64StringUploadPhotoOfRegisterFault = "";
+    private String imageFileUploadPhotoOfRegisterFault;
+    private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,9 +225,21 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFaultVal = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_linearLayout_typeOfFault);
 
+        //only initialization other related code is remaining for below field ---
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAs = (TextView)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_testDoneAs);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal = (TextView)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_testDoneAsVal);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBank = (TextView)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_selectBatteryBank);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal = (TextView)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_selectBatteryBankVal);
+        //-----------------------------------
+
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_button_nextReading);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_linearLayout_typeOfFault);
+
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView)findViewById(R.id.preventiveMaintenanceSiteBatteryBankCheckPoints_button_uploadPhotoOfRegisterFaultView);
     }
 
     private void initCombo() {
@@ -292,6 +334,27 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         str_pmSiteBbcpBatteryBankDischargeTestVal = item.get(position);
                         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal.setText(str_pmSiteBbcpBatteryBankDischargeTestVal);
                         visibilityOfImageViewBatteryBankDischargeTest(str_pmSiteBbcpBatteryBankDischargeTestVal);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankCheckPoints_testDoneAs))),
+                        "Test Done As",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+
+                        str_pmSiteBbcpTestDoneAs = item.get(position);
+                        mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.setText(str_pmSiteBbcpBatteryBankDischargeTestVal);
+                        visibilityOfImageViewBatteryBankDischargeTest(str_pmSiteBbcpTestDoneAs);
                     }
                 });
             }
@@ -455,7 +518,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         currentPos = currentPos - 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
                 }
             }
@@ -471,11 +533,9 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
-                        visibilityOfTypesOfFault(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                         //if (checkValidationOnNoOfAcSelection() == true) {
                         if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                             submitDetails();
@@ -503,6 +563,29 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 batteryBankCheckPointsData.addAll(dataList.getBatteryBankCheckPointsData());
 
                 mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.setText(dataList.getNoOfBatteryBankAvailableAtSite());
+
+                mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
+                mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
+                this.base64StringUploadPhotoOfRegisterFault = dataList.getBase64StringUploadPhotoOfRegisterFault();
+
+                visibilityOfTypesOfFault(dataList.getRegisterFault());
+
+                mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                if (!this.base64StringUploadPhotoOfRegisterFault.isEmpty() && this.base64StringUploadPhotoOfRegisterFault != null) {
+                    mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap inImage = decodeFromBase64ToBitmap(this.base64StringUploadPhotoOfRegisterFault);
+                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                    imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
+                }
+
+                if (dataList.getTypeOfFault() != null && dataList.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+                    alreadySelectedTypeOfFaultList = new ArrayList<>();
+                    //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(pos).getTypeOfFault());
+                    setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
+                    setMultiSelectModel();
+                }
                 //mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal .setText(dataList.getNumberOfEarthPitVisible());
 
                 str_noOfBatteryBankAvailableAtSiteVal = dataList.getNoOfBatteryBankAvailableAtSite();
@@ -537,7 +620,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewPetroleumJellyAppliedVal.setText(batteryBankCheckPointsData.get(index).getPetroleumJellyApplied());
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryVentPlugStatusVal.setText(batteryBankCheckPointsData.get(index).getBatteryVentPlugStatus());
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatusVal.setText(batteryBankCheckPointsData.get(index).getBbEarthingStatus());
-                    mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.setText(batteryBankCheckPointsData.get(index).getRegisterFault());
+                    /*mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.setText(batteryBankCheckPointsData.get(index).getRegisterFault());
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText(batteryBankCheckPointsData.get(index).getTypeOfFault());
 
                     visibilityOfTypesOfFault(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString());
@@ -545,7 +628,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     if (batteryBankCheckPointsData.get(index).getTypeOfFault() != null && batteryBankCheckPointsData.get(index).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
                         //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(index).getTypeOfFault());
                         setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
-                    }
+                    }*/
 
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonPreviousReading.setVisibility(View.GONE);
                     mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
@@ -627,8 +710,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         String petroleumJellyApplied = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewPetroleumJellyAppliedVal.getText().toString().trim();
         String batteryVentPlugStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryVentPlugStatusVal.getText().toString().trim();
         String bbEarthingStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
 
 
         /*BatteryBankCheckPointsData batteryBankCheckPointsDataChild = new BatteryBankCheckPointsData(
@@ -660,8 +742,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         batteryBankCheckPointsDataChild.setPetroleumJellyApplied(petroleumJellyApplied);
         batteryBankCheckPointsDataChild.setBatteryVentPlugStatus(batteryVentPlugStatus);
         batteryBankCheckPointsDataChild.setBbEarthingStatus(bbEarthingStatus);
-        batteryBankCheckPointsDataChild.setRegisterFault(registerFault);
-        batteryBankCheckPointsDataChild.setTypeOfFault(typeOfFault);
 
         if (batteryBankCheckPointsData.size() > 0) {
             if (pos == batteryBankCheckPointsData.size()) {
@@ -698,16 +778,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewPetroleumJellyAppliedVal.setText(batteryBankCheckPointsData.get(pos).getPetroleumJellyApplied());
             mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryVentPlugStatusVal.setText(batteryBankCheckPointsData.get(pos).getBatteryVentPlugStatus());
             mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatusVal.setText(batteryBankCheckPointsData.get(pos).getBbEarthingStatus());
-            mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.setText(batteryBankCheckPointsData.get(pos).getRegisterFault());
-            mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText(batteryBankCheckPointsData.get(pos).getTypeOfFault());
 
-
-            if (batteryBankCheckPointsData.get(pos).getTypeOfFault() != null && batteryBankCheckPointsData.get(pos).getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
-                alreadySelectedTypeOfFaultList = new ArrayList<>();
-                //setArrayValuesOfTypeOfFault(earthingCheckPointsData.get(pos).getTypeOfFault());
-                setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
-                setMultiSelectModel();
-            }
 
             mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
@@ -737,9 +808,13 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         try {
 
             String noOfBatteryBankAvailableAtSiteVal = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim();
+            String registerFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+            String typeOfFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+            String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
+
             //String numberOfEarthPitVisible = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim();
 
-            dataList = new BatteryBankCheckPointsParentData(noOfBatteryBankAvailableAtSiteVal, batteryBankCheckPointsData);
+            dataList = new BatteryBankCheckPointsParentData(noOfBatteryBankAvailableAtSiteVal, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault, batteryBankCheckPointsData);
 
             pmSiteTransactionDetails.setBatteryBankCheckPointsParentData(dataList);
 
@@ -780,7 +855,9 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         str_pmSiteBbcpTypeOfFaultVal = "";
 
         base64StringDetailsOfBatteryBankQRCodeScan = "";
+        base64StringUploadPhotoOfRegisterFault = "";
 
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
         mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteBatteryBankCheckPointsImageViewBatteryBankDischargeTest.setVisibility(View.GONE);
@@ -849,6 +926,41 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             }
         });
 
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkCameraPermission()) {
+                    UploadPhotoOfRegisterFault();
+                }
+            }
+        });
+
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                    GlobalMethods.showImageDialog(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
+                } else {
+                    Toast.makeText(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void UploadPhotoOfRegisterFault() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            imageFileUploadPhotoOfRegisterFault = "IMG_" + ticketName + "_" + sdf.format(new Date()) + "_sitePremises.jpg";
+
+            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileUploadPhotoOfRegisterFault);
+            imageFileUriUploadPhotoOfRegisterFault = FileProvider.getUriForFile(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
+            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUriUploadPhotoOfRegisterFault);
+            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void DetailsOfBatteryBankQRCodeScan() {
@@ -884,11 +996,16 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     }
 
     private void visibilityOfTypesOfFault(String RegisterFault) {
-
-        mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFault.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.GONE);
         if (RegisterFault.equals("Yes")) {
-            // mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText("");
-            mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
+            mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
+        } else {
+            base64StringUploadPhotoOfRegisterFault = "";
+            mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText("");
+            mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+            imageFileUploadPhotoOfRegisterFault = "";
         }
     }
 
@@ -929,6 +1046,27 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                         }*/
                     }
+                }
+                break;
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfRegisterFault = "";
+                    imageFileUriUploadPhotoOfRegisterFault = null;
+                    mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
                 }
                 break;
         }

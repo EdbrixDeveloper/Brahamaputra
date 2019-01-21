@@ -48,5 +48,15 @@ public class Customer {
     public void setCustomerList(List<CustomerList> customerList) {
         this.customerList = customerList;
     }
+    public Error getError() {
+        return error;
+    }
 
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 }

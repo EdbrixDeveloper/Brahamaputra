@@ -105,26 +105,27 @@ public class ElectricBillProcessList extends BaseActivity {
                         public void onResponse(@NonNull EbPaymentRequest response) {
                             hideBusyProgress();
                             //showToast(""+response.getSuccess().toString());
-                            if (response.getSuccess() == 1) {
-                                ebPaymentRequest = response;
-                                if (ebPaymentRequest.getEbPaymentRequestList() != null && ebPaymentRequest.getEbPaymentRequestList().size() > 0) {
-                                    txtNoTicketFound.setVisibility(View.GONE);
-                                    listViewElectricBill.setVisibility(View.VISIBLE);
-                                    ArrayList<EbPaymentRequestList> dd = new ArrayList<EbPaymentRequestList>(ebPaymentRequest.getEbPaymentRequestList().size());
-                                    dd.addAll(ebPaymentRequest.getEbPaymentRequestList());
-                                    ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(dd, ElectricBillProcessList.this);
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    ebPaymentRequest = response;
+                                    if (ebPaymentRequest.getEbPaymentRequestList() != null && ebPaymentRequest.getEbPaymentRequestList().size() > 0) {
+                                        txtNoTicketFound.setVisibility(View.GONE);
+                                        listViewElectricBill.setVisibility(View.VISIBLE);
+                                        ArrayList<EbPaymentRequestList> dd = new ArrayList<EbPaymentRequestList>(ebPaymentRequest.getEbPaymentRequestList().size());
+                                        dd.addAll(ebPaymentRequest.getEbPaymentRequestList());
+                                        ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(dd, ElectricBillProcessList.this);
 
-                                    listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);
+                                        listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);
 
 
-                                } else {
-                                    listViewElectricBill.setVisibility(View.GONE);
-                                    txtNoTicketFound.setVisibility(View.VISIBLE);
+                                    } else {
+                                        listViewElectricBill.setVisibility(View.GONE);
+                                        txtNoTicketFound.setVisibility(View.VISIBLE);
+                                    }
                                 }
-
-
                             }
-
                         }
                     }, new Response.ErrorListener() {
                 @Override

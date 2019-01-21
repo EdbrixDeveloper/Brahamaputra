@@ -1722,6 +1722,11 @@
         <item>Execute BD Test</item>
     </string-array>
 
+    <string-array name="array_pmSiteBatteryBankCheckPoints_testDoneAs">
+        <item>Combined</item>
+        <item>Individual</item>
+    </string-array>
+
     <string-array name="array_pmSiteBatteryBankCheckPoints_stripTightnessAsPerTorque">
         <item>Checked &amp; Tightened</item>
     </string-array>

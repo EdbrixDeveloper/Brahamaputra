@@ -332,37 +332,40 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                         @Override
                         public void onResponse(@NonNull EbPaymentDetailsParent response) {
                             hideBusyProgress();
-                            if (response.getSuccess() == 1) {
-                                //Set The Values to Control Fields
-                                //mUploadEbPaymentTextViewPaymentTypeVal.setText(response.getEbPaymentDetails().getEbPaymentRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentRemark());
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    //Set The Values to Control Fields
+                                    //mUploadEbPaymentTextViewPaymentTypeVal.setText(response.getEbPaymentDetails().getEbPaymentRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentRemark());
 
-                                mUploadEbPaymentTextViewDdChequeTransactionDetails.setText(response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails());
+                                    mUploadEbPaymentTextViewDdChequeTransactionDetails.setText(response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails());
                                 /*mUploadEbPaymentTextViewDdChequeNumber.setText(response.getEbPaymentDetails().getEbPaymentDdChequeNumber() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeNumber());
                                 mUploadEbPaymentTextViewDdChequeDate.setText(response.getEbPaymentDetails().getEbPaymentDdChequetDate() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequetDate());
                                 mUploadEbPaymentTextViewDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());*/
 
-                                /*mUploadEbPaymentEditTextDdChequeTransactionDetails.setText(response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails());*/
-                                mUploadEbPaymentEditTextDdChequeNumber.setText(response.getEbPaymentDetails().getEbPaymentDdChequeNumber() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeNumber());
-                                mUploadEbPaymentEditTextDdChequeDate.setText(response.getEbPaymentDetails().getEbPaymentDdChequetDate() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequetDate());
-                                mUploadEbPaymentEditTextDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());
+                                    /*mUploadEbPaymentEditTextDdChequeTransactionDetails.setText(response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeTransactionDetails());*/
+                                    mUploadEbPaymentEditTextDdChequeNumber.setText(response.getEbPaymentDetails().getEbPaymentDdChequeNumber() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeNumber());
+                                    mUploadEbPaymentEditTextDdChequeDate.setText(response.getEbPaymentDetails().getEbPaymentDdChequetDate() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequetDate());
+                                    mUploadEbPaymentEditTextDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());
 
-                                mUploadEbPaymentEditTextDdChequeRemark.setText(response.getEbPaymentDetails().getEbPaymentDDUploadRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentDDUploadRemark());
-                                if (StatusId.equals("3")) {
-                                    mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
-                                    mUploadEbPaymentButtonDdChequePhotoView.setVisibility(View.GONE);
-                                    //invalidateOptionsMenu();
+                                    mUploadEbPaymentEditTextDdChequeRemark.setText(response.getEbPaymentDetails().getEbPaymentDDUploadRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentDDUploadRemark());
+                                    if (StatusId.equals("3")) {
+                                        mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
+                                        mUploadEbPaymentButtonDdChequePhotoView.setVisibility(View.GONE);
+                                        //invalidateOptionsMenu();
+                                    }
+                                    if (response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl() != null && !response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl().isEmpty() && response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl().length() > 0) {
+                                        imageUri = response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl();
+                                        imageFileName = "";
+                                        imageFileNameUri = null;
+                                        mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
+                                        mUploadEbPaymentButtonDdChequePhotoView.setVisibility(View.VISIBLE);
+                                        //invalidateOptionsMenu();
+                                    }
+                                    invalidateOptionsMenu();
                                 }
-                                if (response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl() != null && !response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl().isEmpty() && response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl().length() > 0) {
-                                    imageUri = response.getEbPaymentDetails().getEbPaymentDdChequeScanCopyImageUrl();
-                                    imageFileName = "";
-                                    imageFileNameUri = null;
-                                    mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
-                                    mUploadEbPaymentButtonDdChequePhotoView.setVisibility(View.VISIBLE);
-                                    //invalidateOptionsMenu();
-                                }
-                                invalidateOptionsMenu();
                             }
-
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -512,14 +515,18 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                             if (response.getError() != null) {
                                 showToast(response.getError().getErrorMessage());
                             } else {
-                                if (response.getSuccess() == 1) {
-
-                                    setResult(RESULT_OK);
-                                    showToast("EB Payment Uploaded successfully.");
-                                    finish();
+                                if (response.getError() != null) {
+                                    showToast(response.getError().getErrorMessage());
                                 } else {
+                                    if (response.getSuccess() == 1) {
 
-                                    showToast("Something went wrong");
+                                        setResult(RESULT_OK);
+                                        showToast("EB Payment Uploaded successfully.");
+                                        finish();
+                                    } else {
+
+                                        showToast("Something went wrong");
+                                    }
                                 }
                             }
                         }

@@ -89,4 +89,16 @@ public class EbSiteConnectedData {
     public void setConnectionTariffList(List<String> connectionTariffList) {
         ConnectionTariffList = connectionTariffList;
     }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 }

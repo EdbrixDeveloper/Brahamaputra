@@ -53,4 +53,15 @@ public class UserDetailsParent {
         this.userDetails = userDetails;
     }
 
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 }

@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -24,6 +25,18 @@ public class UserSitesList {
     public void setSuccess(Integer success) {
         Success = success;
     }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 
     public String getCode() {
         return Code;

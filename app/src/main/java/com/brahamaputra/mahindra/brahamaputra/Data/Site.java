@@ -52,4 +52,16 @@ public class Site {
         this.siteList = siteList;
     }
 
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
+
 }

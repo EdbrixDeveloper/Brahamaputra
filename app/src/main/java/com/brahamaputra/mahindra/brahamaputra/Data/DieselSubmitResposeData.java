@@ -23,6 +23,18 @@ public class DieselSubmitResposeData {
         this.success = success;
     }
 
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
+
     public String getCode() {
         return code;
     }

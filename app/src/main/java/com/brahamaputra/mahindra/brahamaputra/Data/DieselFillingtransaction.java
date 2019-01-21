@@ -50,5 +50,15 @@ public class DieselFillingtransaction{
     public void setDiselFillingTransactionList(List<DiselFillingTransactionList> diselFillingTransactionList) {
         this.diselFillingTransactionList = diselFillingTransactionList;
     }
+    public Error getError() {
+        return error;
+    }
 
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 }

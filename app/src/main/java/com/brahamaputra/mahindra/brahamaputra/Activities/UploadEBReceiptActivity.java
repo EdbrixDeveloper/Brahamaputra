@@ -289,14 +289,18 @@ public class UploadEBReceiptActivity extends BaseActivity {
                             if (response.getError() != null) {
                                 showToast(response.getError().getErrorMessage());
                             } else {
-                                if (response.getSuccess() == 1) {
-
-                                    setResult(RESULT_OK);
-                                    showToast("Receipt Uploaded successfully.");
-                                    finish();
+                                if (response.getError() != null) {
+                                    showToast(response.getError().getErrorMessage());
                                 } else {
+                                    if (response.getSuccess() == 1) {
 
-                                    showToast("Something went wrong");
+                                        setResult(RESULT_OK);
+                                        showToast("Receipt Uploaded successfully.");
+                                        finish();
+                                    } else {
+
+                                        showToast("Something went wrong");
+                                    }
                                 }
                             }
                         }

@@ -51,4 +51,15 @@ public class SSA{
         this.sSAList = sSAList;
     }
 
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    @SerializedName("Error")
+    @Expose
+    private Error error;
 }

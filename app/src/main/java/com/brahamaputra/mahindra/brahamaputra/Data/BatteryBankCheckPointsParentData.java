@@ -16,6 +16,15 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     @SerializedName("batteryBankCheckPointData")
     @Expose
     private List<BatteryBankCheckPointsData> batteryBankCheckPointsData;
+    @SerializedName("base64StringUploadPhotoOfRegisterFault")
+    @Expose
+    String base64StringUploadPhotoOfRegisterFault;
+    @SerializedName("registerFault")
+    @Expose
+    private String registerFault;
+    @SerializedName("typeOfFault")
+    @Expose
+    private String typeOfFault;
     @SerializedName("isSubmited")
     @Expose
     private int isSubmited = 0;
@@ -26,11 +35,17 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     public BatteryBankCheckPointsParentData() {
         this.noOfBatteryBankAvailableAtSite = "";
         this.batteryBankCheckPointsData = new ArrayList<>();
+        this.base64StringUploadPhotoOfRegisterFault = "";
+        this.registerFault = "";
+        this.typeOfFault = "";
         this.isSubmited = 0;
     }
 
-    public BatteryBankCheckPointsParentData(String noOfBatteryBankAvailableAtSite, List<BatteryBankCheckPointsData> batteryBankCheckPointsData) {
+    public BatteryBankCheckPointsParentData(String noOfBatteryBankAvailableAtSite, String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault, List<BatteryBankCheckPointsData> batteryBankCheckPointsData) {
         this.noOfBatteryBankAvailableAtSite = noOfBatteryBankAvailableAtSite;
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
+        this.registerFault = registerFault;
+        this.typeOfFault = typeOfFault;
         this.batteryBankCheckPointsData = batteryBankCheckPointsData;
         if(!noOfBatteryBankAvailableAtSite.isEmpty())
         {
@@ -63,6 +78,29 @@ public class BatteryBankCheckPointsParentData implements Serializable {
 
     public void setBatteryBankCheckPointsData(List<BatteryBankCheckPointsData> batteryBankCheckPointsData) {
         this.batteryBankCheckPointsData = batteryBankCheckPointsData;
+    }
+
+    public String getRegisterFault() {
+        return registerFault;
+    }
+
+    public void setRegisterFault(String registerFault) {
+        this.registerFault = registerFault;
+    }
+
+    public String getTypeOfFault() {
+        return typeOfFault;
+    }
+
+    public void setTypeOfFault(String typeOfFault) {
+        this.typeOfFault = typeOfFault;
+    }
+    public String getBase64StringUploadPhotoOfRegisterFault() {
+        return base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
+        this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
     }
 
 }
