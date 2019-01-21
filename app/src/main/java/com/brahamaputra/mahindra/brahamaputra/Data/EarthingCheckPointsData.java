@@ -12,13 +12,6 @@ public class EarthingCheckPointsData implements Serializable {
     @Expose
     private String earthPitValue;
 
-    @SerializedName("registerFault")
-    @Expose
-    private String registerFault;
-
-    @SerializedName("typeOfFault")
-    @Expose
-    private String typeOfFault;
 
     /*@SerializedName("isSubmited")
         private Boolean isSubmited;*/
@@ -27,14 +20,10 @@ public class EarthingCheckPointsData implements Serializable {
 
     public EarthingCheckPointsData() {
         this.earthPitValue = "";
-        this.registerFault = "";
-        this.typeOfFault = "";
     }
 
-    public EarthingCheckPointsData(String earthPitValue, String registerFault, String typeOfFault) {
+    public EarthingCheckPointsData(String earthPitValue) {
         this.earthPitValue = earthPitValue;
-        this.registerFault = registerFault;
-        this.typeOfFault = typeOfFault;
     }
 
     public String getEarthPitValue() {
@@ -43,22 +32,6 @@ public class EarthingCheckPointsData implements Serializable {
 
     public void setEarthPitValue(String earthPitValue) {
         this.earthPitValue = earthPitValue;
-    }
-
-    public String getRegisterFault() {
-        return registerFault;
-    }
-
-    public void setRegisterFault(String registerFault) {
-        this.registerFault = registerFault;
-    }
-
-    public String getTypeOfFault() {
-        return typeOfFault;
-    }
-
-    public void setTypeOfFault(String typeOfFault) {
-        this.typeOfFault = typeOfFault;
     }
 
     /* public Boolean getSubmited() {
