@@ -1075,9 +1075,12 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private void visibilityOfFireExtingisherAvailablity(String FireExtingisherAvailablity) {
 
         mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherExpiryDate.setVisibility(View.VISIBLE);
+        mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutNoOfFireExtingisherAvailablity.setVisibility(View.VISIBLE);
         if (FireExtingisherAvailablity.equals("Not Available")) {
             mPreventiveMaintenanceSiteHygieneGeneralSaftyEditTextFireExtingisherExpiryDate.setText("");
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewNoOfFireExtingisherAvailablityVal.setText("");
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutFireExtingisherExpiryDate.setVisibility(View.GONE);
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutNoOfFireExtingisherAvailablity.setVisibility(View.GONE);
         }
     }
 
