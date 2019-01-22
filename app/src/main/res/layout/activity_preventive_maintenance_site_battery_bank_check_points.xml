@@ -48,6 +48,41 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_textView_batteryBankDischargeTest"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Battery Bank Discharge Test" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_textView_batteryBankDischargeTestVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.4"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+                <ImageView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_imageview_batteryBankDischargeTest"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.2"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/book"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
                     android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_textView_testDoneAs"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
@@ -252,40 +287,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_textView_batteryBankDischargeTest"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Battery Bank Discharge Test" />
-
-                    <TextView
-                        android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_textView_batteryBankDischargeTestVal"
-                        style="@style/MyTheme"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.4"
-                        android:hint="Select"
-                        android:textAlignment="viewStart" />
-
-                    <ImageView
-                        android:id="@+id/preventiveMaintenanceSiteBatteryBankCheckPoints_imageview_batteryBankDischargeTest"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="0.2"
-                        android:clickable="true"
-                        android:padding="2dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/book"
-                        android:visibility="gone" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
