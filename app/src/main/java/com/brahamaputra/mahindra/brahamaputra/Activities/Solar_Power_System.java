@@ -91,6 +91,7 @@ public class Solar_Power_System extends BaseActivity {
     LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier;
     LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierBookValue;
 
+
     String str_available;
     String str_supplier_same_as_Solar_Supplier;
     String str_assetOwner;

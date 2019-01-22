@@ -62,6 +62,7 @@ public class ACDB_DCDB extends BaseActivity {
     private TextView mAcdbDcdbTextViewFreeCoolingDeviseStausFCU;
     private TextView mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal;
     private LinearLayout mAcdbDcdbLinearLayoutFreeCoolingDeviseStausFCU;
+    private LinearLayout mSolarPowerSystemLinearLayourContainer;
 
 
    /* mAcdbDcdbTextViewNumberofACDBVal;
@@ -80,6 +81,9 @@ public class ACDB_DCDB extends BaseActivity {
         mAcdbDcdbTextViewFreeCoolingDeviseStausFCU = (TextView) findViewById(R.id.acdb_dcdb_textView_FreeCoolingDeviseStausFCU);
         mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal = (TextView) findViewById(R.id.acdb_dcdb_textView_FreeCoolingDeviseStausFCU_val);
         mAcdbDcdbLinearLayoutFreeCoolingDeviseStausFCU=(LinearLayout) findViewById(R.id.acdb_dcdb_linearLayout_FreeCoolingDeviseStausFCU);
+
+        mSolarPowerSystemLinearLayourContainer = (LinearLayout)findViewById(R.id.linearLayoutSolarPowerSystemContainer);
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -119,9 +123,14 @@ public class ACDB_DCDB extends BaseActivity {
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
-
                         str_NumberofACDB = item.get(position);
                         mAcdbDcdbTextViewNumberofACDBVal.setText(str_NumberofACDB);
+
+                        if(str_NumberofACDB.equals("0")){
+                            mSolarPowerSystemLinearLayourContainer.setVisibility(View.GONE);
+                        }else {
+                            mSolarPowerSystemLinearLayourContainer.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 
