@@ -810,8 +810,8 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.setText("");
         mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsControlerStatusVal.setText("");
         mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsEarthingStatusVal.setText("");
-        mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText("");
-        mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText("");
+        /*mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.setText("");
+        mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText("");*/
         mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadCurrent.setText("");
         mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadAmpPh.setText("");
 
@@ -821,6 +821,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         mButtonClearQRCodeScanView.setVisibility(View.GONE);
         //mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScan.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.GONE);
         alreadySelectedTypeOfFaultList=new ArrayList<>();
     }
 

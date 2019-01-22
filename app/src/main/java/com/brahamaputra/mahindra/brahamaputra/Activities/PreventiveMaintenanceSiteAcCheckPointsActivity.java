@@ -1103,8 +1103,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText("");
         mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText("");
         mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText("");
-        mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText("");
-        mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText("");
+        /*mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText("");
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText("");*/
         mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText("");
 
         base64StringAcCheckPointsQRCodeScan = "";
@@ -1118,6 +1118,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
         alreadySelectedTypeOfFaultList=new ArrayList<>();
 
     }
