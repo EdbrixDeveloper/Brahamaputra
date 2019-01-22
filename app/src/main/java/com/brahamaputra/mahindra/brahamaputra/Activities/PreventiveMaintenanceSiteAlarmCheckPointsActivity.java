@@ -368,7 +368,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
 
     private void visibilityOfRemarks(String str_pmSiteAcpRemarks) {
         mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.VISIBLE);
-        if (str_pmSiteAcpRemarks.equals("No")) {
+        if (str_pmSiteAcpRemarks.equals("Yes")) {
             mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRemarksVal.setText("");
             mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.GONE);
         }
