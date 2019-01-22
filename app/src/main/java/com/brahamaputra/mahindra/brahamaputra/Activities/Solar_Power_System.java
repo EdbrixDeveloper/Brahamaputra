@@ -816,5 +816,6 @@ public class Solar_Power_System extends BaseActivity {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
+    
 
 }

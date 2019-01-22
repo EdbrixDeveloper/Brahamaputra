@@ -187,152 +187,316 @@
 
             </LinearLayout>
 
-
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/solarPowerSystem_linearLayout_manufacturerMakeModel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Manufacturer / Make / Model" />
-
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_manufacturerMakeModel"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Manufacturer"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/solarPowerSystem_linearLayout_capacityKW"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_capacityKW"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Capacity (KW)" />
-
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_capacityKW"
-
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Capacity(KW)"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/solarPowerSystem_linearLayout_bookValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+            <LinearLayout
+                android:id="@+id/linearLayoutSolarPowerSystemSolarContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="@dimen/app_normal_margin"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/FontStyle"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Book value in Rs" />
+                    android:layout_weight="0.5"
+                    android:text="SOLAR"
+                    android:textAlignment="center"
+                    android:textStyle="bold"/>
 
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_bookValue"
-                    android:layout_width="0dp"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_manufacturerMakeModel"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Book Value"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Manufacturer / Make / Model" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_manufacturerMakeModel"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Manufacturer"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_capacityKW"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_capacityKW"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Capacity (KW)" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_capacityKW"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Capacity(KW)"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_bookValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Book value in Rs" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_bookValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Book Value"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_amcYesNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_amcYesNo"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AMC (Yes / No)" />
+
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_amcYesNo_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_validityOfAmc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_validityOfAmc"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="If yes, Validity of the AMC" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_dateOfvalidityOfAmc"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MMM/YYYY"
+                        android:inputType="none"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/solarPowerSystem_linearLayout_amcYesNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+            <LinearLayout
+                android:id="@+id/linearLayoutSolarPowerSystemBatteryContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="@dimen/app_normal_margin"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/solarPowerSystem_textView_amcYesNo"
                     style="@style/FontStyle"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="AMC (Yes / No)" />
+                    android:layout_weight="0.5"
+                    android:text="Battery"
+                    android:textAlignment="center"
+                    android:textStyle="bold"/>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_battery_manufacturerMakeModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Manufacturer / Make / Model" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_battery_manufacturerMakeModel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Manufacturer"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_battery_capacityKW"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_capacityKW"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Capacity (KW)" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_battery_capacityKW"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Capacity(KW)"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_battery_bookValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Book value in Rs" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_battery_bookValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Book Value"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_battery_amcYesNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_amcYesNo"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="AMC (Yes / No)" />
 
 
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_amcYesNo_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_battery_amcYesNo_val"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/solarPowerSystem_linearLayout_battery_validityOfAmc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/solarPowerSystem_textView_validityOfAmc"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="If yes, Validity of the AMC" />
+
+                    <EditText
+                        android:id="@+id/solarPowerSystem_editText_battery_dateOfvalidityOfAmc"
+                        style="@android:style/Widget.Holo.Light.Spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="DD/MMM/YYYY"
+                        android:inputType="none"
+                        android:textAlignment="viewStart" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/solarPowerSystem_linearLayout_validityOfAmc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-
-                <TextView
-                    android:id="@+id/solarPowerSystem_textView_validityOfAmc"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="If yes, Validity of the AMC" />
-
-                <EditText
-                    android:id="@+id/solarPowerSystem_editText_dateOfvalidityOfAmc"
-                    style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="DD/MMM/YYYY"
-                    android:inputType="none"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
 
         </LinearLayout>
+
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
