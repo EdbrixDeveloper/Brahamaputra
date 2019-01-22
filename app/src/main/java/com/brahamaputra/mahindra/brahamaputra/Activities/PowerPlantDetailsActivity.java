@@ -134,9 +134,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private String imageFileName = "";
     private int totalPlantCount = 0;
     private int currentPos = 0;
-
     //
-
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_FLAG_MODULE_RESULT = 200;
     public static final String ALLOW_KEY = "ALLOWED";

@@ -238,7 +238,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Number of Module Slots" />
+                        android:text="No of Rectifier Module Slots" />
 
 
                     <TextView
@@ -399,7 +399,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Number of Modules" />
+                        android:text="No of Rectifier Modules" />
 
                     <TextView
                         android:id="@+id/powerPlantDetails_textView_numberOfModules_val"
@@ -419,14 +419,12 @@
                         android:padding="2dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/book"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
 
-
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app_min_padding"
@@ -438,7 +436,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="No. of Faulty Modules" />
+                        android:text="No of Faulty Rectifier Modules" />
 
 
                     <TextView
@@ -449,7 +447,6 @@
                         android:layout_weight="0.6"
                         android:hint="Select"
                         android:textAlignment="viewStart" />
-
 
 
                 </LinearLayout>

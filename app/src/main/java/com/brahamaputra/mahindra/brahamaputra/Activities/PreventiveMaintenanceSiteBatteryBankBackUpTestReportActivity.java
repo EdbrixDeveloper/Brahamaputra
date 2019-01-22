@@ -774,7 +774,6 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     }
 
-
     private void setClassBatteryBankCheckPointsData() {
         /*try {*/
 

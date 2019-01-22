@@ -39,44 +39,44 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayoutSolarPowerSystemContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/app_normal_margin"
-            android:orientation="vertical">
-
             <LinearLayout
+                android:id="@+id/linearLayoutSolarPowerSystemContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                android:layout_margin="@dimen/app_normal_margin"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/acdb_dcdb_textView_ACDBRatingAMP"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="ACDB Rating ( AMP)" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <EditText
-                    android:id="@+id/acdb_dcdb_editText_ACDBRatingAMP"
+                    <TextView
+                        android:id="@+id/acdb_dcdb_textView_ACDBRatingAMP"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="ACDB Rating ( AMP)" />
 
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter ACDB Rating ( AMP) "
-                    android:inputType="number"
-                    android:textAlignment="viewStart"
-                    android:imeOptions="actionNext"
-                    />
+                    <EditText
+                        android:id="@+id/acdb_dcdb_editText_ACDBRatingAMP"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter ACDB Rating ( AMP) "
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textAlignment="viewStart" />
 
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -100,16 +100,16 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/acdb_dcdb_linearLayout_FreeCoolingDeviseStausFCU"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
-                android:id="@+id/acdb_dcdb_linearLayout_FreeCoolingDeviseStausFCU"
                 android:weightSum="1">
 
                 <TextView
@@ -127,11 +127,10 @@
                     android:layout_height="50dp"
                     android:layout_weight="0.6"
 
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
-        </LinearLayout>
 
 
         </LinearLayout>
