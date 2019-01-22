@@ -58,38 +58,54 @@ import java.util.Locale;
 
 public class Solar_Power_System extends BaseActivity {
 
-    private TextView mSolarPowerSystemTextViewQRCodeScan;
-    private ImageView mSolarPowerSystemButtonQRCodeScan;
-
-    private ImageView mSolarPowerSystemButtonQRCodeScanView;
-
     private TextView mSolarPowerSystemTextViewAvailable;
     private TextView mSolarPowerSystemTextViewAvailableVal;
+    private LinearLayout mSolarPowerSystemLinearLayoutQRCodeScan;
+    private TextView mSolarPowerSystemTextViewQRCodeScan;
+    private ImageView mSolarPowerSystemButtonQRCodeScan;
+    private ImageView mSolarPowerSystemButtonQRCodeScanView;
+    private ImageView mButtonClearQRCodeScanView;
+    private LinearLayout mSolarPowerSystemLinearLayoutAssetOwner;
     private TextView mSolarPowerSystemTextViewAssetOwner;
     private TextView mSolarPowerSystemTextViewAssetOwnerVal;
-    private TextView mSolarPowerSystemTextViewManufacturerMakeModel;
-    private EditText mSolarPowerSystemEditTextManufacturerMakeModel;
+    private LinearLayout mSolarPowerSystemLinearLayoutCellPanel;
     private TextView mSolarPowerSystemTextViewCellPanel;
     private TextView mSolarPowerSystemTextViewCellPanelVal;
+    private LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier;
+    private TextView mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplierVal;
+    private LinearLayout mLinearLayoutSolarPowerSystemSolarContainer;
+    private LinearLayout mSolarPowerSystemLinearLayoutManufacturerMakeModel;
+    private TextView mSolarPowerSystemTextViewManufacturerMakeModel;
+    private EditText mSolarPowerSystemEditTextManufacturerMakeModel;
+    private LinearLayout mSolarPowerSystemLinearLayoutCapacityKW;
     private TextView mSolarPowerSystemTextViewCapacityKW;
     private EditText mSolarPowerSystemEditTextCapacityKW;
+    private LinearLayout mSolarPowerSystemLinearLayoutBookValue;
     private EditText mSolarPowerSystemEditTextBookValue;
+    private LinearLayout mSolarPowerSystemLinearLayoutAmcYesNo;
     private TextView mSolarPowerSystemTextViewAmcYesNo;
     private TextView mSolarPowerSystemTextViewAmcYesNoVal;
+    private LinearLayout mSolarPowerSystemLinearLayoutValidityOfAmc;
     private TextView mSolarPowerSystemTextViewValidityOfAmc;
     private EditText mSolarPowerSystemEditTextDateOfvalidityOfAmc;
-    private ImageView button_ClearQRCodeScanView;
+    private LinearLayout mLinearLayoutSolarPowerSystemBatteryContainer;
+    private LinearLayout mSolarPowerSystemLinearLayoutBatteryManufacturerMakeModel;
+    private TextView mSolarPowerSystemTextViewBatteryManufacturerMakeModel;
+    private EditText mSolarPowerSystemEditTextBatteryManufacturerMakeModel;
+    private LinearLayout mSolarPowerSystemLinearLayoutBatteryCapacityKW;
+    private TextView mSolarPowerSystemTextViewBatteryCapacityKW;
+    private EditText mSolarPowerSystemEditTextBatteryCapacityKW;
+    private LinearLayout mSolarPowerSystemLinearLayoutBatteryBookValue;
+    private EditText mSolarPowerSystemEditTextBatteryBookValue;
+    private LinearLayout mSolarPowerSystemLinearLayoutBatteryAmcYesNo;
+    private TextView mSolarPowerSystemTextViewBatteryAmcYesNo;
+    private TextView mSolarPowerSystemTextViewBatteryAmcYesNoVal;
+    private LinearLayout mSolarPowerSystemLinearLayoutBatteryValidityOfAmc;
+    private TextView mSolarPowerSystemTextViewBatteryValidityOfAmc;
+    private EditText mSolarPowerSystemEditTextBatteryDateOfvalidityOfAmc;
     private TextView mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier;
-
-    LinearLayout mSolarPowerSystemLinearLayoutQRCodeScan;
-    LinearLayout mSolarPowerSystemLinearLayoutAssetOwner;
-    LinearLayout mSolarPowerSystemLinearLayoutManufacturerMakeModel;
-    LinearLayout mSolarPowerSystemLinearLayoutCellPanel;
-    LinearLayout mSolarPowerSystemLinearLayoutCapacityKW;
-    LinearLayout mSolarPowerSystemLinearLayoutAmcYesNo;
-    LinearLayout mSolarPowerSystemLinearLayoutValidityOfAmc;
-    LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier;
-    LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierBookValue;
+    private LinearLayout mSolarPowerSystemLinearLayoutBatterySupplierBookValue;
+    private ImageView button_ClearQRCodeScanView;
 
 
     String str_available;
@@ -110,8 +126,6 @@ public class Solar_Power_System extends BaseActivity {
     private SessionManager sessionManager;
     private Uri imageFileUri;
     private String imageFileName = "";
-
-
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -251,39 +265,55 @@ public class Solar_Power_System extends BaseActivity {
     }
 
     private void assignViews() {
-        mSolarPowerSystemTextViewQRCodeScan = (TextView) findViewById(R.id.solarPowerSystem_textView_QRCodeScan);
-        mSolarPowerSystemButtonQRCodeScan = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScan);
-
-        mSolarPowerSystemButtonQRCodeScanView = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScanView);
-
         mSolarPowerSystemTextViewAvailable = (TextView) findViewById(R.id.solarPowerSystem_textView_available);
         mSolarPowerSystemTextViewAvailableVal = (TextView) findViewById(R.id.solarPowerSystem_textView_available_val);
+        mSolarPowerSystemLinearLayoutQRCodeScan = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_QRCodeScan);
+        mSolarPowerSystemTextViewQRCodeScan = (TextView) findViewById(R.id.solarPowerSystem_textView_QRCodeScan);
+        mSolarPowerSystemButtonQRCodeScan = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScan);
+        mSolarPowerSystemButtonQRCodeScanView = (ImageView) findViewById(R.id.solarPowerSystem_button_QRCodeScanView);
+        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
+        mSolarPowerSystemLinearLayoutAssetOwner = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_assetOwner);
         mSolarPowerSystemTextViewAssetOwner = (TextView) findViewById(R.id.solarPowerSystem_textView_assetOwner);
         mSolarPowerSystemTextViewAssetOwnerVal = (TextView) findViewById(R.id.solarPowerSystem_textView_assetOwner_val);
-        mSolarPowerSystemTextViewManufacturerMakeModel = (TextView) findViewById(R.id.solarPowerSystem_textView_manufacturerMakeModel);
-        mSolarPowerSystemEditTextManufacturerMakeModel = (EditText) findViewById(R.id.solarPowerSystem_editText_manufacturerMakeModel);
+        mSolarPowerSystemLinearLayoutCellPanel = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_cellPanel);
         mSolarPowerSystemTextViewCellPanel = (TextView) findViewById(R.id.solarPowerSystem_textView_cellPanel);
         mSolarPowerSystemTextViewCellPanelVal = (TextView) findViewById(R.id.solarPowerSystem_textView_cellPanel_val);
+        mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_batterySupplierSameAsSolarSupplier);
+        mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier = (TextView)findViewById(R.id.solarPowerSystem_textView_batterySupplierSameAsSolarSupplier_val);
+        mLinearLayoutSolarPowerSystemSolarContainer = (LinearLayout) findViewById(R.id.linearLayoutSolarPowerSystemSolarContainer);
+        mSolarPowerSystemLinearLayoutManufacturerMakeModel = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_manufacturerMakeModel);
+        mSolarPowerSystemTextViewManufacturerMakeModel = (TextView) findViewById(R.id.solarPowerSystem_textView_manufacturerMakeModel);
+        mSolarPowerSystemEditTextManufacturerMakeModel = (EditText) findViewById(R.id.solarPowerSystem_editText_manufacturerMakeModel);
+        mSolarPowerSystemLinearLayoutCapacityKW = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_capacityKW);
         mSolarPowerSystemTextViewCapacityKW = (TextView) findViewById(R.id.solarPowerSystem_textView_capacityKW);
         mSolarPowerSystemEditTextCapacityKW = (EditText) findViewById(R.id.solarPowerSystem_editText_capacityKW);
+        mSolarPowerSystemLinearLayoutBatterySupplierBookValue  = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_bookValue);
         mSolarPowerSystemEditTextBookValue = (EditText) findViewById(R.id.solarPowerSystem_editText_bookValue);
+        mSolarPowerSystemLinearLayoutAmcYesNo = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_amcYesNo);
         mSolarPowerSystemTextViewAmcYesNo = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo);
         mSolarPowerSystemTextViewAmcYesNoVal = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo_val);
+        mSolarPowerSystemLinearLayoutValidityOfAmc = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_validityOfAmc);
         mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
         mSolarPowerSystemEditTextDateOfvalidityOfAmc = (EditText) findViewById(R.id.solarPowerSystem_editText_dateOfvalidityOfAmc);
 
-        mSolarPowerSystemLinearLayoutQRCodeScan = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_QRCodeScan);
-        mSolarPowerSystemLinearLayoutAssetOwner = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_assetOwner);
-        mSolarPowerSystemLinearLayoutManufacturerMakeModel = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_manufacturerMakeModel);
-        mSolarPowerSystemLinearLayoutCellPanel = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_cellPanel);
-        mSolarPowerSystemLinearLayoutCapacityKW = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_capacityKW);
-        mSolarPowerSystemLinearLayoutAmcYesNo = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_amcYesNo);
-        mSolarPowerSystemLinearLayoutValidityOfAmc = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_validityOfAmc);
-        button_ClearQRCodeScanView = (ImageView) findViewById(R.id.button_ClearQRCodeScanView);
+        mSolarPowerSystemLinearLayoutBatteryManufacturerMakeModel = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_battery_manufacturerMakeModel);
+        mSolarPowerSystemTextViewManufacturerMakeModel = (TextView) findViewById(R.id.solarPowerSystem_textView_manufacturerMakeModel);
 
-        mSolarPowerSystemTextViewBatterySupplierSameAsSolarSupplier = (TextView)findViewById(R.id.solarPowerSystem_textView_batterySupplierSameAsSolarSupplier_val);
-        mSolarPowerSystemLinearLayoutBatterySupplierSameAsSolarSupplier = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_batterySupplierSameAsSolarSupplier);
-        mSolarPowerSystemLinearLayoutBatterySupplierBookValue  = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_bookValue);
+        mSolarPowerSystemLinearLayoutBatteryCapacityKW = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_battery_capacityKW);
+        mSolarPowerSystemTextViewCapacityKW = (TextView) findViewById(R.id.solarPowerSystem_textView_capacityKW);
+        mSolarPowerSystemEditTextBatteryCapacityKW = (EditText) findViewById(R.id.solarPowerSystem_editText_battery_capacityKW);
+        mSolarPowerSystemLinearLayoutBatteryBookValue = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_battery_bookValue);
+        mSolarPowerSystemEditTextBatteryBookValue = (EditText) findViewById(R.id.solarPowerSystem_editText_battery_bookValue);
+        mSolarPowerSystemLinearLayoutBatteryAmcYesNo = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_battery_amcYesNo);
+        mSolarPowerSystemTextViewAmcYesNo = (TextView) findViewById(R.id.solarPowerSystem_textView_amcYesNo);
+        mSolarPowerSystemTextViewBatteryAmcYesNoVal = (TextView) findViewById(R.id.solarPowerSystem_textView_battery_amcYesNo_val);
+        mSolarPowerSystemLinearLayoutBatteryValidityOfAmc = (LinearLayout) findViewById(R.id.solarPowerSystem_linearLayout_battery_validityOfAmc);
+        mSolarPowerSystemTextViewValidityOfAmc = (TextView) findViewById(R.id.solarPowerSystem_textView_validityOfAmc);
+        mSolarPowerSystemEditTextBatteryDateOfvalidityOfAmc = (EditText) findViewById(R.id.solarPowerSystem_editText_battery_dateOfvalidityOfAmc);
+
+        mLinearLayoutSolarPowerSystemBatteryContainer = (LinearLayout) findViewById(R.id.linearLayoutSolarPowerSystemBatteryContainer);
+        mSolarPowerSystemEditTextBatteryManufacturerMakeModel = (EditText) findViewById(R.id.solarPowerSystem_editText_battery_manufacturerMakeModel);
+
 
         mSolarPowerSystemEditTextCapacityKW.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
 
@@ -816,6 +846,6 @@ public class Solar_Power_System extends BaseActivity {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
-    
+
 
 }

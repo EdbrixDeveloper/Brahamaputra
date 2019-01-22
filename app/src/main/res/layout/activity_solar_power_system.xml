@@ -365,7 +365,6 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/solarPowerSystem_textView_manufacturerMakeModel"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -392,7 +391,6 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/solarPowerSystem_textView_capacityKW"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -444,7 +442,6 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/solarPowerSystem_textView_amcYesNo"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -472,7 +469,6 @@
 
 
                     <TextView
-                        android:id="@+id/solarPowerSystem_textView_validityOfAmc"
                         style="@style/FontStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
