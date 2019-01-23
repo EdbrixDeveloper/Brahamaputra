@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsChildData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.DgBatteryCheckPointsData;
@@ -153,6 +154,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     private String imageFileUploadPhotoOfRegisterFault;
     private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
+    private ArrayList<BatteryBankCheckPointsChildData> batteryBankCheckPointschildData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,8 +176,10 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
         pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
         batteryBankCheckPointsData = new ArrayList<>();
+        dataList = new BatteryBankCheckPointsParentData();
 
         batteryBankCheckPointsDataChild = new BatteryBankCheckPointsData();
+        batteryBankCheckPointschildData = new ArrayList<>();
 
         currentPos = 0;
 
@@ -192,7 +197,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         setInputDetails(currentPos);
         invalidateOptionsMenu();
         setMultiSelectModel();
-
 
     }
 
@@ -561,6 +565,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
                 dataList = pmSiteTransactionDetails.getBatteryBankCheckPointsParentData();
                 batteryBankCheckPointsData.addAll(dataList.getBatteryBankCheckPointsData());
+                batteryBankCheckPointschildData.clear();
+                batteryBankCheckPointschildData.addAll(dataList.getBatteryBankCheckPointsChildData());
 
                 mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.setText(dataList.getNoOfBatteryBankAvailableAtSite());
 
@@ -777,9 +783,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             String batteryBankDischargeTest = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal.getText().toString().trim();
             String testDoneAs = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.getText().toString().trim();
             String batteryBankQrCodeSelection = mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.getText().toString().trim();
-            //String numberOfEarthPitVisible = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim();
-
-            //dataList = new BatteryBankCheckPointsParentData(noOfBatteryBankAvailableAtSiteVal, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault, batteryBankCheckPointsData);
 
             dataList.setNoOfBatteryBankAvailableAtSite(noOfBatteryBankAvailableAtSiteVal);
             dataList.setRegisterFault(registerFault);
@@ -789,6 +792,56 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             dataList.setTestDoneAs(testDoneAs);
             dataList.setBatteryBankQrCodeSelection(batteryBankQrCodeSelection);
             dataList.setBatteryBankCheckPointsData(batteryBankCheckPointsData);
+
+            dataList.setTypeOfBattery("VRLA");
+
+            if (batteryBankDischargeTest.equals("Execute BD Test")) {
+                if (batteryBankCheckPointschildData.size() > 0) {
+                    dataList.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
+                }
+            } else {
+                batteryBankCheckPointschildData = new ArrayList<>();
+
+                dataList.setBdTestBatteryBankBackUpTicketNo("");
+                dataList.setBdTestCustomer("");
+                dataList.setBdTestCircle("");
+                dataList.setBdTestState("");
+                dataList.setBdTestSiteName("");
+                dataList.setBdTestSiteId("");
+                dataList.setBdTestSsa("");
+                dataList.setBdTestUserFseNameDesignation("");
+                dataList.setTypeOfBattery("");
+
+                dataList.setBdTestVoltageModuleReading1("");
+                dataList.setBdTestCurrentModuleReading1("");
+                dataList.setBdTestSocModuleReading1("");
+                dataList.setBdTestSohModuleReading1("");
+                dataList.setBdTestVoltageModuleReading2("");
+                dataList.setBdTestCurrentModuleReading2("");
+                dataList.setBdTestSocModuleReading2("");
+                dataList.setBdTestSohModuleReading2("");
+                dataList.setBdTestVoltageModuleReading3("");
+                dataList.setBdTestCurrentModuleReading3("");
+                dataList.setBdTestSocModuleReading3("");
+                dataList.setBdTestSohModuleReading3("");
+
+                dataList.setBdTestFloatVoltageInSmpsBusBarAfter30Min("");
+                dataList.setBdTestTotalLoadCurrentInAmps("");
+                dataList.setBdTestBatteryBankMake("");
+                dataList.setBdTestBatteryBankCapacity("");
+                dataList.setBdTestNumberOfRectifireModuleWorking("");
+                dataList.setBdTestSiteLoadOnBatteryInAmps("");
+                dataList.setBdTestFloatVoltageBeforeBBTest("");
+                dataList.setBdTestSingleModuleRating("");
+                dataList.setBdTestNumberOfBatteryModule("");
+                dataList.setBdTestReadingTakenAt("");
+                dataList.setBdTestLastReadingTakenAt("");
+                dataList.setBdTestRemarks("");
+
+                dataList.setBdTestDetailsBatteryBankBackUpOfQRCodeScan("");
+                dataList.setBdTestBase64StringPhotoOfBatteryBank("");
+
+            }
 
 
             pmSiteTransactionDetails.setBatteryBankCheckPointsParentData(dataList);
@@ -801,8 +854,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             e.printStackTrace();
         }
     }
-
-    // class com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails declares multiple JSON fields named smpsCheckPointParentData
 
     public void clearFields(int indexPos) {
 
@@ -1030,8 +1081,13 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 /*if (requestCode == MY_FLAG_MODULE_RESULT) {*/
                 if (resultCode == RESULT_OK) {
                     Bundle b = data.getExtras();
-                    dataList = new BatteryBankCheckPointsParentData();
-                    dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
+                    //dataList = new BatteryBankCheckPointsParentData();
+                    //dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
+                    String ss = (String) b.getSerializable("flag");
+                    if (ss.equals("1")) {
+                        //showToast("Called Return");
+                        setInputDetails(0);
+                    }
                     Log.e("123", "123");
                 }
                 /*}*/

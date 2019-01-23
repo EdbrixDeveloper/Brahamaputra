@@ -330,7 +330,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_min_margin"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -589,7 +590,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_min_margin"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -633,7 +635,8 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:hint="Cell1"
-                            android:inputType="numberDecimal" />
+                            android:inputType="numberDecimal"
+                            android:nextFocusRight="@+id/bdTestCellReadingEditText2" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText2"
