@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -344,6 +345,15 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                 batteryBankCheckPointsData.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
             }
 
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+                pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+
+            }
+
             pmSiteTransactionDetails.setBatteryBankCheckPointsParentData(batteryBankCheckPointsData);
 
             Gson gson2 = new GsonBuilder().create();
@@ -411,7 +421,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                         if (totalAcCount > 1) {
                             mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Next Reading");
                         } else {
-                            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Finish");
+                            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Set");//Finish
                         }
                     }
                 }
@@ -526,7 +536,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
-                        setInputDetails();
+                        //setInputDetails();
+
                         //if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                         //submitDetails();
                         //startActivity(new Intent(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this, PreventiveMaintenanceSiteEarthingCheckPointsActivity.class));
@@ -737,11 +748,11 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
             mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Next Reading");
         } else if (pos > 0 && pos == (totalAcCount - 1)) {
             mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPreviousReading.setVisibility(View.VISIBLE);
-            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Finish");
+            mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Set");//Finish
         } else if (pos == 0) {
             mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPreviousReading.setVisibility(View.GONE);
             if (pos == (totalAcCount - 1)) {
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Finish");
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Set");//Finish
             } else {
                 mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.setText("Next Reading");
             }
@@ -960,9 +971,21 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     @Override
     public void onBackPressed() {
-        setInputDetails();
-        setResult(RESULT_OK);
-        finish();
+        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this);
+        alertDialogManager.Dialog("Confirmation", "Do you want to save this record?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+                setInputDetails();
+                setResult(RESULT_OK);
+                finish();
+            }
+
+            @Override
+            public void onNegativeClick() {
+
+            }
+        }).show();
+
     }
 
     private void submitDetails() {

@@ -703,12 +703,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         String batteryVentPlugStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryVentPlugStatusVal.getText().toString().trim();
         String bbEarthingStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatusVal.getText().toString().trim();
 
-        /*batteryBankCheckPointsDataChild.setDetailsOfBatteryBankQrCodeScan(detailsOfBatteryBankQRCodeScan);
-        batteryBankCheckPointsDataChild.setStripBoltTightnessAsPerTorque(stripBoltTightnessAsPerTorque);
-        batteryBankCheckPointsDataChild.setPetroleumJellyApplied(petroleumJellyApplied);
-        batteryBankCheckPointsDataChild.setBatteryVentPlugStatus(batteryVentPlugStatus);
-        batteryBankCheckPointsDataChild.setBbEarthingStatus(bbEarthingStatus);*/
-
         BatteryBankCheckPointsData child = new BatteryBankCheckPointsData(detailsOfBatteryBankQRCodeScan, stripBoltTightnessAsPerTorque,
                 petroleumJellyApplied, batteryVentPlugStatus, bbEarthingStatus);
 
@@ -793,6 +787,12 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             dataList.setTestDoneAs(testDoneAs);
             dataList.setBatteryBankQrCodeSelection(batteryBankQrCodeSelection);
             dataList.setBatteryBankCheckPointsData(batteryBankCheckPointsData);
+
+            if (!noOfBatteryBankAvailableAtSiteVal.isEmpty() && !batteryBankDischargeTest.isEmpty() && !registerFault.isEmpty()) {
+                dataList.setSubmited(2);
+            } else {
+                dataList.setSubmited(1);
+            }
 
             dataList.setTypeOfBattery("VRLA");
 
