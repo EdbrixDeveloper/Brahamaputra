@@ -564,6 +564,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
                 pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
                 dataList = pmSiteTransactionDetails.getBatteryBankCheckPointsParentData();
+                batteryBankCheckPointsData.clear();
                 batteryBankCheckPointsData.addAll(dataList.getBatteryBankCheckPointsData());
                 batteryBankCheckPointschildData.clear();
                 batteryBankCheckPointschildData.addAll(dataList.getBatteryBankCheckPointsChildData());
