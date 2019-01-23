@@ -573,7 +573,7 @@ public class Solar_Power_System extends BaseActivity {
                 mSolarPowerSystemEditTextBatteryBookValue.setText(solarPowerSystemData.getBattery_bookValue());
                 mSolarPowerSystemTextViewBatteryAmcYesNoVal.setText(solarPowerSystemData.getBattery_amcYesNo());
                 mSolarPowerSystemEditTextBatteryDateOfvalidityOfAmc.setText(solarPowerSystemData.getBattery_dateOfvalidityOfAmc());
-                
+
                 changeVisibilityOfFields(solarPowerSystemData.getAvailable());
 
                 if(solarPowerSystemData.getBattery_supplier_same_as_Solar_Supplier().equals("No")){
@@ -621,7 +621,7 @@ public class Solar_Power_System extends BaseActivity {
             }else {//single
                 solarPowerSystemData = new SolarPowerSystemData(qRCodeScan,bookValue ,available, assetOwner,
                         manufacturerMakeModel, cellPanel,capacityKW, amcYesNo, dateOfvalidityOfAmc, imageFileName,
-                        "","","","","",battery_supplier_same_as_Solar_Supplier);
+                        manufacturerMakeModel,capacityKW,bookValue,amcYesNo,dateOfvalidityOfAmc,battery_supplier_same_as_Solar_Supplier);
             }
 
             hotoTransactionData.setSolarPowerSystemData(solarPowerSystemData);
