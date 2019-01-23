@@ -117,6 +117,9 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         otherElectricalCheckPoints = new OtherElectricalCheckPoints();
     }
 
+    public PreventiveMaintanceSiteTransactionDetails(String userId, String accessToken, String latitude, String longitude, String siteID, String customer, String circle, String state, String ssa, String nameOfSite, String sheduledDateOfPm, String actualPmExecutionDate) {
+    }
+
     public String getAccessToken() {
         return accessToken;
     }
@@ -331,6 +334,38 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
 
     public void setDgBatteryCheckPointsParentData(DgBatteryCheckPointsParentData dgBatteryCheckPointsParentData) {
         this.dgBatteryCheckPointsParentData = dgBatteryCheckPointsParentData;
+    }
+
+    public boolean isAtLeastOneHotoFormsSubmit() {
+        if (siteHygenieneGenralSeftyParameter.getSubmited() == 2) {
+            return true;
+        } else if (acCheckPointParentData.getSubmited() == 2) {
+            return true;
+        } else if (batteryBankCheckPointsParentData.getSubmited() == 2) {
+            return true;
+        } else if (EarthingCheckPointsParentData.getSubmited() == 2) {
+            return true;
+        } else if (ebMeterBox.getSubmited() == 2) {
+            return true;
+        } else if (dgBatteryCheckPointsParentData.getSubmited() == 2) {
+            return true;
+        } else if (dgCheckPointsParentData.getSubmited() == 2) {
+            return true;
+        } else if (alarmCheckPoints.getSubmited() == 2) {
+            return true;
+        } else if (smpsCheckPointParentData.getSubmited() == 2) {
+            return true;
+        } else if (rectifierModuleCheckPoint.getSubmited() == 2) {
+            return true;
+        } else if (pmsAmfPanelCheckPoints.getSubmited() == 2) {
+            return true;
+        } else if (servoCheckPoints.getSubmited() == 2) {
+            return true;
+        } else if (shelterCheckPoints.getSubmited() == 2) {
+            return true;
+        } else if (otherElectricalCheckPoints.getSubmited() == 2) {
+            return true;
+        }  else return false;
     }
 
    /* public boolean isAllPreventiveMaintainanceFormSubmitted()
