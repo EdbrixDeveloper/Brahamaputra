@@ -17,6 +17,35 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
+        <RelativeLayout
+            android:id="@+id/myEnegyList_relativeLayout_dieselFillingReq"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:id="@+id/img_dieselFillingReq"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center|top"
+                android:src="@drawable/request"
+                android:tint="@color/red"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_dieselFillingReq"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/app_min_margin"
+                android:text="Diesel Filling\nRequest"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/myEnegyList_relativeLayout_dieselFilling"
@@ -48,6 +77,16 @@
 
         </RelativeLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_min_margin"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
         <RelativeLayout
             android:id="@+id/myEnegyList_relativeLayout_ebProcess"
             android:layout_width="match_parent"
@@ -77,38 +116,17 @@
                 android:textSize="18dp" />
 
         </RelativeLayout>
-        -->
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/app_normal_margin"
-        android:layout_marginTop="@dimen/app_min_margin"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
-            android:layout_weight="1"
-           >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_gravity="center|bottom"
-                android:layout_marginTop="@dimen/app_min_margin"
-
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textSize="18dp" />
-
+            android:layout_weight="1">
 
         </RelativeLayout>
+
     </LinearLayout>
 
     <LinearLayout

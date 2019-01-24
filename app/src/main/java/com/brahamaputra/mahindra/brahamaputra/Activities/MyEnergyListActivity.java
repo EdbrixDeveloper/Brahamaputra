@@ -30,6 +30,8 @@ import java.util.ArrayList;
 
 public class MyEnergyListActivity extends AppCompatActivity {
 
+    private RelativeLayout mMyEnegyListRelativeLayoutDieselFillingReq;
+    private ImageView mImgDieselFillingReq;
     private RelativeLayout mMyEnegyListRelativeLayoutDieselFilling;
     private ImageView mImgDieselFilling;
     private RelativeLayout mMyEnegyListRelativeLayoutEbProcess;
@@ -39,6 +41,9 @@ public class MyEnergyListActivity extends AppCompatActivity {
     private AlertDialogManager alertDialogManager;
 
     private void assignViews() {
+        mMyEnegyListRelativeLayoutDieselFillingReq = (RelativeLayout) findViewById(R.id.myEnegyList_relativeLayout_dieselFillingReq);
+        mImgDieselFillingReq = (ImageView) findViewById(R.id.img_dieselFillingReq);
+
         mMyEnegyListRelativeLayoutDieselFilling = (RelativeLayout) findViewById(R.id.myEnegyList_relativeLayout_dieselFilling);
         mImgDieselFilling = (ImageView) findViewById(R.id.img_dieselFilling);
         mMyEnegyListRelativeLayoutEbProcess = (RelativeLayout) findViewById(R.id.myEnegyList_relativeLayout_ebProcess);
@@ -56,8 +61,39 @@ public class MyEnergyListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_energy_list);
         this.setTitle("My Energy Process");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         assignViews();
+
+        mMyEnegyListRelativeLayoutDieselFillingReq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Conditions.isNetworkConnected(MyEnergyListActivity.this)) {
+                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                        startActivity(new Intent(MyEnergyListActivity.this, DieselFillingFundReqestList.class));
+                    } else {
+                        //showToast("Could not detecting location. Please try again later.");
+                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                            @Override
+                            public void onPositiveClick() {
+                                if (gpsTracker.canGetLocation()) {
+                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
+                                    Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                }
+                            }
+                        }).show();
+                    }
+                }else {
+                    alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                        @Override
+                        public void onPositiveClick() {
+                            finish();
+                        }
+                    }).show();
+                }
+
+            }
+        });
+
         mMyEnegyListRelativeLayoutDieselFilling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

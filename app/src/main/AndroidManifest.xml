@@ -320,7 +320,8 @@
             android:label="Preventive Maintenance Site Earthing Check Points"
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.PreventiveMaintenanceDashboard" />
-        <activity android:name=".Activities.AcPreventiveMaintenanceDashboardActivity"></activity>
+        <activity android:name=".Activities.AcPreventiveMaintenanceDashboardActivity" />
+        <activity android:name=".Activities.DieselFillingFundReqestList"></activity>
     </application>
 
 </manifest>
