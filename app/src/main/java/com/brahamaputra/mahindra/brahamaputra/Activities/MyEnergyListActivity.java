@@ -190,6 +190,4 @@ public class MyEnergyListActivity extends AppCompatActivity {
         setResult(RESULT_OK);
         finish();
     }
-
-
 }

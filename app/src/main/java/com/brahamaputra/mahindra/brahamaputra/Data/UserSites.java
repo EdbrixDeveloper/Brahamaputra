@@ -30,6 +30,131 @@ public class UserSites {
     @SerializedName("Longitude")
     private String Longitude;
 
+///////////////////////////////////////
+
+    @SerializedName("BillingMonth")
+    private String BillingMonth;
+
+    @SerializedName("IpAddress")
+    private String IpAddress;
+
+    @SerializedName("Port")
+    private String Port;
+
+    @SerializedName("ImeiNumber")
+    private String ImeiNumber;
+
+    @SerializedName("PetroCompanyName")
+    private String PetroCompanyName;
+
+    @SerializedName("ChildCardNumber")
+    private String ChildCardNumber;
+
+    @SerializedName("SourceOfPower")
+    private String SourceOfPower;
+
+    @SerializedName("LastDieselFillingDate")
+    private String LastDieselFillingDate;
+
+    @SerializedName("LastDieselStock")
+    private String LastDieselStock;
+
+    @SerializedName("LastDGHMR")
+    private String LastDGHMR;
+
+    @SerializedName("LastEBReading")
+    private String LastEBReadingl;
+
+//////////////////////////////////////
+    
+    public String getBillingMonth() {
+        return BillingMonth;
+    }
+
+    public void setBillingMonth(String billingMonth) {
+        BillingMonth = billingMonth;
+    }
+
+    public String getIpAddress() {
+        return IpAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        IpAddress = ipAddress;
+    }
+
+    public String getPort() {
+        return Port;
+    }
+
+    public void setPort(String port) {
+        Port = port;
+    }
+
+    public String getImeiNumber() {
+        return ImeiNumber;
+    }
+
+    public void setImeiNumber(String imeiNumber) {
+        ImeiNumber = imeiNumber;
+    }
+
+    public String getPetroCompanyName() {
+        return PetroCompanyName;
+    }
+
+    public void setPetroCompanyName(String petroCompanyName) {
+        PetroCompanyName = petroCompanyName;
+    }
+
+    public String getChildCardNumber() {
+        return ChildCardNumber;
+    }
+
+    public void setChildCardNumber(String childCardNumber) {
+        ChildCardNumber = childCardNumber;
+    }
+
+    public String getSourceOfPower() {
+        return SourceOfPower;
+    }
+
+    public void setSourceOfPower(String sourceOfPower) {
+        SourceOfPower = sourceOfPower;
+    }
+
+    public String getLastDieselFillingDate() {
+        return LastDieselFillingDate;
+    }
+
+    public void setLastDieselFillingDate(String lastDieselFillingDate) {
+        LastDieselFillingDate = lastDieselFillingDate;
+    }
+
+    public String getLastDieselStock() {
+        return LastDieselStock;
+    }
+
+    public void setLastDieselStock(String lastDieselStock) {
+        LastDieselStock = lastDieselStock;
+    }
+
+    public String getLastDGHMR() {
+        return LastDGHMR;
+    }
+
+    public void setLastDGHMR(String lastDGHMR) {
+        LastDGHMR = lastDGHMR;
+    }
+
+    public String getLastEBReadingl() {
+        return LastEBReadingl;
+    }
+
+    public void setLastEBReadingl(String lastEBReadingl) {
+        LastEBReadingl = lastEBReadingl;
+    }
+
     public String getLatitude() {
         return Latitude;
     }
