@@ -58,7 +58,7 @@ public class DieselFillingFundReqestList extends AppCompatActivity {
             case R.id.menuAdd:
                 /*Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
                 startActivity(intent);*/
-                Intent intent = new Intent(DieselFillingFundReqestList.this, DieselFilling.class);
+                Intent intent = new Intent(DieselFillingFundReqestList.this, DieselFillingFundRequest.class);
                 startActivityForResult(intent, RESULT_TRAN_SUBMIT);
                 return true;
         }

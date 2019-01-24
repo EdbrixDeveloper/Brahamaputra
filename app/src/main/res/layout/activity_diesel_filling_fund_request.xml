@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DieselFillingFundRequest">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/app_normal_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_customer"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Customer" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_customerVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_circle"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Circle" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_circleVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_state"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="State" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_stateVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_ssa"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="SSA" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_ssaVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_siteName"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site Name" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_siteNameVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_siteId"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site ID" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_siteIdVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_siteDetails"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site details" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_siteDetailsVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_sourceOfPower"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Source of Power" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_sourceOfPowerVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_cardSupplier"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Card Supplier" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_cardSupplierVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_childCardNumber"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Child Card Number" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_childCardNumberVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastDieselFillingDate"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Last Diesel Filling Date" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastDieselFillingDateVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastDieselStock"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Last Diesel Stock" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastDieselStockVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastDgHmr"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Last DG HMR" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastDgHmrVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastEbReading"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Last EB Reading" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_lastEbReadingVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_selectDgIdQrCode"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Select DG ID / QR code" />
+
+                <ImageView
+                    android:id="@+id/dieselFillingFundRequest_button_qrCode"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_selectDgIdQrCodeVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.5"
+                    android:hint="Select"
+                    android:textAlignment="viewStart"/>
+
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_presentDgHmr"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Present DG HMR" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_presentDgHmr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Present DG HMR"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_hmrPhotoUpload"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="HMR Photo Upload" />
+
+                <ImageView
+                    android:id="@+id/dieselFillingFundRequest_button_hmrPhotoUpload"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/dieselFillingFundRequest_button_hmrPhotoUploadView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_presentDieselStock"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Present Diesel Stock" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_presentDieselStock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Present Diesel Stock"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_tankBalanceBeforeFilling"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Tank Balance Before filling (in Lts)" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_tankBalanceBeforeFilling"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Tank Balance Before filling (in Lts)"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_fillingQty"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Filling Quantity (in Lts)" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_fillingQty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Filling Quantity (in Lts)"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_finalDieselStock"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Final Diesel Stock (in Lts)" />
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_finalDieselStockVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_dieselPrice"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Diesel Price/Lts (in Rs)" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_dieselPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Diesel Price"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_presentEbReading"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Present EB Reading" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_presentEbReading"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Present EB Reading"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_presentEbReadingKwhPhoto"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Present EB Meter Reading KWH Photo" />
+
+                <ImageView
+                    android:id="@+id/dieselFillingFundRequest_button_presentEbReadingKwhPhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
+
+                <ImageView
+                    android:id="@+id/dieselFillingFundRequest_button_presentEbReadingKwhPhotoView"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.3"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_presentDateTime"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Present Date &amp; Time" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_presentDateTime"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MMM/YYYY"
+                    android:imeOptions="actionDone"
+                    android:inputType="none"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_dieselQuantityRequired"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Diesel Quantity Required (in Ltrs)" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_dieselQuantityRequired"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Diesel Quantity Required (in Lts)"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
