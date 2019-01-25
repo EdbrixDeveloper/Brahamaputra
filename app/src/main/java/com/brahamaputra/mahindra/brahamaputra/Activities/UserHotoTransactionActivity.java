@@ -316,7 +316,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
         // show the button when some condition is true
         shareItem.setVisible(false);
-        if (hotoTransactionData.isAllHotoFormsSubmit()) {
+        if (hotoTransactionData.isAtLeastOneHotoFormsSubmit()) {
             shareItem.setVisible(true);
         }
 
@@ -403,8 +403,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
                     }
                 }).show();
-
-
             } else {
                 showSettingsAlert();
             }
@@ -420,13 +418,13 @@ public class UserHotoTransactionActivity extends BaseActivity {
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
-                if(isNetworkConnected()){
+                if (isNetworkConnected()) {
                     if (mUserHotoTransSpinnerSourceOfPowerVal.getText().toString().trim().equals("Non EB")) {
                         setElectricConnectionDataOnSourceOfPowerChangedValidation();
                     } else {
                         submitHotoTicket();
                     }
-                }else {
+                } else {
                     showToast("No Internet Available");
                     finish();
                 }
@@ -439,6 +437,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
             }
         }).show();
+
 
     }
     ////added by 008 on 10-11-2018 End
@@ -653,7 +652,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 String bankIfscCode = electricConnectionData.getBankIfscCode();
                 String bankAccountNo = electricConnectionData.getBankAccountNo();
 
-                electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad,"", existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
+                electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, "", existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
                 hotoTransactionData.setElectricConnectionData(electricConnectionData);
 
                 Gson gson2 = new GsonBuilder().create();

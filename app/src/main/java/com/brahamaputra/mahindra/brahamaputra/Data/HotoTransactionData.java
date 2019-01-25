@@ -375,50 +375,79 @@ public class HotoTransactionData {
         this.siteId = siteId;
     }
 
-    public boolean isAllHotoFormsSubmit() {
-        if (landDetailsData.getSubmited() != 2 && landDetailsData.getSubmited() != 1 ) {
+    /*public boolean isAllHotoFormsSubmit() {
+        if (landDetailsData.getSubmited() != 2 || landDetailsData.getSubmited() != 1) {
             return false;
-        } else if (towerDetailsData.getSubmited() != 2 && towerDetailsData.getSubmited() != 1) {
+        } else if (towerDetailsData.getSubmited() != 2 || towerDetailsData.getSubmited() != 1) {
             return false;
-        } else if (earthResistanceTowerData.getSubmited() != 2 && earthResistanceTowerData.getSubmited() != 1) {
+        } else if (earthResistanceTowerData.getSubmited() != 2 || earthResistanceTowerData.getSubmited() != 1) {
             return false;
-        } else if (earthResistanceEquipmentData.getSubmited() != 2 && earthResistanceEquipmentData.getSubmited() != 1) {
+        } else if (earthResistanceEquipmentData.getSubmited() != 2 || earthResistanceEquipmentData.getSubmited() != 1) {
             return false;
-        } else if (electricConnectionData.getSubmited() != 2 && electricConnectionData.getSubmited() != 1) {
+        } else if (electricConnectionData.getSubmited() != 2 || electricConnectionData.getSubmited() != 1) {
             return false;
-        } else if (airConditionParentData.getSubmited() != 2 && airConditionParentData.getSubmited() != 1) {
+        } else if (airConditionParentData.getSubmited() != 2 || airConditionParentData.getSubmited() != 1) {
             return false;
-        } else if (solarPowerSystemData.getSubmited() != 2 && solarPowerSystemData.getSubmited() != 1) {
+        } else if (solarPowerSystemData.getSubmited() != 2 || solarPowerSystemData.getSubmited() != 1) {
             return false;
-        } else if (powerPlantDetailsParentData.getSubmited() != 2 && powerPlantDetailsParentData.getSubmited() != 1) {
+        } else if (powerPlantDetailsParentData.getSubmited() != 2 || powerPlantDetailsParentData.getSubmited() != 1) {
             return false;
-        } else if (powerBackupsDGParentData.getSubmited() != 2 && powerBackupsDGParentData.getSubmited() != 1) {
+        } else if (powerBackupsDGParentData.getSubmited() != 2 || powerBackupsDGParentData.getSubmited() != 1) {
             return false;
-        } else if (shelterData.getSubmited() != 2 && shelterData.getSubmited() != 1) {
+        } else if (shelterData.getSubmited() != 2 || shelterData.getSubmited() != 1) {
             return false;
-        } else if (mediaData.getSubmited() != 2 && mediaData.getSubmited() != 2) {
+        } else if (mediaData.getSubmited() != 2 || mediaData.getSubmited() != 1) {
             return false;
-        } else if (batterySetParentData.getSubmited() != 2 && batterySetParentData.getSubmited() != 1 ) {
+        } else if (batterySetParentData.getSubmited() != 2 || batterySetParentData.getSubmited() != 1) {
             return false;
-        } else if (externalTenantsPersonalDetailsParentData.getSubmited() != 2 && externalTenantsPersonalDetailsParentData.getSubmited() != 1) {
+        } else if (externalTenantsPersonalDetailsParentData.getSubmited() != 2 || externalTenantsPersonalDetailsParentData.getSubmited() != 1) {
             return false;
-        } else if (totalDCLoadofSiteData.getSubmited() != 2 && totalDCLoadofSiteData.getSubmited() != 1) {
+        } else if (totalDCLoadofSiteData.getSubmited() != 2 || totalDCLoadofSiteData.getSubmited() != 1) {
             return false;
-        } else if (activeequipmentDetailsData.getSubmited() != 2 && activeequipmentDetailsData.getSubmited() != 1) {
+        } else if (activeequipmentDetailsData.getSubmited() != 2 || activeequipmentDetailsData.getSubmited() != 1) {
             return false;
-        } else if (powerManagementSystemData.getSubmited() != 2 && powerManagementSystemData.getSubmited() != 1) {
+        } else if (powerManagementSystemData.getSubmited() != 2 || powerManagementSystemData.getSubmited() != 1) {
             return false;
-        } else if (generalSafetyMeasuresParentData.getSubmited() != 2 && generalSafetyMeasuresParentData.getSubmited() != 1) {
+        } else if (generalSafetyMeasuresParentData.getSubmited() != 2 || generalSafetyMeasuresParentData.getSubmited() != 1) {
             return false;
-        } else if (acdb_dcdb_data.getSubmited() != 2 && acdb_dcdb_data.getSubmited() != 1) {
+        } else if (acdb_dcdb_data.getSubmited() != 2 || acdb_dcdb_data.getSubmited() != 1) {
             return false;
-        } else if (servoStabilizerData.getSubmited() != 2 && servoStabilizerData.getSubmited() != 1) {
+        } else if (servoStabilizerData.getSubmited() != 2 || servoStabilizerData.getSubmited() != 1) {
             return false;
-        } else if (detailsOfUnusedMaterialsParentData.getSubmited() != 2 && detailsOfUnusedMaterialsParentData.getSubmited() != 1) {
+        } else if (detailsOfUnusedMaterialsParentData.getSubmited() != 2 || detailsOfUnusedMaterialsParentData.getSubmited() != 1) {
             return false;
-        } else if (sitePhotoCaptureData.getSubmited() != 2 && sitePhotoCaptureData.getSubmited() != 1) {
+        } else if (sitePhotoCaptureData.getSubmited() != 2 || sitePhotoCaptureData.getSubmited() != 1) {
             return false;
         } else return true;
+    }*/
+
+    public boolean isAllHotoFormsSubmit() {
+
+        if ((landDetailsData.getSubmited() == 2) &&
+                (towerDetailsData.getSubmited() == 2) &&
+                (earthResistanceTowerData.getSubmited() == 2) &&
+                (earthResistanceEquipmentData.getSubmited() == 2)
+                && (electricConnectionData.getSubmited() == 2) &&
+                (airConditionParentData.getSubmited() == 2) &&
+                (solarPowerSystemData.getSubmited() == 2) &&
+                (powerPlantDetailsParentData.getSubmited() == 2) &&
+                (powerBackupsDGParentData.getSubmited() == 2) &&
+                (shelterData.getSubmited() == 2) &&
+                (mediaData.getSubmited() == 2) &&
+                (batterySetParentData.getSubmited() == 2) &&
+                (externalTenantsPersonalDetailsParentData.getSubmited() == 2) &&
+                (totalDCLoadofSiteData.getSubmited() == 2) &&
+                (activeequipmentDetailsData.getSubmited() == 2) &&
+                (powerManagementSystemData.getSubmited() == 2) &&
+                (generalSafetyMeasuresParentData.getSubmited() == 2) &&
+                (acdb_dcdb_data.getSubmited() == 2) &&
+                (servoStabilizerData.getSubmited() == 2) &&
+                (detailsOfUnusedMaterialsParentData.getSubmited() == 2) &&
+                (sitePhotoCaptureData.getSubmited() == 2)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isAtLeastOneHotoFormsSubmit() {
@@ -466,31 +495,29 @@ public class HotoTransactionData {
             return true;
         } else return false;*/
 
-        if(landDetailsData.getSubmited() == 2 || landDetailsData.getSubmited() == 1 &&
-                towerDetailsData.getSubmited() == 2 || towerDetailsData.getSubmited() == 1 &&
-                earthResistanceTowerData.getSubmited() == 2 || earthResistanceTowerData.getSubmited() == 1 &&
-                earthResistanceEquipmentData.getSubmited() == 2 || earthResistanceEquipmentData.getSubmited() == 1 &&
-                electricConnectionData.getSubmited() == 2 || electricConnectionData.getSubmited() == 1 &&
-                airConditionParentData.getSubmited() == 2 || airConditionParentData.getSubmited() == 1 &&
-                solarPowerSystemData.getSubmited() == 2 || solarPowerSystemData.getSubmited() == 1 &&
-                powerPlantDetailsParentData.getSubmited() == 2 || powerPlantDetailsParentData.getSubmited() == 1 &&
-                powerBackupsDGParentData.getSubmited() == 2 || powerBackupsDGParentData.getSubmited() == 1 &&
-                shelterData.getSubmited() == 2 || shelterData.getSubmited() == 1 &&
-                mediaData.getSubmited() == 2 || mediaData.getSubmited() == 1 &&
-                batterySetParentData.getSubmited() == 2 || batterySetParentData.getSubmited() == 1 &&
-                externalTenantsPersonalDetailsParentData.getSubmited() == 2 || externalTenantsPersonalDetailsParentData.getSubmited() == 1 &&
-                totalDCLoadofSiteData.getSubmited() == 2 || totalDCLoadofSiteData.getSubmited() == 1 &&
-                activeequipmentDetailsData.getSubmited() == 2 || activeequipmentDetailsData.getSubmited() == 1 &&
-                powerManagementSystemData.getSubmited() == 2 || powerManagementSystemData.getSubmited() == 1 &&
-                generalSafetyMeasuresParentData.getSubmited() == 2 || generalSafetyMeasuresParentData.getSubmited() == 1 &&
-                acdb_dcdb_data.getSubmited() == 2 || acdb_dcdb_data.getSubmited() == 1 &&
-                servoStabilizerData.getSubmited() == 2 || servoStabilizerData.getSubmited() == 1 &&
-                detailsOfUnusedMaterialsParentData.getSubmited() == 2 || detailsOfUnusedMaterialsParentData.getSubmited() == 1 &&
-                sitePhotoCaptureData.getSubmited() == 2 || sitePhotoCaptureData.getSubmited() == 1)
-        {
+        if ((landDetailsData.getSubmited() == 2 || landDetailsData.getSubmited() == 1) &&
+                (towerDetailsData.getSubmited() == 2 || towerDetailsData.getSubmited() == 1) &&
+                (earthResistanceTowerData.getSubmited() == 2 || earthResistanceTowerData.getSubmited() == 1) &&
+                (earthResistanceEquipmentData.getSubmited() == 2 || earthResistanceEquipmentData.getSubmited() == 1)
+                && (electricConnectionData.getSubmited() == 2 || electricConnectionData.getSubmited() == 1) &&
+                (airConditionParentData.getSubmited() == 2 || airConditionParentData.getSubmited() == 1) &&
+                (solarPowerSystemData.getSubmited() == 2 || solarPowerSystemData.getSubmited() == 1) &&
+                (powerPlantDetailsParentData.getSubmited() == 2 || powerPlantDetailsParentData.getSubmited() == 1) &&
+                (powerBackupsDGParentData.getSubmited() == 2 || powerBackupsDGParentData.getSubmited() == 1) &&
+                (shelterData.getSubmited() == 2 || shelterData.getSubmited() == 1) &&
+                (mediaData.getSubmited() == 2 || mediaData.getSubmited() == 1) &&
+                (batterySetParentData.getSubmited() == 2 || batterySetParentData.getSubmited() == 1) &&
+                (externalTenantsPersonalDetailsParentData.getSubmited() == 2 || externalTenantsPersonalDetailsParentData.getSubmited() == 1) &&
+                (totalDCLoadofSiteData.getSubmited() == 2 || totalDCLoadofSiteData.getSubmited() == 1) &&
+                (activeequipmentDetailsData.getSubmited() == 2 || activeequipmentDetailsData.getSubmited() == 1) &&
+                (powerManagementSystemData.getSubmited() == 2 || powerManagementSystemData.getSubmited() == 1) &&
+                (generalSafetyMeasuresParentData.getSubmited() == 2 || generalSafetyMeasuresParentData.getSubmited() == 1) &&
+                (acdb_dcdb_data.getSubmited() == 2 || acdb_dcdb_data.getSubmited() == 1) &&
+                (servoStabilizerData.getSubmited() == 2 || servoStabilizerData.getSubmited() == 1) &&
+                (detailsOfUnusedMaterialsParentData.getSubmited() == 2 || detailsOfUnusedMaterialsParentData.getSubmited() == 1) &&
+                (sitePhotoCaptureData.getSubmited() == 2 || sitePhotoCaptureData.getSubmited() == 1)) {
             return true;
-        }else
-        {
+        } else {
             return false;
         }
     }
