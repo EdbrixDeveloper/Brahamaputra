@@ -65,6 +65,8 @@ public class Constants {
 
     public final static String GetUserSites = BASE_URL.concat("common/getusersites"); //* // getusersites //used in diesel filling activity
     public final static String GetDgId_from_Sites = BASE_URL.concat("common/getdgmrqrcodesbysiteid");//*  // getdgmrqrcodesbysiteid //used in diesel filling activity
+    public final static String Submitdieselfillingfundrequesttransaction = BASE_URL.concat("diesel/createdieselfillingrequest");// Submitdieselfillingfundrequesttransaction //used in diesel filling fund request activity
+    public final static String getuserdieselrequestticketlist = BASE_URL.concat("diesel/getuserdieselrequestticketlist");//used in Diesel Filling Fund ReqestList List activity
     public final static String Submitdieselfillingtransaction = BASE_URL.concat("diesel/submitdieselfillingtransaction");  // Submitdieselfillingtransaction //used in diesel filling activity
     public final static String Getdieseltransactionticketlist = BASE_URL.concat("diesel/getdieseltransactionticketlist");//used in diesel filling List activity
 

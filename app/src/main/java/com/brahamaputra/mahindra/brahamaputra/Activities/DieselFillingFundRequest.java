@@ -156,30 +156,19 @@ public class DieselFillingFundRequest extends BaseActivity {
 
     //////////
 
-
     public GPSTracker gpsTracker;
-
-    //private ToastMessage toastMessage;
     private AlertDialogManager alertDialogManager;
 
     DecimalConversion decimalConversion;
 
     private ArrayList<String> DgIdList;
 
+    private ArrayList<String> siteArray;
+    private Site site;
     public int site_id = 0;
     public double siteLongitude = 0;
     public double siteLatitude = 0;
-
-    String str_customerName = "";
-    String str_circleName = "";
-    String str_stateName;
-    String str_ssa = "";
     String str_siteName;
-
-    int customerId = 0;
-    int circleId = 0;
-    int StateId = 0;
-    int ssaID = 0;
     int siteID = 0;
 
     @Override
@@ -201,7 +190,8 @@ public class DieselFillingFundRequest extends BaseActivity {
         assignViews();
         initCombo();
         set_listener();
-        prepareUserPersonalData();
+        setSessionValuesToFields();
+        prepareUserSites(true);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -219,10 +209,6 @@ public class DieselFillingFundRequest extends BaseActivity {
         mDieselFillingFundRequestEditTextPresentDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*new DatePickerDialog(DieselFillingFundRequest.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
-
                 DatePickerDialog dialog = new DatePickerDialog(DieselFillingFundRequest.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -232,7 +218,6 @@ public class DieselFillingFundRequest extends BaseActivity {
 
             }
         });
-
 
     }
 
@@ -308,47 +293,12 @@ public class DieselFillingFundRequest extends BaseActivity {
         mDieselFillingFundRequestTextViewSiteNameVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mDieselFillingFundRequestTextViewSsaVal.getText().toString().trim().isEmpty()) {
-
-
-                    /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFillingFundRequest.this,
-                            siteArray,
-                            "Select Site",
-                            "Close", "#000000");
-                    searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                        @Override
-                        public void onClick(ArrayList<String> item, int position) {
-
-                            ConsumerNoList = null;
-                            PaymentTypeList = null;
-                            ElectricConnectionTypeList = null;
-                            ConnectionTariffList = null;
-                            mEbProcessTextViewEbConsumerNumberVal.setText("");
-                            mEbProcessTextViewTypeModeOfPayementVal.setText("");
-                            mEbProcessTextViewTypeOfElectricConnectionVal.setText("");
-                            mEbProcessTextViewTariffVal.setText("");
-                            mEbProcessTextViewSiteIDVal.setText("");
-                            mEbProcessTextViewSiteDetailsVal.setText("");
-                            mEbProcessTextViewEbServiceProviderVal.setText("");
-
-                            str_siteName = item.get(position);
-                            mDieselFillingFundRequestTextViewSiteNameVal.setText(str_siteName);
-                            siteID = Integer.valueOf(site.getSiteList().get(position).getId());
-                            mEbProcessTextViewSiteIDVal.setText(site.getSiteList().get(position).getSiteId());
-                            String siteAddress = String.valueOf(site.getSiteList().get(position).getSiteAddress());
-                            if (!siteAddress.isEmpty()) {
-                                mEbProcessTextViewSiteDetailsVal.setText(String.valueOf(site.getSiteList().get(position).getSiteAddress()));
-                            }
-                            mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(site.getSiteList().get(position).getEbOfficeName()));
-                            prepareEbSiteConnectedData();
-                        }
-                    });*/
-
-
-                } else {
-                    showToast("Please Select SSA");
+                if (userSitesList.getSiteList() == null) {
+                    if (Conditions.isNetworkConnected(DieselFillingFundRequest.this)) {
+                        prepareUserSites(false);
+                    } else {
+                        showToast("No Internet Found..");
+                    }
                 }
 
             }
@@ -392,6 +342,145 @@ public class DieselFillingFundRequest extends BaseActivity {
                 }
             }
         });
+
+    }
+
+    private void prepareUserSites(final boolean listbind_only) {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+
+
+            GsonRequest<UserSitesList> getuserSitesNameRequest = new GsonRequest<>(Request.Method.POST, Constants.GetUserSites, jo.toString(), UserSitesList.class,
+                    new Response.Listener<UserSitesList>() {
+                        @Override
+                        public void onResponse(UserSitesList response) {
+                            hideBusyProgress();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    userSitesList = response;
+
+                                    if (userSitesList.getSiteList().size() > 0) {
+
+                                        final ArrayList<String> Sitelist = new ArrayList<String>();
+                                        for (UserSites site : userSitesList.getSiteList()) {
+                                            Sitelist.add(site.getSiteName());
+                                        }
+
+                                        mDieselFillingFundRequestTextViewSiteNameVal.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFillingFundRequest.this,
+                                                        Sitelist,
+                                                        "Select Site",
+                                                        "Close", "#000000");
+                                                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                                                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                                                    @Override
+                                                    public void onClick(ArrayList<String> item, int position) {
+
+
+                                                        mDieselFillingFundRequestTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
+                                                        mDieselFillingFundRequestTextViewSiteIdVal.setText(userSitesList.getSiteList().get(position).getSiteId());
+                                                        mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower());
+                                                        mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName());
+                                                        mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber());
+                                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate());
+                                                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock());
+                                                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR());
+                                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl());
+
+                                                        if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null &&
+                                                                !userSitesList.getSiteList().get(position).getLatitude().isEmpty() && !userSitesList.getSiteList().get(position).getLongitude().isEmpty()) {
+                                                            siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
+                                                            siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
+                                                        } else {
+                                                            siteLatitude = 0;
+                                                            siteLongitude = 0;
+                                                        }
+
+                                                        site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+
+                                                        /*mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
+
+                                                        if (site_id > 0) {
+                                                            if (Conditions.isNetworkConnected(DieselFilling.this)) {
+                                                                prepareDgId_from_Sites();
+                                                            } else {
+                                                                showToast("No Internet Found..");
+                                                            }
+                                                        } else {
+                                                            showToast("Please Select Site ID First..");
+                                                        }*/
+                                                    }
+                                                });
+
+                                            }
+                                        });
+                                        if (!listbind_only) {
+                                            SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFillingFundRequest.this,
+                                                    Sitelist,
+                                                    "Select Site",
+                                                    "Close", "#000000");
+                                            searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                                            searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                                                @Override
+                                                public void onClick(ArrayList<String> item, int position) {
+
+                                                    mDieselFillingFundRequestTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
+                                                    mDieselFillingFundRequestTextViewSiteIdVal.setText(userSitesList.getSiteList().get(position).getSiteId());
+                                                    mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower());
+                                                    mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName());
+                                                    mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber());
+                                                    mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate());
+                                                    mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock());
+                                                    mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR());
+                                                    mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl());
+                                                    site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+                                                }
+                                            });
+                                        }
+
+                                    } else {
+                                        mDieselFillingFundRequestTextViewSiteNameVal.setText("No Site Found");
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            hideBusyProgress();
+                            Log.e("D100", error.toString());
+                        }
+                    });
+            getuserSitesNameRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            getuserSitesNameRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(getuserSitesNameRequest, "userSitesNameRequest");
+
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
+
+
+    }
+
+    private void setSessionValuesToFields() {
+        //mDieselFillingFundRequestTextViewCustomerVal.getText().toString().trim();
+        mDieselFillingFundRequestTextViewCircleVal.setText(sessionManager.getSessionCircle().toString());
+        mDieselFillingFundRequestTextViewStateVal.setText(sessionManager.getUser_State().toString());
+        mDieselFillingFundRequestTextViewSsaVal.setText(sessionManager.getUser_Ssa().toString());
 
     }
 
@@ -445,119 +534,6 @@ public class DieselFillingFundRequest extends BaseActivity {
         mDieselFillingEditTextDieselPrice.setText(decimalConversion.convertDecimal(mDieselFillingEditTextDieselPrice.getText().toString()));*/
     }
 
-    private void prepareUserPersonalData() {
-        try {
-            showBusyProgress();
-            JSONObject jo = new JSONObject();
-
-            jo.put("UserId", sessionManager.getSessionUserId());
-            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
-
-
-            GsonRequest<UserDetailsParent> userProfileRequestGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.GetUserDetails, jo.toString(), UserDetailsParent.class,
-                    new Response.Listener<UserDetailsParent>() {
-                        @Override
-                        public void onResponse(@NonNull UserDetailsParent response) {
-
-                            if (response.getSuccess() == 1) {
-
-                                str_customerName = response.getUserDetails().getUserAdditionalDetails().getCustomerName();
-                                mDieselFillingFundRequestTextViewCustomerVal.setText(str_customerName);
-                                customerId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCustomerId());
-
-                                str_circleName = response.getUserDetails().getUserAdditionalDetails().getCircleName();
-                                mDieselFillingFundRequestTextViewCircleVal.setText(str_circleName);
-                                circleId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCircleId());
-
-                                str_stateName = response.getUserDetails().getUserAdditionalDetails().getStateName();
-                                mDieselFillingFundRequestTextViewStateVal.setText(str_stateName);
-                                StateId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getStateId());
-
-                                str_ssa = response.getUserDetails().getUserAdditionalDetails().getSsaName();
-                                mDieselFillingFundRequestTextViewSsaVal.setText(str_ssa);
-                                ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());
-                                /*
-                                prepareSite();*/
-                                hideBusyProgress();
-                            }
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    if (error.getMessage().contains("java.net.UnknownHostException")) {
-                        showToast("No Internet Connection.");
-                    }
-                    hideBusyProgress();
-
-                }
-            });
-            userProfileRequestGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
-            userProfileRequestGsonRequest.setShouldCache(false);
-            Application.getInstance().addToRequestQueue(userProfileRequestGsonRequest, "ebPaymentRequestGsonRequest");
-
-        } catch (JSONException e) {
-            hideBusyProgress();
-            showToast("Something went wrong. Please try again later.");
-        }
-
-    }
-
-    private void prepareSite() {
-        try {
-            showBusyProgress();
-            JSONObject jo = new JSONObject();
-            jo.put("UserId", sessionManager.getSessionUserId());
-            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
-            //jo.put("SSAId", ssaID); user for after remove error in fund request
-
-
-            GsonRequest<Site> getSiteRequest = new GsonRequest<>(Request.Method.POST, Constants.GetSite, jo.toString(), Site.class,
-                    new Response.Listener<Site>() {
-                        @Override
-                        public void onResponse(Site response) {
-                            hideBusyProgress();
-                            if (response.getError() != null) {
-                                showToast(response.getError().getErrorMessage());
-                            } else {
-                                /*if (response.getSuccess() == 1) {
-                                    site = response;
-
-                                    if (site.getSiteList().size() > 0) {
-                                        siteArray = new ArrayList<String>();
-                                        for (SiteList siteList : site.getSiteList()) {
-                                            siteArray.add(siteList.getSiteName());
-                                        }
-
-                                    } else {
-                                        mEbProcessTextViewSiteIDVal.setText("No Site Found");
-                                        //No sites found
-                                    }
-                                }*/
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                            hideBusyProgress();
-                            Log.e("D100", error.toString());
-                        }
-                    });
-            getSiteRequest.setRetryPolicy(Application.getDefaultRetryPolice());
-            getSiteRequest.setShouldCache(false);
-            Application.getInstance().addToRequestQueue(getSiteRequest, "getSiteRequest");
-
-
-        } catch (JSONException e) {
-            hideBusyProgress();
-            showToast("Something went wrong. Please try again later.");
-        }
-
-
-    }
-
     private void showSettingsAlert() {
 
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
@@ -604,16 +580,37 @@ public class DieselFillingFundRequest extends BaseActivity {
             String presentDateTime = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().trim();
             String dieselQuantityRequiredInLtrs = mDieselFillingFundRequestEditTextDieselQuantityRequired.getText().toString().trim();
 
-            dieselFillingFundRequestData = new DieselFillingFundRequestData(customer, circle, state, ssa, siteName, siteId,
+            /*dieselFillingFundRequestData = new DieselFillingFundRequestData(customer, circle, state, ssa, siteName, siteId,
                     sourceOfPower, cardSupplier, childCardNumber, lastDieselFillingDate,
                     lastDieselStock, lastDgHmr, lastEbReading, presentDgHmr,
                     hmrPhotoUpload, presentDieselStock, presentEbReading,
                     presentEbMeterReadingKwhPhoto, presentDateTime, dieselQuantityRequiredInLtrs);
 
             Gson gson2 = new GsonBuilder().create();
-            String jsonString = gson2.toJson(dieselFillingFundRequestData);
+            String jsonString = gson2.toJson(dieselFillingFundRequestData);*/
 
-            /*GsonRequest<DieselSubmitResposeData> dieselSubmitResposeData = new GsonRequest<>(Request.Method.POST, Constants.Submitdieselfillingtransaction, jsonString, DieselSubmitResposeData.class,
+            /*"UserId":"12",
+                    "AccessToken":"MjUyLTg1REEyUzMtQURTUzVELUVJNUI0QTIyMTEy" ,
+                    "SiteId":"12",
+                    "PresentDgHmr":"12",
+                    "HMRPhotoUpload":"12",
+                    "PresentDieselStock":"12",
+                    "PresentEbReading":"12",
+                    "PresentEBMeterReadingKWHPhoto":"12",
+                    "DieselQuantityRequiredinLtrs":"12"*/
+
+            JSONObject jsonString = new JSONObject();
+            jsonString.put("UserId", sessionManager.getSessionUserId());
+            jsonString.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jsonString.put("SiteId", siteId);
+            jsonString.put("PresentDgHmr", presentDgHmr);
+            jsonString.put("HMRPhotoUpload", hmrPhotoUpload);
+            jsonString.put("PresentDieselStock", presentDieselStock);
+            jsonString.put("PresentEbReading", presentEbReading);
+            jsonString.put("PresentEBMeterReadingKWHPhoto", presentEbMeterReadingKwhPhoto);
+            jsonString.put("DieselQuantityRequiredinLtrs", dieselQuantityRequiredInLtrs);
+
+            GsonRequest<DieselSubmitResposeData> dieselSubmitResposeData = new GsonRequest<>(Request.Method.POST, Constants.Submitdieselfillingfundrequesttransaction, jsonString.toString(), DieselSubmitResposeData.class,
                     new Response.Listener<DieselSubmitResposeData>() {
                         @Override
                         public void onResponse(DieselSubmitResposeData response) {
@@ -642,7 +639,7 @@ public class DieselFillingFundRequest extends BaseActivity {
                     });
             dieselSubmitResposeData.setRetryPolicy(Application.getDefaultRetryPolice());
             dieselSubmitResposeData.setShouldCache(false);
-            Application.getInstance().addToRequestQueue(dieselSubmitResposeData, "dieselSubmitResposeData");*/
+            Application.getInstance().addToRequestQueue(dieselSubmitResposeData, "dieselSubmitResposeData");
 
         } catch (Exception e) {
             e.printStackTrace();
