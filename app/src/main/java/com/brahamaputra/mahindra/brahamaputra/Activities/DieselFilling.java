@@ -1,6 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,8 +68,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Locale;
 
 public class DieselFilling extends BaseActivity {
 
@@ -127,6 +131,16 @@ public class DieselFilling extends BaseActivity {
     private TextView mDieselFillingTextViewPresentFillingDate;
     private TextView mDieselFillingTextViewPresentFillingDateVal;
     private ImageView dieselFilling_button_qrCode;
+
+    private TextView mDieselFillingTextViewDieselRequestTicketNo;
+    private TextView mDieselFillingTextViewDieselRequestTicketNoVal;
+    private TextView mDieselFillingTextViewChildPetroCardNo;
+    private TextView mDieselFillingTextViewChildPetroCardNoVal;
+    private TextView mDieselFillingTextViewApprovedQty;
+    private TextView mDieselFillingTextViewApprovedQtyVal;
+    private TextView mDieselFillingTextViewFillingDate;
+    private TextView mDieselFillingEditTextFillingDateVal;
+
     public GPSTracker gpsTracker;
 
     //private ToastMessage toastMessage;
@@ -143,6 +157,8 @@ public class DieselFilling extends BaseActivity {
     public int site_id = 0;
     public double siteLongitude = 0;
     public double siteLatitude = 0;
+
+    final Calendar myCalendar = Calendar.getInstance();
 
 
     private void assignViews() {
@@ -173,6 +189,18 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingButtonPresentEbReadingKwhPhoto = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhoto);
         mDieselFillingButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhotoView);
         dieselFilling_button_qrCode = (ImageView) findViewById(R.id.dieselFilling_button_qrCode);
+
+        mDieselFillingTextViewDieselRequestTicketNo = (TextView)findViewById(R.id.dieselFilling_textView_dieselRequestTicketNo);
+        mDieselFillingTextViewDieselRequestTicketNoVal = (TextView)findViewById(R.id.dieselFilling_textView_dieselRequestTicketNoVal);
+        mDieselFillingTextViewChildPetroCardNo = (TextView)findViewById(R.id.dieselFilling_textView_childPetroCardNo);
+        mDieselFillingTextViewChildPetroCardNoVal = (TextView)findViewById(R.id.dieselFilling_textView_childPetroCardNo_val);
+        mDieselFillingTextViewApprovedQty = (TextView)findViewById(R.id.dieselFilling_textView_approvedQty);
+        mDieselFillingTextViewApprovedQtyVal = (TextView)findViewById(R.id.dieselFilling_textView_approvedQty_val);
+        mDieselFillingTextViewFillingDate = (TextView)findViewById(R.id.dieselFillingFundRequest_textView_fillingDate);
+        mDieselFillingEditTextFillingDateVal = (EditText)findViewById(R.id.dieselFillingFundRequest_editText_fillingDateTime);
+
+
+
       /*  mDieselFillingTextViewPresentFillingDate = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDate);
         mDieselFillingTextViewPresentFillingDateVal = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDateVal);*/
         mDieselFillingEditTextTankBalanceBeforeFilling.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
@@ -215,10 +243,46 @@ public class DieselFilling extends BaseActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        mDieselFillingEditTextFillingDateVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*new DatePickerDialog(DieselFillingFundRequest.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
+
+                DatePickerDialog dialog = new DatePickerDialog(DieselFilling.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
+
+            }
+        });
+
         setInputDetails();
         prepareUserSites(true);
     }
 
+    private void updateLabel() {
+        String myFormat = "dd/MMM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        mDieselFillingEditTextFillingDateVal.setText(sdf.format(myCalendar.getTime()));
+    }
     public void onClicked(View v) {
 
         IntentIntegrator integrator = new IntentIntegrator(this);

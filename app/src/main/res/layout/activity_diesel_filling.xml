@@ -15,9 +15,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
-            android:paddingBottom="@dimen/app_normal_margin"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/app_normal_margin">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_dieselRequestTicketNo"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Diesel Request Ticket No" />
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_dieselRequestTicketNoVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,8 +63,8 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -63,8 +87,35 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:paddingTop="5dp"
                     android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+                <!--android:textAllCaps="true"-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_childPetroCardNo"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Child Petro Card No" />
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_childPetroCardNo_val"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
                 <!--android:textAllCaps="true"-->
@@ -91,11 +142,12 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:textAlignment="viewStart"
                     android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
                     android:textSize="16sp" />
                 <!--android:textAllCaps="true"-->
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,16 +161,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Select DG ID / QR code" />
+
                 <ImageView
                     android:id="@+id/dieselFilling_button_qrCode"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
+                    android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitStart"
-                    android:src="@drawable/baseline_photo_camera_black_18dp"
-                    android:layout_gravity="center"/>
+                    android:src="@drawable/baseline_photo_camera_black_18dp" />
 
                 <TextView
                     android:id="@+id/dieselFilling_textView_selectDgIdQrCodeVal"
@@ -126,8 +179,8 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="0.5"
-                    android:textAlignment="viewStart"
-                    android:hint="Select"></TextView>
+                    android:hint="Select"
+                    android:textAlignment="viewStart"></TextView>
 
             </LinearLayout>
 
@@ -175,9 +228,9 @@
                     android:id="@+id/dieselFilling_button_hmrPhotoUpload"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
                     android:layout_weight="0.3"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
 
@@ -185,12 +238,12 @@
                     android:id="@+id/dieselFilling_button_hmrPhotoUploadView"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
                     android:layout_weight="0.3"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/view_image" />
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -217,6 +270,33 @@
                     android:imeOptions="actionNext"
                     android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_approvedQty"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Approved Qty" />
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_approvedQty_val"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+                <!--android:textAllCaps="true"-->
 
             </LinearLayout>
 
@@ -331,6 +411,36 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/dieselFillingFundRequest_textView_fillingDate"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Filling Date" />
+
+                <EditText
+                    android:id="@+id/dieselFillingFundRequest_editText_fillingDateTime"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="DD/MMM/YYYY"
+                    android:imeOptions="actionDone"
+                    android:inputType="none"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
                     android:id="@+id/dieselFilling_textView_presentEbReadingKwhPhoto"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
@@ -342,9 +452,9 @@
                     android:id="@+id/dieselFilling_button_presentEbReadingKwhPhoto"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
                     android:layout_weight="0.3"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitStart"
                     android:src="@drawable/baseline_photo_camera_black_18dp" />
 
@@ -352,12 +462,12 @@
                     android:id="@+id/dieselFilling_button_presentEbReadingKwhPhotoView"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
                     android:layout_weight="0.3"
                     android:clickable="true"
+                    android:padding="2dp"
                     android:scaleType="fitCenter"
-                    android:visibility="gone"
-                    android:src="@drawable/view_image" />
+                    android:src="@drawable/view_image"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
