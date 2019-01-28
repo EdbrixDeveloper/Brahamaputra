@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,6 +52,15 @@ public class DieselFillingFundReqestList extends BaseActivity {
     public static final int RESULT_TRAN_SUBMIT = 300;
 
 
+    // Listview Pagingnation Purpose
+    ArrayList<DiselRequestTransactionList> d1;
+    int requestCount = 1;
+    boolean loadMore = false;
+    //private int visibleThreshold = 5;
+    //private int currentPage = 0;
+    private int previousTotal = 0;
+    private boolean loading = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +73,126 @@ public class DieselFillingFundReqestList extends BaseActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(DieselFillingFundReqestList.this, userId, ticketName);
         dieselFillingFundRequestTransaction = new DieselFillingFundRequestTransaction();
         assignViews();
-        prepareListData();
+        //prepareListData();
+        d1 = new ArrayList<DiselRequestTransactionList>();
+        timelineScrollItem();
+        //
+
     }
+
+    //https://stackoverflow.com/questions/45409210/how-to-add-pagination-in-listview
+    // https://benjii.me/2010/08/endless-scrolling-listview-in-android/     ref link
+
+
+    public void getTimeLineData(final String token, final String page) {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jo.put("PageNo", page);
+
+
+            GsonRequest<DieselFillingFundRequestTransaction> dieselFillingFundRequestTransactionRequest = new GsonRequest<>(Request.Method.POST, Constants.getuserdieselrequestticketlist, jo.toString(), DieselFillingFundRequestTransaction.class,
+                    new Response.Listener<DieselFillingFundRequestTransaction>() {
+                        @Override
+                        public void onResponse(@NonNull DieselFillingFundRequestTransaction response) {
+                            hideBusyProgress();
+                            //showToast(""+response.getSuccess().toString());
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    dieselFillingFundRequestTransaction = response;
+                                    if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList() != null && dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() > 0) {
+                                        mTxtNoTicketFound.setVisibility(View.GONE);
+                                        mDieselFillingReqListListViewTickets.setVisibility(View.VISIBLE);
+                                        //ArrayList<DiselRequestTransactionList> dd = new ArrayList<DiselRequestTransactionList>(dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size());
+                                        d1.addAll(dieselFillingFundRequestTransaction.getDiselRequestTransactionList());
+                                        if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() < 15) {
+                                            loadMore = false;
+                                        }
+                                        dieselFillingFundRequestListAdapter = new DieselFillingFundRequestListAdapter(d1, DieselFillingFundReqestList.this);
+                                        mDieselFillingReqListListViewTickets.setAdapter(dieselFillingFundRequestListAdapter);
+                                        dieselFillingFundRequestListAdapter.notifyDataSetChanged();
+
+                                    } else {
+                                        if (d1.size() < 1) {
+                                            mDieselFillingReqListListViewTickets.setVisibility(View.GONE);
+                                            mTxtNoTicketFound.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                    /*if (d1 != null) {
+                                        dieselFillingFundRequestListAdapter.notifyDataSetChanged();
+                                    }*/
+                                }
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
+                        showToast("No Internet Connection.");
+                    }
+                    hideBusyProgress();
+
+                }
+            });
+            dieselFillingFundRequestTransactionRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            dieselFillingFundRequestTransactionRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(dieselFillingFundRequestTransactionRequest, "dieselFillingFundRequestTransactionRequest");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
+    }
+
+    private void getData() {
+        //Adding the method to the queue by calling the method getDataFromServer
+        getTimeLineData("", String.valueOf(requestCount));
+        //Incrementing the request counter
+        requestCount++;
+    }
+
+    public void timelineScrollItem() {
+        //008 paging code
+        mDieselFillingReqListListViewTickets.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+                if (loading) {
+                    if (totalItemCount > previousTotal) {
+                        loading = false;
+                        previousTotal = totalItemCount;
+                        //currentPage++;
+                    }
+                }
+                if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleItemCount)) {
+                    // I load the next page of gigs using a background task,
+                    // but you can call any function here.
+                    getData();
+                    loading = true;
+                }
+
+
+            }
+        });
+        /*For First time load list purpose*/
+        if (loading) {
+            getData();
+        }
+    }
+
+//////////////
+
 
     private void assignViews() {
         mDieselFillingReqListListViewTickets = (ListView) findViewById(R.id.listViewDieselReq);
@@ -105,7 +233,8 @@ public class DieselFillingFundReqestList extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            prepareListData();
+            //prepareListData();
+            timelineScrollItem();
         }
     }
 

@@ -29,6 +29,9 @@ public class DiselRequestTransactionList {
     @SerializedName("Status")
     @Expose
     private String status;
+    @SerializedName("StatusId")
+    @Expose
+    private int StatusId;
     @SerializedName("SiteName")
     @Expose
     private String siteName;
@@ -110,6 +113,14 @@ public class DiselRequestTransactionList {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getStatusId() {
+        return StatusId;
+    }
+
+    public void setStatusId(int statusId) {
+        StatusId = statusId;
     }
 
     public String getSiteName() {

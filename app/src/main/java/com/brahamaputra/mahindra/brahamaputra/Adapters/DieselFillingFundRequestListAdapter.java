@@ -1,10 +1,12 @@
 package com.brahamaputra.mahindra.brahamaputra.Adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
@@ -26,6 +28,7 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
         TextView textView_DateOfRequest;
         TextView textView_SiteAddress;
         TextView textView_RequestQty;
+        LinearLayout linearLayout_container;
     }
 
     public DieselFillingFundRequestListAdapter(ArrayList<DiselRequestTransactionList> data, Context context) {
@@ -64,20 +67,33 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
             viewHolder.textView_DateOfRequest = (TextView) convertView.findViewById(R.id.textView_DateOfRequest);
             viewHolder.textView_SiteAddress = (TextView) convertView.findViewById(R.id.textView_SiteAddress);
             viewHolder.textView_RequestQty = (TextView) convertView.findViewById(R.id.textView_RequestQty);
-
+            viewHolder.linearLayout_container = (LinearLayout) convertView.findViewById(R.id.linearLayout_container);
             result = convertView;
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
             result = convertView;
         }
+        if (dataModel != null) {
+            viewHolder.textView_RequesttTicketNo.setText("Ticket No:" + dataModel.getDiselRequesttTicketNo());
+            viewHolder.textView_SiteName.setText("Site Name:" + dataModel.getSiteName());
+            viewHolder.textView_DateOfRequest.setText("Date:" + dataModel.getDateOfRequest());
+            viewHolder.textView_SiteAddress.setText("Site Address:" + dataModel.getSiteAddress());
+            viewHolder.textView_RequestQty.setText("Diesel Filling Qty:" + dataModel.getDieselQuantityRequiredinLtrs());
+            //viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.yellow));
 
-        viewHolder.textView_RequesttTicketNo.setText("Ticket No:" + dataModel.getDiselRequesttTicketNo());
-        viewHolder.textView_SiteName.setText("Site Name:" + dataModel.getSiteName());
-        viewHolder.textView_DateOfRequest.setText("Date:" + dataModel.getDateOfRequest());
-        viewHolder.textView_SiteAddress.setText("Site Address:" + dataModel.getSiteAddress());
-        viewHolder.textView_RequestQty.setText("Diesel Filling Qty:" + dataModel.getDieselQuantityRequiredinLtrs());
+            /*if (dataModel.getStatusId() == 0) {
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
+            }
 
+            if (dataModel.getStatusId() == 1) {
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.yellow));
+            }
+
+            if (dataModel.getStatusId() == 2) {
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+            }*/
+        }
         return convertView;
     }
 }
