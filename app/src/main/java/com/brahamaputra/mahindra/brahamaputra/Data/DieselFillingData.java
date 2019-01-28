@@ -40,12 +40,26 @@ public class DieselFillingData {
     @SerializedName("dieselPrice")
     private String dieselPrice;
 
+    @SerializedName("dgReqTicketNo")
+    private String dgReqTicketNo;
+
+    @SerializedName("dgChildPetroCardNo")
+    private String dgChildPetroCardNo;
+
+    @SerializedName("dgApprovedQty")
+    private String dgApprovedQty;
+
+    @SerializedName("dgFillingDate")
+    private String dgFillingDate;
+
 
     @SerializedName("latitude")
     private String latitude;
 
     @SerializedName("longitude")
     private String longitude;
+
+
 
     public String getSiteID() {
         return siteID;
@@ -159,7 +173,7 @@ public class DieselFillingData {
         this.longitude = longitude;
     }
 
-    public DieselFillingData(String siteID, String selectDgIdQrCode, String presentDgHmr, String hmrPhotoUpload, String tankBalanceBeforeFilling, String fillingQty, String finalDieselStock, String pesentEbReading, String ebReadingKwhPhoto, String userId, String accessToken, String dieselPrice, String latitude, String longitude) {
+    /*public DieselFillingData(String siteID, String selectDgIdQrCode, String presentDgHmr, String hmrPhotoUpload, String tankBalanceBeforeFilling, String fillingQty, String finalDieselStock, String pesentEbReading, String ebReadingKwhPhoto, String userId, String accessToken, String dieselPrice, String latitude, String longitude) {
         this.siteID = siteID;
         this.selectDgIdQrCode = selectDgIdQrCode;
         this.presentDgHmr = presentDgHmr;
@@ -174,6 +188,60 @@ public class DieselFillingData {
         this.dieselPrice = dieselPrice;
         this.latitude = latitude;
         this.longitude = longitude;
+    }*/
+    public DieselFillingData(String dieselRequestTicketNo, String siteID, String childPetroCardNo, String selectDgIdQrCode, String presentDgHmr, String hmrPhotoUpload,
+                             String tankBalanceBeforeFilling, String approvedQty, String fillingQty, String finalDieselStock, String presentEbReading, String fillingDate,
+                             String ebReadingKwhPhoto, String userId, String accessToken, String dieselPrice, String latitude, String longitude) {
+        this.dgReqTicketNo = dieselRequestTicketNo;
+        this.siteID = siteID;
+        this.dgChildPetroCardNo = childPetroCardNo;
+        this.selectDgIdQrCode = selectDgIdQrCode;
+        this.presentDgHmr = presentDgHmr;
+        this.hmrPhotoUpload = hmrPhotoUpload;
+        this.tankBalanceBeforeFilling = tankBalanceBeforeFilling;
+        this.dgApprovedQty = approvedQty;
+        this.fillingQty = fillingQty;
+        this.finalDieselStock = finalDieselStock;
+        this.pesentEbReading = presentEbReading;
+        this.dgFillingDate = fillingDate;
+        this.ebReadingKwhPhoto = ebReadingKwhPhoto;
+        UserId = userId;
+        AccessToken = accessToken;
+        this.dieselPrice = dieselPrice;
+        this.latitude = latitude;
+        this.longitude = longitude;
+
+    }
+
+    public String getDgReqTicketNo() {
+        return dgReqTicketNo;
+    }
+    public void setDgReqTicketNo(String dgReqTicketNo) {
+         this.dgReqTicketNo = dgReqTicketNo;
+    }
+
+    public String getDgChildPetroCardNo() {
+        return dgChildPetroCardNo;
+    }
+
+    public void setDgChildPetroCardNo(String dgChildPetroCardNo) {
+        this.dgChildPetroCardNo = dgChildPetroCardNo;
+    }
+
+    public String getDgApprovedQty() {
+        return dgApprovedQty;
+    }
+
+    public void setDgApprovedQty(String dgApprovedQty) {
+        this.dgApprovedQty = dgApprovedQty;
+    }
+
+    public String getDgFillingDate() {
+        return dgFillingDate;
+    }
+
+    public void setDgFillingDate(String dgFillingDate) {
+       this.dgFillingDate = dgFillingDate;
     }
 }
 

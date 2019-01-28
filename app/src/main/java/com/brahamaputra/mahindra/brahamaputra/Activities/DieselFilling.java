@@ -610,8 +610,8 @@ public class DieselFilling extends BaseActivity {
     }
 
     private void setInputDetails() {
-        try {
-          /*  if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+        /*try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
@@ -619,24 +619,28 @@ public class DieselFilling extends BaseActivity {
 
                 mDieselFillingTextViewSiteNameVal.setText(dieselFillingData.getSiteName());
                 mDieselFillingTextViewSiteDetailsVal.setText(dieselFillingData.getSiteDetails());
+                mDieselFillingTextViewDieselRequestTicketNoVal.setText(dieselFillingData.getDgReqTicketNo());
                 mDieselFillingTextViewSiteIDVal.setText(dieselFillingData.getSiteID());
+                mDieselFillingTextViewChildPetroCardNoVal.setText(dieselFillingData.getDgChildPetroCardNo());
                 mDieselFillingTextViewSelectDgIdQrCodeVal.setText(dieselFillingData.getSelectDgIdQrCode());
                 mDieselFillingEditTextPresentDgHmr.setText(dieselFillingData.getPresentDgHmr());
                 base64StringHmrPhoto= dieselFillingData.getHmrPhotoUpload();
+                mDieselFillingTextViewApprovedQtyVal.setText(dieselFillingData.getDgApprovedQty());
                 mDieselFillingEditTextTankBalanceBeforeFilling.setText(dieselFillingData.getTankBalanceBeforeFilling());
                 mDieselFillingEditTextFillingQty.setText(dieselFillingData.getFillingQty());
                 mDieselFillingTextViewFinalDieselStockVal.setText(dieselFillingData.getFinalDieselStock());
                 mDieselFillingEditTextPresentEbReading.setText(dieselFillingData.getPesentEbReading());
+                mDieselFillingEditTextFillingDateVal.setText(dieselFillingData.getDgFillingDate());
                 base64StringEbReadingKwh =dieselFillingData.getEbReadingKwhPhoto();
 
 
 
             } else {
                 Toast.makeText(DieselFilling.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
-            }*/
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private void showSettingsAlert() {
@@ -676,8 +680,14 @@ public class DieselFilling extends BaseActivity {
             String presentEbReading = mDieselFillingEditTextPresentEbReading.getText().toString().trim();
             String ebReadingKwhPhoto = base64StringEbReadingKwh;
             String dieselPrice = mDieselFillingEditTextDieselPrice.getText().toString().trim();
+            String dieselRequestTicketNo = mDieselFillingTextViewDieselRequestTicketNoVal.getText().toString().trim();
+            String childPetroCardNo = mDieselFillingTextViewChildPetroCardNoVal.getText().toString().trim();
+            String approvedQty = mDieselFillingTextViewApprovedQtyVal.getText().toString().trim();
+            String fillingDate = mDieselFillingTextViewPresentFillingDateVal.getText().toString().trim();
 
-            dieselFillingData = new DieselFillingData(siteID, selectDgIdQrCode, presentDgHmr, hmrPhotoUpload, tankBalanceBeforeFilling, fillingQty, finalDieselStock, presentEbReading, ebReadingKwhPhoto, userId, accessToken, dieselPrice, latitude, longitude);
+            dieselFillingData = new DieselFillingData(dieselRequestTicketNo,siteID,childPetroCardNo, selectDgIdQrCode, presentDgHmr, hmrPhotoUpload, tankBalanceBeforeFilling,
+                    approvedQty,fillingQty, finalDieselStock, presentEbReading, fillingDate,ebReadingKwhPhoto,
+                    userId, accessToken, dieselPrice, latitude, longitude);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(dieselFillingData);
@@ -1040,8 +1050,12 @@ public class DieselFilling extends BaseActivity {
         String accessToken = sessionManager.getSessionDeviceToken();
         String latitude = String.valueOf(gpsTracker.getLatitude());
         String longitude = String.valueOf(gpsTracker.getLongitude());
+        String dieselRequestTicketNo = mDieselFillingTextViewDieselRequestTicketNoVal.getText().toString();
         String siteID = mDieselFillingTextViewSiteNameVal.getText().toString();
+        String childPetroCardNo = mDieselFillingTextViewChildPetroCardNoVal.getText().toString();
         String selectDgIdQrCode = mDieselFillingTextViewSelectDgIdQrCodeVal.getText().toString().trim();
+        String approvedQty = mDieselFillingTextViewApprovedQtyVal.getText().toString();
+        String fillingDate = mDieselFillingTextViewPresentFillingDateVal.getText().toString();
 
         String presentDgHmr = mDieselFillingEditTextPresentDgHmr.getText().toString().trim();
         String hmrPhotoUpload = base64StringHmrPhoto;
@@ -1083,7 +1097,19 @@ public class DieselFilling extends BaseActivity {
         } else if (ebReadingKwhPhoto.isEmpty() || ebReadingKwhPhoto == null) {
             showToast("Upload Photo of EB Reading KWH");
             return false;
-        } else return true;
+        } else if (dieselRequestTicketNo.isEmpty() || dieselRequestTicketNo == null) {
+            showToast("Select Diesel Request Ticket No");
+            return false;
+        }else if (childPetroCardNo.isEmpty() || childPetroCardNo == null) {
+            showToast("Select Child Petro Card No");
+            return false;
+        }else if (approvedQty.isEmpty() || approvedQty == null) {
+            showToast("Select Approved Qty");
+            return false;
+        }else if (fillingDate.isEmpty() || fillingDate == null) {
+            showToast("Select Filling Date");
+            return false;
+        }else return true;
 
     }
 
