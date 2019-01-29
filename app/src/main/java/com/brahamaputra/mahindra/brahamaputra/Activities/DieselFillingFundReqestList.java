@@ -54,7 +54,7 @@ public class DieselFillingFundReqestList extends BaseActivity {
 
 
     // Listview Pagingnation Purpose
-    ArrayList<DiselRequestTransactionList> d1;
+    ArrayList<DiselRequestTransactionList> diselRequestTransactionList;
     private int requestCount = 1;
     //private boolean loadMore = false;
     private boolean loading = true;
@@ -73,7 +73,7 @@ public class DieselFillingFundReqestList extends BaseActivity {
         assignViews();
 
         //prepareListData();
-        d1 = new ArrayList<DiselRequestTransactionList>();
+        diselRequestTransactionList = new ArrayList<DiselRequestTransactionList>();
         //timelineScrollItem();
 
         if (requestCount < 2) {
@@ -125,17 +125,17 @@ public class DieselFillingFundReqestList extends BaseActivity {
                                         mTxtNoTicketFound.setVisibility(View.GONE);
                                         mDieselFillingReqListListViewTickets.setVisibility(View.VISIBLE);
                                         //ArrayList<DiselRequestTransactionList> dd = new ArrayList<DiselRequestTransactionList>(dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size());
-                                        d1.addAll(dieselFillingFundRequestTransaction.getDiselRequestTransactionList());
+                                        diselRequestTransactionList.addAll(dieselFillingFundRequestTransaction.getDiselRequestTransactionList());
                                         /*if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() < 15) {
                                             loadMore = false;
                                         }*/
-                                        dieselFillingFundRequestListAdapter = new DieselFillingFundRequestListAdapter(d1, DieselFillingFundReqestList.this);
+                                        dieselFillingFundRequestListAdapter = new DieselFillingFundRequestListAdapter(diselRequestTransactionList, DieselFillingFundReqestList.this);
                                         mDieselFillingReqListListViewTickets.setAdapter(dieselFillingFundRequestListAdapter);
                                         mDieselFillingReqListListViewTickets.setSelectionFromTop(currentFirstVisibleItem, 0);
                                         dieselFillingFundRequestListAdapter.notifyDataSetChanged();
 
                                     } else {
-                                        if (d1.size() < 1) {
+                                        if (diselRequestTransactionList.size() < 1) {
                                             mDieselFillingReqListListViewTickets.setVisibility(View.GONE);
                                             mTxtNoTicketFound.setVisibility(View.VISIBLE);
                                         }

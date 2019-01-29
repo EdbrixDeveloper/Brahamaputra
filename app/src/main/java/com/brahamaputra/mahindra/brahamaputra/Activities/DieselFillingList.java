@@ -38,6 +38,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.EndlessScrollListener;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -67,10 +68,11 @@ public class DieselFillingList extends BaseActivity {
     private DieselTrasactionAdapter dieselTrasactionAdapter;
     public static final int RESULT_TRAN_SUBMIT = 259;
 
-    private void assignViews() {
-        mDieselFillingListListViewTickets = (ListView) findViewById(R.id.listViewDiesel);
-        mTxtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
-    }
+    // Listview Pagingnation Purpose
+    ArrayList<DiselFillingTransactionList> diselFillingTransactionList;
+    private int requestCount = 1;
+    private boolean loading = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +86,96 @@ public class DieselFillingList extends BaseActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(DieselFillingList.this, userId, ticketName);
         dieselFillingtransaction = new DieselFillingtransaction();
         assignViews();
-        prepareListData();
+        //prepareListData();
+
+        diselFillingTransactionList = new ArrayList<DiselFillingTransactionList>();
+        if (requestCount < 2) {
+            if (loading) {
+                getListDataByPaging(String.valueOf(requestCount), 0);
+            }
+        }
+
+        mDieselFillingListListViewTickets.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount, int firstVisibleItem) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to your AdapterView
+                getListDataByPaging(String.valueOf(page), firstVisibleItem);
+                // or loadNextDataFromApi(totalItemsCount);
+                return true; // ONLY if more data is actually being loaded; false otherwise.
+            }
+        });
+
+    }
+
+    private void assignViews() {
+        mDieselFillingListListViewTickets = (ListView) findViewById(R.id.listViewDiesel);
+        mTxtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
+    }
+
+    public void getListDataByPaging(final String page, final int currentFirstVisibleItem) {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jo.put("PageNo", page);
 
 
+            GsonRequest<DieselFillingtransaction> dieselFillingtransactionRequest = new GsonRequest<>(Request.Method.POST, Constants.Getdieseltransactionticketlist, jo.toString(), DieselFillingtransaction.class,
+                    new Response.Listener<DieselFillingtransaction>() {
+                        @Override
+                        public void onResponse(@NonNull DieselFillingtransaction response) {
+                            hideBusyProgress();
+                            //showToast(""+response.getSuccess().toString());
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    dieselFillingtransaction = response;
+                                    if (dieselFillingtransaction.getDiselFillingTransactionList() != null && dieselFillingtransaction.getDiselFillingTransactionList().size() > 0) {
+                                        mTxtNoTicketFound.setVisibility(View.GONE);
+                                        mDieselFillingListListViewTickets.setVisibility(View.VISIBLE);
+                                        /*ArrayList<DiselFillingTransactionList> dd = new ArrayList<DiselFillingTransactionList>(dieselFillingtransaction.getDiselFillingTransactionList().size());
+                                        dd.addAll(dieselFillingtransaction.getDiselFillingTransactionList());
+                                        dieselTrasactionAdapter = new DieselTrasactionAdapter(dd, DieselFillingList.this);
+                                        mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);*/
+
+                                        diselFillingTransactionList.addAll(dieselFillingtransaction.getDiselFillingTransactionList());
+                                        dieselTrasactionAdapter = new DieselTrasactionAdapter(diselFillingTransactionList, DieselFillingList.this);
+                                        mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);
+                                        mDieselFillingListListViewTickets.setSelectionFromTop(currentFirstVisibleItem, 0);
+                                        dieselTrasactionAdapter.notifyDataSetChanged();
+
+
+                                    } else {
+                                        if (diselFillingTransactionList.size() < 1) {
+                                            mDieselFillingListListViewTickets.setVisibility(View.GONE);
+                                            mTxtNoTicketFound.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
+                        showToast("No Internet Connection.");
+                    }
+                    hideBusyProgress();
+
+                }
+            });
+            dieselFillingtransactionRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            dieselFillingtransactionRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(dieselFillingtransactionRequest, "dieselFillingtransactionRequest");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
     }
 
     private void prepareListData() {
@@ -127,7 +216,7 @@ public class DieselFillingList extends BaseActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    if (error.getMessage().contains("java.net.UnknownHostException")){
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
                         showToast("No Internet Connection.");
                     }
                     hideBusyProgress();
@@ -145,7 +234,6 @@ public class DieselFillingList extends BaseActivity {
 
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -184,7 +272,8 @@ public class DieselFillingList extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            prepareListData();
+            //prepareListData();
+            getListDataByPaging("1", 0);
         }
     }
 

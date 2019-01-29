@@ -608,6 +608,7 @@ public class DieselFillingFundRequest extends BaseActivity {
             jsonString.put("PresentDieselStock", presentDieselStock);
             jsonString.put("PresentEbReading", presentEbReading);
             jsonString.put("PresentEBMeterReadingKWHPhoto", presentEbMeterReadingKwhPhoto);
+            //jsonString.put("presentDateTime", presentDateTime);
             jsonString.put("DieselQuantityRequiredinLtrs", dieselQuantityRequiredInLtrs);
 
             GsonRequest<DieselSubmitResposeData> dieselSubmitResposeData = new GsonRequest<>(Request.Method.POST, Constants.Submitdieselfillingfundrequesttransaction, jsonString.toString(), DieselSubmitResposeData.class,

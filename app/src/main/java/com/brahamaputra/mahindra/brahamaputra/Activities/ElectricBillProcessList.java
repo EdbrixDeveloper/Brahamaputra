@@ -15,11 +15,8 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.DieselTrasactionAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.EbProcessTrasactionAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingtransaction;
-import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentRequest;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentRequestList;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -29,6 +26,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.EndlessScrollListener;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 
@@ -53,6 +51,42 @@ public class ElectricBillProcessList extends BaseActivity {
 
     public static final int RESULT_EB_REC_SUBMIT = 259;
 
+    // Listview Pagingnation Purpose
+    ArrayList<EbPaymentRequestList> ebPaymentRequestList;
+    private int requestCount = 1;
+    private boolean loading = true;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_electric_bill_process_list);
+        this.setTitle("Electric Bill Process Tickets");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        alertDialogManager = new AlertDialogManager(ElectricBillProcessList.this);
+        sessionManager = new SessionManager(ElectricBillProcessList.this);
+        userId = sessionManager.getSessionUserId();
+        assignViews();
+        //prepareListData();
+
+        ebPaymentRequestList = new ArrayList<EbPaymentRequestList>();
+        if (requestCount < 2) {
+            if (loading) {
+                getListDataByPaging(String.valueOf(requestCount), 0);
+            }
+        }
+
+        listViewElectricBill.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount, int firstVisibleItem) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to your AdapterView
+                getListDataByPaging(String.valueOf(page), firstVisibleItem);
+                // or loadNextDataFromApi(totalItemsCount);
+                return true; // ONLY if more data is actually being loaded; false otherwise.
+            }
+        });
+    }
+
     private void assignViews() {
         listViewElectricBill = (ListView) findViewById(R.id.listViewElectricBill);
         txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
@@ -76,17 +110,68 @@ public class ElectricBillProcessList extends BaseActivity {
         });*/
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_electric_bill_process_list);
-        this.setTitle("Electric Bill Process Tickets");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        alertDialogManager = new AlertDialogManager(ElectricBillProcessList.this);
-        sessionManager = new SessionManager(ElectricBillProcessList.this);
-        userId = sessionManager.getSessionUserId();
-        assignViews();
-        prepareListData();
+    public void getListDataByPaging(final String page, final int currentFirstVisibleItem) {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jo.put("PageNo", page);
+
+
+            GsonRequest<EbPaymentRequest> ebPaymentRequestGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.GetElectriBillTransactionslist, jo.toString(), EbPaymentRequest.class,
+                    new Response.Listener<EbPaymentRequest>() {
+                        @Override
+                        public void onResponse(@NonNull EbPaymentRequest response) {
+                            hideBusyProgress();
+                            //showToast(""+response.getSuccess().toString());
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    ebPaymentRequest = response;
+                                    if (ebPaymentRequest.getEbPaymentRequestList() != null && ebPaymentRequest.getEbPaymentRequestList().size() > 0) {
+                                        txtNoTicketFound.setVisibility(View.GONE);
+                                        listViewElectricBill.setVisibility(View.VISIBLE);
+                                        /*ArrayList<EbPaymentRequestList> dd = new ArrayList<EbPaymentRequestList>(ebPaymentRequest.getEbPaymentRequestList().size());
+                                        dd.addAll(ebPaymentRequest.getEbPaymentRequestList());
+                                        ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(dd, ElectricBillProcessList.this);
+                                        listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);*/
+
+                                        ebPaymentRequestList.addAll(ebPaymentRequest.getEbPaymentRequestList());
+                                        ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(ebPaymentRequestList, ElectricBillProcessList.this);
+                                        listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);
+                                        listViewElectricBill.setSelectionFromTop(currentFirstVisibleItem, 0);
+                                        ebProcessTrasactionAdapter.notifyDataSetChanged();
+
+
+                                    } else {
+                                        if (ebPaymentRequestList.size() < 1) {
+                                            listViewElectricBill.setVisibility(View.GONE);
+                                            txtNoTicketFound.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
+                        showToast("No Internet Connection.");
+                    }
+                    hideBusyProgress();
+
+                }
+            });
+            ebPaymentRequestGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            ebPaymentRequestGsonRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(ebPaymentRequestGsonRequest, "ebPaymentRequestGsonRequest");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
     }
 
 
@@ -130,7 +215,7 @@ public class ElectricBillProcessList extends BaseActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    if (error.getMessage().contains("java.net.UnknownHostException")){
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
                         showToast("No Internet Connection.");
                     }
                     hideBusyProgress();
@@ -148,14 +233,12 @@ public class ElectricBillProcessList extends BaseActivity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.eb_add_item_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -168,7 +251,8 @@ public class ElectricBillProcessList extends BaseActivity {
                 startActivityForResult(intent, RESULT_TRAN_SUBMIT);
                 return true;
             case R.id.menuRefresh:
-                prepareListData();
+                //prepareListData();
+                getListDataByPaging("1", 0);
                 return true;
 
 
@@ -182,7 +266,6 @@ public class ElectricBillProcessList extends BaseActivity {
         finish();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -190,7 +273,8 @@ public class ElectricBillProcessList extends BaseActivity {
             prepareListData();
         }*/
         if (requestCode == RESULT_EB_REC_SUBMIT && resultCode == RESULT_OK) {
-            prepareListData();
+            //prepareListData();
+            getListDataByPaging("1", 0);
         }
     }
 
@@ -198,4 +282,5 @@ public class ElectricBillProcessList extends BaseActivity {
     protected void onResume() {
         super.onResume();
     }
+
 }
