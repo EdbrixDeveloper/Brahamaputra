@@ -28,6 +28,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.EndlessScrollListener;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 
 import org.json.JSONException;
@@ -54,11 +55,8 @@ public class DieselFillingFundReqestList extends BaseActivity {
 
     // Listview Pagingnation Purpose
     ArrayList<DiselRequestTransactionList> d1;
-    int requestCount = 1;
-    boolean loadMore = false;
-    //private int visibleThreshold = 5;
-    //private int currentPage = 0;
-    private int previousTotal = 0;
+    private int requestCount = 1;
+    //private boolean loadMore = false;
     private boolean loading = true;
 
     @Override
@@ -73,18 +71,36 @@ public class DieselFillingFundReqestList extends BaseActivity {
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(DieselFillingFundReqestList.this, userId, ticketName);
         dieselFillingFundRequestTransaction = new DieselFillingFundRequestTransaction();
         assignViews();
+
         //prepareListData();
         d1 = new ArrayList<DiselRequestTransactionList>();
-        timelineScrollItem();
+        //timelineScrollItem();
+
+        if (requestCount < 2) {
+            if (loading) {
+                getTimeLineData(String.valueOf(requestCount), 0);
+            }
+        }
+        mDieselFillingReqListListViewTickets.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount, int firstVisibleItem) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to your AdapterView
+                getTimeLineData(String.valueOf(page), firstVisibleItem);
+                // or loadNextDataFromApi(totalItemsCount);
+                return true; // ONLY if more data is actually being loaded; false otherwise.
+            }
+        });
+
         //
 
     }
 
     //https://stackoverflow.com/questions/45409210/how-to-add-pagination-in-listview
-    // https://benjii.me/2010/08/endless-scrolling-listview-in-android/     ref link
+    // https://benjii.me/2010/08/endless-scrolling-listview-in-android/
+    // https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView      ref link
 
-
-    public void getTimeLineData(final String token, final String page) {
+    public void getTimeLineData(final String page, final int currentFirstVisibleItem) {
         try {
             showBusyProgress();
             JSONObject jo = new JSONObject();
@@ -110,11 +126,12 @@ public class DieselFillingFundReqestList extends BaseActivity {
                                         mDieselFillingReqListListViewTickets.setVisibility(View.VISIBLE);
                                         //ArrayList<DiselRequestTransactionList> dd = new ArrayList<DiselRequestTransactionList>(dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size());
                                         d1.addAll(dieselFillingFundRequestTransaction.getDiselRequestTransactionList());
-                                        if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() < 15) {
+                                        /*if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() < 15) {
                                             loadMore = false;
-                                        }
+                                        }*/
                                         dieselFillingFundRequestListAdapter = new DieselFillingFundRequestListAdapter(d1, DieselFillingFundReqestList.this);
                                         mDieselFillingReqListListViewTickets.setAdapter(dieselFillingFundRequestListAdapter);
+                                        mDieselFillingReqListListViewTickets.setSelectionFromTop(currentFirstVisibleItem, 0);
                                         dieselFillingFundRequestListAdapter.notifyDataSetChanged();
 
                                     } else {
@@ -123,9 +140,6 @@ public class DieselFillingFundReqestList extends BaseActivity {
                                             mTxtNoTicketFound.setVisibility(View.VISIBLE);
                                         }
                                     }
-                                    /*if (d1 != null) {
-                                        dieselFillingFundRequestListAdapter.notifyDataSetChanged();
-                                    }*/
                                 }
                             }
                         }
@@ -148,49 +162,6 @@ public class DieselFillingFundReqestList extends BaseActivity {
             showToast("Something went wrong. Please try again later.");
         }
     }
-
-    private void getData() {
-        //Adding the method to the queue by calling the method getDataFromServer
-        getTimeLineData("", String.valueOf(requestCount));
-        //Incrementing the request counter
-        requestCount++;
-    }
-
-    public void timelineScrollItem() {
-        //008 paging code
-        mDieselFillingReqListListViewTickets.setOnScrollListener(new AbsListView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem,
-                                 int visibleItemCount, int totalItemCount) {
-
-                if (loading) {
-                    if (totalItemCount > previousTotal) {
-                        loading = false;
-                        previousTotal = totalItemCount;
-                        //currentPage++;
-                    }
-                }
-                if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleItemCount)) {
-                    // I load the next page of gigs using a background task,
-                    // but you can call any function here.
-                    getData();
-                    loading = true;
-                }
-
-
-            }
-        });
-        /*For First time load list purpose*/
-        if (loading) {
-            getData();
-        }
-    }
-
 //////////////
 
 
@@ -234,7 +205,7 @@ public class DieselFillingFundReqestList extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             //prepareListData();
-            timelineScrollItem();
+            getTimeLineData("1", 0);
         }
     }
 
@@ -294,4 +265,59 @@ public class DieselFillingFundReqestList extends BaseActivity {
 
 
     }
+
+    /*code for paging listview purpose
+     //private int visibleThreshold = 5;
+    //private int currentPage = 0;
+    private int previousTotal = 0;
+    private void getData() {
+        //Adding the method to the queue by calling the method getDataFromServer
+        getTimeLineData(String.valueOf(requestCount));
+        //Incrementing the request counter
+        requestCount++;
+    }
+
+    int currentFirstVisibleItem, currentVisibleItemCount, currentTotalItemCount;
+
+    public void timelineScrollItem() {
+        //008 paging code
+        mDieselFillingReqListListViewTickets.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+                currentFirstVisibleItem = firstVisibleItem;
+                currentVisibleItemCount = visibleItemCount;
+                currentTotalItemCount = totalItemCount;
+
+                if (requestCount > 1) {
+                    if (loading) {
+                        if (totalItemCount > previousTotal) {
+                            loading = false;
+                            previousTotal = totalItemCount;
+                            //currentPage++;
+                        }
+                    }
+                    if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleItemCount)) {
+                        // I load the next page of gigs using a background task,
+                        // but you can call any function here.
+                        getData();
+                        loading = true;
+                    }
+                }
+
+            }
+
+        });
+        if (requestCount < 2) {
+            if (loading) {
+                getData();
+            }
+        }
+
+    }*/
 }

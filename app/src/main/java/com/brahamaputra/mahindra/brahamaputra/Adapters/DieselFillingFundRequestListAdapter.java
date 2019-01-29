@@ -32,7 +32,7 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
     }
 
     public DieselFillingFundRequestListAdapter(ArrayList<DiselRequestTransactionList> data, Context context) {
-        super(context, R.layout.item_diesel_trasaction_list, data);
+        super(context, R.layout.item_diesel_filling_request_fund_trasaction_list, data);
         this.dataSet = data;
         this.mContext = context;
     }
@@ -82,7 +82,7 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
             viewHolder.textView_RequestQty.setText("Diesel Filling Qty:" + dataModel.getDieselQuantityRequiredinLtrs());
             //viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.yellow));
 
-            /*if (dataModel.getStatusId() == 0) {
+            if (dataModel.getStatusId() == 0) {
                 viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
             }
 
@@ -92,7 +92,7 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
 
             if (dataModel.getStatusId() == 2) {
                 viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
-            }*/
+            }
         }
         return convertView;
     }

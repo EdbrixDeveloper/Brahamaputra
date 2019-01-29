@@ -48,7 +48,7 @@ public class DialogManager {
             }
 
             if (message == null) {
-                this.progressDialog.setMessage("Please wait....");
+                this.progressDialog.setMessage("Please wait...");
             } else {
                 this.progressDialog.setMessage(message);
             }
