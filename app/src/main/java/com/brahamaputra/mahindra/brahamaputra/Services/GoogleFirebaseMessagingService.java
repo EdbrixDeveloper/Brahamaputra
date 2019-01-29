@@ -225,6 +225,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
         try {
             JSONObject data = json.getJSONObject("data");
 
+            String typeId = data.getString("typeId");
             String title = data.getString("title");
             String message = data.getString("message");
             boolean isBackground = data.getBoolean("is_background");
@@ -236,6 +237,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             if (payload.has("hototicketdetails")) {
                 JSONObject hototicketdetails = payload.getJSONObject("hototicketdetails");
                 hototicketid = hototicketdetails.getString("hototicketid");
+
             } else {
                 Log.e(TAG, "HototicketDetails No...");
             }
@@ -243,10 +245,44 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             //JSONObject hototicketdetails = payload.getJSONObject("hototicketdetails");
             //String hototicketid = hototicketdetails.getString("hototicketid");
             Intent resultIntent;
-            if (!hototicketid.isEmpty() && hototicketid != null)
+            /*if (!hototicketid.isEmpty() && hototicketid != null)
                 resultIntent = new Intent(getApplicationContext(), UsersHotoListActivity.class);
             else
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);*/
+
+            ///////////////////////Handling Type Of Notification////////////////////
+
+            if(typeId.equals("1")) {
+
                 resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId",typeId);
+                resultIntent.putExtra("title",title);
+                resultIntent.putExtra("msg",message);
+                resultIntent.putExtra("timestamp",timestamp);
+
+            }else if(typeId.equals("2")) {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId",typeId);
+
+            }else if(typeId.equals("3")) {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId",typeId);
+
+            }else if(typeId.equals("4")) {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId",typeId);
+
+            }else {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId",0);
+
+            }
+
+            ////////////////////////////////////////////////////////////////
             //{"hototicketdetails":{"hototicketid":"1"}}
             //
 

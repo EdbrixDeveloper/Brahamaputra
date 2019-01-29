@@ -121,9 +121,21 @@ public class NotificationList extends BaseActivity {
             dd = new ArrayList<Notification>(databaseHelper.getAllNotification().size());
             dd.addAll(databaseHelper.getAllNotification());
             notificationListAdapter = new NotificationListAdapter(dd, NotificationList.this);
+
             mNotificationListView.setAdapter(notificationListAdapter);
             mNotificationListView.setVisibility(View.VISIBLE);
             mTxtNoNotificationFound.setVisibility(View.GONE);
+
+            mNotificationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getApplicationContext(),ShowHotoNotifiacationDetailsActivity.class);
+                    intent.putExtra("title",dd.get(position).getTitle());
+                    intent.putExtra("timestamp",dd.get(position).getTimestamp());
+                    intent.putExtra("message",dd.get(position).getMessage());
+                    startActivity(intent);
+                }
+            });
         } else {
             mNotificationListView.setVisibility(View.GONE);
             mTxtNoNotificationFound.setVisibility(View.VISIBLE);

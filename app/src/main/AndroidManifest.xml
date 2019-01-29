@@ -325,7 +325,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.PreventiveMaintenanceDashboard" />
         <activity android:name=".Activities.AcPreventiveMaintenanceDashboardActivity" />
-        <activity android:name=".Activities.DieselFillingFundReqestList"></activity>
+        <activity android:name=".Activities.DieselFillingFundReqestList" />
+        <activity android:name=".CustomTitleActivity" />
+        <activity android:name=".Activities.ShowHotoNotifiacationDetailsActivity"></activity>
     </application>
 
 </manifest>

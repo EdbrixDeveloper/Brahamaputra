@@ -16,6 +16,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
  * limitations under the License.
  */
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,12 +25,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -102,6 +105,67 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 startActivity(new Intent(DashboardCircularActivity.this, UserProfileActivity.class));
             }
         });
+
+
+        /////Created By Pranav ////////////////////Handling alertDialog by notification type and redirect to respective activity//////////////////////////////////
+        Intent fromNotificationIntent = getIntent();
+        String typeId = fromNotificationIntent.getStringExtra("typeId");
+        String title = fromNotificationIntent.getStringExtra("title");
+        String message = fromNotificationIntent.getStringExtra("msg");
+        String timeStamp = fromNotificationIntent.getStringExtra("timestamp");
+
+
+        if(typeId!=null) {
+
+            if(typeId.equals("1")) {
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.setAlertDialogCancellable(false);
+
+                alertDialogManager.Dialog(title, message+"\n\n"+timeStamp, "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        startActivity(new Intent(DashboardCircularActivity.this, UsersHotoListActivity.class));
+                    }
+                }).show();
+
+            }else if(typeId.equals("2")){
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.Dialog("Information", "This is for Diesel Fund Request", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        startActivity(new Intent(DashboardCircularActivity.this, DieselFillingFundReqestList.class));
+                    }
+                }).show();
+            }else if(typeId.equals("3")){
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.Dialog("Information", "This is for Diesel Filling", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        startActivity(new Intent(DashboardCircularActivity.this, DieselFillingList.class));
+                    }
+                }).show();
+            }else if(typeId.equals("4")){
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.Dialog("Information", "This is for Diesel Filling", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));
+                    }
+                }).show();
+            }else {
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.Dialog("Information", "This is for Default", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                       /* startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));*/
+                    }
+                }).show();
+            }
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    public void showAlertDialogBox(final String className)  {
 
     }
 

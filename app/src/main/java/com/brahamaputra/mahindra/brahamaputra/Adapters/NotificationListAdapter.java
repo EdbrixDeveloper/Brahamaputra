@@ -87,9 +87,9 @@ public class NotificationListAdapter extends ArrayAdapter<Notification>
         viewHolder.button_deleteMessage.setTag(position);
         //viewHolder.linearLayout_item.setTag(position);
 
-        viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
+        viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
         if (dataModel.getIsRead() == 1) {
-            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+            viewHolder.linearLayout_item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
         }
 
 

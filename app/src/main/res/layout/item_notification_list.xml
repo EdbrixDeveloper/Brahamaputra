@@ -49,7 +49,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/textView_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,6 +66,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/app_normal_margin"
                 android:layout_weight="1"
+                android:gravity="right"
+                android:text="Date: dd/mm/yyyy"
+                android:textSize="12sp" />-->
+
+            <TextView
+                android:id="@+id/textView_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_min_margin"
+                android:layout_marginLeft="@dimen/app_normal_margin"
+                android:layout_weight="0.9"
+                android:text="MESSAGE"
+                android:textColor="#2196F3"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textView_messageDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_min_margin"
+                android:layout_weight="1.1"
                 android:gravity="right"
                 android:text="Date: dd/mm/yyyy"
                 android:textSize="12sp" />
