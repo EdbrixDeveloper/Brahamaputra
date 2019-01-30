@@ -205,6 +205,7 @@ public class DieselFillingFundReqestList extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             //prepareListData();
+            diselRequestTransactionList=new ArrayList<DiselRequestTransactionList>();
             getTimeLineData("1", 0);
         }
     }

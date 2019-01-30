@@ -11,12 +11,14 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +33,8 @@ import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -178,6 +182,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private int totalAcCount = 6;
     private int currentPos = 0;
 
+    DecimalConversion decimalConversion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -185,6 +191,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         setContentView(R.layout.activity_preventive_maintenance_site_battery_bank_back_up_test_report);
         this.setTitle("Battery Bank Back Up Test Report");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        decimalConversion = new DecimalConversion();
         assignViews();
         sessionManager = new SessionManager(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
@@ -200,6 +207,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         getInputDetails(batteryBankCheckPointsData);
         currentPos = 0;
         //setInputDetails();
+
+        decimalEditTextListener();
     }
 
     private void assignViews() {
@@ -296,6 +305,418 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_photoOfBatteryBankView);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewRemarks = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_remarks);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks = (EditText) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_remarks);
+
+        ////////////
+        mBdTestCellReadingEditText1.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText2.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText3.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText4.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText5.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText6.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText7.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText8.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText9.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText10.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText11.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText12.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText13.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText14.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText15.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText16.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText17.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText18.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText19.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText20.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText21.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText22.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText23.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCellReadingEditText24.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        /////////////
+        mBdTestVoltageModuleReading1EditText1.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCurrentModuleReading1EditText1.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestSocModuleReadingEditText1.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestSohModuleReadingEditText1.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestVoltageModuleReading1EditText2.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCurrentModuleReading1EditText2.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestSocModuleReadingEditText2.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestSohModuleReadingEditText2.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestVoltageModuleReading1EditText3.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestCurrentModuleReading1EditText3.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestSocModuleReadingEditText3.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mBdTestSohModuleReadingEditText3.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        //////////////
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        /////////////
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
+    private void decimalEditTextListener() {
+        mBdTestCellReadingEditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText5.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText8.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText9.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText10.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText11.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText12.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText13.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText14.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText15.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText16.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText17.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText18.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText19.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText20.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText21.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText22.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText23.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCellReadingEditText24.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        /////////////
+        mBdTestVoltageModuleReading1EditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCurrentModuleReading1EditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestSocModuleReadingEditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestSohModuleReadingEditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestVoltageModuleReading1EditText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCurrentModuleReading1EditText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestSocModuleReadingEditText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestSohModuleReadingEditText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestVoltageModuleReading1EditText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestCurrentModuleReading1EditText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestSocModuleReadingEditText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mBdTestSohModuleReadingEditText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        //////////////
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        /////////////
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
+    }
+
+    public void DecimalFormatConversion() {
+
+        mBdTestCellReadingEditText1.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText1.getText().toString()));
+        mBdTestCellReadingEditText2.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText2.getText().toString()));
+        mBdTestCellReadingEditText3.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText3.getText().toString()));
+        mBdTestCellReadingEditText4.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText4.getText().toString()));
+        mBdTestCellReadingEditText5.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText5.getText().toString()));
+        mBdTestCellReadingEditText6.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText6.getText().toString()));
+        mBdTestCellReadingEditText7.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText7.getText().toString()));
+        mBdTestCellReadingEditText8.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText8.getText().toString()));
+        mBdTestCellReadingEditText9.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText9.getText().toString()));
+        mBdTestCellReadingEditText10.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText10.getText().toString()));
+        mBdTestCellReadingEditText11.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText11.getText().toString()));
+        mBdTestCellReadingEditText12.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText12.getText().toString()));
+        mBdTestCellReadingEditText13.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText13.getText().toString()));
+        mBdTestCellReadingEditText14.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText14.getText().toString()));
+        mBdTestCellReadingEditText15.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText15.getText().toString()));
+        mBdTestCellReadingEditText16.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText16.getText().toString()));
+        mBdTestCellReadingEditText17.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText17.getText().toString()));
+        mBdTestCellReadingEditText18.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText18.getText().toString()));
+        mBdTestCellReadingEditText19.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText19.getText().toString()));
+        mBdTestCellReadingEditText20.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText20.getText().toString()));
+        mBdTestCellReadingEditText21.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText21.getText().toString()));
+        mBdTestCellReadingEditText22.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText22.getText().toString()));
+        mBdTestCellReadingEditText23.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText23.getText().toString()));
+        mBdTestCellReadingEditText24.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText24.getText().toString()));
+        /////////////
+        mBdTestVoltageModuleReading1EditText1.setText(decimalConversion.convertDecimal(mBdTestVoltageModuleReading1EditText1.getText().toString()));
+        mBdTestCurrentModuleReading1EditText1.setText(decimalConversion.convertDecimal(mBdTestCurrentModuleReading1EditText1.getText().toString()));
+        mBdTestSocModuleReadingEditText1.setText(decimalConversion.convertDecimal(mBdTestSocModuleReadingEditText1.getText().toString()));
+        mBdTestSohModuleReadingEditText1.setText(decimalConversion.convertDecimal(mBdTestSohModuleReadingEditText1.getText().toString()));
+        mBdTestVoltageModuleReading1EditText2.setText(decimalConversion.convertDecimal(mBdTestVoltageModuleReading1EditText2.getText().toString()));
+        mBdTestCurrentModuleReading1EditText2.setText(decimalConversion.convertDecimal(mBdTestCurrentModuleReading1EditText2.getText().toString()));
+        mBdTestSocModuleReadingEditText2.setText(decimalConversion.convertDecimal(mBdTestSocModuleReadingEditText2.getText().toString()));
+        mBdTestSohModuleReadingEditText2.setText(decimalConversion.convertDecimal(mBdTestSohModuleReadingEditText2.getText().toString()));
+        mBdTestVoltageModuleReading1EditText3.setText(decimalConversion.convertDecimal(mBdTestVoltageModuleReading1EditText3.getText().toString()));
+        mBdTestCurrentModuleReading1EditText3.setText(decimalConversion.convertDecimal(mBdTestCurrentModuleReading1EditText3.getText().toString()));
+        mBdTestSocModuleReadingEditText3.setText(decimalConversion.convertDecimal(mBdTestSocModuleReadingEditText3.getText().toString()));
+        mBdTestSohModuleReadingEditText3.setText(decimalConversion.convertDecimal(mBdTestSohModuleReadingEditText3.getText().toString()));
+        //////////////
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setText(decimalConversion.convertDecimal(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.getText().toString()));
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setText(decimalConversion.convertDecimal(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.getText().toString()));
+        /////////////
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setText(decimalConversion.convertDecimal(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.getText().toString()));
     }
 
     private void setInputDetails() {
@@ -378,6 +799,9 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
             mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewUserFseNameDesignationVal.setText(batteryBankCheckPointsData.getBdTestUserFseNameDesignation() == null ? "" : batteryBankCheckPointsData.getBdTestUserFseNameDesignation());
             mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.setText(batteryBankCheckPointsData.getTypeOfBattery() == null ? "" : batteryBankCheckPointsData.getTypeOfBattery());
 
+            mLinearLayoutBatteryTypeVRLAAndVRLAPlusReadings.setVisibility(View.GONE);
+            mLinearLayoutBatteryTypeLiIonReadings.setVisibility(View.GONE);
+
             if (batteryBankCheckPointsData.getTypeOfBattery().equals("VRLA") || batteryBankCheckPointsData.getTypeOfBattery().equals("VRLA+")) {
                 mLinearLayoutBatteryTypeVRLAAndVRLAPlusReadings.setVisibility(View.VISIBLE);
 
@@ -425,12 +849,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                         }
                     }
                 }
-            } else {
-                mLinearLayoutBatteryTypeVRLAAndVRLAPlusReadings.setVisibility(View.GONE);
-            }
-
-
-            if (batteryBankCheckPointsData.getTypeOfBattery().equals("Li Ion")) {
+            } else if (batteryBankCheckPointsData.getTypeOfBattery().equals("Li Ion")) {
                 mLinearLayoutBatteryTypeLiIonReadings.setVisibility(View.VISIBLE);
 
                 mBdTestVoltageModuleReading1EditText1.setText(batteryBankCheckPointsData.getBdTestVoltageModuleReading1() == null ? "" : batteryBankCheckPointsData.getBdTestVoltageModuleReading1());
@@ -446,6 +865,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                 mBdTestSocModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSocModuleReading3() == null ? "" : batteryBankCheckPointsData.getBdTestSocModuleReading3());
                 mBdTestSohModuleReadingEditText3.setText(batteryBankCheckPointsData.getBdTestSohModuleReading3() == null ? "" : batteryBankCheckPointsData.getBdTestSohModuleReading3());
             } else {
+                mLinearLayoutBatteryTypeVRLAAndVRLAPlusReadings.setVisibility(View.GONE);
                 mLinearLayoutBatteryTypeLiIonReadings.setVisibility(View.GONE);
             }
 
@@ -492,6 +912,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DecimalFormatConversion();
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankBackUpTestReport_readingTakenAt))),
                         "Reading Taket At",

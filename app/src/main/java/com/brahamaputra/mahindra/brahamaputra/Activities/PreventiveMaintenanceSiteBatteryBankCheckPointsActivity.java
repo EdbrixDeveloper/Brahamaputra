@@ -794,7 +794,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 dataList.setSubmited(1);
             }
 
-            dataList.setTypeOfBattery("VRLA");
+            dataList.setTypeOfBattery("Li Ion");
 
             if (batteryBankDischargeTest.equals("Execute BD Test")) {
                 if (batteryBankCheckPointschildData.size() > 0) {
