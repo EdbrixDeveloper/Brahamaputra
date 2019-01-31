@@ -74,6 +74,10 @@ public class UserProfileActivity extends BaseActivity {
     private TextView mUserProfileTextViewSsa;
     private TextView mUserProfileTextViewSsaText;
 
+    private ImageView mUserProfileImageViewCustomer;
+    private TextView mUserProfileTextViewCustomer;
+    private TextView mUserProfileTextViewCustomerText;
+
     ImageView mUserProfileImageViewUserName;
     TextView mUserProfileTextViewUserName;
     TextView mUserProfileTextViewUserNameText;
@@ -161,6 +165,7 @@ public class UserProfileActivity extends BaseActivity {
             mUserProfileTextViewCircleText.setText(sessionManager.getSessionCircle().toString());
             mUserProfileTextViewStateText.setText(sessionManager.getUser_State().toString());
             mUserProfileTextViewSsaText.setText(sessionManager.getUser_Ssa().toString());
+            mUserProfileTextViewCustomerText.setText(sessionManager.getSessionCustomer().toString());
             //mImageView2.setImageBitmap(getBitmapFromURL(sessionManager.getSessionProfileImageUrl().toString()));
 
             String imageUri = sessionManager.getSessionProfileImageUrl().toString();
@@ -329,6 +334,10 @@ public class UserProfileActivity extends BaseActivity {
         mUserProfileTextViewSsa = (TextView) findViewById(R.id.userProfile_textView_ssa);
         mUserProfileTextViewSsaText = (TextView) findViewById(R.id.userProfile_textView_ssaText);
 
+        mUserProfileImageViewCustomer = (ImageView) findViewById(R.id.userProfile_imageView_customer);
+        mUserProfileTextViewCustomer = (TextView) findViewById(R.id.userProfile_textView_customer);
+        mUserProfileTextViewCustomerText = (TextView) findViewById(R.id.userProfile_textView_customerText);
+
 
         textViewAppVersion = (TextView) findViewById(R.id.textView_appVersion);
     }
@@ -363,6 +372,7 @@ public class UserProfileActivity extends BaseActivity {
                                     sessionManager.updateSessionCircle(response.getUserDetails().getUserAdditionalDetails().getCircleName());
                                     sessionManager.updateSessionState(response.getUserDetails().getUserAdditionalDetails().getStateName());
                                     sessionManager.updateSessionSsa(response.getUserDetails().getUserAdditionalDetails().getSsaName());
+                                    sessionManager.updateSessionCustomer(response.getUserDetails().getUserAdditionalDetails().getCustomerName());
 
                                     setValues();
                                 }

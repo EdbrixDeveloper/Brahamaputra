@@ -48,6 +48,7 @@ public class SessionManager {
     private static final String PREFS_SESSION_User_State = "State";
     private static final String PREFS_SESSION_User_Ssa = "SSA";
 
+    private static final String PREFS_SESSION_User_Customer = "Customer";
 
     private SharedPreferences sharedPrefs;
 
@@ -200,6 +201,10 @@ public class SessionManager {
 
     public String getUser_Ssa() {
         return this.sharedPrefs.getString(PREFS_SESSION_User_Ssa, "");
+    }
+
+    public String getSessionCustomer() {
+        return this.sharedPrefs.getString(PREFS_SESSION_User_Customer, "");
     }
 
     /*  public ArrayList<UserData> getLoggedUsersList() {
@@ -476,6 +481,17 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void updateSessionCustomer(String Customer) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((Customer != null) && (Customer.length() > 0)) {
+            editor.putString(PREFS_SESSION_User_Customer, Customer);
+        } else {
+            editor.remove(PREFS_SESSION_User_Customer);
+        }
+        editor.commit();
+    }
+
     public void updateSessionDesignation(String Designation) {
 
         Editor editor = this.sharedPrefs.edit();
@@ -629,6 +645,7 @@ public class SessionManager {
         this.updateSessionUserTicketName(null);
         this.updateSessionState(null);
         this.updateSessionSsa(null);
+        this.updateSessionCustomer(null);
 //        this.updateLoggedUserList(null);
 //        this.updateLoggedUsersCredentials(null);
 //        this.updateLoggedUserData(null);

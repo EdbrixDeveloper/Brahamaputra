@@ -315,7 +315,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Last Diesel Stock" />
+                    android:text="Last Diesel Stock (in Ltrs)" />
 
                 <TextView
                     android:id="@+id/dieselFillingFundRequest_textView_lastDieselStockVal"
@@ -493,7 +493,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Present Diesel Stock" />
+                    android:text="Present Diesel Stock (in Ltrs)" />
 
                 <EditText
                     android:id="@+id/dieselFillingFundRequest_editText_presentDieselStock"
@@ -692,7 +692,7 @@
                     style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
+                    android:layout_weight="0.53"
                     android:editable="false"
                     android:focusable="false"
                     android:hint="DD/MMM/YYYY"
@@ -700,6 +700,16 @@
                     android:inputType="none"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/dieselFillingFundRequest_button_presentDateTime"
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="0.08"
+                    android:clickable="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/baseline_timer_black_36dp" />
 
             </LinearLayout>
 

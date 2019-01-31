@@ -317,6 +317,43 @@
                         android:textColor="#2196F3" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/app_normal_margin"
+                    android:gravity="left"
+                    android:paddingLeft="@dimen/app_normal_padding">
+
+                    <ImageView
+                        android:id="@+id/userProfile_imageView_customer"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="@dimen/app_min_margin"
+                        android:clickable="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/ic_user" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_customer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/userProfile_imageView_customer"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="Customer" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_customerText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userProfile_textView_customer"
+                        android:layout_marginBottom="@dimen/app_big_margin"
+                        android:layout_toRightOf="@+id/userProfile_imageView_customer"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="Customer"
+                        android:textColor="#2196F3" />
+
+                </RelativeLayout>
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

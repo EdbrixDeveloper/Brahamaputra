@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -120,6 +122,7 @@ public class DieselFillingFundRequest extends BaseActivity {
     private ImageView mDieselFillingFundRequestButtonPresentEbReadingKwhPhotoView;
     private TextView mDieselFillingFundRequestTextViewPresentDateTime;
     private EditText mDieselFillingFundRequestEditTextPresentDateTime;
+    private ImageView mDieselFillingFundRequestButtonPresentDateTime;
     private TextView mDieselFillingFundRequestTextViewDieselQuantityRequired;
     private EditText mDieselFillingFundRequestEditTextDieselQuantityRequired;
 
@@ -168,6 +171,8 @@ public class DieselFillingFundRequest extends BaseActivity {
     public int siteDbId = 0;
     public double siteLongitude = 0;
     public double siteLatitude = 0;
+
+    private String Str_Date = "", Str_Time = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,6 +265,9 @@ public class DieselFillingFundRequest extends BaseActivity {
         mDieselFillingFundRequestButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFillingFundRequest_button_presentEbReadingKwhPhotoView);
         mDieselFillingFundRequestTextViewPresentDateTime = (TextView) findViewById(R.id.dieselFillingFundRequest_textView_presentDateTime);
         mDieselFillingFundRequestEditTextPresentDateTime = (EditText) findViewById(R.id.dieselFillingFundRequest_editText_presentDateTime);
+        mDieselFillingFundRequestButtonPresentDateTime = (ImageView) findViewById(R.id.dieselFillingFundRequest_button_presentDateTime);
+
+
         mDieselFillingFundRequestTextViewDieselQuantityRequired = (TextView) findViewById(R.id.dieselFillingFundRequest_textView_dieselQuantityRequired);
         mDieselFillingFundRequestEditTextDieselQuantityRequired = (EditText) findViewById(R.id.dieselFillingFundRequest_editText_dieselQuantityRequired);
 
@@ -283,7 +291,19 @@ public class DieselFillingFundRequest extends BaseActivity {
         String myFormat = "dd/MMM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mDieselFillingFundRequestEditTextPresentDateTime.setText(sdf.format(myCalendar.getTime()));
+        //mDieselFillingFundRequestEditTextPresentDateTime.setText(sdf.format(myCalendar.getTime()));
+
+        Str_Date = "";
+        Str_Time = "";
+
+        if (mDieselFillingFundRequestEditTextPresentDateTime.getText().length() > 1) {
+            Str_Time = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().substring(mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().indexOf(" ") + 1, mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().length());
+            Str_Date = sdf.format(myCalendar.getTime()) + " ";
+        } else {
+            Str_Date = sdf.format(myCalendar.getTime()) + " ";
+        }
+        mDieselFillingFundRequestEditTextPresentDateTime.setText(Str_Date + Str_Time);
+
     }
 
     public void set_listener() {
@@ -298,7 +318,6 @@ public class DieselFillingFundRequest extends BaseActivity {
                         showToast("No Internet Found..");
                     }
                 }
-
             }
         });
 
@@ -340,6 +359,39 @@ public class DieselFillingFundRequest extends BaseActivity {
                 }
             }
         });
+
+        mDieselFillingFundRequestButtonPresentDateTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(DieselFillingFundRequest.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
+                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
+                        //mDieselFillingFundRequestEditTextPresentDateTime.setText(selectedHour1 + ":" + selectedMinute1);
+                        Str_Date = "";
+                        Str_Time = "";
+                        if (mDieselFillingFundRequestEditTextPresentDateTime.getText().length() > 1) {
+                            Str_Date = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().substring(0, mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().indexOf(" "));
+                            Str_Time = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().substring(mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().indexOf(" "), mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().length());
+                            Str_Time = " " + selectedHour1 + ":" + selectedMinute1;
+                        } else {
+                            Str_Time = " " + selectedHour1 + ":" + selectedMinute1;
+                        }
+                        mDieselFillingFundRequestEditTextPresentDateTime.setText(Str_Date + Str_Time);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time For Average Eb Availability");
+                mTimePicker.show();
+
+            }
+        });
+
 
     }
 
@@ -475,7 +527,7 @@ public class DieselFillingFundRequest extends BaseActivity {
     }
 
     private void setSessionValuesToFields() {
-        //mDieselFillingFundRequestTextViewCustomerVal.getText().toString().trim();
+        mDieselFillingFundRequestTextViewCustomerVal.setText(sessionManager.getSessionCustomer().toString());
         mDieselFillingFundRequestTextViewCircleVal.setText(sessionManager.getSessionCircle().toString());
         mDieselFillingFundRequestTextViewStateVal.setText(sessionManager.getUser_State().toString());
         mDieselFillingFundRequestTextViewSsaVal.setText(sessionManager.getUser_Ssa().toString());
