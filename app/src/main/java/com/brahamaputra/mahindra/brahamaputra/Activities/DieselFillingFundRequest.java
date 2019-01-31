@@ -165,11 +165,9 @@ public class DieselFillingFundRequest extends BaseActivity {
 
     private ArrayList<String> siteArray;
     private Site site;
-    public int site_id = 0;
+    public int siteDbId = 0;
     public double siteLongitude = 0;
     public double siteLatitude = 0;
-    String str_siteName;
-    int siteID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -404,11 +402,11 @@ public class DieselFillingFundRequest extends BaseActivity {
                                                             siteLongitude = 0;
                                                         }
 
-                                                        site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+                                                        siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
 
                                                         /*mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
 
-                                                        if (site_id > 0) {
+                                                        if (siteDbId > 0) {
                                                             if (Conditions.isNetworkConnected(DieselFilling.this)) {
                                                                 prepareDgId_from_Sites();
                                                             } else {
@@ -442,7 +440,7 @@ public class DieselFillingFundRequest extends BaseActivity {
                                                     mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock());
                                                     mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR());
                                                     mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl());
-                                                    site_id = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+                                                    siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
                                                 }
                                             });
                                         }
@@ -564,7 +562,7 @@ public class DieselFillingFundRequest extends BaseActivity {
             String state = mDieselFillingFundRequestTextViewStateVal.getText().toString().trim();
             String ssa = mDieselFillingFundRequestTextViewSsaVal.getText().toString().trim();
             String siteName = mDieselFillingFundRequestTextViewSiteNameVal.getText().toString().trim();
-            String siteId = mDieselFillingFundRequestTextViewSiteIdVal.getText().toString().trim();
+            //String siteCodeId = mDieselFillingFundRequestTextViewSiteIdVal.getText().toString().trim();
             String sourceOfPower = mDieselFillingFundRequestTextViewSourceOfPowerVal.getText().toString().trim();
             String cardSupplier = mDieselFillingFundRequestTextViewCardSupplierVal.getText().toString().trim();
             String childCardNumber = mDieselFillingFundRequestTextViewChildCardNumberVal.getText().toString().trim();
@@ -580,7 +578,7 @@ public class DieselFillingFundRequest extends BaseActivity {
             String presentDateTime = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().trim();
             String dieselQuantityRequiredInLtrs = mDieselFillingFundRequestEditTextDieselQuantityRequired.getText().toString().trim();
 
-            /*dieselFillingFundRequestData = new DieselFillingFundRequestData(customer, circle, state, ssa, siteName, siteId,
+            /*dieselFillingFundRequestData = new DieselFillingFundRequestData(customer, circle, state, ssa, siteName, siteCodeId,
                     sourceOfPower, cardSupplier, childCardNumber, lastDieselFillingDate,
                     lastDieselStock, lastDgHmr, lastEbReading, presentDgHmr,
                     hmrPhotoUpload, presentDieselStock, presentEbReading,
@@ -602,7 +600,7 @@ public class DieselFillingFundRequest extends BaseActivity {
             JSONObject jsonString = new JSONObject();
             jsonString.put("UserId", sessionManager.getSessionUserId());
             jsonString.put("AccessToken", sessionManager.getSessionDeviceToken());
-            jsonString.put("SiteId", siteId);
+            jsonString.put("SiteId", siteDbId);//siteCodeId
             jsonString.put("PresentDgHmr", presentDgHmr);
             jsonString.put("HMRPhotoUpload", hmrPhotoUpload);
             jsonString.put("PresentDieselStock", presentDieselStock);
