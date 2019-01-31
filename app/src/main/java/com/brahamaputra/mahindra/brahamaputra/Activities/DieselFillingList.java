@@ -178,6 +178,49 @@ public class DieselFillingList extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.add_item_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.menuAdd:
+                /*Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
+                startActivity(intent);*/
+                Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
+                startActivityForResult(intent, RESULT_TRAN_SUBMIT);
+                return true;
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            //prepareListData();
+            diselFillingTransactionList = new ArrayList<DiselFillingTransactionList>();
+            getListDataByPaging("1", 0);
+        }
+    }
+
+
+    //Out Of Process
     private void prepareListData() {
         try {
             showBusyProgress();
@@ -234,47 +277,4 @@ public class DieselFillingList extends BaseActivity {
 
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_item_menu, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            case R.id.menuAdd:
-                /*Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
-                startActivity(intent);*/
-                Intent intent = new Intent(DieselFillingList.this, DieselFilling.class);
-                startActivityForResult(intent, RESULT_TRAN_SUBMIT);
-                return true;
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        setResult(RESULT_OK);
-        finish();
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            //prepareListData();
-            getListDataByPaging("1", 0);
-        }
-    }
-
 }

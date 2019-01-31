@@ -964,7 +964,7 @@ public class DieselFilling extends BaseActivity {
                                                         }
 
 
-                                                        siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getSiteId());
+                                                        siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
                                                         mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
 
                                                         if (siteDbId > 0) {
@@ -1255,10 +1255,10 @@ public class DieselFilling extends BaseActivity {
         } else if (fillingQty.isEmpty() || fillingQty == null) {
             showToast("Enter Filling Quantity");
             return false;
-        } /*else if (finalDieselStock.isEmpty() || finalDieselStock == null) {
+        } else if (finalDieselStock.isEmpty() || finalDieselStock == null) {
             showToast("Wrong Final Diesel Stock");
             return false;
-        }*/ else if (dieselPrice.isEmpty() || dieselPrice == null) {
+        } else if (dieselPrice.isEmpty() || dieselPrice == null) {
             showToast("Enter Diesel Price");
             return false;
         } else if (presentEbReading.isEmpty() || presentEbReading == null) {

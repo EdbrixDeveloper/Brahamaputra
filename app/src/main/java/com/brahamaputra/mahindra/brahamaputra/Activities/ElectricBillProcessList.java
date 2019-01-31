@@ -174,7 +174,61 @@ public class ElectricBillProcessList extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.eb_add_item_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.menuAdd:
+                Intent intent = new Intent(ElectricBillProcessList.this, ElectricBillProcess.class);
+                startActivityForResult(intent, RESULT_TRAN_SUBMIT);
+                return true;
+            case R.id.menuRefresh:
+                //prepareListData();
+                ebPaymentRequestList = new ArrayList<EbPaymentRequestList>();
+                getListDataByPaging("1", 0);
+                return true;
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+     /*   if (resultCode == RESULT_OK) {
+            prepareListData();
+        }*/
+        if (requestCode == RESULT_EB_REC_SUBMIT && resultCode == RESULT_OK) {
+            //prepareListData();
+            ebPaymentRequestList = new ArrayList<EbPaymentRequestList>();
+            getListDataByPaging("1", 0);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+
+    //Out Of Code
     private void prepareListData() {
         try {
             showBusyProgress();
@@ -232,55 +286,4 @@ public class ElectricBillProcessList extends BaseActivity {
         }
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.eb_add_item_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            case R.id.menuAdd:
-                Intent intent = new Intent(ElectricBillProcessList.this, ElectricBillProcess.class);
-                startActivityForResult(intent, RESULT_TRAN_SUBMIT);
-                return true;
-            case R.id.menuRefresh:
-                //prepareListData();
-                getListDataByPaging("1", 0);
-                return true;
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        setResult(RESULT_OK);
-        finish();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-     /*   if (resultCode == RESULT_OK) {
-            prepareListData();
-        }*/
-        if (requestCode == RESULT_EB_REC_SUBMIT && resultCode == RESULT_OK) {
-            //prepareListData();
-            getListDataByPaging("1", 0);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
 }
