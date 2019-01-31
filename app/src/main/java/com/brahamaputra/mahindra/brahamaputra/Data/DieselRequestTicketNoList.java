@@ -16,8 +16,8 @@ public class DieselRequestTicketNoList {
     @SerializedName("Message")
     private String Message;
 
-    @SerializedName("DieselRequestTicketNoList")
-    private List<DieselFillingData> requestTicketNoList = null;
+    @SerializedName("DiselRequestTicketList")
+    private List<DiselRequestTicketList> diselRequestTicketList = null;
 
     public Integer getSuccess() {
         return Success;
@@ -55,11 +55,11 @@ public class DieselRequestTicketNoList {
         Message = message;
     }
 
-    public List<DieselFillingData> getRequestTicketNoListList() {
-        return requestTicketNoList;
+    public List<DiselRequestTicketList> getDiselRequestTicketList() {
+        return diselRequestTicketList;
     }
 
-    public void setgetRequestTicketNoListList(List<DieselFillingData> siteList) {
-        requestTicketNoList = siteList;
+    public void setDiselRequestTicketList(List<DiselRequestTicketList> diselRequestTicketList) {
+        this.diselRequestTicketList = diselRequestTicketList;
     }
 }
