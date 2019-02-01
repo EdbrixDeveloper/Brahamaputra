@@ -1,8 +1,8 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,12 +13,10 @@ import android.widget.RelativeLayout;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
-import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 
-public class MyPreventiveListActivity extends BaseActivity {
-
+public class MaintenanceDashboardActivity extends AppCompatActivity {
     private RelativeLayout mMyPreventiveListRelativeLayoutAcPreventiveMaintenance;
     private ImageView mImgAcPreventiveMaintenance;
     private RelativeLayout mMyPreventiveListRelativeLayoutSitePreventiveMaintenance;
@@ -29,24 +27,24 @@ public class MyPreventiveListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_preventive_list);
-        this.setTitle("Preventive");
+        setContentView(R.layout.activity_maintenance_dashboard);
+        this.setTitle("Maintenance");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         assignViews();
+
         mMyPreventiveListRelativeLayoutAcPreventiveMaintenance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (Conditions.isNetworkConnected(MyPreventiveListActivity.this)) {
+                if (Conditions.isNetworkConnected(MaintenanceDashboardActivity.this)) {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        startActivity(new Intent(MyPreventiveListActivity.this, AcPreventiveMaintenanceDashboardActivity.class));
+                        startActivity(new Intent(MaintenanceDashboardActivity.this, MyPreventiveListActivity.class));
                     } else {
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                    Log.e(MaintenanceDashboardActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
                         }).show();
@@ -59,39 +57,13 @@ public class MyPreventiveListActivity extends BaseActivity {
                         }
                     }).show();
                 }
-
             }
         });
 
         mMyPreventiveListRelativeLayoutSitePreventiveMaintenance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //startActivity(new Intent(MyEnergyListActivity.this, ElectricBillProcessList.class));
 
-                if (Conditions.isNetworkConnected(MyPreventiveListActivity.this)) {
-                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        //startActivity(new Intent(MyPreventiveListActivity.this, PriventiveMaintenanceSiteTransactionActivity.class));
-                        startActivity(new Intent(MyPreventiveListActivity.this, PreventiveMaintenanceDashboard.class));
-                    } else {
-                        //showToast("Could not detecting location. Please try again later.");
-                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                            @Override
-                            public void onPositiveClick() {
-                                if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
-                                    Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                                }
-                            }
-                        }).show();
-                    }
-                }else {
-                    alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                        @Override
-                        public void onPositiveClick() {
-                            finish();
-                        }
-                    }).show();
-                }
             }
         });
     }
@@ -101,10 +73,9 @@ public class MyPreventiveListActivity extends BaseActivity {
         mImgAcPreventiveMaintenance = (ImageView) findViewById(R.id.img_acPreventiveMaintenance);
         mMyPreventiveListRelativeLayoutSitePreventiveMaintenance = (RelativeLayout) findViewById(R.id.MyPreventiveList_relativeLayout_sitePreventiveMaintenance);
         mImgSitePreventiveMaintenance = (ImageView) findViewById(R.id.img_sitePreventiveMaintenance);
-        gpsTracker = new GPSTracker(MyPreventiveListActivity.this);
-        alertDialogManager = new AlertDialogManager(MyPreventiveListActivity.this);
+        gpsTracker = new GPSTracker(MaintenanceDashboardActivity.this);
+        alertDialogManager = new AlertDialogManager(MaintenanceDashboardActivity.this);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -138,6 +109,4 @@ public class MyPreventiveListActivity extends BaseActivity {
         setResult(RESULT_OK);
         finish();
     }
-
-
 }

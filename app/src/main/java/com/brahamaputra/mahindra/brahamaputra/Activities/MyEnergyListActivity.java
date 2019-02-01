@@ -59,7 +59,7 @@ public class MyEnergyListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_energy_list);
-        this.setTitle("My Energy Process");
+        this.setTitle("Diesel");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
 
@@ -125,12 +125,12 @@ public class MyEnergyListActivity extends AppCompatActivity {
             }
         });
 
-        mMyEnegyListRelativeLayoutEbProcess.setOnClickListener(new View.OnClickListener() {
+        /*mMyEnegyListRelativeLayoutEbProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               //startActivity(new Intent(MyEnergyListActivity.this, ElectricBillProcessList.class));
 
-                if (Conditions.isNetworkConnected(MyEnergyListActivity.this)) {
+               *//* if (Conditions.isNetworkConnected(MyEnergyListActivity.this)) {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         startActivity(new Intent(MyEnergyListActivity.this, ElectricBillProcessList.class));
                     } else {
@@ -152,9 +152,9 @@ public class MyEnergyListActivity extends AppCompatActivity {
                             finish();
                         }
                     }).show();
-                }
+                }*//*
             }
-        });
+        });*/
     }
 
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="3"
-    tools:context=".Activities.MyEnergyListActivity"
+    tools:context=".Activities.MaintenanceDashboardActivity"
     android:background="#f0f3f8"
     android:layout_margin="@dimen/app_min_margin">
 
@@ -17,8 +17,9 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
+
         <RelativeLayout
-            android:id="@+id/myEnegyList_relativeLayout_dieselFillingReq"
+            android:id="@+id/MyPreventiveList_relativeLayout_acPreventiveMaintenance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
@@ -26,21 +27,21 @@
             android:background="@color/colorWhite">
 
             <ImageView
-                android:id="@+id/img_dieselFillingReq"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/img_acPreventiveMaintenance"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center|top"
-                android:src="@drawable/request"
+                android:src="@drawable/prevetive_icon"
                 android:tint="@color/red"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_dieselFillingReq"
+                android:layout_below="@+id/img_acPreventiveMaintenance"
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="@dimen/app_min_margin"
-                android:text="Diesel Request"
+                android:text="Preventive"
                 android:textAlignment="center"
                 android:textColor="@color/red"
                 android:textSize="18dp" />
@@ -48,7 +49,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/myEnegyList_relativeLayout_dieselFilling"
+            android:id="@+id/MyPreventiveList_relativeLayout_sitePreventiveMaintenance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
@@ -56,21 +57,21 @@
             android:background="@color/colorWhite">
 
             <ImageView
-                android:id="@+id/img_dieselFilling"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/img_sitePreventiveMaintenance"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center|top"
-                android:src="@drawable/img_dieselfilling"
-                android:tint="@color/red"/>
+                android:tint="@color/red"
+                android:src="@drawable/corrective" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_dieselFilling"
+                android:layout_below="@+id/img_sitePreventiveMaintenance"
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="@dimen/app_min_margin"
-                android:text="Diesel Filling "
+                android:text="Corrective"
                 android:textAlignment="center"
                 android:textColor="@color/red"
                 android:textSize="18dp" />
@@ -79,55 +80,8 @@
 
     </LinearLayout>
 
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/app_min_margin"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <RelativeLayout
-            android:id="@+id/myEnegyList_relativeLayout_ebProcess"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/app_normal_margin"
-            android:layout_weight="1"
-            android:background="@color/colorWhite">
-
-            <ImageView
-                android:id="@+id/img_ebProcess"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center|top"
-                android:tint="@color/red"
-                android:src="@drawable/img_elctricitybilling" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/img_ebProcess"
-                android:layout_gravity="center|bottom"
-                android:layout_marginTop="@dimen/app_min_margin"
-                android:text="Electricity Billing "
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textSize="18dp" />
-
-        </RelativeLayout>
 
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/app_normal_margin"
-            android:layout_weight="1">
-
-        </RelativeLayout>
-
-    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -138,7 +92,6 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/app_normal_margin"
@@ -148,10 +101,36 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="@dimen/app_min_margin"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
 
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_normal_margin"
+        android:layout_marginTop="@dimen/app_min_margin"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/app_min_margin"
                 android:textAlignment="center"
                 android:textColor="@color/red"
                 android:textSize="18dp" />

@@ -148,7 +148,7 @@
             android:background="@color/zxing_transparent"
             android:elevation="2dp"
             android:padding="5dp"
-            android:src="@drawable/prevetive_icon"
+            android:src="@drawable/maintenance"
             android:tint="@color/colorPrimary"
             circle:name="My Preventive" />
 
@@ -158,7 +158,7 @@
             android:layout_below="@+id/dashboard_myPrevitive"
             android:layout_centerHorizontal="true"
 
-            android:text="Preventive"
+            android:text="Maintenance"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
@@ -174,6 +174,35 @@
         android:src="@drawable/prevetive_icon"
         android:tint="@color/colorPrimary"
         circle:name="My Prevetive" />-->
+    <RelativeLayout
+        android:id="@+id/dashboard_safetyTips_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.brahamaputra.mahindra.brahamaputra.commons.CircleImageView
+            android:id="@+id/dashboard_safetyTips"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/zxing_transparent"
+            android:elevation="2dp"
+            android:padding="5dp"
+            android:src="@drawable/safetytips"
+            android:tint="@color/colorPrimary"
+            circle:name="My Incident" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dashboard_safetyTips"
+            android:layout_centerHorizontal="true"
+
+            android:text="Safety Tips"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/dashboard_myIncident_layout"
         android:layout_width="match_parent"

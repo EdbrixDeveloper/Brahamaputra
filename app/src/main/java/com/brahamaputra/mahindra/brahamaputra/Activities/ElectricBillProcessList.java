@@ -60,7 +60,7 @@ public class ElectricBillProcessList extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electric_bill_process_list);
-        this.setTitle("Electric Bill Process Tickets");
+        this.setTitle("Electricity Billing Tickets");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(ElectricBillProcessList.this);
         sessionManager = new SessionManager(ElectricBillProcessList.this);

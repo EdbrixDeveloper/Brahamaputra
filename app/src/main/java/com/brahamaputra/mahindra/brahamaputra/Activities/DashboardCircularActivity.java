@@ -152,6 +152,14 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                         startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));
                     }
                 }).show();
+            }else if(typeId.equals("5")){
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.Dialog("Information", "This is for Saftey Tips", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        startActivity(new Intent(DashboardCircularActivity.this, SafteyTipsActivity.class));
+                    }
+                }).show();
             }else {
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
                 alertDialogManager.Dialog("Information", "This is for Default", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
@@ -213,7 +221,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 break;
             case R.id.dashboard_myEnergy_layout:
                 // Handle key click
-                Intent intent = new Intent(DashboardCircularActivity.this, MyEnergyListActivity.class);
+                Intent intent = new Intent(DashboardCircularActivity.this, EnergyDashboardActivity.class);
                 startActivity(intent);
                 break;
             /*case R.id.main_mail_image:
@@ -221,7 +229,12 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 break;*/
             case R.id.dashboard_myPrevitive_layout:
                 // Handle profile click
-                intent = new Intent(DashboardCircularActivity.this, MyPreventiveListActivity.class);
+                intent = new Intent(DashboardCircularActivity.this, MaintenanceDashboardActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.dashboard_safetyTips_layout:
+                // Handle profile click
+                intent = new Intent(DashboardCircularActivity.this, SafteyTipsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.dashboard_myIncident_layout:

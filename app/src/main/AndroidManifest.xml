@@ -327,7 +327,13 @@
         <activity android:name=".Activities.AcPreventiveMaintenanceDashboardActivity" />
         <activity android:name=".Activities.DieselFillingFundReqestList" />
         <activity android:name=".CustomTitleActivity" />
-        <activity android:name=".Activities.ShowHotoNotifiacationDetailsActivity"></activity>
+        <activity android:name=".Activities.ShowHotoNotifiacationDetailsActivity" />
+        <activity android:name=".Activities.MaintenanceDashboardActivity" />
+        <activity android:name=".Activities.EnergyDashboardActivity" />
+        <activity android:name=".Activities.ElectricBillPaymentActivity" />
+        <activity android:name=".Activities.SafteyTipsActivity" />
+        <activity android:name=".Activities.ListGroupActivity" />
+        <activity android:name=".Activities.ItemListActivity"></activity>
     </application>
 
 </manifest>
