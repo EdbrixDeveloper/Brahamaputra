@@ -658,7 +658,7 @@ public class DieselFillingFundRequest extends BaseActivity {
             jsonString.put("PresentDieselStock", presentDieselStock);
             jsonString.put("PresentEbReading", presentEbReading);
             jsonString.put("PresentEBMeterReadingKWHPhoto", presentEbMeterReadingKwhPhoto);
-            jsonString.put("DateOfRequest", presentDateTime);
+            //jsonString.put("DateOfRequest", presentDateTime);
             jsonString.put("DieselQuantityRequiredinLtrs", dieselQuantityRequiredInLtrs);
 
             GsonRequest<DieselSubmitResposeData> dieselSubmitResposeData = new GsonRequest<>(Request.Method.POST, Constants.Submitdieselfillingfundrequesttransaction, jsonString.toString(), DieselSubmitResposeData.class,
@@ -717,7 +717,7 @@ public class DieselFillingFundRequest extends BaseActivity {
         String presentDieselStock = mDieselFillingFundRequestEditTextPresentDieselStock.getText().toString().trim();
         String presentEbReading = mDieselFillingFundRequestEditTextPresentEbReading.getText().toString().trim();
         String presentEbMeterReadingKwhPhoto = base64StringPresentEbReadingKwhPhoto;//mDieselFillingFundRequestTextView.getText().toString().trim();
-        String presentDateTime = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().trim();
+        //String presentDateTime = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().trim();
         String dieselQuantityRequiredInLtrs = mDieselFillingFundRequestEditTextDieselQuantityRequired.getText().toString().trim();
 
         if (siteId.isEmpty() || siteId == null) {
@@ -738,10 +738,10 @@ public class DieselFillingFundRequest extends BaseActivity {
         } else if (presentEbMeterReadingKwhPhoto.isEmpty() || presentEbMeterReadingKwhPhoto == null) {
             showToast("Upload Photo of EB Reading KWH");
             return false;
-        } else if (presentDateTime.isEmpty() || presentDateTime == null) {
+        } /*else if (presentDateTime.isEmpty() || presentDateTime == null) {
             showToast("Select Present Date & Time");
             return false;
-        } else if (dieselQuantityRequiredInLtrs.isEmpty() || dieselQuantityRequiredInLtrs == null) {
+        }*/ else if (dieselQuantityRequiredInLtrs.isEmpty() || dieselQuantityRequiredInLtrs == null) {
             showToast("Enter Diesel Quantity Required (in Ltrs)");
             return false;
         } else return true;

@@ -47,6 +47,10 @@ public class User {
     @Expose
     private String SSA;
 
+    @SerializedName("CustomerName")
+    @Expose
+    private String CustomerName;
+
     public String getId() {
         return id;
     }
@@ -133,6 +137,14 @@ public class User {
 
     public void setSSA(String SSA) {
         this.SSA = SSA;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
     }
 
     @Override
