@@ -437,13 +437,15 @@ public class DieselFillingFundRequest extends BaseActivity {
 
                                                         mDieselFillingFundRequestTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                         mDieselFillingFundRequestTextViewSiteIdVal.setText(userSitesList.getSiteList().get(position).getSiteId());
-                                                        mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower());
-                                                        mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName());
-                                                        mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber());
-                                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate());
-                                                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock());
-                                                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR());
-                                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl());
+
+                                                        mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower() == null || userSitesList.getSiteList().get(position).getSourceOfPower().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getSourceOfPower());
+                                                        mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName() == null || userSitesList.getSiteList().get(position).getPetroCompanyName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getPetroCompanyName());
+                                                        mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber() == null || userSitesList.getSiteList().get(position).getChildCardNumber().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getChildCardNumber());
+                                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate() == null || userSitesList.getSiteList().get(position).getLastDieselFillingDate().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().substring(0, userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().indexOf(" ")));
+
+                                                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock() == null || userSitesList.getSiteList().get(position).getLastDieselStock().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselStock());
+                                                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR() == null || userSitesList.getSiteList().get(position).getLastDGHMR().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDGHMR());
+                                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl() == null || userSitesList.getSiteList().get(position).getLastEBReadingl().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastEBReadingl());
 
                                                         if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null &&
                                                                 !userSitesList.getSiteList().get(position).getLatitude().isEmpty() && !userSitesList.getSiteList().get(position).getLongitude().isEmpty()) {
@@ -485,14 +487,17 @@ public class DieselFillingFundRequest extends BaseActivity {
 
                                                     mDieselFillingFundRequestTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                     mDieselFillingFundRequestTextViewSiteIdVal.setText(userSitesList.getSiteList().get(position).getSiteId());
-                                                    mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower());
-                                                    mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName());
-                                                    mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber());
-                                                    mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate());
-                                                    mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock());
-                                                    mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR());
-                                                    mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl());
+
+                                                    mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower() == null || userSitesList.getSiteList().get(position).getSourceOfPower().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getSourceOfPower());
+                                                    mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName() == null || userSitesList.getSiteList().get(position).getPetroCompanyName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getPetroCompanyName());
+                                                    mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber() == null || userSitesList.getSiteList().get(position).getChildCardNumber().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getChildCardNumber());
+                                                    mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate() == null || userSitesList.getSiteList().get(position).getLastDieselFillingDate().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().substring(0, userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().indexOf(" ")));
+                                                    mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock() == null || userSitesList.getSiteList().get(position).getLastDieselStock().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselStock());
+                                                    mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR() == null || userSitesList.getSiteList().get(position).getLastDGHMR().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDGHMR());
+                                                    mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl() == null || userSitesList.getSiteList().get(position).getLastEBReadingl().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastEBReadingl());
+
                                                     siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+
                                                 }
                                             });
                                         }
@@ -586,7 +591,7 @@ public class DieselFillingFundRequest extends BaseActivity {
 
     private void showSettingsAlert() {
 
-        alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+        alertDialogManager.Dialog("Confirmation", "Do you want to submit this request?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
                 submitDetails();
@@ -627,7 +632,7 @@ public class DieselFillingFundRequest extends BaseActivity {
             String presentDieselStock = mDieselFillingFundRequestEditTextPresentDieselStock.getText().toString().trim();
             String presentEbReading = mDieselFillingFundRequestEditTextPresentEbReading.getText().toString().trim();
             String presentEbMeterReadingKwhPhoto = base64StringPresentEbReadingKwhPhoto;//mDieselFillingFundRequestTextView.getText().toString().trim();
-            String presentDateTime = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().trim();
+            //String presentDateTime = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().trim();
             String dieselQuantityRequiredInLtrs = mDieselFillingFundRequestEditTextDieselQuantityRequired.getText().toString().trim();
 
             /*dieselFillingFundRequestData = new DieselFillingFundRequestData(customer, circle, state, ssa, siteName, siteCodeId,
@@ -726,19 +731,19 @@ public class DieselFillingFundRequest extends BaseActivity {
         } else if (presentDgHmr.isEmpty() || presentDgHmr == null) {
             showToast("Enter Present DG HMR");
             return false;
-        } else if (hmrPhotoUpload.isEmpty() || hmrPhotoUpload == null) {
+        } /*else if (hmrPhotoUpload.isEmpty() || hmrPhotoUpload == null) {
             showToast("Upload Photo of HMR");
             return false;
-        } else if (presentDieselStock.isEmpty() || presentDieselStock == null) {
+        }*/ else if (presentDieselStock.isEmpty() || presentDieselStock == null) {
             showToast("Enter Present Diesel Stock");
             return false;
         } else if (presentEbReading.isEmpty() || presentEbReading == null) {
             showToast("Enter Present EB Reading");
             return false;
-        } else if (presentEbMeterReadingKwhPhoto.isEmpty() || presentEbMeterReadingKwhPhoto == null) {
+        } /*else if (presentEbMeterReadingKwhPhoto.isEmpty() || presentEbMeterReadingKwhPhoto == null) {
             showToast("Upload Photo of EB Reading KWH");
             return false;
-        } /*else if (presentDateTime.isEmpty() || presentDateTime == null) {
+        }else if (presentDateTime.isEmpty() || presentDateTime == null) {
             showToast("Select Present Date & Time");
             return false;
         }*/ else if (dieselQuantityRequiredInLtrs.isEmpty() || dieselQuantityRequiredInLtrs == null) {

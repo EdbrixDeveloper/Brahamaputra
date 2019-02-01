@@ -19,6 +19,6 @@
         android:padding="@dimen/app_normal_margin"
         android:gravity="center_horizontal"
         android:visibility="gone"
-        android:text="No ticket found."/>
+        android:text="No request found."/>
 
 </android.support.constraint.ConstraintLayout>

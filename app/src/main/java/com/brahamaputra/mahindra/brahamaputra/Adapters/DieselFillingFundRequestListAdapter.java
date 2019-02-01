@@ -28,6 +28,7 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
         TextView textView_DateOfRequest;
         TextView textView_SiteAddress;
         TextView textView_RequestQty;
+        TextView textView_RequestStatus;
         LinearLayout linearLayout_container;
     }
 
@@ -67,6 +68,7 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
             viewHolder.textView_DateOfRequest = (TextView) convertView.findViewById(R.id.textView_DateOfRequest);
             viewHolder.textView_SiteAddress = (TextView) convertView.findViewById(R.id.textView_SiteAddress);
             viewHolder.textView_RequestQty = (TextView) convertView.findViewById(R.id.textView_RequestQty);
+            viewHolder.textView_RequestStatus = (TextView) convertView.findViewById(R.id.textView_RequestStatus);
             viewHolder.linearLayout_container = (LinearLayout) convertView.findViewById(R.id.linearLayout_container);
             result = convertView;
             convertView.setTag(viewHolder);
@@ -75,11 +77,12 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
             result = convertView;
         }
         if (dataModel != null) {
-            viewHolder.textView_RequesttTicketNo.setText("Ticket No:" + dataModel.getDiselRequesttTicketNo());
+            viewHolder.textView_RequesttTicketNo.setText("Request No:" + dataModel.getDiselRequesttTicketNo());
             viewHolder.textView_SiteName.setText("Site Name:" + dataModel.getSiteName());
-            viewHolder.textView_DateOfRequest.setText("Date:" + dataModel.getDateOfRequest());
+            viewHolder.textView_DateOfRequest.setText("Request Date:" + dataModel.getDateOfRequest());
             viewHolder.textView_SiteAddress.setText("Site Address:" + dataModel.getSiteAddress());
-            viewHolder.textView_RequestQty.setText("Diesel Filling Qty:" + dataModel.getDieselQuantityRequiredinLtrs());
+            viewHolder.textView_RequestQty.setText("Request Diesel Qty:" + dataModel.getDieselQuantityRequiredinLtrs());
+            viewHolder.textView_RequestStatus.setText("Status:" + dataModel.getStatus());
             //viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.yellow));
 
             if (dataModel.getStatusId() == 0) {
@@ -91,8 +94,9 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
             }
 
             if (dataModel.getStatusId() == 2) {
-                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
             }
+
         }
         return convertView;
     }

@@ -196,14 +196,14 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhotoView);
         dieselFilling_button_qrCode = (ImageView) findViewById(R.id.dieselFilling_button_qrCode);
 
-        mDieselFillingTextViewDieselRequestTicketNo = (TextView)findViewById(R.id.dieselFilling_textView_dieselRequestTicketNo);
-        mDieselFillingTextViewDieselRequestTicketNoVal = (TextView)findViewById(R.id.dieselFilling_textView_dieselRequestTicketNoVal);
-        mDieselFillingTextViewChildPetroCardNo = (TextView)findViewById(R.id.dieselFilling_textView_childPetroCardNo);
-        mDieselFillingTextViewChildPetroCardNoVal = (TextView)findViewById(R.id.dieselFilling_textView_childPetroCardNo_val);
-        mDieselFillingTextViewApprovedQty = (TextView)findViewById(R.id.dieselFilling_textView_approvedQty);
-        mDieselFillingTextViewApprovedQtyVal = (TextView)findViewById(R.id.dieselFilling_textView_approvedQty_val);
-        mDieselFillingTextViewFillingDate = (TextView)findViewById(R.id.dieselFillingFundRequest_textView_fillingDate);
-        mDieselFillingEditTextFillingDateVal = (EditText)findViewById(R.id.dieselFillingFundRequest_editText_fillingDateTime);
+        mDieselFillingTextViewDieselRequestTicketNo = (TextView) findViewById(R.id.dieselFilling_textView_dieselRequestTicketNo);
+        mDieselFillingTextViewDieselRequestTicketNoVal = (TextView) findViewById(R.id.dieselFilling_textView_dieselRequestTicketNoVal);
+        mDieselFillingTextViewChildPetroCardNo = (TextView) findViewById(R.id.dieselFilling_textView_childPetroCardNo);
+        mDieselFillingTextViewChildPetroCardNoVal = (TextView) findViewById(R.id.dieselFilling_textView_childPetroCardNo_val);
+        mDieselFillingTextViewApprovedQty = (TextView) findViewById(R.id.dieselFilling_textView_approvedQty);
+        mDieselFillingTextViewApprovedQtyVal = (TextView) findViewById(R.id.dieselFilling_textView_approvedQty_val);
+        mDieselFillingTextViewFillingDate = (TextView) findViewById(R.id.dieselFillingFundRequest_textView_fillingDate);
+        mDieselFillingEditTextFillingDateVal = (EditText) findViewById(R.id.dieselFillingFundRequest_editText_fillingDateTime);
 
 
 
@@ -290,6 +290,7 @@ public class DieselFilling extends BaseActivity {
 
         mDieselFillingEditTextFillingDateVal.setText(sdf.format(myCalendar.getTime()));
     }
+
     public void onClicked(View v) {
 
         IntentIntegrator integrator = new IntentIntegrator(this);
@@ -485,8 +486,7 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingTextViewDieselRequestTicketNoVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dieselRequestTicketNoList.getDiselRequestTicketList() == null)
-                {
+                if (dieselRequestTicketNoList.getDiselRequestTicketList() == null) {
                     if (Conditions.isNetworkConnected(DieselFilling.this)) {
                         prepareDieselRequestTicketNo(false);
                     } else {
@@ -584,15 +584,15 @@ public class DieselFilling extends BaseActivity {
             case R.id.menuDone:
                 /*if (siteDbId > 0) {*/
                 DecimalFormatConversion();
-                /*if (checkValidationOnSubmitDiselTicket() == true) {*/
+                if (checkValidationOnSubmitDiselTicket() == true) {
                     if (gpsTracker.canGetLocation()) {
-                        
+
                         // Code For Next Validation by 008 on 22112018
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                            
+
                             if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.310686) {///// ( 0.310686 MILE == 500 Meter )
                                 Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
-                                
+
                                 showSettingsAlert();
                             } else {
                                 Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
@@ -620,7 +620,7 @@ public class DieselFilling extends BaseActivity {
                     }
                     //submitDetails();
                     return true;
-                /*}*/
+                }
                 /*} else {
                     showToast("No Site Selected");
                 }*/
@@ -663,8 +663,8 @@ public class DieselFilling extends BaseActivity {
     }
 
     private void showSettingsAlert() {
-
-        alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+        alertDialogManager = new AlertDialogManager(DieselFilling.this);
+        alertDialogManager.Dialog("Confirmation", "Do you want to submit this filling request?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
                 submitDetails();
@@ -784,7 +784,7 @@ public class DieselFilling extends BaseActivity {
             dieselSubmitResposeData.setRetryPolicy(Application.getDefaultRetryPolice());
             dieselSubmitResposeData.setShouldCache(false);
             Application.getInstance().addToRequestQueue(dieselSubmitResposeData, "dieselSubmitResposeData");
-             
+
         } catch (Exception e)
 
         {
@@ -1030,7 +1030,7 @@ public class DieselFilling extends BaseActivity {
 
     }
 
-    private void prepareDieselRequestTicketNo(final boolean listbind_only){
+    private void prepareDieselRequestTicketNo(final boolean listbind_only) {
 
         try {
             showBusyProgress();
@@ -1046,7 +1046,7 @@ public class DieselFilling extends BaseActivity {
                             hideBusyProgress();
                             if (response.getError() != null) {
                                 showToast(response.getError().getErrorMessage());
-                            } else{
+                            } else {
                                 if (response.getSuccess() == 1) {
                                     dieselRequestTicketNoList = response;
                                     if (dieselRequestTicketNoList.getDiselRequestTicketList().size() > 0) {
@@ -1105,7 +1105,7 @@ public class DieselFilling extends BaseActivity {
                                                 public void onClick(ArrayList<String> item, int position) {
 
                                                     //str_siteName = item.get(position);
-                                             //       mDieselFillingTextViewDieselRequestTicketNoVal.setText(userSitesList.getSiteList().get(position).get());
+                                                    //       mDieselFillingTextViewDieselRequestTicketNoVal.setText(userSitesList.getSiteList().get(position).get());
                                                     str_dieselRequestTicketNo = item.get(position);
                                                     requestTicketDbId = Integer.parseInt(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getId());
                                                     siteDbId = Integer.valueOf(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getSiteDBId());
@@ -1121,7 +1121,7 @@ public class DieselFilling extends BaseActivity {
                                                 }
                                             });
                                         }
-                                    }else {
+                                    } else {
                                         mDieselFillingTextViewSiteNameVal.setText("No Site Found");
                                     }
                                 }
@@ -1140,7 +1140,7 @@ public class DieselFilling extends BaseActivity {
             getuserRequestTicketNoRequest.setShouldCache(false);
             Application.getInstance().addToRequestQueue(getuserRequestTicketNoRequest, "userRequestTicketNoRequest");
 
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             hideBusyProgress();
             showToast("Something went wrong. Please try again later.");
         }
@@ -1225,7 +1225,7 @@ public class DieselFilling extends BaseActivity {
         String childPetroCardNo = mDieselFillingTextViewChildPetroCardNoVal.getText().toString();
         String selectDgIdQrCode = mDieselFillingTextViewSelectDgIdQrCodeVal.getText().toString().trim();
         String approvedQty = mDieselFillingTextViewApprovedQtyVal.getText().toString();
-        String fillingDate = mDieselFillingTextViewPresentFillingDateVal.getText().toString();
+        String fillingDate = mDieselFillingEditTextFillingDateVal.getText().toString();
 
         String presentDgHmr = mDieselFillingEditTextPresentDgHmr.getText().toString().trim();
         String hmrPhotoUpload = base64StringHmrPhoto;
@@ -1236,24 +1236,32 @@ public class DieselFilling extends BaseActivity {
         String ebReadingKwhPhoto = base64StringEbReadingKwh;
         String dieselPrice = mDieselFillingEditTextDieselPrice.getText().toString().trim();
 
-
-        if (siteID.isEmpty() || siteID == null) {
+        if (dieselRequestTicketNo.isEmpty() || dieselRequestTicketNo == null) {
+            showToast("Select Diesel Request Ticket No");
+            return false;
+        } else if (siteID.isEmpty() || siteID == null) {
             showToast("Select Site Name");
             return false;
-        } else if (selectDgIdQrCode.isEmpty() || selectDgIdQrCode == null) {
+        } else if (childPetroCardNo.isEmpty() || childPetroCardNo == null) {
+            showToast("Select Child Petro Card No");
+            return false;
+        } /*else if (selectDgIdQrCode.isEmpty() || selectDgIdQrCode == null) {
             showToast("Select DG ID / QR Code");
             return false;
-        } else if (presentDgHmr.isEmpty() || presentDgHmr == null) {
+        }*/ else if (presentDgHmr.isEmpty() || presentDgHmr == null) {
             showToast("Enter Present DG HMR");
             return false;
-        } else if (hmrPhotoUpload.isEmpty() || hmrPhotoUpload == null) {
+        } /*else if (hmrPhotoUpload.isEmpty() || hmrPhotoUpload == null) {
             showToast("Upload Photo of HMR");
             return false;
-        } else if (tankBalanceBeforeFilling.isEmpty() || tankBalanceBeforeFilling == null) {
+        } */else if (tankBalanceBeforeFilling.isEmpty() || tankBalanceBeforeFilling == null) {
             showToast("Enter Tank Balance Before Filling");
             return false;
         } else if (fillingQty.isEmpty() || fillingQty == null) {
             showToast("Enter Filling Quantity");
+            return false;
+        } else if (checkFillingQy(approvedQty, fillingQty) == false) {
+            showToast("Enter Filling Quantity is less than Approved Quantity");
             return false;
         } else if (finalDieselStock.isEmpty() || finalDieselStock == null) {
             showToast("Wrong Final Diesel Stock");
@@ -1264,23 +1272,28 @@ public class DieselFilling extends BaseActivity {
         } else if (presentEbReading.isEmpty() || presentEbReading == null) {
             showToast("Enter Present EB Reading");
             return false;
-        } else if (ebReadingKwhPhoto.isEmpty() || ebReadingKwhPhoto == null) {
+        } /*else if (ebReadingKwhPhoto.isEmpty() || ebReadingKwhPhoto == null) {
             showToast("Upload Photo of EB Reading KWH");
             return false;
-        } else if (dieselRequestTicketNo.isEmpty() || dieselRequestTicketNo == null) {
-            showToast("Select Diesel Request Ticket No");
-            return false;
-        }else if (childPetroCardNo.isEmpty() || childPetroCardNo == null) {
-            showToast("Select Child Petro Card No");
-            return false;
-        }else if (approvedQty.isEmpty() || approvedQty == null) {
+        }*/ /*else if (approvedQty.isEmpty() || approvedQty == null) {
             showToast("Select Approved Qty");
             return false;
-        }else if (fillingDate.isEmpty() || fillingDate == null) {
+        }*/ else if (fillingDate.isEmpty() || fillingDate == null) {
             showToast("Select Filling Date");
             return false;
-        }else return true;
+        } else return true;
 
+    }
+
+    public boolean checkFillingQy(String approvedQty, String fillingQty) {
+        if (approvedQty == null || fillingQty == null) {
+            return false;
+        } else if (approvedQty.isEmpty() && (fillingQty.isEmpty())) {
+            return false;
+        } else if (Double.parseDouble(fillingQty) <= Double.parseDouble(approvedQty)) {
+            return true;
+        }
+        return false;
     }
 
 }

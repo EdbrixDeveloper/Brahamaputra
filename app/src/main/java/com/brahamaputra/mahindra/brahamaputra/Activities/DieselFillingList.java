@@ -78,7 +78,7 @@ public class DieselFillingList extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diesel_filling_list);
-        this.setTitle("Diesel Filling Tickets");
+        this.setTitle("Diesel Filling");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(DieselFillingList.this);
         sessionManager = new SessionManager(DieselFillingList.this);

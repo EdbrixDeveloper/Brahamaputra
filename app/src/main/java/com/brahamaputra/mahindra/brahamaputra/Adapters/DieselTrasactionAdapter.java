@@ -87,11 +87,23 @@ public class DieselTrasactionAdapter extends ArrayAdapter<DiselFillingTransactio
         }
 
 
-        viewHolder.textView_ticketNo.setText("Ticket No:"+dataModel.getDiselFillingtTicketNo());
-        viewHolder.textView_SiteName.setText("Site Name:"+dataModel.getSiteName());
-        viewHolder.textView_DateOfFilling.setText("Date:"+dataModel.getDateOfFilling());
-        viewHolder.textView_SiteAddress.setText("Site Address:"+dataModel.getSiteAddress());
-        viewHolder.textView_fillingQty.setText("Diesel Filling Qty:"+dataModel.getFillingQty());
+        viewHolder.textView_ticketNo.setText("Request No:" + dataModel.getDiselFillingtTicketNo());
+        viewHolder.textView_SiteName.setText("Site Name:" + dataModel.getSiteName());
+        viewHolder.textView_DateOfFilling.setText("Filling Date:" + dataModel.getDateOfFilling());
+        viewHolder.textView_SiteAddress.setText("Site Address:" + dataModel.getSiteAddress());
+        viewHolder.textView_fillingQty.setText("Diesel Filling Qty:" + dataModel.getFillingQty());
+
+        /*if (dataModel.getStatusId() == 0) {
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
+        }
+
+        if (dataModel.getStatusId() == 1) {
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.yellow));
+        }
+
+        if (dataModel.getStatusId() == 2) {
+            viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+        }*/
 
         // Return the completed view to render on screen
         return convertView;

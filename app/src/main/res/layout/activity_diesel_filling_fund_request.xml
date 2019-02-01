@@ -439,7 +439,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Present DG HMR"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -631,7 +631,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Present EB Reading"
                     android:imeOptions="actionNext"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
