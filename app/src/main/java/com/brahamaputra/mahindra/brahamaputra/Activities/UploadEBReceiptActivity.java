@@ -88,6 +88,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
     String site_id;
     String site_name;
     String modeOfPayment;
+    String ebPaymentAmt;
     private AlertDialogManager alertDialogManager;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 101;
@@ -119,6 +120,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         site_id = intent.getStringExtra("site_id");
         site_name = intent.getStringExtra("site_name");
         modeOfPayment = intent.getStringExtra("ModeOfPayment");
+        ebPaymentAmt =  intent.getStringExtra("EbPaymentAmt");
         assignViews();
         setListners();
         alertDialogManager = new AlertDialogManager(UploadEBReceiptActivity.this);
@@ -132,6 +134,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         mUploadEbReceiptTextViewSiteId.setText(site_id);//mUploadEbReceiptEditTextSiteId
         mUploadEbReceiptTextViewSiteName.setText(site_name);//mUploadEbReceiptEditTextSiteName
         mUploadEbReceiptTextViewPaymentTypeVal.setText(modeOfPayment);
+        mUploadEbReceiptEditTextEbPaymentAmount.setText(ebPaymentAmt);
 
         /*mUploadEbReceiptTextViewPaymentTypeVal.setOnClickListener(new View.OnClickListener() {
             @Override

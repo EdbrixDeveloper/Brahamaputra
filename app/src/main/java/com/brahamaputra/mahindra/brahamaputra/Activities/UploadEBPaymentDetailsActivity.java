@@ -97,6 +97,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
     String site_name;
     String modeOfPayment;
     String StatusId;
+    String ebPaymentAmt;
     private AlertDialogManager alertDialogManager;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 101;
@@ -129,6 +130,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         site_name = intent.getStringExtra("site_name");
         modeOfPayment = intent.getStringExtra("ModeOfPayment");
         StatusId = intent.getStringExtra("StatusId");
+        ebPaymentAmt = intent.getStringExtra("EbPaymentAmt");
         decimalConversion = new DecimalConversion();
         assignViews();
         setListners();
@@ -143,6 +145,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         mUploadEbPaymentEditTextSiteId.setText(site_id);
         mUploadEbPaymentEditTextSiteName.setText(site_name);
         mUploadEbPaymentTextViewPaymentTypeVal.setText(modeOfPayment);
+        mUploadEbPaymentEditTextDdChequeAmount.setText(ebPaymentAmt);
 
         getEbPaymentDetailsInDDCheque();
         /*mUploadEbPaymentTextViewPaymentTypeVal.setOnClickListener(new View.OnClickListener() {
@@ -349,7 +352,8 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                                     mUploadEbPaymentEditTextDdChequeDate.setText(response.getEbPaymentDetails().getEbPaymentDdChequetDate() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequetDate());
                                     mUploadEbPaymentEditTextDdChequeAmount.setText(response.getEbPaymentDetails().getEbPaymentDdChequeAmount() == null ? "" : response.getEbPaymentDetails().getEbPaymentDdChequeAmount());
 
-                                    mUploadEbPaymentEditTextDdChequeRemark.setText(response.getEbPaymentDetails().getEbPaymentDDUploadRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentDDUploadRemark());
+                                    //mUploadEbPaymentEditTextDdChequeRemark.setText(response.getEbPaymentDetails().getEbPaymentDDUploadRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentDDUploadRemark());
+                                    mUploadEbPaymentEditTextDdChequeRemark.setText(response.getEbPaymentDetails().getEbPaymentRemark() == null ? "" : response.getEbPaymentDetails().getEbPaymentRemark());
                                     if (StatusId.equals("3")) {
                                         mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
                                         mUploadEbPaymentButtonDdChequePhotoView.setVisibility(View.GONE);
