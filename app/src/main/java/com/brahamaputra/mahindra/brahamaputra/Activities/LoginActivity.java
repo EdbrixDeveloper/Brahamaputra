@@ -180,6 +180,8 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionDeviceToken(response.getAccessToken());
                                 sessionManager.updateSessionState(response.getUser().getState());
                                 sessionManager.updateSessionSsa(response.getUser().getSSA());
+                                sessionManager.updateSessionCustomer(response.getUser().getCustomerName());
+
 
                                 //String s1 = sessionManager.getSessionPreviousUserId().toString();
                                 //String S2 = response.getUser().getId().toString();
