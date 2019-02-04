@@ -518,15 +518,15 @@ public class Air_Conditioners extends BaseActivity {
         airCondition_button_previousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true) {
-                    if (currentPos > 0) {
-                        //Save current ac reading
-                        saveACRecords(currentPos);
-                        currentPos = currentPos - 1;
-                        //move to Next reading
-                        displayACRecords(currentPos);
-                    }
+                /*if (checkValidationOfArrayFields() == true) {comment 04022019 by 008*/
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveACRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayACRecords(currentPos);
                 }
+                /*}*/
             }
         });
         airCondition_button_nextReading.setOnClickListener(new View.OnClickListener() {
@@ -541,14 +541,17 @@ public class Air_Conditioners extends BaseActivity {
                         displayACRecords(currentPos);
 
                     } else if (currentPos == (totalAcCount - 1)) {
+
                         saveACRecords(currentPos);
                         //if (checkValidationOnNoOfAcSelection() == true) {
-                        if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim(), "onSubmit") == true) {
-                            //Save Final current reading and submit all AC data
-                            //saveACRecords(currentPos);
-                            submitDetails();
-                            startActivity(new Intent(Air_Conditioners.this, Solar_Power_System.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {//add 04022019 by 008
+                            if (checkValidationOnChangeNoOfAcSelection(mAirConditionersTextViewNoOfAirConditionersACprovidedVal.getText().toString().trim(), mAirConditionersTextViewNumberOfACInWorkingConditionVal.getText().toString().trim(), "onSubmit") == true) {
+                                //Save Final current reading and submit all AC data
+                                //saveACRecords(currentPos);
+                                submitDetails();
+                                startActivity(new Intent(Air_Conditioners.this, Solar_Power_System.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -667,7 +670,7 @@ public class Air_Conditioners extends BaseActivity {
 
 
         //airConditionersData = new ArrayList<>();
-        AirConditionersData air_conditioners = new AirConditionersData(qRCodeScan, assetOwner, typeOfAcSplitWindow, manufacturerMakeModel, acSerialNumber, capacityTr,bookValue, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem, imageFileName);
+        AirConditionersData air_conditioners = new AirConditionersData(qRCodeScan, assetOwner, typeOfAcSplitWindow, manufacturerMakeModel, acSerialNumber, capacityTr, bookValue, dateOfInstallation, amcYesNo, dateOfvalidityOfAmc, workingCondition, natureOfProblem, imageFileName);
         //airConditionersData.add(air_conditioners);
 
         if (airConditionersData.size() > 0) {
@@ -957,13 +960,29 @@ public class Air_Conditioners extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Enter Nature of Problem");
             return false;
-        }*/ else if (checkDuplicationQrCode(currentPos)) {
+        }*//*04022019 else if (checkDuplicationQrCode(currentPos)) {
             return false;
-        } else return true;
+        }*/ else return true;
 
     }
 
-    private boolean checkDuplicationQrCode(int curr_pos) {
+    //add 04022019 by 008 for new requirement
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < airConditionersData.size(); i++) {
+            for (int j = i + 1; j < airConditionersData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (airConditionersData.get(i).getqRCodeScan().toString().equals(airConditionersData.get(j).getqRCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Reading No:" + (i + 1) + " Already scanned in reading no:" + dup_pos);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //comment 04022019 by 008 for new requirement
+    private boolean checkDuplicationQrCodeOld(int curr_pos) {
         for (int i = 0; i < airConditionersData.size(); i++) {
             if (i != curr_pos) {
                 if (base64StringQRCodeScan.equals(airConditionersData.get(i).getqRCodeScan().toString())) {
@@ -1049,7 +1068,7 @@ public class Air_Conditioners extends BaseActivity {
                     }
                 } else {
                     base64StringQRCodeScan = "";
-                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                    showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                 }
 
             }
