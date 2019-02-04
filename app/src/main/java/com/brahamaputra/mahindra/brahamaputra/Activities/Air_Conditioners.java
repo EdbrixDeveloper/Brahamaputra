@@ -973,7 +973,7 @@ public class Air_Conditioners extends BaseActivity {
                 //compare list.get(i) and list.get(j)
                 if (airConditionersData.get(i).getqRCodeScan().toString().equals(airConditionersData.get(j).getqRCodeScan().toString())) {
                     int dup_pos = j + 1;
-                    showToast("QR Code Reading No:" + (i + 1) + " Already scanned in reading no:" + dup_pos);
+                    showToast("QR Code Scanned in Reading No: "+ dup_pos +" was already scanned in reading no:"+(i + 1));
                     return true;
                 }
             }

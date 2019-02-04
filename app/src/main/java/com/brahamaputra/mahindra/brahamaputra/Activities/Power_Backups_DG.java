@@ -927,12 +927,14 @@ public class Power_Backups_DG extends BaseActivity {
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
                         //if (checkValidationOnNoOfEngineAlternatorSelection() == true) {
-                        if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim(), "onSubmit") == true) {
-                            //Save Final current reading and submit all AC data
-                            //saveRecords(currentPos);
-                            submitDetails();
-                            startActivity(new Intent(Power_Backups_DG.this, Shelter.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {//add 04022019 by 008
+                            if (checkValidationOnChangeNoOfEngineAlternatorSelection(mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim(), mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim(), "onSubmit") == true) {
+                                //Save Final current reading and submit all AC data
+                                //saveRecords(currentPos);
+                                submitDetails();
+                                startActivity(new Intent(Power_Backups_DG.this, Shelter.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -942,15 +944,15 @@ public class Power_Backups_DG extends BaseActivity {
         powerBackupsDg_button_previousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true) {
-                    if (currentPos > 0) {
-                        //Save current ac reading
-                        saveRecords(currentPos);
-                        currentPos = currentPos - 1;
-                        //move to Next reading
-                        displayRecords(currentPos);
-                    }
+                /*if (checkValidationOfArrayFields() == true) {//add 04022019 by 008 for new requirement*/
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
                 }
+                /* }*/
             }
         });
 
@@ -1393,7 +1395,7 @@ public class Power_Backups_DG extends BaseActivity {
         String imageFileName = "";
 
 
-        PowerBackupsDGData obj_powerBackupsDGData = new PowerBackupsDGData(qRCodeScan, bookValue,assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, dgBatteryQRCodeScan, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
+        PowerBackupsDGData obj_powerBackupsDGData = new PowerBackupsDGData(qRCodeScan, bookValue, assetOwner, manufacturerMakeModel, capacityInKva, autoManual, dieselTankCapacity, dateOfInstallation, averageDieselConsumption, amc, dateOfvalidityOfAmc, dgWorkingType, dgHmrReading, dgEngineSerialNo, dgMainAltType, dgMainAltMake, dgMainAltSerialNo, dgCanopyStatus, dgStartingBatteryStatus, dgBatteryQRCodeScan, chargingAlternator, batteryCharger, presentDieselStock, gcuRunHrs, gcuKwh, dgAvrWorkingStatus, fuelTankPosition, workingCondition, natureOfProblem, imageFileName);
         if (powerBackupsDGData.size() > 0) {
             if (pos == powerBackupsDGData.size()) {
                 powerBackupsDGData.add(obj_powerBackupsDGData);
@@ -1745,13 +1747,37 @@ public class Power_Backups_DG extends BaseActivity {
         }*/ else if ((dgqRCodeScan.isEmpty() || dgqRCodeScan == null) && dgStartingBatteryStatus.equals("Yes")) {
             showToast("Please Scan DG Starting Battery QR Code ");
             return false;
-        } else if (checkDuplicationQrCode(currentPos)) {
+        } /*else if (checkDuplicationQrCode(currentPos)) {
             return false;
-        } else return true;
+        }comment 04022019 by 008 for new requirement*/ else return true;
 
     }
 
-    private boolean checkDuplicationQrCode(int curr_pos) {
+    //add 04022019 by 008 for new requirement
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < powerBackupsDGData.size(); i++) {
+            if (powerBackupsDGData.get(i).getqRCodeScan().toString().equals(powerBackupsDGData.get(i).getDgBatteryStatusQRCodeScan().toString())) {
+                showToast("QR Code Scanned in field DG Starting Battery was already scanned in DG QR Code in Reading No: " + (i + 1));
+                return true;
+            }
+            for (int j = i + 1; j < powerBackupsDGData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (powerBackupsDGData.get(i).getqRCodeScan().toString().equals(powerBackupsDGData.get(j).getqRCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                } else if (powerBackupsDGData.get(i).getqRCodeScan().toString().equals(powerBackupsDGData.get(j).getDgBatteryStatusQRCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //add 04022019 by 008 for new requirement
+    private boolean checkDuplicationQrCodeOld(int curr_pos) {
         for (int i = 0; i < powerBackupsDGData.size(); i++) {
             if (i != curr_pos) {
                 if (base64StringQRCodeScan.equals(powerBackupsDGData.get(i).getqRCodeScan().toString())) {
