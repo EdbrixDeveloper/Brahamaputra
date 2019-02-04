@@ -59,12 +59,10 @@
 
                 <TextView
                     android:id="@+id/dieselFilling_textView_siteNameVal"
-                    style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    android:textAlignment="viewStart"></TextView>  <!-- style="@style/MyTheme"-->
 
             </LinearLayout>
 

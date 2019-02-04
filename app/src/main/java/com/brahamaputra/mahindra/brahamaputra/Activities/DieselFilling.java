@@ -953,7 +953,7 @@ public class DieselFilling extends BaseActivity {
                                                         mDieselFillingTextViewSiteDetailsVal.setText(userSitesList.getSiteList().get(position).getSiteAddress());
                                                         mDieselFillingTextViewSiteIDVal.setText(userSitesList.getSiteList().get(position).getSiteId());
 
-                                                        if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null) {
+                                                        /*if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null) {
                                                             siteLatitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLatitude());
                                                             siteLongitude = Double.parseDouble(userSitesList.getSiteList().get(position).getLongitude());
                                                             //showToast(""+siteLatitude+","+siteLongitude);
@@ -961,10 +961,10 @@ public class DieselFilling extends BaseActivity {
                                                             siteLatitude = 0;
                                                             siteLongitude = 0;
                                                             //showToast(""+siteLatitude+","+siteLongitude);
-                                                        }
+                                                        }*/
 
 
-                                                        siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+                                                        /*siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
                                                         mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
 
                                                         if (siteDbId > 0) {
@@ -975,7 +975,7 @@ public class DieselFilling extends BaseActivity {
                                                             }
                                                         } else {
                                                             showToast("Please Select Site ID First..");
-                                                        }
+                                                        }*/
                                                     }
                                                 });
 
@@ -1078,16 +1078,29 @@ public class DieselFilling extends BaseActivity {
                                                         mDieselFillingTextViewChildPetroCardNoVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getChildCardNumber());
                                                         mDieselFillingTextViewApprovedQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getApprovedQuantity());
 
-                                                        /*if (dieselRequestTicketNoList.getRequestTicketNoListList().get(position).getLatitude() != null && dieselRequestTicketNoList.getRequestTicketNoListList().get(position).getLongitude() != null) {
-                                                            siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getRequestTicketNoListList().get(position).getLatitude());
-                                                            siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getRequestTicketNoListList().get(position).getLongitude());
+                                                        if (dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude() != null && dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude() != null) {
+                                                            siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
+                                                            siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());
                                                             //showToast(""+siteLatitude+","+siteLongitude);
                                                         } else {
                                                             siteLatitude = 0;
                                                             siteLatitude = 0;
                                                             siteLongitude = 0;
                                                             //showToast(""+siteLatitude+","+siteLongitude);
-                                                        }*/
+                                                        }
+
+                                                        //siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
+                                                        mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
+
+                                                        if (siteDbId > 0) {
+                                                            if (Conditions.isNetworkConnected(DieselFilling.this)) {
+                                                                prepareDgId_from_Sites();
+                                                            } else {
+                                                                showToast("No Internet Found..");
+                                                            }
+                                                        } else {
+                                                            showToast("Please Select Site ID First..");
+                                                        }
                                                     }
                                                 });
 
@@ -1116,6 +1129,9 @@ public class DieselFilling extends BaseActivity {
                                                     mDieselFillingTextViewDieselRequestTicketNoVal.setText(str_dieselRequestTicketNo);
                                                     mDieselFillingTextViewChildPetroCardNoVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getChildCardNumber());
                                                     mDieselFillingTextViewApprovedQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getApprovedQuantity());
+
+                                                    siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
+                                                    siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());
                                                   /*  siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
                                                     mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");*/
                                                 }

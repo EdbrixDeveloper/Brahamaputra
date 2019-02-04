@@ -542,7 +542,7 @@ public class Battery_Set extends BaseActivity {
         batterySet_button_nextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidtionForArrayFields()) {
+                /*if (checkValidtionForArrayFields()) { comment 04022019 by tiger*/
                     if (currentPos < (totalCount - 1)) {
                         //Save current ac reading
                         saveRecords(currentPos);
@@ -553,14 +553,16 @@ public class Battery_Set extends BaseActivity {
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
                         //Save Final current reading and submit all AC data
-                        if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim(), "onSubmit") == true) {
-                            //saveRecords(currentPos);
-                            submitDetails();
-                            startActivity(new Intent(Battery_Set.this, ExternalTenantsPersonaldetails.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {//add 04022019 by 008
+                            if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim(), "onSubmit") == true) {
+                                //saveRecords(currentPos);
+                                submitDetails();
+                                startActivity(new Intent(Battery_Set.this, ExternalTenantsPersonaldetails.class));
+                                finish();
+                            }
                         }
                     }
-                }
+                /*}*/
             }
         });
         batterySet_button_previousReading.setOnClickListener(new View.OnClickListener() {
@@ -639,14 +641,28 @@ public class Battery_Set extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Select Nature of Problem ");
             return false;
-        }*/ else if (checkDuplicationQrCode(currentPos)) {
+        }*/ /*else if (checkDuplicationQrCode(currentPos)) {
             return false;
-        } else return true;
+        }comment 04022019 by tiger*/ else return true;
 
 
     }
+    //add 04022019 by tiger for new requirement
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < batterySetData.size(); i++) {
+            for (int j = i + 1; j < batterySetData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (batterySetData.get(i).getBatterySet_Qr().toString().equals(batterySetData.get(j).getBatterySet_Qr().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: "+ dup_pos +" was already scanned in reading no:"+(i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-    private boolean checkDuplicationQrCode(int curr_pos) {
+    private boolean checkDuplicationQrCodeOld(int curr_pos) {
         for (int i = 0; i < batterySetData.size(); i++) {
             if (i != curr_pos) {
                 if (base64StringBatterySet.equals(batterySetData.get(i).getBatterySet_Qr().toString())) {

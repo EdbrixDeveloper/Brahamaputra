@@ -28,6 +28,11 @@ public class DiselRequestTicketList {
     @SerializedName("SiteType")
     @Expose
     private String siteType;
+    @SerializedName("SiteLatitude")
+    private String Latitude;
+
+    @SerializedName("SiteLongitude")
+    private String Longitude;
 
 
     @SerializedName("ChildCardNumber")
@@ -36,6 +41,19 @@ public class DiselRequestTicketList {
     @SerializedName("ApprovedQuantity")
     @Expose
     private String approvedQuantity;
+
+    @SerializedName("SiteBillingMonth")
+    @Expose
+    private String SiteBillingMonth;
+    @SerializedName("SiteIpAddress")
+    @Expose
+    private String SiteIpAddress;
+    @SerializedName("SitePort")
+    @Expose
+    private String SitePort;
+    @SerializedName("SiteImeiNumber")
+    @Expose
+    private String SiteImeiNumber;
 
 
     public String getId() {
@@ -108,6 +126,54 @@ public class DiselRequestTicketList {
 
     public void setApprovedQuantity(String approvedQuantity) {
         this.approvedQuantity = approvedQuantity;
+    }
+
+    public String getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        Latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        Longitude = longitude;
+    }
+
+    public String getSiteBillingMonth() {
+        return SiteBillingMonth;
+    }
+
+    public void setSiteBillingMonth(String siteBillingMonth) {
+        SiteBillingMonth = siteBillingMonth;
+    }
+
+    public String getSiteIpAddress() {
+        return SiteIpAddress;
+    }
+
+    public void setSiteIpAddress(String siteIpAddress) {
+        SiteIpAddress = siteIpAddress;
+    }
+
+    public String getSitePort() {
+        return SitePort;
+    }
+
+    public void setSitePort(String sitePort) {
+        SitePort = sitePort;
+    }
+
+    public String getSiteImeiNumber() {
+        return SiteImeiNumber;
+    }
+
+    public void setSiteImeiNumber(String siteImeiNumber) {
+        SiteImeiNumber = siteImeiNumber;
     }
 
 }
