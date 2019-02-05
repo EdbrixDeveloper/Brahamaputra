@@ -144,6 +144,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private AlertDialogManager alertDialogManager;
 
     private ArrayList<PowerPlantDetailsModulesData> powerPlantDetailsModulesData;
+    private ArrayList<PowerPlantDetailsModulesData> powerPlantDetailsModulesDataForDuplicity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1072,7 +1073,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
 
     //add 04022019 by 008 for new requirement
-    private boolean checkDuplicationQrCode() {
+    private boolean checkDuplicationQrCode1() {
 
         //For Child Array Comparision
         if (powerPlantDetailsDataList != null) {
@@ -1103,6 +1104,49 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         }
         return false;
     }
+
+
+    //add 04022019 by 008 for new requirement 2
+    private boolean checkDuplicationQrCode() {
+
+        //For Child Array Comparision
+        if (powerPlantDetailsDataList != null) {
+            for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
+                for (int j = i + 1; j < powerPlantDetailsDataList.size(); j++) {
+                    //compare list.get(i) and list.get(j)
+                    if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsDataList.get(j).getqRCodeScan().toString())) {
+                        int dup_pos = j + 1;
+                        showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+
+        //if (powerPlantDetailsModulesData != null) {
+        for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
+            for (int k = 0; k <= i; k++) {
+                PowerPlantDetailsData powerPlantDetailsData = powerPlantDetailsDataList.get(k);
+                powerPlantDetailsModulesDataForDuplicity = new ArrayList<>();
+                powerPlantDetailsModulesDataForDuplicity.addAll(powerPlantDetailsData.getPowerPlantDetailsModulesData());
+                if (powerPlantDetailsModulesDataForDuplicity != null) {
+                    for (int j = 0; j < powerPlantDetailsModulesDataForDuplicity.size(); j++) {
+                        //compare list.get(i) and list.get(j)
+                        if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsModulesDataForDuplicity.get(j).getModuleQrCodeScan().toString())) {
+                            int dup_pos = j + 1;
+                            showToast("QR Code scanned in reading no: " + (i + 1) + " was already scanned in Rectifier Modules reading no:" + dup_pos);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        //}
+        return false;
+    }
+
 
     //add 04022019 by 008 for new requirement
     private boolean checkDuplicationQrCodeOld(int curr_pos) {

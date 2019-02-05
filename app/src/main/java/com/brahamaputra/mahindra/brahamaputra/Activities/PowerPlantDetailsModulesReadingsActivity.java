@@ -67,6 +67,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     private String str_makeModule = "";
 
     private ArrayList<PowerPlantDetailsModulesData> powerPlantDetailsModulesData;
+    private ArrayList<PowerPlantDetailsModulesData> powerPlantDetailsModulesDataForDuplicity;
     private ArrayList<PowerPlantDetailsData> powerPlantDetailsDataList;
     private int totalCount = 0;
     private int currentPos = 0;
@@ -526,6 +527,25 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
 
     private boolean checkDuplicationQrCode() {
         if (powerPlantDetailsDataList != null) {
+            for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
+                for (int k = 0; k <= i; k++) {
+                    PowerPlantDetailsData powerPlantDetailsData = powerPlantDetailsDataList.get(k);
+                    powerPlantDetailsModulesDataForDuplicity = new ArrayList<>();
+                    powerPlantDetailsModulesDataForDuplicity.addAll(powerPlantDetailsData.getPowerPlantDetailsModulesData());
+                    if (powerPlantDetailsModulesDataForDuplicity != null) {
+                        for (int j = 0; j < powerPlantDetailsModulesDataForDuplicity.size(); j++) {
+                            //compare list.get(i) and list.get(j)
+                            if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsModulesDataForDuplicity.get(j).getModuleQrCodeScan().toString())) {
+                                int dup_pos = j + 1;
+                                showToast("QR Code scanned in reading no: " + dup_pos + " was already scanned in Power Plant reading no:" + (i + 1));
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+
             for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
                 for (int j = 0; j < powerPlantDetailsModulesData.size(); j++) {
                     //compare list.get(i) and list.get(j)
