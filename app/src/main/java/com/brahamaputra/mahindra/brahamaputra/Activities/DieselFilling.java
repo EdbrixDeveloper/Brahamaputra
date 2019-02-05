@@ -585,7 +585,11 @@ public class DieselFilling extends BaseActivity {
                 /*if (siteDbId > 0) {*/
                 DecimalFormatConversion();
                 if (checkValidationOnSubmitDiselTicket() == true) {
-                    if (gpsTracker.canGetLocation()) {
+                    showSettingsAlert();
+                    return true;
+
+                    //commented on 05-02-2019 by tiger /// for mahindra have new requirement that doen't check location when submit ticket//////////////////////////////////
+                    /*if (gpsTracker.canGetLocation()) {
 
                         // Code For Next Validation by 008 on 22112018
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
@@ -617,13 +621,10 @@ public class DieselFilling extends BaseActivity {
                                 }
                             }).show();
                         }
-                    }
+                    }*/
+                    //////////////////////////////////////////////////////////////
                     //submitDetails();
-                    return true;
                 }
-                /*} else {
-                    showToast("No Site Selected");
-                }*/
         }
         return super.onOptionsItemSelected(item);
     }

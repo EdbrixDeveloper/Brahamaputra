@@ -799,7 +799,11 @@ public class DieselFillingFundRequest extends BaseActivity {
             case R.id.menuDone:
                 DecimalFormatConversion();
                 if (checkValidationOnSubmitDiselTicket() == true) {
-                    if (gpsTracker.canGetLocation()) {
+                    showSettingsAlert();
+                    return true;
+
+                    //commented on 05-02-2019 by tiger /// for mahindra have new requirement that doen't check location when submit ticket//////////////////////////////////
+                    /*if (gpsTracker.canGetLocation()) {
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                             if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.310686) {///// ( 0.310686 MILE == 500 Meter )
                                 Log.i(DieselFillingFundRequest.class.getName(), "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
@@ -824,8 +828,8 @@ public class DieselFillingFundRequest extends BaseActivity {
                                 }
                             }).show();
                         }
-                    }
-                    return true;
+                    }*/
+                    //////////////////////////////////
                 }
 
         }
