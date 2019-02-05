@@ -748,7 +748,7 @@ public class DieselFilling extends BaseActivity {
             jsonString.put("longitude", longitude);
             jsonString.put("pesentEbReading", presentEbReading);
             jsonString.put("presentDgHmr", presentDgHmr);
-            jsonString.put("selectDgIdQrCode", selectDgIdQrCode);
+            jsonString.put("selectDgIdQrCode", selectDgIdQrCode);//new field DG Capacity
             jsonString.put("siteID", siteID);
             jsonString.put("tankBalanceBeforeFilling", tankBalanceBeforeFilling);
             jsonString.put("diselfillingrequestsId", requestTicketDbID);
