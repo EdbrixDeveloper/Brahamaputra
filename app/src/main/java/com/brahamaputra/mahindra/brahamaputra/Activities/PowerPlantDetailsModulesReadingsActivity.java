@@ -321,7 +321,9 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                     } else if (currentPos == (totalCount - 1)) {
                         //Save Final current reading and submit all AC data
                         saveRecords(currentPos);
-                        submitDetails();
+                        if (checkDuplicationQrCode() == false) {
+                            submitDetails();
+                        }
                         //startActivity(new Intent(DetailsOfUnusedMaterials.this, PhotoCaptureActivity.class));
                         //finish();
                     }
@@ -342,9 +344,9 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         if (base64StringQRCodeScan.isEmpty()) {
             showToast("Please Scan QR Code");
             return false;
-        } else if (checkDuplicationQrCode(currentPos)) {
+        } /*else if (checkDuplicationQrCode(currentPos)) {
             return false;
-        } else return true;
+        }*/ else return true;
     }
 
     @Override
@@ -380,7 +382,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                     }
                 } else {
                     base64StringQRCodeScan = "";
-                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                    showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                 }
             }
         }
@@ -396,7 +398,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         String bookValue = mPowerPlantDetailsEditTextBookValueModule.getText().toString().trim();
 
         //DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(typeOfAsset, assetMake, assetStatus, assetDescription);
-        PowerPlantDetailsModulesData obj_powerPlantDetailsModulesData = new PowerPlantDetailsModulesData(qrCode, manufacturer, capacity,bookValue);
+        PowerPlantDetailsModulesData obj_powerPlantDetailsModulesData = new PowerPlantDetailsModulesData(qrCode, manufacturer, capacity, bookValue);
 
         if (powerPlantDetailsModulesData.size() > 0) {
             if (pos == powerPlantDetailsModulesData.size()) {
@@ -522,9 +524,66 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     }
 
 
+    private boolean checkDuplicationQrCode() {
+        if (powerPlantDetailsDataList != null) {
+            for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
+                for (int j = 0; j < powerPlantDetailsModulesData.size(); j++) {
+                    //compare list.get(i) and list.get(j)
+                    if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsModulesData.get(j).getModuleQrCodeScan().toString())) {
+                        int dup_pos = j + 1;
+                        //showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                        showToast("QR Code scanned in reading no: " + dup_pos + " was already scanned in Power Plant reading no:" + (i + 1));
+
+                        //showToast("QR Code already Scanned in Power Plant at " + dup_pos + " Reading No: " + (i + 1));
+                        return true;
+                    }
+                }
+            }
+        }
+        //For Child Array Comparision
+        if (powerPlantDetailsModulesData != null) {
+            for (int i = 0; i < powerPlantDetailsModulesData.size(); i++) {
+                for (int j = i + 1; j < powerPlantDetailsModulesData.size(); j++) {
+                    //compare list.get(i) and list.get(j)
+                    if (powerPlantDetailsModulesData.get(i).getModuleQrCodeScan().toString().equals(powerPlantDetailsModulesData.get(j).getModuleQrCodeScan().toString())) {
+                        int dup_pos = j + 1;
+                        showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
+    private boolean checkDuplicationQrCodeInChild() {
+
+        for (int j = 0; j < powerPlantDetailsModulesData.size(); j++) {
+            if (base64StringQRCodeScan.equals(powerPlantDetailsModulesData.get(j).getModuleQrCodeScan().toString())) {
+                int dup_pos = j + 1;
+                showToast("This QR Code Already scanned in Modules Reading Number: " + dup_pos);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     //008
-    private boolean checkDuplicationQrCode(int curr_pos) {
-        for (int i = 0; i < powerPlantDetailsModulesData.size(); i++) {
+    private boolean checkDuplicationQrCode1() {
+        if (powerPlantDetailsDataList != null) {
+            for (int i = 0; i < Math.max(powerPlantDetailsDataList.size(), powerPlantDetailsModulesData.size()); i++) {
+                if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsModulesData.get(i).getModuleQrCodeScan().toString())) {
+                    showToast("QR Code Scanned in Reading No: " + i + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
+
+
+        /*for (int i = 0; i < powerPlantDetailsModulesData.size(); i++) {
             if (base64StringQRCodeScan.equals(powerPlantDetailsModulesData.get(i).getModuleQrCodeScan().toString())) {
                 if (i == curr_pos) {
                     return checkDuplicationQrCodeInParent();
@@ -537,7 +596,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                 return checkDuplicationQrCodeInParent();
             }
         }
-        return false;
+        return false;*/
     }
 
     private boolean checkDuplicationQrCodeInParent() {

@@ -541,6 +541,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 } else {
                     int count = Integer.parseInt(str_numberOfModules);
                     if (count > 0) {
+                        savePlantRecords(currentPos);
                         Intent i = new Intent(PowerPlantDetailsActivity.this, PowerPlantDetailsModulesReadingsActivity.class);
                         i.putExtra("numberOfModules", count);
                         i.putExtra("powerPlantDetailsModulesData", powerPlantDetailsModulesData);
@@ -621,15 +622,15 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         btnPrevReadingPowerPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true) {
-                    if (currentPos > 0) {
-                        //Save current reading
-                        savePlantRecords(currentPos);
-                        currentPos = currentPos - 1;
-                        //move to Next reading
-                        displayPlantRecords(currentPos);
-                    }
+                /*if (checkValidationOfArrayFields() == true) {*/
+                if (currentPos > 0) {
+                    //Save current reading
+                    savePlantRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayPlantRecords(currentPos);
                 }
+                /*}*/
             }
         });
 
@@ -647,12 +648,14 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     } else if (currentPos == (totalPlantCount - 1)) {
                         savePlantRecords(currentPos);
                         //if (checkValidationOnNoOfPowerPlant() == true) {
-                        if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim(), "onSubmit") == true) {
-                            //Save Final current reading and submit all  data
-                            //savePlantRecords(currentPos);
-                            submitDetails();
-                            startActivity(new Intent(PowerPlantDetailsActivity.this, Power_Backups_DG.class));
-                            finish();
+                        if (checkDuplicationQrCode() == false) {
+                            if (checkValidationOnChangeNoOfPowerPlant(mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim(), mPowerPlantDetailsTextViewNumberOfPowerPlantWorkingVal.getText().toString().trim(), "onSubmit") == true) {
+                                //Save Final current reading and submit all  data
+                                //savePlantRecords(currentPos);
+                                submitDetails();
+                                startActivity(new Intent(PowerPlantDetailsActivity.this, Power_Backups_DG.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -772,7 +775,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
             str_numberOfModules = "" + powerPlantDetailsModulesData.size();
             int count = powerPlantDetailsModulesData.size();
-            if (count > 0) {
+            if (count > 0 || Integer.valueOf(powerPlantDetailsData.getNumberOfModules() == "" ? "0" : powerPlantDetailsData.getNumberOfModules()) > 0) {
                 powerPlantDetails_imageview_modules.setVisibility(View.VISIBLE);
             } else {
                 powerPlantDetails_imageview_modules.setVisibility(View.GONE);
@@ -845,7 +848,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         arr_powerPlantDetailsModulesData.addAll(powerPlantDetailsModulesData);
 
         //007
-        PowerPlantDetailsData powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, bookedValue,assetOwner, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem, imageFileName, arr_powerPlantDetailsModulesData);
+        PowerPlantDetailsData powerPlantDetailsData = new PowerPlantDetailsData(qRCodeScan, bookedValue, assetOwner, manufacturerMakeModel, powerPlantModel, numberModuleSlots, earthingStatus, dcLoadInDisplay, serialNumber, typeOfPowerPlantCommercialSmps, capacityInAmp, numberOfModules, noOfFaultyModulese, smpsExpandable, SmpsUltimateCapacity, spdStatus, workingCondition, natureOfProblem, imageFileName, arr_powerPlantDetailsModulesData);
 
         if (powerPlantDetailsDataList.size() > 0) {
             if (pos == powerPlantDetailsDataList.size()) {
@@ -891,6 +894,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsTextViewTypeOfPowerPlantCommercialSmpsVal.setText("");
         mPowerPlantDetailsEditTextCapacityInAmp.setText("");
         mPowerPlantDetailsTextViewNumberOfModulesVal.setText("");
+        powerPlantDetails_imageview_modules.setVisibility(View.GONE);
         mPowerPlantDetailsEditTextBookValue.setText("");
         mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.setText("");
         mPowerPlantDetailsEditTextSmpsExpandableUpToKW.setText("");
@@ -978,6 +982,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         DecimalFormatConversion();
         String numberOfPowerPlant = mPowerPlantDetailsTextViewNumberOfPowerPlantVal.getText().toString().trim();
         String qRCodeScan = base64StringQRCodeScan;
+        String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
         /*String assetOwner = mPowerPlantDetailsTextViewAssetOwnerVal.getText().toString().trim();
         String manufacturerMakeModel = mPowerPlantDetailsTextViewManufacturerMakeModelVal.getText().toString().trim();
         String powerPlantModel = mPowerPlantDetailsEditTextPowerPlantModel.getText().toString().trim();
@@ -1002,7 +1007,13 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else if (qRCodeScan.isEmpty() || qRCodeScan == null) {
             showToast("Please Scan QR Code");
             return false;
-        } /*else if (assetOwner.isEmpty() || assetOwner == null) {
+        } else if (!numberOfModules.isEmpty()) {
+            if (powerPlantDetailsModulesData.size() != Integer.valueOf(numberOfModules == "" ? "0" : numberOfModules)) {
+                showToast("No of Rectifier Modules Readings should be equal to selected number of Rectifier Modules. ");
+                return false;
+            } else return true;
+        }
+        /*else if (assetOwner.isEmpty() || assetOwner == null) {
             showToast("Select Asset Owner");
             return false;
         } else if (manufacturerMakeModel.isEmpty() || manufacturerMakeModel == null) {
@@ -1050,15 +1061,51 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Enter Nature of Problem");
             return false;
-        }*/ else if (checkDuplicationQrCode(currentPos)) {
+        }*/ /*else if (checkDuplicationQrCode(currentPos)) {
             return false;
-        } else return true;/*if (checkValidationOnNoOfModuleSlots() == false) {
+        } 04022019 by 008 for new purpose*/
+        else return true;/*if (checkValidationOnNoOfModuleSlots() == false) {
             return false;
         } else return checkValidationOnNoOfFaultyModulese();*/
 
     }
 
-    private boolean checkDuplicationQrCode(int curr_pos) {
+
+    //add 04022019 by 008 for new requirement
+    private boolean checkDuplicationQrCode() {
+
+        //For Child Array Comparision
+        if (powerPlantDetailsDataList != null) {
+            for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
+                for (int j = i + 1; j < powerPlantDetailsDataList.size(); j++) {
+                    //compare list.get(i) and list.get(j)
+                    if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsDataList.get(j).getqRCodeScan().toString())) {
+                        int dup_pos = j + 1;
+                        showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+        if (powerPlantDetailsModulesData != null) {
+            for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
+                for (int j = 0; j < powerPlantDetailsModulesData.size(); j++) {
+                    //compare list.get(i) and list.get(j)
+                    if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsModulesData.get(j).getModuleQrCodeScan().toString())) {
+                        int dup_pos = j + 1;
+                        showToast("QR Code scanned in reading no: " + (i + 1) + " was already scanned in Rectifier Modules reading no:" + dup_pos);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //add 04022019 by 008 for new requirement
+    private boolean checkDuplicationQrCodeOld(int curr_pos) {
         for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
             //if (i != curr_pos) {
             if (base64StringQRCodeScan.equals(powerPlantDetailsDataList.get(i).getqRCodeScan().toString())) {
@@ -1252,7 +1299,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     }
                 } else {
                     base64StringQRCodeScan = "";
-                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                    showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                 }
             }
         }

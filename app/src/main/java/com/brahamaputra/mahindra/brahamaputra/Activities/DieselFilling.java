@@ -509,7 +509,7 @@ public class DieselFilling extends BaseActivity {
 
                         SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(DieselFilling.this,
                                 DgIdList,
-                                "Select Dg ID / QR Code",
+                                "Select DG Capacity",
                                 "Close", "#000000");
                         searchableSpinnerDialog.showSearchableSpinnerDialog();
 
@@ -517,6 +517,7 @@ public class DieselFilling extends BaseActivity {
                             @Override
                             public void onClick(ArrayList<String> item, int position) {
 
+                                //"Select Dg ID / QR Code",
                                 str_siteName = item.get(position);
                                 mDieselFillingTextViewSelectDgIdQrCodeVal.setText(str_siteName);
                             }
@@ -836,9 +837,8 @@ public class DieselFilling extends BaseActivity {
                 base64StringQRCodeScan = result.getContents();
                 if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
                     //mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                    //dgIdQrCodeList
                     //dgIdQrCodeList.
-                    if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
+                    /*if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
 
                         for (int i = 0; i < dgIdQrCodeList.getPowerBackupsDGMRQRList().size(); i++) {
                             if (base64StringQRCodeScan.equals(dgIdQrCodeList.getPowerBackupsDGMRQRList().get(i).getqRCodeScan().toString())) {
@@ -849,7 +849,7 @@ public class DieselFilling extends BaseActivity {
                     } else {
                         mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
                         //No sites found
-                    }
+                    }*/
                 }
             }
         }
@@ -1164,7 +1164,63 @@ public class DieselFilling extends BaseActivity {
 
     }
 
+
     private void prepareDgId_from_Sites() {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jo.put("SiteId", siteDbId);
+
+
+            GsonRequest<DgIdQrCodeList> getDgIdQrCodeRequest = new GsonRequest<>(Request.Method.POST, Constants.GetSitePowerBackupDgData, jo.toString(), DgIdQrCodeList.class,
+                    new Response.Listener<DgIdQrCodeList>() {
+                        @Override
+                        public void onResponse(DgIdQrCodeList response) {
+                            hideBusyProgress();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    dgIdQrCodeList = response;
+                                    DgIdList = new ArrayList<String>();
+                                    if (dgIdQrCodeList.getPowerBackupsDGDataList().size() > 0) {
+                                        /*for (DgIdQrCode ids : dgIdQrCodeList.getPowerBackupsDGDataList()) {
+                                            DgIdList.add(ids.getqRCodeScan());
+                                        }*/
+                                        DgIdList.addAll(dgIdQrCodeList.getPowerBackupsDGDataList());
+                                    } else {
+                                        mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
+                                        //No sites found
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            hideBusyProgress();
+                            Log.e("D100", error.toString());
+                        }
+                    });
+            getDgIdQrCodeRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            getDgIdQrCodeRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(getDgIdQrCodeRequest, "getDgIdQrCodeRequest");
+
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
+
+
+    }
+
+
+    private void prepareDgId_from_Sitesold() {
         try {
             showBusyProgress();
             JSONObject jo = new JSONObject();
@@ -1184,14 +1240,14 @@ public class DieselFilling extends BaseActivity {
                                 if (response.getSuccess() == 1) {
                                     dgIdQrCodeList = response;
                                     DgIdList = new ArrayList<String>();
-                                    if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
+                                    /*if (dgIdQrCodeList.getPowerBackupsDGMRQRList().size() > 0) {
                                         for (DgIdQrCode ids : dgIdQrCodeList.getPowerBackupsDGMRQRList()) {
                                             DgIdList.add(ids.getqRCodeScan());
                                         }
                                     } else {
                                         mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
                                         //No sites found
-                                    }
+                                    }*/
                                 }
                             }
                         }
@@ -1263,6 +1319,9 @@ public class DieselFilling extends BaseActivity {
             showToast("Select Child Petro Card No");
             return false;
         } /*else if (selectDgIdQrCode.isEmpty() || selectDgIdQrCode == null) {
+            showToast("Select DG Capacity");
+            return false;
+        }*//*else if (selectDgIdQrCode.isEmpty() || selectDgIdQrCode == null) {
             showToast("Select DG ID / QR Code");
             return false;
         }*/ else if (presentDgHmr.isEmpty() || presentDgHmr == null) {
@@ -1271,7 +1330,7 @@ public class DieselFilling extends BaseActivity {
         } /*else if (hmrPhotoUpload.isEmpty() || hmrPhotoUpload == null) {
             showToast("Upload Photo of HMR");
             return false;
-        } */else if (tankBalanceBeforeFilling.isEmpty() || tankBalanceBeforeFilling == null) {
+        } */ else if (tankBalanceBeforeFilling.isEmpty() || tankBalanceBeforeFilling == null) {
             showToast("Enter Tank Balance Before Filling");
             return false;
         } else if (fillingQty.isEmpty() || fillingQty == null) {

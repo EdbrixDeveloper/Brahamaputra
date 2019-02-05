@@ -16,8 +16,11 @@ public class DgIdQrCodeList {
     @SerializedName("Message")
     private String Message;
 
-    @SerializedName("PowerBackupsDGMRQRList")
-    private List<DgIdQrCode> PowerBackupsDGMRQRList = null;
+    /*@SerializedName("PowerBackupsDGMRQRList")
+    private List<DgIdQrCode> PowerBackupsDGMRQRList = null;*/
+
+    @SerializedName("PowerBackupsDGDataList")
+    private List<String> powerBackupsDGDataList = null;
 
     public Integer getSuccess() {
         return Success;
@@ -55,12 +58,20 @@ public class DgIdQrCodeList {
         Message = message;
     }
 
-    public List<DgIdQrCode> getPowerBackupsDGMRQRList() {
+    /*public List<DgIdQrCode> getPowerBackupsDGMRQRList() {
         return PowerBackupsDGMRQRList;
     }
 
     public void setPowerBackupsDGMRQRList(List<DgIdQrCode> powerBackupsDGMRQRList) {
         PowerBackupsDGMRQRList = powerBackupsDGMRQRList;
+    }*/
+
+    public List<String> getPowerBackupsDGDataList() {
+        return powerBackupsDGDataList;
+    }
+
+    public void setPowerBackupsDGDataList(List<String> powerBackupsDGDataList) {
+        this.powerBackupsDGDataList = powerBackupsDGDataList;
     }
 }
 
