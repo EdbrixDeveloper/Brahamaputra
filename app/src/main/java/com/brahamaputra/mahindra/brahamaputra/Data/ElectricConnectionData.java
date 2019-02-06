@@ -2,6 +2,8 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.SerializedName;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+
 public class ElectricConnectionData {
 
     @SerializedName("electricConnectionType")
@@ -148,7 +150,7 @@ public class ElectricConnectionData {
         this.securityAmountPaid = "";
     }
 
-    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad,String securityAmountPaid, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate, String sapVendorCode, String typeModeOfPayment_Val, String bankIfscCode, String bankAccountNo) {
+    public ElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String securityAmountPaid, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate, String sapVendorCode, String typeModeOfPayment_Val, String bankIfscCode, String bankAccountNo) {
         this.electricConnectionType = electricConnectionType;
         this.connectionTariff = connectionTariff;
         this.sanctionLoad = sanctionLoad;
@@ -183,12 +185,19 @@ public class ElectricConnectionData {
         this.bankAccountNo = bankAccountNo;
         //this.isSubmited=true;//007
         this.isSubmited = 1;
-        if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
-                !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
-            this.isSubmited = 2;
-        } /*else {
+        if (hototicket_sourceOfPower.equals("Non EB")) {
+            if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
+                    !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
+                this.isSubmited = 2;
+            }
+        } else {
+            if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
+                    !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
+                this.isSubmited = 2;
+            } /*else {
             this.isSubmited = 1;
         }*/
+        }
     }
     //endregion
 

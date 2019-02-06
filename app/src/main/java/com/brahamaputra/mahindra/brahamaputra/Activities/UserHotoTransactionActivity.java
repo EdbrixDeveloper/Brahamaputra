@@ -48,6 +48,7 @@ import org.json.JSONObject;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_CustomerName;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
 public class UserHotoTransactionActivity extends BaseActivity {
 
@@ -183,6 +184,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
                         str_sourceOfPower = item.get(position);
                         mUserHotoTransSpinnerSourceOfPowerVal.setText(str_sourceOfPower);
+                        hototicket_sourceOfPower=str_sourceOfPower;
                     }
                 });
             }

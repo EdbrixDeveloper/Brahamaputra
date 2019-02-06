@@ -1,6 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,11 +91,11 @@ public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselReque
             }
 
             if (dataModel.getStatusId() == 1) {
-                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.yellow));
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
             }
 
             if (dataModel.getStatusId() == 2) {
-                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+                viewHolder.linearLayout_container.setBackgroundColor( Color.parseColor("#ffcdd2"));//R.color.red
             }
 
         }
