@@ -187,7 +187,7 @@ public class ElectricConnectionData {
         this.isSubmited = 1;
         if (hototicket_sourceOfPower.equals("Non EB")) {
             if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
-                    !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
+                    !this.typeModeOfPayment_Val.isEmpty()) {
                 this.isSubmited = 2;
             }
         } else {
