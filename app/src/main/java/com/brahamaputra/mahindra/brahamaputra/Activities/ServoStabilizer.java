@@ -62,7 +62,7 @@ public class ServoStabilizer extends BaseActivity {
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ServoStabilizerData servoStabilizerData;
-    private String base64StringServoStablizer = "eji39jjj";
+    private String base64StringServoStablizer = "";
     private SessionManager sessionManager;
 
     private TextView mServoStabilizerTextViewQRCodeScan;
@@ -103,8 +103,62 @@ public class ServoStabilizer extends BaseActivity {
     String str_ratingofServo;
     String str_workingCondition;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_servo_stabilizer);
+        this.setTitle("SERVO STABILIZER");
+        sessionManager = new SessionManager(ServoStabilizer.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ServoStabilizer.this, userId, ticketName);
+        assignViews();
+        initCombo();
+        alertDialogManager = new AlertDialogManager(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
+
+
+        mServoStabilizerbuttonQRCodeScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(ServoStabilizer.this,
+                        Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    if (getFromPref(ServoStabilizer.this, ALLOW_KEY)) {
+
+                        showSettingsAlert();
+
+                    } else if (ContextCompat.checkSelfPermission(ServoStabilizer.this,
+                            Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Should we show an explanation?
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(ServoStabilizer.this,
+                                Manifest.permission.CAMERA)) {
+                            showAlert();
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            ActivityCompat.requestPermissions(ServoStabilizer.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    MY_PERMISSIONS_REQUEST_CAMERA);
+                        }
+                    }
+                } else {
+                    //openCameraIntent();This Commented By 0008 on 15-11-2018 For QR Code Purpose
+                    onClicked(v);
+                }
+
+            }
+        });
+
+
+    }
+
     private void assignViews() {
-        linearLayoutServoDetails = (LinearLayout)findViewById(R.id.linearLayout_servoDetails);
+        linearLayoutServoDetails = (LinearLayout) findViewById(R.id.linearLayout_servoDetails);
         mServoStabilizerTextViewQRCodeScan = (TextView) findViewById(R.id.servoStabilizer_textView_QRCodeScan);
         mServoStabilizerbuttonQRCodeScan = (ImageView) findViewById(R.id.servoStabilizer_button_QRCodeScan);
         mServoStabilizerbuttonQRCodeScanView = (ImageView) findViewById(R.id.servoStabilizer_button_QRCodeScanView);
@@ -143,8 +197,7 @@ public class ServoStabilizer extends BaseActivity {
                         mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(str_ServoStabilizerWorkingStatus);
 
                         // Added Code By Pranav For Handling Field Visibility In Servo Stabilizer
-                        if(str_ServoStabilizerWorkingStatus.equals("Not Available"))
-                        {
+                        if (str_ServoStabilizerWorkingStatus.equals("Not Available")) {
                             base64StringServoStablizer = "";
                             button_ClearQRCodeScanView.setVisibility(View.GONE);
                             mServoStabilizerbuttonQRCodeScanView.setVisibility(View.GONE);
@@ -153,8 +206,7 @@ public class ServoStabilizer extends BaseActivity {
                             mServoStabilizerTextViewWorkingConditionVal.setText("");
                             mServoStabilizerEditTextNatureofProblem.setText("");
                             linearLayoutServoDetails.setVisibility(View.GONE);
-                        }else
-                        {
+                        } else {
                             linearLayoutServoDetails.setVisibility(View.VISIBLE);
                         }
                     }
@@ -236,60 +288,6 @@ public class ServoStabilizer extends BaseActivity {
         });*/
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_servo_stabilizer);
-        this.setTitle("SERVO STABILIZER");
-        sessionManager = new SessionManager(ServoStabilizer.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ServoStabilizer.this, userId, ticketName);
-        assignViews();
-        initCombo();
-        alertDialogManager = new AlertDialogManager(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
-
-
-        mServoStabilizerbuttonQRCodeScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(ServoStabilizer.this,
-                        Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    if (getFromPref(ServoStabilizer.this, ALLOW_KEY)) {
-
-                        showSettingsAlert();
-
-                    } else if (ContextCompat.checkSelfPermission(ServoStabilizer.this,
-                            Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Should we show an explanation?
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(ServoStabilizer.this,
-                                Manifest.permission.CAMERA)) {
-                            showAlert();
-                        } else {
-                            // No explanation needed, we can request the permission.
-                            ActivityCompat.requestPermissions(ServoStabilizer.this,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    MY_PERMISSIONS_REQUEST_CAMERA);
-                        }
-                    }
-                } else {
-                    //openCameraIntent();This Commented By 0008 on 15-11-2018 For QR Code Purpose
-                    onClicked(v);
-                }
-
-            }
-        });
-
-
-    }
-
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
@@ -308,41 +306,6 @@ public class ServoStabilizer extends BaseActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.dropdown_details_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.menuDone:
-                // Added Code By Pranav For Handling Field Visibility In Servo Stabilizer
-                if(mServoStabilizerTextViewServoStabilizerWorkingStatusVal.getText().toString().equals("Not Available"))
-                {
-                    submitDetails();
-                    finish();
-                    startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
-                    return true;
-                }
-                else
-                {
-                    if (checkValidation() == true) {
-                        submitDetails();
-                        finish();
-                        startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
-                        return true;
-                    }
-                }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -353,13 +316,10 @@ public class ServoStabilizer extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 servoStabilizerData = hotoTransactionData.getServoStabilizerData();
 
-                if(servoStabilizerData.getServoStabilizerWorkingStatus().equals("Not Available"))
-                {
+                if (servoStabilizerData.getServoStabilizerWorkingStatus().equals("Not Available")) {
                     mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(servoStabilizerData.getServoStabilizerWorkingStatus());
                     linearLayoutServoDetails.setVisibility(View.GONE);
-                }
-                else
-                {
+                } else {
                     base64StringServoStablizer = servoStabilizerData.getServoStabilizer_Qr();
                     mServoStabilizerTextViewServoStabilizerWorkingStatusVal.setText(servoStabilizerData.getServoStabilizerWorkingStatus());
                     mServoStabilizerTextViewMakeofServoVal.setText(servoStabilizerData.getMakeofServo());
@@ -422,16 +382,19 @@ public class ServoStabilizer extends BaseActivity {
         }
     }
 
-
     /*0008 29112018*/
     public boolean checkValidation() {
+        String servoStabilizerWorkingStatus = mServoStabilizerTextViewServoStabilizerWorkingStatusVal.getText().toString().trim();
         String qRCodeScan = base64StringServoStablizer;
-        if (qRCodeScan.isEmpty() || qRCodeScan == null) {
+
+        if (servoStabilizerWorkingStatus.isEmpty() || servoStabilizerWorkingStatus == null) {
+            showToast("Select Servo Stabilizer Working Status");
+            return false;
+        } else if ((qRCodeScan.isEmpty() || qRCodeScan == null) && !servoStabilizerWorkingStatus.equals("Not Available")) {
             showToast("Please Scan QR Code");
             return false;
         } else return true;
     }
-
 
     public static Boolean getFromPref(Context context, String key) {
         SharedPreferences myPrefs = context.getSharedPreferences
@@ -537,6 +500,38 @@ public class ServoStabilizer extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.dropdown_details_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.menuDone:
+                // Added Code By Pranav For Handling Field Visibility In Servo Stabilizer
+                if (mServoStabilizerTextViewServoStabilizerWorkingStatusVal.getText().toString().equals("Not Available")) {
+                    submitDetails();
+                    finish();
+                    startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
+                    return true;
+                } else {
+                    if (checkValidation() == true) {
+                        submitDetails();
+                        finish();
+                        startActivity(new Intent(this, DetailsOfUnusedMaterials.class));
+                        return true;
+                    }
+                }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -555,9 +550,9 @@ public class ServoStabilizer extends BaseActivity {
                         mServoStabilizerbuttonQRCodeScanView.setVisibility(View.VISIBLE);
                         button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     base64StringServoStablizer = "";
-                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                    showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                 }
 
 

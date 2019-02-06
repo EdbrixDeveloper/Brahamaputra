@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class PowerManagementSystemData {
 
     @SerializedName("newFieldAvailability")
-    private  String newFieldAvailability;
+    private String newFieldAvailability;
 
     @SerializedName("powerManagementSystemQR")
     private String powerManagementSystemQR;
@@ -44,9 +44,11 @@ public class PowerManagementSystemData {
     public String getNewFieldAvailability() {
         return newFieldAvailability;
     }
-    public void setNewFieldAvailability(String newFieldAvailability){
+
+    public void setNewFieldAvailability(String newFieldAvailability) {
         this.newFieldAvailability = newFieldAvailability;
     }
+
     public String getPowerManagementSystemQR() {
         return powerManagementSystemQR;
     }
@@ -150,7 +152,7 @@ public class PowerManagementSystemData {
         this.qrCodeImageFileName = qrCodeImageFileName;
     }
 
-    public PowerManagementSystemData(String newFieldAvailability,String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem, String qrCodeImageFileName) {
+    public PowerManagementSystemData(String newFieldAvailability, String powerManagementSystemQR, String assetOwner, String powerManagementSystemType, String powerManagementSystemMake, String powerManagementSystemPosition, String powerManagementSystemStaus, String serialNumber, String workingCondition, String natureofProblem, String qrCodeImageFileName) {
         this.newFieldAvailability = newFieldAvailability;
         this.powerManagementSystemQR = powerManagementSystemQR;
         this.assetOwner = assetOwner;
@@ -163,9 +165,14 @@ public class PowerManagementSystemData {
         this.natureofProblem = natureofProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;//007
-
-        if (!this.powerManagementSystemQR.isEmpty() && !this.assetOwner.isEmpty() && !this.powerManagementSystemType.isEmpty() && !this.powerManagementSystemMake.isEmpty() && !this.serialNumber.isEmpty()) {
+        if (newFieldAvailability.equals("No")) {
             this.isSubmited = 2;
+        } else if (newFieldAvailability.equals("Yes")) {
+            if (!this.powerManagementSystemQR.isEmpty() && !this.assetOwner.isEmpty() && !this.powerManagementSystemType.isEmpty() && !this.powerManagementSystemMake.isEmpty() && !this.serialNumber.isEmpty()) {
+                this.isSubmited = 2;
+            } else {
+                this.isSubmited = 1;
+            }
         } else {
             this.isSubmited = 1;
         }

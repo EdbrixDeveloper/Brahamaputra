@@ -155,7 +155,7 @@ public class PowerManagementSystem extends BaseActivity {
     }
 
     private void assignViews() {
-        linearLayoutPowerManagementDetails = (LinearLayout)findViewById(R.id.linearLayout_powerManagementDetails);
+        linearLayoutPowerManagementDetails = (LinearLayout) findViewById(R.id.linearLayout_powerManagementDetails);
         mPowerManagementSystemTextViewAvailability = (TextView) findViewById(R.id.powerManagementSystem_textView_availability);
         mPowerManagementSystemTextViewAvailabilityVal = (TextView) findViewById(R.id.powerManagementSystem_textView_availability_val);
         mPowerManagementSystemTextViewQRCodeScan = (TextView) findViewById(R.id.powerManagementSystem_textView_QRCodeScan);
@@ -203,8 +203,7 @@ public class PowerManagementSystem extends BaseActivity {
                         str_newFieldAvailibity = item.get(position);
                         mPowerManagementSystemTextViewAvailabilityVal.setText(str_newFieldAvailibity);
                         // Added Code By Pranav For Handling Field Visibility In Power Management System
-                        if(str_newFieldAvailibity.equals("No"))
-                        {
+                        if (str_newFieldAvailibity.equals("No")) {
                             base64StringPowerManagementSystem = "";
                             button_ClearQRCodeScanView.setVisibility(View.GONE);
                             mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
@@ -217,144 +216,143 @@ public class PowerManagementSystem extends BaseActivity {
                             mPowerManagementSystemTextViewWorkingConditionVal.setText("");
                             mPowerManagementSystemEditTextNatureofProblem.setText("");
                             linearLayoutPowerManagementDetails.setVisibility(View.GONE);
-                        }
-                        else{
+                        } else {
                             linearLayoutPowerManagementDetails.setVisibility(View.VISIBLE);
                         }
                     }
                 });
             }
         });
-            mPowerManagementSystemTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
-                            new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_AssetOwner))),
-                            "Asset Owner",
-                            "Close", "#000000");
-                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+        mPowerManagementSystemTextViewAssetOwnerVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_AssetOwner))),
+                        "Asset Owner",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                        @Override
-                        public void onClick(ArrayList<String> item, int position) {
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
 
-                            str_assetOwner = item.get(position);
-                            mPowerManagementSystemTextViewAssetOwnerVal.setText(str_assetOwner);
-                        }
-                    });
+                        str_assetOwner = item.get(position);
+                        mPowerManagementSystemTextViewAssetOwnerVal.setText(str_assetOwner);
+                    }
+                });
 
-                }
-            });
-            mPowerManagementSystemTextViewPowerManagementSystemTypeVal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
-                            new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemType))),
-                            "Power Management System Type",
-                            "Close", "#000000");
-                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+            }
+        });
+        mPowerManagementSystemTextViewPowerManagementSystemTypeVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemType))),
+                        "Power Management System Type",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                        @Override
-                        public void onClick(ArrayList<String> item, int position) {
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
 
-                            str_powerManagementSystemType = item.get(position);
-                            mPowerManagementSystemTextViewPowerManagementSystemTypeVal.setText(str_powerManagementSystemType);
-                        }
-                    });
+                        str_powerManagementSystemType = item.get(position);
+                        mPowerManagementSystemTextViewPowerManagementSystemTypeVal.setText(str_powerManagementSystemType);
+                    }
+                });
 
-                }
-            });
-            mPowerManagementSystemTextViewPowerManagementSystemMakeVal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
-                            new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemMake))),
-                            "Power Management System Make",
-                            "Close", "#000000");
-                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+            }
+        });
+        mPowerManagementSystemTextViewPowerManagementSystemMakeVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemMake))),
+                        "Power Management System Make",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                        @Override
-                        public void onClick(ArrayList<String> item, int position) {
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
 
-                            str_powerManagementSystemMake = item.get(position);
-                            mPowerManagementSystemTextViewPowerManagementSystemMakeVal.setText(str_powerManagementSystemMake);
-                        }
-                    });
+                        str_powerManagementSystemMake = item.get(position);
+                        mPowerManagementSystemTextViewPowerManagementSystemMakeVal.setText(str_powerManagementSystemMake);
+                    }
+                });
 
-                }
-            });
+            }
+        });
 
-            mPowerManagementSystemTextViewPowerManagementSystemPositionVal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
-                            new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemPosition))),
-                            "Power Management System Position",
-                            "Close", "#000000");
-                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+        mPowerManagementSystemTextViewPowerManagementSystemPositionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemPosition))),
+                        "Power Management System Position",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                        @Override
-                        public void onClick(ArrayList<String> item, int position) {
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
 
-                            str_powerManagementSystemPosition = item.get(position);
-                            mPowerManagementSystemTextViewPowerManagementSystemPositionVal.setText(str_powerManagementSystemPosition);
-                        }
-                    });
+                        str_powerManagementSystemPosition = item.get(position);
+                        mPowerManagementSystemTextViewPowerManagementSystemPositionVal.setText(str_powerManagementSystemPosition);
+                    }
+                });
 
-                }
-            });
-            mPowerManagementSystemTextViewPowerManagementSystemStausVal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
-                            new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemStaus))),
-                            "Power Management System Staus",
-                            "Close", "#000000");
-                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+            }
+        });
+        mPowerManagementSystemTextViewPowerManagementSystemStausVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_PowerManagementSystemStaus))),
+                        "Power Management System Staus",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                        @Override
-                        public void onClick(ArrayList<String> item, int position) {
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
 
-                            str_powerManagementSystemStaus = item.get(position);
-                            mPowerManagementSystemTextViewPowerManagementSystemStausVal.setText(str_powerManagementSystemStaus);
-                        }
-                    });
+                        str_powerManagementSystemStaus = item.get(position);
+                        mPowerManagementSystemTextViewPowerManagementSystemStausVal.setText(str_powerManagementSystemStaus);
+                    }
+                });
 
-                }
-            });
-            mPowerManagementSystemTextViewWorkingConditionVal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
-                            new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_WorkingCondition))),
-                            "Working Condition",
-                            "Close", "#000000");
-                    searchableSpinnerDialog.showSearchableSpinnerDialog();
+            }
+        });
+        mPowerManagementSystemTextViewWorkingConditionVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PowerManagementSystem.this,
+                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerManagementSystem_WorkingCondition))),
+                        "Working Condition",
+                        "Close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                        @Override
-                        public void onClick(ArrayList<String> item, int position) {
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
 
-                            str_workingCondition = item.get(position);
-                            mPowerManagementSystemTextViewWorkingConditionVal.setText(str_workingCondition);
-                        }
-                    });
+                        str_workingCondition = item.get(position);
+                        mPowerManagementSystemTextViewWorkingConditionVal.setText(str_workingCondition);
+                    }
+                });
 
-                }
-            });
-            button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    base64StringPowerManagementSystem = "";
-                    button_ClearQRCodeScanView.setVisibility(View.GONE);
-                    mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
-                    showToast("Cleared");
-                }
-            });
+            }
+        });
+        button_ClearQRCodeScanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                base64StringPowerManagementSystem = "";
+                button_ClearQRCodeScanView.setVisibility(View.GONE);
+                mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
+                showToast("Cleared");
+            }
+        });
 
         /*This Commented By 008 on 15-11-2018 For QR Code Purpose
         mPowerManagementSystemButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
@@ -403,15 +401,12 @@ public class PowerManagementSystem extends BaseActivity {
                 return true;
             case R.id.menuDone:
                 // Added Code By Pranav For Handling Field Visibility In Power Management System
-                if(mPowerManagementSystemTextViewAvailabilityVal.getText().toString().equals("No"))
-                {
+                if (mPowerManagementSystemTextViewAvailabilityVal.getText().toString().equals("No")) {
                     submitDetails();
                     finish();
                     startActivity(new Intent(this, GeneralAndSafetyMeasures.class));
                     return true;
-                }
-                else
-                {
+                } else {
                     if (checkValidation() == true) {
                         submitDetails();
                         finish();
@@ -433,15 +428,13 @@ public class PowerManagementSystem extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 powerManagementSystemData = hotoTransactionData.getPowerManagementSystemData();
 
+                mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
                 // Added Code By Pranav For Handling Field Visibility In Power Management System
-                if(mPowerManagementSystemTextViewAvailabilityVal.getText().toString().equals("No"))
-                {
-                   // mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
+                if (mPowerManagementSystemTextViewAvailabilityVal.getText().toString().equals("No")) {
+                    // mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
                     linearLayoutPowerManagementDetails.setVisibility(View.GONE);
-                }
-                else
-                {
-                   // mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
+                } else {
+                    // mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
                     base64StringPowerManagementSystem = powerManagementSystemData.getPowerManagementSystemQR();
                     mPowerManagementSystemTextViewAssetOwnerVal.setText(powerManagementSystemData.getAssetOwner());
                     mPowerManagementSystemTextViewPowerManagementSystemTypeVal.setText(powerManagementSystemData.getPowerManagementSystemType());
@@ -497,7 +490,7 @@ public class PowerManagementSystem extends BaseActivity {
             String workingCondition = mPowerManagementSystemTextViewWorkingConditionVal.getText().toString().trim();
             String natureofProblem = mPowerManagementSystemEditTextNatureofProblem.getText().toString().trim();
 
-            powerManagementSystemData = new PowerManagementSystemData(newFieldAvailability,powerManagementSystemQR, assetOwner, powerManagementSystemType, powerManagementSystemMake, powerManagementSystemPosition, powerManagementSystemStaus, serialNumber, workingCondition, natureofProblem, imageFileName);
+            powerManagementSystemData = new PowerManagementSystemData(newFieldAvailability, powerManagementSystemQR, assetOwner, powerManagementSystemType, powerManagementSystemMake, powerManagementSystemPosition, powerManagementSystemStaus, serialNumber, workingCondition, natureofProblem, imageFileName);
 
             hotoTransactionData.setPowerManagementSystemData(powerManagementSystemData);
 
@@ -513,8 +506,12 @@ public class PowerManagementSystem extends BaseActivity {
 
     /*008 29112018*/
     public boolean checkValidation() {
+        String newFieldAvailability = mPowerManagementSystemTextViewAvailabilityVal.getText().toString().trim();
         String qRCodeScan = base64StringPowerManagementSystem;
-        if (qRCodeScan.isEmpty() || qRCodeScan == null) {
+        if (newFieldAvailability.isEmpty() || newFieldAvailability == null) {
+            showToast("Select Availability");
+            return false;
+        } else if ((qRCodeScan.isEmpty() || qRCodeScan == null) && (newFieldAvailability.equals("Yes"))) {
             showToast("Please Scan QR Code");
             return false;
         } else return true;
@@ -646,7 +643,7 @@ public class PowerManagementSystem extends BaseActivity {
                     }
                 } else {
                     base64StringPowerManagementSystem = "";
-                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                    showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                 }
 
 

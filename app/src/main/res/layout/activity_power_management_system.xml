@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:singleLine="false"
-                    android:text="Availability" />
+                    android:text="Availability*" />
 
                 <TextView
                     android:id="@+id/powerManagementSystem_textView_availability_val"
@@ -39,7 +39,7 @@
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
                     android:hint="Select"
-                    android:textAlignment="viewStart"></TextView>
+                    android:textAlignment="viewStart"/>
 
 
             </LinearLayout>

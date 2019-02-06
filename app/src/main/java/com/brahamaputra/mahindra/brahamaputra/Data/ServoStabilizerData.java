@@ -49,10 +49,14 @@ public class ServoStabilizerData {
         this.natureofProblem = natureofProblem;
         this.qrCodeImageFileName = qrCodeImageFileName;
         //this.isSubmited=true;//007
-        if (!this.servoStabilizer_Qr.isEmpty() && !this.servoStabilizerWorkingStatus.isEmpty()) {
+        if (servoStabilizerWorkingStatus.equals("Not Available")) {
             this.isSubmited = 2;
         } else {
-            this.isSubmited = 1;
+            if (!this.servoStabilizer_Qr.isEmpty() && !this.servoStabilizerWorkingStatus.isEmpty()) {
+                this.isSubmited = 2;
+            } else {
+                this.isSubmited = 1;
+            }
         }
     }
 
