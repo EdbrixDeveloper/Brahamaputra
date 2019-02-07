@@ -1186,10 +1186,7 @@ public class DieselFilling extends BaseActivity {
                                     dgIdQrCodeList = response;
                                     DgIdList = new ArrayList<String>();
                                     if (dgIdQrCodeList.getPowerBackupsDGDataList().size() > 0) {
-                                        /*for (DgIdQrCode ids : dgIdQrCodeList.getPowerBackupsDGDataList()) {
-                                            DgIdList.add(ids.getqRCodeScan());
-                                        }*/
-                                        DgIdList.addAll(dgIdQrCodeList.getPowerBackupsDGDataList());
+                                        //DgIdList.addAll(dgIdQrCodeList.getPowerBackupsDGDataList()); by 008 for new changes on 07022019
                                     } else {
                                         mDieselFillingTextViewSelectDgIdQrCodeVal.setText("No Data Found");
                                         //No sites found

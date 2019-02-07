@@ -8,26 +8,51 @@ import java.util.List;
 public class DgIdQrCodeList {
 
     @SerializedName("Success")
-    private Integer Success;
-
+    @Expose
+    private Integer success;
     @SerializedName("Code")
-    private String Code;
-
+    @Expose
+    private String code;
     @SerializedName("Message")
-    private String Message;
-
-    /*@SerializedName("PowerBackupsDGMRQRList")
-    private List<DgIdQrCode> PowerBackupsDGMRQRList = null;*/
-
+    @Expose
+    private String message;
+    @SerializedName("Error")
+    @Expose
+    private Error error;
     @SerializedName("PowerBackupsDGDataList")
-    private List<String> powerBackupsDGDataList = null;
+    @Expose
+    private List<PowerBackupsDGDataList> powerBackupsDGDataList = null;
 
     public Integer getSuccess() {
-        return Success;
+        return success;
     }
 
     public void setSuccess(Integer success) {
-        Success = success;
+        this.success = success;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<PowerBackupsDGDataList> getPowerBackupsDGDataList() {
+        return powerBackupsDGDataList;
+    }
+
+    public void setPowerBackupsDGDataList(List<PowerBackupsDGDataList> powerBackupsDGDataList) {
+        this.powerBackupsDGDataList = powerBackupsDGDataList;
     }
 
     public Error getError() {
@@ -38,9 +63,33 @@ public class DgIdQrCodeList {
         this.error = error;
     }
 
+/////////////////////////////////////////////////////////////////
+    /*@SerializedName("Success")
+    private Integer Success;
+
+    @SerializedName("Code")
+    private String Code;
+
+    @SerializedName("Message")
+    private String Message;
+
     @SerializedName("Error")
     @Expose
-    private Error error;
+    private Error error;*/
+
+    /*@SerializedName("PowerBackupsDGMRQRList")
+    private List<DgIdQrCode> PowerBackupsDGMRQRList = null;*/
+
+    /*@SerializedName("PowerBackupsDGDataList")
+    private List<String> powerBackupsDGDataList = null;
+
+    public Integer getSuccess() {
+        return Success;
+    }
+
+    public void setSuccess(Integer success) {
+        Success = success;
+    }
 
     public String getCode() {
         return Code;
@@ -58,6 +107,16 @@ public class DgIdQrCodeList {
         Message = message;
     }
 
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }*/
+
+
+
     /*public List<DgIdQrCode> getPowerBackupsDGMRQRList() {
         return PowerBackupsDGMRQRList;
     }
@@ -66,12 +125,14 @@ public class DgIdQrCodeList {
         PowerBackupsDGMRQRList = powerBackupsDGMRQRList;
     }*/
 
-    public List<String> getPowerBackupsDGDataList() {
+
+
+    /*public List<String> getPowerBackupsDGDataList() {
         return powerBackupsDGDataList;
     }
 
     public void setPowerBackupsDGDataList(List<String> powerBackupsDGDataList) {
         this.powerBackupsDGDataList = powerBackupsDGDataList;
-    }
+    }*/
 }
 
