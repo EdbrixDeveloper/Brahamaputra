@@ -55,6 +55,13 @@ public class DiselRequestTicketList {
     @Expose
     private String SiteImeiNumber;
 
+    @SerializedName("DGMake")
+    @Expose
+    private String DGMake;
+    @SerializedName("DGCapacity")
+    @Expose
+    private String DGCapacity;
+
 
     public String getId() {
         return id;
@@ -174,6 +181,22 @@ public class DiselRequestTicketList {
 
     public void setSiteImeiNumber(String siteImeiNumber) {
         SiteImeiNumber = siteImeiNumber;
+    }
+
+    public String getDGMake() {
+        return DGMake;
+    }
+
+    public void setDGMake(String DGMake) {
+        this.DGMake = DGMake;
+    }
+
+    public String getDGCapacity() {
+        return DGCapacity;
+    }
+
+    public void setDGCapacity(String DGCapacity) {
+        this.DGCapacity = DGCapacity;
     }
 
 }

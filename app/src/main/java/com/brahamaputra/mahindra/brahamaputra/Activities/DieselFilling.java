@@ -109,6 +109,12 @@ public class DieselFilling extends BaseActivity {
     private TextView mDieselFillingTextViewSiteNameVal;
     private TextView mDieselFillingTextViewSiteDetails;
     private TextView mDieselFillingTextViewSiteDetailsVal;
+
+    private TextView mDieselFillingTextViewDgMake;
+    private TextView mDieselFillingTextViewDgMakeVal;
+    private TextView mDieselFillingTextViewDgCapacityInKva;
+    private TextView mDieselFillingTextViewDgCapacityInKvaVal;
+
     private TextView mDieselFillingTextViewSiteID;
     private TextView mDieselFillingTextViewSiteIDVal;
     private TextView mDieselFillingTextViewSelectDgIdQrCode;
@@ -166,66 +172,6 @@ public class DieselFilling extends BaseActivity {
 
     final Calendar myCalendar = Calendar.getInstance();
 
-
-    private void assignViews() {
-        mDieselFillingTextViewSiteName = (TextView) findViewById(R.id.dieselFilling_textView_siteName);
-        mDieselFillingTextViewSiteNameVal = (TextView) findViewById(R.id.dieselFilling_textView_siteNameVal);
-        mDieselFillingTextViewSiteDetails = (TextView) findViewById(R.id.dieselFilling_textView_siteDetails);
-        mDieselFillingTextViewSiteDetailsVal = (TextView) findViewById(R.id.dieselFilling_textView_siteDetails_val);
-        mDieselFillingTextViewSiteID = (TextView) findViewById(R.id.dieselFilling_textView_siteID);
-        mDieselFillingTextViewSiteIDVal = (TextView) findViewById(R.id.dieselFilling_textView_siteID_val);
-        mDieselFillingTextViewSelectDgIdQrCode = (TextView) findViewById(R.id.dieselFilling_textView_selectDgIdQrCode);
-        mDieselFillingTextViewSelectDgIdQrCodeVal = (TextView) findViewById(R.id.dieselFilling_textView_selectDgIdQrCodeVal);
-        mDieselFillingTextViewPresentDgHmr = (TextView) findViewById(R.id.dieselFilling_textView_presentDgHmr);
-        mDieselFillingEditTextPresentDgHmr = (EditText) findViewById(R.id.dieselFilling_editText_presentDgHmr);
-        mDieselFillingTextViewHmrPhotoUpload = (TextView) findViewById(R.id.dieselFilling_textView_hmrPhotoUpload);
-        mDieselFillingButtonHmrPhotoUpload = (ImageView) findViewById(R.id.dieselFilling_button_hmrPhotoUpload);
-        mDieselFillingButtonHmrPhotoUploadView = (ImageView) findViewById(R.id.dieselFilling_button_hmrPhotoUploadView);
-        mDieselFillingTextViewTankBalanceBeforeFilling = (TextView) findViewById(R.id.dieselFilling_textView_tankBalanceBeforeFilling);
-        mDieselFillingEditTextTankBalanceBeforeFilling = (EditText) findViewById(R.id.dieselFilling_editText_tankBalanceBeforeFilling);
-        mDieselFillingTextViewFillingQty = (TextView) findViewById(R.id.dieselFilling_textView_fillingQty);
-        mDieselFillingEditTextFillingQty = (EditText) findViewById(R.id.dieselFilling_editText_fillingQty);
-        mDieselFillingTextViewFinalDieselStock = (TextView) findViewById(R.id.dieselFilling_textView_finalDieselStock);
-        mDieselFillingTextViewFinalDieselStockVal = (TextView) findViewById(R.id.dieselFilling_textView_finalDieselStockVal);
-        mDieselFillingTextViewDieselPrice = (TextView) findViewById(R.id.dieselFilling_textView_dieselPrice);
-        mDieselFillingEditTextDieselPrice = (EditText) findViewById(R.id.dieselFilling_editText_dieselPrice);
-        mDieselFillingTextViewPresentEbReading = (TextView) findViewById(R.id.dieselFilling_textView_presentEbReading);
-        mDieselFillingEditTextPresentEbReading = (EditText) findViewById(R.id.dieselFilling_editText_presentEbReading);
-        mDieselFillingTextViewPresentEbReadingKwhPhoto = (TextView) findViewById(R.id.dieselFilling_textView_presentEbReadingKwhPhoto);
-        mDieselFillingButtonPresentEbReadingKwhPhoto = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhoto);
-        mDieselFillingButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhotoView);
-        dieselFilling_button_qrCode = (ImageView) findViewById(R.id.dieselFilling_button_qrCode);
-
-        mDieselFillingTextViewDieselRequestTicketNo = (TextView) findViewById(R.id.dieselFilling_textView_dieselRequestTicketNo);
-        mDieselFillingTextViewDieselRequestTicketNoVal = (TextView) findViewById(R.id.dieselFilling_textView_dieselRequestTicketNoVal);
-        mDieselFillingTextViewChildPetroCardNo = (TextView) findViewById(R.id.dieselFilling_textView_childPetroCardNo);
-        mDieselFillingTextViewChildPetroCardNoVal = (TextView) findViewById(R.id.dieselFilling_textView_childPetroCardNo_val);
-        mDieselFillingTextViewApprovedQty = (TextView) findViewById(R.id.dieselFilling_textView_approvedQty);
-        mDieselFillingTextViewApprovedQtyVal = (TextView) findViewById(R.id.dieselFilling_textView_approvedQty_val);
-        mDieselFillingTextViewFillingDate = (TextView) findViewById(R.id.dieselFillingFundRequest_textView_fillingDate);
-        mDieselFillingEditTextFillingDateVal = (EditText) findViewById(R.id.dieselFillingFundRequest_editText_fillingDateTime);
-
-
-
-      /*  mDieselFillingTextViewPresentFillingDate = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDate);
-        mDieselFillingTextViewPresentFillingDateVal = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDateVal);*/
-        mDieselFillingEditTextTankBalanceBeforeFilling.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
-        mDieselFillingEditTextFillingQty.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
-        mDieselFillingEditTextDieselPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
-
-        mDieselFillingTextViewSiteIDVal.setAllCaps(true);
-        mDieselFillingTextViewSiteDetailsVal.setAllCaps(true);
-        mDieselFillingTextViewFinalDieselStockVal.setAllCaps(true);
-
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-    }
-
-
-    private void initCombo() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -282,6 +228,70 @@ public class DieselFilling extends BaseActivity {
         setInputDetails();
         prepareUserSites(true);
         prepareDieselRequestTicketNo(true);
+    }
+
+    private void assignViews() {
+        mDieselFillingTextViewSiteName = (TextView) findViewById(R.id.dieselFilling_textView_siteName);
+        mDieselFillingTextViewSiteNameVal = (TextView) findViewById(R.id.dieselFilling_textView_siteNameVal);
+        mDieselFillingTextViewSiteDetails = (TextView) findViewById(R.id.dieselFilling_textView_siteDetails);
+        mDieselFillingTextViewSiteDetailsVal = (TextView) findViewById(R.id.dieselFilling_textView_siteDetails_val);
+        mDieselFillingTextViewSiteID = (TextView) findViewById(R.id.dieselFilling_textView_siteID);
+        mDieselFillingTextViewSiteIDVal = (TextView) findViewById(R.id.dieselFilling_textView_siteID_val);
+
+        mDieselFillingTextViewDgMake = (TextView) findViewById(R.id.dieselFilling_textView_dgMake);
+        mDieselFillingTextViewDgMakeVal = (TextView) findViewById(R.id.dieselFilling_textView_dgMake_val);
+        mDieselFillingTextViewDgCapacityInKva = (TextView) findViewById(R.id.dieselFilling_textView_dgCapacityInKva);
+        mDieselFillingTextViewDgCapacityInKvaVal = (TextView) findViewById(R.id.dieselFilling_textView_dgCapacityInKva_val);
+
+        mDieselFillingTextViewSelectDgIdQrCode = (TextView) findViewById(R.id.dieselFilling_textView_selectDgIdQrCode);
+        mDieselFillingTextViewSelectDgIdQrCodeVal = (TextView) findViewById(R.id.dieselFilling_textView_selectDgIdQrCodeVal);
+        mDieselFillingTextViewPresentDgHmr = (TextView) findViewById(R.id.dieselFilling_textView_presentDgHmr);
+        mDieselFillingEditTextPresentDgHmr = (EditText) findViewById(R.id.dieselFilling_editText_presentDgHmr);
+        mDieselFillingTextViewHmrPhotoUpload = (TextView) findViewById(R.id.dieselFilling_textView_hmrPhotoUpload);
+        mDieselFillingButtonHmrPhotoUpload = (ImageView) findViewById(R.id.dieselFilling_button_hmrPhotoUpload);
+        mDieselFillingButtonHmrPhotoUploadView = (ImageView) findViewById(R.id.dieselFilling_button_hmrPhotoUploadView);
+        mDieselFillingTextViewTankBalanceBeforeFilling = (TextView) findViewById(R.id.dieselFilling_textView_tankBalanceBeforeFilling);
+        mDieselFillingEditTextTankBalanceBeforeFilling = (EditText) findViewById(R.id.dieselFilling_editText_tankBalanceBeforeFilling);
+        mDieselFillingTextViewFillingQty = (TextView) findViewById(R.id.dieselFilling_textView_fillingQty);
+        mDieselFillingEditTextFillingQty = (EditText) findViewById(R.id.dieselFilling_editText_fillingQty);
+        mDieselFillingTextViewFinalDieselStock = (TextView) findViewById(R.id.dieselFilling_textView_finalDieselStock);
+        mDieselFillingTextViewFinalDieselStockVal = (TextView) findViewById(R.id.dieselFilling_textView_finalDieselStockVal);
+        mDieselFillingTextViewDieselPrice = (TextView) findViewById(R.id.dieselFilling_textView_dieselPrice);
+        mDieselFillingEditTextDieselPrice = (EditText) findViewById(R.id.dieselFilling_editText_dieselPrice);
+        mDieselFillingTextViewPresentEbReading = (TextView) findViewById(R.id.dieselFilling_textView_presentEbReading);
+        mDieselFillingEditTextPresentEbReading = (EditText) findViewById(R.id.dieselFilling_editText_presentEbReading);
+        mDieselFillingTextViewPresentEbReadingKwhPhoto = (TextView) findViewById(R.id.dieselFilling_textView_presentEbReadingKwhPhoto);
+        mDieselFillingButtonPresentEbReadingKwhPhoto = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhoto);
+        mDieselFillingButtonPresentEbReadingKwhPhotoView = (ImageView) findViewById(R.id.dieselFilling_button_presentEbReadingKwhPhotoView);
+        dieselFilling_button_qrCode = (ImageView) findViewById(R.id.dieselFilling_button_qrCode);
+
+        mDieselFillingTextViewDieselRequestTicketNo = (TextView) findViewById(R.id.dieselFilling_textView_dieselRequestTicketNo);
+        mDieselFillingTextViewDieselRequestTicketNoVal = (TextView) findViewById(R.id.dieselFilling_textView_dieselRequestTicketNoVal);
+        mDieselFillingTextViewChildPetroCardNo = (TextView) findViewById(R.id.dieselFilling_textView_childPetroCardNo);
+        mDieselFillingTextViewChildPetroCardNoVal = (TextView) findViewById(R.id.dieselFilling_textView_childPetroCardNo_val);
+        mDieselFillingTextViewApprovedQty = (TextView) findViewById(R.id.dieselFilling_textView_approvedQty);
+        mDieselFillingTextViewApprovedQtyVal = (TextView) findViewById(R.id.dieselFilling_textView_approvedQty_val);
+        mDieselFillingTextViewFillingDate = (TextView) findViewById(R.id.dieselFillingFundRequest_textView_fillingDate);
+        mDieselFillingEditTextFillingDateVal = (EditText) findViewById(R.id.dieselFillingFundRequest_editText_fillingDateTime);
+
+
+
+      /*  mDieselFillingTextViewPresentFillingDate = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDate);
+        mDieselFillingTextViewPresentFillingDateVal = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDateVal);*/
+        mDieselFillingEditTextTankBalanceBeforeFilling.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mDieselFillingEditTextFillingQty.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mDieselFillingEditTextDieselPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+
+        mDieselFillingTextViewSiteIDVal.setAllCaps(true);
+        mDieselFillingTextViewSiteDetailsVal.setAllCaps(true);
+        mDieselFillingTextViewFinalDieselStockVal.setAllCaps(true);
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
+    private void initCombo() {
     }
 
     private void updateLabel() {
@@ -1076,22 +1086,23 @@ public class DieselFilling extends BaseActivity {
                                                         mDieselFillingTextViewSiteNameVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getSiteName());
                                                         mDieselFillingTextViewSiteIDVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getSiteId());
                                                         mDieselFillingTextViewSiteDetailsVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getSiteAddress());
+                                                        mDieselFillingTextViewDgMakeVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getDGMake());
+                                                        mDieselFillingTextViewDgCapacityInKvaVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getDGCapacity());
                                                         mDieselFillingTextViewChildPetroCardNoVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getChildCardNumber());
                                                         mDieselFillingTextViewApprovedQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getApprovedQuantity());
 
                                                         if (dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude() != null && dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude() != null) {
                                                             siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
                                                             siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());
-                                                            //showToast(""+siteLatitude+","+siteLongitude);
                                                         } else {
                                                             siteLatitude = 0;
                                                             siteLatitude = 0;
                                                             siteLongitude = 0;
-                                                            //showToast(""+siteLatitude+","+siteLongitude);
                                                         }
 
                                                         //siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
-                                                        mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
+
+                                                        /*mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");
 
                                                         if (siteDbId > 0) {
                                                             if (Conditions.isNetworkConnected(DieselFilling.this)) {
@@ -1101,7 +1112,7 @@ public class DieselFilling extends BaseActivity {
                                                             }
                                                         } else {
                                                             showToast("Please Select Site ID First..");
-                                                        }
+                                                        }*/
                                                     }
                                                 });
 
@@ -1118,8 +1129,6 @@ public class DieselFilling extends BaseActivity {
                                                 @Override
                                                 public void onClick(ArrayList<String> item, int position) {
 
-                                                    //str_siteName = item.get(position);
-                                                    //       mDieselFillingTextViewDieselRequestTicketNoVal.setText(userSitesList.getSiteList().get(position).get());
                                                     str_dieselRequestTicketNo = item.get(position);
                                                     requestTicketDbId = Integer.parseInt(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getId());
                                                     siteDbId = Integer.valueOf(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getSiteDBId());
@@ -1133,8 +1142,6 @@ public class DieselFilling extends BaseActivity {
 
                                                     siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
                                                     siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());
-                                                  /*  siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
-                                                    mDieselFillingTextViewSelectDgIdQrCodeVal.setText("");*/
                                                 }
                                             });
                                         }

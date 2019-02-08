@@ -100,6 +100,32 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/dieselFilling_textView_siteDetails"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site details" />
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_siteDetails_val"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+                <!--android:textAllCaps="true"-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
                     android:id="@+id/dieselFilling_textView_childPetroCardNo"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
@@ -127,15 +153,15 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/dieselFilling_textView_siteDetails"
+                    android:id="@+id/dieselFilling_textView_dgMake"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Site details" />
+                    android:text="DG Make" />
 
                 <TextView
-                    android:id="@+id/dieselFilling_textView_siteDetails_val"
+                    android:id="@+id/dieselFilling_textView_dgMake_val"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="0.6"
@@ -150,6 +176,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_dgCapacityInKva"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="DG Capacity in KVA" />
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_dgCapacityInKva_val"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+                <!--android:textAllCaps="true"-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
