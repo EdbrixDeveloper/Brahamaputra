@@ -102,6 +102,40 @@ public class Shelter extends BaseActivity {
 
     }
 
+    private void assignViews() {
+        mShelterTextViewPhysicalConditionOfShelterPlatform = (TextView) findViewById(R.id.shelter_textView_physicalConditionOfShelterPlatform);
+        mShelterTextViewPhysicalConditionOfShelterPlatformVal = (TextView) findViewById(R.id.shelter_textView_physicalConditionOfShelterPlatform_val);
+        mShelterTextViewNumberOfBtsInsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsInsideShelter);
+        mShelterTextViewNumberOfBtsInsideShelterVal = (TextView) findViewById(R.id.shelter_textView_numberOfBtsInsideShelter_val);
+        mShelterTextViewNumberOfBtsOutsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsOutsideShelter);
+        mShelterTextViewNumberOfBtsOutsideShelterVal = (TextView) findViewById(R.id.shelter_textView_numberOfBtsOutsideShelter_val);
+        mShelterTextViewShelterLock = (TextView) findViewById(R.id.shelter_textView_shelterLock);
+        mShelterTextViewShelterLockVal = (TextView) findViewById(R.id.shelter_textView_shelterLock_val);
+        mShelterTextViewOutdoorShelterLock = (TextView) findViewById(R.id.shelter_textView_outdoorShelterLock);
+        mShelterTextViewOutdoorShelterLockVal = (TextView) findViewById(R.id.shelter_textView_outdoorShelterLock_val);
+        mShelterTextViewIgbStatus = (TextView) findViewById(R.id.shelter_textView_igbStatus);
+        mShelterTextViewIgbStatusVal = (TextView) findViewById(R.id.shelter_textView_igbStatus_val);
+        mShelterTextViewEgbStatus = (TextView) findViewById(R.id.shelter_textView_egbStatus);
+        mShelterTextViewEgbStatusVal = (TextView) findViewById(R.id.shelter_textView_egbStatus_val);
+        mShelterTextViewNoOfOdcAvailable = (TextView) findViewById(R.id.shelter_textView_noOfOdcAvailable);
+        mShelterTextViewNoOfOdcAvailableVal = (TextView) findViewById(R.id.shelter_textView_noOfOdcAvailable_val);
+        mShelterTextViewOdcLock = (TextView) findViewById(R.id.shelter_textView_odcLock);
+        mShelterTextViewOdcLockVal = (TextView) findViewById(R.id.shelter_textView_odcLock_val);
+
+        mshelterLinearLayoutNumberOfBtsInsideShelter = (LinearLayout) findViewById(R.id.shelter_linearLayout_numberOfBtsInsideShelter);
+        mshelterLinearLayoutNumberOfBtsOutsideShelter = (LinearLayout) findViewById(R.id.shelter_linearLayout_numberOfBtsOutsideShelter);
+        mshelterLinearLayoutShelterLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_shelterLock);
+        mshelterLinearLayoutOutdoorShelterLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_outdoorShelterLock);
+        mshelterLinearLayoutIgbStatus = (LinearLayout) findViewById(R.id.shelter_linearLayout_igbStatus);
+        mshelterLinearLayoutEgbStatus = (LinearLayout) findViewById(R.id.shelter_linearLayout_egbStatus);
+        mshelterLinearLayoutNoOfOdcAvailable = (LinearLayout) findViewById(R.id.shelter_linearLayout_noOfOdcAvailable);
+        mshelterLinearLayoutOdcLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_odcLock);
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
     private void initCombo() {
         mShelterTextViewPhysicalConditionOfShelterPlatformVal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,41 +335,7 @@ public class Shelter extends BaseActivity {
             }
         });
     }
-
-    private void assignViews() {
-        mShelterTextViewPhysicalConditionOfShelterPlatform = (TextView) findViewById(R.id.shelter_textView_physicalConditionOfShelterPlatform);
-        mShelterTextViewPhysicalConditionOfShelterPlatformVal = (TextView) findViewById(R.id.shelter_textView_physicalConditionOfShelterPlatform_val);
-        mShelterTextViewNumberOfBtsInsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsInsideShelter);
-        mShelterTextViewNumberOfBtsInsideShelterVal = (TextView) findViewById(R.id.shelter_textView_numberOfBtsInsideShelter_val);
-        mShelterTextViewNumberOfBtsOutsideShelter = (TextView) findViewById(R.id.shelter_textView_numberOfBtsOutsideShelter);
-        mShelterTextViewNumberOfBtsOutsideShelterVal = (TextView) findViewById(R.id.shelter_textView_numberOfBtsOutsideShelter_val);
-        mShelterTextViewShelterLock = (TextView) findViewById(R.id.shelter_textView_shelterLock);
-        mShelterTextViewShelterLockVal = (TextView) findViewById(R.id.shelter_textView_shelterLock_val);
-        mShelterTextViewOutdoorShelterLock = (TextView) findViewById(R.id.shelter_textView_outdoorShelterLock);
-        mShelterTextViewOutdoorShelterLockVal = (TextView) findViewById(R.id.shelter_textView_outdoorShelterLock_val);
-        mShelterTextViewIgbStatus = (TextView) findViewById(R.id.shelter_textView_igbStatus);
-        mShelterTextViewIgbStatusVal = (TextView) findViewById(R.id.shelter_textView_igbStatus_val);
-        mShelterTextViewEgbStatus = (TextView) findViewById(R.id.shelter_textView_egbStatus);
-        mShelterTextViewEgbStatusVal = (TextView) findViewById(R.id.shelter_textView_egbStatus_val);
-        mShelterTextViewNoOfOdcAvailable = (TextView) findViewById(R.id.shelter_textView_noOfOdcAvailable);
-        mShelterTextViewNoOfOdcAvailableVal = (TextView) findViewById(R.id.shelter_textView_noOfOdcAvailable_val);
-        mShelterTextViewOdcLock = (TextView) findViewById(R.id.shelter_textView_odcLock);
-        mShelterTextViewOdcLockVal = (TextView) findViewById(R.id.shelter_textView_odcLock_val);
-
-        mshelterLinearLayoutNumberOfBtsInsideShelter = (LinearLayout) findViewById(R.id.shelter_linearLayout_numberOfBtsInsideShelter);
-        mshelterLinearLayoutNumberOfBtsOutsideShelter = (LinearLayout) findViewById(R.id.shelter_linearLayout_numberOfBtsOutsideShelter);
-        mshelterLinearLayoutShelterLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_shelterLock);
-        mshelterLinearLayoutOutdoorShelterLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_outdoorShelterLock);
-        mshelterLinearLayoutIgbStatus = (LinearLayout) findViewById(R.id.shelter_linearLayout_igbStatus);
-        mshelterLinearLayoutEgbStatus = (LinearLayout) findViewById(R.id.shelter_linearLayout_egbStatus);
-        mshelterLinearLayoutNoOfOdcAvailable = (LinearLayout) findViewById(R.id.shelter_linearLayout_noOfOdcAvailable);
-        mshelterLinearLayoutOdcLock = (LinearLayout) findViewById(R.id.shelter_linearLayout_odcLock);
-
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-    }
-
+    
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {

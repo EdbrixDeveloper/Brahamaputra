@@ -132,6 +132,27 @@ public class PhotoCaptureActivity extends BaseActivity {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void assignViews() {
+        mPhotoCaptureButtonSite = (ImageView) findViewById(R.id.photoCapture_button_site);
+        mPhotoCaptureButtonShelter = (ImageView) findViewById(R.id.photoCapture_button_shelter);
+        mPhotoCaptureButtonEbMeterBox = (ImageView) findViewById(R.id.photoCapture_button_ebMeterBox);
+        mPhotoCaptureButtonSmps = (ImageView) findViewById(R.id.photoCapture_button_smps);
+        mPhotoCaptureButtonEbMeter = (ImageView) findViewById(R.id.photoCapture_button_ebMeter);
+        mPhotoCaptureButtonDgHmr = (ImageView) findViewById(R.id.photoCapture_button_dgHmr);
+        mPhotoCaptureButtonDgOverview = (ImageView) findViewById(R.id.photoCapture_button_dgOerview);
+
+        mPhotoCaptureButtonSiteView = (ImageView) findViewById(R.id.photoCapture_button_siteView);
+        mPhotoCaptureButtonShelterView = (ImageView) findViewById(R.id.photoCapture_button_shelterView);
+        mPhotoCaptureButtonEbMeterBoxView = (ImageView) findViewById(R.id.photoCapture_button_ebMeterBoxView);
+        mPhotoCaptureButtonSmpsView = (ImageView) findViewById(R.id.photoCapture_button_smpsView);
+        mPhotoCaptureButtonEbMeterView = (ImageView) findViewById(R.id.photoCapture_button_ebMeterView);
+        mPhotoCaptureButtonDgHmrView = (ImageView) findViewById(R.id.photoCapture_button_dgHmrView);
+        mPhotoCaptureButtonDgOverviewView = (ImageView) findViewById(R.id.photoCapture_button_dgOerviewView);
+
+        mPhotoCaptureSwitchCaptureMode = (Switch)findViewById(R.id.photoCapture_switch_captureMode);
+
+    }
+
     private void setListner() {
         mPhotoCaptureButtonSite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -690,26 +711,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void assignViews() {
-        mPhotoCaptureButtonSite = (ImageView) findViewById(R.id.photoCapture_button_site);
-        mPhotoCaptureButtonShelter = (ImageView) findViewById(R.id.photoCapture_button_shelter);
-        mPhotoCaptureButtonEbMeterBox = (ImageView) findViewById(R.id.photoCapture_button_ebMeterBox);
-        mPhotoCaptureButtonSmps = (ImageView) findViewById(R.id.photoCapture_button_smps);
-        mPhotoCaptureButtonEbMeter = (ImageView) findViewById(R.id.photoCapture_button_ebMeter);
-        mPhotoCaptureButtonDgHmr = (ImageView) findViewById(R.id.photoCapture_button_dgHmr);
-        mPhotoCaptureButtonDgOverview = (ImageView) findViewById(R.id.photoCapture_button_dgOerview);
 
-        mPhotoCaptureButtonSiteView = (ImageView) findViewById(R.id.photoCapture_button_siteView);
-        mPhotoCaptureButtonShelterView = (ImageView) findViewById(R.id.photoCapture_button_shelterView);
-        mPhotoCaptureButtonEbMeterBoxView = (ImageView) findViewById(R.id.photoCapture_button_ebMeterBoxView);
-        mPhotoCaptureButtonSmpsView = (ImageView) findViewById(R.id.photoCapture_button_smpsView);
-        mPhotoCaptureButtonEbMeterView = (ImageView) findViewById(R.id.photoCapture_button_ebMeterView);
-        mPhotoCaptureButtonDgHmrView = (ImageView) findViewById(R.id.photoCapture_button_dgHmrView);
-        mPhotoCaptureButtonDgOverviewView = (ImageView) findViewById(R.id.photoCapture_button_dgOerviewView);
-
-        mPhotoCaptureSwitchCaptureMode = (Switch)findViewById(R.id.photoCapture_switch_captureMode);
-
-    }
 
     private void setInputDetails() {
         try {
