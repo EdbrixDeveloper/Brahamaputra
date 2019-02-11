@@ -57,7 +57,6 @@ public class ExternalTenantsPersonaldetails extends BaseActivity {
     private HotoTransactionData hotoTransactionData;
     private ExternalTenantsPersonalDetailsParentData externalTenantsPersonalDetailsParentData;
     private ArrayList<ExternalTenantsPersonalDetailsData> externalTenantsPersonalDetailsDataList;
-    //private String base64StringLayoutOfLand = "eji39jjj";
     private SessionManager sessionManager;
     private int totalTenantCount = 0;
     private int currentPos = 0;
