@@ -1,28 +1,27 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.app.DatePickerDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.DatePicker;
+
 import android.widget.EditText;
-import android.widget.ImageView;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.ACDB_DCDB_Data;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -30,11 +29,10 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Locale;
+
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
@@ -65,10 +63,6 @@ public class ACDB_DCDB extends BaseActivity {
     private LinearLayout mSolarPowerSystemLinearLayourContainer;
 
 
-   /* mAcdbDcdbTextViewNumberofACDBVal;
-    mAcdbDcdbEditTextACDBRatingAMP;
-    mAcdbDcdbTextViewNumberofDCDBVal;
-    mAcdbDcdbTextViewFreeCoolingDeviseStausFCUVal;*/
 
 
     private void assignViews() {
