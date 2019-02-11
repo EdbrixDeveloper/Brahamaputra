@@ -44,7 +44,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
     private String ticketName = "";
     private SessionManager sessionManager;
 
-    private OfflineStorageWrapper offlineStorageWrapper;
+    //private OfflineStorageWrapper offlineStorageWrapper;
     private LinearLayout mLnrModulesPlantDetails;
     private TextView mPowerPlantDetailsModulesTextViewModuleNumber;
     private ImageView mPowerPlantDetailsButtonModuleQRCodeScan;
@@ -83,7 +83,7 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerPlantDetailsModulesReadingsActivity.this, userId, ticketName);
+        //offlineStorageWrapper = OfflineStorageWrapper.getInstance(PowerPlantDetailsModulesReadingsActivity.this, userId, ticketName);
 
         assignViews();
         initCombo();
@@ -287,7 +287,6 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
                         str_makeModule = item.get(position);
                         mPowerPlantDetailsTextViewModuleMakeVal.setText(str_makeModule);
-                        //showToast(str_makeModule);
                     }
                 });
             }
@@ -398,7 +397,6 @@ public class PowerPlantDetailsModulesReadingsActivity extends BaseActivity {
         String capacity = mPowerPlantDetailsEditTextModuleCapacity.getText().toString().trim();
         String bookValue = mPowerPlantDetailsEditTextBookValueModule.getText().toString().trim();
 
-        //DetailsOfUnusedMaterialsData obj_detailsOfUnusedMaterialsData = new DetailsOfUnusedMaterialsData(typeOfAsset, assetMake, assetStatus, assetDescription);
         PowerPlantDetailsModulesData obj_powerPlantDetailsModulesData = new PowerPlantDetailsModulesData(qrCode, manufacturer, capacity, bookValue);
 
         if (powerPlantDetailsModulesData.size() > 0) {

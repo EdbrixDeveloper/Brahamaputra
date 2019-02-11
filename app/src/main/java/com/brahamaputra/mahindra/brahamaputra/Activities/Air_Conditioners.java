@@ -57,6 +57,8 @@ import java.util.Locale;
 
 public class Air_Conditioners extends BaseActivity {
 
+    private static final String TAG = Air_Conditioners.class.getSimpleName();
+
     private TextView mAirConditionersTextViewNoOfAirConditionersACprovided;
     private TextView mAirConditionersTextViewNoOfAirConditionersACprovidedVal;
     private TextView mAirConditionersTextViewNumberOfACInWorkingCondition;
@@ -104,12 +106,10 @@ public class Air_Conditioners extends BaseActivity {
     private String str_amcYesNo;
     private String str_workingCondition;
 
-    private static final String TAG = Air_Conditioners.class.getSimpleName();
-
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ArrayList<AirConditionersData> airConditionersData;
     //private AirConditionersData airConditionersDataTemp;
@@ -584,7 +584,6 @@ public class Air_Conditioners extends BaseActivity {
                 Gson gson = new Gson();
 
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-                //airConditionersData = hotoTransactionData.getAirConditionersData();
                 dataList = hotoTransactionData.getAirConditionParentData();//setAirConditionersData(hotoTransactionData.getAirConditionParentData().getAirConditionersData());
                 airConditionersData.addAll(dataList.getAirConditionersData());
 
@@ -643,12 +642,10 @@ public class Air_Conditioners extends BaseActivity {
 
             } else {
                 showToast("No previous saved data available");
-                //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 linearLayout_container.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //showToast(e.getMessage().toString());
         }
     }
 
@@ -973,7 +970,7 @@ public class Air_Conditioners extends BaseActivity {
                 //compare list.get(i) and list.get(j)
                 if (airConditionersData.get(i).getqRCodeScan().toString().equals(airConditionersData.get(j).getqRCodeScan().toString())) {
                     int dup_pos = j + 1;
-                    showToast("QR Code Scanned in Reading No: "+ dup_pos +" was already scanned in reading no:"+(i + 1));
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
                     return true;
                 }
             }

@@ -37,6 +37,7 @@ import java.util.Locale;
 
 public class Earth_Resistance_Equipment extends BaseActivity {
 
+    private static final String TAG = Earth_Resistance_Equipment.class.getSimpleName();
     private TextView mEarthResistanceEquipmentTextViewTypeOfEarth;
     private TextView mEarthResistanceEquipmentTextViewTypeOfEarthVal;
     private TextView mEarthResistanceEquipmentTextViewEarthResistance;
@@ -44,17 +45,15 @@ public class Earth_Resistance_Equipment extends BaseActivity {
     private TextView mEarthResistanceEquipmentTextViewDateOfearthResistanceMeasured;
     private EditText mEarthResistanceEquipmentEditTextDateOfearthResistanceMeasured;
 
-    private static final String TAG = Earth_Resistance_Equipment.class.getSimpleName();
     DecimalConversion decimalConversion;
     String str_typeOfEarth;
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private EarthResistanceEquipmentData earthResistanceEquipmentData;
-
     private SessionManager sessionManager;
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -189,8 +188,6 @@ public class Earth_Resistance_Equipment extends BaseActivity {
 
     private void submitDetails() {
         try {
-
-            //hotoTransactionData.setTicketNo(ticketName);
 
             String earthType = mEarthResistanceEquipmentTextViewTypeOfEarthVal.getText().toString().trim();
             String earthResistanceInOhms = mEarthResistanceEquipmentEditTextEarthResistance.getText().toString().trim();

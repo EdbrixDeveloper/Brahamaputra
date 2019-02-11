@@ -36,6 +36,8 @@ import java.util.Locale;
 
 public class Tower_Detail extends BaseActivity {
 
+    private static final String TAG = Tower_Detail.class.getSimpleName();
+
     private TextView mTowerDetailTextViewTower;
     private TextView mTowerDetailTextViewTowerVal;
     private TextView mTowerDetailTextViewTypeOfTower;
@@ -63,15 +65,12 @@ public class Tower_Detail extends BaseActivity {
     String str_cautionSignageboard;
     String str_warningSignageboardVal;
 
-    private static final String TAG = Tower_Detail.class.getSimpleName();
-
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private TowerDetailsData towerDetailsData;
-
     private SessionManager sessionManager;
 
     @Override
@@ -277,7 +276,6 @@ public class Tower_Detail extends BaseActivity {
 
     }
 
-
     private void updateLabel() {
         String myFormat = "dd/MMM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -285,14 +283,12 @@ public class Tower_Detail extends BaseActivity {
         mTowerDetailEditTextDateOfPaintingOfTheTower.setText(sdf.format(myCalendar.getTime()));
     }
 
-
     private void setInputDetails() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
 
                 Gson gson = new Gson();
-
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 towerDetailsData = hotoTransactionData.getTowerDetailsData();
 
@@ -317,8 +313,6 @@ public class Tower_Detail extends BaseActivity {
     private void submitDetails() {
         try {
 
-            //hotoTransactionData.setTicketNo(ticketName);
-
             String towerName = mTowerDetailTextViewTowerVal.getText().toString().trim();
             String towerType = mTowerDetailTextViewTypeOfTowerVal.getText().toString().trim();
             String bookValueOfTheTower = mTowerDetailEditTextBookValueOfTheTower.getText().toString().trim();
@@ -329,8 +323,7 @@ public class Tower_Detail extends BaseActivity {
             String cautionSignBoard = mTowerDetailTextViewCautionSignageboardVal.getText().toString().trim();
             String warningSignBoard = mTowerDetailTextViewWarningSignageboardVal.getText().toString().trim();
 
-            towerDetailsData = new TowerDetailsData(towerName, towerType, bookValueOfTheTower,towerHeight, dateOfTowerPainting, boardSign, dangerSignBoard, cautionSignBoard, warningSignBoard);
-
+            towerDetailsData = new TowerDetailsData(towerName, towerType, bookValueOfTheTower, towerHeight, dateOfTowerPainting, boardSign, dangerSignBoard, cautionSignBoard, warningSignBoard);
             hotoTransactionData.setTowerDetailsData(towerDetailsData);
 
             Gson gson2 = new GsonBuilder().create();

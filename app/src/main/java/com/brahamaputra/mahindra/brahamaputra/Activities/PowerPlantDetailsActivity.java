@@ -122,9 +122,9 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private static final String TAG = PowerPlantDetailsActivity.class.getSimpleName();
     DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private PowerPlantDetailsParentData powerPlantDetailsParentData;
     private ArrayList<PowerPlantDetailsData> powerPlantDetailsDataList;
@@ -253,7 +253,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         mPowerPlantDetailsButtonQRCodeScan = (ImageView) findViewById(R.id.powerPlantDetails_button_QRCodeScan);
 
         mPowerPlantDetailsButtonQRCodeScanView = (ImageView) findViewById(R.id.powerPlantDetails_button_QRCodeScanView);
-
         mpowerPlantDetails_textView_PlantNumber = (TextView) findViewById(R.id.powerPlantDetails_textView_PlantNumber);
 
         mPowerPlantDetailsTextViewAssetOwner = (TextView) findViewById(R.id.powerPlantDetails_textView_assetOwner);
@@ -743,11 +742,9 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     } else {
                         btnNextReadingPowerPlant.setText("Finish");
                     }
-                    //private ImageView mSolarPowerSystemButtonQRCodeScan.setText(landDetailsData.getQRCodeScan());
                 }
 
             } else {
-                //Toast.makeText(PowerPlantDetailsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 showToast("No previous saved data available");
             }
         } catch (Exception e) {
@@ -1186,7 +1183,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         //String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
         //String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
 
-
         if (!numberModuleSlots.isEmpty() && numberModuleSlots != null) {
             if (numberModuleSlots.matches("\\d+(?:\\.\\d+)?")) {
                 if (Integer.valueOf(numberModuleSlots) > 0) {
@@ -1248,7 +1244,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     }
 
 
-    /*Arjun 28112018*/
+    /*008 28112018*/
     public boolean checkValidationOnChangeNoOfModuleSlots(String numberModuleSlots, String numberOfModules) {
         //String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
 
@@ -1258,7 +1254,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         } else return checkValidationOnNoOfModuleSlots(numberModuleSlots, numberOfModules);
     }
 
-    /*Arjun 28112018*/
+    /*008 28112018*/
     public boolean checkValidationOnChangeNoOfFaultyModulese(String numberOfModules, String noOfFaultyModulese) {
 
         //String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();

@@ -37,6 +37,7 @@ import java.util.Locale;
 
 public class Earth_Resistance_Tower extends BaseActivity {
 
+    private static final String TAG = Earth_Resistance_Tower.class.getSimpleName();
     private TextView mEarthResistanceTowerTextViewTypeOfEarth;
     private TextView mEarthResistanceTowerTextViewTypeOfEarthVal;
     private TextView mEarthResistanceTowerTextViewEarthResistance;
@@ -44,14 +45,13 @@ public class Earth_Resistance_Tower extends BaseActivity {
     private TextView mEarthResistanceTowerTextViewDateOfearthResistanceMeasured;
     private EditText mEarthResistanceTowerEditTextDateOfearthResistanceMeasured;
 
-    private static final String TAG = Earth_Resistance_Tower.class.getSimpleName();
     DecimalConversion decimalConversion;
     String str_typeOfEarth;
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private EarthResistanceTowerData earthResistanceTowerData;
     private SessionManager sessionManager;
@@ -188,14 +188,11 @@ public class Earth_Resistance_Tower extends BaseActivity {
     private void submitDetails() {
         try {
 
-            //hotoTransactionData.setTicketNo(ticketName);
-
             String earthType = mEarthResistanceTowerTextViewTypeOfEarthVal.getText().toString().trim();
             String earthResistanceInOhms = mEarthResistanceTowerEditTextEarthResistance.getText().toString().trim();
             String earthResistanceMeasuredDate = mEarthResistanceTowerEditTextDateOfearthResistanceMeasured.getText().toString().trim();
 
             earthResistanceTowerData = new EarthResistanceTowerData(earthType, earthResistanceInOhms, earthResistanceMeasuredDate);
-
             hotoTransactionData.setEarthResistanceTowerData(earthResistanceTowerData);
 
             Gson gson2 = new GsonBuilder().create();

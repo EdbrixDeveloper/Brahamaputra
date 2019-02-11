@@ -66,7 +66,7 @@ public class UserSites {
     private String LastEBReadingl;
 
 //////////////////////////////////////
-    
+
     public String getBillingMonth() {
         return BillingMonth;
     }

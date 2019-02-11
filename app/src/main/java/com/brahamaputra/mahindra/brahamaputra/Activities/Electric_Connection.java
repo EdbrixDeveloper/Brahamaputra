@@ -131,11 +131,9 @@ public class Electric_Connection extends BaseActivity {
 
     DecimalConversion decimalConversion;
     private static final String TAG = Electric_Connection.class.getSimpleName();
-    //String selectedHour = "HH", selectedMinute = "MM";
 
     String str_typeOfElectricConnection;
     String str_tariff;
-    //String str_nameOfSupplyCompany;
     String str_copyOfElectricBills;
     String str_ebSupplier;
     String str_ebStatus;
@@ -152,9 +150,9 @@ public class Electric_Connection extends BaseActivity {
 
 
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ElectricConnectionData electricConnectionData;
     private SessionManager sessionManager;
@@ -264,8 +262,6 @@ public class Electric_Connection extends BaseActivity {
             }
         });
 
-        //showToast(hototicket_nameOfSupplyCompany);
-
         if (hototicket_nameOfSupplyCompany.isEmpty() || hototicket_nameOfSupplyCompany.length() < 0) {
             //
         } else {
@@ -287,7 +283,7 @@ public class Electric_Connection extends BaseActivity {
 
         mElectricConnectionEditTextSecurityAmountPaidToTheCompany = (EditText) findViewById(R.id.electricConnection_editText_SecurityAmountPaidToTheCompany);
         mElectricConnectionTextViewNameOfSupplyCompany = (TextView) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany);
-        //nameOfSupplyCompany
+
         mElectricConnectionTextViewNameOfSupplyCompanyVal = (EditText) findViewById(R.id.electricConnection_textView_nameOfSupplyCompany_val);
         mElectricConnectionTextViewCopyOfElectricBills = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills);
         mElectricConnectionTextViewCopyOfElectricBillsVal = (TextView) findViewById(R.id.electricConnection_textView_copyOfElectricBills_val);
@@ -730,7 +726,6 @@ public class Electric_Connection extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 electricConnectionData = hotoTransactionData.getElectricConnectionData();
 
-
                 mElectricConnectionTextViewTypeOfElectricConnectionVal.setText(electricConnectionData.getElectricConnectionType());
                 mElectricConnectionTextViewTariffVal.setText(electricConnectionData.getConnectionTariff());
                 mElectricConnectionEditTextSanctionedLoadKVA.setText(electricConnectionData.getSanctionLoad());
@@ -777,8 +772,6 @@ public class Electric_Connection extends BaseActivity {
     private void submitDetails() {
         try {
 
-            //hotoTransactionData.setTicketNo(ticketName);
-
             String electricConnectionType = mElectricConnectionTextViewTypeOfElectricConnectionVal.getText().toString().trim();
             String connectionTariff = mElectricConnectionTextViewTariffVal.getText().toString().trim();
             String sanctionLoad = mElectricConnectionEditTextSanctionedLoadKVA.getText().toString().trim();
@@ -815,8 +808,7 @@ public class Electric_Connection extends BaseActivity {
             String bankAccountNo = mElectricConnectionEditTextBankAccountNo.getText().toString().trim();
 
 
-            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, securityAmountPaid,existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
-
+            electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, securityAmountPaid, existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
             hotoTransactionData.setElectricConnectionData(electricConnectionData);
 
             Gson gson2 = new GsonBuilder().create();

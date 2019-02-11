@@ -151,9 +151,9 @@ public class Power_Backups_DG extends BaseActivity {
     private static final String TAG = Power_Backups_DG.class.getSimpleName();
     DecimalConversion decimalConversion;
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ArrayList<PowerBackupsDGData> powerBackupsDGData;
     private byte qrScanFlag = 0;
@@ -1333,7 +1333,6 @@ public class Power_Backups_DG extends BaseActivity {
                 }
 
             } else {
-                //Toast.makeText(Power_Backups_DG.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 showToast("No previous saved data available");
                 linearLayout_container.setVisibility(View.GONE);
                 mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//008

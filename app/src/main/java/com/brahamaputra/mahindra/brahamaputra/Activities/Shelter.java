@@ -31,6 +31,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 
 public class Shelter extends BaseActivity {
 
+    private static final String TAG = Shelter.class.getSimpleName();
 
     private TextView mShelterTextViewPhysicalConditionOfShelterPlatform;
     private TextView mShelterTextViewPhysicalConditionOfShelterPlatformVal;
@@ -71,12 +72,10 @@ public class Shelter extends BaseActivity {
     private String str_noOfOdcAvailable;
     private String str_odcLock;
 
-    private static final String TAG = Shelter.class.getSimpleName();
-
     private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "101";
-    private String ticketId = "28131";
-    private String ticketName = "28131";
+    private String userId = "";
+    private String ticketId = "";
+    private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private ShelterData shelterData;
 
@@ -358,7 +357,6 @@ public class Shelter extends BaseActivity {
                 mShelterTextViewOdcLockVal.setText(shelterData.getOdcLock());
 
             } else {
-                //Toast.makeText(Shelter.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 showToast("No previous saved data available");
             }
         } catch (Exception e) {
@@ -368,8 +366,6 @@ public class Shelter extends BaseActivity {
 
     private void submitDetails() {
         try {
-
-            //hotoTransactionData.setTicketNo(ticketName);
 
             String physicalCondition = mShelterTextViewPhysicalConditionOfShelterPlatformVal.getText().toString().trim();
             String noOfBtsInsideShelter = mShelterTextViewNumberOfBtsInsideShelterVal.getText().toString().trim();
@@ -383,7 +379,6 @@ public class Shelter extends BaseActivity {
 
 
             shelterData = new ShelterData(physicalCondition, noOfBtsInsideShelter, noOfBtsOutsideShelter, shelterLock, outdoorShelterLock, igbStatus, egbStatus, noOfOdcAvailable, odcLock);
-
             hotoTransactionData.setShelterData(shelterData);
 
             Gson gson2 = new GsonBuilder().create();
