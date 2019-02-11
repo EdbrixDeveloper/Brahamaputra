@@ -63,7 +63,7 @@ public class DieselFillingFundReqestList extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diesel_filling_fund_reqest_list);
-        this.setTitle("Diesel Filling Fund Request");
+        this.setTitle("Diesel Request");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(DieselFillingFundReqestList.this);
         sessionManager = new SessionManager(DieselFillingFundReqestList.this);

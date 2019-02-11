@@ -40,11 +40,13 @@ import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.DgIdQrCode;
 import com.brahamaputra.mahindra.brahamaputra.Data.DgIdQrCodeList;
+import com.brahamaputra.mahindra.brahamaputra.Data.DgLastReadingsForDieselRequest;
 import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingData;
 import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingFundRequestData;
 import com.brahamaputra.mahindra.brahamaputra.Data.DieselSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGDataList;
 import com.brahamaputra.mahindra.brahamaputra.Data.Site;
+import com.brahamaputra.mahindra.brahamaputra.Data.SiteDieselTransactions;
 import com.brahamaputra.mahindra.brahamaputra.Data.SiteList;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserDetailsParent;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserSites;
@@ -188,7 +190,7 @@ public class DieselFillingFundRequest extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diesel_filling_fund_request);
-        this.setTitle("Diesel Filling Fund Request");
+        this.setTitle("Diesel Request");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         gpsTracker = new GPSTracker(DieselFillingFundRequest.this);
 
@@ -487,17 +489,22 @@ public class DieselFillingFundRequest extends BaseActivity {
                                                         mDieselFillingFundRequestTextViewDgMakeVal.setText("");
                                                         mDieselFillingFundRequestTextViewDgCapacityInKvaVal.setText("");
 
+                                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText("");
+                                                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText("");
+                                                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText("");
+                                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText("");
+
                                                         mDieselFillingFundRequestTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                         mDieselFillingFundRequestTextViewSiteIdVal.setText(userSitesList.getSiteList().get(position).getSiteId());
 
                                                         mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower() == null || userSitesList.getSiteList().get(position).getSourceOfPower().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getSourceOfPower());
                                                         mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName() == null || userSitesList.getSiteList().get(position).getPetroCompanyName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getPetroCompanyName());
                                                         mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber() == null || userSitesList.getSiteList().get(position).getChildCardNumber().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getChildCardNumber());
-                                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate() == null || userSitesList.getSiteList().get(position).getLastDieselFillingDate().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().substring(0, userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().indexOf(" ")));
 
+                                                        /*mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate() == null || userSitesList.getSiteList().get(position).getLastDieselFillingDate().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().substring(0, userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().indexOf(" ")));
                                                         mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock() == null || userSitesList.getSiteList().get(position).getLastDieselStock().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselStock());
                                                         mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR() == null || userSitesList.getSiteList().get(position).getLastDGHMR().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDGHMR());
-                                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl() == null || userSitesList.getSiteList().get(position).getLastEBReadingl().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastEBReadingl());
+                                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl() == null || userSitesList.getSiteList().get(position).getLastEBReadingl().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastEBReadingl());*/
 
                                                         if (userSitesList.getSiteList().get(position).getLatitude() != null && userSitesList.getSiteList().get(position).getLongitude() != null &&
                                                                 !userSitesList.getSiteList().get(position).getLatitude().isEmpty() && !userSitesList.getSiteList().get(position).getLongitude().isEmpty()) {
@@ -558,10 +565,11 @@ public class DieselFillingFundRequest extends BaseActivity {
                                                     mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower() == null || userSitesList.getSiteList().get(position).getSourceOfPower().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getSourceOfPower());
                                                     mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName() == null || userSitesList.getSiteList().get(position).getPetroCompanyName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getPetroCompanyName());
                                                     mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber() == null || userSitesList.getSiteList().get(position).getChildCardNumber().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getChildCardNumber());
-                                                    mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate() == null || userSitesList.getSiteList().get(position).getLastDieselFillingDate().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().substring(0, userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().indexOf(" ")));
+
+                                                    /*mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(userSitesList.getSiteList().get(position).getLastDieselFillingDate() == null || userSitesList.getSiteList().get(position).getLastDieselFillingDate().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().substring(0, userSitesList.getSiteList().get(position).getLastDieselFillingDate().toString().indexOf(" ")));
                                                     mDieselFillingFundRequestTextViewLastDieselStockVal.setText(userSitesList.getSiteList().get(position).getLastDieselStock() == null || userSitesList.getSiteList().get(position).getLastDieselStock().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDieselStock());
                                                     mDieselFillingFundRequestTextViewLastDgHmrVal.setText(userSitesList.getSiteList().get(position).getLastDGHMR() == null || userSitesList.getSiteList().get(position).getLastDGHMR().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastDGHMR());
-                                                    mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl() == null || userSitesList.getSiteList().get(position).getLastEBReadingl().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastEBReadingl());
+                                                    mDieselFillingFundRequestTextViewLastEbReadingVal.setText(userSitesList.getSiteList().get(position).getLastEBReadingl() == null || userSitesList.getSiteList().get(position).getLastEBReadingl().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getLastEBReadingl());*/
 
                                                     siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
 
@@ -966,7 +974,6 @@ public class DieselFillingFundRequest extends BaseActivity {
         }
     }
 
-
     private void prepareDgMake_from_Sites() {
         try {
             showBusyProgress();
@@ -1011,6 +1018,12 @@ public class DieselFillingFundRequest extends BaseActivity {
 
                                                         dgCapacityList = new ArrayList<String>();
                                                         mDieselFillingFundRequestTextViewDgCapacityInKvaVal.setText("");
+
+                                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText("");
+                                                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText("");
+                                                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText("");
+                                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText("");
+
                                                         mDieselFillingFundRequestTextViewDgMakeVal.setText(dgIdQrCodeList.getPowerBackupsDGDataList().get(position).getDGMakeName());
                                                         if (dgIdQrCodeList.getPowerBackupsDGDataList().get(position).getCapacity() != null) {
                                                             dgCapacityList.addAll(dgIdQrCodeList.getPowerBackupsDGDataList().get(position).getCapacity());
@@ -1070,13 +1083,25 @@ public class DieselFillingFundRequest extends BaseActivity {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
 
+                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText("");
+                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText("");
+                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText("");
+                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText("");
 
                         mDieselFillingFundRequestTextViewDgCapacityInKvaVal.setText(dgCapacityList.get(position).toString());
+
                         /*final ArrayList<String> dgCapacityList = new ArrayList<String>();
                         if (dgIdQrCodeList.getPowerBackupsDGDataList().get(position).getCapacity() != null) {
                             dgCapacityList.addAll(dgIdQrCodeList.getPowerBackupsDGDataList().get(position).getCapacity());
                             bindToDgCapacity(dgCapacityList);
                         }*/
+
+                        if (!mDieselFillingFundRequestTextViewDgMakeVal.getText().toString().isEmpty() &&
+                                !mDieselFillingFundRequestTextViewDgMakeVal.getText().toString().equals("No Data Found") &&
+                                !mDieselFillingFundRequestTextViewDgCapacityInKvaVal.getText().toString().isEmpty() &&
+                                !mDieselFillingFundRequestTextViewDgCapacityInKvaVal.getText().toString().equals("No Data Found")) {
+                            setLastReadingValues();
+                        }
 
                     }
                 });
@@ -1086,4 +1111,71 @@ public class DieselFillingFundRequest extends BaseActivity {
 
     }
 
+    private void setLastReadingValues() {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jo.put("SiteId", siteDbId);
+            jo.put("DGMake", mDieselFillingFundRequestTextViewDgMakeVal.getText().toString().trim());
+            jo.put("DGCapacity", mDieselFillingFundRequestTextViewDgCapacityInKvaVal.getText().toString().trim());
+
+
+            GsonRequest<DgLastReadingsForDieselRequest> getDgLastReadings = new GsonRequest<>(Request.Method.POST, Constants.GetSiteDieselTransactionByDG, jo.toString(), DgLastReadingsForDieselRequest.class,
+                    new Response.Listener<DgLastReadingsForDieselRequest>() {
+                        @Override
+                        public void onResponse(DgLastReadingsForDieselRequest response) {
+                            hideBusyProgress();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    if (response.getSiteDieselTransactions() != null) {
+                                        //SiteDieselTransactions siteDieselTransactions = new SiteDieselTransactions();
+                                        //siteDieselTransactions = response.getSiteDieselTransactions();
+
+
+                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText(response.getSiteDieselTransactions().getLastDieselFillingDate() == null || response.getSiteDieselTransactions().getLastDieselFillingDate().isEmpty() == true ? "-" : response.getSiteDieselTransactions().getLastDieselFillingDate().toString().substring(0, response.getSiteDieselTransactions().getLastDieselFillingDate().toString().indexOf(" ")));
+                                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText(response.getSiteDieselTransactions().getLastDieselStock() == null || response.getSiteDieselTransactions().getLastDieselStock().isEmpty() == true ? "-" : response.getSiteDieselTransactions().getLastDieselStock());
+                                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText(response.getSiteDieselTransactions().getLastDGHMR() == null || response.getSiteDieselTransactions().getLastDGHMR().isEmpty() == true ? "-" : response.getSiteDieselTransactions().getLastDGHMR());
+                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText(response.getSiteDieselTransactions().getLastEBReadingl() == null || response.getSiteDieselTransactions().getLastEBReadingl().isEmpty() == true ? "-" : response.getSiteDieselTransactions().getLastEBReadingl());
+
+                                    } else {
+                                        mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText("-");
+                                        mDieselFillingFundRequestTextViewLastDieselStockVal.setText("-");
+                                        mDieselFillingFundRequestTextViewLastDgHmrVal.setText("-");
+                                        mDieselFillingFundRequestTextViewLastEbReadingVal.setText("-");
+                                    }
+
+                                } else {
+                                    mDieselFillingFundRequestTextViewLastDieselFillingDateVal.setText("-");
+                                    mDieselFillingFundRequestTextViewLastDieselStockVal.setText("-");
+                                    mDieselFillingFundRequestTextViewLastDgHmrVal.setText("-");
+                                    mDieselFillingFundRequestTextViewLastEbReadingVal.setText("-");
+                                }
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            hideBusyProgress();
+                            Log.e("D100", error.toString());
+                        }
+                    });
+            getDgLastReadings.setRetryPolicy(Application.getDefaultRetryPolice());
+            getDgLastReadings.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(getDgLastReadings, "getDgLastReadings");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
+    }
+
+
 }
+
+
