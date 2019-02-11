@@ -62,8 +62,28 @@ public class ACDB_DCDB extends BaseActivity {
     private LinearLayout mAcdbDcdbLinearLayoutFreeCoolingDeviseStausFCU;
     private LinearLayout mSolarPowerSystemLinearLayourContainer;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_acdb_dcdb);
+        this.setTitle("ACDB/DCDB");
 
+        sessionManager = new SessionManager(ACDB_DCDB.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ACDB_DCDB.this, userId, ticketName);
 
+        assignViews();
+        initCombo();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        hotoTransactionData = new HotoTransactionData();
+        setInputDetails();
+        checkValidation();
+
+    }
 
     private void assignViews() {
         mAcdbDcdbTextViewNumberofACDB = (TextView) findViewById(R.id.acdb_dcdb_textView_NumberofACDB);
@@ -119,7 +139,7 @@ public class ACDB_DCDB extends BaseActivity {
                     public void onClick(ArrayList<String> item, int position) {
                         str_NumberofACDB = item.get(position);
                         mAcdbDcdbTextViewNumberofACDBVal.setText(str_NumberofACDB);
-
+                        mAcdbDcdbEditTextACDBRatingAMP.setText("");
                         if(str_NumberofACDB.equals("0")){
                             mSolarPowerSystemLinearLayourContainer.setVisibility(View.GONE);
                         }else {
@@ -153,29 +173,6 @@ public class ACDB_DCDB extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acdb_dcdb);
-        this.setTitle("ACDB/DCDB");
-
-        sessionManager = new SessionManager(ACDB_DCDB.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(ACDB_DCDB.this, userId, ticketName);
-
-        assignViews();
-        initCombo();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        hotoTransactionData = new HotoTransactionData();
-        setInputDetails();
-        checkValidation();
-
-    }
-
     private void checkValidation() {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -196,14 +193,12 @@ public class ACDB_DCDB extends BaseActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -233,7 +228,11 @@ public class ACDB_DCDB extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 acdb_dcdb_data = hotoTransactionData.getAcdb_dcdb_data();
 
-
+                if(acdb_dcdb_data.getNumberofACDB().equals("0")){
+                    mSolarPowerSystemLinearLayourContainer.setVisibility(View.GONE);
+                }else {
+                    mSolarPowerSystemLinearLayourContainer.setVisibility(View.VISIBLE);
+                }
 
                 mAcdbDcdbTextViewNumberofACDBVal.setText(acdb_dcdb_data.getNumberofACDB());;
                 mAcdbDcdbEditTextACDBRatingAMP.setText(acdb_dcdb_data.getAcdbRatingAMP());;
