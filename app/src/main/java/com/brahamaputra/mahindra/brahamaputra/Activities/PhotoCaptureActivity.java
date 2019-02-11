@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -16,7 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -72,7 +72,7 @@ public class PhotoCaptureActivity extends BaseActivity {
     private HotoTransactionData hotoTransactionData;
     private SitePhotoCaptureData sitePhotoCaptureData;
 
-    private Uri imageFileUri;
+
 
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
