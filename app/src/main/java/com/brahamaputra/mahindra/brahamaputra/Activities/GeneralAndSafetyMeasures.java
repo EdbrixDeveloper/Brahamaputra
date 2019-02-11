@@ -3,7 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,21 +13,21 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
+
 import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresData;
 import com.brahamaputra.mahindra.brahamaputra.Data.GeneralSafetyMeasuresParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TowerDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
-import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
+
 import com.brahamaputra.mahindra.brahamaputra.Utils.InputFilterMinMax;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.ArrayList;
+
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
@@ -74,7 +74,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
     String str_DoorOpenSensor;
     String str_FuelSensor;
     String str_FireSmokeSensor;
-    String str_AgencyName;
+
 
 
     private OfflineStorageWrapper offlineStorageWrapper;
