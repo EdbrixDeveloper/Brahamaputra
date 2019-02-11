@@ -16,13 +16,13 @@ import android.widget.Toast;
 import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.DetailsOfUnusedMaterialsParentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePhotoCaptureData;
+
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
-import com.brahamaputra.mahindra.brahamaputra.commons.ToastMessage;
+
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
@@ -53,10 +53,6 @@ public class DetailsOfUnusedMaterials extends BaseActivity {
 
     private EditText mDetailsOfUnusedMaterialsEditTextDescriptionVal;
 
-  /*  mDetailsOfUnusedMaterialsTextViewNumberofUnusedAssetinSiteVal;
-    mDetailsOfUnusedMaterialsTextViewAssetMakeVal;
-    mDetailsOfUnusedMaterialsTextViewAssetStatusVal;
-*/
 
     String str_numberofUnusedAssetinSite;
     String str_typeOfAsset;
