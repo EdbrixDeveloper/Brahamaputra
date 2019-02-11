@@ -101,7 +101,6 @@ public class Land_Details extends BaseActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
-    //public String date_flag = "no";
 
     private AlertDialogManager alertDialogManager;
 
@@ -144,7 +143,6 @@ public class Land_Details extends BaseActivity {
             }
 
         };
-
 
         mLandDetailsEditTextDateOfvalidityOfAgreement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,7 +228,6 @@ public class Land_Details extends BaseActivity {
         mLandDetailsEditTextRentLeaseInNumber = (EditText) findViewById(R.id.landDetails_editText_rentLeaseInNumber);
         mLandDetailsEditTextBookValueOfTheLand = (EditText) findViewById(R.id.landDetails_editText_BookValueOfTheLand);
         landDetails_LinearLayout_BookValueOfTheLand = (LinearLayout) findViewById(R.id.landDetails_LinearLayout_BookValueOfTheLand);
-
 
         mLandDetailsTextViewRentLeaseInWords = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords);
         mLandDetailsTextViewRentLeaseInWords_val = (TextView) findViewById(R.id.landDetails_textView_rentLeaseInWords_val);
