@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TotalDCLoadofSiteData;
@@ -37,7 +36,6 @@ public class Total_DC_Load_site extends BaseActivity {
     private String ticketName = "";
     private HotoTransactionData hotoTransactionData;
     private TotalDCLoadofSiteData totalDCLoadofSiteData;
-    //private String base64StringLayoutOfLand = "eji39jjj";
     private SessionManager sessionManager;
 
     private void assignViews() {
