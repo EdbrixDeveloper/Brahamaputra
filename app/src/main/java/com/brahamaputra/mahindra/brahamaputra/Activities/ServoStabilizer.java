@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,8 +13,7 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,7 +29,7 @@ import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.LandDetailsData;
+
 import com.brahamaputra.mahindra.brahamaputra.Data.ServoStabilizerData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -46,7 +44,6 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,12 +79,6 @@ public class ServoStabilizer extends BaseActivity {
     private LinearLayout linearLayoutServoDetails;
 
 
-  /*  mBatterySetButtonQRCodeScan;
-    mServoStabilizerTextViewServoStabilizerWorkingStatusVal;
-    mServoStabilizerTextViewMakeofServoVal;
-    mServoStabilizerTextViewRatingofServoVal;
-    mServoStabilizerTextViewWorkingConditionVal;
-    mServoStabilizerEditTextNatureofProblem;*/
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
