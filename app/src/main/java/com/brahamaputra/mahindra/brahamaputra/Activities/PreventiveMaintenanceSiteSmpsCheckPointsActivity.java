@@ -1,17 +1,12 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -87,10 +82,10 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     private Button mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading;
     private LinearLayout mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault;
 
-    private LinearLayout  mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
-    private TextView  mPreventiveMaintenanceSiteSmpsCheckPointsTextViewUploadPhotoOfRegisterFault;
-    private ImageView  mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFault;
-    private ImageView  mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView;
+    private LinearLayout mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault;
+    private TextView mPreventiveMaintenanceSiteSmpsCheckPointsTextViewUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFault;
+    private ImageView mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView;
 
     String str_noOfSmpsAvailableAtSiteVal;
     String str_smpsConditionVal;
@@ -214,12 +209,12 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_nextReading);
-        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_typeOfFault);
+        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_typeOfFault);
 
-        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteSmpsCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_textView_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView)findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_uploadPhotoOfRegisterFaultView);
+        mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteSmpsCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteSmpsCheckPoints_button_uploadPhotoOfRegisterFaultView);
     }
 
     private void initCombo() {
@@ -636,7 +631,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         finish();
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void setInputDetails(int index) {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -700,7 +695,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                     }
 
                 }
-            }else {
+            } else {
                 showToast("No previous saved data available");
                 //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 mLinearLayoutContainer.setVisibility(View.GONE);
@@ -725,7 +720,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         }
     }
 
-    private void saveRecords(int pos){
+    private void saveRecords(int pos) {
 
         String smpsCondition = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.getText().toString().trim();
         String smpsControlerStatus = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsControlerStatusVal.getText().toString().trim();
@@ -736,8 +731,8 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         String base64DcLoadCurrentPhoto = base64StringPhotoDcLoadCurrent;
 
         SmpsCheckPoint smpsCheckPointchild = new SmpsCheckPoint(detailsOfSmpsQrCodeScan, smpsCondition, smpsControlerStatus,
-                                                            smpsEarthingStatus, dcLoadCurrentInFloat, base64DcLoadCurrentPhoto,
-                                                            dcLoadAmpPh);
+                smpsEarthingStatus, dcLoadCurrentInFloat, base64DcLoadCurrentPhoto,
+                dcLoadAmpPh);
         if (smpsCheckPointsData.size() > 0) {
             if (pos == smpsCheckPointsData.size()) {
                 smpsCheckPointsData.add(smpsCheckPointchild);
@@ -750,7 +745,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
 
     }
 
-    private void displayRecords(int pos){
+    private void displayRecords(int pos) {
         if (smpsCheckPointsData.size() > 0 && pos < smpsCheckPointsData.size()) {
 
             mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsNumber.setText("Reading: #" + (pos + 1));
@@ -822,7 +817,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         //mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScan.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteSmpsCheckPointsButtonPhotoDcLoadCurrentView.setVisibility(View.GONE);
-        alreadySelectedTypeOfFaultList=new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
     }
 
     private void submitDetails() {
@@ -832,7 +827,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
             String typeOfFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
             String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
 
-            dataList = new SmpsCheckPointParentData(noOfsmpsAtSite, smpsCheckPointsData,registerFault,typeOfFault,base64StringUploadPhotoOfRegisterFault);
+            dataList = new SmpsCheckPointParentData(noOfsmpsAtSite, smpsCheckPointsData, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault);
             pmSiteTransactionDetails.setSmpsCheckPointParentData(dataList);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);
@@ -842,7 +837,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         }
     }
 
-    public boolean checkValidationOfArrayFields(){
+    public boolean checkValidationOfArrayFields() {
         String smpsCondition = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.getText().toString().trim();
         String smpsControlerStatus = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsControlerStatusVal.getText().toString().trim();
         String smpsEarthingStatus = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsEarthingStatusVal.getText().toString().trim();

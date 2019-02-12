@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class SmpsCheckPoint implements Serializable
 {
-
     @SerializedName("detailsOfSmpsQrCodeScan")
     @Expose
     private String detailsOfSmpsQrCodeScan;
@@ -29,10 +28,6 @@ public class SmpsCheckPoint implements Serializable
     @SerializedName("dcLoadAmpPh")
     @Expose
     private String dcLoadAmpPh;
-
-
-
-    private final static long serialVersionUID = 311885327518270776L;
 
     public String getDetailsOfSmpsQrCodeScan() {
         return detailsOfSmpsQrCodeScan;

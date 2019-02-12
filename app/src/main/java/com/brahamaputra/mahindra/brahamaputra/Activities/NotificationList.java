@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,25 +14,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.DieselTrasactionAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.NotificationListAdapter;
-import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.Notification;
 import com.brahamaputra.mahindra.brahamaputra.R;
-import com.brahamaputra.mahindra.brahamaputra.Services.GoogleFirebaseMessagingService;
-import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
-import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.DatabaseHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -129,10 +117,10 @@ public class NotificationList extends BaseActivity {
             mNotificationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getApplicationContext(),ShowHotoNotifiacationDetailsActivity.class);
-                    intent.putExtra("title",dd.get(position).getTitle());
-                    intent.putExtra("timestamp",dd.get(position).getTimestamp());
-                    intent.putExtra("message",dd.get(position).getMessage());
+                    Intent intent = new Intent(getApplicationContext(), ShowHotoNotifiacationDetailsActivity.class);
+                    intent.putExtra("title", dd.get(position).getTitle());
+                    intent.putExtra("timestamp", dd.get(position).getTimestamp());
+                    intent.putExtra("message", dd.get(position).getMessage());
                     startActivity(intent);
                 }
             });

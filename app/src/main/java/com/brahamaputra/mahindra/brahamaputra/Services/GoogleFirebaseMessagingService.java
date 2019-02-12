@@ -16,7 +16,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardCircularActivity;
-import com.brahamaputra.mahindra.brahamaputra.Activities.UsersHotoListActivity;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
 import com.brahamaputra.mahindra.brahamaputra.app.Config;
@@ -26,15 +25,10 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.util.Map;
 import java.util.Random;
 
 public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
@@ -252,33 +246,33 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
 
             ///////////////////////Handling Type Of Notification////////////////////
 
-            if(typeId.equals("1")) {
+            if (typeId.equals("1")) {
 
                 resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
-                resultIntent.putExtra("typeId",typeId);
-                resultIntent.putExtra("title",title);
-                resultIntent.putExtra("msg",message);
-                resultIntent.putExtra("timestamp",timestamp);
+                resultIntent.putExtra("typeId", typeId);
+                resultIntent.putExtra("title", title);
+                resultIntent.putExtra("msg", message);
+                resultIntent.putExtra("timestamp", timestamp);
 
-            }else if(typeId.equals("2")) {
-
-                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
-                resultIntent.putExtra("typeId",typeId);
-
-            }else if(typeId.equals("3")) {
+            } else if (typeId.equals("2")) {
 
                 resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
-                resultIntent.putExtra("typeId",typeId);
+                resultIntent.putExtra("typeId", typeId);
 
-            }else if(typeId.equals("4")) {
-
-                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
-                resultIntent.putExtra("typeId",typeId);
-
-            }else {
+            } else if (typeId.equals("3")) {
 
                 resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
-                resultIntent.putExtra("typeId",0);
+                resultIntent.putExtra("typeId", typeId);
+
+            } else if (typeId.equals("4")) {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId", typeId);
+
+            } else {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId", 0);
 
             }
 

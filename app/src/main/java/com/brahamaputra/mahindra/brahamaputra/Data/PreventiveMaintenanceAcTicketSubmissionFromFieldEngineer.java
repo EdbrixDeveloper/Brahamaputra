@@ -59,7 +59,6 @@ public class PreventiveMaintenanceAcTicketSubmissionFromFieldEngineer implements
     @SerializedName("remarks")
     @Expose
     private String remarks;
-    private final static long serialVersionUID = 8821042758141768738L;
 
     /**
      * No args constructor for use in serialization

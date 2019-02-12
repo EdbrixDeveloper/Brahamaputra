@@ -1,12 +1,11 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PmsAmfPanelCheckPointsData implements Serializable
-{
+public class PmsAmfPanelCheckPointsData implements Serializable {
 
     @SerializedName("detailsOfPmsAmfPiuQrCodeScan")
     @Expose
@@ -21,10 +20,7 @@ public class PmsAmfPanelCheckPointsData implements Serializable
     @Expose
     private String pmsAmfPiuEarthingStatus;
 
-    private final static long serialVersionUID = -7367757211641983319L;
-
-    public PmsAmfPanelCheckPointsData()
-    {
+    public PmsAmfPanelCheckPointsData() {
         this.detailsOfPmsAmfPiuQrCodeScan = "";
         this.siteInAutoManual = "";
         this.anyLooseConnectionBypass = "";
@@ -35,7 +31,7 @@ public class PmsAmfPanelCheckPointsData implements Serializable
     public PmsAmfPanelCheckPointsData(String detailsOfPmsAmfQrCodeScan, String siteInAutoManual, String anyLooseConnectionBypass, String pmsAmfPuiEarthingStatus) {
         this.detailsOfPmsAmfPiuQrCodeScan = detailsOfPmsAmfQrCodeScan;
         this.siteInAutoManual = siteInAutoManual;
-        this.anyLooseConnectionBypass =anyLooseConnectionBypass;
+        this.anyLooseConnectionBypass = anyLooseConnectionBypass;
         this.pmsAmfPiuEarthingStatus = pmsAmfPuiEarthingStatus;
 
     }
@@ -71,7 +67,6 @@ public class PmsAmfPanelCheckPointsData implements Serializable
     public void setPmsAmfPiuEarthingStatus(String pmsAmfPiuEarthingStatus) {
         this.pmsAmfPiuEarthingStatus = pmsAmfPiuEarthingStatus;
     }
-
 
 
 }

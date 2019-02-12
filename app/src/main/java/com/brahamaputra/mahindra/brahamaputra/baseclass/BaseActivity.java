@@ -8,18 +8,15 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.brahamaputra.mahindra.brahamaputra.Activities.Land_Details;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -261,7 +258,7 @@ public class BaseActivity extends AppCompatActivity {
 
         return false;
     }*/
-    public Object[] isDuplicateQRcode(String strQrcode){
+    public Object[] isDuplicateQRcode(String strQrcode) {
 
         OfflineStorageWrapper offlineStorageWrapper;
         HotoTransactionData hotoTransactionData = null;
@@ -283,41 +280,41 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         ///Air Conditioners*
-        for(int i=0;i<hotoTransactionData.getAirConditionParentData().getAirConditionersData().size();i++){
-            if(hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Object[]{"Air Conditioners in Reading "+String.valueOf(i+1), true};
+        for (int i = 0; i < hotoTransactionData.getAirConditionParentData().getAirConditionersData().size(); i++) {
+            if (hotoTransactionData.getAirConditionParentData().getAirConditionersData().get(i).getqRCodeScan().contains(strQrcode)) {
+                return new Object[]{"Air Conditioners in Reading " + String.valueOf(i + 1), true};
             }
         }
 
         ///Solar Power System*
-        if(hotoTransactionData.getSolarPowerSystemData().getqRCodeScan().contains(strQrcode)){
+        if (hotoTransactionData.getSolarPowerSystemData().getqRCodeScan().contains(strQrcode)) {
             return new Object[]{"Solar Power System ", true};
         }
 
         ///Power Plant*
-        for(int i=0;i<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size();i++){
-            if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Object[]{"Power Plant in Reading "+String.valueOf(i+1), true};
-            }else{
-                for(int j=0;j<hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size();j++){
-                    if(hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)){
-                        return new Object[]{"Power Plant Modules in Reading "+String.valueOf(j+1), true};
+        for (int i = 0; i < hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().size(); i++) {
+            if (hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getqRCodeScan().contains(strQrcode)) {
+                return new Object[]{"Power Plant in Reading " + String.valueOf(i + 1), true};
+            } else {
+                for (int j = 0; j < hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().size(); j++) {
+                    if (hotoTransactionData.getPowerPlantDetailsParentData().getPowerPlantDetailsData().get(i).getPowerPlantDetailsModulesData().get(j).getModuleQrCodeScan().equals(strQrcode)) {
+                        return new Object[]{"Power Plant Modules in Reading " + String.valueOf(j + 1), true};
                     }
                 }
             }
         }
 
         ///Power Backups (DG)*
-        for(int i=0;i<hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size();i++){
-            if(hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)){
-                return new Object[]{"Power Backups (DG) in Reading "+String.valueOf(i+1), true};
+        for (int i = 0; i < hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().size(); i++) {
+            if (hotoTransactionData.getPowerBackupsDGParentData().getPowerBackupsDGData().get(i).getqRCodeScan().contains(strQrcode)) {
+                return new Object[]{"Power Backups (DG) in Reading " + String.valueOf(i + 1), true};
             }
         }
 
         ///Battery Set*
-        for(int i=0;i<hotoTransactionData.getBatterySetParentData().getBatterySetData().size();i++){
-            if(hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)){
-                return new Object[]{"Battery Set in Reading "+String.valueOf(i+1), true};
+        for (int i = 0; i < hotoTransactionData.getBatterySetParentData().getBatterySetData().size(); i++) {
+            if (hotoTransactionData.getBatterySetParentData().getBatterySetData().get(i).getBatterySet_Qr().contains(strQrcode)) {
+                return new Object[]{"Battery Set in Reading " + String.valueOf(i + 1), true};
             }
         }
 

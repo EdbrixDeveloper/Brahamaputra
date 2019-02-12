@@ -1,8 +1,6 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -54,8 +52,6 @@ public class EbMeterBox implements Serializable {
 
     @SerializedName("isSubmited")
     private int isSubmited;
-
-    private final static long serialVersionUID = -7989704559019063986L;
 
     public EbMeterBox() {
         this.ebMeterBoxCondition = "";

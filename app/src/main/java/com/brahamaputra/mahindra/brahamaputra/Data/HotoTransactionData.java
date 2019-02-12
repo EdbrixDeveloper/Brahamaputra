@@ -1,11 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 public class HotoTransactionData {
-
 
     @SerializedName("UserId")
     private String UserId;

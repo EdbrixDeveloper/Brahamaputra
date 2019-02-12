@@ -20,7 +20,6 @@ public class RectifierModuleCheckPointData implements Serializable
     @SerializedName("base64RectifierPhotoAfterCleaning")
     @Expose
     private String base64RectifierPhotoAfterCleaning;
-    private final static long serialVersionUID = -6106004319522608280L;
 
     public RectifierModuleCheckPointData(String base64RectifierModuleDetailsQrCodeScan, String base64RectifierPhotoBeforeCleaning, String base64RectifierPhotoAfterCleaning, String rectifierCleaning) {
         this.base64RectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;

@@ -1,6 +1,4 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,6 @@ public class PmsAmfPanelCheckPointsParentData implements Serializable
     //private Boolean isSubmited;
     private int isSubmited;
 
-    private final static long serialVersionUID = -6067841024671567130L;
     public PmsAmfPanelCheckPointsParentData()
     {
         this.noOfPmsAmfPiuAvailableAtSite = "";

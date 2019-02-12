@@ -1,13 +1,10 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class OtherElectricalCheckPoints implements Serializable
 {
-
     @SerializedName("dcEnergyMeterstatus")
     @Expose
     private String dcEnergyMeterstatus;
@@ -24,8 +21,6 @@ public class OtherElectricalCheckPoints implements Serializable
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
-
-    private final static long serialVersionUID = -102542994464311110L;
 
     public OtherElectricalCheckPoints()
     {

@@ -1,8 +1,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
+
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class State{
+
+public class State {
 
     @SerializedName("Success")
     @Expose

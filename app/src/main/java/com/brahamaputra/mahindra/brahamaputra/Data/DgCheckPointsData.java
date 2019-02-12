@@ -1,11 +1,7 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import java.io.Serializable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 public class DgCheckPointsData implements Serializable {
 
     /*@SerializedName("noOfDgAvailableAtSite")

@@ -35,8 +35,6 @@ public class ServoCheckPoints implements Serializable
     //private Boolean isSubmited;
     private int isSubmited;
 
-    private final static long serialVersionUID = -725516690069653860L;
-
     public ServoCheckPoints()
     {
         this.detailsOfServoQrCodeScan = "";

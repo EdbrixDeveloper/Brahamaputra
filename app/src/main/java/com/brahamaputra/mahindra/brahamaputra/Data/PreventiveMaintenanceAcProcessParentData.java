@@ -42,7 +42,6 @@ public class PreventiveMaintenanceAcProcessParentData implements Serializable
     @SerializedName("acPreventiveMaintenanceProcessData")
     @Expose
     private List<PreventiveMaintenanceAcProcessData> acPreventiveMaintenanceProcessData = null;
-    private final static long serialVersionUID = -6031411276255719168L;
 
     /**
      * No args constructor for use in serialization

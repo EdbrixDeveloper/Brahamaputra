@@ -155,7 +155,6 @@ public class PreventiveMaintenanceAcProcessData implements Serializable {
     @SerializedName("remarks")
     @Expose
     private String remarks;
-    private final static long serialVersionUID = -8133532690363856270L;
 
     /**
      * No args constructor for use in serialization

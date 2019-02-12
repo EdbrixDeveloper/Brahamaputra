@@ -1,13 +1,6 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import android.annotation.SuppressLint;
-import android.util.Log;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -105,8 +98,6 @@ public class EarthingCheckPointsParentData implements Serializable {
 
     @SerializedName("isSubmited")
     private int isSubmited;
-
-    private final static long serialVersionUID = 2082877317620656429L;
 
     public EarthingCheckPointsParentData() {
         this.allNutBoltsAreIntact = "";

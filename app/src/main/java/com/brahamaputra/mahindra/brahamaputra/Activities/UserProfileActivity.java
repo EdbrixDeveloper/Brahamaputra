@@ -24,7 +24,6 @@ import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.Notification;
-import com.brahamaputra.mahindra.brahamaputra.Data.UserDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserDetailsParent;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
@@ -37,9 +36,7 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserProfileActivity extends BaseActivity {

@@ -10,10 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.DiselRequestTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.R;
-
 import java.util.ArrayList;
 
 public class DieselFillingFundRequestListAdapter extends ArrayAdapter<DiselRequestTransactionList>

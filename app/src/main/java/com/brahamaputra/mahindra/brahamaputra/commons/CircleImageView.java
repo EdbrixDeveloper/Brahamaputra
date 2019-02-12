@@ -19,56 +19,54 @@ package com.brahamaputra.mahindra.brahamaputra.commons;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 import android.support.v7.widget.AppCompatImageView;
 
-import com.brahamaputra.mahindra.brahamaputra.R;
-
 /**
- * 
  * @author Szugyi
  * Custom ImageView for the CircleLayout class.
  * Makes it possible for the image to have a name,
  * which can be displayed separately from the ImageView itself.
  */
 public class CircleImageView extends AppCompatImageView {
-	// The name of the view
-	private String name;
+    // The name of the view
+    private String name;
 
-	public CircleImageView(Context context) {
-		this(context, null);
-	}
+    public CircleImageView(Context context) {
+        this(context, null);
+    }
 
-	public CircleImageView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
-	}
+    public CircleImageView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
 
-	public CircleImageView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		if (attrs != null) {
-			TypedArray array = getContext().obtainStyledAttributes(attrs,
-					com.brahamaputra.mahindra.brahamaputra.R.styleable.CircleImageView);
-			
-			this.name = array.getString(com.brahamaputra.mahindra.brahamaputra.R.styleable.CircleImageView_name);
-			array.recycle();
-		}
-	}
+    public CircleImageView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        if (attrs != null) {
+            TypedArray array = getContext().obtainStyledAttributes(attrs,
+                    com.brahamaputra.mahindra.brahamaputra.R.styleable.CircleImageView);
 
-	/**
-	 * Return the name of the view.
-	 * @return Returns the name of the view.
-	 */
-	public String getName(){
-		return name;
-	}
+            this.name = array.getString(com.brahamaputra.mahindra.brahamaputra.R.styleable.CircleImageView_name);
+            array.recycle();
+        }
+    }
 
-	/**
-	 * Set the name of the view.
-	 * @param name The name to be set for the view.
-	 */
-	public void setName(String name){
-		this.name = name;
-	}
+    /**
+     * Return the name of the view.
+     *
+     * @return Returns the name of the view.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Set the name of the view.
+     *
+     * @param name The name to be set for the view.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
 
 }

@@ -1,9 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,9 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.EbMeterBox;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
-import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -23,9 +18,6 @@ import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
-
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_CustomerName;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 
 public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
@@ -135,7 +127,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case R.id.menuSubmit:
-                if (checkValidationOnSubmitPmTransactionTicket() == true){
+                if (checkValidationOnSubmitPmTransactionTicket() == true) {
                     if (gpsTracker.canGetLocation()) {
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                             //showToast(""+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
@@ -204,10 +196,10 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         } else if (sheduledDatePm.isEmpty() || sheduledDatePm == null) {
             showToast("Enter Filling Quantity");
             return false;
-        }  else if (actualPmExecutionDate.isEmpty() || actualPmExecutionDate == null) {
+        } else if (actualPmExecutionDate.isEmpty() || actualPmExecutionDate == null) {
             showToast("Enter Diesel Price");
             return false;
-        }  else return true;
+        } else return true;
     }
 
     private void showSettingsAlert() {
@@ -246,8 +238,8 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
             preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId,accessToken,latitude,longitude,siteID,customer,circle,state
             ,ssa,nameOfSite,sheduledDateOfPm,actualPmExecutionDate);*/
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 

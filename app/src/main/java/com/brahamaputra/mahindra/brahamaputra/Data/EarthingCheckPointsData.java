@@ -1,8 +1,5 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import java.io.Serializable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -15,8 +12,6 @@ public class EarthingCheckPointsData implements Serializable {
 
     /*@SerializedName("isSubmited")
         private Boolean isSubmited;*/
-
-    private final static long serialVersionUID = 5934053737079112992L;
 
     public EarthingCheckPointsData() {
         this.earthPitValue = "";

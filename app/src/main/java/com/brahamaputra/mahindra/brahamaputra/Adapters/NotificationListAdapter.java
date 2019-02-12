@@ -1,9 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.brahamaputra.mahindra.brahamaputra.Activities.NotificationList;
-import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.Notification;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.helper.DatabaseHelper;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

@@ -45,11 +45,6 @@ public class AcCheckPoint implements Serializable
     @Expose
     private String shelterDoorStatus;
 
-
-
-
-    private final static long serialVersionUID = -6436987330345681329L;
-
     public AcCheckPoint(){
         this.detailsOfAcQrCodeScan = "";
         this.workingConditionOfAc = "";

@@ -1,5 +1,4 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import java.util.ArrayList;
 
 public class HotoListHeader {

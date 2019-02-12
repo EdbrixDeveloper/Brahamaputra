@@ -1,11 +1,8 @@
-
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 public class DgBatteryCheckPointsData implements Serializable {
 
     @SerializedName("detailsOfDgBatteryQrCodeScan")
@@ -24,9 +21,6 @@ public class DgBatteryCheckPointsData implements Serializable {
     @SerializedName("dgBatteryCharger")
     @Expose
     private String dgBatteryCharger;
-
-
-    //private final static long serialVersionUID = -7689901156568939001L;
 
     public DgBatteryCheckPointsData() {
         this.detailsOfDgBatteryQrCodeScan = "";

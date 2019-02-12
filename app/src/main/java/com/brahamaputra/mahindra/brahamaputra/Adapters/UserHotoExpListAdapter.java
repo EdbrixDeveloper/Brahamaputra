@@ -13,7 +13,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketsDate;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
 import com.brahamaputra.mahindra.brahamaputra.R;
-
 import java.util.List;
 
 public class UserHotoExpListAdapter extends BaseExpandableListAdapter {

@@ -37,7 +37,6 @@ public class ShelterCheckPoints implements Serializable
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
-    private final static long serialVersionUID = -536383988018643670L;
 
     public ShelterCheckPoints(){
         this.shelterCleaning = "";

@@ -8,25 +8,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.brahamaputra.mahindra.brahamaputra.Adapters.HotoSectionListAdapter;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
-import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
-import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
-import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 public class MyEnergyListActivity extends AppCompatActivity {
 

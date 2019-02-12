@@ -76,8 +76,6 @@ public class SiteHygenieneGenralSeftyParameter implements Serializable {
     private String imageFileCautionSignBoard;
     private String imageFileWarningSignBoard;
     private String imageFileDangerSignBoard;*/
-    //private final static long serialVersionUID = 2983840755754588275L;
-
 
     public SiteHygenieneGenralSeftyParameter() {
         this.sitePremisesCleaning = "";

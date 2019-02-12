@@ -16,7 +16,6 @@ public class SmpsCheckPointParentData implements Serializable
     @SerializedName("smpsCheckPointsData")
     @Expose
     private List<SmpsCheckPoint> smpsCheckPointsData = null;
-    private final static long serialVersionUID = -2356912691505734753L;
 
     @SerializedName("registerFault")
     @Expose

@@ -1,6 +1,5 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.OtherElectricalCheckPoints;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -181,8 +179,7 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
                 return true;
 
             case R.id.menuSubmit:
-                if(checkValidationOfArrayFields()==true)
-                {
+                if (checkValidationOfArrayFields() == true) {
                     submitDetails();
                     finish();
                     return true;
@@ -194,17 +191,14 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
 
     private void setInputDetails() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt"))
-            {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
                 Gson gson = new Gson();
-                preventiveMaintanceSiteTransactionDetails = gson.fromJson(jsonInString,PreventiveMaintanceSiteTransactionDetails.class);
+                preventiveMaintanceSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
 
-                if(preventiveMaintanceSiteTransactionDetails != null)
-                {
+                if (preventiveMaintanceSiteTransactionDetails != null) {
                     otherElectricalCheckPoints = preventiveMaintanceSiteTransactionDetails.getOtherElectricalCheckPoints();
-                    if(otherElectricalCheckPoints != null)
-                    {
+                    if (otherElectricalCheckPoints != null) {
                         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.setText(otherElectricalCheckPoints.getDcEnergyMeterstatus());
                         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.setText(otherElectricalCheckPoints.getAviationLamp());
                         mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.setText(otherElectricalCheckPoints.getLightsInsideTheShelter());
@@ -212,12 +206,10 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
                     }
                 }
 
-            }
-            else
-            {
+            } else {
                 Toast.makeText(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
@@ -225,19 +217,18 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
 
     private void submitDetails() {
         try {
-                String dcEnergyMeterStatus =  mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.getText().toString().trim();
-                String aviationLamp = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.getText().toString().trim();
-                String lightInsideTheShelter = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.getText().toString().trim();
-                String lightsInSitePremisesBulkHead = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.getText().toString().trim();
+            String dcEnergyMeterStatus = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.getText().toString().trim();
+            String aviationLamp = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.getText().toString().trim();
+            String lightInsideTheShelter = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.getText().toString().trim();
+            String lightsInSitePremisesBulkHead = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.getText().toString().trim();
 
-                otherElectricalCheckPoints = new OtherElectricalCheckPoints(dcEnergyMeterStatus,aviationLamp,lightInsideTheShelter,lightsInSitePremisesBulkHead);
-                preventiveMaintanceSiteTransactionDetails.setOtherElectricalCheckPoints(otherElectricalCheckPoints);
+            otherElectricalCheckPoints = new OtherElectricalCheckPoints(dcEnergyMeterStatus, aviationLamp, lightInsideTheShelter, lightsInSitePremisesBulkHead);
+            preventiveMaintanceSiteTransactionDetails.setOtherElectricalCheckPoints(otherElectricalCheckPoints);
 
-                Gson gson2 = new GsonBuilder().create();
-                String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);
-                offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
-        }catch (Exception e)
-        {
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -248,7 +239,7 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
         finish();
     }
 
-    public boolean checkValidationOfArrayFields(){
+    public boolean checkValidationOfArrayFields() {
         String dcEnergyMeterStatus = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewDcEnergyMeterStatusVal.getText().toString().trim();
         String aviationLamp = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewAviationLampVal.getText().toString().trim();
         String lightsInsideTheShelter = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInsideTheShelterVal.getText().toString().trim();
@@ -257,15 +248,15 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
         if (dcEnergyMeterStatus.isEmpty() || dcEnergyMeterStatus == null) {
             showToast("Select DC Energy Meter Status");
             return false;
-        }else if(aviationLamp.isEmpty() || aviationLamp == null) {
+        } else if (aviationLamp.isEmpty() || aviationLamp == null) {
             showToast("Select Aviation Lamp");
             return false;
-        }else if(lightsInsideTheShelter.isEmpty() || lightsInsideTheShelter == null) {
+        } else if (lightsInsideTheShelter.isEmpty() || lightsInsideTheShelter == null) {
             showToast("Select Lights Inside The Shelter");
             return false;
-        }else if(lightsInSitePremisesBulkHead.isEmpty() || lightsInSitePremisesBulkHead == null) {
+        } else if (lightsInSitePremisesBulkHead.isEmpty() || lightsInSitePremisesBulkHead == null) {
             showToast("Select Lights In Site Premises Bulk Head");
             return false;
-        }else return true;
+        } else return true;
     }
 }

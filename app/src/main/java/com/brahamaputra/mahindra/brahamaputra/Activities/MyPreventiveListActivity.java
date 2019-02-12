@@ -2,7 +2,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,7 +50,7 @@ public class MyPreventiveListActivity extends BaseActivity {
                             }
                         }).show();
                     }
-                }else {
+                } else {
                     alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
                         public void onPositiveClick() {
@@ -66,7 +65,7 @@ public class MyPreventiveListActivity extends BaseActivity {
         mMyPreventiveListRelativeLayoutSitePreventiveMaintenance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //startActivity(new Intent(MyEnergyListActivity.this, ElectricBillProcessList.class));
+                //startActivity(new Intent(MyEnergyListActivity.this, ElectricBillProcessList.class));
 
                 if (Conditions.isNetworkConnected(MyPreventiveListActivity.this)) {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
@@ -84,7 +83,7 @@ public class MyPreventiveListActivity extends BaseActivity {
                             }
                         }).show();
                     }
-                }else {
+                } else {
                     alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
                         public void onPositiveClick() {

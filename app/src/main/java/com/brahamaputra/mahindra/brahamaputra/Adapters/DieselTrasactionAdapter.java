@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.brahamaputra.mahindra.brahamaputra.Activities.DieselFillingList;
-import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingtransaction;
 import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.R;
-
 import java.util.ArrayList;
 
 public class DieselTrasactionAdapter extends ArrayAdapter<DiselFillingTransactionList>

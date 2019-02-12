@@ -2,7 +2,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -48,8 +47,6 @@ public class AlarmCheckPoints implements Serializable {
 
     @SerializedName("isSubmited")
     private int isSubmited;
-
-    private final static long serialVersionUID = -5880192528663814251L;
 
     public AlarmCheckPoints() {
         this.detailsOfWrmsQrCodeScan = "";

@@ -2,7 +2,6 @@ package com.brahamaputra.mahindra.brahamaputra.helper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,7 +18,6 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 /**
  * Created by shashank on 18/04/2018.

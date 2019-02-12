@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSection;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
-import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.ArrayList;

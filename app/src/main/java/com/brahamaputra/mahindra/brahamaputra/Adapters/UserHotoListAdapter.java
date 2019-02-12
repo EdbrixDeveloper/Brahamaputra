@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
-
 import java.util.ArrayList;
 import java.util.TreeSet;
 

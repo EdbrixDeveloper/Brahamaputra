@@ -35,7 +35,6 @@ public class RectifierModuleCheckPointParentData implements Serializable
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited = 0;
-    private final static long serialVersionUID = 1961740297699264464L;
 
     public RectifierModuleCheckPointParentData()
     {

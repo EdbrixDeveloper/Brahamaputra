@@ -96,8 +96,6 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     @SerializedName("acCheckPointParentData")
     private AcCheckPointParentData acCheckPointParentData;
 
-    // private final static long serialVersionUID = 4468678041836209812L;
-
     public PreventiveMaintanceSiteTransactionDetails() {
         siteHygenieneGenralSeftyParameter = new SiteHygenieneGenralSeftyParameter();
         alarmCheckPoints = new AlarmCheckPoints();

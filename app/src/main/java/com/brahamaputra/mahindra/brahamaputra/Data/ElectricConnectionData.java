@@ -1,7 +1,5 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import com.google.gson.annotations.SerializedName;
-
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
 public class ElectricConnectionData {

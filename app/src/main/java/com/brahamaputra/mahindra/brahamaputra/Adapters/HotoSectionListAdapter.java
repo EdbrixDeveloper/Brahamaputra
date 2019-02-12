@@ -1,42 +1,17 @@
 package com.brahamaputra.mahindra.brahamaputra.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.brahamaputra.mahindra.brahamaputra.Activities.ACDB_DCDB;
-import com.brahamaputra.mahindra.brahamaputra.Activities.ActiveequipmentDetails;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Air_Conditioners;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Battery_Set;
-import com.brahamaputra.mahindra.brahamaputra.Activities.DetailsOfUnusedMaterials;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Earth_Resistance_Equipment;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Earth_Resistance_Tower;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Electric_Connection;
-import com.brahamaputra.mahindra.brahamaputra.Activities.ExternalTenantsPersonaldetails;
-import com.brahamaputra.mahindra.brahamaputra.Activities.GeneralAndSafetyMeasures;
-import com.brahamaputra.mahindra.brahamaputra.Activities.HotoSectionsListActivity;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Land_Details;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Media;
-import com.brahamaputra.mahindra.brahamaputra.Activities.PowerManagementSystem;
-import com.brahamaputra.mahindra.brahamaputra.Activities.PowerPlantDetailsActivity;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Power_Backups_DG;
-import com.brahamaputra.mahindra.brahamaputra.Activities.ServoStabilizer;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Shelter;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Solar_Power_System;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Total_DC_Load_site;
-import com.brahamaputra.mahindra.brahamaputra.Activities.Tower_Detail;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
-
 import java.util.ArrayList;
 
 public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements View.OnClickListener{

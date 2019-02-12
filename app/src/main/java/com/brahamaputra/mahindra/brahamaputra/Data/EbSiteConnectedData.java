@@ -1,7 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class EbSiteConnectedData {
@@ -31,7 +30,6 @@ public class EbSiteConnectedData {
     @SerializedName("ConnectionTariffList")
     @Expose
     private List<String> ConnectionTariffList;
-
 
 
     public Integer getSuccess() {

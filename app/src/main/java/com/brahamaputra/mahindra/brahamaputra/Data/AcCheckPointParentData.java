@@ -16,7 +16,6 @@ public class AcCheckPointParentData implements Serializable
     @SerializedName("acCheckPoints")
     @Expose
     private List<AcCheckPoint> acCheckPoints = null;
-    private final static long serialVersionUID = 3555383886849176421L;
 
     @SerializedName("registerFault")
     @Expose

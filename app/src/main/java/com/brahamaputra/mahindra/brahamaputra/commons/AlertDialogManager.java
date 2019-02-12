@@ -1,7 +1,5 @@
 package com.brahamaputra.mahindra.brahamaputra.commons;
 
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,11 +13,11 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 
 /**
  * @author rajk
- *         <p>
- *         Usage
- *         AlertDialogManager dialogManager=new AlertDialogManager(mContext);
- *         dialogManager.Dialog("Please select state first.").show();
- *         ***NOTE*** don't forget to show() after dialog's end parentheses
+ * <p>
+ * Usage
+ * AlertDialogManager dialogManager=new AlertDialogManager(mContext);
+ * dialogManager.Dialog("Please select state first.").show();
+ * ***NOTE*** don't forget to show() after dialog's end parentheses
  */
 
 public class AlertDialogManager {
@@ -103,19 +101,18 @@ public class AlertDialogManager {
     public AlertDialog Dialog(String title, String message, String posButton, String negButton, boolean showIcon, final onSingleButtonClickListner listener) {
 
         if (!title.isEmpty()) {
-            if(!title.equals("HOTO Ticket"))
-            {
+            if (!title.equals("HOTO Ticket")) {
                 this.alertDialog.setTitle(title);
-            }else{
+            } else {
 
                 LayoutInflater inflater = LayoutInflater.from(context);
-                View view=inflater.inflate(R.layout.activity_custom_title, null);
-                TextView alertTitle = (TextView)view.findViewById(R.id.txtTitle);
+                View view = inflater.inflate(R.layout.activity_custom_title, null);
+                TextView alertTitle = (TextView) view.findViewById(R.id.txtTitle);
                 alertTitle.setText(title);
                 this.alertDialog.setCustomTitle(view);
             }
         } else {
-           this.alertDialog.setTitle(R.string.app_name);
+            this.alertDialog.setTitle(R.string.app_name);
         }
 
         if (!message.isEmpty()) {

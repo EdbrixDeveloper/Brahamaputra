@@ -15,13 +15,9 @@ import android.widget.TextView;
 import com.brahamaputra.mahindra.brahamaputra.Activities.ElectricBillProcessList;
 import com.brahamaputra.mahindra.brahamaputra.Activities.UploadEBPaymentDetailsActivity;
 import com.brahamaputra.mahindra.brahamaputra.Activities.UploadEBReceiptActivity;
-import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentRequestList;
 import com.brahamaputra.mahindra.brahamaputra.R;
-
 import java.util.ArrayList;
-
-import static com.brahamaputra.mahindra.brahamaputra.Activities.ElectricBillProcessList.RESULT_EB_REC_SUBMIT;
 
 public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestList>
         implements View.OnClickListener {

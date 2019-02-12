@@ -1,10 +1,8 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class EbPaymentDetails {
-
 
     @SerializedName("UserId")
     @Expose

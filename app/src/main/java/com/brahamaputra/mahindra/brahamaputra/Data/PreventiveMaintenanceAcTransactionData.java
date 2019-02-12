@@ -1,11 +1,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PreventiveMaintenanceAcTransactionData implements Serializable
-{
+public class PreventiveMaintenanceAcTransactionData implements Serializable {
 
     @SerializedName("AccessToken")
     @Expose
@@ -52,7 +52,6 @@ public class PreventiveMaintenanceAcTransactionData implements Serializable
     @SerializedName("acPreventiveMaintenanceProcessParentData")
     @Expose
     private PreventiveMaintenanceAcProcessParentData acPreventiveMaintenanceProcessParentData;
-    private final static long serialVersionUID = 128514140580365061L;
 
     public PreventiveMaintenanceAcTransactionData() {
     }

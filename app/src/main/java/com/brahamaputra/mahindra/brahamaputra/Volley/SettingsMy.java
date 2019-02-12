@@ -15,8 +15,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
-
 import static android.content.Context.MODE_PRIVATE;
 
 /**

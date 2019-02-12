@@ -2,13 +2,11 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,11 +14,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.DieselFillingFundRequestListAdapter;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.DieselTrasactionAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingFundRequestTransaction;
-import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingtransaction;
-import com.brahamaputra.mahindra.brahamaputra.Data.DiselFillingTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.DiselRequestTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
@@ -205,7 +200,7 @@ public class DieselFillingFundReqestList extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             //prepareListData();
-            diselRequestTransactionList=new ArrayList<DiselRequestTransactionList>();
+            diselRequestTransactionList = new ArrayList<DiselRequestTransactionList>();
             getTimeLineData("1", 0);
         }
     }

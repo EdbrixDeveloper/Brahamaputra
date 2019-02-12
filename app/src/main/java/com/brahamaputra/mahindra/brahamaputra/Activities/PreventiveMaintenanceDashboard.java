@@ -1,18 +1,13 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.progresviews.ProgressWheel;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -21,9 +16,6 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PreventiveMaintenanceDashboard extends BaseActivity {
 
@@ -123,7 +115,8 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             }
         });
     }
-    private void openTicket2(){
+
+    private void openTicket2() {
         if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
             if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
@@ -154,7 +147,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         }
     }
 
-    private void openTicket1(){
+    private void openTicket1() {
         if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
             if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
