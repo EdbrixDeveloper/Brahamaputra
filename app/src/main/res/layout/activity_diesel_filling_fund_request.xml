@@ -811,7 +811,7 @@
                     android:layout_weight="0.6"
                     android:hint="Diesel Quantity Required (in Lts)"
                     android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
