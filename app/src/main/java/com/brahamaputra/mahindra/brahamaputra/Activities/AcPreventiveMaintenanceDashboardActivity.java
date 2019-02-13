@@ -51,7 +51,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends AppCompatActivity 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ac_preventive_maintenance_dashboard);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("AC Preventive Maintenance Dashboard");
+        this.setTitle("AC Preventive Maintenance");
         assignViews();
         sessionManager = new SessionManager(AcPreventiveMaintenanceDashboardActivity.this);
         setListner();
