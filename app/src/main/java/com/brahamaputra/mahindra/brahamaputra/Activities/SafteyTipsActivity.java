@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,9 +30,13 @@ public class SafteyTipsActivity extends AppCompatActivity {
         this.setTitle("Safety Tips");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;
+
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
-
+        expListView.setIndicatorBounds(width - GetPixelFromDips(45), width - GetPixelFromDips(5));
         // preparing list data
         prepareListData();
 
@@ -39,6 +44,12 @@ public class SafteyTipsActivity extends AppCompatActivity {
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
+    }
+    public int GetPixelFromDips(float pixels) {
+        // Get the screen's density scale
+        final float scale = getResources().getDisplayMetrics().density;
+        // Convert the dps to pixels, based on density scale
+        return (int) (pixels * scale + 0.5f);
     }
 
     /*
@@ -56,32 +67,32 @@ public class SafteyTipsActivity extends AppCompatActivity {
 
         // Adding child data
         List<String> top250 = new ArrayList<String>();
-        top250.add("Ensure PPE 100% tie off");
-        top250.add("No shot cuts use Safe Access");
-        top250.add("Carry tools in tool kit");
-        top250.add("No work if bad weather/ill health");
+        top250.add("1. Ensure PPE 100% tie off");
+        top250.add("2. No shot cuts use Safe Access");
+        top250.add("3. Carry tools in tool kit");
+        top250.add("4. No work if bad weather/ill health");
 
 
         List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("Ensure PPE, Gloves, Insulated tools, training & competency");
-        nowShowing.add("Isolate Power before working on electrical Equipment");
-        nowShowing.add("Check Earthing, CB, Wiring quality");
-        nowShowing.add("Do no work with wet hands and wet tools");
-        nowShowing.add("No short cuts. No work if wet");
+        nowShowing.add("1. Ensure PPE, Gloves, Insulated tools, training & competency");
+        nowShowing.add("2. Isolate Power before working on electrical Equipment");
+        nowShowing.add("3. Check Earthing, CB, Wiring quality");
+        nowShowing.add("4. Do no work with wet hands and wet tools");
+        nowShowing.add("5. No short cuts. No work if wet");
 
 
         List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("Ensure certified lifting tools and equipment, PPE, training and competency");
-        comingSoon.add("Away from load. Ensure barricading");
+        comingSoon.add("1. Ensure certified lifting tools and equipment, PPE, training and competency");
+        comingSoon.add("2. Away from load. Ensure barricading");
 
 
         List<String> roadSafety = new ArrayList<String>();
-        roadSafety.add("Wear ISI quality helmet while driving two wheelers");
-        roadSafety.add("Ensure helmet chin strap is tightly tied/locked");
-        roadSafety.add("Follow Traffic Rules");
-        roadSafety.add("Do not drink and drive");
-        roadSafety.add("Wear seat belts while driving four wheelers");
-        roadSafety.add("Follow traffic rules");
+        roadSafety.add("1. Wear ISI quality helmet while driving two wheelers");
+        roadSafety.add("2. Ensure helmet chin strap is tightly tied/locked");
+        roadSafety.add("3. Follow Traffic Rules");
+        roadSafety.add("4. Do not drink and drive");
+        roadSafety.add("5. Wear seat belts while driving four wheelers");
+        roadSafety.add("6. Follow traffic rules");
 
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
         listDataChild.put(listDataHeader.get(1), nowShowing);
