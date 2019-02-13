@@ -578,7 +578,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Present Diesel Stock"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -811,7 +811,7 @@
                     android:layout_weight="0.6"
                     android:hint="Diesel Quantity Required (in Lts)"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>

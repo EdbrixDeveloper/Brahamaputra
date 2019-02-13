@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -43,6 +44,7 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -158,7 +160,6 @@ public class DieselFillingFundRequest extends BaseActivity {
 
     DecimalConversion decimalConversion;
 
-
     private ArrayList<String> siteArray;
     private Site site;
     public int siteDbId = 0;
@@ -214,6 +215,24 @@ public class DieselFillingFundRequest extends BaseActivity {
                 dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.show();
 
+            }
+        });
+
+        mDieselFillingFundRequestEditTextPresentDieselStock.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
+        mDieselFillingFundRequestEditTextDieselQuantityRequired.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
             }
         });
 
@@ -286,12 +305,25 @@ public class DieselFillingFundRequest extends BaseActivity {
         mDieselFillingTextViewSiteDetailsVal.setAllCaps(true);
         mDieselFillingTextViewFinalDieselStockVal.setAllCaps(true);*/
 
+
+        mDieselFillingFundRequestEditTextPresentDieselStock.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        mDieselFillingFundRequestEditTextDieselQuantityRequired.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
     }
 
     private void initCombo() {
+    }
+
+    public void DecimalFormatConversion() {
+        mDieselFillingFundRequestEditTextPresentDieselStock.setText(decimalConversion.convertDecimal(mDieselFillingFundRequestEditTextPresentDieselStock.getText().toString()));
+        mDieselFillingFundRequestEditTextDieselQuantityRequired.setText(decimalConversion.convertDecimal(mDieselFillingFundRequestEditTextDieselQuantityRequired.getText().toString()));
+        /*mDieselFillingEditTextFillingQty.setText(decimalConversion.convertDecimal(mDieselFillingEditTextFillingQty.getText().toString()));
+        mDieselFillingEditTextTankBalanceBeforeFilling.setText(decimalConversion.convertDecimal(mDieselFillingEditTextTankBalanceBeforeFilling.getText().toString()));
+        mDieselFillingTextViewFinalDieselStockVal.setText(decimalConversion.convertDecimal(mDieselFillingTextViewFinalDieselStockVal.getText().toString()));
+        mDieselFillingEditTextDieselPrice.setText(decimalConversion.convertDecimal(mDieselFillingEditTextDieselPrice.getText().toString()));*/
     }
 
     private void updateLabel() {
@@ -640,13 +672,6 @@ public class DieselFillingFundRequest extends BaseActivity {
         return false;
     }
 
-    public void DecimalFormatConversion() {
-        /*mDieselFillingEditTextFillingQty.setText(decimalConversion.convertDecimal(mDieselFillingEditTextFillingQty.getText().toString()));
-        mDieselFillingEditTextTankBalanceBeforeFilling.setText(decimalConversion.convertDecimal(mDieselFillingEditTextTankBalanceBeforeFilling.getText().toString()));
-        mDieselFillingTextViewFinalDieselStockVal.setText(decimalConversion.convertDecimal(mDieselFillingTextViewFinalDieselStockVal.getText().toString()));
-        mDieselFillingEditTextDieselPrice.setText(decimalConversion.convertDecimal(mDieselFillingEditTextDieselPrice.getText().toString()));*/
-    }
-
     private void showSettingsAlert() {
 
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this request?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
@@ -788,18 +813,18 @@ public class DieselFillingFundRequest extends BaseActivity {
         String presentEbMeterReadingKwhPhoto = base64StringPresentEbReadingKwhPhoto;//mDieselFillingFundRequestTextView.getText().toString().trim();
         //String presentDateTime = mDieselFillingFundRequestEditTextPresentDateTime.getText().toString().trim();
         String dieselQuantityRequiredInLtrs = mDieselFillingFundRequestEditTextDieselQuantityRequired.getText().toString().trim();
-        String DGCapacity = mDieselFillingFundRequestTextViewDgMakeVal.getText().toString().trim();//.setText("No Data Found");
-        String DGMake = mDieselFillingFundRequestTextViewDgCapacityInKvaVal.getText().toString().trim();//.setText("No Data Found");
+        String DGCapacity = mDieselFillingFundRequestTextViewDgCapacityInKvaVal.getText().toString().trim();//.setText("No Data Found");
+        String DGMake = mDieselFillingFundRequestTextViewDgMakeVal.getText().toString().trim();//.setText("No Data Found");
 
 
         if (siteId.isEmpty() || siteId == null) {
             showToast("Select Site Name");
             return false;
+        } else if (DGMake.isEmpty() || DGMake == null || DGMake.equals("No Data Found")) {
+            showToast("Select DG Make");
+            return false;
         } else if (DGCapacity.isEmpty() || DGCapacity == null || DGCapacity.equals("No Data Found")) {
             showToast("Select DG Capacity");
-            return false;
-        } else if (DGMake.isEmpty() || DGMake == null || DGMake.equals("No Data Found")) {
-            showToast("Enter DG Make");
             return false;
         } else if (presentDgHmr.isEmpty() || presentDgHmr == null) {
             showToast("Enter Present DG HMR");

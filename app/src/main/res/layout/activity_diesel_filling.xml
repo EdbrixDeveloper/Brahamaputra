@@ -311,7 +311,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Tank Balance Before filling (in Lts)" />
+                    android:text="Tank Balance Before filling (in Ltrs)" />
 
                 <EditText
                     android:id="@+id/dieselFilling_editText_tankBalanceBeforeFilling"
@@ -364,7 +364,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Filling Quantity (in Lts)" />
+                    android:text="Filling Quantity (in Ltrs)" />
 
                 <EditText
                     android:id="@+id/dieselFilling_editText_fillingQty"
@@ -390,7 +390,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Final Diesel Stock (in Lts)" />
+                    android:text="Final Diesel Stock (in Ltrs)" />
 
                 <TextView
                     android:id="@+id/dieselFilling_textView_finalDieselStockVal"
@@ -415,7 +415,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Diesel Price/Lts (in Rs)" />
+                    android:text="Diesel Price/Ltrs (in Rs)" />
 
                 <EditText
                     android:id="@+id/dieselFilling_editText_dieselPrice"
