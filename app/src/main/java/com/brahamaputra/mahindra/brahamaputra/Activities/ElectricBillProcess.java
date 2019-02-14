@@ -816,6 +816,10 @@ public class ElectricBillProcess extends BaseActivity {
         String NetPayableOnOrBeforeDueDate = mEbProcessEditTextNetPaybleBeforeDueDate.getText().toString().trim();
         String VendorSAPId = "";
         String EbBillScanCopyImageName = base64StringBillUpload;
+
+        Double netPayAmt = Double.parseDouble(NetPayableOnOrBeforeDueDate);
+        Double grossPayAmt = Double.parseDouble(GrossAmount);
+
         if (CustomerId.isEmpty() || CustomerId == null) {
             showToast("Select Customer ");
             return false;
@@ -878,6 +882,9 @@ public class ElectricBillProcess extends BaseActivity {
             return false;
         } else if (!dateFromToValid(date_BillFrom, date_BillTo)) {
             showToast("Bill To Date should  greater than Bill From Date ");
+            return false;
+        } else if (netPayAmt > grossPayAmt) {
+            showToast("Net Payable Amt Should Be Less Than Gross Amt");
             return false;
         } else
             return true;
