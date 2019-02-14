@@ -544,6 +544,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         } else {
             mPreventiveMaintenanceSiteServoCheckPointsTextViewTypeOfFaultVal.setText("");
             base64StringUploadPhotoOfRegisterFault = "";
+            mPreventiveMaintenanceSiteServoCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
         }
     }
 

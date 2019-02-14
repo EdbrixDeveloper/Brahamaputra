@@ -522,6 +522,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         } else {
             mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText("");
             base64StringUploadPhotoOfRegisterFault = "";
+            mPreventiveMaintenanceSiteShelterCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
         }
     }
 
