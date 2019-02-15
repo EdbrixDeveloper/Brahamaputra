@@ -575,6 +575,9 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
+            return false;
         } else return true;
     }
 }

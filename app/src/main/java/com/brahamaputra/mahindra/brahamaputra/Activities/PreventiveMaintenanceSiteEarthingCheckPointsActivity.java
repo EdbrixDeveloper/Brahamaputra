@@ -796,6 +796,9 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         } else if ((((typeOfFault.isEmpty() || typeOfFault == null) && (registerFault.equals("Yes"))) && methodFlag.equals("onSubmit"))) {
             showToast("Select Type of Fault");
             return false;
+        }else if ((((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && (registerFault.equals("Yes"))) && methodFlag.equals("onSubmit"))) {
+            showToast("Upload Photo Of Type Of Fault");
+            return false;
         } else return true;
 
     }

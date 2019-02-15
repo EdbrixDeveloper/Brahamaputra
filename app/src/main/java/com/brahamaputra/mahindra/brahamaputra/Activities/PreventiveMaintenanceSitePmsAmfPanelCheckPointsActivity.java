@@ -387,7 +387,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
             public void onClick(View v) {
                 //alreadySelectedTypeOfFaultList = new ArrayList<>();
                 //setMultiSelectModel();
-                if (checkValidtionForArrayFields()) {
+                if (checkValidationOfArrayFields()) {
                     if (currentPos < (totalCount - 1)) {
                         //Save current ac reading
                         saveRecords(currentPos);
@@ -400,9 +400,11 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         //Save Final current reading and submit all AC data
                         saveRecords(currentPos);
                         // visibilityOfTypesOfFault(mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
-                        submitDetails();
-                        startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
-                        finish();
+                        if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true) {
+                            submitDetails();
+                            startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                            finish();
+                        }
                     }
                 }
             }
@@ -425,31 +427,6 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean checkValidtionForArrayFields() {
-        /* String typeOfAsset = mDetailsOfUnusedMaterialsTextViewTypeOfAssetVal.getText().toString().trim();
-         *//* String assetMake = mDetailsOfUnusedMaterialsTextViewAssetMakeVal.getText().toString().trim();*//*
-        String assetStatus = mDetailsOfUnusedMaterialsTextViewAssetStatusVal.getText().toString().trim();
-        String assetDescription = mDetailsOfUnusedMaterialsEditTextDescriptionVal.getText().toString().trim();
-
-        *//*if (typeOfAsset.isEmpty() || typeOfAsset == null) {
-            showToast("Select Type of Asset ");
-            return false;
-        } else if (assetMake.isEmpty() || assetMake == null) {
-            showToast("Select Asset Make ");
-            return false;
-        } else*//*
-        if (typeOfAsset.equals("General Item")) {
-            return true;
-        } else if ((assetStatus.isEmpty() || assetStatus == null) && (!assetDescription.isEmpty() && assetDescription != null)) {
-            showToast("Select Asset Status");
-            return false;
-        } else*//* if (assetDescription.isEmpty() || assetDescription == null) {
-            showToast("Select Asset Description ");
-            return false;
-        } else*/
-        return true;
     }
 
 
@@ -809,8 +786,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         String siteInAutoManual = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewSiteInAutoManualVal.getText().toString().trim();
         String anyLooseConnectionBypass = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewLooseConnectionBypassVal.getText().toString().trim();
         String pmsAmfPiuEarthingStatus = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewPmfAmfPiuEarthingStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
 
 
         if (qrCodeScan.isEmpty() || qrCodeScan == null) {
@@ -825,12 +801,34 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         } else if (pmsAmfPiuEarthingStatus.isEmpty() || pmsAmfPiuEarthingStatus == null) {
             showToast("Select PMS/AMF/PIU Earthing Status");
             return false;
-        } else if (registerFault.isEmpty() || registerFault == null) {
+        } else return true;
+    }
+
+    private boolean checkValidtionForNoOfPmsAmfPuiAvailabelAtSite(String methodFlag) {
+
+        String noOfPmsAmfPuiAvailableAtSite = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewNoOfPmsAmfPiuAvailableAtSiteVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+
+        if (noOfPmsAmfPuiAvailableAtSite.isEmpty() || noOfPmsAmfPuiAvailableAtSite == null) {
+            showToast("Select No Of PMS/AMF/PIU Available At Site");
+            return false;
+        }
+        else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        } else return true;
+        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
+            return false;
+        } else if (Integer.valueOf(noOfPmsAmfPuiAvailableAtSite) > 0) {
+            if ((pmsAmfPanelCheckPointsArrayList.size() != Integer.valueOf(noOfPmsAmfPuiAvailableAtSite) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");
+                return false;
+            } else return true;
+        }else
+            return true;
     }
 }

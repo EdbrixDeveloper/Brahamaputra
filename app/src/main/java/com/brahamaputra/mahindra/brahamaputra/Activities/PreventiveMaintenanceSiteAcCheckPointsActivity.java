@@ -1149,65 +1149,68 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String cleaningOfCoolingCondensorCoils = mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.getText().toString().trim();
         String anyAbnormalSoundFromMotor = mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.getText().toString().trim();
         String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
         String detailsOfAcQrCodeScan = base64StringAcCheckPointsQRCodeScan;
         String base64TakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
         String base64TakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
         String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
 
-        if (workingConditionOfAc.isEmpty() || workingConditionOfAc == null) {
-            showToast("Select workingConditionOfAc");
+          if (detailsOfAcQrCodeScan.isEmpty() || detailsOfAcQrCodeScan == null) {
+            showToast("Scan AC QR Code Scan");
+            return false;
+        }else if (workingConditionOfAc.isEmpty() || workingConditionOfAc == null) {
+            showToast("Select Working Condition Of AC");
             return false;
         } else if (automationOfAcController.isEmpty() || automationOfAcController == null) {
-            showToast("Select automationOfAcController");
+            showToast("Select Automation Of AC Controller");
             return false;
         } else  if (acEarthingStatus.isEmpty() || acEarthingStatus == null) {
-            showToast("Select acEarthingStatus");
+            showToast("Select AC Earthing Status");
             return false;
         } else  if (acFilterStatus.isEmpty() || acFilterStatus == null) {
-            showToast("Select Register Fault");
+            showToast("Select AC Filter Status");
             return false;
         } else  if (cleaningOfCoolingCondensorCoils.isEmpty() || cleaningOfCoolingCondensorCoils == null) {
-            showToast("Select cleaningOfCoolingCondensorCoils");
+            showToast("Select Cleaning Of Cooling Condensor Coils");
             return false;
         } else  if (anyAbnormalSoundFromMotor.isEmpty() || anyAbnormalSoundFromMotor == null) {
-            showToast("Select anyAbnormalSoundFromMotor");
+            showToast("Select Any Abnormal Sound From Motor");
             return false;
         } else  if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
-            showToast("Select shelterDoorStatus");
+            showToast("Select Shelter Door Status");
             return false;
         } else  if (shelterTemperature.isEmpty() || shelterTemperature == null) {
-            showToast("Select shelterTemperature");
+            showToast("Select Shelter Temperature");
             return false;
-        } else  if (detailsOfAcQrCodeScan.isEmpty() || detailsOfAcQrCodeScan == null) {
-            showToast("Scan AcQrCodeScan");
-            return false;
-        } else  if (base64TakePhotoOfAcFiltersBeforeCleaning.isEmpty() || base64TakePhotoOfAcFiltersBeforeCleaning == null) {
-            showToast("TakePhotoOfAcFiltersBeforeCleaning");
+        }  else  if (base64TakePhotoOfAcFiltersBeforeCleaning.isEmpty() || base64TakePhotoOfAcFiltersBeforeCleaning == null) {
+            showToast("Take Photo Of AC Filters Before Cleaning");
             return false;
         } else  if (base64TakePhotoOfAcFiltersAfterCleaning.isEmpty() || base64TakePhotoOfAcFiltersAfterCleaning == null) {
-            showToast("TakePhotoOfAcFiltersAfterCleaning");
+            showToast("Take Photo Of AC Filters After Cleaning");
             return false;
         } else  if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
-            showToast("TakePhotoOfTemperature");
+            showToast("Take Photo Of Temperature");
             return false;
-        } else if (registerFault.isEmpty() || registerFault == null) {
-            showToast("Select Register Fault");
-            return false;
-        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
-            showToast("Select Type of Fault");
-            return false;
-        } else return true;
+        }  else return true;
 
     }
 
     private boolean checkValidationonSubmit(String methodFlag) {
 
         String totalNumberval = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         if (totalNumberval.isEmpty() || totalNumberval == null) {
             showToast("Select Number Of Tenant ");
+            return false;
+        }else if (registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type of Fault");
+            return false;
+        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
             return false;
         } else if (Integer.valueOf(totalNumberval) > 0) {
             if ((acCheckPointsData.size() != Integer.valueOf(totalNumberval) && methodFlag.equals("onSubmit"))) {

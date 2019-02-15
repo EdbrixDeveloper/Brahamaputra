@@ -1269,7 +1269,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             showToast("Select Site Premises Cleaning");
             return false;
         } else if (uploadPhotoOfSitePremises.isEmpty() || uploadPhotoOfSitePremises == null) {
-            showToast("Select Upload Photo Of Site Premises");
+            showToast("Upload Photo Of Site Premises");
             return false;
         } else if (equipmentCleaning.isEmpty() || equipmentCleaning == null) {
             showToast("Select Equipment Cleaning");
@@ -1278,7 +1278,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             showToast("Select Any Eagle/Crow/Honey Hives In Tower");
             return false;
         } else if (compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) {
-            showToast("Select Compound Wall Fencing Status");
+            showToast("Select Compound Wall/Fencing Status");
             return false;
         } else if (gateLockAvailability.isEmpty() || gateLockAvailability == null) {
             showToast("Select Gate Lock Availability");
@@ -1321,6 +1321,9 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
+            return false;
+        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
             return false;
         } else return true;
     }

@@ -891,56 +891,56 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
     public boolean checkValidationOnChangeNoOfDgBatteryAvailable(String NoOfBatteryBankAvailableAtSiteVal, String methodFlag) {
 
+        String registerFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+        String batteryBankDischargeTest = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal.getText().toString().trim();
+        String testDoneAs = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.getText().toString().trim();
+        String selectBatteryBank = mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.getText().toString().trim();
+
         if (NoOfBatteryBankAvailableAtSiteVal.isEmpty() || NoOfBatteryBankAvailableAtSiteVal == null) {
             showToast("Select No of Battery Bank Available");
             return false;
-        } else if ((batteryBankCheckPointsData.size() != Integer.valueOf(NoOfBatteryBankAvailableAtSiteVal) && methodFlag.equals("onSubmit"))) {
+        } else if (batteryBankDischargeTest.isEmpty() || batteryBankDischargeTest == null) {
+            showToast("Select Battery Bank Discharge Test");
+            return false;
+        }  else if (testDoneAs.isEmpty() || testDoneAs == null) {
+            showToast("Select Test Done As");
+            return false;
+        } else if (selectBatteryBank.isEmpty() || selectBatteryBank == null) {
+            showToast("Select Battery Bank");
+            return false;
+        }else if (registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Types Of Fault");
+            return false;
+        }else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Types Of Fault");
+            return false;
+        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
+            return false;
+        }  else if ((batteryBankCheckPointsData.size() != Integer.valueOf(NoOfBatteryBankAvailableAtSiteVal) && methodFlag.equals("onSubmit"))) {
             showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
             return false;
         } else return true;
-
-
-        /*String noOfEarthPitValue, String noOfEarthPitValueVisible,
-        if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
-            showToast("Select No of Earth Pit");
-            return false;
-        } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {
-            if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
-                showToast("Select Number of Earth Pit Visible");
-                return false;
-            } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
-                showToast("Select Earth Pit Visible is less than or equal to Earth Pit");
-                return false;
-            } else if ((batteryBankCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
-                showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
-                return false;
-            } else return true;
-        } else return true;*/
 
     }
 
     //////////////////
     public boolean checkValidationOfArrayFields() {
-        String noOfBatteryBankAvailableAtSite = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim();
+
         String qrCodeScan = base64StringDetailsOfBatteryBankQRCodeScan;
-        //String batteryBankDischargeTest = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal.getText().toString().trim();
         String stripBoltTightnessAsPerTorque = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewStripBoltTightnessAsPerTorqueVal.getText().toString().trim();
         String petroleumJellyApplied = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewPetroleumJellyAppliedVal.getText().toString().trim();
         String batteryVentPlugStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryVentPlugStatusVal.getText().toString().trim();
         String bbEarthingStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatusVal.getText().toString().trim();
-        //String registerFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        //String typeOfFault = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
 
-        if (noOfBatteryBankAvailableAtSite.isEmpty() || noOfBatteryBankAvailableAtSite == null) {
-            showToast("Select No Of Battery Bank Available At Site");
-            return false;
-        } else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+        if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Scan QR Code");
             return false;
-        } /*else if (batteryBankDischargeTest.isEmpty() || batteryBankDischargeTest == null) {
-            showToast("Select Battery Bank Discharge Test");
-            return false;
-        }*/ else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
+        } else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
             showToast("Select Strip Bolt Tightness As Per Torque");
             return false;
         } else if (petroleumJellyApplied.isEmpty() || petroleumJellyApplied == null) {
@@ -952,13 +952,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         } else if (bbEarthingStatus.isEmpty() || bbEarthingStatus == null) {
             showToast("Select BB Earthing Status");
             return false;
-        } /*else if (registerFault.isEmpty() || registerFault == null) {
-            showToast("Select Register Fault");
-            return false;
-        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
-            showToast("Select Types Of Fault");
-            return false;
-        }*/ else return true;
+        }else return true;
     }
 
     private void visibilityOfImageViewBatteryBankDischargeTest(String str_pmSiteBbcpBatteryBankDischargeTestVal) {

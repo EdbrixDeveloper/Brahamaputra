@@ -613,7 +613,10 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
-        } else if ((dgCheckPointsData.size() != Integer.valueOf(NoOfDgAvailable) && methodFlag.equals("onSubmit"))) {
+        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
+            return false;
+        }  else if ((dgCheckPointsData.size() != Integer.valueOf(NoOfDgAvailable) && methodFlag.equals("onSubmit"))) {
             showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
             return false;
         } else return true;

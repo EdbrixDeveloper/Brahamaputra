@@ -748,6 +748,9 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
+        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
+            return false;
         } else if ((dgBatteryCheckPointsData.size() != Integer.valueOf(NoOfDgBatteryAvailable) && methodFlag.equals("onSubmit"))) {
             showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
             return false;

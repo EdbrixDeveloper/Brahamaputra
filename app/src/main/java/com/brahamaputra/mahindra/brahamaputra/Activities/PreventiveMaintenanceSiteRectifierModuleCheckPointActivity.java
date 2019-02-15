@@ -670,8 +670,6 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         String rectifierCleaning = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.getText().toString().trim();
         String rectifierPhotoBeforeCleaning = base64StringRectifierPhotoBeforeCleaning;
         String rectifierPhotoAfterCleaning = base64StringRectifierPhotoAfterCleaning;
-        String registerFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim();
 
         if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Please Scan QR Code");
@@ -685,23 +683,37 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         } else if (rectifierPhotoAfterCleaning.isEmpty() || rectifierPhotoAfterCleaning == null) {
             showToast("Please Take Rectifier Photo After Cleaning");
             return false;
+        } else return true;
+    }
+
+    private boolean checkValidationonSubmit(String methodFlag) {
+
+        String totalNoOFRectifierModule = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.getText().toString().trim();
+        String noOfModulesWorking = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.getText().toString().trim();
+        String noOfFaultyModulesInSite = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim();
+
+        if (totalNoOFRectifierModule.isEmpty() || totalNoOFRectifierModule == null) {
+            showToast("Select No OF Rectifier Module Available At Site");
+            return false;
+        } else if (noOfModulesWorking.isEmpty() || noOfModulesWorking == null) {
+            showToast("Select No Of Modules Working");
+            return false;
+        } else if (noOfFaultyModulesInSite.isEmpty() || noOfFaultyModulesInSite == null) {
+            showToast("Select No Of Faulty Modules In Site");
+            return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        } else return true;
-    }
-
-    private boolean checkValidationonSubmit(String methodFlag) {
-
-        String totalNumberval = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.getText().toString().trim();
-        if (totalNumberval.isEmpty() || totalNumberval == null) {
-            showToast("Select Number Of Tenant ");
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Register Fault");
             return false;
-        } else if (Integer.valueOf(totalNumberval) > 0) {
-            if ((rectifierModuleCheckPointDataList.size() != Integer.valueOf(totalNumberval) && methodFlag.equals("onSubmit"))) {
+        } else if (Integer.valueOf(totalNoOFRectifierModule) > 0) {
+            if ((rectifierModuleCheckPointDataList.size() != Integer.valueOf(totalNoOFRectifierModule) && methodFlag.equals("onSubmit"))) {
                 showToast("Complete the all readings.");
                 return false;
             } else return true;

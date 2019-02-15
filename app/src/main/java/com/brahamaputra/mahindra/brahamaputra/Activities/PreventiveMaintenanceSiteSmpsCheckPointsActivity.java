@@ -841,51 +841,51 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         String smpsCondition = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsConditionVal.getText().toString().trim();
         String smpsControlerStatus = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsControlerStatusVal.getText().toString().trim();
         String smpsEarthingStatus = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewSmpsEarthingStatusVal.getText().toString().trim();
-        String registerFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
-        String typeOfFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         String dcLoadCurrentInFloat = mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadCurrent.getText().toString().trim();
         String dcLoadAmpPh = mPreventiveMaintenanceSiteSmpsCheckPointsEditTextDcLoadAmpPh.getText().toString().trim();
         String detailsOfSmpsQrCodeScan = base64StringSmpsCheckPointsQRCodeScan;
         String base64DcLoadCurrentPhoto = base64StringPhotoDcLoadCurrent;
 
-        if (smpsCondition.isEmpty() || smpsCondition == null) {
-            showToast("Select smpsCondition");
+         if (detailsOfSmpsQrCodeScan.isEmpty() || detailsOfSmpsQrCodeScan == null) {
+            showToast("Scan Details Of SMPS QR Code");
+            return false;
+        }else if (smpsCondition.isEmpty() || smpsCondition == null) {
+            showToast("Select SMPS Condition");
             return false;
         } else if (smpsControlerStatus.isEmpty() || smpsControlerStatus == null) {
-            showToast("Select smpsControlerStatus");
-            return false;
-        } else if (registerFault.isEmpty() || registerFault == null) {
-            showToast("Select Register Fault");
+            showToast("Select SMPS Controler Status");
             return false;
         } else if (smpsEarthingStatus.isEmpty() || smpsEarthingStatus == null) {
-            showToast("Select smpsEarthingStatus");
-            return false;
-        } else if (registerFault.isEmpty() || registerFault == null) {
-            showToast("Select Register Fault");
+            showToast("Select SMPS Earthing Status");
             return false;
         } else if (dcLoadCurrentInFloat.isEmpty() || dcLoadCurrentInFloat == null) {
-            showToast("Select dcLoadCurrentInFloat");
+            showToast("Select DC Load Current In Float");
             return false;
-        } else if (dcLoadAmpPh.isEmpty() || dcLoadAmpPh == null) {
-            showToast("Select dcLoadAmpPh");
+        }else if (base64DcLoadCurrentPhoto.isEmpty() || base64DcLoadCurrentPhoto == null) {
+             showToast("Take Photo Of DC Load Current");
+             return false;
+         }  else if (dcLoadAmpPh.isEmpty() || dcLoadAmpPh == null) {
+            showToast("Select DC Load Amp/Ph");
             return false;
-        } else if (base64DcLoadCurrentPhoto.isEmpty() || base64DcLoadCurrentPhoto == null) {
-            showToast("Click DcLoadCurrentPhoto");
-            return false;
-        } else if (detailsOfSmpsQrCodeScan.isEmpty() || detailsOfSmpsQrCodeScan == null) {
-            showToast("Scan detailsOfSmpsQrCodeScan");
-            return false;
-        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
-            showToast("Select Type of Fault");
-            return false;
-        } else return true;
+        }  else return true;
     }
 
     private boolean checkValidationonSubmit(String methodFlag) {
 
         String totalNumberval = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewNoOfSmpsAvailableAtSiteVal.getText().toString().trim();
+        String registerFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+        String typeOfFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         if (totalNumberval.isEmpty() || totalNumberval == null) {
             showToast("Select Number Of Tenant ");
+            return false;
+        }else if (registerFault.isEmpty() || registerFault == null) {
+            showToast("Select Register Fault");
+            return false;
+        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+            showToast("Select Type of Fault");
+            return false;
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+            showToast("Upload Photo Of Type Of Fault");
             return false;
         } else if (Integer.valueOf(totalNumberval) > 0) {
             if ((smpsCheckPointsData.size() != Integer.valueOf(totalNumberval) && methodFlag.equals("onSubmit"))) {
