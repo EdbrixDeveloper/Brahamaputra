@@ -1197,11 +1197,11 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
     private boolean checkValidationonSubmit(String methodFlag) {
 
-        String totalNumberval = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
+        String noOfAcAvalibleAtSite = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
         String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
-        if (totalNumberval.isEmpty() || totalNumberval == null) {
-            showToast("Select Number Of Tenant ");
+        if (noOfAcAvalibleAtSite.isEmpty() || noOfAcAvalibleAtSite == null) {
+            showToast("Select No Of AC Avalible At Site");
             return false;
         }else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
@@ -1212,8 +1212,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
-        } else if (Integer.valueOf(totalNumberval) > 0) {
-            if ((acCheckPointsData.size() != Integer.valueOf(totalNumberval) && methodFlag.equals("onSubmit"))) {
+        } else if (Integer.valueOf(noOfAcAvalibleAtSite) > 0) {
+            if ((acCheckPointsData.size() != Integer.valueOf(noOfAcAvalibleAtSite) && methodFlag.equals("onSubmit"))) {
                 showToast("Complete the all readings.");
                 return false;
             } else return true;
