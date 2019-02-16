@@ -385,7 +385,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         String detailsOfDgQrCodeScan = base64StringDgCheckPointsQRCodeScan;
         String dgHmrReading = mPreventiveMaintenanceSiteDgCheckPointsEditTextDgHmrReading.getText().toString().trim();
         String base64StringTakePhotoOfDgHmr = base64StringPhotoOfDgHmr;
-        //String imageFileUploadPhotoOfSitePremises= mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthPitValue.getText().toString().trim();
         String dgWorkingCondition = mPreventiveMaintenanceSiteDgCheckPointsTextViewDgWorkingConditionVal.getText().toString().trim();
         String coolentLevel = mPreventiveMaintenanceSiteDgCheckPointsTextViewCoolentLevelVal.getText().toString().trim();
         String beltTension = mPreventiveMaintenanceSiteDgCheckPointsTextViewBeltTensionVal.getText().toString().trim();
@@ -595,14 +594,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
         String registerFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
-        /*else if (registerFault.isEmpty() || registerFault == null) {
-            showToast("Select Register Fault");
-            return false;
-        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
-            showToast("Select Type of Fault");
-            return false;
-        }*/
-
 
         if (NoOfDgAvailable.isEmpty() || NoOfDgAvailable == null) {
             showToast("Select No of DG Available");

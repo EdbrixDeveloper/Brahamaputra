@@ -662,7 +662,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
             showToast("Select Type Of Fault");
             return false;
         } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
-            showToast("Upload Photo Of Type Of Fault");
+            showToast("Upload Photo Of Register Fault");
             return false;
         }else return true;
     }
