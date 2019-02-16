@@ -76,7 +76,9 @@ public class ElectricBillProcessList extends BaseActivity {
             public boolean onLoadMore(int page, int totalItemsCount, int firstVisibleItem) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to your AdapterView
-                getListDataByPaging(String.valueOf(page), firstVisibleItem);
+                if (loading) {
+                    getListDataByPaging(String.valueOf(page), firstVisibleItem);
+                }
                 // or loadNextDataFromApi(totalItemsCount);
                 return true; // ONLY if more data is actually being loaded; false otherwise.
             }
@@ -133,7 +135,9 @@ public class ElectricBillProcessList extends BaseActivity {
                                         dd.addAll(ebPaymentRequest.getEbPaymentRequestList());
                                         ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(dd, ElectricBillProcessList.this);
                                         listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);*/
-
+                                        if (ebPaymentRequest.getEbPaymentRequestList().size() < 15) {
+                                            loading = false;
+                                        }
                                         ebPaymentRequestList.addAll(ebPaymentRequest.getEbPaymentRequestList());
                                         ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(ebPaymentRequestList, ElectricBillProcessList.this);
                                         listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);
@@ -221,7 +225,6 @@ public class ElectricBillProcessList extends BaseActivity {
     protected void onResume() {
         super.onResume();
     }
-
 
 
     //Out Of Code

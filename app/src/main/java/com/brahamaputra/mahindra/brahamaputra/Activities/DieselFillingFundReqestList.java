@@ -81,7 +81,9 @@ public class DieselFillingFundReqestList extends BaseActivity {
             public boolean onLoadMore(int page, int totalItemsCount, int firstVisibleItem) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to your AdapterView
-                getTimeLineData(String.valueOf(page), firstVisibleItem);
+                if (loading) {
+                    getTimeLineData(String.valueOf(page), firstVisibleItem);
+                }
                 // or loadNextDataFromApi(totalItemsCount);
                 return true; // ONLY if more data is actually being loaded; false otherwise.
             }
@@ -119,6 +121,9 @@ public class DieselFillingFundReqestList extends BaseActivity {
                                     if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList() != null && dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() > 0) {
                                         mTxtNoTicketFound.setVisibility(View.GONE);
                                         mDieselFillingReqListListViewTickets.setVisibility(View.VISIBLE);
+                                        if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() < 15) {
+                                            loading = false;
+                                        }
                                         //ArrayList<DiselRequestTransactionList> dd = new ArrayList<DiselRequestTransactionList>(dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size());
                                         diselRequestTransactionList.addAll(dieselFillingFundRequestTransaction.getDiselRequestTransactionList());
                                         /*if (dieselFillingFundRequestTransaction.getDiselRequestTransactionList().size() < 15) {

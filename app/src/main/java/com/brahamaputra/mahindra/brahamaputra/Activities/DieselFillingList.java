@@ -77,7 +77,9 @@ public class DieselFillingList extends BaseActivity {
             public boolean onLoadMore(int page, int totalItemsCount, int firstVisibleItem) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to your AdapterView
-                getListDataByPaging(String.valueOf(page), firstVisibleItem);
+                if (loading) {
+                    getListDataByPaging(String.valueOf(page), firstVisibleItem);
+                }
                 // or loadNextDataFromApi(totalItemsCount);
                 return true; // ONLY if more data is actually being loaded; false otherwise.
             }
@@ -119,6 +121,9 @@ public class DieselFillingList extends BaseActivity {
                                         dieselTrasactionAdapter = new DieselTrasactionAdapter(dd, DieselFillingList.this);
                                         mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);*/
 
+                                        if (dieselFillingtransaction.getDiselFillingTransactionList().size() < 15) {
+                                            loading = false;
+                                        }
                                         diselFillingTransactionList.addAll(dieselFillingtransaction.getDiselFillingTransactionList());
                                         dieselTrasactionAdapter = new DieselTrasactionAdapter(diselFillingTransactionList, DieselFillingList.this);
                                         mDieselFillingListListViewTickets.setAdapter(dieselTrasactionAdapter);
@@ -195,7 +200,7 @@ public class DieselFillingList extends BaseActivity {
             getListDataByPaging("1", 0);
         }
     }
-    
+
     //Out Of Process
     private void prepareListData() {
         try {
