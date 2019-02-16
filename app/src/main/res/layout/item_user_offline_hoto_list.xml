@@ -21,7 +21,8 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="15dp"
+        android:layout_gravity="center"
         android:layout_weight="0.1"
         app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
 </LinearLayout>
