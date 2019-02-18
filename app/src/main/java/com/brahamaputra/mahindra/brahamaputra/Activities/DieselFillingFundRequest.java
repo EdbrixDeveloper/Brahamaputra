@@ -501,6 +501,11 @@ public class DieselFillingFundRequest extends BaseActivity {
 
                                                         dgMakeList = new ArrayList<String>();
                                                         dgCapacityList = new ArrayList<String>();
+
+                                                        mDieselFillingFundRequestTextViewCircleVal.setText("");
+                                                        mDieselFillingFundRequestTextViewStateVal.setText("");
+                                                        mDieselFillingFundRequestTextViewSsaVal.setText("");
+
                                                         mDieselFillingFundRequestTextViewDgMakeVal.setText("");
                                                         mDieselFillingFundRequestTextViewDgCapacityInKvaVal.setText("");
 
@@ -508,6 +513,10 @@ public class DieselFillingFundRequest extends BaseActivity {
                                                         mDieselFillingFundRequestTextViewLastDieselStockVal.setText("");
                                                         mDieselFillingFundRequestTextViewLastDgHmrVal.setText("");
                                                         mDieselFillingFundRequestTextViewLastEbReadingVal.setText("");
+
+                                                        mDieselFillingFundRequestTextViewCircleVal.setText(userSitesList.getSiteList().get(position).getCircleName() == null || userSitesList.getSiteList().get(position).getCircleName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getCircleName());
+                                                        mDieselFillingFundRequestTextViewStateVal.setText(userSitesList.getSiteList().get(position).getStateName() == null || userSitesList.getSiteList().get(position).getStateName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getStateName());
+                                                        mDieselFillingFundRequestTextViewSsaVal.setText(userSitesList.getSiteList().get(position).getSsaName() == null || userSitesList.getSiteList().get(position).getSsaName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getSsaName());
 
                                                         mDieselFillingFundRequestTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                         mDieselFillingFundRequestTextViewSiteIdVal.setText(userSitesList.getSiteList().get(position).getSiteId());
@@ -577,6 +586,10 @@ public class DieselFillingFundRequest extends BaseActivity {
                                                     mDieselFillingFundRequestTextViewSiteNameVal.setText(userSitesList.getSiteList().get(position).getSiteName());
                                                     mDieselFillingFundRequestTextViewSiteIdVal.setText(userSitesList.getSiteList().get(position).getSiteId());
 
+                                                    mDieselFillingFundRequestTextViewCircleVal.setText(userSitesList.getSiteList().get(position).getCircleName() == null || userSitesList.getSiteList().get(position).getCircleName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getCircleName());
+                                                    mDieselFillingFundRequestTextViewStateVal.setText(userSitesList.getSiteList().get(position).getStateName() == null || userSitesList.getSiteList().get(position).getStateName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getStateName());
+                                                    mDieselFillingFundRequestTextViewSsaVal.setText(userSitesList.getSiteList().get(position).getSsaName() == null || userSitesList.getSiteList().get(position).getSsaName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getSsaName());
+
                                                     mDieselFillingFundRequestTextViewSourceOfPowerVal.setText(userSitesList.getSiteList().get(position).getSourceOfPower() == null || userSitesList.getSiteList().get(position).getSourceOfPower().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getSourceOfPower());
                                                     mDieselFillingFundRequestTextViewCardSupplierVal.setText(userSitesList.getSiteList().get(position).getPetroCompanyName() == null || userSitesList.getSiteList().get(position).getPetroCompanyName().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getPetroCompanyName());
                                                     mDieselFillingFundRequestTextViewChildCardNumberVal.setText(userSitesList.getSiteList().get(position).getChildCardNumber() == null || userSitesList.getSiteList().get(position).getChildCardNumber().isEmpty() == true ? "-" : userSitesList.getSiteList().get(position).getChildCardNumber());
@@ -623,9 +636,9 @@ public class DieselFillingFundRequest extends BaseActivity {
 
     private void setSessionValuesToFields() {
         mDieselFillingFundRequestTextViewCustomerVal.setText(sessionManager.getSessionCustomer().toString());
-        mDieselFillingFundRequestTextViewCircleVal.setText(sessionManager.getSessionCircle().toString());
-        mDieselFillingFundRequestTextViewStateVal.setText(sessionManager.getUser_State().toString());
-        mDieselFillingFundRequestTextViewSsaVal.setText(sessionManager.getUser_Ssa().toString());
+        //mDieselFillingFundRequestTextViewCircleVal.setText(sessionManager.getSessionCircle().toString());
+        //mDieselFillingFundRequestTextViewStateVal.setText(sessionManager.getUser_State().toString());
+        //mDieselFillingFundRequestTextViewSsaVal.setText(sessionManager.getUser_Ssa().toString());
 
     }
 

@@ -137,7 +137,7 @@ public class UserAdditionalDetails {
     }
 
     public void setSiteName(String SiteName) {
-        this.SsaName = SiteName;
+        this.SiteName = SiteName;
     }
 
     public String getSiteCode() {

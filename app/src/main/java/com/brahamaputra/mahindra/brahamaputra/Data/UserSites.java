@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UserSites {
@@ -15,6 +16,24 @@ public class UserSites {
 
     @SerializedName("SiteAddress")
     private String SiteAddress;
+
+    @SerializedName("CircleId")
+    private String CircleId;
+
+    @SerializedName("CircleName")
+    private String CircleName;
+
+    @SerializedName("StateId")
+    private String StateId;
+
+    @SerializedName("StateName")
+    private String StateName;
+
+    @SerializedName("SsaId")
+    private String SsaId;
+
+    @SerializedName("SsaName")
+    private String SsaName;
 
     @SerializedName("SiteType")
     private String SiteType;
@@ -216,6 +235,57 @@ public class UserSites {
     public void setTowerType(String towerType) {
         TowerType = towerType;
     }
+
+    //////////////////////////
+
+    public String getCircleId() {
+        return CircleId;
+    }
+
+    public void setCircleId(String CircleId) {
+        this.CircleId = CircleId;
+    }
+
+    public String getCircleName() {
+        return CircleName;
+    }
+
+    public void setCircleName(String CircleName) {
+        this.CircleName = CircleName;
+    }
+
+    public String getStateId() {
+        return StateId;
+    }
+
+    public void setStateId(String StateId) {
+        this.StateId = StateId;
+    }
+
+    public String getStateName() {
+        return StateName;
+    }
+
+    public void setStateName(String StateName) {
+        this.StateName = StateName;
+    }
+
+    public String getSsaId() {
+        return SsaId;
+    }
+
+    public void setSsaId(String SsaId) {
+        this.SsaId = SsaId;
+    }
+
+    public String getSsaName() {
+        return SsaName;
+    }
+
+    public void setSsaName(String SsaName) {
+        this.SsaName = SsaName;
+    }
+
 
     /*public UserSites(String id, String siteId, String siteName, Object siteAddress, String siteType, String towerType) {
         Id = id;

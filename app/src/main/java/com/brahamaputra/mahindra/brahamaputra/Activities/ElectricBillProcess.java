@@ -245,7 +245,7 @@ public class ElectricBillProcess extends BaseActivity {
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(ElectricBillProcess.this, userId, "EB");
         assignViews();
-        initCombo();
+        //initCombo();
         set_listener();
         prepareUserPersonalData();//arj
 
@@ -422,6 +422,7 @@ public class ElectricBillProcess extends BaseActivity {
                 }
             }
         });
+
         mEbProcessTextViewSiteVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
