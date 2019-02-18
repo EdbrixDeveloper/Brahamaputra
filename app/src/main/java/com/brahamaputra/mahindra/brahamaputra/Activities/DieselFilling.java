@@ -1063,7 +1063,7 @@ public class DieselFilling extends BaseActivity {
                                     if (dieselRequestTicketNoList.getDiselRequestTicketList().size() > 0) {
                                         final ArrayList<String> requestTicketList = new ArrayList<String>();
                                         for (DiselRequestTicketList diselRequestTicketList : dieselRequestTicketNoList.getDiselRequestTicketList()) {
-                                            requestTicketList.add(diselRequestTicketList.getDiselRequesttTicketNo());
+                                            requestTicketList.add(diselRequestTicketList.getSiteName()+" - "+diselRequestTicketList.getDiselRequesttTicketNo());
                                         }
 
                                         mDieselFillingTextViewDieselRequestTicketNoVal.setOnClickListener(new View.OnClickListener() {
@@ -1091,14 +1091,14 @@ public class DieselFilling extends BaseActivity {
                                                         mDieselFillingTextViewChildPetroCardNoVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getChildCardNumber());
                                                         mDieselFillingTextViewApprovedQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getApprovedQuantity());
 
-                                                        if (dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude() != null && dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude() != null) {
+                                                       /* if (!(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude().equals("")) && !(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude().equals(""))) {
                                                             siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
                                                             siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());
                                                         } else {
                                                             siteLatitude = 0;
                                                             siteLatitude = 0;
                                                             siteLongitude = 0;
-                                                        }
+                                                        }*/
 
                                                         //siteDbId = Integer.valueOf(userSitesList.getSiteList().get(position).getId());
 
@@ -1140,8 +1140,8 @@ public class DieselFilling extends BaseActivity {
                                                     mDieselFillingTextViewChildPetroCardNoVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getChildCardNumber());
                                                     mDieselFillingTextViewApprovedQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getApprovedQuantity());
 
-                                                    siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
-                                                    siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());
+                                                   /* siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
+                                                    siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());*/
                                                 }
                                             });
                                         }
