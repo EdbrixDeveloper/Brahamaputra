@@ -658,6 +658,8 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteRectifierModuleCheckPointLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             base64StringUploadPhotoOfRegisterFault = "";
             mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);

@@ -520,6 +520,8 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
             mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutTypeOfFaultVal.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteShelterCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText("");
             base64StringUploadPhotoOfRegisterFault = "";
             mPreventiveMaintenanceSiteShelterCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
@@ -552,10 +554,10 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         } else if (hatchPlateEntrySealed.isEmpty() || hatchPlateEntrySealed == null) {
             showToast("Select Hatch Plate Entry Sealed");
             return false;
-        }  else if (shelterFloorStatus.isEmpty() || shelterFloorStatus == null) {
+        } else if (shelterFloorStatus.isEmpty() || shelterFloorStatus == null) {
             showToast("Select Shelter Floor Status");
             return false;
-        }else if (shelterEarthingStatus.isEmpty() || shelterEarthingStatus == null) {
+        } else if (shelterEarthingStatus.isEmpty() || shelterEarthingStatus == null) {
             showToast("Select Shelter Earthing Status");
             return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
@@ -564,7 +566,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
         } else return true;

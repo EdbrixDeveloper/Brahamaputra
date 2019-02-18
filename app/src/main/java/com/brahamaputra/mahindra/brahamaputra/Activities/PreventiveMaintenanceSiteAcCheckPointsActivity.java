@@ -465,6 +465,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
             base64StringUploadPhotoOfRegisterFault = "";

@@ -713,6 +713,8 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
             mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteSmpsCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteSmpsCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
             base64StringUploadPhotoOfRegisterFault = "";
