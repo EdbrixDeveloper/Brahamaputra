@@ -1090,6 +1090,8 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutTypesOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewTypesOfFaultVal.setText("");
             mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
             base64StringUploadPhotoOfRegisterFault = "";
@@ -1322,7 +1324,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
         } else return true;

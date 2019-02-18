@@ -511,6 +511,8 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
             mPreventiveMaintenanceSiteEbMeterBoxLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteEbMeterBoxLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             mPreventiveMaintenanceSiteEbMeterBoxTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteEbMeterBoxButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
             base64StringUploadPhotoOfRegisterFault = "";
@@ -664,6 +666,6 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
         } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
-        }else return true;
+        } else return true;
     }
 }

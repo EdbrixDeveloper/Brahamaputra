@@ -1059,6 +1059,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             base64StringUploadPhotoOfRegisterFault = "";
             mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);

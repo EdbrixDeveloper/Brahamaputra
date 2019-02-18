@@ -355,6 +355,8 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
             mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutTypeOfFault.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutUploadPhotoOfRegisterFault.setVisibility(View.VISIBLE);
         } else {
+            alreadySelectedTypeOfFaultList = new ArrayList<>();
+            setMultiSelectModel();
             mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setText("");
             mPreventiveMaintenanceSiteAlarmCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
             base64StringUploadPhotoOfRegisterFault = "";
@@ -777,7 +779,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
         } else return true;
