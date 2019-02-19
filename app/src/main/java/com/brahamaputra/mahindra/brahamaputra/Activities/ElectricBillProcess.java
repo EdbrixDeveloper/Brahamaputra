@@ -457,6 +457,19 @@ public class ElectricBillProcess extends BaseActivity {
                             siteID = Integer.valueOf(site.getSiteList().get(position).getId());
                             mEbProcessTextViewSiteIDVal.setText(site.getSiteList().get(position).getSiteId());
                             String siteAddress = String.valueOf(site.getSiteList().get(position).getSiteAddress());
+
+                            /*str_circleName = response.getUserDetails().getUserAdditionalDetails().getCircleName();
+                            mEbProcessTextViewCircleVal.setText(str_circleName);
+                            circleId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCircleId());
+
+                            str_stateName = response.getUserDetails().getUserAdditionalDetails().getStateName();
+                            mEbProcessTextViewStateVal.setText(str_stateName);
+                            StateId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getStateId());
+
+                            str_ssa = response.getUserDetails().getUserAdditionalDetails().getSsaName();
+                            mEbProcessTextViewSsaVal.setText(str_ssa);
+                            ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());*/
+
                             if (!siteAddress.isEmpty()) {
                                 mEbProcessTextViewSiteDetailsVal.setText(String.valueOf(site.getSiteList().get(position).getSiteAddress()));
                             }
@@ -1609,7 +1622,7 @@ public class ElectricBillProcess extends BaseActivity {
                                 mEbProcessTextViewCustomerVal.setText(str_customerName);
                                 customerId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCustomerId());
 
-                                str_circleName = response.getUserDetails().getUserAdditionalDetails().getCircleName();
+                                /*str_circleName = response.getUserDetails().getUserAdditionalDetails().getCircleName();
                                 mEbProcessTextViewCircleVal.setText(str_circleName);
                                 circleId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCircleId());
 
@@ -1619,7 +1632,8 @@ public class ElectricBillProcess extends BaseActivity {
 
                                 str_ssa = response.getUserDetails().getUserAdditionalDetails().getSsaName();
                                 mEbProcessTextViewSsaVal.setText(str_ssa);
-                                ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());
+                                ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());*/
+                                //on 19022019
 
 
                                 //str_siteName = response.getUserDetails().getUserAdditionalDetails().getSiteName();
