@@ -61,6 +61,11 @@ public class DiselRequestTicketList {
     @Expose
     private String DGCapacity;
 
+    @SerializedName("RemainingQty")
+    @Expose
+    private String RemainingQty;
+
+
 
     public String getId() {
         return id;
@@ -196,6 +201,14 @@ public class DiselRequestTicketList {
 
     public void setDGCapacity(String DGCapacity) {
         this.DGCapacity = DGCapacity;
+    }
+
+    public String getRemainingQty() {
+        return RemainingQty;
+    }
+
+    public void setRemainingQty(String remainingQty) {
+        RemainingQty = remainingQty;
     }
 
 }

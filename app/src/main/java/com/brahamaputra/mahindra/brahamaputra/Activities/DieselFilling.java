@@ -147,6 +147,8 @@ public class DieselFilling extends BaseActivity {
     private TextView mDieselFillingTextViewChildPetroCardNoVal;
     private TextView mDieselFillingTextViewApprovedQty;
     private TextView mDieselFillingTextViewApprovedQtyVal;
+    private TextView mDieselFillingTextViewRemainingQty;
+    private TextView mDieselFillingTextViewRemainingQtyVal;
     private TextView mDieselFillingTextViewFillingDate;
     private TextView mDieselFillingEditTextFillingDateVal;
 
@@ -273,7 +275,8 @@ public class DieselFilling extends BaseActivity {
         mDieselFillingTextViewApprovedQtyVal = (TextView) findViewById(R.id.dieselFilling_textView_approvedQty_val);
         mDieselFillingTextViewFillingDate = (TextView) findViewById(R.id.dieselFillingFundRequest_textView_fillingDate);
         mDieselFillingEditTextFillingDateVal = (EditText) findViewById(R.id.dieselFillingFundRequest_editText_fillingDateTime);
-
+        mDieselFillingTextViewRemainingQty = (TextView) findViewById(R.id.dieselFilling_textView_remainingQty);
+        mDieselFillingTextViewRemainingQtyVal = (TextView) findViewById(R.id.dieselFilling_textView_remainingQty_val);
 
 
       /*  mDieselFillingTextViewPresentFillingDate = (TextView) findViewById(R.id.dieselFilling_textView_presentFillingDate);
@@ -717,6 +720,7 @@ public class DieselFilling extends BaseActivity {
             String childPetroCardNo = mDieselFillingTextViewChildPetroCardNoVal.getText().toString().trim();
             String approvedQty = mDieselFillingTextViewApprovedQtyVal.getText().toString().trim();
             String fillingDate = mDieselFillingEditTextFillingDateVal.getText().toString().trim();
+            String remainingQty = mDieselFillingTextViewRemainingQtyVal.getText().toString().trim();
 /*
             dieselFillingData = new DieselFillingData(dieselRequestTicketNo,siteID,childPetroCardNo, selectDgIdQrCode, presentDgHmr, hmrPhotoUpload, tankBalanceBeforeFilling,
                     approvedQty,fillingQty, finalDieselStock, presentEbReading, fillingDate,ebReadingKwhPhoto,
@@ -1090,8 +1094,10 @@ public class DieselFilling extends BaseActivity {
                                                         mDieselFillingTextViewDgCapacityInKvaVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getDGCapacity());
                                                         mDieselFillingTextViewChildPetroCardNoVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getChildCardNumber());
                                                         mDieselFillingTextViewApprovedQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getApprovedQuantity());
+                                                        mDieselFillingTextViewRemainingQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getRemainingQty());
 
-                                                       /* if (!(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude().equals("")) && !(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude().equals(""))) {
+
+                                                        /* if (!(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude().equals("")) && !(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude().equals(""))) {
                                                             siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
                                                             siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());
                                                         } else {
@@ -1139,7 +1145,7 @@ public class DieselFilling extends BaseActivity {
                                                     mDieselFillingTextViewDieselRequestTicketNoVal.setText(str_dieselRequestTicketNo);
                                                     mDieselFillingTextViewChildPetroCardNoVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getChildCardNumber());
                                                     mDieselFillingTextViewApprovedQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getApprovedQuantity());
-
+                                                    mDieselFillingTextViewRemainingQtyVal.setText(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getRemainingQty());
                                                    /* siteLatitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLatitude());
                                                     siteLongitude = Double.parseDouble(dieselRequestTicketNoList.getDiselRequestTicketList().get(position).getLongitude());*/
                                                 }
@@ -1302,6 +1308,7 @@ public class DieselFilling extends BaseActivity {
         String childPetroCardNo = mDieselFillingTextViewChildPetroCardNoVal.getText().toString();
         String selectDgIdQrCode = mDieselFillingTextViewSelectDgIdQrCodeVal.getText().toString().trim();
         String approvedQty = mDieselFillingTextViewApprovedQtyVal.getText().toString();
+        String remainingQty = mDieselFillingTextViewRemainingQtyVal.getText().toString();
         String fillingDate = mDieselFillingEditTextFillingDateVal.getText().toString();
 
         String presentDgHmr = mDieselFillingEditTextPresentDgHmr.getText().toString().trim();
@@ -1340,8 +1347,8 @@ public class DieselFilling extends BaseActivity {
         } else if (fillingQty.isEmpty() || fillingQty == null) {
             showToast("Enter Filling Quantity");
             return false;
-        } else if (checkFillingQy(approvedQty, fillingQty) == false) {
-            showToast("Enter Filling Quantity is less than Approved Quantity");
+        } else if (checkFillingQy(approvedQty, fillingQty,remainingQty) == false) {
+            showToast("Check Approved Quantity,Remaining Quantity and Filling Quantity, Put Wrong Quantity in any of this three");
             return false;
         } else if (finalDieselStock.isEmpty() || finalDieselStock == null) {
             showToast("Wrong Final Diesel Stock");
@@ -1365,12 +1372,13 @@ public class DieselFilling extends BaseActivity {
 
     }
 
-    public boolean checkFillingQy(String approvedQty, String fillingQty) {
-        if (approvedQty == null || fillingQty == null) {
+    public boolean checkFillingQy(String approvedQty, String fillingQty, String remainingQty) {
+        if (approvedQty == null || fillingQty == null || remainingQty == null) {
             return false;
-        } else if (approvedQty.isEmpty() && (fillingQty.isEmpty())) {
+        } else if (approvedQty.isEmpty() && (fillingQty.isEmpty()) && (remainingQty.isEmpty())) {
             return false;
-        } else if (Double.parseDouble(fillingQty) <= Double.parseDouble(approvedQty)) {
+        } else if (((Double.parseDouble(fillingQty) <= Double.parseDouble(approvedQty)) && (Double.parseDouble(remainingQty) == Double.parseDouble(approvedQty))) ||
+                ((Double.parseDouble(fillingQty) <=  Double.parseDouble(approvedQty)) && (Double.parseDouble(fillingQty) <=  Double.parseDouble(remainingQty)) && (Double.parseDouble(remainingQty) != Double.parseDouble(approvedQty)))) {
             return true;
         }
         return false;

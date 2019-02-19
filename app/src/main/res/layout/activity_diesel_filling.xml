@@ -359,6 +359,33 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/dieselFilling_textView_remainingQty"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Remaining Qty" />
+
+                <TextView
+                    android:id="@+id/dieselFilling_textView_remainingQty_val"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+                <!--android:textAllCaps="true"-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
                     android:id="@+id/dieselFilling_textView_fillingQty"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
