@@ -458,17 +458,23 @@ public class ElectricBillProcess extends BaseActivity {
                             mEbProcessTextViewSiteIDVal.setText(site.getSiteList().get(position).getSiteId());
                             String siteAddress = String.valueOf(site.getSiteList().get(position).getSiteAddress());
 
-                            /*str_circleName = response.getUserDetails().getUserAdditionalDetails().getCircleName();
+                            str_circleName = site.getSiteList().get(position).getCircleName() == null || site.getSiteList().get(position).getCircleName().isEmpty() == true ? "-" : site.getSiteList().get(position).getCircleName();
+                            //str_circleName = site.getSiteList().get(position).getCircleName();
                             mEbProcessTextViewCircleVal.setText(str_circleName);
-                            circleId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCircleId());
+                            circleId = Integer.valueOf(site.getSiteList().get(position).getCircleId() == null || site.getSiteList().get(position).getCircleId().isEmpty() == true ? "" : site.getSiteList().get(position).getCircleId());
+                            //circleId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getCircleId());
 
-                            str_stateName = response.getUserDetails().getUserAdditionalDetails().getStateName();
+                            str_stateName = site.getSiteList().get(position).getStateName() == null || site.getSiteList().get(position).getStateName().isEmpty() == true ? "-" : site.getSiteList().get(position).getStateName();
+                            //str_stateName = response.getUserDetails().getUserAdditionalDetails().getStateName();
                             mEbProcessTextViewStateVal.setText(str_stateName);
-                            StateId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getStateId());
+                            StateId = Integer.valueOf(site.getSiteList().get(position).getStateId() == null || site.getSiteList().get(position).getStateId().isEmpty() == true ? "" : site.getSiteList().get(position).getStateId());
+                            //StateId = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getStateId());
 
-                            str_ssa = response.getUserDetails().getUserAdditionalDetails().getSsaName();
+                            str_ssa = site.getSiteList().get(position).getSsaName() == null || site.getSiteList().get(position).getSsaName().isEmpty() == true ? "-" : site.getSiteList().get(position).getSsaName();
+                            //str_ssa = response.getUserDetails().getUserAdditionalDetails().getSsaName();
                             mEbProcessTextViewSsaVal.setText(str_ssa);
-                            ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());*/
+                            StateId = Integer.valueOf(site.getSiteList().get(position).getSsaId() == null || site.getSiteList().get(position).getSsaId().isEmpty() == true ? "" : site.getSiteList().get(position).getSsaId());
+                            //ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());
 
                             if (!siteAddress.isEmpty()) {
                                 mEbProcessTextViewSiteDetailsVal.setText(String.valueOf(site.getSiteList().get(position).getSiteAddress()));
@@ -1418,7 +1424,7 @@ public class ElectricBillProcess extends BaseActivity {
             JSONObject jo = new JSONObject();
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
-            jo.put("SSAId", ssaID);
+            //jo.put("SSAId", ssaID);
 
 
             GsonRequest<Site> getSiteRequest = new GsonRequest<>(Request.Method.POST, Constants.GetSite, jo.toString(), Site.class,
@@ -1645,7 +1651,8 @@ public class ElectricBillProcess extends BaseActivity {
                                 //if (!siteAddress.isEmpty()) {
                                 //    mEbProcessTextViewSiteDetailsVal.setText(siteAddress);
                                 //}
-                                mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(response.getUserDetails().getUserAdditionalDetails().getEbOfficeName()));
+
+                                //19022019 by 008 mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(response.getUserDetails().getUserAdditionalDetails().getEbOfficeName()));
                                 prepareEbSiteConnectedData();
                                 prepareSite();
                                 hideBusyProgress();
