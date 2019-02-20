@@ -1336,7 +1336,7 @@ public class DieselFilling extends BaseActivity {
         }*//*else if (selectDgIdQrCode.isEmpty() || selectDgIdQrCode == null) {
             showToast("Select DG ID / QR Code");
             return false;
-        }*/ else if (presentDgHmr.isEmpty() || presentDgHmr == null) {
+        }*/ else if (presentDgHmr.isEmpty() || presentDgHmr == null) { 
             showToast("Enter Present DG HMR");
             return false;
         } /*else if (hmrPhotoUpload.isEmpty() || hmrPhotoUpload == null) {
