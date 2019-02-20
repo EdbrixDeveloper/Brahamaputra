@@ -1348,7 +1348,7 @@ public class DieselFilling extends BaseActivity {
             showToast("Enter Filling Quantity");
             return false;
         } else if (checkFillingQy(approvedQty, fillingQty,remainingQty) == false) {
-            showToast("Check Approved Quantity,Remaining Quantity and Filling Quantity, Put Wrong Quantity in any of this three");
+            showToast("Filling Quantity not be greater than Remaining Qty");
             return false;
         } else if (finalDieselStock.isEmpty() || finalDieselStock == null) {
             showToast("Wrong Final Diesel Stock");
