@@ -849,7 +849,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         String base64DcLoadCurrentPhoto = base64StringPhotoDcLoadCurrent;
 
          if (detailsOfSmpsQrCodeScan.isEmpty() || detailsOfSmpsQrCodeScan == null) {
-            showToast("Scan Details Of SMPS QR Code");
+            showToast("Please Scan QR Code");
             return false;
         }else if (smpsCondition.isEmpty() || smpsCondition == null) {
             showToast("Select SMPS Condition");
@@ -861,7 +861,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
             showToast("Select SMPS Earthing Status");
             return false;
         } else if (dcLoadCurrentInFloat.isEmpty() || dcLoadCurrentInFloat == null) {
-            showToast("Select DC Load Current In Float");
+            showToast("Select DC Load Current in Float");
             return false;
         }else if (base64DcLoadCurrentPhoto.isEmpty() || base64DcLoadCurrentPhoto == null) {
              showToast("Take Photo Of DC Load Current");
@@ -878,7 +878,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         String registerFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteSmpsCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         if (totalNumberval.isEmpty() || totalNumberval == null) {
-            showToast("Select Number Of Tenant ");
+            showToast("Select No of SMPS available at site");
             return false;
         }else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
@@ -887,7 +887,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
             showToast("Select Type of Fault");
             return false;
         } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
-            showToast("Upload Photo Of Type Of Fault");
+            showToast("Upload Photo Of Register Fault");
             return false;
         } else if (Integer.valueOf(totalNumberval) > 0) {
             if ((smpsCheckPointsData.size() != Integer.valueOf(totalNumberval) && methodFlag.equals("onSubmit"))) {

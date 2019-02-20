@@ -1158,7 +1158,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
 
           if (detailsOfAcQrCodeScan.isEmpty() || detailsOfAcQrCodeScan == null) {
-            showToast("Scan AC QR Code Scan");
+            showToast("Please Scan QR Code");
             return false;
         }else if (workingConditionOfAc.isEmpty() || workingConditionOfAc == null) {
             showToast("Select Working Condition Of AC");
@@ -1172,28 +1172,28 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         } else  if (acFilterStatus.isEmpty() || acFilterStatus == null) {
             showToast("Select AC Filter Status");
             return false;
-        } else  if (cleaningOfCoolingCondensorCoils.isEmpty() || cleaningOfCoolingCondensorCoils == null) {
+        } else  if (base64TakePhotoOfAcFiltersBeforeCleaning.isEmpty() || base64TakePhotoOfAcFiltersBeforeCleaning == null) {
+              showToast("Take Photo Of AC Filters Before Cleaning");
+              return false;
+          } else  if (base64TakePhotoOfAcFiltersAfterCleaning.isEmpty() || base64TakePhotoOfAcFiltersAfterCleaning == null) {
+              showToast("Take Photo Of AC Filters After Cleaning");
+              return false;
+          } else  if (cleaningOfCoolingCondensorCoils.isEmpty() || cleaningOfCoolingCondensorCoils == null) {
             showToast("Select Cleaning Of Cooling Condensor Coils");
             return false;
         } else  if (anyAbnormalSoundFromMotor.isEmpty() || anyAbnormalSoundFromMotor == null) {
             showToast("Select Any Abnormal Sound From Motor");
             return false;
-        } else  if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
-            showToast("Select Shelter Door Status");
-            return false;
         } else  if (shelterTemperature.isEmpty() || shelterTemperature == null) {
-            showToast("Select Shelter Temperature");
-            return false;
-        }  else  if (base64TakePhotoOfAcFiltersBeforeCleaning.isEmpty() || base64TakePhotoOfAcFiltersBeforeCleaning == null) {
-            showToast("Take Photo Of AC Filters Before Cleaning");
-            return false;
-        } else  if (base64TakePhotoOfAcFiltersAfterCleaning.isEmpty() || base64TakePhotoOfAcFiltersAfterCleaning == null) {
-            showToast("Take Photo Of AC Filters After Cleaning");
-            return false;
-        } else  if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
+              showToast("Select Shelter Temperature");
+              return false;
+          }  else  if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
             showToast("Take Photo Of Temperature");
             return false;
-        }  else return true;
+        } else  if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
+              showToast("Select Shelter Door Status");
+              return false;
+          }  else return true;
 
     }
 

@@ -596,7 +596,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
 
         if (NoOfDgAvailable.isEmpty() || NoOfDgAvailable == null) {
-            showToast("Select No of DG Available");
+            showToast("Select No of DG available at site");
             return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");

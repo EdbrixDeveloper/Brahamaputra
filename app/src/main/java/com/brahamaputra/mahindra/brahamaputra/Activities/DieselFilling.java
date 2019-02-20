@@ -24,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -1349,6 +1350,9 @@ public class DieselFilling extends BaseActivity {
             return false;
         } else if (checkFillingQy(approvedQty, fillingQty,remainingQty) == false) {
             showToast("Filling Quantity not be greater than Remaining Qty");
+            mDieselFillingEditTextFillingQty.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(mDieselFillingEditTextFillingQty, InputMethodManager.SHOW_IMPLICIT);
             return false;
         } else if (finalDieselStock.isEmpty() || finalDieselStock == null) {
             showToast("Wrong Final Diesel Stock");

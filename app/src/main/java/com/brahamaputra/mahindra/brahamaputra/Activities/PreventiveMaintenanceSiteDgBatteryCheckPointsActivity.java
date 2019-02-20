@@ -740,7 +740,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
 
         if (NoOfDgBatteryAvailable.isEmpty() || NoOfDgBatteryAvailable == null) {
-            showToast("Select No of DG Battery Available");
+            showToast("Select No of DG Battery Available at site");
             return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");

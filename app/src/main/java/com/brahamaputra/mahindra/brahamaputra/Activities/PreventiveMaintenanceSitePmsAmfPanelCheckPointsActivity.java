@@ -794,7 +794,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
             showToast("Please Scan QR Code");
             return false;
         } else if (siteInAutoManual.isEmpty() || siteInAutoManual == null) {
-            showToast("Select Site In Auto Manual");
+            showToast("Select Site In Auto/Manual");
             return false;
         } else if (anyLooseConnectionBypass.isEmpty() || anyLooseConnectionBypass == null) {
             showToast("Select Any Loose Connection/Bypass");
