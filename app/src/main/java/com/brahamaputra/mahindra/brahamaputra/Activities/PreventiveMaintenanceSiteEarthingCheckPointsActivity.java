@@ -757,6 +757,10 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
     public boolean checkValidationOnChangeNoOfEarthPitValue(String noOfEarthPitValue, String noOfEarthPitValueVisible, String methodFlag) {
 
+        String allNutBoltsAreIntact = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewAllNutOrBoltsAreIntactVal.getText().toString().trim();
+        String igbOgbStatus = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewIgbOrOgbStatusVal.getText().toString().trim();
+        String lightningArresterStatus = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewLightningArresterStatusVal.getText().toString().trim();
+
         String executeEarthPitTest = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.getText().toString().trim();
         /*For Future validation
         String valuePITNo1 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.getText().toString().trim();
@@ -773,7 +777,16 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         String registerFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
 
-        if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
+        if(allNutBoltsAreIntact.isEmpty() || allNutBoltsAreIntact == null){
+            showToast("Select All Nut/Bolts are Intact");
+            return false;
+        } else if (igbOgbStatus.isEmpty() || igbOgbStatus == null) {
+            showToast("Select IGB/OGB Status");
+            return false;
+        } else if (lightningArresterStatus.isEmpty() || lightningArresterStatus == null) {
+            showToast("Select Lighting Arrester Status");
+            return false;
+        } else if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
             showToast("Select No of Earth Pit");
             return false;
         } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {

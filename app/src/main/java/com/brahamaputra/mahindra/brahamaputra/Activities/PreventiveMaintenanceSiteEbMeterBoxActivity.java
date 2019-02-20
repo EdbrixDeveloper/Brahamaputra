@@ -640,16 +640,16 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
             showToast("Select SFU/MCCB Status");
             return false;
         } else if (hrcFuseStatus.isEmpty() || hrcFuseStatus == null) {
-            showToast("Select HRC/Fuse Status");
+            showToast("Select HRC Fuse Status");
             return false;
         } else if (acLoadAmpPhRPhase.isEmpty() || acLoadAmpPhRPhase == null) {
-            showToast("Please Enter AC Load Amp R Phase");
+            showToast("Please Enter AC Load Amp/Ph R Phase");
             return false;
         } else if (acLoadAmpPhYPhase.isEmpty() || acLoadAmpPhYPhase == null) {
-            showToast("Please Enter AC Load Amp Y Phase");
+            showToast("Please Enter AC Load Amp/Ph Y Phase");
             return false;
         } else if (acLoadAmpPhBPhase.isEmpty() || acLoadAmpPhBPhase == null) {
-            showToast("Please Enter AC Load Amp B Phase");
+            showToast("Please Enter AC Load Amp/Ph B Phase");
             return false;
         } else if (ebMeterReadingKwh.isEmpty() || ebMeterReadingKwh == null) {
             showToast("Please Enter EB Meter Reading KWH");
