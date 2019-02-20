@@ -593,7 +593,7 @@ public class Battery_Set extends BaseActivity {
 
     private boolean checkValidtionForArrayFields() {
         String batterySet_Qr = base64StringBatterySet;
-        /*String assetOwner = mBatterySetTextViewAssetOwnerVal.getText().toString().trim();
+        String assetOwner = mBatterySetTextViewAssetOwnerVal.getText().toString().trim();
         String manufactureMakeModel = mBatterySetTextViewManufacturerMakeModelVal.getText().toString().trim();
         String capacityInAH = mBatterySetTextViewCapacityinAHVal.getText().toString().trim();
         String typeOfBattery = mBatterySetTextViewTypeofBatteryVal.getText().toString().trim();
@@ -603,22 +603,22 @@ public class Battery_Set extends BaseActivity {
         String batteryBankCableSize = mBatterySetTextViewBatteryBankCableSizeinSQMMVal.getText().toString().trim();
         String batteryBankEarthingStatus = mBatterySetTextViewBatteryBankEarthingStatusVal.getText().toString().trim();
         String backupCondition = mBatterySetTextViewBACKUPConditionVal.getText().toString().trim();
-        String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();*/
+        String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
 
         if (batterySet_Qr.isEmpty() || batterySet_Qr == null) {
-            showToast("Battery Set Qr Missing ");
+            showToast("Please Scan QR Code");
             return false;
-        } /*else if (assetOwner.isEmpty() || assetOwner == null) {
+        } else if (assetOwner.isEmpty() || assetOwner == null) {
             showToast("Select Asset Owner ");
             return false;
         } else if (manufactureMakeModel.isEmpty() || manufactureMakeModel == null) {
-            showToast("Select Manufacture Make Model");
+            showToast("Select Manufacture/Make/Model");
             return false;
         } else if (capacityInAH.isEmpty() || capacityInAH == null) {
-            showToast("Select capacity InAH ");
+            showToast("Select Capacity in AH ");
             return false;
         } else if (typeOfBattery.isEmpty() || typeOfBattery == null) {
-            showToast("Select type of Battery ");
+            showToast("Select Type of Battery ");
             return false;
         } else if (dateOfInstallation.isEmpty() || dateOfInstallation == null) {
             showToast("Select Date of Installation ");
@@ -641,9 +641,9 @@ public class Battery_Set extends BaseActivity {
         } else if (natureOfProblem.isEmpty() || natureOfProblem == null) {
             showToast("Select Nature of Problem ");
             return false;
-        }*/ /*else if (checkDuplicationQrCode(currentPos)) {
+        }/* else if (checkDuplicationQrCode(currentPos)) {
             return false;
-        }comment 04022019 by tiger*/ else return true;
+        }*/else return true;
 
 
     }

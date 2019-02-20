@@ -122,12 +122,12 @@ public class Media extends BaseActivity {
     }
 
     private boolean checkValiadtion() {
-        /*String mediaType = mMediaTextViewTypeofmediaVal.getText().toString().trim();
+        String mediaType = mMediaTextViewTypeofmediaVal.getText().toString().trim();
         if (mediaType.isEmpty() || mediaType == null) {
             showToast("Select Media Type ");
             return false;
-        } else*/
-        return true;
+        }else
+            return true;
     }
 
     private void setInputDetails() {
