@@ -427,9 +427,9 @@ public class ElectricBillProcess extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //prepareSite();
-                if (!mEbProcessTextViewSsaVal.getText().toString().trim().isEmpty()) {
-                    //prepareSite();
-
+                //on 20022019 if (!mEbProcessTextViewSsaVal.getText().toString().trim().isEmpty()) {
+                //prepareSite();
+                if (siteArray != null) {
                     SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(ElectricBillProcess.this,
                             siteArray,
                             "Select Site",
@@ -456,7 +456,7 @@ public class ElectricBillProcess extends BaseActivity {
                             mEbProcessTextViewSiteVal.setText(str_siteName);
                             siteID = Integer.valueOf(site.getSiteList().get(position).getId());
                             mEbProcessTextViewSiteIDVal.setText(site.getSiteList().get(position).getSiteId());
-                            String siteAddress = String.valueOf(site.getSiteList().get(position).getSiteAddress());
+                            //String siteAddress = String.valueOf(site.getSiteList().get(position).getSiteAddress());
 
                             str_circleName = site.getSiteList().get(position).getCircleName() == null || site.getSiteList().get(position).getCircleName().isEmpty() == true ? "-" : site.getSiteList().get(position).getCircleName();
                             //str_circleName = site.getSiteList().get(position).getCircleName();
@@ -476,18 +476,21 @@ public class ElectricBillProcess extends BaseActivity {
                             StateId = Integer.valueOf(site.getSiteList().get(position).getSsaId() == null || site.getSiteList().get(position).getSsaId().isEmpty() == true ? "" : site.getSiteList().get(position).getSsaId());
                             //ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());
 
-                            if (!siteAddress.isEmpty()) {
-                                mEbProcessTextViewSiteDetailsVal.setText(String.valueOf(site.getSiteList().get(position).getSiteAddress()));
-                            }
-                            mEbProcessTextViewEbServiceProviderVal.setText(String.valueOf(site.getSiteList().get(position).getEbOfficeName()));
+
+                            //if (!siteAddress.isEmpty()) {
+                            mEbProcessTextViewSiteDetailsVal.setText(site.getSiteList().get(position).getSiteAddress() == null || site.getSiteList().get(position).getSiteAddress().isEmpty() == true ? "-" : site.getSiteList().get(position).getSiteAddress());
+                            //}
+                            mEbProcessTextViewEbServiceProviderVal.setText(site.getSiteList().get(position).getEbOfficeName() == null || site.getSiteList().get(position).getEbOfficeName().isEmpty() == true ? "-" : site.getSiteList().get(position).getEbOfficeName());
                             prepareEbSiteConnectedData();
                         }
                     });
-
-
                 } else {
-                    showToast("Please Select SSA");
+                    showToast("Sites are not found");
                 }
+
+                /* on 20022019 } else {
+                    showToast("Please Select SSA");
+                }*/
 
             }
         });
@@ -837,26 +840,32 @@ public class ElectricBillProcess extends BaseActivity {
         String VendorSAPId = "";
         String EbBillScanCopyImageName = base64StringBillUpload;
 
-        Double netPayAmt = Double.parseDouble(NetPayableOnOrBeforeDueDate);
-        Double grossPayAmt = Double.parseDouble(GrossAmount);
+        Double netPayAmt = 0.0, grossPayAmt = 0.0;
+        if (!NetPayableOnOrBeforeDueDate.isEmpty()) {
+            netPayAmt = Double.parseDouble(NetPayableOnOrBeforeDueDate);
+        }
+        if (!GrossAmount.isEmpty()) {
+            grossPayAmt = Double.parseDouble(GrossAmount);
+        }
 
-        if (CustomerId.isEmpty() || CustomerId == null) {
-            showToast("Select Customer ");
+
+        if (CustomerId.isEmpty() || CustomerId == null || CustomerId.equals("-")) {
+            showToast("Customer  not found");
             return false;
-        } else if (CircleId.isEmpty() || CircleId == null) {
-            showToast("Select Circle ");
+        } else if (SiteId.isEmpty() || SiteId == null || SiteId.equals("-")) {
+            showToast("Select Site");
             return false;
-        } else if (stateId.isEmpty() || stateId == null) {
-            showToast("Select State ");
+        } else if (CircleId.isEmpty() || CircleId == null || CircleId.equals("-")) {
+            showToast("Circle  not found");
             return false;
-        } else if (SSAId.isEmpty() || SSAId == null) {
-            showToast("Select SSA ");
+        } else if (stateId.isEmpty() || stateId == null || stateId.equals("-")) {
+            showToast("State  not found");
             return false;
-        } else if (SiteId.isEmpty() || SiteId == null) {
-            showToast("Select Site ");
+        } else if (SSAId.isEmpty() || SSAId == null || SSAId.equals("-")) {
+            showToast("SSA not found");
             return false;
-        } else if (EBServiceProvider.isEmpty() || EBServiceProvider == null) {
-            showToast("Select EB Service Provider ");
+        } else if (EBServiceProvider.isEmpty() || EBServiceProvider == null || EBServiceProvider.equals("-")) {
+            showToast("EB Service Provider not found");
             return false;
         } else if (EBConsumerNumber.isEmpty() || EBConsumerNumber == null) {
             showToast("Select EB Consumer Number ");
@@ -871,7 +880,7 @@ public class ElectricBillProcess extends BaseActivity {
             showToast("Select Tariff ");
             return false;
         } else if (UnitsConsumed.isEmpty() || UnitsConsumed == null) {
-            showToast("Select Units Consumed ");
+            showToast("Enter Units Consumed ");
             return false;
         } else if (BillingPeriodFrom.isEmpty() || BillingPeriodFrom == null) {
             showToast("Select Billing Period From ");
@@ -880,7 +889,7 @@ public class ElectricBillProcess extends BaseActivity {
             showToast("Select Billing Period To ");
             return false;
         } else if (ReceiptNumber.isEmpty() || ReceiptNumber == null) {
-            showToast("Select Bill Number ");
+            showToast("Enter Bill Number ");
             return false;
         } else if (BillIssueDate.isEmpty() || BillIssueDate == null) {
             showToast("Select Bill Issue Date ");
@@ -889,19 +898,16 @@ public class ElectricBillProcess extends BaseActivity {
             showToast("Select Bill Due Date ");
             return false;
         } else if (GrossAmount.isEmpty() || GrossAmount == null) {
-            showToast("Select Gross Amount ");
+            showToast("Enter Gross Amount ");
             return false;
         } else if (NetPayableOnOrBeforeDueDate.isEmpty() || NetPayableOnOrBeforeDueDate == null) {
-            showToast("Select Net Payable On Or Before Due Date ");
-            return false;
-        } else if (CustomerId.isEmpty() || CustomerId == null) {
-            showToast("Select Net Payable On Or Before Due Date ");
+            showToast("Enter Net Payable On Or Before Due Date");
             return false;
         } else if (base64StringBillUpload.isEmpty() || base64StringBillUpload == null) {
-            showToast("Upload Bill Image ");
+            showToast("Upload EB Bill Scan Copy");
             return false;
         } else if (!dateFromToValid(date_BillFrom, date_BillTo)) {
-            showToast("Bill To Date should  greater than Bill From Date ");
+            showToast("Bill To Date should greater than Bill From Date");
             return false;
         } else if (netPayAmt > grossPayAmt) {
             showToast("Net Payable Amt Should Be Less Than Gross Amt");
@@ -1426,8 +1432,8 @@ public class ElectricBillProcess extends BaseActivity {
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
             //jo.put("SSAId", ssaID);
 
-
-            GsonRequest<Site> getSiteRequest = new GsonRequest<>(Request.Method.POST, Constants.GetSite, jo.toString(), Site.class,
+            //GetSite old web service
+            GsonRequest<Site> getSiteRequest = new GsonRequest<>(Request.Method.POST, Constants.GetUserSites, jo.toString(), Site.class,
                     new Response.Listener<Site>() {
                         @Override
                         public void onResponse(Site response) {

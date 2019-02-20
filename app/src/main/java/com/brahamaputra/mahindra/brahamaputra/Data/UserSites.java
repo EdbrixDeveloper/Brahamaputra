@@ -82,6 +82,10 @@ public class UserSites {
     @SerializedName("LastEBReading")
     private String LastEBReadingl;
 
+    @SerializedName("EbOfficeName")
+    @Expose
+    private String ebOfficeName;
+
 //////////////////////////////////////
 
     public String getBillingMonth() {
@@ -286,6 +290,13 @@ public class UserSites {
         this.SsaName = SsaName;
     }
 
+    public String getEbOfficeName() {
+        return ebOfficeName;
+    }
+
+    public void setEbOfficeName(String ebOfficeName) {
+        this.ebOfficeName = ebOfficeName;
+    }
 
     /*public UserSites(String id, String siteId, String siteName, Object siteAddress, String siteType, String towerType) {
         Id = id;
