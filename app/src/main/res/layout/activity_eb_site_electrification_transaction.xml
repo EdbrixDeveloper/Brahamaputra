@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/siteElectrificationTrans_button_submitSiteElectrificationTrans"
+        android:layout_above="@+id/ebSiteElectrificationTransaction_button_submitEbSiteElectrificationTransaction"
         android:layout_marginBottom="@dimen/app_min_margin"
         android:padding="@dimen/app_min_padding">
 

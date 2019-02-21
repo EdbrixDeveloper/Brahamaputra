@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.EbSiteElectrificationExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTicketList;
+import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransaction;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
@@ -47,7 +49,7 @@ public class EbSiteElectrificationList extends BaseActivity {
     /////////////////////////
     public static final int RESULT_EbSiteElectrification_SUBMIT = 257;
     private TextView txtNoTicketFound;
-
+    private LinearLayout TempForTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +64,48 @@ public class EbSiteElectrificationList extends BaseActivity {
         txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
         txtNoTicketFound.setVisibility(View.GONE);
 
+        TempForTest = (LinearLayout) findViewById(R.id.linearLayout_Temp_EbSiteElectrificationTicket);
+
+
         alertDialogManager = new AlertDialogManager(EbSiteElectrificationList.this);
         sessionManager = new SessionManager(EbSiteElectrificationList.this);
         gpsTracker = new GPSTracker(EbSiteElectrificationList.this);
         if (gpsTracker.canGetLocation()) {
-            Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+            Log.e(EbSiteElectrificationTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         }
 
-        prepareListData();
+        //prepareListData(); Comment For Test
+        TempForTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (gpsTracker.canGetLocation()) {
+                    Intent intent = new Intent(EbSiteElectrificationList.this, EbSiteElectrificationTransactionActivity.class);////////////
+                    intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(EbSiteElectrificationList.this));
+                    intent.putExtra("Id", "52");
 
+                    intent.putExtra("ticketNO", "EBSE1100096");
+                    intent.putExtra("ebSiteElectrificationTicketDate", "");
+                    intent.putExtra("siteId", "site 2992");
+                    intent.putExtra("siteName", "SM Site 2992");
+                    intent.putExtra("siteAddress", "Plot No.213, Whites Road, Royapettah, Jammu, Jammu Kashmir, 600014");
+                    intent.putExtra("status", "WIP");
+                    intent.putExtra("siteType", "Outdoor");
+                    intent.putExtra("stateName", "JAMMU & KASHMIR");
+                    intent.putExtra("customerName", "BSNL");
+                    intent.putExtra("circleName", "JAMMU & KASHMIR");
+                    intent.putExtra("ssaName", "Jammu");
+                    intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
+                    intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
 
-        ebSiteElectrificationList_listView_ebList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                    sessionManager.updateSessionUserTicketId("52");
+                    sessionManager.updateSessionUserTicketName("EBSE1100096");
+                    startActivityForResult(intent, RESULT_EbSiteElectrification_SUBMIT);
+
+                }
+            }
+        });
+
+        /*ebSiteElectrificationList_listView_ebList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 ebSiteElectrificationList_listView_ebList.expandGroup(groupPosition);
@@ -106,10 +139,10 @@ public class EbSiteElectrificationList extends BaseActivity {
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         if (ebSiteElectrificationTicketList != null) {
-                            final String hotoTicketId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getId().toString();
-                            final String hotoTicketNo = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getEbSiteElectrificationTicketNo().toString();
+                            final String ebSiteElectrificationTicketId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getId().toString();
+                            final String ebSiteElectrificationTicketNo = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getEbSiteElectrificationTicketNo().toString();
 
-                            final String hotoTicketDate = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getEbSiteElectrificationTicketNo().toString();
+                            final String ebSiteElectrificationTicketDate = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getEbSiteElectrificationTicketNo().toString();
                             final String siteId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSiteId().toString();
                             final String siteName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSiteName().toString();
                             final String siteAddress = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSiteAddress().toString();
@@ -121,21 +154,21 @@ public class EbSiteElectrificationList extends BaseActivity {
                             final String ssaName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSsaName().toString();
                             hototicket_Selected_SiteType = siteType;
 
-                            String hotoTickStatus = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getStatus().toString();
+                            String ebSiteElectrificationTickStatus = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getStatus().toString();
                             hototicket_nameOfSupplyCompany = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getNameOfSupplyCompany().toString();
 
-                            if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP") || hotoTickStatus.equals("Reassigned")) {
-                                if (hotoTickStatus.equals("Open")) {
+                            if (ebSiteElectrificationTickStatus.equals("Open") || ebSiteElectrificationTickStatus.equals("WIP") || ebSiteElectrificationTickStatus.equals("Reassigned")) {
+                                if (ebSiteElectrificationTickStatus.equals("Open")) {
 
                                     alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                         @Override
                                         public void onPositiveClick() {
-                                            checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                            checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteId, siteName, siteAddress, status, siteType,
                                                     stateName, customerName, circleName, ssaName);
                                         }
                                     }).show();
                                 } else {
-                                    checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                    checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteId, siteName, siteAddress, status, siteType,
                                             stateName, customerName, circleName, ssaName);
                                 }
 
@@ -143,13 +176,11 @@ public class EbSiteElectrificationList extends BaseActivity {
                         }
 
                     } else {
-                        //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
-                                    Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                    Log.e(EbSiteElectrificationTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
                         }).show();
@@ -157,7 +188,7 @@ public class EbSiteElectrificationList extends BaseActivity {
                 }
                 return false;
             }
-        });
+        });*/
     }
 
     /**
@@ -174,7 +205,7 @@ public class EbSiteElectrificationList extends BaseActivity {
 
             Log.i(EbSiteElectrificationList.class.getName(), "EbSiteElectrificationTicketList json: \n\n" + jo.toString());
 
-            GsonRequest<EbSiteElectrificationTicketList> getAssignAvailabilityLearnersListRequest = new GsonRequest<>(Request.Method.POST, Constants.hototTicketList, jo.toString(), EbSiteElectrificationTicketList.class,
+            GsonRequest<EbSiteElectrificationTicketList> getAssignAvailabilityLearnersListRequest = new GsonRequest<>(Request.Method.POST, Constants.ebSiteElectrificationTicketList, jo.toString(), EbSiteElectrificationTicketList.class,
                     new Response.Listener<EbSiteElectrificationTicketList>() {
                         @Override
                         public void onResponse(@NonNull EbSiteElectrificationTicketList response) {
@@ -208,7 +239,7 @@ public class EbSiteElectrificationList extends BaseActivity {
             });
             getAssignAvailabilityLearnersListRequest.setRetryPolicy(Application.getDefaultRetryPolice());
             getAssignAvailabilityLearnersListRequest.setShouldCache(false);
-            Application.getInstance().addToRequestQueue(getAssignAvailabilityLearnersListRequest, "assignavailabilitylearnerslist");
+            Application.getInstance().addToRequestQueue(getAssignAvailabilityLearnersListRequest, "assignAvailabilityLearnersList");
 
         } catch (JSONException e) {
             hideBusyProgress();
@@ -231,7 +262,7 @@ public class EbSiteElectrificationList extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuRefresh:
-                prepareListData();
+                //prepareListData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -246,7 +277,7 @@ public class EbSiteElectrificationList extends BaseActivity {
         }
     }
 
-    public void checkSystemLocation(final String hotoTickitNo, final String hotoTicketId, String hotoTicketDate, String siteId,
+    public void checkSystemLocation(final String ebSiteElectrificationTickitNo, final String ebSiteElectrificationTicketId, String ebSiteElectrificationTicketDate, String siteId,
                                     String siteName, String siteAddress, String status, String siteType, String stateName,
                                     String customerName, String circleName, String ssaName) {
 
@@ -273,13 +304,13 @@ public class EbSiteElectrificationList extends BaseActivity {
             if (Conditions.isNetworkConnected(EbSiteElectrificationList.this)) {
                 //if (gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
 
-                Intent intent = new Intent(EbSiteElectrificationList.this, UserHotoTransactionActivity.class);////////////
+                Intent intent = new Intent(EbSiteElectrificationList.this, EbSiteElectrificationTransactionActivity.class);////////////
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(EbSiteElectrificationList.this));
-                intent.putExtra("Id", hotoTicketId);
+                intent.putExtra("Id", ebSiteElectrificationTicketId);
 
-                intent.putExtra("ticketNO", hotoTickitNo);
+                intent.putExtra("ticketNO", ebSiteElectrificationTickitNo);
 
-                intent.putExtra("hotoTicketDate", hotoTicketDate);
+                intent.putExtra("ebSiteElectrificationTicketDate", ebSiteElectrificationTicketDate);
                 intent.putExtra("siteId", siteId);
                 intent.putExtra("siteName", siteName);
                 intent.putExtra("siteAddress", siteAddress);
@@ -292,8 +323,8 @@ public class EbSiteElectrificationList extends BaseActivity {
                 intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
                 intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
 
-                //sessionManager.updateSessionUserTicketId(hotoTicketId);
-                //sessionManager.updateSessionUserTicketName(hotoTickitNo);
+                sessionManager.updateSessionUserTicketId(ebSiteElectrificationTicketId);
+                sessionManager.updateSessionUserTicketName(ebSiteElectrificationTickitNo);
                 startActivityForResult(intent, RESULT_EbSiteElectrification_SUBMIT);
 
                 //}else{
@@ -302,15 +333,10 @@ public class EbSiteElectrificationList extends BaseActivity {
                 //}
 
             } else {
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
-                        Intent intent = new Intent(EbSiteElectrificationList.this, UserHotoTransactionActivity.class);//////
-                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(EbSiteElectrificationList.this));
-                        intent.putExtra("ticketNO", hotoTickitNo);
-                        //sessionManager.updateSessionUserTicketId(hotoTicketId);
-                        //sessionManager.updateSessionUserTicketName(hotoTickitNo);
-                        startActivityForResult(intent, RESULT_EbSiteElectrification_SUBMIT);
+                        finish();
                     }
                 }).show();
             }

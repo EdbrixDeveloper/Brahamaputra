@@ -99,7 +99,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                 hototicket_Selected_SiteType = mEbSiteElectrificationTransactionEditTextTypeOfSite.getText().toString();
                 hototicket_Selected_CustomerName = mEbSiteElectrificationTransactionEditTextCustomerName.getText().toString();
 
-                Intent intent = new Intent(EbSiteElectrificationTransactionActivity.this, HotoSectionsListActivity.class);
+                Intent intent = new Intent(EbSiteElectrificationTransactionActivity.this, EbSiteElectrificationElectricConnectionActivity.class);
                 intent.putExtra("ticketName", ticketName);
 
                 startActivityForResult(intent, 1);
@@ -139,7 +139,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
 
                         str_sourceOfPower = item.get(position);
                         mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.setText(str_sourceOfPower);
-                        hototicket_sourceOfPower=str_sourceOfPower;
+                        hototicket_sourceOfPower = str_sourceOfPower;
                     }
                 });
             }
@@ -148,16 +148,16 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
 
     public void checkNetworkConnection() {
 
-            Intent intent = getIntent();
+        Intent intent = getIntent();
 
-            mEbSiteElectrificationTransactionEditTextCustomerName.setText(intent.getStringExtra("customerName"));
-            mEbSiteElectrificationTransactionEditTextState.setText(intent.getStringExtra("stateName"));
-            mEbSiteElectrificationTransactionEditTextNameOfCircle.setText(intent.getStringExtra("circleName"));
-            mEbSiteElectrificationTransactionEditTextNameOfssa.setText(intent.getStringExtra("ssaName"));
-            mEbSiteElectrificationTransactionEditTextNameOfsite.setText(intent.getStringExtra("siteName"));
-            mEbSiteElectrificationTransactionEditTextSiteID.setText(intent.getStringExtra("siteId"));
-            mEbSiteElectrificationTransactionEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
-            mEbSiteElectrificationTransactionEditTextTypeOfSite.setText(intent.getStringExtra("siteType"));
+        mEbSiteElectrificationTransactionEditTextCustomerName.setText(intent.getStringExtra("customerName"));
+        mEbSiteElectrificationTransactionEditTextState.setText(intent.getStringExtra("stateName"));
+        mEbSiteElectrificationTransactionEditTextNameOfCircle.setText(intent.getStringExtra("circleName"));
+        mEbSiteElectrificationTransactionEditTextNameOfssa.setText(intent.getStringExtra("ssaName"));
+        mEbSiteElectrificationTransactionEditTextNameOfsite.setText(intent.getStringExtra("siteName"));
+        mEbSiteElectrificationTransactionEditTextSiteID.setText(intent.getStringExtra("siteId"));
+        mEbSiteElectrificationTransactionEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
+        mEbSiteElectrificationTransactionEditTextTypeOfSite.setText(intent.getStringExtra("siteType"));
 
            /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 checkInLat = String.valueOf(gpsTracker.getLatitude());
@@ -201,7 +201,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
             //offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG , e.getMessage().toString());
+            Log.e(TAG, e.getMessage().toString());
 
         }
 
