@@ -40,7 +40,7 @@
                 android:layout_below="@+id/img_ebPayment"
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="@dimen/app_min_margin"
-                android:text="EB Payment"
+                android:text="EB"
                 android:textAlignment="center"
                 android:textColor="@color/red"
                 android:textSize="18dp" />
@@ -70,7 +70,7 @@
                 android:layout_below="@+id/img_dieselFilling"
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="@dimen/app_min_margin"
-                android:text="Diesel Filling "
+                android:text="Diesel"
                 android:textAlignment="center"
                 android:textColor="@color/red"
                 android:textSize="18dp" />

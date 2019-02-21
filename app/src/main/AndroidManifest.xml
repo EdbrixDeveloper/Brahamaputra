@@ -334,6 +334,8 @@
         <activity android:name=".Activities.SafteyTipsActivity" />
         <activity android:name=".Activities.ListGroupActivity" />
         <activity android:name=".Activities.ItemListActivity"></activity>
+
+        <activity android:name=".Activities.EbSiteElectrificationList"></activity>
     </application>
 
 </manifest>
