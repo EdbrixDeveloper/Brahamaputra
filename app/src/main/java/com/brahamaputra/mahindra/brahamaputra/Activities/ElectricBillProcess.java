@@ -473,7 +473,7 @@ public class ElectricBillProcess extends BaseActivity {
                             str_ssa = site.getSiteList().get(position).getSsaName() == null || site.getSiteList().get(position).getSsaName().isEmpty() == true ? "-" : site.getSiteList().get(position).getSsaName();
                             //str_ssa = response.getUserDetails().getUserAdditionalDetails().getSsaName();
                             mEbProcessTextViewSsaVal.setText(str_ssa);
-                            StateId = Integer.valueOf(site.getSiteList().get(position).getSsaId() == null || site.getSiteList().get(position).getSsaId().isEmpty() == true ? "" : site.getSiteList().get(position).getSsaId());
+                            ssaID = Integer.valueOf(site.getSiteList().get(position).getSsaId() == null || site.getSiteList().get(position).getSsaId().isEmpty() == true ? "" : site.getSiteList().get(position).getSsaId());
                             //ssaID = Integer.valueOf(response.getUserDetails().getUserAdditionalDetails().getSsaId());
 
 
