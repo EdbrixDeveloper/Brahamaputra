@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Electric_Connection">
+    tools:context=".Activities.EbSiteElectrificationElectricConnectionActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -25,7 +25,88 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_typeOfElectricConnection"
+                    android:id="@+id/ebSiteElectrificationElectricConnection_textView_nameOfSupplyCompany"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Name of the supply company*" />
+
+                <EditText
+                    android:id="@+id/ebSiteElectrificationElectricConnection_textView_nameOfSupplyCompany_val"
+                    android:layout_width="0dp"
+                    android:layout_height="65dp"
+                    android:layout_weight="0.6"
+                    android:enabled="false"
+                    android:hint="Name of the supply company"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/ebSiteElectrificationElectricConnection_linearLayout_consumerNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebSiteElectrificationElectricConnection_textView_consumerNumber"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Consumer Number*" />
+
+                <EditText
+                    android:id="@+id/ebSiteElectrificationElectricConnection_editText_consumerNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Consumer Number"
+                    android:imeOptions="actionNext"
+                    android:enabled="false"
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebMeterSerialNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebMeterSerialNumber"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="EB Meter Serial Number" />
+
+                <EditText
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_ebMeterSerialNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Meter Serial"
+                    android:enabled="false"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_typeOfElectricConnection"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -34,7 +115,7 @@
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_typeOfElectricConnection_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_typeOfElectricConnection_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -51,7 +132,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_tariff"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_tariff"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -60,7 +141,7 @@
                     android:textColor="@color/colorBlueLink" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_tariff_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_tariff_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -70,32 +151,32 @@
 
             </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_sanctionedLoadKVA"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/app_min_padding"
-                    android:weightSum="1">
+                    android:layout_weight="0.4"
+                    android:text="Sanctioned load (KVA)"
+                    android:textColor="@color/colorBlueLink" />
 
-                    <TextView
-                        android:id="@+id/electricConnection_textView_sanctionedLoadKVA"
-                        style="@style/FontStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Sanctioned load (KVA)"
-                        android:textColor="@color/colorBlueLink" />
+                <EditText
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_sanctionedLoadKVA"
 
-                    <EditText
-                        android:id="@+id/electricConnection_editText_sanctionedLoadKVA"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Sanctioned load"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal" />
 
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:hint="Enter Sanctioned load"
-                        android:imeOptions="actionNext"
-                        android:inputType="numberDecimal" />
-
-                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -104,7 +185,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_existingLoadAtSiteKVA"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_existingLoadAtSiteKVA"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -113,7 +194,7 @@
                     android:textColor="@color/colorBlueLink" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_existingLoadAtSiteKVA"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_existingLoadAtSiteKVA"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -121,32 +202,6 @@
                     android:hint="Enter Existing load"
                     android:imeOptions="actionNext"
                     android:inputType="numberDecimal" />
-
-            </LinearLayout>
-
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_nameOfSupplyCompany"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Name of the supply company*" />
-
-                <EditText
-                    android:id="@+id/electricConnection_textView_nameOfSupplyCompany_val"
-                    android:layout_width="0dp"
-                    android:layout_height="65dp"
-                    android:layout_weight="0.6"
-                    android:hint="Name of the supply company"
-                    android:textAlignment="viewStart" />
 
             </LinearLayout>
 
@@ -164,7 +219,7 @@
                     android:text="Security Amount paid to the company, Rs" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_SecurityAmountPaidToTheCompany"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_SecurityAmountPaidToTheCompany"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -182,7 +237,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_copyOfElectricBills"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_copyOfElectricBills"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -190,7 +245,7 @@
                     android:text="Copy of the electric bills(Last Three Months)" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_copyOfElectricBills_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_copyOfElectricBills_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -207,7 +262,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_numberOfCompoundLights"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_numberOfCompoundLights"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -215,7 +270,7 @@
                     android:text="Number of Compound lights(Nos)" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_numberOfCompoundLights"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_numberOfCompoundLights"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -227,14 +282,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebMeterReadingInKWh"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebMeterReadingInKWh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterReadingInKWh"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebMeterReadingInKWh"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -242,7 +297,7 @@
                     android:text="EB Meter Reading(KWH)*" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_ebMeterReadingInKWh"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_ebMeterReadingInKWh"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -255,14 +310,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebSupplier"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebSupplier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebSupplier"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebSupplier"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -270,7 +325,7 @@
                     android:text="EB Supplier" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebSupplier_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebSupplier_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -281,14 +336,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebCostPerUnitForSharedConnection"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebCostPerUnitForSharedConnection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebCostPerUnitForSharedConnection"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebCostPerUnitForSharedConnection"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -296,7 +351,7 @@
                     android:text="EB Cost Per Unit for Shared Connection" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_ebCostPerUnitForSharedConnection"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_ebCostPerUnitForSharedConnection"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -309,14 +364,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebStatus"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebStatus"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -324,7 +379,7 @@
                     android:text="EB Status" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebStatus_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebStatus_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -335,14 +390,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_transformerWorkingCondition"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_transformerWorkingCondition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_transformerWorkingCondition"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_transformerWorkingCondition"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -350,7 +405,7 @@
                     android:text="Transformer Working Condition" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_transformerWorkingCondition_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_transformerWorkingCondition_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -361,14 +416,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_transformerCapacityInKva"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_transformerCapacityInKva"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_transformerCapacityInKva"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_transformerCapacityInKva"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -376,7 +431,7 @@
                     android:text="Transformer Capacity in KVA" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_transformerCapacityInKva"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_transformerCapacityInKva"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -388,14 +443,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebMeterBoxStatus"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebMeterBoxStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterBoxStatus"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebMeterBoxStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -403,7 +458,7 @@
                     android:text="EB Meter Box Status" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterBoxStatus_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebMeterBoxStatus_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -414,14 +469,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_sectionName"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_sectionName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_sectionName"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_sectionName"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -429,7 +484,7 @@
                     android:text="Section Name" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_sectionName"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_sectionName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -441,14 +496,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_sectionNumber"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_sectionNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_sectionNumber"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_sectionNumber"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -456,7 +511,7 @@
                     android:text="Section Number" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_sectionNumber"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_sectionNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -468,41 +523,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_consumerNumber"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebMeterWorkingStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_consumerNumber"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Consumer Number*" />
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_consumerNumber"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Consumer Number"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebMeterWorkingStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterWorkingStatus"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebMeterWorkingStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -510,7 +538,7 @@
                     android:text="EB Meter Working Status" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterWorkingStatus_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebMeterWorkingStatus_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -521,41 +549,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebMeterSerialNumber"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_typeOfPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebMeterSerialNumber"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="EB Meter Serial Number" />
-
-                <EditText
-                    android:id="@+id/electricConnection_editText_ebMeterSerialNumber"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Meter Serial"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_typeOfPayment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/electricConnection_textView_typeOfPayment"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_typeOfPayment"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -563,7 +564,7 @@
                     android:text="Type Of Payment" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_typeOfPayment_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_typeOfPayment_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -574,14 +575,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebPaymentSchedule"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebPaymentSchedule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebPaymentSchedule"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebPaymentSchedule"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -589,7 +590,7 @@
                     android:text="EB Payment Schedule" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebPaymentSchedule_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebPaymentSchedule_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -600,14 +601,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_safetyFuseUnit"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_safetyFuseUnit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_safetyFuseUnit"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_safetyFuseUnit"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -615,7 +616,7 @@
                     android:text="Safety Fuse Unit (SFU)" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_safetyFuseUnit_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_safetyFuseUnit_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -626,14 +627,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_kitKatClayFuseStatus"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_kitKatClayFuseStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_kitKatClayFuseStatus"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_kitKatClayFuseStatus"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -641,7 +642,7 @@
                     android:text="KIT-KAT/Clay Fuse Status" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_kitKatClayFuseStatus_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_kitKatClayFuseStatus_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -652,14 +653,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebNeutralEarthing"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebNeutralEarthing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebNeutralEarthing"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebNeutralEarthing"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -667,7 +668,7 @@
                     android:text="EB Neutral Earthing" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebNeutralEarthing_val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebNeutralEarthing_val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -678,14 +679,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_averageEbAvailabilityPerDay"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_averageEbAvailabilityPerDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_averageEbAvailabilityPerDay"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_averageEbAvailabilityPerDay"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -707,7 +708,7 @@
                      app:textSize="25sp" />-->
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_averageEbAvailabilityPerDay"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_averageEbAvailabilityPerDay"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -723,14 +724,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_scheduledPowerCutInHrs"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_scheduledPowerCutInHrs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_scheduledPowerCutInHrs"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_scheduledPowerCutInHrs"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -738,7 +739,7 @@
                     android:text="Scheduled Power Cut in Hrs" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_scheduledPowerCutInHrs"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_scheduledPowerCutInHrs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -753,14 +754,14 @@
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/electricConnection_linearLayout_ebBillDate"
+                android:id="@+id/ebSiteElectrificationTransaction_linearLayout_ebBillDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebBillDate"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebBillDate"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -768,7 +769,7 @@
                     android:text="EB Bill Date" />
 
                 <!--<EditText
-                    android:id="@+id/electricConnection_editText_ebBillDate"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_ebBillDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -778,7 +779,7 @@
                     android:textAlignment="viewStart" />-->
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_ebBillDate_Val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_ebBillDate_Val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -796,7 +797,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_sapVendorCode"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_sapVendorCode"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -804,7 +805,7 @@
                     android:text="SAP Vendor Code" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_sapVendorCode"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_sapVendorCode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -822,7 +823,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_typeModeOfPayment"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_typeModeOfPayment"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -830,7 +831,7 @@
                     android:text="Type|Mode of Payment*" />
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_typeModeOfPayment_Val"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_typeModeOfPayment_Val"
                     style="@style/MyTheme"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
@@ -847,7 +848,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_bankIfscCode"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_bankIfscCode"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -855,7 +856,7 @@
                     android:text="Bank IFSC Code" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_bankIfscCode"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_bankIfscCode"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -874,7 +875,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/electricConnection_textView_bankAccountNo"
+                    android:id="@+id/ebSiteElectrificationTransaction_textView_bankAccountNo"
                     style="@style/FontStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -882,7 +883,7 @@
                     android:text="Bank Account No" />
 
                 <EditText
-                    android:id="@+id/electricConnection_editText_bankAccountNo"
+                    android:id="@+id/ebSiteElectrificationTransaction_editText_bankAccountNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
@@ -894,6 +895,6 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
