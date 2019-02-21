@@ -6,92 +6,92 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 
 public class EbSiteElectrificationElectricConnectionData {
 
-    @SerializedName("electricConnectionType")
-    private String electricConnectionType;
+    @SerializedName("nameOfTheSupplyCompany")
+    private String nameOfTheSupplyCompany;
 
-    @SerializedName("connectionTariff")
-    private String connectionTariff;
+    @SerializedName("consumerNumber")
+    private String consumerNumber;
 
-    @SerializedName("sanctionLoad")
-    private String sanctionLoad;
+    @SerializedName("ebMeterSerialNumber")
+    private String ebMeterSerialNumber;
+
+    @SerializedName("typeOfElectricConnection")
+    private String typeOfElectricConnection;
+
+    @SerializedName("tariff")
+    private String tariff;
+
+    @SerializedName("sanctionedLoad")
+    private String sanctionedLoad;
 
     @SerializedName("existingLoadAtSite")
     private String existingLoadAtSite;
 
-    @SerializedName("nameSupplyCompany")
-    private String nameSupplyCompany;
+    @SerializedName("securityAmountPaidToTheCompany")
+    private String securityAmountPaidToTheCompany;
 
-    @SerializedName("electricBillCopyStatus")
-    private String electricBillCopyStatus;
+    @SerializedName("copyOfTheElectricBills")
+    private String copyOfTheElectricBills;
 
-    @SerializedName("noOfCompoundLights")
-    private String noOfCompoundLights;
+    @SerializedName("numberOfCompoundLights")
+    private String numberOfCompoundLights;
 
-    @SerializedName("meterReadingsEB")
-    private String meterReadingsEB;
+    @SerializedName("ebMeterReadingInKWH")
+    private String ebMeterReadingInKWH;
 
-    @SerializedName("supplierEB")
-    private String supplierEB;
+    @SerializedName("ebSupplier")
+    private String ebSupplier;
 
-    @SerializedName("costPerUnitForSharedConnectionEB")
-    private String costPerUnitForSharedConnectionEB;
+    @SerializedName("ebCostPerUnitForSharedConnection")
+    private String ebCostPerUnitForSharedConnection;
 
-    @SerializedName("statusEB")
-    private String statusEB;
+    @SerializedName("ebStatus")
+    private String ebStatus;
 
     @SerializedName("transformerWorkingCondition")
     private String transformerWorkingCondition;
 
-    @SerializedName("transformerCapacity")
-    private String transformerCapacity;
+    @SerializedName("transformerCapacityInKVA")
+    private String transformerCapacityInKVA;
 
-    @SerializedName("meterBoxStatusEB")
-    private String meterBoxStatusEB;
+    @SerializedName("ebMeterBoxStatus")
+    private String ebMeterBoxStatus;
 
     @SerializedName("sectionName")
     private String sectionName;
 
-    @SerializedName("sectionNo")
-    private String sectionNo;
+    @SerializedName("sectionNumber")
+    private String sectionNumber;
 
-    @SerializedName("consumerNo")
-    private String consumerNo;
+    @SerializedName("ebMeterWorkingStatus")
+    private String ebMeterWorkingStatus;
 
-    @SerializedName("meterWorkingStatusEB")
-    private String meterWorkingStatusEB;
+    @SerializedName("typeOfPayment")
+    private String typeOfPayment;
 
-    @SerializedName("meterSerialNumberEB")
-    private String meterSerialNumberEB;
-
-    @SerializedName("paymentType")
-    private String paymentType;
-
-    @SerializedName("paymentScheduleEB")
-    private String paymentScheduleEB;
+    @SerializedName("ebPaymentSchedule")
+    private String ebPaymentSchedule;
 
     @SerializedName("safetyFuseUnit")
     private String safetyFuseUnit;
 
-    @SerializedName("kitKatFuseStatus")
-    private String kitKatFuseStatus;
+    @SerializedName("kitkatClayFuseStatus")
+    private String kitkatClayFuseStatus;
 
     @SerializedName("ebNeutralEarthing")
     private String ebNeutralEarthing;
 
-    @SerializedName("averageEbAvailability")
-    private String averageEbAvailability;
+    @SerializedName("averageEbAvailabilityPerDay")
+    private String averageEbAvailabilityPerDay;
 
-    @SerializedName("scheduledPowerCut")
-    private String scheduledPowerCut;
+    @SerializedName("scheduledPowerCutInHrs")
+    private String scheduledPowerCutInHrs;
 
     @SerializedName("ebBillDate")
     private String ebBillDate;
 
-    @SerializedName("sapVendorCode")
-    private String sapVendorCode;
-
-    @SerializedName("typeModeOfPayment_Val")
-    private String typeModeOfPayment_Val;
+    @SerializedName("typeModeOfPayment")
+    private String typeModeOfPayment;
 
     @SerializedName("bankIfscCode")
     private String bankIfscCode;
@@ -99,131 +99,116 @@ public class EbSiteElectrificationElectricConnectionData {
     @SerializedName("bankAccountNo")
     private String bankAccountNo;
 
-    @SerializedName("securityAmountPaid")
-    private String securityAmountPaid;
-
-    public String getSecurityAmountPaid() {
-        return securityAmountPaid;
-    }
-
-    public void setSecurityAmountPaid(String securityAmountPaid) {
-        this.securityAmountPaid = securityAmountPaid;
-    }
-
     @SerializedName("isSubmited")
     //private Boolean isSubmited;
     private int isSubmited;
 
-    //region Region of Constructors
-    public EbSiteElectrificationElectricConnectionData() {
-        this.electricConnectionType = "";
-        this.connectionTariff = "";
-        this.sanctionLoad = "";
+
+    public EbSiteElectrificationElectricConnectionData(){
+        this.nameOfTheSupplyCompany = "";
+        this.consumerNumber = "";
+        this.ebMeterSerialNumber = "";
+        this.typeOfElectricConnection = "";
+        this.tariff = "";
+        this.sanctionedLoad = "";
         this.existingLoadAtSite = "";
-        this.nameSupplyCompany = "";
-        this.electricBillCopyStatus = "";
-        this.noOfCompoundLights = "";
-        this.meterReadingsEB = "";
-        this.supplierEB = "";
-        this.costPerUnitForSharedConnectionEB = "";
-        this.statusEB = "";
+        this.securityAmountPaidToTheCompany = "";
+        this.copyOfTheElectricBills = "";
+        this.numberOfCompoundLights = "";
+        this.ebMeterReadingInKWH = "";
+        this.ebSupplier = "";
+        this.ebCostPerUnitForSharedConnection = "";
+        this.ebStatus = "";
         this.transformerWorkingCondition = "";
-        this.transformerCapacity = "";
-        this.meterBoxStatusEB = "";
+        this.transformerCapacityInKVA = "";
+        this.ebMeterBoxStatus = "";
         this.sectionName = "";
-        this.sectionNo = "";
-        this.consumerNo = "";
-        this.meterWorkingStatusEB = "";
-        this.meterSerialNumberEB = "";
-        this.paymentType = "";
-        this.paymentScheduleEB = "";
-        this.safetyFuseUnit = "";
-        this.kitKatFuseStatus = "";
-        this.ebNeutralEarthing = "";
-        this.averageEbAvailability = "";
-        this.scheduledPowerCut = "";
-        this.ebBillDate = "";
-        this.typeModeOfPayment_Val = "";
-        this.bankIfscCode = "";
-        this.bankAccountNo = "";
-        this.isSubmited = 0;
-        this.securityAmountPaid = "";
+        this.sectionNumber = "";
+        this.ebMeterWorkingStatus = "";
+        this.typeOfPayment = "";
+
+       /* @SerializedName("ebPaymentSchedule")
+        private String ebPaymentSchedule;
+
+        @SerializedName("safetyFuseUnit")
+        private String safetyFuseUnit;
+
+        @SerializedName("kitkatClayFuseStatus")
+        private String kitkatClayFuseStatus;
+
+        @SerializedName("ebNeutralEarthing")
+        private String ebNeutralEarthing;
+
+        @SerializedName("averageEbAvailabilityPerDay")
+        private String averageEbAvailabilityPerDay;
+
+        @SerializedName("scheduledPowerCutInHrs")
+        private String scheduledPowerCutInHrs;
+
+        @SerializedName("ebBillDate")
+        private String ebBillDate;
+
+        @SerializedName("typeModeOfPayment")
+        private String typeModeOfPayment;
+
+        @SerializedName("bankIfscCode")
+        private String bankIfscCode;
+
+        @SerializedName("bankAccountNo")
+        private String bankAccountNo;
+
+        @SerializedName("isSubmited")
+        //private Boolean isSubmited;
+        private int isSubmited;*/
     }
 
-    public EbSiteElectrificationElectricConnectionData(String electricConnectionType, String connectionTariff, String sanctionLoad, String securityAmountPaid, String existingLoadAtSite, String nameSupplyCompany, String electricBillCopyStatus, String noOfCompoundLights, String meterReadingsEB, String supplierEB, String costPerUnitForSharedConnectionEB, String statusEB, String transformerWorkingCondition, String transformerCapacity, String meterBoxStatusEB, String sectionName, String sectionNo, String consumerNo, String meterWorkingStatusEB, String meterSerialNumberEB, String paymentType, String paymentScheduleEB, String safetyFuseUnit, String kitKatFuseStatus, String ebNeutralEarthing, String averageEbAvailability, String scheduledPowerCut, String ebBillDate, String sapVendorCode, String typeModeOfPayment_Val, String bankIfscCode, String bankAccountNo) {
-        this.electricConnectionType = electricConnectionType;
-        this.connectionTariff = connectionTariff;
-        this.sanctionLoad = sanctionLoad;
-        this.securityAmountPaid = securityAmountPaid;
-        this.existingLoadAtSite = existingLoadAtSite;
-        this.nameSupplyCompany = nameSupplyCompany;
-        this.electricBillCopyStatus = electricBillCopyStatus;
-        this.noOfCompoundLights = noOfCompoundLights;
-        this.meterReadingsEB = meterReadingsEB;
-        this.supplierEB = supplierEB;
-        this.costPerUnitForSharedConnectionEB = costPerUnitForSharedConnectionEB;
-        this.statusEB = statusEB;
-        this.transformerWorkingCondition = transformerWorkingCondition;
-        this.transformerCapacity = transformerCapacity;
-        this.meterBoxStatusEB = meterBoxStatusEB;
-        this.sectionName = sectionName;
-        this.sectionNo = sectionNo;
-        this.consumerNo = consumerNo;
-        this.meterWorkingStatusEB = meterWorkingStatusEB;
-        this.meterSerialNumberEB = meterSerialNumberEB;
-        this.paymentType = paymentType;
-        this.paymentScheduleEB = paymentScheduleEB;
-        this.safetyFuseUnit = safetyFuseUnit;
-        this.kitKatFuseStatus = kitKatFuseStatus;
-        this.ebNeutralEarthing = ebNeutralEarthing;
-        this.averageEbAvailability = averageEbAvailability;
-        this.scheduledPowerCut = scheduledPowerCut;
-        this.ebBillDate = ebBillDate;
-        this.sapVendorCode = sapVendorCode;
-        this.typeModeOfPayment_Val = typeModeOfPayment_Val;
-        this.bankIfscCode = bankIfscCode;
-        this.bankAccountNo = bankAccountNo;
-        //this.isSubmited=true;//007
-        this.isSubmited = 1;
-        if (hototicket_sourceOfPower.equals("Non EB")) {
-            if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
-                    !this.typeModeOfPayment_Val.isEmpty()) {
-                this.isSubmited = 2;
-            }
-        } else {
-            if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
-                    !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
-                this.isSubmited = 2;
-            } /*else {
-            this.isSubmited = 1;
-        }*/
-        }
-    }
-    //endregion
 
-    //region Region of Getter() Setter() Properties
-    public String getElectricConnectionType() {
-        return electricConnectionType;
+    public String getNameOfTheSupplyCompany() {
+        return nameOfTheSupplyCompany;
     }
 
-    public void setElectricConnectionType(String electricConnectionType) {
-        this.electricConnectionType = electricConnectionType;
+    public void setNameOfTheSupplyCompany(String nameOfTheSupplyCompany) {
+        this.nameOfTheSupplyCompany = nameOfTheSupplyCompany;
     }
 
-    public String getConnectionTariff() {
-        return connectionTariff;
+    public String getConsumerNumber() {
+        return consumerNumber;
     }
 
-    public void setConnectionTariff(String connectionTariff) {
-        this.connectionTariff = connectionTariff;
+    public void setConsumerNumber(String consumerNumber) {
+        this.consumerNumber = consumerNumber;
     }
 
-    public String getSanctionLoad() {
-        return sanctionLoad;
+    public String getEbMeterSerialNumber() {
+        return ebMeterSerialNumber;
     }
 
-    public void setSanctionLoad(String sanctionLoad) {
-        this.sanctionLoad = sanctionLoad;
+    public void setEbMeterSerialNumber(String ebMeterSerialNumber) {
+        this.ebMeterSerialNumber = ebMeterSerialNumber;
+    }
+
+    public String getTypeOfElectricConnection() {
+        return typeOfElectricConnection;
+    }
+
+    public void setTypeOfElectricConnection(String typeOfElectricConnection) {
+        this.typeOfElectricConnection = typeOfElectricConnection;
+    }
+
+    public String getTariff() {
+        return tariff;
+    }
+
+    public void setTariff(String tariff) {
+        this.tariff = tariff;
+    }
+
+    public String getSanctionedLoad() {
+        return sanctionedLoad;
+    }
+
+    public void setSanctionedLoad(String sanctionedLoad) {
+        this.sanctionedLoad = sanctionedLoad;
     }
 
     public String getExistingLoadAtSite() {
@@ -234,60 +219,60 @@ public class EbSiteElectrificationElectricConnectionData {
         this.existingLoadAtSite = existingLoadAtSite;
     }
 
-    public String getNameSupplyCompany() {
-        return nameSupplyCompany;
+    public String getSecurityAmountPaidToTheCompany() {
+        return securityAmountPaidToTheCompany;
     }
 
-    public void setNameSupplyCompany(String nameSupplyCompany) {
-        this.nameSupplyCompany = nameSupplyCompany;
+    public void setSecurityAmountPaidToTheCompany(String securityAmountPaidToTheCompany) {
+        this.securityAmountPaidToTheCompany = securityAmountPaidToTheCompany;
     }
 
-    public String getElectricBillCopyStatus() {
-        return electricBillCopyStatus;
+    public String getCopyOfTheElectricBills() {
+        return copyOfTheElectricBills;
     }
 
-    public void setElectricBillCopyStatus(String electricBillCopyStatus) {
-        this.electricBillCopyStatus = electricBillCopyStatus;
+    public void setCopyOfTheElectricBills(String copyOfTheElectricBills) {
+        this.copyOfTheElectricBills = copyOfTheElectricBills;
     }
 
-    public String getNoOfCompoundLights() {
-        return noOfCompoundLights;
+    public String getNumberOfCompoundLights() {
+        return numberOfCompoundLights;
     }
 
-    public void setNoOfCompoundLights(String noOfCompoundLights) {
-        this.noOfCompoundLights = noOfCompoundLights;
+    public void setNumberOfCompoundLights(String numberOfCompoundLights) {
+        this.numberOfCompoundLights = numberOfCompoundLights;
     }
 
-    public String getMeterReadingsEB() {
-        return meterReadingsEB;
+    public String getEbMeterReadingInKWH() {
+        return ebMeterReadingInKWH;
     }
 
-    public void setMeterReadingsEB(String meterReadingsEB) {
-        this.meterReadingsEB = meterReadingsEB;
+    public void setEbMeterReadingInKWH(String ebMeterReadingInKWH) {
+        this.ebMeterReadingInKWH = ebMeterReadingInKWH;
     }
 
-    public String getSupplierEB() {
-        return supplierEB;
+    public String getEbSupplier() {
+        return ebSupplier;
     }
 
-    public void setSupplierEB(String supplierEB) {
-        this.supplierEB = supplierEB;
+    public void setEbSupplier(String ebSupplier) {
+        this.ebSupplier = ebSupplier;
     }
 
-    public String getCostPerUnitForSharedConnectionEB() {
-        return costPerUnitForSharedConnectionEB;
+    public String getEbCostPerUnitForSharedConnection() {
+        return ebCostPerUnitForSharedConnection;
     }
 
-    public void setCostPerUnitForSharedConnectionEB(String costPerUnitForSharedConnectionEB) {
-        this.costPerUnitForSharedConnectionEB = costPerUnitForSharedConnectionEB;
+    public void setEbCostPerUnitForSharedConnection(String ebCostPerUnitForSharedConnection) {
+        this.ebCostPerUnitForSharedConnection = ebCostPerUnitForSharedConnection;
     }
 
-    public String getStatusEB() {
-        return statusEB;
+    public String getEbStatus() {
+        return ebStatus;
     }
 
-    public void setStatusEB(String statusEB) {
-        this.statusEB = statusEB;
+    public void setEbStatus(String ebStatus) {
+        this.ebStatus = ebStatus;
     }
 
     public String getTransformerWorkingCondition() {
@@ -298,20 +283,20 @@ public class EbSiteElectrificationElectricConnectionData {
         this.transformerWorkingCondition = transformerWorkingCondition;
     }
 
-    public String getTransformerCapacity() {
-        return transformerCapacity;
+    public String getTransformerCapacityInKVA() {
+        return transformerCapacityInKVA;
     }
 
-    public void setTransformerCapacity(String transformerCapacity) {
-        this.transformerCapacity = transformerCapacity;
+    public void setTransformerCapacityInKVA(String transformerCapacityInKVA) {
+        this.transformerCapacityInKVA = transformerCapacityInKVA;
     }
 
-    public String getMeterBoxStatusEB() {
-        return meterBoxStatusEB;
+    public String getEbMeterBoxStatus() {
+        return ebMeterBoxStatus;
     }
 
-    public void setMeterBoxStatusEB(String meterBoxStatusEB) {
-        this.meterBoxStatusEB = meterBoxStatusEB;
+    public void setEbMeterBoxStatus(String ebMeterBoxStatus) {
+        this.ebMeterBoxStatus = ebMeterBoxStatus;
     }
 
     public String getSectionName() {
@@ -322,52 +307,36 @@ public class EbSiteElectrificationElectricConnectionData {
         this.sectionName = sectionName;
     }
 
-    public String getSectionNo() {
-        return sectionNo;
+    public String getSectionNumber() {
+        return sectionNumber;
     }
 
-    public void setSectionNo(String sectionNo) {
-        this.sectionNo = sectionNo;
+    public void setSectionNumber(String sectionNumber) {
+        this.sectionNumber = sectionNumber;
     }
 
-    public String getConsumerNo() {
-        return consumerNo;
+    public String getEbMeterWorkingStatus() {
+        return ebMeterWorkingStatus;
     }
 
-    public void setConsumerNo(String consumerNo) {
-        this.consumerNo = consumerNo;
+    public void setEbMeterWorkingStatus(String ebMeterWorkingStatus) {
+        this.ebMeterWorkingStatus = ebMeterWorkingStatus;
     }
 
-    public String getMeterWorkingStatusEB() {
-        return meterWorkingStatusEB;
+    public String getTypeOfPayment() {
+        return typeOfPayment;
     }
 
-    public void setMeterWorkingStatusEB(String meterWorkingStatusEB) {
-        this.meterWorkingStatusEB = meterWorkingStatusEB;
+    public void setTypeOfPayment(String typeOfPayment) {
+        this.typeOfPayment = typeOfPayment;
     }
 
-    public String getMeterSerialNumberEB() {
-        return meterSerialNumberEB;
+    public String getEbPaymentSchedule() {
+        return ebPaymentSchedule;
     }
 
-    public void setMeterSerialNumberEB(String meterSerialNumberEB) {
-        this.meterSerialNumberEB = meterSerialNumberEB;
-    }
-
-    public String getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public String getPaymentScheduleEB() {
-        return paymentScheduleEB;
-    }
-
-    public void setPaymentScheduleEB(String paymentScheduleEB) {
-        this.paymentScheduleEB = paymentScheduleEB;
+    public void setEbPaymentSchedule(String ebPaymentSchedule) {
+        this.ebPaymentSchedule = ebPaymentSchedule;
     }
 
     public String getSafetyFuseUnit() {
@@ -378,12 +347,12 @@ public class EbSiteElectrificationElectricConnectionData {
         this.safetyFuseUnit = safetyFuseUnit;
     }
 
-    public String getKitKatFuseStatus() {
-        return kitKatFuseStatus;
+    public String getKitkatClayFuseStatus() {
+        return kitkatClayFuseStatus;
     }
 
-    public void setKitKatFuseStatus(String kitKatFuseStatus) {
-        this.kitKatFuseStatus = kitKatFuseStatus;
+    public void setKitkatClayFuseStatus(String kitkatClayFuseStatus) {
+        this.kitkatClayFuseStatus = kitkatClayFuseStatus;
     }
 
     public String getEbNeutralEarthing() {
@@ -394,20 +363,20 @@ public class EbSiteElectrificationElectricConnectionData {
         this.ebNeutralEarthing = ebNeutralEarthing;
     }
 
-    public String getAverageEbAvailability() {
-        return averageEbAvailability;
+    public String getAverageEbAvailabilityPerDay() {
+        return averageEbAvailabilityPerDay;
     }
 
-    public void setAverageEbAvailability(String averageEbAvailability) {
-        this.averageEbAvailability = averageEbAvailability;
+    public void setAverageEbAvailabilityPerDay(String averageEbAvailabilityPerDay) {
+        this.averageEbAvailabilityPerDay = averageEbAvailabilityPerDay;
     }
 
-    public String getScheduledPowerCut() {
-        return scheduledPowerCut;
+    public String getScheduledPowerCutInHrs() {
+        return scheduledPowerCutInHrs;
     }
 
-    public void setScheduledPowerCut(String scheduledPowerCut) {
-        this.scheduledPowerCut = scheduledPowerCut;
+    public void setScheduledPowerCutInHrs(String scheduledPowerCutInHrs) {
+        this.scheduledPowerCutInHrs = scheduledPowerCutInHrs;
     }
 
     public String getEbBillDate() {
@@ -418,20 +387,12 @@ public class EbSiteElectrificationElectricConnectionData {
         this.ebBillDate = ebBillDate;
     }
 
-    public String getSapVendorCode() {
-        return sapVendorCode;
+    public String getTypeModeOfPayment() {
+        return typeModeOfPayment;
     }
 
-    public void setSapVendorCode(String sapVendorCode) {
-        this.sapVendorCode = sapVendorCode;
-    }
-
-    public String getTypeModeOfPayment_Val() {
-        return typeModeOfPayment_Val;
-    }
-
-    public void setTypeModeOfPayment_Val(String typeModeOfPayment_Val) {
-        this.typeModeOfPayment_Val = typeModeOfPayment_Val;
+    public void setTypeModeOfPayment(String typeModeOfPayment) {
+        this.typeModeOfPayment = typeModeOfPayment;
     }
 
     public String getBankIfscCode() {
@@ -448,6 +409,14 @@ public class EbSiteElectrificationElectricConnectionData {
 
     public void setBankAccountNo(String bankAccountNo) {
         this.bankAccountNo = bankAccountNo;
+    }
+
+    public int getIsSubmited() {
+        return isSubmited;
+    }
+
+    public void setIsSubmited(int isSubmited) {
+        this.isSubmited = isSubmited;
     }
 
     public int getSubmited() {

@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationElectricConnectionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -106,7 +108,8 @@ public class EbSiteElectrificationElectricConnectionActivity extends AppCompatAc
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
-
+    private EbSiteElectrificationTransactionData ebSiteElectrificationTransactionData;
+    private EbSiteElectrificationElectricConnectionData ebSiteElectrificationElectricConnectionData;
     private SessionManager sessionManager;
 
     @Override
@@ -115,6 +118,7 @@ public class EbSiteElectrificationElectricConnectionActivity extends AppCompatAc
         setContentView(R.layout.activity_eb_site_electrification_electric_connection);
         this.setTitle("Electric Connection");//EB Site Electrification
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        decimalConversion = new DecimalConversion();
         assignViews();
 
 
