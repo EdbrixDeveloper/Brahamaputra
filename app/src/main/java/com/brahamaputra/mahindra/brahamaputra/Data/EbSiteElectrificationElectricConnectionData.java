@@ -431,13 +431,5 @@ public class EbSiteElectrificationElectricConnectionData {
     public void setIsSubmited(int isSubmited) {
         this.isSubmited = isSubmited;
     }
-
-    public int getSubmited() {
-        return isSubmited;
-    }
-
-    public void setSubmited(int submited) {
-        isSubmited = submited;
-    }
     //endregion
 }
