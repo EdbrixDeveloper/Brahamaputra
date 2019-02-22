@@ -336,7 +336,6 @@
         <activity android:name=".Activities.ItemListActivity"></activity>
 
         <activity android:name=".Activities.EbSiteElectrificationList"></activity>
-        <activity android:name=".Activities.ItemListActivity" />
         <activity android:name=".Activities.EbSiteElectrificationTransactionActivity" />
         <activity android:name=".Activities.EbSiteElectrificationElectricConnectionActivity"></activity>
     </application>

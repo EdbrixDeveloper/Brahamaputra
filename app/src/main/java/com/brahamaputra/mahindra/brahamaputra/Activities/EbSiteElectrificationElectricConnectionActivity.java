@@ -1,26 +1,35 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationElectricConnectionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
+import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import java.util.Calendar;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 
 public class EbSiteElectrificationElectricConnectionActivity extends AppCompatActivity {
 
@@ -144,6 +153,99 @@ public class EbSiteElectrificationElectricConnectionActivity extends AppCompatAc
         assignViews();
         initCombo();
 
+        mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(EbSiteElectrificationElectricConnectionActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
+                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
+                        mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay.setText(selectedHour1 + ":" + selectedMinute1);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time For Average Eb Availability");
+                mTimePicker.show();
+
+            }
+        });
+
+        mEbSiteElectrificationTransactionEditTextScheduledPowerCutInHrs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(EbSiteElectrificationElectricConnectionActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String selectedHour1 = (selectedHour >= 10) ? Integer.toString(selectedHour) : String.format("0%s", Integer.toString(selectedHour));
+                        String selectedMinute1 = (selectedMinute >= 10) ? Integer.toString(selectedMinute) : String.format("0%s", Integer.toString(selectedMinute));
+                        mEbSiteElectrificationTransactionEditTextScheduledPowerCutInHrs.setText(selectedHour1 + ":" + selectedMinute1);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time For Scheduled Power Cut");
+                mTimePicker.show();
+
+            }
+        });
+
+        mEbSiteElectrificationTransactionEditTextSanctionedLoadKVA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mEbSiteElectrificationTransactionEditTextExistingLoadAtSiteKVA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mEbSiteElectrificationTransactionEditTextEbMeterReadingInKWh.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mEbSiteElectrificationTransactionEditTextEbCostPerUnitForSharedConnection.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mEbSiteElectrificationTransactionEditTextTransformerCapacityInKva.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
+        if (hototicket_nameOfSupplyCompany.isEmpty() || hototicket_nameOfSupplyCompany.length() < 0) {
+            //
+        } else {
+            mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setText(hototicket_nameOfSupplyCompany);
+            mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setKeyListener(null);
+        }
+
+
     }
 
     private void assignViews() {
@@ -230,6 +332,26 @@ public class EbSiteElectrificationElectricConnectionActivity extends AppCompatAc
         mEbSiteElectrificationTransactionEditTextBankIfscCode = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_bankIfscCode);
         mEbSiteElectrificationTransactionTextViewBankAccountNo = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_bankAccountNo);
         mEbSiteElectrificationTransactionEditTextBankAccountNo = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_bankAccountNo);
+
+
+        mEbSiteElectrificationTransactionEditTextSanctionedLoadKVA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mEbSiteElectrificationTransactionEditTextExistingLoadAtSiteKVA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mEbSiteElectrificationTransactionEditTextEbMeterReadingInKWh.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mEbSiteElectrificationTransactionEditTextEbCostPerUnitForSharedConnection.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+        mEbSiteElectrificationTransactionEditTextTransformerCapacityInKva.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(8, 2)});
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+
+    }
+
+    public void DecimalFormatConversion() {
+        mEbSiteElectrificationTransactionEditTextSanctionedLoadKVA.setText(decimalConversion.convertDecimal(mEbSiteElectrificationTransactionEditTextSanctionedLoadKVA.getText().toString()));
+        mEbSiteElectrificationTransactionEditTextExistingLoadAtSiteKVA.setText(decimalConversion.convertDecimal(mEbSiteElectrificationTransactionEditTextExistingLoadAtSiteKVA.getText().toString()));
+        mEbSiteElectrificationTransactionEditTextEbMeterReadingInKWh.setText(decimalConversion.convertDecimal(mEbSiteElectrificationTransactionEditTextEbMeterReadingInKWh.getText().toString()));
+        mEbSiteElectrificationTransactionEditTextEbCostPerUnitForSharedConnection.setText(decimalConversion.convertDecimal(mEbSiteElectrificationTransactionEditTextEbCostPerUnitForSharedConnection.getText().toString()));
+        mEbSiteElectrificationTransactionEditTextTransformerCapacityInKva.setText(decimalConversion.convertDecimal(mEbSiteElectrificationTransactionEditTextTransformerCapacityInKva.getText().toString()));
     }
 
     private void initCombo() {
