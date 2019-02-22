@@ -104,7 +104,7 @@ public class EbSiteElectrificationElectricConnectionData {
     private int isSubmited;
 
 
-    public EbSiteElectrificationElectricConnectionData(){
+    public EbSiteElectrificationElectricConnectionData() {
         this.nameOfTheSupplyCompany = "";
         this.consumerNumber = "";
         this.ebMeterSerialNumber = "";
@@ -126,40 +126,53 @@ public class EbSiteElectrificationElectricConnectionData {
         this.sectionNumber = "";
         this.ebMeterWorkingStatus = "";
         this.typeOfPayment = "";
+        this.ebPaymentSchedule = "";
+        this.safetyFuseUnit = "";
+        this.kitkatClayFuseStatus = "";
+        this.ebNeutralEarthing = "";
+        this.averageEbAvailabilityPerDay = "";
+        this.scheduledPowerCutInHrs = "";
+        this.ebBillDate = "";
+        this.typeModeOfPayment = "";
+        this.bankIfscCode = "";
+        this.bankAccountNo = "";
+        this.isSubmited = 0;
 
-       /* @SerializedName("ebPaymentSchedule")
-        private String ebPaymentSchedule;
+    }
 
-        @SerializedName("safetyFuseUnit")
-        private String safetyFuseUnit;
-
-        @SerializedName("kitkatClayFuseStatus")
-        private String kitkatClayFuseStatus;
-
-        @SerializedName("ebNeutralEarthing")
-        private String ebNeutralEarthing;
-
-        @SerializedName("averageEbAvailabilityPerDay")
-        private String averageEbAvailabilityPerDay;
-
-        @SerializedName("scheduledPowerCutInHrs")
-        private String scheduledPowerCutInHrs;
-
-        @SerializedName("ebBillDate")
-        private String ebBillDate;
-
-        @SerializedName("typeModeOfPayment")
-        private String typeModeOfPayment;
-
-        @SerializedName("bankIfscCode")
-        private String bankIfscCode;
-
-        @SerializedName("bankAccountNo")
-        private String bankAccountNo;
-
-        @SerializedName("isSubmited")
-        //private Boolean isSubmited;
-        private int isSubmited;*/
+    public EbSiteElectrificationElectricConnectionData(String nameOfTheSupplyCompany, String consumerNumber, String ebMeterSerialNumber, String typeOfElectricConnection, String tariff, String sanctionedLoad, String existingLoadAtSite, String securityAmountPaidToTheCompany, String copyOfTheElectricBills, String numberOfCompoundLights, String ebMeterReadingInKWH, String ebSupplier, String ebCostPerUnitForSharedConnection, String ebStatus, String transformerWorkingCondition, String transformerCapacityInKVA, String ebMeterBoxStatus, String sectionName, String sectionNumber, String ebMeterWorkingStatus, String typeOfPayment, String ebPaymentSchedule, String safetyFuseUnit, String kitkatClayFuseStatus, String ebNeutralEarthing, String averageEbAvailabilityPerDay, String scheduledPowerCutInHrs, String ebBillDate, String typeModeOfPayment, String bankIfscCode, String bankAccountNo) {
+        this.nameOfTheSupplyCompany = nameOfTheSupplyCompany;
+        this.consumerNumber = consumerNumber;
+        this.ebMeterSerialNumber = ebMeterSerialNumber;
+        this.typeOfElectricConnection = typeOfElectricConnection;
+        this.tariff = tariff;
+        this.sanctionedLoad = sanctionedLoad;
+        this.existingLoadAtSite = existingLoadAtSite;
+        this.securityAmountPaidToTheCompany = securityAmountPaidToTheCompany;
+        this.copyOfTheElectricBills = copyOfTheElectricBills;
+        this.numberOfCompoundLights = numberOfCompoundLights;
+        this.ebMeterReadingInKWH = ebMeterReadingInKWH;
+        this.ebSupplier = ebSupplier;
+        this.ebCostPerUnitForSharedConnection = ebCostPerUnitForSharedConnection;
+        this.ebStatus = ebStatus;
+        this.transformerWorkingCondition = transformerWorkingCondition;
+        this.transformerCapacityInKVA = transformerCapacityInKVA;
+        this.ebMeterBoxStatus = ebMeterBoxStatus;
+        this.sectionName = sectionName;
+        this.sectionNumber = sectionNumber;
+        this.ebMeterWorkingStatus = ebMeterWorkingStatus;
+        this.typeOfPayment = typeOfPayment;
+        this.ebPaymentSchedule = ebPaymentSchedule;
+        this.safetyFuseUnit = safetyFuseUnit;
+        this.kitkatClayFuseStatus = kitkatClayFuseStatus;
+        this.ebNeutralEarthing = ebNeutralEarthing;
+        this.averageEbAvailabilityPerDay = averageEbAvailabilityPerDay;
+        this.scheduledPowerCutInHrs = scheduledPowerCutInHrs;
+        this.ebBillDate = ebBillDate;
+        this.typeModeOfPayment = typeModeOfPayment;
+        this.bankIfscCode = bankIfscCode;
+        this.bankAccountNo = bankAccountNo;
+        //this.isSubmited = isSubmited;
     }
 
 
