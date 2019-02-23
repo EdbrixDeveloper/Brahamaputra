@@ -1,8 +1,11 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import com.brahamaputra.mahindra.brahamaputra.Activities.EbSiteElectrificationElectricConnectionActivity;
 import com.google.gson.annotations.SerializedName;
 
-public class EbSiteElectrificationTransactionData {
+import java.io.Serializable;
+
+public class EbSiteElectrificationTransactionData implements Serializable {
     @SerializedName("UserId")
     private String UserId;
 
@@ -41,6 +44,9 @@ public class EbSiteElectrificationTransactionData {
 
     @SerializedName("checkOutBatteryData")
     private String checkOutBatteryData;
+
+    @SerializedName("objEbSiteElectrificationElectricConnection")
+    private EbSiteElectrificationElectricConnectionData objEbSiteElectrificationElectricConnection;
 
 
     public String getUserId() {
@@ -145,5 +151,14 @@ public class EbSiteElectrificationTransactionData {
 
     public void setCheckOutLongitude(String checkOutLongitude) {
         this.checkOutLongitude = checkOutLongitude;
+    }
+
+    public EbSiteElectrificationElectricConnectionData getObjEbSiteElectrificationElectricConnection()
+    {
+        return objEbSiteElectrificationElectricConnection;
+    }
+
+    public void setObjEbSiteElectrificationElectricConnection(EbSiteElectrificationElectricConnectionData objEbSiteElectrificationElectricConnection) {
+        this.objEbSiteElectrificationElectricConnection = objEbSiteElectrificationElectricConnection;
     }
 }

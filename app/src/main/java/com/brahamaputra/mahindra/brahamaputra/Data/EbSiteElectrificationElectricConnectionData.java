@@ -2,9 +2,11 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
-public class EbSiteElectrificationElectricConnectionData {
+public class EbSiteElectrificationElectricConnectionData implements Serializable {
 
     @SerializedName("nameOfTheSupplyCompany")
     private String nameOfTheSupplyCompany;

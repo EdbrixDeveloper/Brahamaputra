@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationElectricConnectionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsModulesData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -69,6 +71,9 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
     private String checkOutBatteryData = "0";
 
     EbSiteElectrificationTransactionData ebSiteElectrificationTransactionData;
+    EbSiteElectrificationElectricConnectionData ebSiteElectrificationElectricConnectionData;
+
+    public static final int MY_FLAG_MODULE_RESULT = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +107,11 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                 Intent intent = new Intent(EbSiteElectrificationTransactionActivity.this, EbSiteElectrificationElectricConnectionActivity.class);
                 intent.putExtra("ticketName", ticketName);
 
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 200);
             }
         });
+
+
     }
 
     private void assignViews() {
@@ -193,6 +200,8 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
             ebSiteElectrificationTransactionData.setSiteAddress(mEbSiteElectrificationTransactionEditTextSiteAddress.getText().toString());
 
             ebSiteElectrificationTransactionData.setSourceOfPower(mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.getText().toString());
+            ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(ebSiteElectrificationElectricConnectionData);
+
 
 
             Gson gson2 = new GsonBuilder().create();
@@ -215,7 +224,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
 
         // show the button when some condition is true
-        shareItem.setVisible(false);
+        shareItem.setVisible(true);
         /*if (hotoTransactionData.isAtLeastOneHotoFormsSubmit()) {
             shareItem.setVisible(true);
         }*/
@@ -279,10 +288,25 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                     }
                 }*/
 
-
+                submitDetails();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MY_FLAG_MODULE_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Bundle b = data.getExtras();
+                //powerPlantDetailsModulesData = data.getBundleExtra("powerPlantDetailsModulesData");
+                //powerPlantDetailsModulesData = (ArrayList<PowerPlantDetailsModulesData>)data.getExtras().getSerializable("powerPlantDetailsModulesData");
+                ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(new EbSiteElectrificationElectricConnectionData());
+                ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection((EbSiteElectrificationElectricConnectionData) b.getSerializable("ebSiteElectrificationElectricConnectionObj"));
+                Log.e("123", "123");
+            }
         }
     }
 }

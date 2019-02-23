@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -245,6 +247,7 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
             mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setText(hototicket_nameOfSupplyCompany);
             mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setKeyListener(null);
         }
+
 
 
     }
@@ -948,6 +951,50 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
         return true;
     }
 
+    private void saveEbElectrificationElectricConnectionData()
+    {
+        String nameOfTheSupplyCompany = mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.getText().toString();
+        String consumerNumber = mEbSiteElectrificationElectricConnectionEditTextConsumerNumber.getText().toString();
+        String ebMeterSerialNumber = mEbSiteElectrificationTransactionEditTextEbMeterSerialNumber.getText().toString();
+        String typeOfElectricConnection = mEbSiteElectrificationTransactionTextViewTypeOfElectricConnectionVal.getText().toString();
+        String tariff = mEbSiteElectrificationTransactionTextViewTariffVal.getText().toString();
+        String sanctionedLoad = mEbSiteElectrificationTransactionEditTextSanctionedLoadKVA.getText().toString();
+        String existingLoadAtSite = mEbSiteElectrificationTransactionEditTextExistingLoadAtSiteKVA.getText().toString();
+        String securityAmountPaidToTheCompany = mEbSiteElectrificationTransactionEditTextSecurityAmountPaidToTheCompany.getText().toString();
+        String copyOfTheElectricBills = mEbSiteElectrificationTransactionTextViewCopyOfElectricBillsVal.getText().toString();
+        String numberOfCompoundLights = mEbSiteElectrificationTransactionEditTextNumberOfCompoundLights.getText().toString();
+        String ebMeterReadingInKWH = mEbSiteElectrificationTransactionEditTextEbMeterReadingInKWh.getText().toString();
+        String ebSupplier = mEbSiteElectrificationTransactionTextViewEbSupplierVal.getText().toString();
+        String ebCostPerUnitForSharedConnection = mEbSiteElectrificationTransactionEditTextEbCostPerUnitForSharedConnection.getText().toString();
+        String ebStatus = mEbSiteElectrificationTransactionTextViewEbStatusVal.getText().toString();
+        String transformerWorkingCondition = mEbSiteElectrificationTransactionTextViewTransformerWorkingConditionVal.getText().toString();
+        String transformerCapacityInKVA = mEbSiteElectrificationTransactionEditTextTransformerCapacityInKva.getText().toString();
+        String ebMeterBoxStatus = mEbSiteElectrificationTransactionTextViewEbMeterBoxStatusVal.getText().toString();
+        String sectionName = mEbSiteElectrificationTransactionEditTextSectionName.getText().toString();
+        String sectionNumber = mEbSiteElectrificationTransactionEditTextSectionNumber.getText().toString();
+        String ebMeterWorkingStatus = mEbSiteElectrificationTransactionTextViewEbMeterWorkingStatusVal.getText().toString();
+        String typeOfPayment = mEbSiteElectrificationTransactionTextViewTypeOfPaymentVal.getText().toString();
+        String ebPaymentSchedule = mEbSiteElectrificationTransactionTextViewEbPaymentScheduleVal.getText().toString();
+        String safetyFuseUnit = mEbSiteElectrificationTransactionTextViewSafetyFuseUnitVal.getText().toString();
+        String kitkatClayFuseStatus = mEbSiteElectrificationTransactionTextViewKitKatClayFuseStatusVal.getText().toString();
+        String ebNeutralEarthing = mEbSiteElectrificationTransactionTextViewEbNeutralEarthingVal.getText().toString();
+        String averageEbAvailabilityPerDay = mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay.getText().toString();
+        String scheduledPowerCutInHrs = mEbSiteElectrificationTransactionEditTextScheduledPowerCutInHrs.getText().toString();
+        String ebBillDate = mEbSiteElectrificationTransactionTextViewEbBillDateVal.getText().toString();
+        //String SapVendorCode = mEbSiteElectrificationTransactionEditTextSapVendorCode.getText().toString();
+        String typeModeOfPayment = mEbSiteElectrificationTransactionTextViewTypeModeOfPaymentVal.getText().toString();
+        String bankIfscCode = mEbSiteElectrificationTransactionEditTextBankIfscCode.getText().toString();
+        String bankAccountNo = mEbSiteElectrificationTransactionEditTextBankAccountNo.getText().toString();
+
+
+        ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData(nameOfTheSupplyCompany,consumerNumber,ebMeterSerialNumber,
+                typeOfElectricConnection,tariff,sanctionedLoad,existingLoadAtSite,securityAmountPaidToTheCompany,copyOfTheElectricBills,
+                numberOfCompoundLights,ebMeterReadingInKWH,ebSupplier,ebCostPerUnitForSharedConnection,ebStatus,transformerWorkingCondition,
+                transformerCapacityInKVA,ebMeterBoxStatus,sectionName,sectionNumber,ebMeterWorkingStatus,typeOfPayment,ebPaymentSchedule,safetyFuseUnit
+        ,kitkatClayFuseStatus,ebNeutralEarthing,averageEbAvailabilityPerDay,scheduledPowerCutInHrs,ebBillDate,typeModeOfPayment,bankIfscCode,bankAccountNo);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -966,9 +1013,14 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
                 //DecimalFormatConversion();
                 //submitDetails();
                 //startActivity(new Intent(this, EbSiteElectrificationTransactionActivity.class));
-                if (validation() == true) {
+               /* if (validation() == true) {*/
+                    saveEbElectrificationElectricConnectionData();
+                    Intent intent = new Intent(this, EbSiteElectrificationTransactionActivity.class);
+                    intent.putExtra("ebSiteElectrificationElectricConnectionObj", (Serializable) ebSiteElectrificationElectricConnectionData);
+                    setResult(Activity.RESULT_OK, intent);
                     finish();
-                }
+
+                /*}*/
                 return true;
 
             default:
