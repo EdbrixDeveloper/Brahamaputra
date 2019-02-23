@@ -43,6 +43,9 @@ public class Constants {
 
     public static String hototicket_sourceOfPower = "";
 
+    public static String ebSiteElectrificationConsumerNumber = "";
+    public static String ebSiteElectrificationEbMeterSerialNumber;
+
     // TODO Change it to your web domain
     public final static String WEB_DOMAIN = "http://mahindradeveb2-api-env.srumj83md3.ap-south-1.elasticbeanstalk.com/";
     // TODO Change it to your APP Key

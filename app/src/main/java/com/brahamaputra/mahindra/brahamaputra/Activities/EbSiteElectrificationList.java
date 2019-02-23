@@ -11,15 +11,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Adapters.DieselFillingFundRequestListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.EbSiteElectrificationExpListAdapter;
+import com.brahamaputra.mahindra.brahamaputra.Adapters.EbSiteElectrificationTicketListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingFundRequestTransaction;
+import com.brahamaputra.mahindra.brahamaputra.Data.DiselRequestTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTicketList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransaction;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -29,52 +35,66 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.EndlessScrollListener;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.ebSiteElectrificationConsumerNumber;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.ebSiteElectrificationEbMeterSerialNumber;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EbSiteElectrificationList extends BaseActivity {
+import java.util.ArrayList;
 
-    private EbSiteElectrificationExpListAdapter ebSiteElectrificationExpListAdapter;
-    public ExpandableListView ebSiteElectrificationList_listView_ebList;
+public class EbSiteElectrificationList extends BaseActivity {
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private String userId = "";
+    private String ticketName = "";
+    private String ticketId = "";
+
+    private EbSiteElectrificationTicketList ebSiteElectrificationTicketList;
+    private EbSiteElectrificationTransaction ebSiteElectrificationTransaction;
+    private EbSiteElectrificationTicketListAdapter ebSiteElectrificationTicketListAdapter;
+
+    private ListView ebSiteElectrificationList_listView_ebList;
+    private TextView mTxtNoTicketFound;
+
+
+    /////////
+
     private AlertDialogManager alertDialogManager;
     private SessionManager sessionManager;
-    private EbSiteElectrificationTicketList ebSiteElectrificationTicketList;
     public GPSTracker gpsTracker;
-
-    /////////////////////////
     public static final int RESULT_EbSiteElectrification_SUBMIT = 257;
-    private TextView txtNoTicketFound;
     private LinearLayout TempForTest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eb_site_electrification_list);
         this.setTitle("Site Electrification");
         ebSiteElectrificationTicketList = new EbSiteElectrificationTicketList();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ebSiteElectrificationList_listView_ebList = (ExpandableListView) findViewById(R.id.listViewEbSiteElectrification);
-        txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
-        txtNoTicketFound.setVisibility(View.GONE);
-
-        TempForTest = (LinearLayout) findViewById(R.id.linearLayout_Temp_EbSiteElectrificationTicket);
-
 
         alertDialogManager = new AlertDialogManager(EbSiteElectrificationList.this);
         sessionManager = new SessionManager(EbSiteElectrificationList.this);
         gpsTracker = new GPSTracker(EbSiteElectrificationList.this);
+
+        assignViews();
+        mTxtNoTicketFound.setVisibility(View.GONE);
+        TempForTest = (LinearLayout) findViewById(R.id.linearLayout_Temp_EbSiteElectrificationTicket);
+
         if (gpsTracker.canGetLocation()) {
             Log.e(EbSiteElectrificationTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         }
 
-        //prepareListData(); Comment For Test
+        //prepareListData();
         TempForTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,18 +125,12 @@ public class EbSiteElectrificationList extends BaseActivity {
             }
         });
 
-        /*ebSiteElectrificationList_listView_ebList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                ebSiteElectrificationList_listView_ebList.expandGroup(groupPosition);
-                return true;
-            }
-        });
-        ebSiteElectrificationList_listView_ebList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
-                // notify user
 
+        ebSiteElectrificationList_listView_ebList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int groupPosition, long id) {
+
+///////
                 LocationManager lm = (LocationManager) EbSiteElectrificationList.this.getSystemService(Context.LOCATION_SERVICE);
                 boolean gps_enabled = false;
                 boolean network_enabled = false;
@@ -139,23 +153,29 @@ public class EbSiteElectrificationList extends BaseActivity {
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         if (ebSiteElectrificationTicketList != null) {
-                            final String ebSiteElectrificationTicketId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getId().toString();
-                            final String ebSiteElectrificationTicketNo = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getEbSiteElectrificationTicketNo().toString();
+                            final String ebSiteElectrificationTicketId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getId().toString();
+                            final String ebSiteElectrificationTicketNo = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationTicketNo().toString();
 
-                            final String ebSiteElectrificationTicketDate = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getEbSiteElectrificationTicketNo().toString();
-                            final String siteId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSiteId().toString();
-                            final String siteName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSiteName().toString();
-                            final String siteAddress = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSiteAddress().toString();
-                            final String status = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getStatus().toString();
-                            final String siteType = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSiteType().toString();
-                            final String stateName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getStateName().toString();
-                            final String customerName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getCustomerName().toString();
-                            final String circleName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getCircleName().toString();
-                            final String ssaName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getSsaName().toString();
+                            final String ebSiteElectrificationTicketDate = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationTicketNo().toString();
+                            final String siteId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteId().toString();
+                            final String siteName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteName().toString();
+                            final String siteAddress = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteAddress().toString();
+                            final String status = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStatus().toString();
+                            final String siteType = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteType().toString();
+                            final String stateName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStateName().toString();
+                            final String customerName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getCustomerName().toString();
+                            final String circleName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getCircleName().toString();
+                            final String ssaName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSsaName().toString();
                             hototicket_Selected_SiteType = siteType;
 
-                            String ebSiteElectrificationTickStatus = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getStatus().toString();
-                            hototicket_nameOfSupplyCompany = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationList().get(childPosition).getNameOfSupplyCompany().toString();
+                            String ebSiteElectrificationTickStatus = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStatus().toString();
+                            hototicket_nameOfSupplyCompany = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getNameOfSupplyCompany().toString();
+
+                            String consumerNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getConsumerNumber().toString();
+                            ebSiteElectrificationConsumerNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getConsumerNumber().toString();
+
+                            String ebMeterSerialNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStatus().toString();
+                            ebSiteElectrificationEbMeterSerialNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getNameOfSupplyCompany().toString();
 
                             if (ebSiteElectrificationTickStatus.equals("Open") || ebSiteElectrificationTickStatus.equals("WIP") || ebSiteElectrificationTickStatus.equals("Reassigned")) {
                                 if (ebSiteElectrificationTickStatus.equals("Open")) {
@@ -186,66 +206,19 @@ public class EbSiteElectrificationList extends BaseActivity {
                         }).show();
                     }
                 }
-                return false;
+
+
+///////
+
             }
-        });*/
+        });
+
+
     }
 
-    /**
-     * Load ticket list. Can use for refresh list as same.
-     */
-    private void prepareListData() {
-        try {
-            showBusyProgress();
-            JSONObject jo = new JSONObject();
-
-
-            jo.put("UserId", sessionManager.getSessionUserId());
-            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
-
-            Log.i(EbSiteElectrificationList.class.getName(), "EbSiteElectrificationTicketList json: \n\n" + jo.toString());
-
-            GsonRequest<EbSiteElectrificationTicketList> getAssignAvailabilityLearnersListRequest = new GsonRequest<>(Request.Method.POST, Constants.ebSiteElectrificationTicketList, jo.toString(), EbSiteElectrificationTicketList.class,
-                    new Response.Listener<EbSiteElectrificationTicketList>() {
-                        @Override
-                        public void onResponse(@NonNull EbSiteElectrificationTicketList response) {
-                            hideBusyProgress();
-                            if (response.getError() != null) {
-                                showToast(response.getError().getErrorMessage());
-                            } else {
-                                if (response.getSuccess() == 1) {
-                                    ebSiteElectrificationTicketList = response;
-                                    if (ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction() != null && ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().size() > 0) {
-                                        txtNoTicketFound.setVisibility(View.GONE);
-                                        ebSiteElectrificationList_listView_ebList.setVisibility(View.VISIBLE);
-                                        ebSiteElectrificationExpListAdapter = new EbSiteElectrificationExpListAdapter(EbSiteElectrificationList.this, ebSiteElectrificationTicketList);
-                                        ebSiteElectrificationList_listView_ebList.setAdapter(ebSiteElectrificationExpListAdapter);
-                                        for (int i = 0; i < ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().size(); i++) {
-                                            ebSiteElectrificationList_listView_ebList.expandGroup(i);
-                                        }
-                                    } else {
-                                        ebSiteElectrificationList_listView_ebList.setVisibility(View.GONE);
-                                        txtNoTicketFound.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    hideBusyProgress();
-
-                }
-            });
-            getAssignAvailabilityLearnersListRequest.setRetryPolicy(Application.getDefaultRetryPolice());
-            getAssignAvailabilityLearnersListRequest.setShouldCache(false);
-            Application.getInstance().addToRequestQueue(getAssignAvailabilityLearnersListRequest, "assignAvailabilityLearnersList");
-
-        } catch (JSONException e) {
-            hideBusyProgress();
-            showToast("Something went wrong. Please try again later.");
-        }
-
+    private void assignViews() {
+        ebSiteElectrificationList_listView_ebList = (ListView) findViewById(R.id.listViewEbSiteElectrification);
+        mTxtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
     }
 
     @Override
@@ -262,20 +235,67 @@ public class EbSiteElectrificationList extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuRefresh:
-                //prepareListData();
+                prepareListData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_EbSiteElectrification_SUBMIT && resultCode == RESULT_OK) {
-            prepareListData();
+    private void prepareListData() {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+
+            GsonRequest<EbSiteElectrificationTicketList> ebSiteElectrificationTicketListRequest = new GsonRequest<>(Request.Method.POST, Constants.getuserdieselrequestticketlist, jo.toString(), EbSiteElectrificationTicketList.class,
+                    new Response.Listener<EbSiteElectrificationTicketList>() {
+                        @Override
+                        public void onResponse(@NonNull EbSiteElectrificationTicketList response) {
+                            hideBusyProgress();
+                            //showToast(""+response.getSuccess().toString());
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    ebSiteElectrificationTicketList = response;
+                                    if (ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction() != null && ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().size() > 0) {
+                                        mTxtNoTicketFound.setVisibility(View.GONE);
+                                        ebSiteElectrificationList_listView_ebList.setVisibility(View.VISIBLE);
+                                        ArrayList<EbSiteElectrificationTransaction> dd = new ArrayList<EbSiteElectrificationTransaction>(ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().size());
+                                        dd.addAll(ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction());
+                                        ebSiteElectrificationTicketListAdapter = new EbSiteElectrificationTicketListAdapter(dd, EbSiteElectrificationList.this);
+                                        ebSiteElectrificationList_listView_ebList.setAdapter(ebSiteElectrificationTicketListAdapter);
+
+                                    } else {
+                                        ebSiteElectrificationList_listView_ebList.setVisibility(View.GONE);
+                                        mTxtNoTicketFound.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage().contains("java.net.UnknownHostException")) {
+                        showToast("No Internet Connection.");
+                    }
+                    hideBusyProgress();
+
+                }
+            });
+            ebSiteElectrificationTicketListRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            ebSiteElectrificationTicketListRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(ebSiteElectrificationTicketListRequest, "ebSiteElectrificationTicketListRequest");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
         }
     }
+
 
     public void checkSystemLocation(final String ebSiteElectrificationTickitNo, final String ebSiteElectrificationTicketId, String ebSiteElectrificationTicketDate, String siteId,
                                     String siteName, String siteAddress, String status, String siteType, String stateName,
@@ -307,9 +327,7 @@ public class EbSiteElectrificationList extends BaseActivity {
                 Intent intent = new Intent(EbSiteElectrificationList.this, EbSiteElectrificationTransactionActivity.class);////////////
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(EbSiteElectrificationList.this));
                 intent.putExtra("Id", ebSiteElectrificationTicketId);
-
                 intent.putExtra("ticketNO", ebSiteElectrificationTickitNo);
-
                 intent.putExtra("ebSiteElectrificationTicketDate", ebSiteElectrificationTicketDate);
                 intent.putExtra("siteId", siteId);
                 intent.putExtra("siteName", siteName);
@@ -342,5 +360,5 @@ public class EbSiteElectrificationList extends BaseActivity {
             }
         }
     }
-}
 
+}

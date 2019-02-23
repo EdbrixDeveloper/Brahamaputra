@@ -45,6 +45,13 @@ public class EbSiteElectrificationTransactionList {
     @SerializedName("nameOfSupplyCompany")
     @Expose
     private String nameOfSupplyCompany;
+    @SerializedName("consumerNumber")
+    @Expose
+    private String consumerNumber;
+    @SerializedName("ebMeterSerialNumber")
+    @Expose
+    private String ebMeterSerialNumber;
+
 
     public String getId() {
         return id;
@@ -150,7 +157,7 @@ public class EbSiteElectrificationTransactionList {
         this.nameOfSupplyCompany = nameOfSupplyCompany;
     }
 
-    public EbSiteElectrificationTransactionList(String id, String ebSiteElectrificationTicketNo, String ebSiteElectrificationTicketDate, String siteId, String siteName, String siteAddress, String status, String siteType, String stateName, String customerName, String circleName, String ssaName, String nameOfSupplyCompany) {
+    public EbSiteElectrificationTransactionList(String id, String ebSiteElectrificationTicketNo, String ebSiteElectrificationTicketDate, String siteId, String siteName, String siteAddress, String status, String siteType, String stateName, String customerName, String circleName, String ssaName, String nameOfSupplyCompany,String consumerNumber,String ebMeterSerialNumber) {
         this.id = id;
         this.ebSiteElectrificationTicketNo = ebSiteElectrificationTicketNo;
         this.ebSiteElectrificationTicketDate = ebSiteElectrificationTicketDate;
@@ -164,6 +171,24 @@ public class EbSiteElectrificationTransactionList {
         this.circleName = circleName;
         this.ssaName = ssaName;
         this.nameOfSupplyCompany = nameOfSupplyCompany;
+        this.consumerNumber = consumerNumber;
+        this.ebMeterSerialNumber = ebMeterSerialNumber;
+    }
+
+    public String getConsumerNumber() {
+        return consumerNumber;
+    }
+
+    public void setConsumerNumber(String consumerNumber) {
+        this.consumerNumber = consumerNumber;
+    }
+
+    public String getEbMeterSerialNumber() {
+        return ebMeterSerialNumber;
+    }
+
+    public void setEbMeterSerialNumber(String ebMeterSerialNumber) {
+        this.ebMeterSerialNumber = ebMeterSerialNumber;
     }
 
 }

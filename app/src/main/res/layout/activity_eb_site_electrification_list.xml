@@ -81,13 +81,19 @@
 
     </LinearLayout>
 
-    <ExpandableListView
+    <!--<ExpandableListView
         android:id="@+id/listViewEbSiteElectrification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         tools:listheader="@layout/item_eb_site_electrification_list_seprator"
-        tools:listitem="@layout/item_eb_site_electrification_list" />
+        tools:listitem="@layout/item_eb_site_electrification_list" />-->
+
+    <ListView
+        android:id="@+id/listViewEbSiteElectrification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/txtNoTicketFound"
