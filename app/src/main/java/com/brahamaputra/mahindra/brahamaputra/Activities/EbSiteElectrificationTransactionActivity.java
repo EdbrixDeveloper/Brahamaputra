@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -89,6 +90,8 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eb_site_electrification_transaction);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        checkInBatteryData = "" + GlobalMethods.getBattery_percentage(EbSiteElectrificationTransactionActivity.this);
 
         gpsTracker = new GPSTracker(EbSiteElectrificationTransactionActivity.this);
         ebSiteElectrificationTransactionData = new EbSiteElectrificationTransactionData();
@@ -264,6 +267,33 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
 
     }
 
+    private void showSettingsAlert() {
+
+        alertDialogManager = new AlertDialogManager(EbSiteElectrificationTransactionActivity.this);
+        alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+            @Override
+            public void onPositiveClick() {
+                if (isNetworkConnected()) {
+                    submitDetails();
+                } else {
+                    showToast("No Internet Available");
+                    finish();
+                }
+            }
+
+            @Override
+            public void onNegativeClick() {
+
+            }
+        }).show();
+
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -312,9 +342,10 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         checkOutLat = String.valueOf(gpsTracker.getLatitude());
                         checkOutLong = String.valueOf(gpsTracker.getLongitude());
-
+                        checkOutBatteryData = "" + GlobalMethods.getBattery_percentage(EbSiteElectrificationTransactionActivity.this);
                         if (validation() == true) {
-                            submitDetails();
+                            //submitDetails();
+                            showSettingsAlert();
                         }
 
                     } else {

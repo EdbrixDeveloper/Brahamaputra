@@ -351,6 +351,14 @@ public class EbSiteElectrificationList extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_EbSiteElectrification_SUBMIT && resultCode == RESULT_OK) {
+            prepareListData();
+        }
+    }
+
     private void prepareListData() {
         try {
             showBusyProgress();
