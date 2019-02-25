@@ -1,11 +1,8 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class EbSiteElectrificationTicketList {
+public class EbSiteElectrificationSubmitResposeData {
 
     @SerializedName("Success")
     @Expose
@@ -16,10 +13,6 @@ public class EbSiteElectrificationTicketList {
     @SerializedName("Message")
     @Expose
     private String message;
-    //@SerializedName("EbSiteElectrificationTransactions")
-    @SerializedName("SiteElectificationList")
-    @Expose
-    private List<EbSiteElectrificationTransaction> ebSiteElectrificationTransaction = null;
 
     public Integer getSuccess() {
         return success;
@@ -56,13 +49,4 @@ public class EbSiteElectrificationTicketList {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    public List<EbSiteElectrificationTransaction> getEbSiteElectrificationTransaction() {
-        return ebSiteElectrificationTransaction;
-    }
-
-    public void setEbSiteElectrificationTransaction(List<EbSiteElectrificationTransaction> ebSiteElectrificationTransaction) {
-        this.ebSiteElectrificationTransaction = ebSiteElectrificationTransaction;
-    }
-
 }

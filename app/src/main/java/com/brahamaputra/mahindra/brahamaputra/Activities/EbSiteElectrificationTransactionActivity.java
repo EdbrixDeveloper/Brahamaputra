@@ -15,11 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.DieselSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationElectricConnectionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsModulesData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
@@ -35,7 +44,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
-public class EbSiteElectrificationTransactionActivity extends AppCompatActivity {
+public class EbSiteElectrificationTransactionActivity extends BaseActivity {
 
     private static final String TAG = EbSiteElectrificationTransactionActivity.class.getSimpleName();
 
@@ -80,6 +89,11 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eb_site_electrification_transaction);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        gpsTracker = new GPSTracker(EbSiteElectrificationTransactionActivity.this);
+        ebSiteElectrificationTransactionData = new EbSiteElectrificationTransactionData();
+        ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData();
+
         Intent intent = getIntent();
         String id = intent.getStringExtra("ticketNO");
         this.setTitle(id);
@@ -95,8 +109,6 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = sessionManager.getSessionUserTicketName();
 
-        ebSiteElectrificationTransactionData = new EbSiteElectrificationTransactionData();
-
         mEbSiteElectrificationTransactionButtonSubmitEbSiteElectrificationTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +117,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                 hototicket_Selected_CustomerName = mEbSiteElectrificationTransactionEditTextCustomerName.getText().toString();
 
                 Intent intent = new Intent(EbSiteElectrificationTransactionActivity.this, EbSiteElectrificationElectricConnectionActivity.class);
-                intent.putExtra("ticketName", ticketName);
+                intent.putExtra("ebSiteElectrificationTransactionData", ebSiteElectrificationTransactionData);
 
                 startActivityForResult(intent, 200);
             }
@@ -131,7 +143,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
 
     private void initCombo() {
 
-        mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.setOnClickListener(new View.OnClickListener() {
+        /*mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(EbSiteElectrificationTransactionActivity.this,
@@ -150,7 +162,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                     }
                 });
             }
-        });
+        });*/
     }
 
     public void checkNetworkConnection() {
@@ -165,6 +177,11 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
         mEbSiteElectrificationTransactionEditTextSiteID.setText(intent.getStringExtra("siteId"));
         mEbSiteElectrificationTransactionEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
         mEbSiteElectrificationTransactionEditTextTypeOfSite.setText(intent.getStringExtra("siteType"));
+
+        ebSiteElectrificationElectricConnectionData.setConsumerNumber(intent.getStringExtra("consumerNumber"));
+        ebSiteElectrificationElectricConnectionData.setEbMeterSerialNumber(intent.getStringExtra("ebMeterSerialNumber"));
+        ebSiteElectrificationElectricConnectionData.setNameOfTheSupplyCompany(intent.getStringExtra("nameOfTheSupplyCompany"));
+        ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(ebSiteElectrificationElectricConnectionData);
 
            /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 checkInLat = String.valueOf(gpsTracker.getLatitude());
@@ -200,12 +217,43 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
             ebSiteElectrificationTransactionData.setSiteAddress(mEbSiteElectrificationTransactionEditTextSiteAddress.getText().toString());
 
             ebSiteElectrificationTransactionData.setSourceOfPower(mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.getText().toString());
-            ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(ebSiteElectrificationElectricConnectionData);
-
+            //ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(ebSiteElectrificationElectricConnectionData);
 
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(ebSiteElectrificationTransactionData);
+            Log.e(TAG, jsonString);
+
+            /*GsonRequest<EbSiteElectrificationSubmitResposeData> ebSiteElectrificationTicketSubmit = new GsonRequest<>(Request.Method.POST, Constants.SubmitebSiteElectrificationTicket, jsonString.toString(), EbSiteElectrificationSubmitResposeData.class,
+                    new Response.Listener<EbSiteElectrificationSubmitResposeData>() {
+                        @Override
+                        public void onResponse(EbSiteElectrificationSubmitResposeData response) {
+                            hideBusyProgress();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    hideBusyProgress();
+                                    setResult(RESULT_OK);
+                                    showToast("Ticket submitted successfully.");
+                                    finish();
+                                } else {
+                                    hideBusyProgress();
+                                    showToast("Something went wrong");
+                                }
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            hideBusyProgress();
+                            Log.e("D100", error.toString());
+                        }
+                    });
+            ebSiteElectrificationTicketSubmit.setRetryPolicy(Application.getDefaultRetryPolice());
+            ebSiteElectrificationTicketSubmit.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(ebSiteElectrificationTicketSubmit, "ebSiteElectrificationTicketSubmit");*/
 
             //offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
         } catch (Exception e) {
@@ -240,11 +288,7 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                 return true;
 
             case R.id.menuSubmit:
-                //submitHotoTicket(); Comment by 008 on 10-11-2018
-                //sessionManager.updateSessionUserTicketId(null);
-                //sessionManager.updateSessionUserTicketName(null);
-                //finish();
-                /*LocationManager lm = (LocationManager) UserHotoTransactionActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                LocationManager lm = (LocationManager) EbSiteElectrificationTransactionActivity.this.getSystemService(Context.LOCATION_SERVICE);
                 boolean gps_enabled = false;
                 boolean network_enabled = false;
 
@@ -256,12 +300,12 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
 
                 if (!gps_enabled && !network_enabled) {
                     // notify user
-                    alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+                    alertDialogManager = new AlertDialogManager(EbSiteElectrificationTransactionActivity.this);
                     alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
                         public void onPositiveClick() {
                             Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            UserHotoTransactionActivity.this.startActivity(myIntent);
+                            EbSiteElectrificationTransactionActivity.this.startActivity(myIntent);
                         }
                     }).show();
                 } else {
@@ -269,26 +313,29 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                         checkOutLat = String.valueOf(gpsTracker.getLatitude());
                         checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
-                        submitDetails();
-                        CheckSubmitFlagOfAllHotoForms();//24112018 by 008
-                        //showSettingsAlert();
+                        if (validation() == true) {
+                            submitDetails();
+                        }
 
                     } else {
                         //showToast("Could not detecting location.");
-                        alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+                        alertDialogManager = new AlertDialogManager(EbSiteElectrificationTransactionActivity.this);
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
                                     //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
-                                    Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                    Log.e(EbSiteElectrificationTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
                         }).show();
                     }
-                }*/
+                }
 
-                submitDetails();
+
+                /*if (validation() == true) {
+                    submitDetails();
+                }*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -303,10 +350,107 @@ public class EbSiteElectrificationTransactionActivity extends AppCompatActivity 
                 Bundle b = data.getExtras();
                 //powerPlantDetailsModulesData = data.getBundleExtra("powerPlantDetailsModulesData");
                 //powerPlantDetailsModulesData = (ArrayList<PowerPlantDetailsModulesData>)data.getExtras().getSerializable("powerPlantDetailsModulesData");
-                ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(new EbSiteElectrificationElectricConnectionData());
-                ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection((EbSiteElectrificationElectricConnectionData) b.getSerializable("ebSiteElectrificationElectricConnectionObj"));
+                //ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(new EbSiteElectrificationElectricConnectionData());
+                ebSiteElectrificationTransactionData = ((EbSiteElectrificationTransactionData) b.getSerializable("ebSiteElectrificationTransactionData"));
                 Log.e("123", "123");
             }
         }
+    }
+
+    private boolean validation() {
+        if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getNameOfTheSupplyCompany().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getNameOfTheSupplyCompany() == null || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getNameOfTheSupplyCompany().equals("-")) {
+            showToast("Name of the Supply Company not found in Electric Connection");
+            return false;
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getConsumerNumber().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getConsumerNumber() == null || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getConsumerNumber().equals("-")) {
+            showToast("Consumer Number not found in Electric Connection");
+            return false;
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterSerialNumber().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterSerialNumber() == null || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterSerialNumber().equals("-")) {
+            showToast("EB Meter Serial Number not found in Electric Connection");
+            return false;
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeOfElectricConnection().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeOfElectricConnection() == null) {
+            showToast("Select Type of Electric Connection in Electric Connection");
+            return false;
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTariff().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTariff() == null) {
+            showToast("Select Tariff in Electric Connection");
+            return false;
+        } /*else if (sanctionedLoad.isEmpty() || sanctionedLoad == null) {
+            showToast("Enter Sanctioned Load(KVA)");
+            return false;
+        } else if (existingLoadAtSite.isEmpty() || existingLoadAtSite == null) {
+            showToast("Enter Existing load at Site(KVA)");
+            return false;
+        } else if (securityAmountPaidToTheCompany.isEmpty() || securityAmountPaidToTheCompany == null) {
+            showToast("Enter Security Amount paid to the Company");
+            return false;
+        } else if (copyOfTheElectricBills.isEmpty() || copyOfTheElectricBills == null) {
+            showToast("Select Copy of the Electric Bills(Last Three Months)");
+            return false;
+        } else if (numberOfCompoundLights.isEmpty() || numberOfCompoundLights == null) {
+            showToast("Enter Number of Compound Lights");
+            return false;
+        }*/ else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterReadingInKWH().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterReadingInKWH() == null) {
+            showToast("Enter EB Meter Reading(KWH) in Electric Connection");
+            return false;
+        } /*else if (ebSupplier.isEmpty() || ebSupplier == null) {
+            showToast("Select EB Supplier");
+            return false;
+        } else if ((ebCostPerUnitForSharedConnection.isEmpty() || ebCostPerUnitForSharedConnection == null) && (!ebSupplier.equals("Dedicated Connection"))) {
+            showToast("Enter EB Cost Per Unit for Shared Connection");
+            return false;
+        } else if (ebStatus.isEmpty() || ebStatus == null) {
+            showToast("Select EB Status");
+            return false;
+        } else if (transformerWorkingCondition.isEmpty() || transformerWorkingCondition == null) {
+            showToast("Select Transformer Working Condition");
+            return false;
+        } else if (transformerCapacityInKVA.isEmpty() || transformerCapacityInKVA == null) {
+            showToast("Enter Transformer Capacity(KVA)");
+            return false;
+        } else if (ebMeterBoxStatus.isEmpty() || ebMeterBoxStatus == null) {
+            showToast("Select EB Meter Box Status");
+            return false;
+        } else if (sectionName.isEmpty() || sectionName == null) {
+            showToast("Enter Section Name");
+            return false;
+        } else if (sectionNumber.isEmpty() || sectionNumber == null) {
+            showToast("Enter Section Number");
+            return false;
+        } else if (ebMeterWorkingStatus.isEmpty() || ebMeterWorkingStatus == null) {
+            showToast("Select EB Meter Working Status");
+            return false;
+        } else if (typeOfPayment.isEmpty() || typeOfPayment == null) {
+            showToast("Select Type of Payment");
+            return false;
+        } else if ((ebPaymentSchedule.isEmpty() || ebPaymentSchedule == null) && (typeOfPayment.equals("Post Paid"))) {
+            showToast("Select EB Payment Schedule");
+            return false;
+        } else if (safetyFuseUnit.isEmpty() || safetyFuseUnit == null) {
+            showToast("Select Safety Fuse Unit");
+            return false;
+        } else if (kitkatClayFuseStatus.isEmpty() || kitkatClayFuseStatus == null) {
+            showToast("Select KIT-KAT/Clay Fuse Status");
+            return false;
+        } else if (ebNeutralEarthing.isEmpty() || ebNeutralEarthing == null) {
+            showToast("Select EB Neutral Earthing");
+            return false;
+        } else if (averageEbAvailabilityPerDay.equals("00:00")) {
+            showToast("Select Average EB Availability Per Day");
+            return false;
+        } else if (scheduledPowerCutInHrs.equals("00:00")) {
+            showToast("Select Scheduled Power Cut in Hrs");
+            return false;
+        } else if (ebBillDate.isEmpty() || ebBillDate == null) {
+            showToast("Select EB Bill Date");
+            return false;
+        }*/ else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeModeOfPayment().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeModeOfPayment() == null) {
+            showToast("Select Type|Mode of Payment in Electric Connection");
+            return false;
+        } else return true; /*else if (bankIfscCode.isEmpty() || bankIfscCode == null) {
+            showToast("Enter Bank IFSC Code");
+            return false;
+        } else if (bankAccountNo.isEmpty() || bankAccountNo == null) {
+            showToast("Enter Bank Account No");
+            return false;
+        }*/
     }
 }

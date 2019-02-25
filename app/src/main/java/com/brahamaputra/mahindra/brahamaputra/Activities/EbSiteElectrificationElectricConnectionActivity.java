@@ -126,6 +126,7 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
+
     private EbSiteElectrificationTransactionData ebSiteElectrificationTransactionData;
     private EbSiteElectrificationElectricConnectionData ebSiteElectrificationElectricConnectionData;
     private SessionManager sessionManager;
@@ -156,6 +157,14 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
         assignViews();
         initCombo();
 
+        ebSiteElectrificationTransactionData = new EbSiteElectrificationTransactionData();
+        ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData();
+
+        setClassEbSiteElectrificationTransactionData();
+
+        if (ebSiteElectrificationTransactionData != null) {
+            setValues();
+        }
         mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -247,7 +256,6 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
             mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setText(hototicket_nameOfSupplyCompany);
             mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setKeyListener(null);
         }
-
 
 
     }
@@ -681,9 +689,21 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
         }
     }
 
+    private void setClassEbSiteElectrificationTransactionData() {
+        /*try {*/
+
+        Intent intent = getIntent();
+        ebSiteElectrificationTransactionData = (EbSiteElectrificationTransactionData) intent.getSerializableExtra("ebSiteElectrificationTransactionData");
+        /*} catch (Exception e) {
+            e.printStackTrace();
+        }*/
+    }
+
     private void setValues() {
 
-        EbSiteElectrificationElectricConnectionData ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData();
+        //EbSiteElectrificationElectricConnectionData ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData();
+        ebSiteElectrificationElectricConnectionData = ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection();
+
         mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setText(ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany() == null || ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany().isEmpty() ? "-" : ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany());
         mEbSiteElectrificationElectricConnectionEditTextConsumerNumber.setText(ebSiteElectrificationElectricConnectionData.getConsumerNumber() == null || ebSiteElectrificationElectricConnectionData.getConsumerNumber().isEmpty() ? "-" : ebSiteElectrificationElectricConnectionData.getConsumerNumber());
         mEbSiteElectrificationTransactionEditTextEbMeterSerialNumber.setText(ebSiteElectrificationElectricConnectionData.getEbMeterSerialNumber() == null || ebSiteElectrificationElectricConnectionData.getEbMeterSerialNumber().isEmpty() ? "-" : ebSiteElectrificationElectricConnectionData.getEbMeterSerialNumber());
@@ -951,8 +971,7 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
         return true;
     }
 
-    private void saveEbElectrificationElectricConnectionData()
-    {
+    private void saveEbElectrificationElectricConnectionData() {
         String nameOfTheSupplyCompany = mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.getText().toString();
         String consumerNumber = mEbSiteElectrificationElectricConnectionEditTextConsumerNumber.getText().toString();
         String ebMeterSerialNumber = mEbSiteElectrificationTransactionEditTextEbMeterSerialNumber.getText().toString();
@@ -987,11 +1006,12 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
         String bankAccountNo = mEbSiteElectrificationTransactionEditTextBankAccountNo.getText().toString();
 
 
-        ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData(nameOfTheSupplyCompany,consumerNumber,ebMeterSerialNumber,
-                typeOfElectricConnection,tariff,sanctionedLoad,existingLoadAtSite,securityAmountPaidToTheCompany,copyOfTheElectricBills,
-                numberOfCompoundLights,ebMeterReadingInKWH,ebSupplier,ebCostPerUnitForSharedConnection,ebStatus,transformerWorkingCondition,
-                transformerCapacityInKVA,ebMeterBoxStatus,sectionName,sectionNumber,ebMeterWorkingStatus,typeOfPayment,ebPaymentSchedule,safetyFuseUnit
-        ,kitkatClayFuseStatus,ebNeutralEarthing,averageEbAvailabilityPerDay,scheduledPowerCutInHrs,ebBillDate,typeModeOfPayment,bankIfscCode,bankAccountNo);
+        ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData(nameOfTheSupplyCompany, consumerNumber, ebMeterSerialNumber,
+                typeOfElectricConnection, tariff, sanctionedLoad, existingLoadAtSite, securityAmountPaidToTheCompany, copyOfTheElectricBills,
+                numberOfCompoundLights, ebMeterReadingInKWH, ebSupplier, ebCostPerUnitForSharedConnection, ebStatus, transformerWorkingCondition,
+                transformerCapacityInKVA, ebMeterBoxStatus, sectionName, sectionNumber, ebMeterWorkingStatus, typeOfPayment, ebPaymentSchedule, safetyFuseUnit
+                , kitkatClayFuseStatus, ebNeutralEarthing, averageEbAvailabilityPerDay, scheduledPowerCutInHrs, ebBillDate, typeModeOfPayment, bankIfscCode, bankAccountNo);
+        ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(ebSiteElectrificationElectricConnectionData);
 
     }
 
@@ -1010,17 +1030,16 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
                 return true;
 
             case R.id.menuSubmit:
-                //DecimalFormatConversion();
+                DecimalFormatConversion();
                 //submitDetails();
                 //startActivity(new Intent(this, EbSiteElectrificationTransactionActivity.class));
-               /* if (validation() == true) {*/
+                if (validation() == true) {
                     saveEbElectrificationElectricConnectionData();
                     Intent intent = new Intent(this, EbSiteElectrificationTransactionActivity.class);
-                    intent.putExtra("ebSiteElectrificationElectricConnectionObj", (Serializable) ebSiteElectrificationElectricConnectionData);
+                    intent.putExtra("ebSiteElectrificationTransactionData", (Serializable) ebSiteElectrificationTransactionData);
                     setResult(Activity.RESULT_OK, intent);
                     finish();
-
-                /*}*/
+                }
                 return true;
 
             default:

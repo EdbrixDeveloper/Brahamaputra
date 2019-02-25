@@ -80,11 +80,11 @@ public class EbSiteElectrificationTicketListAdapter extends ArrayAdapter<EbSiteE
         if (dataModel != null) {
             viewHolder.textView_ebSiteElectrificationTicketNo.setText("Ticket No:" + dataModel.getEbSiteElectrificationTicketNo());
             viewHolder.textView_ebSiteElectrificationSiteName.setText("Site Name:" + dataModel.getSiteName());
-            viewHolder.textView_ebSiteElectrificationTicketDate.setText("Request Date:" + dataModel.getEbSiteElectrificationTicketDate());
+            viewHolder.textView_ebSiteElectrificationTicketDate.setText("Date:" + dataModel.getEbSiteElectrificationTicketDate());
             viewHolder.textView_ebSiteElectrificationSiteAddress.setText("Site Address:" + dataModel.getSiteAddress());
             viewHolder.textView_ebSiteElectrificationSiteID.setText("Site ID:" + dataModel.getSiteId());
             viewHolder.textView_ebSiteElectrificationSiteSSA.setText("Site SSA:" + dataModel.getSsaName());
-            viewHolder.linearLayout_container.setTag(position);
+            //viewHolder.linearLayout_container.setTag(position);
 
 
             /*if (dataModel.getStatusId() == 0) {

@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:hint=""
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
@@ -51,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:hint=""
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
@@ -68,6 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:hint=""
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
@@ -85,6 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:hint=""
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
@@ -102,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:hint=""
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
@@ -119,6 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:hint=""
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="16dp"
@@ -149,6 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint=""
                     android:inputType="textPostalAddress"
                     android:lines="3" />
@@ -166,6 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:enabled="false"
                 android:hint=""
                 android:inputType="textPostalAddress"
                 android:lines="3"
@@ -173,37 +181,57 @@
                 tools:layout_editor_absoluteY="232dp" />
 
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/ebSiteElectrificationTransaction_textView_sourceOfPower"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_normal_margin"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/app_min_padding"
-                android:paddingTop="@dimen/app_min_padding"
-                android:weightSum="1">
+                android:text="Source of Power"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/ebSiteElectrificationTransaction_textView_sourceOfPower"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:text="Source of Power"
-                    android:textColor="@color/colorBlueLink"
-                    android:textStyle="bold" />
+            <EditText
+                android:id="@+id/ebSiteElectrificationTransaction_textView_sourceOfPower_val"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:text="Non EB"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <!-- <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="@dimen/app_normal_margin"
+                 android:orientation="horizontal"
+                 android:paddingBottom="@dimen/app_min_padding"
+                 android:paddingTop="@dimen/app_min_padding"
+                 android:weightSum="1">
+
+                 <TextView
+                     android:id="@+id/ebSiteElectrificationTransaction_textView_sourceOfPower"
+                     style="@style/FontStyle"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:layout_weight="0.5"
+                     android:text="Source of Power"
+                     android:textColor="@color/colorBlueLink"
+                     android:textStyle="bold" />
 
 
-                <TextView
-                    android:id="@+id/ebSiteElectrificationTransaction_textView_sourceOfPower_val"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.5"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
+                 <TextView
+                     android:id="@+id/ebSiteElectrificationTransaction_textView_sourceOfPower_val"
+                     style="@style/MyTheme"
+                     android:layout_width="0dp"
+                     android:layout_height="45dp"
+                     android:layout_weight="0.5"
+                     android:hint="Select"
+                     android:textAlignment="viewStart" />
 
-            </LinearLayout>
+             </LinearLayout>-->
 
         </LinearLayout>
 

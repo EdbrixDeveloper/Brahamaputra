@@ -39,7 +39,7 @@
                     android:layout_weight="0.6"
                     android:enabled="false"
                     android:hint="Name of the supply company"
-                    android:text="MSEB"
+                    android:text=""
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -68,7 +68,7 @@
                     android:imeOptions="actionNext"
                     android:enabled="false"
                     android:inputType="text"
-                    android:text="MSEB129947311"
+                    android:text=""
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
@@ -97,7 +97,7 @@
                     android:enabled="false"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:text="AIHF213OBB1O312OH123"
+                    android:text=""
                     android:textAlignment="viewStart" />
 
             </LinearLayout>
