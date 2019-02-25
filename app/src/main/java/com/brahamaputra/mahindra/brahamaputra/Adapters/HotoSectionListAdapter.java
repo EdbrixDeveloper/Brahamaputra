@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
+
 import java.util.ArrayList;
 
 public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements View.OnClickListener{
@@ -90,6 +92,14 @@ public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements
         if(dataModel.getSecReadingStatus() == 2){
             //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
             viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.limegreen));
+        }
+
+        if(Constants.hototicket_sourceOfPower.equals("Non EB"))
+        {
+            if(dataModel.getSecName().equals("Electric Connection"))
+            {
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.lightgrey));
+            }
         }
 
         return convertView;

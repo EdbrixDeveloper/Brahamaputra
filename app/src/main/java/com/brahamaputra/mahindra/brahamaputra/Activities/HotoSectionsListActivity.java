@@ -13,6 +13,7 @@ import com.brahamaputra.mahindra.brahamaputra.Adapters.HotoSectionListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoSection;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
@@ -84,7 +85,9 @@ public class HotoSectionsListActivity extends BaseActivity {
                         startActivity(new Intent(HotoSectionsListActivity.this, Earth_Resistance_Equipment.class));
                         break;
                     case 4:
-                        startActivity(new Intent(HotoSectionsListActivity.this, Electric_Connection.class));
+                        if(!(Constants.hototicket_sourceOfPower.equals("Non EB"))) {
+                            startActivity(new Intent(HotoSectionsListActivity.this, Electric_Connection.class));
+                        }
                         break;
                     case 5:
                         startActivity(new Intent(HotoSectionsListActivity.this, Air_Conditioners.class));

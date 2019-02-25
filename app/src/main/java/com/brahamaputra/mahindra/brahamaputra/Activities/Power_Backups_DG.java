@@ -30,6 +30,7 @@ import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -509,6 +510,8 @@ public class Power_Backups_DG extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+
     }
 
     public void DecimalFormatConversion() {
@@ -521,55 +524,62 @@ public class Power_Backups_DG extends BaseActivity {
     }
 
     private void initCombo() {
-        mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_noOfEngineAlternatorSetsprovided))),
-                        "No.of Engine Alternator Sets provided",
-                        "Close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
+        if(Constants.hototicket_sourceOfPower.equals("Non DG"))
+        {
+            mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setHint("0");
+            mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setEnabled(false);
+        }else{
+            mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(Power_Backups_DG.this,
+                            new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_powerBackupsDg_noOfEngineAlternatorSetsprovided))),
+                            "No.of Engine Alternator Sets provided",
+                            "Close", "#000000");
+                    searchableSpinnerDialog.showSearchableSpinnerDialog();
 
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
+                    searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                        @Override
+                        public void onClick(ArrayList<String> item, int position) {
 
-                        str_noOfEngineAlternatorSetsprovided = item.get(position);
-                        invalidateOptionsMenu();
-                        mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(str_noOfEngineAlternatorSetsprovided);
-                        mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText("");
+                            str_noOfEngineAlternatorSetsprovided = item.get(position);
+                            invalidateOptionsMenu();
+                            mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(str_noOfEngineAlternatorSetsprovided);
+                            mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText("");
 
-                        //clear AC collection empty by select / changing value of No of Ac provided
-                        if (powerBackupsDGData != null && powerBackupsDGData.size() > 0) {
-                            powerBackupsDGData.clear();
-                        }
-                        currentPos = 0;
-                        totalCount = 0;
-                        clearFields(currentPos);
-                        totalCount = Integer.parseInt(str_noOfEngineAlternatorSetsprovided);
-
-                        // Clear all field value and hide layout If Non AC or O //
-                        if (totalCount > 0) {
-
-                            powerBackupsDg_textView_Number.setText("Reading: #1");
-                            linearLayout_container.setVisibility(View.VISIBLE);
-                            mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.VISIBLE);//008
-                            powerBackupsDg_button_previousReading.setVisibility(View.GONE);
-                            powerBackupsDg_button_nextReading.setVisibility(View.VISIBLE);
-                            if (totalCount > 0 && totalCount == 1) {
-                                powerBackupsDg_button_nextReading.setText("Finish");
-                            } else {
-                                powerBackupsDg_button_nextReading.setText("Next Reading");
+                            //clear AC collection empty by select / changing value of No of Ac provided
+                            if (powerBackupsDGData != null && powerBackupsDGData.size() > 0) {
+                                powerBackupsDGData.clear();
                             }
-                        } else {
-                            linearLayout_container.setVisibility(View.GONE);
-                            mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//008
+                            currentPos = 0;
+                            totalCount = 0;
+                            clearFields(currentPos);
+                            totalCount = Integer.parseInt(str_noOfEngineAlternatorSetsprovided);
 
+                            // Clear all field value and hide layout If Non AC or O //
+                            if (totalCount > 0) {
+
+                                powerBackupsDg_textView_Number.setText("Reading: #1");
+                                linearLayout_container.setVisibility(View.VISIBLE);
+                                mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.VISIBLE);//008
+                                powerBackupsDg_button_previousReading.setVisibility(View.GONE);
+                                powerBackupsDg_button_nextReading.setVisibility(View.VISIBLE);
+                                if (totalCount > 0 && totalCount == 1) {
+                                    powerBackupsDg_button_nextReading.setText("Finish");
+                                } else {
+                                    powerBackupsDg_button_nextReading.setText("Next Reading");
+                                }
+                            } else {
+                                linearLayout_container.setVisibility(View.GONE);
+                                mPowerBackupsDgLinearLayoutNumberOfWorkingDg.setVisibility(View.GONE);//008
+
+                            }
                         }
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        }
+
 
         mPowerBackupsDgTextViewNumberOfWorkingDgVal.setOnClickListener(new View.OnClickListener() {
             @Override
