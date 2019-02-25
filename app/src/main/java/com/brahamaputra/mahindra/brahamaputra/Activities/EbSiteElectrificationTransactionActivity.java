@@ -202,7 +202,7 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
             ebSiteElectrificationTransactionData.setUserId(sessionManager.getSessionUserId());
             ebSiteElectrificationTransactionData.setAccessToken(sessionManager.getSessionDeviceToken());
             ebSiteElectrificationTransactionData.setTicketId(ticketId);
-            ebSiteElectrificationTransactionData.setTicketNo(ticketName);
+            /*ebSiteElectrificationTransactionData.setTicketNo(ticketName);*/
 
             ebSiteElectrificationTransactionData.setCheckInLatitude(checkInLat);
             ebSiteElectrificationTransactionData.setCheckInLongitude(checkInLong);
@@ -224,7 +224,7 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
             String jsonString = gson2.toJson(ebSiteElectrificationTransactionData);
             Log.e(TAG, jsonString);
 
-            /*GsonRequest<EbSiteElectrificationSubmitResposeData> ebSiteElectrificationTicketSubmit = new GsonRequest<>(Request.Method.POST, Constants.SubmitebSiteElectrificationTicket, jsonString.toString(), EbSiteElectrificationSubmitResposeData.class,
+            GsonRequest<EbSiteElectrificationSubmitResposeData> ebSiteElectrificationTicketSubmit = new GsonRequest<>(Request.Method.POST, Constants.SubmitebSiteElectrificationTicket, jsonString.toString(), EbSiteElectrificationSubmitResposeData.class,
                     new Response.Listener<EbSiteElectrificationSubmitResposeData>() {
                         @Override
                         public void onResponse(EbSiteElectrificationSubmitResposeData response) {
@@ -253,7 +253,7 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
                     });
             ebSiteElectrificationTicketSubmit.setRetryPolicy(Application.getDefaultRetryPolice());
             ebSiteElectrificationTicketSubmit.setShouldCache(false);
-            Application.getInstance().addToRequestQueue(ebSiteElectrificationTicketSubmit, "ebSiteElectrificationTicketSubmit");*/
+            Application.getInstance().addToRequestQueue(ebSiteElectrificationTicketSubmit, "ebSiteElectrificationTicketSubmit");
 
             //offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
         } catch (Exception e) {

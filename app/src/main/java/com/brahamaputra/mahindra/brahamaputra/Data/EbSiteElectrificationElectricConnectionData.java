@@ -101,9 +101,8 @@ public class EbSiteElectrificationElectricConnectionData implements Serializable
     @SerializedName("bankAccountNo")
     private String bankAccountNo;
 
-    @SerializedName("isSubmited")
-    //private Boolean isSubmited;
-    private int isSubmited;
+    /*@SerializedName("isSubmited")
+    private int isSubmited;*/
 
 
     public EbSiteElectrificationElectricConnectionData() {
@@ -138,7 +137,7 @@ public class EbSiteElectrificationElectricConnectionData implements Serializable
         this.typeModeOfPayment = "";
         this.bankIfscCode = "";
         this.bankAccountNo = "";
-        this.isSubmited = 0;
+        /*this.isSubmited = 0;*/
 
     }
 
@@ -426,12 +425,12 @@ public class EbSiteElectrificationElectricConnectionData implements Serializable
         this.bankAccountNo = bankAccountNo;
     }
 
-    public int getIsSubmited() {
+    /*public int getIsSubmited() {
         return isSubmited;
     }
 
     public void setIsSubmited(int isSubmited) {
         this.isSubmited = isSubmited;
-    }
+    }*/
     //endregion
 }

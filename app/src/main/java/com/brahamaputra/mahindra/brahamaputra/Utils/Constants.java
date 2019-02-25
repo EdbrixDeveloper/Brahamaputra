@@ -93,6 +93,6 @@ public class Constants {
     public final static String GetEbPaymentDetails = BASE_URL.concat("electricbill/getelectribillchequedddetails");
     public final static String SubmitEbPaymentDetails = BASE_URL.concat("electricbill/submitebfillingddchequereceipt");
 
-    public final static String GetSiteElectrificationCompletionList = BASE_URL.concat("electricbill/getsiteelectrificationcompletionlist");  // gethototticketlist
-    public final static String SubmitebSiteElectrificationTicket = BASE_URL.concat("diesel/createdieselfillingrequest");// Submitdieselfillingfundrequesttransaction //used in diesel filling fund request activity
+    public final static String GetSiteElectrificationCompletionList = BASE_URL.concat("electricbill/getsiteelectrificationcompletionlist");  // get EB Site Electrification Ticket List
+    public final static String SubmitebSiteElectrificationTicket = BASE_URL.concat("electricbill/submitelectrificationdata");// Submit EB Site Electrification Ticket //used in EbSiteElectrificationTransactionActivity
 }

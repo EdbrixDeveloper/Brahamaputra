@@ -15,8 +15,8 @@ public class EbSiteElectrificationTransactionData implements Serializable {
     @SerializedName("ticketId")
     private String ticketId;
 
-    @SerializedName("ticketNo")
-    private String ticketNo;
+    /*@SerializedName("ticketNo")
+    private String ticketNo;*/
 
     @SerializedName("checkInLatitude")
     private String checkInLatitude;
@@ -73,13 +73,13 @@ public class EbSiteElectrificationTransactionData implements Serializable {
         this.ticketId = ticketId;
     }
 
-    public String getTicketNo() {
+    /*public String getTicketNo() {
         return ticketNo;
     }
 
     public void setTicketNo(String ticketNo) {
         this.ticketNo = ticketNo;
-    }
+    }*/
 
     public String getCheckInLatitude() {
         return checkInLatitude;
