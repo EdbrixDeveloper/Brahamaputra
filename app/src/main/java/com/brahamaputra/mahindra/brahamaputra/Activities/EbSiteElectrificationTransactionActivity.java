@@ -404,84 +404,84 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTariff().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTariff() == null) {
             showToast("Select Tariff in Electric Connection");
             return false;
-        } /*else if (sanctionedLoad.isEmpty() || sanctionedLoad == null) {
-            showToast("Enter Sanctioned Load(KVA)");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSanctionedLoad().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSanctionedLoad() == null) {
+            showToast("Enter Sanctioned Load(KVA) in Electric Connection");
             return false;
-        } else if (existingLoadAtSite.isEmpty() || existingLoadAtSite == null) {
-            showToast("Enter Existing load at Site(KVA)");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getExistingLoadAtSite().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getExistingLoadAtSite() == null) {
+            showToast("Enter Existing load at Site(KVA) in Electric Connection");
             return false;
-        } else if (securityAmountPaidToTheCompany.isEmpty() || securityAmountPaidToTheCompany == null) {
-            showToast("Enter Security Amount paid to the Company");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSecurityAmountPaidToTheCompany().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSecurityAmountPaidToTheCompany() == null) {
+            showToast("Enter Security Amount paid to the Company in Electric Connection");
             return false;
-        } else if (copyOfTheElectricBills.isEmpty() || copyOfTheElectricBills == null) {
-            showToast("Select Copy of the Electric Bills(Last Three Months)");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getCopyOfTheElectricBills().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getCopyOfTheElectricBills() == null) {
+            showToast("Select Copy of the Electric Bills(Last Three Months) in Electric Connection");
             return false;
-        } else if (numberOfCompoundLights.isEmpty() || numberOfCompoundLights == null) {
-            showToast("Enter Number of Compound Lights");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getNumberOfCompoundLights().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getNumberOfCompoundLights() == null) {
+            showToast("Enter Number of Compound Lights in Electric Connection");
             return false;
-        }*/ else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterReadingInKWH().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterReadingInKWH() == null) {
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterReadingInKWH().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterReadingInKWH() == null) {
             showToast("Enter EB Meter Reading(KWH) in Electric Connection");
             return false;
-        } /*else if (ebSupplier.isEmpty() || ebSupplier == null) {
-            showToast("Select EB Supplier");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbSupplier().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbSupplier() == null) {
+            showToast("Select EB Supplier in Electric Connection");
             return false;
-        } else if ((ebCostPerUnitForSharedConnection.isEmpty() || ebCostPerUnitForSharedConnection == null) && (!ebSupplier.equals("Dedicated Connection"))) {
-            showToast("Enter EB Cost Per Unit for Shared Connection");
+        } else if ((ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbCostPerUnitForSharedConnection().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbCostPerUnitForSharedConnection() == null) && (!ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbSupplier().equals("Dedicated Connection"))) {
+            showToast("Enter EB Cost Per Unit for Shared Connection in Electric Connection");
             return false;
-        } else if (ebStatus.isEmpty() || ebStatus == null) {
-            showToast("Select EB Status");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbStatus().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbStatus() == null) {
+            showToast("Select EB Status in Electric Connection");
             return false;
-        } else if (transformerWorkingCondition.isEmpty() || transformerWorkingCondition == null) {
-            showToast("Select Transformer Working Condition");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTransformerWorkingCondition().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTransformerWorkingCondition() == null) {
+            showToast("Select Transformer Working Condition in Electric Connection");
             return false;
-        } else if (transformerCapacityInKVA.isEmpty() || transformerCapacityInKVA == null) {
-            showToast("Enter Transformer Capacity(KVA)");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTransformerCapacityInKVA().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTransformerCapacityInKVA() == null) {
+            showToast("Enter Transformer Capacity(KVA) in Electric Connection");
             return false;
-        } else if (ebMeterBoxStatus.isEmpty() || ebMeterBoxStatus == null) {
-            showToast("Select EB Meter Box Status");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterBoxStatus().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterBoxStatus() == null) {
+            showToast("Select EB Meter Box Status in Electric Connection");
             return false;
-        } else if (sectionName.isEmpty() || sectionName == null) {
-            showToast("Enter Section Name");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSectionName().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSectionName() == null) {
+            showToast("Enter Section Name in Electric Connection");
             return false;
-        } else if (sectionNumber.isEmpty() || sectionNumber == null) {
-            showToast("Enter Section Number");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSectionNumber().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSectionNumber() == null) {
+            showToast("Enter Section Number in Electric Connection");
             return false;
-        } else if (ebMeterWorkingStatus.isEmpty() || ebMeterWorkingStatus == null) {
-            showToast("Select EB Meter Working Status");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterWorkingStatus().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbMeterWorkingStatus() == null) {
+            showToast("Select EB Meter Working Status in Electric Connection");
             return false;
-        } else if (typeOfPayment.isEmpty() || typeOfPayment == null) {
-            showToast("Select Type of Payment");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeOfPayment().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeOfPayment() == null) {
+            showToast("Select Type of Payment in Electric Connection");
             return false;
-        } else if ((ebPaymentSchedule.isEmpty() || ebPaymentSchedule == null) && (typeOfPayment.equals("Post Paid"))) {
-            showToast("Select EB Payment Schedule");
+        } else if ((ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbPaymentSchedule().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbPaymentSchedule() == null) && (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeOfPayment().equals("Post Paid"))) {
+            showToast("Select EB Payment Schedule in Electric Connection");
             return false;
-        } else if (safetyFuseUnit.isEmpty() || safetyFuseUnit == null) {
-            showToast("Select Safety Fuse Unit");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSafetyFuseUnit().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getSafetyFuseUnit() == null) {
+            showToast("Select Safety Fuse Unit in Electric Connection");
             return false;
-        } else if (kitkatClayFuseStatus.isEmpty() || kitkatClayFuseStatus == null) {
-            showToast("Select KIT-KAT/Clay Fuse Status");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getKitkatClayFuseStatus().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getKitkatClayFuseStatus() == null) {
+            showToast("Select KIT-KAT/Clay Fuse Status in Electric Connection");
             return false;
-        } else if (ebNeutralEarthing.isEmpty() || ebNeutralEarthing == null) {
-            showToast("Select EB Neutral Earthing");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbNeutralEarthing().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbNeutralEarthing() == null) {
+            showToast("Select EB Neutral Earthing in Electric Connection");
             return false;
-        } else if (averageEbAvailabilityPerDay.equals("00:00")) {
-            showToast("Select Average EB Availability Per Day");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getAverageEbAvailabilityPerDay().equals("00:00")) {
+            showToast("Select Average EB Availability Per Day in Electric Connection");
             return false;
-        } else if (scheduledPowerCutInHrs.equals("00:00")) {
-            showToast("Select Scheduled Power Cut in Hrs");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getScheduledPowerCutInHrs().equals("00:00")) {
+            showToast("Select Scheduled Power Cut in Hrs in Electric Connection");
             return false;
-        } else if (ebBillDate.isEmpty() || ebBillDate == null) {
-            showToast("Select EB Bill Date");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbBillDate().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getEbBillDate() == null) {
+            showToast("Select EB Bill Date in Electric Connection");
             return false;
-        }*/ else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeModeOfPayment().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeModeOfPayment() == null) {
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeModeOfPayment().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getTypeModeOfPayment() == null) {
             showToast("Select Type|Mode of Payment in Electric Connection");
             return false;
-        } else return true; /*else if (bankIfscCode.isEmpty() || bankIfscCode == null) {
-            showToast("Enter Bank IFSC Code");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getBankIfscCode().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getBankIfscCode() == null) {
+            showToast("Enter Bank IFSC Code in Electric Connection");
             return false;
-        } else if (bankAccountNo.isEmpty() || bankAccountNo == null) {
-            showToast("Enter Bank Account No");
+        } else if (ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getBankAccountNo().isEmpty() || ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection().getBankAccountNo() == null) {
+            showToast("Enter Bank Account No in Electric Connection");
             return false;
-        }*/
+        } else return true;
     }
 }
