@@ -43,6 +43,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.ebSiteElectrificationConsumerNumber;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.ebSiteElectrificationEbMeterSerialNumber;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.ebSiteElectrificationSiteDbId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -174,10 +175,13 @@ public class EbSiteElectrificationList extends BaseActivity {
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         if (ebSiteElectrificationTicketList != null) {
-                            final String ebSiteElectrificationTicketId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getId().toString();
+
+                            final String ebSiteElectrificationTicketId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getSiteElectrificationId().toString();
                             final String ebSiteElectrificationTicketNo = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getEbSiteElectrificationTicketNo().toString();
 
                             final String ebSiteElectrificationTicketDate = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getEbSiteElectrificationTicketNo().toString();
+                            final String siteDbId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getSiteDBId().toString();
+                            ebSiteElectrificationSiteDbId= ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getSiteDBId().toString();
                             final String siteId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getSiteId().toString();
                             final String siteName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getSiteName().toString();
                             final String siteAddress = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(position).getSiteAddress().toString();
@@ -206,12 +210,12 @@ public class EbSiteElectrificationList extends BaseActivity {
                                     alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                         @Override
                                         public void onPositiveClick() {
-                                            checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                            checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteDbId, siteId, siteName, siteAddress, status, siteType,
                                                     stateName, customerName, circleName, ssaName, nameOfTheSupplyCompany, consumerNumber, ebMeterSerialNumber);
                                         }
                                     }).show();
                                 } else {
-                                    checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                    checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteDbId, siteId, siteName, siteAddress, status, siteType,
                                             stateName, customerName, circleName, ssaName, nameOfTheSupplyCompany, consumerNumber, ebMeterSerialNumber);
                                 }
 
@@ -414,8 +418,9 @@ public class EbSiteElectrificationList extends BaseActivity {
     }
 
 
-    public void checkSystemLocation(final String ebSiteElectrificationTickitNo, final String ebSiteElectrificationTicketId, String ebSiteElectrificationTicketDate, String siteId,
-                                    String siteName, String siteAddress, String status, String siteType, String stateName,
+    public void checkSystemLocation(final String ebSiteElectrificationTickitNo, final String ebSiteElectrificationTicketId, String ebSiteElectrificationTicketDate,
+                                    String siteDbId, String siteId, String siteName, String siteAddress,
+                                    String status, String siteType, String stateName,
                                     String customerName, String circleName, String ssaName, String nameOfTheSupplyCompany, String consumerNumber, String ebMeterSerialNumber) {
 
         LocationManager lm = (LocationManager) EbSiteElectrificationList.this.getSystemService(Context.LOCATION_SERVICE);
@@ -446,6 +451,7 @@ public class EbSiteElectrificationList extends BaseActivity {
                 intent.putExtra("Id", ebSiteElectrificationTicketId);
                 intent.putExtra("ticketNO", ebSiteElectrificationTickitNo);
                 intent.putExtra("ebSiteElectrificationTicketDate", ebSiteElectrificationTicketDate);
+                intent.putExtra("siteDbId", siteDbId);
                 intent.putExtra("siteId", siteId);
                 intent.putExtra("siteName", siteName);
                 intent.putExtra("siteAddress", siteAddress);

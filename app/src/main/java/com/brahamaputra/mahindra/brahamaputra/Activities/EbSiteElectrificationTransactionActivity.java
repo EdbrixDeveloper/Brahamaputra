@@ -41,6 +41,7 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.ebSiteElectrificationSiteDbId;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_CustomerName;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
@@ -177,6 +178,7 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         mEbSiteElectrificationTransactionEditTextNameOfCircle.setText(intent.getStringExtra("circleName"));
         mEbSiteElectrificationTransactionEditTextNameOfssa.setText(intent.getStringExtra("ssaName"));
         mEbSiteElectrificationTransactionEditTextNameOfsite.setText(intent.getStringExtra("siteName"));
+        mEbSiteElectrificationTransactionEditTextSiteID.setText(intent.getStringExtra("siteDbId"));
         mEbSiteElectrificationTransactionEditTextSiteID.setText(intent.getStringExtra("siteId"));
         mEbSiteElectrificationTransactionEditTextSiteAddress.setText(intent.getStringExtra("siteAddress"));
         mEbSiteElectrificationTransactionEditTextTypeOfSite.setText(intent.getStringExtra("siteType"));
@@ -215,7 +217,8 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
             ebSiteElectrificationTransactionData.setCheckOutLongitude(checkOutLong);
             ebSiteElectrificationTransactionData.setCheckOutBatteryData(checkOutBatteryData);
 
-            ebSiteElectrificationTransactionData.setSiteId(mEbSiteElectrificationTransactionEditTextSiteID.getText().toString());
+            //ebSiteElectrificationTransactionData.setSiteId(mEbSiteElectrificationTransactionEditTextSiteID.getText().toString());
+            ebSiteElectrificationTransactionData.setSiteId(ebSiteElectrificationSiteDbId);
 
             ebSiteElectrificationTransactionData.setSiteAddress(mEbSiteElectrificationTransactionEditTextSiteAddress.getText().toString());
 

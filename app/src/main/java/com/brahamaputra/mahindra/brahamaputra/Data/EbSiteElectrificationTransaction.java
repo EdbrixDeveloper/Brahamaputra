@@ -14,9 +14,9 @@ public class EbSiteElectrificationTransaction {
     private Integer ebSiteElectrificationTicketCount;
 
     //////////////
-    @SerializedName("Id")
+    @SerializedName("siteDBId")//Id
     @Expose
-    private String id;
+    private String siteDBId;
     @SerializedName("ebSiteElectrificationTicketNo")
     @Expose
     private String ebSiteElectrificationTicketNo;
@@ -60,12 +60,17 @@ public class EbSiteElectrificationTransaction {
     @Expose
     private String ebMeterSerialNumber;
 
-    public String getId() {
-        return id;
+    @SerializedName("siteelectrificationId")
+    @Expose
+    private String siteElectrificationId;
+
+
+    public String getSiteDBId() {
+        return siteDBId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSiteDBId(String siteDBId) {
+        this.siteDBId = siteDBId;
     }
 
     public String getEbSiteElectrificationTicketNo() {
@@ -180,6 +185,14 @@ public class EbSiteElectrificationTransaction {
         this.ebMeterSerialNumber = ebMeterSerialNumber;
     }
 
+    public String getSiteElectrificationId() {
+        return siteElectrificationId;
+    }
+
+    public void setSiteElectrificationId(String siteElectrificationId) {
+        this.siteElectrificationId = siteElectrificationId;
+    }
+
     ////////////
 
     @SerializedName("ebSiteElectrificationTickets")
@@ -215,4 +228,6 @@ public class EbSiteElectrificationTransaction {
         this.ebSiteElectrificationTicketCount = ebSiteElectrificationTicketCount;
         this.ebSiteElectrificationTransactionList = ebSiteElectrificationTransactionList;
     }
+
+
 }

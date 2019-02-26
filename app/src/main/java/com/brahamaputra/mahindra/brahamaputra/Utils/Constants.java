@@ -43,6 +43,7 @@ public class Constants {
 
     public static String hototicket_sourceOfPower = "";
 
+    public static String ebSiteElectrificationSiteDbId = "";
     public static String ebSiteElectrificationConsumerNumber = "";
     public static String ebSiteElectrificationEbMeterSerialNumber;
 
