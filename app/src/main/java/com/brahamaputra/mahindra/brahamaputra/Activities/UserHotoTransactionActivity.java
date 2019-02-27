@@ -184,7 +184,9 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
                         str_sourceOfPower = item.get(position);
                         mUserHotoTransSpinnerSourceOfPowerVal.setText(str_sourceOfPower);
-                        hototicket_sourceOfPower=str_sourceOfPower;
+                        hototicket_sourceOfPower = str_sourceOfPower;
+                        setElectricConnectionDataOnSourceOfPowerChangedListValues();
+
                     }
                 });
             }
@@ -462,6 +464,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                     mUserHotoTransEditTextSiteID.setText(hotoTransactionData.getSiteId());
                     mUserHotoTransEditTextSiteAddress.setText(hotoTransactionData.getSiteAddress());
                     mUserHotoTransSpinnerSourceOfPowerVal.setText(hotoTransactionData.getSourceOfPower());
+                    hototicket_sourceOfPower = hotoTransactionData.getSourceOfPower() == null || hotoTransactionData.getSourceOfPower().isEmpty() ? "" : hotoTransactionData.getSourceOfPower();
                 }
 
             } else {
@@ -622,7 +625,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
                 electricConnectionData = hotoTransactionData.getElectricConnectionData();
 
-                String electricConnectionType = electricConnectionData.getElectricConnectionType();
+                /*String electricConnectionType = electricConnectionData.getElectricConnectionType();
                 String connectionTariff = electricConnectionData.getConnectionTariff();
                 String sanctionLoad = electricConnectionData.getSanctionLoad();
                 String existingLoadAtSite = electricConnectionData.getExistingLoadAtSite();
@@ -652,7 +655,40 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 String sapVendorCode = "";
                 String typeModeOfPayment_Val = electricConnectionData.getTypeModeOfPayment_Val();
                 String bankIfscCode = electricConnectionData.getBankIfscCode();
-                String bankAccountNo = electricConnectionData.getBankAccountNo();
+                String bankAccountNo = electricConnectionData.getBankAccountNo();*/
+
+
+                String electricConnectionType = "";
+                String connectionTariff = "";
+                String sanctionLoad = "";
+                String existingLoadAtSite = "";
+                String nameSupplyCompany = "";
+                String electricBillCopyStatus = "";
+                String noOfCompoundLights = "";
+                String meterReadingsEB = "";
+                String supplierEB = "";
+                String costPerUnitForSharedConnectionEB = "";
+                String statusEB = "";
+                String transformerWorkingCondition = "";
+                String transformerCapacity = "";
+                String meterBoxStatusEB = "";
+                String sectionName = "";
+                String sectionNo = "";
+                String consumerNo = "";
+                String meterWorkingStatusEB = "";
+                String meterSerialNumberEB = "";
+                String paymentType = "";
+                String paymentScheduleEB = "";
+                String safetyFuseUnit = "";
+                String kitKatFuseStatus = "";
+                String ebNeutralEarthing = "";
+                String averageEbAvailability = "";
+                String scheduledPowerCut = "";
+                String ebBillDate = "";
+                String sapVendorCode = "";
+                String typeModeOfPayment_Val = "";
+                String bankIfscCode = "";
+                String bankAccountNo = "";
 
                 electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, "", existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
                 hotoTransactionData.setElectricConnectionData(electricConnectionData);
@@ -662,6 +698,77 @@ public class UserHotoTransactionActivity extends BaseActivity {
                 offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
                 submitHotoTicket();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setElectricConnectionDataOnSourceOfPowerChangedListValues() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+
+                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
+                electricConnectionData = hotoTransactionData.getElectricConnectionData();
+
+                if (hototicket_sourceOfPower.equals("Non EB")) {
+                    String electricConnectionType = "";
+                    String connectionTariff = "";
+                    String sanctionLoad = "";
+                    String existingLoadAtSite = "";
+                    String nameSupplyCompany = "";
+                    String electricBillCopyStatus = "";
+                    String noOfCompoundLights = "";
+                    String meterReadingsEB = "";
+                    String supplierEB = "";
+                    String costPerUnitForSharedConnectionEB = "";
+                    String statusEB = "";
+                    String transformerWorkingCondition = "";
+                    String transformerCapacity = "";
+                    String meterBoxStatusEB = "";
+                    String sectionName = "";
+                    String sectionNo = "";
+                    String consumerNo = "";
+                    String meterWorkingStatusEB = "";
+                    String meterSerialNumberEB = "";
+                    String paymentType = "";
+                    String paymentScheduleEB = "";
+                    String safetyFuseUnit = "";
+                    String kitKatFuseStatus = "";
+                    String ebNeutralEarthing = "";
+                    String averageEbAvailability = "";
+                    String scheduledPowerCut = "";
+                    String ebBillDate = "";
+                    String sapVendorCode = "";
+                    String typeModeOfPayment_Val = "";
+                    String bankIfscCode = "";
+                    String bankAccountNo = "";
+
+                    electricConnectionData = new ElectricConnectionData(electricConnectionType, connectionTariff, sanctionLoad, "", existingLoadAtSite, nameSupplyCompany, electricBillCopyStatus, noOfCompoundLights, meterReadingsEB, supplierEB, costPerUnitForSharedConnectionEB, statusEB, transformerWorkingCondition, transformerCapacity, meterBoxStatusEB, sectionName, sectionNo, consumerNo, meterWorkingStatusEB, meterSerialNumberEB, paymentType, paymentScheduleEB, safetyFuseUnit, kitKatFuseStatus, ebNeutralEarthing, averageEbAvailability, scheduledPowerCut, ebBillDate, sapVendorCode, typeModeOfPayment_Val, bankIfscCode, bankAccountNo);
+
+                } else {
+                    electricConnectionData = new ElectricConnectionData(electricConnectionData.getElectricConnectionType(), electricConnectionData.getConnectionTariff(),
+                            electricConnectionData.getSanctionLoad(), electricConnectionData.getSecurityAmountPaid(), electricConnectionData.getExistingLoadAtSite(),
+                            electricConnectionData.getNameSupplyCompany(), electricConnectionData.getElectricBillCopyStatus(), electricConnectionData.getNoOfCompoundLights(),
+                            electricConnectionData.getMeterReadingsEB(), electricConnectionData.getSupplierEB(), electricConnectionData.getCostPerUnitForSharedConnectionEB(),
+                            electricConnectionData.getStatusEB(), electricConnectionData.getTransformerWorkingCondition(), electricConnectionData.getTransformerCapacity(),
+                            electricConnectionData.getMeterBoxStatusEB(), electricConnectionData.getSectionName(), electricConnectionData.getSectionNo(), electricConnectionData.getConsumerNo(),
+                            electricConnectionData.getMeterWorkingStatusEB(), electricConnectionData.getMeterSerialNumberEB(),
+                            electricConnectionData.getPaymentType() , electricConnectionData.getPaymentScheduleEB(), electricConnectionData.getSafetyFuseUnit(),
+                            electricConnectionData.getKitKatFuseStatus(), electricConnectionData.getEbNeutralEarthing(),
+                            electricConnectionData.getAverageEbAvailability(), electricConnectionData.getScheduledPowerCut(),
+                            electricConnectionData.getEbBillDate(), electricConnectionData.getSapVendorCode(), electricConnectionData.getTypeModeOfPayment_Val(),
+                            electricConnectionData.getBankIfscCode(), electricConnectionData.getBankAccountNo());
+                }
+
+                hotoTransactionData.setElectricConnectionData(electricConnectionData);
+                Gson gson2 = new GsonBuilder().create();
+                String jsonString = gson2.toJson(hotoTransactionData);
+                offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,5 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
+
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.google.gson.annotations.SerializedName;
 
@@ -494,10 +495,10 @@ public class HotoTransactionData {
             return true;
         } else return false;*/
 
-        if(hototicket_sourceOfPower.equals("Non EB"))
-        {
+        if (hototicket_sourceOfPower.equals("Non EB")) {
             electricConnectionData.setSubmited(2);
         }
+
         if ((landDetailsData.getSubmited() == 2 || landDetailsData.getSubmited() == 1) &&
                 (towerDetailsData.getSubmited() == 2 || towerDetailsData.getSubmited() == 1) &&
                 (earthResistanceTowerData.getSubmited() == 2 || earthResistanceTowerData.getSubmited() == 1) &&

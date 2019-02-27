@@ -100,7 +100,12 @@ public class HotoSectionListAdapter extends ArrayAdapter<HotoSection> implements
             {
                 viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.lightgrey));
             }
-        }
+        }/*else if(!(Constants.hototicket_sourceOfPower.equals("Non EB"))){
+            if(dataModel.getSecName().equals("Electric Connection"))
+            {
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
+            }
+        }*/
 
         return convertView;
     }

@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -25,7 +26,9 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.JsonArray;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -221,17 +224,25 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
 
             String typeId = data.getString("typeId");
             String title = data.getString("title");
-            String message = data.getString("message");
+            String message = String.valueOf(Html.fromHtml(data.getString("message"), null, null));//data.getString("message");
             boolean isBackground = data.getBoolean("is_background");
             String imageUrl = data.getString("image");
             String timestamp = data.getString("timestamp");
             JSONObject payload = data.getJSONObject("payload");
+            String fundTransfered;
 
             String hototicketid = "";
             if (payload.has("hototicketdetails")) {
                 JSONObject hototicketdetails = payload.getJSONObject("hototicketdetails");
-                hototicketid = hototicketdetails.getString("hototicketid");
-
+                if(hototicketdetails.has("hototicketid"))
+                {
+                    hototicketid = hototicketdetails.getString("hototicketid");
+                }else if(hototicketdetails.has("Fund Transfered")){
+                    fundTransfered = hototicketdetails.getString("Fund Transfered");
+                }else {
+                    hototicketid = "";
+                    fundTransfered = "";
+                }
             } else {
                 Log.e(TAG, "HototicketDetails No...");
             }

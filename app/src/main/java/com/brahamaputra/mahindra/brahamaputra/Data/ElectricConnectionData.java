@@ -184,10 +184,10 @@ public class ElectricConnectionData {
         //this.isSubmited=true;//007
         this.isSubmited = 1;
         if (hototicket_sourceOfPower.equals("Non EB")) {
-            if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
-                    !this.typeModeOfPayment_Val.isEmpty()) {
+            /*if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
+                    !this.typeModeOfPayment_Val.isEmpty()) {*/
                 this.isSubmited = 2;
-            }
+            /*}*/
         } else {
             if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
                     !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
