@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceEquipmentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -34,6 +35,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
 public class Earth_Resistance_Equipment extends BaseActivity {
 
@@ -224,7 +227,12 @@ public class Earth_Resistance_Equipment extends BaseActivity {
             case R.id.menuSubmit:
                 DecimalFormatConversion();
                 submitDetails();
-                startActivity(new Intent(this, Electric_Connection.class));
+                if(!(hototicket_sourceOfPower.equals("Non EB")))
+                {
+                    startActivity(new Intent(this, Electric_Connection.class));
+                }else{
+                    startActivity(new Intent(this, Air_Conditioners.class));
+                }
                 finish();
                 return true;
 
