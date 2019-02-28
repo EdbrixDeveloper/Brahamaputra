@@ -1,5 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
+
 import com.google.gson.annotations.SerializedName;
+
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
 public class ElectricConnectionData {
@@ -186,13 +188,24 @@ public class ElectricConnectionData {
         if (hototicket_sourceOfPower.equals("Non EB")) {
             /*if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
                     !this.typeModeOfPayment_Val.isEmpty()) {*/
-                this.isSubmited = 2;
+            this.isSubmited = 2;
             /*}*/
         } else {
             if (!this.electricConnectionType.isEmpty() && !this.connectionTariff.isEmpty() && !this.nameSupplyCompany.isEmpty() &&
                     !this.meterReadingsEB.isEmpty() && !this.consumerNo.isEmpty() && !this.typeModeOfPayment_Val.isEmpty()) {
                 this.isSubmited = 2;
-            } /*else {
+            } else if (this.electricConnectionType.isEmpty() && this.connectionTariff.isEmpty() && this.sanctionLoad.isEmpty() && this.securityAmountPaid.isEmpty() && this.
+                    existingLoadAtSite.isEmpty() && this.nameSupplyCompany.isEmpty() && this.electricBillCopyStatus.isEmpty() && this.noOfCompoundLights.isEmpty() && this.
+                    meterReadingsEB.isEmpty() && this.supplierEB.isEmpty() && this.costPerUnitForSharedConnectionEB.isEmpty() && this.statusEB.isEmpty() && this.
+                    transformerWorkingCondition.isEmpty() && this.transformerCapacity.isEmpty() && this.meterBoxStatusEB.isEmpty() && this.sectionName.isEmpty() && this.
+                    sectionNo.isEmpty() && this.consumerNo.isEmpty() && this.meterWorkingStatusEB.isEmpty() && this.meterSerialNumberEB.isEmpty() && this.
+                    paymentType.isEmpty() && this.paymentScheduleEB.isEmpty() && this.safetyFuseUnit.isEmpty() && this.kitKatFuseStatus.isEmpty() && this.
+                    ebNeutralEarthing.isEmpty() && this.averageEbAvailability.isEmpty() && this.
+                    scheduledPowerCut.isEmpty() && this.ebBillDate.isEmpty() && this.sapVendorCode.isEmpty() && this.typeModeOfPayment_Val.isEmpty() && this.
+                    bankIfscCode.isEmpty() && this.bankAccountNo.isEmpty()) {
+                this.isSubmited = 0;
+            }
+            /*else {
             this.isSubmited = 1;
         }*/
         }
