@@ -58,6 +58,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+
 public class Power_Backups_DG extends BaseActivity {
 
     private TextView mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovided;
@@ -524,11 +526,11 @@ public class Power_Backups_DG extends BaseActivity {
     }
 
     private void initCombo() {
-        if(Constants.hototicket_sourceOfPower.equals("Non DG"))
-        {
-            mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setHint("0");
+        if (hototicket_sourceOfPower.equals("Non DG")) {
+            mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText("0");
             mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setEnabled(false);
-        }else{
+        } else {
+            mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setEnabled(true);
             mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1256,7 +1258,8 @@ public class Power_Backups_DG extends BaseActivity {
                 powerBackupsDGParentData = hotoTransactionData.getPowerBackupsDGParentData();
                 powerBackupsDGData.addAll(powerBackupsDGParentData.getPowerBackupsDGData());
 
-                mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(powerBackupsDGParentData.getNoOfEngineAlternator());
+                mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(hototicket_sourceOfPower.equals("Non DG") ? "0" : powerBackupsDGParentData.getNoOfEngineAlternator());
+
                 mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(powerBackupsDGParentData.getNumberOfWorkingDg());
 
                 linearLayout_container.setVisibility(View.GONE);
