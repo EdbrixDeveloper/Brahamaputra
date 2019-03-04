@@ -1870,6 +1870,7 @@
         <item>EB Meter Box Faulty</item>
         <item>EB Meter Faulty</item>
         <item>MCCB/SFU Faulty</item>
+        <item>Fuse Faulty</item>
         <item>Wire Damaged</item>
     </string-array>
 
