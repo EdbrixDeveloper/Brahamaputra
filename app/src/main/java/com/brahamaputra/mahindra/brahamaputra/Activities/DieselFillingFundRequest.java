@@ -466,7 +466,7 @@ public class DieselFillingFundRequest extends BaseActivity {
             JSONObject jo = new JSONObject();
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
-
+            jo.put("IsDieselRequest", "1");
 
             GsonRequest<UserSitesList> getuserSitesNameRequest = new GsonRequest<>(Request.Method.POST, Constants.GetUserSites, jo.toString(), UserSitesList.class,
                     new Response.Listener<UserSitesList>() {

@@ -1430,6 +1430,7 @@ public class ElectricBillProcess extends BaseActivity {
             JSONObject jo = new JSONObject();
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jo.put("IsEbProcess", "1");
             //jo.put("SSAId", ssaID);
 
             //GetSite old web service
