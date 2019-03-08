@@ -295,7 +295,7 @@ public class SessionManager {
         editor.commit();
     }
 
-    /**
+        /**
      * Updates the saved session credentials.
      *
      * @param deviceFCMToken the DeviceFCMToken to save.

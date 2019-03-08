@@ -47,6 +47,8 @@ public class Constants {
     public static String ebSiteElectrificationConsumerNumber = "";
     public static String ebSiteElectrificationEbMeterSerialNumber;
 
+    public static String androidDeviceid;
+
     // TODO Change it to your web domain
     public final static String WEB_DOMAIN = "http://mahindradeveb2-api-env.srumj83md3.ap-south-1.elasticbeanstalk.com/";
     // TODO Change it to your APP Key
@@ -67,6 +69,8 @@ public class Constants {
     public final static String changepassword = BASE_URL.concat("auth/changepassword");  // changepassword
     public final static String editprofile = BASE_URL.concat("auth/editprofile");  // editprofile
     public final static String forgotpassword = BASE_URL.concat("auth/forgotpassword");  // forgotpassword
+    public final static String updatedevicetoken = BASE_URL.concat("auth/updatedevicetoken"); //updatedevicetoken
+
 
 
     public final static String GetUserSites = BASE_URL.concat("common/getusersites"); //* // getusersites //used in diesel filling activity

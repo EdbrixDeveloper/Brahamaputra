@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.provider.Settings.Secure;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -51,6 +52,7 @@ public class LoginActivity extends BaseActivity {
     final public int CHECK_PERMISSIONS = 123;
     private SessionManager sessionManager;
 
+
     boolean doubleBackToExitPressedOnce = false;
 
     private ImageView eyeIcon;
@@ -72,6 +74,10 @@ public class LoginActivity extends BaseActivity {
             textViewAppVersion.setText("App Version : " + BuildConfig.VERSION_NAME);
         }
         checkPermission();
+
+       Constants.androidDeviceid = Secure.getString(getApplicationContext().getContentResolver(),
+                Secure.ANDROID_ID);
+        Log.e(BaseActivity.class.getName(),Constants.androidDeviceid);
     }
 
     private void assignViews() {
@@ -150,6 +156,7 @@ public class LoginActivity extends BaseActivity {
             jo.put("SECRETKEY", Constants.APP_SECRET__);
             jo.put("Username", email);
             jo.put("Password", password);
+            jo.put( "DeviceId",Constants.androidDeviceid);
             jo.put("DeviceToken", sessionManager.getSessionFCMToken());
             jo.put("Type", "A");
 
@@ -181,6 +188,8 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionState(response.getUser().getState());
                                 sessionManager.updateSessionSsa(response.getUser().getSSA());
                                 sessionManager.updateSessionCustomer(response.getUser().getCustomerName());
+
+
 
 
                                 //String s1 = sessionManager.getSessionPreviousUserId().toString();

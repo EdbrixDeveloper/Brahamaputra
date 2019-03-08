@@ -10,15 +10,24 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardCircularActivity;
+import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.JsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.app.Config;
 import com.brahamaputra.mahindra.brahamaputra.helper.DatabaseHelper;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
@@ -26,6 +35,7 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
@@ -41,6 +51,23 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
     private LocalBroadcastManager localBroadcastManager;
     private final String SERVICE_RESULT = "com.service.result";
     private final String SERVICE_MESSAGE = "com.service.message";
+    private SessionManager sessionManager;
+
+    @Override
+        public void onNewToken(String s) {
+            super.onNewToken(s);
+            //doNewToken(sessionManager.getSessionDeviceToken(),s);
+            sessionManager = new SessionManager(this);
+            if(!(sessionManager.getSessionUserId().equals("")) && !(sessionManager.getSessionDeviceToken().equals("")))
+            {
+                doNewToken("",s,sessionManager);
+            }else{
+                sessionManager.updateSessionFCMToken(s);
+            }
+            Log.d(TAG,"NewToken: "+s);
+
+
+    }
 
     /**
      * Called when message is received.
@@ -401,5 +428,60 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
         if (message != null)
             intent.putExtra(SERVICE_MESSAGE, message);
         localBroadcastManager.sendBroadcast(intent);
+    }
+
+    private void doNewToken(String prvToken, final String newToken,final SessionManager sessionManager) {
+
+        if(!prvToken.equals(newToken))
+        {
+            try {
+                JSONObject jo = new JSONObject();
+                try {
+                    jo.put("UserId", sessionManager.getSessionUserId());
+                    jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+                    jo.put("DeviceId", Constants.androidDeviceid);
+                    jo.put("DeviceToken", newToken);
+
+                } catch (JSONException e) {
+                    Log.e(GoogleFirebaseMessagingService.class.getName(), e.getMessage().toString());
+                    return;
+                }
+
+                Log.e(GoogleFirebaseMessagingService.class.getName(),"In the doNewToken() :"+jo.toString());
+
+                JsonRequest doNewToken = new JsonRequest(Request.Method.POST, Constants.updatedevicetoken, jo,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(@NonNull JSONObject response) {
+                                try {
+                                if (response != null) {
+                                    if (response.has("Success")) {
+                                        int success = response.getInt("Success");
+                                        if (success == 1) {
+                                            sessionManager.updateSessionFCMToken(newToken);
+                                        } else {
+
+                                        }
+                                    }
+                                }
+                                } catch (Exception e) {
+                                    Log.e(GoogleFirebaseMessagingService.class.getName(),"Exception :" + e.getMessage());
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //showToast(SettingsMy.getErrorMessage(error));
+                        Log.e(GoogleFirebaseMessagingService.class.getName(),"onErrorResponse :" + SettingsMy.getErrorMessage(error));
+                    }
+                });
+                doNewToken.setRetryPolicy(Application.getDefaultRetryPolice());
+                doNewToken.setShouldCache(false);
+                Application.getInstance().addToRequestQueue(doNewToken, "doNewToken");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
