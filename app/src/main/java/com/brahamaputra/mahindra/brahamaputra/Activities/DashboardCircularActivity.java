@@ -138,10 +138,10 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 }).show();
             }else if(typeId.equals("3")){
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
-                alertDialogManager.Dialog("Information", "This is for Diesel Filling", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Information", "This is for Electricity Billing", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
-                        startActivity(new Intent(DashboardCircularActivity.this, DieselFillingList.class));
+                        startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));
                     }
                 }).show();
             }else if(typeId.equals("4")){
