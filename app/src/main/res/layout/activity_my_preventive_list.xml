@@ -19,36 +19,6 @@
 
 
         <RelativeLayout
-            android:id="@+id/MyPreventiveList_relativeLayout_acPreventiveMaintenance"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/app_normal_margin"
-            android:layout_weight="1"
-            android:background="@color/colorWhite">
-
-            <ImageView
-                android:id="@+id/img_acPreventiveMaintenance"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center|top"
-                android:src="@drawable/img_ac1"
-                android:tint="@color/red"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/img_acPreventiveMaintenance"
-                android:layout_gravity="center|bottom"
-                android:layout_marginTop="@dimen/app_min_margin"
-                android:text="AC Preventive Maintenance"
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                android:textSize="18dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/MyPreventiveList_relativeLayout_sitePreventiveMaintenance"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -71,12 +41,44 @@
                 android:layout_below="@+id/img_sitePreventiveMaintenance"
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="@dimen/app_min_margin"
-                android:text="Site Preventive Maintenance"
+                android:text="Site PM"
                 android:textAlignment="center"
                 android:textColor="@color/red"
                 android:textSize="18dp" />
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/MyPreventiveList_relativeLayout_acPreventiveMaintenance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:id="@+id/img_acPreventiveMaintenance"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center|top"
+                android:src="@drawable/img_ac1"
+                android:tint="@color/red"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_acPreventiveMaintenance"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/app_min_margin"
+                android:text="AC PM"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 

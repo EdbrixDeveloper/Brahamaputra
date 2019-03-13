@@ -52,7 +52,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_dashboard);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("Site Preventive Maintenance");
+        this.setTitle("Site PM");
         assignViews();
         sessionManager = new SessionManager(PreventiveMaintenanceDashboard.this);
         setListner();
