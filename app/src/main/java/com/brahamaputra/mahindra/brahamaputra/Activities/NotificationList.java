@@ -129,6 +129,13 @@ public class NotificationList extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.notification_icon_menu, menu);
+
+        MenuItem deleteAllNotificationItem = menu.findItem(R.id.menuDeleteAll);
+        deleteAllNotificationItem.setVisible(false);
+        int notificationCount = databaseHelper.getAllNotification().size();
+        if(notificationCount!=0){
+            deleteAllNotificationItem.setVisible(true);
+        }
         return true;
     }
 

@@ -251,7 +251,8 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
 
             String typeId = data.getString("typeId");
             String title = data.getString("title");
-            String message = String.valueOf(Html.fromHtml(data.getString("message"), null, null));//data.getString("message");
+            String tempMsg = String.valueOf(Html.fromHtml(data.getString("message"), null, null));
+            String message = tempMsg.replaceAll("\\[", "").replaceAll("\\]","");
             boolean isBackground = data.getBoolean("is_background");
             String imageUrl = data.getString("image");
             String timestamp = data.getString("timestamp");
@@ -289,7 +290,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
                 resultIntent.putExtra("typeId", typeId);
                 resultIntent.putExtra("title", title);
-                resultIntent.putExtra("msg", message);
+                resultIntent.putExtra("msg", message.replaceAll("\\[", "").replaceAll("\\]",""));
                 resultIntent.putExtra("timestamp", timestamp);
 
             } else if (typeId.equals("2")) {

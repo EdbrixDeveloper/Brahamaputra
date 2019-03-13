@@ -1651,7 +1651,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="EB Payment Remark" />
+                        android:text="Remark" />
 
                     <EditText
                         android:id="@+id/preventiveMaintenanceAcTechnician_EditText_remarks"

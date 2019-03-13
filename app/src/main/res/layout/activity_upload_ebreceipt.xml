@@ -219,7 +219,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="EB Receipt Remark" />
+                        android:text="Remark" />
 
                     <EditText
                         android:id="@+id/uploadEbReceipt_editText_EbReceiptRemark"
