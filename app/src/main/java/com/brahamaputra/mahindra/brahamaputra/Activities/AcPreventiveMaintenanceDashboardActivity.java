@@ -63,13 +63,13 @@ public class AcPreventiveMaintenanceDashboardActivity extends AppCompatActivity 
         mLinearLayoutContainer1 = (LinearLayout) findViewById(R.id.linearLayout_container1);
         mAcPreventiveMaintenanceSectionTextViewName = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_name);
         mAcPreventiveMaintenanceSectionTextViewNo = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_no);
-        mAcPreventiveMaintenanceSectionImageViewStatus = (ImageView) findViewById(R.id.acPreventiveMaintenanceSection_imageView_status);
+        //mAcPreventiveMaintenanceSectionImageViewStatus = (ImageView) findViewById(R.id.acPreventiveMaintenanceSection_imageView_status);
         mLinearLayoutContainer2 = (LinearLayout) findViewById(R.id.linearLayout_container2);
         mPriventiveMaintenanceSiteLinearLayoutTicket1 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket1);
         mPriventiveMaintenanceSiteLinearLayoutTicket2 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket2);
         mAcPreventiveMaintenanceSectionTextViewName2 = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_name2);
         mAcPreventiveMaintenanceSectionTextViewNo2 = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_no2);
-        mAcPreventiveMaintenanceSectionImageViewStatus2 = (ImageView) findViewById(R.id.acPreventiveMaintenanceSection_imageView_status2);
+        //mAcPreventiveMaintenanceSectionImageViewStatus2 = (ImageView) findViewById(R.id.acPreventiveMaintenanceSection_imageView_status2);
         mTextViewHotoName = (TextView) findViewById(R.id.textView_HotoName);
         mTextViewSiteID = (TextView) findViewById(R.id.textView_SiteID);
         mTextViewSiteName = (TextView) findViewById(R.id.textView_SiteName);
@@ -91,7 +91,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends AppCompatActivity 
             @Override
             public void onClick(View view) {
 
-                alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         openTicket1();
@@ -105,7 +105,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends AppCompatActivity 
             @Override
             public void onClick(View view) {
 
-                alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         openTicket2();

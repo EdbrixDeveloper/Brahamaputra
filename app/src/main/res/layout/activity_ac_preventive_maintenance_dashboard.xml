@@ -51,13 +51,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:weightSum="3.6">
+                android:weightSum="2.0">
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/app_min_margin"
-                    android:layout_weight="1.6"
+                    android:layout_weight="1.8"
                     android:background="@color/colorPrimary" />
 
                 <LinearLayout
@@ -87,7 +87,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.6"
@@ -103,7 +103,7 @@
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
             <LinearLayout
@@ -112,13 +112,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:weightSum="3.6">
+                android:weightSum="2.0">
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/app_min_margin"
-                    android:layout_weight="1.6"
+                    android:layout_weight="1.8"
                     android:background="@color/lightgrey" />
 
                 <LinearLayout
@@ -147,7 +147,7 @@
                         android:textSize="14sp" />
                 </LinearLayout>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.6"
@@ -162,7 +162,7 @@
                         android:layout_margin="@dimen/app_min_margin"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
         </LinearLayout>
