@@ -130,13 +130,27 @@ public class UsersHotoListActivity extends BaseActivity {
                             if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP") || hotoTickStatus.equals("Reassigned")) {
                                 if(hotoTickStatus.equals("Open")){
 
-                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                    //alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onTwoButtonClickListner() {
                                         @Override
                                         public void onPositiveClick() {
                                             checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
                                                     stateName, customerName, circleName, ssaName);
                                         }
+
+                                        @Override
+                                        public void onNegativeClick() {
+
+                                        }
                                     }).show();
+
+                                    /*alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                        @Override
+                                        public void onPositiveClick() {
+                                            checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                                    stateName, customerName, circleName, ssaName);
+                                        }
+                                    }).show();*/
                                 }else {
                                     checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
                                             stateName, customerName, circleName, ssaName);

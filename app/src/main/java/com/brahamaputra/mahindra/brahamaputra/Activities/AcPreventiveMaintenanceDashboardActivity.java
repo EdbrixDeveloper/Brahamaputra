@@ -91,12 +91,24 @@ public class AcPreventiveMaintenanceDashboardActivity extends AppCompatActivity 
             @Override
             public void onClick(View view) {
 
-                alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                //alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
+                alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         openTicket1();
                     }
+
+                    @Override
+                    public void onNegativeClick() {
+
+                    }
                 }).show();
+                /*alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        openTicket1();
+                    }
+                }).show();*/
 
             }
         });
@@ -105,16 +117,29 @@ public class AcPreventiveMaintenanceDashboardActivity extends AppCompatActivity 
             @Override
             public void onClick(View view) {
 
-                alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         openTicket2();
                     }
+
+                    @Override
+                    public void onNegativeClick() {
+
+                    }
                 }).show();
+
+                /*alertDialogManager.Dialog("Information", "Do you want to proceed doing AC PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        openTicket2();
+                    }
+                }).show();*/
             }
         });
     }
-    private void openTicket2(){
+
+    private void openTicket2() {
         if (Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this)) {
             if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 Intent intent = new Intent(AcPreventiveMaintenanceDashboardActivity.this, AcPreventiveMaintenanceSectionsListActivity.class);
@@ -145,7 +170,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends AppCompatActivity 
         }
     }
 
-    private void openTicket1(){
+    private void openTicket1() {
         if (Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this)) {
             if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 Intent intent = new Intent(AcPreventiveMaintenanceDashboardActivity.this, AcPreventiveMaintenanceSectionsListActivity.class);

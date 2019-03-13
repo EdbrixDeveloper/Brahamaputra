@@ -92,12 +92,24 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Information", "Do you want to proceed doing SITE PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         openTicket1();
                     }
+
+                    @Override
+                    public void onNegativeClick() {
+
+                    }
                 }).show();
+
+                /*alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        openTicket1();
+                    }
+                }).show();*/
 
             }
         });
@@ -106,12 +118,24 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog("Information", "Do you want to proceed doing SITE PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         openTicket2();
                     }
+
+                    @Override
+                    public void onNegativeClick() {
+
+                    }
                 }).show();
+
+                /*alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        openTicket2();
+                    }
+                }).show();*/
             }
         });
     }
