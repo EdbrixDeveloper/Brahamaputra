@@ -33,7 +33,7 @@
                 app:defTextSize="16sp"
                 app:definitionText="% COMPLETE"
                 app:marginBtwText="15dp"
-                app:percentage="275"
+                app:percentage="360"
                 app:progressColor="@color/colorPrimary" />
 
         </LinearLayout>
@@ -68,7 +68,7 @@
                     android:padding="@dimen/app_min_padding">
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_name"
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_openTickets"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     android:padding="@dimen/app_min_padding">
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_name2"
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_allTickets"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -169,7 +169,23 @@
 
     </LinearLayout>
 
+    <ExpandableListView
+        android:id="@+id/pmSiteList_listView_siteList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout_Status"
+        tools:listheader="@layout/item_site_pm_ticket_list_seprator"
+        tools:listitem="@layout/item_site_pm_ticket_list" />
 
+    <TextView
+        android:id="@+id/txtNoTicketFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:text="No ticket found."/>
+
+    <!--Temporory Design-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -325,4 +341,5 @@
 
 
     </LinearLayout>
+    <!--Temporory Design-->
 </RelativeLayout>

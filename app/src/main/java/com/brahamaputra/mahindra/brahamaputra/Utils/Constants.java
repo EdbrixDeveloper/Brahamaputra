@@ -100,4 +100,6 @@ public class Constants {
 
     public final static String GetSiteElectrificationCompletionList = BASE_URL.concat("electricbill/getsiteelectrificationcompletionlist");  // get EB Site Electrification Ticket List
     public final static String SubmitebSiteElectrificationTicket = BASE_URL.concat("electricbill/submitelectrificationdata");// Submit EB Site Electrification Ticket //used in EbSiteElectrificationTransactionActivity
+    public final static String sitePmTicketList = BASE_URL.concat("sitepm/getsitepmtransactionticketlist");
+
 }
