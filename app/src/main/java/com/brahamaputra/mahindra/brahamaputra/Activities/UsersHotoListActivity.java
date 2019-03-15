@@ -131,7 +131,7 @@ public class UsersHotoListActivity extends BaseActivity {
                                 if(hotoTickStatus.equals("Open")){
 
                                     //alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
-                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onTwoButtonClickListner() {
+                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                                         @Override
                                         public void onPositiveClick() {
                                             checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,

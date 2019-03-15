@@ -54,11 +54,11 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
     public GPSTracker gpsTracker;
 
     /////
-    public static final int RESULT_HOTO_SUBMIT = 257;
+    public static final int RESULT_PM_SITE_SUBMIT = 257;
     private TextView txtNoTicketFound;
 
 
-    private LinearLayout mLinearLayoutStatus;
+    /*private LinearLayout mLinearLayoutStatus;
     private ProgressWheel mWheelprogress;
     private LinearLayout mLinearLayoutContainer1;
     private LinearLayout mPriventiveMaintenanceSiteLinearLayoutTicket1;
@@ -79,9 +79,8 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
     private TextView mTextViewSiteID1;
     private TextView mTextViewSiteName1;
     private TextView mTextViewSiteSSA1;
-    private TextView mTextViewSiteAddress1;
+    private TextView mTextViewSiteAddress1;*/
 
-    public static final int RESULT_PM_SITE_SUBMIT = 257;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,10 +108,10 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             Log.e(PreventiveMaintenanceDashboard.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         }
 
-        //prepareListData();
+        prepareListData();
 
 
-        /*pmSiteList_listView_siteList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        pmSiteList_listView_siteList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 pmSiteList_listView_siteList.expandGroup(groupPosition);
@@ -167,7 +166,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
                                 if (sitePMTickStatus.equals("Open")) {
 
-                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onTwoButtonClickListner() {
+                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                                         @Override
                                         public void onPositiveClick() {
                                             checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
@@ -204,7 +203,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
                 return false;
             }
-        });*/
+        });
 
         ///////////////////////////
 
@@ -214,7 +213,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         //sessionManager = new SessionManager(PreventiveMaintenanceDashboard.this);
         //setListner();
     }
-
 
     private void prepareListData() {
         try {
@@ -240,7 +238,15 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                     if (sitePMTicketsList.getSitePMTicketSummary() != null) {
                                         acPreventiveMaintenanceSection_textView_openTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getOpenTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().toString());
                                         acPreventiveMaintenanceSection_textView_allTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getTotalTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().toString());
-                                        wheelprogress.setPercentage(sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage());
+
+                                        int per=0;
+                                        double p=0.0;
+                                        per=sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage();
+                                        p=(3.6)*Double.valueOf(per);
+                                        per=(int)Math.round(p);
+
+                                        wheelprogress.setPercentage(per);
+                                        //wheelprogress.setPercentage(sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage());
                                         wheelprogress.setStepCountText(sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString() == null ? "0" : sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString());
                                     }
                                     if (sitePMTicketsList.getSitePMTicketsDates() != null && sitePMTicketsList.getSitePMTicketsDates().size() > 0) {
@@ -294,7 +300,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 finish();
                 return true;
             case R.id.menuRefresh:
-                //prepareListData();
+                prepareListData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -304,8 +310,8 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_HOTO_SUBMIT && resultCode == RESULT_OK) {
-            //prepareListData();
+        if (requestCode == RESULT_PM_SITE_SUBMIT && resultCode == RESULT_OK) {
+            prepareListData();
         }
     }
 
@@ -359,7 +365,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
                 sessionManager.updateSessionUserTicketId(sitePMTicketId);
                 sessionManager.updateSessionUserTicketName(sitePMTicketNo);
-                startActivityForResult(intent, RESULT_HOTO_SUBMIT);
+                startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
 
                 //}else{
                 //    showToast("Sorry could not detect location");
@@ -375,166 +381,12 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                         intent.putExtra("ticketNO", sitePMTicketNo);
                         sessionManager.updateSessionUserTicketId(sitePMTicketId);
                         sessionManager.updateSessionUserTicketName(sitePMTicketNo);
-                        startActivityForResult(intent, RESULT_HOTO_SUBMIT);
+                        startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
                     }
                 }).show();
             }
         }
     }
 
-
-    private void assignViews() {
-        mLinearLayoutStatus = (LinearLayout) findViewById(R.id.linearLayout_Status);
-        mWheelprogress = (ProgressWheel) findViewById(R.id.wheelprogress);
-        mLinearLayoutContainer1 = (LinearLayout) findViewById(R.id.linearLayout_container1);
-        mAcPreventiveMaintenanceSectionTextViewName = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_name);
-        mAcPreventiveMaintenanceSectionTextViewNo = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_no);
-        //mAcPreventiveMaintenanceSectionImageViewStatus = (ImageView) findViewById(R.id.acPreventiveMaintenanceSection_imageView_status);
-        mLinearLayoutContainer2 = (LinearLayout) findViewById(R.id.linearLayout_container2);
-        mPriventiveMaintenanceSiteLinearLayoutTicket1 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket1);
-        mPriventiveMaintenanceSiteLinearLayoutTicket2 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket2);
-        mAcPreventiveMaintenanceSectionTextViewName2 = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_name2);
-        mAcPreventiveMaintenanceSectionTextViewNo2 = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_no2);
-        //mAcPreventiveMaintenanceSectionImageViewStatus2 = (ImageView) findViewById(R.id.acPreventiveMaintenanceSection_imageView_status2);
-        mTextViewHotoName = (TextView) findViewById(R.id.textView_HotoName);
-        mTextViewSiteID = (TextView) findViewById(R.id.textView_SiteID);
-        mTextViewSiteName = (TextView) findViewById(R.id.textView_SiteName);
-        mTextViewSiteSSA = (TextView) findViewById(R.id.textView_SiteSSA);
-        mTextViewSiteAddress = (TextView) findViewById(R.id.textView_SiteAddress);
-        mTextViewHotoName1 = (TextView) findViewById(R.id.textView_HotoName1);
-        mTextViewSiteID1 = (TextView) findViewById(R.id.textView_SiteID1);
-        mTextViewSiteName1 = (TextView) findViewById(R.id.textView_SiteName1);
-        mTextViewSiteSSA1 = (TextView) findViewById(R.id.textView_SiteSSA1);
-        mTextViewSiteAddress1 = (TextView) findViewById(R.id.textView_SiteAddress1);
-
-        gpsTracker = new GPSTracker(PreventiveMaintenanceDashboard.this);
-        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceDashboard.this);
-    }
-
-    private void setListner() {
-
-        mPriventiveMaintenanceSiteLinearLayoutTicket1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                alertDialogManager.Dialog("Information", "Do you want to proceed doing SITE PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        openTicket1();
-                    }
-
-                    @Override
-                    public void onNegativeClick() {
-
-                    }
-                }).show();
-
-                /*alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        openTicket1();
-                    }
-                }).show();*/
-
-            }
-        });
-
-        mPriventiveMaintenanceSiteLinearLayoutTicket2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                alertDialogManager.Dialog("Information", "Do you want to proceed doing SITE PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        openTicket2();
-                    }
-
-                    @Override
-                    public void onNegativeClick() {
-
-                    }
-                }).show();
-
-                /*alertDialogManager.Dialog("Information", "DO YOU WANT TO PROCEED DOING SITE PM?", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        openTicket2();
-                    }
-                }).show();*/
-            }
-        });
-    }
-
-    private void openTicket2() {
-        if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
-            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
-                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
-                intent.putExtra("ticketNO", "SIKL19019999");
-                sessionManager.updateSessionUserTicketId("SIKL19019999");
-                sessionManager.updateSessionUserTicketName("SIKL19019999");
-                startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
-            } else {
-                //showToast("Could not detecting location. Please try again later.");
-                alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        if (gpsTracker.canGetLocation()) {
-                            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
-                            Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                        }
-                    }
-                }).show();
-            }
-        } else {
-            alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                @Override
-                public void onPositiveClick() {
-                    finish();
-                }
-            }).show();
-        }
-    }
-
-    private void openTicket1() {
-        if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
-            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
-                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
-                intent.putExtra("ticketNO", "SIKL19012222");
-                sessionManager.updateSessionUserTicketId("SIKL19012222");
-                sessionManager.updateSessionUserTicketName("SIKL19012222");
-                startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
-            } else {
-                alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        if (gpsTracker.canGetLocation()) {
-                            Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                        }
-                    }
-                }).show();
-            }
-        } else {
-            alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                @Override
-                public void onPositiveClick() {
-                    finish();
-                }
-            }).show();
-        }
-    }
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
 
 }
