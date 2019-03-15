@@ -1,5 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
+
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -17,6 +19,10 @@ public class HotoTicketList {
     @SerializedName("HotoTicketsDates")
     @Expose
     private List<HotoTicketsDate> hotoTicketsDates = null;
+
+    @SerializedName("HotoTicketSummary")
+    @Expose
+    private HotoTicketSummary hotoTicketSummary;
 
     public Integer getSuccess() {
         return success;
@@ -60,6 +66,14 @@ public class HotoTicketList {
 
     public void setHotoTicketsDates(List<HotoTicketsDate> hotoTicketsDates) {
         this.hotoTicketsDates = hotoTicketsDates;
+    }
+
+    public HotoTicketSummary getHotoTicketSummary() {
+        return hotoTicketSummary;
+    }
+
+    public void setHotoTicketSummary(HotoTicketSummary hotoTicketSummary) {
+        this.hotoTicketSummary = hotoTicketSummary;
     }
 
 }

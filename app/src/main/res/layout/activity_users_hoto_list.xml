@@ -28,14 +28,14 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 app:barWidth="09dp"
-                app:countText="23"
+                app:countText="0"
                 app:countTextColor="@android:color/black"
                 app:countTextSize="45sp"
                 app:defTextColor="@android:color/black"
                 app:defTextSize="16sp"
                 app:definitionText="% COMPLETE"
                 app:marginBtwText="15dp"
-                app:percentage="200"
+                app:percentage="0"
                 app:progressColor="@color/colorPrimary" />
 
         </LinearLayout>
@@ -70,16 +70,16 @@
                     android:padding="@dimen/app_min_padding">
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_name"
+                        android:id="@+id/userHotoList_textView_openTickets"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3"
+                        android:text="0"
                         android:textColor="@color/colorMainText"
                         android:textSize="30sp" />
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_no"
+                        android:id="@+id/userHotoList_textView_no"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -131,16 +131,16 @@
                     android:padding="@dimen/app_min_padding">
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_name2"
+                        android:id="@+id/userHotoList_textView_allTickets"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="21"
+                        android:text="0"
                         android:textColor="@color/colorMainText"
                         android:textSize="30sp" />
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_no2"
+                        android:id="@+id/userHotoList_textView_no2"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

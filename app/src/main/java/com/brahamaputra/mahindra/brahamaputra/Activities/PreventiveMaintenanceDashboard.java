@@ -97,7 +97,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         wheelprogress = (ProgressWheel) findViewById(R.id.wheelprogress);
         acPreventiveMaintenanceSection_textView_openTickets = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_openTickets);
         acPreventiveMaintenanceSection_textView_allTickets = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_allTickets);
-        wheelprogress.setPercentage(15);
         pmSiteList_listView_siteList = (ExpandableListView) findViewById(R.id.pmSiteList_listView_siteList);
         txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
         txtNoTicketFound.setVisibility(View.GONE);

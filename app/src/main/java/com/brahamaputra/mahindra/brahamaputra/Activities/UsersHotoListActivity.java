@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.app.progresviews.ProgressWheel;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
@@ -39,6 +40,11 @@ public class UsersHotoListActivity extends BaseActivity {
 
     //import com.brahamaputra.mahindra.brahamaputra.Adapters.UserHotoListAdapter;
     //private UserHotoListAdapter mAdapter;
+
+    private ProgressWheel wheelprogress;
+    private TextView userHotoList_textView_openTickets;
+    private TextView userHotoList_textView_allTickets;
+
     private UserHotoExpListAdapter userHotoExpListAdapter;
     public ExpandableListView userHotoList_listView_hotoList;
     private AlertDialogManager alertDialogManager;
@@ -60,6 +66,11 @@ public class UsersHotoListActivity extends BaseActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        wheelprogress = (ProgressWheel) findViewById(R.id.wheelprogress);
+        userHotoList_textView_openTickets = (TextView) findViewById(R.id.userHotoList_textView_openTickets);
+        userHotoList_textView_allTickets = (TextView) findViewById(R.id.userHotoList_textView_allTickets);
+
         userHotoList_listView_hotoList = (ExpandableListView) findViewById(R.id.userHotoList_listView_hotoList);
         txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
         txtNoTicketFound.setVisibility(View.GONE);
@@ -222,6 +233,20 @@ public class UsersHotoListActivity extends BaseActivity {
                             } else {
                                 if (response.getSuccess() == 1) {
                                     hotoTicketList = response;
+                                    if (hotoTicketList.getHotoTicketSummary() != null) {
+                                        userHotoList_textView_openTickets.setText(hotoTicketList.getHotoTicketSummary().getOpenTickets() == null || hotoTicketList.getHotoTicketSummary().getOpenTickets().isEmpty() ? "0" : hotoTicketList.getHotoTicketSummary().getOpenTickets().toString());
+                                        userHotoList_textView_allTickets.setText(hotoTicketList.getHotoTicketSummary().getTotalTickets() == null || hotoTicketList.getHotoTicketSummary().getTotalTickets().isEmpty() ? "0" : hotoTicketList.getHotoTicketSummary().getTotalTickets().toString());
+
+                                        int per=0;
+                                        double p=0.0;
+                                        per=hotoTicketList.getHotoTicketSummary().getPercentage() == null ? 0 : hotoTicketList.getHotoTicketSummary().getPercentage();
+                                        p=(3.6)*Double.valueOf(per);
+                                        per=(int)Math.round(p);
+
+                                        wheelprogress.setPercentage(per);
+                                        //wheelprogress.setPercentage(hotoTicketList.getHotoTicketSummary().getPercentage() == null ? 0 : hotoTicketList.getHotoTicketSummary().getPercentage());
+                                        wheelprogress.setStepCountText(hotoTicketList.getHotoTicketSummary().getPercentage().toString() == null ? "0" : hotoTicketList.getHotoTicketSummary().getPercentage().toString());
+                                    }
                                     if (hotoTicketList.getHotoTicketsDates() != null && hotoTicketList.getHotoTicketsDates().size() > 0) {
                                         txtNoTicketFound.setVisibility(View.GONE);
                                         userHotoList_listView_hotoList.setVisibility(View.VISIBLE);
