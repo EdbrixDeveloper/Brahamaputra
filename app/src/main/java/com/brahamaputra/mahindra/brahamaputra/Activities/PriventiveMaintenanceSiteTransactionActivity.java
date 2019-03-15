@@ -1,7 +1,10 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,14 +13,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.JsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
@@ -61,14 +74,14 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_priventive_maintenance_site_transaction);
         assignViews();
-        this.setTitle("Priventive Maintenance Site Transaction");
+        this.setTitle("Site PM Transaction");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         checkInBatteryData = "" + GlobalMethods.getBattery_percentage(PriventiveMaintenanceSiteTransactionActivity.this);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("ticketNO");
-        this.setTitle(id);
+        ticketId = intent.getStringExtra("ticketNO");
+        this.setTitle(ticketId);
         checkInLat = intent.getStringExtra("latitude");
         checkInLong = intent.getStringExtra("longitude");
 
@@ -91,6 +104,8 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
             }
         });
+
+        checkNetworkConnection();
 
     }
 
@@ -241,6 +256,99 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
+    }
+
+    public void checkNetworkConnection() {
+        if (!isNetworkConnected()) {
+            mPriventiveMaintenanceSiteTransEditTextCustomerName.setHint("Offline");
+            mPriventiveMaintenanceSiteTransEditTextCircle.setHint("Offline");
+            mPriventiveMaintenanceSiteTransEditTextState.setHint("Offline");
+            mPriventiveMaintenanceSiteTransEditTextSsa.setHint("Offline");
+            mPriventiveMaintenanceSiteTransEditTextNameOfSite.setHint("Offline");
+            mPriventiveMaintenanceSiteTransEditTextSiteID.setHint("Offline");
+            mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.setHint("Offline");
+            // mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setHint("Offline");
+
+        } else {
+            Intent intent = getIntent();
+
+            mPriventiveMaintenanceSiteTransEditTextCustomerName.setText(intent.getStringExtra("customerName"));
+            mPriventiveMaintenanceSiteTransEditTextState.setText(intent.getStringExtra("stateName"));
+            mPriventiveMaintenanceSiteTransEditTextCircle.setText(intent.getStringExtra("circleName"));
+            mPriventiveMaintenanceSiteTransEditTextSsa.setText(intent.getStringExtra("ssaName"));
+            mPriventiveMaintenanceSiteTransEditTextNameOfSite.setText(intent.getStringExtra("siteName"));
+            mPriventiveMaintenanceSiteTransEditTextSiteID.setText(intent.getStringExtra("siteId"));
+            mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.setText(intent.getStringExtra("sitePmScheduledDate"));
+            //mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setText(intent.getStringExtra("sitepmexecutiondate"));
+
+            /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                checkInLat = String.valueOf(gpsTracker.getLatitude());
+                checkInLong = String.valueOf(gpsTracker.getLongitude());*/
+
+            submitCheckIn(checkInLong, checkInLat, checkInBatteryData);
+            /*} else {
+                showToast("Could not detecting location.");
+            }*/
+        }
+    }
+
+    private void submitCheckIn(String longitude, String latitude, String batteryLevel) {
+        showBusyProgress();
+        try {
+            JSONObject jo = new JSONObject();
+            try {
+                jo.put("UserId", sessionManager.getSessionUserId());
+                jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+                jo.put("Longitude", longitude);
+                jo.put("Latitude", latitude);
+                jo.put("SitePMTicketId", ticketId);
+                /*jo.put("BatteryLevel", batteryLevel);*/
+            } catch (JSONException e) {
+                Log.e(LoginActivity.class.getName(), e.getMessage().toString());
+                return;
+            }
+
+            JsonRequest hototticketstatusclockin = new JsonRequest(Request.Method.POST, Constants.updatedSitePMCheckIn, jo,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(@NonNull JSONObject response) {
+                            hideBusyProgress();
+                            try {
+                                if (response != null) {
+                                    if (response.has("Success")) {
+                                        int success = response.getInt("Success");
+                                        if (success == 1) {
+                                            showToast("Checked In");
+                                        } else {
+                                            showToast("Problem while check-in");
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                showToast("Exception :" + e.getMessage());
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    hideBusyProgress();
+                    showToast(SettingsMy.getErrorMessage(error));
+                }
+            });
+            hototticketstatusclockin.setRetryPolicy(Application.getDefaultRetryPolice());
+            hototticketstatusclockin.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(hototticketstatusclockin, "hototticketstatusclockin");
+
+        } catch (Exception e) {
+            hideBusyProgress();
+            e.printStackTrace();
+        }
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
     @Override

@@ -102,4 +102,6 @@ public class Constants {
     public final static String SubmitebSiteElectrificationTicket = BASE_URL.concat("electricbill/submitelectrificationdata");// Submit EB Site Electrification Ticket //used in EbSiteElectrificationTransactionActivity
     public final static String sitePmTicketList = BASE_URL.concat("sitepm/getsitepmtransactionticketlist");
 
+    public final static String updatedSitePMCheckIn = BASE_URL.concat("sitepm/sitepmcheckin");//update site PM check in
+
 }
