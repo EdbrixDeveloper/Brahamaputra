@@ -14,16 +14,16 @@ public class RectifierModuleCheckPointData implements Serializable
     @SerializedName("rectifierCleaning")
     @Expose
     private String rectifierCleaning;
-    @SerializedName("base64RectifierPhotoBeforeCleaning")
+    @SerializedName("base64StringRectifierPhotoBeforeCleaning")
     @Expose
-    private String base64RectifierPhotoBeforeCleaning;
-    @SerializedName("base64RectifierPhotoAfterCleaning")
+    private String base64StringRectifierPhotoBeforeCleaning;
+    @SerializedName("base64StringRectifierPhotoAfterCleaning")
     @Expose
-    private String base64RectifierPhotoAfterCleaning;
+    private String base64StringRectifierPhotoAfterCleaning;
 
     public RectifierModuleCheckPointData(String base64RectifierModuleDetailsQrCodeScan, String base64RectifierPhotoBeforeCleaning, String base64RectifierPhotoAfterCleaning, String rectifierCleaning) {
-        this.base64RectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
-        this.base64RectifierPhotoBeforeCleaning = base64RectifierPhotoBeforeCleaning;
+        this.base64StringRectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
+        this.base64StringRectifierPhotoBeforeCleaning = base64RectifierPhotoBeforeCleaning;
         this.detailsOfRectifierModuleQrCodeScan = base64RectifierModuleDetailsQrCodeScan;
         this.rectifierCleaning = rectifierCleaning;
         /*this.registerFault = registerFault;
@@ -47,19 +47,19 @@ public class RectifierModuleCheckPointData implements Serializable
     }
 
     public String getBase64RectifierPhotoBeforeCleaning() {
-        return base64RectifierPhotoBeforeCleaning;
+        return base64StringRectifierPhotoBeforeCleaning;
     }
 
     public void setBase64RectifierPhotoBeforeCleaning(String base64RectifierPhotoBeforeCleaning) {
-        this.base64RectifierPhotoBeforeCleaning = base64RectifierPhotoBeforeCleaning;
+        this.base64StringRectifierPhotoBeforeCleaning = base64RectifierPhotoBeforeCleaning;
     }
 
     public String getBase64RectifierPhotoAfterCleaning() {
-        return base64RectifierPhotoAfterCleaning;
+        return base64StringRectifierPhotoAfterCleaning;
     }
 
     public void setBase64RectifierPhotoAfterCleaning(String base64RectifierPhotoAfterCleaning) {
-        this.base64RectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
+        this.base64StringRectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
     }
 
 

@@ -7,9 +7,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class DgBatteryCheckPointsParentData implements Serializable {
 
-    @SerializedName("noOfDgBatteryavailableAtSite")
+    @SerializedName("noOfDgBatteryAvailableAtSite")
     @Expose
-    private String noOfDgBatteryavailableAtSite;
+    private String noOfDgBatteryAvailableAtSite;
     @SerializedName("registerFault")
     @Expose
     private String registerFault;
@@ -29,7 +29,7 @@ public class DgBatteryCheckPointsParentData implements Serializable {
     private int isSubmited = 0;
 
     public DgBatteryCheckPointsParentData() {
-        this.noOfDgBatteryavailableAtSite = "";
+        this.noOfDgBatteryAvailableAtSite = "";
         this.registerFault = "";
         this.typeOfFault = "";
         this.base64StringUploadPhotoOfRegisterFault = "";
@@ -38,12 +38,12 @@ public class DgBatteryCheckPointsParentData implements Serializable {
     }
 
     public DgBatteryCheckPointsParentData(String noOfDgBatteryavailableAtSite, String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault, List<DgBatteryCheckPointsData> dgBatteryCheckPointsData) {
-        this.noOfDgBatteryavailableAtSite = noOfDgBatteryavailableAtSite;
+        this.noOfDgBatteryAvailableAtSite = noOfDgBatteryavailableAtSite;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
         this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
         this.dgBatteryCheckPointsData = dgBatteryCheckPointsData;
-        if (!this.noOfDgBatteryavailableAtSite.isEmpty()) {
+        if (!this.noOfDgBatteryAvailableAtSite.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
@@ -51,11 +51,11 @@ public class DgBatteryCheckPointsParentData implements Serializable {
     }
 
     public String getNoOfDgBatteryavailableAtSite() {
-        return noOfDgBatteryavailableAtSite;
+        return noOfDgBatteryAvailableAtSite;
     }
 
     public void setNoOfDgBatteryavailableAtSite(String noOfDgBatteryavailableAtSite) {
-        this.noOfDgBatteryavailableAtSite = noOfDgBatteryavailableAtSite;
+        this.noOfDgBatteryAvailableAtSite = noOfDgBatteryavailableAtSite;
     }
 
     public List<DgBatteryCheckPointsData> getDgBatteryCheckPointsData() {

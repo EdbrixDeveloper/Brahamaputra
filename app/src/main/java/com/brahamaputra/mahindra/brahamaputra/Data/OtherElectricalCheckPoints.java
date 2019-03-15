@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class OtherElectricalCheckPoints implements Serializable
 {
-    @SerializedName("dcEnergyMeterstatus")
+    @SerializedName("dcEnergyMeterStatus")
     @Expose
-    private String dcEnergyMeterstatus;
+    private String dcEnergyMeterStatus;
     @SerializedName("aviationLamp")
     @Expose
     private String aviationLamp;
@@ -24,7 +24,7 @@ public class OtherElectricalCheckPoints implements Serializable
 
     public OtherElectricalCheckPoints()
     {
-        this.dcEnergyMeterstatus = "";
+        this.dcEnergyMeterStatus = "";
         this.aviationLamp = "";
         this.lightsInsideTheShelter = "";
         this.lightsInSitePremisesBulkhead = "";
@@ -33,12 +33,12 @@ public class OtherElectricalCheckPoints implements Serializable
 
     public OtherElectricalCheckPoints(String dcEnergyMeterstatus,String aviationLamp,String lightsInsideTheShelter,String lightsInSitePremisesBulkhead)
     {
-        this.dcEnergyMeterstatus = dcEnergyMeterstatus;
+        this.dcEnergyMeterStatus = dcEnergyMeterstatus;
         this.aviationLamp = aviationLamp;
         this.lightsInsideTheShelter = lightsInsideTheShelter;
         this.lightsInSitePremisesBulkhead = lightsInSitePremisesBulkhead;
 
-         if (!this.dcEnergyMeterstatus.isEmpty() && !this.aviationLamp.isEmpty() && !this.lightsInsideTheShelter.isEmpty() && !this.lightsInSitePremisesBulkhead.isEmpty()) {
+         if (!this.dcEnergyMeterStatus.isEmpty() && !this.aviationLamp.isEmpty() && !this.lightsInsideTheShelter.isEmpty() && !this.lightsInSitePremisesBulkhead.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
@@ -46,11 +46,11 @@ public class OtherElectricalCheckPoints implements Serializable
     }
 
     public String getDcEnergyMeterstatus() {
-        return dcEnergyMeterstatus;
+        return dcEnergyMeterStatus;
     }
 
     public void setDcEnergyMeterstatus(String dcEnergyMeterstatus) {
-        this.dcEnergyMeterstatus = dcEnergyMeterstatus;
+        this.dcEnergyMeterStatus = dcEnergyMeterstatus;
     }
 
     public String getAviationLamp() {

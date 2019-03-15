@@ -16,7 +16,7 @@ public class PmsAmfPanelCheckPointsData implements Serializable {
     @SerializedName("anyLooseConnectionBypass")
     @Expose
     private String anyLooseConnectionBypass;
-    @SerializedName("PmsAmfPiuEarthingStatus")
+    @SerializedName("pmsAmfPiuEarthingStatus")
     @Expose
     private String pmsAmfPiuEarthingStatus;
 

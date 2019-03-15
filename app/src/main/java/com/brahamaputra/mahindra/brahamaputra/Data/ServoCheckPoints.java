@@ -17,7 +17,7 @@ public class ServoCheckPoints implements Serializable
     @SerializedName("anyBypassInSVS")
     @Expose
     private String anyBypassInSVS;
-    @SerializedName("svsEarthing Status")
+    @SerializedName("svsEarthingStatus")
     @Expose
     private String svsEarthingStatus;
     @SerializedName("registerFault")

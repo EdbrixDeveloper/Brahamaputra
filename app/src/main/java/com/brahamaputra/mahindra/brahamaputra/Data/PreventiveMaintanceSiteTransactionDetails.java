@@ -115,7 +115,10 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         otherElectricalCheckPoints = new OtherElectricalCheckPoints();
     }
 
-    public PreventiveMaintanceSiteTransactionDetails(String userId, String accessToken, String latitude, String longitude, String siteID, String customer, String circle, String state, String ssa, String nameOfSite, String sheduledDateOfPm, String actualPmExecutionDate) {
+    public PreventiveMaintanceSiteTransactionDetails(String userId, String accessToken, String ticketId, String ticketName, String latitude, String longitude, String siteID, String customer, String circle, String state, String ssa, String nameOfSite, String sheduledDateOfPm, String actualPmExecutionDate) {
+        this.userId = userId;
+        this.accessToken = accessToken;
+        //this.la
     }
 
     public String getAccessToken() {

@@ -68,6 +68,8 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
     private AlertDialogManager alertDialogManager;
     private PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
 
+    private String sitePMTicketStatus;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("ticketNO");
+        sitePMTicketStatus = intent.getStringExtra("status");
         this.setTitle(id);
 
         //ticketId = intent.getStringExtra("ticketNO");
@@ -109,7 +112,6 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
             }
         });
-
         checkNetworkConnection();
 
     }
@@ -153,7 +155,9 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                             //showToast(""+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
                             if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.310686) {///// ( 0.310686 MILE == 500 Meter )
                                 Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
-                                //showToast("User in Site Area");
+
+                                checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                                checkOutLong = String.valueOf(gpsTracker.getLongitude());
                                 showSettingsAlert();
                             } else {
                                 Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
@@ -227,7 +231,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
-                //submitDetails();
+                submitDetails();
             }
 
             @Override
@@ -239,15 +243,15 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
     private void submitDetails() {
         try {
-            /*showBusyProgress();
+
+            checkOutBatteryData = "" + GlobalMethods.getBattery_percentage(PriventiveMaintenanceSiteTransactionActivity.this);
             String userId = sessionManager.getSessionUserId();
             String accessToken = sessionManager.getSessionDeviceToken();
-          *//*  String ticketId = "";
-            String ticketNo = "";*//*
             String latitude = String.valueOf(gpsTracker.getLatitude());
             String longitude = String.valueOf(gpsTracker.getLongitude());
 
-            String siteID = String.valueOf(site_id);
+
+           // String siteID = String.valueOf(site_id);
             String customer  = mPriventiveMaintenanceSiteTransEditTextCustomerName.getText().toString().trim();
             String circle = mPriventiveMaintenanceSiteTransEditTextCircle.getText().toString().trim();
             String state = mPriventiveMaintenanceSiteTransEditTextState.getText().toString().trim();
@@ -255,9 +259,9 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
             String nameOfSite = mPriventiveMaintenanceSiteTransEditTextNameOfSite.getText().toString().trim();
             String sheduledDateOfPm = mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.getText().toString().trim();
             String actualPmExecutionDate = mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.getText().toString().trim();
-
-            preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId,accessToken,latitude,longitude,siteID,customer,circle,state
-            ,ssa,nameOfSite,sheduledDateOfPm,actualPmExecutionDate);*/
+/*
+          //  preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId,accessToken,ticketId,ticketName,checkInLat,
+                    checkInLong,checkInBatteryData,checkOutLat,checkOutLong,checkOutBatteryData,siteID,customer,circle,state,ssa,nameOfSite,sheduledDateOfPm,actualPmExecutionDate);*/
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
@@ -272,7 +276,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
             mPriventiveMaintenanceSiteTransEditTextNameOfSite.setHint("Offline");
             mPriventiveMaintenanceSiteTransEditTextSiteID.setHint("Offline");
             mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.setHint("Offline");
-            // mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setHint("Offline");
+            mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setHint("Offline");
 
         } else {
             Intent intent = getIntent();
@@ -284,13 +288,14 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
             mPriventiveMaintenanceSiteTransEditTextNameOfSite.setText(intent.getStringExtra("siteName"));
             mPriventiveMaintenanceSiteTransEditTextSiteID.setText(intent.getStringExtra("siteId"));
             mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.setText(intent.getStringExtra("sitePmScheduledDate"));
-            //mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setText(intent.getStringExtra("sitepmexecutiondate"));
+            mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setText(intent.getStringExtra("sitePmScheduledDate"));
 
             /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                 checkInLat = String.valueOf(gpsTracker.getLatitude());
                 checkInLong = String.valueOf(gpsTracker.getLongitude());*/
-
-            submitCheckIn(checkInLong, checkInLat, checkInBatteryData);
+            if (sitePMTicketStatus.equals("Open") || sitePMTicketStatus.equals("Reassigned")) {
+                submitCheckIn(checkInLong, checkInLat, checkInBatteryData);
+            }
             /*} else {
                 showToast("Could not detecting location.");
             }*/
@@ -323,7 +328,8 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                                     if (response.has("Success")) {
                                         int success = response.getInt("Success");
                                         if (success == 1) {
-                                            showToast("Checked In");
+                                            //showToast("Checked In");
+                                            mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setText(response.getString("SitePMExecutionDate")/*.toString().substring(0, 10)*/);
                                         } else {
                                             showToast("Problem while check-in");
                                         }

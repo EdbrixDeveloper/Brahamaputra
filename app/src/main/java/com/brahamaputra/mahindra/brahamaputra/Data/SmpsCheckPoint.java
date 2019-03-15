@@ -10,21 +10,21 @@ public class SmpsCheckPoint implements Serializable
     @SerializedName("detailsOfSmpsQrCodeScan")
     @Expose
     private String detailsOfSmpsQrCodeScan;
-    @SerializedName("SmpsCondition")
+    @SerializedName("smpsCondition")
     @Expose
     private String smpsCondition;
-    @SerializedName("SmpsControlerStatus")
+    @SerializedName("smpsControlerStatus")
     @Expose
     private String smpsControlerStatus;
-    @SerializedName("SmpsEarthingStatus")
+    @SerializedName("smpsEarthingStatus")
     @Expose
     private String smpsEarthingStatus;
-    @SerializedName("DcLoadCurrentInFloat")
+    @SerializedName("dcLoadCurrentInFloat")
     @Expose
     private String dcLoadCurrentInFloat;
-    @SerializedName("base64DcLoadCurrentPhoto")
+    @SerializedName("base64StringDcLoadCurrentPhoto")
     @Expose
-    private String base64DcLoadCurrentPhoto;
+    private String base64StringDcLoadCurrentPhoto;
     @SerializedName("dcLoadAmpPh")
     @Expose
     private String dcLoadAmpPh;
@@ -70,11 +70,11 @@ public class SmpsCheckPoint implements Serializable
     }
 
     public String getBase64DcLoadCurrentPhoto() {
-        return base64DcLoadCurrentPhoto;
+        return base64StringDcLoadCurrentPhoto;
     }
 
     public void setBase64DcLoadCurrentPhoto(String base64DcLoadCurrentPhoto) {
-        this.base64DcLoadCurrentPhoto = base64DcLoadCurrentPhoto;
+        this.base64StringDcLoadCurrentPhoto = base64DcLoadCurrentPhoto;
     }
 
     public String getDcLoadAmpPh() {
@@ -92,7 +92,7 @@ public class SmpsCheckPoint implements Serializable
         this.smpsControlerStatus = smpsControlerStatus;
         this.smpsEarthingStatus = smpsEarthingStatus;
         this.dcLoadCurrentInFloat = dcLoadCurrentInFloat;
-        this.base64DcLoadCurrentPhoto = base64DcLoadCurrentPhoto;
+        this.base64StringDcLoadCurrentPhoto = base64DcLoadCurrentPhoto;
         this.dcLoadAmpPh = dcLoadAmpPh;
 
     }
@@ -102,7 +102,7 @@ public class SmpsCheckPoint implements Serializable
         this.smpsControlerStatus = "";
         this.smpsEarthingStatus = "";
         this.dcLoadCurrentInFloat = "";
-        this.base64DcLoadCurrentPhoto = "";
+        this.base64StringDcLoadCurrentPhoto = "";
         this.dcLoadAmpPh = "";
     }
 }

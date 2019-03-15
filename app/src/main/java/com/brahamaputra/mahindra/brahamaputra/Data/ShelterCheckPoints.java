@@ -14,9 +14,9 @@ public class ShelterCheckPoints implements Serializable
     @SerializedName("shelterLeakage")
     @Expose
     private String shelterLeakage;
-    @SerializedName("hatchPlateEntrysealed")
+    @SerializedName("hatchPlateEntrySealed")
     @Expose
-    private String hatchPlateEntrysealed;
+    private String hatchPlateEntrySealed;
     @SerializedName("shleterFloorStatus")
     @Expose
     private String shleterFloorStatus;
@@ -40,7 +40,7 @@ public class ShelterCheckPoints implements Serializable
 
     public ShelterCheckPoints(){
         this.shelterCleaning = "";
-        this.hatchPlateEntrysealed = "";
+        this.hatchPlateEntrySealed = "";
         this.shelterLeakage = "";
         this.shleterFloorStatus = "";
         this.shelterEarthingStatus = "";
@@ -52,7 +52,7 @@ public class ShelterCheckPoints implements Serializable
 
     public ShelterCheckPoints(String shelterCleaning, String shelterLeakage, String hatchPlateEntrySealed, String shelterFloorStatus, String shelterEarthingStatus, String resultFault, String typeOfFault,String base64StringUploadPhotoOfRegisterFault) {
         this.shelterCleaning = shelterCleaning;
-        this.hatchPlateEntrysealed = hatchPlateEntrySealed;
+        this.hatchPlateEntrySealed = hatchPlateEntrySealed;
         this.shelterLeakage = shelterLeakage;
         this.shleterFloorStatus = shelterFloorStatus;
         this.shelterEarthingStatus = shelterEarthingStatus;
@@ -60,7 +60,7 @@ public class ShelterCheckPoints implements Serializable
         this.typeOfFault = typeOfFault;
         this.base64StringUploadPhotoOfRegisterFault=base64StringUploadPhotoOfRegisterFault;
 
-         if (!this.shelterCleaning.isEmpty() && !this.hatchPlateEntrysealed.isEmpty() && !this.shelterLeakage.isEmpty()) {
+         if (!this.shelterCleaning.isEmpty() && !this.hatchPlateEntrySealed.isEmpty() && !this.shelterLeakage.isEmpty()) {
             this.isSubmited = 2;
         } else {
             this.isSubmited = 1;
@@ -84,11 +84,11 @@ public class ShelterCheckPoints implements Serializable
     }
 
     public String getHatchPlateEntrysealed() {
-        return hatchPlateEntrysealed;
+        return hatchPlateEntrySealed;
     }
 
     public void setHatchPlateEntrysealed(String hatchPlateEntrysealed) {
-        this.hatchPlateEntrysealed = hatchPlateEntrysealed;
+        this.hatchPlateEntrySealed = hatchPlateEntrysealed;
     }
 
     public String getShleterFloorStatus() {
