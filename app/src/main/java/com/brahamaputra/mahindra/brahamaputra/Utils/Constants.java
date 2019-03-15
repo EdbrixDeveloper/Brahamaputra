@@ -47,6 +47,8 @@ public class Constants {
     public static String ebSiteElectrificationConsumerNumber = "";
     public static String ebSiteElectrificationEbMeterSerialNumber;
 
+
+
     public static String androidDeviceid;
 
     // TODO Change it to your web domain

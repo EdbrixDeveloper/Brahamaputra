@@ -80,14 +80,19 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         checkInBatteryData = "" + GlobalMethods.getBattery_percentage(PriventiveMaintenanceSiteTransactionActivity.this);
 
         Intent intent = getIntent();
-        ticketId = intent.getStringExtra("ticketNO");
-        this.setTitle(ticketId);
+        String id = intent.getStringExtra("ticketNO");
+        this.setTitle(id);
+
+        //ticketId = intent.getStringExtra("ticketNO");
+        //this.setTitle(ticketId);
         checkInLat = intent.getStringExtra("latitude");
         checkInLong = intent.getStringExtra("longitude");
 
         alertDialogManager = new AlertDialogManager(PriventiveMaintenanceSiteTransactionActivity.this);
         sessionManager = new SessionManager(PriventiveMaintenanceSiteTransactionActivity.this);
         userId = sessionManager.getSessionUserId();
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = sessionManager.getSessionUserTicketName();
 
         preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PriventiveMaintenanceSiteTransactionActivity.this, userId, ticketName);

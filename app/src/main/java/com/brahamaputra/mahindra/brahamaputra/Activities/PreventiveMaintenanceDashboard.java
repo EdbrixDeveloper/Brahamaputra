@@ -39,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 
 public class PreventiveMaintenanceDashboard extends BaseActivity {
@@ -158,8 +159,10 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             final String customerName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCustomerName().toString();
                             final String circleName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCircleName().toString();
                             final String ssaName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSSAName().toString();
+                            final String sourceOfPower = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSourceOfPower().toString();
+                            final String sitePmScheduledDate= sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMScheduledDate().toString();
                             hototicket_Selected_SiteType = siteType;
-
+                            hototicket_sourceOfPower=sourceOfPower;
                             String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
                             //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();
 
@@ -170,7 +173,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                         @Override
                                         public void onPositiveClick() {
                                             checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                    stateName, customerName, circleName, ssaName);
+                                                    stateName, customerName, circleName, ssaName,sitePmScheduledDate);
                                         }
 
                                         @Override
@@ -181,7 +184,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
                                 } else {
                                     checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                            stateName, customerName, circleName, ssaName);
+                                            stateName, customerName, circleName, ssaName,sitePmScheduledDate);
                                 }
 
                             }
@@ -193,7 +196,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
                                     //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
-                                    Log.e(PreventiveMaintanceSiteTransactionDetails.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                    Log.e(PriventiveMaintenanceSiteTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
                         }).show();
@@ -319,7 +322,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                     final String sitePMTicketId, String sitePMTicketDate, String siteId,
                                     String siteName, String siteAddress, String status, String siteType, String
                                             stateName,
-                                    String customerName, String circleName, String ssaName) {
+                                    String customerName, String circleName, String ssaName,String sitePmScheduledDate) {
 
         LocationManager lm = (LocationManager) PreventiveMaintenanceDashboard.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
@@ -344,13 +347,14 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             if (Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this)) {
                 //if (gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
 
-                Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PreventiveMaintanceSiteTransactionDetails.class);
+                Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
                 intent.putExtra("Id", sitePMTicketId);
 
                 intent.putExtra("ticketNO", sitePMTicketNo);
 
                 intent.putExtra("sitePMTicketDate", sitePMTicketDate);
+                intent.putExtra("sitePmScheduledDate",sitePmScheduledDate);
                 intent.putExtra("siteId", siteId);
                 intent.putExtra("siteName", siteName);
                 intent.putExtra("siteAddress", siteAddress);
@@ -376,7 +380,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
-                        Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PreventiveMaintanceSiteTransactionDetails.class);
+                        Intent intent = new Intent(PreventiveMaintenanceDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
                         intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceDashboard.this));
                         intent.putExtra("ticketNO", sitePMTicketNo);
                         sessionManager.updateSessionUserTicketId(sitePMTicketId);
