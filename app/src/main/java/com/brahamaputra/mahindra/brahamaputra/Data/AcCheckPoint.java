@@ -23,12 +23,12 @@ public class AcCheckPoint implements Serializable
     @SerializedName("acFilterStatus")
     @Expose
     private String acFilterStatus;
-    @SerializedName("base64TakePhotoOfAcFiltersBeforeCleaning")
+    @SerializedName("base64StringTakePhotoOfAcFiltersBeforeCleaning")
     @Expose
-    private String base64TakePhotoOfAcFiltersBeforeCleaning;
-    @SerializedName("base64TakePhotoOfAcFiltersAfterCleaning")
+    private String base64StringTakePhotoOfAcFiltersBeforeCleaning;
+    @SerializedName("base64StringTakePhotoOfAcFiltersAfterCleaning")
     @Expose
-    private String base64TakePhotoOfAcFiltersAfterCleaning;
+    private String base64StringTakePhotoOfAcFiltersAfterCleaning;
     @SerializedName("cleaningOfCoolingCondensorCoils")
     @Expose
     private String cleaningOfCoolingCondensorCoils;
@@ -38,9 +38,9 @@ public class AcCheckPoint implements Serializable
     @SerializedName("shelterTemperature")
     @Expose
     private String shelterTemperature;
-    @SerializedName("base64TakePhotoOfTemperature")
+    @SerializedName("base64StringTakePhotoOfTemperature")
     @Expose
-    private String base64TakePhotoOfTemperature;
+    private String base64StringTakePhotoOfTemperature;
     @SerializedName("shelterDoorStatus")
     @Expose
     private String shelterDoorStatus;
@@ -51,27 +51,27 @@ public class AcCheckPoint implements Serializable
         this.automationOfAcController = "";
         this.acEarthingStatus = "";
         this.acFilterStatus = "";
-        this.base64TakePhotoOfAcFiltersBeforeCleaning = "";
-        this.base64TakePhotoOfAcFiltersAfterCleaning = "";
+        this.base64StringTakePhotoOfAcFiltersBeforeCleaning = "";
+        this.base64StringTakePhotoOfAcFiltersAfterCleaning = "";
         this.cleaningOfCoolingCondensorCoils = "";
         this.anyAbnormalSoundFromMotor = "";
         this.shelterTemperature = "";
-        this.base64TakePhotoOfTemperature = "";
+        this.base64StringTakePhotoOfTemperature = "";
         this.shelterDoorStatus = "";
 
     }
-    public AcCheckPoint(String detailsOfAcQrCodeScan, String workingConditionOfAc, String automationOfAcController, String acEarthingStatus, String acFilterStatus, String base64TakePhotoOfAcFiltersBeforeCleaning, String base64TakePhotoOfAcFiltersAfterCleaning, String cleaningOfCoolingCondensorCoils, String anyAbnormalSoundFromMotor, String shelterTemperature, String base64TakePhotoOfTemperature, String shelterDoorStatus) {
+    public AcCheckPoint(String detailsOfAcQrCodeScan, String workingConditionOfAc, String automationOfAcController, String acEarthingStatus, String acFilterStatus, String base64StringTakePhotoOfAcFiltersBeforeCleaning, String base64StringTakePhotoOfAcFiltersAfterCleaning, String cleaningOfCoolingCondensorCoils, String anyAbnormalSoundFromMotor, String shelterTemperature, String base64StringTakePhotoOfTemperature, String shelterDoorStatus) {
         this.detailsOfAcQrCodeScan = detailsOfAcQrCodeScan;
         this.workingConditionOfAc = workingConditionOfAc;
         this.automationOfAcController = automationOfAcController;
         this.acEarthingStatus = acEarthingStatus;
         this.acFilterStatus = acFilterStatus;
-        this.base64TakePhotoOfAcFiltersBeforeCleaning = base64TakePhotoOfAcFiltersBeforeCleaning;
-        this.base64TakePhotoOfAcFiltersAfterCleaning = base64TakePhotoOfAcFiltersAfterCleaning;
+        this.base64StringTakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
+        this.base64StringTakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
         this.cleaningOfCoolingCondensorCoils = cleaningOfCoolingCondensorCoils;
         this.anyAbnormalSoundFromMotor = anyAbnormalSoundFromMotor;
         this.shelterTemperature = shelterTemperature;
-        this.base64TakePhotoOfTemperature = base64TakePhotoOfTemperature;
+        this.base64StringTakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
         this.shelterDoorStatus = shelterDoorStatus;
 
     }
@@ -117,19 +117,19 @@ public class AcCheckPoint implements Serializable
     }
 
     public String getBase64TakePhotoOfAcFiltersBeforeCleaning() {
-        return base64TakePhotoOfAcFiltersBeforeCleaning;
+        return base64StringTakePhotoOfAcFiltersBeforeCleaning;
     }
 
-    public void setBase64TakePhotoOfAcFiltersBeforeCleaning(String base64TakePhotoOfAcFiltersBeforeCleaning) {
-        this.base64TakePhotoOfAcFiltersBeforeCleaning = base64TakePhotoOfAcFiltersBeforeCleaning;
+    public void setBase64TakePhotoOfAcFiltersBeforeCleaning(String base64StringTakePhotoOfAcFiltersBeforeCleaning) {
+        this.base64StringTakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
     }
 
     public String getBase64TakePhotoOfAcFiltersAfterCleaning() {
-        return base64TakePhotoOfAcFiltersAfterCleaning;
+        return base64StringTakePhotoOfAcFiltersAfterCleaning;
     }
 
-    public void setBase64TakePhotoOfAcFiltersAfterCleaning(String base64TakePhotoOfAcFiltersAfterCleaning) {
-        this.base64TakePhotoOfAcFiltersAfterCleaning = base64TakePhotoOfAcFiltersAfterCleaning;
+    public void setBase64TakePhotoOfAcFiltersAfterCleaning(String base64StringTakePhotoOfAcFiltersAfterCleaning) {
+        this.base64StringTakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
     }
 
     public String getCleaningOfCoolingCondensorCoils() {
@@ -157,11 +157,11 @@ public class AcCheckPoint implements Serializable
     }
 
     public String getBase64TakePhotoOfTemperature() {
-        return base64TakePhotoOfTemperature;
+        return base64StringTakePhotoOfTemperature;
     }
 
-    public void setBase64TakePhotoOfTemperature(String base64TakePhotoOfTemperature) {
-        this.base64TakePhotoOfTemperature = base64TakePhotoOfTemperature;
+    public void setBase64TakePhotoOfTemperature(String base64StringTakePhotoOfTemperature) {
+        this.base64StringTakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
     }
 
     public String getShelterDoorStatus() {

@@ -40,6 +40,7 @@ import org.json.JSONObject;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePm_siteBoundaryStatus;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 
 public class PreventiveMaintenanceDashboard extends BaseActivity {
@@ -159,9 +160,12 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             final String circleName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCircleName().toString();
                             final String ssaName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSSAName().toString();
                             final String sourceOfPower = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSourceOfPower().toString();
-                            final String sitePmScheduledDate= sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMScheduledDate().toString();
+                            final String sitePmScheduledDate = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMScheduledDate().toString();
+                            final String SiteBoundaryStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteBoundaryStatus().toString();
                             hototicket_Selected_SiteType = siteType;
-                            hototicket_sourceOfPower=sourceOfPower;
+                            hototicket_sourceOfPower = sourceOfPower;
+                            sitePm_siteBoundaryStatus=SiteBoundaryStatus;
+
                             String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
                             //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();
 
@@ -172,7 +176,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                         @Override
                                         public void onPositiveClick() {
                                             checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                    stateName, customerName, circleName, ssaName,sitePmScheduledDate);
+                                                    stateName, customerName, circleName, ssaName, sitePmScheduledDate);
                                         }
 
                                         @Override
@@ -183,7 +187,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
                                 } else {
                                     checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                            stateName, customerName, circleName, ssaName,sitePmScheduledDate);
+                                            stateName, customerName, circleName, ssaName, sitePmScheduledDate);
                                 }
 
                             }
@@ -241,11 +245,11 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                         acPreventiveMaintenanceSection_textView_openTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getOpenTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().toString());
                                         acPreventiveMaintenanceSection_textView_allTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getTotalTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().toString());
 
-                                        int per=0;
-                                        double p=0.0;
-                                        per=sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage();
-                                        p=(3.6)*Double.valueOf(per);
-                                        per=(int)Math.round(p);
+                                        int per = 0;
+                                        double p = 0.0;
+                                        per = sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage();
+                                        p = (3.6) * Double.valueOf(per);
+                                        per = (int) Math.round(p);
 
                                         wheelprogress.setPercentage(per);
                                         //wheelprogress.setPercentage(sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage());
@@ -321,7 +325,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                     final String sitePMTicketId, String sitePMTicketDate, String siteId,
                                     String siteName, String siteAddress, String status, String siteType, String
                                             stateName,
-                                    String customerName, String circleName, String ssaName,String sitePmScheduledDate) {
+                                    String customerName, String circleName, String ssaName, String sitePmScheduledDate) {
 
         LocationManager lm = (LocationManager) PreventiveMaintenanceDashboard.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
@@ -353,7 +357,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 intent.putExtra("ticketNO", sitePMTicketNo);
 
                 intent.putExtra("sitePMTicketDate", sitePMTicketDate);
-                intent.putExtra("sitePmScheduledDate",sitePmScheduledDate);
+                intent.putExtra("sitePmScheduledDate", sitePmScheduledDate);
                 intent.putExtra("siteId", siteId);
                 intent.putExtra("siteName", siteName);
                 intent.putExtra("siteAddress", siteAddress);

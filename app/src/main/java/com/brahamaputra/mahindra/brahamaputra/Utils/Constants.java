@@ -47,7 +47,8 @@ public class Constants {
     public static String ebSiteElectrificationConsumerNumber = "";
     public static String ebSiteElectrificationEbMeterSerialNumber;
 
-
+    /*-----Site PM Stctic Fields-----*/
+    public static String sitePm_siteBoundaryStatus = "";
 
     public static String androidDeviceid;
 

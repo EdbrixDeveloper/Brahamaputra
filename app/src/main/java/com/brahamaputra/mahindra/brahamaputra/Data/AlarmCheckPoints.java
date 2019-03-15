@@ -32,7 +32,7 @@ public class AlarmCheckPoints implements Serializable {
     @SerializedName("alarmConfirmedByNoc")
     @Expose
     private String alarmConfirmedByNoc;
-    @SerializedName("Remarks")
+    @SerializedName("remarks")
     @Expose
     private String remarks;
     @SerializedName("registerFault")

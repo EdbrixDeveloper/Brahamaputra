@@ -10,9 +10,9 @@ import com.google.gson.annotations.SerializedName;
 public class AcCheckPointParentData implements Serializable
 {
 
-    @SerializedName("noOfAcAvailableAtsite")
+    @SerializedName("noOfAcAvailableAtSite")
     @Expose
-    private String noOfAcAvailableAtsite;
+    private String noOfAcAvailableAtSite;
     @SerializedName("acCheckPoints")
     @Expose
     private List<AcCheckPoint> acCheckPoints = null;
@@ -32,11 +32,11 @@ public class AcCheckPointParentData implements Serializable
     private int isSubmited = 0;
 
     public String getNoOfAcAvailableAtsite() {
-        return noOfAcAvailableAtsite;
+        return noOfAcAvailableAtSite;
     }
 
-    public void setNoOfAcAvailableAtsite(String noOfAcAvailableAtsite) {
-        this.noOfAcAvailableAtsite = noOfAcAvailableAtsite;
+    public void setNoOfAcAvailableAtsite(String noOfAcAvailableAtSite) {
+        this.noOfAcAvailableAtSite = noOfAcAvailableAtSite;
     }
 
     public List<AcCheckPoint> getAcCheckPoints() {
@@ -47,13 +47,13 @@ public class AcCheckPointParentData implements Serializable
         this.acCheckPoints = acCheckPoints;
     }
 
-    public AcCheckPointParentData(String noOfAcAvailableAtsite, List<AcCheckPoint> acCheckPoints,String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault) {
-        this.noOfAcAvailableAtsite = noOfAcAvailableAtsite;
+    public AcCheckPointParentData(String noOfAcAvailableAtSite, List<AcCheckPoint> acCheckPoints,String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault) {
+        this.noOfAcAvailableAtSite = noOfAcAvailableAtSite;
         this.acCheckPoints = acCheckPoints;
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
         this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
-        if(!this.noOfAcAvailableAtsite.isEmpty()) {
+        if(!this.noOfAcAvailableAtSite.isEmpty()) {
             isSubmited = 2;
         }else {
             isSubmited = 1;
@@ -61,7 +61,7 @@ public class AcCheckPointParentData implements Serializable
     }
 
     public AcCheckPointParentData() {
-        this.noOfAcAvailableAtsite = "";
+        this.noOfAcAvailableAtSite = "";
         this.registerFault = "";
         this.typeOfFault = "";
         this.acCheckPoints = new ArrayList<>();
