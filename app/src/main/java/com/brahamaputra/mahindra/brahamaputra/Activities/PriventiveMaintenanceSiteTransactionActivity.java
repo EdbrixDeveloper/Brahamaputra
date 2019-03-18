@@ -18,9 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
+import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.Volley.JsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
@@ -28,9 +30,13 @@ import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
@@ -136,7 +142,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
         // show the button when some condition is true
         shareItem.setVisible(false);
-        if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneHotoFormsSubmit()) {
+        if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
             shareItem.setVisible(true);
         }
         return true;
@@ -247,23 +253,84 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
             checkOutBatteryData = "" + GlobalMethods.getBattery_percentage(PriventiveMaintenanceSiteTransactionActivity.this);
             String userId = sessionManager.getSessionUserId();
             String accessToken = sessionManager.getSessionDeviceToken();
-            String latitude = String.valueOf(gpsTracker.getLatitude());
-            String longitude = String.valueOf(gpsTracker.getLongitude());
 
 
-           // String siteID = String.valueOf(site_id);
+
+           /*// String siteID = String.valueOf(site_id);
             String customer  = mPriventiveMaintenanceSiteTransEditTextCustomerName.getText().toString().trim();
             String circle = mPriventiveMaintenanceSiteTransEditTextCircle.getText().toString().trim();
             String state = mPriventiveMaintenanceSiteTransEditTextState.getText().toString().trim();
             String ssa = mPriventiveMaintenanceSiteTransEditTextSsa.getText().toString().trim();
             String nameOfSite = mPriventiveMaintenanceSiteTransEditTextNameOfSite.getText().toString().trim();
             String sheduledDateOfPm = mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.getText().toString().trim();
-            String actualPmExecutionDate = mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.getText().toString().trim();
-/*
-          //  preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId,accessToken,ticketId,ticketName,checkInLat,
+            String actualPmExecutionDate = mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.getText().toString().trim();*/
+            //commented by tiger 18-03-2019
+            /*preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId,accessToken,ticketId,ticketName,checkInLat,
                     checkInLong,checkInBatteryData,checkOutLat,checkOutLong,checkOutBatteryData,siteID,customer,circle,state,ssa,nameOfSite,sheduledDateOfPm,actualPmExecutionDate);*/
+            ////////////////////////
+
+            preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId, accessToken, ticketId, checkInLat,
+                    checkInLong, checkInBatteryData, checkOutLat, checkOutLong, checkOutBatteryData);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);
+
+            offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
+
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
+        }
+    }
+
+    public void submitPMSiteTicket() {
+
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+                showBusyProgress();
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+                Log.e("123", jsonInString);
+                //remaining to add webservice for submit PM site Ticket
+                GsonRequest<UserLoginResponseData>
+                        submitSitePmTicketRequest = new GsonRequest<>(Request.Method.POST, Constants.submitSitePMTicket, jsonInString, UserLoginResponseData.class,
+                        new Response.Listener<UserLoginResponseData>() {
+                            @Override
+                            public void onResponse(@NonNull UserLoginResponseData response) {
+                                hideBusyProgress();
+                                if (response.getError() != null) {
+                                    showToast(response.getError().getErrorMessage());
+                                } else {
+                                    if (response.getSuccess() == 1) {
+                                        showToast("Ticket submitted successfully.");
+                                        sessionManager.updateSessionUserTicketId(null);
+                                        sessionManager.updateSessionUserTicketName(null);
+                                        setResult(RESULT_OK);
+                                        removeOfflineCache();
+                                        finish();
+                                    }
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        hideBusyProgress();
+                        showToast(SettingsMy.getErrorMessage(error));
+                    }
+                });
+
+                submitSitePmTicketRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+                submitSitePmTicketRequest.setShouldCache(false);
+                Application.getInstance().addToRequestQueue(submitSitePmTicketRequest, "submitSitePmTicketRequest");
+            }
+        } catch (Exception e) {
+            hideBusyProgress();
+            e.printStackTrace();
+        }
+    }
+
+    private void removeOfflineCache() {
+        if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+            offlineStorageWrapper.removedOffLineFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
         }
     }
 
@@ -328,7 +395,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                                     if (response.has("Success")) {
                                         int success = response.getInt("Success");
                                         if (success == 1) {
-                                            //showToast("Checked In");
+                                            showToast("Checked In");
                                             mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.setText(response.getString("SitePMExecutionDate")/*.toString().substring(0, 10)*/);
                                         } else {
                                             showToast("Problem while check-in");

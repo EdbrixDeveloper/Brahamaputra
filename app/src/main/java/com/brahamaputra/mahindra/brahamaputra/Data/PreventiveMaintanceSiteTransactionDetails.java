@@ -115,11 +115,18 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         otherElectricalCheckPoints = new OtherElectricalCheckPoints();
     }
 
-    public PreventiveMaintanceSiteTransactionDetails(String userId, String accessToken, String ticketId, String ticketName, String latitude, String longitude, String siteID, String customer, String circle, String state, String ssa, String nameOfSite, String sheduledDateOfPm, String actualPmExecutionDate) {
+    public PreventiveMaintanceSiteTransactionDetails(String userId, String accessToken, String ticketId, String checkInLat, String checkInLong, String checkInBatteryData, String checkOutLat, String checkOutLong, String checkOutBatteryData) {
         this.userId = userId;
         this.accessToken = accessToken;
-        //this.la
+        this.ticketId = ticketId;
+        this.checkInLongitude = checkInLat;
+        this.checkInLongitude = checkInLong;
+        this.checkInBatteryData = checkInBatteryData;
+        this.checkOutLongitude = checkOutLong;
+        this.checkOutLatitude = checkOutLat;
+        this.checkOutBatteryData = checkOutBatteryData;
     }
+
 
     public String getAccessToken() {
         return accessToken;
@@ -337,7 +344,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         this.dgBatteryCheckPointsParentData = dgBatteryCheckPointsParentData;
     }
 
-    public boolean isAtLeastOneHotoFormsSubmit() {
+    public boolean isAtLeastOneSitePmFormsSubmit() {
         if (siteHygenieneGenralSeftyParameter.getSubmited() == 2) {
             return true;
         } else if (acCheckPointParentData.getSubmited() == 2) {

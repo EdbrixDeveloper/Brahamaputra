@@ -429,7 +429,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:hint="Enter Nuetral Voltage"
+                        android:hint="Enter Neutral Voltage"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
                         android:textSize="16sp" />
