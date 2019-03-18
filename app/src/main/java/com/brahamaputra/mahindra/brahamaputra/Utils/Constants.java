@@ -49,7 +49,8 @@ public class Constants {
 
     /*-----Site PM Stctic Fields-----*/
     public static String sitePm_siteBoundaryStatus = "";
-    public static String sitePmNoOfAcAvailableAtSite="";
+    public static String sitePmNoOfAcAvailableAtSite = "";
+    public static String sitePmServoStabilizerWorkingStatus = "";
 
     public static String androidDeviceid;
 
@@ -74,7 +75,6 @@ public class Constants {
     public final static String editprofile = BASE_URL.concat("auth/editprofile");  // editprofile
     public final static String forgotpassword = BASE_URL.concat("auth/forgotpassword");  // forgotpassword
     public final static String updatedevicetoken = BASE_URL.concat("auth/updatedevicetoken"); //updatedevicetoken
-
 
 
     public final static String GetUserSites = BASE_URL.concat("common/getusersites"); //* // getusersites //used in diesel filling activity

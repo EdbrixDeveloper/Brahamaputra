@@ -268,6 +268,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewFireSmokeVal.setText(alarmCheckPoints.getFireSmoke());
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewPowerPlantFailureVal.setText(alarmCheckPoints.getPowerPlantFailure());
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewAlarmConfirmedByNocVal.setText(alarmCheckPoints.getAlarmConfirmedByNoc());
+                        visibilityOfRemarks(alarmCheckPoints.getAlarmConfirmedByNoc());
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRemarksVal.setText(alarmCheckPoints.getRemarks());
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRegisterFaultVal.setText(alarmCheckPoints.getRegisterFault());
                         mPreventiveMaintenanceSiteAlarmCheckPointsTextViewTypeOfFaultVal.setText(alarmCheckPoints.getTypeOfFault());
