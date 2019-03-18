@@ -17,7 +17,10 @@ import com.brahamaputra.mahindra.brahamaputra.Activities.UploadEBPaymentDetailsA
 import com.brahamaputra.mahindra.brahamaputra.Activities.UploadEBReceiptActivity;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbPaymentRequestList;
 import com.brahamaputra.mahindra.brahamaputra.R;
+
 import java.util.ArrayList;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.eb_billing_process_flag;
 
 public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestList>
         implements View.OnClickListener {

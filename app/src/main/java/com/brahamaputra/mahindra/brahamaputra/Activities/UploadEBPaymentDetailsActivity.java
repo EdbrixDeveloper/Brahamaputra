@@ -121,7 +121,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_eb_payment_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("Upload Payment Details");
+        this.setTitle("Upload DD / Cheque");//Upload Payment Details
 
         Intent intent = getIntent();
         request_id = intent.getStringExtra("request_id");

@@ -179,6 +179,10 @@
             android:label="Sections"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Activities.ElectricBillMenuActivity"
+            android:label="Sections"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Activities.ElectricBillProcess"
             android:label="Sections"
             android:screenOrientation="portrait" />

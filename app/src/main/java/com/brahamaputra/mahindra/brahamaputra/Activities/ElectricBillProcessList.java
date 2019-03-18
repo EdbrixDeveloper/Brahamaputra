@@ -31,6 +31,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.eb_billing_process_flag;
+
 public class ElectricBillProcessList extends BaseActivity {
 
 
@@ -56,7 +58,15 @@ public class ElectricBillProcessList extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electric_bill_process_list);
-        this.setTitle("Electricity Billing");
+
+        if (eb_billing_process_flag.equals("0")) {
+            this.setTitle("Bill Request");//Electricity Billing
+        } else if (eb_billing_process_flag.equals("1")) {
+            this.setTitle("Upload DD / Cheque");
+        } else if (eb_billing_process_flag.equals("2")) {
+            this.setTitle("Upload EB Receipt");
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(ElectricBillProcessList.this);
         sessionManager = new SessionManager(ElectricBillProcessList.this);
@@ -138,7 +148,21 @@ public class ElectricBillProcessList extends BaseActivity {
                                         if (ebPaymentRequest.getEbPaymentRequestList().size() < 15) {
                                             loading = false;
                                         }
-                                        ebPaymentRequestList.addAll(ebPaymentRequest.getEbPaymentRequestList());
+
+                                        for (EbPaymentRequestList ebPaymentRequest :
+                                                ebPaymentRequest.getEbPaymentRequestList()) {
+                                            if (ebPaymentRequest.getStatusId().equals("0") && eb_billing_process_flag.equals("0")) {
+                                                ebPaymentRequestList.add(ebPaymentRequest);
+                                            } else if ((ebPaymentRequest.getStatusId().equals("1") || ebPaymentRequest.getStatusId().equals("2")) && eb_billing_process_flag.equals("1")) {
+                                                ebPaymentRequestList.add(ebPaymentRequest);
+                                            } else if ((ebPaymentRequest.getStatusId().equals("3") || ebPaymentRequest.getStatusId().equals("4")) && eb_billing_process_flag.equals("2")) {
+                                                ebPaymentRequestList.add(ebPaymentRequest);
+                                            }
+                                        }
+                                       /* if (ebPaymentRequest.getEbPaymentRequestList().get(0).getStatusId().equals("0") && eb_billing_process_flag.equals("0")) {
+
+                                        }*/
+                                        //ebPaymentRequestList.addAll(ebPaymentRequest.getEbPaymentRequestList());
                                         ebProcessTrasactionAdapter = new EbProcessTrasactionAdapter(ebPaymentRequestList, ElectricBillProcessList.this);
                                         listViewElectricBill.setAdapter(ebProcessTrasactionAdapter);
                                         listViewElectricBill.setSelectionFromTop(currentFirstVisibleItem, 0);
@@ -178,6 +202,14 @@ public class ElectricBillProcessList extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.eb_add_item_menu, menu);
+
+        MenuItem shareItem = menu.findItem(R.id.menuAdd);
+        // show the button when some condition is true
+        shareItem.setVisible(false);
+        if (eb_billing_process_flag.equals("0")) {
+            shareItem.setVisible(true);
+        }
+
         return true;
     }
 

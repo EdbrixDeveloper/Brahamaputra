@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/app_min_margin"
+    android:background="#f0f3f8"
+    android:orientation="vertical"
+    android:weightSum="3"
+    tools:context=".Activities.ElectricBillMenuActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <!--android:layout_marginTop="@dimen/app_min_margin"-->
+        <RelativeLayout
+            android:id="@+id/electricBillMenu_relativeLayout_ebBillRequest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:id="@+id/img_ebBillRequest"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center|top"
+                android:src="@drawable/img_elctricitybilling"
+                android:tint="@color/red" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_ebBillRequest"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/app_min_margin"
+                android:text="Bill Request "
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/electricBillMenu_relativeLayout_ebUploadDdCheque"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:id="@+id/img_ebUploadDdCheque"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center|top"
+                android:src="@drawable/img_elctricitybilling"
+                android:tint="@color/red" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_ebUploadDdCheque"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/app_min_margin"
+                android:text=" Upload DD/Cheque"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_normal_margin"
+        android:layout_marginTop="@dimen/app_min_margin"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/electricBillMenu_relativeLayout_ebUploadReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:layout_weight="1"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:id="@+id/img_ebUploadReceipt"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center|top"
+                android:src="@drawable/img_elctricitybilling"
+                android:tint="@color/red" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_ebUploadReceipt"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/app_min_margin"
+                android:text="Upload EB Receipt "
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/app_min_margin"
+
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

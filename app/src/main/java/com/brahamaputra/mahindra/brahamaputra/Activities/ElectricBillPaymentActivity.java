@@ -39,7 +39,7 @@ public class ElectricBillPaymentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (Conditions.isNetworkConnected(ElectricBillPaymentActivity.this)) {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        startActivity(new Intent(ElectricBillPaymentActivity.this, ElectricBillProcessList.class));
+                        startActivity(new Intent(ElectricBillPaymentActivity.this, ElectricBillMenuActivity.class));//ElectricBillProcessList
                     } else {
                         //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {

@@ -234,7 +234,7 @@ public class ElectricBillProcess extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electric_bill_process);
-        this.setTitle("Electric Bill Process");
+        this.setTitle("Bill Request");//Electric Bill Process
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         gpsTracker = new GPSTracker(ElectricBillProcess.this);
 

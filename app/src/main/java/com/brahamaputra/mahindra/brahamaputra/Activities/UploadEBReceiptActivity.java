@@ -100,7 +100,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_ebreceipt);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle("Upload Receipt");
+        this.setTitle("Upload EB Receipt");//Upload Receipt
 
         Intent intent = getIntent();
         request_id = intent.getStringExtra("request_id");
