@@ -41,6 +41,7 @@ import org.json.JSONObject;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePm_siteBoundaryStatus;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 
 public class PreventiveMaintenanceDashboard extends BaseActivity {
@@ -162,9 +163,11 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             final String sourceOfPower = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSourceOfPower().toString();
                             final String sitePmScheduledDate = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMScheduledDate().toString();
                             final String SiteBoundaryStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteBoundaryStatus().toString();
+                            final String NoOfACprovided = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNoOfACprovided().toString();
                             hototicket_Selected_SiteType = siteType;
                             hototicket_sourceOfPower = sourceOfPower;
-                            sitePm_siteBoundaryStatus=SiteBoundaryStatus;
+                            sitePm_siteBoundaryStatus = SiteBoundaryStatus;
+                            sitePmNoOfAcAvailableAtSite = NoOfACprovided;
 
                             String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
                             //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();

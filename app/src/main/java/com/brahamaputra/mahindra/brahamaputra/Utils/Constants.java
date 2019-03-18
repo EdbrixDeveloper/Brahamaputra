@@ -49,6 +49,7 @@ public class Constants {
 
     /*-----Site PM Stctic Fields-----*/
     public static String sitePm_siteBoundaryStatus = "";
+    public static String sitePmNoOfAcAvailableAtSite="";
 
     public static String androidDeviceid;
 

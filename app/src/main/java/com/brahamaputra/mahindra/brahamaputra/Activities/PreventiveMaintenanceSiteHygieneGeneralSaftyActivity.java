@@ -50,6 +50,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePm_siteBoundaryStatus;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+
 public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseActivity {
 
 
@@ -252,9 +256,9 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity.setVisibility(View.VISIBLE);
         mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity.setVisibility(View.VISIBLE);
 
-        //visibilityOfCompoundWallFencingStatus("");
-        //visibilityOfShelterLockAvailablity("");
-        //visibilityOfDgLockAvailablity("");
+        visibilityOfCompoundWallFencingStatus(sitePm_siteBoundaryStatus);
+        visibilityOfShelterLockAvailablity(hototicket_Selected_SiteType);
+        visibilityOfDgLockAvailablity(hototicket_sourceOfPower);
 
         listOfFaultsTypes = new ArrayList<>();
         alreadySelectedTypeOfFaultList = new ArrayList<>();
@@ -1044,18 +1048,21 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         return false;
     }
 
-    private void visibilityOfCompoundWallFencingStatus(String site) {
+    private void visibilityOfCompoundWallFencingStatus(String SiteBoundaryStatus) {
         //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.setText("");
-        if (site.isEmpty() || site.equals("Outdoor")) {
+
+        if (SiteBoundaryStatus.equals("Not Applicable") || SiteBoundaryStatus.equals("Open Site")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.setText("");
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCompoundWallFencingStatus.setVisibility(View.GONE);
         } else {
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutCompoundWallFencingStatus.setVisibility(View.VISIBLE);
         }
     }
 
-    private void visibilityOfShelterLockAvailablity(String site) {
+    private void visibilityOfShelterLockAvailablity(String Selected_SiteType) {
         //mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewCompoundWallFencingStatusVal.setText("");
-        if (site.isEmpty() || site.equals("Outdoor")) {
+        if (Selected_SiteType.equals("Outdoor")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewShelterLockAvailablityVal.setText("");
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity.setVisibility(View.GONE);
         } else {
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutShelterLockAvailablity.setVisibility(View.VISIBLE);
@@ -1063,7 +1070,8 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     }
 
     private void visibilityOfDgLockAvailablity(String SourceOfPower) {
-        if (SourceOfPower.isEmpty() || SourceOfPower.equals("Non DG")) {
+        if (SourceOfPower.equals("Non DG")) {
+            mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewDgLockAvailablityVal.setText("");
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity.setVisibility(View.GONE);
         } else {
             mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutDgLockAvailablity.setVisibility(View.VISIBLE);
