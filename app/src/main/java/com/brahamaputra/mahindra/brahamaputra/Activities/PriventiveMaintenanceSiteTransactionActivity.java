@@ -2,8 +2,10 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Menu;
@@ -79,7 +81,6 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
     private String sitePMTicketStatus;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,10 +146,10 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
         // show the button when some condition is true
-        shareItem.setVisible(true);
-        /*if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
+        shareItem.setVisible(false);
+        if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
             shareItem.setVisible(true);
-        }*/
+        }
         return true;
     }
 
@@ -159,44 +160,74 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case R.id.menuSubmit:
-                showSettingsAlert();
-               /* if (checkValidationOnSubmitPmTransactionTicket() == true) {
-                    if (gpsTracker.canGetLocation()) {
-                        if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                            //showToast(""+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
-                            if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.310686) {///// ( 0.310686 MILE == 500 Meter )
-                                Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
+                LocationManager lm = (LocationManager) PriventiveMaintenanceSiteTransactionActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                boolean gps_enabled = false;
+                boolean network_enabled = false;
 
-                                checkOutLat = String.valueOf(gpsTracker.getLatitude());
-                                checkOutLong = String.valueOf(gpsTracker.getLongitude());
+                try {
+                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                } catch (Exception ex) {
+                }
 
-                            } else {
-                                Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
-                                //showToast("User not in Site Area");
-                                alertDialogManager.Dialog("Information", "User not in area of site", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                                    @Override
-                                    public void onPositiveClick() {
-
-                                    }
-                                }).show();
-                            }
-                        } else {
-                            //showToast("Could not detecting location. Please try again later.");
-                            alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                                @Override
-                                public void onPositiveClick() {
-                                    if (gpsTracker.canGetLocation()) {
-                                        //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
-                                        Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                                    }
-                                }
-                            }).show();
+                if (!gps_enabled && !network_enabled) {
+                    // notify user
+                    alertDialogManager = new AlertDialogManager(PriventiveMaintenanceSiteTransactionActivity.this);
+                    alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                        @Override
+                        public void onPositiveClick() {
+                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            PriventiveMaintenanceSiteTransactionActivity.this.startActivity(myIntent);
                         }
+                    }).show();
+                } else {
+                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                        checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                        checkOutLong = String.valueOf(gpsTracker.getLongitude());
+
+                        CheckSubmitFlagOfAllSitePmForms();
+
+                    } else {
+                        //showToast("Could not detecting location.");
+                        alertDialogManager = new AlertDialogManager(PriventiveMaintenanceSiteTransactionActivity.this);
+                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                            @Override
+                            public void onPositiveClick() {
+                                if (gpsTracker.canGetLocation()) {
+                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
+                                    Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                }
+                            }
+                        }).show();
                     }
-                }*/
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void CheckSubmitFlagOfAllSitePmForms() {
+        try {
+            if (!preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
+                hideBusyProgress();
+                alertDialogManager = new AlertDialogManager(PriventiveMaintenanceSiteTransactionActivity.this);
+                alertDialogManager.Dialog("Confirmation", "Some section incomplete.Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        showSettingsAlert();
+                    }
+
+                    @Override
+                    public void onNegativeClick() {
+
+                    }
+                }).show();
+            } else {
+                showSettingsAlert();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -422,8 +453,11 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
     private void getOfflineData() {
         try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+            /*if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");*/
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
@@ -441,6 +475,15 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        invalidateOptionsMenu();
+        if (requestCode == RESULT_PRIVENTIVE_MAINTENANCE_SITE_READING && resultCode == RESULT_OK) {
+            getOfflineData();
         }
     }
 

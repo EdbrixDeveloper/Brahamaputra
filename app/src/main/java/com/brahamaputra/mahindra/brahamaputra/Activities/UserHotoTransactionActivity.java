@@ -364,7 +364,7 @@ public class UserHotoTransactionActivity extends BaseActivity {
                         checkOutLat = String.valueOf(gpsTracker.getLatitude());
                         checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
-                        submitDetails();
+                        //submitDetails();
                         CheckSubmitFlagOfAllHotoForms();//24112018 by 008
                         //showSettingsAlert();
 
