@@ -141,10 +141,10 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
 
             viewHolder.textView_details.setText("Details");
             viewHolder.textView_details.setTextColor(Color.BLACK);
-            viewHolder.textView_details.setVisibility(View.VISIBLE);
+            viewHolder.textView_details.setVisibility(View.GONE);//change on 19032019 by 008
 
-            viewHolder.imageView_details.setVisibility(View.VISIBLE);
-            viewHolder.imageView_status.setVisibility(View.GONE);
+            viewHolder.imageView_details.setVisibility(View.GONE);//change on 19032019 by 008
+            viewHolder.imageView_status.setVisibility(View.VISIBLE);//change on 19032019 by 008
 
         } else if (dataModel.getStatusId().equals("3")) { ///////// 3
             if (dataModel.getStatusId().equals("3") && dataModel.getModeOfPayment().equals("Cash")) {
@@ -239,7 +239,34 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 EbPaymentRequestList lst = getItem(position);
                 Context c = getContext();
                 //if (lst.getStatusId().equals("1")) {
-                Intent intent = new Intent(getContext(), UploadEBReceiptActivity.class);
+                if (eb_billing_process_flag.equals("1")) {
+                    Intent intent = new Intent(getContext(), UploadEBPaymentDetailsActivity.class);
+                    intent.putExtra("request_id", lst.getId());
+                    intent.putExtra("ticket_no", lst.getRequestTicketeNo());
+                    intent.putExtra("site_id", lst.getSiteId());
+                    intent.putExtra("site_name", lst.getSiteName());
+                    intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
+                    intent.putExtra("StatusId", lst.getStatusId());
+                    intent.putExtra("EbPaymentAmt", lst.getGrossAmount());
+                    // c.startActivity(intent);
+                    ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                    //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                    // }
+                } else if (eb_billing_process_flag.equals("2")) {
+                    Intent intent = new Intent(getContext(), UploadEBReceiptActivity.class);
+                    intent.putExtra("request_id", lst.getId());
+                    intent.putExtra("ticket_no", lst.getRequestTicketeNo());
+                    intent.putExtra("site_id", lst.getSiteId());
+                    intent.putExtra("site_name", lst.getSiteName());
+                    intent.putExtra("ModeOfPayment", lst.getModeOfPayment());
+                    intent.putExtra("StatusId", lst.getStatusId());
+                    intent.putExtra("EbPaymentAmt", lst.getGrossAmount());
+                    // c.startActivity(intent);
+                    ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                    //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
+                    // }
+                }
+                /*Intent intent = new Intent(getContext(), UploadEBReceiptActivity.class);
                 intent.putExtra("request_id", lst.getId());
                 intent.putExtra("ticket_no", lst.getRequestTicketeNo());
                 intent.putExtra("site_id", lst.getSiteId());
@@ -250,7 +277,7 @@ public class EbProcessTrasactionAdapter extends ArrayAdapter<EbPaymentRequestLis
                 // c.startActivity(intent);
                 ((ElectricBillProcessList) mContext).startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
                 //mContext.st startActivityForResult(intent, RESULT_EB_REC_SUBMIT);
-                // }
+                // }*/
             }
         });
 

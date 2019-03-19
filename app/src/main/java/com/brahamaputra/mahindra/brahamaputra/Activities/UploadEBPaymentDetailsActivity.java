@@ -21,8 +21,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
@@ -374,8 +380,31 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    if (error.getMessage().contains("java.net.UnknownHostException")) {
+                    /*if (error.getMessage().contains("java.net.UnknownHostException")) {
                         showToast("No Internet Connection.");
+                    }*/
+                    error.printStackTrace();
+                    Log.d("Upload EB", "error:" + error);
+
+                    int errorCode = 0;
+                    if (error instanceof TimeoutError) {
+                        errorCode = -7;
+                        showToast("Network Timeout.");
+                    } else if (error instanceof NoConnectionError) {
+                        errorCode = -1;
+                        showToast("No Internet Connection.");
+                    } else if (error instanceof AuthFailureError) {
+                        errorCode = -6;
+                        showToast("Unauthorised User.");
+                    } else if (error instanceof ServerError) {
+                        errorCode = 0;
+                        showToast("Server Error.");
+                    } else if (error instanceof NetworkError) {
+                        errorCode = -1;
+                        showToast("Network Error.");
+                    } else if (error instanceof ParseError) {
+                        errorCode = -8;
+                        showToast("Parse Error.");
                     }
                     hideBusyProgress();
 
