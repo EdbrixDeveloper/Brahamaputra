@@ -33,6 +33,9 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
 
@@ -139,7 +142,7 @@ public class UsersHotoListActivity extends BaseActivity {
                             hototicket_nameOfSupplyCompany = hotoTicketList.getHotoTicketsDates().get(groupPosition).getHotoTickets().get(childPosition).getNameOfSupplyCompany().toString();
 
                             if (hotoTickStatus.equals("Open") || hotoTickStatus.equals("WIP") || hotoTickStatus.equals("Reassigned")) {
-                                if(hotoTickStatus.equals("Open")){
+                                if (hotoTickStatus.equals("Open")) {
 
                                     //alertDialogManager = new AlertDialogManager(UserHotoTransactionActivity.this);
                                     alertDialogManager.Dialog("Information", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
@@ -162,7 +165,7 @@ public class UsersHotoListActivity extends BaseActivity {
                                                     stateName, customerName, circleName, ssaName);
                                         }
                                     }).show();*/
-                                }else {
+                                } else {
                                     checkSystemLocation(hotoTicketNo, hotoTicketId, hotoTicketDate, siteId, siteName, siteAddress, status, siteType,
                                             stateName, customerName, circleName, ssaName);
                                 }
@@ -218,8 +221,11 @@ public class UsersHotoListActivity extends BaseActivity {
             JSONObject jo = new JSONObject();
 
 
-            jo.put("UserId", sessionManager.getSessionUserId());
-            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            //jo.put("UserId", sessionManager.getSessionUserId());
+            //jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+
+            jo.put("UserId", "107");
+            jo.put("AccessToken", "MjUyLTg1REEyUzMtQURTUzVELUVJNUI0QTIyMTEwNw==");
 
             Log.i(UsersHotoListActivity.class.getName(), Constants.hototTicketList + "\n\n" + jo.toString());
 
@@ -237,15 +243,22 @@ public class UsersHotoListActivity extends BaseActivity {
                                         userHotoList_textView_openTickets.setText(hotoTicketList.getHotoTicketSummary().getOpenTickets() == null || hotoTicketList.getHotoTicketSummary().getOpenTickets().isEmpty() ? "0" : hotoTicketList.getHotoTicketSummary().getOpenTickets().toString());
                                         userHotoList_textView_allTickets.setText(hotoTicketList.getHotoTicketSummary().getTotalTickets() == null || hotoTicketList.getHotoTicketSummary().getTotalTickets().isEmpty() ? "0" : hotoTicketList.getHotoTicketSummary().getTotalTickets().toString());
 
-                                        int per=0;
-                                        double p=0.0;
-                                        per=hotoTicketList.getHotoTicketSummary().getPercentage() == null ? 0 : hotoTicketList.getHotoTicketSummary().getPercentage();
-                                        p=(3.6)*Double.valueOf(per);
-                                        per=(int)Math.round(p);
+                                        double per = 0.0;
+                                        double circlePer = 0.0;
+                                        int roundPer = 0;
+                                        per = hotoTicketList.getHotoTicketSummary().getPercentage();//hotoTicketList.getHotoTicketSummary().getPercentage() == null ? 0.0 :
+                                        circlePer = (3.6) * Double.valueOf(per);
+                                        roundPer = (int) Math.round(circlePer);
 
-                                        wheelprogress.setPercentage(per);
+                                        DecimalFormat df = new DecimalFormat("###.##");
+                                        df.setRoundingMode(RoundingMode.FLOOR);
+                                        per = new Double(df.format(per));
+
+
+                                        wheelprogress.setPercentage(roundPer);
                                         //wheelprogress.setPercentage(hotoTicketList.getHotoTicketSummary().getPercentage() == null ? 0 : hotoTicketList.getHotoTicketSummary().getPercentage());
-                                        wheelprogress.setStepCountText(hotoTicketList.getHotoTicketSummary().getPercentage().toString() == null ? "0" : hotoTicketList.getHotoTicketSummary().getPercentage().toString());
+                                        //wheelprogress.setStepCountText(hotoTicketList.getHotoTicketSummary().getPercentage().toString() == null ? "0" : hotoTicketList.getHotoTicketSummary().getPercentage().toString());
+                                        wheelprogress.setStepCountText(String.valueOf(per));
                                     }
                                     if (hotoTicketList.getHotoTicketsDates() != null && hotoTicketList.getHotoTicketsDates().size() > 0) {
                                         txtNoTicketFound.setVisibility(View.GONE);
