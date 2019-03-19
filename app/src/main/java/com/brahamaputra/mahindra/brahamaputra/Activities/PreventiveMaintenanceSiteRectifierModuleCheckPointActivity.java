@@ -358,6 +358,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading.setVisibility(View.VISIBLE);
                             if (totalCount > 0 && totalCount == 1) {
                                 mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading.setText("Finish");
+
                             } else {
                                 mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonNextReading.setText("Next Reading");
                             }
@@ -1003,7 +1004,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
+                submitDetails();
                 startActivity(new Intent(this, PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
                 finish();
                 return true;

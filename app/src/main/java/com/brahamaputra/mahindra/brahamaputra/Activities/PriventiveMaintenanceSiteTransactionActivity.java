@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -37,6 +38,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
 public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
@@ -105,6 +108,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
         preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PriventiveMaintenanceSiteTransactionActivity.this, userId, ticketName);
+        getOfflineData();
         gpsTracker = new GPSTracker(PriventiveMaintenanceSiteTransactionActivity.this);
 
         mPriventiveMaintenanceSiteTransButtonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -141,10 +145,10 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
         // show the button when some condition is true
-        shareItem.setVisible(false);
-        if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
+        shareItem.setVisible(true);
+        /*if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
             shareItem.setVisible(true);
-        }
+        }*/
         return true;
     }
 
@@ -155,7 +159,8 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case R.id.menuSubmit:
-                if (checkValidationOnSubmitPmTransactionTicket() == true) {
+                showSettingsAlert();
+               /* if (checkValidationOnSubmitPmTransactionTicket() == true) {
                     if (gpsTracker.canGetLocation()) {
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                             //showToast(""+gpsTracker.distance(gpsTracker.getLatitude(),gpsTracker.getLongitude(),siteLatitude,siteLongitude));
@@ -164,7 +169,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
                                 checkOutLat = String.valueOf(gpsTracker.getLatitude());
                                 checkOutLong = String.valueOf(gpsTracker.getLongitude());
-                                showSettingsAlert();
+
                             } else {
                                 Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
                                 //showToast("User not in Site Area");
@@ -188,7 +193,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                             }).show();
                         }
                     }
-                }
+                }*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -251,32 +256,18 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         try {
 
             checkOutBatteryData = "" + GlobalMethods.getBattery_percentage(PriventiveMaintenanceSiteTransactionActivity.this);
-            String userId = sessionManager.getSessionUserId();
-            String accessToken = sessionManager.getSessionDeviceToken();
-
-
-
-           /*// String siteID = String.valueOf(site_id);
-            String customer  = mPriventiveMaintenanceSiteTransEditTextCustomerName.getText().toString().trim();
-            String circle = mPriventiveMaintenanceSiteTransEditTextCircle.getText().toString().trim();
-            String state = mPriventiveMaintenanceSiteTransEditTextState.getText().toString().trim();
-            String ssa = mPriventiveMaintenanceSiteTransEditTextSsa.getText().toString().trim();
-            String nameOfSite = mPriventiveMaintenanceSiteTransEditTextNameOfSite.getText().toString().trim();
-            String sheduledDateOfPm = mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.getText().toString().trim();
-            String actualPmExecutionDate = mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.getText().toString().trim();*/
-            //commented by tiger 18-03-2019
-            /*preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId,accessToken,ticketId,ticketName,checkInLat,
-                    checkInLong,checkInBatteryData,checkOutLat,checkOutLong,checkOutBatteryData,siteID,customer,circle,state,ssa,nameOfSite,sheduledDateOfPm,actualPmExecutionDate);*/
-            ////////////////////////
-
-            preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails(userId, accessToken, ticketId, checkInLat,
-                    checkInLong, checkInBatteryData, checkOutLat, checkOutLong, checkOutBatteryData);
+            preventiveMaintanceSiteTransactionDetails.setUserId(sessionManager.getSessionUserId());
+            preventiveMaintanceSiteTransactionDetails.setAccessToken(sessionManager.getSessionDeviceToken());
+            preventiveMaintanceSiteTransactionDetails.setTicketId(ticketId);
+            preventiveMaintanceSiteTransactionDetails.setCheckOutLatitude(checkOutLat);
+            preventiveMaintanceSiteTransactionDetails.setCheckOutLongitude(checkOutLong);
+            preventiveMaintanceSiteTransactionDetails.setCheckOutBatteryData(checkOutBatteryData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);
 
             offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
-
+            submitPMSiteTicket();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
@@ -427,6 +418,30 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    private void getOfflineData() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
+
+                Gson gson = new Gson();
+                preventiveMaintanceSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+
+                if (preventiveMaintanceSiteTransactionDetails != null) {
+                   /* mUserHotoTransEditTextSiteID.setText(hotoTransactionData.getSiteId());
+                    mUserHotoTransEditTextSiteAddress.setText(hotoTransactionData.getSiteAddress());
+                    mUserHotoTransSpinnerSourceOfPowerVal.setText(hotoTransactionData.getSourceOfPower());
+                    hototicket_sourceOfPower = hotoTransactionData.getSourceOfPower() == null || hotoTransactionData.getSourceOfPower().isEmpty() ? "" : hotoTransactionData.getSourceOfPower();*/
+                }
+
+            } else {
+//                Toast.makeText(UserHotoTransactionActivity.this, "No offline data available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

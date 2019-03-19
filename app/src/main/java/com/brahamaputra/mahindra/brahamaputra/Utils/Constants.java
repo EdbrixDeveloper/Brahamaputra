@@ -109,6 +109,6 @@ public class Constants {
     public final static String sitePmTicketList = BASE_URL.concat("sitepm/getsitepmtransactionticketlist");
 
     public final static String updatedSitePMCheckIn = BASE_URL.concat("sitepm/sitepmcheckin");//update site PM check in
-    public final static String submitSitePMTicket = BASE_URL.concat("");
+    public final static String submitSitePMTicket = BASE_URL.concat("sitepm/submitsitepmtickettransactions");
 
 }

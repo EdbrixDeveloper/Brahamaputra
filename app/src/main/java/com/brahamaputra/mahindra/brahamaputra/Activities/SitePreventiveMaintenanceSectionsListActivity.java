@@ -21,6 +21,11 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
+
 public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActivity {
 
     public ListView sitePreventiveMaintenanceSections_listView_sections;
@@ -91,13 +96,20 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteEbMeterBoxActivity.class));
                         break;
                     case 5:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
+                        if(!hototicket_sourceOfPower.equals("Non DG")){
+                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
+
+                        }
                         break;
                     case 6:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
+                        if(!hototicket_sourceOfPower.equals("Non DG")){
+                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
+                        }
                         break;
                     case 7:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                        if(!sitePmNoOfAcAvailableAtSite.equals("0")){
+                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                        }
                         break;
                     case 8:
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
@@ -109,15 +121,16 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
                         break;
                     case 11:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                        if(!sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                        }
                         break;
                     case 12:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                        if(!hototicket_Selected_SiteType.equals("Outdoor")){
+                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                        }
                         break;
                     case 13:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
-                        break;
-                    case 14:
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
                         break;
 

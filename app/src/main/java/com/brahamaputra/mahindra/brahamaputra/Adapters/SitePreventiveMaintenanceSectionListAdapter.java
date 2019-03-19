@@ -12,7 +12,14 @@ import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePreventiveMaintenanceSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
+
 import java.util.ArrayList;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
 
 public class SitePreventiveMaintenanceSectionListAdapter extends ArrayAdapter<SitePreventiveMaintenanceSection> implements View.OnClickListener {
 
@@ -90,6 +97,31 @@ public class SitePreventiveMaintenanceSectionListAdapter extends ArrayAdapter<Si
         if (dataModel.getSecReadingStatus() == 2) {
             //viewHolder.imageViewStatus.setImageResource(R.drawable.ic_done_green_24dp);
             viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.limegreen));
+        }
+
+        if(hototicket_sourceOfPower.equals("Non DG")){
+            if(dataModel.getSecName().equals("DG Check Points") || dataModel.getSecName().equals("DG Battery Check Points"))
+            {
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.lightgrey));
+            }
+        }
+
+        if(hototicket_Selected_SiteType.equals("Outdoor")){
+            if(dataModel.getSecName().equals("Shelter Check Points")){
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.lightgrey));
+            }
+        }
+
+        if(sitePmNoOfAcAvailableAtSite.equals("0")){
+            if(dataModel.getSecName().equals("AC Check Points")){
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.lightgrey));
+            }
+        }
+
+        if(sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+            if(dataModel.getSecName().equals("Servo Check Points")){
+                viewHolder.linearLayout_container.setBackgroundColor(ContextCompat.getColor(mContext,R.color.lightgrey));
+            }
         }
 
         return convertView;

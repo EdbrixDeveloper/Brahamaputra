@@ -5,6 +5,11 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
+
 public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
 
     @SerializedName("AccessToken")
@@ -40,9 +45,9 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     @SerializedName("sourceOfPower")
     @Expose
     private String sourceOfPower;
-    @SerializedName("ticketId")
+    @SerializedName("sitePMTicketId")
     @Expose
-    private String ticketId;
+    private String sitePMTicketId;
     @SerializedName("ticketNo")
     @Expose
     private String ticketNo;
@@ -118,7 +123,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     public PreventiveMaintanceSiteTransactionDetails(String userId, String accessToken, String ticketId, String checkInLat, String checkInLong, String checkInBatteryData, String checkOutLat, String checkOutLong, String checkOutBatteryData) {
         this.userId = userId;
         this.accessToken = accessToken;
-        this.ticketId = ticketId;
+        this.sitePMTicketId = ticketId;
         this.checkInLongitude = checkInLat;
         this.checkInLongitude = checkInLong;
         this.checkInBatteryData = checkInBatteryData;
@@ -217,11 +222,11 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     }
 
     public String getTicketId() {
-        return ticketId;
+        return sitePMTicketId;
     }
 
     public void setTicketId(String ticketId) {
-        this.ticketId = ticketId;
+        this.sitePMTicketId = ticketId;
     }
 
     public String getTicketNo() {
@@ -345,6 +350,24 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     }
 
     public boolean isAtLeastOneSitePmFormsSubmit() {
+
+        if(hototicket_sourceOfPower.equals("Non DG")){
+            dgCheckPointsParentData.setSubmited(2);
+            dgBatteryCheckPointsParentData.setSubmited(2);
+        }
+
+        if(sitePmNoOfAcAvailableAtSite.equals("0")){
+            acCheckPointParentData.setSubmited(2);
+        }
+
+        if(sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+            servoCheckPoints.setSubmited(2);
+        }
+
+        if(hototicket_Selected_SiteType.equals("Outdoor")){
+            shelterCheckPoints.setSubmited(2);
+        }
+
         if (siteHygenieneGenralSeftyParameter.getSubmited() == 2) {
             return true;
         } else if (acCheckPointParentData.getSubmited() == 2) {
@@ -374,6 +397,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         } else if (otherElectricalCheckPoints.getSubmited() == 2) {
             return true;
         }  else return false;
+
     }
 
    /* public boolean isAllPreventiveMaintainanceFormSubmitted()
