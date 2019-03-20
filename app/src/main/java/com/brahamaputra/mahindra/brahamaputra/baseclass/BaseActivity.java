@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Utils.NotificationUtils;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 
@@ -32,8 +33,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import android.provider.Settings.Secure;
 
+import android.provider.Settings.Secure;
 
 
 /**
@@ -336,6 +337,92 @@ public class BaseActivity extends AppCompatActivity {
 
         return new Object[]{"default", false};
     }
+
+    /*--Site PM Section by 008 on 20032019--*/
+    public Object[] isDuplicateQRcodeForSitePM(String strQrcode) {
+
+        OfflineStorageWrapper offlineStorageWrapper;
+        PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails = null;
+
+        String ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        String userId = sessionManager.getSessionUserId();
+
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(this, userId, ticketName);
+        //pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
+
+        try {
+            String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+            Gson gson = new Gson();
+            pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ///Total 9 Sections Available for QR CODE
+        ///Alarm Check Points*
+        if (pmSiteTransactionDetails.getAlarmCheckPoints().getDetailsOfWrmsQrCodeScan().contains(strQrcode)) {
+            return new Object[]{"Alarm Check Points ", true};
+        }
+
+        ///Battery Bank Check Points Pending for discussion*
+        for (int i = 0; i < pmSiteTransactionDetails.getBatteryBankCheckPointsParentData().getBatteryBankCheckPointsData().size(); i++) {
+            if (pmSiteTransactionDetails.getBatteryBankCheckPointsParentData().getBatteryBankCheckPointsData().get(i).getDetailsOfBatteryBankQrCodeScan().contains(strQrcode)) {
+                return new Object[]{"Battery Bank Check Points in Reading " + String.valueOf(i + 1), true};
+            }
+        }
+
+        ///DG Check Points*
+        for (int i = 0; i < pmSiteTransactionDetails.getDgCheckPointsParentData().getDgCheckPointsData().size(); i++) {
+            if (pmSiteTransactionDetails.getDgCheckPointsParentData().getDgCheckPointsData().get(i).getDetailsOfDgQrCodeScan().contains(strQrcode)) {
+                return new Object[]{"DG Check Points in Reading " + String.valueOf(i + 1), true};
+            }
+        }
+
+        ///DG Battery Check Points*
+        for (int i = 0; i < pmSiteTransactionDetails.getDgBatteryCheckPointsParentData().getDgBatteryCheckPointsData().size(); i++) {
+            if (pmSiteTransactionDetails.getDgBatteryCheckPointsParentData().getDgBatteryCheckPointsData().get(i).getDetailsOfDgBatteryQrCodeScan().contains(strQrcode)) {
+                return new Object[]{"DG Battery Check Points in Reading " + String.valueOf(i + 1), true};
+            }
+        }
+
+        ///AC Check Points*
+        for (int i = 0; i < pmSiteTransactionDetails.getAcCheckPointParentData().getAcCheckPoints().size(); i++) {
+            if (pmSiteTransactionDetails.getAcCheckPointParentData().getAcCheckPoints().get(i).getDetailsOfAcQrCodeScan().contains(strQrcode)) {
+                return new Object[]{"AC Check Points in Reading " + String.valueOf(i + 1), true};
+            }
+        }
+
+        ///SMPS Check Points*
+        for (int i = 0; i < pmSiteTransactionDetails.getSmpsCheckPointParentData().getSmpsCheckPointsData().size(); i++) {
+            if (pmSiteTransactionDetails.getSmpsCheckPointParentData().getSmpsCheckPointsData().get(i).getDetailsOfSmpsQrCodeScan().contains(strQrcode)) {
+                return new Object[]{"SMPS Check Points in Reading " + String.valueOf(i + 1), true};
+            }
+        }
+
+        ///Rectifier Module Check Point*
+        for (int i = 0; i < pmSiteTransactionDetails.getRectifierModuleCheckPoint().getRectifierModuleCheckPointData().size(); i++) {
+            if (pmSiteTransactionDetails.getRectifierModuleCheckPoint().getRectifierModuleCheckPointData().get(i).getDetailsOfRectifierModuleQrCodeScan().contains(strQrcode)) {
+                return new Object[]{"Rectifier Module Check Point in Reading " + String.valueOf(i + 1), true};
+            }
+        }
+
+        ///PMS/AMF Panel Check Points*
+        for (int i = 0; i < pmSiteTransactionDetails.getPmsAmfPanelCheckPoints().getPmsAmfPanelCheckPointsData().size(); i++) {
+            if (pmSiteTransactionDetails.getPmsAmfPanelCheckPoints().getPmsAmfPanelCheckPointsData().get(i).getDetailsOfPmsAmfPiuQrCodeScan().contains(strQrcode)) {
+                return new Object[]{"PMS/AMF Panel Check Points in Reading " + String.valueOf(i + 1), true};
+            }
+        }
+
+        ///Servo Check Points*
+        if (pmSiteTransactionDetails.getServoCheckPoints().getDetailsOfServoQrCodeScan().contains(strQrcode)) {
+            return new Object[]{"Servo Check Points ", true};
+        }
+
+        return new Object[]{"default", false};
+    }
+
 
     public Bitmap decodeFromBase64ToBitmap(String encodedImage) {
         byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);

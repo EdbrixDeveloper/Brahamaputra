@@ -1236,13 +1236,12 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 return true;
 
             case R.id.menuSubmit:
-                /*if(checkValidationOfArrayFields() == true)
-                {*/
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
-                finish();
-                return true;
-            /* }*/
+                if (checkValidationOfArrayFields() == true) {
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -1287,25 +1286,25 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         } else if (anyEagleCrowHoneyHivesInTower.isEmpty() || anyEagleCrowHoneyHivesInTower == null) {
             showToast("Select Any Eagle/Crow/Honey Hives In Tower");
             return false;
-        } else if (compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) {
+        } else if ((compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) && (!sitePm_siteBoundaryStatus.equals("Not Applicable") || !sitePm_siteBoundaryStatus.equals("Open Site"))) {
             showToast("Select Compound Wall/Fencing Status");
             return false;
         } else if (gateLockAvailability.isEmpty() || gateLockAvailability == null) {
             showToast("Select Gate Lock Availability");
             return false;
-        } else if (shelterLockAvailability.isEmpty() || shelterLockAvailability == null) {
+        } else if ((shelterLockAvailability.isEmpty() || shelterLockAvailability == null) && (!hototicket_Selected_SiteType.equals("Outdoor"))) {
             showToast("Select Shelter Lock Availability");
             return false;
-        } else if (dgLockAvailability.isEmpty() || dgLockAvailability == null) {
+        } else if ((dgLockAvailability.isEmpty() || dgLockAvailability == null) && (!hototicket_sourceOfPower.equals("Non DG"))) {
             showToast("Select DG Lock Availability");
             return false;
         } else if (fireExtinguisherAvaliability.isEmpty() || fireExtinguisherAvaliability == null) {
             showToast("Select Fire Extinguisher Avaliability");
             return false;
-        } else if (noOfFireExtingusher.isEmpty() || noOfFireExtingusher == null) {
+        } else if ((noOfFireExtingusher.isEmpty() || noOfFireExtingusher == null) && fireExtinguisherAvaliability.equals("Available")) {
             showToast("Select No Of Fire Extingusher");
             return false;
-        } else if (fireExtinguisherExpiryDate.isEmpty() || fireExtinguisherExpiryDate == null) {
+        } else if ((fireExtinguisherExpiryDate.isEmpty() || fireExtinguisherExpiryDate == null) && fireExtinguisherAvaliability.equals("Available")) {
             showToast("Select Fire Extinguisher Expiry Date");
             return false;
         } else if (fireBucket.isEmpty() || fireBucket == null) {
