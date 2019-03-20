@@ -906,18 +906,18 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         base64StringDetailsOfRectifierModuleQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
+                        if (!flagIsDuplicateQRcode) {
                         base64StringDetailsOfRectifierModuleQRCodeScan = result.getContents();
                         if (!base64StringDetailsOfRectifierModuleQRCodeScan.isEmpty() && base64StringDetailsOfRectifierModuleQRCodeScan != null) {
                             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
                             mButtonClearDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
                         }
-                        /*} else {
+                        } else {
                             base64StringDetailsOfRectifierModuleQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;

@@ -395,18 +395,18 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
                         base64StringDetailsOfServoQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
+                        if (!flagIsDuplicateQRcode) {
                         base64StringDetailsOfServoQRCodeScan = result.getContents();
                         if (!base64StringDetailsOfServoQRCodeScan.isEmpty() && base64StringDetailsOfServoQRCodeScan != null) {
                             mPreventiveMaintenanceSiteServoCheckPointsButtonDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
                             mButtonClearDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
                         }
-                        /*} else {
+                        } else {
                             base64StringDetailsOfServoQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;

@@ -400,10 +400,12 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         //Save Final current reading and submit all AC data
                         saveRecords(currentPos);
                         // visibilityOfTypesOfFault(mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
-                        if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true) {
-                            submitDetails();
-                            startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
-                            finish();
+                        if(checkDuplicationQrCodeNew() == false){
+                            if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true) {
+                                submitDetails();
+                                startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -533,18 +535,18 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         base64StringPmsAmfPanelCheckPointsQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
+                        if (!flagIsDuplicateQRcode) {
                         base64StringPmsAmfPanelCheckPointsQRCodeScan = result.getContents();
                         if (!base64StringPmsAmfPanelCheckPointsQRCodeScan.isEmpty() && base64StringPmsAmfPanelCheckPointsQRCodeScan != null) {
                             mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
                             mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
                         }
-                        /*} else {
+                        } else {
                             base64StringPmsAmfPanelCheckPointsQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;
@@ -803,6 +805,20 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
             showToast("Select PMS/AMF/PIU Earthing Status");
             return false;
         } else return true;
+    }
+
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < pmsAmfPanelCheckPointsArrayList.size(); i++) {
+            for (int j = i + 1; j < pmsAmfPanelCheckPointsArrayList.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (pmsAmfPanelCheckPointsArrayList.get(i).getDetailsOfPmsAmfPiuQrCodeScan().toString().equals(pmsAmfPanelCheckPointsArrayList.get(j).getDetailsOfPmsAmfPiuQrCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean checkValidtionForNoOfPmsAmfPuiAvailabelAtSite(String methodFlag) {
