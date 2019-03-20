@@ -220,12 +220,8 @@ public class UsersHotoListActivity extends BaseActivity {
             showBusyProgress();
             JSONObject jo = new JSONObject();
 
-
-            //jo.put("UserId", sessionManager.getSessionUserId());
-            //jo.put("AccessToken", sessionManager.getSessionDeviceToken());
-
-            jo.put("UserId", "107");
-            jo.put("AccessToken", "MjUyLTg1REEyUzMtQURTUzVELUVJNUI0QTIyMTEwNw==");
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
             Log.i(UsersHotoListActivity.class.getName(), Constants.hototTicketList + "\n\n" + jo.toString());
 
