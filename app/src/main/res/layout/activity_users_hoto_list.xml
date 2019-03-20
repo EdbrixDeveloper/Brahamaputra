@@ -30,7 +30,7 @@
                 app:barWidth="09dp"
                 app:countText="0"
                 app:countTextColor="@android:color/black"
-                app:countTextSize="45sp"
+                app:countTextSize="30sp"
                 app:defTextColor="@android:color/black"
                 app:defTextSize="16sp"
                 app:definitionText="% COMPLETE"

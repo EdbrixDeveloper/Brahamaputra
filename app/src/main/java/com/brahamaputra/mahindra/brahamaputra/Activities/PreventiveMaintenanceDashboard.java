@@ -38,6 +38,9 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePm_siteBoundaryStatus;
@@ -251,15 +254,31 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                         acPreventiveMaintenanceSection_textView_openTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getOpenTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().toString());
                                         acPreventiveMaintenanceSection_textView_allTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getTotalTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().toString());
 
-                                        int per = 0;
+                                        /*int per = 0;
                                         double p = 0.0;
                                         per = sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage();
                                         p = (3.6) * Double.valueOf(per);
                                         per = (int) Math.round(p);
 
                                         wheelprogress.setPercentage(per);
-                                        //wheelprogress.setPercentage(sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage());
-                                        wheelprogress.setStepCountText(sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString() == null ? "0" : sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString());
+                                        wheelprogress.setStepCountText(sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString() == null ? "0" : sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString());*/
+
+                                        double per = 0.0;
+                                        double circlePer = 0.0;
+                                        int roundPer = 0;
+                                        per = sitePMTicketsList.getSitePMTicketSummary().getPercentage();//hotoTicketList.getHotoTicketSummary().getPercentage() == null ? 0.0 :
+                                        circlePer = (3.6) * Double.valueOf(per);
+                                        roundPer = (int) Math.round(circlePer);
+
+                                        DecimalFormat df = new DecimalFormat("###.##");
+                                        df.setRoundingMode(RoundingMode.FLOOR);
+                                        per = new Double(df.format(per));
+
+
+                                        wheelprogress.setPercentage(roundPer);
+                                        wheelprogress.setStepCountText(String.valueOf(per));
+
+
                                     }
                                     if (sitePMTicketsList.getSitePMTicketsDates() != null && sitePMTicketsList.getSitePMTicketsDates().size() > 0) {
                                         txtNoTicketFound.setVisibility(View.GONE);

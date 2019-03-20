@@ -13,7 +13,7 @@ public class HotoTicketSummary {
     private String openTickets;
     @SerializedName("Percentage")
     @Expose
-    private Integer percentage;
+    private double percentage;
 
     public String getTotalTickets() {
         return totalTickets;
@@ -31,11 +31,11 @@ public class HotoTicketSummary {
         this.openTickets = openTickets;
     }
 
-    public Integer getPercentage() {
+    public double getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(Integer percentage) {
+    public void setPercentage(double percentage) {
         this.percentage = percentage;
     }
 
