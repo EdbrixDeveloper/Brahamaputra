@@ -664,18 +664,18 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                         base64StringDetailsOfWrmsQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringDetailsOfWrmsQRCodeScan = result.getContents();
-                        if (!base64StringDetailsOfWrmsQRCodeScan.isEmpty() && base64StringDetailsOfWrmsQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteAlarmCheckPointsButtonDetailsOfWrmsQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearDetailsOfWrmsQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
-                        /*} else {
+                        if (!flagIsDuplicateQRcode) {
+                            base64StringDetailsOfWrmsQRCodeScan = result.getContents();
+                            if (!base64StringDetailsOfWrmsQRCodeScan.isEmpty() && base64StringDetailsOfWrmsQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteAlarmCheckPointsButtonDetailsOfWrmsQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearDetailsOfWrmsQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
+                        } else {
                             base64StringDetailsOfWrmsQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;
@@ -719,13 +719,12 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                 return true;
 
             case R.id.menuSubmit:
-               /* if(checkValidationOfArrayFields()==true)
-                {*/
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
-                finish();
-                return true;
-            /*}*/
+                if (checkValidationOfArrayFields() == true) {
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
