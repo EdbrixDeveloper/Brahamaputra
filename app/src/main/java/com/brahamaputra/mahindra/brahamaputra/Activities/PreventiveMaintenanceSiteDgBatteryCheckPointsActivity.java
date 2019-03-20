@@ -373,10 +373,12 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
                         //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
-                        if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
-                            submitDetails();
-                            startActivity(new Intent(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {
+                            if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
+                                submitDetails();
+                                startActivity(new Intent(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -719,6 +721,20 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
     }
 
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < dgBatteryCheckPointsData.size(); i++) {
+            for (int j = i + 1; j < dgBatteryCheckPointsData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (dgBatteryCheckPointsData.get(i).getDetailsOfDgBatteryQrCodeScan().toString().equals(dgBatteryCheckPointsData.get(j).getDetailsOfDgBatteryQrCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean checkValidationOnChangeNoOfDgBatteryAvailable(String NoOfDgBatteryAvailable, String methodFlag) {
 
         /*String detailsOfDgBatteryQrCodeScan;
@@ -748,7 +764,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
-        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
         } else if ((dgBatteryCheckPointsData.size() != Integer.valueOf(NoOfDgBatteryAvailable) && methodFlag.equals("onSubmit"))) {
@@ -901,18 +917,18 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                         base64StringDetailsOfDgBatteryQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringDetailsOfDgBatteryQRCodeScan = result.getContents();
-                        if (!base64StringDetailsOfDgBatteryQRCodeScan.isEmpty() && base64StringDetailsOfDgBatteryQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
-                        /*} else {
+                        if (!flagIsDuplicateQRcode) {
+                            base64StringDetailsOfDgBatteryQRCodeScan = result.getContents();
+                            if (!base64StringDetailsOfDgBatteryQRCodeScan.isEmpty() && base64StringDetailsOfDgBatteryQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearDetailsOfDgBatteryQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
+                        } else {
                             base64StringDetailsOfDgBatteryQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;

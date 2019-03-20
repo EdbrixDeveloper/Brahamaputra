@@ -379,10 +379,12 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
 
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
-                        if (checkValidationonSubmit("onSubmit") == true) {
-                            submitDetails();
-                            startActivity(new Intent(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {
+                            if (checkValidationonSubmit("onSubmit") == true) {
+                                submitDetails();
+                                startActivity(new Intent(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -552,18 +554,18 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                         base64StringSmpsCheckPointsQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringSmpsCheckPointsQRCodeScan = result.getContents();
-                        if (!base64StringSmpsCheckPointsQRCodeScan.isEmpty() && base64StringSmpsCheckPointsQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
-                        /*} else {
+                        if (!flagIsDuplicateQRcode) {
+                            base64StringSmpsCheckPointsQRCodeScan = result.getContents();
+                            if (!base64StringSmpsCheckPointsQRCodeScan.isEmpty() && base64StringSmpsCheckPointsQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteSmpsCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
+                        } else {
                             base64StringSmpsCheckPointsQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;
@@ -692,6 +694,15 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                         inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
                         String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
                         imageFileUriPhotoDcLoadCurrent = Uri.parse(path);
+                    }
+
+                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonPreviousReading.setVisibility(View.GONE);
+                    mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
+
+                    if (totalCount > 1) {
+                        mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading.setText("Next Reading");
+                    } else {
+                        mPreventiveMaintenanceSiteSmpsCheckPointsButtonNextReading.setText("Finish");
                     }
 
                 }
@@ -848,10 +859,10 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         String detailsOfSmpsQrCodeScan = base64StringSmpsCheckPointsQRCodeScan;
         String base64DcLoadCurrentPhoto = base64StringPhotoDcLoadCurrent;
 
-         if (detailsOfSmpsQrCodeScan.isEmpty() || detailsOfSmpsQrCodeScan == null) {
+        if (detailsOfSmpsQrCodeScan.isEmpty() || detailsOfSmpsQrCodeScan == null) {
             showToast("Please Scan QR Code");
             return false;
-        }else if (smpsCondition.isEmpty() || smpsCondition == null) {
+        } else if (smpsCondition.isEmpty() || smpsCondition == null) {
             showToast("Select SMPS Condition");
             return false;
         } else if (smpsControlerStatus.isEmpty() || smpsControlerStatus == null) {
@@ -863,13 +874,27 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         } else if (dcLoadCurrentInFloat.isEmpty() || dcLoadCurrentInFloat == null) {
             showToast("Select DC Load Current in Float");
             return false;
-        }else if (base64DcLoadCurrentPhoto.isEmpty() || base64DcLoadCurrentPhoto == null) {
-             showToast("Take Photo Of DC Load Current");
-             return false;
-         }  else if (dcLoadAmpPh.isEmpty() || dcLoadAmpPh == null) {
+        } else if (base64DcLoadCurrentPhoto.isEmpty() || base64DcLoadCurrentPhoto == null) {
+            showToast("Take Photo Of DC Load Current");
+            return false;
+        } else if (dcLoadAmpPh.isEmpty() || dcLoadAmpPh == null) {
             showToast("Select DC Load Amp/Ph");
             return false;
-        }  else return true;
+        } else return true;
+    }
+
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < smpsCheckPointsData.size(); i++) {
+            for (int j = i + 1; j < smpsCheckPointsData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (smpsCheckPointsData.get(i).getDetailsOfSmpsQrCodeScan().toString().equals(smpsCheckPointsData.get(j).getDetailsOfSmpsQrCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean checkValidationonSubmit(String methodFlag) {
@@ -880,7 +905,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         if (totalNumberval.isEmpty() || totalNumberval == null) {
             showToast("Select No of SMPS available at site");
             return false;
-        }else if (registerFault.isEmpty() || registerFault == null) {
+        } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {

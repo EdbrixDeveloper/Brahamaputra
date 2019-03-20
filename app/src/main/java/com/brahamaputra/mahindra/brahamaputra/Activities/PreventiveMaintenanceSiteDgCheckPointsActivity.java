@@ -397,7 +397,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             showToast("Please Scan QR Code");
             return false;
         } else if (dgHmrReading.isEmpty() || dgHmrReading == null) {
-            showToast("Please Enter DG HMR Reading");
+            showToast("Enter DG HMR Reading");
             return false;
         } else if (base64StringTakePhotoOfDgHmr.isEmpty() || base64StringTakePhotoOfDgHmr == null) {
             showToast("Please Take A Photo Of DG HMR ");
@@ -588,6 +588,20 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         mButtonClearQRCodeScanView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteDgCheckPointsButtonPhotoOfDgHmrView.setVisibility(View.GONE);
 
+    }
+
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < dgCheckPointsData.size(); i++) {
+            for (int j = i + 1; j < dgCheckPointsData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (dgCheckPointsData.get(i).getDetailsOfDgQrCodeScan().toString().equals(dgCheckPointsData.get(j).getDetailsOfDgQrCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean checkValidationOnChangeNoOfDgAvailable(String NoOfDgAvailable, String methodFlag) {
@@ -875,11 +889,13 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
-                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
-                        if (checkValidationOnChangeNoOfDgAvailable(mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
-                            submitDetails();
-                            startActivity(new Intent(PreventiveMaintenanceSiteDgCheckPointsActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {
+                            //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+                            if (checkValidationOnChangeNoOfDgAvailable(mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
+                                submitDetails();
+                                startActivity(new Intent(PreventiveMaintenanceSiteDgCheckPointsActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -1045,18 +1061,18 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         base64StringDgCheckPointsQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringDgCheckPointsQRCodeScan = result.getContents();
-                        if (!base64StringDgCheckPointsQRCodeScan.isEmpty() && base64StringDgCheckPointsQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
-                        /*} else {
+                        if (!flagIsDuplicateQRcode) {
+                            base64StringDgCheckPointsQRCodeScan = result.getContents();
+                            if (!base64StringDgCheckPointsQRCodeScan.isEmpty() && base64StringDgCheckPointsQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteDgCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
+                        } else {
                             base64StringDgCheckPointsQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;

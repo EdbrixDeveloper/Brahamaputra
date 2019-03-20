@@ -497,10 +497,12 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
                         // visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
-                        if (checkValidationonSubmit("onSubmit") == true) {
-                            submitDetails();
-                            startActivity(new Intent(getApplicationContext(), PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {
+                            if (checkValidationonSubmit("onSubmit") == true) {
+                                submitDetails();
+                                startActivity(new Intent(getApplicationContext(), PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -689,6 +691,20 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         } else return true;
     }
 
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < rectifierModuleCheckPointDataList.size(); i++) {
+            for (int j = i + 1; j < rectifierModuleCheckPointDataList.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (rectifierModuleCheckPointDataList.get(i).getDetailsOfRectifierModuleQrCodeScan().toString().equals(rectifierModuleCheckPointDataList.get(j).getDetailsOfRectifierModuleQrCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private boolean checkValidationonSubmit(String methodFlag) {
 
         String totalNoOFRectifierModule = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.getText().toString().trim();
@@ -830,7 +846,6 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         }
     }
 
-
     private void DgCheckPointsQRCodeScan() {
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
@@ -909,11 +924,11 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
                         if (!flagIsDuplicateQRcode) {
-                        base64StringDetailsOfRectifierModuleQRCodeScan = result.getContents();
-                        if (!base64StringDetailsOfRectifierModuleQRCodeScan.isEmpty() && base64StringDetailsOfRectifierModuleQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
+                            base64StringDetailsOfRectifierModuleQRCodeScan = result.getContents();
+                            if (!base64StringDetailsOfRectifierModuleQRCodeScan.isEmpty() && base64StringDetailsOfRectifierModuleQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearDetailsOfRectifierModuleQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
                         } else {
                             base64StringDetailsOfRectifierModuleQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");

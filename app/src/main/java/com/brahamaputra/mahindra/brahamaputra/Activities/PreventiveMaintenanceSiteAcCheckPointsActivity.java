@@ -164,8 +164,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     ArrayList<Integer> alreadySelected;
     ArrayList<String> typeOfFaultList;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -446,11 +444,12 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
                     } else if (currentPos == (totalCount - 1)) {
                         saveRecords(currentPos);
-
-                        if (checkValidationonSubmit("onSubmit") == true) {
-                            submitDetails();
-                            startActivity(new Intent(PreventiveMaintenanceSiteAcCheckPointsActivity.this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {
+                            if (checkValidationonSubmit("onSubmit") == true) {
+                                submitDetails();
+                                startActivity(new Intent(PreventiveMaintenanceSiteAcCheckPointsActivity.this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -514,12 +513,12 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_textView_typeOfFaultVal);
         mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading = (Button) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_previousReading);
         mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading = (Button) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_nextReading);
-        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_linearLayout_typeOfFault);
+        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutTypeOfFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_linearLayout_typeOfFault);
 
-        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteAcCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_textView_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_uploadPhotoOfRegisterFault);
-        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView)findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_uploadPhotoOfRegisterFaultView);
+        mPreventiveMaintenanceSiteAcCheckPointsLinearLayoutUploadPhotoOfRegisterFault = (LinearLayout) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_linearLayout_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteAcCheckPointsTextViewUploadPhotoOfRegisterFault = (TextView) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_textView_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFault = (ImageView) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_uploadPhotoOfRegisterFault);
+        mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView = (ImageView) findViewById(R.id.preventiveMaintenanceSiteAcCheckPoints_button_uploadPhotoOfRegisterFaultView);
     }
 
     private boolean checkCameraPermission() {
@@ -731,18 +730,18 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         base64StringAcCheckPointsQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringAcCheckPointsQRCodeScan = result.getContents();
-                        if (!base64StringAcCheckPointsQRCodeScan.isEmpty() && base64StringAcCheckPointsQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
-                        /*} else {
+                        if (!flagIsDuplicateQRcode) {
+                            base64StringAcCheckPointsQRCodeScan = result.getContents();
+                            if (!base64StringAcCheckPointsQRCodeScan.isEmpty() && base64StringAcCheckPointsQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
+                        } else {
                             base64StringAcCheckPointsQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
+                        }
                     }
                 }
                 break;
@@ -874,7 +873,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         finish();
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void setInputDetails(int index) {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
@@ -940,7 +939,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         imageFileUriAcFiltersBeforeCleaning = Uri.parse(path);
                     }
 
-                    base64StringTakePhotoOfAcFiltersAfterCleaning= acCheckPointsData.get(index).getBase64TakePhotoOfAcFiltersAfterCleaning();//////003
+                    base64StringTakePhotoOfAcFiltersAfterCleaning = acCheckPointsData.get(index).getBase64TakePhotoOfAcFiltersAfterCleaning();//////003
                     mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.GONE);
                     if (!base64StringTakePhotoOfAcFiltersAfterCleaning.isEmpty() && base64StringTakePhotoOfAcFiltersAfterCleaning != null) {
                         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.VISIBLE);
@@ -951,7 +950,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         imageFileUriAcFiltersAfterCleaning = Uri.parse(path);
                     }
 
-                    base64StringTakePhotoOfTemperature= acCheckPointsData.get(index).getBase64TakePhotoOfTemperature();//////004
+                    base64StringTakePhotoOfTemperature = acCheckPointsData.get(index).getBase64TakePhotoOfTemperature();//////004
                     mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
                     if (!base64StringTakePhotoOfTemperature.isEmpty() && base64StringTakePhotoOfTemperature != null) {
                         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
@@ -972,17 +971,17 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     }
                 }
             } else {
-            showToast("No previous saved data available");
-            //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
-            mLinearLayoutContainer.setVisibility(View.GONE);
-        }
+                showToast("No previous saved data available");
+                //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                mLinearLayoutContainer.setVisibility(View.GONE);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             //showToast(e.getMessage().toString());
         }
     }
 
-    private void saveRecords(int pos){
+    private void saveRecords(int pos) {
 
         String workingConditionOfAc = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcWorkingConditionVal.getText().toString().trim();
         String automationOfAcController = mPreventiveMaintenanceSiteAcCheckPointsTextViewAutomationOfAcControllerVal.getText().toString().trim();
@@ -997,11 +996,11 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String base64TakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
         String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
 
-        AcCheckPoint acCheckPointChild = new AcCheckPoint (detailsOfAcQrCodeScan, workingConditionOfAc, automationOfAcController,
-                                                acEarthingStatus, acFilterStatus, base64TakePhotoOfAcFiltersBeforeCleaning,
-                                                base64TakePhotoOfAcFiltersAfterCleaning, cleaningOfCoolingCondensorCoils,
-                                                anyAbnormalSoundFromMotor, shelterTemperature, base64TakePhotoOfTemperature,
-                                                shelterDoorStatus);
+        AcCheckPoint acCheckPointChild = new AcCheckPoint(detailsOfAcQrCodeScan, workingConditionOfAc, automationOfAcController,
+                acEarthingStatus, acFilterStatus, base64TakePhotoOfAcFiltersBeforeCleaning,
+                base64TakePhotoOfAcFiltersAfterCleaning, cleaningOfCoolingCondensorCoils,
+                anyAbnormalSoundFromMotor, shelterTemperature, base64TakePhotoOfTemperature,
+                shelterDoorStatus);
         if (acCheckPointsData.size() > 0) {
             if (pos == acCheckPointsData.size()) {
                 acCheckPointsData.add(acCheckPointChild);
@@ -1013,7 +1012,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         }
     }
 
-    private void displayRecords(int pos){
+    private void displayRecords(int pos) {
 
         if (acCheckPointsData.size() > 0 && pos < acCheckPointsData.size()) {
 
@@ -1050,7 +1049,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 imageFileUriAcFiltersBeforeCleaning = Uri.parse(path);
             }
 
-            base64StringTakePhotoOfAcFiltersAfterCleaning= acCheckPointsData.get(pos).getBase64TakePhotoOfAcFiltersAfterCleaning();//////003
+            base64StringTakePhotoOfAcFiltersAfterCleaning = acCheckPointsData.get(pos).getBase64TakePhotoOfAcFiltersAfterCleaning();//////003
             mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.GONE);
             if (!base64StringTakePhotoOfAcFiltersAfterCleaning.isEmpty() && base64StringTakePhotoOfAcFiltersAfterCleaning != null) {
                 mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.VISIBLE);
@@ -1061,7 +1060,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 imageFileUriAcFiltersAfterCleaning = Uri.parse(path);
             }
 
-            base64StringTakePhotoOfTemperature= acCheckPointsData.get(pos).getBase64TakePhotoOfTemperature();//////004
+            base64StringTakePhotoOfTemperature = acCheckPointsData.get(pos).getBase64TakePhotoOfTemperature();//////004
             mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
             if (!base64StringTakePhotoOfTemperature.isEmpty() && base64StringTakePhotoOfTemperature != null) {
                 mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
@@ -1074,7 +1073,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
             mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
-
 
 
         } else {
@@ -1111,8 +1109,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
 
         base64StringAcCheckPointsQRCodeScan = "";
         base64StringTakePhotoOfAcFiltersBeforeCleaning = "";
-        base64StringTakePhotoOfAcFiltersAfterCleaning= "";
-        base64StringTakePhotoOfTemperature= "";
+        base64StringTakePhotoOfAcFiltersAfterCleaning = "";
+        base64StringTakePhotoOfTemperature = "";
 
         mButtonClearQRCodeScanView.setVisibility(View.GONE);
         mButtonClearQRCodeScanView.setVisibility(View.GONE);
@@ -1121,7 +1119,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
         mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
-        alreadySelectedTypeOfFaultList=new ArrayList<>();
+        alreadySelectedTypeOfFaultList = new ArrayList<>();
 
     }
 
@@ -1131,8 +1129,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
             String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
             String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
-            
-            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite,acCheckPointsData,registerFault, typeOfFault,base64StringUploadPhotoOfRegisterFault);
+
+            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite, acCheckPointsData, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault);
             pmSiteTransactionDetails.setAcCheckPointParentData(dataList);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);
@@ -1157,44 +1155,58 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String base64TakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
         String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
 
-          if (detailsOfAcQrCodeScan.isEmpty() || detailsOfAcQrCodeScan == null) {
+        if (detailsOfAcQrCodeScan.isEmpty() || detailsOfAcQrCodeScan == null) {
             showToast("Please Scan QR Code");
             return false;
-        }else if (workingConditionOfAc.isEmpty() || workingConditionOfAc == null) {
+        } else if (workingConditionOfAc.isEmpty() || workingConditionOfAc == null) {
             showToast("Select Working Condition Of AC");
             return false;
         } else if (automationOfAcController.isEmpty() || automationOfAcController == null) {
             showToast("Select Automation Of AC Controller");
             return false;
-        } else  if (acEarthingStatus.isEmpty() || acEarthingStatus == null) {
+        } else if (acEarthingStatus.isEmpty() || acEarthingStatus == null) {
             showToast("Select AC Earthing Status");
             return false;
-        } else  if (acFilterStatus.isEmpty() || acFilterStatus == null) {
+        } else if (acFilterStatus.isEmpty() || acFilterStatus == null) {
             showToast("Select AC Filter Status");
             return false;
-        } else  if (base64TakePhotoOfAcFiltersBeforeCleaning.isEmpty() || base64TakePhotoOfAcFiltersBeforeCleaning == null) {
-              showToast("Take Photo Of AC Filters Before Cleaning");
-              return false;
-          } else  if (base64TakePhotoOfAcFiltersAfterCleaning.isEmpty() || base64TakePhotoOfAcFiltersAfterCleaning == null) {
-              showToast("Take Photo Of AC Filters After Cleaning");
-              return false;
-          } else  if (cleaningOfCoolingCondensorCoils.isEmpty() || cleaningOfCoolingCondensorCoils == null) {
+        } else if (base64TakePhotoOfAcFiltersBeforeCleaning.isEmpty() || base64TakePhotoOfAcFiltersBeforeCleaning == null) {
+            showToast("Take Photo Of AC Filters Before Cleaning");
+            return false;
+        } else if (base64TakePhotoOfAcFiltersAfterCleaning.isEmpty() || base64TakePhotoOfAcFiltersAfterCleaning == null) {
+            showToast("Take Photo Of AC Filters After Cleaning");
+            return false;
+        } else if (cleaningOfCoolingCondensorCoils.isEmpty() || cleaningOfCoolingCondensorCoils == null) {
             showToast("Select Cleaning Of Cooling Condensor Coils");
             return false;
-        } else  if (anyAbnormalSoundFromMotor.isEmpty() || anyAbnormalSoundFromMotor == null) {
+        } else if (anyAbnormalSoundFromMotor.isEmpty() || anyAbnormalSoundFromMotor == null) {
             showToast("Select Any Abnormal Sound From Motor");
             return false;
-        } else  if (shelterTemperature.isEmpty() || shelterTemperature == null) {
-              showToast("Select Shelter Temperature");
-              return false;
-          }  else  if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
+        } else if (shelterTemperature.isEmpty() || shelterTemperature == null) {
+            showToast("Select Shelter Temperature");
+            return false;
+        } else if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
             showToast("Take Photo Of Temperature");
             return false;
-        } else  if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
-              showToast("Select Shelter Door Status");
-              return false;
-          }  else return true;
+        } else if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
+            showToast("Select Shelter Door Status");
+            return false;
+        } else return true;
 
+    }
+
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < acCheckPointsData.size(); i++) {
+            for (int j = i + 1; j < acCheckPointsData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (acCheckPointsData.get(i).getDetailsOfAcQrCodeScan().toString().equals(acCheckPointsData.get(j).getDetailsOfAcQrCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean checkValidationonSubmit(String methodFlag) {
@@ -1203,15 +1215,15 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
         if (noOfAcAvalibleAtSite.isEmpty() || noOfAcAvalibleAtSite == null) {
-            showToast("Select No Of AC Avalible At Site");
+            showToast("Select No of AC Avalible At Site");
             return false;
-        }else if (registerFault.isEmpty() || registerFault == null) {
+        } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type of Fault");
             return false;
-        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
         } else if (Integer.valueOf(noOfAcAvalibleAtSite) > 0) {

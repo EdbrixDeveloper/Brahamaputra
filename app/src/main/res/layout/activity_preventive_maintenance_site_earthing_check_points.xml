@@ -421,7 +421,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
-                        android:text="Earth to Nuetral Voltage"
+                        android:text="Earth to Neutral Voltage"
                         android:textColor="@color/colorBlueLink" />
 
                     <EditText

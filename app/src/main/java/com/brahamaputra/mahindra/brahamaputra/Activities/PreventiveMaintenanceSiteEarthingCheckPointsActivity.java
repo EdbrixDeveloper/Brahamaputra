@@ -762,7 +762,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         String lightningArresterStatus = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewLightningArresterStatusVal.getText().toString().trim();
 
         String executeEarthPitTest = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.getText().toString().trim();
-        /*For Future validation
+        /*For Future validation*/
         String valuePITNo1 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.getText().toString().trim();
         String valuePITNo2 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.getText().toString().trim();
         String valuePITNo3 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.getText().toString().trim();
@@ -772,22 +772,25 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         String valuePITNo7 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.getText().toString().trim();
         String valuePITNo8 = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.getText().toString().trim();
         String earthNuetralVoltage = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.getText().toString().trim();
-        String observationConclusion = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.getText().toString().trim();*/
+        String observationConclusion = mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.getText().toString().trim();
 
         String registerFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
 
-        if(allNutBoltsAreIntact.isEmpty() || allNutBoltsAreIntact == null){
+        if ((allNutBoltsAreIntact.isEmpty() || allNutBoltsAreIntact == null) && methodFlag.equals("onSubmit")) {
             showToast("Select All Nut/Bolts are Intact");
             return false;
-        } else if (igbOgbStatus.isEmpty() || igbOgbStatus == null) {
+        } else if ((igbOgbStatus.isEmpty() || igbOgbStatus == null) && methodFlag.equals("onSubmit")) {
             showToast("Select IGB/OGB Status");
             return false;
-        } else if (lightningArresterStatus.isEmpty() || lightningArresterStatus == null) {
+        } else if ((lightningArresterStatus.isEmpty() || lightningArresterStatus == null) && methodFlag.equals("onSubmit")) {
             showToast("Select Lighting Arrester Status");
             return false;
         } else if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
             showToast("Select No of Earth Pit");
+            return false;
+        } else if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
+            showToast("Select Number of Earth Pit Visible");
             return false;
         } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {
             if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
@@ -802,6 +805,36 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             }*/ else return true;
         } else if ((executeEarthPitTest.isEmpty() || executeEarthPitTest == null) && methodFlag.equals("onSubmit")) {
             showToast("Select Execute Earth Pit Test");
+            return false;
+        } else if ((valuePITNo1.isEmpty() || valuePITNo1 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 01");
+            return false;
+        } else if ((valuePITNo2.isEmpty() || valuePITNo2 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 02");
+            return false;
+        } else if ((valuePITNo3.isEmpty() || valuePITNo3 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 03");
+            return false;
+        } else if ((valuePITNo4.isEmpty() || valuePITNo4 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 04");
+            return false;
+        } else if ((valuePITNo5.isEmpty() || valuePITNo5 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 05");
+            return false;
+        } else if ((valuePITNo6.isEmpty() || valuePITNo6 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 06");
+            return false;
+        } else if ((valuePITNo7.isEmpty() || valuePITNo7 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 07");
+            return false;
+        } else if ((valuePITNo8.isEmpty() || valuePITNo8 == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Value in PIT No 08");
+            return false;
+        } else if ((earthNuetralVoltage.isEmpty() || earthNuetralVoltage == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Earth to Neutral Voltage");
+            return false;
+        } else if ((observationConclusion.isEmpty() || observationConclusion == null) && executeEarthPitTest.equals("Yes")) {
+            showToast("Enter Observation & Conclusion");
             return false;
         } else if ((registerFault.isEmpty() || registerFault == null) && methodFlag.equals("onSubmit")) {
             showToast("Select Register Fault");
@@ -994,7 +1027,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 str_pmSiteEcpNumberOfEarthPitVal = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString();
 
                 if (str_pmSiteEcpNumberOfEarthPitVal == null || str_pmSiteEcpNumberOfEarthPitVal.equals("")) {
-                    showToast("Please select no of earth pit");
+                    showToast("Select Number of Earth PIT");
                 } else {
                     if (checkValidationOnChangeNoOfEarthPitValue(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim(), mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim(), "onSubmit") == true) {
                         submitDetails();
