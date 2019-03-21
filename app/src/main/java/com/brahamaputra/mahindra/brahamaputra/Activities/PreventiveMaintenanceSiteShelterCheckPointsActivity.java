@@ -316,7 +316,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
             public void onClick(View v) {
                 multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
 
-                /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteShelterCheckPointsActivity.this,
+                 /*SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteShelterCheckPointsActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteShelterCheckPoints_typeOfFault))),
                         "Type of Fault",
                         "close", "#000000");
