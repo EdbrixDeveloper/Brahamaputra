@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.brahamaputra.mahindra.brahamaputra.Adapters.SitePreventiveMaintenanceSectionListAdapter;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePreventiveMaintenanceSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -43,7 +44,7 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
 
 
     private PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
-    //vinayak code end
+    ArrayList<BatteryType> batteryType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +55,14 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        batteryType = new ArrayList<BatteryType>();
         Intent intent = getIntent();
+        batteryType = (ArrayList<BatteryType>) intent.getSerializableExtra("batteryType");
+
         String tic_Name = intent.getStringExtra("ticketName");
         this.setTitle(tic_Name);
 
-        this.setTitle("Site Preventive Maintenance Sections List");
+        this.setTitle("Site PM Sections List");
 
 
         values = getResources().getStringArray(R.array.listView_sitePreventiveMaintenanceSections_sections);
@@ -81,13 +85,18 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
 
                 switch (position) {
                     case 0:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class));
+                        Intent intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class);
+                        intent.putExtra("batteryType", batteryType);
+                        startActivity(intent);
                         break;
                     case 1:
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
+                        intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
+                        intent.putExtra("batteryType", batteryType);
+                        startActivity(intent);
+                        //startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                         break;
                     case 3:
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteEarthingCheckPointsActivity.class));
@@ -96,18 +105,18 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteEbMeterBoxActivity.class));
                         break;
                     case 5:
-                        if(!hototicket_sourceOfPower.equals("Non DG")){
+                        if (!hototicket_sourceOfPower.equals("Non DG")) {
                             startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
 
                         }
                         break;
                     case 6:
-                        if(!hototicket_sourceOfPower.equals("Non DG")){
+                        if (!hototicket_sourceOfPower.equals("Non DG")) {
                             startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
                         }
                         break;
                     case 7:
-                        if(!sitePmNoOfAcAvailableAtSite.equals("0")){
+                        if (!sitePmNoOfAcAvailableAtSite.equals("0")) {
                             startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
                         }
                         break;
@@ -121,12 +130,12 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
                         break;
                     case 11:
-                        if(!sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+                        if (!sitePmServoStabilizerWorkingStatus.equals("Not Available")) {
                             startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
                         }
                         break;
                     case 12:
-                        if(!hototicket_Selected_SiteType.equals("Outdoor")){
+                        if (!hototicket_Selected_SiteType.equals("Outdoor")) {
                             startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
                         }
                         break;

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class BatteryType {
+public class BatteryType implements java.io.Serializable {
 
     @SerializedName("QRCodeScan")
     @Expose

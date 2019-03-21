@@ -21,6 +21,9 @@ import com.app.progresviews.ProgressWheel;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.PmSiteExpListAdapter;
 
 import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
+import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
+import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicketsList;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -36,6 +39,8 @@ import org.json.JSONObject;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
@@ -55,7 +60,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
     private SessionManager sessionManager;
     private SitePMTicketsList sitePMTicketsList;
     public GPSTracker gpsTracker;
-
+    ArrayList<BatteryType> batteryType;
     /////
     public static final int RESULT_PM_SITE_SUBMIT = 257;
     private TextView txtNoTicketFound;
@@ -92,7 +97,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         this.setTitle("Site PM");
 
         sitePMTicketsList = new SitePMTicketsList();
-
+        batteryType = new ArrayList<BatteryType>();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -165,6 +170,12 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             final String SiteBoundaryStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteBoundaryStatus().toString();
                             final String NoOfACprovided = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNoOfACprovided().toString();
                             final String ServoStabilizerStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getServoStabilizerWorkingStatus().toString();
+
+                            if (sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes() != null) {
+                                batteryType = new ArrayList<BatteryType>();
+                                batteryType.addAll(sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes());
+                            }
+
                             hototicket_Selected_SiteType = siteType;
                             hototicket_sourceOfPower = sourceOfPower;
                             sitePm_siteBoundaryStatus = SiteBoundaryStatus;
@@ -181,7 +192,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                         @Override
                                         public void onPositiveClick() {
                                             checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                    stateName, customerName, circleName, ssaName, sitePmScheduledDate);
+                                                    stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
                                         }
 
                                         @Override
@@ -192,7 +203,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
                                 } else {
                                     checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                            stateName, customerName, circleName, ssaName, sitePmScheduledDate);
+                                            stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
                                 }
 
                             }
@@ -344,9 +355,9 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
     public void checkSystemLocation(final String sitePMTicketNo,
                                     final String sitePMTicketId, String sitePMTicketDate, String siteId,
-                                    String siteName, String siteAddress, String status, String siteType, String
-                                            stateName,
-                                    String customerName, String circleName, String ssaName, String sitePmScheduledDate) {
+                                    String siteName, String siteAddress, String status, String siteType,
+                                    String stateName, String customerName, String circleName, String ssaName,
+                                    String sitePmScheduledDate,ArrayList<BatteryType> batteryType) {
 
         LocationManager lm = (LocationManager) PreventiveMaintenanceDashboard.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
@@ -390,6 +401,10 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 intent.putExtra("ssaName", ssaName);
                 intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
                 intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
+
+                //String[] array = new String[]{"Item1", "Item2", "item3", "Item4", "item5"};
+                //Bundle bundle = new Bundle();
+                intent.putExtra("batteryType", batteryType);
 
                 sessionManager.updateSessionUserTicketId(sitePMTicketId);
                 sessionManager.updateSessionUserTicketName(sitePMTicketNo);

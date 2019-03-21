@@ -28,6 +28,7 @@ import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsChildData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsParentData;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -154,12 +155,20 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
     private ArrayList<BatteryBankCheckPointsChildData> batteryBankCheckPointschildData;
 
+    ArrayList<BatteryType> batteryType;
+    ArrayList<String> batteryQRCodeList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_battery_bank_check_points);
         this.setTitle("Battery Bank Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        batteryType = new ArrayList<BatteryType>();
+        Intent intent = getIntent();
+        batteryType = (ArrayList<BatteryType>) intent.getSerializableExtra("batteryType");
 
         sessionManager = new SessionManager(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
@@ -169,6 +178,10 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
         checkCameraPermission();
         assignViews();
+        if (batteryType != null) {
+            batteryQRCodeList = new ArrayList<String>();
+            getBatteryQRCodeList(batteryType);
+        }
         initCombo();
         setListner();
 
@@ -356,6 +369,26 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
                         str_pmSiteBbcpTestDoneAs = item.get(position);
                         mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.setText(str_pmSiteBbcpTestDoneAs);
+                    }
+                });
+            }
+        });
+
+        mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this,
+                        batteryQRCodeList,
+                        "Select Battery Bank",
+                        "close", "#000000");
+                searchableSpinnerDialog.showSearchableSpinnerDialog();
+
+                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
+                    @Override
+                    public void onClick(ArrayList<String> item, int position) {
+//new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankCheckPoints_testDoneAs)))
+                        str_pmSiteBbcpSelectBatteryBank = item.get(position);
+                        mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText(str_pmSiteBbcpSelectBatteryBank);
                     }
                 });
             }
@@ -1190,4 +1223,9 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         finish();
     }
 
+    public void getBatteryQRCodeList(ArrayList<BatteryType> batteryTypeList) {
+        for (BatteryType batteryType : batteryTypeList) {
+            batteryQRCodeList.add(batteryType.getQRCodeScan());
+        }
+    }
 }

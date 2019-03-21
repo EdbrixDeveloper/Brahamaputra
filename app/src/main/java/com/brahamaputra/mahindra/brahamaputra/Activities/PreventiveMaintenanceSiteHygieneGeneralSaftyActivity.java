@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.SiteHygenieneGenralSeftyParameter;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -210,6 +211,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private String base64StringUploadPhotoOfRegisterFault;
     private int isSubmited;*/
 
+    ArrayList<BatteryType> batteryType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,6 +219,11 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         setContentView(R.layout.activity_preventive_maintenance_site_hygiene_general_safty);
         setTitle("Site Hygiene-General Safety Parameters");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        batteryType = new ArrayList<BatteryType>();
+        Intent intent = getIntent();
+        batteryType = (ArrayList<BatteryType>) intent.getSerializableExtra("batteryType");
+
         assignViews();
         initCombo();
         checkCameraPermission();
@@ -1238,7 +1245,9 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
             case R.id.menuSubmit:
                 if (checkValidationOfArrayFields() == true) {
                     submitDetails();
-                    startActivity(new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
+                    Intent intent = new Intent(this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class);
+                    intent.putExtra("batteryType", batteryType);
+                    startActivity(intent);
                     finish();
                     return true;
                 }

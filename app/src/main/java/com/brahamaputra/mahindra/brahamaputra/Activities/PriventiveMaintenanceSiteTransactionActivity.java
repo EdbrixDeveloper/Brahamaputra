@@ -19,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
@@ -40,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
@@ -80,6 +82,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
     private PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
 
     private String sitePMTicketStatus;
+    ArrayList<BatteryType> batteryType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +93,9 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         checkInBatteryData = "" + GlobalMethods.getBattery_percentage(PriventiveMaintenanceSiteTransactionActivity.this);
-
+        batteryType = new ArrayList<BatteryType>();
         Intent intent = getIntent();
+        batteryType = (ArrayList<BatteryType>) intent.getSerializableExtra("batteryType");
         String id = intent.getStringExtra("ticketNO");
         sitePMTicketStatus = intent.getStringExtra("status");
         this.setTitle(id);
@@ -117,6 +121,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(PriventiveMaintenanceSiteTransactionActivity.this, SitePreventiveMaintenanceSectionsListActivity.class);
+                intent.putExtra("batteryType", batteryType);
                 //intent.putExtra("ticketName", "");
 
                 startActivityForResult(intent, RESULT_PRIVENTIVE_MAINTENANCE_SITE_READING);

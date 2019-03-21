@@ -26,6 +26,7 @@ import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.AlarmCheckPoints;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -139,12 +140,19 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
      String typeOfFault;
      private String base64StringUploadPhotoOfRegisterFault;*/
 
+    ArrayList<BatteryType> batteryType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_alarm_check_points);
         this.setTitle("Alarm Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        batteryType = new ArrayList<BatteryType>();
+        Intent intent = getIntent();
+        batteryType = (ArrayList<BatteryType>) intent.getSerializableExtra("batteryType");
+
         assignViews();
         checkCameraPermission();
         initCombo();
@@ -721,7 +729,11 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
             case R.id.menuSubmit:
                 if (checkValidationOfArrayFields() == true) {
                     submitDetails();
-                    startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
+                    Intent intent = new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
+                    intent.putExtra("batteryType", batteryType);
+                    startActivity(intent);
+
+                    //startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                     finish();
                     return true;
                 }
