@@ -46,6 +46,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
+
 public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActivity {
 
     private static final String TAG = PreventiveMaintenanceSiteServoCheckPointsActivity.class.getSimpleName();
@@ -451,8 +454,15 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
             case R.id.menuSubmit:
                 if (checkValidationOfArrayFields() == true) {
                     submitDetails();
-                    startActivity(new Intent(this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
-                    finish();
+                    if(hototicket_Selected_SiteType.equals("Outdoor"))
+                    {
+                        startActivity(new Intent(this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
+                        finish();
+                    }else {
+                        startActivity(new Intent(this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                        finish();
+                    }
+
                     return true;
                 }
             default:

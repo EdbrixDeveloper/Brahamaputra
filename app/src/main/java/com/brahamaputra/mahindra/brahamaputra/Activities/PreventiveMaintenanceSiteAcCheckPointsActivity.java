@@ -857,11 +857,12 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
-                finish();
-                return true;
-
+                if (checkValidationonSubmit("onSubmit") == true) {
+                    //submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

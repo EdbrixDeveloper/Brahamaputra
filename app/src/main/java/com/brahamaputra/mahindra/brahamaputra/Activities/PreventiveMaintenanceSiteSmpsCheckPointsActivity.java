@@ -617,11 +617,12 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.class));
-                finish();
-                return true;
-
+                if (checkValidationonSubmit("onSubmit") == true) {
+                    //submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

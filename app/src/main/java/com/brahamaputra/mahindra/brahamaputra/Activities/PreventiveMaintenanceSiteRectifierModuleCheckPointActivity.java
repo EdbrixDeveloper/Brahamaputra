@@ -1019,11 +1019,12 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                 return true;
 
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
-                finish();
-                return true;
-
+                if (checkValidationonSubmit("onSubmit") == true) {
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

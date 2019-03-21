@@ -349,11 +349,12 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                 return true;
 
             case R.id.menuSubmit:
-                submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
-                finish();
-                return true;
-
+                if(checkValidationOfArrayFields() == true){
+                    submitDetails();
+                    startActivity(new Intent(this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
+                    finish();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

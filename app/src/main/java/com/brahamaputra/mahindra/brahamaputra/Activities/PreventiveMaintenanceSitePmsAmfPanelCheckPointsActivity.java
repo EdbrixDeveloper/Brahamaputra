@@ -29,6 +29,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PmsAmfPanelCheckPointsParentD
 import com.brahamaputra.mahindra.brahamaputra.Data.PmsAmfPanelCheckPointsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
@@ -48,6 +49,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
 
 public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends BaseActivity {
 
@@ -403,8 +407,17 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         if(checkDuplicationQrCodeNew() == false){
                             if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true) {
                                 submitDetails();
-                                startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
-                                finish();
+                                if(sitePmServoStabilizerWorkingStatus.equals("Not Available") && hototicket_Selected_SiteType.equals("Outdoor"))
+                                {
+                                    startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
+                                    finish();
+                                }else if(sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+                                    startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                                    finish();
+                                }else {
+                                    startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                                    finish();
+                                }
                             }
                         }
                     }
@@ -579,6 +592,14 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if (str_noOfPmsAmfPiuAvailableAtSiteVal != null && !str_noOfPmsAmfPiuAvailableAtSiteVal.isEmpty()) {
+            if (Integer.valueOf(str_noOfPmsAmfPiuAvailableAtSiteVal) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
         return true;
     }
 
@@ -590,10 +611,22 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
-                startActivity(new Intent(this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
-                finish();
-                return true;
+                if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true){
+                                    /*submitDetails();
+                if(sitePmServoStabilizerWorkingStatus.equals("Not Available") && hototicket_Selected_SiteType.equals("Outdoor"))
+                {
+                    startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
+                    finish();
+                }else if(sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+                    startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                    finish();
+                }else {
+                    startActivity(new Intent(PreventiveMaintenanc eSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                    finish();
+                }*/
+                    return true;
+                }
+
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -848,4 +881,6 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         }else
             return true;
     }
+
+
 }
