@@ -46,6 +46,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
+
 public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
 
     private static final String TAG = PreventiveMaintenanceSiteEbMeterBoxActivity.class.getSimpleName();
@@ -598,7 +601,13 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
             case R.id.menuSubmit:
                 if (checkValidationOfArrayFields() == true) {
                     submitDetails();
-                    startActivity(new Intent(this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
+                    if (hototicket_sourceOfPower.equals("Non DG") && sitePmNoOfAcAvailableAtSite.equals("0")) {
+                        startActivity(new Intent(this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
+                    } else if (hototicket_sourceOfPower.equals("Non DG")) {
+                        startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                    } else {
+                        startActivity(new Intent(this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
+                    }
                     finish();
                     return true;
                 }

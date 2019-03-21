@@ -1128,9 +1128,17 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             case R.id.menuSubmit:
 
                 str_pmSiteDgcpNoOfDgAvailableAtSiteVal = mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.getText().toString();
+                String registerFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+                String typeOfFault = mPreventiveMaintenanceSiteDgCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
 
                 if (str_pmSiteDgcpNoOfDgAvailableAtSiteVal == null || str_pmSiteDgcpNoOfDgAvailableAtSiteVal.equals("")) {
-                    showToast("Please select no of ac");
+                    showToast("Select No of DG available at site");
+                } else if (registerFault.isEmpty() || registerFault == null) {
+                    showToast("Select Register Fault");
+                } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+                    showToast("Select Type of Fault");
+                } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+                    showToast("Upload Photo Of Register Fault");
                 } else {
                     if (checkValidationOnChangeNoOfDgAvailable(mPreventiveMaintenanceSiteDgCheckPointsTextViewNoOfDgAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                         submitDetails();

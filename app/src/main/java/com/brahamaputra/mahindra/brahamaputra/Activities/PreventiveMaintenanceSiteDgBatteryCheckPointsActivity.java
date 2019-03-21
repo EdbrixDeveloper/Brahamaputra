@@ -49,6 +49,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
+
 public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseActivity {
 
     private static final String TAG = PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class.getSimpleName();
@@ -376,7 +379,12 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                         if (checkDuplicationQrCodeNew() == false) {
                             if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                                 submitDetails();
-                                startActivity(new Intent(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                                if (sitePmNoOfAcAvailableAtSite.equals("0")) {
+                                    startActivity(new Intent(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
+                                } else {
+                                    startActivity(new Intent(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                                }
+                                //startActivity(new Intent(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
                                 finish();
                             }
                         }
@@ -984,13 +992,25 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
             case R.id.menuSubmit:
 
                 str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString();
+                String registerFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+                String typeOfFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
 
                 if (str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal == null || str_pmSiteDgbcpNoOfDGBatteryAvailableAtSiteVal.equals("")) {
-                    showToast("Please select no of ac");
+                    showToast("Select No of DG Battery Available at site");
+                } else if (registerFault.isEmpty() || registerFault == null) {
+                    showToast("Select Register Fault");
+                } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+                    showToast("Select Type of Fault");
+                } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+                    showToast("Upload Photo Of Register Fault");
                 } else {
                     if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewNoOfDgBatteryAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
                         submitDetails();
-                        startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                        if (sitePmNoOfAcAvailableAtSite.equals("0")) {
+                            startActivity(new Intent(this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
+                        } else {
+                            startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                        }
                         finish();
                     }
                 }

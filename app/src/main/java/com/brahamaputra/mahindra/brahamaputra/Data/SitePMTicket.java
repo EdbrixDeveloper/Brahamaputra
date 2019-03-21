@@ -52,9 +52,13 @@ public class SitePMTicket {
     @SerializedName("SourceOfPower")
     @Expose
     private String sourceOfPower;
+    /*@SerializedName("BatteryTypes")
+    @Expose
+    private List<Object> batteryTypes = null;*/
     @SerializedName("BatteryTypes")
     @Expose
-    private List<Object> batteryTypes = null;
+    private List<BatteryType> batteryTypes = null;
+
     @SerializedName("SiteBoundaryStatus")
     @Expose
     private String siteBoundaryStatus;
@@ -185,11 +189,11 @@ public class SitePMTicket {
         this.sourceOfPower = sourceOfPower;
     }
 
-    public List<Object> getBatteryTypes() {
+    public List<BatteryType> getBatteryTypes() {
         return batteryTypes;
     }
 
-    public void setBatteryTypes(List<Object> batteryTypes) {
+    public void setBatteryTypes(List<BatteryType> batteryTypes) {
         this.batteryTypes = batteryTypes;
     }
 

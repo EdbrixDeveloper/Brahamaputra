@@ -857,12 +857,28 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 return true;
 
             case R.id.menuSubmit:
-                if (checkValidationonSubmit("onSubmit") == true) {
-                    //submitDetails();
+                String noOfAcAvalibleAtSite = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
+                String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
+                String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+                if (noOfAcAvalibleAtSite.isEmpty() || noOfAcAvalibleAtSite == null) {
+                    showToast("Select No of AC Avalible At Site");
+                    return false;
+                } else if (registerFault.isEmpty() || registerFault == null) {
+                    showToast("Select Register Fault");
+                    return false;
+                } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
+                    showToast("Select Type of Fault");
+                    return false;
+                } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+                    showToast("Upload Photo Of Register Fault");
+                    return false;
+                } else {
+                    submitDetails();
                     startActivity(new Intent(this, PreventiveMaintenanceSiteSmpsCheckPointsActivity.class));
                     finish();
-                    return true;
                 }
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
