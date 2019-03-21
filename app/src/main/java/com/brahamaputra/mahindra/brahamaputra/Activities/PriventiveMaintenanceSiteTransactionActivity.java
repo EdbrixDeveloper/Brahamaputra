@@ -292,7 +292,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
             preventiveMaintanceSiteTransactionDetails.setTicketId(ticketId);
             preventiveMaintanceSiteTransactionDetails.setCheckOutLatitude(checkOutLat);
             preventiveMaintanceSiteTransactionDetails.setCheckOutLongitude(checkOutLong);
-            preventiveMaintanceSiteTransactionDetails.setCheckOutBatteryData(checkOutBatteryData);
+            //preventiveMaintanceSiteTransactionDetails.setCheckOutBatteryData(checkOutBatteryData);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(preventiveMaintanceSiteTransactionDetails);

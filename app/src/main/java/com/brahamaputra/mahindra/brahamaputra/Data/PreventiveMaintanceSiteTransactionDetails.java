@@ -18,7 +18,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     @SerializedName("UserId")
     @Expose
     private String userId;
-    @SerializedName("checkInBatteryData")
+    /*@SerializedName("checkInBatteryData")
     @Expose
     private String checkInBatteryData;
     @SerializedName("checkInLatitude")
@@ -29,7 +29,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
     private String checkInLongitude;
     @SerializedName("checkOutBatteryData")
     @Expose
-    private String checkOutBatteryData;
+    private String checkOutBatteryData;*/
     @SerializedName("checkOutLatitude")
     @Expose
     private String checkOutLatitude;
@@ -124,12 +124,12 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         this.userId = userId;
         this.accessToken = accessToken;
         this.sitePMTicketId = ticketId;
-        this.checkInLongitude = checkInLat;
+        /*this.checkInLongitude = checkInLat;
         this.checkInLongitude = checkInLong;
-        this.checkInBatteryData = checkInBatteryData;
+        this.checkInBatteryData = checkInBatteryData;*/
         this.checkOutLongitude = checkOutLong;
         this.checkOutLatitude = checkOutLat;
-        this.checkOutBatteryData = checkOutBatteryData;
+        /*this.checkOutBatteryData = checkOutBatteryData;*/
     }
 
 
@@ -149,7 +149,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         this.userId = userId;
     }
 
-    public String getCheckInBatteryData() {
+    /*public String getCheckInBatteryData() {
         return checkInBatteryData;
     }
 
@@ -179,7 +179,7 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
 
     public void setCheckOutBatteryData(String checkOutBatteryData) {
         this.checkOutBatteryData = checkOutBatteryData;
-    }
+    }*/
 
     public String getCheckOutLatitude() {
         return checkOutLatitude;
