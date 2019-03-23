@@ -11,13 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivity {
+public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewCustomer;
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal;
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewCircle;
@@ -154,5 +155,19 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends AppCompatActivit
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    public boolean checkValidationOfArrayFields(){
+
+        String feedBack = mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.getText().toString().trim();
+        String remark = mPreventiveMaintanceAcFieldEngineerEditTextRemark.getText().toString().trim();
+
+        if (feedBack.isEmpty() || feedBack == null) {
+            showToast("Select Feedback");
+            return false;
+        } else if (remark.isEmpty() || remark == null) {
+            showToast("Enter remark For Technician");
+            return false;
+        } else return true;
     }
 }

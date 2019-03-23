@@ -543,17 +543,19 @@ public class Battery_Set extends BaseActivity {
             @Override
             public void onClick(View v) {
                 /*if (checkValidtionForArrayFields()) { comment 04022019 by tiger*/
-                    if (currentPos < (totalCount - 1)) {
-                        //Save current ac reading
-                        saveRecords(currentPos);
-                        currentPos = currentPos + 1;
-                        //move to Next reading
-                        displayRecords(currentPos);
+                if (currentPos < (totalCount - 1)) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos + 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
 
-                    } else if (currentPos == (totalCount - 1)) {
-                        saveRecords(currentPos);
-                        //Save Final current reading and submit all AC data
-                        if (checkDuplicationQrCodeNew() == false) {//add 04022019 by 008
+                } else if (currentPos == (totalCount - 1)) {
+                    saveRecords(currentPos);
+                    //Save Final current reading and submit all AC data
+
+                    if (checkDuplicationQrCodeNew() == false) {//add 04022019 by 008
+                         if (checkTypeOfBatteryIsSame() == false) {//add 23032019 by tiger for new requirement
                             if (checkValidation(mBatterySetTextViewNoofBatterySetProvidedVal.getText().toString().trim(), mBatterySetTextViewNumberofBatteryBankWorkingVal.getText().toString().trim(), "onSubmit") == true) {
                                 //saveRecords(currentPos);
                                 submitDetails();
@@ -562,6 +564,7 @@ public class Battery_Set extends BaseActivity {
                             }
                         }
                     }
+                }
                 /*}*/
             }
         });
@@ -589,6 +592,21 @@ public class Battery_Set extends BaseActivity {
         });
 
 
+    }
+
+    //add 23032019 by tiger for new requirement
+    private boolean checkTypeOfBatteryIsSame() {
+        for (int i = 0; i < batterySetData.size(); i++) {
+            for (int j = i + 1; j < batterySetData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (!batterySetData.get(i).getTypeOfBattery().toString().equals(batterySetData.get(j).getTypeOfBattery().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("Type Of Battery value in reading no: " + dup_pos + " was not same in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean checkValidtionForArrayFields() {
@@ -643,10 +661,11 @@ public class Battery_Set extends BaseActivity {
             return false;
         }/* else if (checkDuplicationQrCode(currentPos)) {
             return false;
-        }*/else return true;
+        }*/ else return true;
 
 
     }
+
     //add 04022019 by tiger for new requirement
     private boolean checkDuplicationQrCodeNew() {
         for (int i = 0; i < batterySetData.size(); i++) {
@@ -654,7 +673,7 @@ public class Battery_Set extends BaseActivity {
                 //compare list.get(i) and list.get(j)
                 if (batterySetData.get(i).getBatterySet_Qr().toString().equals(batterySetData.get(j).getBatterySet_Qr().toString())) {
                     int dup_pos = j + 1;
-                    showToast("QR Code Scanned in Reading No: "+ dup_pos +" was already scanned in reading no:"+(i + 1));
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
                     return true;
                 }
             }
@@ -918,7 +937,7 @@ public class Battery_Set extends BaseActivity {
                     }
                 } else {
                     base64StringBatterySet = "";
-                    showToast("This QR Code Already Used in "+isDuplicateQRcode[0]+" Section");
+                    showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
                 }
             }
         }
@@ -1084,7 +1103,7 @@ public class Battery_Set extends BaseActivity {
         String natureOfProblem = mBatterySetEditTextNatureofProblem.getText().toString().trim();
 
 
-        BatterySetData obj_batterySetData = new BatterySetData(batterySet_Qr,bookValue, assetOwner, manufactureMakeModel, capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank, batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem, imageFileName);
+        BatterySetData obj_batterySetData = new BatterySetData(batterySet_Qr, bookValue, assetOwner, manufactureMakeModel, capacityInAH, typeOfBattery, dateOfInstallation, backupDuaration, positionOfBatteryBank, batteryBankCableSize, batteryBankEarthingStatus, backupCondition, natureOfProblem, imageFileName);
 
         if (batterySetData.size() > 0) {
             if (pos == batterySetData.size()) {

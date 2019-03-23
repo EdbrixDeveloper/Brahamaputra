@@ -169,6 +169,22 @@
 
     </LinearLayout>
 
+    <ExpandableListView
+        android:id="@+id/pmSiteList_listView_siteacList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout_Status"
+        tools:listheader="@layout/item_site_pm_ticket_list_seprator"
+        tools:listitem="@layout/item_site_pm_ticket_list" />
+
+    <TextView
+        android:id="@+id/txtNoTicketFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:text="No ticket found."/>
+
 
     <LinearLayout
         android:layout_width="match_parent"

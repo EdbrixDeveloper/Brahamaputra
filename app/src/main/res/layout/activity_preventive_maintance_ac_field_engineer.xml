@@ -442,7 +442,6 @@
                     android:hint="Enter Remark"
                     android:imeOptions="actionNext"
                     android:inputType="textMultiLine"
-                    android:maxLength="3"
                     android:textAlignment="viewStart" />
             </LinearLayout>
         </LinearLayout>
