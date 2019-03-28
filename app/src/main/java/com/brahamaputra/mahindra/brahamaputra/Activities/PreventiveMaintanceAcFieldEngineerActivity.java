@@ -61,9 +61,9 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewRemark;
     private EditText mPreventiveMaintanceAcFieldEngineerEditTextRemark;
 
-    private String userId = "1111";
-    private String ticketId = "1111";
-    private String ticketName = "1111";
+    private String userId = "1112";
+    private String ticketId = "1112";
+    private String ticketName = "1112";
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
@@ -88,6 +88,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         ticktetSubmissionFromFieldEngineerDatum = new TicktetSubmissionFromFieldEngineerDatum();
         assignViews();
         initCombo();
+        setInputDetails();
     }
 
     private void assignViews() {
@@ -195,6 +196,47 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         } else return true;
     }
 
+    private void setInputDetails() {
+
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
+
+                Gson gson = new Gson();
+                ticktetSubmissionFromFieldEngineerDatum = gson.fromJson(jsonInString, TicktetSubmissionFromFieldEngineerDatum.class);
+
+                mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.setText(ticktetSubmissionFromFieldEngineerDatum.getCustomer());
+                mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.setText(ticktetSubmissionFromFieldEngineerDatum.getCircle());
+                mPreventiveMaintanceAcFieldEngineerTextViewStateVal.setText(ticktetSubmissionFromFieldEngineerDatum.getState());
+                mPreventiveMaintanceAcFieldEngineerTextViewSsaVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSsa());
+                mPreventiveMaintanceAcFieldEngineerTextViewSiteIDVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSiteId());
+                mPreventiveMaintanceAcFieldEngineerTextViewSiteNameVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSiteName());
+                mPreventiveMaintanceAcFieldEngineerTextViewPmSheduledDateOfAcVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSheduledDateOfAcPm());
+                mPreventiveMaintanceAcFieldEngineerTextViewModeOfOprationVal.setText(ticktetSubmissionFromFieldEngineerDatum.getModeOfOpration());
+                mPreventiveMaintanceAcFieldEngineerTextViewTicketNoVal.setText(ticktetSubmissionFromFieldEngineerDatum.getTicketNo());
+                mPreventiveMaintanceAcFieldEngineerTextViewVendorNameVal.setText(ticktetSubmissionFromFieldEngineerDatum.getVendorName());
+                mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.setText(ticktetSubmissionFromFieldEngineerDatum.getAcTechnicianName());
+                mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.setText(ticktetSubmissionFromFieldEngineerDatum.getAcTechnicianMobileNo());
+
+                if(ticktetSubmissionFromFieldEngineerDatum.getTicketStatusToWip().equals("true"))
+                {
+                    mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(true);
+                }else{
+                    mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(false);
+                }
+                mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.setText(ticktetSubmissionFromFieldEngineerDatum.getStatus());
+                mPreventiveMaintanceAcFieldEngineerTextViewDateSubmittedByTechnicianVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSubmittedDate());
+                mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setText(ticktetSubmissionFromFieldEngineerDatum.getFeedBack());
+                mPreventiveMaintanceAcFieldEngineerEditTextRemark.setText(ticktetSubmissionFromFieldEngineerDatum.getRemark());
+
+
+            }
+        } catch (Exception e){
+
+        }
+
+    }
+
     public void setDataToFields(Intent intent){
         mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.setText(intent.getStringExtra(""));
         mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.setText(intent.getStringExtra(""));
@@ -227,7 +269,15 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             String vendorName = mPreventiveMaintanceAcFieldEngineerTextViewVendorNameVal.getText().toString().trim();
             String technicianName = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.getText().toString().trim();
             String technicianMobileNo = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.getText().toString().trim();
-            String ticketStatusToWip = mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.getText().toString().trim();
+            String ticketStatusToWip = "";
+            if(mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.isChecked())
+            {
+                 ticketStatusToWip = "true";
+            }
+            else
+            {
+                 ticketStatusToWip = "false";
+            }
             String status = mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.getText().toString().trim();
             String submittedDate = mPreventiveMaintanceAcFieldEngineerTextViewDateSubmittedByTechnicianVal.getText().toString().trim();
             String feedback = mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.getText().toString().trim();
@@ -247,7 +297,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     }
 
     private void clearFields(){
-
         mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setText("");
         mPreventiveMaintanceAcFieldEngineerEditTextRemark.setText("");
         mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(false);
