@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,10 +11,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintanceProcessParentDatum;
+import com.brahamaputra.mahindra.brahamaputra.Data.TicktetSubmissionFromFieldEngineerDatum;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +61,15 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewRemark;
     private EditText mPreventiveMaintanceAcFieldEngineerEditTextRemark;
 
+    private String userId = "1111";
+    private String ticketId = "1111";
+    private String ticketName = "1111";
+
+    private OfflineStorageWrapper offlineStorageWrapper;
+    private SessionManager sessionManager;
+
     String str_feedBackVal;
+    TicktetSubmissionFromFieldEngineerDatum ticktetSubmissionFromFieldEngineerDatum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +77,15 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         setContentView(R.layout.activity_preventive_maintance_ac_field_engineer);
         setTitle("Ticket Submission from Field Engineer");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        sessionManager = new SessionManager(PreventiveMaintanceAcFieldEngineerActivity.this);
+        //ticketId = sessionManager.getSessionUserTicketId();
+        //ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintanceAcFieldEngineerActivity.this, userId, ticketName);
+
+        ticktetSubmissionFromFieldEngineerDatum = new TicktetSubmissionFromFieldEngineerDatum();
         assignViews();
         initCombo();
     }
@@ -141,7 +165,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                //submitDetails();
+                 submitDetails();
                 //startActivity(new Intent(this, Tower_Detail.class));
                 finish();
                 return true;
@@ -170,4 +194,63 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             return false;
         } else return true;
     }
+
+    public void setDataToFields(Intent intent){
+        mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewStateVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewSsaVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewSiteNameVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewSiteIDVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewPmSheduledDateOfAcVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewModeOfOprationVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewTicketNoVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewVendorNameVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintanceAcFieldEngineerTextViewDateSubmittedByTechnicianVal.setText(intent.getStringExtra(""));
+    }
+
+    private void submitDetails() {
+
+        try{
+            String customer = mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.getText().toString().trim();
+            String circle = mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.getText().toString().trim();
+            String state = mPreventiveMaintanceAcFieldEngineerTextViewStateVal.getText().toString().trim();
+            String ssa = mPreventiveMaintanceAcFieldEngineerTextViewSsaVal.getText().toString().trim();
+            String siteId = mPreventiveMaintanceAcFieldEngineerTextViewSiteIDVal.getText().toString().trim();
+            String siteName = mPreventiveMaintanceAcFieldEngineerTextViewSiteNameVal.getText().toString().trim();
+            String sheduledDateOfAcPm = mPreventiveMaintanceAcFieldEngineerTextViewPmSheduledDateOfAcVal.getText().toString().trim();
+            String modeOfOpration = mPreventiveMaintanceAcFieldEngineerTextViewModeOfOprationVal.getText().toString().trim();
+            String ticketNo = mPreventiveMaintanceAcFieldEngineerTextViewTicketNoVal.getText().toString().trim();
+            String vendorName = mPreventiveMaintanceAcFieldEngineerTextViewVendorNameVal.getText().toString().trim();
+            String technicianName = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.getText().toString().trim();
+            String technicianMobileNo = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.getText().toString().trim();
+            String ticketStatusToWip = mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.getText().toString().trim();
+            String status = mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.getText().toString().trim();
+            String submittedDate = mPreventiveMaintanceAcFieldEngineerTextViewDateSubmittedByTechnicianVal.getText().toString().trim();
+            String feedback = mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.getText().toString().trim();
+            String remark = mPreventiveMaintanceAcFieldEngineerEditTextRemark.getText().toString().trim();
+
+            ticktetSubmissionFromFieldEngineerDatum = new TicktetSubmissionFromFieldEngineerDatum(customer,circle,state,ssa,siteId,siteName,
+                    sheduledDateOfAcPm,modeOfOpration,ticketNo,vendorName,technicianName,technicianMobileNo,ticketStatusToWip,status,submittedDate,
+                    feedback,remark);
+
+            Gson gson2 = new GsonBuilder().create();
+            String jsonString = gson2.toJson(ticktetSubmissionFromFieldEngineerDatum);
+            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void clearFields(){
+
+        mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setText("");
+        mPreventiveMaintanceAcFieldEngineerEditTextRemark.setText("");
+        mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(false);
+    }
+
 }

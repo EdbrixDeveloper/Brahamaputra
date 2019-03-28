@@ -270,6 +270,7 @@
         <activity
             android:name=".Activities.PriventiveMaintenanceSiteTransactionActivity"
             android:label="Priventive Maintenance Site Transaction"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.PreventiveMaintenanceSiteHygieneGeneralSaftyActivity"

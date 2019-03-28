@@ -428,7 +428,6 @@ public class DieselFillingFundRequest extends BaseActivity {
         mDieselFillingFundRequestButtonPresentDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -453,11 +452,8 @@ public class DieselFillingFundRequest extends BaseActivity {
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time For Average Eb Availability");
                 mTimePicker.show();
-
             }
         });
-
-
     }
 
     private void prepareUserSites(final boolean listbind_only) {
