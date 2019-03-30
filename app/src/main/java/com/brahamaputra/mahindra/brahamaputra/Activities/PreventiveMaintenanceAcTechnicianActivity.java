@@ -288,6 +288,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         setListner();
         checkCameraPermission();
 
+        Intent intent = getIntent();
+
         sessionManager = new SessionManager(PreventiveMaintenanceAcTechnicianActivity.this);
         //ticketId = sessionManager.getSessionUserTicketId();
         //ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -299,6 +301,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
         setInputDetails(currentPos);
         invalidateOptionsMenu();
+        displayDataOnForm(intent);
 
 
     }
@@ -2310,6 +2313,18 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         return false;
     }
 
+    private void displayDataOnForm(Intent intent){
+
+        mPreventiveMaintenanceAcTechnicianTextViewCircleVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewStateVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewSsaVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewSiteIdVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewSiteNameVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewTicketNoVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewTicketDateVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewPmPlanDateVal.setText(intent.getStringExtra(""));
+        mPreventiveMaintenanceAcTechnicianTextViewSubmittedDateVal.setText(intent.getStringExtra(""));
+    }
 
 
 }
