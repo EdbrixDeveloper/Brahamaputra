@@ -622,7 +622,7 @@
                     android:layout_height="match_parent"
                     android:background="#000000">
 
-                    <TableRow
+                    <TableRows
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:weightSum="4">
@@ -667,7 +667,7 @@
                             android:background="#ffffff"
                             android:hint="Cell4"
                             android:inputType="numberDecimal" />
-                    </TableRow>
+                    </TableRows>
 
                     <TableRow
                         android:layout_width="match_parent"

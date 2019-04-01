@@ -1008,6 +1008,14 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
+        MenuItem shareItem = menu.findItem(R.id.menuSubmit);
+        // show the button when some condition is true
+        shareItem.setVisible(true);
+        if ( str_noOfRectifierModuleAvailableAtSiteVal != null && ! str_noOfRectifierModuleAvailableAtSiteVal.isEmpty()) {
+            if (Integer.valueOf( str_noOfRectifierModuleAvailableAtSiteVal) > 0) {
+                shareItem.setVisible(false);
+            }
+        }
         return true;
     }
 

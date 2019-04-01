@@ -89,6 +89,9 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         assignViews();
         initCombo();
         setInputDetails();
+
+        Intent intent = getIntent();
+        setDataToFields(intent);
     }
 
     private void assignViews() {
@@ -156,6 +159,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
         return true;
+
     }
 
     @Override
