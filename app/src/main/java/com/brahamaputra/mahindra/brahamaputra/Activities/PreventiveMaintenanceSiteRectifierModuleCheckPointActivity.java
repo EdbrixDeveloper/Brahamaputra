@@ -368,6 +368,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             }
         });
 
+
         mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -377,21 +378,25 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
+
                 searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
-
-                        str_noOfModulesWorkingVal = item.get(position);
-                        mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText(str_noOfModulesWorkingVal);
-                        int noOfWorkingModules = Integer.parseInt(str_noOfModulesWorkingVal);
-                        int noOfModuleAvailableInSite = Integer.parseInt(str_noOfRectifierModuleAvailableAtSiteVal);
-                        int remainingFaultyModules = 0;
-                        if (noOfWorkingModules > noOfModuleAvailableInSite) {
-                            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText("");
-                            Toast.makeText(getApplicationContext(), "Wrong input must be less then or equal to no of available module in site.", Toast.LENGTH_LONG).show();
+                        if (mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.getText().toString().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Must be select no of rectifier module available at site", Toast.LENGTH_LONG).show();
                         } else {
-                            remainingFaultyModules = noOfModuleAvailableInSite - noOfWorkingModules;
-                            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setText("" + remainingFaultyModules);
+                            str_noOfModulesWorkingVal = item.get(position);
+                            mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText(str_noOfModulesWorkingVal);
+                            int noOfWorkingModules = Integer.parseInt(str_noOfModulesWorkingVal);
+                            int noOfModuleAvailableInSite = Integer.parseInt(str_noOfRectifierModuleAvailableAtSiteVal);
+                            int remainingFaultyModules = 0;
+                            if (noOfWorkingModules > noOfModuleAvailableInSite) {
+                                mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText("");
+                                Toast.makeText(getApplicationContext(), "Wrong input must be less then or equal to no of available module in site.", Toast.LENGTH_LONG).show();
+                            } else {
+                                remainingFaultyModules = noOfModuleAvailableInSite - noOfWorkingModules;
+                                mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setText("" + remainingFaultyModules);
+                            }
                         }
                     }
                 });
@@ -1011,8 +1016,8 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
         // show the button when some condition is true
         shareItem.setVisible(true);
-        if ( str_noOfRectifierModuleAvailableAtSiteVal != null && ! str_noOfRectifierModuleAvailableAtSiteVal.isEmpty()) {
-            if (Integer.valueOf( str_noOfRectifierModuleAvailableAtSiteVal) > 0) {
+        if (str_noOfRectifierModuleAvailableAtSiteVal != null && !str_noOfRectifierModuleAvailableAtSiteVal.isEmpty()) {
+            if (Integer.valueOf(str_noOfRectifierModuleAvailableAtSiteVal) > 0) {
                 shareItem.setVisible(false);
             }
         }
