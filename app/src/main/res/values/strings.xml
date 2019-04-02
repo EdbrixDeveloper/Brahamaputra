@@ -1965,15 +1965,15 @@
     </string-array>
 
     <string-array name="array_pmSiteDgBatteryCheckPoints_typeOfFault"><!--why this commented, commented items present in xls sheet for this field commented by tiger-->
-        <!--<item>Battery Faulty</item>
+        <item>Battery Faulty</item>
         <item>Battery Not Charging</item>
         <item>Battery Terminal Damage</item>
         <item>DG Battery Cable Damage</item>
-        <item>Theft</item>-->
-        <item>Low Back-up</item>
+        <item>Theft</item>
+        <!--<item>Low Back-up</item>
         <item>Battery Cable Replacement Required</item>
         <item>Strip Replace</item>
-        <item>General Faults</item>
+        <item>General Faults</item>-->
     </string-array>
 
     <!--PM AC Check Points-->
