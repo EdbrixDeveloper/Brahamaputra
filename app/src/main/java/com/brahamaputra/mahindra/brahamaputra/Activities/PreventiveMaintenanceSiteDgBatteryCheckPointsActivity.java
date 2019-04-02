@@ -348,7 +348,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
             @Override
             public void onClick(View v) {
                 resetMultiSelectModel();
-                if (checkValidationOfArrayFields() == true) {
+               /* if (checkValidationOfArrayFields() == true) {*/
                     if (currentPos > 0) {
                         //Save current ac reading
                         saveDGCheckRecords(currentPos);
@@ -357,7 +357,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                         displayDGCheckRecords(currentPos);
                         //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
-                }
+               /* }*/
             }
         });
         mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {

@@ -475,7 +475,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true) {
+               /* if (checkValidationOfArrayFields() == true) {*/
                     if (currentPos > 0) {
                         //Save current ac reading
                         saveRecords(currentPos);
@@ -484,7 +484,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         displayRecords(currentPos);
                         //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
                     }
-                }
+               /* }*/
             }
         });
 

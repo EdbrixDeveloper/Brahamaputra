@@ -419,7 +419,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true) {
+               /* if (checkValidationOfArrayFields() == true) {*/
                     if (currentPos > 0) {
                         //Save current ac reading
                         saveRecords(currentPos);
@@ -428,7 +428,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         displayRecords(currentPos);
 
                     }
-                }
+                /*}*/
             }
         });
         mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {

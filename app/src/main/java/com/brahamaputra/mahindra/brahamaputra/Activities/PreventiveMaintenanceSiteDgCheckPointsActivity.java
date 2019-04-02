@@ -862,7 +862,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 resetMultiSelectModel();
-                if (checkValidationOfArrayFields() == true) {
+              /*  if (checkValidationOfArrayFields() == true) {*/
                     if (currentPos > 0) {
                         //Save current ac reading
                         saveDGCheckRecords(currentPos);
@@ -871,7 +871,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         displayDGCheckRecords(currentPos);
                         //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
                     }
-                }
+               /* }*/
             }
         });
         mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {
