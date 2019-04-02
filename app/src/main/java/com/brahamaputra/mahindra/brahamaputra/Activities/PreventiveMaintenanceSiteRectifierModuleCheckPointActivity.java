@@ -89,7 +89,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
 
     String str_noOfRectifierModuleAvailableAtSiteVal;
     String str_noOfModulesWorkingVal;
-    String str_noOfFaultyModulesInSiteVal;
+    //String str_noOfFaultyModulesInSiteVal;
     String str_rectifierCleaningVal;
     String str_registerFaultVal;
     String str_typeOfFaultVal;
@@ -398,7 +398,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             }
         });
 
-        mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setOnClickListener(new View.OnClickListener() {
+        /*mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this,
@@ -416,7 +416,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                     }
                 });
             }
-        });
+        });*/
 
         mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.setOnClickListener(new View.OnClickListener() {
             @Override

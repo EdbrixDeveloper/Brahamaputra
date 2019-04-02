@@ -18,9 +18,11 @@
             android:orientation="vertical">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_detailsOfQRCodeScan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -66,9 +68,38 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_selectBatteryBank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_selectBatteryBank"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Select QR Code" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_selectBatteryBankVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <!--No Important FSR No(Ticket No) Section-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -425,8 +456,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="volt 1"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Voltage 1"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCurrentModuleReading1EditText1"
+                            android:nextFocusLeft="@+id/bdTestVoltageModuleReading1EditText1" />
 
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText1"
@@ -436,8 +469,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="curr 1"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Current 1"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestSocModuleReadingEditText1"
+                            android:nextFocusLeft="@+id/bdTestCurrentModuleReading1EditText1" />
 
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText1"
@@ -447,8 +482,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="soc 1"
-                            android:inputType="numberDecimal" />
+                            android:hint=" SOC 1"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestSohModuleReadingEditText1"
+                            android:nextFocusLeft="@+id/bdTestSocModuleReadingEditText1" />
 
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText1"
@@ -458,8 +495,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="soh 1"
-                            android:inputType="numberDecimal" />
+                            android:hint=" SOH 1"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestVoltageModuleReading1EditText2"
+                            android:nextFocusLeft="@+id/bdTestSohModuleReadingEditText1" />
                     </TableRow>
 
                     <TableRow
@@ -485,8 +524,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="volt 2"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Voltage 2"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCurrentModuleReading1EditText2"
+                            android:nextFocusLeft="@+id/bdTestVoltageModuleReading1EditText2" />
 
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText2"
@@ -496,8 +537,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="curr 2"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Current 2"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestSocModuleReadingEditText2"
+                            android:nextFocusLeft="@+id/bdTestCurrentModuleReading1EditText2" />
 
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText2"
@@ -507,8 +550,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="soc 2"
-                            android:inputType="numberDecimal" />
+                            android:hint=" SOC 2"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestSohModuleReadingEditText2"
+                            android:nextFocusLeft="@+id/bdTestSocModuleReadingEditText2" />
 
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText2"
@@ -518,8 +563,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="soh 2"
-                            android:inputType="numberDecimal" />
+                            android:hint=" SOH 2"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestVoltageModuleReading1EditText3"
+                            android:nextFocusLeft="@+id/bdTestSohModuleReadingEditText2" />
                     </TableRow>
 
                     <TableRow
@@ -545,8 +592,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="volt 3"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Voltage 3"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCurrentModuleReading1EditText3"
+                            android:nextFocusLeft="@+id/bdTestVoltageModuleReading1EditText3" />
 
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText3"
@@ -556,8 +605,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="curr 3"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Current 3"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestSocModuleReadingEditText3"
+                            android:nextFocusLeft="@+id/bdTestCurrentModuleReading1EditText3" />
 
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText3"
@@ -567,8 +618,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="soc 3"
-                            android:inputType="numberDecimal" />
+                            android:hint=" SOC 3"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestSohModuleReadingEditText3"
+                            android:nextFocusLeft="@+id/bdTestSocModuleReadingEditText3" />
 
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText3"
@@ -578,8 +631,10 @@
                             android:layout_weight="1"
                             android:background="#ffffff"
                             android:ellipsize="start"
-                            android:hint="soh 3"
-                            android:inputType="numberDecimal" />
+                            android:hint=" SOH 3"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min"
+                            android:nextFocusLeft="@+id/bdTestSohModuleReadingEditText3" />
                     </TableRow>
                 </TableLayout>
 
@@ -606,7 +661,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/app_min_margin"
-                    android:text="#1"
+                    android:text="Reading: #1"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -622,7 +677,7 @@
                     android:layout_height="match_parent"
                     android:background="#000000">
 
-                    <TableRows
+                    <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:weightSum="4">
@@ -634,9 +689,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell1"
+                            android:hint=" Cell 1"
                             android:inputType="numberDecimal"
-                            android:nextFocusRight="@+id/bdTestCellReadingEditText2" />
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText2"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText1" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText2"
@@ -645,8 +701,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell2"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 2"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText3"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText2" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText3"
@@ -655,8 +713,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell3"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 3"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText4"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText3" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText4"
@@ -665,9 +725,11 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell4"
-                            android:inputType="numberDecimal" />
-                    </TableRows>
+                            android:hint=" Cell 4"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText5"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText4" />
+                    </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -681,8 +743,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell5"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 5"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText6"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText5" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText6"
@@ -691,8 +755,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell6"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 6"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText7"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText6" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText7"
@@ -701,8 +767,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell7"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 7"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText8"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText7" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText8"
@@ -711,8 +779,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell8"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 8"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText9"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText8" />
                     </TableRow>
 
                     <TableRow
@@ -727,8 +797,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell9"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 9"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText10"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText9" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText10"
@@ -737,8 +809,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell10"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 10"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText11"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText10" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText11"
@@ -747,8 +821,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell11"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 11"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText12"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText11" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText12"
@@ -757,8 +833,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell12"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 12"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText13"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText12" />
                     </TableRow>
 
                     <TableRow
@@ -773,8 +851,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell13"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 13"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText14"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText13" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText14"
@@ -783,8 +863,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell14"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 14"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText15"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText14" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText15"
@@ -793,8 +875,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell15"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 15"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText16"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText15" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText16"
@@ -803,8 +887,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell16"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 16"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText17"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText16" />
                     </TableRow>
 
                     <TableRow
@@ -819,8 +905,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell17"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 17"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText18"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText17" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText18"
@@ -829,8 +917,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell18"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 18"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText19"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText18" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText19"
@@ -839,8 +929,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell19"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 19"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText20"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText19" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText20"
@@ -849,8 +941,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell20"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 20"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText21"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText20" />
                     </TableRow>
 
                     <TableRow
@@ -865,8 +959,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell21"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 21"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText22"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText21" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText22"
@@ -875,8 +971,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell22"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 22"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText23"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText22" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText23"
@@ -885,8 +983,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell23"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 23"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/bdTestCellReadingEditText24"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText23" />
 
                         <EditText
                             android:id="@+id/bdTestCellReadingEditText24"
@@ -895,8 +995,10 @@
                             android:layout_margin="1dp"
                             android:layout_weight="1"
                             android:background="#ffffff"
-                            android:hint="Cell24"
-                            android:inputType="numberDecimal" />
+                            android:hint=" Cell 24"
+                            android:inputType="numberDecimal"
+                            android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
+                            android:nextFocusLeft="@+id/bdTestCellReadingEditText24" />
                     </TableRow>
 
                 </TableLayout>
@@ -930,6 +1032,8 @@
                         android:layout_marginTop="@dimen/app_normal_margin"
                         android:layout_weight="1"
                         android:background="@color/red"
+                        android:nextFocusDown="@+id/bdTestCellReadingEditText1"
+                        android:nextFocusLeft="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
                         android:text="Next Reading"
                         android:textColor="@color/whitesmoke"
                         android:textSize="18sp" />
@@ -1000,11 +1104,14 @@
 
             </LinearLayout>
 
-
+            <!---->
+            <!---->
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_batteryBankMake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -1028,9 +1135,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_batteryBankCapacity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -1054,9 +1163,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_noOfWorkingRectifireModule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -1078,6 +1189,8 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+            <!---->
+            <!---->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1137,9 +1250,11 @@
 
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_singleModuleRating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView
@@ -1164,9 +1279,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_noOfBatteryModule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
                 android:weightSum="1">
 
                 <TextView

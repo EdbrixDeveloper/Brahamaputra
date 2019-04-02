@@ -1295,7 +1295,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
         } else if (anyEagleCrowHoneyHivesInTower.isEmpty() || anyEagleCrowHoneyHivesInTower == null) {
             showToast("Select Any Eagle/Crow/Honey Hives In Tower");
             return false;
-        } else if ((compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) && (!sitePm_siteBoundaryStatus.equals("Not Applicable") || !sitePm_siteBoundaryStatus.equals("Open Site"))) {
+        } else if ((compoundWallFencingStatus.isEmpty() || compoundWallFencingStatus == null) && (!sitePm_siteBoundaryStatus.equals("Not Applicable") && !sitePm_siteBoundaryStatus.equals("Open Site"))) {
             showToast("Select Compound Wall/Fencing Status");
             return false;
         } else if (gateLockAvailability.isEmpty() || gateLockAvailability == null) {

@@ -729,10 +729,17 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
             case R.id.menuSubmit:
                 if (checkValidationOfArrayFields() == true) {
                     submitDetails();
-                    Intent intent = new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
-                    intent.putExtra("batteryType", batteryType);
-                    startActivity(intent);
-
+                    if (batteryType != null) {
+                        if (batteryType.size() > 0) {
+                            Intent intent = new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
+                            intent.putExtra("batteryType", batteryType);
+                            startActivity(intent);
+                        } else {
+                            showToast("Battery Type not available for that site");
+                        }
+                    } else {
+                        showToast("Battery Type not available for that site");
+                    }
                     //startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                     finish();
                     return true;

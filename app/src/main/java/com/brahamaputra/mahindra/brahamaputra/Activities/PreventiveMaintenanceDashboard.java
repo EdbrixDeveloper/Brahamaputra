@@ -48,6 +48,13 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePm_site
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmCustomerName;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmCircleName;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmStateName;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteName;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteId;
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSsaName;
+
 
 public class PreventiveMaintenanceDashboard extends BaseActivity {
 
@@ -182,6 +189,13 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             sitePmNoOfAcAvailableAtSite = NoOfACprovided;
                             sitePmServoStabilizerWorkingStatus = ServoStabilizerStatus;
 
+                            sitePmCustomerName = customerName;
+                            sitePmCircleName = circleName;
+                            sitePmStateName = stateName;
+                            sitePmSiteName = siteName;
+                            sitePmSiteId = siteId;
+                            sitePmSsaName = ssaName;
+
                             String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
                             //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();
 
@@ -227,13 +241,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             }
         });
 
-        ///////////////////////////
-
-
-        //this.setTitle("Site PM");
-        //assignViews();
-        //sessionManager = new SessionManager(PreventiveMaintenanceDashboard.this);
-        //setListner();
     }
 
     private void prepareListData() {
@@ -261,19 +268,10 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                         acPreventiveMaintenanceSection_textView_openTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getOpenTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getOpenTickets().toString());
                                         acPreventiveMaintenanceSection_textView_allTickets.setText(sitePMTicketsList.getSitePMTicketSummary().getTotalTickets() == null || sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().isEmpty() ? "0" : sitePMTicketsList.getSitePMTicketSummary().getTotalTickets().toString());
 
-                                        /*int per = 0;
-                                        double p = 0.0;
-                                        per = sitePMTicketsList.getSitePMTicketSummary().getPercentage() == null ? 0 : sitePMTicketsList.getSitePMTicketSummary().getPercentage();
-                                        p = (3.6) * Double.valueOf(per);
-                                        per = (int) Math.round(p);
-
-                                        wheelprogress.setPercentage(per);
-                                        wheelprogress.setStepCountText(sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString() == null ? "0" : sitePMTicketsList.getSitePMTicketSummary().getPercentage().toString());*/
-
                                         double per = 0.0;
                                         double circlePer = 0.0;
                                         int roundPer = 0;
-                                        per = sitePMTicketsList.getSitePMTicketSummary().getPercentage();//hotoTicketList.getHotoTicketSummary().getPercentage() == null ? 0.0 :
+                                        per = sitePMTicketsList.getSitePMTicketSummary().getPercentage();
                                         circlePer = (3.6) * Double.valueOf(per);
                                         roundPer = (int) Math.round(circlePer);
 
@@ -357,7 +355,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                     final String sitePMTicketId, String sitePMTicketDate, String siteId,
                                     String siteName, String siteAddress, String status, String siteType,
                                     String stateName, String customerName, String circleName, String ssaName,
-                                    String sitePmScheduledDate,ArrayList<BatteryType> batteryType) {
+                                    String sitePmScheduledDate, ArrayList<BatteryType> batteryType) {
 
         LocationManager lm = (LocationManager) PreventiveMaintenanceDashboard.this.getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;

@@ -34,10 +34,6 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     @Expose
     private String testDoneAs;
 
-    @SerializedName("batteryBankQrCodeSelection")
-    @Expose
-    private String batteryBankQrCodeSelection;
-
     @SerializedName("isSubmited")
     @Expose
     private int isSubmited = 0;
@@ -47,6 +43,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     @SerializedName("batteryBankDischargeTest")
     @Expose
     private String batteryBankDischargeTest;
+
     @SerializedName("bdTestDetailsBatteryBankBackUpOfQRCodeScan")
     @Expose
     private String bdTestDetailsBatteryBankBackUpOfQRCodeScan;
@@ -168,7 +165,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
         this.registerFault = "";
         this.typeOfFault = "";
         this.testDoneAs = "";
-        this.batteryBankQrCodeSelection = "";
+
         this.isSubmited = 0;
 
         ////////////////
@@ -213,7 +210,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
         this.batteryBankCheckPointsChildData = new ArrayList<>();
     }
 
-    public BatteryBankCheckPointsParentData(String noOfBatteryBankAvailableAtSite, String registerFault, String typeOfFault, String testDoneAs, String batteryBankQrCodeSelection, String base64StringUploadPhotoOfRegisterFault, List<BatteryBankCheckPointsData> batteryBankCheckPointsData,
+    public BatteryBankCheckPointsParentData(String noOfBatteryBankAvailableAtSite, String registerFault, String typeOfFault, String testDoneAs, String base64StringUploadPhotoOfRegisterFault, List<BatteryBankCheckPointsData> batteryBankCheckPointsData,
             /*String registerFault, String typeOfFault,*/String batteryBankDischargeTest, String bdTestDetailsBatteryBankBackUpOfQRCodeScan,
                                             String bdTestBatteryBankBackUpTicketNo, String bdTestCustomer, String bdTestCircle, String bdTestState,
                                             String bdTestSiteName, String bdTestSiteId, String bdTestSsa, String bdTestUserFseNameDesignation,
@@ -232,7 +229,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
         this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;
         this.testDoneAs = testDoneAs;
-        this.batteryBankQrCodeSelection = batteryBankQrCodeSelection;
+
         this.batteryBankCheckPointsData = batteryBankCheckPointsData;
         if (!noOfBatteryBankAvailableAtSite.isEmpty()) {
             this.isSubmited = 2;
@@ -329,15 +326,6 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     public void setTestDoneAs(String testDoneAs) {
         this.testDoneAs = testDoneAs;
     }
-
-    public String getBatteryBankQrCodeSelection() {
-        return batteryBankQrCodeSelection;
-    }
-
-    public void setBatteryBankQrCodeSelection(String batteryBankQrCodeSelection) {
-        this.batteryBankQrCodeSelection = batteryBankQrCodeSelection;
-    }
-
 
     public String getBase64StringUploadPhotoOfRegisterFault() {
         return base64StringUploadPhotoOfRegisterFault;

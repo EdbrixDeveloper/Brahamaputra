@@ -13,6 +13,19 @@ public class BatteryType implements java.io.Serializable {
     @SerializedName("TypeOfBattery")
     @Expose
     private String typeOfBattery;
+    @SerializedName("CapacityInAH")
+    @Expose
+    private String capacityInAH;
+    @SerializedName("ManufactureMakeModel")
+    @Expose
+    private String manufactureMakeModel;
+    @SerializedName("NoOfRectifireModuleWorking")
+    @Expose
+    private String noOfRectifireModuleWorking;
+    @SerializedName("NoOfBatteryModule")
+    @Expose
+    private String noOfBatteryModule;
+
 
     public String getQRCodeScan() {
         return qRCodeScan;
@@ -29,4 +42,37 @@ public class BatteryType implements java.io.Serializable {
     public void setTypeOfBattery(String typeOfBattery) {
         this.typeOfBattery = typeOfBattery;
     }
+
+    public String getCapacityInAH() {
+        return capacityInAH;
+    }
+
+    public void setCapacityInAH(String capacityInAH) {
+        this.capacityInAH = capacityInAH;
+    }
+
+    public String getManufactureMakeModel() {
+        return manufactureMakeModel;
+    }
+
+    public void setManufactureMakeModel(String manufactureMakeModel) {
+        this.manufactureMakeModel = manufactureMakeModel;
+    }
+
+    public String getNoOfRectifireModuleWorking() {
+        return noOfRectifireModuleWorking;
+    }
+
+    public void setNoOfRectifireModuleWorking(String noOfRectifireModuleWorking) {
+        this.noOfRectifireModuleWorking = noOfRectifireModuleWorking;
+    }
+
+    public String getNoOfBatteryModule() {
+        return noOfBatteryModule;
+    }
+
+    public void setNoOfBatteryModule(String noOfBatteryModule) {
+        this.noOfBatteryModule = noOfBatteryModule;
+    }
+
 }

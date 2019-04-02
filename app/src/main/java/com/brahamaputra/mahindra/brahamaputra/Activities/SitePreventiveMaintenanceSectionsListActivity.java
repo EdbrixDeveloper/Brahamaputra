@@ -16,6 +16,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransa
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePreventiveMaintenanceSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.google.gson.Gson;
@@ -27,7 +28,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
 
-public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActivity {
+public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity {
 
     public ListView sitePreventiveMaintenanceSections_listView_sections;
     ArrayList<SitePreventiveMaintenanceSection> dataModels;
@@ -93,9 +94,17 @@ public class SitePreventiveMaintenanceSectionsListActivity extends AppCompatActi
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
                         break;
                     case 2:
-                        intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
-                        intent.putExtra("batteryType", batteryType);
-                        startActivity(intent);
+                        if (batteryType != null) {
+                            if (batteryType.size() > 0) {
+                                intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
+                                intent.putExtra("batteryType", batteryType);
+                                startActivity(intent);
+                            } else {
+                                showToast("Battery Type not available for that site");
+                            }
+                        } else {
+                            showToast("Battery Type not available for that site");
+                        }
                         //startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                         break;
                     case 3:

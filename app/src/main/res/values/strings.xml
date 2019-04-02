@@ -1964,12 +1964,16 @@
         <item>Yes</item>
     </string-array>
 
-    <string-array name="array_pmSiteDgBatteryCheckPoints_typeOfFault">
-        <item>Battery Faulty</item>
+    <string-array name="array_pmSiteDgBatteryCheckPoints_typeOfFault"><!--why this commented, commented items present in xls sheet for this field commented by tiger-->
+        <!--<item>Battery Faulty</item>
         <item>Battery Not Charging</item>
         <item>Battery Terminal Damage</item>
         <item>DG Battery Cable Damage</item>
-        <item>Theft</item>
+        <item>Theft</item>-->
+        <item>Low Back-up</item>
+        <item>Battery Cable Replacement Required</item>
+        <item>Strip Replace</item>
+        <item>General Faults</item>
     </string-array>
 
     <!--PM AC Check Points-->
@@ -2016,8 +2020,8 @@
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_shelterDoorStatus">
-        <item>No</item>
-        <item>Yes</item>
+        <item>Closed</item>
+        <item>Open due to AC Fault</item>
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_registerFault">
@@ -2085,12 +2089,12 @@
         <item>4</item>
     </string-array>
 
-    <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfFaultyModulesInSite">
+   <!-- <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfFaultyModulesInSite">
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
-    </string-array>
+    </string-array>           it become auto calculated no need to define here commented by tiger -->
 
     <string-array name="array_pmSiteRectifierModuleCheckPoints_rectifierCleaning">
         <item>Cleaned</item>

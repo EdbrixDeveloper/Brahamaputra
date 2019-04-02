@@ -53,6 +53,15 @@ public class Constants {
     public static String sitePm_siteBoundaryStatus = "";
     public static String sitePmNoOfAcAvailableAtSite = "";
     public static String sitePmServoStabilizerWorkingStatus = "";
+    public static String sitePmBatteryBankType="";
+
+    /*-- Battery Bank Check Points --*/
+    public static String sitePmCustomerName = "";
+    public static String sitePmCircleName = "";
+    public static String sitePmStateName = "";
+    public static String sitePmSiteName="";
+    public static String sitePmSiteId = "";
+    public static String sitePmSsaName="";
 
     public static String androidDeviceid;
 
