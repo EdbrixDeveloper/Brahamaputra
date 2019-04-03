@@ -240,7 +240,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         alreadySelectedTypeOfFaultList = new ArrayList<>();
 
         //Code For MultiSelect Type Of Fault
-        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteDgBatteryCheckPoints_typeOfFault)));
+        typeOfFaultList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankCheckPoints_typeOfFault)));
         int id = 1;
         for (int i = 0; i < typeOfFaultList.size(); i++) {
             listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
@@ -363,11 +363,11 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutBatteryBankDischargeTest.setVisibility(View.GONE);
                             mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutBatteryBankDischargeTest1.setVisibility(View.GONE);
 
-                            if (sitePmBatteryBankType.contains("Li-Ion")) {
+                            /*if (sitePmBatteryBankType.contains("Li-Ion")) {
                                 str_pmSiteBbcpTestDoneAs = "Combined";
                                 mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.setText(str_pmSiteBbcpTestDoneAs);
                                 mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutBatteryBankDischargeTest.setVisibility(View.VISIBLE);
-                            }
+                            }*/
                             if (totalAcCount > 0 && totalAcCount == 1) {
 
                                 if (sitePmBatteryBankType.contains("VRLA")) {
@@ -384,6 +384,13 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                                 mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setText("Next Reading");
 
                             }
+
+                            if (sitePmBatteryBankType.contains("Li-Ion")) {
+                                str_pmSiteBbcpTestDoneAs = "Combined";
+                                mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.setText(str_pmSiteBbcpTestDoneAs);
+                                mPreventiveMaintenanceSiteBatteryBankCheckPointsLinearLayoutBatteryBankDischargeTest.setVisibility(View.VISIBLE);
+                            }
+
                         }
 
 
@@ -672,11 +679,12 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
-                        //if (checkValidationOnNoOfAcSelection() == true) {
-                        if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
-                            submitDetails();
-                            startActivity(new Intent(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this, PreventiveMaintenanceSiteEarthingCheckPointsActivity.class));
-                            finish();
+                        if (checkDuplicationQrCodeNew() == false) {
+                            if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
+                                submitDetails();
+                                startActivity(new Intent(PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.this, PreventiveMaintenanceSiteEarthingCheckPointsActivity.class));
+                                finish();
+                            }
                         }
                     }
                 }
@@ -684,7 +692,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         });
 
     }
-
 
     /////////////
     private void setInputDetails(int index) {
@@ -849,7 +856,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
         if (batteryBankCheckPointsData.size() > 0 && batteryBankCheckPointsData.size() != pos) {
             //if (batteryBankCheckPointsData.get(pos).getTypeOfBattery() != null) {
-            batteryBankCheckPointsData.get(pos).setDetailsOfBatteryBankQrCodeScan(detailsOfBatteryBankQRCodeScan);
+            batteryBankCheckPointsData.get(pos).setDetailsOfBatteryBankQrCodeScan(batteryBankQrCodeSelection);//detailsOfBatteryBankQRCodeScan
             batteryBankCheckPointsData.get(pos).setBatteryBankQrCodeSelection(batteryBankQrCodeSelection);
             batteryBankCheckPointsData.get(pos).setStripBoltTightnessAsPerTorque(stripBoltTightnessAsPerTorque);
             batteryBankCheckPointsData.get(pos).setPetroleumJellyApplied(petroleumJellyApplied);
@@ -858,7 +865,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             batteryBankCheckPointsData.get(pos).setBatteryBankDischargeTest(str_pmSiteBbcpBatteryBankDischargeTestVal1);
             // }
         } else {
-            BatteryBankCheckPointsData child = new BatteryBankCheckPointsData(detailsOfBatteryBankQRCodeScan, stripBoltTightnessAsPerTorque,
+            //detailsOfBatteryBankQRCodeScan
+            BatteryBankCheckPointsData child = new BatteryBankCheckPointsData(batteryBankQrCodeSelection, stripBoltTightnessAsPerTorque,
                     petroleumJellyApplied, batteryBankQrCodeSelection, str_pmSiteBbcpBatteryBankDischargeTestVal1, batteryVentPlugStatus, bbEarthingStatus);
 
             if (batteryBankCheckPointsData.size() > 0) {
@@ -1227,19 +1235,29 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     //////////////////
     public boolean checkValidationOfArrayFields() {
 
-        String qrCodeScan = base64StringDetailsOfBatteryBankQRCodeScan;
+        //String qrCodeScan = base64StringDetailsOfBatteryBankQRCodeScan;
         String testDoneAs = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewTestDoneAsVal.getText().toString().trim();
+        String batteryBankDischargeTest = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal.getText().toString().trim();
+        String qrCodeScan = mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.getText().toString().trim();
         String stripBoltTightnessAsPerTorque = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewStripBoltTightnessAsPerTorqueVal.getText().toString().trim();
         String petroleumJellyApplied = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewPetroleumJellyAppliedVal.getText().toString().trim();
         String batteryVentPlugStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryVentPlugStatusVal.getText().toString().trim();
         String bbEarthingStatus = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBbEarthingStatusVal.getText().toString().trim();
         String batteryBankDischargeTest1 = mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBatteryBankDischargeTestVal1.getText().toString().trim();
 
-        /*if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+        if ((testDoneAs.isEmpty() || testDoneAs == null) && sitePmBatteryBankType.contains("VRLA")) {
+            showToast("Select Test Done as");
+            return false;
+        } else if ((batteryBankDischargeTest.isEmpty() || batteryBankDischargeTest == null) && (sitePmBatteryBankType.contains("Li-Ion") || sitePmBatteryBankType.contains("VRLA")) && !testDoneAs.equals("Individual")) {
+            showToast("Select Battery Bank Discharge Test");
+            return false;
+        } else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Scan QR Code");
             return false;
-        } else*/
-        if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
+        } else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+            showToast("Scan QR Code");
+            return false;
+        } else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
             showToast("Select Strip Bolt Tightness As Per Torque");
             return false;
         } else if (petroleumJellyApplied.isEmpty() || petroleumJellyApplied == null) {
@@ -1363,6 +1381,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 base64StringDetailsOfBatteryBankQRCodeScan = "";
                 mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
                 mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText("");
                 showToast("Cleared");
             }
         });
@@ -1437,108 +1456,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        switch (requestCode) {
-            case MY_FLAG_MODULE_RESULT:
-                /*if (requestCode == MY_FLAG_MODULE_RESULT) {*/
-                if (resultCode == RESULT_OK) {
-                    /*Bundle b = data.getExtras();
-                    //dataList = new BatteryBankCheckPointsParentData();
-                    //dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
-                    String ss = (String) b.getSerializable("flag");
-                    if (ss.equals("1")) {
-                        //showToast("Called Return");
-                        setInputDetails(0);
-                    }*/
-
-                    Bundle b = data.getExtras();
-
-                    str_pmSiteBbcpTestDoneAs = (String) b.getSerializable("str_pmSiteBbcpTestDoneAs");
-                    currentPos = b.getInt("arrayIndex", 0);
-                    if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
-                        dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
-                    } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
-                        //dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
-                        batteryBankCheckPointsData = (ArrayList<BatteryBankCheckPointsData>) b.getSerializable("batteryBankCheckPointsDataList");
-                    }
-
-                    Log.e("123", "123");
-                }
-                /*}*/
-                break;
-
-            case MY_PERMISSIONS_REQUEST_CAMERA:
-                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
-                if (result != null) {
-                    mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
-                    mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
-                    if (result.getContents() == null) {
-                        base64StringDetailsOfBatteryBankQRCodeScan = "";
-                        showToast("Cancelled");
-                    } else {
-
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
-                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringDetailsOfBatteryBankQRCodeScan = result.getContents();
-
-                        if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
-                            if (batteryQRCodeList.size() > 0) {
-
-                                for (int i = 0; i < batteryQRCodeList.size(); i++) {
-                                    if (base64StringDetailsOfBatteryBankQRCodeScan.equals(batteryQRCodeList.get(i).toString())) {
-                                        str_pmSiteBbcpSelectBatteryBank = base64StringDetailsOfBatteryBankQRCodeScan;
-                                        mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText(str_pmSiteBbcpSelectBatteryBank);
-                                        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
-                                        mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                            } else {
-                                mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText("No Data Found");
-                                //No sites found
-                            }
-                        }
-
-                        /*if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
-                        }*/
-
-
-                        /*} else {
-                            base64StringDetailsOfBatteryBankQRCodeScan = "";
-                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
-
-                    }
-                }
-                break;
-            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
-                if (resultCode == RESULT_OK) {
-                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
-                        try {
-                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
-                            byte[] bitmapDataArray = stream.toByteArray();
-                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                            mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else {
-                    imageFileUploadPhotoOfRegisterFault = "";
-                    imageFileUriUploadPhotoOfRegisterFault = null;
-                    mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
-                }
-                break;
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.submit_icon_menu, menu);
@@ -1587,6 +1504,110 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case MY_FLAG_MODULE_RESULT:
+                /*if (requestCode == MY_FLAG_MODULE_RESULT) {*/
+                if (resultCode == RESULT_OK) {
+                    /*Bundle b = data.getExtras();
+                    //dataList = new BatteryBankCheckPointsParentData();
+                    //dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
+                    String ss = (String) b.getSerializable("flag");
+                    if (ss.equals("1")) {
+                        //showToast("Called Return");
+                        setInputDetails(0);
+                    }*/
+
+                    Bundle b = data.getExtras();
+
+                    str_pmSiteBbcpTestDoneAs = (String) b.getSerializable("str_pmSiteBbcpTestDoneAs");
+                    currentPos = b.getInt("arrayIndex", 0);
+                    if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
+                        dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
+                    } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+                        //dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
+                        batteryBankCheckPointsData = (ArrayList<BatteryBankCheckPointsData>) b.getSerializable("batteryBankCheckPointsDataList");
+                    }
+
+                    Log.e("123", "123");
+                }
+                /*}*/
+                break;
+
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                IntentResult result = IntentIntegrator.parseActivityResult(resultCode, data);
+                if (result != null) {
+                    mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
+                    mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
+                    if (result.getContents() == null) {
+                        base64StringDetailsOfBatteryBankQRCodeScan = "";
+                        showToast("Cancelled");
+                    } else {
+
+                        Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
+                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
+                        if (!flagIsDuplicateQRcode) {
+                            base64StringDetailsOfBatteryBankQRCodeScan = result.getContents();
+
+                            if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
+                                if (batteryQRCodeList.size() > 0) {
+
+                                    for (int i = 0; i < batteryQRCodeList.size(); i++) {
+                                        if (base64StringDetailsOfBatteryBankQRCodeScan.equals(batteryQRCodeList.get(i).toString())) {
+                                            str_pmSiteBbcpSelectBatteryBank = base64StringDetailsOfBatteryBankQRCodeScan;
+                                            mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText(str_pmSiteBbcpSelectBatteryBank);
+                                            mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
+                                            mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
+                                        } else {
+                                            mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText("");
+                                            showToast("QR Code not matched.");
+                                        }
+                                    }
+                                } else {
+                                    mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText("No Data Found");
+                                    //No sites found
+                                }
+                            }
+
+                        /*if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
+                            mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
+                            mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
+                        }*/
+
+                        } else {
+                            base64StringDetailsOfBatteryBankQRCodeScan = "";
+                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
+                        }
+
+                    }
+                }
+                break;
+            case MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault:
+                if (resultCode == RESULT_OK) {
+                    if (imageFileUriUploadPhotoOfRegisterFault != null) {
+                        try {
+                            Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            byte[] bitmapDataArray = stream.toByteArray();
+                            base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
+                            mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    imageFileUploadPhotoOfRegisterFault = "";
+                    imageFileUriUploadPhotoOfRegisterFault = null;
+                    mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.GONE);
+                }
+                break;
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         setResult(RESULT_OK);
         finish();
@@ -1596,6 +1617,20 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         for (BatteryType batteryType : batteryTypeList) {
             batteryQRCodeList.add(batteryType.getQRCodeScan());
         }
+    }
+
+    private boolean checkDuplicationQrCodeNew() {
+        for (int i = 0; i < batteryBankCheckPointsData.size(); i++) {
+            for (int j = i + 1; j < batteryBankCheckPointsData.size(); j++) {
+                //compare list.get(i) and list.get(j)
+                if (batteryBankCheckPointsData.get(i).getDetailsOfBatteryBankQrCodeScan().toString().equals(batteryBankCheckPointsData.get(j).getDetailsOfBatteryBankQrCodeScan().toString())) {
+                    int dup_pos = j + 1;
+                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

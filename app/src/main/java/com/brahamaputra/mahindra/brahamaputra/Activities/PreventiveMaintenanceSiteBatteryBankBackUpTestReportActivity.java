@@ -1505,7 +1505,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     public boolean checkValidationOfArrayFields() {
 
-        /*String bdTestCellReading1 = mBdTestCellReadingEditText1.getText().toString();
+        String bdTestCellReading1 = mBdTestCellReadingEditText1.getText().toString();
         String bdTestCellReading2 = mBdTestCellReadingEditText2.getText().toString();
         String bdTestCellReading3 = mBdTestCellReadingEditText3.getText().toString();
         String bdTestCellReading4 = mBdTestCellReadingEditText4.getText().toString();
@@ -1602,7 +1602,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         } else if (bdTestCellReading24.isEmpty() || bdTestCellReading24 == null) {
             showToast("Enter Cell Reading 24");
             return false;
-        }*/
+        }
         return true;
     }
 
@@ -2021,14 +2021,16 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                 alertDialogManager.Dialog("Confirmation", "Do you want to save this record?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
-                        if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
-                            setInputDetails();
-                        } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
-                            setInputDetailsForArray();
+                        if (validation() == true) {
+                            if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
+                                setInputDetails();
+                            } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+                                setInputDetailsForArray();
+                            }
+                            //setInputDetails();
+                            setResult(RESULT_OK);
+                            finish();
                         }
-                        //setInputDetails();
-                        setResult(RESULT_OK);
-                        finish();
                     }
 
                     @Override
@@ -2056,14 +2058,17 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         alertDialogManager.Dialog("Confirmation", "Do you want to save this record?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
-                if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
-                    setInputDetails();
-                } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
-                    setInputDetailsForArray();
+                if (validation() == true) {
+
+                    if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
+                        setInputDetails();
+                    } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+                        setInputDetailsForArray();
+                    }
+                    //setInputDetails();
+                    setResult(RESULT_OK);
+                    finish();
                 }
-                //setInputDetails();
-                setResult(RESULT_OK);
-                finish();
             }
 
             @Override
@@ -2139,35 +2144,35 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         String UserFseNameDesignation = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewUserFseNameDesignationVal.getText().toString().trim();
         String TypeOfBattery = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.getText().toString().trim();
 
-        if (mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.getText().toString().equals("Li-Ion")) {
-            String VoltageModuleReading1 = mBdTestVoltageModuleReading1EditText1.getText().toString().trim();
-            String CurrentModuleReading1 = mBdTestCurrentModuleReading1EditText1.getText().toString().trim();
-            String SocModuleReading1 = mBdTestSocModuleReadingEditText1.getText().toString().trim();
-            String SohModuleReading1 = mBdTestSohModuleReadingEditText1.getText().toString().trim();
-            String VoltageModuleReading2 = mBdTestVoltageModuleReading1EditText2.getText().toString().trim();
-            String CurrentModuleReading2 = mBdTestCurrentModuleReading1EditText2.getText().toString().trim();
-            String SocModuleReading2 = mBdTestSocModuleReadingEditText2.getText().toString().trim();
-            String SohModuleReading2 = mBdTestSohModuleReadingEditText2.getText().toString().trim();
-            String VoltageModuleReading3 = mBdTestVoltageModuleReading1EditText3.getText().toString().trim();
-            String CurrentModuleReading3 = mBdTestCurrentModuleReading1EditText3.getText().toString().trim();
-            String SocModuleReading3 = mBdTestSocModuleReadingEditText3.getText().toString().trim();
-            String SohModuleReading3 = mBdTestSohModuleReadingEditText3.getText().toString().trim();
-        }
+        //if (mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.getText().toString().equals("Li-Ion")) {
+        String VoltageModuleReading1 = mBdTestVoltageModuleReading1EditText1.getText().toString().trim();
+        String CurrentModuleReading1 = mBdTestCurrentModuleReading1EditText1.getText().toString().trim();
+        String SocModuleReading1 = mBdTestSocModuleReadingEditText1.getText().toString().trim();
+        String SohModuleReading1 = mBdTestSohModuleReadingEditText1.getText().toString().trim();
+        String VoltageModuleReading2 = mBdTestVoltageModuleReading1EditText2.getText().toString().trim();
+        String CurrentModuleReading2 = mBdTestCurrentModuleReading1EditText2.getText().toString().trim();
+        String SocModuleReading2 = mBdTestSocModuleReadingEditText2.getText().toString().trim();
+        String SohModuleReading2 = mBdTestSohModuleReadingEditText2.getText().toString().trim();
+        String VoltageModuleReading3 = mBdTestVoltageModuleReading1EditText3.getText().toString().trim();
+        String CurrentModuleReading3 = mBdTestCurrentModuleReading1EditText3.getText().toString().trim();
+        String SocModuleReading3 = mBdTestSocModuleReadingEditText3.getText().toString().trim();
+        String SohModuleReading3 = mBdTestSohModuleReadingEditText3.getText().toString().trim();
+        //}
 
         String FloatVoltageInSmpsBusBarAfter30Min = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.getText().toString().trim();
         String TotalLoadCurrentInAmps = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.getText().toString().trim();
-        //String BatteryBankMake = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMakeVal.getText().toString().trim();
-        //String BatteryBankCapacity = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankCapacityVal.getText().toString().trim();
+        String BatteryBankMake = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankMakeVal.getText().toString().trim();
+        String BatteryBankCapacity = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryBankCapacityVal.getText().toString().trim();
         //String NumberOfRectifireModuleWorking = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfWorkingRectifireModuleVal.getText().toString().trim();
         String SiteLoadOnBatteryInAmps = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.getText().toString().trim();
         String FloatVoltageBeforeBBTest = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest.getText().toString().trim();
         String SingleModuleRating = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating.getText().toString().trim();//for Li-Ion
-        //String NumberOfBatteryModule = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal.getText().toString().trim();
+        //String NumberOfBatteryModule = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewNoOfBatteryModuleVal.getText().toString().trim();//for Li-Ion
         String ReadingTakenAt = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewReadingTaketAtVal.getText().toString().trim();
         String LastReadingTakenAt = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.getText().toString().trim();
         String Remarks = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextRemarks.getText().toString().trim();
 
-        String DetailsBatteryBankBackUpOfQRCodeScan = base64StringDetailsOfBatteryBankQRCodeScan;//individual
+        String DetailsBatteryBankBackUpOfQRCodeScan = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSelectBatteryBankVal.getText().toString().trim();//individual
         String Base64StringPhotoOfBatteryBank = base64StringPhotoOfBatteryBank;
 
 
@@ -2176,81 +2181,117 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
             batteryBankCheckPointsParentData.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
         }*/
 
-        if (Customer.isEmpty() || Customer == null) {
-            showToast("Customer must be required");
+        if ((DetailsBatteryBankBackUpOfQRCodeScan.isEmpty() || DetailsBatteryBankBackUpOfQRCodeScan == null) && str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+            showToast("Scan QR Code.");
+            return false;
+        } else if (Customer.isEmpty() || Customer == null) {
+            showToast("Customer must be required.");
             return false;
         } else if (Circle.isEmpty() || Circle == null) {
-            showToast("Circle must be required");
+            showToast("Circle must be required.");
             return false;
         } else if (State.isEmpty() || State == null) {
-            showToast("State must be required");
+            showToast("State must be required.");
             return false;
         } else if (SiteName.isEmpty() || SiteName == null) {
-            showToast("Site Name must be required");
+            showToast("Site Name must be required.");
             return false;
         } else if (SiteId.isEmpty() || SiteId == null) {
-            showToast("Site Id must be required");
+            showToast("Site Id must be required.");
             return false;
-        } /*else if (bdTestCellReading6.isEmpty() || bdTestCellReading6 == null) {
-            showToast("Enter must be required");
+        } else if (Ssa.isEmpty() || Ssa == null) {
+            showToast("SSA must be required.");
             return false;
-        } else if (bdTestCellReading7.isEmpty() || bdTestCellReading7 == null) {
-            showToast("Enter Cell Reading 7");
+        } else if (UserFseNameDesignation.isEmpty() || UserFseNameDesignation == null) {
+            showToast("User/FSE Name & Designation must be required.");
             return false;
-        } else if (bdTestCellReading8.isEmpty() || bdTestCellReading8 == null) {
-            showToast("Enter Cell Reading 8");
+        } else if (TypeOfBattery.isEmpty() || TypeOfBattery == null) {
+            showToast("Type of Battery must be required.");
             return false;
-        } else if (bdTestCellReading9.isEmpty() || bdTestCellReading9 == null) {
-            showToast("Enter Cell Reading 9");
+        }
+        //////////
+        else if ((VoltageModuleReading1.isEmpty() || VoltageModuleReading1 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Voltage Module Reading 1.");
             return false;
-        } else if (bdTestCellReading10.isEmpty() || bdTestCellReading10 == null) {
-            showToast("Enter Cell Reading 10");
+        } else if ((CurrentModuleReading1.isEmpty() || CurrentModuleReading1 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Current Module Reading 1.");
             return false;
-        } else if (bdTestCellReading11.isEmpty() || bdTestCellReading11 == null) {
-            showToast("Enter Cell Reading 11");
+        } else if ((SocModuleReading1.isEmpty() || SocModuleReading1 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter SOC Module Reading 1.");
             return false;
-        } else if (bdTestCellReading12.isEmpty() || bdTestCellReading12 == null) {
-            showToast("Enter Cell Reading 12");
+        } else if ((SohModuleReading1.isEmpty() || SohModuleReading1 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter SOH Module Reading 1.");
             return false;
-        } else if (bdTestCellReading13.isEmpty() || bdTestCellReading13 == null) {
-            showToast("Enter Cell Reading 13");
+        } else if ((VoltageModuleReading2.isEmpty() || VoltageModuleReading2 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Voltage Module Reading 2.");
             return false;
-        } else if (bdTestCellReading14.isEmpty() || bdTestCellReading14 == null) {
-            showToast("Enter Cell Reading 14");
+        } else if ((CurrentModuleReading2.isEmpty() || CurrentModuleReading2 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Current Module Reading 2.");
             return false;
-        } else if (bdTestCellReading15.isEmpty() || bdTestCellReading15 == null) {
-            showToast("Enter Cell Reading 15");
+        } else if ((SocModuleReading2.isEmpty() || SocModuleReading2 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter SOC Module Reading 2.");
             return false;
-        } else if (bdTestCellReading16.isEmpty() || bdTestCellReading16 == null) {
-            showToast("Enter Cell Reading 16");
+        } else if ((SohModuleReading2.isEmpty() || SohModuleReading2 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter SOH Module Reading 2.");
             return false;
-        } else if (bdTestCellReading17.isEmpty() || bdTestCellReading17 == null) {
-            showToast("Enter Cell Reading 17");
+        } else if ((VoltageModuleReading3.isEmpty() || VoltageModuleReading3 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Voltage Module Reading 3.");
             return false;
-        } else if (bdTestCellReading18.isEmpty() || bdTestCellReading18 == null) {
-            showToast("Enter Cell Reading 18");
+        } else if ((CurrentModuleReading3.isEmpty() || CurrentModuleReading3 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Current Module Reading 3.");
             return false;
-        } else if (bdTestCellReading19.isEmpty() || bdTestCellReading19 == null) {
-            showToast("Enter Cell Reading 19");
+        } else if ((SocModuleReading3.isEmpty() || SocModuleReading3 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter SOC Module Reading 3.");
             return false;
-        } else if (bdTestCellReading20.isEmpty() || bdTestCellReading20 == null) {
-            showToast("Enter Cell Reading 20");
+        } else if ((SohModuleReading3.isEmpty() || SohModuleReading3 == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter SOH Module Reading 3.");
             return false;
-        } else if (bdTestCellReading21.isEmpty() || bdTestCellReading21 == null) {
-            showToast("Enter Cell Reading 21");
+        }
+        //////////
+
+        else if (FloatVoltageInSmpsBusBarAfter30Min.isEmpty() || FloatVoltageInSmpsBusBarAfter30Min == null) {
+            showToast("Enter Float Voltage in SMPS Bus Bar After 30 min.");
             return false;
-        } else if (bdTestCellReading22.isEmpty() || bdTestCellReading22 == null) {
-            showToast("Enter Cell Reading 22");
+        } else if (TotalLoadCurrentInAmps.isEmpty() || TotalLoadCurrentInAmps == null) {
+            showToast("Enter Total Load Current(in Amps).");
             return false;
-        } else if (bdTestCellReading23.isEmpty() || bdTestCellReading23 == null) {
-            showToast("Enter Cell Reading 23");
+        } else if ((BatteryBankMake.isEmpty() || BatteryBankMake == null) && str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+            showToast("Battery Bank Make must be required.");
             return false;
-        } else if (bdTestCellReading24.isEmpty() || bdTestCellReading24 == null) {
-            showToast("Enter Cell Reading 24");
+        } else if ((BatteryBankCapacity.isEmpty() || BatteryBankCapacity == null) && str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+            showToast("Battery Bank Capacity must be required.");
+            return false;
+        } /*else if ((NumberOfRectifireModuleWorking.isEmpty() || NumberOfRectifireModuleWorking == null) && str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+            showToast("Number of Rectifire Module Working must be required.");
             return false;
         }*/
+        ////
+
+        else if (SiteLoadOnBatteryInAmps.isEmpty() || SiteLoadOnBatteryInAmps == null) {
+            showToast("Enter Site Load on Battery(in Amps).");
+            return false;
+        } else if (FloatVoltageBeforeBBTest.isEmpty() || FloatVoltageBeforeBBTest == null) {
+            showToast("Enter Float Voltage before BB Test.");
+            return false;
+        } else if ((SingleModuleRating.isEmpty() || SingleModuleRating == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Single Module Rating.");
+            return false;
+        } /*else if ((NumberOfBatteryModule.isEmpty() || NumberOfBatteryModule == null) && TypeOfBattery.equals("Li-Ion")) {
+            showToast("Enter Number of Battery Module.");
+            return false;
+        }*/ else if (ReadingTakenAt.isEmpty() || ReadingTakenAt == null) {
+            showToast("Select Reading Taken At.");
+            return false;
+        } else if (LastReadingTakenAt.isEmpty() || LastReadingTakenAt == null) {
+            showToast("Enter Last Reading Taken At.");
+            return false;
+        } else if (Base64StringPhotoOfBatteryBank.isEmpty() || Base64StringPhotoOfBatteryBank == null) {
+            showToast("Photo of Battery Bank must be required.");
+            return false;
+        } else if (Remarks.isEmpty() || Remarks == null) {
+            showToast("Enter Remarks");
+            return false;
+        }
         return true;
-
-
     }
 }

@@ -149,7 +149,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
                 if (!gps_enabled && !network_enabled) {
                     // notify user
-                    alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                    alertDialogManager.Dialog("Conformation", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
                         public void onPositiveClick() {
                             Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -202,7 +202,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
                                 if (sitePMTickStatus.equals("Open")) {
 
-                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                                    alertDialogManager.Dialog("Conformation", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                                         @Override
                                         public void onPositiveClick() {
                                             checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
@@ -224,7 +224,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                         }
 
                     } else {
-                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                        alertDialogManager.Dialog("Conformation", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {

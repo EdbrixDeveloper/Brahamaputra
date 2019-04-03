@@ -2011,7 +2011,8 @@
 
     <string-array name="array_pmSiteAcCheckPoints_cleaningOfCoolingOrCondensorCoils">
         <item>Cleaned</item>
-        <item>Need Replacement</item>
+        <item>Replace required</item>
+        <!--<item>Need Replacement</item>-->
     </string-array>
 
     <string-array name="array_pmSiteAcCheckPoints_anyAbnormalSoundFromMotor">
@@ -2075,6 +2076,7 @@
 
     <!--PM Rectifier Module Check Points-->
     <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfRectifierModuleAvailableAtSite">
+        <!--<item>0</item>-->
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -2088,12 +2090,12 @@
         <item>4</item>
     </string-array>
 
-   <!-- <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfFaultyModulesInSite">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>           it become auto calculated no need to define here commented by tiger -->
+    <!-- <string-array name="array_pmSiteRectifierModuleCheckPoints_noOfFaultyModulesInSite">
+         <item>1</item>
+         <item>2</item>
+         <item>3</item>
+         <item>4</item>
+     </string-array>           it become auto calculated no need to define here commented by tiger -->
 
     <string-array name="array_pmSiteRectifierModuleCheckPoints_rectifierCleaning">
         <item>Cleaned</item>
