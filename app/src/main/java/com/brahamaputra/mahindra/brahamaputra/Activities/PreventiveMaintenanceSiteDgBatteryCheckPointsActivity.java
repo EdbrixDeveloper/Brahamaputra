@@ -347,23 +347,23 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetMultiSelectModel();
-               /* if (checkValidationOfArrayFields() == true) {*/
-                    if (currentPos > 0) {
-                        //Save current ac reading
-                        saveDGCheckRecords(currentPos);
-                        currentPos = currentPos - 1;
-                        //move to Next reading
-                        displayDGCheckRecords(currentPos);
-                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
-                    }
-               /* }*/
+                //resetMultiSelectModel(); by 008
+                /* if (checkValidationOfArrayFields() == true) {*/
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveDGCheckRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayDGCheckRecords(currentPos);
+                    //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+                }
+                /* }*/
             }
         });
         mPreventiveMaintenanceSiteDgBatteryCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetMultiSelectModel();
+                //resetMultiSelectModel(); by 008
                 if (checkValidationOfArrayFields() == true) {
                     if (currentPos < (totalAcCount - 1)) {
                         //Save current ac reading

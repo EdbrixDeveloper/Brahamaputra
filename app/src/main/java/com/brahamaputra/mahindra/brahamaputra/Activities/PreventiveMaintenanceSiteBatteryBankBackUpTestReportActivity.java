@@ -2122,8 +2122,10 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSelectBatteryBankVal.setText(str_pmSiteBbcpSelectBatteryBank);
                         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
                         mButtonClearBatteryBankBackUpTestReportDetailsOfQRCodeScanView.setVisibility(View.VISIBLE);
-                        if (j == 0)
+                        if (j == 0) {
                             setValueToDepedentFieldsOnQr(i);
+                            break;
+                        }
                     }
                 }
             } else {

@@ -653,7 +653,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetMultiSelectModel();
+                //resetMultiSelectModel(); by 008
                 /*if (checkValidationOfArrayFields() == true) {*/
                 if (currentPos > 0) {
                     //Save current ac reading
@@ -668,7 +668,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetMultiSelectModel();
+                //resetMultiSelectModel(); by 008
                 if (checkValidationOfArrayFields() == true) {
                     if (currentPos < (totalAcCount - 1)) {
                         //Save current ac reading
@@ -1542,6 +1542,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.GONE);
                     if (result.getContents() == null) {
                         base64StringDetailsOfBatteryBankQRCodeScan = "";
+                        mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText("");
                         showToast("Cancelled");
                     } else {
 
@@ -1552,17 +1553,22 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
                             if (!base64StringDetailsOfBatteryBankQRCodeScan.isEmpty() && base64StringDetailsOfBatteryBankQRCodeScan != null) {
                                 if (batteryQRCodeList.size() > 0) {
-
+                                    boolean tempflag = false;
                                     for (int i = 0; i < batteryQRCodeList.size(); i++) {
                                         if (base64StringDetailsOfBatteryBankQRCodeScan.equals(batteryQRCodeList.get(i).toString())) {
                                             str_pmSiteBbcpSelectBatteryBank = base64StringDetailsOfBatteryBankQRCodeScan;
                                             mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText(str_pmSiteBbcpSelectBatteryBank);
                                             mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
                                             mButtonClearDetailsOfBatteryBankQRCodeScanView.setVisibility(View.VISIBLE);
+                                            tempflag = true;
+                                            break;
                                         } else {
                                             mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText("");
-                                            showToast("QR Code not matched.");
+                                            //showToast("QR Code not matched.");
                                         }
+                                    }
+                                    if (tempflag == false) {
+                                        showToast("QR Code not matched.");
                                     }
                                 } else {
                                     mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.setText("No Data Found");

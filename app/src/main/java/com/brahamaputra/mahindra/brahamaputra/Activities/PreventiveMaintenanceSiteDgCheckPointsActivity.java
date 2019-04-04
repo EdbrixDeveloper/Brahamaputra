@@ -861,23 +861,23 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteDgCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetMultiSelectModel();
-              /*  if (checkValidationOfArrayFields() == true) {*/
-                    if (currentPos > 0) {
-                        //Save current ac reading
-                        saveDGCheckRecords(currentPos);
-                        currentPos = currentPos - 1;
-                        //move to Next reading
-                        displayDGCheckRecords(currentPos);
-                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
-                    }
-               /* }*/
+                //resetMultiSelectModel(); by008
+                /*  if (checkValidationOfArrayFields() == true) {*/
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveDGCheckRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayDGCheckRecords(currentPos);
+                    //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteDgCheckPointsTextViewRegisterFaultVal.getText().toString().trim());
+                }
+                /* }*/
             }
         });
         mPreventiveMaintenanceSiteDgCheckPointsButtonNextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetMultiSelectModel();
+                //resetMultiSelectModel(); by008
                 if (checkValidationOfArrayFields() == true) {
                     if (currentPos < (totalAcCount - 1)) {
                         //Save current ac reading

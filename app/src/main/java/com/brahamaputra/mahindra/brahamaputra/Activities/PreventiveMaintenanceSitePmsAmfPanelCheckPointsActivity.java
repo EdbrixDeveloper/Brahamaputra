@@ -404,17 +404,16 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         //Save Final current reading and submit all AC data
                         saveRecords(currentPos);
                         // visibilityOfTypesOfFault(mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
-                        if(checkDuplicationQrCodeNew() == false){
+                        if (checkDuplicationQrCodeNew() == false) {
                             if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true) {
                                 submitDetails();
-                                if(sitePmServoStabilizerWorkingStatus.equals("Not Available") && hototicket_Selected_SiteType.equals("Outdoor"))
-                                {
+                                if (sitePmServoStabilizerWorkingStatus.equals("Not Available") && hototicket_Selected_SiteType.equals("Outdoor")) {
                                     startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
                                     finish();
-                                }else if(sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+                                } else if (sitePmServoStabilizerWorkingStatus.equals("Not Available")) {
                                     startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
                                     finish();
-                                }else {
+                                } else {
                                     startActivity(new Intent(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
                                     finish();
                                 }
@@ -551,11 +550,11 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
                         if (!flagIsDuplicateQRcode) {
-                        base64StringPmsAmfPanelCheckPointsQRCodeScan = result.getContents();
-                        if (!base64StringPmsAmfPanelCheckPointsQRCodeScan.isEmpty() && base64StringPmsAmfPanelCheckPointsQRCodeScan != null) {
-                            mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
+                            base64StringPmsAmfPanelCheckPointsQRCodeScan = result.getContents();
+                            if (!base64StringPmsAmfPanelCheckPointsQRCodeScan.isEmpty() && base64StringPmsAmfPanelCheckPointsQRCodeScan != null) {
+                                mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
                         } else {
                             base64StringPmsAmfPanelCheckPointsQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
@@ -611,7 +610,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                 return true;
 
             case R.id.menuSubmit:
-                if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true){
+                if (checkValidtionForNoOfPmsAmfPuiAvailabelAtSite("onSubmit") == true) {
                                     /*submitDetails();
                 if(sitePmServoStabilizerWorkingStatus.equals("Not Available") && hototicket_Selected_SiteType.equals("Outdoor"))
                 {
@@ -705,9 +704,11 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                         mPreventiveMaintenanceSitePmsAmfPanelCheckPointsButtonNextReading.setText("Finish");
                     }
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                    showToast("No previous saved data available");
                     mLinearLayoutContainer.setVisibility(View.GONE);
                 }
+            } else {
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -824,7 +825,6 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         String pmsAmfPiuEarthingStatus = mPreventiveMaintenanceSitePmsAmfPanelCheckPointsTextViewPmfAmfPiuEarthingStatusVal.getText().toString().trim();
 
 
-
         if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Please Scan QR Code");
             return false;
@@ -863,14 +863,13 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
         if (noOfPmsAmfPuiAvailableAtSite.isEmpty() || noOfPmsAmfPuiAvailableAtSite == null) {
             showToast("Select No Of PMS/AMF/PIU Available At Site");
             return false;
-        }
-        else if (registerFault.isEmpty() || registerFault == null) {
+        } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Type Of Fault");
             return false;
-        }else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
+        } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
             showToast("Upload Photo Of Register Fault");
             return false;
         } else if (Integer.valueOf(noOfPmsAmfPuiAvailableAtSite) > 0) {
@@ -878,7 +877,7 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
                 showToast("Complete the all readings.");
                 return false;
             } else return true;
-        }else
+        } else
             return true;
     }
 

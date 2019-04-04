@@ -452,7 +452,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                     }
                 }
             } else {
-                Toast.makeText(PreventiveMaintenanceSiteEbMeterBoxActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

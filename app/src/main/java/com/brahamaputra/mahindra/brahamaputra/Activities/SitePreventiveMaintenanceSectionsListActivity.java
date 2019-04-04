@@ -91,7 +91,10 @@ public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity 
                         startActivity(intent);
                         break;
                     case 1:
-                        startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
+                        intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class);
+                        intent.putExtra("batteryType", batteryType);
+                        startActivity(intent);
+                        //startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
                         break;
                     case 2:
                         if (batteryType != null) {

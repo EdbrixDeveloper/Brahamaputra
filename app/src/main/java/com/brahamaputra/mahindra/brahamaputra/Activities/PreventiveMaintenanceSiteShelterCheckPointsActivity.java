@@ -349,7 +349,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                 return true;
 
             case R.id.menuSubmit:
-                if(checkValidationOfArrayFields() == true){
+                if (checkValidationOfArrayFields() == true) {
                     submitDetails();
                     startActivity(new Intent(this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
                     finish();
@@ -458,7 +458,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                     }
                 }
             } else {
-                Toast.makeText(PreventiveMaintenanceSiteShelterCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

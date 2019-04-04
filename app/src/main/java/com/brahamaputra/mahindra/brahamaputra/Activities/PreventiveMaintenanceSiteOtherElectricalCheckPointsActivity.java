@@ -207,7 +207,7 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
                 }
 
             } else {
-                Toast.makeText(PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
 

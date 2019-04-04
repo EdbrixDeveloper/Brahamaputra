@@ -518,7 +518,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                     }
                 }
             } else {
-                Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

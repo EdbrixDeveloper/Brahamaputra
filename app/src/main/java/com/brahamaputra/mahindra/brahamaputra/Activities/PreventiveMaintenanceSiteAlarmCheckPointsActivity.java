@@ -301,7 +301,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                     }
                 }
             } else {
-                Toast.makeText(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -374,10 +374,12 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     }
 
     private void visibilityOfRemarks(String str_pmSiteAcpRemarks) {
-        mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.VISIBLE);
-        if (str_pmSiteAcpRemarks.equals("Yes")) {
-            mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRemarksVal.setText("");
-            mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.GONE);
+        if (!str_pmSiteAcpRemarks.isEmpty() && str_pmSiteAcpRemarks != null) {
+            mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.VISIBLE);
+            if (str_pmSiteAcpRemarks.equals("Yes")) {
+                mPreventiveMaintenanceSiteAlarmCheckPointsTextViewRemarksVal.setText("");
+                mPreventiveMaintenanceSiteAlarmCheckPointsLinearLayoutRemarks.setVisibility(View.GONE);
+            }
         }
     }
 
