@@ -455,6 +455,11 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
                             imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
                         }
+
+                        if (shelterCheckPoints.getTypeOfFault() != null && shelterCheckPoints.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+                            setArrayValuesOfTypeOfFault(mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.getText().toString().trim());
+                        }
+
                     }
                 }
             } else {
