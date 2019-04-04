@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,6 +70,8 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
     private TextView txtNoTicketFound;
 
     private SitePmAcTicketList sitePmAcTicketList;
+
+    String returnValueFromFieldEngineerForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +173,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                 Intent intent = new Intent(AcPreventiveMaintenanceDashboardActivity.this, AcPreventiveMaintenanceSectionsListActivity.class);
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this));
                 intent.putExtra("ticketNO", "SIKL19019999");
+                intent.putExtra("status", "Submitted");
                 sessionManager.updateSessionUserTicketId("SIKL19019999");
                 sessionManager.updateSessionUserTicketName("SIKL19019999");
                 startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
@@ -201,6 +205,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                 Intent intent = new Intent(AcPreventiveMaintenanceDashboardActivity.this, AcPreventiveMaintenanceSectionsListActivity.class);
                 intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this));
                 intent.putExtra("ticketNO", "SIKL19012222");
+                intent.putExtra("status", "Submitted by Technician");
                 sessionManager.updateSessionUserTicketId("SIKL19012222");
                 sessionManager.updateSessionUserTicketName("SIKL19012222");
                 startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
@@ -323,4 +328,19 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_PM_SITE_SUBMIT && resultCode == RESULT_OK) {
+           // onBackPressed();
+            returnValueFromFieldEngineerForm = data.getStringExtra("returnValue");
+            if(returnValueFromFieldEngineerForm.equals("WIP")){
+                mPriventiveMaintenanceSiteLinearLayoutTicket2.setEnabled(false);
+                mPriventiveMaintenanceSiteLinearLayoutTicket2.setBackgroundColor(ContextCompat.getColor(mContext,R.color.yellow));
+            }
+
+        }
+    }
+
 }

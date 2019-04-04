@@ -276,6 +276,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private ArrayList<AcPreventiveMaintanceProcessDatum> acPreventiveMaintanceProcessData;
     private AcPreventiveMaintanceProcessParentDatum acPreventiveMaintanceProcessParentDatum;
     MenuItem shareItem;
+    String statusFlag = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,7 +290,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         checkCameraPermission();
 
         Intent intent = getIntent();
-
+        statusFlag = intent.getStringExtra("status");
         sessionManager = new SessionManager(PreventiveMaintenanceAcTechnicianActivity.this);
         //ticketId = sessionManager.getSessionUserTicketId();
         //ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -302,7 +303,76 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         setInputDetails(currentPos);
         invalidateOptionsMenu();
         displayDataOnForm(intent);
+        if (!statusFlag.equals("")) {
+            disableAllFields();
+        }
 
+
+    }
+
+    private void disableAllFields() {
+
+        mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.setEnabled(false);
+        mLinearLayoutContainer.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonQRCodeScan.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setEnabled(false);
+        mButtonClearQRCodeScanView.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcModelVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcTypeVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcMakeVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcCapacityVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcSerialNoVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewMainMcbStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewSubMcbStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewMetalCladPlugStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewMetalCladSocketStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStablizerStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStabilizerMakeVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStabilizerCapacityVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStablizerWorkingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextInputAcVoltage.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcEarthingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhoto.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setEnabled(true);
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhoto.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setEnabled(true);
+        mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhoto.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setEnabled(true);
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhoto.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setEnabled(true);
+        mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhoto.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setEnabled(true);
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhoto.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setEnabled(true);
+        mPreventiveMaintenanceAcTechnicianTextViewAcCoolingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextAcStartingLoadcurrent.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextAcRunningLoadCurrent.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewIndoorFilterCleanedStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewIndoorFanMotorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewBlowerWheelConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewNoiseIndoorMotorVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewOutdoorFanMotorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFanLeafConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewNoiseOutdoorMotorVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewCompressorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewCompCapacitorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewControllerConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcAlarmStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextRoomTemperature.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextSetTemperature.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewVibrationOfAcVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingUnitStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingAvailableWorkingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewWaterLeakageVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcCabinateStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewShelterDoorStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextRemarks.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianButtonPreviousReading.setVisibility(View.GONE);
+        mPreventiveMaintenanceAcTechnicianButtonNextReading.setVisibility(View.GONE);
 
     }
 
@@ -457,15 +527,14 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.setText(str_noOfAcAtSiteVal);
                         invalidateOptionsMenu();
 
-                        if(acPreventiveMaintanceProcessData != null && acPreventiveMaintanceProcessData.size()>0) {
+                        if (acPreventiveMaintanceProcessData != null && acPreventiveMaintanceProcessData.size() > 0) {
                             acPreventiveMaintanceProcessData.clear();
                         }
                         currentPos = 0;
                         totalCount = 0;
                         clearFields(currentPos);
 
-                        if(str_noOfAcAtSiteVal.equals("0"))
-                        {
+                        if (str_noOfAcAtSiteVal.equals("0")) {
                             mLinearLayoutContainer.setVisibility(View.GONE);
                         } else {
                             totalCount = Integer.parseInt(str_noOfAcAtSiteVal);
@@ -1598,10 +1667,10 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 onBackPressed();
                 return true;
             case R.id.menuSubmit:
-                    if(checkValidationonSubmit("onSubmit") == true) {
-                        submitDetails();
-                        return true;
-                    }
+                if (checkValidationonSubmit("onSubmit") == true) {
+                    submitDetails();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -1722,7 +1791,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         Bitmap inImage = decodeFromBase64ToBitmap(base64StringCoolingCoilCleanedBeforePhoto);
                         inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
                         String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
-                        imageFileUriCoolingCoilCleanedBeforePhoto= Uri.parse(path);
+                        imageFileUriCoolingCoilCleanedBeforePhoto = Uri.parse(path);
                     }
 
                     base64StringCoolingCoilCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(index).getBase64StringCoolingCoilPhotoAfterCleaned();
@@ -1776,7 +1845,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 mLinearLayoutContainer.setVisibility(View.GONE);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1784,7 +1853,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
     private void submitDetails() {
 
-        try{
+        try {
             String circle = mPreventiveMaintenanceAcTechnicianTextViewCircleVal.getText().toString().trim();
             String state = mPreventiveMaintenanceAcTechnicianTextViewStateVal.getText().toString().trim();
             String ssa = mPreventiveMaintenanceAcTechnicianTextViewSsaVal.getText().toString().trim();
@@ -1796,22 +1865,22 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             String submittedDate = mPreventiveMaintenanceAcTechnicianTextViewSubmittedDateVal.getText().toString().trim();
             String noOfAcAtSite = mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.getText().toString().trim();
 
-            acPreventiveMaintanceProcessParentDatum = new AcPreventiveMaintanceProcessParentDatum(circle,state,ssa,siteId,siteName,ticketNo,ticketDate,
-                    pmPlanDate,submittedDate,noOfAcAtSite,acPreventiveMaintanceProcessData);
+            acPreventiveMaintanceProcessParentDatum = new AcPreventiveMaintanceProcessParentDatum(circle, state, ssa, siteId, siteName, ticketNo, ticketDate,
+                    pmPlanDate, submittedDate, noOfAcAtSite, acPreventiveMaintanceProcessData);
             //remaing for parent form becoz don't know what is it?
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(acPreventiveMaintanceProcessParentDatum);
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void displayRecords(int pos) {
 
-        if(acPreventiveMaintanceProcessData.size() >0 && pos < acPreventiveMaintanceProcessData.size()){
+        if (acPreventiveMaintanceProcessData.size() > 0 && pos < acPreventiveMaintanceProcessData.size()) {
 
             mPreventiveMaintenanceAcTechnicianTextViewAcNumber.setText("Reading: #" + (pos + 1));
             base64StringAcTechnicianQRCodeScan = acPreventiveMaintanceProcessData.get(pos).getAcPreventiveMaintanceProcessQrCodeScan();
@@ -1896,7 +1965,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 Bitmap inImage = decodeFromBase64ToBitmap(base64StringCoolingCoilCleanedBeforePhoto);
                 inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
                 String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
-                imageFileUriCoolingCoilCleanedBeforePhoto= Uri.parse(path);
+                imageFileUriCoolingCoilCleanedBeforePhoto = Uri.parse(path);
             }
 
             base64StringCoolingCoilCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringCoolingCoilPhotoAfterCleaned();
@@ -1937,7 +2006,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
             mPreventiveMaintenanceAcTechnicianButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceAcTechnicianButtonNextReading.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             clearFields(pos);
         }
 
@@ -2069,7 +2138,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         String compCapacitorCondition = mPreventiveMaintenanceAcTechnicianTextViewCompCapacitorConditionVal.getText().toString().trim();
         String controllerCondition = mPreventiveMaintenanceAcTechnicianTextViewControllerConditionVal.getText().toString().trim();
         String acAlarmStatus = mPreventiveMaintenanceAcTechnicianTextViewAcAlarmStatusVal.getText().toString().trim();
-        String acSensorCondition =  mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.getText().toString().trim();
+        String acSensorCondition = mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.getText().toString().trim();
         String roomTemperature = mPreventiveMaintenanceAcTechnicianEditTextRoomTemperature.getText().toString().trim();
         String setTemperature = mPreventiveMaintenanceAcTechnicianEditTextSetTemperature.getText().toString().trim();
         String ifAnyVibrationOfAc = mPreventiveMaintenanceAcTechnicianTextViewVibrationOfAcVal.getText().toString().trim();
@@ -2080,14 +2149,14 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         String shelterDoorStatus = mPreventiveMaintenanceAcTechnicianTextViewShelterDoorStatusVal.getText().toString().trim();
         String remark = mPreventiveMaintenanceAcTechnicianEditTextRemarks.getText().toString().trim();
 
-        AcPreventiveMaintanceProcessDatum acPreventiveMaintanceProcessDatum = new AcPreventiveMaintanceProcessDatum(qrCodeScan,acModel,acType,acMake,acCapacity,
-                acSerialNo,mainMcbStatus,subMcbStatus,metalCladPlugStatus,metalCladSocketStatus,stabilizerStatus,stabilizerMake,stabilizerCapacity,
-                stabilizerWorkingStatus,inputAcVoltage,acEarthingStatus,filterCleaned,filterPhotoBeforeCleaned,filterPhotoAfterCleaned,condenserCoilCleaned,
-                condenserCoilPhotoBeforeCleaned,condenserCoilPhotoAfterCleaned,coolingCoilCleaned,coolingCoilPhotoBeforeCleaned,coolingCoilPhotoAfterCleaned,
-                acCoolingStatus,acStartingLoadCurrent,acRunningLoadCurrent,indoorFilterCleanedStatus,indoorFanMotorCondition,blowerWheelCondition,ifAnyNoiseIndoorMotor,
-                outdoorFanMotorCondition,fanLeafCondition,ifAnyNoiseOutdoorMotor,compressorCondition,compCapacitorCondition,controllerCondition,acAlarmStatus,
-                acSensorCondition,roomTemperature,setTemperature,ifAnyVibrationOfAc,freeCoolingUnitStatus,ifFreeCoolingAvailableWorkingStatus,waterLeakageIfAny,
-                acCabinateStatus,shelterDoorStatus,remark);
+        AcPreventiveMaintanceProcessDatum acPreventiveMaintanceProcessDatum = new AcPreventiveMaintanceProcessDatum(qrCodeScan, acModel, acType, acMake, acCapacity,
+                acSerialNo, mainMcbStatus, subMcbStatus, metalCladPlugStatus, metalCladSocketStatus, stabilizerStatus, stabilizerMake, stabilizerCapacity,
+                stabilizerWorkingStatus, inputAcVoltage, acEarthingStatus, filterCleaned, filterPhotoBeforeCleaned, filterPhotoAfterCleaned, condenserCoilCleaned,
+                condenserCoilPhotoBeforeCleaned, condenserCoilPhotoAfterCleaned, coolingCoilCleaned, coolingCoilPhotoBeforeCleaned, coolingCoilPhotoAfterCleaned,
+                acCoolingStatus, acStartingLoadCurrent, acRunningLoadCurrent, indoorFilterCleanedStatus, indoorFanMotorCondition, blowerWheelCondition, ifAnyNoiseIndoorMotor,
+                outdoorFanMotorCondition, fanLeafCondition, ifAnyNoiseOutdoorMotor, compressorCondition, compCapacitorCondition, controllerCondition, acAlarmStatus,
+                acSensorCondition, roomTemperature, setTemperature, ifAnyVibrationOfAc, freeCoolingUnitStatus, ifFreeCoolingAvailableWorkingStatus, waterLeakageIfAny,
+                acCabinateStatus, shelterDoorStatus, remark);
 
         if (acPreventiveMaintanceProcessData.size() > 0) {
             if (pos == acPreventiveMaintanceProcessData.size()) {
@@ -2101,7 +2170,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
     }
 
-    public boolean checkValidationOfArrayFields(){
+    public boolean checkValidationOfArrayFields() {
 
         String qrCodeScan = base64StringAcTechnicianQRCodeScan;
         String mainMcbStatus = mPreventiveMaintenanceAcTechnicianTextViewMainMcbStatusVal.getText().toString().trim();
@@ -2137,7 +2206,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         String compCapacitorCondition = mPreventiveMaintenanceAcTechnicianTextViewCompCapacitorConditionVal.getText().toString().trim();
         String controllerCondition = mPreventiveMaintenanceAcTechnicianTextViewControllerConditionVal.getText().toString().trim();
         String acAlarmStatus = mPreventiveMaintenanceAcTechnicianTextViewAcAlarmStatusVal.getText().toString().trim();
-        String acSensorCondition =  mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.getText().toString().trim();
+        String acSensorCondition = mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.getText().toString().trim();
         String roomTemperature = mPreventiveMaintenanceAcTechnicianEditTextRoomTemperature.getText().toString().trim();
         String setTemperature = mPreventiveMaintenanceAcTechnicianEditTextSetTemperature.getText().toString().trim();
         String ifAnyVibrationOfAc = mPreventiveMaintenanceAcTechnicianTextViewVibrationOfAcVal.getText().toString().trim();
@@ -2268,16 +2337,16 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         } else if (ifFreeCoolingAvailableWorkingStatus.isEmpty() || ifFreeCoolingAvailableWorkingStatus == null) {
             showToast("Select If Free Cooling Available Working Status");
             return false;
-        }else if (waterLeakageIfAny.isEmpty() || waterLeakageIfAny == null) {
+        } else if (waterLeakageIfAny.isEmpty() || waterLeakageIfAny == null) {
             showToast("Select Water Leakage If Any");
             return false;
-        }else if (acCabinateStatus.isEmpty() || acCabinateStatus == null) {
+        } else if (acCabinateStatus.isEmpty() || acCabinateStatus == null) {
             showToast("Select AC Cabinate Status");
             return false;
         } else if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
             showToast("Select Shelter Door Status");
             return false;
-        }else if (remark.isEmpty() || remark == null) {
+        } else if (remark.isEmpty() || remark == null) {
             showToast("Enter remark For AC Preventive Maintenance Process");
             return false;
         } else return true;
@@ -2287,8 +2356,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
         String noOfAcAtSite = mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.getText().toString().trim();
 
-        if(noOfAcAtSite.isEmpty() || noOfAcAtSite == null)
-        {
+        if (noOfAcAtSite.isEmpty() || noOfAcAtSite == null) {
             showToast("Select No Of AC At Site");
             return false;
         } else if (Integer.valueOf(noOfAcAtSite) > 0) {
@@ -2313,7 +2381,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         return false;
     }
 
-    private void displayDataOnForm(Intent intent){
+    private void displayDataOnForm(Intent intent) {
 
         mPreventiveMaintenanceAcTechnicianTextViewCircleVal.setText(intent.getStringExtra(""));
         mPreventiveMaintenanceAcTechnicianTextViewStateVal.setText(intent.getStringExtra(""));

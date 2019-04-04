@@ -1,6 +1,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -29,6 +30,10 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
     String[] values;
     private static AcPreventiveMaintenanceSectionListAdapter adapter;
     public static final int RESULT_READING_COMPLETED = 650;
+    private SessionManager sessionManager;
+    private String designation;
+    String flag;
+
 
     //vinayak code start
     /*private OfflineStorageWrapper offlineStorageWrapper;
@@ -44,27 +49,39 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ac_preventive_maintenance_sections_list);
-
+        sessionManager = new SessionManager(AcPreventiveMaintenanceSectionsListActivity.this);
         acPreventiveMaintenanceSections_listView_sections = (ListView) findViewById(R.id.acPreventiveMaintenanceSections_listView_sections);
 
+        Intent intent = getIntent();
+        flag = intent.getStringExtra("status");
+        designation = sessionManager.getSessionDesignation();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /*Intent intent = getIntent();
         String tic_Name = intent.getStringExtra("ticketName");
         this.setTitle(tic_Name);*/
 
-        this.setTitle("AC Preventive Maintenance Sections List");
+        this.setTitle("AC PM Sections List");
+
 
 
         values = getResources().getStringArray(R.array.listView_acPreventiveMaintenanceSections_sections);
         dataModels = new ArrayList<>();
+
         for (int i = 0; i < values.length; i++) {
-            if (i / 2 == 0) {
-                dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
+            if (flag.equals("Submitted by Technician")) {
+                if (i / 2 == 0) {
+                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
+                } else {
+                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
+                }
             } else {
-                dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
+                if (values[i].equals("AC Preventive Maintenance Process") && designation.equals("AC Technician (Mobile)")) {
+                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
+                } else if (values[i].equals("Ticket Submission from Field Engineer") && designation.equals("Site Head")) {// || designation.equals("Senior Field Support Engineer (Mobile)")
+                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
+                }
             }
-            //dataModels.add(new AcPreventiveMaintenanceSection(""+(i+1),""+values[i],true));
         }
 
         adapter = new AcPreventiveMaintenanceSectionListAdapter(dataModels, getApplicationContext());
@@ -76,68 +93,45 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
 
                 switch (position) {
                     case 0:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class));
-                        break;
+                        if (dataModels.get(position).getSecName().equals("Ticket Submission from Field Engineer")) {
+                            Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
+                            acPMProcessIntent.putExtra("status", "");
+                            startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
+                            break;
+                        } else if (dataModels.get(position).getSecName().equals("AC Preventive Maintenance Process")) {
+                            if (flag.equals("Submitted by Technician")) {
+                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class);
+                                acPMProcessIntent.putExtra("status", flag);
+                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
+                            } else {
+                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class);
+                                acPMProcessIntent.putExtra("status", "");
+                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
+                            }
+
+                            break;
+                        }
+
                     case 1:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class));
-                        break;
-                    /*case 2:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Earth_Resistance_Tower.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Earth_Resistance_Equipment.class));
-                        break;
-                    case 4:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Electric_Connection.class));
-                        break;
-                    case 5:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Air_Conditioners.class));
-                        break;
-                    case 6:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Solar_Power_System.class));
-                        break;
-                    case 7:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PowerPlantDetailsActivity.class));
-                        break;
-                    case 8:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Power_Backups_DG.class));
-                        break;
-                    case 9:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Shelter.class));
-                        break;
-                    case 10:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Media.class));
-                        break;
-                    case 11:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Battery_Set.class));
-                        break;
-                    case 12:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, ExternalTenantsPersonaldetails.class));
-                        break;
-                    case 13:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, Total_DC_Load_site.class));
-                        break;
-                    case 14:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, ActiveequipmentDetails.class));
-                        break;
-                    case 15:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PowerManagementSystem.class));
-                        break;
-                    case 16:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, GeneralAndSafetyMeasures.class));
-                        break;
-                    case 17:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, ACDB_DCDB.class));
-                        break;
-                    case 18:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, ServoStabilizer.class));
-                        break;
-                    case 19:
-                        startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, DetailsOfUnusedMaterials.class));
-                        break;
-                    case 20:
-                        startActivityForResult(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PhotoCaptureActivity.class), RESULT_READING_COMPLETED);
-                        break;*/
+                        if (dataModels.get(position).getSecName().equals("Ticket Submission from Field Engineer")) {
+                            if (flag.equals("Submitted by Technician")) {
+                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
+                                acPMProcessIntent.putExtra("status", flag);
+                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
+                            } else {
+                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
+                                acPMProcessIntent.putExtra("status", "");
+                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
+                            }
+                            break;
+                        } else if (dataModels.get(position).getSecName().equals("AC Preventive Maintenance Process")) {
+                            Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class);
+                            acPMProcessIntent.putExtra("status", flag);
+                            startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
+                            break;
+                        }
+                        //startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class));
+                        //break;
                 }
             }
         });
@@ -148,6 +142,7 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_READING_COMPLETED && resultCode == RESULT_OK) {
             onBackPressed();
+
         }
     }
 

@@ -351,99 +351,111 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/LinearLayoutParent"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
+                android:visibility="gone"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_statusSubmittedByTechnician"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Status" />
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_statusSubmittedByTechnicianVal"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_statusSubmittedByTechnician"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Status" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_statusSubmittedByTechnicianVal"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:imeOptions="actionNext"
+                        android:paddingTop="5dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_dateSubmittedByTechnician"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Submitted Date" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_dateSubmittedByTechnicianVal"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:imeOptions="actionNext"
+                        android:paddingTop="5dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_feedBack"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Feed Back" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_feedBackVal"
+                        style="@style/MyTheme"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="0.6"
+                        android:hint="Select "
+                        android:textAlignment="viewStart"></TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_remark"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Remark" />
+                    <EditText
+                        android:id="@+id/preventiveMaintanceAcFieldEngineer_editText_remark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Remark"
+                        android:imeOptions="actionNext"
+                        android:inputType="textMultiLine"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
+
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_dateSubmittedByTechnician"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Submitted Date" />
 
-                <TextView
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_dateSubmittedByTechnicianVal"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_feedBack"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Feed Back" />
-
-                <TextView
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_feedBackVal"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select "
-                    android:textAlignment="viewStart"></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_remark"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Remark" />
-                <EditText
-                    android:id="@+id/preventiveMaintanceAcFieldEngineer_editText_remark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Remark"
-                    android:imeOptions="actionNext"
-                    android:inputType="textMultiLine"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

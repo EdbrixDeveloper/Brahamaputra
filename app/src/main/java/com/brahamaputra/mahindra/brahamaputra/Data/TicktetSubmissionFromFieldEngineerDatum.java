@@ -57,6 +57,22 @@ public class TicktetSubmissionFromFieldEngineerDatum {
         @Expose
         private String remark;
 
+        @SerializedName("Success")
+        @Expose
+        private Integer success;
+
+        @SerializedName("Error")
+        @Expose
+        private Error error;
+
+        @SerializedName("Code")
+        @Expose
+        private String code;
+
+        @SerializedName("Message")
+        @Expose
+        private String message;
+
         /**
          * No args constructor for use in serialization
          *
@@ -240,4 +256,35 @@ public class TicktetSubmissionFromFieldEngineerDatum {
         public void setRemark(String remark) {
             this.remark = remark;
         }
+
+    public Integer getSuccess() {
+        return success;
+    }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+    public void setSuccess(Integer success) {
+        this.success = success;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

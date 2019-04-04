@@ -1,21 +1,33 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintanceProcessParentDatum;
 import com.brahamaputra.mahindra.brahamaputra.Data.TicktetSubmissionFromFieldEngineerDatum;
+import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
+import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
+import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -60,6 +72,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal;
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewRemark;
     private EditText mPreventiveMaintanceAcFieldEngineerEditTextRemark;
+    private LinearLayout mLinearLayoutParent;
 
     private String userId = "1112";
     private String ticketId = "1112";
@@ -67,6 +80,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
+    String flag = "";
 
     String str_feedBackVal;
     TicktetSubmissionFromFieldEngineerDatum ticktetSubmissionFromFieldEngineerDatum;
@@ -78,6 +92,8 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         setTitle("Ticket Submission from Field Engineer");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent intent = getIntent();
+        flag = intent.getStringExtra("status");
 
         sessionManager = new SessionManager(PreventiveMaintanceAcFieldEngineerActivity.this);
         //ticketId = sessionManager.getSessionUserTicketId();
@@ -90,7 +106,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         initCombo();
         setInputDetails();
 
-        Intent intent = getIntent();
         setDataToFields(intent);
     }
 
@@ -129,6 +144,12 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal = (TextView) findViewById(R.id.preventiveMaintanceAcFieldEngineer_textView_feedBackVal);
         mPreventiveMaintanceAcFieldEngineerTextViewRemark = (TextView) findViewById(R.id.preventiveMaintanceAcFieldEngineer_textView_remark);
         mPreventiveMaintanceAcFieldEngineerEditTextRemark = (EditText) findViewById(R.id.preventiveMaintanceAcFieldEngineer_editText_remark);
+        mLinearLayoutParent = (LinearLayout) findViewById(R.id.LinearLayoutParent);
+
+        if (flag.equals("Submitted by Technician")) {
+            mLinearLayoutParent.setVisibility(View.VISIBLE);
+        }
+
     }
 
     private void initCombo() {
@@ -152,6 +173,16 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             }
         });
 
+        mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(PreventiveMaintanceAcFieldEngineerActivity.this,AcPreventiveMaintenanceDashboardActivity.class);
+                    intent.putExtra("returnValue","WIP");
+                    startActivity(intent);
+                    finish();
+            }
+        });
+
     }
 
     @Override
@@ -170,7 +201,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                 return true;
 
             case R.id.menuSubmit:
-                 submitDetails();
+                submitDetails();
                 //startActivity(new Intent(this, Tower_Detail.class));
                 finish();
                 return true;
@@ -182,11 +213,13 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        /*Intent i = new Intent();
+        i.putExtra("returnValue","WIP");*/
         setResult(RESULT_OK);
         finish();
     }
 
-    public boolean checkValidationOfArrayFields(){
+    public boolean checkValidationOfArrayFields() {
 
         String feedBack = mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.getText().toString().trim();
         String remark = mPreventiveMaintanceAcFieldEngineerEditTextRemark.getText().toString().trim();
@@ -222,10 +255,9 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                 mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.setText(ticktetSubmissionFromFieldEngineerDatum.getAcTechnicianName());
                 mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.setText(ticktetSubmissionFromFieldEngineerDatum.getAcTechnicianMobileNo());
 
-                if(ticktetSubmissionFromFieldEngineerDatum.getTicketStatusToWip().equals("true"))
-                {
+                if (ticktetSubmissionFromFieldEngineerDatum.getTicketStatusToWip().equals("true")) {
                     mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(true);
-                }else{
+                } else {
                     mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(false);
                 }
                 mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.setText(ticktetSubmissionFromFieldEngineerDatum.getStatus());
@@ -235,13 +267,13 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
 
 
             }
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
 
     }
 
-    public void setDataToFields(Intent intent){
+    public void setDataToFields(Intent intent) {
         mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.setText(intent.getStringExtra(""));
         mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.setText(intent.getStringExtra(""));
         mPreventiveMaintanceAcFieldEngineerTextViewStateVal.setText(intent.getStringExtra(""));
@@ -260,7 +292,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
 
     private void submitDetails() {
 
-        try{
+        try {
             String customer = mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.getText().toString().trim();
             String circle = mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.getText().toString().trim();
             String state = mPreventiveMaintanceAcFieldEngineerTextViewStateVal.getText().toString().trim();
@@ -274,36 +306,83 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             String technicianName = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.getText().toString().trim();
             String technicianMobileNo = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.getText().toString().trim();
             String ticketStatusToWip = "";
-            if(mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.isChecked())
-            {
-                 ticketStatusToWip = "true";
-            }
-            else
-            {
-                 ticketStatusToWip = "false";
+            if (mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.isChecked()) {
+                ticketStatusToWip = "true";
+            } else {
+                ticketStatusToWip = "false";
             }
             String status = mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.getText().toString().trim();
             String submittedDate = mPreventiveMaintanceAcFieldEngineerTextViewDateSubmittedByTechnicianVal.getText().toString().trim();
             String feedback = mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.getText().toString().trim();
             String remark = mPreventiveMaintanceAcFieldEngineerEditTextRemark.getText().toString().trim();
 
-            ticktetSubmissionFromFieldEngineerDatum = new TicktetSubmissionFromFieldEngineerDatum(customer,circle,state,ssa,siteId,siteName,
-                    sheduledDateOfAcPm,modeOfOpration,ticketNo,vendorName,technicianName,technicianMobileNo,ticketStatusToWip,status,submittedDate,
-                    feedback,remark);
+            ticktetSubmissionFromFieldEngineerDatum = new TicktetSubmissionFromFieldEngineerDatum(customer, circle, state, ssa, siteId, siteName,
+                    sheduledDateOfAcPm, modeOfOpration, ticketNo, vendorName, technicianName, technicianMobileNo, ticketStatusToWip, status, submittedDate,
+                    feedback, remark);
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(ticktetSubmissionFromFieldEngineerDatum);
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void clearFields(){
+    private void clearFields() {
         mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setText("");
         mPreventiveMaintanceAcFieldEngineerEditTextRemark.setText("");
         mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(false);
+    }
+
+    public void submitFieldEngineerAcPmSiteTicket() {
+        try {
+            if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+
+                showBusyProgress();
+                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+                Log.e("123", jsonInString);
+
+                GsonRequest<TicktetSubmissionFromFieldEngineerDatum> submitSitePmAcTicketRequest = new GsonRequest<>(Request.Method.POST, Constants.submitSitePMTicket, jsonInString, TicktetSubmissionFromFieldEngineerDatum.class,
+                        new Response.Listener<TicktetSubmissionFromFieldEngineerDatum>() {
+                            @Override
+                            public void onResponse(@NonNull TicktetSubmissionFromFieldEngineerDatum response) {
+                                hideBusyProgress();
+                                if (response.getError() != null) {
+                                    showToast(response.getError().getErrorMessage());
+                                } else {
+                                    if (response.getSuccess() == 1) {
+                                        showToast("Ticket submitted successfully.");
+                                        sessionManager.updateSessionUserTicketId(null);
+                                        sessionManager.updateSessionUserTicketName(null);
+                                        setResult(RESULT_OK);
+                                        removeOfflineCache();
+                                        finish();
+                                    }
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        hideBusyProgress();
+                        showToast(SettingsMy.getErrorMessage(error));
+                    }
+                });
+
+                submitSitePmAcTicketRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+                submitSitePmAcTicketRequest.setShouldCache(false);
+                Application.getInstance().addToRequestQueue(submitSitePmAcTicketRequest, "submitSitePmTicketRequest");
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void removeOfflineCache() {
+        if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+            offlineStorageWrapper.removedOffLineFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
+        }
     }
 
 }
