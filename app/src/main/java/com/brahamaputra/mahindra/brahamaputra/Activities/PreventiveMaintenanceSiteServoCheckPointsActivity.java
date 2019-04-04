@@ -45,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
@@ -132,7 +133,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         setListner();
 
         preventiveMaintanceSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
-        setInputDetails();
+        //setInputDetails();
 
         listOfFaultsTypes = new ArrayList<>();
         alreadySelectedTypeOfFaultList = new ArrayList<>();
@@ -144,6 +145,8 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
             listOfFaultsTypes.add(new MultiSelectModel(id, typeOfFaultList.get(i).toString()));
             id++;
         }
+
+        setInputDetails();
         setMultiSelectModel();
     }
 
@@ -401,11 +404,11 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
                         Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
                         if (!flagIsDuplicateQRcode) {
-                        base64StringDetailsOfServoQRCodeScan = result.getContents();
-                        if (!base64StringDetailsOfServoQRCodeScan.isEmpty() && base64StringDetailsOfServoQRCodeScan != null) {
-                            mPreventiveMaintenanceSiteServoCheckPointsButtonDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
+                            base64StringDetailsOfServoQRCodeScan = result.getContents();
+                            if (!base64StringDetailsOfServoQRCodeScan.isEmpty() && base64StringDetailsOfServoQRCodeScan != null) {
+                                mPreventiveMaintenanceSiteServoCheckPointsButtonDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
+                                mButtonClearDetailsOfServoQRCodeScanView.setVisibility(View.VISIBLE);
+                            }
                         } else {
                             base64StringDetailsOfServoQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
@@ -454,11 +457,10 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
             case R.id.menuSubmit:
                 if (checkValidationOfArrayFields() == true) {
                     submitDetails();
-                    if(hototicket_Selected_SiteType.equals("Outdoor"))
-                    {
+                    if (hototicket_Selected_SiteType.equals("Outdoor")) {
                         startActivity(new Intent(this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));
                         finish();
-                    }else {
+                    } else {
                         startActivity(new Intent(this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
                         finish();
                     }
@@ -507,6 +509,12 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
                             imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
                         }
+
+                        if (servoCheckPoints.getTypeOfFault() != null && servoCheckPoints.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+
+                            setArrayValuesOfTypeOfFault(servoCheckPoints.getTypeOfFault());
+                        }
+
                     }
                 }
             } else {
@@ -591,5 +599,20 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
             showToast("Upload Photo Of Register Fault");
             return false;
         } else return true;
+    }
+
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

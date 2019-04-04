@@ -48,6 +48,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity {
 
@@ -419,15 +420,15 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* if (checkValidationOfArrayFields() == true) {*/
-                    if (currentPos > 0) {
-                        //Save current ac reading
-                        saveRecords(currentPos);
-                        currentPos = currentPos - 1;
-                        //move to Next reading
-                        displayRecords(currentPos);
+                /* if (checkValidationOfArrayFields() == true) {*/
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
 
-                    }
+                }
                 /*}*/
             }
         });
@@ -919,6 +920,11 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     imageFileUriUploadPhotoOfRegisterFault = Uri.parse(path);
                 }
 
+                if (dataList.getTypeOfFault() != null && dataList.getTypeOfFault().length() > 0 && listOfFaultsTypes.size() > 0) {
+
+                    setArrayValuesOfTypeOfFault(dataList.getTypeOfFault());
+                }
+
                 str_pmSiteAcpNoOfAcAvailableAtSiteVal = dataList.getNoOfAcAvailableAtsite();
                 invalidateOptionsMenu();
                 if (acCheckPointsData != null && acCheckPointsData.size() > 0) {
@@ -1279,5 +1285,20 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         Log.d(TAG, "Dialog cancelled");
                     }
                 });
+    }
+
+    private void setArrayValuesOfTypeOfFault(String TypeOfFault) {
+
+        if (!TypeOfFault.isEmpty() && TypeOfFault != null) {
+            List<String> items = Arrays.asList(TypeOfFault.split("\\s*,\\s*"));
+            for (String ss : items) {
+                for (MultiSelectModel c : listOfFaultsTypes) {
+                    if (ss.equals(c.getName())) {
+                        alreadySelectedTypeOfFaultList.add(c.getId());
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
