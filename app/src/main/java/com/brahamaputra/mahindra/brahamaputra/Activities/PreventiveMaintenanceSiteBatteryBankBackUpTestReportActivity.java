@@ -1435,7 +1435,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                 DecimalFormatConversion();
                 SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this,
                         new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankBackUpTestReport_readingTakenAt))),
-                        "Reading Taket At",
+                        "Reading Taken At",
                         "close", "#000000");
                 searchableSpinnerDialog.showSearchableSpinnerDialog();
 
