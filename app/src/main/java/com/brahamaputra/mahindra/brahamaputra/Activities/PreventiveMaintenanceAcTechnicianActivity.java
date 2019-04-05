@@ -41,6 +41,8 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -1872,6 +1874,12 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(acPreventiveMaintanceProcessParentDatum);
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId", sessionManager.getSessionUserId());
+            jsonObject.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jsonObject.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jsonObject.put("AccessToken", sessionManager.getSessionDeviceToken());
 
         } catch (Exception e) {
             e.printStackTrace();

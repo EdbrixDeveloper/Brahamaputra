@@ -85,6 +85,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
         assignViews();
         sessionManager = new SessionManager(AcPreventiveMaintenanceDashboardActivity.this);
         setListner();
+        //prepareListData();
     }
 
     private void assignViews() {
@@ -333,12 +334,12 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_PM_SITE_SUBMIT && resultCode == RESULT_OK) {
-           // onBackPressed();
-            returnValueFromFieldEngineerForm = data.getStringExtra("returnValue");
-            if(returnValueFromFieldEngineerForm.equals("WIP")){
+            onBackPressed();
+            //returnValueFromFieldEngineerForm = data.getStringExtra("returnValue");
+            /*if(returnValueFromFieldEngineerForm.equals("WIP")){
                 mPriventiveMaintenanceSiteLinearLayoutTicket2.setEnabled(false);
                 mPriventiveMaintenanceSiteLinearLayoutTicket2.setBackgroundColor(ContextCompat.getColor(mContext,R.color.yellow));
-            }
+            }*/
 
         }
     }
