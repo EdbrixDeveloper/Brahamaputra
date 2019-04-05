@@ -33,7 +33,7 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
     private SessionManager sessionManager;
     private String designation;
     String flag;
-
+    String returnValue;
 
     //vinayak code start
     /*private OfflineStorageWrapper offlineStorageWrapper;
@@ -141,6 +141,7 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_READING_COMPLETED && resultCode == RESULT_OK) {
+            returnValue = data.getStringExtra("returnValue");
             onBackPressed();
 
         }
@@ -169,7 +170,9 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
 
     @Override
     public void onBackPressed() {
-        setResult(RESULT_OK);
+        Intent i = new Intent();
+        i.putExtra("returnValue",returnValue);
+        setResult(RESULT_OK,i);
         finish();
     }
 

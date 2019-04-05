@@ -19,7 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintanceProcessParentDatum;
+import com.brahamaputra.mahindra.brahamaputra.Data.DieselSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TicktetSubmissionFromFieldEngineerDatum;
+import com.brahamaputra.mahindra.brahamaputra.Data.UpdateAcPreventiveMaintanceStatusResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
@@ -34,10 +36,15 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
+
+    private String TAG = this.getClass().getName();
+
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewCustomer;
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal;
     private TextView mPreventiveMaintanceAcFieldEngineerTextViewCircle;
@@ -84,6 +91,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
 
     String str_feedBackVal;
     TicktetSubmissionFromFieldEngineerDatum ticktetSubmissionFromFieldEngineerDatum;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,13 +184,69 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(PreventiveMaintanceAcFieldEngineerActivity.this,AcPreventiveMaintenanceDashboardActivity.class);
+                   /* Intent intent = new Intent(PreventiveMaintanceAcFieldEngineerActivity.this,AcPreventiveMaintenanceDashboardActivity.class);
                     intent.putExtra("returnValue","WIP");
                     startActivity(intent);
-                    finish();
+                    finish();*/
+               // updateStatusOfTicket();
+                onBackPressed();
             }
         });
 
+    }
+
+    //for update the ticket status when field engineer select the status WIP is yes
+    private void updateStatusOfTicket() {
+
+        showBusyProgress();
+        String userId = sessionManager.getSessionUserId();
+        String accessToken = sessionManager.getSessionDeviceToken();
+        String siteDbId = "";
+        String status = "WIP";
+
+        try {
+            JSONObject jsonString = new JSONObject();
+            jsonString.put("UserId", userId);
+            jsonString.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jsonString.put("SiteId", siteDbId);//siteCodeId
+           // jsonString.put("Id", siteDbId); //ticketDbId
+            // jsonString.put("SitePMAcTicketNo", siteDbId); //ticketCode
+            jsonString.put("Status", status);
+
+            GsonRequest<UpdateAcPreventiveMaintanceStatusResposeData> updateAcPreventiveMaintanceStatusResposeDataGsonRequest = new GsonRequest<>(Request.Method.POST, ""/*remaining becoz webservice not done yet.*/, jsonString.toString(), UpdateAcPreventiveMaintanceStatusResposeData.class,
+                    new Response.Listener<UpdateAcPreventiveMaintanceStatusResposeData>() {
+                        @Override
+                        public void onResponse(UpdateAcPreventiveMaintanceStatusResposeData response) {
+                            hideBusyProgress();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    hideBusyProgress();
+                                   // setResult(RESULT_OK);
+                                    showToast("Status updated successfully.");
+                                    onBackPressed();
+                                    finish();
+                                } else {
+                                    hideBusyProgress();
+                                    showToast("Something went wrong");
+                                }
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            hideBusyProgress();
+                            Log.e(TAG, error.toString());
+                        }
+                    });
+            updateAcPreventiveMaintanceStatusResposeDataGsonRequest.setRetryPolicy(Application.getDefaultRetryPolice());
+            updateAcPreventiveMaintanceStatusResposeDataGsonRequest.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(updateAcPreventiveMaintanceStatusResposeDataGsonRequest, "updateAcPreventiveMaintanceStatusResposeData");
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
     }
 
     @Override
@@ -213,9 +277,9 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        /*Intent i = new Intent();
-        i.putExtra("returnValue","WIP");*/
-        setResult(RESULT_OK);
+        Intent i = new Intent();
+        i.putExtra("returnValue", "WIP");
+        setResult(RESULT_OK, i);
         finish();
     }
 
@@ -323,6 +387,59 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(ticktetSubmissionFromFieldEngineerDatum);
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId", sessionManager.getSessionUserId());
+            jsonObject.put("AccessToken", sessionManager.getSessionDeviceToken());
+            jsonObject.put("customer", customer);
+            jsonObject.put("circle", circle);
+            jsonObject.put("state", state);
+            jsonObject.put("ssa", ssa);
+            jsonObject.put("siteName", siteName);
+            jsonObject.put("siteId", siteId);
+            jsonObject.put("sheduledDateOfAcPm", sheduledDateOfAcPm);
+            jsonObject.put("modeOfOpration", modeOfOpration);
+            jsonObject.put("ticketNo", ticketNo);
+            jsonObject.put("vendorName", vendorName);
+            jsonObject.put("acTechnicianName", technicianName);
+            jsonObject.put("acTechnicianMobileNo", technicianMobileNo);
+            jsonObject.put("ticketStatusToWip", ticketStatusToWip);
+            jsonObject.put("status", status);
+            jsonObject.put("submittedDate", submittedDate);
+            jsonObject.put("feedBack", feedback);
+            jsonObject.put("remark", remark);
+
+
+            GsonRequest<TicktetSubmissionFromFieldEngineerDatum> ticktetSubmissionFromFieldEngineerDatum = new GsonRequest<>(Request.Method.POST, Constants.Submitdieselfillingfundrequesttransaction, jsonObject.toString(), TicktetSubmissionFromFieldEngineerDatum.class,
+                    new Response.Listener<TicktetSubmissionFromFieldEngineerDatum>() {
+                        @Override
+                        public void onResponse(TicktetSubmissionFromFieldEngineerDatum response) {
+                            hideBusyProgress();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    hideBusyProgress();
+                                    setResult(RESULT_OK);
+                                    showToast("Record submitted successfully.");
+                                    finish();
+                                } else {
+                                    hideBusyProgress();
+                                    showToast("Something went wrong");
+                                }
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            hideBusyProgress();
+                            Log.e("D100", error.toString());
+                        }
+                    });
+            ticktetSubmissionFromFieldEngineerDatum.setRetryPolicy(Application.getDefaultRetryPolice());
+            ticktetSubmissionFromFieldEngineerDatum.setShouldCache(false);
+            Application.getInstance().addToRequestQueue(ticktetSubmissionFromFieldEngineerDatum, "ticktetSubmissionFromFieldEngineerDatum");
 
         } catch (Exception e) {
             e.printStackTrace();
