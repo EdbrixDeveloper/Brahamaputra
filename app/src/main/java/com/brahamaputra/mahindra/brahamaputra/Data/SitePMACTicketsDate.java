@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-class SitePMACTicketsDate {
+public class SitePMACTicketsDate {
 
     @SerializedName("TicketDate")
     @Expose
     private String ticketDate;
     @SerializedName("SitePMTicketCount")
     @Expose
-    private Integer sitePMTicketCount;
+    private Integer sitePMAcTicketCount;
     @SerializedName("SitePMTickets")
     @Expose
-    private List<SitePMTicket> sitePMTickets = null;
+    private List<AcSitePMTicket> sitePMAcTickets = null;
 
     public String getTicketDate() {
         return ticketDate;
@@ -25,19 +25,19 @@ class SitePMACTicketsDate {
         this.ticketDate = ticketDate;
     }
 
-    public Integer getSitePMTicketCount() {
-        return sitePMTicketCount;
+    public Integer getSitePMAcTicketCount() {
+        return sitePMAcTicketCount;
     }
 
-    public void setSitePMTicketCount(Integer sitePMTicketCount) {
-        this.sitePMTicketCount = sitePMTicketCount;
+    public void setSitePMAcTicketCount(Integer sitePMTicketCount) {
+        this.sitePMAcTicketCount = sitePMTicketCount;
     }
 
-    public List<SitePMTicket> getSitePMTickets() {
-        return sitePMTickets;
+    public List<AcSitePMTicket> getSitePMAcTickets() {
+        return sitePMAcTickets;
     }
 
-    public void setSitePMTickets(List<SitePMTicket> sitePMTickets) {
-        this.sitePMTickets = sitePMTickets;
+    public void setSitePMTickets(List<AcSitePMTicket> sitePMAcTickets) {
+        this.sitePMAcTickets = sitePMAcTickets;
     }
 }
