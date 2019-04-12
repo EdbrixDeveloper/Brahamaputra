@@ -7,20 +7,20 @@ public class AcSitePMTicket {
     @SerializedName("Id")
     @Expose
     private String id;
-    @SerializedName("AcPMTicketNo")
+    @SerializedName("SitePMAcTicketNo")
     @Expose
     private String acPMTicketNo;
-    @SerializedName("AcPMTicketDate")
+    @SerializedName("SitePMAcTicketDate")
     @Expose
     private String acPMTicketDate;
 
-    @SerializedName("PmPlanDate")
+    @SerializedName("AcPmPlanDate")
     @Expose
     private String pmPlanDate;
     @SerializedName("SubmittedDate")
     @Expose
     private String submittedDate;
-    @SerializedName("AcPMScheduledDate")
+    @SerializedName("SheduledDateOfAcPm")
     @Expose
     private String acPMScheduledDate;
 
@@ -36,6 +36,9 @@ public class AcSitePMTicket {
     @SerializedName("AcTechnicianMobileNo")
     @Expose
     private String acTechnicianMobileNo;
+    @SerializedName("SiteDBId")
+    @Expose
+    private String siteDBId;
     @SerializedName("SiteId")
     @Expose
     private String siteId;
@@ -49,9 +52,9 @@ public class AcSitePMTicket {
     @SerializedName("NumberOfAc")
     @Expose
     private String numberOfAc;
-    @SerializedName("AcTechnicianStatus")
+    /*@SerializedName("AcTechnicianStatus")
     @Expose
-    private String acTechnicianStatus;
+    private String acTechnicianStatus;*/
     @SerializedName("StateName")
     @Expose
     private String stateName;
@@ -69,41 +72,17 @@ public class AcSitePMTicket {
     @Expose
     private String ticketAccess;
 
-    public String getTicketAccess() {
-        return ticketAccess;
-    }
-
-    public void setTicketAccess(String ticketAccess) {
-        this.ticketAccess = ticketAccess;
-    }
-
-    public String getSiteType() {
-        return siteType;
-    }
-
-    public void setSiteType(String siteType) {
-        this.siteType = siteType;
-    }
-
-    public String getAccessType() {
-        return AccessType;
-    }
-
-    public void setAccessType(String accessType) {
-        AccessType = accessType;
-    }
-
     @SerializedName("SiteType")
     @Expose
     private String siteType;
 
     @SerializedName("AccessType")
     @Expose
-    private String AccessType;
+    private String accessType;
 
-
-
-
+    @SerializedName("SiteAddress")
+    @Expose
+    private String SiteAddress;
 
 
     public String getId() {
@@ -186,6 +165,14 @@ public class AcSitePMTicket {
         this.acTechnicianMobileNo = acTechnicianMobileNo;
     }
 
+    public String getSiteDBId() {
+        return siteDBId;
+    }
+
+    public void setSiteDBId(String siteDBId) {
+        this.siteDBId = siteDBId;
+    }
+
     public String getSiteId() {
         return siteId;
     }
@@ -219,13 +206,13 @@ public class AcSitePMTicket {
         this.numberOfAc = numberOfAc;
     }
 
-    public String getAcTechnicianStatus() {
+    /*public String getAcTechnicianStatus() {
         return acTechnicianStatus;
     }
 
     public void setAcTechnicianStatus(String acTechnicianStatus) {
         this.acTechnicianStatus = acTechnicianStatus;
-    }
+    }*/
 
     public String getStateName() {
         return stateName;
@@ -258,4 +245,37 @@ public class AcSitePMTicket {
     public void setSSAName(String SSAName) {
         this.ssaName = SSAName;
     }
+
+    public String getTicketAccess() {
+        return ticketAccess;
+    }
+
+    public void setTicketAccess(String ticketAccess) {
+        this.ticketAccess = ticketAccess;
+    }
+
+    public String getSiteType() {
+        return siteType;
+    }
+
+    public void setSiteType(String siteType) {
+        this.siteType = siteType;
+    }
+
+    public String getAccessType() {
+        return accessType;
+    }
+
+    public void setAccessType(String accessType) {
+        this.accessType = accessType;
+    }
+
+    public String getSiteAddress() {
+        return SiteAddress;
+    }
+
+    public void setSiteAddress(String siteAddress) {
+        SiteAddress = siteAddress;
+    }
+
 }

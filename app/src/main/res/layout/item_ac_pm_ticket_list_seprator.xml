@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/colorPrimary">
+
+
+    <TextView
+        android:id="@+id/textView_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="26/10/2018"
+        android:layout_margin="@dimen/app_min_margin"
+        android:textColor="@color/colorWhite"
+        android:paddingLeft="@dimen/app_min_padding"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView_Count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="0"
+        android:textColor="@color/colorWhite"
+        android:textAlignment="textEnd"
+        android:layout_margin="@dimen/app_min_margin"
+        android:paddingRight="@dimen/app_min_padding"/>
+</LinearLayout>

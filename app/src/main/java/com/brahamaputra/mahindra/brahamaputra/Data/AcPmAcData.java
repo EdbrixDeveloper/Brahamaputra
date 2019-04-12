@@ -3,9 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class SitePmAcTicketList {
+public class AcPmAcData {
     @SerializedName("Success")
     @Expose
     private Integer success;
@@ -15,12 +13,9 @@ public class SitePmAcTicketList {
     @SerializedName("Message")
     @Expose
     private String message;
-    @SerializedName("SitePMAcTicketsDates")
+    @SerializedName("AcPmAcDetails")
     @Expose
-    private List<SitePMACTicketsDate> sitePMACTicketsDates = null;
-    @SerializedName("SitePMAcTicketSummary")
-    @Expose
-    private SitePMTicketSummary sitePMTicketSummary;
+    private AcPmAcDetails acPmAcDetails;
 
     @SerializedName("Error")
     @Expose
@@ -50,20 +45,12 @@ public class SitePmAcTicketList {
         this.message = message;
     }
 
-    public List<SitePMACTicketsDate> getSitePMTicketsDates() {
-        return sitePMACTicketsDates;
+    public AcPmAcDetails getAcPmAcDetails() {
+        return acPmAcDetails;
     }
 
-    public void setSitePMTicketsDates(List<SitePMACTicketsDate> sitePMTicketsDates) {
-        this.sitePMACTicketsDates = sitePMTicketsDates;
-    }
-
-    public SitePMTicketSummary getSitePMTicketSummary() {
-        return sitePMTicketSummary;
-    }
-
-    public void setSitePMTicketSummary(SitePMTicketSummary sitePMTicketSummary) {
-        this.sitePMTicketSummary = sitePMTicketSummary;
+    public void setAcPmAcDetails(AcPmAcDetails acPmAcDetails) {
+        this.acPmAcDetails = acPmAcDetails;
     }
 
     public Error getError() {
@@ -73,4 +60,5 @@ public class SitePmAcTicketList {
     public void setError(Error error) {
         this.error = error;
     }
+
 }

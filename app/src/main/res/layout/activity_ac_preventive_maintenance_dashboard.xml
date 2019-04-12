@@ -26,14 +26,14 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 app:barWidth="09dp"
-                app:countText="23"
+                app:countText="0"
                 app:countTextColor="@android:color/black"
-                app:countTextSize="45sp"
+                app:countTextSize="30sp"
                 app:defTextColor="@android:color/black"
                 app:defTextSize="16sp"
                 app:definitionText="% COMPLETE"
                 app:marginBtwText="15dp"
-                app:percentage="275"
+                app:percentage="0"
                 app:progressColor="@color/colorPrimary" />
 
         </LinearLayout>
@@ -68,11 +68,11 @@
                     android:padding="@dimen/app_min_padding">
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_name"
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_openTickets"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3"
+                        android:text="0"
                         android:textColor="@color/colorMainText"
                         android:textSize="30sp" />
 
@@ -129,11 +129,11 @@
                     android:padding="@dimen/app_min_padding">
 
                     <TextView
-                        android:id="@+id/acPreventiveMaintenanceSection_textView_name2"
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_allTickets"
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="21"
+                        android:text="0"
                         android:textColor="@color/colorMainText"
                         android:textSize="30sp" />
 
@@ -174,23 +174,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout_Status"
-        tools:listheader="@layout/item_site_pm_ticket_list_seprator"
-        tools:listitem="@layout/item_site_pm_ticket_list" />
+        tools:listheader="@layout/item_ac_pm_ticket_list_seprator"
+        tools:listitem="@layout/item_ac_pm_ticket_list" />
 
     <TextView
         android:id="@+id/txtNoTicketFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:text="No ticket found."/>
+        android:text="No ticket found."
+        android:visibility="gone" />
 
-
+    <!--No Important Just Testing Pupose-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout_Status"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <View
             android:layout_width="match_parent"

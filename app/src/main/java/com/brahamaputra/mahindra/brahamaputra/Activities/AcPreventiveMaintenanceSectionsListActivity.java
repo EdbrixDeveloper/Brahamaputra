@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivity {
+public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
 
     public ListView acPreventiveMaintenanceSections_listView_sections;
     ArrayList<PreventiveMaintenanceAcSection> dataModels;
@@ -35,37 +35,98 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
     String flag;
     String returnValue;
 
-    //vinayak code start
-    /*private OfflineStorageWrapper offlineStorageWrapper;
-    private SessionManager sessionManager;
-    private String userId = "";
-    private String ticketId = "";
-    private String ticketName = "";
+    //008 start
 
-    private HotoTransactionData hotoTransactionData;*/
-    //vinayak code end
+    private String customerName;
+    private String circleName;
+    private String stateName;
+    private String ssaName;
+    private String siteDBId;
+    private String siteId;
+    private String siteName;
+    private String siteType;
+    private String TicketId;
+    private String TicketNO;
+    private String TicketDate;
+    private String acPmPlanDate;
+    private String submittedDate;
+    private String acPmSheduledDate;
+    private String numberOfAc;
+    private String modeOfOpration;
+    private String vendorName;
+    private String acTechnicianName;
+    private String acTechnicianMobileNo;
+    private String accessType;
+    private String ticketAccess;
+    private String acPmTickStatus;
+
+
+    //008 end
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ac_preventive_maintenance_sections_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.setTitle("AC PM Sections List");
+
         sessionManager = new SessionManager(AcPreventiveMaintenanceSectionsListActivity.this);
         acPreventiveMaintenanceSections_listView_sections = (ListView) findViewById(R.id.acPreventiveMaintenanceSections_listView_sections);
 
         Intent intent = getIntent();
-        flag = intent.getStringExtra("status");
+        //flag = intent.getStringExtra("status");
+
+        TicketId = intent.getStringExtra("TicketId");
+        TicketNO = intent.getStringExtra("TicketNO");
+        TicketDate = intent.getStringExtra("TicketDate");
+
+        acPmPlanDate = intent.getStringExtra("acPmPlanDate");
+        submittedDate = intent.getStringExtra("submittedDate");
+        acPmSheduledDate = intent.getStringExtra("acPmSheduledDate");
+
+        customerName = intent.getStringExtra("customerName");
+        circleName = intent.getStringExtra("circleName");
+        stateName = intent.getStringExtra("stateName");
+        ssaName = intent.getStringExtra("ssaName");
+        siteDBId = intent.getStringExtra("siteDBId");
+        siteId = intent.getStringExtra("siteId");
+        siteName = intent.getStringExtra("siteName");
+        siteType = intent.getStringExtra("siteType");
+
+        numberOfAc = intent.getStringExtra("numberOfAc");
+        modeOfOpration = intent.getStringExtra("modeOfOpration");
+        vendorName = intent.getStringExtra("vendorName");
+        acTechnicianName = intent.getStringExtra("acTechnicianName");
+        acTechnicianMobileNo = intent.getStringExtra("acTechnicianMobileNo");
+        accessType = intent.getStringExtra("accessType");
+        ticketAccess = intent.getStringExtra("ticketAccess");
+        acPmTickStatus = intent.getStringExtra("acPmTickStatus");
+
         designation = sessionManager.getSessionDesignation();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*Intent intent = getIntent();
-        String tic_Name = intent.getStringExtra("ticketName");
-        this.setTitle(tic_Name);*/
+        int flag = 0;
+        if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("Open")) {
+            flag = 1;
+            values = new String[]{"Ticket Submission from Field Engineer"};
+        } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+            flag = 1;
+            values = new String[]{"AC PM Process"};
+        } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+            flag = 1;
+            values = new String[]{"AC PM Process", "Ticket Submission from Field Engineer"};
+        } else {
+            flag = 0;
+            showToast("Unauthorised ticket status.");
+            //finish();
+            intent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, AcPreventiveMaintenanceDashboardActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivityForResult(intent, RESULT_OK);
+        }/*else if (accessType.equals("") && ticketAccess.equals("") && acPmTickStatus.equals("")) {
+            values = new String[]{"", ""};
+        }*/
 
-        this.setTitle("AC PM Sections List");
 
-
-
-        values = getResources().getStringArray(R.array.listView_acPreventiveMaintenanceSections_sections);
+        /*values = getResources().getStringArray(R.array.listView_acPreventiveMaintenanceSections_sections);
         dataModels = new ArrayList<>();
 
         for (int i = 0; i < values.length; i++) {
@@ -76,74 +137,148 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
                     dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
                 }
             } else {
-                if (values[i].equals("AC Preventive Maintenance Process") && designation.equals("AC Technician (Mobile)")) {
+                if (values[i].equals("AC PM Process") && designation.equals("AC Technician (Mobile)")) {
                     dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
                 } else if (values[i].equals("Ticket Submission from Field Engineer") && designation.equals("Site Head")) {// || designation.equals("Senior Field Support Engineer (Mobile)")
                     dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
                 }
             }
-        }
-
-        adapter = new AcPreventiveMaintenanceSectionListAdapter(dataModels, getApplicationContext());
-
-        acPreventiveMaintenanceSections_listView_sections.setAdapter(adapter);
-        acPreventiveMaintenanceSections_listView_sections.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                switch (position) {
-                    case 0:
-                        if (dataModels.get(position).getSecName().equals("Ticket Submission from Field Engineer")) {
-                            Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
-                            acPMProcessIntent.putExtra("status", "");
-                            startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
-                            break;
-                        } else if (dataModels.get(position).getSecName().equals("AC Preventive Maintenance Process")) {
-                            if (flag.equals("Submitted by Technician")) {
-                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class);
-                                acPMProcessIntent.putExtra("status", flag);
-                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
-                            } else {
-                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class);
-                                acPMProcessIntent.putExtra("status", "");
-                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
-                            }
-
-                            break;
-                        }
-
-                    case 1:
-                        if (dataModels.get(position).getSecName().equals("Ticket Submission from Field Engineer")) {
-                            if (flag.equals("Submitted by Technician")) {
-                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
-                                acPMProcessIntent.putExtra("status", flag);
-                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
-                            } else {
-                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
-                                acPMProcessIntent.putExtra("status", "");
-                                startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
-                            }
-                            break;
-                        } else if (dataModels.get(position).getSecName().equals("AC Preventive Maintenance Process")) {
-                            Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class);
-                            acPMProcessIntent.putExtra("status", flag);
-                            startActivityForResult(acPMProcessIntent,RESULT_READING_COMPLETED);
-                            break;
-                        }
-                        //startActivity(new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class));
-                        //break;
-                }
+        }*/
+        if (flag == 1) {
+            dataModels = new ArrayList<>();
+            for (int i = 0; i < values.length; i++) {
+                dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
             }
-        });
+
+            adapter = new AcPreventiveMaintenanceSectionListAdapter(dataModels, getApplicationContext());
+
+            acPreventiveMaintenanceSections_listView_sections.setAdapter(adapter);
+            acPreventiveMaintenanceSections_listView_sections.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    switch (position) {
+                        case 0:
+
+                            if (dataModels.get(position).getSecName().equals("Ticket Submission from Field Engineer")) {
+                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
+
+                                //008 start
+                                acPMProcessIntent.putExtra("TicketId", TicketId);
+                                acPMProcessIntent.putExtra("TicketNO", TicketNO);
+                                acPMProcessIntent.putExtra("TicketDate", TicketDate);
+
+                                acPMProcessIntent.putExtra("acPmPlanDate", acPmPlanDate);
+                                acPMProcessIntent.putExtra("submittedDate", submittedDate);
+                                acPMProcessIntent.putExtra("acPmSheduledDate", acPmSheduledDate);
+
+                                acPMProcessIntent.putExtra("customerName", customerName);
+                                acPMProcessIntent.putExtra("circleName", circleName);
+                                acPMProcessIntent.putExtra("stateName", stateName);
+                                acPMProcessIntent.putExtra("ssaName", ssaName);
+                                acPMProcessIntent.putExtra("siteDBId", siteDBId);
+                                acPMProcessIntent.putExtra("siteId", siteId);
+                                acPMProcessIntent.putExtra("siteName", siteName);
+                                acPMProcessIntent.putExtra("siteType", siteType);
+
+                                acPMProcessIntent.putExtra("numberOfAc", numberOfAc);
+                                acPMProcessIntent.putExtra("modeOfOpration", modeOfOpration);
+                                acPMProcessIntent.putExtra("vendorName", vendorName);
+                                acPMProcessIntent.putExtra("acTechnicianName", acTechnicianName);
+                                acPMProcessIntent.putExtra("acTechnicianMobileNo", acTechnicianMobileNo);
+                                acPMProcessIntent.putExtra("accessType", accessType);
+                                acPMProcessIntent.putExtra("ticketAccess", ticketAccess);
+                                acPMProcessIntent.putExtra("acPmTickStatus", acPmTickStatus);//WIP
+                                //008 end
+
+                                startActivityForResult(acPMProcessIntent, RESULT_READING_COMPLETED);
+                                break;
+
+                            } else if (dataModels.get(position).getSecName().equals("AC PM Process")) {
+
+                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceAcTechnicianActivity.class);
+
+                                //008 start
+                                acPMProcessIntent.putExtra("TicketId", TicketId);
+                                acPMProcessIntent.putExtra("TicketNO", TicketNO);
+                                acPMProcessIntent.putExtra("TicketDate", TicketDate);
+
+                                acPMProcessIntent.putExtra("acPmPlanDate", acPmPlanDate);
+                                acPMProcessIntent.putExtra("submittedDate", submittedDate);
+                                acPMProcessIntent.putExtra("acPmSheduledDate", acPmSheduledDate);
+
+                                acPMProcessIntent.putExtra("customerName", customerName);
+                                acPMProcessIntent.putExtra("circleName", circleName);
+                                acPMProcessIntent.putExtra("stateName", stateName);
+                                acPMProcessIntent.putExtra("ssaName", ssaName);
+                                acPMProcessIntent.putExtra("siteDBId", siteDBId);
+                                acPMProcessIntent.putExtra("siteId", siteId);
+                                acPMProcessIntent.putExtra("siteName", siteName);
+                                acPMProcessIntent.putExtra("siteType", siteType);
+
+                                acPMProcessIntent.putExtra("numberOfAc", numberOfAc);
+                                acPMProcessIntent.putExtra("modeOfOpration", modeOfOpration);
+                                acPMProcessIntent.putExtra("vendorName", vendorName);
+                                acPMProcessIntent.putExtra("acTechnicianName", acTechnicianName);
+                                acPMProcessIntent.putExtra("acTechnicianMobileNo", acTechnicianMobileNo);
+                                acPMProcessIntent.putExtra("accessType", accessType);
+                                acPMProcessIntent.putExtra("ticketAccess", ticketAccess);
+                                acPMProcessIntent.putExtra("acPmTickStatus", acPmTickStatus);//WIP
+                                //008 end
+
+                                startActivityForResult(acPMProcessIntent, RESULT_READING_COMPLETED);
+
+                                break;
+                            }
+
+                        case 1:
+                            if (dataModels.get(position).getSecName().equals("Ticket Submission from Field Engineer")) {
+                                Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
+                                //acPMProcessIntent.putExtra("status", "");
+
+                                //008 start
+                                acPMProcessIntent.putExtra("TicketId", TicketId);
+                                acPMProcessIntent.putExtra("TicketNO", TicketNO);
+                                acPMProcessIntent.putExtra("TicketDate", TicketDate);
+
+                                acPMProcessIntent.putExtra("acPmPlanDate", acPmPlanDate);
+                                acPMProcessIntent.putExtra("submittedDate", submittedDate);
+                                acPMProcessIntent.putExtra("acPmSheduledDate", acPmSheduledDate);
+
+                                acPMProcessIntent.putExtra("customerName", customerName);
+                                acPMProcessIntent.putExtra("circleName", circleName);
+                                acPMProcessIntent.putExtra("stateName", stateName);
+                                acPMProcessIntent.putExtra("ssaName", ssaName);
+                                acPMProcessIntent.putExtra("siteDBId", siteDBId);
+                                acPMProcessIntent.putExtra("siteId", siteId);
+                                acPMProcessIntent.putExtra("siteName", siteName);
+                                acPMProcessIntent.putExtra("siteType", siteType);
+
+                                acPMProcessIntent.putExtra("numberOfAc", numberOfAc);
+                                acPMProcessIntent.putExtra("modeOfOpration", modeOfOpration);
+                                acPMProcessIntent.putExtra("vendorName", vendorName);
+                                acPMProcessIntent.putExtra("acTechnicianName", acTechnicianName);
+                                acPMProcessIntent.putExtra("acTechnicianMobileNo", acTechnicianMobileNo);
+                                acPMProcessIntent.putExtra("accessType", accessType);
+                                acPMProcessIntent.putExtra("ticketAccess", ticketAccess);
+                                acPMProcessIntent.putExtra("acPmTickStatus", acPmTickStatus);//WIP
+                                //008 end
+
+                                startActivityForResult(acPMProcessIntent, RESULT_READING_COMPLETED);
+                                break;
+                            }
+
+
+                    }
+                }
+            });
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_READING_COMPLETED && resultCode == RESULT_OK) {
-            //returnValue = data.getStringExtra("returnValue");
-            //onBackPressed();
-
         }
     }
 
@@ -170,10 +305,7 @@ public class AcPreventiveMaintenanceSectionsListActivity extends AppCompatActivi
 
     @Override
     public void onBackPressed() {
-      /* Intent i = new Intent();
-        i.putExtra("returnValue",returnValue);
-        setResult(RESULT_OK,i);*/
-        setResult(RESULT_OK );
+        setResult(RESULT_OK);
         finish();
     }
 

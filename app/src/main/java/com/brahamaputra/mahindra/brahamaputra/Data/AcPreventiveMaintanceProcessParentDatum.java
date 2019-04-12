@@ -1,11 +1,13 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
+
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AcPreventiveMaintanceProcessParentDatum {
 
-    @SerializedName("circle")
+    /*@SerializedName("circle")
     @Expose
     private String circle;
     @SerializedName("state")
@@ -22,8 +24,8 @@ public class AcPreventiveMaintanceProcessParentDatum {
     private String siteId;
     @SerializedName("ticketNo")
     @Expose
-    private String ticketNo;
-    @SerializedName("ticketDate")
+    private String ticketNo;*/
+    /*@SerializedName("ticketDate")
     @Expose
     private String ticketDate;
     @SerializedName("pmPlanDate")
@@ -31,7 +33,7 @@ public class AcPreventiveMaintanceProcessParentDatum {
     private String pmPlanDate;
     @SerializedName("submittedDate")
     @Expose
-    private String submittedDate;
+    private String submittedDate;*/
     @SerializedName("noOfAcAtSite")
     @Expose
     private String noOfAcAtSite;
@@ -60,20 +62,20 @@ public class AcPreventiveMaintanceProcessParentDatum {
      */
     public AcPreventiveMaintanceProcessParentDatum(String circle, String state, String ssa, String siteName, String siteId, String ticketNo, String ticketDate, String pmPlanDate, String submittedDate, String noOfAcAtSite, List<AcPreventiveMaintanceProcessDatum> acPreventiveMaintanceProcessData) {
         super();
-        this.circle = circle;
+        /*this.circle = circle;
         this.state = state;
         this.ssa = ssa;
         this.siteName = siteName;
         this.siteId = siteId;
-        this.ticketNo = ticketNo;
-        this.ticketDate = ticketDate;
+        this.ticketNo = ticketNo;*/
+        /*this.ticketDate = ticketDate;
         this.pmPlanDate = pmPlanDate;
-        this.submittedDate = submittedDate;
+        this.submittedDate = submittedDate;*/
         this.noOfAcAtSite = noOfAcAtSite;
         this.acPreventiveMaintanceProcessData = acPreventiveMaintanceProcessData;
     }
 
-    public String getCircle() {
+    /*public String getCircle() {
         return circle;
     }
 
@@ -119,9 +121,9 @@ public class AcPreventiveMaintanceProcessParentDatum {
 
     public void setTicketNo(String ticketNo) {
         this.ticketNo = ticketNo;
-    }
+    }*/
 
-    public String getTicketDate() {
+    /*public String getTicketDate() {
         return ticketDate;
     }
 
@@ -143,7 +145,7 @@ public class AcPreventiveMaintanceProcessParentDatum {
 
     public void setSubmittedDate(String submittedDate) {
         this.submittedDate = submittedDate;
-    }
+    }*/
 
     public String getNoOfAcAtSite() {
         return noOfAcAtSite;

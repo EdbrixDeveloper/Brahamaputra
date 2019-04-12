@@ -53,15 +53,15 @@ public class Constants {
     public static String sitePm_siteBoundaryStatus = "";
     public static String sitePmNoOfAcAvailableAtSite = "";
     public static String sitePmServoStabilizerWorkingStatus = "";
-    public static String sitePmBatteryBankType="";
+    public static String sitePmBatteryBankType = "";
 
     /*-- Battery Bank Check Points --*/
     public static String sitePmCustomerName = "";
     public static String sitePmCircleName = "";
     public static String sitePmStateName = "";
-    public static String sitePmSiteName="";
+    public static String sitePmSiteName = "";
     public static String sitePmSiteId = "";
-    public static String sitePmSsaName="";
+    public static String sitePmSsaName = "";
 
     public static String androidDeviceid;
 
@@ -119,5 +119,16 @@ public class Constants {
 
     public final static String updatedSitePMCheckIn = BASE_URL.concat("sitepm/sitepmcheckin");//update site PM check in
     public final static String submitSitePMTicket = BASE_URL.concat("sitepm/submitsitepmtickettransactions");
+
+    /*--AC PM Section API --*/
+    public final static String acPmTicketList = BASE_URL.concat("acpm/getacpmtransactionticketlist");
+
+    public final static String acPmCheckTicketByFieldEngineer = BASE_URL.concat("acpm/acpmcheckin");
+    public final static String acPmAcDataOnQrCodeScan = BASE_URL.concat("acpm/acdetailsonqrcode");
+    public final static String processedAcPmTicket = BASE_URL.concat("acpm/processticketbyactechinican");
+
+    public final static String readAcPmDataByFSE = BASE_URL.concat("acpm/readacpmdatabyfse");
+    public final static String submitAcPmTicket = BASE_URL.concat("acpm/submitticketbyfse");
+
 
 }

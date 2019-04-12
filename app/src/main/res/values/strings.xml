@@ -254,6 +254,7 @@
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>
         <item>Mahindra Supplied Revenue</item>
+        <item>Tenant Supplied Asset</item>
     </string-array>
 
     <string-array name="array_solarPowerSystem_cellPanel">
@@ -290,6 +291,7 @@
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>
         <item>Mahindra Supplied Revenue</item>
+        <item>Tenant Supplied Asset</item>
     </string-array>
 
     <string-array name="array_batterySet_ManufacturerMakeModel">
@@ -438,6 +440,7 @@
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>
         <item>Mahindra Supplied Revenue</item>
+        <item>Tenant Supplied Asset</item>
 
     </string-array>
 
@@ -1002,6 +1005,7 @@
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>
         <item>Mahindra Supplied Revenue</item>
+        <item>Tenant Supplied Asset</item>
     </string-array>
 
     <string-array name="array_airConditioners_typeOfAcSpliWindow">
@@ -1122,6 +1126,7 @@
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>
         <item>Mahindra Supplied Revenue</item>
+        <item>Tenant Supplied Asset</item>
     </string-array>
     <string-array name="array_powerBackupsDg_manufacturerMakeModel">
         <item>Ashok Leyland</item>
@@ -1232,6 +1237,7 @@
         <item>BSNL Supplied Asset</item>
         <item>Mahindra Supplied Asset</item>
         <item>Mahindra Supplied Revenue</item>
+        <item>Tenant Supplied Asset</item>
     </string-array>
 
     <string-array name="array_powerPlantDetails_numberOfPowerPlant">
