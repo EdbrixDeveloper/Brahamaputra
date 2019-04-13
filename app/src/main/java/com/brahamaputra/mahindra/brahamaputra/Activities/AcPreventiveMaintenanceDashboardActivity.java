@@ -181,11 +181,11 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                             final String acPmTickStatus = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getStatus() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getStatus().toString();
 
                             // comment for not added checkSystemLocation || acPmTickStatus.equals("Processed")
-                            if (acPmTickStatus.equals("Open") || acPmTickStatus.equals("WIP")  || acPmTickStatus.equals("Reassigned")) {
+                            if (acPmTickStatus.equals("Open") || acPmTickStatus.equals("WIP") || acPmTickStatus.equals("Reassigned")) {
                                 if (acPmTickStatus.equals("Open")) {
 
                                     int flag = 0;
-                                    if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("Open")) {
+                                    if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
                                         flag = 1;
                                     } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
                                         flag = 1;
@@ -204,7 +204,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
 
                                 } else {
                                     int flag = 0;
-                                    if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("Open")) {
+                                    if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
                                         flag = 1;
                                     } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
                                         flag = 1;

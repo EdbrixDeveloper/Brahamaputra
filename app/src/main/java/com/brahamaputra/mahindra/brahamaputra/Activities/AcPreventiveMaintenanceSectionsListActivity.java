@@ -105,7 +105,7 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
         designation = sessionManager.getSessionDesignation();
 
         int flag = 0;
-        if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("Open")) {
+        if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
             flag = 1;
             values = new String[]{"Ticket Submission from Field Engineer"};
         } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {

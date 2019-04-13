@@ -285,8 +285,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
@@ -295,8 +293,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private ArrayList<AcPreventiveMaintanceProcessDatum> acPreventiveMaintanceProcessData;
     private AcPreventiveMaintanceProcessParentDatum acPreventiveMaintanceProcessParentDatum;
     MenuItem shareItem;
-    //String statusFlag = "";
-
 
     private String customerName;
     private String circleName;
@@ -366,72 +362,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         /*if (!statusFlag.equals("")) {
             disableAllFields();
         }*/
-
-    }
-
-    private void disableAllFields() {
-
-        mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.setEnabled(false);
-        mLinearLayoutContainer.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonQRCodeScan.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setEnabled(false);
-        mButtonClearQRCodeScanView.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcModelVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcTypeVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcMakeVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcCapacityVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcSerialNoVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewMainMcbStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewSubMcbStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewMetalCladPlugStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewMetalCladSocketStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewStablizerStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewStabilizerMakeVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewStabilizerCapacityVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewStablizerWorkingStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianEditTextInputAcVoltage.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcEarthingStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhoto.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setEnabled(true);
-        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhoto.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setEnabled(true);
-        mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhoto.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setEnabled(true);
-        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhoto.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setEnabled(true);
-        mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhoto.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setEnabled(true);
-        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhoto.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setEnabled(true);
-        mPreventiveMaintenanceAcTechnicianTextViewAcCoolingStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianEditTextAcStartingLoadcurrent.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianEditTextAcRunningLoadCurrent.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewIndoorFilterCleanedStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewIndoorFanMotorConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewBlowerWheelConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewNoiseIndoorMotorVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewOutdoorFanMotorConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewFanLeafConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewNoiseOutdoorMotorVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewCompressorConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewCompCapacitorConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewControllerConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcAlarmStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianEditTextRoomTemperature.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianEditTextSetTemperature.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewVibrationOfAcVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingUnitStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingAvailableWorkingStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewWaterLeakageVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewAcCabinateStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianTextViewShelterDoorStatusVal.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianEditTextRemarks.setEnabled(false);
-        mPreventiveMaintenanceAcTechnicianButtonPreviousReading.setVisibility(View.GONE);
-        mPreventiveMaintenanceAcTechnicianButtonNextReading.setVisibility(View.GONE);
 
     }
 
@@ -1214,50 +1144,73 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         mPreventiveMaintenanceAcTechnicianButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if (checkValidationOfArrayFields() == true) {*/
-                if (currentPos > 0) {
-                    //Save current ac reading
-                    saveRecords(currentPos);
-                    currentPos = currentPos - 1;
-                    //move to Next reading
-                    displayRecords(currentPos);
+                if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                    /*if (checkValidationOfArrayFields() == true) {*/
+                    if (currentPos > 0) {
+                        //Save current ac reading
+                        saveRecords(currentPos);
+                        currentPos = currentPos - 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
 
+                    }
+                    /*}*/
+                } else {
+                    if (currentPos > 0) {
+                        currentPos = currentPos - 1;
+                        //move to Next reading
+                        displayRecords(currentPos);
+
+                    }
                 }
-                /*}*/
             }
         });
 
         mPreventiveMaintenanceAcTechnicianButtonNextReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidationOfArrayFields() == true) {
+                if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                    if (checkValidationOfArrayFields() == true) {
+                        if (currentPos < (totalCount - 1)) {
+                            //Save current ac reading
+                            saveRecords(currentPos);
+                            currentPos = currentPos + 1;
+                            //move to Next reading
+                            displayRecords(currentPos);
+
+                        } else if (currentPos == (totalCount - 1)) {
+                            saveRecords(currentPos);
+
+                            if (checkDuplicationQrCodeNew() == false) {
+                                if (checkValidationonSubmit("onSubmit") == true) {
+                                    //submitDetails();
+                                    if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                        showToast("You are in readable mode");
+                                    } else {
+                                        if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                            showSettingsAlert();
+                                        } else {
+                                            showToast("Unauthorised ticket");
+                                        }
+                                    }
+                                    //finish();
+                                }
+                            }
+
+                        }
+                    }
+                } else {
                     if (currentPos < (totalCount - 1)) {
-                        //Save current ac reading
-                        saveRecords(currentPos);
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
 
                     } else if (currentPos == (totalCount - 1)) {
-                        saveRecords(currentPos);
-
-                        if (checkDuplicationQrCodeNew() == false) {
-                            if (checkValidationonSubmit("onSubmit") == true) {
-                                //submitDetails();
-                                if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                    showToast("You are in readable mode");
-                                } else {
-                                    if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                        showSettingsAlert();
-                                    } else {
-                                        showToast("Unauthorised ticket");
-                                    }
-                                }
-                                //finish();
-                            }
+                        if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                            showToast("You are in readable mode");
                         }
-
                     }
+
                 }
             }
         });
@@ -2060,7 +2013,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
             base64StringCoolingCoilCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringCoolingCoilPhotoAfterCleaned();
             if (base64StringCoolingCoilCleanedAfterPhoto.contains("data:image/jpg;base64,")) {
-                base64StringCoolingCoilCleanedAfterPhoto = base64StringCoolingCoilCleanedAfterPhoto .replace("data:image/jpg;base64,", "");
+                base64StringCoolingCoilCleanedAfterPhoto = base64StringCoolingCoilCleanedAfterPhoto.replace("data:image/jpg;base64,", "");
             }
             mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.GONE);
             if (!base64StringCoolingCoilCleanedAfterPhoto.isEmpty() && base64StringCoolingCoilCleanedAfterPhoto != null) {
@@ -2773,46 +2726,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                             } else {
                                 showToast("No data found");
                             }
-                            /*if (response.getError() != null) {
-                                showToast(response.getError().getErrorMessage());
-                            } else {
-                                if (response.getSuccess() == 1) {
-                                    acPmTicketList = response;
-                                    if (acPmTicketList.getSitePMTicketSummary() != null) {
-                                        acPreventiveMaintenanceSection_textView_openTickets.setText(acPmTicketList.getSitePMTicketSummary().getOpenTickets() == null || acPmTicketList.getSitePMTicketSummary().getOpenTickets().isEmpty() ? "0" : acPmTicketList.getSitePMTicketSummary().getOpenTickets().toString());
-                                        acPreventiveMaintenanceSection_textView_allTickets.setText(acPmTicketList.getSitePMTicketSummary().getTotalTickets() == null || acPmTicketList.getSitePMTicketSummary().getTotalTickets().isEmpty() ? "0" : acPmTicketList.getSitePMTicketSummary().getTotalTickets().toString());
-
-                                        double per = 0.0;
-                                        double circlePer = 0.0;
-                                        int roundPer = 0;
-                                        per = acPmTicketList.getSitePMTicketSummary().getPercentage();
-                                        circlePer = (3.6) * Double.valueOf(per);
-                                        roundPer = (int) Math.round(circlePer);
-
-                                        DecimalFormat df = new DecimalFormat("###.##");
-                                        df.setRoundingMode(RoundingMode.FLOOR);
-                                        per = new Double(df.format(per));
-
-
-                                        wheelprogress.setPercentage(roundPer);
-                                        wheelprogress.setStepCountText(String.valueOf(per));
-
-
-                                    }
-                                    if (acPmTicketList.getSitePMTicketsDates() != null && acPmTicketList.getSitePMTicketsDates().size() > 0) {
-                                        txtNoTicketFound.setVisibility(View.GONE);
-                                        pmSiteList_listView_siteList.setVisibility(View.VISIBLE);
-                                        pmAcExpListAdapter = new PmAcExpListAdapter(AcPreventiveMaintenanceDashboardActivity.this, acPmTicketList);
-                                        pmSiteList_listView_siteList.setAdapter(pmAcExpListAdapter);
-                                        for (int i = 0; i < acPmTicketList.getSitePMTicketsDates().size(); i++) {
-                                            pmSiteList_listView_siteList.expandGroup(i);
-                                        }
-                                    } else {
-                                        pmSiteList_listView_siteList.setVisibility(View.GONE);
-                                        txtNoTicketFound.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                            }*/
                         }
                     }, new Response.ErrorListener()
 
