@@ -1824,8 +1824,11 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 /*if (flagReadDataByFSE == true) {
 
                 } else {*//*}*/
-            /*
+
             base64StringFilterCleanedBeforePhoto = acPreventiveMaintanceProcessData.get(index).getBase64StringAcFilterPhotoBeforeCleaned();
+            if (base64StringFilterCleanedBeforePhoto.contains("data:image/jpg;base64,")) {
+                base64StringFilterCleanedBeforePhoto = base64StringFilterCleanedBeforePhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.GONE);
             if (!base64StringFilterCleanedBeforePhoto.isEmpty() && base64StringFilterCleanedBeforePhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -1839,6 +1842,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             }
 
             base64StringFilterCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(index).getBase64StringAcFilterPhotoAfterCleaned();
+            if (base64StringFilterCleanedAfterPhoto.contains("data:image/jpg;base64,")) {
+                base64StringFilterCleanedAfterPhoto = base64StringFilterCleanedAfterPhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setVisibility(View.GONE);
             if (!base64StringFilterCleanedAfterPhoto.isEmpty() && base64StringFilterCleanedAfterPhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setVisibility(View.VISIBLE);
@@ -1852,6 +1858,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal.setText(acPreventiveMaintanceProcessData.get(index).getCondenserCoilCleaned());
 
             base64StringCondenserCoilCleanedBeforePhoto = acPreventiveMaintanceProcessData.get(index).getBase64StringCondenserCoilPhotoBeforeCleaned();
+            if (base64StringCondenserCoilCleanedBeforePhoto.contains("data:image/jpg;base64,")) {
+                base64StringCondenserCoilCleanedBeforePhoto = base64StringCondenserCoilCleanedBeforePhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setVisibility(View.GONE);
             if (!base64StringCondenserCoilCleanedBeforePhoto.isEmpty() && base64StringCondenserCoilCleanedBeforePhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -1863,6 +1872,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             }
 
             base64StringCondenserCoilCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(index).getBase64StringCondenserCoilPhotoAfterCleaned();
+            if (base64StringCondenserCoilCleanedAfterPhoto.contains("data:image/jpg;base64,")) {
+                base64StringCondenserCoilCleanedAfterPhoto = base64StringCondenserCoilCleanedAfterPhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setVisibility(View.GONE);
             if (!base64StringCondenserCoilCleanedAfterPhoto.isEmpty() && base64StringCondenserCoilCleanedAfterPhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);
@@ -1876,6 +1888,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal.setText(acPreventiveMaintanceProcessData.get(index).getMainMcbStatus());
 
             base64StringCoolingCoilCleanedBeforePhoto = acPreventiveMaintanceProcessData.get(index).getBase64StringCoolingCoilPhotoBeforeCleaned();
+            if (base64StringCoolingCoilCleanedBeforePhoto.contains("data:image/jpg;base64,")) {
+                base64StringCoolingCoilCleanedBeforePhoto = base64StringCoolingCoilCleanedBeforePhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setVisibility(View.GONE);
             if (!base64StringCoolingCoilCleanedBeforePhoto.isEmpty() && base64StringCoolingCoilCleanedBeforePhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -1887,6 +1902,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             }
 
             base64StringCoolingCoilCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(index).getBase64StringCoolingCoilPhotoAfterCleaned();
+            if (base64StringCoolingCoilCleanedAfterPhoto.contains("data:image/jpg;base64,")) {
+                base64StringCoolingCoilCleanedAfterPhoto = base64StringCoolingCoilCleanedAfterPhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.GONE);
             if (!base64StringCoolingCoilCleanedAfterPhoto.isEmpty() && base64StringCoolingCoilCleanedAfterPhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);
@@ -1895,7 +1913,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
                 String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
                 imageFileUriCoolingCoilCleanedAfterPhoto = Uri.parse(path);
-            }*/
+            }
 
             mPreventiveMaintenanceAcTechnicianTextViewAcCoolingStatusVal.setText(acPreventiveMaintanceProcessData.get(index).getAcCoolingStatus());
             mPreventiveMaintenanceAcTechnicianEditTextAcStartingLoadcurrent.setText(acPreventiveMaintanceProcessData.get(index).getAcStartingLoadCurrent());
@@ -1965,6 +1983,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedVal.setText(acPreventiveMaintanceProcessData.get(pos).getFilterCleaned());
 
             base64StringFilterCleanedBeforePhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringAcFilterPhotoBeforeCleaned();
+            if (base64StringFilterCleanedBeforePhoto.contains("data:image/jpg;base64,")) {
+                base64StringFilterCleanedBeforePhoto = base64StringFilterCleanedBeforePhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.GONE);
             if (!base64StringFilterCleanedBeforePhoto.isEmpty() && base64StringFilterCleanedBeforePhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -1976,6 +1997,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             }
 
             base64StringFilterCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringAcFilterPhotoAfterCleaned();
+            if (base64StringFilterCleanedAfterPhoto.contains("data:image/jpg;base64,")) {
+                base64StringFilterCleanedAfterPhoto = base64StringFilterCleanedAfterPhoto.replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setVisibility(View.GONE);
             if (!base64StringFilterCleanedAfterPhoto.isEmpty() && base64StringFilterCleanedAfterPhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setVisibility(View.VISIBLE);
@@ -1987,8 +2011,11 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             }
 
             mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal.setText(acPreventiveMaintanceProcessData.get(pos).getCondenserCoilCleaned());
-
             base64StringCondenserCoilCleanedBeforePhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringCondenserCoilPhotoBeforeCleaned();
+            if (base64StringCondenserCoilCleanedBeforePhoto.contains("data:image/jpg;base64,")) {
+                base64StringCondenserCoilCleanedBeforePhoto = base64StringCondenserCoilCleanedBeforePhoto.replace("data:image/jpg;base64,", "");
+            }
+
             mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setVisibility(View.GONE);
             if (!base64StringCondenserCoilCleanedBeforePhoto.isEmpty() && base64StringCondenserCoilCleanedBeforePhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -2000,6 +2027,10 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             }
 
             base64StringCondenserCoilCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringCondenserCoilPhotoAfterCleaned();
+            if (base64StringCondenserCoilCleanedAfterPhoto.contains("data:image/jpg;base64,")) {
+                base64StringCondenserCoilCleanedAfterPhoto = base64StringCondenserCoilCleanedAfterPhoto.replace("data:image/jpg;base64,", "");
+            }
+
             mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setVisibility(View.GONE);
             if (!base64StringCondenserCoilCleanedAfterPhoto.isEmpty() && base64StringCondenserCoilCleanedAfterPhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);
@@ -2013,6 +2044,10 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal.setText(acPreventiveMaintanceProcessData.get(pos).getMainMcbStatus());
 
             base64StringCoolingCoilCleanedBeforePhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringCoolingCoilPhotoBeforeCleaned();
+            if (base64StringCoolingCoilCleanedBeforePhoto.contains("data:image/jpg;base64,")) {
+                base64StringCoolingCoilCleanedBeforePhoto = base64StringCoolingCoilCleanedBeforePhoto.replace("data:image/jpg;base64,", "");
+            }
+
             mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setVisibility(View.GONE);
             if (!base64StringCoolingCoilCleanedBeforePhoto.isEmpty() && base64StringCoolingCoilCleanedBeforePhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -2024,6 +2059,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             }
 
             base64StringCoolingCoilCleanedAfterPhoto = acPreventiveMaintanceProcessData.get(pos).getBase64StringCoolingCoilPhotoAfterCleaned();
+            if (base64StringCoolingCoilCleanedAfterPhoto.contains("data:image/jpg;base64,")) {
+                base64StringCoolingCoilCleanedAfterPhoto = base64StringCoolingCoilCleanedAfterPhoto .replace("data:image/jpg;base64,", "");
+            }
             mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.GONE);
             if (!base64StringCoolingCoilCleanedAfterPhoto.isEmpty() && base64StringCoolingCoilCleanedAfterPhoto != null) {
                 mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);
