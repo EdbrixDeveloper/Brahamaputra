@@ -357,12 +357,234 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_batteryBankMake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankMake"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Battery Bank Make" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankMakeVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_batteryBankCapacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankCapacity"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Battery Bank Capacity" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankCapacityVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_noOfWorkingRectifireModule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfWorkingRectifireModule"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Number of Rectifire Module Working" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfWorkingRectifireModuleVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_siteLoadOnBatteryInAmps"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Site Load on Battery in Amps" />
+
+
+                <EditText
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_siteLoadOnBatteryInAmps"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Site Load on Battery"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_floatVoltageBeforeBbTest"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Float Voltage before BB Test" />
+
+
+                <EditText
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageBeforeBbTest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Float Voltage"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_singleModuleRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_singleModuleRating"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Single Module Rating" />
+
+                <EditText
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_singleModuleRating"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Enter Single Module Rating"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_noOfBatteryModule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:visibility="gone"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfBatteryModule"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Number of Battery Module" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfBatteryModuleVal"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/app_min_padding"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAt"
+                    style="@style/FontStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Reading Taken At" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAtVal"
+                    style="@style/MyTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.6"
+                    android:hint="Select"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/LinearLayoutBatteryTypeLiIonReadings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_min_margin"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -371,6 +593,22 @@
                     android:text="Battery Type Li-Ion Readings"
                     android:textAlignment="center"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_battreyBankCellNumber_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/app_min_margin"
+                    android:text="Reading: #1"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#a40404" />
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -638,6 +876,7 @@
                     </TableRow>
                 </TableLayout>
 
+
             </LinearLayout>
 
             <LinearLayout
@@ -659,7 +898,7 @@
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_battreyBankCellNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_margin="@dimen/app_min_margin"
                     android:text="Reading: #1"
                     android:textAlignment="textStart"
@@ -1000,8 +1239,70 @@
                             android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
                             android:nextFocusLeft="@+id/bdTestCellReadingEditText24" />
                     </TableRow>
-
                 </TableLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_belowGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_floatVoltageInSmpsBusBarAfter30Min"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Float Voltage in SMPS Bus Bar after 30 Minute" />
+
+
+                    <EditText
+                        android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Float Voltage in SMPS Bus Bar"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/app_min_padding"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_totalLoadCurrentInAmps"
+                        style="@style/FontStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Total Load Current(in Amps)" />
+
+
+                    <EditText
+                        android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_totalLoadCurrentInAmps"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:hint="Enter Total Load Current"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1040,296 +1341,32 @@
                     <!--android:textAllCaps="false"-->
 
                 </LinearLayout>
-
             </LinearLayout>
-
 
             <!--Float Voltage in SMPS Bus Bar after 30 Minute
             Total Load Current ( in Amps)-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_floatVoltageInSmpsBusBarAfter30Min"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Float Voltage in SMPS Bus Bar after 30 Minute" />
-
-
-                <EditText
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Float Voltage in SMPS Bus Bar"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_totalLoadCurrentInAmps"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Total Load Current(in Amps)" />
-
-
-                <EditText
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_totalLoadCurrentInAmps"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Total Load Current"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
 
             <!---->
             <!---->
-            <LinearLayout
-                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_batteryBankMake"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:visibility="gone"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankMake"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Battery Bank Make" />
 
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankMakeVal"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_batteryBankCapacity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:visibility="gone"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankCapacity"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Battery Bank Capacity" />
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryBankCapacityVal"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_noOfWorkingRectifireModule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:visibility="gone"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfWorkingRectifireModule"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Number of Rectifire Module Working" />
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfWorkingRectifireModuleVal"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
             <!---->
             <!---->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_siteLoadOnBatteryInAmps"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Site Load on Battery in Amps" />
 
 
-                <EditText
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_siteLoadOnBatteryInAmps"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Site Load on Battery"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_floatVoltageBeforeBbTest"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Float Voltage before BB Test" />
 
 
-                <EditText
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageBeforeBbTest"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Float Voltage"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_singleModuleRating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:visibility="gone"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_singleModuleRating"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Single Module Rating" />
 
-                <EditText
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_singleModuleRating"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:hint="Enter Single Module Rating"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_linearLayout_noOfBatteryModule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:visibility="gone"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfBatteryModule"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Number of Battery Module" />
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_noOfBatteryModuleVal"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAt"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Reading Taken At" />
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_readingTaketAtVal"
-                    style="@style/MyTheme"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:hint="Select"
-                    android:textAlignment="viewStart" />
-
-            </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"

@@ -64,6 +64,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSsaNa
 
 public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extends BaseActivity {
 
+
     private static final String TAG = PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.class.getSimpleName();
 
     private LinearLayout mPreventiveMaintenanceSiteBatteryBankBackUpTestReportLinearLayoutDetailsOfQRCodeScan;
@@ -174,6 +175,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     private Button mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPreviousReading;
     private Button mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading;
+
+
 
     private String str_readingTaketAtVal = "";
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -452,6 +455,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
         /////////////
+
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(10, 2)});
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
