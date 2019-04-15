@@ -1654,14 +1654,17 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         String FloatVoltageInSmpsBusBarAfter30Min = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.getText().toString().trim();
         String TotalLoadCurrentInAmps = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.getText().toString().trim();
         if (TypeOfBattery.equals("Li-Ion")) {
+
             String VoltageModuleReading1 = mBdTestVoltageModuleReading1EditText1.getText().toString().trim();
             String CurrentModuleReading1 = mBdTestCurrentModuleReading1EditText1.getText().toString().trim();
             String SocModuleReading1 = mBdTestSocModuleReadingEditText1.getText().toString().trim();
             String SohModuleReading1 = mBdTestSohModuleReadingEditText1.getText().toString().trim();
+
             String VoltageModuleReading2 = mBdTestVoltageModuleReading1EditText2.getText().toString().trim();
             String CurrentModuleReading2 = mBdTestCurrentModuleReading1EditText2.getText().toString().trim();
             String SocModuleReading2 = mBdTestSocModuleReadingEditText2.getText().toString().trim();
             String SohModuleReading2 = mBdTestSohModuleReadingEditText2.getText().toString().trim();
+
             String VoltageModuleReading3 = mBdTestVoltageModuleReading1EditText3.getText().toString().trim();
             String CurrentModuleReading3 = mBdTestCurrentModuleReading1EditText3.getText().toString().trim();
             String SocModuleReading3 = mBdTestSocModuleReadingEditText3.getText().toString().trim();
@@ -1793,16 +1796,18 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
                 mBdTestVoltageModuleReading1EditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestVoltageModuleReading1());
                 mBdTestCurrentModuleReading1EditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestCurrentModuleReading1());
-                mBdTestSocModuleReadingEditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
-                mBdTestSohModuleReadingEditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
+                mBdTestSocModuleReadingEditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestSocModuleReading1());
+                mBdTestSohModuleReadingEditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestSohModuleReading1());
+
                 mBdTestVoltageModuleReading1EditText2.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestVoltageModuleReading2());
-                mBdTestCurrentModuleReading1EditText2.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
-                mBdTestSocModuleReadingEditText2.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
-                mBdTestSohModuleReadingEditText2.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
+                mBdTestCurrentModuleReading1EditText2.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestCurrentModuleReading2());
+                mBdTestSocModuleReadingEditText2.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestSocModuleReading2());
+                mBdTestSohModuleReadingEditText2.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestSohModuleReading2());
+
                 mBdTestVoltageModuleReading1EditText3.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestVoltageModuleReading3());
-                mBdTestCurrentModuleReading1EditText3.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
-                mBdTestSocModuleReadingEditText3.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
-                mBdTestSohModuleReadingEditText3.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
+                mBdTestCurrentModuleReading1EditText3.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestCurrentModuleReading3());
+                mBdTestSocModuleReadingEditText3.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestSocModuleReading3());
+                mBdTestSohModuleReadingEditText3.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestSohModuleReading3());
 
                 mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestFloatVoltageInSmpsBusBarAfter30Min());
                 mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestTotalLoadCurrentInAmps());

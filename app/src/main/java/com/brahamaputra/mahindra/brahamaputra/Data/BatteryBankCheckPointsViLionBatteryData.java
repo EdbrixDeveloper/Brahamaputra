@@ -83,12 +83,15 @@ public class BatteryBankCheckPointsViLionBatteryData implements Serializable {
         this.bdTestVoltageModuleReading1 = bdTestVoltageModuleReading1;
         this.bdTestVoltageModuleReading2 = bdTestVoltageModuleReading2;
         this.bdTestVoltageModuleReading3 = bdTestVoltageModuleReading3;
+
         this.bdTestCurrentModuleReading1 = bdTestCurrentModuleReading1;
         this.bdTestCurrentModuleReading2 = bdTestCurrentModuleReading2;
         this.bdTestCurrentModuleReading3 = bdTestCurrentModuleReading3;
+
         this.bdTestSocModuleReading1 = bdTestSocModuleReading1;
         this.bdTestSocModuleReading2 = bdTestSocModuleReading2;
         this.bdTestSocModuleReading3 = bdTestSocModuleReading3;
+
         this.bdTestSohModuleReading1 = bdTestSohModuleReading1;
         this.bdTestSohModuleReading2 = bdTestSohModuleReading2;
         this.bdTestSohModuleReading3 = bdTestSohModuleReading3;
