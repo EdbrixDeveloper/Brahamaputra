@@ -20,7 +20,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -35,17 +35,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_customerVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -60,17 +59,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_circleVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -85,17 +83,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_stateVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -110,17 +107,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_ssaVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -135,17 +131,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_siteNameVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -160,17 +155,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_siteIDVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -185,17 +179,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_pmSheduledDateOfAcVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -219,18 +212,17 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_modeOfOprationVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -245,18 +237,17 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_ticketNoVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/preventiveMaintanceAcFieldEngineer_linearLayout_vendorName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1"
                 android:visibility="gone">
@@ -272,7 +263,7 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_vendorNameVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
                     android:paddingTop="5dp"
@@ -282,7 +273,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -297,17 +288,16 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_acTechnicianNameVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                   android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 
@@ -322,11 +312,10 @@
                 <TextView
                     android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_acTechnicianMobNoVal"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
+                    android:layout_gravity="center"
                     android:textSize="16sp" />
             </LinearLayout>
 
