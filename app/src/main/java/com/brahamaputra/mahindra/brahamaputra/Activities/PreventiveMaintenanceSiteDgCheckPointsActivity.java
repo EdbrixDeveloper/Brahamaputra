@@ -153,6 +153,8 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
 
+    int isQrCodeNew = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -445,7 +447,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         // String powerCableConnectionStatus, String registerFault, String typeOfFault
         DgCheckPointsData dgCheckPointsChild = new DgCheckPointsData(detailsOfDgQrCodeScan, dgHmrReading,
                 base64StringTakePhotoOfDgHmr, /*imageFilePhotoOfDgHmr,*/ dgWorkingCondition, coolentLevel, beltTension, engineLubeOilLevel, safetyWorkingStatus,
-                powerCableConnectionStatus/*, registerFault, typeOfFault*/);
+                powerCableConnectionStatus,/*, registerFault, typeOfFault*/isQrCodeNew);
 
         if (dgCheckPointsData.size() > 0) {
             if (pos == dgCheckPointsData.size()) {

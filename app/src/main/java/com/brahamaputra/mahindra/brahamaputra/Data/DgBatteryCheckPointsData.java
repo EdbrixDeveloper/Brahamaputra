@@ -1,8 +1,10 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 public class DgBatteryCheckPointsData implements Serializable {
 
     @SerializedName("detailsOfDgBatteryQrCodeScan")
@@ -21,6 +23,9 @@ public class DgBatteryCheckPointsData implements Serializable {
     @SerializedName("dgBatteryCharger")
     @Expose
     private String dgBatteryCharger;
+    @SerializedName("isQrCodeNew")
+    @Expose
+    private int isQrCodeNew = 0;
 
     public DgBatteryCheckPointsData() {
         this.detailsOfDgBatteryQrCodeScan = "";
@@ -32,7 +37,7 @@ public class DgBatteryCheckPointsData implements Serializable {
     }
 
     public DgBatteryCheckPointsData(String detailsOfDgBatteryQrCodeScan, String dgBatteryCondition, String dgBatteryWaterAvailable,
-                                    String petroleumJellyToDgBatteryTerminal, String dgBatteryCharger) {
+                                    String petroleumJellyToDgBatteryTerminal, String dgBatteryCharger, int isQrCodeNew) {
         this.detailsOfDgBatteryQrCodeScan = detailsOfDgBatteryQrCodeScan;
         this.dgBatteryCondition = dgBatteryCondition;
         this.dgBatteryWaterAvailable = dgBatteryWaterAvailable;
@@ -80,5 +85,11 @@ public class DgBatteryCheckPointsData implements Serializable {
     public void setDgBatteryCharger(String dgBatteryCharger) {
         this.dgBatteryCharger = dgBatteryCharger;
     }
+    public int getIsQrCodeNew() {
+        return isQrCodeNew;
+    }
 
+    public void setIsQrCodeNew(int isQrCodeNew) {
+        this.isQrCodeNew = isQrCodeNew;
+    }
 }

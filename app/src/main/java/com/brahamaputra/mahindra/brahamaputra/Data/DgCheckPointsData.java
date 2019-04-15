@@ -1,7 +1,10 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
+
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 public class DgCheckPointsData implements Serializable {
 
     /*@SerializedName("noOfDgAvailableAtSite")
@@ -35,7 +38,9 @@ public class DgCheckPointsData implements Serializable {
     @SerializedName("powerCableConnectionStatus")
     @Expose
     private String powerCableConnectionStatus;
-
+    @SerializedName("isQrCodeNew")
+    @Expose
+    private int isQrCodeNew = 0;
 
     /*private String imageFileTakePhotoOfDgHmr;*/
 
@@ -61,7 +66,7 @@ public class DgCheckPointsData implements Serializable {
         /*this.imageFileTakePhotoOfDgHmr = "";*/
     }
 
-    public DgCheckPointsData(String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, /*String imageFileTakePhotoOfDgHmr,*/ String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus, String powerCableConnectionStatus) {
+    public DgCheckPointsData(String detailsOfDgQrCodeScan, String dgHmrReading, String base64StringTakePhotoOfDgHmr, /*String imageFileTakePhotoOfDgHmr,*/ String dgWorkingCondition, String coolentLevel, String beltTension, String engineLubeOilLevel, String safetyWorkingStatus, String powerCableConnectionStatus, int isQrCodeNew) {
         this.detailsOfDgQrCodeScan = detailsOfDgQrCodeScan;
         this.dgHmrReading = dgHmrReading;
         this.base64StringTakePhotoOfDgHmr = base64StringTakePhotoOfDgHmr;
@@ -73,6 +78,7 @@ public class DgCheckPointsData implements Serializable {
         this.safetyWorkingStatus = safetyWorkingStatus;
         this.powerCableConnectionStatus = powerCableConnectionStatus;
 
+        this.isQrCodeNew = isQrCodeNew;
     }
 
     public String getDetailsOfDgQrCodeScan() {
@@ -156,4 +162,11 @@ public class DgCheckPointsData implements Serializable {
     }*/
 
 
+    public int getIsQrCodeNew() {
+        return isQrCodeNew;
+    }
+
+    public void setIsQrCodeNew(int isQrCodeNew) {
+        this.isQrCodeNew = isQrCodeNew;
+    }
 }

@@ -134,6 +134,8 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
 
+    int isQrCodeNew = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -616,7 +618,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                 dgBatteryCondition,
                 dgBatteryWaterAvailable,
                 petroleumJellyToDgBatteryTerminal,
-                dgBatteryCharger);
+                dgBatteryCharger,isQrCodeNew);
 
         if (dgBatteryCheckPointsData.size() > 0) {
             if (pos == dgBatteryCheckPointsData.size()) {

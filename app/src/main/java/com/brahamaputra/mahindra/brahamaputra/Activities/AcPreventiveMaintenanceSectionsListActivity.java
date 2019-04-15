@@ -1,9 +1,14 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +22,8 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSectio
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
+import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.google.gson.Gson;
@@ -60,7 +67,10 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
     private String ticketAccess;
     private String acPmTickStatus;
 
-
+    public GPSTracker gpsTracker;
+    private AlertDialogManager alertDialogManager;
+    private String checkOutLat = "0.0";
+    private String checkOutLong = "0.0";
     //008 end
 
     @Override
@@ -69,6 +79,8 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
         setContentView(R.layout.activity_ac_preventive_maintenance_sections_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.setTitle("AC PM Sections List");
+
+        alertDialogManager = new AlertDialogManager(AcPreventiveMaintenanceSectionsListActivity.this);
 
         sessionManager = new SessionManager(AcPreventiveMaintenanceSectionsListActivity.this);
         acPreventiveMaintenanceSections_listView_sections = (ListView) findViewById(R.id.acPreventiveMaintenanceSections_listView_sections);
@@ -103,6 +115,7 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
         acPmTickStatus = intent.getStringExtra("acPmTickStatus");
 
         designation = sessionManager.getSessionDesignation();
+        gpsTracker = new GPSTracker(AcPreventiveMaintenanceSectionsListActivity.this);
 
         int flag = 0;
         if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
@@ -226,8 +239,46 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
                                 acPMProcessIntent.putExtra("acPmTickStatus", acPmTickStatus);//WIP
                                 //008 end
 
-                                startActivityForResult(acPMProcessIntent, RESULT_READING_COMPLETED);
+                                LocationManager lm = (LocationManager) AcPreventiveMaintenanceSectionsListActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                                boolean gps_enabled = false;
+                                boolean network_enabled = false;
 
+                                try {
+                                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                                    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                                } catch (Exception ex) {
+                                }
+
+                                if (!gps_enabled && !network_enabled) {
+                                    // notify user
+                                    alertDialogManager = new AlertDialogManager(AcPreventiveMaintenanceSectionsListActivity.this);
+                                    alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                        @Override
+                                        public void onPositiveClick() {
+                                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                            AcPreventiveMaintenanceSectionsListActivity.this.startActivity(myIntent);
+                                        }
+                                    }).show();
+                                } else {
+                                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                                        checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                                        checkOutLong = String.valueOf(gpsTracker.getLongitude());
+                                        startActivityForResult(acPMProcessIntent, RESULT_READING_COMPLETED);
+
+                                    } else {
+                                        //showToast("Could not detecting location.");
+                                        alertDialogManager = new AlertDialogManager(AcPreventiveMaintenanceSectionsListActivity.this);
+                                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                            @Override
+                                            public void onPositiveClick() {
+                                                if (gpsTracker.canGetLocation()) {
+                                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
+                                                    Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                                }
+                                            }
+                                        }).show();
+                                    }
+                                }
                                 break;
                             }
 
@@ -315,115 +366,8 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
         super.onResume();
     }
 
-
-    /*public void refreshList() {
-
-        sessionManager = new SessionManager(AcPreventiveMaintenanceSectionsListActivity.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(AcPreventiveMaintenanceSectionsListActivity.this, userId, ticketName);
-
-        hotoTransactionData = new HotoTransactionData();
-        if (getHotoObj()) {
-
-
-            acPreventiveMaintenanceSections_listView_sections = (ListView) findViewById(R.id.acPreventiveMaintenanceSections_listView_sections);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-            values = getResources().getStringArray(R.array.listView_acPreventiveMaintenanceSections_sections);
-            dataModels = new ArrayList<>();
-            //Boolean greenStatus = false;
-            int status = 0;
-
-            for (int i = 0; i < values.length; i++) {
-                status = checkIsSubmited(i);
-
-                if (i / 2 == 0) {
-                    dataModels.add(new AcPreventiveMaintenanceSection("" + (i + 1), "" + values[i], status));
-                } else {
-                    dataModels.add(new AcPreventiveMaintenanceSection("" + (i + 1), "" + values[i], status));
-                }
-                //dataModels.add(new AcPreventiveMaintenanceSection(""+(i+1),""+values[i],true));
-
-            }
-
-            adapter = new AcPreventiveMaintenanceSectionListAdapter(dataModels, getApplicationContext());
-
-            acPreventiveMaintenanceSections_listView_sections.setAdapter(adapter);
-        }
-
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
-
-    public Boolean getHotoObj() {
-        try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-
-                Gson gson = new Gson();
-
-                hotoTransactionData = gson.fromJson(jsonInString, HotoTransactionData.class);
-
-                if (hotoTransactionData != null) {
-                    return true;
-                }
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public int checkIsSubmited(Integer SecNo) {
-        switch (SecNo) {
-            case 0:
-                return hotoTransactionData.getLandDetailsData().getSubmited();
-            case 1:
-                return hotoTransactionData.getTowerDetailsData().getSubmited();
-            *//*case 2:
-                return hotoTransactionData.getEarthResistanceTowerData().getSubmited();
-            case 3:
-                return hotoTransactionData.getEarthResistanceEquipmentData().getSubmited();
-            case 4:
-                return hotoTransactionData.getElectricConnectionData().getSubmited();
-            case 5:
-                return hotoTransactionData.getAirConditionParentData().getSubmited();
-            case 6:
-                return hotoTransactionData.getSolarPowerSystemData().getSubmited();
-            case 7:
-                return hotoTransactionData.getPowerPlantDetailsParentData().getSubmited();
-            case 8:
-                return hotoTransactionData.getPowerBackupsDGParentData().getSubmited();
-            case 9:
-                return hotoTransactionData.getShelterData().getSubmited();
-            case 10:
-                return hotoTransactionData.getMediaData().getSubmited();
-            case 11:
-                return hotoTransactionData.getBatterySetParentData().getSubmited();
-            case 12:
-                return hotoTransactionData.getExternalTenantsPersonalDetailsParentData().getSubmited();
-            case 13:
-                return hotoTransactionData.getTotalDCLoadofSiteData().getSubmited();
-            case 14:
-                return hotoTransactionData.getActiveequipmentDetailsData().getSubmited();
-            case 15:
-                return hotoTransactionData.getPowerManagementSystemData().getSubmited();
-            case 16:
-                return hotoTransactionData.getGeneralSafetyMeasuresParentData().getSubmited();
-            case 17:
-                return hotoTransactionData.getAcdb_dcdb_data().getSubmited();
-            case 18:
-                return hotoTransactionData.getServoStabilizerData().getSubmited();
-            case 19:
-                return hotoTransactionData.getDetailsOfUnusedMaterialsParentData().getSubmited();
-            case 20:
-                return hotoTransactionData.getSitePhotoCaptureData().getSubmited();*//*
-
-        }
-        return 0;
-    }*/
-
-
 }

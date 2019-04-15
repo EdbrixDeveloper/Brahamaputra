@@ -44,6 +44,9 @@ public class AcCheckPoint implements Serializable
     @SerializedName("shelterDoorStatus")
     @Expose
     private String shelterDoorStatus;
+    @SerializedName("isQrCodeNew")
+    @Expose
+    private int isQrCodeNew = 0;
 
     public AcCheckPoint(){
         this.detailsOfAcQrCodeScan = "";
@@ -58,9 +61,8 @@ public class AcCheckPoint implements Serializable
         this.shelterTemperature = "";
         this.base64StringTakePhotoOfTemperature = "";
         this.shelterDoorStatus = "";
-
     }
-    public AcCheckPoint(String detailsOfAcQrCodeScan, String workingConditionOfAc, String automationOfAcController, String acEarthingStatus, String acFilterStatus, String base64StringTakePhotoOfAcFiltersBeforeCleaning, String base64StringTakePhotoOfAcFiltersAfterCleaning, String cleaningOfCoolingCondensorCoils, String anyAbnormalSoundFromMotor, String shelterTemperature, String base64StringTakePhotoOfTemperature, String shelterDoorStatus) {
+    public AcCheckPoint(String detailsOfAcQrCodeScan, String workingConditionOfAc, String automationOfAcController, String acEarthingStatus, String acFilterStatus, String base64StringTakePhotoOfAcFiltersBeforeCleaning, String base64StringTakePhotoOfAcFiltersAfterCleaning, String cleaningOfCoolingCondensorCoils, String anyAbnormalSoundFromMotor, String shelterTemperature, String base64StringTakePhotoOfTemperature, String shelterDoorStatus, int isQrCodeNew) {
         this.detailsOfAcQrCodeScan = detailsOfAcQrCodeScan;
         this.workingConditionOfAc = workingConditionOfAc;
         this.automationOfAcController = automationOfAcController;
@@ -73,7 +75,7 @@ public class AcCheckPoint implements Serializable
         this.shelterTemperature = shelterTemperature;
         this.base64StringTakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
         this.shelterDoorStatus = shelterDoorStatus;
-
+        this.isQrCodeNew = isQrCodeNew;
     }
 
     public String getDetailsOfAcQrCodeScan() {

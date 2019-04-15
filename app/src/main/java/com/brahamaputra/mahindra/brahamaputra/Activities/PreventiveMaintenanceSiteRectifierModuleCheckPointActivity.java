@@ -143,6 +143,8 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     private String imageFileUploadPhotoOfRegisterFault;
     private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
+    int isQrCodeNew = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -581,7 +583,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             String rectifierCleaning = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.getText().toString().trim();
 
             rectifierModuleCheckPointData = new RectifierModuleCheckPointData(base64RectifierModuleDetailsQrCodeScan, base64RectifierPhotoBeforeCleaning, base64RectifierPhotoAfterCleaning
-                    , rectifierCleaning);
+                    , rectifierCleaning,isQrCodeNew);
             if (rectifierModuleCheckPointDataList.size() > 0) {
                 if (currentPos == rectifierModuleCheckPointDataList.size()) {
                     rectifierModuleCheckPointDataList.add(rectifierModuleCheckPointData);
@@ -927,6 +929,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         showToast("Cancelled");
                     } else {
                         Object[] isDuplicateQRcode = isDuplicateQRcodeForSitePM(result.getContents());
+
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
                         if (!flagIsDuplicateQRcode) {
                             base64StringDetailsOfRectifierModuleQRCodeScan = result.getContents();

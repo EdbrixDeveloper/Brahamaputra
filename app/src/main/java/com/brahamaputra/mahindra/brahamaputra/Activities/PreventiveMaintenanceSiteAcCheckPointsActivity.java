@@ -165,6 +165,8 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     ArrayList<Integer> alreadySelected;
     ArrayList<String> typeOfFaultList;
 
+    int isQrCodeNew = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1023,7 +1025,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 acEarthingStatus, acFilterStatus, base64TakePhotoOfAcFiltersBeforeCleaning,
                 base64TakePhotoOfAcFiltersAfterCleaning, cleaningOfCoolingCondensorCoils,
                 anyAbnormalSoundFromMotor, shelterTemperature, base64TakePhotoOfTemperature,
-                shelterDoorStatus);
+                shelterDoorStatus,isQrCodeNew);
         if (acCheckPointsData.size() > 0) {
             if (pos == acCheckPointsData.size()) {
                 acCheckPointsData.add(acCheckPointChild);

@@ -1,12 +1,15 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -46,6 +49,7 @@ import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
+import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -321,6 +325,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private AcPmTransactionDetails acPmTransactionDetails;
 
     private boolean flagReadDataByFSE = false;
+    public GPSTracker gpsTracker;
+    private String checkOutLat = "0.0";
+    private String checkOutLong = "0.0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1682,8 +1689,47 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             case R.id.menuSubmit:
 
                 if (checkValidationonSubmit("onSubmit") == true) {
-                    //submitDetails();
-                    showSettingsAlert();
+                    LocationManager lm = (LocationManager) PreventiveMaintenanceAcTechnicianActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                    boolean gps_enabled = false;
+                    boolean network_enabled = false;
+
+                    try {
+                        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                    } catch (Exception ex) {
+                    }
+
+                    if (!gps_enabled && !network_enabled) {
+                        // notify user
+                        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
+                        alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                            @Override
+                            public void onPositiveClick() {
+                                Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                PreventiveMaintenanceAcTechnicianActivity.this.startActivity(myIntent);
+                            }
+                        }).show();
+                    } else {
+                        if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                            checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                            checkOutLong = String.valueOf(gpsTracker.getLongitude());
+                            showSettingsAlert();
+
+                        } else {
+                            //showToast("Could not detecting location.");
+                            alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
+                            alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                @Override
+                                public void onPositiveClick() {
+                                    if (gpsTracker.canGetLocation()) {
+                                        //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
+                                        Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                    }
+                                }
+                            }).show();
+                        }
+                    }
+
                     return true;
                 }
             default:
