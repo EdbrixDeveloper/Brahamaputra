@@ -608,6 +608,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/app_min_margin"
                     android:background="#a40404" />
 
                 <TableLayout
@@ -909,6 +910,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/app_min_margin"
                     android:background="#a40404" />
 
                 <TableLayout
@@ -1304,6 +1306,7 @@
 
                 </LinearLayout>
 
+                <!--Button Previous and Next-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1341,6 +1344,7 @@
                     <!--android:textAllCaps="false"-->
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <!--Float Voltage in SMPS Bus Bar after 30 Minute
@@ -1351,21 +1355,8 @@
             <!---->
 
 
-
-
-
             <!---->
             <!---->
-
-
-
-
-
-
-
-
-
-
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -1435,6 +1426,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_min_margin"
                 android:padding="@dimen/app_min_padding"
                 android:weightSum="1">
 

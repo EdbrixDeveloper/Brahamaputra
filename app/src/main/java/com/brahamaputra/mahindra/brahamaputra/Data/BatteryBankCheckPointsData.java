@@ -35,7 +35,7 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.stripBoltTightnessAsPerTorque = "";
         this.petroleumJellyApplied = "";
         this.batteryBankQrCodeSelection = "";
-        this.batteryBankDischargeTest="";
+        this.batteryBankDischargeTest = "";
         //this.batteryCharger = "";
         this.batteryVentPlugStatus = "";
         this.bbEarthingStatus = "";
@@ -43,13 +43,13 @@ public class BatteryBankCheckPointsData implements Serializable {
     }
 
     public BatteryBankCheckPointsData(String detailsOfBatteryBankQrCodeScan, String stripBoltTightnessAsPerTorque,
-                                      String petroleumJellyApplied,String batteryBankQrCodeSelection,String batteryBankDischargeTest, String batteryVentPlugStatus, String bbEarthingStatus
+                                      String petroleumJellyApplied, String batteryBankQrCodeSelection, String batteryBankDischargeTest, String batteryVentPlugStatus, String bbEarthingStatus
     ) {
         this.detailsOfBatteryBankQrCodeScan = detailsOfBatteryBankQrCodeScan;
         this.stripBoltTightnessAsPerTorque = stripBoltTightnessAsPerTorque;
         this.petroleumJellyApplied = petroleumJellyApplied;
         this.batteryBankQrCodeSelection = batteryBankQrCodeSelection;
-        this.batteryBankDischargeTest=batteryBankDischargeTest;
+        this.batteryBankDischargeTest = batteryBankDischargeTest;
         this.batteryVentPlugStatus = batteryVentPlugStatus;
         this.bbEarthingStatus = bbEarthingStatus;
 
@@ -171,7 +171,8 @@ public class BatteryBankCheckPointsData implements Serializable {
     @SerializedName("bdTestReadingTakenAt")
     @Expose
     private String bdTestReadingTakenAt;
-    @SerializedName("bdTestVoltageModuleReading1")
+
+    /*@SerializedName("bdTestVoltageModuleReading1")
     @Expose
     private String bdTestVoltageModuleReading1;
     @SerializedName("bdTestVoltageModuleReading2")
@@ -212,7 +213,9 @@ public class BatteryBankCheckPointsData implements Serializable {
     private String bdTestFloatVoltageInSmpsBusBarAfter30Min;
     @SerializedName("bdTestTotalLoadCurrentInAmps")
     @Expose
-    private String bdTestTotalLoadCurrentInAmps;
+    private String bdTestTotalLoadCurrentInAmps;*/
+
+
     @SerializedName("bdTestLastReadingTakenAt")
     @Expose
     private String bdTestLastReadingTakenAt;
@@ -227,6 +230,9 @@ public class BatteryBankCheckPointsData implements Serializable {
     @Expose
     private List<BatteryBankCheckPointsChildData> batteryBankCheckPointsChildData;
 
+    @SerializedName("batteryBankCheckPointsViLionBatteryData")
+    @Expose
+    private List<BatteryBankCheckPointsViLionBatteryData> batteryBankCheckPointsViLionBatteryData;
 
     public String getBatteryBankQrCodeSelection() {
         return batteryBankQrCodeSelection;
@@ -396,7 +402,7 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestReadingTakenAt = bdTestReadingTakenAt;
     }
 
-    public String getBdTestVoltageModuleReading1() {
+    /*public String getBdTestVoltageModuleReading1() {
         return bdTestVoltageModuleReading1;
     }
 
@@ -506,7 +512,7 @@ public class BatteryBankCheckPointsData implements Serializable {
 
     public void setBdTestTotalLoadCurrentInAmps(String bdTestTotalLoadCurrentInAmps) {
         this.bdTestTotalLoadCurrentInAmps = bdTestTotalLoadCurrentInAmps;
-    }
+    }*/
 
     public String getBdTestLastReadingTakenAt() {
         return bdTestLastReadingTakenAt;
@@ -538,6 +544,14 @@ public class BatteryBankCheckPointsData implements Serializable {
 
     public void setBatteryBankCheckPointsChildData(List<BatteryBankCheckPointsChildData> batteryBankCheckPointsChildData) {
         this.batteryBankCheckPointsChildData = batteryBankCheckPointsChildData;
+    }
+
+    public List<BatteryBankCheckPointsViLionBatteryData> getBatteryBankCheckPointsViLionBatteryData() {
+        return batteryBankCheckPointsViLionBatteryData;
+    }
+
+    public void setBatteryBankCheckPointsViLionBatteryData(List<BatteryBankCheckPointsViLionBatteryData> batteryBankCheckPointsViLionBatteryData) {
+        this.batteryBankCheckPointsViLionBatteryData = batteryBankCheckPointsViLionBatteryData;
     }
 
 }

@@ -28,6 +28,7 @@ import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsChildData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsParentData;
+import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsViLionBatteryData;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -173,6 +174,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
     private ArrayList<BatteryBankCheckPointsChildData> batteryBankCheckPointschildData;
 
+    private ArrayList<BatteryBankCheckPointsViLionBatteryData> batteryBankCheckPointsViLionBatteryData;//13042019
+
     ArrayList<BatteryType> batteryType;
     ArrayList<String> batteryQRCodeList;
 
@@ -233,6 +236,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
         batteryBankCheckPointsDataChild = new BatteryBankCheckPointsData();
         batteryBankCheckPointschildData = new ArrayList<>();
+        batteryBankCheckPointsViLionBatteryData = new ArrayList<>();//13042019
 
         currentPos = 0;
 
@@ -708,6 +712,9 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                 batteryBankCheckPointschildData.clear();
                 batteryBankCheckPointschildData.addAll(dataList.getBatteryBankCheckPointsChildData());
 
+                batteryBankCheckPointsViLionBatteryData.clear();//13042019
+                batteryBankCheckPointsViLionBatteryData.addAll(dataList.getBatteryBankCheckPointsViLionBatteryData());//13042019
+
                 mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.setText(dataList.getNoOfBatteryBankAvailableAtSite());
 
                 if (dataList.getNoOfBatteryBankAvailableAtSite().equals("1")) {
@@ -999,6 +1006,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     //dataList.setTypeOfBattery("");// 008
                     batteryBankCheckPointschildData = new ArrayList<>();
                     dataList.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
+                    batteryBankCheckPointsViLionBatteryData = new ArrayList<>();//13042019
+                    dataList.setBatteryBankCheckPointsViLionBatteryData(batteryBankCheckPointsViLionBatteryData);//13042019
                     dataList.setBatteryBankDischargeTest("");//
                     dataList.setBdTestBatteryBankBackUpTicketNo("");
                     dataList.setBdTestCustomer("");
@@ -1010,7 +1019,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     dataList.setBdTestUserFseNameDesignation("");
                     //dataList.setTypeOfBattery(""); 008
 
-                    dataList.setBdTestVoltageModuleReading1("");
+                    /*dataList.setBdTestVoltageModuleReading1("");
                     dataList.setBdTestCurrentModuleReading1("");
                     dataList.setBdTestSocModuleReading1("");
                     dataList.setBdTestSohModuleReading1("");
@@ -1024,7 +1033,10 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     dataList.setBdTestSohModuleReading3("");
 
                     dataList.setBdTestFloatVoltageInSmpsBusBarAfter30Min("");
-                    dataList.setBdTestTotalLoadCurrentInAmps("");
+                    dataList.setBdTestTotalLoadCurrentInAmps("");*/
+
+                    //Set Vi Lion List new with size 0
+
                     dataList.setBdTestBatteryBankMake("");
                     dataList.setBdTestBatteryBankCapacity("");
                     dataList.setBdTestNumberOfRectifireModuleWorking("");
@@ -1048,6 +1060,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         for (BatteryBankCheckPointsData dd : batteryBankCheckPointsData) {
                             batteryBankCheckPointschildData = new ArrayList<>();
                             dd.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
+                            batteryBankCheckPointsViLionBatteryData = new ArrayList<>();//13042019
+                            dd.setBatteryBankCheckPointsViLionBatteryData(batteryBankCheckPointsViLionBatteryData);
                             dd.setBatteryBankDischargeTest("");//
                             dd.setBdTestBatteryBankBackUpTicketNo("");
                             dd.setBdTestCustomer("");
@@ -1059,7 +1073,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             dd.setBdTestUserFseNameDesignation("");
                             dd.setTypeOfBattery("");
 
-                            dd.setBdTestVoltageModuleReading1("");
+                            /*dd.setBdTestVoltageModuleReading1("");
                             dd.setBdTestCurrentModuleReading1("");
                             dd.setBdTestSocModuleReading1("");
                             dd.setBdTestSohModuleReading1("");
@@ -1073,7 +1087,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             dd.setBdTestSohModuleReading3("");
 
                             dd.setBdTestFloatVoltageInSmpsBusBarAfter30Min("");
-                            dd.setBdTestTotalLoadCurrentInAmps("");
+                            dd.setBdTestTotalLoadCurrentInAmps("");*/
                             dd.setBdTestBatteryBankMake("");
                             dd.setBdTestBatteryBankCapacity("");
                             dd.setBdTestNumberOfRectifireModuleWorking("");
@@ -1095,12 +1109,23 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     dataList.setBatteryBankCheckPointsData(batteryBankCheckPointsData);
 
                     if (batteryBankDischargeTest.equals("Execute BD Test")) {
-                        if (batteryBankCheckPointschildData.size() > 0) {
-                            dataList.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
+                        if (sitePmBatteryBankType.contains("VRLA")) {
+                            if (batteryBankCheckPointschildData.size() > 0) {
+                                batteryBankCheckPointsViLionBatteryData = new ArrayList<>();
+                                dataList.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
+                                dataList.setBatteryBankCheckPointsViLionBatteryData(batteryBankCheckPointsViLionBatteryData);
+                            }
+                        } else if (sitePmBatteryBankType.contains("Li-Ion")) {
+                            if (batteryBankCheckPointsViLionBatteryData.size() > 0) {
+                                batteryBankCheckPointschildData = new ArrayList<>();
+                                dataList.setBatteryBankCheckPointsChildData(batteryBankCheckPointschildData);
+                                dataList.setBatteryBankCheckPointsViLionBatteryData(batteryBankCheckPointsViLionBatteryData);
+                            }
                         }
                     } else {
                         batteryBankCheckPointschildData = new ArrayList<>();
-
+                        batteryBankCheckPointsViLionBatteryData = new ArrayList<>();//13042019
+                        dataList.setBatteryBankCheckPointsViLionBatteryData(batteryBankCheckPointsViLionBatteryData);
                         dataList.setBdTestBatteryBankBackUpTicketNo("");
                         dataList.setBdTestCustomer("");
                         dataList.setBdTestCircle("");
@@ -1111,7 +1136,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         dataList.setBdTestUserFseNameDesignation("");
                         //dataList.setTypeOfBattery(""); 008
 
-                        dataList.setBdTestVoltageModuleReading1("");
+                        /*dataList.setBdTestVoltageModuleReading1("");
                         dataList.setBdTestCurrentModuleReading1("");
                         dataList.setBdTestSocModuleReading1("");
                         dataList.setBdTestSohModuleReading1("");
@@ -1125,7 +1150,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         dataList.setBdTestSohModuleReading3("");
 
                         dataList.setBdTestFloatVoltageInSmpsBusBarAfter30Min("");
-                        dataList.setBdTestTotalLoadCurrentInAmps("");
+                        dataList.setBdTestTotalLoadCurrentInAmps("");*/
                         dataList.setBdTestBatteryBankMake("");
                         dataList.setBdTestBatteryBankCapacity("");
                         dataList.setBdTestNumberOfRectifireModuleWorking("");
