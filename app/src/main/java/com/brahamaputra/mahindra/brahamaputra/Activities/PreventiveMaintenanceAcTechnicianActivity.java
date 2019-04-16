@@ -2234,6 +2234,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
     private void clearFields(int pos) {
 
+        mPreventiveMaintenanceAcTechnicianTextViewAcNumber.setText("Reading: #" + (pos + 1));
         base64StringAcTechnicianQRCodeScan = "";
         mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.GONE);
         mButtonClearQRCodeScanView.setVisibility(View.GONE);
