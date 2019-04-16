@@ -1238,10 +1238,11 @@
                             android:background="#ffffff"
                             android:hint=" Cell 24"
                             android:inputType="numberDecimal"
-                            android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
+                            android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min"
                             android:nextFocusLeft="@+id/bdTestCellReadingEditText24" />
                     </TableRow>
                 </TableLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -1273,6 +1274,8 @@
                         android:hint="Enter Float Voltage in SMPS Bus Bar"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_totalLoadCurrentInAmps"
+                        android:nextFocusLeft="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
@@ -1301,6 +1304,8 @@
                         android:hint="Enter Total Load Current"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
+                        android:nextFocusLeft="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_totalLoadCurrentInAmps"
                         android:textAlignment="viewStart"
                         android:textSize="16sp" />
 
@@ -1346,6 +1351,13 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/app_min_margin"
+                android:background="#a40404" />
 
             <!--Float Voltage in SMPS Bus Bar after 30 Minute
             Total Load Current ( in Amps)-->

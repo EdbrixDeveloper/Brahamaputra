@@ -97,6 +97,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryType;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal;
     private LinearLayout mLinearLayoutBatteryTypeLiIonReadings;
+    private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber1;
     private EditText mBdTestVoltageModuleReading1EditText1;
     private EditText mBdTestCurrentModuleReading1EditText1;
     private EditText mBdTestSocModuleReadingEditText1;
@@ -332,6 +333,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryType = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryType);
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryTypeVal);
         mLinearLayoutBatteryTypeLiIonReadings = (LinearLayout) findViewById(R.id.LinearLayoutBatteryTypeLiIonReadings);
+
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber1 = (TextView) findViewById(R.id.preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_battreyBankCellNumber_1);
         mBdTestVoltageModuleReading1EditText1 = (EditText) findViewById(R.id.bdTestVoltageModuleReading1EditText1);
         mBdTestCurrentModuleReading1EditText1 = (EditText) findViewById(R.id.bdTestCurrentModuleReading1EditText1);
         mBdTestSocModuleReadingEditText1 = (EditText) findViewById(R.id.bdTestSocModuleReadingEditText1);
@@ -1168,7 +1171,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                         batteryBankCheckPointsViLionBatteryData.clear();
                         batteryBankCheckPointsViLionBatteryData.addAll(batteryBankCheckPointsParentData.getBatteryBankCheckPointsViLionBatteryData());
 
-                        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber.setText("Reading: #1");
+                        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber1.setText("Reading: #1");
 
                         mBdTestVoltageModuleReading1EditText1.setText(batteryBankCheckPointsViLionBatteryData.get(currentPos).getBdTestVoltageModuleReading1() == null ? "" : batteryBankCheckPointsViLionBatteryData.get(currentPos).getBdTestVoltageModuleReading1());
                         mBdTestCurrentModuleReading1EditText1.setText(batteryBankCheckPointsViLionBatteryData.get(currentPos).getBdTestCurrentModuleReading1() == null ? "" : batteryBankCheckPointsViLionBatteryData.get(currentPos).getBdTestCurrentModuleReading1());
@@ -1792,7 +1795,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         } else if (TypeOfBattery.equals("Li-Ion")) {
             if (batteryBankCheckPointsViLionBatteryData.size() > 0 && pos < batteryBankCheckPointsViLionBatteryData.size()) {
 
-                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber.setText("Reading: #" + (pos + 1));
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber1.setText("Reading: #" + (pos + 1));
 
                 mBdTestVoltageModuleReading1EditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestVoltageModuleReading1());
                 mBdTestCurrentModuleReading1EditText1.setText(batteryBankCheckPointsViLionBatteryData.get(pos).getBdTestCurrentModuleReading1());
@@ -1840,6 +1843,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     public void clearFields(int indexPos) {
 
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber.setText("Reading: #" + (indexPos + 1));
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBattreyBankCellNumber1.setText("Reading: #" + (indexPos + 1));
 
         mBdTestCellReadingEditText1.setText("");
         mBdTestCellReadingEditText2.setText("");

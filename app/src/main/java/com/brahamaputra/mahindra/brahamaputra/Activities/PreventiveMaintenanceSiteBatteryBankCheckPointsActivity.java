@@ -789,6 +789,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     } else {
                         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setText("Finish");
                     }
+                } else if (!str_noOfBatteryBankAvailableAtSiteVal.isEmpty()) {
+                    mLinearLayoutContainer.setVisibility(View.VISIBLE);
                 }
 
             } else {
