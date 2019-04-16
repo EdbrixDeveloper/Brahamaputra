@@ -1,5 +1,6 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
@@ -40,11 +41,15 @@ public class AcPreventiveMaintanceProcessParentDatum {
     @SerializedName("acPreventiveMaintanceProcessData")
     @Expose
     private List<AcPreventiveMaintanceProcessDatum> acPreventiveMaintanceProcessData = null;
+    @SerializedName("acPmTechnicianLat")
+    @Expose
+    private String acPmTechnicianLat;
+    @SerializedName("acPmTechnicianLong")
+    @Expose
+    private String acPmTechnicianLong;
 
-    /**
-     * No args constructor for use in serialization
-     */
-    public AcPreventiveMaintanceProcessParentDatum() {
+    public AcPreventiveMaintanceProcessParentDatum(){
+
     }
 
     /**
@@ -161,5 +166,20 @@ public class AcPreventiveMaintanceProcessParentDatum {
 
     public void setAcPreventiveMaintanceProcessData(List<AcPreventiveMaintanceProcessDatum> acPreventiveMaintanceProcessData) {
         this.acPreventiveMaintanceProcessData = acPreventiveMaintanceProcessData;
+    }
+    public String getAcPmTechnicianLat() {
+        return acPmTechnicianLat;
+    }
+
+    public void setAcPmTechnicianLat(String acPmTechnicianLat) {
+        this.acPmTechnicianLat = acPmTechnicianLat;
+    }
+
+    public String getAcPmTechnicianLong() {
+        return acPmTechnicianLong;
+    }
+
+    public void setAcPmTechnicianLong(String acPmTechnicianLong) {
+        this.acPmTechnicianLong = acPmTechnicianLong;
     }
 }

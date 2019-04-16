@@ -583,7 +583,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
             String rectifierCleaning = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRectifierCleaningVal.getText().toString().trim();
 
             rectifierModuleCheckPointData = new RectifierModuleCheckPointData(base64RectifierModuleDetailsQrCodeScan, base64RectifierPhotoBeforeCleaning, base64RectifierPhotoAfterCleaning
-                    , rectifierCleaning,isQrCodeNew);
+                    , rectifierCleaning/*,isQrCodeNew*/);
             if (rectifierModuleCheckPointDataList.size() > 0) {
                 if (currentPos == rectifierModuleCheckPointDataList.size()) {
                     rectifierModuleCheckPointDataList.add(rectifierModuleCheckPointData);

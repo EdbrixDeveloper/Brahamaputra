@@ -21,16 +21,16 @@ public class RectifierModuleCheckPointData implements Serializable
     @SerializedName("base64StringRectifierPhotoAfterCleaning")
     @Expose
     private String base64StringRectifierPhotoAfterCleaning;
-    @SerializedName("isQrCodeNew")
+    /*@SerializedName("isQrCodeNew")
     @Expose
     private int isQrCodeNew;
-
-    public RectifierModuleCheckPointData(String base64RectifierModuleDetailsQrCodeScan, String base64RectifierPhotoBeforeCleaning, String base64RectifierPhotoAfterCleaning, String rectifierCleaning,int isQrCodeNew) {
+*/
+    public RectifierModuleCheckPointData(String base64RectifierModuleDetailsQrCodeScan, String base64RectifierPhotoBeforeCleaning, String base64RectifierPhotoAfterCleaning, String rectifierCleaning/*,int isQrCodeNew*/) {
         this.base64StringRectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
         this.base64StringRectifierPhotoBeforeCleaning = base64RectifierPhotoBeforeCleaning;
         this.detailsOfRectifierModuleQrCodeScan = base64RectifierModuleDetailsQrCodeScan;
         this.rectifierCleaning = rectifierCleaning;
-        this.isQrCodeNew = isQrCodeNew;
+        /*this.isQrCodeNew = isQrCodeNew;*/
         /*this.registerFault = registerFault;
         this.typeOfFault = typeOfFault;*/
     }
@@ -67,12 +67,12 @@ public class RectifierModuleCheckPointData implements Serializable
         this.base64StringRectifierPhotoAfterCleaning = base64RectifierPhotoAfterCleaning;
     }
 
-    public int getIsQrCodeNew() {
+   /* public int getIsQrCodeNew() {
         return isQrCodeNew;
     }
 
     public void setIsQrCodeNew(int isQrCodeNew) {
         this.isQrCodeNew = isQrCodeNew;
-    }
+    }*/
 
 }

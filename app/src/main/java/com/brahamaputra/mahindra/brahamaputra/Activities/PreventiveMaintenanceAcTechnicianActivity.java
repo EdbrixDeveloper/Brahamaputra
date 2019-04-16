@@ -326,8 +326,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
     private boolean flagReadDataByFSE = false;
     public GPSTracker gpsTracker;
-    private String checkOutLat = "0.0";
-    private String checkOutLong = "0.0";
+    private String technicianLat = "0.0";
+    private String technicianLong = "0.0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -347,6 +347,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
         alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceAcTechnicianActivity.this);
+        gpsTracker = new GPSTracker(PreventiveMaintenanceAcTechnicianActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
         userId = sessionManager.getSessionUserId();
@@ -1195,7 +1196,48 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                                         showToast("You are in readable mode");
                                     } else {
                                         if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                            showSettingsAlert();
+
+                                            LocationManager lm = (LocationManager) PreventiveMaintenanceAcTechnicianActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                                            boolean gps_enabled = false;
+                                            boolean network_enabled = false;
+
+                                            try {
+                                                gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                                                network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                                            } catch (Exception ex) {
+                                            }
+
+                                            if (!gps_enabled && !network_enabled) {
+                                                // notify user
+                                                alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
+                                                alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                                    @Override
+                                                    public void onPositiveClick() {
+                                                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                                        PreventiveMaintenanceAcTechnicianActivity.this.startActivity(myIntent);
+                                                    }
+                                                }).show();
+                                            } else {
+                                                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                                                    technicianLat = String.valueOf(gpsTracker.getLatitude());
+                                                    technicianLong = String.valueOf(gpsTracker.getLongitude());
+                                                    showSettingsAlert();
+
+                                                } else {
+                                                    //showToast("Could not detecting location.");
+                                                    alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
+                                                    alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                                        @Override
+                                                        public void onPositiveClick() {
+                                                            if (gpsTracker.canGetLocation()) {
+                                                                //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
+                                                                Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                                            }
+                                                        }
+                                                    }).show();
+                                                }
+                                            }
+                                            //showSettingsAlert();
                                         } else {
                                             showToast("Unauthorised ticket");
                                         }
@@ -1711,8 +1753,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         }).show();
                     } else {
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                            checkOutLat = String.valueOf(gpsTracker.getLatitude());
-                            checkOutLong = String.valueOf(gpsTracker.getLongitude());
+                            technicianLat = String.valueOf(gpsTracker.getLatitude());
+                            technicianLong = String.valueOf(gpsTracker.getLongitude());
                             showSettingsAlert();
 
                         } else {
@@ -2278,7 +2320,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
             acPreventiveMaintanceProcessParentDatum = new AcPreventiveMaintanceProcessParentDatum(circle, state, ssa, siteId, siteName, ticketNo, ticketDate,
                     pmPlanDate, submittedDate, noOfAcAtSite, acPreventiveMaintanceProcessData);
-
+            acPreventiveMaintanceProcessParentDatum.setAcPmTechnicianLat(technicianLat);
+            acPreventiveMaintanceProcessParentDatum.setAcPmTechnicianLong(technicianLong);
             /*Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(acPreventiveMaintanceProcessParentDatum);
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);*/
@@ -2287,6 +2330,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             acPmTransactionDetails.setUserId(sessionManager.getSessionUserId());
             acPmTransactionDetails.setAccessToken(sessionManager.getSessionDeviceToken());
             acPmTransactionDetails.setTicketId(sessionManager.getSessionUserTicketId());
+
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(acPmTransactionDetails);

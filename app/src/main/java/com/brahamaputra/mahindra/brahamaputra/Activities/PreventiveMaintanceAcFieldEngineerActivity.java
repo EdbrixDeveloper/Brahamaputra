@@ -125,6 +125,9 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     private String ticketAccess;
     private String acPmTickStatus;
 
+    private String fieldEngineerLat = "0.0";
+    private String fieldEngineerLong = "0.0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -264,6 +267,8 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                                 }).show();
                             } else {
                                 if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                                    fieldEngineerLat = String.valueOf(gpsTracker.getLongitude());
+                                    fieldEngineerLong = String.valueOf(gpsTracker.getLongitude());
                                     if (Conditions.isNetworkConnected(PreventiveMaintanceAcFieldEngineerActivity.this)) {
                                         updateStatusOfTicket(String.valueOf(gpsTracker.getLongitude()), String.valueOf(gpsTracker.getLatitude()));
                                     } else {
@@ -491,58 +496,27 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     private void submitDetails() {
 
         try {
-            /*String customer = mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.getText().toString().trim();
-            String circle = mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.getText().toString().trim();
-            String state = mPreventiveMaintanceAcFieldEngineerTextViewStateVal.getText().toString().trim();
-            String ssa = mPreventiveMaintanceAcFieldEngineerTextViewSsaVal.getText().toString().trim();
-            String siteId = mPreventiveMaintanceAcFieldEngineerTextViewSiteIDVal.getText().toString().trim();
-            String siteName = mPreventiveMaintanceAcFieldEngineerTextViewSiteNameVal.getText().toString().trim();
-            String sheduledDateOfAcPm = mPreventiveMaintanceAcFieldEngineerTextViewPmSheduledDateOfAcVal.getText().toString().trim();
-            String modeOfOpration = mPreventiveMaintanceAcFieldEngineerTextViewModeOfOprationVal.getText().toString().trim();
-            String ticketNo = mPreventiveMaintanceAcFieldEngineerTextViewTicketNoVal.getText().toString().trim();
-            String vendorName = mPreventiveMaintanceAcFieldEngineerTextViewVendorNameVal.getText().toString().trim();
-            String technicianName = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.getText().toString().trim();
-            String technicianMobileNo = mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.getText().toString().trim();
-            String ticketStatusToWip = "";
-            if (mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.isChecked()) {
-                ticketStatusToWip = "true";
-            } else {
-                ticketStatusToWip = "false";
+
+            LocationManager lm = (LocationManager) PreventiveMaintanceAcFieldEngineerActivity.this.getSystemService(Context.LOCATION_SERVICE);
+            boolean gps_enabled = false;
+            boolean network_enabled = false;
+
+            try {
+                gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            } catch (Exception ex) {
             }
-            String status = mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.getText().toString().trim();
-            String submittedDate = mPreventiveMaintanceAcFieldEngineerTextViewDateSubmittedByTechnicianVal.getText().toString().trim();
-            String feedback = mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.getText().toString().trim();
-            String remark = mPreventiveMaintanceAcFieldEngineerEditTextRemark.getText().toString().trim();
 
-            ticktetSubmissionFromFieldEngineerDatum = new TicktetSubmissionFromFieldEngineerDatum(customer, circle, state, ssa, siteId, siteName,
-                    sheduledDateOfAcPm, modeOfOpration, ticketNo, vendorName, technicianName, technicianMobileNo, ticketStatusToWip, status, submittedDate,
-                    feedback, remark);
-
-            Gson gson2 = new GsonBuilder().create();
-            String jsonString = gson2.toJson(ticktetSubmissionFromFieldEngineerDatum);
-            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("UserId", sessionManager.getSessionUserId());
-            jsonObject.put("AccessToken", sessionManager.getSessionDeviceToken());
-            jsonObject.put("ticketNo", ticketNo);
-            jsonObject.put("feedBack", feedback);
-            jsonObject.put("remark", remark);
-
-            jsonObject.put("customer", customer);
-            jsonObject.put("circle", circle);
-            jsonObject.put("state", state);
-            jsonObject.put("ssa", ssa);
-            jsonObject.put("siteName", siteName);
-            jsonObject.put("siteId", siteId);
-            jsonObject.put("sheduledDateOfAcPm", sheduledDateOfAcPm);
-            jsonObject.put("modeOfOpration", modeOfOpration);*/
-            /*jsonObject.put("vendorName", vendorName);
-            jsonObject.put("acTechnicianName", technicianName);
-            jsonObject.put("acTechnicianMobileNo", technicianMobileNo);
-            jsonObject.put("ticketStatusToWip", ticketStatusToWip);
-            jsonObject.put("status", status);
-            jsonObject.put("submittedDate", submittedDate);*/
+            if (!gps_enabled && !network_enabled) {
+                // notify user
+                fieldEngineerLat = "0.0";
+                fieldEngineerLong = "0.0";
+            } else {
+                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                    fieldEngineerLat = String.valueOf(gpsTracker.getLongitude());
+                    fieldEngineerLong = String.valueOf(gpsTracker.getLongitude());
+                }
+            }
 
             String feedback = mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.getText().toString().trim();
             String remark = mPreventiveMaintanceAcFieldEngineerEditTextRemark.getText().toString().trim();
@@ -554,6 +528,8 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             //jsonObject.put("TicketNo", TicketNO);
             jsonObject.put("feedBack", feedback);
             jsonObject.put("remark", remark);
+            jsonObject.put("acPmSiteEngineerLat", fieldEngineerLat);
+            jsonObject.put("acPmSiteEngineerLong", fieldEngineerLong);
 
             GsonRequest<TicktetSubmissionFromFieldEngineerDatum> ticktetSubmissionFromFieldEngineerDatum = new GsonRequest<>(Request.Method.POST, Constants.submitAcPmTicket, jsonObject.toString(), TicktetSubmissionFromFieldEngineerDatum.class,
                     new Response.Listener<TicktetSubmissionFromFieldEngineerDatum>() {
