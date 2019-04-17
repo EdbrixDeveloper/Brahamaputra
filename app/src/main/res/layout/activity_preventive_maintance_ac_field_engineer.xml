@@ -345,12 +345,13 @@
                 android:id="@+id/LinearLayoutParent"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:layout_height="wrap_content">
+               >
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:padding="@dimen/app_min_padding"
                     android:weightSum="1">
 
@@ -365,18 +366,16 @@
                     <TextView
                         android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_statusSubmittedByTechnicianVal"
                         android:layout_width="0dp"
-                        android:layout_height="45dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:imeOptions="actionNext"
-                        android:paddingTop="5dp"
-                        android:textAlignment="viewStart"
+                        android:layout_gravity="center"
                         android:textSize="16sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:padding="@dimen/app_min_padding"
-
                     android:weightSum="1">
 
                     <TextView
@@ -390,11 +389,10 @@
                     <TextView
                         android:id="@+id/preventiveMaintanceAcFieldEngineer_textView_dateSubmittedByTechnicianVal"
                         android:layout_width="0dp"
-                        android:layout_height="45dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:imeOptions="actionNext"
-                        android:paddingTop="5dp"
-                        android:textAlignment="viewStart"
+                        android:layout_gravity="center"
                         android:textSize="16sp" />
                 </LinearLayout>
                 <LinearLayout
