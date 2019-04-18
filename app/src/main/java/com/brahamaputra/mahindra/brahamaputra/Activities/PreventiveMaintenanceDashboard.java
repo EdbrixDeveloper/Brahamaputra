@@ -292,13 +292,13 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             long elapsedDays = different / daysInMilli;
             different = different % daysInMilli;
 
-            if (elapsedDays <= requiredDaysForStartWork && elapsedDays >= lastDayForStartWork) {
+            if (elapsedDays <= requiredDaysForStartWork ) {//&& elapsedDays >= lastDayForStartWork
                 return true;
             } else if (elapsedDays > requiredDaysForStartWork) {
                 showToast("You have access this ticket only before 3 days ago of Scheduled Date:" + sitePmScheduledDate);
-            } else if (elapsedDays < lastDayForStartWork) {
+            } /*else if (elapsedDays < lastDayForStartWork) {
                 showToast("You don't have access to this ticket after Scheduled Date:" + sitePmScheduledDate);
-            }
+            }*/
 
         } catch (ParseException e) {
             Log.d("ParseException", e.getMessage());

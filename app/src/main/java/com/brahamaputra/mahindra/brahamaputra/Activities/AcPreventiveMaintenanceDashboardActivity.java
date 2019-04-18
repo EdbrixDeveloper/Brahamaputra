@@ -45,6 +45,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
 
@@ -158,9 +159,11 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         if (acPmTicketList != null) {
                             //final String sitePMAcTicketId = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getId().toString();
+                            String myFormat = "dd/MMM/yyyy"; //In which you need put here
+                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                            String currentDateTimeString = sdf.format(new Date());
 
-
-                            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                            /*String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());*/
                             final String sitePMAcTicketId = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getId() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getId().toString();
                             final String sitePMAcTicketNo = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketNo() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketNo().toString();
                             final String sitePMAcTicketDate = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketDate() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketDate().toString();
@@ -262,7 +265,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
         Date newFormatedSheduledDate;
         /* String date="May 1, 2019 6:30:00 PM";*/
 
-        SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("dd/MMM/yyyy");
         SimpleDateFormat simpleDateFormatForSheduleDate = new SimpleDateFormat("dd/MMM/yyyy");
 
         SimpleDateFormat newSimpleDateFormatForDaysCalculate = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
@@ -287,13 +290,13 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
             long elapsedDays = different / daysInMilli;
             different = different % daysInMilli;
 
-            if (elapsedDays <= requiredDaysForStartWork && elapsedDays >= lastDayForStartWork) {
+            if (elapsedDays <= requiredDaysForStartWork ) {//&& elapsedDays >= lastDayForStartWork
                 return true;
             } else if (elapsedDays > requiredDaysForStartWork) {
                 showToast("You have access this ticket only before 3 days ago of " + newSheduledDate + " this date");
-            } else if (elapsedDays < lastDayForStartWork) {
+            } /*else if (elapsedDays < lastDayForStartWork) {
                 showToast("You don't have access to this ticket after " + newSheduledDate + " this date");
-            }
+            }*/
 
            /* long elapsedHours = different / hoursInMilli;
             different = different % hoursInMilli;
