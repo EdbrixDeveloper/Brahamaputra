@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.ParseException;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -39,8 +40,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.RoundingMode;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
 
@@ -154,6 +158,9 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         if (acPmTicketList != null) {
                             //final String sitePMAcTicketId = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getId().toString();
+
+
+                            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                             final String sitePMAcTicketId = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getId() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getId().toString();
                             final String sitePMAcTicketNo = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketNo() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketNo().toString();
                             final String sitePMAcTicketDate = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketDate() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSitePMAcTicketDate().toString();
@@ -180,49 +187,53 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
 
                             final String acPmTickStatus = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getStatus() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getStatus().toString();
 
-                            // comment for not added checkSystemLocation || acPmTickStatus.equals("Processed")
-                            if (acPmTickStatus.equals("Open") || acPmTickStatus.equals("WIP") || acPmTickStatus.equals("Reassigned")) {
-                                if (acPmTickStatus.equals("Open")) {
 
-                                    int flag = 0;
-                                    if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
-                                        flag = 1;
-                                    } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                        flag = 1;
-                                    } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                        flag = 1;
+                            if (getDaysRemainingForSheduledDate(currentDateTimeString, sheduledDateOfAcPm)) {
+                                // comment for not added checkSystemLocation || acPmTickStatus.equals("Processed")
+                                if (acPmTickStatus.equals("Open") || acPmTickStatus.equals("WIP") || acPmTickStatus.equals("Reassigned")) {
+                                    if (acPmTickStatus.equals("Open")) {
+
+                                        int flag = 0;
+                                        if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
+                                            flag = 1;
+                                        } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                            flag = 1;
+                                        } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                            flag = 1;
+                                        } else {
+                                            flag = 0;
+                                            showToast("Access denied in ticket status " + acPmTickStatus + " mode");
+                                        }
+                                        if (flag == 1) {
+                                            checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
+                                                    sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
+                                                    submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
+                                                    vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
+                                        }
+
                                     } else {
-                                        flag = 0;
-                                        showToast("Access denied in ticket status " + acPmTickStatus + " mode");
-                                    }
-                                    if (flag == 1) {
-                                        checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
-                                                sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
-                                                submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
-                                                vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
+                                        int flag = 0;
+                                        if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
+                                            flag = 1;
+                                        } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                            flag = 1;
+                                        } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                            flag = 1;
+                                        } else {
+                                            flag = 0;
+                                            showToast("Access denied in ticket status " + acPmTickStatus + " mode");
+                                        }
+                                        if (flag == 1) {
+                                            checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
+                                                    sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
+                                                    submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
+                                                    vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
+                                        }
                                     }
 
-                                } else {
-                                    int flag = 0;
-                                    if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
-                                        flag = 1;
-                                    } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                        flag = 1;
-                                    } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                        flag = 1;
-                                    } else {
-                                        flag = 0;
-                                        showToast("Access denied in ticket status " + acPmTickStatus + " mode");
-                                    }
-                                    if (flag == 1) {
-                                        checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
-                                                sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
-                                                submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
-                                                vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
-                                    }
                                 }
-
                             }
+
                         }
 
                     } else {
@@ -236,11 +247,69 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                         }).show();
                     }
                 }
-
-
                 return false;
             }
         });
+    }
+
+    // added by tiger on 17092019 for date validation
+    public boolean getDaysRemainingForSheduledDate(String currentDateTimeString, String sitePmScheduledDate) {
+
+        long requiredDaysForStartWork = 3;
+        long lastDayForStartWork = 0;
+        String newCurrentDate, newSheduledDate;
+        Date newFormatedCurrentDate;
+        Date newFormatedSheduledDate;
+        /* String date="May 1, 2019 6:30:00 PM";*/
+
+        SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormatForSheduleDate = new SimpleDateFormat("dd/MMM/yyyy");
+
+        SimpleDateFormat newSimpleDateFormatForDaysCalculate = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+        try {
+
+            Date currentDate = simpleDateFormatForCurrentDate.parse(currentDateTimeString);
+            Date sheduledDate = simpleDateFormatForSheduleDate.parse(sitePmScheduledDate);
+
+            newCurrentDate = newSimpleDateFormatForDaysCalculate.format(currentDate);
+            newSheduledDate = newSimpleDateFormatForDaysCalculate.format(sheduledDate);
+
+            newFormatedCurrentDate = newSimpleDateFormatForDaysCalculate.parse(newCurrentDate);
+            newFormatedSheduledDate = newSimpleDateFormatForDaysCalculate.parse(newSheduledDate);
+
+            long different = newFormatedSheduledDate.getTime() - newFormatedCurrentDate.getTime();
+
+            long secondsInMilli = 1000;
+            long minutesInMilli = secondsInMilli * 60;
+            long hoursInMilli = minutesInMilli * 60;
+            long daysInMilli = hoursInMilli * 24;
+
+            long elapsedDays = different / daysInMilli;
+            different = different % daysInMilli;
+
+            if (elapsedDays <= requiredDaysForStartWork && elapsedDays >= lastDayForStartWork) {
+                return true;
+            } else if (elapsedDays > requiredDaysForStartWork) {
+                showToast("You have access this ticket only before 3 days ago of " + newSheduledDate + " this date");
+            } else if (elapsedDays < lastDayForStartWork) {
+                showToast("You don't have access to this ticket after " + newSheduledDate + " this date");
+            }
+
+           /* long elapsedHours = different / hoursInMilli;
+            different = different % hoursInMilli;
+
+            long elapsedMinutes = different / minutesInMilli;
+            different = different % minutesInMilli;
+
+            long elapsedSeconds = different / secondsInMilli;*/
+
+        } catch (ParseException e) {
+            Log.d("ParseException", e.getMessage());
+        } catch (java.text.ParseException e) {
+            Log.d("ParseException", e.getMessage());
+        }
+
+        return false;
     }
 
     private void prepareListData() {
@@ -328,6 +397,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
         }
 
     }
+
 
     public void checkSystemLocation(final String customerName, final String circleName, final String stateName, final String ssaName,
                                     final String siteDBId, final String siteId, final String siteName, final String siteType, final String acPmTicketId,

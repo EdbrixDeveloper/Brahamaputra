@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,11 +14,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.InputFilter;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -470,6 +473,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     }
 
     private void decimalEditTextListener() {
+
         mBdTestCellReadingEditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -1487,6 +1491,22 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     }
 
+    private boolean checkLastReadingTakenAt(String lastReadingTakenVal) {
+        if (!lastReadingTakenVal.isEmpty()) {
+            if (Integer.valueOf(lastReadingTakenVal) <= 180) {
+                return true;
+            } else {
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.setText("");
+                showToast("Last Reading Taken At is must be less than and equal to Reding Taken At value");
+                mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal, InputMethodManager.SHOW_IMPLICIT);
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean checkValidationOfArrayFields() {
 
         String TypeOfBattery = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.getText().toString().trim();
@@ -2159,14 +2179,17 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                     @Override
                     public void onPositiveClick() {
                         if (validation() == true) {
-                            if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
-                                setInputDetails();
-                            } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
-                                setInputDetailsForArray();
+                            if(checkLastReadingTakenAt(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.getText().toString().trim()))
+                            {
+                                if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
+                                    setInputDetails();
+                                } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+                                    setInputDetailsForArray();
+                                }
+                                //setInputDetails();
+                                setResult(RESULT_OK);
+                                finish();
                             }
-                            //setInputDetails();
-                            setResult(RESULT_OK);
-                            finish();
                         }
                     }
 
@@ -2196,15 +2219,16 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
             @Override
             public void onPositiveClick() {
                 if (validation() == true) {
-
-                    if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
-                        setInputDetails();
-                    } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
-                        setInputDetailsForArray();
+                    if(checkLastReadingTakenAt(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.getText().toString().trim())){
+                        if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
+                            setInputDetails();
+                        } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+                            setInputDetailsForArray();
+                        }
+                        //setInputDetails();
+                        setResult(RESULT_OK);
+                        finish();
                     }
-                    //setInputDetails();
-                    setResult(RESULT_OK);
-                    finish();
                 }
             }
 

@@ -3,6 +3,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -38,8 +39,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.RoundingMode;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
@@ -159,6 +163,9 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         if (sitePMTicketsList != null) {
+
+                            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
                             final String sitePMTicketId = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getId().toString();
                             final String sitePMTicketNo = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketNo().toString();
 
@@ -178,48 +185,52 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             final String NoOfACprovided = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNoOfACprovided().toString();
                             final String ServoStabilizerStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getServoStabilizerWorkingStatus().toString();
 
-                            if (sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes() != null) {
-                                batteryType = new ArrayList<BatteryType>();
-                                batteryType.addAll(sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes());
-                            }
 
-                            hototicket_Selected_SiteType = siteType;
-                            hototicket_sourceOfPower = sourceOfPower;
-                            sitePm_siteBoundaryStatus = SiteBoundaryStatus;
-                            sitePmNoOfAcAvailableAtSite = NoOfACprovided;
-                            sitePmServoStabilizerWorkingStatus = ServoStabilizerStatus;
+                            if (getDaysRemainingForSheduledDate(currentDateTimeString, sitePmScheduledDate)) {
 
-                            sitePmCustomerName = customerName;
-                            sitePmCircleName = circleName;
-                            sitePmStateName = stateName;
-                            sitePmSiteName = siteName;
-                            sitePmSiteId = siteId;
-                            sitePmSsaName = ssaName;
-
-                            String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
-                            //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();
-
-                            if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
-                                if (sitePMTickStatus.equals("Open")) {
-
-                                    alertDialogManager.Dialog("Conformation", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-                                        @Override
-                                        public void onPositiveClick() {
-                                            checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                    stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
-                                        }
-
-                                        @Override
-                                        public void onNegativeClick() {
-
-                                        }
-                                    }).show();
-
-                                } else {
-                                    checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                            stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
+                                if (sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes() != null) {
+                                    batteryType = new ArrayList<BatteryType>();
+                                    batteryType.addAll(sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes());
                                 }
 
+                                hototicket_Selected_SiteType = siteType;
+                                hototicket_sourceOfPower = sourceOfPower;
+                                sitePm_siteBoundaryStatus = SiteBoundaryStatus;
+                                sitePmNoOfAcAvailableAtSite = NoOfACprovided;
+                                sitePmServoStabilizerWorkingStatus = ServoStabilizerStatus;
+
+                                sitePmCustomerName = customerName;
+                                sitePmCircleName = circleName;
+                                sitePmStateName = stateName;
+                                sitePmSiteName = siteName;
+                                sitePmSiteId = siteId;
+                                sitePmSsaName = ssaName;
+
+                                String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
+                                //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();
+
+                                if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
+                                    if (sitePMTickStatus.equals("Open")) {
+
+                                        alertDialogManager.Dialog("Conformation", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                                            @Override
+                                            public void onPositiveClick() {
+                                                checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                                        stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
+                                            }
+
+                                            @Override
+                                            public void onNegativeClick() {
+
+                                            }
+                                        }).show();
+
+                                    } else {
+                                        checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                                stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
+                                    }
+
+                                }
                             }
                         }
 
@@ -241,6 +252,66 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             }
         });
 
+    }
+
+// added by tiger on 17092019 for date validation
+    public boolean getDaysRemainingForSheduledDate(String currentDateTimeString, String sitePmScheduledDate) {
+
+        long requiredDaysForStartWork = 3;
+        long lastDayForStartWork = 0;
+        String newCurrentDate, newSheduledDate;
+        Date newFormatedCurrentDate;
+        Date newFormatedSheduledDate;
+       /* String date="May 1, 2019 6:30:00 PM";*/
+
+        SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormatForSheduleDate = new SimpleDateFormat("dd/MMM/yyyy");
+
+        SimpleDateFormat newSimpleDateFormatForDaysCalculate = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+        try {
+
+            Date currentDate = simpleDateFormatForCurrentDate.parse(currentDateTimeString);
+            Date sheduledDate = simpleDateFormatForSheduleDate.parse(sitePmScheduledDate);
+
+            newCurrentDate = newSimpleDateFormatForDaysCalculate.format(currentDate);
+            newSheduledDate = newSimpleDateFormatForDaysCalculate.format(sheduledDate);
+
+            newFormatedCurrentDate = newSimpleDateFormatForDaysCalculate.parse(newCurrentDate);
+            newFormatedSheduledDate = newSimpleDateFormatForDaysCalculate.parse(newSheduledDate);
+
+            long different = newFormatedSheduledDate.getTime() - newFormatedCurrentDate.getTime();
+
+            long secondsInMilli = 1000;
+            long minutesInMilli = secondsInMilli * 60;
+            long hoursInMilli = minutesInMilli * 60;
+            long daysInMilli = hoursInMilli * 24;
+
+            long elapsedDays = different / daysInMilli;
+            different = different % daysInMilli;
+
+            if (elapsedDays <= requiredDaysForStartWork && elapsedDays >= lastDayForStartWork) {
+                return true;
+            } else if (elapsedDays > requiredDaysForStartWork) {
+                showToast("You have access this ticket only before 3 days ago of " + newSheduledDate + " this date");
+            } else if (elapsedDays < lastDayForStartWork) {
+                showToast("You don't have access to this ticket after " + newSheduledDate + " this date");
+            }
+
+           /* long elapsedHours = different / hoursInMilli;
+            different = different % hoursInMilli;
+
+            long elapsedMinutes = different / minutesInMilli;
+            different = different % minutesInMilli;
+
+            long elapsedSeconds = different / secondsInMilli;*/
+
+        } catch (ParseException e) {
+            Log.d("ParseException", e.getMessage());
+        } catch (java.text.ParseException e) {
+            Log.d("ParseException", e.getMessage());
+        }
+
+        return false;
     }
 
     private void prepareListData() {
