@@ -266,7 +266,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         String newCurrentDate, newSheduledDate;
         Date newFormatedCurrentDate;
         Date newFormatedSheduledDate;
-        /* String date="May 1, 2019 6:30:00 PM";*/
 
         SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("dd/MMM/yyyy");
         SimpleDateFormat simpleDateFormatForSheduleDate = new SimpleDateFormat("dd/MMM/yyyy");
@@ -296,18 +295,10 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             if (elapsedDays <= requiredDaysForStartWork && elapsedDays >= lastDayForStartWork) {
                 return true;
             } else if (elapsedDays > requiredDaysForStartWork) {
-                showToast("You have access this ticket only before 3 days ago of " + newSheduledDate + " this date");
+                showToast("You have access this ticket only before 3 days ago of Scheduled Date:" + sitePmScheduledDate);
             } else if (elapsedDays < lastDayForStartWork) {
-                showToast("You don't have access to this ticket after " + newSheduledDate + " this date");
+                showToast("You don't have access to this ticket after Scheduled Date:" + sitePmScheduledDate);
             }
-
-           /* long elapsedHours = different / hoursInMilli;
-            different = different % hoursInMilli;
-
-            long elapsedMinutes = different / minutesInMilli;
-            different = different % minutesInMilli;
-
-            long elapsedSeconds = different / secondsInMilli;*/
 
         } catch (ParseException e) {
             Log.d("ParseException", e.getMessage());
