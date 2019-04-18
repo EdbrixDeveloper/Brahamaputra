@@ -8,6 +8,9 @@ import java.io.Serializable;
 
 public class BatteryBankCheckPointsViLionBatteryData implements Serializable {
 
+    @SerializedName("bdTestReadingTakenAt")
+    @Expose
+    private String bdTestReadingTakenAt;
     @SerializedName("bdTestVoltageModuleReading1")
     @Expose
     private String bdTestVoltageModuleReading1;
@@ -53,6 +56,7 @@ public class BatteryBankCheckPointsViLionBatteryData implements Serializable {
     private String bdTestTotalLoadCurrentInAmps;
 
     public BatteryBankCheckPointsViLionBatteryData() {
+        this.bdTestReadingTakenAt = "";
         this.bdTestVoltageModuleReading1 = "";
         this.bdTestVoltageModuleReading2 = "";
         this.bdTestVoltageModuleReading3 = "";
@@ -71,15 +75,17 @@ public class BatteryBankCheckPointsViLionBatteryData implements Serializable {
 
     }
 
-    public BatteryBankCheckPointsViLionBatteryData(
-            String bdTestVoltageModuleReading1, String bdTestVoltageModuleReading2,
-            String bdTestVoltageModuleReading3,
-            String bdTestCurrentModuleReading1, String bdTestCurrentModuleReading2,
-            String bdTestCurrentModuleReading3,
-            String bdTestSocModuleReading1, String bdTestSocModuleReading2, String bdTestSocModuleReading3,
-            String bdTestSohModuleReading1, String bdTestSohModuleReading2, String bdTestSohModuleReading3,
-            String bdTestFloatVoltageInSmpsBusBarAfter30Min, String bdTestTotalLoadCurrentInAmps
+    public BatteryBankCheckPointsViLionBatteryData(String bdTestReadingTakenAt,
+                                                   String bdTestVoltageModuleReading1, String bdTestVoltageModuleReading2,
+                                                   String bdTestVoltageModuleReading3,
+                                                   String bdTestCurrentModuleReading1, String bdTestCurrentModuleReading2,
+                                                   String bdTestCurrentModuleReading3,
+                                                   String bdTestSocModuleReading1, String bdTestSocModuleReading2, String bdTestSocModuleReading3,
+                                                   String bdTestSohModuleReading1, String bdTestSohModuleReading2, String bdTestSohModuleReading3,
+                                                   String bdTestFloatVoltageInSmpsBusBarAfter30Min, String bdTestTotalLoadCurrentInAmps
     ) {
+        this.bdTestReadingTakenAt = bdTestReadingTakenAt;
+
         this.bdTestVoltageModuleReading1 = bdTestVoltageModuleReading1;
         this.bdTestVoltageModuleReading2 = bdTestVoltageModuleReading2;
         this.bdTestVoltageModuleReading3 = bdTestVoltageModuleReading3;
@@ -98,6 +104,14 @@ public class BatteryBankCheckPointsViLionBatteryData implements Serializable {
 
         this.bdTestFloatVoltageInSmpsBusBarAfter30Min = bdTestFloatVoltageInSmpsBusBarAfter30Min;
         this.bdTestTotalLoadCurrentInAmps = bdTestTotalLoadCurrentInAmps;
+    }
+
+    public String getBdTestReadingTakenAt() {
+        return bdTestReadingTakenAt;
+    }
+
+    public void setBdTestReadingTakenAt(String bdTestReadingTakenAt) {
+        this.bdTestReadingTakenAt = bdTestReadingTakenAt;
     }
 
     public String getBdTestVoltageModuleReading1() {

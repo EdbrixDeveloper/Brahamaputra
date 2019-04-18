@@ -98,9 +98,9 @@ public class BatteryBankCheckPointsParentData implements Serializable {
     @SerializedName("bdTestNumberOfBatteryModule")
     @Expose
     private String bdTestNumberOfBatteryModule;
-    @SerializedName("bdTestReadingTakenAt")
+    /*@SerializedName("bdTestReadingTakenAt")
     @Expose
-    private String bdTestReadingTakenAt;
+    private String bdTestReadingTakenAt;*/
 
 
     /*
@@ -197,7 +197,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
         this.bdTestFloatVoltageBeforeBBTest = "";
         this.bdTestSingleModuleRating = "";
         this.bdTestNumberOfBatteryModule = "";
-        this.bdTestReadingTakenAt = "";
+        //this.bdTestReadingTakenAt = "";
         /*this.bdTestVoltageModuleReading1 = "";
         this.bdTestVoltageModuleReading2 = "";
         this.bdTestVoltageModuleReading3 = "";
@@ -225,7 +225,7 @@ public class BatteryBankCheckPointsParentData implements Serializable {
                                             String bdTestSiteName, String bdTestSiteId, String bdTestSsa, String bdTestUserFseNameDesignation,
                                             String bdTestBatteryTestDateTime, String typeOfBattery, String bdTestBatteryBankMake, String bdTestBatteryBankCapacity,
                                             String bdTestNumberOfRectifireModuleWorking, String bdTestSiteLoadOnBatteryInAmps, String bdTestFloatVoltageBeforeBBTest,
-                                            String bdTestSingleModuleRating, String bdTestNumberOfBatteryModule, String bdTestReadingTakenAt,
+                                            String bdTestSingleModuleRating, String bdTestNumberOfBatteryModule, /*String bdTestReadingTakenAt,*/
                                             String bdTestLastReadingTakenAt, String bdTestBase64StringPhotoOfBatteryBank,
                                             String bdTestRemarks, List<BatteryBankCheckPointsChildData> batteryBankCheckPointsChildData,
                                             List<BatteryBankCheckPointsViLionBatteryData> batteryBankCheckPointsViLionBatteryData
@@ -270,7 +270,8 @@ public class BatteryBankCheckPointsParentData implements Serializable {
         this.bdTestFloatVoltageBeforeBBTest = bdTestFloatVoltageBeforeBBTest;
         this.bdTestSingleModuleRating = bdTestSingleModuleRating;
         this.bdTestNumberOfBatteryModule = bdTestNumberOfBatteryModule;
-        this.bdTestReadingTakenAt = bdTestReadingTakenAt;
+        //this.bdTestReadingTakenAt = bdTestReadingTakenAt;
+
         /*this.bdTestVoltageModuleReading1 = bdTestVoltageModuleReading1;
         this.bdTestVoltageModuleReading2 = bdTestVoltageModuleReading2;
         this.bdTestVoltageModuleReading3 = bdTestVoltageModuleReading3;
@@ -521,13 +522,13 @@ public class BatteryBankCheckPointsParentData implements Serializable {
         this.bdTestNumberOfBatteryModule = bdTestNumberOfBatteryModule;
     }
 
-    public String getBdTestReadingTakenAt() {
+    /*public String getBdTestReadingTakenAt() {
         return bdTestReadingTakenAt;
     }
 
     public void setBdTestReadingTakenAt(String bdTestReadingTakenAt) {
         this.bdTestReadingTakenAt = bdTestReadingTakenAt;
-    }
+    }*/
 
     /*public String getBdTestVoltageModuleReading1() {
         return bdTestVoltageModuleReading1;

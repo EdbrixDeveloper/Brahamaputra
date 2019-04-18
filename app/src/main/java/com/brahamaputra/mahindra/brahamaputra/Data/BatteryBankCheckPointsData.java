@@ -168,9 +168,9 @@ public class BatteryBankCheckPointsData implements Serializable {
     @SerializedName("bdTestNumberOfBatteryModule")
     @Expose
     private String bdTestNumberOfBatteryModule;
-    @SerializedName("bdTestReadingTakenAt")
+    /*@SerializedName("bdTestReadingTakenAt")
     @Expose
-    private String bdTestReadingTakenAt;
+    private String bdTestReadingTakenAt;*/
 
     /*@SerializedName("bdTestVoltageModuleReading1")
     @Expose
@@ -394,13 +394,13 @@ public class BatteryBankCheckPointsData implements Serializable {
         this.bdTestNumberOfBatteryModule = bdTestNumberOfBatteryModule;
     }
 
-    public String getBdTestReadingTakenAt() {
+    /*public String getBdTestReadingTakenAt() {
         return bdTestReadingTakenAt;
     }
 
     public void setBdTestReadingTakenAt(String bdTestReadingTakenAt) {
         this.bdTestReadingTakenAt = bdTestReadingTakenAt;
-    }
+    }*/
 
     /*public String getBdTestVoltageModuleReading1() {
         return bdTestVoltageModuleReading1;

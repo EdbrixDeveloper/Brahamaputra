@@ -791,11 +791,17 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     }
                 } else if (!str_noOfBatteryBankAvailableAtSiteVal.isEmpty()) {
                     mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                    int AcCount = Integer.parseInt(str_noOfBatteryBankAvailableAtSiteVal);
+                    if (AcCount > 1) {
+                        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setText("Next Reading");
+                    } else {
+                        mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setText("Finish");
+                    }
                 }
 
             } else {
                 showToast("No previous saved data available");
-                mLinearLayoutContainer.setVisibility(View.GONE);
+                //mLinearLayoutContainer.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1046,7 +1052,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     dataList.setBdTestFloatVoltageBeforeBBTest("");
                     dataList.setBdTestSingleModuleRating("");
                     dataList.setBdTestNumberOfBatteryModule("");
-                    dataList.setBdTestReadingTakenAt("");
+                    //dataList.setBdTestReadingTakenAt("");
                     dataList.setBdTestLastReadingTakenAt("");
                     dataList.setBdTestRemarks("");
 
@@ -1097,7 +1103,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             dd.setBdTestFloatVoltageBeforeBBTest("");
                             dd.setBdTestSingleModuleRating("");
                             dd.setBdTestNumberOfBatteryModule("");
-                            dd.setBdTestReadingTakenAt("");
+                            //dd.setBdTestReadingTakenAt("");
                             dd.setBdTestLastReadingTakenAt("");
                             dd.setBdTestRemarks("");
 
@@ -1160,7 +1166,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         dataList.setBdTestFloatVoltageBeforeBBTest("");
                         dataList.setBdTestSingleModuleRating("");
                         dataList.setBdTestNumberOfBatteryModule("");
-                        dataList.setBdTestReadingTakenAt("");
+                        //dataList.setBdTestReadingTakenAt("");
                         dataList.setBdTestLastReadingTakenAt("");
                         dataList.setBdTestRemarks("");
 

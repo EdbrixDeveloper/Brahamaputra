@@ -45,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
@@ -163,8 +164,11 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         if (sitePMTicketsList != null) {
+                            String myFormat = "dd/MMM/yyyy"; //In which you need put here
+                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                            String currentDateTimeString = sdf.format(new Date());
 
-                            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                            //String currentDateTimeString = DateFormat.getDateInstance(DateFormat.SHORT).format(new Date());
 
                             final String sitePMTicketId = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getId().toString();
                             final String sitePMTicketNo = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketNo().toString();
@@ -254,7 +258,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
     }
 
-// added by tiger on 17092019 for date validation
+    // added by tiger on 17092019 for date validation
     public boolean getDaysRemainingForSheduledDate(String currentDateTimeString, String sitePmScheduledDate) {
 
         long requiredDaysForStartWork = 3;
@@ -262,9 +266,9 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
         String newCurrentDate, newSheduledDate;
         Date newFormatedCurrentDate;
         Date newFormatedSheduledDate;
-       /* String date="May 1, 2019 6:30:00 PM";*/
+        /* String date="May 1, 2019 6:30:00 PM";*/
 
-        SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("dd/MMM/yyyy");
         SimpleDateFormat simpleDateFormatForSheduleDate = new SimpleDateFormat("dd/MMM/yyyy");
 
         SimpleDateFormat newSimpleDateFormatForDaysCalculate = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");

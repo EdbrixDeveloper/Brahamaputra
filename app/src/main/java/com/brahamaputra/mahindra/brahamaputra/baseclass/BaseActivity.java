@@ -363,26 +363,28 @@ public class BaseActivity extends AppCompatActivity {
         if (pmSiteTransactionDetails != null) {
             ///Total 9 Sections Available for QR CODE
             ///Alarm Check Points*
-            if (pmSiteTransactionDetails.getAlarmCheckPoints().getDetailsOfWrmsQrCodeScan() != null)
+            if (pmSiteTransactionDetails.getAlarmCheckPoints().getDetailsOfWrmsQrCodeScan() != null) {
                 if (pmSiteTransactionDetails.getAlarmCheckPoints().getDetailsOfWrmsQrCodeScan().contains(strQrcode)) {
                     return new Object[]{"Alarm Check Points ", true};
                 }
-
+            }
             ///Battery Bank Check Points Pending for discussion*
-            if (pmSiteTransactionDetails.getBatteryBankCheckPointsParentData().getBatteryBankCheckPointsData() != null)
+            if (pmSiteTransactionDetails.getBatteryBankCheckPointsParentData().getBatteryBankCheckPointsData() != null) {
                 for (int i = 0; i < pmSiteTransactionDetails.getBatteryBankCheckPointsParentData().getBatteryBankCheckPointsData().size(); i++) {
                     if (pmSiteTransactionDetails.getBatteryBankCheckPointsParentData().getBatteryBankCheckPointsData().get(i).getDetailsOfBatteryBankQrCodeScan().contains(strQrcode)) {
                         return new Object[]{"Battery Bank Check Points in Reading " + String.valueOf(i + 1), true};
                     }
                 }
+            }
 
             ///DG Check Points*
-            if (pmSiteTransactionDetails.getDgCheckPointsParentData().getDgCheckPointsData() != null)
+            if (pmSiteTransactionDetails.getDgCheckPointsParentData().getDgCheckPointsData() != null) {
                 for (int i = 0; i < pmSiteTransactionDetails.getDgCheckPointsParentData().getDgCheckPointsData().size(); i++) {
                     if (pmSiteTransactionDetails.getDgCheckPointsParentData().getDgCheckPointsData().get(i).getDetailsOfDgQrCodeScan().contains(strQrcode)) {
                         return new Object[]{"DG Check Points in Reading " + String.valueOf(i + 1), true};
                     }
                 }
+            }
 
             ///DG Battery Check Points*
             if (pmSiteTransactionDetails.getDgBatteryCheckPointsParentData().getDgBatteryCheckPointsData() != null)

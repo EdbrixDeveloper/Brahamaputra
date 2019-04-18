@@ -8,6 +8,9 @@ import java.io.Serializable;
 
 public class BatteryBankCheckPointsChildData implements Serializable {
 
+    @SerializedName("bdTestReadingTakenAt")
+    @Expose
+    private String bdTestReadingTakenAt;
     @SerializedName("bdTestCellReading1")
     @Expose
     private String bdTestCellReading1;
@@ -89,6 +92,7 @@ public class BatteryBankCheckPointsChildData implements Serializable {
     private String bdTestTotalLoadCurrentInAmps;
 
     public BatteryBankCheckPointsChildData() {
+        this.bdTestReadingTakenAt = "";
         this.bdTestCellReading1 = "";
         this.bdTestCellReading2 = "";
         this.bdTestCellReading3 = "";
@@ -119,17 +123,18 @@ public class BatteryBankCheckPointsChildData implements Serializable {
 
     }
 
-    public BatteryBankCheckPointsChildData(
-            String bdTestCellReading1, String bdTestCellReading2, String bdTestCellReading3,
-            String bdTestCellReading4, String bdTestCellReading5, String bdTestCellReading6,
-            String bdTestCellReading7, String bdTestCellReading8, String bdTestCellReading9,
-            String bdTestCellReading10, String bdTestCellReading11, String bdTestCellReading12,
-            String bdTestCellReading13, String bdTestCellReading14, String bdTestCellReading15,
-            String bdTestCellReading16, String bdTestCellReading17, String bdTestCellReading18,
-            String bdTestCellReading19, String bdTestCellReading20, String bdTestCellReading21,
-            String bdTestCellReading22, String bdTestCellReading23, String bdTestCellReading24,
-            String bdTestFloatVoltageInSmpsBusBarAfter30Min, String bdTestTotalLoadCurrentInAmps
+    public BatteryBankCheckPointsChildData(String bdTestReadingTakenAt,
+                                           String bdTestCellReading1, String bdTestCellReading2, String bdTestCellReading3,
+                                           String bdTestCellReading4, String bdTestCellReading5, String bdTestCellReading6,
+                                           String bdTestCellReading7, String bdTestCellReading8, String bdTestCellReading9,
+                                           String bdTestCellReading10, String bdTestCellReading11, String bdTestCellReading12,
+                                           String bdTestCellReading13, String bdTestCellReading14, String bdTestCellReading15,
+                                           String bdTestCellReading16, String bdTestCellReading17, String bdTestCellReading18,
+                                           String bdTestCellReading19, String bdTestCellReading20, String bdTestCellReading21,
+                                           String bdTestCellReading22, String bdTestCellReading23, String bdTestCellReading24,
+                                           String bdTestFloatVoltageInSmpsBusBarAfter30Min, String bdTestTotalLoadCurrentInAmps
     ) {
+        this.bdTestReadingTakenAt = bdTestReadingTakenAt;
         this.bdTestCellReading1 = bdTestCellReading1;
         this.bdTestCellReading2 = bdTestCellReading2;
         this.bdTestCellReading3 = bdTestCellReading3;
@@ -156,6 +161,14 @@ public class BatteryBankCheckPointsChildData implements Serializable {
         this.bdTestCellReading24 = bdTestCellReading24;
         this.bdTestFloatVoltageInSmpsBusBarAfter30Min = bdTestFloatVoltageInSmpsBusBarAfter30Min;
         this.bdTestTotalLoadCurrentInAmps = bdTestTotalLoadCurrentInAmps;
+    }
+
+    public String getBdTestReadingTakenAt() {
+        return bdTestReadingTakenAt;
+    }
+
+    public void setBdTestReadingTakenAt(String bdTestReadingTakenAt) {
+        this.bdTestReadingTakenAt = bdTestReadingTakenAt;
     }
 
     public String getBdTestCellReading1() {
