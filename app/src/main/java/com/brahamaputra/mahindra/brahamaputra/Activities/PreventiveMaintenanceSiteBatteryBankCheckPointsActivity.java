@@ -346,7 +346,8 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             batteryBankCheckPointsData.clear();
                         }
                         currentPos = 0;
-                        totalAcCount = 2;
+                        totalAcCount = Integer.parseInt(str_noOfBatteryBankAvailableAtSiteVal);
+                        //totalAcCount = 2;
                         clearFields(currentPos);
 
                         // Clear all field value and hide layout If Non AC or O //
