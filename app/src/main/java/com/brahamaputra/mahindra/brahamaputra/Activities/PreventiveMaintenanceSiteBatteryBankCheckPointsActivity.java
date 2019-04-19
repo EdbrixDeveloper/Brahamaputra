@@ -791,8 +791,9 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                     }
                 } else if (!str_noOfBatteryBankAvailableAtSiteVal.isEmpty()) {
                     mLinearLayoutContainer.setVisibility(View.VISIBLE);
-                    int AcCount = Integer.parseInt(str_noOfBatteryBankAvailableAtSiteVal);
-                    if (AcCount > 1) {
+                    //int AcCount = Integer.parseInt(str_noOfBatteryBankAvailableAtSiteVal);
+                    totalAcCount = Integer.parseInt(str_noOfBatteryBankAvailableAtSiteVal);
+                    if (totalAcCount > 1) {
                         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setText("Next Reading");
                     } else {
                         mPreventiveMaintenanceSiteBatteryBankCheckPointsButtonNextReading.setText("Finish");
