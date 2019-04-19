@@ -153,7 +153,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
     private BatteryBankCheckPointsParentData dataList;
 
-    private int totalAcCount = 0;
+    private int totalAcCount = 2;
     private int currentPos = 0;
 
     MultiSelectDialog multiSelectDialog;
@@ -346,7 +346,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             batteryBankCheckPointsData.clear();
                         }
                         currentPos = 0;
-                        totalAcCount = 0;
+                        totalAcCount = 2;
                         clearFields(currentPos);
 
                         // Clear all field value and hide layout If Non AC or O //
@@ -356,7 +356,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                             //mAirConditionersLinearLayoutNumberOfACInWorkingCondition.setVisibility(View.GONE);
                         } else {
                             str_noOfBatteryBankAvailableAtSiteVal = item.get(position);
-                            totalAcCount = Integer.parseInt(str_noOfBatteryBankAvailableAtSiteVal);
+                            //totalAcCount = Integer.parseInt(str_noOfBatteryBankAvailableAtSiteVal);
                             mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewBattreyBankNumber.setText("Reading: #1");
                             mLinearLayoutContainer.setVisibility(View.VISIBLE);
                             mLinearLayoutMainContainer.setVisibility(View.VISIBLE);
