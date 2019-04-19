@@ -295,7 +295,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             if (elapsedDays <= requiredDaysForStartWork ) {//&& elapsedDays >= lastDayForStartWork
                 return true;
             } else if (elapsedDays > requiredDaysForStartWork) {
-                showToast("You have access this ticket only before 3 days ago of Scheduled Date:" + sitePmScheduledDate);
+                showToast("You can open this ticket only 3 days before Scheduled Date:" + sitePmScheduledDate);
             } /*else if (elapsedDays < lastDayForStartWork) {
                 showToast("You don't have access to this ticket after Scheduled Date:" + sitePmScheduledDate);
             }*/

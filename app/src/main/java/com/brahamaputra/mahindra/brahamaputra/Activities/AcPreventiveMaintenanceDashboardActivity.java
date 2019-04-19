@@ -290,10 +290,10 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
             long elapsedDays = different / daysInMilli;
             different = different % daysInMilli;
 
-            if (elapsedDays <= requiredDaysForStartWork ) {//&& elapsedDays >= lastDayForStartWork
+            if (elapsedDays <= requiredDaysForStartWork) {//&& elapsedDays >= lastDayForStartWork
                 return true;
             } else if (elapsedDays > requiredDaysForStartWork) {
-                showToast("You have access this ticket only before 3 days ago of Scheduled Date:" +  sitePmScheduledDate);
+                showToast("You can open this ticket only 3 days before Scheduled Date:" + sitePmScheduledDate);
             } /*else if (elapsedDays < lastDayForStartWork) {
                 showToast("You don't have access to this ticket after " + newSheduledDate + " this date");
             }*/
