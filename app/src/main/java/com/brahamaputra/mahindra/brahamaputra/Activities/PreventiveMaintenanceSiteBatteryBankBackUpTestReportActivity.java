@@ -1499,7 +1499,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         String TotalLoadCurrentInAmps = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.getText().toString().trim();
 
 
-        if ((bdTestCellReading1.isEmpty() || bdTestCellReading1 == null) && TypeOfBattery.contains("VRLA")) {
+        /*if ((bdTestCellReading1.isEmpty() || bdTestCellReading1 == null) && TypeOfBattery.contains("VRLA")) {
             showToast("Enter Cell Reading 1");
             return false;
         } else if ((bdTestCellReading2.isEmpty() || bdTestCellReading2 == null) && TypeOfBattery.contains("VRLA")) {
@@ -1613,7 +1613,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         } else if (TotalLoadCurrentInAmps.isEmpty() || TotalLoadCurrentInAmps == null) {
             showToast("Enter Total Load Current(in Amps).");
             return false;
-        }
+        }*/
         return true;
     }
 
@@ -2266,7 +2266,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         //data.putExtra("batteryBankCheckPointsParentData", batteryBankCheckPointsData);
 
         data.putExtra("str_pmSiteBbcpTestDoneAs", str_pmSiteBbcpTestDoneAs);
-        data.putExtra(" ", arrayIndex);
+        data.putExtra("arrayIndex", arrayIndex);
         if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
             data.putExtra("batteryBankCheckPointsParentData", batteryBankCheckPointsParentData);
         } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {

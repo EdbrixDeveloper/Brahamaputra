@@ -1189,64 +1189,64 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         } else if (currentPos == (totalCount - 1)) {
                             saveRecords(currentPos);
 
-                            if (checkDuplicationQrCodeNew() == false) {
-                                if (checkValidationonSubmit("onSubmit") == true) {
-                                    //submitDetails();
-                                    if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                        showToast("You are in readable mode");
-                                    } else {
-                                        if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                            /*if (checkDuplicationQrCodeNew() == false) {*/
+                            if (checkValidationonSubmit("onSubmit") == true) {
+                                //submitDetails();
+                                if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                    showToast("You are in readable mode");
+                                } else {
+                                    if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
 
-                                            LocationManager lm = (LocationManager) PreventiveMaintenanceAcTechnicianActivity.this.getSystemService(Context.LOCATION_SERVICE);
-                                            boolean gps_enabled = false;
-                                            boolean network_enabled = false;
+                                        LocationManager lm = (LocationManager) PreventiveMaintenanceAcTechnicianActivity.this.getSystemService(Context.LOCATION_SERVICE);
+                                        boolean gps_enabled = false;
+                                        boolean network_enabled = false;
 
-                                            try {
-                                                gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                                                network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-                                            } catch (Exception ex) {
-                                            }
+                                        try {
+                                            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                                            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                                        } catch (Exception ex) {
+                                        }
 
-                                            if (!gps_enabled && !network_enabled) {
-                                                // notify user
+                                        if (!gps_enabled && !network_enabled) {
+                                            // notify user
+                                            alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
+                                            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                                @Override
+                                                public void onPositiveClick() {
+                                                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                                    PreventiveMaintenanceAcTechnicianActivity.this.startActivity(myIntent);
+                                                }
+                                            }).show();
+                                        } else {
+                                            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
+                                                technicianLat = String.valueOf(gpsTracker.getLatitude());
+                                                technicianLong = String.valueOf(gpsTracker.getLongitude());
+                                                showSettingsAlert();
+
+                                            } else {
+                                                //showToast("Could not detecting location.");
                                                 alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
-                                                alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                                alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                                     @Override
                                                     public void onPositiveClick() {
-                                                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                                        PreventiveMaintenanceAcTechnicianActivity.this.startActivity(myIntent);
+                                                        if (gpsTracker.canGetLocation()) {
+                                                            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
+                                                            Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                                        }
                                                     }
                                                 }).show();
-                                            } else {
-                                                if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                                                    technicianLat = String.valueOf(gpsTracker.getLatitude());
-                                                    technicianLong = String.valueOf(gpsTracker.getLongitude());
-                                                    showSettingsAlert();
-
-                                                } else {
-                                                    //showToast("Could not detecting location.");
-                                                    alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
-                                                    alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                                                        @Override
-                                                        public void onPositiveClick() {
-                                                            if (gpsTracker.canGetLocation()) {
-                                                                //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
-                                                                Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                                                            }
-                                                        }
-                                                    }).show();
-                                                }
                                             }
-                                            //showSettingsAlert();
-                                        } else {
-                                            showToast("Unauthorised ticket");
                                         }
+                                        //showSettingsAlert();
+                                    } else {
+                                        showToast("Unauthorised ticket");
                                     }
-                                    //finish();
                                 }
+                                //finish();
                             }
-
                         }
+
+                        /*}*/
                     }
                 } else {
                     if (currentPos < (totalCount - 1)) {
@@ -1556,15 +1556,19 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         base64StringAcTechnicianQRCodeScan = "";
                         showToast("Cancelled");
                     } else {
+                        if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                            if (checkDuplicationQrCodeNew(result.getContents()) == false) {
+                                base64StringAcTechnicianQRCodeScan = result.getContents();
+                                if (!base64StringAcTechnicianQRCodeScan.isEmpty() && base64StringAcTechnicianQRCodeScan != null) {
+                                    mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.VISIBLE);
+                                    mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
+                                    GetScannedAcQrData();
+                                }
+                            }
+                        }
                         /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
                         boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-                        if (!flagIsDuplicateQRcode) {*/
-                        base64StringAcTechnicianQRCodeScan = result.getContents();
-                        if (!base64StringAcTechnicianQRCodeScan.isEmpty() && base64StringAcTechnicianQRCodeScan != null) {
-                            mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                            mButtonClearQRCodeScanView.setVisibility(View.VISIBLE);
-                            GetScannedAcQrData();
-                        }
+
                         /*} else {
                             base64StringAcTechnicianQRCodeScan = "";
                             showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
@@ -2413,11 +2417,11 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         } else if (metalCladSocketStatus.isEmpty() || metalCladSocketStatus == null) {
             showToast("Select Metal Clad Socket Status");
             return false;
-        } else if (stabilizerMake.isEmpty() || stabilizerMake == null) {
-            showToast("Select Stabilizer Make");
-            return false;
         } else if (stabilizerStatus.isEmpty() || stabilizerStatus == null) {
             showToast("Select Stabilizer Status");
+            return false;
+        } else if (stabilizerMake.isEmpty() || stabilizerMake == null) {
+            showToast("Select Stabilizer Make");
             return false;
         } else if (stabilizerCapacity.isEmpty() || stabilizerCapacity == null) {
             showToast("Select Stabilizer Capacity");
@@ -2456,7 +2460,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Please Take Photo Cooling Coil Before Cleaned");
             return false;
         } else if (coolingCoilPhotoAfterCleaned.isEmpty() || coolingCoilPhotoAfterCleaned == null) {
-            showToast("Please Take Photo sCooling Coil After Cleaned");
+            showToast("Please Take Photo Cooling Coil After Cleaned");
             return false;
         } else if (acCoolingStatus.isEmpty() || acCoolingStatus == null) {
             showToast("Select AC Cooling Status");
@@ -2477,7 +2481,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Select Blower Wheel Condition");
             return false;
         } else if (ifAnyNoiseIndoorMotor.isEmpty() || ifAnyNoiseIndoorMotor == null) {
-            showToast("Select If Any Noise Indoor Motor");
+            showToast("Select If any Noise Indoor Motor");
             return false;
         } else if (outdoorFanMotorCondition.isEmpty() || outdoorFanMotorCondition == null) {
             showToast("Select Outdoor Fan Motor Condition");
@@ -2486,7 +2490,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Select Fan Leaf Condition");
             return false;
         } else if (ifAnyNoiseOutdoorMotor.isEmpty() || ifAnyNoiseOutdoorMotor == null) {
-            showToast("Select If Any Noise Outdoor Motor");
+            showToast("Select If any Noise Outdoor Motor");
             return false;
         } else if (compressorCondition.isEmpty() || compressorCondition == null) {
             showToast("Select Compressor Condition");
@@ -2510,7 +2514,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Enter Set Temperature");
             return false;
         } else if (ifAnyVibrationOfAc.isEmpty() || ifAnyVibrationOfAc == null) {
-            showToast("Select If Any Vibration Of AC");
+            showToast("Select If any Vibration Of AC");
             return false;
         } else if (freeCoolingUnitStatus.isEmpty() || freeCoolingUnitStatus == null) {
             showToast("Select Free Cooling Unit Status");
@@ -2528,7 +2532,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Select Shelter Door Status");
             return false;
         } else if (remark.isEmpty() || remark == null) {
-            showToast("Enter remark For AC Preventive Maintenance Process");
+            showToast("Enter Remark");
             return false;
         } else return true;
     }
@@ -2548,13 +2552,13 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         } else return true;
     }
 
-    private boolean checkDuplicationQrCodeNew() {
+    private boolean checkDuplicationQrCodeNew(String qrCode) {
         for (int i = 0; i < acPreventiveMaintanceProcessData.size(); i++) {
-            for (int j = i + 1; j < acPreventiveMaintanceProcessData.size(); j++) {
+            for (int j = i; j < acPreventiveMaintanceProcessData.size(); j++) {
                 //compare list.get(i) and list.get(j)
-                if (acPreventiveMaintanceProcessData.get(i).getAcPreventiveMaintanceProcessQrCodeScan().toString().equals(acPreventiveMaintanceProcessData.get(j).getAcPreventiveMaintanceProcessQrCodeScan().toString())) {
+                if (acPreventiveMaintanceProcessData.get(i).getAcPreventiveMaintanceProcessQrCodeScan().toString().equals(qrCode)) {//acPreventiveMaintanceProcessData.get(j).getAcPreventiveMaintanceProcessQrCodeScan().toString()
                     int dup_pos = j + 1;
-                    showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
+                    showToast("Scanned QR Code in Reading No: " + ++dup_pos + " was already scanned in reading no:" + (i + 1));
                     return true;
                 }
             }
