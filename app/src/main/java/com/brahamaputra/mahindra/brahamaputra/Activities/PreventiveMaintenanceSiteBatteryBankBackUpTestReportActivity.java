@@ -68,6 +68,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSsaNa
 
 public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extends BaseActivity {
 
+    //https://developer.android.com/training/scheduling/alarms
 
     private static final String TAG = PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.class.getSimpleName();
 
@@ -235,7 +236,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventive_maintenance_site_battery_bank_back_up_test_report);
-        this.setTitle("Battery Bank Back Up Test Report");
+        this.setTitle("Battery Bank Discharge Test");//Battery Bank Back Up Test Report
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         decimalConversion = new DecimalConversion();
         assignViews();
@@ -2188,8 +2189,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                     @Override
                     public void onPositiveClick() {
                         if (validation() == true) {
-                            if(checkLastReadingTakenAt(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.getText().toString().trim()))
-                            {
+                            if (checkLastReadingTakenAt(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.getText().toString().trim())) {
                                 if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
                                     setInputDetails();
                                 } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
@@ -2228,7 +2228,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
             @Override
             public void onPositiveClick() {
                 if (validation() == true) {
-                    if(checkLastReadingTakenAt(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.getText().toString().trim())){
+                    if (checkLastReadingTakenAt(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextLastReadingTaketAtVal.getText().toString().trim())) {
                         if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
                             setInputDetails();
                         } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
@@ -2250,6 +2250,18 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     }
 
     private void submitDetails() {
+
+        /*Intent data = new Intent(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
+        data.putExtra("str_pmSiteBbcpTestDoneAs", str_pmSiteBbcpTestDoneAs);
+        data.putExtra("arrayIndex", arrayIndex);
+        if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
+            data.putExtra("batteryBankCheckPointsParentData", batteryBankCheckPointsParentData);
+        } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+            data.putExtra("batteryBankCheckPointsDataList", BatteryBankCheckPointsDataList);
+        }
+        data.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivityForResult(data, Activity.RESULT_OK);*/
+
         Intent data = new Intent();
         //data.putExtra("batteryBankCheckPointsParentData", batteryBankCheckPointsData);
 
@@ -2261,10 +2273,9 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
             data.putExtra("batteryBankCheckPointsDataList", BatteryBankCheckPointsDataList);
         }
 
-        //data.putExtra("flag", "1");
-
         setResult(Activity.RESULT_OK, data);
         finish();
+        //finishActivity(Activity.RESULT_OK);
     }
 
     public void getBatteryQRCodeList(ArrayList<BatteryType> batteryTypeList) {
@@ -2460,10 +2471,10 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         }*/ else if (LastReadingTakenAt.isEmpty() || LastReadingTakenAt == null) {
             showToast("Enter Last Reading Taken At.");
             return false;
-        } else if (Base64StringPhotoOfBatteryBank.isEmpty() || Base64StringPhotoOfBatteryBank == null) {
+        } /*else if (Base64StringPhotoOfBatteryBank.isEmpty() || Base64StringPhotoOfBatteryBank == null) {
             showToast("Photo of Battery Bank must be required.");
             return false;
-        } else if (Remarks.isEmpty() || Remarks == null) {
+        }*/ else if (Remarks.isEmpty() || Remarks == null) {
             showToast("Enter Remarks");
             return false;
         }

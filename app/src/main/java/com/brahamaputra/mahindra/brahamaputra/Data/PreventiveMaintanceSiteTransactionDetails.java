@@ -2,6 +2,7 @@
 package com.brahamaputra.mahindra.brahamaputra.Data;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -349,26 +350,26 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
         this.dgBatteryCheckPointsParentData = dgBatteryCheckPointsParentData;
     }
 
-    public boolean isAtLeastOneSitePmFormsSubmit() {
+    public int isAtLeastOneSitePmFormsSubmit() {
 
-        if(hototicket_sourceOfPower.equals("Non DG")){
+        if (hototicket_sourceOfPower.equals("Non DG")) {
             dgCheckPointsParentData.setSubmited(2);
             dgBatteryCheckPointsParentData.setSubmited(2);
         }
 
-        if(sitePmNoOfAcAvailableAtSite.equals("0")){
+        if (sitePmNoOfAcAvailableAtSite.equals("0")) {
             acCheckPointParentData.setSubmited(2);
         }
 
-        if(sitePmServoStabilizerWorkingStatus.equals("Not Available")){
+        if (sitePmServoStabilizerWorkingStatus.equals("Not Available")) {
             servoCheckPoints.setSubmited(2);
         }
 
-        if(hototicket_Selected_SiteType.equals("Outdoor")){
+        if (hototicket_Selected_SiteType.equals("Outdoor")) {
             shelterCheckPoints.setSubmited(2);
         }
 
-        if (siteHygenieneGenralSeftyParameter.getSubmited() == 2) {
+        /*if (siteHygenieneGenralSeftyParameter.getSubmited() == 2) {
             return true;
         } else if (acCheckPointParentData.getSubmited() == 2) {
             return true;
@@ -396,8 +397,60 @@ public class PreventiveMaintanceSiteTransactionDetails implements Serializable {
             return true;
         } else if (otherElectricalCheckPoints.getSubmited() == 2) {
             return true;
-        }  else return false;
+        }  else return false;*/
 
+        int flag = 0;
+
+        if (siteHygenieneGenralSeftyParameter.getSubmited() == 0 ||
+                acCheckPointParentData.getSubmited() == 0 ||
+                batteryBankCheckPointsParentData.getSubmited() == 0 ||
+                EarthingCheckPointsParentData.getSubmited() == 0 ||
+                ebMeterBox.getSubmited() == 0 ||
+                dgBatteryCheckPointsParentData.getSubmited() == 0 ||
+                dgCheckPointsParentData.getSubmited() == 0 ||
+                alarmCheckPoints.getSubmited() == 0 ||
+                smpsCheckPointParentData.getSubmited() == 0 ||
+                rectifierModuleCheckPoint.getSubmited() == 0 ||
+                pmsAmfPanelCheckPoints.getSubmited() == 0 ||
+                servoCheckPoints.getSubmited() == 0 ||
+                shelterCheckPoints.getSubmited() == 0 ||
+                otherElectricalCheckPoints.getSubmited() == 0
+                ) {
+            flag = 0;
+        } else if (siteHygenieneGenralSeftyParameter.getSubmited() == 1 ||
+                acCheckPointParentData.getSubmited() == 1 ||
+                batteryBankCheckPointsParentData.getSubmited() == 1 ||
+                EarthingCheckPointsParentData.getSubmited() == 1 ||
+                ebMeterBox.getSubmited() == 1 ||
+                dgBatteryCheckPointsParentData.getSubmited() == 1 ||
+                dgCheckPointsParentData.getSubmited() == 1 ||
+                alarmCheckPoints.getSubmited() == 1 ||
+                smpsCheckPointParentData.getSubmited() == 1 ||
+                rectifierModuleCheckPoint.getSubmited() == 1 ||
+                pmsAmfPanelCheckPoints.getSubmited() == 1 ||
+                servoCheckPoints.getSubmited() == 1 ||
+                shelterCheckPoints.getSubmited() == 1 ||
+                otherElectricalCheckPoints.getSubmited() == 1
+                ) {
+            flag = 1;
+        } else if (siteHygenieneGenralSeftyParameter.getSubmited() == 2 &&
+                acCheckPointParentData.getSubmited() == 2 &&
+                batteryBankCheckPointsParentData.getSubmited() == 2 &&
+                EarthingCheckPointsParentData.getSubmited() == 2 &&
+                ebMeterBox.getSubmited() == 2 &&
+                dgBatteryCheckPointsParentData.getSubmited() == 2 &&
+                dgCheckPointsParentData.getSubmited() == 2 &&
+                alarmCheckPoints.getSubmited() == 2 &&
+                smpsCheckPointParentData.getSubmited() == 2 &&
+                rectifierModuleCheckPoint.getSubmited() == 2 &&
+                pmsAmfPanelCheckPoints.getSubmited() == 2 &&
+                servoCheckPoints.getSubmited() == 2 &&
+                shelterCheckPoints.getSubmited() == 2 &&
+                otherElectricalCheckPoints.getSubmited() == 2
+                ) {
+            flag = 2;
+        }
+        return flag;
     }
 
 

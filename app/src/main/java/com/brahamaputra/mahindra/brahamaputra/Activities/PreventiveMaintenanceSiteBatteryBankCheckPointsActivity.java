@@ -1540,7 +1540,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case MY_FLAG_MODULE_RESULT:
                 /*if (requestCode == MY_FLAG_MODULE_RESULT) {*/
@@ -1554,18 +1554,23 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
                         setInputDetails(0);
                     }*/
 
-                    Bundle b = data.getExtras();
+                    if (data != null) {
 
-                    str_pmSiteBbcpTestDoneAs = (String) b.getSerializable("str_pmSiteBbcpTestDoneAs");
-                    currentPos = b.getInt("arrayIndex", 0);
-                    if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
-                        dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
-                    } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
-                        //dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
-                        batteryBankCheckPointsData = (ArrayList<BatteryBankCheckPointsData>) b.getSerializable("batteryBankCheckPointsDataList");
+                        Bundle b = data.getExtras();
+
+                        str_pmSiteBbcpTestDoneAs = (String) b.getSerializable("str_pmSiteBbcpTestDoneAs");
+                        currentPos = b.getInt("arrayIndex", 0);
+                        if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
+                            dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
+                        } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {
+                            //dataList = (BatteryBankCheckPointsParentData) b.getSerializable("batteryBankCheckPointsParentData");
+                            batteryBankCheckPointsData = (ArrayList<BatteryBankCheckPointsData>) b.getSerializable("batteryBankCheckPointsDataList");
+                        }
+
+                        Log.e("123", "123");
+                    } else {
+                        showToast("Null Data Pass");
                     }
-
-                    Log.e("123", "123");
                 }
                 /*}*/
                 break;

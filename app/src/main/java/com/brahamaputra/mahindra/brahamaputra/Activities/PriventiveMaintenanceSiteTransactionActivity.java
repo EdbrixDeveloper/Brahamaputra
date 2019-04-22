@@ -152,7 +152,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
         // show the button when some condition is true
         shareItem.setVisible(false);
-        if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
+        if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit() == 1 || preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit() == 2) {
             shareItem.setVisible(true);
         }
         return true;
@@ -214,10 +214,10 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
     private void CheckSubmitFlagOfAllSitePmForms() {
         try {
-            if (!preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit()) {
+            if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit() == 1) {
                 hideBusyProgress();
                 alertDialogManager = new AlertDialogManager(PriventiveMaintenanceSiteTransactionActivity.this);
-                alertDialogManager.Dialog("Confirmation", "Some section incomplete.Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                alertDialogManager.Dialog("Confirmation", "Some sections not fully completed.Do you want to submit?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         showSettingsAlert();
@@ -228,7 +228,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
                     }
                 }).show();
-            } else {
+            } else if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit() == 2) {
                 showSettingsAlert();
             }
         } catch (Exception e) {

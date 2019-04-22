@@ -216,7 +216,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                 if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
                                     if (sitePMTickStatus.equals("Open")) {
 
-                                        alertDialogManager.Dialog("Conformation", "Do you want to proceed.", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                                        alertDialogManager.Dialog("Conformation", "Do you want to proceed doing Site PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
                                             @Override
                                             public void onPositiveClick() {
                                                 checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
