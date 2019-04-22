@@ -1125,7 +1125,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfSitePremises);
 
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringUploadPhotoOfSitePremises = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfSitePremisesView.setVisibility(View.VISIBLE);
@@ -1147,7 +1147,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCautionSignBoard);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringCautionSignBoard = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonCautionSignBoardPhotoView.setVisibility(View.VISIBLE);
@@ -1168,7 +1168,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriWarningSignBoard);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringWarningSignBoard = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonWarningSignBoardPhotoView.setVisibility(View.VISIBLE);
@@ -1189,7 +1189,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriDangerSignBoard);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringDangerSignBoard = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonDangerSignBoardPhotoView.setVisibility(View.VISIBLE);
@@ -1210,7 +1210,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);

@@ -951,7 +951,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriRectifierPhotoBeforeCleaning);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringRectifierPhotoBeforeCleaning = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonRectifierPhotoBeforeCleaningView.setVisibility(View.VISIBLE);
@@ -973,7 +973,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriRectifierPhotoAfterCleaning);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringRectifierPhotoAfterCleaning = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonRectifierPhotoAfterCleaningView.setVisibility(View.VISIBLE);
@@ -993,7 +993,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);

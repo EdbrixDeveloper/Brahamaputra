@@ -561,7 +561,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteEbMeterBoxButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);

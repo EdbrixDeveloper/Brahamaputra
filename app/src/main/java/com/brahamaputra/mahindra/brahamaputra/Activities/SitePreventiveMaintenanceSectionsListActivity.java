@@ -86,27 +86,43 @@ public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity 
 
                 switch (position) {
                     case 0:
-                        Intent intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class);
-                        intent.putExtra("batteryType", batteryType);
-                        startActivity(intent);
+                        if (batteryType != null) {
+                            if (batteryType.size() > 0) {
+                                Intent intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class);
+                                intent.putExtra("batteryType", batteryType);
+                                startActivity(intent);
+                            } else {
+                                showToast("Battery Type not found, Please reopen ticket");
+                            }
+                        } else {
+                            showToast("Battery Type not found, Please reopen ticket");
+                        }
                         break;
                     case 1:
-                        intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class);
-                        intent.putExtra("batteryType", batteryType);
-                        startActivity(intent);
+                        if (batteryType != null) {
+                            if (batteryType.size() > 0) {
+                                Intent intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class);
+                                intent.putExtra("batteryType", batteryType);
+                                startActivity(intent);
+                            } else {
+                                showToast("Battery Type not found, Please reopen ticket");
+                            }
+                        } else {
+                            showToast("Battery Type not found, Please reopen ticket");
+                        }
                         //startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAlarmCheckPointsActivity.class));
                         break;
                     case 2:
                         if (batteryType != null) {
                             if (batteryType.size() > 0) {
-                                intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
+                                Intent intent = new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class);
                                 intent.putExtra("batteryType", batteryType);
                                 startActivity(intent);
                             } else {
                                 showToast("Battery Type not available for that site");
                             }
                         } else {
-                            showToast("Battery Type not available for that site");
+                            showToast("Battery Type not found, Please reopen ticket");
                         }
                         //startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                         break;
@@ -117,19 +133,40 @@ public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity 
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteEbMeterBoxActivity.class));
                         break;
                     case 5:
-                        if (!hototicket_sourceOfPower.equals("Non DG")) {
-                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
-
+                        if (hototicket_sourceOfPower != null) {
+                            if (!hototicket_sourceOfPower.equals("Non DG")) {
+                                startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgCheckPointsActivity.class));
+                            } else {
+                                showToast("This site is Non DG");
+                            }
+                        } else {
+                            showToast("Source Of Power not found, Please reopen ticket");
+                            finish();
                         }
                         break;
                     case 6:
-                        if (!hototicket_sourceOfPower.equals("Non DG")) {
-                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
+                        if (hototicket_sourceOfPower != null) {
+                            if (!hototicket_sourceOfPower.equals("Non DG")) {
+                                startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
+                            } else {
+                                showToast("This site is Non DG");
+                            }
+                        } else {
+                            showToast("Source Of Power not found, Please reopen ticket");
+                            finish();
                         }
                         break;
                     case 7:
-                        if (!sitePmNoOfAcAvailableAtSite.equals("0")) {
-                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                        if (sitePmNoOfAcAvailableAtSite != null) {
+                            if (!sitePmNoOfAcAvailableAtSite.equals("0")) {
+                                startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
+                            } else {
+                                showToast("No of AC not available for that site");
+                            }
+
+                        } else {
+                            showToast("No of AC not available for that site");
+                            finish();
                         }
                         break;
                     case 8:
@@ -142,14 +179,29 @@ public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity 
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity.class));
                         break;
                     case 11:
-                        if (!sitePmServoStabilizerWorkingStatus.equals("Not Available")) {
-                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                        if (sitePmServoStabilizerWorkingStatus != null) {
+                            if (!sitePmServoStabilizerWorkingStatus.equals("Not Available")) {
+                                startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteServoCheckPointsActivity.class));
+                            } else {
+                                showToast("Servo Stabilizer Working Status not available for that site");
+                            }
+                        } else {
+                            showToast("Servo Stabilizer Working Status not available for that site");
+                            finish();
                         }
                         break;
                     case 12:
-                        if (!hototicket_Selected_SiteType.equals("Outdoor")) {
-                            startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                        if (hototicket_Selected_SiteType != null) {
+                            if (!hototicket_Selected_SiteType.equals("Outdoor")) {
+                                startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteShelterCheckPointsActivity.class));
+                            } else {
+                                showToast("Site Type of that site is outdoor");
+                            }
+                        } else {
+                            showToast("Site Type not available for that site");
+                            finish();
                         }
+
                         break;
                     case 13:
                         startActivity(new Intent(SitePreventiveMaintenanceSectionsListActivity.this, PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity.class));

@@ -2085,7 +2085,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriPhotoOfBatteryBank);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringPhotoOfBatteryBank = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonPhotoOfBatteryBankView.setVisibility(View.VISIBLE);
@@ -2254,7 +2254,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         //data.putExtra("batteryBankCheckPointsParentData", batteryBankCheckPointsData);
 
         data.putExtra("str_pmSiteBbcpTestDoneAs", str_pmSiteBbcpTestDoneAs);
-        data.putExtra("arrayIndex", arrayIndex);
+        data.putExtra(" ", arrayIndex);
         if (str_pmSiteBbcpTestDoneAs.equals("Combined")) {
             data.putExtra("batteryBankCheckPointsParentData", batteryBankCheckPointsParentData);
         } else if (str_pmSiteBbcpTestDoneAs.equals("Individual")) {

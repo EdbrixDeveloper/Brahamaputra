@@ -1580,7 +1580,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriFilterCleanedBeforePhoto);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringFilterCleanedBeforePhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceAcTechnicianButtonFilterCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -1602,7 +1602,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriFilterCleanedAfterPhoto);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringFilterCleanedAfterPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceAcTechnicianButtonFilterCleanedAfterPhotoView.setVisibility(View.VISIBLE);
@@ -1623,7 +1623,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCondenserCoilCleanedBeforePhoto);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringCondenserCoilCleanedBeforePhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -1644,7 +1644,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCondenserCoilCleanedAfterPhoto);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringCondenserCoilCleanedAfterPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceAcTechnicianButtonCondenserCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);
@@ -1665,7 +1665,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCoolingCoilCleanedBeforePhoto);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringCoolingCoilCleanedBeforePhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedBeforePhotoView.setVisibility(View.VISIBLE);
@@ -1686,7 +1686,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriCoolingCoilCleanedAfterPhoto);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringCoolingCoilCleanedAfterPhoto = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceAcTechnicianButtonCoolingCoilCleanedAfterPhotoView.setVisibility(View.VISIBLE);

@@ -755,7 +755,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriAcFiltersBeforeCleaning);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringTakePhotoOfAcFiltersBeforeCleaning = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersBeforeCleaningView.setVisibility(View.VISIBLE);
@@ -777,7 +777,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriAcFiltersAfterCleaning);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringTakePhotoOfAcFiltersAfterCleaning = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfAcFiltersAfterCleaningView.setVisibility(View.VISIBLE);
@@ -798,7 +798,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriTemperature);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringTakePhotoOfTemperature = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
@@ -818,7 +818,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         try {
                             Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUriUploadPhotoOfRegisterFault);
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 30, stream);
+                            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                             byte[] bitmapDataArray = stream.toByteArray();
                             base64StringUploadPhotoOfRegisterFault = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
                             mPreventiveMaintenanceSiteAcCheckPointsButtonUploadPhotoOfRegisterFaultView.setVisibility(View.VISIBLE);
