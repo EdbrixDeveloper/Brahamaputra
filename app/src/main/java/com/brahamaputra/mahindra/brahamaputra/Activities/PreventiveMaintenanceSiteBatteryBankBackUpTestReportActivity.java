@@ -2,6 +2,7 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.InputFilter;
 import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +38,7 @@ import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsViLionB
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Services.NotifyService;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -52,9 +55,12 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmBatteryBankType;
@@ -229,6 +235,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     public static int submitMenu = 0;
     int setBtn = 0;
     ArrayList<String> StringListReadingTakenAt;
+
+    private boolean flagForCallNotification;
 
 
     @Override
@@ -1415,8 +1423,20 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
 
+                        /*int minute = 2 * currentPos;
+                        Calendar now = Calendar.getInstance();
+                        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+                        now.add(Calendar.MINUTE, minute);
+
+                        String newTime = String.valueOf(df.format(now.getTime()));
+
+                        sessionManager.updateSessionBBTestReportTime(newTime);
+                        sessionManager.updateSessionBBTestReportCount(String.valueOf(currentPos));
+                        startService(new Intent(getApplicationContext(), NotifyService.class));*/
+
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
+                        // stopService(new Intent(getApplicationContext(), NotifyService.class));
                         //setInputDetails();
 
                         //if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
@@ -1427,7 +1447,8 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
                     }
                 }
-                if (!mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.getText().toString().trim().contains("Set")) {
+                if (!mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.getText().toString().trim().contains("Set"))
+                {
                     submitMenu = 0;
                     invalidateOptionsMenu();
                 }
@@ -1435,6 +1456,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         });
 
     }
+
 
     private boolean checkLastReadingTakenAt(String lastReadingTakenVal) {
         if (!lastReadingTakenVal.isEmpty()) {

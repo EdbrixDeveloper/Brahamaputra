@@ -75,8 +75,8 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
     private String checkOutLong = "0.0";
     private String checkOutBatteryData = "0";
 
-    public double siteLongitude = 0;
-    public double siteLatitude = 0;
+    public double siteLongitude = 0.0;
+    public double siteLatitude = 0.0;
 
     private AlertDialogManager alertDialogManager;
     private PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
@@ -187,10 +187,25 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                     }).show();
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        checkOutLat = String.valueOf(gpsTracker.getLatitude());
-                        checkOutLong = String.valueOf(gpsTracker.getLongitude());
+                        //calculate area distance
+                        siteLatitude = Double.valueOf(sessionManager.getSessionSiteLat());
+                        siteLongitude = Double.valueOf(sessionManager.getSessionSiteLng());
+                        if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(),siteLatitude , siteLongitude) < 0.0310686) {///// ( 0.0310686 MILE == 50 Meter )
+                            Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
 
-                        CheckSubmitFlagOfAllSitePmForms();
+                            checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                            checkOutLong = String.valueOf(gpsTracker.getLongitude());
+
+                            CheckSubmitFlagOfAllSitePmForms();
+                        } else {
+                            Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
+                            alertDialogManager.Dialog("Alert", "User not in area of site", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                                @Override
+                                public void onPositiveClick() {
+                                    //nothing to do
+                                }
+                            }).show();
+                        }
 
                     } else {
                         //showToast("Could not detecting location.");

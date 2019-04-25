@@ -69,6 +69,13 @@ public class SitePMTicket {
     @Expose
     private String servoStabilizerWorkingStatus;
 
+    @SerializedName("SiteLongitude")
+    @Expose
+    private String SiteLongitude;
+    @SerializedName("SiteLatitude")
+    @Expose
+    private String SiteLatitude;
+
     public String getId() {
         return id;
     }
@@ -219,6 +226,22 @@ public class SitePMTicket {
 
     public void setServoStabilizerWorkingStatus(String servoStabilizerWorkingStatus) {
         this.servoStabilizerWorkingStatus = servoStabilizerWorkingStatus;
+    }
+
+    public String getSiteLongitude() {
+        return SiteLongitude;
+    }
+
+    public void setSiteLongitude(String siteLongitude) {
+        SiteLongitude = siteLongitude;
+    }
+
+    public String getSiteLatitude() {
+        return SiteLatitude;
+    }
+
+    public void setSiteLatitude(String siteLatitude) {
+        SiteLatitude = siteLatitude;
     }
 
 }

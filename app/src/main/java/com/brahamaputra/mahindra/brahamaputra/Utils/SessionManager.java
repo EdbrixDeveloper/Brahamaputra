@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
+import java.sql.Time;
+
 /**
  * Wrapper for managing session data.
  *
@@ -36,6 +38,11 @@ public class SessionManager {
     private static final String PREFS_SESSION_MobileNo = "MobileNo";
     private static final String PREFS_SESSION_USER_TICKET_ID = "SessionUserTicketId";
     private static final String PREFS_SESSION_USER_TICKET_NAME = "SessionUserTicketName";
+    private static final String PREFS_SESSION_USER_LAT = "SessionUserLat";
+    private static final String PREFS_SESSION_USER_LNG = "SessionUserLng";
+    private static final String PREFS_SESSION_USER_TIME = "SessionUserTime";
+
+    private static final String PREFS_SESSION_BB_TEST_REPORT_COUNT = "SessionBBTestReportCount";
 
     private static final String PREF_SESSION_WALKTHROUGH_SKIP_KEY = "wlkSkip";
     private static final String PREF_SESSION_APPUPDATE_SKIP_KEY = "AppUpdateSkip";
@@ -207,6 +214,23 @@ public class SessionManager {
         return this.sharedPrefs.getString(PREFS_SESSION_User_Customer, "");
     }
 
+    public String getSessionSiteLat() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_LAT, "");
+    }
+
+    public String getSessionSiteLng() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_LNG, "");
+    }
+
+    public String getSessionBBTestReportArrayCount() {
+        return this.sharedPrefs.getString(PREFS_SESSION_BB_TEST_REPORT_COUNT, "");
+    }
+
+    public String getSessionBBTestReportTime() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_TIME, "");
+    }
+
+
     /*  public ArrayList<UserData> getLoggedUsersList() {
         try {
             return (ArrayList<UserData>) ObjectSerializer.deserialize(this.sharedPrefs.getString(PREFS_SESSION_LOGGEDUSERSLIST, ObjectSerializer.serialize(new ArrayList<UserData>())));
@@ -236,6 +260,8 @@ public class SessionManager {
      *
      * @param username the username to save.
      */
+
+
     public void updateSessionUsername(String username) {
 
         Editor editor = this.sharedPrefs.edit();
@@ -525,6 +551,49 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void updateSessionUserLat(String lat) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((lat != null) && (lat.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_LAT, lat);
+        } else {
+            editor.remove(PREFS_SESSION_USER_LAT);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionUserLng(String lng) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((lng != null) && (lng.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_LNG, lng);
+        } else {
+            editor.remove(PREFS_SESSION_USER_LNG);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionBBTestReportCount(String count) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((count != null) && (count.length() > 0)) {
+            editor.putString(PREFS_SESSION_BB_TEST_REPORT_COUNT, count);
+        } else {
+            editor.remove(PREFS_SESSION_BB_TEST_REPORT_COUNT);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionBBTestReportTime(String time) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((time != null) && (time.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_TIME, time);
+        } else {
+            editor.remove(PREFS_SESSION_USER_TIME);
+        }
+        editor.commit();
+    }
 
     /**
      * Updates the saved session credentials.

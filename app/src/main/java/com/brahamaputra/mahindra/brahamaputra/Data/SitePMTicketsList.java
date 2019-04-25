@@ -25,6 +25,7 @@ public class SitePMTicketsList {
 
     @SerializedName("Error")
     @Expose
+
     private Error error;
 
     public Integer getSuccess() {
@@ -74,7 +75,5 @@ public class SitePMTicketsList {
     public void setError(Error error) {
         this.error = error;
     }
-
-
 
 }
