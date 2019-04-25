@@ -77,31 +77,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
     public static final int RESULT_PM_SITE_SUBMIT = 257;
     private TextView txtNoTicketFound;
 
-
-    /*private LinearLayout mLinearLayoutStatus;
-    private ProgressWheel mWheelprogress;
-    private LinearLayout mLinearLayoutContainer1;
-    private LinearLayout mPriventiveMaintenanceSiteLinearLayoutTicket1;
-    private LinearLayout mPriventiveMaintenanceSiteLinearLayoutTicket2;
-    private TextView mAcPreventiveMaintenanceSectionTextViewName;
-    private TextView mAcPreventiveMaintenanceSectionTextViewNo;
-    private ImageView mAcPreventiveMaintenanceSectionImageViewStatus;
-    private LinearLayout mLinearLayoutContainer2;
-    private TextView mAcPreventiveMaintenanceSectionTextViewName2;
-    private TextView mAcPreventiveMaintenanceSectionTextViewNo2;
-    private ImageView mAcPreventiveMaintenanceSectionImageViewStatus2;
-    private TextView mTextViewHotoName;
-    private TextView mTextViewSiteID;
-    private TextView mTextViewSiteName;
-    private TextView mTextViewSiteSSA;
-    private TextView mTextViewSiteAddress;
-    private TextView mTextViewHotoName1;
-    private TextView mTextViewSiteID1;
-    private TextView mTextViewSiteName1;
-    private TextView mTextViewSiteSSA1;
-    private TextView mTextViewSiteAddress1;*/
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -292,7 +267,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             long elapsedDays = different / daysInMilli;
             different = different % daysInMilli;
 
-            if (elapsedDays <= requiredDaysForStartWork ) {//&& elapsedDays >= lastDayForStartWork
+            if (elapsedDays <= requiredDaysForStartWork) {//&& elapsedDays >= lastDayForStartWork
                 return true;
             } else if (elapsedDays > requiredDaysForStartWork) {
                 showToast("You can open this ticket only 3 days before Scheduled Date:" + sitePmScheduledDate);
@@ -318,7 +293,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
-            Log.i(PreventiveMaintenanceDashboard.class.getName(), Constants.hototTicketList + "\n\n" + jo.toString());
+            Log.i(PreventiveMaintenanceDashboard.class.getName(), Constants.sitePmTicketList + "\n\n" + jo.toString());
 
             GsonRequest<SitePMTicketsList> getAssignAvailabilityLearnersListRequest = new GsonRequest<>(Request.Method.POST, Constants.sitePmTicketList, jo.toString(), SitePMTicketsList.class,
                     new Response.Listener<SitePMTicketsList>() {
@@ -391,7 +366,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.refresh_icon_menu, menu);
+        menuInflater.inflate(R.menu.refresh_icon_menu_site_pm, menu);
         return true;
     }
 
@@ -403,6 +378,11 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 return true;
             case R.id.menuRefresh:
                 prepareListData();
+                return true;
+            case R.id.menuReport:
+                //showToast("Hi...");
+                //prepareListData();
+                startActivity(new Intent(PreventiveMaintenanceDashboard.this, PreventiveMaintenanceSiteReportDashboard.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

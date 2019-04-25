@@ -270,8 +270,8 @@
         <activity
             android:name=".Activities.PriventiveMaintenanceSiteTransactionActivity"
             android:label="Priventive Maintenance Site Transaction"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activities.PreventiveMaintenanceSiteHygieneGeneralSaftyActivity"
             android:label="Preventive Maintenance Site Hygiene General Safty"
@@ -338,11 +338,16 @@
         <activity android:name=".Activities.ElectricBillPaymentActivity" />
         <activity android:name=".Activities.SafteyTipsActivity" />
         <activity android:name=".Activities.ListGroupActivity" />
-        <activity android:name=".Activities.ItemListActivity"></activity>
-
-        <activity android:name=".Activities.EbSiteElectrificationList"></activity>
+        <activity android:name=".Activities.ItemListActivity" />
+        <activity android:name=".Activities.EbSiteElectrificationList" />
         <activity android:name=".Activities.EbSiteElectrificationTransactionActivity" />
-        <activity android:name=".Activities.EbSiteElectrificationElectricConnectionActivity"></activity>
+        <activity android:name=".Activities.EbSiteElectrificationElectricConnectionActivity" />
+        <activity
+            android:name=".Activities.PreventiveMaintenanceSiteReportDashboard"
+            android:label="Preventive Maintenance Site Report Dashboard"
+            android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>
