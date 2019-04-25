@@ -190,14 +190,14 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                         //calculate area distance
                         siteLatitude = Double.valueOf(sessionManager.getSessionSiteLat());
                         siteLongitude = Double.valueOf(sessionManager.getSessionSiteLng());
-                        if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(),siteLatitude , siteLongitude) < 0.0310686) {///// ( 0.0310686 MILE == 50 Meter )
-                            Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
+                        /*if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(),siteLatitude , siteLongitude) < 0.0310686) {///// ( 0.0310686 MILE == 50 Meter )
+                            Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));*/
 
                             checkOutLat = String.valueOf(gpsTracker.getLatitude());
                             checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
                             CheckSubmitFlagOfAllSitePmForms();
-                        } else {
+                        /*} else {
                             Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
                             alertDialogManager.Dialog("Alert", "User not in area of site", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                 @Override
@@ -205,7 +205,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                                     //nothing to do
                                 }
                             }).show();
-                        }
+                        }*/
 
                     } else {
                         //showToast("Could not detecting location.");

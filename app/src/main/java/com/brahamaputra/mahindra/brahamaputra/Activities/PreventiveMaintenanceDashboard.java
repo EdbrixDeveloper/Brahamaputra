@@ -145,8 +145,8 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         //calculate area distance
-                        if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.0310686) {///// ( 0.0310686 MILE == 50 Meter )
-                            Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
+                        /*if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude) < 0.0310686) {///// ( 0.0310686 MILE == 50 Meter )
+                            Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));*/
 
 
                             if (sitePMTicketsList != null) {
@@ -227,7 +227,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                 }
                             }
 
-                        } else {
+                        /*} else {
                             Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
                             alertDialogManager.Dialog("Conformation", "User not in area of site", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                 @Override
@@ -235,7 +235,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                                     //nothing to do
                                 }
                             }).show();
-                        }
+                        }*/
 
 
                     } else {
