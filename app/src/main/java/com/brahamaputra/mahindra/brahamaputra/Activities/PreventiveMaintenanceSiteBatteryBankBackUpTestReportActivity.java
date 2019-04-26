@@ -1447,8 +1447,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
                     }
                 }
-                if (!mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.getText().toString().trim().contains("Set"))
-                {
+                if (!mPreventiveMaintenanceSiteBatteryBankBackUpTestReportButtonNextReading.getText().toString().trim().contains("Set")) {
                     submitMenu = 0;
                     invalidateOptionsMenu();
                 }
@@ -1521,7 +1520,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         String TotalLoadCurrentInAmps = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.getText().toString().trim();
 
 
-        /*if ((bdTestCellReading1.isEmpty() || bdTestCellReading1 == null) && TypeOfBattery.contains("VRLA")) {
+        if ((bdTestCellReading1.isEmpty() || bdTestCellReading1 == null) && TypeOfBattery.contains("VRLA")) {
             showToast("Enter Cell Reading 1");
             return false;
         } else if ((bdTestCellReading2.isEmpty() || bdTestCellReading2 == null) && TypeOfBattery.contains("VRLA")) {
@@ -1635,7 +1634,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         } else if (TotalLoadCurrentInAmps.isEmpty() || TotalLoadCurrentInAmps == null) {
             showToast("Enter Total Load Current(in Amps).");
             return false;
-        }*/
+        }
         return true;
     }
 

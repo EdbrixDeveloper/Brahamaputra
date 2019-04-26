@@ -149,6 +149,38 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             }
         });
 
+        mWheelprogress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showToast("Clicked on total site filter");
+            }
+        });
+
+        mLinearLayoutContainer1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showToast("Clicked on done site filter");
+            }
+        });
+
+        mLinearLayoutContainer2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showToast("Clicked on pending site filter");
+            }
+        });
+
+        mLinearLayoutContainer3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showToast("Clicked on total site pm filter");
+            }
+        });
+
         mPmSiteListListViewSiteList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
