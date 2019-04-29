@@ -65,6 +65,8 @@ public class Constants {
 
     public static String androidDeviceid;
 
+    public static final String ACTION_START_SERVICE ="startService";
+
     // TODO Change it to your web domain
     public final static String WEB_DOMAIN = "http://mahindradeveb2-api-env.srumj83md3.ap-south-1.elasticbeanstalk.com/";
     // TODO Change it to your APP Key

@@ -2,6 +2,8 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -38,7 +40,10 @@ import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsViLionB
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.R;
+import com.brahamaputra.mahindra.brahamaputra.Services.AlarmReceiver;
+import com.brahamaputra.mahindra.brahamaputra.Services.AlarmSoundService;
 import com.brahamaputra.mahindra.brahamaputra.Services.NotifyService;
+import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -203,6 +208,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 
+
     private AlertDialogManager alertDialogManager;
 
     private String userId = "";
@@ -236,7 +242,10 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     int setBtn = 0;
     ArrayList<String> StringListReadingTakenAt;
 
-    private boolean flagForCallNotification;
+    //Pending intent instance
+    private PendingIntent pendingIntent;
+    //Alarm Request Code
+    private static final int ALARM_REQUEST_CODE = 133;
 
 
     @Override
@@ -258,6 +267,11 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         batteryType = new ArrayList<BatteryType>();
 
         StringListReadingTakenAt = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_pmSiteBatteryBankBackUpTestReport_readingTakenAt)));
+
+        /* Retrieve a PendingIntent that will perform a broadcast */ //for local notification
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE, alarmIntent, 0);
+        ////////////////////////////////////////////////////////////////////////
 
         initCombo();
         setListner();
@@ -1423,20 +1437,18 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                         //move to Next reading
                         displayDGCheckRecords(currentPos);
 
-                        /*int minute = 2 * currentPos;
-                        Calendar now = Calendar.getInstance();
-                        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
-                        now.add(Calendar.MINUTE, minute);
+                        //new code for local notification
+                        int getInterval = 30 * currentPos;
+                        //check interval should not be empty and 0
+                        if (!(getInterval == 0))
+                            //finally trigger alarm manager
+                            triggerAlarmManager(getTimeInterval(getInterval));
 
-                        String newTime = String.valueOf(df.format(now.getTime()));
-
-                        sessionManager.updateSessionBBTestReportTime(newTime);
-                        sessionManager.updateSessionBBTestReportCount(String.valueOf(currentPos));
-                        startService(new Intent(getApplicationContext(), NotifyService.class));*/
 
                     } else if (currentPos == (totalAcCount - 1)) {
                         saveDGCheckRecords(currentPos);
-                        // stopService(new Intent(getApplicationContext(), NotifyService.class));
+                        stopAlarmManager();
+
                         //setInputDetails();
 
                         //if (checkValidationOnChangeNoOfDgBatteryAvailable(mPreventiveMaintenanceSiteBatteryBankCheckPointsTextViewNoOfBatteryBankAvailableAtSiteVal.getText().toString().trim(), "onSubmit") == true) {
@@ -1455,6 +1467,45 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         });
 
     }
+
+    //get time interval to trigger alarm manager
+    private int getTimeInterval(int getInterval) {
+        int interval = getInterval;
+        return interval * 60;////convert minute into seconds
+    }
+
+    //Trigger alarm manager with entered time interval
+    public void triggerAlarmManager(int alarmTriggerTime) {
+        // get a Calendar object with current time
+        Calendar cal = Calendar.getInstance();
+        // add alarmTriggerTime seconds to the calendar object
+        cal.add(Calendar.SECOND, alarmTriggerTime);
+        long millis = cal.getTimeInMillis();
+        AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);//get instance of alarm manager
+        manager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);//set alarm manager with entered timer by converting into milliseconds
+
+        Toast.makeText(this, "Alarm Set for " + alarmTriggerTime + " seconds.", Toast.LENGTH_SHORT).show();
+
+    }
+
+    //Stop/Cancel alarm manager
+    public void stopAlarmManager() {
+
+        AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);//cancel the alarm manager of the pending intent
+
+
+        //Stop the Media Player Service to stop sound
+       stopService(new Intent(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, AlarmSoundService.class));
+
+        //remove the notification from notification tray
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NotifyService.NOTIFICATION_ID);
+
+        Toast.makeText(this, "Alarm Canceled/Stop by User.", Toast.LENGTH_SHORT).show();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     private boolean checkLastReadingTakenAt(String lastReadingTakenVal) {
