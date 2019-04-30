@@ -558,7 +558,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
             showToast("Select Shelter Leakage");
             return false;
         } else if (hatchPlateEntrySealed.isEmpty() || hatchPlateEntrySealed == null) {
-            showToast("Select Hatch Plate Entry Sealed");
+            showToast("Select Hatch Plate Entry sealed");
             return false;
         } else if (shelterFloorStatus.isEmpty() || shelterFloorStatus == null) {
             showToast("Select Shelter Floor Status");

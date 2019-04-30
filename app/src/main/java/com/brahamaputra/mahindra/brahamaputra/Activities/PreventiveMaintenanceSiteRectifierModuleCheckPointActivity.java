@@ -721,13 +721,13 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         String typeOfFault = mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewTypeOfFaultVal.getText().toString().trim();
 
         if (totalNoOFRectifierModule.isEmpty() || totalNoOFRectifierModule == null) {
-            showToast("Select No OF Rectifier Module Available At Site");
+            showToast("Select No of Rectifier Module available at site");
             return false;
         } else if (noOfModulesWorking.isEmpty() || noOfModulesWorking == null) {
-            showToast("Select No Of Modules Working");
+            showToast("Select No of Modules Working");
             return false;
         } else if (noOfFaultyModulesInSite.isEmpty() || noOfFaultyModulesInSite == null) {
-            showToast("Select No Of Faulty Modules In Site");
+            showToast("Select No of Faulty Modules in Site");
             return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");

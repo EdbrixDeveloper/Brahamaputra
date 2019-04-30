@@ -584,7 +584,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
             showToast("Select Servo Working Status");
             return false;
         } else if (anyBypassInSvs.isEmpty() || anyBypassInSvs == null) {
-            showToast("Select Any Bypass In SVS");
+            showToast("Select Any Bypass in SVS");
             return false;
         } else if (svsEarthingStatus.isEmpty() || svsEarthingStatus == null) {
             showToast("Select SVS Earthing Status");

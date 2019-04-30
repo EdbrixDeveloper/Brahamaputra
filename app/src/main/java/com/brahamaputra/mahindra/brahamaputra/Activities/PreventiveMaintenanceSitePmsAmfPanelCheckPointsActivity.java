@@ -829,10 +829,10 @@ public class PreventiveMaintenanceSitePmsAmfPanelCheckPointsActivity extends Bas
             showToast("Please Scan QR Code");
             return false;
         } else if (siteInAutoManual.isEmpty() || siteInAutoManual == null) {
-            showToast("Select Site In Auto/Manual");
+            showToast("Select Site in Auto/Manual");
             return false;
         } else if (anyLooseConnectionBypass.isEmpty() || anyLooseConnectionBypass == null) {
-            showToast("Select Any Loose Connection/Bypass");
+            showToast("Select Any loose connection/Bypass");
             return false;
         } else if (pmsAmfPiuEarthingStatus.isEmpty() || pmsAmfPiuEarthingStatus == null) {
             showToast("Select PMS/AMF/PIU Earthing Status");

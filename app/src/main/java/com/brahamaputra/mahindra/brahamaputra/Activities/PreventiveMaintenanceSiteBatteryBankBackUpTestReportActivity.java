@@ -77,7 +77,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteN
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteId;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSsaName;
 
-public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extends BaseActivity {
+public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extends BaseActivity {
 
     //https://developer.android.com/training/scheduling/alarms
 
@@ -2400,19 +2400,19 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         String TypeOfBattery = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.getText().toString().trim();
 
         //if (mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewBatteryTypeVal.getText().toString().equals("Li-Ion")) {
-        String VoltageModuleReading1 = mBdTestVoltageModuleReading1EditText1.getText().toString().trim();
-        String CurrentModuleReading1 = mBdTestCurrentModuleReading1EditText1.getText().toString().trim();
-        String SocModuleReading1 = mBdTestSocModuleReadingEditText1.getText().toString().trim();
-        String SohModuleReading1 = mBdTestSohModuleReadingEditText1.getText().toString().trim();
-        String VoltageModuleReading2 = mBdTestVoltageModuleReading1EditText2.getText().toString().trim();
-        String CurrentModuleReading2 = mBdTestCurrentModuleReading1EditText2.getText().toString().trim();
-        String SocModuleReading2 = mBdTestSocModuleReadingEditText2.getText().toString().trim();
-        String SohModuleReading2 = mBdTestSohModuleReadingEditText2.getText().toString().trim();
-        String VoltageModuleReading3 = mBdTestVoltageModuleReading1EditText3.getText().toString().trim();
-        String CurrentModuleReading3 = mBdTestCurrentModuleReading1EditText3.getText().toString().trim();
-        String SocModuleReading3 = mBdTestSocModuleReadingEditText3.getText().toString().trim();
-        String SohModuleReading3 = mBdTestSohModuleReadingEditText3.getText().toString().trim();
-        //}
+
+        //}String VoltageModuleReading1 = mBdTestVoltageModuleReading1EditText1.getText().toString().trim();
+        //        String CurrentModuleReading1 = mBdTestCurrentModuleReading1EditText1.getText().toString().trim();
+        //        String SocModuleReading1 = mBdTestSocModuleReadingEditText1.getText().toString().trim();
+        //        String SohModuleReading1 = mBdTestSohModuleReadingEditText1.getText().toString().trim();
+        //        String VoltageModuleReading2 = mBdTestVoltageModuleReading1EditText2.getText().toString().trim();
+        //        String CurrentModuleReading2 = mBdTestCurrentModuleReading1EditText2.getText().toString().trim();
+        //        String SocModuleReading2 = mBdTestSocModuleReadingEditText2.getText().toString().trim();
+        //        String SohModuleReading2 = mBdTestSohModuleReadingEditText2.getText().toString().trim();
+        //        String VoltageModuleReading3 = mBdTestVoltageModuleReading1EditText3.getText().toString().trim();
+        //        String CurrentModuleReading3 = mBdTestCurrentModuleReading1EditText3.getText().toString().trim();
+        //        String SocModuleReading3 = mBdTestSocModuleReadingEditText3.getText().toString().trim();
+        //        String SohModuleReading3 = mBdTestSohModuleReadingEditText3.getText().toString().trim();
 
         String FloatVoltageInSmpsBusBarAfter30Min = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageInSmpsBusBarAfter30Min.getText().toString().trim();
         String TotalLoadCurrentInAmps = mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextTotalLoadCurrentInAmps.getText().toString().trim();

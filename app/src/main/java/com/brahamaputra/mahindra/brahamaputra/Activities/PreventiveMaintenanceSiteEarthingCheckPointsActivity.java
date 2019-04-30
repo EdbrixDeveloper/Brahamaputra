@@ -787,14 +787,14 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
             showToast("Select Lighting Arrester Status");
             return false;
         } else if (noOfEarthPitValue.isEmpty() || noOfEarthPitValue == null) {
-            showToast("Select No of Earth Pit");
+            showToast("Select Number of Earth PIT");
             return false;
         } else if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
-            showToast("Select Number of Earth Pit Visible");
+            showToast("Select Number of Earth PIT Visible");
             return false;
         } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {
             if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
-                showToast("Select Number of Earth Pit Visible");
+                showToast("Select Number of Earth PIT Visible");
                 return false;
             } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
                 showToast("Select Earth Pit Visible is less than or equal to Earth Pit");

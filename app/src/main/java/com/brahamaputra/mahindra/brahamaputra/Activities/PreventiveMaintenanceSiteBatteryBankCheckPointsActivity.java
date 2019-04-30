@@ -1237,7 +1237,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         String selectBatteryBank = mPreventiveMaintenanceSiteBatteryBankCheckPointsSelectBatteryBankVal.getText().toString().trim();
 
         if (NoOfBatteryBankAvailableAtSiteVal.isEmpty() || NoOfBatteryBankAvailableAtSiteVal == null) {
-            showToast("Select No of Battery Bank Available");
+            showToast("Select No of Battery Bank available at Site");
             return false;
         } else if ((batteryBankDischargeTest.isEmpty() || batteryBankDischargeTest == null) && (sitePmBatteryBankType.contains("Li-Ion") || sitePmBatteryBankType.contains("VRLA")) && !testDoneAs.equals("Individual")) {
             showToast("Select Battery Bank Discharge Test");
@@ -1250,9 +1250,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
             return false;
         }*/ else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
-            return false;
-        } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
-            showToast("Select Types Of Fault");
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
             showToast("Select Types Of Fault");
@@ -1289,10 +1286,10 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         } else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Scan QR Code");
             return false;
-        } else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
+        } /*else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Scan QR Code");
             return false;
-        } else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
+        } */else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
             showToast("Select Strip Bolt Tightness As Per Torque");
             return false;
         } else if (petroleumJellyApplied.isEmpty() || petroleumJellyApplied == null) {

@@ -246,16 +246,16 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
         String lightsInSitePremisesBulkHead = mPreventiveMaintenanceSiteOtherElectricalCheckPointsTextViewLightsInSitePremisesOrBulkHeadVal.getText().toString().trim();
 
         if (dcEnergyMeterStatus.isEmpty() || dcEnergyMeterStatus == null) {
-            showToast("Select DC Energy Meter Status");
+            showToast("Select DC Energy Meter status");
             return false;
         } else if (aviationLamp.isEmpty() || aviationLamp == null) {
             showToast("Select Aviation Lamp");
             return false;
         } else if (lightsInsideTheShelter.isEmpty() || lightsInsideTheShelter == null) {
-            showToast("Select Lights Inside The Shelter");
+            showToast("Select Lights Inside the Shelter");
             return false;
         } else if (lightsInSitePremisesBulkHead.isEmpty() || lightsInSitePremisesBulkHead == null) {
-            showToast("Select Lights In Site Premises Bulk Head");
+            showToast("Select Lights in Site Premises/Bulk head");
             return false;
         } else return true;
     }
