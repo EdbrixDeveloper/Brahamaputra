@@ -538,6 +538,95 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
     }
 
+    private void prepareListDataOnChangedAndSelection1(String type/*, String DoneSites, String PendingSites, String TotalSitePm*/) {
+        try {
+            showBusyProgress();
+            JSONObject jo = new JSONObject();
+
+            jo.put("UserId", sessionManager.getSessionUserId());
+            jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+
+            jo.put("Type", type);
+            /*jo.put("DoneSites", DoneSites);
+            jo.put("PendingSites", PendingSites);
+            jo.put("TotalSitePm", TotalSitePm);
+            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
+            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
+
+
+            Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmTicketList + "\n\n" + jo.toString());
+
+            GsonRequest<SitePMReportListData> getSitePMReportListData = new GsonRequest<>(Request.Method.POST, Constants.sitePmTicketList, jo.toString(), SitePMReportListData.class,
+                    new Response.Listener<SitePMReportListData>() {
+                        @Override
+                        public void onResponse(@NonNull SitePMReportListData response) {
+                            hideBusyProgress();
+                            if (response.getError() != null) {
+                                showToast(response.getError().getErrorMessage());
+                            } else {
+                                if (response.getSuccess() == 1) {
+                                    sitePMReportListData = response;
+                                    if (sitePMReportListData.getSitePMReportSummary() != null) {
+
+                                        mAcPreventiveMaintenanceSectionTextViewDoneSites.setText(sitePMReportListData.getSitePMReportSummary().getDoneSites() == null || sitePMReportListData.getSitePMReportSummary().getDoneSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getDoneSites().toString());
+                                        mAcPreventiveMaintenanceSectionTextViewPendingSites.setText(sitePMReportListData.getSitePMReportSummary().getPendingSites() == null || sitePMReportListData.getSitePMReportSummary().getPendingSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getPendingSites().toString());
+                                        mPreventiveMaintenanceSiteReportTextViewTotalSitePm1.setText(sitePMReportListData.getSitePMReportSummary().getTotalSitePm() == null || sitePMReportListData.getSitePMReportSummary().getTotalSitePm().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getTotalSitePm().toString());
+
+
+                                        /*double per = 0.0;
+                                        double circlePer = 0.0;
+                                        int roundPer = 0;
+                                        per = sitePMReportListData.getSitePMTicketSummary().getPercentage();
+                                        circlePer = (3.6) * Double.valueOf(per);
+                                        roundPer = (int) Math.round(circlePer);
+
+                                        DecimalFormat df = new DecimalFormat("###.##");
+                                        df.setRoundingMode(RoundingMode.FLOOR);
+                                        per = new Double(df.format(per));*/
+
+
+                                        mWheelprogress.setPercentage(360);//roundPer
+                                        mWheelprogress.setStepCountText(String.valueOf(sitePMReportListData.getSitePMReportSummary().getTotalSites()));//per
+
+
+                                    }
+                                    if (sitePMReportListData.getSitePMReportTicketsDates() != null && sitePMReportListData.getSitePMReportTicketsDates().size() > 0) {
+                                        txtNoTicketFound.setVisibility(View.GONE);
+                                        mPmSiteListListViewSiteList.setVisibility(View.VISIBLE);
+                                        pmSiteReportExpListAdapter = new PmSiteReportExpListAdapter(PreventiveMaintenanceSiteReportDashboard.this, sitePMReportListData);
+                                        mPmSiteListListViewSiteList.setAdapter(pmSiteReportExpListAdapter);
+                                        for (int i = 0; i < sitePMReportListData.getSitePMReportTicketsDates().size(); i++) {
+                                            mPmSiteListListViewSiteList.expandGroup(i);
+                                        }
+                                    } else {
+                                        mPmSiteListListViewSiteList.setVisibility(View.GONE);
+                                        txtNoTicketFound.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            }
+                        }
+                    }, new Response.ErrorListener()
+
+            {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    hideBusyProgress();
+
+                }
+            });
+            getSitePMReportListData.setRetryPolicy(Application.getDefaultRetryPolice());
+            getSitePMReportListData.setShouldCache(false);
+            Application.getInstance().
+
+                    addToRequestQueue(getSitePMReportListData, "SitePMReportListData");
+
+        } catch (JSONException e) {
+            hideBusyProgress();
+            showToast("Something went wrong. Please try again later.");
+        }
+
+    }
+
     private void prepareListDataOnSelectionTotalSites() {
         try {
             showBusyProgress();
