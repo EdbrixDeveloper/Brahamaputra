@@ -2430,7 +2430,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Select Stabilizer Working Status");
             return false;
         } else if (inputAcVoltage.isEmpty() || inputAcVoltage == null) {
-            showToast("Select Input Ac Voltage");
+            showToast("Select Input AC Voltage");
             return false;
         } else if (acEarthingStatus.isEmpty() || acEarthingStatus == null) {
             showToast("Select AC Earthing Status");
@@ -2481,7 +2481,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Select Blower Wheel Condition");
             return false;
         } else if (ifAnyNoiseIndoorMotor.isEmpty() || ifAnyNoiseIndoorMotor == null) {
-            showToast("Select If any Noise Indoor Motor");
+            showToast("Select If any noise Indoor Motor");
             return false;
         } else if (outdoorFanMotorCondition.isEmpty() || outdoorFanMotorCondition == null) {
             showToast("Select Outdoor Fan Motor Condition");
@@ -2490,13 +2490,13 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Select Fan Leaf Condition");
             return false;
         } else if (ifAnyNoiseOutdoorMotor.isEmpty() || ifAnyNoiseOutdoorMotor == null) {
-            showToast("Select If any Noise Outdoor Motor");
+            showToast("Select If any noise Outdoor Motor");
             return false;
         } else if (compressorCondition.isEmpty() || compressorCondition == null) {
-            showToast("Select Compressor Condition");
+            showToast("Select Compressor condition");
             return false;
         } else if (compCapacitorCondition.isEmpty() || compCapacitorCondition == null) {
-            showToast("Select Comp Capacitor Condition");
+            showToast("Select Comp-Capacitor Condition");
             return false;
         } else if (controllerCondition.isEmpty() || controllerCondition == null) {
             showToast("Select Controller Condition");
@@ -2520,10 +2520,10 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             showToast("Select Free Cooling Unit Status");
             return false;
         } else if (ifFreeCoolingAvailableWorkingStatus.isEmpty() || ifFreeCoolingAvailableWorkingStatus == null) {
-            showToast("Select If Free Cooling Available Working Status");
+            showToast("Select If Free Cooling Available, Working Status");
             return false;
         } else if (waterLeakageIfAny.isEmpty() || waterLeakageIfAny == null) {
-            showToast("Select Water Leakage If Any");
+            showToast("Select Water Leakage if Any");
             return false;
         } else if (acCabinateStatus.isEmpty() || acCabinateStatus == null) {
             showToast("Select AC Cabinate Status");

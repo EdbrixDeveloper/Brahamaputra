@@ -670,10 +670,10 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
             showToast("Select Register Fault");
             return false;
         } else if ((typeOfFault.isEmpty() || typeOfFault == null) && registerFault.equals("Yes")) {
-            showToast("Select Type Of Fault");
+            showToast("Select Type of Fault");
             return false;
         } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
-            showToast("Upload Photo Of Register Fault");
+            showToast("Upload Photo of Register Fault");
             return false;
         } else return true;
     }

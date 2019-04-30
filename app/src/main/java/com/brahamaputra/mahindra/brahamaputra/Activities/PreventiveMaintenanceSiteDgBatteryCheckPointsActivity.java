@@ -586,7 +586,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
             showToast("Select DG Battery Water Available");
             return false;
         } else if (petroleumJellyToDgBatteryTerminal.isEmpty() || petroleumJellyToDgBatteryTerminal == null) {
-            showToast("Select Petroleum Jelly To DG Battery Terminal");
+            showToast("Select Petroleum Jelly to DG Battery Terminal");
             return false;
         } else if (dgBatteryCharger.isEmpty() || dgBatteryCharger == null) {
             showToast("Select DG Battery Charger");
@@ -766,7 +766,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
 
         if (NoOfDgBatteryAvailable.isEmpty() || NoOfDgBatteryAvailable == null) {
-            showToast("Select No of DG Battery Available at site");
+            showToast("Select No of DG Battery available at site");
             return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
@@ -775,7 +775,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
             showToast("Select Type of Fault");
             return false;
         } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
-            showToast("Upload Photo Of Register Fault");
+            showToast("Upload Photo of Register Fault");
             return false;
         } else if ((dgBatteryCheckPointsData.size() != Integer.valueOf(NoOfDgBatteryAvailable) && methodFlag.equals("onSubmit"))) {
             showToast("Complete the all readings.");//as a mentioned AC in no of AC provided

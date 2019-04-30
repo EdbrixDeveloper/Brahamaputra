@@ -792,17 +792,6 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         } else if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
             showToast("Select Number of Earth PIT Visible");
             return false;
-        } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {
-            if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
-                showToast("Select Number of Earth PIT Visible");
-                return false;
-            } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
-                showToast("Select Earth Pit Visible is less than or equal to Earth Pit");
-                return false;
-            }  /*else if ((earthingCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
-                showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
-                return false;
-            }*/ else return true;
         } else if ((executeEarthPitTest.isEmpty() || executeEarthPitTest == null) && methodFlag.equals("onSubmit")) {
             showToast("Select Execute Earth Pit Test");
             return false;
@@ -845,6 +834,17 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         } else if ((((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && (registerFault.equals("Yes"))) && methodFlag.equals("onSubmit"))) {
             showToast("Upload Photo Of Type Of Fault");
             return false;
+        } else if (Integer.valueOf(noOfEarthPitValueVisible) > 0) {
+            if (noOfEarthPitValueVisible.isEmpty() || noOfEarthPitValueVisible == null) {
+                showToast("Select Number of Earth Pit Visible");
+                return false;
+            } else if (Integer.valueOf(noOfEarthPitValueVisible) > Integer.valueOf(noOfEarthPitValue)) {
+                showToast("Select Earth Pit Visible is less than or equal to Earth Pit");
+                return false;
+            }  /*else if ((earthingCheckPointsData.size() != Integer.valueOf(noOfEarthPitValue) && methodFlag.equals("onSubmit"))) {
+                showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
+                return false;
+            }*/ else return true;
         } else return true;
 
     }

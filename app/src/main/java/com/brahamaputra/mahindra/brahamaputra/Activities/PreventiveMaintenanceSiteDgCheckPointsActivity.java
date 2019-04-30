@@ -402,7 +402,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             showToast("Enter DG HMR Reading");
             return false;
         } else if (base64StringTakePhotoOfDgHmr.isEmpty() || base64StringTakePhotoOfDgHmr == null) {
-            showToast("Please Take A Photo Of DG HMR ");
+            showToast("Please Take Photo of DG HMR ");
             return false;
         } else if (dgWorkingCondition.isEmpty() || dgWorkingCondition == null) {
             showToast("Select DG Working Condition");
@@ -621,7 +621,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
             showToast("Select Type of Fault");
             return false;
         } else if ((base64StringUploadPhotoOfRegisterFault.isEmpty() || base64StringUploadPhotoOfRegisterFault == null) && registerFault.equals("Yes")) {
-            showToast("Upload Photo Of Register Fault");
+            showToast("Upload Photo of Register Fault");
             return false;
         } else if ((dgCheckPointsData.size() != Integer.valueOf(NoOfDgAvailable) && methodFlag.equals("onSubmit"))) {
             showToast("Complete the all readings.");//as a mentioned AC in no of AC provided
