@@ -1442,7 +1442,12 @@ public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity exten
                         //check interval should not be empty and 0
                         if (!(getInterval == 0))
                             //finally trigger alarm manager
-                            triggerAlarmManager(getTimeInterval(getInterval));
+                            try{
+                                triggerAlarmManager(getTimeInterval(getInterval));//
+                            } catch (Exception e){
+                                Log.e("Exception :",e.getMessage());
+                            }
+
 
 
                     } else if (currentPos == (totalAcCount - 1)) {
@@ -1470,21 +1475,32 @@ public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity exten
 
     //get time interval to trigger alarm manager
     private int getTimeInterval(int getInterval) {
-        int interval = getInterval;
-        return interval * 60;////convert minute into seconds
+        int newInterval = 0;
+        try{
+            int interval = getInterval;
+            newInterval = interval /** 60*/;////convert minute into seconds
+        }catch (Exception e){
+            Log.e("getTimeInterval", e.getMessage());
+        }
+        return newInterval;
     }
 
     //Trigger alarm manager with entered time interval
     public void triggerAlarmManager(int alarmTriggerTime) {
         // get a Calendar object with current time
-        Calendar cal = Calendar.getInstance();
-        // add alarmTriggerTime seconds to the calendar object
-        cal.add(Calendar.SECOND, alarmTriggerTime);
-        long millis = cal.getTimeInMillis();
-        AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);//get instance of alarm manager
-        manager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);//set alarm manager with entered timer by converting into milliseconds
+        try{
+            Calendar cal = Calendar.getInstance();
+            // add alarmTriggerTime seconds to the calendar object
+            cal.add(Calendar.SECOND, alarmTriggerTime);
+            long millis = cal.getTimeInMillis();
+            AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);//get instance of alarm manager
+            manager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);//set alarm manager with entered timer by converting into milliseconds
 
-        Toast.makeText(this, "Alarm Set for " + alarmTriggerTime + " seconds.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Alarm Set for " + alarmTriggerTime + " seconds.", Toast.LENGTH_SHORT).show();
+            //showToast("Alarm Set for " + alarmTriggerTime + " seconds.");
+        }catch (Exception e) {
+            Log.e("triggerAlarmManager", e.getMessage());
+        }
 
     }
 

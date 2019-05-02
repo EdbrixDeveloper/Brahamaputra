@@ -119,10 +119,12 @@ public class NotifyService extends IntentService {
                     "Channel human readable title",
                     NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
+        } else {
+
         }
 
-        //final int SIMPLE_NOTIFICATION_RANDOM_ID = new Random().nextInt(851) + 90;
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+        final int SIMPLE_NOTIFICATION_RANDOM_ID = new Random().nextInt(851) + 90;
+        notificationManager.notify(SIMPLE_NOTIFICATION_RANDOM_ID, notificationBuilder.build());
 
     }
 }

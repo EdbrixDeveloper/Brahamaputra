@@ -304,31 +304,7 @@
 
             </LinearLayout>
 
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/app_min_padding"
-                android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryTestDateTime"
-                    style="@style/FontStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Battery Test Date &amp; Time" />
-
-                <TextView
-                    android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_textView_batteryTestDateTimeVal"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="0.6"
-                    android:imeOptions="actionNext"
-                    android:paddingTop="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="16sp" />
-
-            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -698,8 +674,7 @@
                             android:hint=" Voltage 1"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestCurrentModuleReading1EditText1"
-                        android:nextFocusLeft="@+id/bdTestVoltageModuleReading1EditText1"-->
+
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText1"
                             android:layout_width="match_parent"
@@ -712,8 +687,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
 
-                        <!--android:nextFocusDown="@+id/bdTestSocModuleReadingEditText1"
-                        android:nextFocusLeft="@+id/bdTestCurrentModuleReading1EditText1"-->
+
 
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText1"
@@ -726,8 +700,7 @@
                             android:hint=" SOC 1"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestSohModuleReadingEditText1"
-                        android:nextFocusLeft="@+id/bdTestSocModuleReadingEditText1"-->
+
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText1"
                             android:layout_width="match_parent"
@@ -739,8 +712,7 @@
                             android:hint=" SOH 1"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestVoltageModuleReading1EditText2"
-                        android:nextFocusLeft="@+id/bdTestSohModuleReadingEditText1"-->
+
                     </TableRow>
 
                     <TableRow
@@ -770,8 +742,6 @@
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
 
-                        <!--android:nextFocusDown="@+id/bdTestCurrentModuleReading1EditText2"
-                        android:nextFocusLeft="@+id/bdTestVoltageModuleReading1EditText2"-->
 
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText2"
@@ -784,8 +754,7 @@
                             android:hint=" Current 2"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestSocModuleReadingEditText2"
-                        android:nextFocusLeft="@+id/bdTestCurrentModuleReading1EditText2"-->
+
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText2"
                             android:layout_width="match_parent"
@@ -797,8 +766,7 @@
                             android:hint=" SOC 2"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestSohModuleReadingEditText2"
-                        android:nextFocusLeft="@+id/bdTestSocModuleReadingEditText2"-->
+
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText2"
                             android:layout_width="match_parent"
@@ -810,8 +778,7 @@
                             android:hint=" SOH 2"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestVoltageModuleReading1EditText3"
-                        android:nextFocusLeft="@+id/bdTestSohModuleReadingEditText2"-->
+
                     </TableRow>
 
                     <TableRow
@@ -840,8 +807,7 @@
                             android:hint=" Voltage 3"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestCurrentModuleReading1EditText3"
-                        android:nextFocusLeft="@+id/bdTestVoltageModuleReading1EditText3"-->
+
                         <EditText
                             android:id="@+id/bdTestCurrentModuleReading1EditText3"
                             android:layout_width="match_parent"
@@ -853,8 +819,7 @@
                             android:hint=" Current 3"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/bdTestSocModuleReadingEditText3"
-                        android:nextFocusLeft="@+id/bdTestCurrentModuleReading1EditText3"-->
+
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText3"
                             android:layout_width="match_parent"
@@ -867,8 +832,7 @@
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
 
-                        <!--android:nextFocusDown="@+id/bdTestSohModuleReadingEditText3"
-                        android:nextFocusLeft="@+id/bdTestSocModuleReadingEditText3"-->
+
 
                         <EditText
                             android:id="@+id/bdTestSohModuleReadingEditText3"
@@ -881,8 +845,7 @@
                             android:hint=" SOH 3"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-                        <!--android:nextFocusDown="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_editText_floatVoltageInSmpsBusBarAfter30Min"
-                        android:nextFocusLeft="@+id/bdTestSohModuleReadingEditText3"-->
+
                     </TableRow>
                 </TableLayout>
 
@@ -1340,7 +1303,7 @@
                         android:textColor="@color/whitesmoke"
                         android:textSize="18sp"
                         android:visibility="invisible" />
-                    <!--android:textAllCaps="false"-->
+
                     <Button
                         android:id="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -1350,12 +1313,15 @@
                         android:layout_marginTop="@dimen/app_normal_margin"
                         android:layout_weight="1"
                         android:background="@color/red"
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp"
+                        android:text="Next Reading"
+                      />
+                    <!--
                         android:nextFocusDown="@+id/bdTestCellReadingEditText1"
                         android:nextFocusLeft="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
-                        android:text="Next Reading"
-                        android:textColor="@color/whitesmoke"
-                        android:textSize="18sp" />
-                    <!--android:textAllCaps="false"-->
+                         -->
+
 
                 </LinearLayout>
 
@@ -1368,16 +1334,6 @@
                 android:layout_marginBottom="@dimen/app_min_margin"
                 android:background="#a40404" />
 
-            <!--Float Voltage in SMPS Bus Bar after 30 Minute
-            Total Load Current ( in Amps)-->
-
-
-            <!---->
-            <!---->
-
-
-            <!---->
-            <!---->
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
