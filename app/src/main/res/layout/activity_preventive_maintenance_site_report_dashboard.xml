@@ -229,11 +229,31 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout_titleNames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout_Status"
+        android:background="#ffa726"
+        android:orientation="vertical"
+        android:visibility="gone"><!--dce775-->
+
+        <TextView
+            android:id="@+id/textView_sitePmReportTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TITLE"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <ExpandableListView
         android:id="@+id/pmSiteList_listView_siteList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout_Status"
+        android:layout_below="@+id/linearLayout_titleNames"
         tools:listheader="@layout/item_site_pm_report_list_seprator"
         tools:listitem="@layout/item_site_pm_report_list" />
 

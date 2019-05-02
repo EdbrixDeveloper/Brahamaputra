@@ -19,6 +19,8 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.List;
 
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmReportType;
+
 public class PmSiteReportExpListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
@@ -66,7 +68,8 @@ public class PmSiteReportExpListAdapter extends BaseExpandableListAdapter {
         textView_reportSiteId.setText("Site ID: " + SitePMReportTicket.getSiteId());
         textView_reportLastTicketNo.setText("Last Ticket No: " + SitePMReportTicket.getSitePMLastTicketNo());
         textView_reportSiteSSA.setText("SSA: " + SitePMReportTicket.getSiteSSA());
-        if (SitePMReportTicket.getSitePMTicketLastDoneDate().isEmpty() && SitePMReportTicket.getSitePMTicketNextDueDate().isEmpty()) {
+        if (sitePmReportType.equals("1")) {
+            textView_reportLastTicketNo.setVisibility(View.GONE);
             textView_reportLastDoneDate.setVisibility(View.GONE);
             textView_reportNextDueDate.setVisibility(View.GONE);
         }

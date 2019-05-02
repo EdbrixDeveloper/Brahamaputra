@@ -61,7 +61,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteN
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSsaName;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmStateName;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePm_siteBoundaryStatus;
-
+import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmReportType;
 
 public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
@@ -82,6 +82,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
     private TextView mPreventiveMaintenanceSiteReportTextViewTotalSitePm2;
     private ExpandableListView mPmSiteListListViewSiteList;
     private TextView mTxtNoTicketFound;
+    LinearLayout LinearLayoutTitleNames;
+    TextView TextViewSitePmReportTitle;
 
     String str_pmSiteMonthVal = "";
     String str_pmSiteYearVal = "";
@@ -128,6 +130,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         mPreventiveMaintenanceSiteReportTextViewTotalSitePm1 = (TextView) findViewById(R.id.preventiveMaintenanceSiteReport_textView_totalSitePm1);
         txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
         txtNoTicketFound.setVisibility(View.GONE);
+        LinearLayoutTitleNames = (LinearLayout) findViewById(R.id.linearLayout_titleNames);
+        TextViewSitePmReportTitle = (TextView) findViewById(R.id.textView_sitePmReportTitle);
 
         alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteReportDashboard.this);
         sessionManager = new SessionManager(PreventiveMaintenanceSiteReportDashboard.this);
@@ -139,10 +143,17 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         //prepareListData();
         prepareSitePmReportListData();
 
+        //default calling first time
+        LinearLayoutTitleNames.setVisibility(View.VISIBLE);
+        TextViewSitePmReportTitle.setText("Total Site PM");
+        prepareListDataOnChangedAndSelection("4");
+
         mPreventiveMaintenanceSiteReportButtonFiltersMonthYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                LinearLayoutTitleNames.setVisibility(View.GONE);
+                TextViewSitePmReportTitle.setText("Title");
                 prepareSitePmReportListData();
                 //showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
 
@@ -153,7 +164,9 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         mWheelprogress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LinearLayoutTitleNames.setVisibility(View.VISIBLE);
+                TextViewSitePmReportTitle.setText("Total Sites");
+                sitePmReportType = "1";
                 prepareListDataOnChangedAndSelection("1");
                 //showToast("Clicked on total site filter");
             }
@@ -162,8 +175,11 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         mLinearLayoutContainer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LinearLayoutTitleNames.setVisibility(View.VISIBLE);
+                TextViewSitePmReportTitle.setText("Done Sites");
+                sitePmReportType = "2";
                 prepareListDataOnChangedAndSelection("2");
+
                 //showToast("Clicked on done site filter");
             }
         });
@@ -171,7 +187,9 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         mLinearLayoutContainer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LinearLayoutTitleNames.setVisibility(View.VISIBLE);
+                TextViewSitePmReportTitle.setText("Pending Sites");
+                sitePmReportType = "3";
                 prepareListDataOnChangedAndSelection("3");
                 //showToast("Clicked on pending site filter");
             }
@@ -180,7 +198,9 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         mLinearLayoutContainer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LinearLayoutTitleNames.setVisibility(View.VISIBLE);
+                TextViewSitePmReportTitle.setText("Total Site PM");
+                sitePmReportType = "4";
                 prepareListDataOnChangedAndSelection("4");
                 //showToast("Clicked on total site pm filter");
             }
@@ -503,6 +523,11 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
                                         }
                                     }*/
                                     else {
+                                        mAcPreventiveMaintenanceSectionTextViewDoneSites.setText("0");
+                                        mAcPreventiveMaintenanceSectionTextViewPendingSites.setText("0");
+                                        mPreventiveMaintenanceSiteReportTextViewTotalSitePm1.setText("0");
+                                        mWheelprogress.setPercentage(0);
+                                        mWheelprogress.setStepCountText("0");//per
                                         mPmSiteListListViewSiteList.setVisibility(View.GONE);
                                         txtNoTicketFound.setVisibility(View.VISIBLE);
                                     }
@@ -550,9 +575,9 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
 
 
-            Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmTicketList + "\n\n" + jo.toString());
+            Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmReportDashboardData + "\n\n" + jo.toString());
 
-            GsonRequest<SitePMReportListData> getSitePMReportListData = new GsonRequest<>(Request.Method.POST, Constants.sitePmTicketList, jo.toString(), SitePMReportListData.class,
+            GsonRequest<SitePMReportListData> getSitePMReportListData = new GsonRequest<>(Request.Method.POST, Constants.sitePmReportDashboardData, jo.toString(), SitePMReportListData.class,
                     new Response.Listener<SitePMReportListData>() {
                         @Override
                         public void onResponse(@NonNull SitePMReportListData response) {

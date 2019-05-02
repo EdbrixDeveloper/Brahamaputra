@@ -77,7 +77,7 @@ import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteN
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteId;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSsaName;
 
-public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extends BaseActivity {
+public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extends BaseActivity {
 
     //https://developer.android.com/training/scheduling/alarms
 
@@ -1442,12 +1442,11 @@ public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity exten
                         //check interval should not be empty and 0
                         if (!(getInterval == 0))
                             //finally trigger alarm manager
-                            try{
+                            try {
                                 triggerAlarmManager(getTimeInterval(getInterval));//
-                            } catch (Exception e){
-                                Log.e("Exception :",e.getMessage());
+                            } catch (Exception e) {
+                                Log.e("Exception :", e.getMessage());
                             }
-
 
 
                     } else if (currentPos == (totalAcCount - 1)) {
@@ -1476,10 +1475,10 @@ public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity exten
     //get time interval to trigger alarm manager
     private int getTimeInterval(int getInterval) {
         int newInterval = 0;
-        try{
+        try {
             int interval = getInterval;
-            newInterval = interval /** 60*/;////convert minute into seconds
-        }catch (Exception e){
+            newInterval = interval * 60;////convert minute into seconds
+        } catch (Exception e) {
             Log.e("getTimeInterval", e.getMessage());
         }
         return newInterval;
@@ -1488,7 +1487,7 @@ public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity exten
     //Trigger alarm manager with entered time interval
     public void triggerAlarmManager(int alarmTriggerTime) {
         // get a Calendar object with current time
-        try{
+        try {
             Calendar cal = Calendar.getInstance();
             // add alarmTriggerTime seconds to the calendar object
             cal.add(Calendar.SECOND, alarmTriggerTime);
@@ -1498,7 +1497,7 @@ public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity exten
 
             //Toast.makeText(this, "Alarm Set for " + alarmTriggerTime + " seconds.", Toast.LENGTH_SHORT).show();
             //showToast("Alarm Set for " + alarmTriggerTime + " seconds.");
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.e("triggerAlarmManager", e.getMessage());
         }
 
@@ -1512,7 +1511,7 @@ public class  PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity exten
 
 
         //Stop the Media Player Service to stop sound
-       stopService(new Intent(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, AlarmSoundService.class));
+        stopService(new Intent(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, AlarmSoundService.class));
 
         //remove the notification from notification tray
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);

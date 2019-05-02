@@ -63,6 +63,8 @@ public class Constants {
     public static String sitePmSiteId = "";
     public static String sitePmSsaName = "";
 
+    public static String sitePmReportType = "0";
+
     public static String androidDeviceid;
 
     public static final String ACTION_START_SERVICE = "startService";
@@ -135,6 +137,7 @@ public class Constants {
     /*-- Site PM Report Section --*/
     //http://mahindradeveb2-api-env.srumj83md3.ap-south-1.elasticbeanstalk.com/sitepm/getsitepmdashboard
     public final static String sitePmReportSiteList = BASE_URL.concat("sitepm/getsitepmdashboard");
+    public final static String sitePmReportDashboardData = BASE_URL.concat("sitepm/dashboarddetails");
 
 
 }
