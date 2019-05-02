@@ -131,7 +131,7 @@
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="DONE"
+                        android:text="Done"
                         android:textColor="@color/colorMainText"
                         android:textSize="14sp" />
 
@@ -175,7 +175,7 @@
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="PENDING"
+                        android:text="Pending"
                         android:textColor="@color/colorMainText"
                         android:textSize="14sp" />
                 </LinearLayout>

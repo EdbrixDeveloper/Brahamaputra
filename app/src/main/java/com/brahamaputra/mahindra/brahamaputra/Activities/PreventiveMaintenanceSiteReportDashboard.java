@@ -155,6 +155,12 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
                 LinearLayoutTitleNames.setVisibility(View.GONE);
                 TextViewSitePmReportTitle.setText("Title");
                 prepareSitePmReportListData();
+
+                ///////////////
+                LinearLayoutTitleNames.setVisibility(View.VISIBLE);
+                TextViewSitePmReportTitle.setText("Total Site PM");
+                prepareListDataOnChangedAndSelection("4");
+
                 //showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
 
 
@@ -176,7 +182,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
                 LinearLayoutTitleNames.setVisibility(View.VISIBLE);
-                TextViewSitePmReportTitle.setText("Done Sites");
+                TextViewSitePmReportTitle.setText("Done");
                 sitePmReportType = "2";
                 prepareListDataOnChangedAndSelection("2");
 
@@ -188,7 +194,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
                 LinearLayoutTitleNames.setVisibility(View.VISIBLE);
-                TextViewSitePmReportTitle.setText("Pending Sites");
+                TextViewSitePmReportTitle.setText("Pending");
                 sitePmReportType = "3";
                 prepareListDataOnChangedAndSelection("3");
                 //showToast("Clicked on pending site filter");

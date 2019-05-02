@@ -59,6 +59,7 @@ public class PmSiteReportExpListAdapter extends BaseExpandableListAdapter {
         TextView textView_reportSiteId = (TextView) convertView.findViewById(R.id.textView_reportSiteId);
         TextView textView_reportLastTicketNo = (TextView) convertView.findViewById(R.id.textView_reportLastTicketNo);
         TextView textView_reportSiteSSA = (TextView) convertView.findViewById(R.id.textView_reportSiteSSA);
+        TextView textView_reportSiteAddress = (TextView)convertView.findViewById(R.id.textView_reportSiteAddress);
         TextView textView_reportLastDoneDate = (TextView) convertView.findViewById(R.id.textView_reportLastDoneDate);
         /*TextView textView_reportSiteAddress = (TextView) convertView.findViewById(R.id.textView_reportSiteAddress);*/
         TextView textView_reportNextDueDate = (TextView) convertView.findViewById(R.id.textView_reportNextDueDate);
@@ -66,16 +67,32 @@ public class PmSiteReportExpListAdapter extends BaseExpandableListAdapter {
 
         textView_reportSiteName.setText("Site Name: " + SitePMReportTicket.getSiteName());
         textView_reportSiteId.setText("Site ID: " + SitePMReportTicket.getSiteId());
-        textView_reportLastTicketNo.setText("Last Ticket No: " + SitePMReportTicket.getSitePMLastTicketNo());
-        textView_reportSiteSSA.setText("SSA: " + SitePMReportTicket.getSiteSSA());
-        if (sitePmReportType.equals("1")) {
+
+        textView_reportSiteSSA.setText("Site SSA: " + SitePMReportTicket.getSiteSSA());
+
+        /*if (sitePmReportType.equals("1")) {
             textView_reportLastTicketNo.setVisibility(View.GONE);
             textView_reportLastDoneDate.setVisibility(View.GONE);
             textView_reportNextDueDate.setVisibility(View.GONE);
+        }*/
+        if (SitePMReportTicket.getSitePMLastTicketNo().isEmpty()) {
+            textView_reportLastTicketNo.setVisibility(View.GONE);
+        } else {
+            textView_reportLastTicketNo.setText("Last Ticket No: " + SitePMReportTicket.getSitePMLastTicketNo());
         }
-        textView_reportLastDoneDate.setText("Last Done Date: " + SitePMReportTicket.getSitePMTicketLastDoneDate());
-        /*textView_reportSiteAddress.setText("Site Address: " + SitePMReportTicket.getSiteAddress());*/
-        textView_reportNextDueDate.setText("Next Due Date: " + SitePMReportTicket.getSitePMTicketNextDueDate());
+        if (SitePMReportTicket.getSitePMTicketLastDoneDate().isEmpty()) {
+            textView_reportLastDoneDate.setVisibility(View.GONE);
+        } else {
+            textView_reportLastDoneDate.setText("Last Done Date: " + SitePMReportTicket.getSitePMTicketLastDoneDate());
+        }
+        if (SitePMReportTicket.getSitePMTicketNextDueDate().isEmpty()) {
+            textView_reportNextDueDate.setVisibility(View.GONE);
+        } else {
+            textView_reportNextDueDate.setText("Next Due Date: " + SitePMReportTicket.getSitePMTicketNextDueDate());
+        }
+
+        textView_reportSiteAddress.setText("Site Address: " + SitePMReportTicket.getSiteAddress());
+
 
 
         /*if (SitePMTicket.getStatus().equalsIgnoreCase("WIP")) {
