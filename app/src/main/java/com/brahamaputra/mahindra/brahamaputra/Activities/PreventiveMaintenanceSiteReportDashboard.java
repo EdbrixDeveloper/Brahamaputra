@@ -143,7 +143,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
+                //showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
 
 
             }
@@ -153,7 +153,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                showToast("Clicked on total site filter");
+                prepareListDataOnChangedAndSelection("1");
+                //showToast("Clicked on total site filter");
             }
         });
 
@@ -161,7 +162,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                showToast("Clicked on done site filter");
+                prepareListDataOnChangedAndSelection("2");
+                //showToast("Clicked on done site filter");
             }
         });
 
@@ -169,7 +171,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                showToast("Clicked on pending site filter");
+                prepareListDataOnChangedAndSelection("3");
+                //showToast("Clicked on pending site filter");
             }
         });
 
@@ -177,7 +180,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                showToast("Clicked on total site pm filter");
+                prepareListDataOnChangedAndSelection("4");
+                //showToast("Clicked on total site pm filter");
             }
         });
 
@@ -449,7 +453,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
     }
 
-    private void prepareListDataOnChangedAndSelection(String TotalSites, String DoneSites, String PendingSites, String TotalSitePm) {
+    private void prepareSitePmListData() {
         try {
             showBusyProgress();
             JSONObject jo = new JSONObject();
@@ -457,12 +461,12 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
-            jo.put("TotalSites", TotalSites);
+            /*jo.put("TotalSites", TotalSites);
             jo.put("DoneSites", DoneSites);
             jo.put("PendingSites", PendingSites);
             jo.put("TotalSitePm", TotalSitePm);
             jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
-            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());
+            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
 
 
             Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmTicketList + "\n\n" + jo.toString());
@@ -482,26 +486,10 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
                                         mAcPreventiveMaintenanceSectionTextViewDoneSites.setText(sitePMReportListData.getSitePMReportSummary().getDoneSites() == null || sitePMReportListData.getSitePMReportSummary().getDoneSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getDoneSites().toString());
                                         mAcPreventiveMaintenanceSectionTextViewPendingSites.setText(sitePMReportListData.getSitePMReportSummary().getPendingSites() == null || sitePMReportListData.getSitePMReportSummary().getPendingSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getPendingSites().toString());
                                         mPreventiveMaintenanceSiteReportTextViewTotalSitePm1.setText(sitePMReportListData.getSitePMReportSummary().getTotalSitePm() == null || sitePMReportListData.getSitePMReportSummary().getTotalSitePm().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getTotalSitePm().toString());
-
-
-                                        /*double per = 0.0;
-                                        double circlePer = 0.0;
-                                        int roundPer = 0;
-                                        per = sitePMReportListData.getSitePMTicketSummary().getPercentage();
-                                        circlePer = (3.6) * Double.valueOf(per);
-                                        roundPer = (int) Math.round(circlePer);
-
-                                        DecimalFormat df = new DecimalFormat("###.##");
-                                        df.setRoundingMode(RoundingMode.FLOOR);
-                                        per = new Double(df.format(per));*/
-
-
-                                        mWheelprogress.setPercentage(360);//roundPer
+                                        mWheelprogress.setPercentage(360);
                                         mWheelprogress.setStepCountText(String.valueOf(sitePMReportListData.getSitePMReportSummary().getTotalSites()));//per
-
-
                                     }
-                                    if (sitePMReportListData.getSitePMReportTicketsDates() != null && sitePMReportListData.getSitePMReportTicketsDates().size() > 0) {
+                                    /*if (sitePMReportListData.getSitePMReportTicketsDates() != null && sitePMReportListData.getSitePMReportTicketsDates().size() > 0) {
                                         txtNoTicketFound.setVisibility(View.GONE);
                                         mPmSiteListListViewSiteList.setVisibility(View.VISIBLE);
                                         pmSiteReportExpListAdapter = new PmSiteReportExpListAdapter(PreventiveMaintenanceSiteReportDashboard.this, sitePMReportListData);
@@ -509,7 +497,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
                                         for (int i = 0; i < sitePMReportListData.getSitePMReportTicketsDates().size(); i++) {
                                             mPmSiteListListViewSiteList.expandGroup(i);
                                         }
-                                    } else {
+                                    }*/
+                                    else {
                                         mPmSiteListListViewSiteList.setVisibility(View.GONE);
                                         txtNoTicketFound.setVisibility(View.VISIBLE);
                                     }
@@ -538,7 +527,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
     }
 
-    private void prepareListDataOnChangedAndSelection1(String type/*, String DoneSites, String PendingSites, String TotalSitePm*/) {
+    private void prepareListDataOnChangedAndSelection(String type) {
         try {
             showBusyProgress();
             JSONObject jo = new JSONObject();
@@ -546,6 +535,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
+            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
+            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());
             jo.put("Type", type);
             /*jo.put("DoneSites", DoneSites);
             jo.put("PendingSites", PendingSites);
@@ -566,30 +557,15 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
                             } else {
                                 if (response.getSuccess() == 1) {
                                     sitePMReportListData = response;
-                                    if (sitePMReportListData.getSitePMReportSummary() != null) {
+                                    /*if (sitePMReportListData.getSitePMReportSummary() != null) {
 
                                         mAcPreventiveMaintenanceSectionTextViewDoneSites.setText(sitePMReportListData.getSitePMReportSummary().getDoneSites() == null || sitePMReportListData.getSitePMReportSummary().getDoneSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getDoneSites().toString());
                                         mAcPreventiveMaintenanceSectionTextViewPendingSites.setText(sitePMReportListData.getSitePMReportSummary().getPendingSites() == null || sitePMReportListData.getSitePMReportSummary().getPendingSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getPendingSites().toString());
                                         mPreventiveMaintenanceSiteReportTextViewTotalSitePm1.setText(sitePMReportListData.getSitePMReportSummary().getTotalSitePm() == null || sitePMReportListData.getSitePMReportSummary().getTotalSitePm().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getTotalSitePm().toString());
-
-
-                                        /*double per = 0.0;
-                                        double circlePer = 0.0;
-                                        int roundPer = 0;
-                                        per = sitePMReportListData.getSitePMTicketSummary().getPercentage();
-                                        circlePer = (3.6) * Double.valueOf(per);
-                                        roundPer = (int) Math.round(circlePer);
-
-                                        DecimalFormat df = new DecimalFormat("###.##");
-                                        df.setRoundingMode(RoundingMode.FLOOR);
-                                        per = new Double(df.format(per));*/
-
-
-                                        mWheelprogress.setPercentage(360);//roundPer
+                                        mWheelprogress.setPercentage(360);
                                         mWheelprogress.setStepCountText(String.valueOf(sitePMReportListData.getSitePMReportSummary().getTotalSites()));//per
 
-
-                                    }
+                                    }*/
                                     if (sitePMReportListData.getSitePMReportTicketsDates() != null && sitePMReportListData.getSitePMReportTicketsDates().size() > 0) {
                                         txtNoTicketFound.setVisibility(View.GONE);
                                         mPmSiteListListViewSiteList.setVisibility(View.VISIBLE);
