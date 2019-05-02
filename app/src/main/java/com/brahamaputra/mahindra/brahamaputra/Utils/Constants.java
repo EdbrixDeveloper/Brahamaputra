@@ -65,7 +65,7 @@ public class Constants {
 
     public static String androidDeviceid;
 
-    public static final String ACTION_START_SERVICE ="startService";
+    public static final String ACTION_START_SERVICE = "startService";
 
     // TODO Change it to your web domain
     public final static String WEB_DOMAIN = "http://mahindradeveb2-api-env.srumj83md3.ap-south-1.elasticbeanstalk.com/";
@@ -131,6 +131,10 @@ public class Constants {
 
     public final static String readAcPmDataByFSE = BASE_URL.concat("acpm/readacpmdatabyfse");
     public final static String submitAcPmTicket = BASE_URL.concat("acpm/submitticketbyfse");
+
+    /*-- Site PM Report Section --*/
+    //http://mahindradeveb2-api-env.srumj83md3.ap-south-1.elasticbeanstalk.com/sitepm/getsitepmdashboard
+    public final static String sitePmReportSiteList = BASE_URL.concat("sitepm/getsitepmdashboard");
 
 
 }

@@ -137,12 +137,13 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         }
 
         //prepareListData();
-
+        prepareSitePmReportListData();
 
         mPreventiveMaintenanceSiteReportButtonFiltersMonthYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                prepareSitePmReportListData();
                 //showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
 
 
@@ -453,13 +454,16 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
     }
 
-    private void prepareSitePmListData() {
+    private void prepareSitePmReportListData() {
         try {
             showBusyProgress();
             JSONObject jo = new JSONObject();
 
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
+            int i = monthNames.indexOf(mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim()) + 1;
+            jo.put("Month", String.valueOf(i));
+            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());
 
             /*jo.put("TotalSites", TotalSites);
             jo.put("DoneSites", DoneSites);
@@ -469,9 +473,9 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
 
 
-            Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmTicketList + "\n\n" + jo.toString());
+            Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmReportSiteList + "\n\n" + jo.toString());
 
-            GsonRequest<SitePMReportListData> getSitePMReportListData = new GsonRequest<>(Request.Method.POST, Constants.sitePmTicketList, jo.toString(), SitePMReportListData.class,
+            GsonRequest<SitePMReportListData> getSitePMReportListData = new GsonRequest<>(Request.Method.POST, Constants.sitePmReportSiteList, jo.toString(), SitePMReportListData.class,
                     new Response.Listener<SitePMReportListData>() {
                         @Override
                         public void onResponse(@NonNull SitePMReportListData response) {
@@ -535,7 +539,8 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
-            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
+            int i = monthNames.indexOf(mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim()) + 1;
+            jo.put("Month", String.valueOf(i));
             jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());
             jo.put("Type", type);
             /*jo.put("DoneSites", DoneSites);

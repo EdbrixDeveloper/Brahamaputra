@@ -252,7 +252,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout_Status"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <View
             android:layout_width="match_parent"
