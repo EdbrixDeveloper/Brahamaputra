@@ -473,6 +473,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
 
                         str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
                         mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.setText(str_pmSiteEcpNumberOfEarthPitVal);
+                        visibilityOfExecuteEarthPitTest(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewExecuteEarthPitTestVal.getText().toString().trim());
                         /////////////////
                         /*Multi Form Dropdown Value Purpose
                         str_pmSiteEcpNumberOfEarthPitVal = item.get(position);
@@ -795,34 +796,34 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
         } else if ((executeEarthPitTest.isEmpty() || executeEarthPitTest == null) && methodFlag.equals("onSubmit")) {
             showToast("Select Execute Earth Pit Test");
             return false;
-        } else if ((valuePITNo1.isEmpty() || valuePITNo1 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo1.isEmpty() || valuePITNo1 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 01");
             return false;
-        } else if ((valuePITNo2.isEmpty() || valuePITNo2 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo2.isEmpty() || valuePITNo2 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 02");
             return false;
-        } else if ((valuePITNo3.isEmpty() || valuePITNo3 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo3.isEmpty() || valuePITNo3 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 03");
             return false;
-        } else if ((valuePITNo4.isEmpty() || valuePITNo4 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo4.isEmpty() || valuePITNo4 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 04");
             return false;
-        } else if ((valuePITNo5.isEmpty() || valuePITNo5 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo5.isEmpty() || valuePITNo5 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 05");
             return false;
-        } else if ((valuePITNo6.isEmpty() || valuePITNo6 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo6.isEmpty() || valuePITNo6 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 06");
             return false;
-        } else if ((valuePITNo7.isEmpty() || valuePITNo7 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo7.isEmpty() || valuePITNo7 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 07");
             return false;
-        } else if ((valuePITNo8.isEmpty() || valuePITNo8 == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((valuePITNo8.isEmpty() || valuePITNo8 == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Value in PIT No 08");
             return false;
-        } else if ((earthNuetralVoltage.isEmpty() || earthNuetralVoltage == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((earthNuetralVoltage.isEmpty() || earthNuetralVoltage == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Earth to Neutral Voltage");
             return false;
-        } else if ((observationConclusion.isEmpty() || observationConclusion == null) && executeEarthPitTest.equals("Yes")) {
+        } else if ((observationConclusion.isEmpty() || observationConclusion == null) && executeEarthPitTest.equals("Yes") && mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.getVisibility() == View.VISIBLE && methodFlag.equals("onSubmit")) {
             showToast("Enter Observation & Conclusion");
             return false;
         } else if ((registerFault.isEmpty() || registerFault == null) && methodFlag.equals("onSubmit")) {
@@ -893,8 +894,163 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
     private void visibilityOfExecuteEarthPitTest(String pmSiteEcpExecuteEarthPitTestVal) {
         if (pmSiteEcpExecuteEarthPitTestVal.equals("Yes")) {
             mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutExecuteEarthPitTestFields.setVisibility(View.VISIBLE);
-            /*For Fuure Purpose
-            mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+            /*For Fuure Purpose*/
+
+            if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("0")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo1.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("1")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo2.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("2")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo3.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("3")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo4.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("4")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo5.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("5")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo6.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("6")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo7.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("7")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.GONE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextValuePITNo8.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            } else if (mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim().equals("8")) {
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo5.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo6.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo7.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo8.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutEarthNuetralVoltage.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutObservationConclusion.setVisibility(View.VISIBLE);
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextEarthNuetralVoltage.setText("");
+                mPreventiveMaintenanceSiteEarthingCheckPointsEditTextObservationConclusion.setText("");
+            }
+            /*mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo1.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo2.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo3.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteEarthingCheckPointsLinearLayoutValuePITNo4.setVisibility(View.VISIBLE);

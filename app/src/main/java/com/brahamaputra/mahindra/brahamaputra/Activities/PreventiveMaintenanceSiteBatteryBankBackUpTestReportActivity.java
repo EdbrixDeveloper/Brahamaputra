@@ -170,6 +170,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewFloatVoltageBeforeBbTest;
     private EditText mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest;
 
+
     private LinearLayout mPreventiveMaintenanceSiteBatteryBankBackUpTestReportLinearLayoutSingleModuleRating;
     private TextView mPreventiveMaintenanceSiteBatteryBankBackUpTestReportTextViewSingleModuleRating;
     private EditText mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating;
@@ -246,7 +247,6 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     private PendingIntent pendingIntent;
     //Alarm Request Code
     private static final int ALARM_REQUEST_CODE = 133;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -500,6 +500,24 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
     }
 
     private void decimalEditTextListener() {
+
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    DecimalFormatConversion();
+                }
+            }
+        });
+
 
         mBdTestCellReadingEditText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -821,6 +839,9 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
 
     public void DecimalFormatConversion() {
 
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest.setText(decimalConversion.convertDecimal(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextFloatVoltageBeforeBbTest.getText().toString()));
+        mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating.setText(decimalConversion.convertDecimal(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSingleModuleRating.getText().toString()));
+
         mBdTestCellReadingEditText1.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText1.getText().toString()));
         mBdTestCellReadingEditText2.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText2.getText().toString()));
         mBdTestCellReadingEditText3.setText(decimalConversion.convertDecimal(mBdTestCellReadingEditText3.getText().toString()));
@@ -864,7 +885,6 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         /////////////
         mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.setText(decimalConversion.convertDecimal(mPreventiveMaintenanceSiteBatteryBankBackUpTestReportEditTextSiteLoadOnBatteryInAmps.getText().toString()));
     }
-
 
     private void setInputDetails() {
         try {

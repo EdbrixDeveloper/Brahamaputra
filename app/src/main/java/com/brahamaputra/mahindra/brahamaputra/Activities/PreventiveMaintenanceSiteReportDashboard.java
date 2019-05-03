@@ -145,7 +145,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
         //default calling first time
         LinearLayoutTitleNames.setVisibility(View.VISIBLE);
-        TextViewSitePmReportTitle.setText("Total Site PM");
+        TextViewSitePmReportTitle.setText("Current Month Plan");
         prepareListDataOnChangedAndSelection("4");
 
         mPreventiveMaintenanceSiteReportButtonFiltersMonthYear.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +158,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
                 ///////////////
                 LinearLayoutTitleNames.setVisibility(View.VISIBLE);
-                TextViewSitePmReportTitle.setText("Total Site PM");
+                TextViewSitePmReportTitle.setText("Current Month Plan");
                 prepareListDataOnChangedAndSelection("4");
 
                 //showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
@@ -205,7 +205,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             @Override
             public void onClick(View v) {
                 LinearLayoutTitleNames.setVisibility(View.VISIBLE);
-                TextViewSitePmReportTitle.setText("Total Site PM");
+                TextViewSitePmReportTitle.setText("Current Month Plan");
                 sitePmReportType = "4";
                 prepareListDataOnChangedAndSelection("4");
                 //showToast("Clicked on total site pm filter");

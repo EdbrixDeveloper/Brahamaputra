@@ -218,7 +218,7 @@
                         style="@style/FontStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Total Site PM"
+                        android:text="Current Month Plan"
                         android:textColor="@color/colorMainText"
                         android:textSize="14sp" />
                 </LinearLayout>

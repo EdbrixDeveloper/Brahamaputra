@@ -305,7 +305,6 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -465,7 +464,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Float Voltage"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
 
@@ -494,7 +493,7 @@
                     android:layout_weight="0.6"
                     android:hint="Enter Single Module Rating"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewStart"
                     android:textSize="16sp" />
 
@@ -688,7 +687,6 @@
                             android:inputType="numberDecimal" />
 
 
-
                         <EditText
                             android:id="@+id/bdTestSocModuleReadingEditText1"
                             android:layout_width="match_parent"
@@ -831,7 +829,6 @@
                             android:hint=" SOC 3"
                             android:imeOptions="actionNext"
                             android:inputType="numberDecimal" />
-
 
 
                         <EditText
@@ -1313,10 +1310,9 @@
                         android:layout_marginTop="@dimen/app_normal_margin"
                         android:layout_weight="1"
                         android:background="@color/red"
-                        android:textColor="@color/whitesmoke"
-                        android:textSize="18sp"
                         android:text="Next Reading"
-                      />
+                        android:textColor="@color/whitesmoke"
+                        android:textSize="18sp" />
                     <!--
                         android:nextFocusDown="@+id/bdTestCellReadingEditText1"
                         android:nextFocusLeft="@+id/preventiveMaintenanceSiteBatteryBankBackUpTestReport_button_nextReading"
@@ -1333,7 +1329,6 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/app_min_margin"
                 android:background="#a40404" />
-
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
