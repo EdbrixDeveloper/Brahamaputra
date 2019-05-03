@@ -59,7 +59,7 @@ public class PmSiteReportExpListAdapter extends BaseExpandableListAdapter {
         TextView textView_reportSiteId = (TextView) convertView.findViewById(R.id.textView_reportSiteId);
         TextView textView_reportLastTicketNo = (TextView) convertView.findViewById(R.id.textView_reportLastTicketNo);
         TextView textView_reportSiteSSA = (TextView) convertView.findViewById(R.id.textView_reportSiteSSA);
-        TextView textView_reportSiteAddress = (TextView)convertView.findViewById(R.id.textView_reportSiteAddress);
+        TextView textView_reportSiteAddress = (TextView) convertView.findViewById(R.id.textView_reportSiteAddress);
         TextView textView_reportLastDoneDate = (TextView) convertView.findViewById(R.id.textView_reportLastDoneDate);
         /*TextView textView_reportSiteAddress = (TextView) convertView.findViewById(R.id.textView_reportSiteAddress);*/
         TextView textView_reportNextDueDate = (TextView) convertView.findViewById(R.id.textView_reportNextDueDate);
@@ -79,16 +79,19 @@ public class PmSiteReportExpListAdapter extends BaseExpandableListAdapter {
             textView_reportLastTicketNo.setVisibility(View.GONE);
         } else {
             textView_reportLastTicketNo.setText("Last Ticket No: " + SitePMReportTicket.getSitePMLastTicketNo());
+            textView_reportLastTicketNo.setVisibility(View.VISIBLE);
         }
         if (SitePMReportTicket.getSitePMTicketLastDoneDate().isEmpty()) {
             textView_reportLastDoneDate.setVisibility(View.GONE);
         } else {
             textView_reportLastDoneDate.setText("Last Done Date: " + SitePMReportTicket.getSitePMTicketLastDoneDate());
+            textView_reportLastDoneDate.setVisibility(View.VISIBLE);
         }
         if (SitePMReportTicket.getSitePMTicketNextDueDate().isEmpty()) {
             textView_reportNextDueDate.setVisibility(View.GONE);
         } else {
             textView_reportNextDueDate.setText("Next Due Date: " + SitePMReportTicket.getSitePMTicketNextDueDate());
+            textView_reportNextDueDate.setVisibility(View.VISIBLE);
         }
 
         textView_reportSiteAddress.setText("Site Address: " + SitePMReportTicket.getSiteAddress());
