@@ -15,6 +15,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_normal_margin"
+            android:paddingBottom="@dimen/app_normal_margin"
             android:orientation="vertical">
 
             <!--For Testing Purpose -->

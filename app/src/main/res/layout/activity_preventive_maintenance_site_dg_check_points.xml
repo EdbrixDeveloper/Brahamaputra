@@ -15,7 +15,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_normal_margin"
-            android:paddingBottom="@dimen/app_normal_margin"
+
             android:orientation="vertical">
 
             <LinearLayout
@@ -75,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/app_normal_margin"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_textView_dgNumber"
@@ -455,7 +455,7 @@
 
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:id="@+id/preventiveMaintenanceSiteDgCheckPoints_linearLayout_uploadPhotoOfRegisterFault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
