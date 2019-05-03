@@ -17,6 +17,16 @@ public class AcCheckPointParentData implements Serializable
     @Expose
     private List<AcCheckPoint> acCheckPoints = null;
 
+    @SerializedName("shelterTemperature")
+    @Expose
+    private String shelterTemperature;
+    @SerializedName("base64StringTakePhotoOfTemperature")
+    @Expose
+    private String base64StringTakePhotoOfTemperature;
+    @SerializedName("shelterDoorStatus")
+    @Expose
+    private String shelterDoorStatus;
+
     @SerializedName("registerFault")
     @Expose
     private String registerFault;
@@ -47,7 +57,7 @@ public class AcCheckPointParentData implements Serializable
         this.acCheckPoints = acCheckPoints;
     }
 
-    public AcCheckPointParentData(String noOfAcAvailableAtSite, List<AcCheckPoint> acCheckPoints,String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault) {
+    public AcCheckPointParentData(String noOfAcAvailableAtSite, List<AcCheckPoint> acCheckPoints,String registerFault, String typeOfFault, String base64StringUploadPhotoOfRegisterFault, String shelterTemperature, String base64StringTakePhotoOfTemperature, String shelterDoorStatus) {
         this.noOfAcAvailableAtSite = noOfAcAvailableAtSite;
         this.acCheckPoints = acCheckPoints;
         this.registerFault = registerFault;
@@ -58,6 +68,10 @@ public class AcCheckPointParentData implements Serializable
         }else {
             isSubmited = 1;
         }
+
+        this.shelterTemperature = shelterTemperature;
+        this.base64StringTakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
+        this.shelterDoorStatus = shelterDoorStatus;
     }
 
     public AcCheckPointParentData() {
@@ -67,6 +81,9 @@ public class AcCheckPointParentData implements Serializable
         this.acCheckPoints = new ArrayList<>();
         this.base64StringUploadPhotoOfRegisterFault = "";
         this.isSubmited = 0;
+        this.shelterTemperature = "";
+        this.base64StringTakePhotoOfTemperature = "";
+        this.shelterDoorStatus = "";
     }
 
     public int getSubmited() {
@@ -99,5 +116,29 @@ public class AcCheckPointParentData implements Serializable
 
     public void setBase64StringUploadPhotoOfRegisterFault(String base64StringUploadPhotoOfRegisterFault) {
         this.base64StringUploadPhotoOfRegisterFault = base64StringUploadPhotoOfRegisterFault;
+    }
+
+    public String getShelterTemperature() {
+        return shelterTemperature;
+    }
+
+    public void setShelterTemperature(String shelterTemperature) {
+        this.shelterTemperature = shelterTemperature;
+    }
+
+    public String getBase64TakePhotoOfTemperature() {
+        return base64StringTakePhotoOfTemperature;
+    }
+
+    public void setBase64TakePhotoOfTemperature(String base64StringTakePhotoOfTemperature) {
+        this.base64StringTakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
+    }
+
+    public String getShelterDoorStatus() {
+        return shelterDoorStatus;
+    }
+
+    public void setShelterDoorStatus(String shelterDoorStatus) {
+        this.shelterDoorStatus = shelterDoorStatus;
     }
 }

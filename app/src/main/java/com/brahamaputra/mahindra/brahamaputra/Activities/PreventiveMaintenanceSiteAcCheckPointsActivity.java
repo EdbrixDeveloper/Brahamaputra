@@ -908,6 +908,20 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.setText(dataList.getNoOfAcAvailableAtsite());
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(dataList.getRegisterFault());
                 mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(dataList.getTypeOfFault());
+                mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(dataList.getShelterDoorStatus());
+
+                mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(dataList.getShelterTemperature());
+
+                base64StringTakePhotoOfTemperature = dataList.getBase64TakePhotoOfTemperature();//////004
+                mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
+                if (!base64StringTakePhotoOfTemperature.isEmpty() && base64StringTakePhotoOfTemperature != null) {
+                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfTemperature);
+                    inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
+                    String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
+                    imageFileUriTemperature = Uri.parse(path);
+                }
 
                 this.base64StringUploadPhotoOfRegisterFault = dataList.getBase64StringUploadPhotoOfRegisterFault();
                 visibilityOfTypesOfFault(dataList.getRegisterFault());
@@ -940,9 +954,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                     mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.setText(acCheckPointsData.get(index).getAcFilterStatus());
                     mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText(acCheckPointsData.get(index).getCleaningOfCoolingCondensorCoils());
                     mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText(acCheckPointsData.get(index).getAnyAbnormalSoundFromMotor());
-                    mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(acCheckPointsData.get(index).getShelterDoorStatus());
 
-                    mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(acCheckPointsData.get(index).getShelterTemperature());
 
                     base64StringAcCheckPointsQRCodeScan = acCheckPointsData.get(index).getDetailsOfAcQrCodeScan();//////001
                     mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
@@ -975,16 +987,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                         imageFileUriAcFiltersAfterCleaning = Uri.parse(path);
                     }
 
-                    base64StringTakePhotoOfTemperature = acCheckPointsData.get(index).getBase64TakePhotoOfTemperature();//////004
-                    mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
-                    if (!base64StringTakePhotoOfTemperature.isEmpty() && base64StringTakePhotoOfTemperature != null) {
-                        mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
-                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                        Bitmap inImage = decodeFromBase64ToBitmap(base64StringTakePhotoOfTemperature);
-                        inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
-                        String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
-                        imageFileUriTemperature = Uri.parse(path);
-                    }
 
                     mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.GONE);
                     mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
@@ -1014,18 +1016,15 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String acFilterStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.getText().toString().trim();
         String cleaningOfCoolingCondensorCoils = mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.getText().toString().trim();
         String anyAbnormalSoundFromMotor = mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.getText().toString().trim();
-        String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
-        String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
+
         String detailsOfAcQrCodeScan = base64StringAcCheckPointsQRCodeScan;
         String base64TakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
         String base64TakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
-        String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
 
         AcCheckPoint acCheckPointChild = new AcCheckPoint(detailsOfAcQrCodeScan, workingConditionOfAc, automationOfAcController,
                 acEarthingStatus, acFilterStatus, base64TakePhotoOfAcFiltersBeforeCleaning,
                 base64TakePhotoOfAcFiltersAfterCleaning, cleaningOfCoolingCondensorCoils,
-                anyAbnormalSoundFromMotor, shelterTemperature, base64TakePhotoOfTemperature,
-                shelterDoorStatus,isQrCodeNew);
+                anyAbnormalSoundFromMotor, isQrCodeNew);
         if (acCheckPointsData.size() > 0) {
             if (pos == acCheckPointsData.size()) {
                 acCheckPointsData.add(acCheckPointChild);
@@ -1049,10 +1048,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.setText(acCheckPointsData.get(pos).getAcFilterStatus());
             mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.setText(acCheckPointsData.get(pos).getCleaningOfCoolingCondensorCoils());
             mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.setText(acCheckPointsData.get(pos).getAnyAbnormalSoundFromMotor());
-            mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(acCheckPointsData.get(pos).getShelterDoorStatus());
+            /*  mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.setText(acCheckPointsData.get(pos).getShelterDoorStatus());*/
            /* mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.setText(acCheckPointsData.get(pos).getRegisterFault());
             mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.setText(acCheckPointsData.get(pos).getTypeOfFault());*/
-            mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(acCheckPointsData.get(pos).getShelterTemperature());
+            /*mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.setText(acCheckPointsData.get(pos).getShelterTemperature());*/
 
             base64StringAcCheckPointsQRCodeScan = acCheckPointsData.get(pos).getDetailsOfAcQrCodeScan();//////001
             mPreventiveMaintenanceSiteAcCheckPointsButtonQRCodeScanView.setVisibility(View.GONE);
@@ -1085,7 +1084,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 imageFileUriAcFiltersAfterCleaning = Uri.parse(path);
             }
 
-            base64StringTakePhotoOfTemperature = acCheckPointsData.get(pos).getBase64TakePhotoOfTemperature();//////004
+            /*base64StringTakePhotoOfTemperature = acCheckPointsData.get(pos).getBase64TakePhotoOfTemperature();//////004
             mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.GONE);
             if (!base64StringTakePhotoOfTemperature.isEmpty() && base64StringTakePhotoOfTemperature != null) {
                 mPreventiveMaintenanceSiteAcCheckPointsButtonPhotoOfTemperatureView.setVisibility(View.VISIBLE);
@@ -1094,7 +1093,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 inImage.compress(Bitmap.CompressFormat.JPEG, 30, bytes);
                 String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), inImage, "Title", null);
                 imageFileUriTemperature = Uri.parse(path);
-            }
+            }*/
 
             mPreventiveMaintenanceSiteAcCheckPointsButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceSiteAcCheckPointsButtonNextReading.setVisibility(View.VISIBLE);
@@ -1154,8 +1153,12 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
             String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
             String base64StringUploadPhotoOfRegisterFault = this.base64StringUploadPhotoOfRegisterFault;
+            String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
+            String base64StringTakePhotoOfTemperature = this.base64StringTakePhotoOfTemperature;
+            String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
 
-            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite, acCheckPointsData, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault);
+            dataList = new AcCheckPointParentData(noOfAcAvailableAtSite, acCheckPointsData, registerFault, typeOfFault, base64StringUploadPhotoOfRegisterFault, shelterTemperature
+                    , base64StringTakePhotoOfTemperature, shelterDoorStatus);
             pmSiteTransactionDetails.setAcCheckPointParentData(dataList);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(pmSiteTransactionDetails);
@@ -1173,12 +1176,11 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         String acFilterStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewAcFilterStatusVal.getText().toString().trim();
         String cleaningOfCoolingCondensorCoils = mPreventiveMaintenanceSiteAcCheckPointsTextViewCleaningOfCoolingVal.getText().toString().trim();
         String anyAbnormalSoundFromMotor = mPreventiveMaintenanceSiteAcCheckPointsTextViewAbnormalSoundOfMotorVal.getText().toString().trim();
-        String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
-        String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
+
         String detailsOfAcQrCodeScan = base64StringAcCheckPointsQRCodeScan;
         String base64TakePhotoOfAcFiltersBeforeCleaning = base64StringTakePhotoOfAcFiltersBeforeCleaning;
         String base64TakePhotoOfAcFiltersAfterCleaning = base64StringTakePhotoOfAcFiltersAfterCleaning;
-        String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
+
 
         if (detailsOfAcQrCodeScan.isEmpty() || detailsOfAcQrCodeScan == null) {
             showToast("Please Scan QR Code");
@@ -1207,15 +1209,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         } else if (anyAbnormalSoundFromMotor.isEmpty() || anyAbnormalSoundFromMotor == null) {
             showToast("Select Any abnormal Sound from Motor");
             return false;
-        } else if (shelterTemperature.isEmpty() || shelterTemperature == null) {
-            showToast("Select Shelter Temperature");
-            return false;
-        } else if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
-            showToast("Take Photo of Temperature");
-            return false;
-        } else if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
-            showToast("Select Shelter Door Status");
-            return false;
         } else return true;
 
     }
@@ -1237,10 +1230,22 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     private boolean checkValidationonSubmit(String methodFlag) {
 
         String noOfAcAvalibleAtSite = mPreventiveMaintenanceSiteAcCheckPointsTextViewNoOfAcAvailableAtSiteVal.getText().toString().trim();
+        String shelterDoorStatus = mPreventiveMaintenanceSiteAcCheckPointsTextViewShelterDoorStatusVal.getText().toString().trim();
+        String shelterTemperature = mPreventiveMaintenanceSiteAcCheckPointsEditTextShelterTemperature.getText().toString().trim();
         String registerFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteAcCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();
+        String base64TakePhotoOfTemperature = base64StringTakePhotoOfTemperature;
         if (noOfAcAvalibleAtSite.isEmpty() || noOfAcAvalibleAtSite == null) {
             showToast("Select No of AC avalible at site");
+            return false;
+        } else if (shelterTemperature.isEmpty() || shelterTemperature == null) {
+            showToast("Select Shelter Temperature");
+            return false;
+        } else if (base64TakePhotoOfTemperature.isEmpty() || base64TakePhotoOfTemperature == null) {
+            showToast("Take Photo of Temperature");
+            return false;
+        } else if (shelterDoorStatus.isEmpty() || shelterDoorStatus == null) {
+            showToast("Select Shelter Door Status");
             return false;
         } else if (registerFault.isEmpty() || registerFault == null) {
             showToast("Select Register Fault");
