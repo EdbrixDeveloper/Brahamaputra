@@ -183,7 +183,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintenanceSiteAcCheckPointsActivity.this, userId, ticketName);
 
-
+        pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
         acCheckPointsData = new ArrayList<>();
         //dataList = new ArrayList<>();
         arr_acCheckPoints = new ArrayList<>();
@@ -1165,6 +1165,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(TAG,e.getMessage());
         }
     }
 
