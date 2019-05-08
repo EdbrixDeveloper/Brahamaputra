@@ -1182,15 +1182,15 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 //submitDetails();
                 str_pmSiteEcpNumberOfEarthPitVal = mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString();
 
-                if (str_pmSiteEcpNumberOfEarthPitVal == null || str_pmSiteEcpNumberOfEarthPitVal.equals("")) {
+                /*if (str_pmSiteEcpNumberOfEarthPitVal == null || str_pmSiteEcpNumberOfEarthPitVal.equals("")) {
                     showToast("Select Number of Earth PIT");
-                } else {
+                } else {*/
                     if (checkValidationOnChangeNoOfEarthPitValue(mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVal.getText().toString().trim(), mPreventiveMaintenanceSiteEarthingCheckPointsTextViewNumberOfEarthPitVisibleVal.getText().toString().trim(), "onSubmit") == true) {
                         submitDetails();
                         startActivity(new Intent(this, PreventiveMaintenanceSiteEbMeterBoxActivity.class));
                         finish();
                     }
-                }
+                /*}*/
 
                 //startActivity(new Intent(this, PreventiveMaintenanceSiteEbMeterBoxActivity.class));
                 //finish();
