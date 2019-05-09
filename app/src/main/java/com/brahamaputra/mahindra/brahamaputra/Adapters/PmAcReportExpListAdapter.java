@@ -57,7 +57,7 @@ public class PmAcReportExpListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return Long.parseLong(acPMReportListData.getAcPMReportTicketsDates().get(groupPosition).getAcPMReportTickets().get(childPosition).getId());
+        return 0;//Long.parseLong(acPMReportListData.getAcPMReportTicketsDates().get(groupPosition).getAcPMReportTickets().get(childPosition).getId());
     }
 
     @Override

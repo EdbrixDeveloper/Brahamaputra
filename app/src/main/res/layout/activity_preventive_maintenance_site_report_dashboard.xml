@@ -253,6 +253,7 @@
         android:id="@+id/pmSiteList_listView_siteList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:layout_below="@+id/linearLayout_titleNames"
         tools:listheader="@layout/item_site_pm_report_list_seprator"
         tools:listitem="@layout/item_site_pm_report_list" />

@@ -212,19 +212,19 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             }
         });
 
-        mPmSiteListListViewSiteList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+       /* mPmSiteListListViewSiteList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 mPmSiteListListViewSiteList.expandGroup(groupPosition);
                 return true;
             }
-        });
-        mPmSiteListListViewSiteList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        });*/
+       /* mPmSiteListListViewSiteList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
                 // notify user
 
-                /*LocationManager lm = (LocationManager) PreventiveMaintenanceSiteReportDashboard.this.getSystemService(Context.LOCATION_SERVICE);
+                LocationManager lm = (LocationManager) PreventiveMaintenanceSiteReportDashboard.this.getSystemService(Context.LOCATION_SERVICE);
                 boolean gps_enabled = false;
                 boolean network_enabled = false;
 
@@ -327,12 +327,12 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
                             }
                         }).show();
                     }
-                }*/
+                }
 
 
                 return false;
             }
-        });
+        });*/
 
     }
 

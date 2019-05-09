@@ -41,7 +41,7 @@ public class PmSiteReportExpListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return Long.parseLong(hotoTicketList.getSitePMReportTicketsDates().get(groupPosition).getSitePMReportTickets().get(childPosition).getId());
+        return 0;//Long.parseLong(hotoTicketList.getSitePMReportTicketsDates().get(groupPosition).getSitePMReportTickets().get(childPosition).getId());
     }
 
     @Override
