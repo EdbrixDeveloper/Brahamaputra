@@ -375,8 +375,8 @@ public class UserProfileActivity extends BaseActivity {
                                     sessionManager.updateSessionUserID(response.getUserDetails().getId());
                                     sessionManager.updateSessionUserFirstName(response.getUserDetails().getFirstName());
                                     sessionManager.updateSessionUserLastName(response.getUserDetails().getLastName());
-                                    sessionManager.updateSessionUserTypeId(response.getUserDetails().getUserTypeId());
-                                    sessionManager.updateSessionUserTypeName(response.getUserDetails().getUserTypeName());
+                                    sessionManager.updateSessionUserTypeId(response.getUserDetails().getUserAdditionalDetails().getUserTypeId());
+                                    sessionManager.updateSessionUserTypeName(response.getUserDetails().getUserAdditionalDetails().getUserTypeName());
                                     sessionManager.updateSessionUserEmail(response.getUserDetails().getEmail());
                                     sessionManager.updateSessionMobileNo(response.getUserDetails().getMobileNo());
                                     sessionManager.updateSessionDesignation(response.getUserDetails().getDesignation());

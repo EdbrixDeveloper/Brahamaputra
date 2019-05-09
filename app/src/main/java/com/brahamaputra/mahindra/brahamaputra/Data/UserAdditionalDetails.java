@@ -59,6 +59,13 @@ public class UserAdditionalDetails {
     @Expose
     private String EbOfficeName;
 
+    @SerializedName("UserTypeId")
+    @Expose
+    private String UserTypeId;
+
+    @SerializedName("UserTypeName")
+    @Expose
+    private String UserTypeName;
 
     public String getCustomerId() {
         return CustomerId;
@@ -162,6 +169,22 @@ public class UserAdditionalDetails {
 
     public void setEbOfficeName(String EbOfficeName) {
         this.EbOfficeName = EbOfficeName;
+    }
+
+    public String getUserTypeId() {
+        return UserTypeId;
+    }
+
+    public void setUserTypeId(String userTypeId) {
+        UserTypeId = userTypeId;
+    }
+
+    public String getUserTypeName() {
+        return UserTypeName;
+    }
+
+    public void setUserTypeName(String userTypeName) {
+        UserTypeName = userTypeName;
     }
 
 }

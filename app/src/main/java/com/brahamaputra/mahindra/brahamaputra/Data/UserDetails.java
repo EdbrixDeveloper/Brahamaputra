@@ -18,14 +18,6 @@ public class UserDetails {
     @Expose
     private String lastName;
 
-    @SerializedName("UserTypeId")
-    @Expose
-    private String UserTypeId;
-
-    @SerializedName("UserTypeName")
-    @Expose
-    private String UserTypeName;
-
     @SerializedName("Username")
     @Expose
     private String username;
@@ -122,22 +114,6 @@ public class UserDetails {
 
     public void setUserAdditionalDetails(UserAdditionalDetails userAdditionalDetails) {
         this.userAdditionalDetails = userAdditionalDetails;
-    }
-
-    public String getUserTypeId() {
-        return UserTypeId;
-    }
-
-    public void setUserTypeId(String userTypeId) {
-        UserTypeId = userTypeId;
-    }
-
-    public String getUserTypeName() {
-        return UserTypeName;
-    }
-
-    public void setUserTypeName(String userTypeName) {
-        UserTypeName = userTypeName;
     }
 
 }
