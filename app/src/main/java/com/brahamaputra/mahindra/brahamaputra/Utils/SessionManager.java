@@ -41,6 +41,8 @@ public class SessionManager {
     private static final String PREFS_SESSION_USER_LAT = "SessionUserLat";
     private static final String PREFS_SESSION_USER_LNG = "SessionUserLng";
     private static final String PREFS_SESSION_USER_TIME = "SessionUserTime";
+    private static final String PREFS_SESSION_USER_TYPE_ID = "00";
+    private static final String PREFS_SESSION_USER_TYPE_NAME = "AAAA";
 
     private static final String PREFS_SESSION_BB_TEST_REPORT_COUNT = "SessionBBTestReportCount";
 
@@ -150,6 +152,14 @@ public class SessionManager {
      */
     public String getSessionUserFirstLast() {
         return this.sharedPrefs.getString(PREFS_SESSION_USER_LAST_NAME, "");
+    }
+
+    public String getSessionUserTypeId() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_TYPE_ID, "");
+    }
+
+    public String getSessionUserTypeName() {
+        return this.sharedPrefs.getString(PREFS_SESSION_USER_TYPE_NAME, "");
     }
 
     public String getSessionUserEmail() {
@@ -321,7 +331,7 @@ public class SessionManager {
         editor.commit();
     }
 
-        /**
+    /**
      * Updates the saved session credentials.
      *
      * @param deviceFCMToken the DeviceFCMToken to save.
@@ -420,6 +430,28 @@ public class SessionManager {
             editor.putString(PREFS_SESSION_USER_LAST_NAME, lname);
         } else {
             editor.remove(PREFS_SESSION_USER_LAST_NAME);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionUserTypeId(String UserTypeId) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((UserTypeId != null) && (UserTypeId.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_TYPE_ID, UserTypeId);
+        } else {
+            editor.remove(PREFS_SESSION_USER_TYPE_ID);
+        }
+        editor.commit();
+    }
+
+    public void updateSessionUserTypeName(String UserTypeName) {
+
+        Editor editor = this.sharedPrefs.edit();
+        if ((UserTypeName != null) && (UserTypeName.length() > 0)) {
+            editor.putString(PREFS_SESSION_USER_TYPE_NAME, UserTypeName);
+        } else {
+            editor.remove(PREFS_SESSION_USER_TYPE_NAME);
         }
         editor.commit();
     }

@@ -75,9 +75,9 @@ public class LoginActivity extends BaseActivity {
         }
         checkPermission();
 
-       Constants.androidDeviceid = Secure.getString(getApplicationContext().getContentResolver(),
+        Constants.androidDeviceid = Secure.getString(getApplicationContext().getContentResolver(),
                 Secure.ANDROID_ID);
-        Log.e(BaseActivity.class.getName(),Constants.androidDeviceid);
+        Log.e(BaseActivity.class.getName(), Constants.androidDeviceid);
     }
 
     private void assignViews() {
@@ -156,7 +156,7 @@ public class LoginActivity extends BaseActivity {
             jo.put("SECRETKEY", Constants.APP_SECRET__);
             jo.put("Username", email);
             jo.put("Password", password);
-            jo.put( "DeviceId",Constants.androidDeviceid);
+            jo.put("DeviceId", Constants.androidDeviceid);
             jo.put("DeviceToken", sessionManager.getSessionFCMToken());
             jo.put("Type", "A");
 
@@ -179,6 +179,8 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionUserID(response.getUser().getId());
                                 sessionManager.updateSessionUserFirstName(response.getUser().getFirstName());
                                 sessionManager.updateSessionUserLastName(response.getUser().getLastName());
+                                sessionManager.updateSessionUserTypeId(response.getUser().getUserTypeId());
+                                sessionManager.updateSessionUserTypeName(response.getUser().getUserTypeName());
                                 sessionManager.updateSessionUserEmail(response.getUser().getEmail());
                                 sessionManager.updateSessionMobileNo(response.getUser().getMobileNo());
                                 sessionManager.updateSessionDesignation(response.getUser().getDesignation());
@@ -188,8 +190,6 @@ public class LoginActivity extends BaseActivity {
                                 sessionManager.updateSessionState(response.getUser().getState());
                                 sessionManager.updateSessionSsa(response.getUser().getSSA());
                                 sessionManager.updateSessionCustomer(response.getUser().getCustomerName());
-
-
 
 
                                 //String s1 = sessionManager.getSessionPreviousUserId().toString();

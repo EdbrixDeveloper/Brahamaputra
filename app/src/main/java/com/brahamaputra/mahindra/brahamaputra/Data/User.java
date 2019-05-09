@@ -19,6 +19,14 @@ public class User {
     @Expose
     private String username;
 
+    @SerializedName("UserTypeId")
+    @Expose
+    private String UserTypeId;
+
+    @SerializedName("UserTypeName")
+    @Expose
+    private String UserTypeName;
+
     @SerializedName("Email")
     @Expose
     private String Email;
@@ -81,6 +89,22 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getUserTypeId() {
+        return UserTypeId;
+    }
+
+    public void setUserTypeId(String userTypeId) {
+        UserTypeId = userTypeId;
+    }
+
+    public String getUserTypeName() {
+        return UserTypeName;
+    }
+
+    public void setUserTypeName(String userTypeName) {
+        UserTypeName = userTypeName;
     }
 
     public String getEmail() {

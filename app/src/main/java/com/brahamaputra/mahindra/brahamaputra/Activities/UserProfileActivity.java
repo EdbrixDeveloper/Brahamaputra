@@ -36,7 +36,9 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserProfileActivity extends BaseActivity {
@@ -93,6 +95,12 @@ public class UserProfileActivity extends BaseActivity {
     private BroadcastReceiver broadcastReceiver;
     private final String SERVICE_RESULT = "com.service.result";
     private final String SERVICE_MESSAGE = "com.service.message";
+
+
+    private ImageView mUserProfileImageViewUserType;
+    private TextView mUserProfileTextViewUserType;
+    private TextView mUserProfileTextViewUserTypeText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +167,7 @@ public class UserProfileActivity extends BaseActivity {
             mUserProfileTextViewEmailText.setText(sessionManager.getSessionUserEmail().toString());
             mUserProfileTextViewMobileNoText.setText(sessionManager.getSessionMobileNo().toString());
             mUserProfileTextViewDesignationText.setText(sessionManager.getSessionDesignation().toString());
+            mUserProfileTextViewUserTypeText.setText(sessionManager.getSessionUserTicketName().toString());
             mUserProfileTextViewCircleText.setText(sessionManager.getSessionCircle().toString());
             mUserProfileTextViewStateText.setText(sessionManager.getUser_State().toString());
             mUserProfileTextViewSsaText.setText(sessionManager.getUser_Ssa().toString());
@@ -323,6 +332,10 @@ public class UserProfileActivity extends BaseActivity {
         mUserProfileTextViewDesignation = (TextView) findViewById(R.id.userProfile_textView_designation);
         mUserProfileTextViewDesignationText = (TextView) findViewById(R.id.userProfile_textView_designationText);
 
+        mUserProfileImageViewUserType = (ImageView) findViewById(R.id.userProfile_imageView_userType);
+        mUserProfileTextViewUserType = (TextView) findViewById(R.id.userProfile_textView_userType);
+        mUserProfileTextViewUserTypeText = (TextView) findViewById(R.id.userProfile_textView_userTypeText);
+
         mUserProfileImageViewState = (ImageView) findViewById(R.id.userProfile_imageView_state);
         mUserProfileTextViewState = (TextView) findViewById(R.id.userProfile_textView_state);
         mUserProfileTextViewStateText = (TextView) findViewById(R.id.userProfile_textView_stateText);
@@ -362,6 +375,8 @@ public class UserProfileActivity extends BaseActivity {
                                     sessionManager.updateSessionUserID(response.getUserDetails().getId());
                                     sessionManager.updateSessionUserFirstName(response.getUserDetails().getFirstName());
                                     sessionManager.updateSessionUserLastName(response.getUserDetails().getLastName());
+                                    sessionManager.updateSessionUserTypeId(response.getUserDetails().getUserTypeId());
+                                    sessionManager.updateSessionUserTypeName(response.getUserDetails().getUserTypeName());
                                     sessionManager.updateSessionUserEmail(response.getUserDetails().getEmail());
                                     sessionManager.updateSessionMobileNo(response.getUserDetails().getMobileNo());
                                     sessionManager.updateSessionDesignation(response.getUserDetails().getDesignation());

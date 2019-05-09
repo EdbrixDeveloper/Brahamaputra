@@ -227,12 +227,41 @@
                         android:text="Tech"
                         android:textColor="#2196F3" />
 
+                    <ImageView
+                        android:id="@+id/userProfile_imageView_userType"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/userProfile_textView_designationText"
+                        android:clickable="true"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/ic_user" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_userType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userProfile_textView_designationText"
+                        android:layout_toRightOf="@+id/userProfile_imageView_userType"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="User Type" />
+
+                    <TextView
+                        android:id="@+id/userProfile_textView_userTypeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/userProfile_textView_userType"
+                        android:layout_marginBottom="@dimen/app_big_margin"
+                        android:layout_toRightOf="@+id/userProfile_imageView_userType"
+                        android:paddingLeft="@dimen/app_normal_padding"
+                        android:text="Type"
+                        android:textColor="#2196F3" />
+
 
                     <ImageView
                         android:id="@+id/userProfile_imageView_circle"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_below="@+id/userProfile_textView_designationText"
+                        android:layout_below="@+id/userProfile_textView_userTypeText"
                         android:clickable="true"
                         android:scaleType="fitStart"
                         android:src="@drawable/ic_circle" />
@@ -241,7 +270,7 @@
                         android:id="@+id/userProfile_textView_circle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/userProfile_textView_designationText"
+                        android:layout_below="@+id/userProfile_textView_userTypeText"
                         android:layout_toRightOf="@+id/userProfile_imageView_circle"
                         android:paddingLeft="@dimen/app_normal_padding"
                         android:text="Circle" />
