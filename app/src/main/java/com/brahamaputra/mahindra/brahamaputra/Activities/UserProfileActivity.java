@@ -167,7 +167,7 @@ public class UserProfileActivity extends BaseActivity {
             mUserProfileTextViewEmailText.setText(sessionManager.getSessionUserEmail().toString());
             mUserProfileTextViewMobileNoText.setText(sessionManager.getSessionMobileNo().toString());
             mUserProfileTextViewDesignationText.setText(sessionManager.getSessionDesignation().toString());
-            mUserProfileTextViewUserTypeText.setText(sessionManager.getSessionUserTicketName().toString());
+            mUserProfileTextViewUserTypeText.setText(sessionManager.getSessionUserTypeName().toString());
             mUserProfileTextViewCircleText.setText(sessionManager.getSessionCircle().toString());
             mUserProfileTextViewStateText.setText(sessionManager.getUser_State().toString());
             mUserProfileTextViewSsaText.setText(sessionManager.getUser_Ssa().toString());
