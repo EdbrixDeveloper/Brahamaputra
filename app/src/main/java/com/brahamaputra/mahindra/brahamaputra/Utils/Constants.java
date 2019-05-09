@@ -140,4 +140,11 @@ public class Constants {
     public final static String sitePmReportDashboardData = BASE_URL.concat("sitepm/dashboarddetails");
 
 
+    /*-- Ac PM Report Section --*/
+    public final static String acPmReportAcList = BASE_URL.concat("acpm/getacpmdashboard");
+    public final static String acPmReportDashboardData = BASE_URL.concat("acpm/dashboarddetails");
+
+
+
+
 }

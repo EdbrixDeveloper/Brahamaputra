@@ -504,6 +504,11 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
             case R.id.menuRefresh:
                 prepareListData();
                 return true;
+            case R.id.menuReport:
+                //showToast("Hi...");
+                //prepareListData();
+                startActivity(new Intent(AcPreventiveMaintenanceDashboardActivity.this, PreventiveMaintenanceAcReportDashboardActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

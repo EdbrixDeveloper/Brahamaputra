@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/preventiveMaintenanceAcReport_linearLayout_filtersMonthYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_normal_margin"
+        android:padding="@dimen/app_min_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/preventiveMaintenanceAcReport_textView_filtersMonth"
+            style="@style/MyTheme"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/app_big_margin"
+            android:layout_weight="0.35"
+            android:hint="Month"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/preventiveMaintenanceAcReport_textView_filtersYear"
+            style="@style/MyTheme"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/app_min_margin"
+            android:layout_weight="0.35"
+            android:hint="Year"
+            android:textAlignment="viewStart" />
+
+
+        <Button
+            android:id="@+id/preventiveMaintenanceAcReport_Button_filtersMonthYear"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/app_min_margin"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.25"
+            android:background="@drawable/buttonshape"
+            android:clickable="true"
+            android:text="GO"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <!--android:shadowColor="#512869"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout_Status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/preventiveMaintenanceAcReport_linearLayout_filtersMonthYear"
+        android:orientation="horizontal"
+        android:padding="@dimen/app_normal_padding"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.app.progresviews.ProgressWheel
+                android:id="@+id/wheelprogress"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                app:barWidth="09dp"
+                app:countText="0"
+                app:countTextColor="@android:color/black"
+                app:countTextSize="30sp"
+                app:defTextColor="@android:color/black"
+                app:defTextSize="16sp"
+                app:definitionText="Total Sites"
+                app:marginBtwText="15dp"
+                app:percentage="0"
+                app:progressColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_container1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/app_min_margin"
+                    android:layout_weight="1.8"
+                    android:background="@color/lightgrey" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:orientation="vertical"
+                    android:padding="@dimen/app_min_padding">
+
+                    <TextView
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_doneSites"
+                        style="@style/FontStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_no"
+                        style="@style/FontStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Done"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_container2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/app_min_margin"
+                    android:layout_weight="1.8"
+                    android:background="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:orientation="vertical"
+                    android:padding="@dimen/app_min_padding">
+
+                    <TextView
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_pendingSites"
+                        style="@style/FontStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/acPreventiveMaintenanceSection_textView_no2"
+                        style="@style/FontStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pending"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_container3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/app_min_margin"
+                    android:layout_weight="1.8"
+                    android:background="@color/lightGreen" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:orientation="vertical"
+                    android:padding="@dimen/app_min_padding">
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcReport_textView_totalSitePm1"
+                        style="@style/FontStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/preventiveMaintenanceAcReport_textView_totalSitePm2"
+                        style="@style/FontStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Current Month Plan"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_titleNames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout_Status"
+        android:background="#ffa726"
+        android:orientation="vertical"
+        android:visibility="gone"><!--dce775-->
+
+        <TextView
+            android:id="@+id/textView_acPmReportTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TITLE"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@+id/pmAcList_listView_siteList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout_titleNames"
+        tools:listheader="@layout/item_ac_pm_report_list_seprator"
+        tools:listitem="@layout/item_ac_pm_report_list" />
+
+    <TextView
+        android:id="@+id/txtNoTicketFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No data found."
+        android:visibility="gone" />
+
+
+    <!--Temporory Design-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout_Status"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary" />
+
+
+        <LinearLayout
+            android:id="@+id/pmSiteDashboard_linearLayout_ticket1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:padding="@dimen/app_normal_padding"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_HotoName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/app_min_margin"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site Name: ST_MH_01"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_reportSiteId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site ID: 1500" />
+
+                <TextView
+                    android:id="@+id/textView_reportSiteSSA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="SSA:Mahi_AA" />
+
+                <TextView
+                    android:id="@+id/textView_reportLastTicketNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Last Ticket No:PMJK1904003" />
+
+                <TextView
+                    android:id="@+id/textView_reportLastDoneDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Last Done Date:15/Apr/2019" />
+
+
+                <TextView
+                    android:id="@+id/textView_reportNextDueDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Next Due Date:15/July/2019"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pmSiteDashboard_linearLayout_ticket2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:padding="@dimen/app_normal_padding"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_HotoName1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/app_min_margin"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site Name: ST_MH_02"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_reportSiteId1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Site ID: 1507" />
+
+                <TextView
+                    android:id="@+id/textView_reportSiteSSA1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="SSA:Mahi_AA1" />
+
+                <TextView
+                    android:id="@+id/textView_reportLastTicketNo1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Last Ticket No:PMJK1904005" />
+
+                <TextView
+                    android:id="@+id/textView_reportLastDoneDate1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Last Done Date:01/Mar/2019" />
+
+                <TextView
+                    android:id="@+id/textView_reportNextDueDate1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_normal_margin"
+                    android:text="Next Due Date:01/June/2019"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <!--Temporory Design-->
+
+
+</RelativeLayout>

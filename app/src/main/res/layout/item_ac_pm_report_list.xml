@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:orientation="horizontal"
+    android:padding="@dimen/app_min_padding"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_reportSiteId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Site ID: 1500"
+            />
+        <!--android:textSize="18sp"
+            android:textStyle="bold"-->
+
+        <TextView
+            android:id="@+id/textView_reportSiteName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Site Name: ST_MH_01" />
+
+        <TextView
+            android:id="@+id/textView_reportSiteSSA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Site SSA: Mahi_01_AA" />
+
+        <TextView
+            android:id="@+id/textView_reportSiteAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Site Address: Jammu" />
+
+        <TextView
+            android:id="@+id/textView_reportLastTicketNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Last Ticket No: PMJK190400003" />
+
+        <TextView
+            android:id="@+id/textView_reportLastDoneDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Last Done Date: 14/Feb/2019" />
+
+        <TextView
+            android:id="@+id/textView_reportNextDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Next Due Date: 16/May/2019"
+            android:textStyle="bold" />
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textView_reportSiteId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_normal_margin"
+                android:layout_weight="0.99"
+                android:text="Site ID: 1500" />
+
+            <TextView
+                android:id="@+id/textView_reportLastTicketNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_normal_margin"
+                android:layout_weight="0.2"
+                android:text="Last Ticket No:PMJK190400003" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textView_reportSiteSSA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_normal_margin"
+                android:layout_weight="0.99"
+                android:text="SSA: Mahi_01_AA" />
+
+            <TextView
+                android:id="@+id/textView_reportLastDoneDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/app_normal_margin"
+                android:layout_weight="0.2"
+                android:text="Last Done Date:24/Apr/2019" />
+        </LinearLayout>-->
+
+        <!--<TextView
+            android:id="@+id/textView_reportSiteAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/app_min_margin"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:layout_weight="0.95"
+            android:text="Site Address: Plot No.213, Whites Road, Royapettah, Chennai, Tamil Nadu, 600014 " />
+
+        <TextView
+            android:id="@+id/textView_reportNextDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_normal_margin"
+            android:text="Next Due Date:24/Apr/2019"
+            android:textStyle="bold" />-->
+
+        <!--android:layout_weight="0.2"-->
+
+
+        <!--<TextView
+            android:id="@+id/textView_SiteAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Site Address: Plot No.213, Whites Road, Royapettah, Chennai, Tamil Nadu, 600014 "
+            android:layout_marginBottom="@dimen/app_min_margin"
+            android:layout_marginLeft="@dimen/app_normal_margin"/>-->
+
+    </LinearLayout>
+
+    <!--<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+
+    </RelativeLayout>-->
+
+</LinearLayout>

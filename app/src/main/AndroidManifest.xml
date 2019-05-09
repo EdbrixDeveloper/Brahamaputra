@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -222,12 +221,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-
-        <service android:name=".Services.NotifyService"/>
-        <!--  Declare  Alarm Broadcast receiver here  -->
+        <service android:name=".Services.NotifyService" />
+        <!-- Declare  Alarm Broadcast receiver here -->
         <receiver android:name=".Services.AlarmReceiver" />
-        <!--  Declare  Alarm Sound Service here  -->
+        <!-- Declare  Alarm Sound Service here -->
         <service android:name=".Services.AlarmSoundService" />
 
         <!-- [END firebase_service] -->
@@ -356,8 +353,7 @@
             android:name=".Activities.PreventiveMaintenanceSiteReportDashboard"
             android:label="Preventive Maintenance Site Report Dashboard"
             android:screenOrientation="portrait" />
-
-
+        <activity android:name=".Activities.PreventiveMaintenanceAcReportDashboardActivity"></activity>
     </application>
 
 </manifest>
