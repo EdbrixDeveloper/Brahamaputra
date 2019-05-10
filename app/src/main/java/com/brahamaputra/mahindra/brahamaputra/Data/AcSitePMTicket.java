@@ -30,6 +30,11 @@ public class AcSitePMTicket {
     @SerializedName("VendorName")
     @Expose
     private String vendorName;
+
+    @SerializedName("AcTechnicianId")
+    @Expose
+    private String acTechnicianId;
+
     @SerializedName("AcTechnicianName")
     @Expose
     private String acTechnicianName;
@@ -147,6 +152,14 @@ public class AcSitePMTicket {
 
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
+    }
+
+    public String getAcTechnicianId() {
+        return acTechnicianId;
+    }
+
+    public void setAcTechnicianId(String acTechnicianId) {
+        this.acTechnicianId = acTechnicianId;
     }
 
     public String getAcTechnicianName() {

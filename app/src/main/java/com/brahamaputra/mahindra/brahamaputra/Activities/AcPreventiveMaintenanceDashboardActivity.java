@@ -172,6 +172,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                             final String sheduledDateOfAcPm = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSheduledDateOfAcPm() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSheduledDateOfAcPm().toString();
                             final String modeOfOpration = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getModeOfOpration() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getModeOfOpration().toString();
                             final String vendorName = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getVendorName() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getVendorName().toString();
+                            final String acTechnicianId = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getAcTechnicianId() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getAcTechnicianId().toString();
                             final String acTechnicianName = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getAcTechnicianName() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getAcTechnicianName().toString();
                             final String acTechnicianMobileNo = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getAcTechnicianMobileNo() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getAcTechnicianMobileNo().toString();
                             final String siteDBId = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSiteDBId() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getSiteDBId().toString();
@@ -190,51 +191,54 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
 
                             final String acPmTickStatus = acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getStatus() == null ? "" : acPmTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMAcTickets().get(childPosition).getStatus().toString();
 
+                            if (!acTechnicianId.isEmpty()) {
+                                if (getDaysRemainingForSheduledDate(currentDateTimeString, sheduledDateOfAcPm)) {
+                                    // comment for not added checkSystemLocation || acPmTickStatus.equals("Processed")
+                                    if (acPmTickStatus.equals("Open") || acPmTickStatus.equals("WIP") || acPmTickStatus.equals("Reassigned")) {
+                                        if (acPmTickStatus.equals("Open")) {
 
-                            if (getDaysRemainingForSheduledDate(currentDateTimeString, sheduledDateOfAcPm)) {
-                                // comment for not added checkSystemLocation || acPmTickStatus.equals("Processed")
-                                if (acPmTickStatus.equals("Open") || acPmTickStatus.equals("WIP") || acPmTickStatus.equals("Reassigned")) {
-                                    if (acPmTickStatus.equals("Open")) {
+                                            int flag = 0;
+                                            if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
+                                                flag = 1;
+                                            } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                                flag = 1;
+                                            } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                                flag = 1;
+                                            } else {
+                                                flag = 0;
+                                                showToast("Access denied in ticket status " + acPmTickStatus + " mode");
+                                            }
+                                            if (flag == 1) {
+                                                checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
+                                                        sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
+                                                        submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
+                                                        vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
+                                            }
 
-                                        int flag = 0;
-                                        if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
-                                            flag = 1;
-                                        } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                            flag = 1;
-                                        } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                            flag = 1;
                                         } else {
-                                            flag = 0;
-                                            showToast("Access denied in ticket status " + acPmTickStatus + " mode");
-                                        }
-                                        if (flag == 1) {
-                                            checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
-                                                    sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
-                                                    submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
-                                                    vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
+                                            int flag = 0;
+                                            if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
+                                                flag = 1;
+                                            } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                                flag = 1;
+                                            } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                                                flag = 1;
+                                            } else {
+                                                flag = 0;
+                                                showToast("Access denied in ticket status " + acPmTickStatus + " mode");
+                                            }
+                                            if (flag == 1) {
+                                                checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
+                                                        sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
+                                                        submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
+                                                        vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
+                                            }
                                         }
 
-                                    } else {
-                                        int flag = 0;
-                                        if (accessType.equals("S") && ticketAccess.equals("1") && (acPmTickStatus.equals("Open") || acPmTickStatus.equals("Reassigned"))) {
-                                            flag = 1;
-                                        } else if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                            flag = 1;
-                                        } else if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                            flag = 1;
-                                        } else {
-                                            flag = 0;
-                                            showToast("Access denied in ticket status " + acPmTickStatus + " mode");
-                                        }
-                                        if (flag == 1) {
-                                            checkSystemLocation(customerName, circleName, stateName, ssaName, siteDBId, siteId, siteName, siteType,
-                                                    sitePMAcTicketId, sitePMAcTicketNo, sitePMAcTicketDate, pmPlanDate,
-                                                    submittedDate, sheduledDateOfAcPm, numberOfAc, modeOfOpration,
-                                                    vendorName, acTechnicianName, acTechnicianMobileNo, accessType, ticketAccess, acPmTickStatus);
-                                        }
                                     }
-
                                 }
+                            } else {
+                                showToast("Not found AC Technician ");
                             }
 
                         }

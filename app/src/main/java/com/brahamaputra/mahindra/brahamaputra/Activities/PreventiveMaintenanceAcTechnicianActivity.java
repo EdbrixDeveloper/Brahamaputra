@@ -1193,7 +1193,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                             if (checkValidationonSubmit("onSubmit") == true) {
                                 //submitDetails();
                                 if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                                    showToast("You are in readable mode");
+                                    onBackPressed();
+                                    //showToast("You are in readable mode");
                                 } else {
                                     if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
 
@@ -1256,7 +1257,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
                     } else if (currentPos == (totalCount - 1)) {
                         if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
-                            showToast("You are in readable mode");
+                            onBackPressed();
+                            //showToast("You are in readable mode");
                         }
                     }
 
@@ -1992,6 +1994,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Next Reading");
             } else {
                 mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Finish");
+                if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                    mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Back");
+                }
             }
         }
     }
@@ -2154,10 +2159,16 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         } else if (pos > 0 && pos == (totalCount - 1)) {
             mPreventiveMaintenanceAcTechnicianButtonPreviousReading.setVisibility(View.VISIBLE);
             mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Finish");
+            if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Back");
+            }
         } else if (pos == 0) {
             mPreventiveMaintenanceAcTechnicianButtonPreviousReading.setVisibility(View.GONE);
             if (pos == (totalCount - 1)) {
                 mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Finish");
+                if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                    mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Back");
+                }
             } else {
                 mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Next Reading");
             }
@@ -2631,6 +2642,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 mPreventiveMaintenanceAcTechnicianButtonNextReading.setVisibility(View.VISIBLE);
                 if (totalCount > 0 && totalCount == 1) {
                     mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Finish");
+                    if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
+                        mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Back");
+                    }
                 } else {
                     mPreventiveMaintenanceAcTechnicianButtonNextReading.setText("Next Reading");
                 }
