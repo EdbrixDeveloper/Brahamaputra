@@ -495,7 +495,7 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.refresh_icon_menu, menu);
+        menuInflater.inflate(R.menu.refresh_icon_menu_site_pm, menu);
         return true;
     }
 
