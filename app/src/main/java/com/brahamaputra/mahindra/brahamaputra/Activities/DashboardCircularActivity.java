@@ -115,20 +115,20 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         String timeStamp = fromNotificationIntent.getStringExtra("timestamp");
 
 
-        if(typeId!=null) {
+        if (typeId != null) {
 
-            if(typeId.equals("1")) {
+            if (typeId.equals("1")) {
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
                 alertDialogManager.setAlertDialogCancellable(false);
 
-                alertDialogManager.Dialog(title, message+"\n\n"+timeStamp, "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                alertDialogManager.Dialog(title, message + "\n\n" + timeStamp, "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
                         startActivity(new Intent(DashboardCircularActivity.this, UsersHotoListActivity.class));
                     }
                 }).show();
 
-            }else if(typeId.equals("2")){
+            } else if (typeId.equals("2")) {
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
                 alertDialogManager.Dialog("Information", "This is for Diesel Fund Request", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
@@ -136,7 +136,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                         startActivity(new Intent(DashboardCircularActivity.this, DieselFillingFundReqestList.class));
                     }
                 }).show();
-            }else if(typeId.equals("3")){
+            } else if (typeId.equals("3")) {
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
                 alertDialogManager.Dialog("Information", "This is for Electricity Billing", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
@@ -144,7 +144,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                         startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));
                     }
                 }).show();
-            }else if(typeId.equals("4")){
+            } else if (typeId.equals("4")) {
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
                 alertDialogManager.Dialog("Information", "This is for Diesel Filling", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
@@ -152,7 +152,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                         startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));
                     }
                 }).show();
-            }else if(typeId.equals("5")){
+            } else if (typeId.equals("5")) {
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
                 alertDialogManager.Dialog("Information", "This is for Saftey Tips", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
@@ -160,12 +160,29 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                         startActivity(new Intent(DashboardCircularActivity.this, SafteyTipsActivity.class));
                     }
                 }).show();
-            }else {
+            } else if (typeId.equals("6")) {
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.Dialog("Information", "This is for Site Preventive Maintaince", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+
+                        startActivity(new Intent(DashboardCircularActivity.this, PreventiveMaintenanceDashboard.class));
+                    }
+                }).show();
+            } else if (typeId.equals("7")) {
+                alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
+                alertDialogManager.Dialog("Information", "This is for Ac Preventive Maintaince", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
+                    @Override
+                    public void onPositiveClick() {
+                        startActivity(new Intent(DashboardCircularActivity.this, AcPreventiveMaintenanceDashboardActivity.class));
+                    }
+                }).show();
+            } else {
                 alertDialogManager = new AlertDialogManager(DashboardCircularActivity.this);
                 alertDialogManager.Dialog("Information", "This is for Default", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
-                       /* startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));*/
+                        /* startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));*/
                     }
                 }).show();
             }
@@ -173,7 +190,7 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
-    public void showAlertDialogBox(final String className)  {
+    public void showAlertDialogBox(final String className) {
 
     }
 

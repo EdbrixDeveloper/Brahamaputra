@@ -20,7 +20,9 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.brahamaputra.mahindra.brahamaputra.Activities.AcPreventiveMaintenanceDashboardActivity;
 import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardCircularActivity;
+import com.brahamaputra.mahindra.brahamaputra.Activities.PreventiveMaintenanceDashboard;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
@@ -54,17 +56,16 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
     private SessionManager sessionManager;
 
     @Override
-        public void onNewToken(String s) {
-            super.onNewToken(s);
-            //doNewToken(sessionManager.getSessionDeviceToken(),s);
-            sessionManager = new SessionManager(this);
-            if(!(sessionManager.getSessionUserId().equals("")) && !(sessionManager.getSessionDeviceToken().equals("")))
-            {
-                doNewToken("",s,sessionManager);
-            }else{
-                sessionManager.updateSessionFCMToken(s);
-            }
-            Log.d(TAG,"NewToken: "+s);
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        //doNewToken(sessionManager.getSessionDeviceToken(),s);
+        sessionManager = new SessionManager(this);
+        if (!(sessionManager.getSessionUserId().equals("")) && !(sessionManager.getSessionDeviceToken().equals(""))) {
+            doNewToken("", s, sessionManager);
+        } else {
+            sessionManager.updateSessionFCMToken(s);
+        }
+        Log.d(TAG, "NewToken: " + s);
 
 
     }
@@ -252,7 +253,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             String typeId = data.getString("typeId");
             String title = data.getString("title");
             String tempMsg = String.valueOf(Html.fromHtml(data.getString("message"), null, null));
-            String message = tempMsg.replaceAll("\\[", "").replaceAll("\\]","");
+            String message = tempMsg.replaceAll("\\[", "").replaceAll("\\]", "");
             boolean isBackground = data.getBoolean("is_background");
             String imageUrl = data.getString("image");
             String timestamp = data.getString("timestamp");
@@ -262,12 +263,11 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
             String hototicketid = "";
             if (payload.has("hototicketdetails")) {
                 JSONObject hototicketdetails = payload.getJSONObject("hototicketdetails");
-                if(hototicketdetails.has("hototicketid"))
-                {
+                if (hototicketdetails.has("hototicketid")) {
                     hototicketid = hototicketdetails.getString("hototicketid");
-                }else if(hototicketdetails.has("Fund Transfered")){
+                } else if (hototicketdetails.has("Fund Transfered")) {
                     fundTransfered = hototicketdetails.getString("Fund Transfered");
-                }else {
+                } else {
                     hototicketid = "";
                     fundTransfered = "";
                 }
@@ -290,7 +290,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
                 resultIntent.putExtra("typeId", typeId);
                 resultIntent.putExtra("title", title);
-                resultIntent.putExtra("msg", message.replaceAll("\\[", "").replaceAll("\\]",""));
+                resultIntent.putExtra("msg", message.replaceAll("\\[", "").replaceAll("\\]", ""));
                 resultIntent.putExtra("timestamp", timestamp);
 
             } else if (typeId.equals("2")) {
@@ -304,6 +304,16 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                 resultIntent.putExtra("typeId", typeId);
 
             } else if (typeId.equals("4")) {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId", typeId);
+
+            } else if (typeId.equals("6")) {
+
+                resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
+                resultIntent.putExtra("typeId", typeId);
+
+            } else if (typeId.equals("7")) {
 
                 resultIntent = new Intent(getApplicationContext(), DashboardCircularActivity.class);
                 resultIntent.putExtra("typeId", typeId);
@@ -431,10 +441,9 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
         localBroadcastManager.sendBroadcast(intent);
     }
 
-    private void doNewToken(String prvToken, final String newToken,final SessionManager sessionManager) {
+    private void doNewToken(String prvToken, final String newToken, final SessionManager sessionManager) {
 
-        if(!prvToken.equals(newToken))
-        {
+        if (!prvToken.equals(newToken)) {
             try {
                 JSONObject jo = new JSONObject();
                 try {
@@ -448,25 +457,25 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                     return;
                 }
 
-                Log.e(GoogleFirebaseMessagingService.class.getName(),"In the doNewToken() :"+jo.toString());
+                Log.e(GoogleFirebaseMessagingService.class.getName(), "In the doNewToken() :" + jo.toString());
 
                 JsonRequest doNewToken = new JsonRequest(Request.Method.POST, Constants.updatedevicetoken, jo,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(@NonNull JSONObject response) {
                                 try {
-                                if (response != null) {
-                                    if (response.has("Success")) {
-                                        int success = response.getInt("Success");
-                                        if (success == 1) {
-                                            sessionManager.updateSessionFCMToken(newToken);
-                                        } else {
+                                    if (response != null) {
+                                        if (response.has("Success")) {
+                                            int success = response.getInt("Success");
+                                            if (success == 1) {
+                                                sessionManager.updateSessionFCMToken(newToken);
+                                            } else {
 
+                                            }
                                         }
                                     }
-                                }
                                 } catch (Exception e) {
-                                    Log.e(GoogleFirebaseMessagingService.class.getName(),"Exception :" + e.getMessage());
+                                    Log.e(GoogleFirebaseMessagingService.class.getName(), "Exception :" + e.getMessage());
                                     e.printStackTrace();
                                 }
                             }
@@ -474,7 +483,7 @@ public class GoogleFirebaseMessagingService extends FirebaseMessagingService {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //showToast(SettingsMy.getErrorMessage(error));
-                        Log.e(GoogleFirebaseMessagingService.class.getName(),"onErrorResponse :" + SettingsMy.getErrorMessage(error));
+                        Log.e(GoogleFirebaseMessagingService.class.getName(), "onErrorResponse :" + SettingsMy.getErrorMessage(error));
                     }
                 });
                 doNewToken.setRetryPolicy(Application.getDefaultRetryPolice());
