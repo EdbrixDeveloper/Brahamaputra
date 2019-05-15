@@ -2831,6 +2831,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                                 //if (response != null) {
                                 acPmTransactionDetails = response;
                                 flagReadDataByFSE = true;
+                                DisabledFieldsForACTech();
                                 setAcPmData(0);
                             } else {
                                 showToast("No data found");
@@ -2858,5 +2859,49 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
     }
 
+    private void DisabledFieldsForACTech() {
+        //mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.GONE);
+        //mButtonClearQRCodeScanView.setVisibility(View.GONE);
+
+        mPreventiveMaintenanceAcTechnicianTextViewMainMcbStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewSubMcbStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewMetalCladPlugStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewMetalCladSocketStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStabilizerMakeVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStablizerStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStabilizerCapacityVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewStablizerWorkingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextInputAcVoltage.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcEarthingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFilterCleanedVal.setEnabled(false);
+
+        mPreventiveMaintenanceAcTechnicianTextViewCondenserCoilCleanedVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewCoolingCoilCleanedVal.setEnabled(false);
+
+        mPreventiveMaintenanceAcTechnicianTextViewAcCoolingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextAcStartingLoadcurrent.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextAcRunningLoadCurrent.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewIndoorFilterCleanedStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewIndoorFanMotorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewBlowerWheelConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewNoiseIndoorMotorVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewOutdoorFanMotorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFanLeafConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewNoiseOutdoorMotorVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewCompressorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewCompCapacitorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewControllerConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcAlarmStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcSensorConditionVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextRoomTemperature.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextSetTemperature.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewVibrationOfAcVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingUnitStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewFreeCoolingAvailableWorkingStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewWaterLeakageVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewAcCabinateStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianTextViewShelterDoorStatusVal.setEnabled(false);
+        mPreventiveMaintenanceAcTechnicianEditTextRemarks.setEnabled(false);
+    }
 
 }

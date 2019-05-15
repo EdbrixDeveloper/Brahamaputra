@@ -542,7 +542,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                                 if (response.getSuccess() == 1) {
                                     hideBusyProgress();
                                     //setResult(RESULT_OK);
-                                    showToast("Record submitted successfully.");
+                                    showToast("Ticket submitted successfully.");
                                     //finish();
                                     Intent intent = new Intent(PreventiveMaintanceAcFieldEngineerActivity.this, AcPreventiveMaintenanceDashboardActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
