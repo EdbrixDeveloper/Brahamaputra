@@ -21,6 +21,7 @@ public class MaintenanceDashboardActivity extends AppCompatActivity {
     private ImageView mImgAcPreventiveMaintenance;
     private RelativeLayout mMyPreventiveListRelativeLayoutSitePreventiveMaintenance;
     private ImageView mImgSitePreventiveMaintenance;
+    private RelativeLayout mMyPreventiveListRelativeLayoutSiteWrmsReport;
     public GPSTracker gpsTracker;
     private AlertDialogManager alertDialogManager;
 
@@ -49,7 +50,7 @@ public class MaintenanceDashboardActivity extends AppCompatActivity {
                             }
                         }).show();
                     }
-                }else {
+                } else {
                     alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
                         public void onPositiveClick() {
@@ -66,6 +67,35 @@ public class MaintenanceDashboardActivity extends AppCompatActivity {
 
             }
         });
+
+        mMyPreventiveListRelativeLayoutSiteWrmsReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Conditions.isNetworkConnected(MaintenanceDashboardActivity.this)) {
+                    /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {*/
+                    startActivity(new Intent(MaintenanceDashboardActivity.this, WrmsUptimeReportDashboardActivity.class));
+                    /*} else {
+                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                            @Override
+                            public void onPositiveClick() {
+                                if (gpsTracker.canGetLocation()) {
+                                    Log.e(MaintenanceDashboardActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
+                                }
+                            }
+                        }).show();
+                    }*/
+                } else {
+                    alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
+                        @Override
+                        public void onPositiveClick() {
+                            finish();
+                        }
+                    }).show();
+                }
+
+            }
+        });
+
     }
 
     private void assignViews() {
@@ -73,6 +103,7 @@ public class MaintenanceDashboardActivity extends AppCompatActivity {
         mImgAcPreventiveMaintenance = (ImageView) findViewById(R.id.img_acPreventiveMaintenance);
         mMyPreventiveListRelativeLayoutSitePreventiveMaintenance = (RelativeLayout) findViewById(R.id.MyPreventiveList_relativeLayout_sitePreventiveMaintenance);
         mImgSitePreventiveMaintenance = (ImageView) findViewById(R.id.img_sitePreventiveMaintenance);
+        mMyPreventiveListRelativeLayoutSiteWrmsReport = (RelativeLayout) findViewById(R.id.MyPreventiveList_relativeLayout_wrmsReport);
         gpsTracker = new GPSTracker(MaintenanceDashboardActivity.this);
         alertDialogManager = new AlertDialogManager(MaintenanceDashboardActivity.this);
     }

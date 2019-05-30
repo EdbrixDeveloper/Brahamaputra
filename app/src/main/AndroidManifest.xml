@@ -349,11 +349,23 @@
         <activity android:name=".Activities.EbSiteElectrificationList" />
         <activity android:name=".Activities.EbSiteElectrificationTransactionActivity" />
         <activity android:name=".Activities.EbSiteElectrificationElectricConnectionActivity" />
+
         <activity
             android:name=".Activities.PreventiveMaintenanceSiteReportDashboard"
             android:label="Preventive Maintenance Site Report Dashboard"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.PreventiveMaintenanceAcReportDashboardActivity"></activity>
+
+        <activity
+            android:name=".Activities.PreventiveMaintenanceAcReportDashboardActivity"
+            android:label="Preventive Maintenance AC Report Dashboard Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.WrmsUptimeReportDashboardActivity"
+            android:label="wrms Uptime Report Dashboard Activity"
+            android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>
