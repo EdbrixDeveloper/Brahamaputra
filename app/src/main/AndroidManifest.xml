@@ -362,7 +362,12 @@
 
         <activity
             android:name=".Activities.WrmsUptimeReportDashboardActivity"
-            android:label="wrms Uptime Report Dashboard Activity"
+            android:label="WRMS Uptime Report Dashboard Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Activities.WrmsAlarmAcknowledgeActivity"
+            android:label="WRMS Alarm Acknowledge Activity"
             android:screenOrientation="portrait" />
 
 

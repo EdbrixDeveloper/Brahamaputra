@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.WrmsAlarmAcknowledgeActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/wrmsAlarmAcknowledge_button_acknowledge"
+        android:layout_marginBottom="@dimen/app_min_margin"
+        android:padding="@dimen/app_min_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/app_normal_margin"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/app_normal_padding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Circle"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_circle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SSA"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_ssa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Site ID"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_siteID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name of site"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_nameOfSite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alarm Ticket Number"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_alarmTicketNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alarm Description"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_alarmDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alarm Severity"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_alarmSeverity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alarm Occurrence Time"
+                android:textColor="@color/colorBlueLink"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/wrmsAlarmAcknowledge_editText_alarmOccurrenceTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint=""
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+
+        </LinearLayout>
+        /
+    </ScrollView>
+
+    <Button
+        android:id="@+id/wrmsAlarmAcknowledge_button_acknowledge"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/red"
+        android:text="ACKNOWLEDGE"
+        android:textColor="@color/colorWhite"
+        android:textSize="18dp" />
+</RelativeLayout>
