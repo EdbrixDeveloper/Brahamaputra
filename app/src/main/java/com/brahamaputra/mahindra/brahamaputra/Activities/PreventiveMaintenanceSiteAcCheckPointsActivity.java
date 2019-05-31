@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -32,7 +31,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransa
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -119,9 +117,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
 
     private String base64StringAcCheckPointsQRCodeScan = "";
-    //private String imageFileAcCheckPointsQRCodeScan;
-    //private Uri imageFileUriAcCheckPointsQRCodeScan = null;
-
     private String base64StringTakePhotoOfAcFiltersBeforeCleaning = "";
     private String base64StringTakePhotoOfAcFiltersAfterCleaning = "";
     private String base64StringTakePhotoOfTemperature = "";
@@ -141,14 +136,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 
-    private AlertDialogManager alertDialogManager;
-
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
@@ -532,7 +523,6 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             return true;
         }
 
-
         return false;
     }
 
@@ -593,7 +583,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 if (imageFileUriAcFiltersBeforeCleaning != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriAcFiltersBeforeCleaning);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -603,7 +593,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 if (imageFileUriAcFiltersAfterCleaning != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriAcFiltersAfterCleaning);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -613,7 +603,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 if (imageFileUriTemperature != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriTemperature);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -634,7 +624,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAcCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteAcCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -999,12 +989,10 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
                 }
             } else {
                 showToast("No previous saved data available");
-                //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 mLinearLayoutContainer.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //showToast(e.getMessage().toString());
         }
     }
 
@@ -1165,7 +1153,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
     }
 

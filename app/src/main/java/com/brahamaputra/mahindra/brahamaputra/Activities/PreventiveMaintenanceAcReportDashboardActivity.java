@@ -17,13 +17,11 @@ import com.app.progresviews.ProgressWheel;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.PmAcReportExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPMReportListData;
-import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -122,7 +120,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
             Log.e(PreventiveMaintenanceSiteReportDashboard.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
         }
 
-        //prepareListData();
         prepareSitePmReportListData();
 
         //default calling first time
@@ -142,10 +139,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
                 mLinearLayoutTitleNames.setVisibility(View.VISIBLE);
                 mTextViewAcPmReportTitle.setText("Current Month Plan");
                 prepareListDataOnChangedAndSelection("4");
-
-                //showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
-
-
             }
         });
 
@@ -156,7 +149,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
                 mTextViewAcPmReportTitle.setText("Total Sites");
                 sitePmReportType = "1";
                 prepareListDataOnChangedAndSelection("1");
-                //showToast("Clicked on total site filter");
             }
         });
 
@@ -167,8 +159,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
                 mTextViewAcPmReportTitle.setText("Done");
                 sitePmReportType = "2";
                 prepareListDataOnChangedAndSelection("2");
-
-                //showToast("Clicked on done site filter");
             }
         });
 
@@ -179,7 +169,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
                 mTextViewAcPmReportTitle.setText("Pending");
                 sitePmReportType = "3";
                 prepareListDataOnChangedAndSelection("3");
-                //showToast("Clicked on pending site filter");
             }
         });
 
@@ -190,8 +179,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
                 mTextViewAcPmReportTitle.setText("Current Month Plan");
                 sitePmReportType = "4";
                 prepareListDataOnChangedAndSelection("4");
-
-                //showToast("Clicked on total site pm filter");
             }
         });
 
@@ -203,120 +190,13 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
             }
         });
 
-        mPmAcListListViewSiteList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        /*mPmAcListListViewSiteList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, final int childPosition, long id) {
-                // notify user
-
-                /*LocationManager lm = (LocationManager) PreventiveMaintenanceSiteReportDashboard.this.getSystemService(Context.LOCATION_SERVICE);
-                boolean gps_enabled = false;
-                boolean network_enabled = false;
-
-                try {
-                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-                } catch (Exception ex) {
-                }
-
-                if (!gps_enabled && !network_enabled) {
-                    // notify user
-                    alertDialogManager.Dialog("Conformation", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                        @Override
-                        public void onPositiveClick() {
-                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            PreventiveMaintenanceSiteReportDashboard.this.startActivity(myIntent);
-                        }
-                    }).show();
-                } else {
-                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        if (sitePMReportListData != null) {
-                            String myFormat = "dd/MMM/yyyy";
-                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                            String currentDateTimeString = sdf.format(new Date());
-
-                            final String sitePMTicketId = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getId().toString();
-                            final String sitePMTicketNo = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketNo().toString();
-
-                            final String sitePMTicketDate = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketDate().toString();
-                            final String siteId = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteId().toString();
-                            final String siteName = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteName().toString();
-                            final String siteAddress = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteAddress().toString();
-                            final String status = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
-                            final String siteType = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteType().toString();
-                            final String stateName = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStateName().toString();
-                            final String customerName = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCustomerName().toString();
-                            final String circleName = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCircleName().toString();
-                            final String ssaName = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSSAName().toString();
-                            final String sourceOfPower = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSourceOfPower().toString();
-                            final String sitePmScheduledDate = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMScheduledDate().toString();
-                            final String SiteBoundaryStatus = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteBoundaryStatus().toString();
-                            final String NoOfACprovided = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNoOfACprovided().toString();
-                            final String ServoStabilizerStatus = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getServoStabilizerWorkingStatus().toString();
-
-
-                            if (getDaysRemainingForSheduledDate(currentDateTimeString, sitePmScheduledDate)) {
-
-                                if (sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes() != null) {
-                                    batteryType = new ArrayList<BatteryType>();
-                                    batteryType.addAll(sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes());
-                                }
-
-                                hototicket_Selected_SiteType = siteType;
-                                hototicket_sourceOfPower = sourceOfPower;
-                                sitePm_siteBoundaryStatus = SiteBoundaryStatus;
-                                sitePmNoOfAcAvailableAtSite = NoOfACprovided;
-                                sitePmServoStabilizerWorkingStatus = ServoStabilizerStatus;
-
-                                sitePmCustomerName = customerName;
-                                sitePmCircleName = circleName;
-                                sitePmStateName = stateName;
-                                sitePmSiteName = siteName;
-                                sitePmSiteId = siteId;
-                                sitePmSsaName = ssaName;
-
-                                String sitePMTickStatus = sitePMReportListData.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
-
-                                if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
-                                    if (sitePMTickStatus.equals("Open")) {
-
-                                        alertDialogManager.Dialog("Conformation", "Do you want to proceed doing Site PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-                                            @Override
-                                            public void onPositiveClick() {
-                                                checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                        stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
-                                            }
-
-                                            @Override
-                                            public void onNegativeClick() {
-
-                                            }
-                                        }).show();
-
-                                    } else {
-                                        checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType);
-                                    }
-
-                                }
-                            }
-                        }
-
-                    } else {
-                        alertDialogManager.Dialog("Conformation", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                            @Override
-                            public void onPositiveClick() {
-                                if (gpsTracker.canGetLocation()) {
-                                    Log.e(PriventiveMaintenanceSiteTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                                }
-                            }
-                        }).show();
-                    }
-                }*/
-
 
                 return false;
             }
-        });
+        });*/
     }
 
     private void initCombo() {
@@ -391,7 +271,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
         mTxtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
     }
 
-
     private void prepareSitePmReportListData() {
 
         try {
@@ -404,14 +283,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
             int i = monthNames.indexOf(mPreventiveMaintenanceAcReportTextViewFiltersMonth.getText().toString().trim()) + 1;
             jo.put("Month", String.valueOf(i));
             jo.put("Year", mPreventiveMaintenanceAcReportTextViewFiltersYear.getText().toString().trim());
-
-            /*jo.put("TotalSites", TotalSites);
-            jo.put("DoneSites", DoneSites);
-            jo.put("PendingSites", PendingSites);
-            jo.put("TotalSitePm", TotalSitePm);
-            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
-            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
-
 
             Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.acPmReportAcList + "\n\n" + jo.toString());
 
@@ -432,17 +303,7 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
                                         mPreventiveMaintenanceAcReportTextViewTotalSitePm1.setText(acPMReportListData.getAcPMReportSummary().getTotalSitePm() == null || acPMReportListData.getAcPMReportSummary().getTotalSitePm().isEmpty() ? "0" : acPMReportListData.getAcPMReportSummary().getTotalSitePm().toString());
                                         mWheelprogress.setPercentage(360);
                                         mWheelprogress.setStepCountText(String.valueOf(acPMReportListData.getAcPMReportSummary().getTotalSites()));//per
-                                    }
-                                    /*if (sitePMReportListData.getSitePMReportTicketsDates() != null && sitePMReportListData.getSitePMReportTicketsDates().size() > 0) {
-                                        mTxtNoTicketFound.setVisibility(View.GONE);
-                                        mPmSiteListListViewSiteList.setVisibility(View.VISIBLE);
-                                        pmSiteReportExpListAdapter = new PmSiteReportExpListAdapter(PreventiveMaintenanceSiteReportDashboard.this, sitePMReportListData);
-                                        mPmSiteListListViewSiteList.setAdapter(pmSiteReportExpListAdapter);
-                                        for (int i = 0; i < sitePMReportListData.getSitePMReportTicketsDates().size(); i++) {
-                                            mPmSiteListListViewSiteList.expandGroup(i);
-                                        }
-                                    }*/
-                                    else {
+                                    } else {
                                         mAcPreventiveMaintenanceSectionTextViewDoneSites.setText("0");
                                         mAcPreventiveMaintenanceSectionTextViewPendingSites.setText("0");
                                         mPreventiveMaintenanceAcReportTextViewTotalSitePm1.setText("0");
@@ -488,12 +349,6 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
             jo.put("Month", String.valueOf(i));
             jo.put("Year", mPreventiveMaintenanceAcReportTextViewFiltersYear.getText().toString().trim());
             jo.put("Type", type);
-            /*jo.put("DoneSites", DoneSites);
-            jo.put("PendingSites", PendingSites);
-            jo.put("TotalSitePm", TotalSitePm);
-            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
-            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
-
 
             Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.acPmReportDashboardData + "\n\n" + jo.toString());
 
@@ -507,15 +362,7 @@ public class PreventiveMaintenanceAcReportDashboardActivity extends BaseActivity
                             } else {
                                 if (response.getSuccess() == 1) {
                                     acPMReportListData = response;
-                                    /*if (sitePMReportListData.getSitePMReportSummary() != null) {
 
-                                        mAcPreventiveMaintenanceSectionTextViewDoneSites.setText(sitePMReportListData.getSitePMReportSummary().getDoneSites() == null || sitePMReportListData.getSitePMReportSummary().getDoneSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getDoneSites().toString());
-                                        mAcPreventiveMaintenanceSectionTextViewPendingSites.setText(sitePMReportListData.getSitePMReportSummary().getPendingSites() == null || sitePMReportListData.getSitePMReportSummary().getPendingSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getPendingSites().toString());
-                                        mPreventiveMaintenanceSiteReportTextViewTotalSitePm1.setText(sitePMReportListData.getSitePMReportSummary().getTotalSitePm() == null || sitePMReportListData.getSitePMReportSummary().getTotalSitePm().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getTotalSitePm().toString());
-                                        mWheelprogress.setPercentage(360);
-                                        mWheelprogress.setStepCountText(String.valueOf(sitePMReportListData.getSitePMReportSummary().getTotalSites()));//per
-
-                                    }*/
                                     if (acPMReportListData.getAcPMReportTicketsDates() != null && acPMReportListData.getAcPMReportTicketsDates().size() > 0) {
                                         mTxtNoTicketFound.setVisibility(View.GONE);
                                         mPmAcListListViewSiteList.setVisibility(View.VISIBLE);

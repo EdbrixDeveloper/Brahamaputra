@@ -23,8 +23,6 @@ import com.brahamaputra.mahindra.brahamaputra.Adapters.PmSiteExpListAdapter;
 
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
-import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicketsList;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -39,12 +37,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.RoundingMode;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
@@ -107,7 +103,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
 
         prepareListData();
 
-
         pmSiteList_listView_siteList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
@@ -125,7 +120,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 boolean network_enabled = false;
                 siteLatitude = Double.valueOf(sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString() == null || sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString().isEmpty() ? "0.0" : sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString());
                 siteLongitude = Double.valueOf(sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString() == null || sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString().isEmpty() ? "0.0" : sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString());
-
 
                 try {
                     gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -149,83 +143,83 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                             Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));*/
 
 
-                            if (sitePMTicketsList != null) {
-                                String myFormat = "dd/MMM/yyyy"; //In which you need put here
-                                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                                String currentDateTimeString = sdf.format(new Date());
+                        if (sitePMTicketsList != null) {
+                            String myFormat = "dd/MMM/yyyy"; //In which you need put here
+                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                            String currentDateTimeString = sdf.format(new Date());
 
-                                //String currentDateTimeString = DateFormat.getDateInstance(DateFormat.SHORT).format(new Date());
+                            //String currentDateTimeString = DateFormat.getDateInstance(DateFormat.SHORT).format(new Date());
 
-                                final String sitePMTicketId = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getId().toString();
-                                final String sitePMTicketNo = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketNo().toString();
+                            final String sitePMTicketId = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getId().toString();
+                            final String sitePMTicketNo = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketNo().toString();
 
-                                final String sitePMTicketDate = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketDate().toString();
-                                final String siteId = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteId().toString();
-                                final String siteName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteName().toString();
-                                final String siteAddress = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteAddress().toString();
-                                final String status = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
-                                final String siteType = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteType().toString();
-                                final String stateName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStateName().toString();
-                                final String customerName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCustomerName().toString();
-                                final String circleName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCircleName().toString();
-                                final String ssaName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSSAName().toString();
-                                final String sourceOfPower = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSourceOfPower().toString();
-                                final String sitePmScheduledDate = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMScheduledDate().toString();
-                                final String SiteBoundaryStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteBoundaryStatus().toString();
-                                final String NoOfACprovided = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNoOfACprovided().toString();
-                                final String ServoStabilizerStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getServoStabilizerWorkingStatus().toString();
+                            final String sitePMTicketDate = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMTicketDate().toString();
+                            final String siteId = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteId().toString();
+                            final String siteName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteName().toString();
+                            final String siteAddress = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteAddress().toString();
+                            final String status = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
+                            final String siteType = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteType().toString();
+                            final String stateName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStateName().toString();
+                            final String customerName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCustomerName().toString();
+                            final String circleName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getCircleName().toString();
+                            final String ssaName = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSSAName().toString();
+                            final String sourceOfPower = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSourceOfPower().toString();
+                            final String sitePmScheduledDate = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSitePMScheduledDate().toString();
+                            final String SiteBoundaryStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteBoundaryStatus().toString();
+                            final String NoOfACprovided = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNoOfACprovided().toString();
+                            final String ServoStabilizerStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getServoStabilizerWorkingStatus().toString();
 
-                                final String SiteLat = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString() == null || sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString().isEmpty() ? "0.0" : sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString();
-                                final String SiteLng = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString() == null || sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString().isEmpty() ? "0.0" : sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString();
+                            final String SiteLat = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString() == null || sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString().isEmpty() ? "0.0" : sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLatitude().toString();
+                            final String SiteLng = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString() == null || sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString().isEmpty() ? "0.0" : sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getSiteLongitude().toString();
 
 
-                                if (getDaysRemainingForSheduledDate(currentDateTimeString, sitePmScheduledDate)) {
+                            if (getDaysRemainingForSheduledDate(currentDateTimeString, sitePmScheduledDate)) {
 
-                                    if (sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes() != null) {
-                                        batteryType = new ArrayList<BatteryType>();
-                                        batteryType.addAll(sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes());
+                                if (sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes() != null) {
+                                    batteryType = new ArrayList<BatteryType>();
+                                    batteryType.addAll(sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getBatteryTypes());
+                                }
+
+                                hototicket_Selected_SiteType = siteType;
+                                hototicket_sourceOfPower = sourceOfPower;
+                                sitePm_siteBoundaryStatus = SiteBoundaryStatus;
+                                sitePmNoOfAcAvailableAtSite = NoOfACprovided;
+                                sitePmServoStabilizerWorkingStatus = ServoStabilizerStatus;
+
+                                sitePmCustomerName = customerName;
+                                sitePmCircleName = circleName;
+                                sitePmStateName = stateName;
+                                sitePmSiteName = siteName;
+                                sitePmSiteId = siteId;
+                                sitePmSsaName = ssaName;
+
+                                String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
+                                //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();
+
+                                if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
+                                    if (sitePMTickStatus.equals("Open")) {
+
+                                        alertDialogManager.Dialog("Conformation", "Do you want to proceed doing Site PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
+                                            @Override
+                                            public void onPositiveClick() {
+                                                checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                                        stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType, SiteLat, SiteLng);
+                                            }
+
+                                            @Override
+                                            public void onNegativeClick() {
+
+                                            }
+                                        }).show();
+
+                                    } else {
+                                        checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
+                                                stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType, SiteLat, SiteLng);
                                     }
 
-                                    hototicket_Selected_SiteType = siteType;
-                                    hototicket_sourceOfPower = sourceOfPower;
-                                    sitePm_siteBoundaryStatus = SiteBoundaryStatus;
-                                    sitePmNoOfAcAvailableAtSite = NoOfACprovided;
-                                    sitePmServoStabilizerWorkingStatus = ServoStabilizerStatus;
-
-                                    sitePmCustomerName = customerName;
-                                    sitePmCircleName = circleName;
-                                    sitePmStateName = stateName;
-                                    sitePmSiteName = siteName;
-                                    sitePmSiteId = siteId;
-                                    sitePmSsaName = ssaName;
-
-                                    String sitePMTickStatus = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getStatus().toString();
-                                    //hototicket_nameOfSupplyCompany = sitePMTicketsList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().get(childPosition).getNameOfSupplyCompany().toString();
-
-                                    if (sitePMTickStatus.equals("Open") || sitePMTickStatus.equals("WIP") || sitePMTickStatus.equals("Reassigned")) {
-                                        if (sitePMTickStatus.equals("Open")) {
-
-                                            alertDialogManager.Dialog("Conformation", "Do you want to proceed doing Site PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-                                                @Override
-                                                public void onPositiveClick() {
-                                                    checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                            stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType, SiteLat, SiteLng);
-                                                }
-
-                                                @Override
-                                                public void onNegativeClick() {
-
-                                                }
-                                            }).show();
-
-                                        } else {
-                                            checkSystemLocation(sitePMTicketNo, sitePMTicketId, sitePMTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                    stateName, customerName, circleName, ssaName, sitePmScheduledDate, batteryType, SiteLat, SiteLng);
-                                        }
-
-                                    }
                                 }
                             }
+                        }
 
                         /*} else {
                             Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
@@ -377,9 +371,7 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
             });
             getAssignAvailabilityLearnersListRequest.setRetryPolicy(Application.getDefaultRetryPolice());
             getAssignAvailabilityLearnersListRequest.setShouldCache(false);
-            Application.getInstance().
-
-                    addToRequestQueue(getAssignAvailabilityLearnersListRequest, "assignavailabilitylearnerslist");
+            Application.getInstance().addToRequestQueue(getAssignAvailabilityLearnersListRequest, "assignavailabilitylearnerslist");
 
         } catch (JSONException e) {
             hideBusyProgress();
@@ -405,8 +397,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 prepareListData();
                 return true;
             case R.id.menuReport:
-                //showToast("Hi...");
-                //prepareListData();
                 startActivity(new Intent(PreventiveMaintenanceDashboard.this, PreventiveMaintenanceSiteReportDashboard.class));
                 return true;
             default:
@@ -471,8 +461,6 @@ public class PreventiveMaintenanceDashboard extends BaseActivity {
                 intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
                 intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
 
-                //String[] array = new String[]{"Item1", "Item2", "item3", "Item4", "item5"};
-                //Bundle bundle = new Bundle();
                 intent.putExtra("batteryType", batteryType);
 
                 sessionManager.updateSessionUserTicketId(sitePMTicketId);

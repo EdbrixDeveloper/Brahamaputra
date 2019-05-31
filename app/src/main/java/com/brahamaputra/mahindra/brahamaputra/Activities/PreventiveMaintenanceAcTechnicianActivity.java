@@ -30,16 +30,12 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.PmAcExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
-import com.brahamaputra.mahindra.brahamaputra.Data.AcCheckPoint;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPmAcData;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPmTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintanceProcessDatum;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintanceProcessParentDatum;
-import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePmAcTicketList;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -64,18 +60,12 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
-
-    //design not fix for that no written code for make list color green when submitted all field for this section
-    // and also web service are not create for that submit data on database is also remaining
-
     private static final String TAG = PreventiveMaintenanceAcTechnicianActivity.class.getSimpleName();
 
     private TextView mPreventiveMaintenanceAcTechnicianTextViewCircle;
@@ -256,10 +246,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedBeforePhoto = 105;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_CoolingCoilCleanedAfterPhoto = 106;
 
-
     private String base64StringAcTechnicianQRCodeScan = "";
-    //private String imageFileAcTechnicianQRCodeScan;
-    //private Uri imageFileUriAcTechnicianQRCodeScan = null;
 
     private String base64StringFilterCleanedBeforePhoto = "";
     private String base64StringFilterCleanedAfterPhoto = "";
@@ -341,9 +328,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         checkCameraPermission();
 
         Intent intent = getIntent();
-        //statusFlag = intent.getStringExtra("status");
         str_noOfAcAtSiteVal = intent.getStringExtra("numberOfAc");
-
 
         alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceAcTechnicianActivity.this);
@@ -367,10 +352,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             setInputDetails(currentPos);
         }
         invalidateOptionsMenu();
-        /*if (!statusFlag.equals("")) {
-            disableAllFields();
-        }*/
-
     }
 
     private void assignViews() {
@@ -1191,10 +1172,8 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
 
                             /*if (checkDuplicationQrCodeNew() == false) {*/
                             if (checkValidationonSubmit("onSubmit") == true) {
-                                //submitDetails();
                                 if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
                                     onBackPressed();
-                                    //showToast("You are in readable mode");
                                 } else {
                                     if (accessType.equals("A") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
 
@@ -1225,7 +1204,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                                                 showSettingsAlert();
 
                                             } else {
-                                                //showToast("Could not detecting location.");
                                                 alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
                                                 alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                                     @Override
@@ -1238,15 +1216,12 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                                                 }).show();
                                             }
                                         }
-                                        //showSettingsAlert();
                                     } else {
                                         showToast("Unauthorised ticket");
                                     }
                                 }
-                                //finish();
                             }
                         }
-
                         /*}*/
                     }
                 } else {
@@ -1254,11 +1229,9 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                         currentPos = currentPos + 1;
                         //move to Next reading
                         displayRecords(currentPos);
-
                     } else if (currentPos == (totalCount - 1)) {
                         if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
                             onBackPressed();
-                            //showToast("You are in readable mode");
                         }
                     }
 
@@ -1275,8 +1248,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
         } else {
             return true;
         }
-
-
         return false;
     }
 
@@ -1372,7 +1343,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriFilterCleanedBeforePhoto);
                     /*}*/
                 } else {
-                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -1382,7 +1353,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 if (imageFileUriFilterCleanedAfterPhoto != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriFilterCleanedAfterPhoto);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -1392,7 +1363,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 if (imageFileUriCondenserCoilCleanedBeforePhoto != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCondenserCoilCleanedBeforePhoto);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -1402,7 +1373,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 if (imageFileUriCondenserCoilCleanedAfterPhoto != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCondenserCoilCleanedAfterPhoto);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -1413,7 +1384,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 if (imageFileUriCoolingCoilCleanedBeforePhoto != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCoolingCoilCleanedBeforePhoto);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -1423,7 +1394,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 if (imageFileUriCoolingCoilCleanedAfterPhoto != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceAcTechnicianActivity.this, imageFileUriCoolingCoilCleanedAfterPhoto);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceAcTechnicianActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -1438,15 +1409,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
-
-            //        Use this for more customization
-            //        IntentIntegrator integrator = new IntentIntegrator(this);
-            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            //        integrator.setPrompt("Scan a barcode");
-            //        integrator.setCameraId(0);  // Use a specific camera of the device
-            //        integrator.setBeepEnabled(false);
-            //        integrator.setBarcodeImageEnabled(true);
-            //        integrator.initiateScan();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1568,13 +1530,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                                 }
                             }
                         }
-                        /*Object[] isDuplicateQRcode = isDuplicateQRcode(result.getContents());
-                        boolean flagIsDuplicateQRcode = (boolean) isDuplicateQRcode[1];
-
-                        /*} else {
-                            base64StringAcTechnicianQRCodeScan = "";
-                            showToast("This QR Code Already Used in " + isDuplicateQRcode[0] + " Section");
-                        }*/
                     }
                 }
                 break;
@@ -1764,13 +1719,11 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                             showSettingsAlert();
 
                         } else {
-                            //showToast("Could not detecting location.");
                             alertDialogManager = new AlertDialogManager(PreventiveMaintenanceAcTechnicianActivity.this);
                             alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                 @Override
                                 public void onPositiveClick() {
                                     if (gpsTracker.canGetLocation()) {
-                                        //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
                                         Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                     }
                                 }
@@ -1823,18 +1776,7 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private void setAcPmData(int index) {
         acPreventiveMaintanceProcessParentDatum = acPmTransactionDetails.getAcPreventiveMaintanceProcessParentDatum();
 
-        //acPreventiveMaintanceProcessParentDatum = gson.fromJson(jsonInString, AcPreventiveMaintanceProcessParentDatum.class);
         acPreventiveMaintanceProcessData.addAll(acPreventiveMaintanceProcessParentDatum.getAcPreventiveMaintanceProcessData());
-
-                /*mPreventiveMaintenanceAcTechnicianTextViewCircleVal.setText(acPreventiveMaintanceProcessParentDatum.getCircle());
-                mPreventiveMaintenanceAcTechnicianTextViewStateVal.setText(acPreventiveMaintanceProcessParentDatum.getState());
-                mPreventiveMaintenanceAcTechnicianTextViewSsaVal.setText(acPreventiveMaintanceProcessParentDatum.getSsa());
-                mPreventiveMaintenanceAcTechnicianTextViewSiteIdVal.setText(acPreventiveMaintanceProcessParentDatum.getSiteId());
-                mPreventiveMaintenanceAcTechnicianTextViewSiteNameVal.setText(acPreventiveMaintanceProcessParentDatum.getSiteName());
-                mPreventiveMaintenanceAcTechnicianTextViewTicketNoVal.setText(acPreventiveMaintanceProcessParentDatum.getTicketNo());
-                mPreventiveMaintenanceAcTechnicianTextViewTicketDateVal.setText(acPreventiveMaintanceProcessParentDatum.getTicketDate());
-                mPreventiveMaintenanceAcTechnicianTextViewPmPlanDateVal.setText(acPreventiveMaintanceProcessParentDatum.getPmPlanDate());
-                mPreventiveMaintenanceAcTechnicianTextViewSubmittedDateVal.setText(acPreventiveMaintanceProcessParentDatum.getSubmittedDate());*/
 
         mPreventiveMaintenanceAcTechnicianTextViewNoOfAcAtSiteVal.setText(acPreventiveMaintanceProcessParentDatum.getNoOfAcAtSite());
 
@@ -2338,9 +2280,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                     pmPlanDate, submittedDate, noOfAcAtSite, acPreventiveMaintanceProcessData);
             acPreventiveMaintanceProcessParentDatum.setAcPmTechnicianLat(technicianLat);
             acPreventiveMaintanceProcessParentDatum.setAcPmTechnicianLong(technicianLong);
-            /*Gson gson2 = new GsonBuilder().create();
-            String jsonString = gson2.toJson(acPreventiveMaintanceProcessParentDatum);
-            offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);*/
 
             acPmTransactionDetails.setAcPreventiveMaintanceProcessParentDatum(acPreventiveMaintanceProcessParentDatum);
             acPmTransactionDetails.setUserId(sessionManager.getSessionUserId());
@@ -2566,7 +2505,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     private boolean checkDuplicationQrCodeNew(String qrCode) {
         for (int i = 0; i < acPreventiveMaintanceProcessData.size(); i++) {
             for (int j = i; j < acPreventiveMaintanceProcessData.size(); j++) {
-                //compare list.get(i) and list.get(j)
                 if (acPreventiveMaintanceProcessData.get(i).getAcPreventiveMaintanceProcessQrCodeScan().toString().equals(qrCode)) {//acPreventiveMaintanceProcessData.get(j).getAcPreventiveMaintanceProcessQrCodeScan().toString()
                     int dup_pos = j + 1;
                     showToast("Scanned QR Code in Reading No: " + ++dup_pos + " was already scanned in reading no:" + (i + 1));
@@ -2661,11 +2599,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
             jo.put("SiteId", siteDBId);
             jo.put("QrCode", base64StringAcTechnicianQRCodeScan);
-
-            /*jo.put("UserId", "120");
-            jo.put("AccessToken", "MjUyLTg1REEyUzMtQURTUzVELUVJNUI0QTIyMTEyMA==");
-            jo.put("SiteId", "9");
-            jo.put("QrCode", "http://ialac1");*/
 
             Log.i(PreventiveMaintenanceAcTechnicianActivity.class.getName(), Constants.acPmAcDataOnQrCodeScan + "\n\n" + jo.toString());
 
@@ -2762,7 +2695,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
                 showBusyProgress();
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
                 Log.e("AcPm Tech: ", jsonInString);
-                //remaining to add webservice for submit PM site Ticket
                 GsonRequest<UserLoginResponseData>
                         submitSitePmTicketRequest = new GsonRequest<>(Request.Method.POST, Constants.processedAcPmTicket, jsonInString, UserLoginResponseData.class,
                         new Response.Listener<UserLoginResponseData>() {
@@ -2860,9 +2792,6 @@ public class PreventiveMaintenanceAcTechnicianActivity extends BaseActivity {
     }
 
     private void DisabledFieldsForACTech() {
-        //mPreventiveMaintenanceAcTechnicianButtonQRCodeScanView.setVisibility(View.GONE);
-        //mButtonClearQRCodeScanView.setVisibility(View.GONE);
-
         mPreventiveMaintenanceAcTechnicianTextViewMainMcbStatusVal.setEnabled(false);
         mPreventiveMaintenanceAcTechnicianTextViewSubMcbStatusVal.setEnabled(false);
         mPreventiveMaintenanceAcTechnicianTextViewMetalCladPlugStatusVal.setEnabled(false);
