@@ -196,9 +196,7 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         initCombo();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hotoTransactionData = new HotoTransactionData();
-        //setInputDetails();
         checkValidation();
-        //onValidateFireExtuinguisher();
         onValidateSecurityStatus();
         onValidateCaretakerStatus();
         onValidateSecurityCaretakeStatus();
@@ -324,7 +322,6 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
         mGeneralAndSafetyMeasureButtonNextReading = (Button) findViewById(R.id.generalAndSafetyMeasure_button_nextReading);
         linearLayout_container = (LinearLayout) findViewById(R.id.linearLayout_container);
 
-        //mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
         mGeneralAndSafetyMeasuresEditTextPrevailingSLA.setFilters(new InputFilter[]{new InputFilterMinMax(0.00, 100.00, 6, 2)});
         mGeneralAndSafetyMeasureLinearLayoutAgencyNameSalaryPaid.setVisibility(View.GONE);
         getWindow().setSoftInputMode(
@@ -1124,7 +1121,6 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
     private void submitDetails() {
         try {
-            // hotoTransactionData.setTicketNo(ticketId);
 
             String prevailingSLA = mGeneralAndSafetyMeasuresEditTextPrevailingSLA.getText().toString().trim();
             String siteBoundaryStatus = mGeneralAndSafetyMeasureTextViewSiteBoundaryStatusVal.getText().toString().trim();
@@ -1133,8 +1129,6 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
             String dgRoomLock = mGeneralAndSafetyMeasureTextViewDGRoomLockVal.getText().toString().trim();
             String fireExtuinguisher = "";//mGeneralAndSafetyMeasureTextViewFireExtuinguisherVal.getText().toString().trim();
             String noOfFireExtuinguisher = mGeneralAndSafetyMeasureTextViewNoOfFireExtuinguisherVal.getText().toString().trim();
-            /*String fireExtuinguisherType = mGeneralAndSafetyMeasureTextViewFireExtuinguisherTypeVal.getText().toString().trim();
-            String fireExtuinguisherExpiryDate = mGeneralAndSafetyMeasureEditTextFireExtuinguisherExpiryDate.getText().toString().trim();*/
             String fireBucket = mGeneralAndSafetyMeasureTextViewFireBucketVal.getText().toString().trim();
             String securityStatus = mGeneralAndSafetyMeasureTextViewSecurityStatus24x7Val.getText().toString().trim();
             String noofSecurityPerson = mGeneralAndSafetyMeasureTextViewNoofSecurityPersonVal.getText().toString().trim();
@@ -1161,7 +1155,6 @@ public class GeneralAndSafetyMeasures extends BaseActivity {
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {

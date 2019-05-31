@@ -42,6 +42,25 @@ public class Media extends BaseActivity {
     private MediaData mediaData;
     private SessionManager sessionManager;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_media);
+        this.setTitle("Media");
+        assignViews();
+        initCombo();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        sessionManager = new SessionManager(Media.this);
+        ticketId = sessionManager.getSessionUserTicketId();
+        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
+        userId = sessionManager.getSessionUserId();
+        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Media.this, userId, ticketName);
+        hotoTransactionData = new HotoTransactionData();
+
+        setInputDetails();
+    }
+
     private void assignViews() {
         mMediaTextViewTypeofmedia = (TextView) findViewById(R.id.media_textView_Typeofmedia);
         mMediaTextViewTypeofmediaVal = (TextView) findViewById(R.id.media_textView_Typeofmedia_val);
@@ -74,25 +93,6 @@ public class Media extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_media);
-        this.setTitle("Media");
-        assignViews();
-        initCombo();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        sessionManager = new SessionManager(Media.this);
-        ticketId = sessionManager.getSessionUserTicketId();
-        ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
-        userId = sessionManager.getSessionUserId();
-        offlineStorageWrapper = OfflineStorageWrapper.getInstance(Media.this, userId, ticketName);
-        hotoTransactionData = new HotoTransactionData();
-
-        setInputDetails();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dropdown_details_menu, menu);
@@ -105,7 +105,6 @@ public class Media extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
                 if (checkValiadtion()) {
@@ -126,7 +125,7 @@ public class Media extends BaseActivity {
         if (mediaType.isEmpty() || mediaType == null) {
             showToast("Select Media Type ");
             return false;
-        }else
+        } else
             return true;
     }
 
@@ -134,7 +133,6 @@ public class Media extends BaseActivity {
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
 
@@ -145,7 +143,6 @@ public class Media extends BaseActivity {
                 mMediaTextViewTypeofmediaVal.setText(mediaData.getTypeOfMedia());
 
             } else {
-                //Toast.makeText(Media.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 showToast("No previous saved data available");
             }
         } catch (Exception e) {
@@ -155,7 +152,6 @@ public class Media extends BaseActivity {
 
     private void submitDetails() {
         try {
-            // hotoTransactionData.setTicketNo(ticketId);
             String mediaType = mMediaTextViewTypeofmediaVal.getText().toString().trim();
 
             mediaData = new MediaData(mediaType);

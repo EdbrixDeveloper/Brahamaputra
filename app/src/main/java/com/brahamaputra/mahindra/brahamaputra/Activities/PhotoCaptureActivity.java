@@ -73,8 +73,6 @@ public class PhotoCaptureActivity extends BaseActivity {
     private SitePhotoCaptureData sitePhotoCaptureData;
 
 
-
-
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_SITE = 101;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_SHELTER = 102;
@@ -149,7 +147,7 @@ public class PhotoCaptureActivity extends BaseActivity {
         mPhotoCaptureButtonDgHmrView = (ImageView) findViewById(R.id.photoCapture_button_dgHmrView);
         mPhotoCaptureButtonDgOverviewView = (ImageView) findViewById(R.id.photoCapture_button_dgOerviewView);
 
-        mPhotoCaptureSwitchCaptureMode = (Switch)findViewById(R.id.photoCapture_switch_captureMode);
+        mPhotoCaptureSwitchCaptureMode = (Switch) findViewById(R.id.photoCapture_switch_captureMode);
 
     }
 
@@ -289,16 +287,15 @@ public class PhotoCaptureActivity extends BaseActivity {
         });
 
 
-        mPhotoCaptureSwitchCaptureMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
+        mPhotoCaptureSwitchCaptureMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               if(!isChecked){
-                   ORIENTATION_ROTATE = 90;///Portraite
-                   //showToast(""+ORIENTATION_ROTATE);
-               }else {
-                   ORIENTATION_ROTATE = 180;///Landscape
-                   //showToast(""+ORIENTATION_ROTATE);
-               }
+                if (!isChecked) {
+                    ORIENTATION_ROTATE = 90;///Portraite
+                    //showToast(""+ORIENTATION_ROTATE);
+                } else {
+                    ORIENTATION_ROTATE = 180;///Landscape
+                    //showToast(""+ORIENTATION_ROTATE);
+                }
             }
         });
     }
@@ -413,7 +410,7 @@ public class PhotoCaptureActivity extends BaseActivity {
     public static Bitmap rotateImageIfRequired(Bitmap img, Context context, Uri selectedImage) throws IOException {
 
         if (selectedImage.getScheme().equals("content")) {
-            String[] projection = { MediaStore.Images.ImageColumns.ORIENTATION };
+            String[] projection = {MediaStore.Images.ImageColumns.ORIENTATION};
             Cursor c = context.getContentResolver().query(selectedImage, projection, null, null, null);
             if (c.moveToFirst()) {
                 final int rotation = c.getInt(0);
@@ -652,33 +649,6 @@ public class PhotoCaptureActivity extends BaseActivity {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean checkCameraPermission() {
 
-        /*if (ContextCompat.checkSelfPermission(PhotoCaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-        {
-
-            if (getFromPref(PhotoCaptureActivity.this, ALLOW_KEY)) {
-
-                final Intent i = new Intent();
-                i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                i.addCategory(Intent.CATEGORY_DEFAULT);
-                i.setData(Uri.parse("package:" + PhotoCaptureActivity.this.getPackageName()));
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                PhotoCaptureActivity.this.startActivity(i);
-
-            } else if (ContextCompat.checkSelfPermission(PhotoCaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-            {
-                // Should we show an explanation?
-                if (ActivityCompat.shouldShowRequestPermissionRationale(PhotoCaptureActivity.this, Manifest.permission.CAMERA))
-                {
-                    ActivityCompat.requestPermissions(PhotoCaptureActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
-                } else {
-                    // No explanation needed, we can request the permission.
-                    ActivityCompat.requestPermissions(PhotoCaptureActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
-                }
-            }
-        }*/
-
         if (ContextCompat.checkSelfPermission(PhotoCaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(PhotoCaptureActivity.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         } else {
@@ -710,7 +680,6 @@ public class PhotoCaptureActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     private void setInputDetails() {
@@ -813,8 +782,6 @@ public class PhotoCaptureActivity extends BaseActivity {
 
     private void submitDetails() {
         try {
-//            hotoTransactionData.setTicketNo(ticketName);
-
             sitePhotoCaptureData = new SitePhotoCaptureData(imageFileNameOfSite, base64StringSite,
                     imageFileNameOfShelter, base64StringShelter,
                     imageFileNameOfEbMeterBox, base64StringEbMeterBox,
@@ -826,7 +793,6 @@ public class PhotoCaptureActivity extends BaseActivity {
             hotoTransactionData.setSitePhotoCaptureData(sitePhotoCaptureData);
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
         } catch (Exception e) {

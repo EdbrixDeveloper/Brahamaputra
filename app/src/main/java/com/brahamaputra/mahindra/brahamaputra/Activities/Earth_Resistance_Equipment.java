@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.brahamaputra.mahindra.brahamaputra.Data.EarthResistanceEquipmentData;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.R;
-import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;

@@ -20,7 +20,6 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -28,11 +27,6 @@ import java.util.ArrayList;
 public class NotificationList extends BaseActivity {
 
     //implements NotificationReceiver
-
-    private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "";
-    private String ticketName = "";
-    private String ticketId = "";
     private Notification notification;
     private SessionManager sessionManager;
 
@@ -60,7 +54,6 @@ public class NotificationList extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         alertDialogManager = new AlertDialogManager(NotificationList.this);
         sessionManager = new SessionManager(NotificationList.this);
-        userId = sessionManager.getSessionUserId();
         notification = new Notification();
         databaseHelper = new DatabaseHelper(getApplicationContext());
         assignViews();
@@ -71,7 +64,6 @@ public class NotificationList extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Notification dataModel = dd.get(position);
-                //int b4 = dataModel.getIsRead();
                 databaseHelper = new DatabaseHelper(getApplicationContext());
                 databaseHelper.updateNotification(dataModel);
                 prepareListData();
@@ -133,7 +125,7 @@ public class NotificationList extends BaseActivity {
         MenuItem deleteAllNotificationItem = menu.findItem(R.id.menuDeleteAll);
         deleteAllNotificationItem.setVisible(false);
         int notificationCount = databaseHelper.getAllNotification().size();
-        if(notificationCount!=0){
+        if (notificationCount != 0) {
             deleteAllNotificationItem.setVisible(true);
         }
         return true;

@@ -89,7 +89,7 @@ public class WrmsAlarmAcknowledgeActivity extends BaseActivity {
         setContentView(R.layout.activity_wrms_alarm_acknowledge);
         assignViews();
         this.setTitle("WRMS Alarm Acknowledge");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         /*Intent intent = getIntent();
@@ -118,11 +118,6 @@ public class WrmsAlarmAcknowledgeActivity extends BaseActivity {
             public void onClick(View v) {
 
                 showToast("Clicked on Acknowledge button");
-                /*Intent intent = new Intent(WrmsAlarmAcknowledgeActivity.this, SitePreventiveMaintenanceSectionsListActivity.class);
-                intent.putExtra("batteryType", batteryType);
-
-
-                startActivityForResult(intent, RESULT_PRIVENTIVE_MAINTENANCE_SITE_READING);*/
 
             }
         });
@@ -153,17 +148,12 @@ public class WrmsAlarmAcknowledgeActivity extends BaseActivity {
         mWrmsAlarmAcknowledgeEditTextAlarmOccurrenceTime.setText("");*/
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.userpm_site_transaction_menu, menu);
-
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
-        // show the button when some condition is true
         shareItem.setVisible(false);
-        /*if (preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit() == 1 || preventiveMaintanceSiteTransactionDetails.isAtLeastOneSitePmFormsSubmit() == 2) {
-            shareItem.setVisible(true);
-        }*/
         return true;
     }
 
@@ -185,7 +175,6 @@ public class WrmsAlarmAcknowledgeActivity extends BaseActivity {
                 }
 
                 if (!gps_enabled && !network_enabled) {
-                    // notify user
                     alertDialogManager = new AlertDialogManager(WrmsAlarmAcknowledgeActivity.this);
                     alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
@@ -196,7 +185,6 @@ public class WrmsAlarmAcknowledgeActivity extends BaseActivity {
                     }).show();
                 } else {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        //calculate area distance
                         siteLatitude = Double.valueOf(sessionManager.getSessionSiteLat());
                         siteLongitude = Double.valueOf(sessionManager.getSessionSiteLng());
 
@@ -222,7 +210,7 @@ public class WrmsAlarmAcknowledgeActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     private void showSettingsAlert() {
 

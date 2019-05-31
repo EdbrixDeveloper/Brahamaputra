@@ -1,27 +1,17 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -138,32 +128,6 @@ public class DashboardActivity extends BaseActivity {
                 startActivity(intent);
             } else {
                 startActivity(new Intent(DashboardActivity.this,UsersOfflineHotoListActivity.class));
-                /*alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-
-                        final EditText taskEditText = new EditText(DashboardActivity.this);
-                        AlertDialog dialog = new AlertDialog.Builder(DashboardActivity.this)
-                                .setTitle("Information")
-                                .setMessage("Enter Ticket ID")
-                                .setView(taskEditText)
-                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        //TicketID = String.valueOf(taskEditText.getText());
-                                        Intent intent = new Intent(DashboardActivity.this, UserHotoTransactionActivity.class);
-                                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(DashboardActivity.this));
-                                        intent.putExtra("ticketNO", String.valueOf(taskEditText.getText().toString().toUpperCase()));
-                                        //sessionManager.updateSessionUserTicketId(String.valueOf(taskEditText.getText()));
-                                        sessionManager.updateSessionUserTicketName(String.valueOf(taskEditText.getText()));
-                                        startActivity(intent);
-                                    }
-                                })
-                                .setNegativeButton("cancel", null)
-                                .create();
-                        dialog.show();
-                    }
-                }).show();*/
             }
         }
     }

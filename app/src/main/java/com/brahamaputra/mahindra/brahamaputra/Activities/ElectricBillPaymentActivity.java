@@ -41,12 +41,10 @@ public class ElectricBillPaymentActivity extends AppCompatActivity {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         startActivity(new Intent(ElectricBillPaymentActivity.this, ElectricBillMenuActivity.class));//ElectricBillProcessList
                     } else {
-                        //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                                     Log.e(ElectricBillPaymentActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
@@ -70,12 +68,10 @@ public class ElectricBillPaymentActivity extends AppCompatActivity {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         startActivity(new Intent(ElectricBillPaymentActivity.this, EbSiteElectrificationList.class));
                     } else {
-                        //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                                     Log.e(ElectricBillPaymentActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }

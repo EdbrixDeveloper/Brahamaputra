@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,12 +19,8 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.DieselFillingFundRequestListAdapter;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.EbSiteElectrificationExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.EbSiteElectrificationTicketListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.DieselFillingFundRequestTransaction;
-import com.brahamaputra.mahindra.brahamaputra.Data.DiselRequestTransactionList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTicketList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransaction;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -35,9 +30,7 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
-import com.brahamaputra.mahindra.brahamaputra.commons.EndlessScrollListener;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
-import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_nameOfSupplyCompany;
@@ -51,21 +44,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class EbSiteElectrificationList extends BaseActivity {
-    private OfflineStorageWrapper offlineStorageWrapper;
-    private String userId = "";
-    private String ticketName = "";
-    private String ticketId = "";
 
     private EbSiteElectrificationTicketList ebSiteElectrificationTicketList;
-    private EbSiteElectrificationTransaction ebSiteElectrificationTransaction;
     private EbSiteElectrificationTicketListAdapter ebSiteElectrificationTicketListAdapter;
 
     private ListView ebSiteElectrificationList_listView_ebList;
     private TextView mTxtNoTicketFound;
 
-
     /////////
-
     private AlertDialogManager alertDialogManager;
     private SessionManager sessionManager;
     public GPSTracker gpsTracker;
@@ -98,60 +84,10 @@ public class EbSiteElectrificationList extends BaseActivity {
         }
 
         prepareListData();
-        /*TempForTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (gpsTracker.canGetLocation()) {
-                    hototicket_nameOfSupplyCompany = "Maharashtra State Electric Cop.";
-                    ebSiteElectrificationConsumerNumber = "45678912";
-                    ebSiteElectrificationEbMeterSerialNumber = "MSEBKOP1246DFG";
-
-                    Intent intent = new Intent(EbSiteElectrificationList.this, EbSiteElectrificationTransactionActivity.class);////////////
-                    intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(EbSiteElectrificationList.this));
-                    intent.putExtra("Id", "52");
-
-                    intent.putExtra("ticketNO", "EBSE1100096");
-                    intent.putExtra("ebSiteElectrificationTicketDate", "");
-                    intent.putExtra("siteId", "site 2992");
-                    intent.putExtra("siteName", "SM Site 2992");
-                    intent.putExtra("siteAddress", "Plot No.213, Whites Road, Royapettah, Jammu");
-                    intent.putExtra("status", "WIP");
-                    intent.putExtra("siteType", "Outdoor");
-                    intent.putExtra("stateName", "JAMMU & KASHMIR");
-                    intent.putExtra("customerName", "BSNL");
-                    intent.putExtra("circleName", "JAMMU & KASHMIR");
-                    intent.putExtra("ssaName", "Jammu");
-
-                    intent.putExtra("nameOfTheSupplyCompany", "Maharashtra State Electricity Board");
-                    intent.putExtra("consumerNumber", "114544");
-                    intent.putExtra("ebMeterSerialNumber", "MAHEBKOL1545DG");
-
-                    intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
-                    intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
-
-                    sessionManager.updateSessionUserTicketId("52");
-                    sessionManager.updateSessionUserTicketName("EBSE1100096");
-                    startActivityForResult(intent, RESULT_EbSiteElectrification_SUBMIT);
-
-                } else {
-                    alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                        @Override
-                        public void onPositiveClick() {
-                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            EbSiteElectrificationList.this.startActivity(myIntent);
-                        }
-                    }).show();
-                }
-            }
-        });*/
 
         ebSiteElectrificationList_listView_ebList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*Object o = prestListView.getItemAtPosition(position);
-                prestationEco str = (prestationEco)o; //As you are using Default String Adapter
-                Toast.makeText(getBaseContext(),str.getTitle(),Toast.LENGTH_SHORT).show();
-                showToast("Hiiii....");*/
 
                 LocationManager lm = (LocationManager) EbSiteElectrificationList.this.getSystemService(Context.LOCATION_SERVICE);
                 boolean gps_enabled = false;
@@ -237,100 +173,10 @@ public class EbSiteElectrificationList extends BaseActivity {
             }
         });
 
-        /*ebSiteElectrificationList_listView_ebList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int groupPosition, long id) {
-
-///////
-                LocationManager lm = (LocationManager) EbSiteElectrificationList.this.getSystemService(Context.LOCATION_SERVICE);
-                boolean gps_enabled = false;
-                boolean network_enabled = false;
-
-                try {
-                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-                } catch (Exception ex) {
-                }
-
-                if (!gps_enabled && !network_enabled) {
-                    // notify user
-                    alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                        @Override
-                        public void onPositiveClick() {
-                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            EbSiteElectrificationList.this.startActivity(myIntent);
-                        }
-                    }).show();
-                } else {
-                    if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        if (ebSiteElectrificationTicketList != null) {
-                            final String ebSiteElectrificationTicketId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getId().toString();
-                            final String ebSiteElectrificationTicketNo = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationTicketNo().toString();
-
-                            final String ebSiteElectrificationTicketDate = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getEbSiteElectrificationTicketNo().toString();
-                            final String siteId = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteId().toString();
-                            final String siteName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteName().toString();
-                            final String siteAddress = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteAddress().toString();
-                            final String status = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStatus().toString();
-                            final String siteType = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSiteType().toString();
-                            final String stateName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStateName().toString();
-                            final String customerName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getCustomerName().toString();
-                            final String circleName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getCircleName().toString();
-                            final String ssaName = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getSsaName().toString();
-                            hototicket_Selected_SiteType = siteType;
-
-                            final String ebSiteElectrificationTickStatus = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStatus().toString();
-
-                            final String nameOfTheSupplyCompany = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getNameOfSupplyCompany().toString();
-                            hototicket_nameOfSupplyCompany = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getNameOfSupplyCompany().toString();
-
-                            final String consumerNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getConsumerNumber().toString();
-                            ebSiteElectrificationConsumerNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getConsumerNumber().toString();
-
-                            final String ebMeterSerialNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getStatus().toString();
-                            ebSiteElectrificationEbMeterSerialNumber = ebSiteElectrificationTicketList.getEbSiteElectrificationTransaction().get(groupPosition).getNameOfSupplyCompany().toString();
-
-                            if (ebSiteElectrificationTickStatus.equals("Open") || ebSiteElectrificationTickStatus.equals("WIP") || ebSiteElectrificationTickStatus.equals("Reassigned")) {
-                                if (ebSiteElectrificationTickStatus.equals("Open")) {
-
-                                    alertDialogManager.Dialog("Information", "Do you want to proceed.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                                        @Override
-                                        public void onPositiveClick() {
-                                            checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                                    stateName, customerName, circleName, ssaName, nameOfTheSupplyCompany, consumerNumber, ebMeterSerialNumber);
-                                        }
-                                    }).show();
-                                } else {
-                                    checkSystemLocation(ebSiteElectrificationTicketNo, ebSiteElectrificationTicketId, ebSiteElectrificationTicketDate, siteId, siteName, siteAddress, status, siteType,
-                                            stateName, customerName, circleName, ssaName, nameOfTheSupplyCompany, consumerNumber, ebMeterSerialNumber);
-                                }
-
-                            }
-                        }
-
-                    } else {
-                        alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                            @Override
-                            public void onPositiveClick() {
-                                if (gpsTracker.canGetLocation()) {
-                                    Log.e(EbSiteElectrificationTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                                }
-                            }
-                        }).show();
-                    }
-                }
-
-
-///////
-
-            }
-        });*/
-
 
     }
 
     private void assignViews() {
-        //ebSiteElectrificationList_listView_ebList = (ListView) findViewById(R.id.listViewEbSiteElectrification);
         mTxtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
     }
 

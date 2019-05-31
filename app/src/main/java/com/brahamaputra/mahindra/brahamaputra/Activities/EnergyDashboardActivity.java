@@ -18,7 +18,6 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 
 public class EnergyDashboardActivity extends AppCompatActivity {
 
-
     private RelativeLayout mMyEnegyListRelativeLayoutDashboardEBPayment;
     private ImageView mImgEbPayment;
     private RelativeLayout mMyEnegyListRelativeLayoutDashboardDieselFilling;
@@ -29,6 +28,7 @@ public class EnergyDashboardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_energy_dashboard);
         this.setTitle("Energy");
@@ -43,18 +43,16 @@ public class EnergyDashboardActivity extends AppCompatActivity {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         startActivity(new Intent(EnergyDashboardActivity.this, ElectricBillPaymentActivity.class));
                     } else {
-                        //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                                     Log.e(EnergyDashboardActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
                         }).show();
                     }
-                }else {
+                } else {
                     alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
                         public void onPositiveClick() {
@@ -73,18 +71,16 @@ public class EnergyDashboardActivity extends AppCompatActivity {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                         startActivity(new Intent(EnergyDashboardActivity.this, MyEnergyListActivity.class));
                     } else {
-                        //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                                     Log.e(EnergyDashboardActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
                         }).show();
                     }
-                }else {
+                } else {
                     alertDialogManager.Dialog("Information", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                         @Override
                         public void onPositiveClick() {

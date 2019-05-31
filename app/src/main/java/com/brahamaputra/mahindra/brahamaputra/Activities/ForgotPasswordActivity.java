@@ -19,7 +19,6 @@ import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Volley.JsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,9 +26,7 @@ import org.json.JSONObject;
 public class ForgotPasswordActivity extends BaseActivity {
 
     private EditText mForgotPasswordEditTextUserName;
-    //private EditText mForgotPasswordEditTextEmail;
     private Button mForgotPasswordButtonSubmit;
-    private GlobalMethods globalMethods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,6 @@ public class ForgotPasswordActivity extends BaseActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
-        globalMethods = new GlobalMethods();
 
         mForgotPasswordButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,18 +57,9 @@ public class ForgotPasswordActivity extends BaseActivity {
         } else {
             doForgot(userName);
         }
-        /*String email = mForgotPasswordEditTextEmail.getText().toString();
-        Conditions.hideKeyboard(ForgotPasswordActivity.this);
-        if (email.isEmpty()) {
-            mForgotPasswordEditTextEmail.setError("Field can not be empty");
-        } else {
-            doForgot(email);
-        }*/
-
     }
 
     private void doForgot(String userName) {
-        //private void doForgot(String email) {
 
         showBusyProgress();
         try {
@@ -81,8 +68,6 @@ public class ForgotPasswordActivity extends BaseActivity {
                 jo.put("APIKEY", Constants.APP_KEY__);
                 jo.put("SECRETKEY", Constants.APP_SECRET__);
                 jo.put("Username", userName);
-                //jo.put("Email", email);
-
             } catch (JSONException e) {
                 Log.e(ForgotPasswordActivity.class.getName(), e.getMessage().toString());
                 return;
@@ -140,7 +125,6 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     private void assignViews() {
         mForgotPasswordEditTextUserName = (EditText) findViewById(R.id.forgotPassword_editText_username);
-        //mForgotPasswordEditTextEmail= (EditText) findViewById(R.id.forgotPassword_editText_email);
         mForgotPasswordButtonSubmit = (Button) findViewById(R.id.forgotPassword_button_submit);
     }
 }

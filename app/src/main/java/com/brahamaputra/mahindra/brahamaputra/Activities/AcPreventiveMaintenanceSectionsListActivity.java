@@ -2,12 +2,9 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.LocationManager;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,16 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.brahamaputra.mahindra.brahamaputra.Adapters.AcPreventiveMaintenanceSectionListAdapter;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintenanceAcSection;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
-import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
-import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -40,7 +33,6 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
     private SessionManager sessionManager;
     private String designation;
     String flag;
-    String returnValue;
 
     //008 start
 
@@ -86,7 +78,6 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
         acPreventiveMaintenanceSections_listView_sections = (ListView) findViewById(R.id.acPreventiveMaintenanceSections_listView_sections);
 
         Intent intent = getIntent();
-        //flag = intent.getStringExtra("status");
 
         TicketId = intent.getStringExtra("TicketId");
         TicketNO = intent.getStringExtra("TicketNO");
@@ -130,33 +121,11 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
         } else {
             flag = 0;
             showToast("Unauthorised ticket status.");
-            //finish();
             intent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, AcPreventiveMaintenanceDashboardActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivityForResult(intent, RESULT_OK);
-        }/*else if (accessType.equals("") && ticketAccess.equals("") && acPmTickStatus.equals("")) {
-            values = new String[]{"", ""};
-        }*/
+        }
 
-
-        /*values = getResources().getStringArray(R.array.listView_acPreventiveMaintenanceSections_sections);
-        dataModels = new ArrayList<>();
-
-        for (int i = 0; i < values.length; i++) {
-            if (flag.equals("Submitted by Technician")) {
-                if (i / 2 == 0) {
-                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
-                } else {
-                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
-                }
-            } else {
-                if (values[i].equals("AC PM Process") && designation.equals("AC Technician (Mobile)")) {
-                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
-                } else if (values[i].equals("Ticket Submission from Field Engineer") && designation.equals("Site Head")) {// || designation.equals("Senior Field Support Engineer (Mobile)")
-                    dataModels.add(new PreventiveMaintenanceAcSection("" + (i + 1), "" + values[i], 0));
-                }
-            }
-        }*/
         if (flag == 1) {
             dataModels = new ArrayList<>();
             for (int i = 0; i < values.length; i++) {
@@ -272,7 +241,6 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
                                             @Override
                                             public void onPositiveClick() {
                                                 if (gpsTracker.canGetLocation()) {
-                                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
                                                     Log.e(UserHotoTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                                 }
                                             }
@@ -285,7 +253,6 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
                         case 1:
                             if (dataModels.get(position).getSecName().equals("Ticket Submission from Field Engineer")) {
                                 Intent acPMProcessIntent = new Intent(AcPreventiveMaintenanceSectionsListActivity.this, PreventiveMaintanceAcFieldEngineerActivity.class);
-                                //acPMProcessIntent.putExtra("status", "");
 
                                 //008 start
                                 acPMProcessIntent.putExtra("TicketId", TicketId);
@@ -362,12 +329,7 @@ public class AcPreventiveMaintenanceSectionsListActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        //refreshList();
         super.onResume();
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
-    }
 }

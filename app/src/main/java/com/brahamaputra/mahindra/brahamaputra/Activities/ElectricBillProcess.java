@@ -59,7 +59,6 @@ import com.brahamaputra.mahindra.brahamaputra.commons.EnglishNumberToWords;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
-import com.brahamaputra.mahindra.brahamaputra.commons.ToastMessage;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
@@ -103,7 +102,6 @@ public class ElectricBillProcess extends BaseActivity {
     private Uri imageFileUri = null;
     private String imageFileName = "";
 
-    private ToastMessage toastMessage;
     private AlertDialogManager alertDialogManager;
     private TextView mEbProcessTextViewCustomer;
     private TextView mEbProcessTextViewCustomerVal;
@@ -241,16 +239,13 @@ public class ElectricBillProcess extends BaseActivity {
         decimalConversion = new DecimalConversion();
         sessionManager = new SessionManager(ElectricBillProcess.this);
         alertDialogManager = new AlertDialogManager(ElectricBillProcess.this);
-        toastMessage = new ToastMessage(ElectricBillProcess.this);
         userId = sessionManager.getSessionUserId();
         offlineStorageWrapper = OfflineStorageWrapper.getInstance(ElectricBillProcess.this, userId, "EB");
         assignViews();
-        //initCombo();
         set_listener();
-        prepareUserPersonalData();//arj
+        prepareUserPersonalData();//008
 
 
-        // setInputDetails();
         mEbProcessEditTextUnitConsumed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -294,7 +289,6 @@ public class ElectricBillProcess extends BaseActivity {
                     if (netPayable.toString().length() > 0 && !netPayable.equals(".")) {
                         float number = Float.valueOf(netPayable);
                         long aValue = (long) number;
-                        //String str_rentLease = EnglishNumberToWords.convert(Long.valueOf(netPayable));
                         String str_rentLease = EnglishNumberToWords.convert(aValue);
                         mEbProcessTextViewNetPayableWordsVal.setText(str_rentLease);
                     }
@@ -303,7 +297,6 @@ public class ElectricBillProcess extends BaseActivity {
                 }
             }
         });
-
 
     }
 
@@ -372,26 +365,19 @@ public class ElectricBillProcess extends BaseActivity {
         mEbProcessEditTextUnitConsumed.setText(decimalConversion.convertDecimal(mEbProcessEditTextUnitConsumed.getText().toString()));
         mEbProcessEditTextGrossAmount.setText(decimalConversion.convertDecimal(mEbProcessEditTextGrossAmount.getText().toString()));
         mEbProcessEditTextNetPaybleBeforeDueDate.setText(decimalConversion.convertDecimal(mEbProcessEditTextNetPaybleBeforeDueDate.getText().toString()));
-
     }
 
-    private void initCombo() {
-    }
 
     public void set_listener() {
         mEbProcessTextViewCustomerVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ////prepareCustomer();arj
-
             }
         });
         mEbProcessTextViewCircleVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!mEbProcessTextViewCustomerVal.getText().toString().trim().isEmpty()) {
-                    ////prepareCircle();arj
                 } else {
                     showToast("Please Select Customer");
                 }
@@ -670,15 +656,11 @@ public class ElectricBillProcess extends BaseActivity {
     }
 
     private boolean checkCameraPermission() {
-
-
         if (ContextCompat.checkSelfPermission(ElectricBillProcess.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ElectricBillProcess.this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         } else {
             return true;
         }
-
-
         return false;
     }
 
@@ -748,8 +730,6 @@ public class ElectricBillProcess extends BaseActivity {
             }
         }
     }
-    //from = issue
-    //to = due
 
     private void BillIsseuDueDateValidation() {
         if (date_issue != null && date_due != null) {
@@ -764,12 +744,6 @@ public class ElectricBillProcess extends BaseActivity {
             }
         }
     }
-  /*  private String ddmmyyyy_ddmmmyyyy() {
-        String myFormat = "dd/MMM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        mEbProcessEditTextBilliDueDate.setText(sdf.format(String value));
-    }*/
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -784,22 +758,18 @@ public class ElectricBillProcess extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //  startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
                 DecimalFormatConversion();
                 if (checkValiadtion()) {
-                    //showSettingsAlert();
                     if (gpsTracker.canGetLocation()) {
                         if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
                             showSettingsAlert();
                         } else {
-                            //showToast("Could not detecting location. Please try again later.");
                             alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                                 @Override
                                 public void onPositiveClick() {
                                     if (gpsTracker.canGetLocation()) {
-                                        //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                                         Log.e(MyEnergyListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                     }
                                 }
@@ -828,17 +798,11 @@ public class ElectricBillProcess extends BaseActivity {
         String UnitsConsumed = mEbProcessEditTextUnitConsumed.getText().toString().trim();
         String BillingPeriodFrom = mEbProcessEditTextBillingFrom.getText().toString().trim();
         String BillingPeriodTo = mEbProcessEditTextBillingTo.getText().toString().trim();
-        /*String BillingPeriodFrom = date_BillFrom;
-        String BillingPeriodTo = date_BillTo;*/
         String ReceiptNumber = mEbProcessEditTextBillNo.getText().toString().trim();
         String BillIssueDate = mEbProcessEditTextBillingIssueDate.getText().toString().trim();
         String BillDueDate = mEbProcessEditTextBilliDueDate.getText().toString().trim();
-       /* String BillIssueDate = date_issue;
-        String BillDueDate = date_due;*/
         String GrossAmount = mEbProcessEditTextGrossAmount.getText().toString().trim();
         String NetPayableOnOrBeforeDueDate = mEbProcessEditTextNetPaybleBeforeDueDate.getText().toString().trim();
-        String VendorSAPId = "";
-        String EbBillScanCopyImageName = base64StringBillUpload;
 
         Double netPayAmt = 0.0, grossPayAmt = 0.0;
         if (!NetPayableOnOrBeforeDueDate.isEmpty()) {
@@ -931,48 +895,17 @@ public class ElectricBillProcess extends BaseActivity {
             } else {
                 return false;
             }
-
         } catch (ParseException e) {
-
             e.printStackTrace();
-
         }
         return false;
     }
 
-
-    private void setInputDetails() {
-        try {
-          /*  if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-                Gson gson = new Gson();
-                mDieselFillingTextViewSiteNameVal.setText(dieselFillingData.getSiteName());
-                mDieselFillingTextViewSiteDetailsVal.setText(dieselFillingData.getSiteDetails());
-                mDieselFillingTextViewSiteIDVal.setText(dieselFillingData.getSiteID());
-                mDieselFillingTextViewSelectDgIdQrCodeVal.setText(dieselFillingData.getSelectDgIdQrCode());
-                mDieselFillingEditTextPresentDgHmr.setText(dieselFillingData.getPresentDgHmr());
-                base64StringHmrPhoto= dieselFillingData.getHmrPhotoUpload();
-                mDieselFillingEditTextTankBalanceBeforeFilling.setText(dieselFillingData.getTankBalanceBeforeFilling());
-                mDieselFillingEditTextFillingQty.setText(dieselFillingData.getFillingQty());
-                mDieselFillingTextViewFinalDieselStockVal.setText(dieselFillingData.getFinalDieselStock());
-                mDieselFillingEditTextPresentEbReading.setText(dieselFillingData.getPesentEbReading());
-                base64StringEbReadingKwh =dieselFillingData.getEbReadingKwhPhoto();
-            } else {
-                Toast.makeText(DieselFilling.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
-            }*/
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void showSettingsAlert() {
-
         alertDialogManager.Dialog("Confirmation", "Do you want to submit this ticket?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
             @Override
             public void onPositiveClick() {
-
                 submitDetails();
-
             }
 
             @Override
@@ -980,9 +913,7 @@ public class ElectricBillProcess extends BaseActivity {
 
             }
         }).show();
-
     }
-
 
     private void submitDetails() {
 
@@ -1018,8 +949,6 @@ public class ElectricBillProcess extends BaseActivity {
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(electricBillProcessData);
-
-            //offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
 
             GsonRequest<EBlSubmitResposeData> eBlSubmitResposeDataGsonRequest = new GsonRequest<>(Request.Method.POST, Constants.SubmitElectricityBillTicketList, jsonString, EBlSubmitResposeData.class,
                     new Response.Listener<EBlSubmitResposeData>() {
@@ -1061,7 +990,6 @@ public class ElectricBillProcess extends BaseActivity {
             e.printStackTrace();
         }
     }
-
 
     private void prepareCustomer() {
         try {
@@ -1152,7 +1080,6 @@ public class ElectricBillProcess extends BaseActivity {
 
 
     }
-
 
     private void prepareCircle() {
         try {
@@ -1505,7 +1432,6 @@ public class ElectricBillProcess extends BaseActivity {
 
     }
 
-
     private void prepareEbSiteConnectedData() {
         try {
             showBusyProgress();
@@ -1588,11 +1514,6 @@ public class ElectricBillProcess extends BaseActivity {
                 mEbProcessButtonEbBillScanCopyiew.setVisibility(View.GONE);
             }
         }
-    }
-
-    private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
     }
 
     private void prepareUserPersonalData() {

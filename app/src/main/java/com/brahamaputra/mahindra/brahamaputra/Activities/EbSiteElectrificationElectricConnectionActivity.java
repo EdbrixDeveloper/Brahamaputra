@@ -3,7 +3,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.Menu;
@@ -21,7 +20,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransact
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
-import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -123,13 +121,9 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
     private EditText mEbSiteElectrificationTransactionEditTextBankAccountNo;
 
     DecimalConversion decimalConversion;
-    private String userId = "";
-    private String ticketId = "";
-    private String ticketName = "";
 
     private EbSiteElectrificationTransactionData ebSiteElectrificationTransactionData;
     private EbSiteElectrificationElectricConnectionData ebSiteElectrificationElectricConnectionData;
-    private SessionManager sessionManager;
 
     String str_typeOfElectricConnection;
     String str_tariff;
@@ -690,18 +684,12 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
     }
 
     private void setClassEbSiteElectrificationTransactionData() {
-        /*try {*/
-
         Intent intent = getIntent();
         ebSiteElectrificationTransactionData = (EbSiteElectrificationTransactionData) intent.getSerializableExtra("ebSiteElectrificationTransactionData");
-        /*} catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
     private void setValues() {
 
-        //EbSiteElectrificationElectricConnectionData ebSiteElectrificationElectricConnectionData = new EbSiteElectrificationElectricConnectionData();
         ebSiteElectrificationElectricConnectionData = ebSiteElectrificationTransactionData.getObjEbSiteElectrificationElectricConnection();
 
         mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.setText(ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany() == null || ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany().isEmpty() ? "-" : ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany());
@@ -732,113 +720,12 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
         mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay.setText(ebSiteElectrificationElectricConnectionData.getAverageEbAvailabilityPerDay() == null || ebSiteElectrificationElectricConnectionData.getAverageEbAvailabilityPerDay().isEmpty() ? "" : ebSiteElectrificationElectricConnectionData.getAverageEbAvailabilityPerDay());
         mEbSiteElectrificationTransactionEditTextScheduledPowerCutInHrs.setText(ebSiteElectrificationElectricConnectionData.getScheduledPowerCutInHrs() == null || ebSiteElectrificationElectricConnectionData.getScheduledPowerCutInHrs().isEmpty() ? "" : ebSiteElectrificationElectricConnectionData.getScheduledPowerCutInHrs());
         mEbSiteElectrificationTransactionTextViewEbBillDateVal.setText(ebSiteElectrificationElectricConnectionData.getEbBillDate() == null || ebSiteElectrificationElectricConnectionData.getEbBillDate().isEmpty() ? "" : ebSiteElectrificationElectricConnectionData.getEbBillDate());
-        //mEbSiteElectrificationTransactionEditTextSapVendorCode.setText(ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany() == null || ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany().isEmpty() ? "" : ebSiteElectrificationElectricConnectionData.getNameOfTheSupplyCompany());
         mEbSiteElectrificationTransactionTextViewTypeModeOfPaymentVal.setText(ebSiteElectrificationElectricConnectionData.getTypeModeOfPayment() == null || ebSiteElectrificationElectricConnectionData.getTypeModeOfPayment().isEmpty() ? "" : ebSiteElectrificationElectricConnectionData.getTypeModeOfPayment());
         mEbSiteElectrificationTransactionEditTextBankIfscCode.setText(ebSiteElectrificationElectricConnectionData.getBankIfscCode() == null || ebSiteElectrificationElectricConnectionData.getBankIfscCode().isEmpty() ? "" : ebSiteElectrificationElectricConnectionData.getBankIfscCode());
         mEbSiteElectrificationTransactionEditTextBankAccountNo.setText(ebSiteElectrificationElectricConnectionData.getBankAccountNo() == null || ebSiteElectrificationElectricConnectionData.getBankAccountNo().isEmpty() ? "" : ebSiteElectrificationElectricConnectionData.getBankAccountNo());
     }
 
     private boolean validation() {
-        /*mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal = (EditText) findViewById(R.id.ebSiteElectrificationElectricConnection_textView_nameOfSupplyCompany_val);
-        mEbSiteElectrificationElectricConnectionEditTextConsumerNumber = (EditText) findViewById(R.id.ebSiteElectrificationElectricConnection_editText_consumerNumber);
-        mEbSiteElectrificationTransactionEditTextEbMeterSerialNumber = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_ebMeterSerialNumber);
-        mEbSiteElectrificationTransactionTextViewTypeOfElectricConnectionVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_typeOfElectricConnection_val);
-        mEbSiteElectrificationTransactionTextViewTariffVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_tariff_val);
-        mEbSiteElectrificationTransactionEditTextSanctionedLoadKVA = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_sanctionedLoadKVA);
-        mEbSiteElectrificationTransactionEditTextExistingLoadAtSiteKVA = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_existingLoadAtSiteKVA);
-        mEbSiteElectrificationTransactionEditTextSecurityAmountPaidToTheCompany = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_SecurityAmountPaidToTheCompany);
-        mEbSiteElectrificationTransactionTextViewCopyOfElectricBillsVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_copyOfElectricBills_val);
-        mEbSiteElectrificationTransactionEditTextNumberOfCompoundLights = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_numberOfCompoundLights);
-        mEbSiteElectrificationTransactionEditTextEbMeterReadingInKWh = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_ebMeterReadingInKWh);
-        mEbSiteElectrificationTransactionTextViewEbSupplierVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_ebSupplier_val);
-        mEbSiteElectrificationTransactionEditTextEbCostPerUnitForSharedConnection = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_ebCostPerUnitForSharedConnection);
-        mEbSiteElectrificationTransactionTextViewEbStatusVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_ebStatus_val);
-        mEbSiteElectrificationTransactionTextViewTransformerWorkingConditionVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_transformerWorkingCondition_val);
-        mEbSiteElectrificationTransactionEditTextTransformerCapacityInKva = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_transformerCapacityInKva);
-        mEbSiteElectrificationTransactionTextViewEbMeterBoxStatusVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_ebMeterBoxStatus_val);
-        mEbSiteElectrificationTransactionEditTextSectionName = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_sectionName);
-        mEbSiteElectrificationTransactionEditTextSectionNumber = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_sectionNumber);
-        mEbSiteElectrificationTransactionTextViewEbMeterWorkingStatusVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_ebMeterWorkingStatus_val);
-        mEbSiteElectrificationTransactionTextViewTypeOfPaymentVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_typeOfPayment_val);
-        mEbSiteElectrificationTransactionTextViewEbPaymentScheduleVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_ebPaymentSchedule_val);
-        mEbSiteElectrificationTransactionTextViewSafetyFuseUnitVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_safetyFuseUnit_val);
-        mEbSiteElectrificationTransactionTextViewKitKatClayFuseStatusVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_kitKatClayFuseStatus_val);
-        mEbSiteElectrificationTransactionTextViewEbNeutralEarthingVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_ebNeutralEarthing_val);
-        mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_averageEbAvailabilityPerDay);
-        mEbSiteElectrificationTransactionEditTextScheduledPowerCutInHrs = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_scheduledPowerCutInHrs);
-        mEbSiteElectrificationTransactionTextViewEbBillDateVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_ebBillDate_Val);
-        mEbSiteElectrificationTransactionEditTextSapVendorCode = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_sapVendorCode);
-        mEbSiteElectrificationTransactionTextViewTypeModeOfPaymentVal = (TextView) findViewById(R.id.ebSiteElectrificationTransaction_textView_typeModeOfPayment_Val);
-        mEbSiteElectrificationTransactionEditTextBankIfscCode = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_bankIfscCode);
-        mEbSiteElectrificationTransactionEditTextBankAccountNo = (EditText) findViewById(R.id.ebSiteElectrificationTransaction_editText_bankAccountNo);*/
-
-
-        /*mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.getText().toString();
-        mEbSiteElectrificationElectricConnectionEditTextConsumerNumber.getText().toString();
-        mEbSiteElectrificationTransactionEditTextEbMeterSerialNumber.getText().toString();
-        mEbSiteElectrificationTransactionTextViewTypeOfElectricConnectionVal.getText().toString();
-        mEbSiteElectrificationTransactionTextViewTariffVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextSanctionedLoadKVA.getText().toString();
-        mEbSiteElectrificationTransactionEditTextExistingLoadAtSiteKVA.getText().toString();
-        mEbSiteElectrificationTransactionEditTextSecurityAmountPaidToTheCompany.getText().toString();
-        mEbSiteElectrificationTransactionTextViewCopyOfElectricBillsVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextNumberOfCompoundLights.getText().toString();
-        mEbSiteElectrificationTransactionEditTextEbMeterReadingInKWh.getText().toString();
-        mEbSiteElectrificationTransactionTextViewEbSupplierVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextEbCostPerUnitForSharedConnection.getText().toString();
-        mEbSiteElectrificationTransactionTextViewEbStatusVal.getText().toString();
-        mEbSiteElectrificationTransactionTextViewTransformerWorkingConditionVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextTransformerCapacityInKva.getText().toString();
-        mEbSiteElectrificationTransactionTextViewEbMeterBoxStatusVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextSectionName.getText().toString();
-        mEbSiteElectrificationTransactionEditTextSectionNumber.getText().toString();
-        mEbSiteElectrificationTransactionTextViewEbMeterWorkingStatusVal.getText().toString();
-        mEbSiteElectrificationTransactionTextViewTypeOfPaymentVal.getText().toString();
-        mEbSiteElectrificationTransactionTextViewEbPaymentScheduleVal.getText().toString();
-        mEbSiteElectrificationTransactionTextViewSafetyFuseUnitVal.getText().toString();
-        mEbSiteElectrificationTransactionTextViewKitKatClayFuseStatusVal.getText().toString();
-        mEbSiteElectrificationTransactionTextViewEbNeutralEarthingVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay.getText().toString();
-        mEbSiteElectrificationTransactionEditTextScheduledPowerCutInHrs.getText().toString();
-        mEbSiteElectrificationTransactionTextViewEbBillDateVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextSapVendorCode.getText().toString();
-        mEbSiteElectrificationTransactionTextViewTypeModeOfPaymentVal.getText().toString();
-        mEbSiteElectrificationTransactionEditTextBankIfscCode.getText().toString();
-        mEbSiteElectrificationTransactionEditTextBankAccountNo.getText().toString();*/
-
-        /*
-        String nameOfTheSupplyCompany =
-        String consumerNumber =
-        String ebMeterSerialNumber =
-        String typeOfElectricConnection =
-        String tariff =
-        String sanctionedLoad =
-        String existingLoadAtSite =
-        String securityAmountPaidToTheCompany =
-        String copyOfTheElectricBills =
-        String numberOfCompoundLights =
-        String ebMeterReadingInKWH =
-        String ebSupplier =
-        String ebCostPerUnitForSharedConnection =
-        String ebStatus =
-        String transformerWorkingCondition =
-        String transformerCapacityInKVA =
-        String ebMeterBoxStatus =
-        String sectionName =
-        String sectionNumber =
-        String ebMeterWorkingStatus =
-        String typeOfPayment =
-        String ebPaymentSchedule =
-        String safetyFuseUnit =
-        String kitkatClayFuseStatus =
-        String ebNeutralEarthing =
-        String averageEbAvailabilityPerDay =
-        String scheduledPowerCutInHrs =
-        String ebBillDate =
-        String typeModeOfPayment =
-        String bankIfscCode =
-        String bankAccountNo =
-        */
 
         String nameOfTheSupplyCompany = mEbSiteElectrificationElectricConnectionTextViewNameOfSupplyCompanyVal.getText().toString();
         String consumerNumber = mEbSiteElectrificationElectricConnectionEditTextConsumerNumber.getText().toString();
@@ -1000,7 +887,6 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
         String averageEbAvailabilityPerDay = mEbSiteElectrificationTransactionEditTextAverageEbAvailabilityPerDay.getText().toString();
         String scheduledPowerCutInHrs = mEbSiteElectrificationTransactionEditTextScheduledPowerCutInHrs.getText().toString();
         String ebBillDate = mEbSiteElectrificationTransactionTextViewEbBillDateVal.getText().toString();
-        //String SapVendorCode = mEbSiteElectrificationTransactionEditTextSapVendorCode.getText().toString();
         String typeModeOfPayment = mEbSiteElectrificationTransactionTextViewTypeModeOfPaymentVal.getText().toString();
         String bankIfscCode = mEbSiteElectrificationTransactionEditTextBankIfscCode.getText().toString();
         String bankAccountNo = mEbSiteElectrificationTransactionEditTextBankAccountNo.getText().toString();
@@ -1031,8 +917,6 @@ public class EbSiteElectrificationElectricConnectionActivity extends BaseActivit
 
             case R.id.menuSubmit:
                 DecimalFormatConversion();
-                //submitDetails();
-                //startActivity(new Intent(this, EbSiteElectrificationTransactionActivity.class));
                 if (validation() == true) {
                     saveEbElectrificationElectricConnectionData();
                     Intent intent = new Intent(this, EbSiteElectrificationTransactionActivity.class);

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,11 +19,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.DieselSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationElectricConnectionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransactionData;
-import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsModulesData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -33,18 +30,12 @@ import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
-import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
-import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.ebSiteElectrificationSiteDbId;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_CustomerName;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
 public class EbSiteElectrificationTransactionActivity extends BaseActivity {
 
@@ -64,7 +55,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
     private Button mEbSiteElectrificationTransactionButtonSubmitEbSiteElectrificationTransaction;
 
     public GPSTracker gpsTracker;
-    String str_sourceOfPower;
 
     private SessionManager sessionManager;
     private AlertDialogManager alertDialogManager;
@@ -104,7 +94,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         checkInLat = intent.getStringExtra("latitude");
         checkInLong = intent.getStringExtra("longitude");
         assignViews();
-        initCombo();
         checkNetworkConnection();
 
         alertDialogManager = new AlertDialogManager(EbSiteElectrificationTransactionActivity.this);
@@ -122,7 +111,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
 
                 Intent intent = new Intent(EbSiteElectrificationTransactionActivity.this, EbSiteElectrificationElectricConnectionActivity.class);
                 intent.putExtra("ebSiteElectrificationTransactionData", ebSiteElectrificationTransactionData);
-
                 startActivityForResult(intent, 200);
             }
         });
@@ -145,30 +133,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         mEbSiteElectrificationTransactionButtonSubmitEbSiteElectrificationTransaction = (Button) findViewById(R.id.ebSiteElectrificationTransaction_button_submitEbSiteElectrificationTransaction);
     }
 
-    private void initCombo() {
-
-        /*mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchableSpinnerDialog searchableSpinnerDialog = new SearchableSpinnerDialog(EbSiteElectrificationTransactionActivity.this,
-                        new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.array_userHotoTrans_sourceOfPower))),
-                        "Select",
-                        "Close", "#000000");
-                searchableSpinnerDialog.showSearchableSpinnerDialog();
-
-                searchableSpinnerDialog.bindOnSpinerListener(new OnSpinnerItemClick() {
-                    @Override
-                    public void onClick(ArrayList<String> item, int position) {
-
-                        str_sourceOfPower = item.get(position);
-                        mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.setText(str_sourceOfPower);
-                        hototicket_sourceOfPower = str_sourceOfPower;
-                    }
-                });
-            }
-        });*/
-    }
-
     public void checkNetworkConnection() {
 
         Intent intent = getIntent();
@@ -188,15 +152,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         ebSiteElectrificationElectricConnectionData.setNameOfTheSupplyCompany(intent.getStringExtra("nameOfTheSupplyCompany"));
         ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(ebSiteElectrificationElectricConnectionData);
 
-           /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                checkInLat = String.valueOf(gpsTracker.getLatitude());
-                checkInLong = String.valueOf(gpsTracker.getLongitude());*//*
-
-           // submitCheckIn(checkInLong, checkInLat, checkInBatteryData);
-            *//*} else {
-                showToast("Could not detecting location.");
-            }*/
-
     }
 
     private void submitDetails() {
@@ -207,7 +162,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
             ebSiteElectrificationTransactionData.setUserId(sessionManager.getSessionUserId());
             ebSiteElectrificationTransactionData.setAccessToken(sessionManager.getSessionDeviceToken());
             ebSiteElectrificationTransactionData.setTicketId(ticketId);
-            /*ebSiteElectrificationTransactionData.setTicketNo(ticketName);*/
 
             ebSiteElectrificationTransactionData.setCheckInLatitude(checkInLat);
             ebSiteElectrificationTransactionData.setCheckInLongitude(checkInLong);
@@ -217,14 +171,11 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
             ebSiteElectrificationTransactionData.setCheckOutLongitude(checkOutLong);
             ebSiteElectrificationTransactionData.setCheckOutBatteryData(checkOutBatteryData);
 
-            //ebSiteElectrificationTransactionData.setSiteId(mEbSiteElectrificationTransactionEditTextSiteID.getText().toString());
             ebSiteElectrificationTransactionData.setSiteId(ebSiteElectrificationSiteDbId);
 
             ebSiteElectrificationTransactionData.setSiteAddress(mEbSiteElectrificationTransactionEditTextSiteAddress.getText().toString());
 
             ebSiteElectrificationTransactionData.setSourceOfPower(mEbSiteElectrificationTransactionTextViewSourceOfPowerVal.getText().toString());
-            //ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(ebSiteElectrificationElectricConnectionData);
-
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(ebSiteElectrificationTransactionData);
@@ -261,7 +212,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
             ebSiteElectrificationTicketSubmit.setShouldCache(false);
             Application.getInstance().addToRequestQueue(ebSiteElectrificationTicketSubmit, "ebSiteElectrificationTicketSubmit");
 
-            //offlineStorageWrapper.saveObjectToFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt", jsonString);
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, e.getMessage().toString());
@@ -303,13 +253,8 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         menuInflater.inflate(R.menu.eb_site_electrification_transaction_menu, menu);
 
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
-
         // show the button when some condition is true
         shareItem.setVisible(true);
-        /*if (hotoTransactionData.isAtLeastOneHotoFormsSubmit()) {
-            shareItem.setVisible(true);
-        }*/
-
         return true;
     }
 
@@ -352,13 +297,11 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
                         }
 
                     } else {
-                        //showToast("Could not detecting location.");
                         alertDialogManager = new AlertDialogManager(EbSiteElectrificationTransactionActivity.this);
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By 008 on 10-11-2018
                                     Log.e(EbSiteElectrificationTransactionActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
@@ -366,10 +309,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
                     }
                 }
 
-
-                /*if (validation() == true) {
-                    submitDetails();
-                }*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -382,9 +321,6 @@ public class EbSiteElectrificationTransactionActivity extends BaseActivity {
         if (requestCode == MY_FLAG_MODULE_RESULT) {
             if (resultCode == RESULT_OK) {
                 Bundle b = data.getExtras();
-                //powerPlantDetailsModulesData = data.getBundleExtra("powerPlantDetailsModulesData");
-                //powerPlantDetailsModulesData = (ArrayList<PowerPlantDetailsModulesData>)data.getExtras().getSerializable("powerPlantDetailsModulesData");
-                //ebSiteElectrificationTransactionData.setObjEbSiteElectrificationElectricConnection(new EbSiteElectrificationElectricConnectionData());
                 ebSiteElectrificationTransactionData = ((EbSiteElectrificationTransactionData) b.getSerializable("ebSiteElectrificationTransactionData"));
                 Log.e("123", "123");
             }

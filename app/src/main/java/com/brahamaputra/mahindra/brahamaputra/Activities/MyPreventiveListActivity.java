@@ -65,19 +65,15 @@ public class MyPreventiveListActivity extends BaseActivity {
         mMyPreventiveListRelativeLayoutSitePreventiveMaintenance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(MyEnergyListActivity.this, ElectricBillProcessList.class));
 
                 if (Conditions.isNetworkConnected(MyPreventiveListActivity.this)) {
                     if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                        //startActivity(new Intent(MyPreventiveListActivity.this, PriventiveMaintenanceSiteTransactionActivity.class));
                         startActivity(new Intent(MyPreventiveListActivity.this, PreventiveMaintenanceDashboard.class));
                     } else {
-                        //showToast("Could not detecting location. Please try again later.");
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override
                             public void onPositiveClick() {
                                 if (gpsTracker.canGetLocation()) {
-                                    //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
                                     Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
                                 }
                             }
@@ -103,7 +99,6 @@ public class MyPreventiveListActivity extends BaseActivity {
         gpsTracker = new GPSTracker(MyPreventiveListActivity.this);
         alertDialogManager = new AlertDialogManager(MyPreventiveListActivity.this);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

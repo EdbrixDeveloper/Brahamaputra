@@ -6,8 +6,6 @@ import android.location.LocationManager;
 import android.net.ParseException;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,8 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -25,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.app.progresviews.ProgressWheel;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.PmAcExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePmAcTicketList;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -40,10 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.RoundingMode;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -61,43 +54,6 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
     /////
     public static final int RESULT_AC_PM_SUBMIT = 257;
     private TextView txtNoTicketFound;
-
-    /////////////No Imp Below Part Testing Purpose
-
-    /*private LinearLayout mLinearLayoutStatus;
-    private ProgressWheel mWheelprogress;
-    private LinearLayout mLinearLayoutContainer1;
-    private TextView mAcPreventiveMaintenanceSectionTextViewName;
-    private TextView mAcPreventiveMaintenanceSectionTextViewNo;
-    private LinearLayout mLinearLayoutContainer2;
-    private TextView mAcPreventiveMaintenanceSectionTextViewName2;
-    private TextView mAcPreventiveMaintenanceSectionTextViewNo2;
-    private LinearLayout mPmSiteDashboardLinearLayoutTicket1;
-    private TextView mTextViewHotoName;
-    private TextView mTextViewSiteID;
-    private TextView mTextViewSiteName;
-    private TextView mTextViewSiteSSA;
-    private TextView mTextViewSiteAddress;
-    private LinearLayout mPmSiteDashboardLinearLayoutTicket2;
-    private TextView mTextViewHotoName1;
-    private TextView mTextViewSiteID1;
-    private TextView mTextViewSiteName1;
-    private TextView mTextViewSiteSSA1;
-    private TextView mTextViewSiteAddress1;
-    private LinearLayout mPriventiveMaintenanceSiteLinearLayoutTicket1;
-    private LinearLayout mPriventiveMaintenanceSiteLinearLayoutTicket2;
-    public ExpandableListView pmSiteList_listView_siteacList;
-    public ExpandableListView acSiteList_listView_siteList;
-    private SitePmAcTicketList sitePmAcTicketList;
-    String returnValueFromFieldEngineerForm;
-    */
-
-    //public GPSTracker gpsTracker;
-    //private AlertDialogManager alertDialogManager;
-    //private SessionManager sessionManager;
-    //public static final int RESULT_AC_PM_SUBMIT = 257;
-    //private TextView txtNoTicketFound;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +73,6 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
         alertDialogManager = new AlertDialogManager(AcPreventiveMaintenanceDashboardActivity.this);
         sessionManager = new SessionManager(AcPreventiveMaintenanceDashboardActivity.this);
         gpsTracker = new GPSTracker(AcPreventiveMaintenanceDashboardActivity.this);
-
-        //assignViews();
-        //setListner();
 
         prepareListData();
 
@@ -324,14 +277,6 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
             showBusyProgress();
             JSONObject jo = new JSONObject();
 
-            /*{
-                "UserId":"120",
-                    "AccessToken":"MjUyLTg1REEyUzMtQURTUzVELUVJNUI0QTIyMTEyMA=="}*/
-
-            /*{
-                "UserId":"145",
-                    "AccessToken":"MjUyLTg1REEyUzMtQURTUzVELUVJNUI0QTIyMTE0NQ=="
-            }*/
             jo.put("UserId", sessionManager.getSessionUserId());
             jo.put("AccessToken", sessionManager.getSessionDeviceToken());
 
@@ -476,17 +421,6 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
             } else {
                 //No Internet Connection
                 showToast("Device has no internet connection.");
-                /*alertDialogManager.Dialog("Conformation", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        Intent intent = new Intent(AcPreventiveMaintenanceDashboardActivity.this, AcPreventiveMaintenanceSectionsListActivity.class);
-                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this));
-                        intent.putExtra("TicketNO", acPmTicketNo);
-                        sessionManager.updateSessionUserTicketId(acPmTicketId);
-                        sessionManager.updateSessionUserTicketName(acPmTicketNo);
-                        startActivityForResult(intent, RESULT_AC_PM_SUBMIT);
-                    }
-                }).show();*/
             }
         }
     }
@@ -509,26 +443,12 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
                 prepareListData();
                 return true;
             case R.id.menuReport:
-                //showToast("Hi...");
-                //prepareListData();
                 startActivity(new Intent(AcPreventiveMaintenanceDashboardActivity.this, PreventiveMaintenanceAcReportDashboardActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -537,213 +457,5 @@ public class AcPreventiveMaintenanceDashboardActivity extends BaseActivity {
             prepareListData();
         }
     }
-
-    //////////////////////////////////////////////
-
-    private void assignViews() {
-        /*mLinearLayoutStatus = (LinearLayout) findViewById(R.id.linearLayout_Status);
-        mWheelprogress = (ProgressWheel) findViewById(R.id.wheelprogress);
-        mLinearLayoutContainer1 = (LinearLayout) findViewById(R.id.linearLayout_container1);
-        mAcPreventiveMaintenanceSectionTextViewName = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_name);
-        mAcPreventiveMaintenanceSectionTextViewNo = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_no);
-        mPriventiveMaintenanceSiteLinearLayoutTicket1 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket1);
-        mPriventiveMaintenanceSiteLinearLayoutTicket2 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket2);
-        mLinearLayoutContainer2 = (LinearLayout) findViewById(R.id.linearLayout_container2);
-        //mAcPreventiveMaintenanceSectionTextViewName2 = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_name2);
-        mAcPreventiveMaintenanceSectionTextViewNo2 = (TextView) findViewById(R.id.acPreventiveMaintenanceSection_textView_no2);
-        mPmSiteDashboardLinearLayoutTicket1 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket1);
-        mTextViewHotoName = (TextView) findViewById(R.id.textView_HotoName);
-        mTextViewSiteID = (TextView) findViewById(R.id.textView_SiteID);
-        mTextViewSiteName = (TextView) findViewById(R.id.textView_SiteName);
-        mTextViewSiteSSA = (TextView) findViewById(R.id.textView_SiteSSA);
-        mTextViewSiteAddress = (TextView) findViewById(R.id.textView_SiteAddress);
-        mPmSiteDashboardLinearLayoutTicket2 = (LinearLayout) findViewById(R.id.pmSiteDashboard_linearLayout_ticket2);
-        mTextViewHotoName1 = (TextView) findViewById(R.id.textView_HotoName1);
-        mTextViewSiteID1 = (TextView) findViewById(R.id.textView_SiteID1);
-        mTextViewSiteName1 = (TextView) findViewById(R.id.textView_SiteName1);
-        mTextViewSiteSSA1 = (TextView) findViewById(R.id.textView_SiteSSA1);
-        mTextViewSiteAddress1 = (TextView) findViewById(R.id.textView_SiteAddress1);
-        pmSiteList_listView_siteacList = (ExpandableListView) findViewById(R.id.acPmSiteList_listView_siteAcList);
-
-        txtNoTicketFound = (TextView) findViewById(R.id.txtNoTicketFound);
-        txtNoTicketFound.setVisibility(View.GONE);*/
-    }
-
-    private void setListner() {
-
-        /*mPriventiveMaintenanceSiteLinearLayoutTicket1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialogManager.Dialog("Conformation", "Do you want to proceed doing AC PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        openTicket1();
-                    }
-
-                    @Override
-                    public void onNegativeClick() {
-
-                    }
-                }).show();
-
-            }
-        });
-
-        mPriventiveMaintenanceSiteLinearLayoutTicket2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                alertDialogManager.Dialog("Conformation", "Do you want to proceed doing AC PM?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        openTicket2();
-                    }
-
-                    @Override
-                    public void onNegativeClick() {
-
-                    }
-                }).show();
-
-            }
-        });*/
-    }
-
-    private void openTicket2() {
-        if (Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this)) {
-            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                Intent intent = new Intent(AcPreventiveMaintenanceDashboardActivity.this, AcPreventiveMaintenanceSectionsListActivity.class);
-                /*intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this));
-                intent.putExtra("ticketNO", "SIKL19019999");
-                intent.putExtra("status", "Submitted");
-                sessionManager.updateSessionUserTicketId("SIKL19019999");
-                sessionManager.updateSessionUserTicketName("SIKL19019999");*/
-                //008 start
-
-                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this));
-
-                intent.putExtra("TicketId", "02");
-                intent.putExtra("TicketNO", "PMAC00165");
-                intent.putExtra("TicketDate", "16/Apr/2019");
-
-                intent.putExtra("acPmPlanDate", "16/Apr/2019");
-                intent.putExtra("submittedDate", "18/Apr/2019");
-                intent.putExtra("acPmSheduledDate", "15/Apr/2019");
-
-                intent.putExtra("customerName", "Mahindra");
-                intent.putExtra("circleName", "BSNL");
-                intent.putExtra("stateName", "PNB State");
-                intent.putExtra("ssaName", "SSA 1");
-                intent.putExtra("siteId", "Site 001");
-                intent.putExtra("siteName", "Sangola");
-                intent.putExtra("siteType", "Indoor");
-                //intent.putExtra("siteAddress", siteAddress);
-
-                intent.putExtra("numberOfAc", "3");
-                intent.putExtra("modeOfOpration", "In-house");// Out-source
-                intent.putExtra("vendorName", "252");
-                intent.putExtra("acTechnicianName", "Ankil Parimal");
-                intent.putExtra("acTechnicianMobileNo", "9876543210");
-                intent.putExtra("accessType", "A");
-                intent.putExtra("ticketAccess", "1");
-                intent.putExtra("acPmTickStatus", "WIP");//
-
-                intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
-                intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
-
-                sessionManager.updateSessionUserTicketId("02");
-                sessionManager.updateSessionUserTicketName("PMAC00165");
-                //008 end
-
-                startActivityForResult(intent, RESULT_AC_PM_SUBMIT);
-            } else {
-                //showToast("Could not detecting location. Please try again later.");
-                alertDialogManager.Dialog("Conformation", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        if (gpsTracker.canGetLocation()) {
-                            //showToast("Lat : "+gpsTracker.getLatitude()+"\n Long : "+gpsTracker.getLongitude()); comment By Arjun on 10-11-2018
-                            Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                        }
-                    }
-                }).show();
-            }
-        } else {
-            alertDialogManager.Dialog("Conformation", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                @Override
-                public void onPositiveClick() {
-                    finish();
-                }
-            }).show();
-        }
-    }
-
-    private void openTicket1() {
-        if (Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this)) {
-            if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {
-                Intent intent = new Intent(AcPreventiveMaintenanceDashboardActivity.this, AcPreventiveMaintenanceSectionsListActivity.class);
-                /*intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this));
-                intent.putExtra("ticketNO", "SIKL19012222");
-                intent.putExtra("status", "Submitted by Technician");
-                sessionManager.updateSessionUserTicketId("SIKL19012222");
-                sessionManager.updateSessionUserTicketName("SIKL19012222");*/
-
-                //008 start
-                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(AcPreventiveMaintenanceDashboardActivity.this));
-
-                intent.putExtra("TicketId", "02");
-                intent.putExtra("TicketNO", "PMAC00165");
-                intent.putExtra("TicketDate", "16/Apr/2019");
-
-                intent.putExtra("acPmPlanDate", "16/Apr/2019");
-                intent.putExtra("submittedDate", "18/Apr/2019");
-                intent.putExtra("acPmSheduledDate", "15/Apr/2019");
-
-                intent.putExtra("customerName", "Mahindra");
-                intent.putExtra("circleName", "BSNL");
-                intent.putExtra("stateName", "PNB State");
-                intent.putExtra("ssaName", "SSA 1");
-                intent.putExtra("siteId", "Site 001");
-                intent.putExtra("siteName", "Sangola");
-                intent.putExtra("siteType", "Indoor");
-                //intent.putExtra("siteAddress", siteAddress);
-
-                intent.putExtra("numberOfAc", "3");
-                intent.putExtra("modeOfOpration", "In-house");
-                intent.putExtra("vendorName", "");
-                intent.putExtra("acTechnicianName", "Ankil Parimal");
-                intent.putExtra("acTechnicianMobileNo", "9876543210");
-                intent.putExtra("accessType", "S");
-                intent.putExtra("ticketAccess", "1");
-                intent.putExtra("acPmTickStatus", "Open");
-
-                intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
-                intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
-
-                sessionManager.updateSessionUserTicketId("02");
-                sessionManager.updateSessionUserTicketName("PMAC00165");
-                //008 end
-
-                startActivityForResult(intent, RESULT_AC_PM_SUBMIT);
-            } else {
-                alertDialogManager.Dialog("Conformation", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        if (gpsTracker.canGetLocation()) {
-                            Log.e(MyPreventiveListActivity.class.getName(), "Lat : " + gpsTracker.getLatitude() + "\n Long : " + gpsTracker.getLongitude());
-                        }
-                    }
-                }).show();
-            }
-        } else {
-            alertDialogManager.Dialog("Conformation", "Device has no internet connection. Turn on internet", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                @Override
-                public void onPositiveClick() {
-                    finish();
-                }
-            }).show();
-        }
-    }
-
 
 }

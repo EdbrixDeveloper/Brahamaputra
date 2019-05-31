@@ -360,7 +360,6 @@ public class Land_Details extends BaseActivity {
                         mLandDetailsButtonLayoutOfLandView.setVisibility(View.GONE);
                         if (imageFileName != null && imageFileName.length() > 0) {
                             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//                             imageFileUri = Uri.fromFile(file);
                             imageFileUri = FileProvider.getUriForFile(Land_Details.this, BuildConfig.APPLICATION_ID + ".provider", file);
                             if (imageFileUri != null) {
                                 mLandDetailsButtonLayoutOfLandView.setVisibility(View.VISIBLE);
@@ -371,7 +370,7 @@ public class Land_Details extends BaseActivity {
                     }
                 }
             } else {
-                Toast.makeText(Land_Details.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -424,7 +423,6 @@ public class Land_Details extends BaseActivity {
             imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
 
             File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//            imageFileUri = Uri.fromFile(file);
 
             imageFileUri = FileProvider.getUriForFile(Land_Details.this, BuildConfig.APPLICATION_ID + ".provider", file);
 
@@ -544,11 +542,6 @@ public class Land_Details extends BaseActivity {
         }).show();
 
 
-    }
-
-    private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
     }
 
     @Override

@@ -73,7 +73,7 @@ public class MaintenanceDashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (Conditions.isNetworkConnected(MaintenanceDashboardActivity.this)) {
                     /*if (gpsTracker.getLongitude() > 0 && gpsTracker.getLongitude() > 0) {*/
-                    startActivity(new Intent(MaintenanceDashboardActivity.this, WrmsAlarmAcknowledgeActivity.class));//WrmsUptimeReportDashboardActivity
+                    startActivity(new Intent(MaintenanceDashboardActivity.this, WrmsUptimeReportDashboardActivity.class));//WrmsAlarmAcknowledgeActivity
                     /*} else {
                         alertDialogManager.Dialog("Information", "Could not get your location. Please try again.", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
                             @Override

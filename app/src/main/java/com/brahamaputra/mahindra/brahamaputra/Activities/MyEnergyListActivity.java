@@ -13,10 +13,11 @@ import android.widget.RelativeLayout;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
+import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 
-public class MyEnergyListActivity extends AppCompatActivity {
+public class MyEnergyListActivity extends BaseActivity {
 
     private RelativeLayout mMyEnegyListRelativeLayoutDieselFillingReq;
     private ImageView mImgDieselFillingReq;

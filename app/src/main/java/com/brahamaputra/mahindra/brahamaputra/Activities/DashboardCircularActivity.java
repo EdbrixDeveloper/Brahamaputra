@@ -16,23 +16,17 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
  * limitations under the License.
  */
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
@@ -182,17 +176,12 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 alertDialogManager.Dialog("Information", "This is for Default", "Ok", "No", new AlertDialogManager.onSingleButtonClickListner() {
                     @Override
                     public void onPositiveClick() {
-                        /* startActivity(new Intent(DashboardCircularActivity.this, ElectricBillProcessList.class));*/
-                    }
+                            }
                 }).show();
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
-    public void showAlertDialogBox(final String className) {
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -225,9 +214,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
             name = ((CircleImageView) view).getName();
         }
 
-       /* String text = getResources().getString(R.string.start_app, name);
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();*/
-
         switch (view.getId()) {
             case R.id.dashboard_myHoto_layout:
                 // Handle calendar click
@@ -241,9 +227,6 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
                 Intent intent = new Intent(DashboardCircularActivity.this, EnergyDashboardActivity.class);
                 startActivity(intent);
                 break;
-            /*case R.id.main_mail_image:
-                // Handle mail click
-                break;*/
             case R.id.dashboard_myPrevitive_layout:
                 // Handle profile click
                 intent = new Intent(DashboardCircularActivity.this, MaintenanceDashboardActivity.class);
@@ -327,40 +310,5 @@ public class DashboardCircularActivity extends BaseActivity implements OnItemSel
         // Toast.makeText(getApplicationContext(), R.string.center_click, Toast.LENGTH_SHORT).show();
     }
 
-    public void onAddClick(View view) {
-      /*  CircleImageView newMenu = new CircleImageView(this);
-        newMenu.setBackgroundResource(R.drawable.circle);
-        newMenu.setImageResource(R.drawable.ic_voice);
-        newMenu.setName(getString(R.string.voice_search));
-        circleLayout.addView(newMenu);*/
-    }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.dashboard_menu, menu);
-        return true;
-    }*/
-
-    public void onRemoveClick(View view) {
-        if (circleLayout.getChildCount() > 0) {
-            circleLayout.removeViewAt(circleLayout.getChildCount() - 1);
-        }
-    }
-
-    /* public void Rotate(View view) {
-        Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2, view.getHeight() / 2);
-        animation.setDuration(250);
-        view.startAnimation(animation);
-        view_pass = view;
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                menu_selected(view_pass);
-            }
-        }, 100);
-    }
-    */
 
 }
