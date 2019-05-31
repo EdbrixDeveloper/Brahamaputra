@@ -8,11 +8,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerManagementSystemData;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -41,11 +38,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 import android.Manifest;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class PowerManagementSystem extends BaseActivity {
 
@@ -144,7 +138,6 @@ public class PowerManagementSystem extends BaseActivity {
                         }
                     }
                 } else {
-                    //openCameraIntent();This Commented By 008 on 15-11-2018 For QR Code Purpose
                     onClicked(v);
                 }
 
@@ -352,36 +345,14 @@ public class PowerManagementSystem extends BaseActivity {
                 showToast("Cleared");
             }
         });
-
-        /*This Commented By 008 on 15-11-2018 For QR Code Purpose
-        mPowerManagementSystemButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (imageFileUri != null) {
-                    GlobalMethods.showImageDialog(PowerManagementSystem.this, imageFileUri);
-                } else {
-                    Toast.makeText(PowerManagementSystem.this, "Image not available...!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
     }
 
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scan QRcode");
+        integrator.setPrompt("Scan QR Code");
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
-
-//        Use this for more customization
-//        IntentIntegrator integrator = new IntentIntegrator(this);
-//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-//        integrator.setPrompt("Scan a barcode");
-//        integrator.setCameraId(0);  // Use a specific camera of the device
-//        integrator.setBeepEnabled(false);
-//        integrator.setBarcodeImageEnabled(true);
-//        integrator.initiateScan();
-
     }
 
     @Override
@@ -396,7 +367,6 @@ public class PowerManagementSystem extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                // startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuDone:
                 // Added Code By Pranav For Handling Field Visibility In Power Management System
@@ -430,10 +400,8 @@ public class PowerManagementSystem extends BaseActivity {
                 mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
                 // Added Code By Pranav For Handling Field Visibility In Power Management System
                 if (mPowerManagementSystemTextViewAvailabilityVal.getText().toString().equals("No")) {
-                    // mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
                     linearLayoutPowerManagementDetails.setVisibility(View.GONE);
                 } else {
-                    // mPowerManagementSystemTextViewAvailabilityVal.setText(powerManagementSystemData.getNewFieldAvailability());
                     base64StringPowerManagementSystem = powerManagementSystemData.getPowerManagementSystemQR();
                     mPowerManagementSystemTextViewAssetOwnerVal.setText(powerManagementSystemData.getAssetOwner());
                     mPowerManagementSystemTextViewPowerManagementSystemTypeVal.setText(powerManagementSystemData.getPowerManagementSystemType());
@@ -451,22 +419,7 @@ public class PowerManagementSystem extends BaseActivity {
                         button_ClearQRCodeScanView.setVisibility(View.VISIBLE);
                     }
                 }
-
-                // New added for image #ImageSet
-                /*This Commented By 008 on 15-11-2018 For QR Code Purpose
-                imageFileName = powerManagementSystemData.getQrCodeImageFileName();
-                mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
-                if (imageFileName != null && imageFileName.length() > 0) {
-                    File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//                             imageFileUri = Uri.fromFile(file);
-                    imageFileUri = FileProvider.getUriForFile(PowerManagementSystem.this, BuildConfig.APPLICATION_ID + ".provider", file);
-                    if (imageFileUri != null) {
-                        mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                    }
-                }*/
-
             } else {
-                //Toast.makeText(PowerManagementSystem.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 showToast("No previous saved data available");
             }
         } catch (Exception e) {
@@ -476,8 +429,6 @@ public class PowerManagementSystem extends BaseActivity {
 
     private void submitDetails() {
         try {
-            //hotoTransactionData.setTicketNo(ticketId);
-
             String newFieldAvailability = mPowerManagementSystemTextViewAvailabilityVal.getText().toString().trim();
             String powerManagementSystemQR = base64StringPowerManagementSystem;
             String assetOwner = mPowerManagementSystemTextViewAssetOwnerVal.getText().toString().trim();
@@ -495,7 +446,6 @@ public class PowerManagementSystem extends BaseActivity {
 
             Gson gson2 = new GsonBuilder().create();
             String jsonString = gson2.toJson(hotoTransactionData);
-            //Toast.makeText(Land_Details.this, "Gson to json string :" + jsonString, Toast.LENGTH_SHORT).show();
 
             offlineStorageWrapper.saveObjectToFile(ticketName + ".txt", jsonString);
         } catch (Exception e) {
@@ -602,25 +552,6 @@ public class PowerManagementSystem extends BaseActivity {
 
     }
 
-    public void openCameraIntent() {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
-
-            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-            //imageFileUri = Uri.fromFile(file);
-            imageFileUri = FileProvider.getUriForFile(PowerManagementSystem.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -648,35 +579,6 @@ public class PowerManagementSystem extends BaseActivity {
 
             }
         }
-
-        /*This Commented By 008 on 15-11-2018 For QR Code Purpose
-        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
-                resultCode == RESULT_OK) {
-            if (imageFileUri != null) {
-                try {
-                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-//                            (Bitmap) data.getExtras().get("data");
-//                mImageView.setImageBitmap(imageBitmap);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-                    byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringPowerManagementSystem = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                    mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            imageFileName = "";
-            imageFileUri = null;
-            mPowerManagementSystemButtonQRCodeScanView.setVisibility(View.GONE);
-        }*/
-
-    }
-
-    private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
     }
 
     @Override

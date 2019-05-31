@@ -24,7 +24,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
@@ -220,7 +219,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (imageFileNameOfSiteUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfSiteUri);
                 } else {
-                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -231,7 +230,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (imageFileNameOfShelterUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfShelterUri);
                 } else {
-                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -241,7 +240,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (imageFileNameOfEbMeterBoxUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfEbMeterBoxUri);
                 } else {
-                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -251,7 +250,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (imageFileNameOfSmpsUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfSmpsUri);
                 } else {
-                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -261,7 +260,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (imageFileNameOfEbMeterUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfEbMeterUri);
                 } else {
-                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -271,7 +270,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (imageFileNameOfDgHmrUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfDgHmrUri);
                 } else {
-                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -281,7 +280,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                 if (imageFileNameOfDgOverviewUri != null) {
                     GlobalMethods.showImageDialog(PhotoCaptureActivity.this, imageFileNameOfDgOverviewUri);
                 } else {
-                    Toast.makeText(PhotoCaptureActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -773,7 +772,7 @@ public class PhotoCaptureActivity extends BaseActivity {
                     }
                 }
             } else {
-                Toast.makeText(PhotoCaptureActivity.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

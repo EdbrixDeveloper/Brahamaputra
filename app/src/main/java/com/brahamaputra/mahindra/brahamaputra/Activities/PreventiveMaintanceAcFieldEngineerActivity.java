@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -21,26 +19,18 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.AcPreventiveMaintanceProcessParentDatum;
-import com.brahamaputra.mahindra.brahamaputra.Data.DieselSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.Data.TicktetSubmissionFromFieldEngineerDatum;
 import com.brahamaputra.mahindra.brahamaputra.Data.UpdateAcPreventiveMaintanceStatusResposeData;
-import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
-import com.brahamaputra.mahindra.brahamaputra.Volley.SettingsMy;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
 import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
-import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
-import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONObject;
 
@@ -89,14 +79,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     private LinearLayout mLinearLayoutParent;
 
     private AlertDialogManager alertDialogManager;
-
-    private String userId = "";
-    private String ticketId = "";
-    private String ticketName = "";
-
-    private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
-    String flag = "";
 
     String str_feedBackVal;
     TicktetSubmissionFromFieldEngineerDatum ticktetSubmissionFromFieldEngineerDatum;
@@ -144,19 +127,14 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
             invalidateOptionsMenu();
         }
-        //flag = intent.getStringExtra("status");
 
         sessionManager = new SessionManager(PreventiveMaintanceAcFieldEngineerActivity.this);
         gpsTracker = new GPSTracker(PreventiveMaintanceAcFieldEngineerActivity.this);
-        userId = sessionManager.getSessionUserId();
-        //offlineStorageWrapper = OfflineStorageWrapper.getInstance(PreventiveMaintanceAcFieldEngineerActivity.this, userId, ticketName);
         alertDialogManager = new AlertDialogManager(PreventiveMaintanceAcFieldEngineerActivity.this);
         ticktetSubmissionFromFieldEngineerDatum = new TicktetSubmissionFromFieldEngineerDatum();
         assignViews();
         initCombo();
         setDataToFields(intent);
-
-        //setInputDetails();
     }
 
     private void assignViews() {
@@ -196,11 +174,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         mPreventiveMaintanceAcFieldEngineerTextViewRemark = (TextView) findViewById(R.id.preventiveMaintanceAcFieldEngineer_textView_remark);
         mPreventiveMaintanceAcFieldEngineerEditTextRemark = (EditText) findViewById(R.id.preventiveMaintanceAcFieldEngineer_editText_remark);
         mLinearLayoutParent = (LinearLayout) findViewById(R.id.LinearLayoutParent);
-
-        /*if (flag.equals("Submitted by Technician")) {
-            mLinearLayoutParent.setVisibility(View.VISIBLE);
-        }*/
-
 
         if (modeOfOpration.equals("Out-source")) {
             mPreventiveMaintanceAcFieldEngineerLinearLayoutVendorName.setVisibility(View.VISIBLE);
@@ -296,8 +269,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                         }
                     }).show();
                 }
-
-                //onBackPressed();
             }
         });
 
@@ -310,7 +281,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         MenuItem shareItem = menu.findItem(R.id.menuSubmit);
 
         shareItem.setVisible(false);
-
         if (accessType.equals("S") && ticketAccess.equals("1") && acPmTickStatus.equals("WIP")) {
             shareItem.setVisible(true);
         }
@@ -350,7 +320,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
 
                     }
                 }).show();
-
                 return true;
 
             default:
@@ -434,9 +403,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         showBusyProgress();
         String userId = sessionManager.getSessionUserId();
         String accessToken = sessionManager.getSessionDeviceToken();
-        //String siteDbId = "";
-        //String status = "WIP";
-
         try {
             JSONObject jsonString = new JSONObject();
             jsonString.put("UserId", userId);
@@ -444,11 +410,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             jsonString.put("SitePMAcTicketId", TicketId);
             jsonString.put("Longitude", Longitude);
             jsonString.put("Latitude", Latitude);
-
-            //jsonString.put("Status", status);
-            //jsonString.put("SiteId", siteDbId);//siteCodeId
-            // jsonString.put("Id", siteDbId); //ticketDbId
-            // jsonString.put("SitePMAcTicketNo", siteDbId); //ticketCode
 
             Log.e(PreventiveMaintanceAcFieldEngineerActivity.class.getName(), "WIP JSON : " + jsonString.toString());
 
@@ -462,10 +423,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                             } else {
                                 if (response.getSuccess() == 1) {
                                     hideBusyProgress();
-                                    // setResult(RESULT_OK);
                                     showToast("Status updated successfully.");
-                                    //onBackPressed();
-                                    //finish();
 
                                     Intent intent = new Intent(PreventiveMaintanceAcFieldEngineerActivity.this, AcPreventiveMaintenanceDashboardActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -494,9 +452,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
     }
 
     private void submitDetails() {
-
         try {
-
             LocationManager lm = (LocationManager) PreventiveMaintanceAcFieldEngineerActivity.this.getSystemService(Context.LOCATION_SERVICE);
             boolean gps_enabled = false;
             boolean network_enabled = false;
@@ -525,7 +481,6 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
             jsonObject.put("UserId", sessionManager.getSessionUserId());
             jsonObject.put("AccessToken", sessionManager.getSessionDeviceToken());
             jsonObject.put("TicketId", TicketId);
-            //jsonObject.put("TicketNo", TicketNO);
             jsonObject.put("feedBack", feedback);
             jsonObject.put("remark", remark);
             jsonObject.put("acPmSiteEngineerLat", fieldEngineerLat);
@@ -541,9 +496,7 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
                             } else {
                                 if (response.getSuccess() == 1) {
                                     hideBusyProgress();
-                                    //setResult(RESULT_OK);
                                     showToast("Ticket submitted successfully.");
-                                    //finish();
                                     Intent intent = new Intent(PreventiveMaintanceAcFieldEngineerActivity.this, AcPreventiveMaintenanceDashboardActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivityForResult(intent, RESULT_OK);
@@ -571,102 +524,5 @@ public class PreventiveMaintanceAcFieldEngineerActivity extends BaseActivity {
         }
     }
 
-
-    //No important
-    private void setInputDetails() {
-
-        try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-
-                Gson gson = new Gson();
-                ticktetSubmissionFromFieldEngineerDatum = gson.fromJson(jsonInString, TicktetSubmissionFromFieldEngineerDatum.class);
-
-                mPreventiveMaintanceAcFieldEngineerTextViewCustomerVal.setText(ticktetSubmissionFromFieldEngineerDatum.getCustomer());
-                mPreventiveMaintanceAcFieldEngineerTextViewCircleVal.setText(ticktetSubmissionFromFieldEngineerDatum.getCircle());
-                mPreventiveMaintanceAcFieldEngineerTextViewStateVal.setText(ticktetSubmissionFromFieldEngineerDatum.getState());
-                mPreventiveMaintanceAcFieldEngineerTextViewSsaVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSsa());
-                mPreventiveMaintanceAcFieldEngineerTextViewSiteIDVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSiteId());
-                mPreventiveMaintanceAcFieldEngineerTextViewSiteNameVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSiteName());
-                mPreventiveMaintanceAcFieldEngineerTextViewPmSheduledDateOfAcVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSheduledDateOfAcPm());
-                mPreventiveMaintanceAcFieldEngineerTextViewModeOfOprationVal.setText(ticktetSubmissionFromFieldEngineerDatum.getModeOfOpration());
-                mPreventiveMaintanceAcFieldEngineerTextViewTicketNoVal.setText(ticktetSubmissionFromFieldEngineerDatum.getTicketNo());
-                mPreventiveMaintanceAcFieldEngineerTextViewVendorNameVal.setText(ticktetSubmissionFromFieldEngineerDatum.getVendorName());
-                mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianNameVal.setText(ticktetSubmissionFromFieldEngineerDatum.getAcTechnicianName());
-                mPreventiveMaintanceAcFieldEngineerTextViewAcTechnicianMobNoVal.setText(ticktetSubmissionFromFieldEngineerDatum.getAcTechnicianMobileNo());
-
-                if (ticktetSubmissionFromFieldEngineerDatum.getTicketStatusToWip().equals("true")) {
-                    mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(true);
-                } else {
-                    mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(false);
-                }
-                mPreventiveMaintanceAcFieldEngineerTextViewStatusSubmittedByTechnicianVal.setText(ticktetSubmissionFromFieldEngineerDatum.getStatus());
-                mPreventiveMaintanceAcFieldEngineerTextViewDateSubmittedByTechnicianVal.setText(ticktetSubmissionFromFieldEngineerDatum.getSubmittedDate());
-                mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setText(ticktetSubmissionFromFieldEngineerDatum.getFeedBack());
-                mPreventiveMaintanceAcFieldEngineerEditTextRemark.setText(ticktetSubmissionFromFieldEngineerDatum.getRemark());
-
-
-            }
-        } catch (Exception e) {
-
-        }
-
-    }
-
-    private void clearFields() {
-        mPreventiveMaintanceAcFieldEngineerTextViewFeedBackVal.setText("");
-        mPreventiveMaintanceAcFieldEngineerEditTextRemark.setText("");
-        mPreventiveMaintanceAcFieldEngineerCheckBoxTicketStatusToWipVal.setChecked(false);
-    }
-
-    public void submitFieldEngineerAcPmSiteTicket() {
-        try {
-            if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
-
-                showBusyProgress();
-                String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
-                Log.e("123", jsonInString);
-
-                GsonRequest<TicktetSubmissionFromFieldEngineerDatum> submitSitePmAcTicketRequest = new GsonRequest<>(Request.Method.POST, Constants.submitSitePMTicket, jsonInString, TicktetSubmissionFromFieldEngineerDatum.class,
-                        new Response.Listener<TicktetSubmissionFromFieldEngineerDatum>() {
-                            @Override
-                            public void onResponse(@NonNull TicktetSubmissionFromFieldEngineerDatum response) {
-                                hideBusyProgress();
-                                if (response.getError() != null) {
-                                    showToast(response.getError().getErrorMessage());
-                                } else {
-                                    if (response.getSuccess() == 1) {
-                                        showToast("Ticket submitted successfully.");
-                                        sessionManager.updateSessionUserTicketId(null);
-                                        sessionManager.updateSessionUserTicketName(null);
-                                        setResult(RESULT_OK);
-                                        removeOfflineCache();
-                                        finish();
-                                    }
-                                }
-
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        hideBusyProgress();
-                        showToast(SettingsMy.getErrorMessage(error));
-                    }
-                });
-
-                submitSitePmAcTicketRequest.setRetryPolicy(Application.getDefaultRetryPolice());
-                submitSitePmAcTicketRequest.setShouldCache(false);
-                Application.getInstance().addToRequestQueue(submitSitePmAcTicketRequest, "submitSitePmTicketRequest");
-            }
-        } catch (Exception e) {
-
-        }
-    }
-
-    private void removeOfflineCache() {
-        if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
-            offlineStorageWrapper.removedOffLineFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");
-        }
-    }
 
 }

@@ -30,7 +30,6 @@ import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerBackupsDGParentData;
-import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -251,8 +250,6 @@ public class Power_Backups_DG extends BaseActivity {
                         }
                     }
                 } else {
-                    //openCamera();
-                    //openCameraIntent();
                     qrScanFlag = 1;
                     onClicked(v);
                 }
@@ -366,17 +363,6 @@ public class Power_Backups_DG extends BaseActivity {
             }
         });
 
-        /*mPowerBackupsDgButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (imageFileUri != null) {
-                    GlobalMethods.showImageDialog(Power_Backups_DG.this, imageFileUri);
-                } else {
-                    Toast.makeText(Power_Backups_DG.this, "Image not available...!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
-
         button_ClearQRCodeScanView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -404,19 +390,9 @@ public class Power_Backups_DG extends BaseActivity {
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scan QRcode");
+        integrator.setPrompt("Scan QR Code");
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
-
-//        Use this for more customization
-//        IntentIntegrator integrator = new IntentIntegrator(this);
-//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-//        integrator.setPrompt("Scan a barcode");
-//        integrator.setCameraId(0);  // Use a specific camera of the device
-//        integrator.setBeepEnabled(false);
-//        integrator.setBarcodeImageEnabled(true);
-//        integrator.initiateScan();
-
     }
 
     private void assignViews() {
@@ -1067,53 +1043,8 @@ public class Power_Backups_DG extends BaseActivity {
 
     }
 
-    //////////////////////
-    //Camera//
-
-    public void openCameraIntent() {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
-
-            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//            imageFileUri = Uri.fromFile(file);
-
-            imageFileUri = FileProvider.getUriForFile(Power_Backups_DG.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /*if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA &&
-                resultCode == RESULT_OK) {
-            if (imageFileUri != null) {
-                try {
-                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageFileUri);
-//                            (Bitmap) data.getExtras().get("data");
-//                mImageView.setImageBitmap(imageBitmap);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-                    byte[] bitmapDataArray = stream.toByteArray();
-                    base64StringQRCodeScan = Base64.encodeToString(bitmapDataArray, Base64.DEFAULT);
-                    mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                imageFileName = "";
-                imageFileUri = null;
-                mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-            }
-        }*/
-
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
@@ -1180,21 +1111,11 @@ public class Power_Backups_DG extends BaseActivity {
                         if (showRationale) {
                             showAlert();
                         } else if (!showRationale) {
-                            // user denied flagging NEVER ASK AGAIN
-                            // you can either enable some fall back,
-                            // disable features of your app
-                            // or open another dialog explaining
-                            // again the permission and directing to
-                            // the app setting
                             saveToPreferences(Power_Backups_DG.this, ALLOW_KEY, true);
                         }
                     }
                 }
             }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-
         }
     }
 
@@ -1230,7 +1151,6 @@ public class Power_Backups_DG extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
                 //if (checkValidationOnNoOfEngineAlternatorSelection() == true) {
@@ -1271,10 +1191,6 @@ public class Power_Backups_DG extends BaseActivity {
                     powerBackupsDg_textView_Number.setText("Reading: #1");
                     totalCount = Integer.parseInt(powerBackupsDGParentData.getNoOfEngineAlternator());
 
-                    /*Comment By 008
-                    mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.setText(powerBackupsDGParentData.getNoOfEngineAlternator());
-                    mPowerBackupsDgTextViewNumberOfWorkingDgVal.setText(powerBackupsDGParentData.getNumberOfWorkingDg());*/
-
                     base64StringQRCodeScan = powerBackupsDGData.get(index).getqRCodeScan();
                     mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
                     button_ClearQRCodeScanView1.setVisibility(View.GONE);
@@ -1292,17 +1208,6 @@ public class Power_Backups_DG extends BaseActivity {
                         mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
                         button_ClearQRCodeScanView2.setVisibility(View.VISIBLE);
                     }
-                    // New added for image #ImageSet
-                    /*imageFileName = powerBackupsDGData.get(index).getQrCodeImageFileName();
-                    mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-                    if (imageFileName != null && imageFileName.length() > 0) {
-                        File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-//                             imageFileUri = Uri.fromFile(file);
-                        imageFileUri = FileProvider.getUriForFile(Power_Backups_DG.this, BuildConfig.APPLICATION_ID + ".provider", file);
-                        if (imageFileUri != null) {
-                            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
-                        }
-                    }*/
 
                     mPowerBackupsDgTextViewAssetOwnerVal.setText(powerBackupsDGData.get(index).getAssetOwner());
                     mPowerBackupsDgTextViewManufacturerMakeModelVal.setText(powerBackupsDGData.get(index).getManufacturerMakeModel());
@@ -1374,7 +1279,6 @@ public class Power_Backups_DG extends BaseActivity {
 
     private void saveRecords(int pos) {
         String qRCodeScan = base64StringQRCodeScan;
-        //private ImageView mPowerBackupsDgButtonQRCodeScan.getText().toString().trim();
         String assetOwner = mPowerBackupsDgTextViewAssetOwnerVal.getText().toString().trim();
         String manufacturerMakeModel = mPowerBackupsDgTextViewManufacturerMakeModelVal.getText().toString().trim();
         String capacityInKva = mPowerBackupsDgTextViewCapacityInKvaVal.getText().toString().trim();
@@ -1496,9 +1400,6 @@ public class Power_Backups_DG extends BaseActivity {
     public void clearFields(int indexPos) {
 
         powerBackupsDg_textView_Number.setText("Reading: #" + (indexPos + 1));
-        //mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-        //button_ClearQRCodeScanView1.setVisibility(View.GONE);
-
         mPowerBackupsDgTextViewAssetOwnerVal.setText("");
         mPowerBackupsDgTextViewManufacturerMakeModelVal.setText("");
         mPowerBackupsDgTextViewCapacityInKvaVal.setText("");
@@ -1547,55 +1448,24 @@ public class Power_Backups_DG extends BaseActivity {
         base64StringDgBatteryStatusQRCodeScan = "";
 
         mPowerBackupsDgLinearLayoutDgBatteryStatusQRCodeScan.setVisibility(View.GONE);
-        //mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
-        //button_ClearQRCodeScanView2.setVisibility(View.GONE);
 
         mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
         button_ClearQRCodeScanView1.setVisibility(View.GONE);
         if (!base64StringQRCodeScan.isEmpty() && base64StringQRCodeScan != null) {
             mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.VISIBLE);
             button_ClearQRCodeScanView1.setVisibility(View.VISIBLE);
-        } /*else {
-            mPowerBackupsDgButtonQRCodeScanView.setVisibility(View.GONE);
-            button_ClearQRCodeScanView1.setVisibility(View.GONE);
-        }*/
+        }
 
         mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
         button_ClearQRCodeScanView2.setVisibility(View.GONE);
         if (!base64StringDgBatteryStatusQRCodeScan.isEmpty() && base64StringDgBatteryStatusQRCodeScan != null) {
             mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.VISIBLE);
             button_ClearQRCodeScanView2.setVisibility(View.VISIBLE);
-        } /*else {
-            mPowerBackupsDgButtonDgBatteryStatusQRCodeScanView.setVisibility(View.GONE);
-            button_ClearQRCodeScanView2.setVisibility(View.GONE);
-        }*/
+        }
     }
 
     /*008 21112018*/
     public boolean checkValidationOnChangeNoOfEngineAlternatorSelection(String noOfEngineAlternator, String numberOfWorkingDg, String methodFlag) {
-        //String noOfEngineAlternator = mPowerBackupsDgTextViewNoOfEngineAlternatorSetsprovidedVal.getText().toString().trim();
-        //String numberOfWorkingDg = mPowerBackupsDgTextViewNumberOfWorkingDgVal.getText().toString().trim();
-        /*if (!noOfEngineAlternator.isEmpty() && noOfEngineAlternator != null) {
-            if (Integer.valueOf(noOfEngineAlternator) > 0) {
-                if (!numberOfWorkingDg.isEmpty() && numberOfWorkingDg != null) {
-                    if (Integer.valueOf(numberOfWorkingDg) <= Integer.valueOf(noOfEngineAlternator)) {
-                        return true;
-                    } else {
-                        showToast("Select Number of working DG is less than or equal to Number of Engine Alternator sets provided");
-                        return false;
-                    }
-                } else {
-                    showToast("Select Number of working DG");
-                    return false;
-                }
-            } else {
-                return true;
-            }
-        } else {
-            showToast("Select Number of Engine Alternator sets provided");
-            return false;
-        }*/
-
 
         if (noOfEngineAlternator.isEmpty() || noOfEngineAlternator == null) {
             showToast("Select Number of Engine Alternator sets provided");
@@ -1784,50 +1654,6 @@ public class Power_Backups_DG extends BaseActivity {
                     return true;
                 }
             }
-        }
-        return false;
-    }
-
-    //add 04022019 by 008 for new requirement
-    private boolean checkDuplicationQrCodeOld(int curr_pos) {
-        for (int i = 0; i < powerBackupsDGData.size(); i++) {
-            if (i != curr_pos) {
-                if (base64StringQRCodeScan.equals(powerBackupsDGData.get(i).getqRCodeScan().toString())) {
-                    int dup_pos = i + 1;
-                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
-                    return true;
-                }
-
-                if (base64StringQRCodeScan.equals(powerBackupsDGData.get(i).getDgBatteryStatusQRCodeScan().toString())) {
-                    int dup_pos = i + 1;
-                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
-                    return true;
-                }
-
-                if (base64StringDgBatteryStatusQRCodeScan.equals(powerBackupsDGData.get(i).getqRCodeScan().toString())) {
-                    int dup_pos = i + 1;
-                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
-                    return true;
-                }
-                if (!base64StringDgBatteryStatusQRCodeScan.isEmpty()) {
-                    if (base64StringDgBatteryStatusQRCodeScan.equals(powerBackupsDGData.get(i).getDgBatteryStatusQRCodeScan().toString())) {
-                        int dup_pos = i + 1;
-                        showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
-                        return true;
-                    }
-                }
-            }
-            if (i == curr_pos) {
-                if (base64StringQRCodeScan.equals(base64StringDgBatteryStatusQRCodeScan)) {
-                    int dup_pos = i + 1;
-                    showToast("This QR Code Already scanned in that Reading " + dup_pos);
-                    return true;
-                }
-            }
-        }
-        if (base64StringQRCodeScan.equals(base64StringDgBatteryStatusQRCodeScan)) {
-            showToast("This QR Code Already scanned in that Reading ");
-            return true;
         }
         return false;
     }

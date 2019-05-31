@@ -8,11 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
@@ -25,7 +23,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PowerPlantDetailsModulesData;
@@ -49,11 +46,8 @@ import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class PowerPlantDetailsActivity extends BaseActivity {
 
@@ -130,7 +124,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     private ArrayList<PowerPlantDetailsData> powerPlantDetailsDataList;
     private String base64StringQRCodeScan = "";
     private SessionManager sessionManager;
-    private Uri imageFileUri;
     private String imageFileName = "";
     private int totalPlantCount = 0;
     private int currentPos = 0;
@@ -139,7 +132,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     public static final int MY_FLAG_MODULE_RESULT = 200;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
-    //public String date_flag = "no";
 
     private AlertDialogManager alertDialogManager;
 
@@ -193,7 +185,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                         }
                     }
                 } else {
-                    //openCamera();
                     onClicked(v);
                 }
 
@@ -231,20 +222,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 }
             }
         });
-
-
-        /*This Commented By 008 on 15-11-2018 For QR Code Purpose
-        mPowerPlantDetailsButtonQRCodeScanView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (imageFileUri != null) {
-                    GlobalMethods.showImageDialog(PowerPlantDetailsActivity.this, imageFileUri);
-                } else {
-                    Toast.makeText(PowerPlantDetailsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
-
     }
 
 
@@ -906,27 +883,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     /*008 21112018*/
     public boolean checkValidationOnChangeNoOfPowerPlant(String numberOfPowerPlant, String numberOfWorkingPowerPlant, String methodFlag) {
-
-        /*if (!numberOfPowerPlant.isEmpty() && numberOfPowerPlant != null) {
-            if (Integer.valueOf(numberOfPowerPlant) > 0) {
-                if (!numberOfWorkingPowerPlant.isEmpty() && numberOfWorkingPowerPlant != null) {
-                    if (Integer.valueOf(numberOfWorkingPowerPlant) <= Integer.valueOf(numberOfPowerPlant)) {
-                        return true;
-                    } else {
-                        showToast("Select number of working Power Plant is less than or equal to number Of Power Plant");
-                        return false;
-                    }
-                } else {
-                    showToast("Select number of working Power Plant");
-                    return false;
-                }
-            } else {
-                return true;
-            }
-        } else {
-            showToast("Select number of Power Plant");
-            return false;
-        }*/
         if (numberOfPowerPlant.isEmpty() || numberOfPowerPlant == null) {
             showToast("Select number of Power Plant");
             return false;
@@ -1068,41 +1024,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     }
 
-
-    //add 04022019 by 008 for new requirement
-    private boolean checkDuplicationQrCode1() {
-
-        //For Child Array Comparision
-        if (powerPlantDetailsDataList != null) {
-            for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
-                for (int j = i + 1; j < powerPlantDetailsDataList.size(); j++) {
-                    //compare list.get(i) and list.get(j)
-                    if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsDataList.get(j).getqRCodeScan().toString())) {
-                        int dup_pos = j + 1;
-                        showToast("QR Code Scanned in Reading No: " + dup_pos + " was already scanned in reading no:" + (i + 1));
-                        return true;
-                    }
-                }
-            }
-
-        }
-
-        if (powerPlantDetailsModulesData != null) {
-            for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
-                for (int j = 0; j < powerPlantDetailsModulesData.size(); j++) {
-                    //compare list.get(i) and list.get(j)
-                    if (powerPlantDetailsDataList.get(i).getqRCodeScan().toString().equals(powerPlantDetailsModulesData.get(j).getModuleQrCodeScan().toString())) {
-                        int dup_pos = j + 1;
-                        showToast("QR Code scanned in reading no: " + (i + 1) + " was already scanned in Rectifier Modules reading no:" + dup_pos);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-
     //add 04022019 by 008 for new requirement 2
     private boolean checkDuplicationQrCode() {
 
@@ -1120,7 +1041,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
             }
 
         }
-
 
         //if (powerPlantDetailsModulesData != null) {
         for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
@@ -1145,26 +1065,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     }
 
 
-    //add 04022019 by 008 for new requirement
-    private boolean checkDuplicationQrCodeOld(int curr_pos) {
-        for (int i = 0; i < powerPlantDetailsDataList.size(); i++) {
-            //if (i != curr_pos) {
-            if (base64StringQRCodeScan.equals(powerPlantDetailsDataList.get(i).getqRCodeScan().toString())) {
-                if (i == curr_pos) {
-                    return checkDuplicationQrCodeInChild();
-                } else {
-                    int dup_pos = i + 1;
-                    showToast("This QR Code Already scanned at Reading Number: " + dup_pos);
-                    return true;
-                }
-            } else if (powerPlantDetailsModulesData.size() > 0) {
-                return checkDuplicationQrCodeInChild();
-            }
-            //}
-        }
-        return false;
-    }
-
     private boolean checkDuplicationQrCodeInChild() {
         for (int j = 0; j < powerPlantDetailsModulesData.size(); j++) {
             if (base64StringQRCodeScan.equals(powerPlantDetailsModulesData.get(j).getModuleQrCodeScan().toString())) {
@@ -1179,9 +1079,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     /*008 21112018*/
     public boolean checkValidationOnNoOfModuleSlots(String numberModuleSlots, String numberOfModules) {
-
-        //String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
-        //String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
 
         if (!numberModuleSlots.isEmpty() && numberModuleSlots != null) {
             if (numberModuleSlots.matches("\\d+(?:\\.\\d+)?")) {
@@ -1213,9 +1110,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     /*008 21112018*/
     public boolean checkValidationOnNoOfFaultyModulese(String numberOfModules, String noOfFaultyModulese) {
 
-        //String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
-        //String noOfFaultyModulese = mPowerPlantDetailsTextViewNoOfFaultyModuleseVal.getText().toString().trim();
-
         if (!numberOfModules.isEmpty() && numberOfModules != null) {
             if (numberOfModules.matches("\\d+(?:\\.\\d+)?")) {
                 if (Integer.valueOf(numberOfModules) > 0) {
@@ -1246,8 +1140,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
     /*008 28112018*/
     public boolean checkValidationOnChangeNoOfModuleSlots(String numberModuleSlots, String numberOfModules) {
-        //String numberModuleSlots = mPowerPlantDetailsTextViewNumberModuleSlotsVal.getText().toString().trim();
-
         if (numberModuleSlots.isEmpty() || numberModuleSlots == null) {
             showToast("Select Number of Module Slots");
             return false;
@@ -1257,8 +1149,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     /*008 28112018*/
     public boolean checkValidationOnChangeNoOfFaultyModulese(String numberOfModules, String noOfFaultyModulese) {
 
-        //String numberOfModules = mPowerPlantDetailsTextViewNumberOfModulesVal.getText().toString().trim();
-
         if (numberOfModules.isEmpty() || numberOfModules == null) {
             showToast("Select Number of Modules");
             return false;
@@ -1266,27 +1156,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
     }
 
 //////////////////////
-    //Camera//
-
-    public void openCameraIntent() {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            imageFileName = "IMG_" + ticketName + "_" + sdf.format(new Date()) + ".jpg";
-
-            File file = new File(offlineStorageWrapper.getOfflineStorageFolderPath(TAG), imageFileName);
-            //imageFileUri = Uri.fromFile(file);
-
-            imageFileUri = FileProvider.getUriForFile(PowerPlantDetailsActivity.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-            Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-            startActivityForResult(pictureIntent, MY_PERMISSIONS_REQUEST_CAMERA);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void onClicked(View v) {
 
@@ -1366,11 +1235,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 mPowerPlantDetailsButtonQRCodeScanView.setVisibility(View.GONE);
             }
         }*/
-    }
-
-    private void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
     }
 
     public static Boolean getFromPref(Context context, String key) {
@@ -1454,8 +1318,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 dialog.show();
             }
         }).show();
-
-
     }
 
     @Override
@@ -1483,8 +1345,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                     }
                 }
             }
-
-
         }
     }
 
@@ -1510,7 +1370,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
                 shareItem.setVisible(false);
             }
         }
-
         return true;
     }
 
@@ -1519,7 +1378,6 @@ public class PowerPlantDetailsActivity extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                //startActivity(new Intent(this, HotoSectionsListActivity.class));
                 return true;
             case R.id.menuSubmit:
                 //if (checkValidationOnNoOfPowerPlant() == true) {
