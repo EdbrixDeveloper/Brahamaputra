@@ -19,7 +19,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -67,7 +66,8 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
     private TextView mUploadEbPaymentEditTextSiteName;
     private TextView mUploadEbPaymentTextViewPaymentTypeVal;
 
-    private TextView mUploadEbPaymentTextViewDdChequeTransactionDetails;//uploadEbPayment_textView_DdChequeTransactionDetails
+    private TextView mUploadEbPaymentTextViewDdChequeTransactionDetails;
+    //uploadEbPayment_textView_DdChequeTransactionDetails
     /*private TextView mUploadEbPaymentTextViewDdChequeNumber;
     //private EditText mUploadEbPaymentEditTextDdChequeDate;
     private TextView mUploadEbPaymentTextViewDdChequeDate;
@@ -220,7 +220,7 @@ public class UploadEBPaymentDetailsActivity extends BaseActivity {
                     mUploadEbPaymentButtonDdChequePhoto.setVisibility(View.GONE);
                     GlobalMethods.showImageDialogFromUrl(UploadEBPaymentDetailsActivity.this, imageUri);
                 } else {
-                    Toast.makeText(UploadEBPaymentDetailsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });

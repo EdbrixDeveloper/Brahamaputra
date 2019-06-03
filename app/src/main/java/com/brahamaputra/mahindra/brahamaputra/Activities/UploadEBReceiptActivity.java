@@ -17,14 +17,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
-import com.brahamaputra.mahindra.brahamaputra.Data.EBBillUploadReceipt;
 import com.brahamaputra.mahindra.brahamaputra.Data.EBlSubmitResposeData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
@@ -36,6 +34,7 @@ import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 
 import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -60,7 +59,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
     private EditText mUploadEbReceiptEditTextEbReceiptRemark;
     private ImageView mUploadEbReceiptButtonEbReceiptPhoto;
     private ImageView mUploadEbReceiptButtonEbReceiptPhotoView;
-    private EBBillUploadReceipt ebBillUploadReceipt;
+    //private EBBillUploadReceipt ebBillUploadReceipt;
 
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
@@ -108,7 +107,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
         site_id = intent.getStringExtra("site_id");
         site_name = intent.getStringExtra("site_name");
         modeOfPayment = intent.getStringExtra("ModeOfPayment");
-        ebPaymentAmt =  intent.getStringExtra("EbPaymentAmt");
+        ebPaymentAmt = intent.getStringExtra("EbPaymentAmt");
         assignViews();
         setListners();
         alertDialogManager = new AlertDialogManager(UploadEBReceiptActivity.this);
@@ -149,7 +148,7 @@ public class UploadEBReceiptActivity extends BaseActivity {
                 if (imageFileNameUri != null) {
                     GlobalMethods.showImageDialog(UploadEBReceiptActivity.this, imageFileNameUri);
                 } else {
-                    Toast.makeText(UploadEBReceiptActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -330,8 +329,6 @@ public class UploadEBReceiptActivity extends BaseActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         mUploadEbReceiptEditTextEbPaymentDate.setText(sdf.format(myCalendar1.getTime()));
-
-
     }
 
     private void setListners() {

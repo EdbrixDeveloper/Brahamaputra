@@ -35,8 +35,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmReportType;
-
 public class WrmsUptimeReportDashboardActivity extends BaseActivity {
 
     private LinearLayout mWrmsUptimeReportLinearLayoutFiltersMonthYear;

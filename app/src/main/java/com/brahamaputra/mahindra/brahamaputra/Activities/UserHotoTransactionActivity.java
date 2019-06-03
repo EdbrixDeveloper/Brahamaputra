@@ -72,7 +72,6 @@ public class UserHotoTransactionActivity extends BaseActivity {
 
     String str_sourceOfPower;
 
-
     private OfflineStorageWrapper offlineStorageWrapper;
     private HotoTransactionData hotoTransactionData;
 

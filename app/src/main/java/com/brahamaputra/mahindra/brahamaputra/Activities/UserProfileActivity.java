@@ -110,18 +110,11 @@ public class UserProfileActivity extends BaseActivity {
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#c31432")));
 
-        /*#C92143
-        #94203D
-        #c31432*/
-        //getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
-
-
         this.setTitle("Profile");
         assignViews();
         alertDialogManager = new AlertDialogManager(UserProfileActivity.this);
         sessionManager = new SessionManager(UserProfileActivity.this);
         prepareUserPersonalData();
-        //setValues();
         textViewAppVersion.setText("App Version : " + BuildConfig.VERSION_NAME);
 
         broadcastReceiver = new BroadcastReceiver() {
@@ -137,7 +130,6 @@ public class UserProfileActivity extends BaseActivity {
         invalidateOptionsMenu();
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -150,7 +142,6 @@ public class UserProfileActivity extends BaseActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
         super.onStop();
     }
-
 
     @Override
     protected void onResume() {
@@ -197,7 +188,6 @@ public class UserProfileActivity extends BaseActivity {
         });
         return true;
     }
-
 
     private void setupBadge() {
         try {
@@ -275,8 +265,6 @@ public class UserProfileActivity extends BaseActivity {
     }
 
     ////added by 008 on 10-11-2018 Start
-
-
     private void showSettingsAlert() {
 
         alertDialogManager.Dialog("Confirmation", "Are you sure you want to logout?", "Yes", "No", new AlertDialogManager.onTwoButtonClickListner() {
@@ -294,7 +282,7 @@ public class UserProfileActivity extends BaseActivity {
         }).show();
 
     }
-////added by 008 on 10-11-2018 End
+    ////added by 008 on 10-11-2018 End
 
     @Override
     public void onBackPressed() {
