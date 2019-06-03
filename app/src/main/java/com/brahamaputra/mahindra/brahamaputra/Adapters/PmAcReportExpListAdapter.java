@@ -11,21 +11,15 @@ import android.widget.TextView;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPMReportListData;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPMReportTicket;
 import com.brahamaputra.mahindra.brahamaputra.Data.AcPMReportTicketsDate;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePMReportListData;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePMReportTicket;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePMReportTicketsDate;
 import com.brahamaputra.mahindra.brahamaputra.R;
-
-import java.util.List;
 
 public class PmAcReportExpListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<AcPMReportTicketsDate> _listDataHeader; // header titles
     // child data in format of header title, child title
     private AcPMReportListData acPMReportListData;
 
-    public PmAcReportExpListAdapter(Context _context, AcPMReportListData acPMReportListData){
+    public PmAcReportExpListAdapter(Context _context, AcPMReportListData acPMReportListData) {
         this._context = _context;
         this.acPMReportListData = acPMReportListData;
     }

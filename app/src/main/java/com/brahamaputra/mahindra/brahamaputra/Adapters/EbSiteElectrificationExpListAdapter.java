@@ -2,7 +2,6 @@ package com.brahamaputra.mahindra.brahamaputra.Adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,6 @@ import android.widget.TextView;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTicketList;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransaction;
 import com.brahamaputra.mahindra.brahamaputra.Data.EbSiteElectrificationTransactionList;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicket;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketList;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTicketsDate;
 import com.brahamaputra.mahindra.brahamaputra.R;
 
 import java.util.List;

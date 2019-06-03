@@ -6,8 +6,6 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.brahamaputra.mahindra.brahamaputra.R;
-
 /**
  * Created by sonu on 10/04/17.
  */

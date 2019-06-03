@@ -20,9 +20,7 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.brahamaputra.mahindra.brahamaputra.Activities.AcPreventiveMaintenanceDashboardActivity;
 import com.brahamaputra.mahindra.brahamaputra.Activities.DashboardCircularActivity;
-import com.brahamaputra.mahindra.brahamaputra.Activities.PreventiveMaintenanceDashboard;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
@@ -37,10 +35,7 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.google.gson.JsonArray;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

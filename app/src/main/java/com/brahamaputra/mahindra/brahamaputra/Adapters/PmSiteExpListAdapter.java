@@ -12,17 +12,11 @@ import android.widget.TextView;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicket;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicketsList;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicketsDate;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicket;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicketsDate;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicketsList;
 import com.brahamaputra.mahindra.brahamaputra.R;
-
-import java.util.List;
 
 public class PmSiteExpListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<SitePMTicketsDate> _listDataHeader; // header titles
     // child data in format of header title, child title
     private SitePMTicketsList hotoTicketList;
 
@@ -76,19 +70,16 @@ public class PmSiteExpListAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         return hotoTicketList.getSitePMTicketsDates().get(groupPosition).getSitePMTickets().size();
-//        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
         return hotoTicketList.getSitePMTicketsDates().get(groupPosition);
-//        return this._listDataHeader.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
         return hotoTicketList.getSitePMTicketsDates().size();
-//        return this._listDataHeader.size();
     }
 
     @Override
