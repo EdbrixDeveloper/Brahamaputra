@@ -23,13 +23,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import android.Manifest;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
-
 import com.brahamaputra.mahindra.brahamaputra.Data.ServoStabilizerData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -79,7 +76,6 @@ public class ServoStabilizer extends BaseActivity {
     private LinearLayout linearLayoutServoDetails;
 
 
-
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
@@ -89,10 +85,10 @@ public class ServoStabilizer extends BaseActivity {
 
     private AlertDialogManager alertDialogManager;
 
-    String str_ServoStabilizerWorkingStatus;
-    String str_makeofServo;
-    String str_ratingofServo;
-    String str_workingCondition;
+    private String str_ServoStabilizerWorkingStatus;
+    private String str_makeofServo;
+    private String str_ratingofServo;
+    private String str_workingCondition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -282,7 +278,7 @@ public class ServoStabilizer extends BaseActivity {
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scan QRcode");
+        integrator.setPrompt("Scan QR Code");
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
 
@@ -341,7 +337,7 @@ public class ServoStabilizer extends BaseActivity {
                 }*/
 
             } else {
-                Toast.makeText(ServoStabilizer.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
+                showToast("No previous saved data available");
             }
         } catch (Exception e) {
             e.printStackTrace();

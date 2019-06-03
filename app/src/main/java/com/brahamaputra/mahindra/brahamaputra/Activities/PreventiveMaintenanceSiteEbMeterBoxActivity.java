@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -30,7 +29,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransa
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -95,8 +93,6 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
     String str_pmSiteEbmbRegisterFaultVal = "";
     String str_pmSiteEbmbTypeOfFaultVal = "";
 
-    private AlertDialogManager alertDialogManager;
-
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
@@ -111,21 +107,6 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
     ArrayList<MultiSelectModel> listOfFaultsTypes;
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
-
-    /*private String ebMeterBoxCondition;
-    private String ebMeterWorkingStatus;
-    private String kitkatClayFuseStatus;
-    private String sfuMccbStatus;
-    private String hrcFuseStatus;
-    String acLoadAmpRPh,
-    String acLoadAmpYPh,
-    String acLoadAmpBPh,
-    private String ebMeterReadingKwh;
-    private String ebServiceWireCondition;
-    private String registerFault;
-    private String typeOfFault;
-    private String base64StringUploadPhotoOfRegisterFault;*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -370,7 +351,7 @@ public class PreventiveMaintenanceSiteEbMeterBoxActivity extends BaseActivity {
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteEbMeterBoxActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteEbMeterBoxActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });

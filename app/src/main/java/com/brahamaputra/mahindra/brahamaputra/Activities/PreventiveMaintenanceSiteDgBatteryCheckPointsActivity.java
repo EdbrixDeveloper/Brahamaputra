@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -31,7 +30,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransa
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -49,7 +47,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
 
 public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseActivity {
@@ -100,8 +97,6 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private String base64StringDetailsOfDgBatteryQRCodeScan = "";
-    //private String imageFileDetailsOfDgBatteryQRCodeScan;
-    //private Uri imageFileUriDetailsOfDgBatteryQRCodeScan = null;
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
 
@@ -111,8 +106,6 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
 
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
-
-    private AlertDialogManager alertDialogManager;
 
     private String userId = "";
     private String ticketId = "";
@@ -144,7 +137,6 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assignViews();
         initCombo();
-        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this);
 
         ticketId = sessionManager.getSessionUserTicketId();
@@ -172,7 +164,6 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         setInputDetails(currentPos);
         invalidateOptionsMenu();
         setMultiSelectModel();
-
 
     }
 
@@ -605,20 +596,11 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         /*String registerFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewRegisterFaultVal.getText().toString().trim();
         String typeOfFault = mPreventiveMaintenanceSiteDgBatteryCheckPointsTextViewTypeOfFaultVal.getText().toString().trim();*/
 
-        //detailsOfDgBatteryQrCodeScan;
-        //                    String dgBatteryCondition;
-        //                    String dgBatteryWaterAvailable;
-        //                    String petroleumJellyToDgBatteryTerminal;
-        //                    String dgBatteryCharger;
-        //                    String registerFault;
-        //                    String typeOfFault
-
-
         DgBatteryCheckPointsData dgBatteryCheckPointsDataChild = new DgBatteryCheckPointsData(detailsOfDgBatteryQrCodeScan,
                 dgBatteryCondition,
                 dgBatteryWaterAvailable,
                 petroleumJellyToDgBatteryTerminal,
-                dgBatteryCharger,isQrCodeNew);
+                dgBatteryCharger, isQrCodeNew);
 
         if (dgBatteryCheckPointsData.size() > 0) {
             if (pos == dgBatteryCheckPointsData.size()) {
@@ -858,7 +840,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -869,7 +851,7 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
@@ -909,8 +891,6 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
         } else {
             return true;
         }
-
-
         return false;
     }
 
@@ -1016,9 +996,6 @@ public class PreventiveMaintenanceSiteDgBatteryCheckPointsActivity extends BaseA
                         finish();
                     }
                 }
-
-                /*startActivity(new Intent(this, PreventiveMaintenanceSiteAcCheckPointsActivity.class));
-                finish();*/
                 return true;
 
             default:

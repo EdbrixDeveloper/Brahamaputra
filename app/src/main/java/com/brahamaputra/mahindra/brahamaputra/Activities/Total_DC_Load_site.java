@@ -38,20 +38,6 @@ public class Total_DC_Load_site extends BaseActivity {
     private TotalDCLoadofSiteData totalDCLoadofSiteData;
     private SessionManager sessionManager;
 
-    private void assignViews() {
-        mTotalDCLoadsiteTextViewTotalDcLoadOfSite = (TextView) findViewById(R.id.totalDCLoadsite_textView_totalDcLoadOfSite);
-        mTotalDCLoadsiteEditTextTotalDcLoadOfSite = (EditText) findViewById(R.id.totalDCLoadsite_editText_totalDcLoadOfSite);
-
-        mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-    }
-
-    public void DecimalFormatConversion() {
-        mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setText(decimalConversion.convertDecimal(mTotalDCLoadsiteEditTextTotalDcLoadOfSite.getText().toString()));
-    }
-
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -78,8 +64,20 @@ public class Total_DC_Load_site extends BaseActivity {
                 }
             }
         });
+    }
 
+    private void assignViews() {
+        mTotalDCLoadsiteTextViewTotalDcLoadOfSite = (TextView) findViewById(R.id.totalDCLoadsite_textView_totalDcLoadOfSite);
+        mTotalDCLoadsiteEditTextTotalDcLoadOfSite = (EditText) findViewById(R.id.totalDCLoadsite_editText_totalDcLoadOfSite);
 
+        mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(15, 2)});
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
+    public void DecimalFormatConversion() {
+        mTotalDCLoadsiteEditTextTotalDcLoadOfSite.setText(decimalConversion.convertDecimal(mTotalDCLoadsiteEditTextTotalDcLoadOfSite.getText().toString()));
     }
 
     @Override

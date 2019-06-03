@@ -2,7 +2,6 @@ package com.brahamaputra.mahindra.brahamaputra.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,12 +42,12 @@ public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity 
     private String ticketId = "";
     private String ticketName = "";
 
-
     private PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
     ArrayList<BatteryType> batteryType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site_preventive_maintenance_sections_list);
 
@@ -62,9 +61,7 @@ public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity 
 
         String tic_Name = intent.getStringExtra("ticketName");
         this.setTitle(tic_Name);
-
         this.setTitle("Site PM Sections List");
-
 
         values = getResources().getStringArray(R.array.listView_sitePreventiveMaintenanceSections_sections);
         dataModels = new ArrayList<>();
@@ -252,7 +249,6 @@ public class SitePreventiveMaintenanceSectionsListActivity extends BaseActivity 
         refreshList();
         super.onResume();
     }
-
 
     public void refreshList() {
 

@@ -1161,7 +1161,7 @@ public class PowerPlantDetailsActivity extends BaseActivity {
 
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scan QRcode");
+        integrator.setPrompt("Scan QR Code");
         integrator.setOrientationLocked(false);
         integrator.initiateScan();
 

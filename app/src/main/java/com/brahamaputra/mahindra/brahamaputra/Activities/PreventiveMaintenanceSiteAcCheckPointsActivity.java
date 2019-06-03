@@ -650,7 +650,7 @@ public class PreventiveMaintenanceSiteAcCheckPointsActivity extends BaseActivity
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();

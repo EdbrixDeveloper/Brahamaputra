@@ -270,19 +270,9 @@ public class Solar_Power_System extends BaseActivity {
     public void onClicked(View v) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scan a QRcode");
+        integrator.setPrompt("Scan QR Code");
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
-
-//        Use this for more customization
-//        IntentIntegrator integrator = new IntentIntegrator(this);
-//        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-//        integrator.setPrompt("Scan a barcode");
-//        integrator.setCameraId(0);  // Use a specific camera of the device
-//        integrator.setBeepEnabled(false);
-//        integrator.setBarcodeImageEnabled(true);
-//        integrator.initiateScan();
-
     }
 
     private void assignViews() {

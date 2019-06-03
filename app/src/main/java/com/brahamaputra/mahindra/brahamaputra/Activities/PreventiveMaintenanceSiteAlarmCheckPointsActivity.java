@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -31,7 +30,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransa
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -93,7 +91,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     String str_pmSiteAcpFireAndSmokeVal = "";
     String str_pmSiteAcpPowerPlantFailureVal = "";
     String str_pmSiteAcpAlarmConfirmedByNocVal = "";
-    String str_pmSiteAcpRemarks = "";
+    //String str_pmSiteAcpRemarks = "";
     String str_pmSiteAcpRegisterFaultVal = "";
     String str_pmSiteAcpTypeOfFaultVal = "";
 
@@ -105,12 +103,6 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     private String base64StringUploadPhotoOfRegisterFault = "";
     private String imageFileUploadPhotoOfRegisterFault;
     private Uri imageFileUriUploadPhotoOfRegisterFault = null;
-
-
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
-
-    private AlertDialogManager alertDialogManager;
 
     private String userId = "";
     private String ticketId = "";
@@ -126,19 +118,6 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
     ArrayList<MultiSelectModel> listOfFaultsTypes;
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
-
-     /*String detailsOfWrmsQrCodeScan;
-     String doorOpenAlarm;
-     String dgOn;
-     String dgOutputAvailable;
-     String highRoomTemp;
-     String fireSmoke;
-     String powerPlantFailure;
-     String alarmConfirmedByNoc;
-     String remarks;
-     String registerFault;
-     String typeOfFault;
-     private String base64StringUploadPhotoOfRegisterFault;*/
 
     ArrayList<BatteryType> batteryType;
 
@@ -247,11 +226,8 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         try {
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-                // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 
                 Gson gson = new Gson();
-//                landDetailsData = gson.fromJson(jsonInString, LandDetailsData.class);
-
                 pmSiteTransactionDetails = gson.fromJson(jsonInString, PreventiveMaintanceSiteTransactionDetails.class);
 
                 if (pmSiteTransactionDetails != null) {
@@ -605,7 +581,7 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteAlarmCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -616,19 +592,10 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
-
-            //        Use this for more customization
-            //        IntentIntegrator integrator = new IntentIntegrator(this);
-            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            //        integrator.setPrompt("Scan a barcode");
-            //        integrator.setCameraId(0);  // Use a specific camera of the device
-            //        integrator.setBeepEnabled(false);
-            //        integrator.setBarcodeImageEnabled(true);
-            //        integrator.initiateScan();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -656,7 +623,6 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
         } else {
             return true;
         }
-
 
         return false;
     }
@@ -742,7 +708,6 @@ public class PreventiveMaintenanceSiteAlarmCheckPointsActivity extends BaseActiv
                     } else {
                         showToast("Battery Type not available for that site");
                     }
-                    //startActivity(new Intent(this, PreventiveMaintenanceSiteBatteryBankCheckPointsActivity.class));
                     finish();
                     return true;
                 }

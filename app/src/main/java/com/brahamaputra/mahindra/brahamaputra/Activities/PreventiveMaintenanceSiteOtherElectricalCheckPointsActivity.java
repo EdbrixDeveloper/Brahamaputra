@@ -6,7 +6,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.Data.OtherElectricalCheckPoints;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
@@ -210,7 +209,6 @@ public class PreventiveMaintenanceSiteOtherElectricalCheckPointsActivity extends
                 showToast("No previous saved data available");
             }
         } catch (Exception e) {
-
             e.printStackTrace();
         }
     }

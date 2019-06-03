@@ -20,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.brahamaputra.mahindra.brahamaputra.Application;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
-import com.brahamaputra.mahindra.brahamaputra.Data.HotoTransactionData;
 import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransactionDetails;
 import com.brahamaputra.mahindra.brahamaputra.Data.UserLoginResponseData;
 import com.brahamaputra.mahindra.brahamaputra.R;
@@ -40,10 +39,7 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
 
 public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
@@ -193,10 +189,10 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
                         /*if (gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(),siteLatitude , siteLongitude) < 0.0310686) {///// ( 0.0310686 MILE == 50 Meter )
                             Log.i(TAG, "" + "in Area \n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));*/
 
-                            checkOutLat = String.valueOf(gpsTracker.getLatitude());
-                            checkOutLong = String.valueOf(gpsTracker.getLongitude());
+                        checkOutLat = String.valueOf(gpsTracker.getLatitude());
+                        checkOutLong = String.valueOf(gpsTracker.getLongitude());
 
-                            CheckSubmitFlagOfAllSitePmForms();
+                        CheckSubmitFlagOfAllSitePmForms();
                         /*} else {
                             Log.i(TAG, "" + "not in Area\n" + gpsTracker.distance(gpsTracker.getLatitude(), gpsTracker.getLongitude(), siteLatitude, siteLongitude));
                             alertDialogManager.Dialog("Alert", "User not in area of site", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
@@ -249,43 +245,6 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean checkValidationOnSubmitPmTransactionTicket() {
-        String userId = sessionManager.getSessionUserId();
-        String accessToken = sessionManager.getSessionDeviceToken();
-        String latitude = String.valueOf(gpsTracker.getLatitude());
-        String longitude = String.valueOf(gpsTracker.getLongitude());
-        String siteID = mPriventiveMaintenanceSiteTransEditTextSiteID.getText().toString();
-        String customer = mPriventiveMaintenanceSiteTransEditTextCustomerName.getText().toString();
-        String state = mPriventiveMaintenanceSiteTransEditTextState.getText().toString();
-        String ssa = mPriventiveMaintenanceSiteTransEditTextSsa.getText().toString();
-        String nameOfSite = mPriventiveMaintenanceSiteTransEditTextNameOfSite.getText().toString();
-        String sheduledDatePm = mPriventiveMaintenanceSiteTransEditTextSheduledDateOfPm.getText().toString();
-        String actualPmExecutionDate = mPriventiveMaintenanceSiteTransEditTextActualPmExecutionDate.getText().toString();
-
-        if (siteID.isEmpty() || siteID == null) {
-            showToast("Select Site Name");
-            return false;
-        } else if (customer.isEmpty() || customer == null) {
-            showToast("Select DG ID / QR Code");
-            return false;
-        } else if (state.isEmpty() || state == null) {
-            showToast("Enter Present DG HMR");
-            return false;
-        } else if (ssa.isEmpty() || ssa == null) {
-            showToast("Upload Photo of HMR");
-            return false;
-        } else if (nameOfSite.isEmpty() || nameOfSite == null) {
-            showToast("Enter Tank Balance Before Filling");
-            return false;
-        } else if (sheduledDatePm.isEmpty() || sheduledDatePm == null) {
-            showToast("Enter Filling Quantity");
-            return false;
-        } else if (actualPmExecutionDate.isEmpty() || actualPmExecutionDate == null) {
-            showToast("Enter Diesel Price");
-            return false;
-        } else return true;
     }
 
     private void showSettingsAlert() {
@@ -476,7 +435,7 @@ public class PriventiveMaintenanceSiteTransactionActivity extends BaseActivity {
 
             if (offlineStorageWrapper.checkOfflineFileIsAvailable(ticketName + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(ticketName + ".txt");
-            /*if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
+                /*if (offlineStorageWrapper.checkOfflineFileIsAvailable(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt")) {
                 String jsonInString = (String) offlineStorageWrapper.getObjectFromFile(GlobalMethods.replaceAllSpecialCharAtUnderscore(ticketName) + ".txt");*/
                 // Toast.makeText(Land_Details.this,"JsonInString :"+ jsonInString,Toast.LENGTH_SHORT).show();
 

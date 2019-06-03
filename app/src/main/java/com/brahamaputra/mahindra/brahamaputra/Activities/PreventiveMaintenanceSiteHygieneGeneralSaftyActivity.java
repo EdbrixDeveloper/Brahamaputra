@@ -22,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -33,7 +32,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransa
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -59,8 +57,6 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
 
 
     private static final String TAG = PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.class.getSimpleName();
-
-
     private LinearLayout mPreventiveMaintenanceSiteHygieneGeneralSaftyLinearLayoutSitePremisesCleaning;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaning;
     private TextView mPreventiveMaintenanceSiteHygieneGeneralSaftyTextViewSitePremisesCleaningVal;
@@ -128,7 +124,6 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFault;
     private ImageView mPreventiveMaintenanceSiteHygieneGeneralSaftyButtonUploadPhotoOfRegisterFaultView;
 
-
     String str_pmSitePremisesCleaningVal = "";
     String str_pmSiteanyEagleOrCrowOrHoneyHivesInTowerVal = "";
     String str_pmSiteCompoundWallOrFencingStatusVal = "";
@@ -170,11 +165,6 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     private Uri imageFileUriDangerSignBoard = null;
     private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
-
-    private AlertDialogManager alertDialogManager;
-
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
@@ -188,28 +178,6 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
     ArrayList<MultiSelectModel> listOfFaultsTypes;
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
-
-    /*private String sitePremisesCleaning;
-    private String base64StringUploadPhotoOfSitePremises;
-    private String equipmentCleaning;
-    private String anyEagleCrowHoneyHivesInTower;
-    private String compoundWallFencingStatus;
-    private String gateLockAvailablity;
-    private String shelterLockAvailablity;
-    private String dgLockAvailablity;
-    private String fireExtinguisherAvilability;
-    private String noOfFireExtinguisher;
-    private String fireExtinguisherExpiryDate;
-    private String fireBucket;
-    private String base64StringCautionSignBoardPhoto;
-    private String base64StringWarningSignBoardPhoto;
-    private String base64StringDangerSignBoardPhoto;
-    private String safetyChartsCalendar;
-    private String unusedMaterialInSite;
-    private String registerFault;
-    private String typeOfFault;
-    private String base64StringUploadPhotoOfRegisterFault;
-    private int isSubmited;*/
 
     ArrayList<BatteryType> batteryType;
 
@@ -918,7 +886,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 if (imageFileUriUploadPhotoOfSitePremises != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriUploadPhotoOfSitePremises);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -928,7 +896,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 if (imageFileUriCautionSignBoard != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriCautionSignBoard);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -938,7 +906,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 if (imageFileUriWarningSignBoard != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriWarningSignBoard);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -948,7 +916,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 if (imageFileUriDangerSignBoard != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriDangerSignBoard);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -959,7 +927,7 @@ public class PreventiveMaintenanceSiteHygieneGeneralSaftyActivity extends BaseAc
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteHygieneGeneralSaftyActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });

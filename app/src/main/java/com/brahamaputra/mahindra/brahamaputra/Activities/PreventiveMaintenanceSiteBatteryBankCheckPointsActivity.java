@@ -133,13 +133,6 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private String base64StringDetailsOfBatteryBankQRCodeScan = "";
-    //private String imageFileDetailsOfBatteryBankQRCodeScan;
-    //private Uri imageFileUriDetailsOfBatteryBankQRCodeScan = null;
-
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
-
-    private AlertDialogManager alertDialogManager;
 
     private String userId = "";
     private String ticketId = "";
@@ -161,7 +154,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
 
-    public static final int RESULT_PRIVENTIVE_MAINTENANCE_SITE_BATTERY_BANK_CHECK = 258;
+    //public static final int RESULT_PRIVENTIVE_MAINTENANCE_SITE_BATTERY_BANK_CHECK = 258;
     public static final int MY_FLAG_MODULE_RESULT = 200;
 
     private BatteryBankCheckPointsData batteryBankCheckPointsDataChild;
@@ -1289,7 +1282,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         } /*else if (qrCodeScan.isEmpty() || qrCodeScan == null) {
             showToast("Scan QR Code");
             return false;
-        } */else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
+        } */ else if (stripBoltTightnessAsPerTorque.isEmpty() || stripBoltTightnessAsPerTorque == null) {
             showToast("Select Strip Bolt Tightness As Per Torque");
             return false;
         } else if (petroleumJellyApplied.isEmpty() || petroleumJellyApplied == null) {
@@ -1459,7 +1452,7 @@ public class PreventiveMaintenanceSiteBatteryBankCheckPointsActivity extends Bas
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();

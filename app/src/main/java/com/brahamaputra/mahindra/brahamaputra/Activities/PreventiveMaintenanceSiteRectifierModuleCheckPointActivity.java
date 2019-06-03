@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -31,7 +30,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.RectifierModuleCheckPointPare
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -99,8 +97,6 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_RectifierPhotoAfterCleaning = 102;
 
     private String base64StringDetailsOfRectifierModuleQRCodeScan = "";
-    //private String imageFileDetailsOfRectifierModuleQRCodeScan;
-    //private Uri imageFileUriDetailsOfRectifierModuleQRCodeScan = null;
 
     private String base64StringRectifierPhotoBeforeCleaning = "";
     private String base64StringRectifierPhotoAfterCleaning = "";
@@ -111,17 +107,10 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
     private Uri imageFileUriRectifierPhotoBeforeCleaning = null;
     private Uri imageFileUriRectifierPhotoAfterCleaning = null;
 
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
-
-    private AlertDialogManager alertDialogManager;
-
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
@@ -265,7 +254,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "No previous saved data available", Toast.LENGTH_SHORT).show();
+                    showToast("No previous saved data available");
                     mLinearLayoutContainer.setVisibility(View.GONE);
                 }
 
@@ -385,7 +374,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                     @Override
                     public void onClick(ArrayList<String> item, int position) {
                         if (mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfRectifierModuleAvailableAtSiteVal.getText().toString().equals("")) {
-                            Toast.makeText(getApplicationContext(), "Must be select no of rectifier module available at site", Toast.LENGTH_LONG).show();
+                            showToast("Must be select no of rectifier module available at site");
                         } else {
                             str_noOfModulesWorkingVal = item.get(position);
                             mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText(str_noOfModulesWorkingVal);
@@ -394,7 +383,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                             int remainingFaultyModules = 0;
                             if (noOfWorkingModules > noOfModuleAvailableInSite) {
                                 mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfModulesWorkingVal.setText("");
-                                Toast.makeText(getApplicationContext(), "Wrong input must be less then or equal to no of available module in site.", Toast.LENGTH_LONG).show();
+                                showToast("Wrong input must be less then or equal to no of available module in site.");
                             } else {
                                 remainingFaultyModules = noOfModuleAvailableInSite - noOfWorkingModules;
                                 mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewNoOfFaultyModulesInSiteVal.setText("" + remainingFaultyModules);
@@ -477,16 +466,16 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         mPreventiveMaintenanceSiteRectifierModuleCheckPointButtonPreviousReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* if (checkValidationOfArrayFields() == true) {*/
-                    if (currentPos > 0) {
-                        //Save current ac reading
-                        saveRecords(currentPos);
-                        currentPos = currentPos - 1;
-                        //move to Next reading
-                        displayRecords(currentPos);
-                        //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
-                    }
-               /* }*/
+                /* if (checkValidationOfArrayFields() == true) {*/
+                if (currentPos > 0) {
+                    //Save current ac reading
+                    saveRecords(currentPos);
+                    currentPos = currentPos - 1;
+                    //move to Next reading
+                    displayRecords(currentPos);
+                    //visibilityOfTypesOfFault(mPreventiveMaintenanceSiteRectifierModuleCheckPointTextViewRegisterFaultVal.getText().toString().trim());
+                }
+                /* }*/
             }
         });
 
@@ -802,7 +791,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                 if (imageFileUriRectifierPhotoBeforeCleaning != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, imageFileUriRectifierPhotoBeforeCleaning);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -812,7 +801,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                 if (imageFileUriRectifierPhotoAfterCleaning != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, imageFileUriRectifierPhotoAfterCleaning);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -832,7 +821,7 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteRectifierModuleCheckPointActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -857,19 +846,10 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
-
-            //        Use this for more customization
-            //        IntentIntegrator integrator = new IntentIntegrator(this);
-            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            //        integrator.setPrompt("Scan a barcode");
-            //        integrator.setCameraId(0);  // Use a specific camera of the device
-            //        integrator.setBeepEnabled(false);
-            //        integrator.setBarcodeImageEnabled(true);
-            //        integrator.initiateScan();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -910,8 +890,6 @@ public class PreventiveMaintenanceSiteRectifierModuleCheckPointActivity extends 
         } else {
             return true;
         }
-
-
         return false;
     }
 

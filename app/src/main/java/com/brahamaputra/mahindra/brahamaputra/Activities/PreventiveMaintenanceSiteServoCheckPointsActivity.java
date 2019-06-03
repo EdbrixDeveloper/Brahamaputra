@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -29,7 +28,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.ServoCheckPoints;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -48,7 +46,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
 
 public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActivity {
 
@@ -87,20 +84,10 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
     private String base64StringDetailsOfServoQRCodeScan = "";
     private String base64StringUploadPhotoOfRegisterFault = "";
 
-    //private String imageFileDetailsOfServoQRCodeScan;
-    //private Uri imageFileUriDetailsOfServoQRCodeScan = null;
-
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
-
-    private AlertDialogManager alertDialogManager;
-
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
     PreventiveMaintanceSiteTransactionDetails preventiveMaintanceSiteTransactionDetails;
@@ -111,10 +98,8 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     ArrayList<String> typeOfFaultList;
 
-
     private String imageFileUploadPhotoOfRegisterFault;
     private Uri imageFileUriUploadPhotoOfRegisterFault = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -332,7 +317,7 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteServoCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteServoCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -358,19 +343,10 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
-
-            //        Use this for more customization
-            //        IntentIntegrator integrator = new IntentIntegrator(this);
-            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            //        integrator.setPrompt("Scan a barcode");
-            //        integrator.setCameraId(0);  // Use a specific camera of the device
-            //        integrator.setBeepEnabled(false);
-            //        integrator.setBarcodeImageEnabled(true);
-            //        integrator.initiateScan();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -383,7 +359,6 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
         } else {
             return true;
         }
-
 
         return false;
     }
@@ -471,7 +446,6 @@ public class PreventiveMaintenanceSiteServoCheckPointsActivity extends BaseActiv
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     private void setInputDetails() {
         try {

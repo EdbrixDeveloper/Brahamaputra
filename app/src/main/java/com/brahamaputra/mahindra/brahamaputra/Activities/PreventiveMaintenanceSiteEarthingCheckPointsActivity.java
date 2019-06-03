@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -148,7 +147,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
     private AlertDialogManager alertDialogManager;
     private EarthingCheckPointsParentData dataList;
 
-    private int totalAcCount = 0;
+    //private int totalAcCount = 0;
     private int currentPos = 0;
 
     MultiSelectDialog multiSelectDialog;
@@ -867,7 +866,7 @@ public class PreventiveMaintenanceSiteEarthingCheckPointsActivity extends BaseAc
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteEarthingCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteEarthingCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });

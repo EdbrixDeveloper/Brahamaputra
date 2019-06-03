@@ -18,7 +18,6 @@ import android.support.v4.content.FileProvider;
 import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,7 +29,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.brahamaputra.mahindra.brahamaputra.BuildConfig;
 import com.brahamaputra.mahindra.brahamaputra.Data.BatteryBankCheckPointsChildData;
@@ -43,7 +41,6 @@ import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Services.AlarmReceiver;
 import com.brahamaputra.mahindra.brahamaputra.Services.AlarmSoundService;
 import com.brahamaputra.mahindra.brahamaputra.Services.NotifyService;
-import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalConversion;
 import com.brahamaputra.mahindra.brahamaputra.Utils.DecimalDigitsInputFilter;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -60,8 +57,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.sql.Time;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,7 +64,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmBatteryBankType;
-
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmCustomerName;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmCircleName;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmStateName;
@@ -2127,7 +2121,7 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
                 if (imageFileUriPhotoOfBatteryBank != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, imageFileUriPhotoOfBatteryBank);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -2156,15 +2150,6 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
-
-            //        Use this for more customization
-            //        IntentIntegrator integrator = new IntentIntegrator(this);
-            //        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            //        integrator.setPrompt("Scan a barcode");
-            //        integrator.setCameraId(0);  // Use a specific camera of the device
-            //        integrator.setBeepEnabled(false);
-            //        integrator.setBarcodeImageEnabled(true);
-            //        integrator.initiateScan();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -2177,8 +2162,6 @@ public class PreventiveMaintenanceSiteBatteryBankBackUpTestReportActivity extend
         } else {
             return true;
         }
-
-
         return false;
     }
 

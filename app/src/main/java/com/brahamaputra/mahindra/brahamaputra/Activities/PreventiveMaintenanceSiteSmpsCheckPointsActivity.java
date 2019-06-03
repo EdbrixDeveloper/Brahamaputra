@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -32,7 +31,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.SmpsCheckPointParentData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -95,51 +93,36 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
     String str_segisterFaultVal;
     String str_sypeOfFaultVal;
 
-    private AlertDialogManager alertDialogManager;
-
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_PhotoDcLoadCurrent = 101;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
-    //public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
-
 
     private String base64StringSmpsCheckPointsQRCodeScan = "";
     private String base64StringPhotoDcLoadCurrent = "";
-
     private String base64StringUploadPhotoOfRegisterFault = "";
+
     private String imageFileUploadPhotoOfRegisterFault;
     private Uri imageFileUriUploadPhotoOfRegisterFault = null;
 
-    //private String imageFileSmpsCheckPointsQRCodeScan;
     private String imageFilePhotoDcLoadCurrent;
-
-    //private Uri imageFileUriSmpsCheckPointsQRCodeScan = null;
     private Uri imageFileUriPhotoDcLoadCurrent = null;
-
 
     private String userId = "";
     private String ticketId = "";
     private String ticketName = "";
 
-    /*private HotoTransactionData hotoTransactionData;
-    private LandDetailsData landDetailsData;*/
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
-
     private PreventiveMaintanceSiteTransactionDetails pmSiteTransactionDetails;
     private SmpsCheckPointParentData dataList;
-    private ArrayList<SmpsCheckPoint> smpsCheckPointsData;// replce airConditionersData
+    private ArrayList<SmpsCheckPoint> smpsCheckPointsData;// replace airConditionersData
     private int totalCount = 0;
     private int currentPos = 0;
 
-    private ArrayList<SmpsCheckPoint> arr_smpsCheckPoints;// replce airConditionersData
     ArrayList<Integer> alreadySelectedTypeOfFaultList;
     MultiSelectDialog multiSelectDialog;
     ArrayList<MultiSelectModel> listOfFaultsTypes;
-    ArrayList<Integer> alreadySelected;
     ArrayList<String> typeOfFaultList;
 
     @Override
@@ -148,7 +131,6 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         setContentView(R.layout.activity_preventive_maintenance_site_smps_check_points);
         this.setTitle("SMPS Check Points");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this);
         ticketId = sessionManager.getSessionUserTicketId();
         ticketName = GlobalMethods.replaceAllSpecialCharAtUnderscore(sessionManager.getSessionUserTicketName());
@@ -157,9 +139,6 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         pmSiteTransactionDetails = new PreventiveMaintanceSiteTransactionDetails();
 
         smpsCheckPointsData = new ArrayList<>();
-
-        //dataList = new ArrayList<>();
-        arr_smpsCheckPoints = new ArrayList<>();
         currentPos = 0;
 
         listOfFaultsTypes = new ArrayList<>();
@@ -413,7 +392,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                 if (imageFileUriPhotoDcLoadCurrent != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, imageFileUriPhotoDcLoadCurrent);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -452,7 +431,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteSmpsCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -492,7 +471,7 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
@@ -716,12 +695,10 @@ public class PreventiveMaintenanceSiteSmpsCheckPointsActivity extends BaseActivi
                 }
             } else {
                 showToast("No previous saved data available");
-                //Toast.makeText(Air_Conditioners.this, "No previous saved data available", Toast.LENGTH_SHORT).show();
                 mLinearLayoutContainer.setVisibility(View.GONE);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //showToast(e.getMessage().toString());
         }
     }
 

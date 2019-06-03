@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -32,7 +31,6 @@ import com.brahamaputra.mahindra.brahamaputra.Data.PreventiveMaintanceSiteTransa
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GlobalMethods;
 import com.brahamaputra.mahindra.brahamaputra.commons.OfflineStorageWrapper;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
@@ -109,20 +107,15 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
     String str_pmSiteDgcpRegisterFaultVal = "";
     String str_pmSiteDgcpTypeOfFaultVal = "";
 
-    private AlertDialogManager alertDialogManager;
-
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_PhotoOfDgHmr = 101;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
-    //public static final int MY_PERMISSIONS_REQUEST_CAMERA_CautionSignBoard = 102;
 
     private String base64StringDgCheckPointsQRCodeScan = "";
     private String base64StringPhotoOfDgHmr = "";
 
-    //private String imageFileDgCheckPointsQRCodeScan;
     private String imageFilePhotoOfDgHmr;
 
-    //private Uri imageFileUriDgCheckPointsQRCodeScan = null;
     private Uri imageFileUriPhotoOfDgHmr = null;
 
     private String base64StringUploadPhotoOfRegisterFault = "";
@@ -133,7 +126,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
     private String ticketId = "";
     private String ticketName = "";
 
-    private String base64StringTakePhotoOfDgHmr = "";
     private OfflineStorageWrapper offlineStorageWrapper;
     private SessionManager sessionManager;
 
@@ -164,7 +156,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         assignViews();
         initCombo();
 
-        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteDgCheckPointsActivity.this);
         sessionManager = new SessionManager(PreventiveMaintenanceSiteDgCheckPointsActivity.this);
 
         ticketId = sessionManager.getSessionUserTicketId();
@@ -923,7 +914,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                 if (imageFileUriPhotoOfDgHmr != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteDgCheckPointsActivity.this, imageFileUriPhotoOfDgHmr);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteDgCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -962,7 +953,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteDgCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteDgCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -987,7 +978,7 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
         try {
             IntentIntegrator integrator = new IntentIntegrator(this);
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Scan QRcode");
+            integrator.setPrompt("Scan QR Code");
             integrator.setOrientationLocked(true);
             integrator.setRequestCode(MY_PERMISSIONS_REQUEST_CAMERA);
             integrator.initiateScan();
@@ -1148,9 +1139,6 @@ public class PreventiveMaintenanceSiteDgCheckPointsActivity extends BaseActivity
                         finish();
                     }
                 }
-
-                /*startActivity(new Intent(this, PreventiveMaintenanceSiteDgBatteryCheckPointsActivity.class));
-                finish();*/
                 return true;
 
             default:

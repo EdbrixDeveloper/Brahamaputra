@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -97,7 +96,6 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA_UploadPhotoOfRegisterFault = 105;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,7 +143,6 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                         //will return list of selected IDS
                         str_typeOfFaultVal = dataString;
                         mPreventiveMaintenanceSiteShelterCheckPointsTextViewTypeOfFaultVal.setText(str_typeOfFaultVal);
-
                     }
 
                     @Override
@@ -378,7 +375,7 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
                 if (imageFileUriUploadPhotoOfRegisterFault != null) {
                     GlobalMethods.showImageDialog(PreventiveMaintenanceSiteShelterCheckPointsActivity.this, imageFileUriUploadPhotoOfRegisterFault);
                 } else {
-                    Toast.makeText(PreventiveMaintenanceSiteShelterCheckPointsActivity.this, "Image not available...!", Toast.LENGTH_LONG).show();
+                    showToast("Image not available...!");
                 }
             }
         });
@@ -405,8 +402,6 @@ public class PreventiveMaintenanceSiteShelterCheckPointsActivity extends BaseAct
         } else {
             return true;
         }
-
-
         return false;
     }
 

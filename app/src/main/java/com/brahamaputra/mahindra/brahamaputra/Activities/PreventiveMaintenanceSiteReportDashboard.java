@@ -1,15 +1,9 @@
 package com.brahamaputra.mahindra.brahamaputra.Activities;
 
-import android.content.Context;
-import android.content.Intent;
-import android.location.LocationManager;
-import android.net.ParseException;
+
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,19 +15,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.app.progresviews.ProgressWheel;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.PmSiteExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Adapters.PmSiteReportExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
 import com.brahamaputra.mahindra.brahamaputra.Data.SitePMReportListData;
-import com.brahamaputra.mahindra.brahamaputra.Data.SitePMTicketsList;
 import com.brahamaputra.mahindra.brahamaputra.R;
-import com.brahamaputra.mahindra.brahamaputra.Utils.Conditions;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
 import com.brahamaputra.mahindra.brahamaputra.Volley.GsonRequest;
 import com.brahamaputra.mahindra.brahamaputra.baseclass.BaseActivity;
-import com.brahamaputra.mahindra.brahamaputra.commons.AlertDialogManager;
 import com.brahamaputra.mahindra.brahamaputra.commons.GPSTracker;
 import com.brahamaputra.mahindra.brahamaputra.helper.OnSpinnerItemClick;
 import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
@@ -41,26 +30,10 @@ import com.brahamaputra.mahindra.brahamaputra.helper.SearchableSpinnerDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_Selected_SiteType;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.hototicket_sourceOfPower;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmCircleName;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmCustomerName;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmNoOfAcAvailableAtSite;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmServoStabilizerWorkingStatus;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteId;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSiteName;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmSsaName;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmStateName;
-import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePm_siteBoundaryStatus;
 import static com.brahamaputra.mahindra.brahamaputra.Utils.Constants.sitePmReportType;
 
 public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
@@ -92,7 +65,6 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
     private PmSiteReportExpListAdapter pmSiteReportExpListAdapter;
 
     public ExpandableListView pmSiteList_listView_siteList;
-    private AlertDialogManager alertDialogManager;
     private SessionManager sessionManager;
 
     public GPSTracker gpsTracker;
@@ -133,7 +105,6 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
         LinearLayoutTitleNames = (LinearLayout) findViewById(R.id.linearLayout_titleNames);
         TextViewSitePmReportTitle = (TextView) findViewById(R.id.textView_sitePmReportTitle);
 
-        alertDialogManager = new AlertDialogManager(PreventiveMaintenanceSiteReportDashboard.this);
         sessionManager = new SessionManager(PreventiveMaintenanceSiteReportDashboard.this);
         gpsTracker = new GPSTracker(PreventiveMaintenanceSiteReportDashboard.this);
         if (gpsTracker.canGetLocation()) {
@@ -160,10 +131,7 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
                 LinearLayoutTitleNames.setVisibility(View.VISIBLE);
                 TextViewSitePmReportTitle.setText("Current Month Plan");
                 prepareListDataOnChangedAndSelection("4");
-
                 //showToast("Selected Month: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim() + "\"; Selected Year: \"" + mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim() + "\"");
-
-
             }
         });
 
@@ -491,14 +459,6 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             jo.put("Month", String.valueOf(i));
             jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());
 
-            /*jo.put("TotalSites", TotalSites);
-            jo.put("DoneSites", DoneSites);
-            jo.put("PendingSites", PendingSites);
-            jo.put("TotalSitePm", TotalSitePm);
-            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
-            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
-
-
             Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmReportSiteList + "\n\n" + jo.toString());
 
             GsonRequest<SitePMReportListData> getSitePMReportListData = new GsonRequest<>(Request.Method.POST, Constants.sitePmReportSiteList, jo.toString(), SitePMReportListData.class,
@@ -574,12 +534,6 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
             jo.put("Month", String.valueOf(i));
             jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());
             jo.put("Type", type);
-            /*jo.put("DoneSites", DoneSites);
-            jo.put("PendingSites", PendingSites);
-            jo.put("TotalSitePm", TotalSitePm);
-            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
-            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
-
 
             Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.sitePmReportDashboardData + "\n\n" + jo.toString());
 
@@ -727,152 +681,15 @@ public class PreventiveMaintenanceSiteReportDashboard extends BaseActivity {
 
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.refresh_icon_menu, menu);
-        return true;
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-            /*case R.id.menuRefresh:
-                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    // added by tiger on 17092019 for date validation
-    public boolean getDaysRemainingForSheduledDate(String currentDateTimeString, String sitePmScheduledDate) {
-
-        /*long requiredDaysForStartWork = 3;
-        long lastDayForStartWork = 0;
-        String newCurrentDate, newSheduledDate;
-        Date newFormatedCurrentDate;
-        Date newFormatedSheduledDate;
-
-        SimpleDateFormat simpleDateFormatForCurrentDate = new SimpleDateFormat("dd/MMM/yyyy");
-        SimpleDateFormat simpleDateFormatForSheduleDate = new SimpleDateFormat("dd/MMM/yyyy");
-
-        SimpleDateFormat newSimpleDateFormatForDaysCalculate = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-        try {
-
-            Date currentDate = simpleDateFormatForCurrentDate.parse(currentDateTimeString);
-            Date sheduledDate = simpleDateFormatForSheduleDate.parse(sitePmScheduledDate);
-
-            newCurrentDate = newSimpleDateFormatForDaysCalculate.format(currentDate);
-            newSheduledDate = newSimpleDateFormatForDaysCalculate.format(sheduledDate);
-
-            newFormatedCurrentDate = newSimpleDateFormatForDaysCalculate.parse(newCurrentDate);
-            newFormatedSheduledDate = newSimpleDateFormatForDaysCalculate.parse(newSheduledDate);
-
-            long different = newFormatedSheduledDate.getTime() - newFormatedCurrentDate.getTime();
-
-            long secondsInMilli = 1000;
-            long minutesInMilli = secondsInMilli * 60;
-            long hoursInMilli = minutesInMilli * 60;
-            long daysInMilli = hoursInMilli * 24;
-
-            long elapsedDays = different / daysInMilli;
-            different = different % daysInMilli;
-
-            if (elapsedDays <= requiredDaysForStartWork) {//&& elapsedDays >= lastDayForStartWork
-                return true;
-            } else if (elapsedDays > requiredDaysForStartWork) {
-                showToast("You can open this ticket only 3 days before Scheduled Date:" + sitePmScheduledDate);
-            }
-
-        } catch (ParseException e) {
-            Log.d("ParseException", e.getMessage());
-        } catch (java.text.ParseException e) {
-            Log.d("ParseException", e.getMessage());
-        }*/
-
-        return false;
-    }
-
-
-    public void checkSystemLocation(final String sitePMTicketNo,
-                                    final String sitePMTicketId, String sitePMTicketDate, String siteId,
-                                    String siteName, String siteAddress, String status, String siteType,
-                                    String stateName, String customerName, String circleName, String ssaName,
-                                    String sitePmScheduledDate, ArrayList<BatteryType> batteryType) {
-
-        /*LocationManager lm = (LocationManager) PreventiveMaintenanceSiteReportDashboard.this.getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled = false;
-        boolean network_enabled = false;
-
-        try {
-            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception ex) {
-        }
-
-        if (!gps_enabled && !network_enabled) {
-            // notify user
-            alertDialogManager.Dialog("Information", "Location is not enabled. Do you want to enable?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                @Override
-                public void onPositiveClick() {
-                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    PreventiveMaintenanceSiteReportDashboard.this.startActivity(myIntent);
-                }
-            }).show();
-        } else {
-            if (Conditions.isNetworkConnected(PreventiveMaintenanceSiteReportDashboard.this)) {
-                //if (gpsTracker.getLongitude()>0 && gpsTracker.getLongitude()>0){
-
-                Intent intent = new Intent(PreventiveMaintenanceSiteReportDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
-                intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceSiteReportDashboard.this));
-                intent.putExtra("Id", sitePMTicketId);
-
-                intent.putExtra("ticketNO", sitePMTicketNo);
-
-                intent.putExtra("sitePMTicketDate", sitePMTicketDate);
-                intent.putExtra("sitePmScheduledDate", sitePmScheduledDate);
-                intent.putExtra("siteId", siteId);
-                intent.putExtra("siteName", siteName);
-                intent.putExtra("siteAddress", siteAddress);
-                intent.putExtra("status", status);
-                intent.putExtra("siteType", siteType);
-                intent.putExtra("stateName", stateName);
-                intent.putExtra("customerName", customerName);
-                intent.putExtra("circleName", circleName);
-                intent.putExtra("ssaName", ssaName);
-                intent.putExtra("latitude", String.valueOf(gpsTracker.getLatitude()));
-                intent.putExtra("longitude", String.valueOf(gpsTracker.getLongitude()));
-
-                //String[] array = new String[]{"Item1", "Item2", "item3", "Item4", "item5"};
-                //Bundle bundle = new Bundle();
-                intent.putExtra("batteryType", batteryType);
-
-                sessionManager.updateSessionUserTicketId(sitePMTicketId);
-                sessionManager.updateSessionUserTicketName(sitePMTicketNo);
-                startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
-
-                //}else{
-                //    showToast("Sorry could not detect location");
-                //    finish();
-                //}
-
-            } else {
-                alertDialogManager.Dialog("Information", "Device has no internet connection. Do you want to use offline mode?", "ok", "cancel", new AlertDialogManager.onSingleButtonClickListner() {
-                    @Override
-                    public void onPositiveClick() {
-                        Intent intent = new Intent(PreventiveMaintenanceSiteReportDashboard.this, PriventiveMaintenanceSiteTransactionActivity.class);
-                        intent.putExtra("isNetworkConnected", Conditions.isNetworkConnected(PreventiveMaintenanceSiteReportDashboard.this));
-                        intent.putExtra("ticketNO", sitePMTicketNo);
-                        sessionManager.updateSessionUserTicketId(sitePMTicketId);
-                        sessionManager.updateSessionUserTicketName(sitePMTicketNo);
-                        startActivityForResult(intent, RESULT_PM_SITE_SUBMIT);
-                    }
-                }).show();
-            }
-        }*/
     }
 
 
