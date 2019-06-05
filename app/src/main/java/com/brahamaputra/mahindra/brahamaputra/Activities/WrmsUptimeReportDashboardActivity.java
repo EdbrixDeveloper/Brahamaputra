@@ -14,10 +14,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.app.progresviews.ProgressWheel;
-import com.brahamaputra.mahindra.brahamaputra.Adapters.PmAcReportExpListAdapter;
+import com.brahamaputra.mahindra.brahamaputra.Adapters.WrmsUptimeReportExpListAdapter;
 import com.brahamaputra.mahindra.brahamaputra.Application;
-import com.brahamaputra.mahindra.brahamaputra.Data.AcPMReportListData;
-import com.brahamaputra.mahindra.brahamaputra.Data.BatteryType;
+import com.brahamaputra.mahindra.brahamaputra.Data.WrmsUptimeReportListData;
 import com.brahamaputra.mahindra.brahamaputra.R;
 import com.brahamaputra.mahindra.brahamaputra.Utils.Constants;
 import com.brahamaputra.mahindra.brahamaputra.Utils.SessionManager;
@@ -59,6 +58,7 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
     private TextView mTextViewWrmsUptimeReportTitle;
     private ExpandableListView mWrmsUptimeReportListViewUptimeReportList;
     private TextView mTxtNoTicketFound;
+
     private LinearLayout mWrmsUptimeReportLinearLayoutTicket1;
     private TextView mTextViewReportSiteName;
     private TextView mTextViewReportSiteId;
@@ -73,7 +73,7 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
     private TextView mTextViewReportSiteDeviation1;
 
     private ArrayList<String> monthNames;
-    private AcPMReportListData acPMReportListData;
+    private WrmsUptimeReportListData wrmsUptimeReportListData;
 
     String str_pmAcMonthVal = "";
     String str_pmAcYearVal = "";
@@ -83,7 +83,7 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
     public GPSTracker gpsTracker;
     public static final int RESULT_PM_SITE_SUBMIT = 257;
 
-    PmAcReportExpListAdapter pmAcReportExpListAdapter;
+    WrmsUptimeReportExpListAdapter wrmsUptimeReportExpListAdapter;
 
 
     @Override
@@ -107,7 +107,7 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
         mWrmsUptimeReportTextViewFiltersYear.setText(String.valueOf(year));
 
 
-        acPMReportListData = new AcPMReportListData();
+        wrmsUptimeReportListData = new WrmsUptimeReportListData();
 
         mWheelprogress = (ProgressWheel) findViewById(R.id.wheelprogress);
         mWrmsUptimeReportListViewUptimeReportList = (ExpandableListView) findViewById(R.id.wrmsUptimeReport_listView_uptimeReportList);
@@ -297,7 +297,7 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
         mTextViewReportSiteDeviation1 = (TextView) findViewById(R.id.textView_reportSiteDeviation1);
     }
 
-
+    /* Count Summory*/
     private void prepareSitePmReportListData() {
 
         try {
@@ -314,37 +314,27 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
 
             Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.acPmReportAcList + "\n\n" + jo.toString());
 
-            GsonRequest<AcPMReportListData> getAcPMReportListData = new GsonRequest<>(Request.Method.POST, Constants.acPmReportAcList, jo.toString(), AcPMReportListData.class,
-                    new Response.Listener<AcPMReportListData>() {
+            GsonRequest<WrmsUptimeReportListData> getWrmsUptimeReportListData = new GsonRequest<>(Request.Method.POST, Constants.acPmReportAcList, jo.toString(), WrmsUptimeReportListData.class,
+                    new Response.Listener<WrmsUptimeReportListData>() {
                         @Override
-                        public void onResponse(@NonNull AcPMReportListData response) {
+                        public void onResponse(@NonNull WrmsUptimeReportListData response) {
                             hideBusyProgress();
                             if (response.getError() != null) {
                                 showToast(response.getError().getErrorMessage());
                             } else {
                                 if (response.getSuccess() == 1) {
-                                    acPMReportListData = response;
-                                    if (acPMReportListData.getAcPMReportSummary() != null) {
-                                        mWrmsUptimeReportTextViewSsaUptimePercentage.setText(acPMReportListData.getAcPMReportSummary().getDoneSites() == null || acPMReportListData.getAcPMReportSummary().getDoneSites().isEmpty() ? "0" : acPMReportListData.getAcPMReportSummary().getDoneSites().toString());
-                                        mWrmsUptimeReportTextViewCircleUptimePercentage.setText(acPMReportListData.getAcPMReportSummary().getPendingSites() == null || acPMReportListData.getAcPMReportSummary().getPendingSites().isEmpty() ? "0" : acPMReportListData.getAcPMReportSummary().getPendingSites().toString());
-                                        mWrmsUptimeReportTextViewMyUptimePercentage.setText(acPMReportListData.getAcPMReportSummary().getTotalSitePm() == null || acPMReportListData.getAcPMReportSummary().getTotalSitePm().isEmpty() ? "0" : acPMReportListData.getAcPMReportSummary().getTotalSitePm().toString());
-                                        mWrmsUptimeReportTextViewTargetUptimePercentage.setText(acPMReportListData.getAcPMReportSummary().getTotalSitePm() == null || acPMReportListData.getAcPMReportSummary().getTotalSitePm().isEmpty() ? "0" : acPMReportListData.getAcPMReportSummary().getTotalSitePm().toString());
+                                    wrmsUptimeReportListData = response;
+                                    if (wrmsUptimeReportListData.getWrmsUptimeReportSummary() != null) {
+                                        mWrmsUptimeReportTextViewSsaUptimePercentage.setText(wrmsUptimeReportListData.getWrmsUptimeReportSummary().getSSAUptime() == null || wrmsUptimeReportListData.getWrmsUptimeReportSummary().getSSAUptime().isEmpty() ? "0" : wrmsUptimeReportListData.getWrmsUptimeReportSummary().getSSAUptime().toString());
+                                        mWrmsUptimeReportTextViewCircleUptimePercentage.setText(wrmsUptimeReportListData.getWrmsUptimeReportSummary().getCircleUptime() == null || wrmsUptimeReportListData.getWrmsUptimeReportSummary().getCircleUptime().isEmpty() ? "0" : wrmsUptimeReportListData.getWrmsUptimeReportSummary().getCircleUptime().toString());
+                                        mWrmsUptimeReportTextViewMyUptimePercentage.setText(wrmsUptimeReportListData.getWrmsUptimeReportSummary().getMyUptime() == null || wrmsUptimeReportListData.getWrmsUptimeReportSummary().getMyUptime().isEmpty() ? "0" : wrmsUptimeReportListData.getWrmsUptimeReportSummary().getMyUptime().toString());
+                                        mWrmsUptimeReportTextViewTargetUptimePercentage.setText(wrmsUptimeReportListData.getWrmsUptimeReportSummary().getTargetUptime() == null || wrmsUptimeReportListData.getWrmsUptimeReportSummary().getTargetUptime().isEmpty() ? "0" : wrmsUptimeReportListData.getWrmsUptimeReportSummary().getTargetUptime().toString());
                                         mWheelprogress.setPercentage(360);
-                                        mWheelprogress.setStepCountText(String.valueOf(acPMReportListData.getAcPMReportSummary().getTotalSites()));//per
-                                    }
-                                    /*if (sitePMReportListData.getSitePMReportTicketsDates() != null && sitePMReportListData.getSitePMReportTicketsDates().size() > 0) {
-                                        mTxtNoTicketFound.setVisibility(View.GONE);
-                                        mPmSiteListListViewSiteList.setVisibility(View.VISIBLE);
-                                        pmSiteReportExpListAdapter = new PmSiteReportExpListAdapter(PreventiveMaintenanceSiteReportDashboard.this, sitePMReportListData);
-                                        mPmSiteListListViewSiteList.setAdapter(pmSiteReportExpListAdapter);
-                                        for (int i = 0; i < sitePMReportListData.getSitePMReportTicketsDates().size(); i++) {
-                                            mPmSiteListListViewSiteList.expandGroup(i);
-                                        }
-                                    }*/
-                                    else {
-                                        mWrmsUptimeReportTextViewSsaUptimePercentage.setText("0");
-                                        mWrmsUptimeReportTextViewCircleUptimePercentage.setText("0");
-                                        mWrmsUptimeReportTextViewMyUptimePercentage.setText("0");
+                                        mWheelprogress.setStepCountText(String.valueOf(wrmsUptimeReportListData.getWrmsUptimeReportSummary().getTotalSites()));//per
+                                    } else {
+                                        mWrmsUptimeReportTextViewSsaUptimePercentage.setText("0%");
+                                        mWrmsUptimeReportTextViewCircleUptimePercentage.setText("0%");
+                                        mWrmsUptimeReportTextViewMyUptimePercentage.setText("0%");
                                         mWrmsUptimeReportTextViewTargetUptimePercentage.setText("0%");
                                         mWheelprogress.setPercentage(0);
                                         mWheelprogress.setStepCountText("0");//per
@@ -363,11 +353,11 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
 
                 }
             });
-            getAcPMReportListData.setRetryPolicy(Application.getDefaultRetryPolice());
-            getAcPMReportListData.setShouldCache(false);
+            getWrmsUptimeReportListData.setRetryPolicy(Application.getDefaultRetryPolice());
+            getWrmsUptimeReportListData.setShouldCache(false);
             Application.getInstance().
 
-                    addToRequestQueue(getAcPMReportListData, "AcPMReportListData");
+                    addToRequestQueue(getWrmsUptimeReportListData, "WrmsUptimeReportListData");
 
         } catch (JSONException e) {
             hideBusyProgress();
@@ -388,40 +378,25 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
             jo.put("Month", String.valueOf(i));
             jo.put("Year", mWrmsUptimeReportTextViewFiltersYear.getText().toString().trim());
             jo.put("Type", type);
-            /*jo.put("DoneSites", DoneSites);
-            jo.put("PendingSites", PendingSites);
-            jo.put("TotalSitePm", TotalSitePm);
-            jo.put("Month", mPreventiveMaintenanceSiteReportTextViewFiltersMonth.getText().toString().trim());
-            jo.put("Year", mPreventiveMaintenanceSiteReportTextViewFiltersYear.getText().toString().trim());*/
-
 
             Log.i(PreventiveMaintenanceSiteReportDashboard.class.getName(), Constants.acPmReportDashboardData + "\n\n" + jo.toString());
 
-            GsonRequest<AcPMReportListData> getAcPMReportListData = new GsonRequest<>(Request.Method.POST, Constants.acPmReportDashboardData, jo.toString(), AcPMReportListData.class,
-                    new Response.Listener<AcPMReportListData>() {
+            GsonRequest<WrmsUptimeReportListData> getWrmsUptimeReportListData = new GsonRequest<>(Request.Method.POST, Constants.acPmReportDashboardData, jo.toString(), WrmsUptimeReportListData.class,
+                    new Response.Listener<WrmsUptimeReportListData>() {
                         @Override
-                        public void onResponse(@NonNull AcPMReportListData response) {
+                        public void onResponse(@NonNull WrmsUptimeReportListData response) {
                             hideBusyProgress();
                             if (response.getError() != null) {
                                 showToast(response.getError().getErrorMessage());
                             } else {
                                 if (response.getSuccess() == 1) {
-                                    acPMReportListData = response;
-                                    /*if (sitePMReportListData.getSitePMReportSummary() != null) {
-
-                                        mWrmsUptimeReportTextViewSsaUptimePercentage.setText(sitePMReportListData.getSitePMReportSummary().getDoneSites() == null || sitePMReportListData.getSitePMReportSummary().getDoneSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getDoneSites().toString());
-                                        mWrmsUptimeReportTextViewCircleUptimePercentage.setText(sitePMReportListData.getSitePMReportSummary().getPendingSites() == null || sitePMReportListData.getSitePMReportSummary().getPendingSites().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getPendingSites().toString());
-                                        mPreventiveMaintenanceSiteReportTextViewTotalSitePm1.setText(sitePMReportListData.getSitePMReportSummary().getTotalSitePm() == null || sitePMReportListData.getSitePMReportSummary().getTotalSitePm().isEmpty() ? "0" : sitePMReportListData.getSitePMReportSummary().getTotalSitePm().toString());
-                                        mWheelprogress.setPercentage(360);
-                                        mWheelprogress.setStepCountText(String.valueOf(sitePMReportListData.getSitePMReportSummary().getTotalSites()));//per
-
-                                    }*/
-                                    if (acPMReportListData.getAcPMReportTicketsDates() != null && acPMReportListData.getAcPMReportTicketsDates().size() > 0) {
+                                    wrmsUptimeReportListData = response;
+                                    if (wrmsUptimeReportListData.getWrmsUptimeReportTicketsDates() != null && wrmsUptimeReportListData.getWrmsUptimeReportTicketsDates().size() > 0) {
                                         mTxtNoTicketFound.setVisibility(View.GONE);
                                         mWrmsUptimeReportListViewUptimeReportList.setVisibility(View.VISIBLE);
-                                        pmAcReportExpListAdapter = new PmAcReportExpListAdapter(WrmsUptimeReportDashboardActivity.this, acPMReportListData);
-                                        mWrmsUptimeReportListViewUptimeReportList.setAdapter(pmAcReportExpListAdapter);
-                                        for (int i = 0; i < acPMReportListData.getAcPMReportTicketsDates().size(); i++) {
+                                        wrmsUptimeReportExpListAdapter = new WrmsUptimeReportExpListAdapter(WrmsUptimeReportDashboardActivity.this, wrmsUptimeReportListData);
+                                        mWrmsUptimeReportListViewUptimeReportList.setAdapter(wrmsUptimeReportExpListAdapter);
+                                        for (int i = 0; i < wrmsUptimeReportListData.getWrmsUptimeReportTicketsDates().size(); i++) {
                                             mWrmsUptimeReportListViewUptimeReportList.expandGroup(i);
                                         }
                                     } else {
@@ -440,11 +415,11 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
 
                 }
             });
-            getAcPMReportListData.setRetryPolicy(Application.getDefaultRetryPolice());
-            getAcPMReportListData.setShouldCache(false);
+            getWrmsUptimeReportListData.setRetryPolicy(Application.getDefaultRetryPolice());
+            getWrmsUptimeReportListData.setShouldCache(false);
             Application.getInstance().
 
-                    addToRequestQueue(getAcPMReportListData, "SitePMReportListData");
+                    addToRequestQueue(getWrmsUptimeReportListData, "WRMSUptimeReportListData");
 
         } catch (JSONException e) {
             hideBusyProgress();
@@ -452,21 +427,12 @@ public class WrmsUptimeReportDashboardActivity extends BaseActivity {
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.refresh_icon_menu, menu);
-        return true;
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-            /*case R.id.menuRefresh:
-                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
